@@ -1,7 +1,8 @@
 dataDictionary
 ==============
 
-This repository is the container for the openETCS data dictionary
+This repository is the container for the openETCS data dictionary.
+This function is strongly depending to requirements, modelling, tools and verification.
 
 Responsible and Contact: Bernd Hekele, DB
 * Process Mentor: Klaus-Rüdiger Hase
