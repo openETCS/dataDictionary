@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="DataModel">
+  <eClassifiers xsi:type="ecore:EClass" name="Variable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Source" lowerBound="1"
+        eType="#//DataType/T_SourceDocument"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Store" unique="false" eType="#//Variable"
+        unsettable="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Constant" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Nature" lowerBound="1"
+        eType="#//DataType/T_Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="MinimalValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="MaximalValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="SpecialValue" unique="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Resolution" unique="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="DefinitionRequirement"
+        lowerBound="1" upperBound="-1" eType="#//Requirement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Safety" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Definition" lowerBound="1"
+        eType="#//DataType/T_Definition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Requirement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Nature" lowerBound="1"
+        eType="#//DataType/T_RequirementNature"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Source" unique="false"
+        lowerBound="1" eType="#//DataType/T_SourceDocument"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Parent" unique="false"
+        eType="#//Requirement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Allocation" lowerBound="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Safety" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Definition" lowerBound="1"
+        eType="#//DataType/T_Definition"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Discussion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Exported" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Function">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Parent" eType="#//Function"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Allocation" lowerBound="1"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Input" unique="false" upperBound="-1"
+        eType="#//Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Output" unique="false"
+        upperBound="-1" eType="#//Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Internal" unique="false"
+        upperBound="-1" eType="#//Variable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Requirement" unique="false"
+        lowerBound="1" upperBound="-1" eType="#//Requirement"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Safety" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Definition" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eSubpackages name="DataType">
+    <eClassifiers xsi:type="ecore:EDataType" name="T_SourceDocument"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="T_Variable"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="T_Definition"/>
+    <eClassifiers xsi:type="ecore:EEnum" name="T_RequirementNature">
+      <eLiterals name="Structural" value="2" literal="Structural"/>
+      <eLiterals name="Functional" value="1" literal="Functional"/>
+      <eLiterals name="Definition" value="3" literal="Definition"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="T_System">
+      <eLiterals name="Kernel" value="1"/>
+      <eLiterals name="DMI" value="2"/>
+      <eLiterals name="RBC" value="3"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>
