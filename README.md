@@ -6,6 +6,7 @@ This repository is the container for the openETCS data dictionary
 Responsible and Contact: Bernd Hekele, DB
 * Process Mentor: Klaus-Rüdiger Hase
 * Domain Mentor: Marc Behrens
+
 ==============
 
 This repository is designed for the openETCS data dictionary information including:
