@@ -9,7 +9,7 @@ Responsible and Contact: Bernd Hekele, DB
 
 ==============
 
-This repository is designed for the openETCS data dictionary information including:
+This repository is designed for all openETCS data dictionary information including:
 * How-To (processes)
 * Data Dictionary Tools
 * Harbour for results from SRS-Analysis (Information for unlimited distribution in openETCS)
