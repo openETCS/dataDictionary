@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_6OOncExdEeONT6ifUF6lRw" type="Ecore" name="DataModel.ecore_diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_-z6ZIExdEeONT6ifUF6lRw" type="2001" fontName="Microsoft Sans Serif">
+    <children xmi:type="notation:DecorationNode" xmi:id="_-0AfwExdEeONT6ifUF6lRw" type="5001"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_-0GmYExdEeONT6ifUF6lRw" type="7001">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_-0GmYUxdEeONT6ifUF6lRw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_-0GmYkxdEeONT6ifUF6lRw"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_-0GmY0xdEeONT6ifUF6lRw" type="7002">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_-0GmZExdEeONT6ifUF6lRw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_-0GmZUxdEeONT6ifUF6lRw"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_-0GmZkxdEeONT6ifUF6lRw" type="7003">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_-0GmZ0xdEeONT6ifUF6lRw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_-0GmaExdEeONT6ifUF6lRw"/>
+    </children>
+    <element xmi:type="ecore:EClass" href="DataModel.ecore#//Variable"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-z6ZIUxdEeONT6ifUF6lRw" x="55" y="345"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_-0GmaUxdEeONT6ifUF6lRw" type="2001" fontName="Microsoft Sans Serif">
+    <children xmi:type="notation:DecorationNode" xmi:id="_-0Gma0xdEeONT6ifUF6lRw" type="5001"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_-0GmbExdEeONT6ifUF6lRw" type="7001">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_-0GmbUxdEeONT6ifUF6lRw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_-0GmbkxdEeONT6ifUF6lRw"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_-0Gmb0xdEeONT6ifUF6lRw" type="7002">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_-0GmcExdEeONT6ifUF6lRw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_-0GmcUxdEeONT6ifUF6lRw"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_-0GmckxdEeONT6ifUF6lRw" type="7003">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_-0Gmc0xdEeONT6ifUF6lRw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_-0GmdExdEeONT6ifUF6lRw"/>
+    </children>
+    <element xmi:type="ecore:EClass" href="DataModel.ecore#//Requirement"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-0GmakxdEeONT6ifUF6lRw" x="115" y="15"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_-0GmdUxdEeONT6ifUF6lRw" type="2001" fontName="Microsoft Sans Serif">
+    <children xmi:type="notation:DecorationNode" xmi:id="_-0Gmd0xdEeONT6ifUF6lRw" type="5001"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_-0GmeExdEeONT6ifUF6lRw" type="7001">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_-0GmeUxdEeONT6ifUF6lRw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_-0GmekxdEeONT6ifUF6lRw"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_-0Gme0xdEeONT6ifUF6lRw" type="7002">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_-0GmfExdEeONT6ifUF6lRw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_-0GmfUxdEeONT6ifUF6lRw"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_-0GmfkxdEeONT6ifUF6lRw" type="7003">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_-0Gmf0xdEeONT6ifUF6lRw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_-0GmgExdEeONT6ifUF6lRw"/>
+    </children>
+    <element xmi:type="ecore:EClass" href="DataModel.ecore#//Function"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-0GmdkxdEeONT6ifUF6lRw" x="380" y="345"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_-0GmgUxdEeONT6ifUF6lRw" type="2004" fontName="Microsoft Sans Serif">
+    <children xmi:type="notation:DecorationNode" xmi:id="_-0Gmg0xdEeONT6ifUF6lRw" type="5004"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_-0GmhExdEeONT6ifUF6lRw" type="7010">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_-0GmhUxdEeONT6ifUF6lRw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_-0GmhkxdEeONT6ifUF6lRw"/>
+    </children>
+    <element xmi:type="ecore:EDataType" href="DataModel.ecore#//T_Variable"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-0GmgkxdEeONT6ifUF6lRw" x="635" y="260" width="88"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_-0Gmh0xdEeONT6ifUF6lRw" type="2004" fontName="Microsoft Sans Serif">
+    <children xmi:type="notation:DecorationNode" xmi:id="_-0GmiUxdEeONT6ifUF6lRw" type="5004"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_-0GmikxdEeONT6ifUF6lRw" type="7010">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_-0Gmi0xdEeONT6ifUF6lRw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_-0GmjExdEeONT6ifUF6lRw"/>
+    </children>
+    <element xmi:type="ecore:EDataType" href="DataModel.ecore#//T_Definition"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-0GmiExdEeONT6ifUF6lRw" x="625" y="205" width="95"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_-0GmjUxdEeONT6ifUF6lRw" type="2005" fontName="Microsoft Sans Serif">
+    <children xmi:type="notation:DecorationNode" xmi:id="_-0MtAExdEeONT6ifUF6lRw" type="5005"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_-0MtAUxdEeONT6ifUF6lRw" type="7011">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_-0MtAkxdEeONT6ifUF6lRw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_-0MtA0xdEeONT6ifUF6lRw"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_-0MtBExdEeONT6ifUF6lRw" type="7012">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_-0MtBUxdEeONT6ifUF6lRw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_-0MtBkxdEeONT6ifUF6lRw"/>
+    </children>
+    <element xmi:type="ecore:EEnum" href="DataModel.ecore#//T_RequirementNature"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-0GmjkxdEeONT6ifUF6lRw" x="565" y="110" width="157"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_-0MtB0xdEeONT6ifUF6lRw" type="2005" fontName="Microsoft Sans Serif">
+    <children xmi:type="notation:DecorationNode" xmi:id="_-0MtCUxdEeONT6ifUF6lRw" type="5005"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_-0MtCkxdEeONT6ifUF6lRw" type="7011">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_-0MtC0xdEeONT6ifUF6lRw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_-0MtDExdEeONT6ifUF6lRw"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_-0MtDUxdEeONT6ifUF6lRw" type="7012">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_-0MtDkxdEeONT6ifUF6lRw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_-0MtD0xdEeONT6ifUF6lRw"/>
+    </children>
+    <element xmi:type="ecore:EEnum" href="DataModel.ecore#//T_System"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-0MtCExdEeONT6ifUF6lRw" x="645" y="10" width="83"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_-0MtEExdEeONT6ifUF6lRw" type="2005" fontName="Microsoft Sans Serif">
+    <children xmi:type="notation:DecorationNode" xmi:id="_-0MtEkxdEeONT6ifUF6lRw" type="5005"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_-0MtE0xdEeONT6ifUF6lRw" type="7011">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_-0MtFExdEeONT6ifUF6lRw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_-0MtFUxdEeONT6ifUF6lRw"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_-0MtFkxdEeONT6ifUF6lRw" type="7012">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_-0MtF0xdEeONT6ifUF6lRw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_-0MtGExdEeONT6ifUF6lRw"/>
+    </children>
+    <element xmi:type="ecore:EEnum" href="DataModel.ecore#//T_SourceDocument"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-0MtEUxdEeONT6ifUF6lRw" x="565" y="315" width="155"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_6OOncUxdEeONT6ifUF6lRw"/>
+  <element xmi:type="ecore:EPackage" href="DataModel.ecore#/"/>
+</notation:Diagram>
