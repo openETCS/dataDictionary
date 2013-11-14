@@ -10,7 +10,7 @@
 | --- | --- | --- | --- | --- | --- |
 | Speed_Profile | | | | |
 | Gradients | | | | |
-| Movement_Authority_Data | The Movement Authority (MA) gives the train the distance that is allowed to travel. |  [Movement Authority Analysis v.0.0.1.xlsx](https://github.com/openETCS/SRS-Analysis/blob/master/System%20Analysis/Movement%20Authority%20analysis%20v.0.0.1.xlsx)| [Section Movement Authority (MA)](https://github.com/openETCS/dataDictionary/blob/master/DataStructure/Internal%20data%20structure.pdf)| #10 open |
+| Movement_Authority_Data | The Movement Authority (MA) gives the train the distance that is allowed to travel. |  [Movement Authority Analysis v.0.0.1.xlsx](https://github.com/openETCS/SRS-Analysis/blob/master/System%20Analysis/Movement%20Authority%20analysis%20v.0.0.1.xlsx)| [Section Movement Authority (MA)](https://github.com/openETCS/dataDictionary/blob/master/DataStructure/Internal%20data%20structure.pdf)| [#10](https://github.com/openETCS/dataDictionary/issues/10) open |
 | List_of_Announced_Balise_Groups || | | |
 | Announced Transitions | | | | |
 
