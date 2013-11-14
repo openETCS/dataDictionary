@@ -1,12 +1,12 @@
 # Table of important internal data 
 ### Coordinate System
 
-| Name ! Short Description | Reference to System Analysis | Reference to System Description | Status | Owner |
+| Name | Short Description | Reference to System Analysis | Reference to System Description | Status | Owner |
 | --- | --- | --- | --- | --- | --- |
 | Stored_Balise_Groups | | | | |
 
 ### Location Based Information
-| Name ! Short Description | Reference to System Analysis | Reference to System Description | Status | Owner |
+| Name | Short Description | Reference to System Analysis | Reference to System Description | Status | Owner |
 | --- | --- | --- | --- | --- | --- |
 | Speed_Profile | | | | |
 | Gradients | | | | |
@@ -15,7 +15,7 @@
 | Announced Transitions | | | | |
 
 ### Description of the Train
-| Name ! Short Description | Reference to System Analysis | Reference to System Description | Status | Owner |
+| Name | Short Description | Reference to System Analysis | Reference to System Description | Status | Owner |
 | --- | --- | --- | --- | --- | --- |
 | Train Position | | | | |
 | Train Characteristics | | | | |
@@ -23,7 +23,7 @@
 | Brake System Model | | | | |
 
 ### Status Information
-| Name ! Short Description | Reference to System Analysis | Reference to System Description | Status | Owner |
+| Name | Short Description | Reference to System Analysis | Reference to System Description | Status | Owner |
 | --- | --- | --- | --- | --- | --- |
 | DMI Mirror | | | | |
 | Procedure Status | | | | |
