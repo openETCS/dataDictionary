@@ -17,7 +17,7 @@
 ### Description of the Train
 | Name | Short Description | System Analysis | Data Description | Status | Owner |
 | --- | --- | --- | --- | --- | --- |
-| Train Position | | | | |
+| Train Position | | [Train Position Information](https://github.com/openETCS/SRS-Analysis/blob/master/System%20Analysis/WorkingRepository/Group4/SUBSET_26_3-6/Spread-sheet-SUBSET_26-2-6_Train-Position-Information.xlsx)| | |
 | Train Characteristics | | | | |
 | DMI Parameters | | | | |
 | Brake System Model | | | | |
