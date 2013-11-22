@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.openetcs.datadictionary.model/src" modelPluginID="org.openetcs.datadictionary.model"
+    modelName="Datadictionary" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>DataModel.ecore</foreignModel>
+  <genPackages prefix="DataDictionary" disposableProviderFactory="true" ecorePackage="DataModel.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="DataModel.ecore#//T_RequirementNature">
+      <genEnumLiterals ecoreEnumLiteral="DataModel.ecore#//T_RequirementNature/Structural"/>
+      <genEnumLiterals ecoreEnumLiteral="DataModel.ecore#//T_RequirementNature/Functional"/>
+      <genEnumLiterals ecoreEnumLiteral="DataModel.ecore#//T_RequirementNature/Definition"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="DataModel.ecore#//T_System">
+      <genEnumLiterals ecoreEnumLiteral="DataModel.ecore#//T_System/Kernel"/>
+      <genEnumLiterals ecoreEnumLiteral="DataModel.ecore#//T_System/DMI"/>
+      <genEnumLiterals ecoreEnumLiteral="DataModel.ecore#//T_System/RBC"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="DataModel.ecore#//T_SourceDocument"/>
+    <genDataTypes ecoreDataType="DataModel.ecore#//T_Variable"/>
+    <genDataTypes ecoreDataType="DataModel.ecore#//T_Definition"/>
+    <genClasses ecoreClass="DataModel.ecore#//Variable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataModel.ecore#//Variable/Name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataModel.ecore#//Variable/Source"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DataModel.ecore#//Variable/Store"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataModel.ecore#//Variable/Constant"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataModel.ecore#//Variable/Nature"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataModel.ecore#//Variable/MinimalValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataModel.ecore#//Variable/MaximalValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataModel.ecore#//Variable/SpecialValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataModel.ecore#//Variable/Resolution"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DataModel.ecore#//Variable/DefinitionRequirement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataModel.ecore#//Variable/Safety"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataModel.ecore#//Variable/Definition"/>
+    </genClasses>
+    <genClasses ecoreClass="DataModel.ecore#//Requirement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataModel.ecore#//Requirement/Name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataModel.ecore#//Requirement/Nature"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataModel.ecore#//Requirement/Source"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DataModel.ecore#//Requirement/Parent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataModel.ecore#//Requirement/Allocation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataModel.ecore#//Requirement/Safety"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataModel.ecore#//Requirement/Definition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataModel.ecore#//Requirement/Discussion"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataModel.ecore#//Requirement/Exported"/>
+    </genClasses>
+    <genClasses ecoreClass="DataModel.ecore#//Function">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataModel.ecore#//Function/Name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DataModel.ecore#//Function/Parent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataModel.ecore#//Function/Allocation"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DataModel.ecore#//Function/Input"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DataModel.ecore#//Function/Output"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DataModel.ecore#//Function/Internal"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DataModel.ecore#//Function/Requirement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataModel.ecore#//Function/Safety"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DataModel.ecore#//Function/Definition"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
