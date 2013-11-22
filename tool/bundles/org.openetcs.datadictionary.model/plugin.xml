@@ -8,4 +8,12 @@
 
   
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated dataDictionary -->
+      <package
+            uri="http://openetcs.org/datadictionary"
+            class="dataDictionary.DataDictionaryPackage"
+            genModel="model/dataDictionary.genmodel"/>
+   </extension>
+
 </plugin>
