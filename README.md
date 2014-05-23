@@ -11,9 +11,9 @@ Responsible and Contact: Bernd Hekele, DB
 ==============
 
 This repository is designed for all openETCS data dictionary information including:
-* How-To (processes)
-* Data Dictionary Tools
-* Harbour for results from SRS-Analysis (Information for unlimited distribution in openETCS)
-* Documents describing the contents of the data dictionary
+* How-To (processes) --> moved to modelling DoW
+* Data Dictionary Tools --> We use Papyrus for implementing the data dictionary. The models are kept in Modelling
+* Harbour for results from SRS-Analysis (Information for unlimited distribution in openETCS) --> no longer needed!
+* Documents describing the contents of the data dictionary --> Stil relevant.
 
 
