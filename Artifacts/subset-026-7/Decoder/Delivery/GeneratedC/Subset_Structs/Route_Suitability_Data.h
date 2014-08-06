@@ -5,7 +5,7 @@ Formalization of Subset-026-7 (Chapter 7: ERTMS/ETCS language)
 
 - Name: Subset-026-7 / TrackToTrain_Route_Suitability_Data
 - Description: UNISIG SUBSET-026-7, ISSUE : 3.3.0, 3.5 ERTMS/ETCS language) 
-- Copyright (c) Siemens AG, 2013, All Rights Reserved
+- Copyright (c) Siemens AG, 2014, All Rights Reserved
  	
 - Licensed under the EUPL V.1.1 ( http://joinup.ec.europa.eu/software/page/eupl/licence-eupl )
 - Gist URL: none
@@ -21,6 +21,7 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.  	
 ============================================================================= */
 #include <stdint.h>
+#include "opnETCS_Variables.h"
 
 struct DATA_oETCS_TrackToTrain_Route_Suitability_Data {
   int vUsed_idx;                             // aktueller Fuellgrad von aPacket
@@ -29,7 +30,7 @@ struct DATA_oETCS_TrackToTrain_Route_Suitability_Data {
   {
           uint32_t v_TOccurence;            // Zeitpunkt des Empfangs
           uint64_t v_DOccurrence;           // Ort des Empfangs
-          uint32_t vState;                  // Bearbeitungszustände  
+          uint32_t vState;                  // Bearbeitungszustaende  
   } info;
 
   struct 
@@ -38,18 +39,18 @@ struct DATA_oETCS_TrackToTrain_Route_Suitability_Data {
 // The packet gives the characteristics needed to enter a route.
 // Packet Number = 70
 
-	uint32_t NID_PACKET;                      		// # 8	
-	uint32_t Q_DIR;                                  			// # 2	
-	uint32_t L_PACKET;                               			// # 13	
-	uint32_t Q_SCALE;                                			// # 2	
-	uint32_t Q_TRACKINIT;                            			// # 1		// if (Q_TRACKINIT == 1)
-	uint32_t D_TRACKINIT;                            			// # 15		// Only if Q_TRACKINIT = 1	// if (Q_TRACKINIT == 0)
-	uint32_t D_SUITABILITY;                          			// # 15		// Only If Q_TRACKINIT = 0  D_SUITABILITY and the following variables follows
-	uint32_t Q_SUITABILITY;                          			// # 2		// if (Q_SUITABILITY == 0)
-	uint32_t M_LINEGAUGE;                            			// # 8		// If Q_SUITABILITY = 0 (loading gauge)	// if (Q_SUITABILITY == 1)
-	uint32_t M_AXLELOADCAT;                          			// # 7		// If Q_SUITABILITY = 1 (Max axle load)	// if (Q_SUITABILITY == 2)
-	uint32_t M_VOLTAGE;                              			// # 4		// If Q_SUITABILITY = 2 (traction system)	// if ((Q_SUITABILITY == 2) and (M_VOLTAGE != 0))
-	uint32_t NID_CTRACTION;                          			// # 10		// If Q_SUITABILITY = 2 and M_VOLTAGE != 0    
+	uint32_t               NID_PACKET;            		// # 8	
+	T_q_dir                Q_DIR                 ;		// # 2	
+	uint32_t               L_PACKET              ;		// # 13	
+	T_q_scale              Q_SCALE               ;		// # 2	
+	T_q_trackinit          Q_TRACKINIT           ;		// # 1		// if (Q_TRACKINIT == 1)
+	uint32_t               D_TRACKINIT           ;		// # 15		// Only if Q_TRACKINIT = 1	// if (Q_TRACKINIT == 0)
+	uint32_t               D_SUITABILITY         ;		// # 15		// Only If Q_TRACKINIT = 0D_SUITABILITY and the following variables follows
+	T_q_suitability        Q_SUITABILITY         ;		// # 2		// if (Q_SUITABILITY == 0)
+	T_m_linegauge          M_LINEGAUGE           ;		// # 8		// If Q_SUITABILITY = 0 (loading gauge)	// if (Q_SUITABILITY == 1)
+	T_m_axleloadcat        M_AXLELOADCAT         ;		// # 7		// If Q_SUITABILITY = 1 (Max axle load)	// if (Q_SUITABILITY == 2)
+	T_m_voltage            M_VOLTAGE             ;		// # 4		// If Q_SUITABILITY = 2 (traction system)	// if ((Q_SUITABILITY == 2) and (M_VOLTAGE != 0))
+	uint32_t               NID_CTRACTION         ;		// # 10		// If Q_SUITABILITY = 2 and M_VOLTAGE != 0    
         struct {
             uint32_t used;                        //N_ITER+1              // # 5
             struct {

@@ -1,11 +1,11 @@
-#ifndef NESTINGMARK_oETCS_Packet_TrackToTrain_Adhesion_factor
-#define NESTINGMARK_oETCS_Packet_TrackToTrain_Adhesion_factor
+#ifndef NESTINGMARK_oETCS_Packet_TrackToTrain_Adhesion_Factor
+#define NESTINGMARK_oETCS_Packet_TrackToTrain_Adhesion_Factor
 /* =============================================================================
 Formalization of Subset-026-7 (Chapter 7: ERTMS/ETCS language)
 
-- Name: Subset-026-7 / TrackToTrain_Adhesion_factor
+- Name: Subset-026-7 / TrackToTrain_Adhesion_Factor
 - Description: UNISIG SUBSET-026-7, ISSUE : 3.3.0, 3.5 ERTMS/ETCS language) 
-- Copyright (c) Siemens AG, 2013, All Rights Reserved
+- Copyright (c) Siemens AG, 2014, All Rights Reserved
  	
 - Licensed under the EUPL V.1.1 ( http://joinup.ec.europa.eu/software/page/eupl/licence-eupl )
 - Gist URL: none
@@ -21,15 +21,16 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.  	
 ============================================================================= */
 #include <stdint.h>
+#include "opnETCS_Variables.h"
 
-struct DATA_oETCS_TrackToTrain_Adhesion_factor {
+struct DATA_oETCS_TrackToTrain_Adhesion_Factor {
   int vUsed_idx;                             // aktueller Fuellgrad von aPacket
 
   struct 
   {
           uint32_t v_TOccurence;            // Zeitpunkt des Empfangs
           uint64_t v_DOccurrence;           // Ort des Empfangs
-          uint32_t vState;                  // Bearbeitungszustände  
+          uint32_t vState;                  // Bearbeitungszustaende  
   } info;
 
   struct 
@@ -38,13 +39,13 @@ struct DATA_oETCS_TrackToTrain_Adhesion_factor {
 // This packet is used when the trackside requests a change of the adhesion factor to be used in the brake model.
 // Packet Number = 71
 
-	uint32_t NID_PACKET;                      		// # 8	
-	uint32_t Q_DIR;                                  			// # 2	
-	uint32_t L_PACKET;                               			// # 13	
-	uint32_t Q_SCALE;                                			// # 2	
-	uint32_t D_ADHESION;                             			// # 15	
-	uint32_t L_ADHESION;                             			// # 15	
-	uint32_t M_ADHESION;                             			// # 1	
+	uint32_t               NID_PACKET;            		// # 8	
+	T_q_dir                Q_DIR                 ;		// # 2	
+	uint32_t               L_PACKET              ;		// # 13	
+	T_q_scale              Q_SCALE               ;		// # 2	
+	uint32_t               D_ADHESION            ;		// # 15	
+	uint32_t               L_ADHESION            ;		// # 15	
+	T_m_adhesion           M_ADHESION            ;		// # 1	
 } 
 
 
@@ -52,16 +53,16 @@ struct DATA_oETCS_TrackToTrain_Adhesion_factor {
 };
 
 // struct -> type
-typedef struct DATA_oETCS_TrackToTrain_Adhesion_factor T_DATA_oETCS_TrackToTrain_Adhesion_factor;
+typedef struct DATA_oETCS_TrackToTrain_Adhesion_Factor T_DATA_oETCS_TrackToTrain_Adhesion_Factor;
 // typ -> ptrtyp
-typedef  T_DATA_oETCS_TrackToTrain_Adhesion_factor* TP_DATA_oETCS_TrackToTrain_Adhesion_factor;
+typedef  T_DATA_oETCS_TrackToTrain_Adhesion_Factor* TP_DATA_oETCS_TrackToTrain_Adhesion_Factor;
 // declaration of variable of ptrtyp
-extern TP_DATA_oETCS_TrackToTrain_Adhesion_factor  oETCS_Packet_TrackToTrain_Adhesion_factor;
+extern TP_DATA_oETCS_TrackToTrain_Adhesion_Factor  oETCS_Packet_TrackToTrain_Adhesion_Factor;
 // instatiate this ptrtype variable like this: (get memory and fill memory)
-// TP_DATA_oETCS_TrackToTrain_Adhesion_factor  oETCS_Packet_TrackToTrain_Adhesion_factor = new(T_DATA_oETCS_TrackToTrain_Adhesion_factor);
+// TP_DATA_oETCS_TrackToTrain_Adhesion_Factor  oETCS_Packet_TrackToTrain_Adhesion_Factor = new(T_DATA_oETCS_TrackToTrain_Adhesion_Factor);
 // and now fill in the content to start with ...
-// Access variable like this: oETCS_Packet_TrackToTrain_Adhesion_factor->...
-// maybe : memset(oETCS_Packet_TrackToTrain_Adhesion_factor, 0, sizeof(T_DATA_oETCS_Packet_TrackToTrain_Adhesion_factor));
+// Access variable like this: oETCS_Packet_TrackToTrain_Adhesion_Factor->...
+// maybe : memset(oETCS_Packet_TrackToTrain_Adhesion_Factor, 0, sizeof(T_DATA_oETCS_Packet_TrackToTrain_Adhesion_Factor));
 // for complete 0 content.
 
 #endif

@@ -5,7 +5,7 @@ Formalization of Subset-026-7 (Chapter 7: ERTMS/ETCS language)
 
 - Name: Subset-026-7 / TrackToTrain_Level_23_Movement_Authority
 - Description: UNISIG SUBSET-026-7, ISSUE : 3.3.0, 3.5 ERTMS/ETCS language) 
-- Copyright (c) Siemens AG, 2013, All Rights Reserved
+- Copyright (c) Siemens AG, 2014, All Rights Reserved
  	
 - Licensed under the EUPL V.1.1 ( http://joinup.ec.europa.eu/software/page/eupl/licence-eupl )
 - Gist URL: none
@@ -21,6 +21,7 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.  	
 ============================================================================= */
 #include <stdint.h>
+#include "opnETCS_Variables.h"
 
 struct DATA_oETCS_TrackToTrain_Level_23_Movement_Authority {
   int vUsed_idx;                             // aktueller Fuellgrad von aPacket
@@ -29,7 +30,7 @@ struct DATA_oETCS_TrackToTrain_Level_23_Movement_Authority {
   {
           uint32_t v_TOccurence;            // Zeitpunkt des Empfangs
           uint64_t v_DOccurrence;           // Ort des Empfangs
-          uint32_t vState;                  // Bearbeitungszustände  
+          uint32_t vState;                  // Bearbeitungszustaende  
   } info;
 
   struct 
@@ -38,12 +39,12 @@ struct DATA_oETCS_TrackToTrain_Level_23_Movement_Authority {
 // Transmission of a movement authority for levels 2/3.
 // Packet Number = 15
 
-	uint32_t NID_PACKET;                      		// # 8	
-	uint32_t Q_DIR;                                  			// # 2	
-	uint32_t L_PACKET;                               			// # 13	
-	uint32_t Q_SCALE;                                			// # 2	
-	uint32_t V_LOA;                                  			// # 7	
-	uint32_t T_LOA;                                  			// # 10		// Can be set to 'no time-out'    
+	uint32_t               NID_PACKET;            		// # 8	
+	T_q_dir                Q_DIR                 ;		// # 2	
+	uint32_t               L_PACKET              ;		// # 13	
+	T_q_scale              Q_SCALE               ;		// # 2	
+	uint32_t               V_LOA                 ;		// # 7	
+	uint32_t               T_LOA                 ;		// # 10		// Can be set to 'no time-out'    
         struct {
             uint32_t used;                        //N_ITER+1              // # 5
             struct {
@@ -55,21 +56,21 @@ struct DATA_oETCS_TrackToTrain_Level_23_Movement_Authority {
         } a_data[33];
         } k;
 
-	uint32_t L_ENDSECTION;                           			// # 15	
-	uint32_t Q_SECTIONTIMER;                         			// # 1	
-	uint32_t T_SECTIONTIMER;                         			// # 10	
-	uint32_t D_SECTIONTIMERSTOPLOC;                  			// # 15	
-	uint32_t Q_ENDTIMER;                             			// # 1	
-	uint32_t T_ENDTIMER;                             			// # 10	
-	uint32_t D_ENDTIMERSTARTLOC;                     			// # 15	
-	uint32_t Q_DANGERPOINT;                          			// # 1	
-	uint32_t D_DP;                                   			// # 15	
-	uint32_t V_RELEASEDP;                            			// # 7	
-	uint32_t Q_OVERLAP;                              			// # 1	
-	uint32_t D_STARTOL;                              			// # 15	
-	uint32_t T_OL;                                   			// # 10	
-	uint32_t D_OL;                                   			// # 15	
-	uint32_t V_RELEASEOL;                            			// # 7	
+	uint32_t               L_ENDSECTION          ;		// # 15	
+	T_q_sectiontimer       Q_SECTIONTIMER        ;		// # 1	
+	uint32_t               T_SECTIONTIMER        ;		// # 10	
+	uint32_t               D_SECTIONTIMERSTOPLOC ;		// # 15	
+	T_q_endtimer           Q_ENDTIMER            ;		// # 1	
+	uint32_t               T_ENDTIMER            ;		// # 10	
+	uint32_t               D_ENDTIMERSTARTLOC    ;		// # 15	
+	T_q_dangerpoint        Q_DANGERPOINT         ;		// # 1	
+	uint32_t               D_DP                  ;		// # 15	
+	uint32_t               V_RELEASEDP           ;		// # 7	
+	T_q_overlap            Q_OVERLAP             ;		// # 1	
+	uint32_t               D_STARTOL             ;		// # 15	
+	uint32_t               T_OL                  ;		// # 10	
+	uint32_t               D_OL                  ;		// # 15	
+	uint32_t               V_RELEASEOL           ;		// # 7	
 } 
 
 

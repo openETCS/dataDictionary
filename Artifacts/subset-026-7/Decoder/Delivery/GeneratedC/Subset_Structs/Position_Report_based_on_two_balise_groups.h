@@ -5,7 +5,7 @@ Formalization of Subset-026-7 (Chapter 7: ERTMS/ETCS language)
 
 - Name: Subset-026-7 / TrainToTrack_Position_Report_based_on_two_balise_groups
 - Description: UNISIG SUBSET-026-7, ISSUE : 3.3.0, 3.5 ERTMS/ETCS language) 
-- Copyright (c) Siemens AG, 2013, All Rights Reserved
+- Copyright (c) Siemens AG, 2014, All Rights Reserved
  	
 - Licensed under the EUPL V.1.1 ( http://joinup.ec.europa.eu/software/page/eupl/licence-eupl )
 - Gist URL: none
@@ -21,6 +21,7 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.  	
 ============================================================================= */
 #include <stdint.h>
+#include "opnETCS_Variables.h"
 
 struct DATA_oETCS_TrainToTrack_Position_Report_based_on_two_balise_groups {
   int vUsed_idx;                             // aktueller Fuellgrad von aPacket
@@ -29,7 +30,7 @@ struct DATA_oETCS_TrainToTrack_Position_Report_based_on_two_balise_groups {
   {
           uint32_t v_TOccurence;            // Zeitpunkt des Empfangs
           uint64_t v_DOccurrence;           // Ort des Empfangs
-          uint32_t vState;                  // Bearbeitungszustände  
+          uint32_t vState;                  // Bearbeitungszustaende  
   } info;
 
   struct 
@@ -38,23 +39,23 @@ struct DATA_oETCS_TrainToTrack_Position_Report_based_on_two_balise_groups {
 // This packet is an extension of the 'standard position report ' packet 0. It is used in case of single balise groups if the orientation of the LRBG is unknown but the on-board equipment is able to report a second balise group (the one detected before) to give a direction reference for the directional information in the position report.
 // Packet Number = 1
 
-	uint32_t NID_PACKET;                      		// # 8	
-	uint32_t L_PACKET;                               			// # 13	
-	uint32_t Q_SCALE;                                			// # 2	
-	uint32_t NID_LRBG;                               			// # 24	
-	uint32_t NID_PRVLRBG;                            			// # 24		// Used as reference for all directional information in the packet: a move from PRVLRBG towards the LRBG  defines the 'nominal' direction
-	uint32_t D_LRBG;                                 			// # 15	
-	uint32_t Q_DIRLRBG;                              			// # 2		// Train orientation according to reference direction
-	uint32_t Q_DLRBG;                                			// # 2		// Train front position according to reference direction
-	uint32_t L_DOUBTOVER;                            			// # 15	
-	uint32_t L_DOUBTUNDER;                           			// # 15	
-	uint32_t Q_LENGTH;                               			// # 2		// if ((Q_LENGTH == 1) OR (Q_LENGTH == 2))
-	uint32_t L_TRAININT;                             			// # 15		// If Q_LENGTH = 1 OR 2
-	uint32_t V_TRAIN;                                			// # 7	
-	uint32_t Q_DIRTRAIN;                             			// # 2		// Actual running direction according to reference direction
-	uint32_t M_MODE;                                 			// # 4	
-	uint32_t M_LEVEL;                                			// # 3		// if (M_LEVEL == 1)
-	uint32_t NID_NTC;                                			// # 8		// If M_LEVEL = 1
+	uint32_t               NID_PACKET;            		// # 8	
+	uint32_t               L_PACKET              ;		// # 13	
+	T_q_scale              Q_SCALE               ;		// # 2	
+	uint32_t               NID_LRBG              ;		// # 24	
+	uint32_t               NID_PRVLRBG           ;		// # 24		// Used as reference for all directional information in the packet: a move from PRVLRBG towards the LRBG  defines the 'nominal' direction
+	uint32_t               D_LRBG                ;		// # 15	
+	T_q_dirlrbg            Q_DIRLRBG             ;		// # 2		// Train orientation according to reference direction
+	T_q_dlrbg              Q_DLRBG               ;		// # 2		// Train front position according to reference direction
+	uint32_t               L_DOUBTOVER           ;		// # 15	
+	uint32_t               L_DOUBTUNDER          ;		// # 15	
+	T_q_length             Q_LENGTH              ;		// # 2		// if ((Q_LENGTH == 1) OR (Q_LENGTH == 2))
+	uint32_t               L_TRAININT            ;		// # 15		// If Q_LENGTH = 1 OR 2
+	uint32_t               V_TRAIN               ;		// # 7	
+	T_q_dirtrain           Q_DIRTRAIN            ;		// # 2		// Actual running direction according to reference direction
+	T_m_mode               M_MODE                ;		// # 4	
+	T_m_level              M_LEVEL               ;		// # 3		// if (M_LEVEL == 1)
+	uint32_t               NID_NTC               ;		// # 8		// If M_LEVEL = 1
 } 
 
 

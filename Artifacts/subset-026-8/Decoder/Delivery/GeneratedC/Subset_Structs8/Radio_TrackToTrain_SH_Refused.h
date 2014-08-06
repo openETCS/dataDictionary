@@ -1,11 +1,11 @@
-#ifndef NESTINGMARK_oETCS_Packet_Radio_TrackToTrain_SH_Refused
-#define NESTINGMARK_oETCS_Packet_Radio_TrackToTrain_SH_Refused
+#ifndef NESTINGMARK_Radio_Message_TrackToTrain_SH_Refused
+#define NESTINGMARK_Radio_Message_TrackToTrain_SH_Refused
 /* =============================================================================
 Formalization of Subset-026-8 (Chapter 8: ERTMS/ETCS language)
 
-- Name: Subset-026-8 / Radio_TrackToTrain_SH_Refused
+- Name: Subset-026-7 / TrackToTrain_SH_Refused
 - Description: UNISIG SUBSET-026-8, ISSUE : 3.3.0, 3.5 ERTMS/ETCS language) 
-- Copyright (c) Siemens AG, 2013, All Rights Reserved
+- Copyright (c) Siemens AG, 2014, All Rights Reserved
  	
 - Licensed under the EUPL V.1.1 ( http://joinup.ec.europa.eu/software/page/eupl/licence-eupl )
 - Gist URL: none
@@ -20,48 +20,48 @@ which may cause harm to people, physical accidents or financial loss.
 
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.  	
 ============================================================================= */
-
 #include <stdint.h>
+#include "opnETCS_Variables.h"
 
 
 
-struct DATA_oETCS_Radio_TrackToTrain_SH_Refused {
+struct DATA_Radio_TrackToTrain_SH_Refused {
   int vUsed_idx;                             // aktueller Fuellgrad von aPacket
 
   struct 
   {
           uint32_t v_TOccurence;            // Zeitpunkt des Empfangs
           uint64_t v_DOccurrence;           // Ort des Empfangs
-          uint32_t vState;                  // Bearbeitungszustände  
+          uint32_t vState;                  // Bearbeitungszustaende  
   } info;
 
   struct 
  { 
-// TransmissionMedia=RBC
+// Packet Number = 27
 
-	uint32_t NID_MESSAGE;                            			// # 8		// int
-	uint32_t L_MESSAGE;                              			// # 10		// int
-		uint32_t T_TRAIN0;                        		// # 32		// real
-	uint32_t M_ACK;                                  			// # 1		// enum
-	uint32_t NID_LRBG;                               			// # 24		// int
+	uint32_t NID_MESSAGE;                     		// # 8		// int
+	uint32_t               L_MESSAGE             ;		// # 10		// int
+		uint32_t T_TRAIN0;                        		// # 32		// float
+	T_m_ack                M_ACK                 ;		// # 1		// enum
+	uint32_t               NID_LRBG              ;		// # 24		// int
 		uint32_t T_TRAIN1;                        		// # 32	
 } 
 
 
-   aPacket[2];       // Instanz der Sturkur mit dem content
+   Message[2];       // Instanz der Sturkur mit dem content
 };
 
 // struct -> type
-typedef struct DATA_oETCS_Radio_TrackToTrain_SH_Refused T_DATA_oETCS_Radio_TrackToTrain_SH_Refused;
+typedef struct DATA_Radio_TrackToTrain_SH_Refused T_DATA_Radio_TrackToTrain_SH_Refused;
 // typ -> ptrtyp
-typedef  T_DATA_oETCS_Radio_TrackToTrain_SH_Refused* TP_DATA_oETCS_Radio_TrackToTrain_SH_Refused;
+typedef  T_DATA_Radio_TrackToTrain_SH_Refused* TP_DATA_Radio_TrackToTrain_SH_Refused;
 // declaration of variable of ptrtyp
-extern TP_DATA_oETCS_Radio_TrackToTrain_SH_Refused  oETCS_Packet_Radio_TrackToTrain_SH_Refused;
+extern TP_DATA_Radio_TrackToTrain_SH_Refused  Radio_Packet_TrackToTrain_SH_Refused;
 // instatiate this ptrtype variable like this: (get memory and fill memory)
-// TP_DATA_oETCS_Radio_TrackToTrain_SH_Refused  oETCS_Packet_Radio_TrackToTrain_SH_Refused = new(T_DATA_oETCS_Radio_TrackToTrain_SH_Refused);
+// TP_DATA_Radio_TrackToTrain_SH_Refused  Radio_Packet_TrackToTrain_SH_Refused = new(T_DATA_Radio_TrackToTrain_SH_Refused);
 // and now fill in the content to start with ...
-// Access variable like this: oETCS_Packet_Radio_TrackToTrain_SH_Refused->...
-// maybe : memset(oETCS_Packet_Radio_TrackToTrain_SH_Refused, 0, sizeof(T_DATA_oETCS_Packet_Radio_TrackToTrain_SH_Refused));
+// Access variable like this: Radio_Packet_TrackToTrain_SH_Refused->...
+// maybe : memset(Radio_Packet_TrackToTrain_SH_Refused, 0, sizeof(T_DATA_Radio_Packet_TrackToTrain_SH_Refused));
 // for complete 0 content.
 
 #endif

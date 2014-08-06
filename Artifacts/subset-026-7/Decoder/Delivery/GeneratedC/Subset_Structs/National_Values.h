@@ -5,7 +5,7 @@ Formalization of Subset-026-7 (Chapter 7: ERTMS/ETCS language)
 
 - Name: Subset-026-7 / TrackToTrain_National_Values
 - Description: UNISIG SUBSET-026-7, ISSUE : 3.3.0, 3.5 ERTMS/ETCS language) 
-- Copyright (c) Siemens AG, 2013, All Rights Reserved
+- Copyright (c) Siemens AG, 2014, All Rights Reserved
  	
 - Licensed under the EUPL V.1.1 ( http://joinup.ec.europa.eu/software/page/eupl/licence-eupl )
 - Gist URL: none
@@ -21,6 +21,7 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.  	
 ============================================================================= */
 #include <stdint.h>
+#include "opnETCS_Variables.h"
 
 struct DATA_oETCS_TrackToTrain_National_Values {
   int vUsed_idx;                             // aktueller Fuellgrad von aPacket
@@ -29,7 +30,7 @@ struct DATA_oETCS_TrackToTrain_National_Values {
   {
           uint32_t v_TOccurence;            // Zeitpunkt des Empfangs
           uint64_t v_DOccurrence;           // Ort des Empfangs
-          uint32_t vState;                  // Bearbeitungszustände  
+          uint32_t vState;                  // Bearbeitungszustaende  
   } info;
 
   struct 
@@ -38,12 +39,12 @@ struct DATA_oETCS_TrackToTrain_National_Values {
 // Downloads a set of National Values to the train
 // Packet Number = 3
 
-	uint32_t NID_PACKET;                      		// # 8	
-	uint32_t Q_DIR;                                  			// # 2	
-	uint32_t L_PACKET;                               			// # 13	
-	uint32_t Q_SCALE;                                			// # 2	
-	uint32_t D_VALIDNV;                              			// # 15	
-	uint32_t NID_C;                                  			// # 10		// Identification of national areas to which the set applies    
+	uint32_t               NID_PACKET;            		// # 8	
+	T_q_dir                Q_DIR                 ;		// # 2	
+	uint32_t               L_PACKET              ;		// # 13	
+	T_q_scale              Q_SCALE               ;		// # 2	
+	uint32_t               D_VALIDNV             ;		// # 15	
+	uint32_t               NID_C                 ;		// # 10		// Identification of national areas to which the set applies    
         struct {
             uint32_t used;                        //N_ITER+1              // # 5
             struct {
@@ -52,40 +53,40 @@ struct DATA_oETCS_TrackToTrain_National_Values {
         } a_data[33];
         } p;
 
-	uint32_t V_NVSHUNT;                              			// # 7	
-	uint32_t V_NVSTFF;                               			// # 7	
-	uint32_t V_NVONSIGHT;                            			// # 7	
-	uint32_t V_NVLIMSUPERV;                          			// # 7	
-	uint32_t V_NVUNFIT;                              			// # 7	
-	uint32_t V_NVREL;                                			// # 7	
-	uint32_t D_NVROLL;                               			// # 15	
-	uint32_t Q_NVSBTSMPERM;                          			// # 1	
-	uint32_t Q_NVEMRRLS;                             			// # 1	
-	uint32_t Q_NVGUIPERM;                            			// # 1	
-	uint32_t Q_NVSBFBPERM;                           			// # 1	
-	uint32_t Q_NVINHSMICPERM;                        			// # 1	
-	uint32_t V_NVALLOWOVTRP;                         			// # 7	
-	uint32_t V_NVSUPOVTRP;                           			// # 7	
-	uint32_t D_NVOVTRP;                              			// # 15	
-	uint32_t T_NVOVTRP;                              			// # 8	
-	uint32_t D_NVPOTRP;                              			// # 15	
-	uint32_t M_NVCONTACT;                            			// # 2	
-	uint32_t T_NVCONTACT;                            			// # 8	
-	uint32_t M_NVDERUN;                              			// # 1	
-	uint32_t D_NVSTFF;                               			// # 15	
-	uint32_t Q_NVDRIVER_ADHES;                       			// # 1	
-	uint32_t A_NVMAXREDADH1;                         			// # 6	
-	uint32_t A_NVMAXREDADH2;                         			// # 6	
-	uint32_t A_NVMAXREDADH3;                         			// # 6	
-	uint32_t Q_NVLOCACC;                             			// # 6	
-	uint32_t M_NVAVADH;                              			// # 5	
-	uint32_t M_NVEBCL;                               			// # 4	
-	uint32_t Q_NVKINT;                               			// # 1		// if (Q_NVKINT == 1)
-	uint32_t Q_NVKVINTSET;                           			// # 2		// Only if Q_NVKINT = 1, Q_NVKVINTSET and the following variables follow	// if (Q_NVKVINTSET == 1)
-	uint32_t A_NVP12;                                			// # 6		// Only if Q_NVKVINTSET = 1
-	uint32_t A_NVP23;                                			// # 6		// Only if Q_NVKVINTSET = 1
-	uint32_t V_NVKVINT;                              			// # 7		// = 0 km/h
-	uint32_t M_NVKVINT;                              			// # 7		// Valid between V_NVKVINT and V_NVKVINT(1)If Q_NVKVINTSET = 1, gives the correction factor if maximum emergency brake deceleration is lower than A_NVP12    
+	uint32_t               V_NVSHUNT             ;		// # 7	
+	uint32_t               V_NVSTFF              ;		// # 7	
+	uint32_t               V_NVONSIGHT           ;		// # 7	
+	uint32_t               V_NVLIMSUPERV         ;		// # 7	
+	uint32_t               V_NVUNFIT             ;		// # 7	
+	uint32_t               V_NVREL               ;		// # 7	
+	uint32_t               D_NVROLL              ;		// # 15	
+	T_q_nvsbtsmperm        Q_NVSBTSMPERM         ;		// # 1	
+	T_q_nvemrrls           Q_NVEMRRLS            ;		// # 1	
+	T_q_nvguiperm          Q_NVGUIPERM           ;		// # 1	
+	T_q_nvsbfbperm         Q_NVSBFBPERM          ;		// # 1	
+	T_q_nvinhsmicperm      Q_NVINHSMICPERM       ;		// # 1	
+	uint32_t               V_NVALLOWOVTRP        ;		// # 7	
+	uint32_t               V_NVSUPOVTRP          ;		// # 7	
+	uint32_t               D_NVOVTRP             ;		// # 15	
+	uint32_t               T_NVOVTRP             ;		// # 8	
+	uint32_t               D_NVPOTRP             ;		// # 15	
+	T_m_nvcontact          M_NVCONTACT           ;		// # 2	
+	uint32_t               T_NVCONTACT           ;		// # 8	
+	T_m_nvderun            M_NVDERUN             ;		// # 1	
+	uint32_t               D_NVSTFF              ;		// # 15	
+	T_q_nvdriver_adhes     Q_NVDRIVER_ADHES      ;		// # 1	
+	uint32_t               A_NVMAXREDADH1        ;		// # 6	
+	uint32_t               A_NVMAXREDADH2        ;		// # 6	
+	uint32_t               A_NVMAXREDADH3        ;		// # 6	
+	uint32_t               Q_NVLOCACC            ;		// # 6	
+	uint32_t               M_NVAVADH             ;		// # 5	
+	T_m_nvebcl             M_NVEBCL              ;		// # 4	
+	T_q_nvkint             Q_NVKINT              ;		// # 1		// if (Q_NVKINT == 1)
+	T_q_nvkvintset         Q_NVKVINTSET          ;		// # 2		// Only if Q_NVKINT = 1, Q_NVKVINTSET and the following variables follow	// if (Q_NVKVINTSET == 1)
+	uint32_t               A_NVP12               ;		// # 6		// Only if Q_NVKVINTSET = 1
+	uint32_t               A_NVP23               ;		// # 6		// Only if Q_NVKVINTSET = 1
+	uint32_t               V_NVKVINT             ;		// # 7		// = 0 km/h
+	uint32_t               M_NVKVINT             ;		// # 7		// Valid between V_NVKVINT and V_NVKVINT(1)If Q_NVKVINTSET = 1, gives the correction factor if maximum emergency brake deceleration is lower than A_NVP12    
         struct {
             uint32_t used;                        //N_ITER+1              // # 5
             struct {
@@ -116,8 +117,8 @@ struct DATA_oETCS_TrackToTrain_National_Values {
         } a_data[33];
         } k;
 
-	uint32_t L_NVKRINT;                              			// # 5		// = 0m
-	uint32_t M_NVKRINT;                              			// # 5		// Valid between L_NVKRINT and L_NVKRINT(1)    
+	T_l_nvkrint            L_NVKRINT             ;		// # 5		// = 0m
+	uint32_t               M_NVKRINT             ;		// # 5		// Valid between L_NVKRINT and L_NVKRINT(1)    
         struct {
             uint32_t used;                        //N_ITER+1              // # 5
             struct {
@@ -127,7 +128,7 @@ struct DATA_oETCS_TrackToTrain_National_Values {
         } a_data[33];
         } l;
 
-	uint32_t M_NVKTINT;                              			// # 5	
+	uint32_t               M_NVKTINT             ;		// # 5	
 } 
 
 
