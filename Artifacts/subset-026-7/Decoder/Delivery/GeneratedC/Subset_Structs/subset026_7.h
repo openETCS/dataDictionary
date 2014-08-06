@@ -4,7 +4,7 @@ Formalization of Subset-026-7 (Chapter 7: ERTMS/ETCS language)
 
 - Name: subset026_7.h
 - Description: UNISIG SUBSET-026-7, ISSUE : 3.3.0, 3.5 ERTMS/ETCS language) 
-- Copyright (c) Siemens AG, 2013, All Rights Reserved
+- Copyright (c) Siemens AG, 2014, All Rights Reserved
     
 - Licensed under the EUPL V.1.1 ( http://joinup.ec.europa.eu/software/page/eupl/licence-eupl )
 - Gist URL: none
@@ -20,7 +20,7 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.   
 ============================================================================= */
 
-#include "Adhesion_factor.h"
+#include "Adhesion_Factor.h"
 #include "Axle_Load_Speed_Profile.h"
 #include "Conditional_Level_Transition_Order.h"
 #include "Danger_for_Shunting_information.h"
@@ -30,7 +30,7 @@ THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.
 #include "Default_Gradient_for_Temporary_Speed_Restriction.h"
 #include "End_of_Information.h"
 #include "EOLM_Packet.h"
-#include "Error_reporting.h"
+#include "Error_Reporting.h"
 #include "Geographical_Position_Information.h"
 #include "Gradient_Profile.h"
 #include "Infill_location_reference.h"

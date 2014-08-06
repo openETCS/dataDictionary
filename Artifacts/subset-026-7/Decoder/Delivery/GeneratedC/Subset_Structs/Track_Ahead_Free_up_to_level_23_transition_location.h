@@ -5,7 +5,7 @@ Formalization of Subset-026-7 (Chapter 7: ERTMS/ETCS language)
 
 - Name: Subset-026-7 / TrackToTrain_Track_Ahead_Free_up_to_level_23_transition_location
 - Description: UNISIG SUBSET-026-7, ISSUE : 3.3.0, 3.5 ERTMS/ETCS language) 
-- Copyright (c) Siemens AG, 2013, All Rights Reserved
+- Copyright (c) Siemens AG, 2014, All Rights Reserved
  	
 - Licensed under the EUPL V.1.1 ( http://joinup.ec.europa.eu/software/page/eupl/licence-eupl )
 - Gist URL: none
@@ -21,6 +21,7 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.  	
 ============================================================================= */
 #include <stdint.h>
+#include "opnETCS_Variables.h"
 
 struct DATA_oETCS_TrackToTrain_Track_Ahead_Free_up_to_level_23_transition_location {
   int vUsed_idx;                             // aktueller Fuellgrad von aPacket
@@ -29,7 +30,7 @@ struct DATA_oETCS_TrackToTrain_Track_Ahead_Free_up_to_level_23_transition_locati
   {
           uint32_t v_TOccurence;            // Zeitpunkt des Empfangs
           uint64_t v_DOccurrence;           // Ort des Empfangs
-          uint32_t vState;                  // Bearbeitungszustände  
+          uint32_t vState;                  // Bearbeitungszustaende  
   } info;
 
   struct 
@@ -38,12 +39,12 @@ struct DATA_oETCS_TrackToTrain_Track_Ahead_Free_up_to_level_23_transition_locati
 // Notification to on-board that track ahead is free from the balise group transmitting this information up to the level 2/3 transition location
 // Packet Number = 90
 
-	uint32_t NID_PACKET;                      		// # 8	
-	uint32_t Q_DIR;                                  			// # 2	
-	uint32_t L_PACKET;                               			// # 13	
-	uint32_t Q_NEWCOUNTRY;                           			// # 1		// if (Q_NEWCOUNTRY == 1)
-	uint32_t NID_C;                                  			// # 10		// If Q_NEWCOUNTRY = 1
-	uint32_t NID_BG;                                 			// # 14		// Level 2/3 transition location balise group
+	uint32_t               NID_PACKET;            		// # 8	
+	T_q_dir                Q_DIR                 ;		// # 2	
+	uint32_t               L_PACKET              ;		// # 13	
+	T_q_newcountry         Q_NEWCOUNTRY          ;		// # 1		// if (Q_NEWCOUNTRY == 1)
+	uint32_t               NID_C                 ;		// # 10		// If Q_NEWCOUNTRY = 1
+	uint32_t               NID_BG                ;		// # 14		// Level 2/3 transition location balise group
 } 
 
 

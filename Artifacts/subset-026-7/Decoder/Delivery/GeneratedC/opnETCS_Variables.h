@@ -1,10 +1,13 @@
+#ifndef NESTINGMARK_oETCS_Variables
+#define NESTINGMARK_oETCS_Variables
+
 
 /* =============================================================================
 Formalization of Subset-026-7 (Chapter 7: ERTMS/ETCS language)
 
 - Name: opnETCS_Variables.h
 - Description: UNISIG SUBSET-026-7, ISSUE : 3.3.0, 3.5 ERTMS/ETCS language) 
-- Copyright (c) Siemens AG, 2013, All Rights Reserved
+- Copyright (c) Siemens AG, 2014, All Rights Reserved
     
 - Licensed under the EUPL V.1.1 ( http://joinup.ec.europa.eu/software/page/eupl/licence-eupl )
 - Gist URL: none
@@ -20,11 +23,11 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.   
 ============================================================================= */
 
-real A_NVMAXREDADH1	 /* MinVal = 0.0, MaxVal = 3.15 */  ; 
-real A_NVMAXREDADH2	 /* MinVal = 0.0, MaxVal = 3.15 */  ; 
-real A_NVMAXREDADH3	 /* MinVal = 0.0, MaxVal = 3.15 */  ; 
-real A_NVP12	 /* MinVal = 0.0, MaxVal = 3.15 */  ; 
-real A_NVP23	 /* MinVal = 0.0, MaxVal = 3.15 */  ; 
+float A_NVMAXREDADH1	 /* MinVal = 0.0, MaxVal = 3.15 */  ; 
+float A_NVMAXREDADH2	 /* MinVal = 0.0, MaxVal = 3.15 */  ; 
+float A_NVMAXREDADH3	 /* MinVal = 0.0, MaxVal = 3.15 */  ; 
+float A_NVP12	 /* MinVal = 0.0, MaxVal = 3.15 */  ; 
+float A_NVP23	 /* MinVal = 0.0, MaxVal = 3.15 */  ; 
 int D_ADHESION	 /* MinVal = 0, MaxVal = 32767 */  ; 
 int D_AXLELOAD	 /* MinVal = 0, MaxVal = 32767 */  ; 
 int D_CURRENT	 /* MinVal = 0, MaxVal = 32767 */  ; 
@@ -127,7 +130,7 @@ typedef enum {
 	L_NVKRINT_2500m = 29 ,
 	L_NVKRINT_2600m = 30 ,
 	L_NVKRINT_2700m = 31 
-} L_NVKRINT ;
+} T_l_nvkrint ;
 int L_PACKET	 /* MinVal = 0, MaxVal = 8191 */  ; 
 int L_PBDSR	 /* MinVal = 0, MaxVal = 32767 */  ; 
 int L_REVERSEAREA	 /* MinVal = 0, MaxVal = 32767 */  ; 
@@ -144,15 +147,15 @@ int L_TSR	 /* MinVal = 0, MaxVal = 32767 */  ;
 typedef enum { 
 	M_ACK_No_acknowledgement_required = 0 ,
 	M_ACK_Acknowledgement_required = 1 
-} M_ACK ;
+} T_m_ack ;
 typedef enum { 
 	M_ADHESION_Slippery_rail = 0 ,
 	M_ADHESION_Non_slippery_rail = 1 
-} M_ADHESION ;
+} T_m_adhesion ;
 typedef enum { 
 	M_AIRTIGHT_Not_fitted = 0 ,
 	M_AIRTIGHT_Fitted = 1 
-} M_AIRTIGHT ;
+} T_m_airtight ;
 typedef enum { 
 	M_AXLELOADCAT_A = 0 ,
 	M_AXLELOADCAT_HS17 = 1 ,
@@ -167,14 +170,14 @@ typedef enum {
 	M_AXLELOADCAT_D4XL = 10 ,
 	M_AXLELOADCAT_E4 = 11 ,
 	M_AXLELOADCAT_E5 = 12 
-} M_AXLELOADCAT ;
+} T_m_axleloadcat ;
 int M_CURRENT	 /* MinVal = 0, MaxVal = 10000 */	 // 1023 = No_restriction_for_current_consumption 
   ; 
 typedef enum { 
 	M_DUP_No_duplicates = 0 ,
 	M_DUP_This_balise_is_a_duplicate_of_the_next_balise = 1 ,
 	M_DUP_This_balise_is_a_duplicate_of_the_previous_balise = 2 
-} M_DUP ;
+} T_m_dup ;
 typedef enum { 
 	M_ERROR_Balise_group_linking_consistency_error = 0 ,
 	M_ERROR_Linked_balise_group_message_consistency_erro = 1 ,
@@ -185,14 +188,14 @@ typedef enum {
 	M_ERROR_Safety_critical_failure = 6 ,
 	M_ERROR_Double_linking_error = 7 ,
 	M_ERROR_Double_repositioning_error = 8 
-} M_ERROR ;
+} T_m_error ;
 typedef enum { 
 	M_LEVEL_Level_0 = 0 ,
 	M_LEVEL_Level_NTC_specified_by_NID_NTC = 1 ,
 	M_LEVEL_Level_1 = 2 ,
 	M_LEVEL_Level_2 = 3 ,
 	M_LEVEL_Level_3 = 4 
-} M_LEVEL ;
+} T_m_level ;
 typedef enum { 
 	M_LEVELTEXTDISPLAY_Level_0 = 0 ,
 	M_LEVELTEXTDISPLAY_Level_NTC_specified_by_NID_NTC = 1 ,
@@ -200,37 +203,37 @@ typedef enum {
 	M_LEVELTEXTDISPLAY_Level_2 = 3 ,
 	M_LEVELTEXTDISPLAY_Level_3 = 4 ,
 	M_LEVELTEXTDISPLAY_The_display_of_the_text_shall_not_be_limited_by_the_level = 5 
-} M_LEVELTEXTDISPLAY ;
+} T_m_leveltextdisplay ;
 typedef enum { 
 	M_LEVELTR_Level_0 = 0 ,
 	M_LEVELTR_Level_NTC_specified_by_NID_NTC = 1 ,
 	M_LEVELTR_Level_1 = 2 ,
 	M_LEVELTR_Level_2 = 3 ,
 	M_LEVELTR_Level_3 = 4 
-} M_LEVELTR ;
+} T_m_leveltr ;
 typedef enum { 
 	M_LINEGAUGE_G1 = 1 ,
 	M_LINEGAUGE_GA = 2 ,
 	M_LINEGAUGE_GB = 4 ,
 	M_LINEGAUGE_GC = 8 
-} M_LINEGAUGE ;
+} T_m_linegauge ;
 typedef enum { 
 	M_LOADINGGAUGE_The_train_does_not_fit_to_any_of_the_interoperable_loading_gauge_profiles = 0 ,
 	M_LOADINGGAUGE_G1 = 1 ,
 	M_LOADINGGAUGE_GA = 2 ,
 	M_LOADINGGAUGE_GB = 3 ,
 	M_LOADINGGAUGE_GC = 4 
-} M_LOADINGGAUGE ;
+} T_m_loadinggauge ;
 typedef enum { 
 	M_LOC_Now = 0 ,
 	M_LOC_Every_LRBG_compliant_balise_group = 1 ,
 	M_LOC_Do_not_send_position_report_on_passage_of_LRBG_compliant_balise_group = 2 
-} M_LOC ;
+} T_m_loc ;
 typedef enum { 
 	M_MAMODE_On_Sight = 0 ,
 	M_MAMODE_Shunting = 1 ,
 	M_MAMODE_Limited_Supervision = 2 
-} M_MAMODE ;
+} T_m_mamode ;
 int M_MCOUNT	 /* MinVal = 0, MaxVal = 253 */	 // 254 = The_telegram_never_fits_any_message_of_the_group 
 	 // 255 = The_telegram_fits_with_all_telegrams_of_the_same_balise_group 
   ; 
@@ -251,7 +254,7 @@ typedef enum {
 	M_MODE_National_System = 13 ,
 	M_MODE_Reversing = 14 ,
 	M_MODE_Passive_Shunting = 15 
-} M_MODE ;
+} T_m_mode ;
 typedef enum { 
 	M_MODETEXTDISPLAY_Full_Supervision = 0 ,
 	M_MODETEXTDISPLAY_On_Sight = 1 ,
@@ -264,17 +267,17 @@ typedef enum {
 	M_MODETEXTDISPLAY_Limited_Supervision = 12 ,
 	M_MODETEXTDISPLAY_Reversing = 14 ,
 	M_MODETEXTDISPLAY_The_display_of_the_text_shall_not_be_limited_by_the_mode = 15 
-} M_MODETEXTDISPLAY ;
-real M_NVAVADH	 /* MinVal = 0.0, MaxVal = 1.0 */  ; 
+} T_m_modetextdisplay ;
+float M_NVAVADH	 /* MinVal = 0.0, MaxVal = 1.0 */  ; 
 typedef enum { 
 	M_NVCONTACT_Train_trip = 0 ,
 	M_NVCONTACT_Apply_service_brake = 1 ,
 	M_NVCONTACT_No_Reaction = 2 
-} M_NVCONTACT ;
+} T_m_nvcontact ;
 typedef enum { 
 	M_NVDERUN_No = 0 ,
 	M_NVDERUN_Yes = 1 
-} M_NVDERUN ;
+} T_m_nvderun ;
 typedef enum { 
 	M_NVEBCL_Confidence_level_50 = 0 ,
 	M_NVEBCL_Confidence_level_90 = 1 ,
@@ -286,10 +289,10 @@ typedef enum {
 	M_NVEBCL_Confidence_level_99_99999 = 7 ,
 	M_NVEBCL_Confidence_level_99_999999 = 8 ,
 	M_NVEBCL_Confidence_level_99_9999999 = 9 
-} M_NVEBCL ;
-real M_NVKRINT	 /* MinVal = 0.0, MaxVal = 1.5 */  ; 
-real M_NVKTINT	 /* MinVal = 0.0, MaxVal = 1.5 */  ; 
-real M_NVKVINT	 /* MinVal = 0.0, MaxVal = 2.5 */  ; 
+} T_m_nvebcl ;
+float M_NVKRINT	 /* MinVal = 0.0, MaxVal = 1.5 */  ; 
+float M_NVKTINT	 /* MinVal = 0.0, MaxVal = 1.5 */  ; 
+float M_NVKVINT	 /* MinVal = 0.0, MaxVal = 2.5 */  ; 
 typedef enum { 
 	M_PLATFORM_200_mm = 0 ,
 	M_PLATFORM_300380_mm = 1 ,
@@ -305,7 +308,7 @@ typedef enum {
 	M_PLATFORM_920_mm = 11 ,
 	M_PLATFORM_960_mm = 12 ,
 	M_PLATFORM_1100_mm = 13 
-} M_PLATFORM ;
+} T_m_platform ;
 int M_POSITION	 /* MinVal = 0, MaxVal = 9999999 */	 // 16777215 = No_more_geographical_position_calculation_after_this_reference_location 
   ; 
 typedef enum { 
@@ -320,7 +323,7 @@ typedef enum {
 	M_TRACKCOND_Switch_off_magnetic_shoe_brake_Initial_state_is_magnetic_shoe_brake_on = 8 ,
 	M_TRACKCOND_Powerless_section_switch_off_the_main_power_switch_Initial_state_is_not_powerless_section = 9 ,
 	M_TRACKCOND_Switch_off_eddy_current_brake_for_emergency_brake_Initial_state_is_eddy_current_brake_for_emergency_brake_on = 10 
-} M_TRACKCOND ;
+} T_m_trackcond ;
 typedef enum { 
 	M_VOLTAGE_Line_not_fitted_with_any_traction_system = 0 ,
 	M_VOLTAGE_AC_25_kV_50_Hz = 1 ,
@@ -328,13 +331,13 @@ typedef enum {
 	M_VOLTAGE_DC_3_kV = 3 ,
 	M_VOLTAGE_DC_1_5_kV = 4 ,
 	M_VOLTAGE_DC_600_or_750_V = 5 
-} M_VOLTAGE ;
+} T_m_voltage ;
 typedef enum { 
 	M_VERSION_Previous_versions_according_to_e_g_EEIG_SRS_and_UIC_A200_SRS = 0 ,
 	M_VERSION_Version_1_0_introduced_in_SRS_1_2_0_and_reused_in_SRSs_2_0_0_and_2_2_2_and_2_3_0 = 16 ,
 	M_VERSION_Version_1_1_introduced_in_SRS_3_3_0 = 17 ,
 	M_VERSION_Version_2_0_introduced_in_SRS_3_3_0 = 32 
-} M_VERSION ;
+} T_m_version ;
 int N_AXLE	 /* MinVal = 0, MaxVal = 1022 */	 // 1023 = Unknown 
   ; 
 int N_ITER	 /* MinVal = 0, MaxVal = 31 */  ; 
@@ -347,7 +350,7 @@ typedef enum {
 	N_PIG_I_am_the_6th = 5 ,
 	N_PIG_I_am_the_7th = 6 ,
 	N_PIG_I_am_the_8th = 7 
-} N_PIG ;
+} T_n_pig ;
 typedef enum { 
 	N_TOTAL_1_balise_in_the_group = 0 ,
 	N_TOTAL_2_balises_in_the_group = 1 ,
@@ -357,7 +360,7 @@ typedef enum {
 	N_TOTAL_6_balises_in_the_group = 5 ,
 	N_TOTAL_7_balises_in_the_group = 6 ,
 	N_TOTAL_8_balises_in_the_group = 7 
-} N_TOTAL ;
+} T_n_total ;
 typedef enum { 
 	NC_CDDIFF_Specific_SSP_applicable_to_Cant_Deficiency_80_mm = 0 ,
 	NC_CDDIFF_Specific_SSP_applicable_to_Cant_Deficiency_100_mm = 1 ,
@@ -370,7 +373,7 @@ typedef enum {
 	NC_CDDIFF_Specific_SSP_applicable_to_Cant_Deficiency_245_mm = 8 ,
 	NC_CDDIFF_Specific_SSP_applicable_to_Cant_Deficiency_275_mm = 9 ,
 	NC_CDDIFF_Specific_SSP_applicable_to_Cant_Deficiency_300_mm = 10 
-} NC_CDDIFF ;
+} T_nc_cddiff ;
 typedef enum { 
 	NC_CDTRAIN_Cant_Deficiency_80_mm = 0 ,
 	NC_CDTRAIN_Cant_Deficiency_100_mm = 1 ,
@@ -383,7 +386,7 @@ typedef enum {
 	NC_CDTRAIN_Cant_Deficiency_245_mm = 8 ,
 	NC_CDTRAIN_Cant_Deficiency_275_mm = 9 ,
 	NC_CDTRAIN_Cant_Deficiency_300_mm = 10 
-} NC_CDTRAIN ;
+} T_nc_cdtrain ;
 int NC_DIFF	 /* MinVal = 0, MaxVal = 15 */	 // 0 = Specific_SSP_applicable_to_Freight_train_braked_in_P_position 
 	 // 1 = Specific_SSP_applicable_to_Freight_train_braked_in_G_position 
 	 // 2 = Specific_SSP_applicable_to_Passenger_train 
@@ -393,7 +396,7 @@ typedef enum {
 	NC_TRAIN_Freight_train_braked_in_P_position = 1 ,
 	NC_TRAIN_Freight_train_braked_in_G_position = 2 ,
 	NC_TRAIN_Passenger_train = 4 
-} NC_TRAIN ;
+} T_nc_train ;
 int NID_BG	 /* MinVal = 0, MaxVal = 16382 */	 // 16383 = Identity_is_unknown_(only_to_be_used_for_Linking_information) 
   ; 
 int NID_C	 /* MinVal = 0, MaxVal = 1023 */  ; 
@@ -434,241 +437,241 @@ int NID_XUSER	 /* MinVal = 0, MaxVal = 511 */  ;
 typedef enum { 
 	Q_ASPECT_Stop_if_in_SH_mode = 0 ,
 	Q_ASPECT_Go_if_in_SH_mode = 1 
-} Q_ASPECT ;
+} T_q_aspect ;
 typedef enum { 
 	Q_CONFTEXTDISPLAY_Driver_acknowledgement_always_ends_the_text_display_regardless_of_the_end_condition = 0 ,
 	Q_CONFTEXTDISPLAY_Driver_acknowledgement_is_an_additional_condition_to_end_the_display = 1 
-} Q_CONFTEXTDISPLAY ;
+} T_q_conftextdisplay ;
 typedef enum { 
 	Q_DANGERPOINT_No_danger_point_information = 0 ,
 	Q_DANGERPOINT_Danger_point_information_to_follow = 1 
-} Q_DANGERPOINT ;
+} T_q_dangerpoint ;
 typedef enum { 
 	Q_DIFF_Cant_Deficiency_specific_category = 0 ,
 	Q_DIFF_Other_specific_category_replaces_the_Cant_Deficiency_SSP = 1 ,
 	Q_DIFF_Other_specific_category_does_not_replace_the_Cant_Deficiency_SSP = 2 
-} Q_DIFF ;
+} T_q_diff ;
 typedef enum { 
 	Q_DIR_Reverse = 0 ,
 	Q_DIR_Nominal = 1 ,
 	Q_DIR_Both_directions = 2 
-} Q_DIR ;
+} T_q_dir ;
 typedef enum { 
 	Q_DIRLRBG_Reverse = 0 ,
 	Q_DIRLRBG_Nominal = 1 ,
 	Q_DIRLRBG_Unknown = 2 
-} Q_DIRLRBG ;
+} T_q_dirlrbg ;
 typedef enum { 
 	Q_DIRTRAIN_Reverse = 0 ,
 	Q_DIRTRAIN_Nominal = 1 ,
 	Q_DIRTRAIN_Unknown = 2 
-} Q_DIRTRAIN ;
+} T_q_dirtrain ;
 typedef enum { 
 	Q_DLRBG_Reverse = 0 ,
 	Q_DLRBG_Nominal = 1 ,
 	Q_DLRBG_Unknown = 2 
-} Q_DLRBG ;
+} T_q_dlrbg ;
 typedef enum { 
 	Q_EMERGENCYSTOP_Conditional_Emergency_Stop_accepted_with_update_of_EOA = 0 ,
 	Q_EMERGENCYSTOP_Conditional_Emergency_Stop_accepted_with_no_update_of_EOA = 1 ,
 	Q_EMERGENCYSTOP_Unconditional_Emergency_Stop_accepted = 2 ,
 	Q_EMERGENCYSTOP_Emergency_stop = 3 
-} Q_EMERGENCYSTOP ;
+} T_q_emergencystop ;
 typedef enum { 
 	Q_ENDTIMER_No_End_section_timer_information = 0 ,
 	Q_ENDTIMER_End_section_timer_information_to_follow = 1 
-} Q_ENDTIMER ;
+} T_q_endtimer ;
 typedef enum { 
 	Q_FRONT_Train_length_delay_on_validity_end_point_of_profile_element = 0 ,
 	Q_FRONT_No_train_length_delay_on_validity_end_point_of_profile_element = 1 
-} Q_FRONT ;
+} T_q_front ;
 typedef enum { 
 	Q_GDIR_downhill = 0 ,
 	Q_GDIR_uphill = 1 
-} Q_GDIR ;
+} T_q_gdir ;
 typedef enum { 
 	Q_INFILL_Enter = 0 ,
 	Q_INFILL_Exit = 1 
-} Q_INFILL ;
+} T_q_infill ;
 typedef enum { 
 	Q_LENGTH_No_train_integrity_information_available = 0 ,
 	Q_LENGTH_Train_integrity_confirmed_by_integrity_monitoring_device = 1 ,
 	Q_LENGTH_Train_integrity_confirmed_by_driver = 2 ,
 	Q_LENGTH_Train_integrity_lost = 3 
-} Q_LENGTH ;
+} T_q_length ;
 typedef enum { 
 	Q_LGTLOC_Min_safe_rear_end = 0 ,
 	Q_LGTLOC_Max_safe_front_end = 1 
-} Q_LGTLOC ;
+} T_q_lgtloc ;
 typedef enum { 
 	Q_LINK_Unlinked = 0 ,
 	Q_LINK_Linked = 1 
-} Q_LINK ;
+} T_q_link ;
 int Q_LOCACC	 /* MinVal = 0, MaxVal = 63 */  ; 
 typedef enum { 
 	Q_LINKORIENTATION_The_balise_group_is_seen_by_the_train_in_reverse_direction = 0 ,
 	Q_LINKORIENTATION_The_balise_group_is_seen_by_the_train_in_nominal_direction = 1 
-} Q_LINKORIENTATION ;
+} T_q_linkorientation ;
 typedef enum { 
 	Q_LINKREACTION_Train_trip = 0 ,
 	Q_LINKREACTION_Apply_service_brake = 1 ,
 	Q_LINKREACTION_No_Reaction = 2 
-} Q_LINKREACTION ;
+} T_q_linkreaction ;
 typedef enum { 
 	Q_LOOPDIR_Opposite = 0 ,
 	Q_LOOPDIR_Same = 1 
-} Q_LOOPDIR ;
+} T_q_loopdir ;
 typedef enum { 
 	Q_LXSTATUS_LX_is_protected = 0 ,
 	Q_LXSTATUS_LX_is_not_protected = 1 
-} Q_LXSTATUS ;
+} T_q_lxstatus ;
 typedef enum { 
 	Q_MAMODE_as_the_EOA = 0 ,
 	Q_MAMODE_as_both_the_EOA_and_SvL = 1 
-} Q_MAMODE ;
+} T_q_mamode ;
 typedef enum { 
 	Q_MARQSTREASON_Start_selected_by_driver = 1 ,
 	Q_MARQSTREASON_Time_before_reaching_preindication_location_for_the_EOA_or_LOA_reached = 2 ,
 	Q_MARQSTREASON_Time_before_a_section_timer_or_LOA_speed_timer_expires_reached = 4 ,
 	Q_MARQSTREASON_Track_description_deleted = 8 ,
 	Q_MARQSTREASON_TAF_up_to_level_2_or_3_transition_location = 16 
-} Q_MARQSTREASON ;
+} T_q_marqstreason ;
 typedef enum { 
 	Q_MEDIA_Balise = 0 ,
 	Q_MEDIA_Loop = 1 
-} Q_MEDIA ;
+} T_q_media ;
 typedef enum { 
 	Q_MPOSITION_Opposite = 0 ,
 	Q_MPOSITION_Same = 1 
-} Q_MPOSITION ;
+} T_q_mposition ;
 typedef enum { 
 	Q_NEWCOUNTRY_Same_country__or__railway_administration_no_NID_C_follows = 0 ,
 	Q_NEWCOUNTRY_Not_the_same_country__or__railway_administration_NID_C_follows = 1 
-} Q_NEWCOUNTRY ;
+} T_q_newcountry ;
 typedef enum { 
 	Q_NVDRIVER_ADHES_Not_allowed = 0 ,
 	Q_NVDRIVER_ADHES_Allowed = 1 
-} Q_NVDRIVER_ADHES ;
+} T_q_nvdriver_adhes ;
 typedef enum { 
 	Q_NVEMRRLS_Revoke_emergency_brake_command_at_standstill = 0 ,
 	Q_NVEMRRLS_Revoke_emergency_brake_command_when_permitted_speed_supervision_limit_is_no_longer_exceeded = 1 
-} Q_NVEMRRLS ;
+} T_q_nvemrrls ;
 typedef enum { 
 	Q_NVGUIPERM_No = 0 ,
 	Q_NVGUIPERM_Yes = 1 
-} Q_NVGUIPERM ;
+} T_q_nvguiperm ;
 typedef enum { 
 	Q_NVINHSMICPERM_No = 0 ,
 	Q_NVINHSMICPERM_Yes = 1 
-} Q_NVINHSMICPERM ;
+} T_q_nvinhsmicperm ;
 typedef enum { 
 	Q_NVKINT_No_integrated_correction_factors_follow = 0 ,
 	Q_NVKINT_Integrated_correction_factors_follow = 1 
-} Q_NVKINT ;
+} T_q_nvkint ;
 typedef enum { 
 	Q_NVKVINTSET_Freight_trains = 0 ,
 	Q_NVKVINTSET_Conventional_passenger_trains = 1 
-} Q_NVKVINTSET ;
+} T_q_nvkvintset ;
 int Q_NVLOCACC	 /* MinVal = 0, MaxVal = 63 */  ; 
 typedef enum { 
 	Q_NVSBFBPERM_No = 0 ,
 	Q_NVSBFBPERM_Yes = 1 
-} Q_NVSBFBPERM ;
+} T_q_nvsbfbperm ;
 typedef enum { 
 	Q_NVSBTSMPERM_No = 0 ,
 	Q_NVSBTSMPERM_Yes = 1 
-} Q_NVSBTSMPERM ;
+} T_q_nvsbtsmperm ;
 typedef enum { 
 	Q_ORIENTATION_The_balise_group_has_been_passed_by_the_train_in_reverse_direction = 0 ,
 	Q_ORIENTATION_The_balise_group_has_been_passed_by_the_train_in_nominal_direction = 1 
-} Q_ORIENTATION ;
+} T_q_orientation ;
 typedef enum { 
 	Q_OVERLAP_No_overlap_information = 0 ,
 	Q_OVERLAP_Overlap_information_to_follow = 1 
-} Q_OVERLAP ;
+} T_q_overlap ;
 typedef enum { 
 	Q_PBDSR_EB_intervention_requested = 0 ,
 	Q_PBDSR_SB_intervention_requested = 1 
-} Q_PBDSR ;
+} T_q_pbdsr ;
 typedef enum { 
 	Q_PLATFORM_Platform_on_left_side = 0 ,
 	Q_PLATFORM_Platform_on_right_side = 1 ,
 	Q_PLATFORM_Platform_on_both_sides = 2 
-} Q_PLATFORM ;
+} T_q_platform ;
 typedef enum { 
 	Q_RBC_Terminate_communication_session = 0 ,
 	Q_RBC_Establish_communication_session = 1 
-} Q_RBC ;
+} T_q_rbc ;
 typedef enum { 
 	Q_RIU_Terminate_communication_session = 0 ,
 	Q_RIU_Establish_communication_session = 1 
-} Q_RIU ;
+} T_q_riu ;
 typedef enum { 
 	Q_SCALE_10_cm_scale = 0 ,
 	Q_SCALE_1_m_scale = 1 ,
 	Q_SCALE_10_m_scale = 2 
-} Q_SCALE ;
+} T_q_scale ;
 typedef enum { 
 	Q_SECTIONTIMER_No_Section_Timer_information = 0 ,
 	Q_SECTIONTIMER_Section_Timer_information_to_follow = 1 
-} Q_SECTIONTIMER ;
+} T_q_sectiontimer ;
 typedef enum { 
 	Q_SLEEPSESSION_Ignore_session_establishment_order = 0 ,
 	Q_SLEEPSESSION_Execute_session_establishment_order = 1 
-} Q_SLEEPSESSION ;
+} T_q_sleepsession ;
 typedef enum { 
 	Q_SRSTOP_Stop_if_in_SR_mode = 0 ,
 	Q_SRSTOP_Go_if_in_SR_mode = 1 
-} Q_SRSTOP ;
+} T_q_srstop ;
 int Q_SSCODE	 // 15 = Code_reserved_for_test_purposes 
   ; 
 typedef enum { 
 	Q_STATUS_Valid = 1 ,
 	Q_STATUS_Unknown = 2 
-} Q_STATUS ;
+} T_q_status ;
 typedef enum { 
 	Q_STOPLX_No_stop_required = 0 ,
 	Q_STOPLX_Stop_required = 1 
-} Q_STOPLX ;
+} T_q_stoplx ;
 typedef enum { 
 	Q_SUITABILITY_Loading_gauge = 0 ,
 	Q_SUITABILITY_Max_axle_load = 1 ,
 	Q_SUITABILITY_Traction_system = 2 
-} Q_SUITABILITY ;
+} T_q_suitability ;
 typedef enum { 
 	Q_TEXT_Level_crossing_not_protected = 0 ,
 	Q_TEXT_Acknowledgement = 1 
-} Q_TEXT ;
+} T_q_text ;
 typedef enum { 
 	Q_TEXTCLASS_Auxiliary_Information = 0 ,
 	Q_TEXTCLASS_Important_Information = 1 
-} Q_TEXTCLASS ;
+} T_q_textclass ;
 typedef enum { 
 	Q_TEXTCONFIRM_No_confirmation_required = 0 ,
 	Q_TEXTCONFIRM_Confirmation_required = 1 ,
 	Q_TEXTCONFIRM_Confirmation_required_command_application_of_the_service_brake_when_display_end_condition_is_fulfilled_unless_the_text_has_already_been_acknowledged_by_the_driver = 2 ,
 	Q_TEXTCONFIRM_Confirmation_required_command_application_of_the_emergency_brake_when_display_end_condition_is_fulfilled_unless_the_text_has_already_been_acknowledged_by_the_driver = 3 
-} Q_TEXTCONFIRM ;
+} T_q_textconfirm ;
 typedef enum { 
 	Q_TEXTDISPLAY_No_display_as_soon_as__or__until_one_of_the_events_is_fulfilled = 0 ,
 	Q_TEXTDISPLAY_Yes_display_as_soon_as__or__until_all_events_are_fulfilled = 1 
-} Q_TEXTDISPLAY ;
+} T_q_textdisplay ;
 typedef enum { 
 	Q_TEXTREPORT_No_driver_acknowledgement_report_required = 0 ,
 	Q_TEXTREPORT_Driver_acknowledgement_report_required = 1 
-} Q_TEXTREPORT ;
+} T_q_textreport ;
 typedef enum { 
 	Q_TRACKINIT_No_initial_states_to_be_resumed_profile_to_follow = 0 ,
 	Q_TRACKINIT_Empty_profile_initial_states_to_be_resumed = 1 
-} Q_TRACKINIT ;
+} T_q_trackinit ;
 typedef enum { 
 	Q_UPDOWN_Down_link_telegram = 0 ,
 	Q_UPDOWN_Up_link_telegram = 1 
-} Q_UPDOWN ;
+} T_q_updown ;
 typedef enum { 
 	Q_VBCO_Remove_the_Virtual_Balise_Cover = 0 ,
 	Q_VBCO_Set_the_Virtual_Balise_Cover = 1 
-} Q_VBCO ;
+} T_q_vbco ;
 int T_CYCLOC	 /* MinVal = 0, MaxVal = 254 */	 // 255 = infinite 
   ; 
 int T_CYCRQST	 /* MinVal = 0, MaxVal = 254 */	 // 255 = No_repetition 
@@ -690,7 +693,7 @@ int T_TEXTDISPLAY	 /* MinVal = 0, MaxVal = 1022 */	 // 1023 = Display_of_text_no
   ; 
 int T_TIMEOUTRQST	 /* MinVal = 0, MaxVal = 1022 */	 // 1023 = _No_MA_request_triggering_with_regards_to_this_function 
   ; 
-real T_TRAIN	 /* MinVal = 0.0, MaxVal = 42949672.94 */	 // 4294967295 = Unknown 
+float T_TRAIN	 /* MinVal = 0.0, MaxVal = 42949672.94 */	 // 4294967295 = Unknown 
   ; 
 int T_VBC	 /* MinVal = 0, MaxVal = 255 */  ; 
 int V_AXLELOAD	 /* MinVal = 0, MaxVal = 600 */  ; 
@@ -723,3 +726,5 @@ int V_STATIC	 /* MinVal = 0, MaxVal = 600 */	 // 127 = Non_numerical_value_telli
 int V_TRAIN	 /* MinVal = 0, MaxVal = 600 */  ; 
 int V_TSR	 /* MinVal = 0, MaxVal = 600 */  ; 
 int X_TEXT  ; 
+
+#endif

@@ -1,11 +1,11 @@
-#ifndef NESTINGMARK_oETCS_Packet_TrainToTrack_Error_reporting
-#define NESTINGMARK_oETCS_Packet_TrainToTrack_Error_reporting
+#ifndef NESTINGMARK_oETCS_Packet_TrainToTrack_Error_Reporting
+#define NESTINGMARK_oETCS_Packet_TrainToTrack_Error_Reporting
 /* =============================================================================
 Formalization of Subset-026-7 (Chapter 7: ERTMS/ETCS language)
 
-- Name: Subset-026-7 / TrainToTrack_Error_reporting
+- Name: Subset-026-7 / TrainToTrack_Error_Reporting
 - Description: UNISIG SUBSET-026-7, ISSUE : 3.3.0, 3.5 ERTMS/ETCS language) 
-- Copyright (c) Siemens AG, 2013, All Rights Reserved
+- Copyright (c) Siemens AG, 2014, All Rights Reserved
  	
 - Licensed under the EUPL V.1.1 ( http://joinup.ec.europa.eu/software/page/eupl/licence-eupl )
 - Gist URL: none
@@ -21,15 +21,16 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.  	
 ============================================================================= */
 #include <stdint.h>
+#include "opnETCS_Variables.h"
 
-struct DATA_oETCS_TrainToTrack_Error_reporting {
+struct DATA_oETCS_TrainToTrack_Error_Reporting {
   int vUsed_idx;                             // aktueller Fuellgrad von aPacket
 
   struct 
   {
           uint32_t v_TOccurence;            // Zeitpunkt des Empfangs
           uint64_t v_DOccurrence;           // Ort des Empfangs
-          uint32_t vState;                  // Bearbeitungszustände  
+          uint32_t vState;                  // Bearbeitungszustaende  
   } info;
 
   struct 
@@ -38,9 +39,9 @@ struct DATA_oETCS_TrainToTrack_Error_reporting {
 // Error reporting to the RBC
 // Packet Number = 4
 
-	uint32_t NID_PACKET;                      		// # 8	
-	uint32_t L_PACKET;                               			// # 13	
-	uint32_t M_ERROR;                                			// # 8		// error type identifier
+	uint32_t               NID_PACKET;            		// # 8	
+	uint32_t               L_PACKET              ;		// # 13	
+	T_m_error              M_ERROR               ;		// # 8		// error type identifier
 } 
 
 
@@ -48,16 +49,16 @@ struct DATA_oETCS_TrainToTrack_Error_reporting {
 };
 
 // struct -> type
-typedef struct DATA_oETCS_TrainToTrack_Error_reporting T_DATA_oETCS_TrainToTrack_Error_reporting;
+typedef struct DATA_oETCS_TrainToTrack_Error_Reporting T_DATA_oETCS_TrainToTrack_Error_Reporting;
 // typ -> ptrtyp
-typedef  T_DATA_oETCS_TrainToTrack_Error_reporting* TP_DATA_oETCS_TrainToTrack_Error_reporting;
+typedef  T_DATA_oETCS_TrainToTrack_Error_Reporting* TP_DATA_oETCS_TrainToTrack_Error_Reporting;
 // declaration of variable of ptrtyp
-extern TP_DATA_oETCS_TrainToTrack_Error_reporting  oETCS_Packet_TrainToTrack_Error_reporting;
+extern TP_DATA_oETCS_TrainToTrack_Error_Reporting  oETCS_Packet_TrainToTrack_Error_Reporting;
 // instatiate this ptrtype variable like this: (get memory and fill memory)
-// TP_DATA_oETCS_TrainToTrack_Error_reporting  oETCS_Packet_TrainToTrack_Error_reporting = new(T_DATA_oETCS_TrainToTrack_Error_reporting);
+// TP_DATA_oETCS_TrainToTrack_Error_Reporting  oETCS_Packet_TrainToTrack_Error_Reporting = new(T_DATA_oETCS_TrainToTrack_Error_Reporting);
 // and now fill in the content to start with ...
-// Access variable like this: oETCS_Packet_TrainToTrack_Error_reporting->...
-// maybe : memset(oETCS_Packet_TrainToTrack_Error_reporting, 0, sizeof(T_DATA_oETCS_Packet_TrainToTrack_Error_reporting));
+// Access variable like this: oETCS_Packet_TrainToTrack_Error_Reporting->...
+// maybe : memset(oETCS_Packet_TrainToTrack_Error_Reporting, 0, sizeof(T_DATA_oETCS_Packet_TrainToTrack_Error_Reporting));
 // for complete 0 content.
 
 #endif

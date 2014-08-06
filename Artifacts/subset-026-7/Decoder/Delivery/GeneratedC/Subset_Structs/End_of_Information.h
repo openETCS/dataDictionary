@@ -5,7 +5,7 @@ Formalization of Subset-026-7 (Chapter 7: ERTMS/ETCS language)
 
 - Name: Subset-026-7 / BothWays_End_of_Information
 - Description: UNISIG SUBSET-026-7, ISSUE : 3.3.0, 3.5 ERTMS/ETCS language) 
-- Copyright (c) Siemens AG, 2013, All Rights Reserved
+- Copyright (c) Siemens AG, 2014, All Rights Reserved
  	
 - Licensed under the EUPL V.1.1 ( http://joinup.ec.europa.eu/software/page/eupl/licence-eupl )
 - Gist URL: none
@@ -21,6 +21,7 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.  	
 ============================================================================= */
 #include <stdint.h>
+#include "opnETCS_Variables.h"
 
 struct DATA_oETCS_BothWays_End_of_Information {
   int vUsed_idx;                             // aktueller Fuellgrad von aPacket
@@ -29,7 +30,7 @@ struct DATA_oETCS_BothWays_End_of_Information {
   {
           uint32_t v_TOccurence;            // Zeitpunkt des Empfangs
           uint64_t v_DOccurrence;           // Ort des Empfangs
-          uint32_t vState;                  // Bearbeitungszustände  
+          uint32_t vState;                  // Bearbeitungszustaende  
   } info;
 
   struct 
@@ -38,7 +39,7 @@ struct DATA_oETCS_BothWays_End_of_Information {
 // This packet consists only of NID_PACKET containing 8 bit 1sIt acts as a finish flag; the receiver will stop reading the remaining part of the message/telegram when receiving eight bits set to one in the NID_PACKET field.
 // Packet Number = 255
 
-	uint32_t NID_PACKET;                      		// # 8		// = 255 (1111 1111)
+	uint32_t               NID_PACKET;            		// # 8		// = 255 (1111 1111)
 } 
 
 

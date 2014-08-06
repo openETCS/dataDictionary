@@ -1,14 +1,16 @@
 #include <stdio.h>
 #include "Bitwalker.h"
-#include "opnETCS_Decoder8.h"
-#include "Radio_TrainToTrack_Validated_Train_Data.h"
+#include "opnETCS_Variables.h"
+#include "Radio_Decoder.h"
+#include "Radio_DecoderBranch8.h"
+#include "subset026_8.h"
 
 /*
 Formalization of Subset-026-8 (Chapter 8: ERTMS/ETCS language)
 
 - Name: Subset-026-8 / Bitwalker8 / main.c
 - Description: UNISIG SUBSET-026-8, ISSUE : 3.3.0, 3.5 ERTMS/ETCS language) 
-- Copyright Siemens AG, 2013
+- Copyright Siemens AG, 2014
 - Licensed under the EUPL V.1.1 ( http://joinup.ec.europa.eu/software/page/eupl/licence-eupl )
 - Gist URL: none
 - Cryptography: No
@@ -25,22 +27,6 @@ THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.
 
 int main(void)
 {
-	//	uint8_t Teststream[] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-	//							0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-	//							0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-	//							0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-	//							0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-	//
-	//							0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-	//							0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-	//							0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-	//							0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-	//							0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-	//
-	//							0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-	//							0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-	//							0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
-	//						   };
 	uint8_t Teststream[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 							0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 							0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -69,34 +55,6 @@ int main(void)
 	Bitwalker_IncrementalWalker_Init(&PeekLocals, Teststream, size, 0);
 	Bitwalker_IncrementalWalker_Init(&PokeLocals, Teststream, size, 0);
 
-    {
-        //
-        // Für Testzwecke
-        //
-        //	Testwort = 1;
-        //	Bitwalker_IncrementalWalker_Poke_Next(&PokeLocals, 8, Testwort);
-        //	TestwortRetval = Bitwalker_IncrementalWalker_Peek_Next(&PeekLocals, 8);
-
-        //	Testwort = 2;
-        //	Bitwalker_IncrementalWalker_Poke_Next(&PokeLocals, 8, Testwort);
-        //	TestwortRetval = Bitwalker_IncrementalWalker_Peek_Next(&PeekLocals, 8);
-
-        //	Testwort = 4;
-        //	Bitwalker_IncrementalWalker_Poke_Next(&PokeLocals, 8, Testwort);
-        //	TestwortRetval = Bitwalker_IncrementalWalker_Peek_Next(&PeekLocals, 8);
-
-        //	Testwort = 8;
-        //	Bitwalker_IncrementalWalker_Poke_Next(&PokeLocals, 8, Testwort);
-        //	TestwortRetval = Bitwalker_IncrementalWalker_Peek_Next(&PeekLocals, 8);
-
-        //	Testwort = 16;
-        //	Bitwalker_IncrementalWalker_Poke_Next(&PokeLocals, 8, Testwort);
-        //	TestwortRetval = Bitwalker_IncrementalWalker_Peek_Next(&PeekLocals, 8);
-
-        //	Testwort = 32;
-        //	Bitwalker_IncrementalWalker_Poke_Next(&PokeLocals, 8, Testwort);
-        //	TestwortRetval = Bitwalker_IncrementalWalker_Peek_Next(&PeekLocals, 8);
-    }
     // create bitstream of telegram
     // <Packet Number="129" Name="Validated Train Data" TransmissionMedia="RBC" >
 
@@ -132,19 +90,19 @@ int main(void)
 
     switch (MessageID) {
     case 129: {
-        T_DATA_oETCS_Radio_TrainToTrack_Validated_Train_Data oETCS;
-        Radio_TrainToTrack_Validated_Train_Data (&Teststream, FirstBitPos, Bytelength, ArrayIndex, &oETCS);
-        Testwort = oETCS.aPacket[ArrayIndex].NID_MESSAGE;  // shall be    129
-        Testwort = oETCS.aPacket[ArrayIndex].L_MESSAGE;    // shall be     80
-        Testwort = oETCS.aPacket[ArrayIndex].T_TRAIN;      // shall be 456789
-        Testwort = oETCS.aPacket[ArrayIndex].NID_ENGINE;   // shall be   1735
-        Testwort = oETCS.aPacket[ArrayIndex].PADDING0;     // shall be      0
+        T_DATA_Radio_TrainToTrack_Validated_Train_Data Radio;
+        TrainToTrack_Message_129 (&Teststream, FirstBitPos, Bytelength, ArrayIndex, &Radio);
+        Testwort = Radio.Message[ArrayIndex].NID_MESSAGE;  // shall be    129
+        Testwort = Radio.Message[ArrayIndex].L_MESSAGE;    // shall be     80
+        Testwort = Radio.Message[ArrayIndex].T_TRAIN;      // shall be 456789
+        Testwort = Radio.Message[ArrayIndex].NID_ENGINE;   // shall be   1735
+        Testwort = Radio.Message[ArrayIndex].PADDING0;     // shall be      0
         break;
     }
     case 130: {
-        T_DATA_oETCS_Radio_TrainToTrack_Request_for_Shunting oETCS;
-        Radio_TrainToTrack_Request_for_Shunting (&Teststream, FirstBitPos, Bytelength, ArrayIndex, &oETCS);
-        Testwort = oETCS.aPacket[ArrayIndex].NID_MESSAGE;  // shall be    130
+        T_DATA_Radio_TrainToTrack_Request_for_Shunting Radio;
+        TrainToTrack_Message_130 (&Teststream, FirstBitPos, Bytelength, ArrayIndex, &Radio);
+        Testwort = Radio.Message[ArrayIndex].NID_MESSAGE;  // shall be    130
         break;
     }
     default:

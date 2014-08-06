@@ -5,7 +5,7 @@ Formalization of Subset-026-7 (Chapter 7: ERTMS/ETCS language)
 
 - Name: Subset-026-7 / TrainToTrack_Validated_train_data
 - Description: UNISIG SUBSET-026-7, ISSUE : 3.3.0, 3.5 ERTMS/ETCS language) 
-- Copyright (c) Siemens AG, 2013, All Rights Reserved
+- Copyright (c) Siemens AG, 2014, All Rights Reserved
  	
 - Licensed under the EUPL V.1.1 ( http://joinup.ec.europa.eu/software/page/eupl/licence-eupl )
 - Gist URL: none
@@ -21,6 +21,7 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.  	
 ============================================================================= */
 #include <stdint.h>
+#include "opnETCS_Variables.h"
 
 struct DATA_oETCS_TrainToTrack_Validated_train_data {
   int vUsed_idx;                             // aktueller Fuellgrad von aPacket
@@ -29,7 +30,7 @@ struct DATA_oETCS_TrainToTrack_Validated_train_data {
   {
           uint32_t v_TOccurence;            // Zeitpunkt des Empfangs
           uint64_t v_DOccurrence;           // Ort des Empfangs
-          uint32_t vState;                  // Bearbeitungszustände  
+          uint32_t vState;                  // Bearbeitungszustaende  
   } info;
 
   struct 
@@ -38,16 +39,16 @@ struct DATA_oETCS_TrainToTrack_Validated_train_data {
 // Validated train data.
 // Packet Number = 11
 
-	uint32_t NID_PACKET;                      		// # 8	
-	uint32_t L_PACKET;                               			// # 13	
-	uint32_t NC_CDTRAIN;                             			// # 4	
-	uint32_t NC_TRAIN;                               			// # 15	
-	uint32_t L_TRAIN;                                			// # 12	
-	uint32_t V_MAXTRAIN;                             			// # 7	
-	uint32_t M_LOADINGGAUGE;                         			// # 8	
-	uint32_t M_AXLELOADCAT;                          			// # 7	
-	uint32_t M_AIRTIGHT;                             			// # 2	
-	uint32_t N_AXLE;                                 			// # 10	    
+	uint32_t               NID_PACKET;            		// # 8	
+	uint32_t               L_PACKET              ;		// # 13	
+	T_nc_cdtrain           NC_CDTRAIN            ;		// # 4	
+	T_nc_train             NC_TRAIN              ;		// # 15	
+	uint32_t               L_TRAIN               ;		// # 12	
+	uint32_t               V_MAXTRAIN            ;		// # 7	
+	T_m_loadinggauge       M_LOADINGGAUGE        ;		// # 8	
+	T_m_axleloadcat        M_AXLELOADCAT         ;		// # 7	
+	T_m_airtight           M_AIRTIGHT            ;		// # 2	
+	uint32_t               N_AXLE                ;		// # 10	    
         struct {
             uint32_t used;                        //N_ITER+1              // # 5
             struct {

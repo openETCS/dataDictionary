@@ -5,7 +5,7 @@ Formalization of Subset-026-8 (Chapter 8: ERTMS/ETCS language)
 
 - Name: Subset-026-8 / subset026_8.h
 - Description: UNISIG SUBSET-026-8, ISSUE : 3.3.0, 3.5 ERTMS/ETCS language) 
-- Copyright (c) Siemens AG, 2013, All Rights Reserved
+- Copyright (c) Siemens AG, 2014, All Rights Reserved
     
 - Licensed under the EUPL V.1.1 ( http://joinup.ec.europa.eu/software/page/eupl/licence-eupl )
 - Gist URL: none
@@ -24,7 +24,7 @@ THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.
 
 
  // please remember to include file 'opnETCS_Variables.h'  from Chapter7's directory
- #include "Radio_TrackToTrain_Acknowledgement_of_termination_of_a_communication_session.h"
+#include "Radio_TrackToTrain_Acknowledgement_of_termination_of_a_communication_session.h"
 #include "Radio_TrackToTrain_Acknowledgement_of_Train_Data.h"
 #include "Radio_TrackToTrain_Assignment_of_coordinate_system.h"
 #include "Radio_TrackToTrain_Conditional_Emergency_Stop.h"

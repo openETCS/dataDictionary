@@ -1,19 +1,21 @@
 TEMPLATE = app
-CONFIG += console
-CONFIG -= app_bundle
-CONFIG -= qt
+CONFIG  += core console
+# CONFIG  -= app_bundle
+
 
 SOURCES += main.c \
     Bitwalker.c \
-    ../GeneratedC/opnETCS_Decoder.c
+    ../GeneratedC/opnETCS_Decoder.c \
+    ../GeneratedC/opnETCS_DecoderBranch.c
 
 INCLUDEPATH += ../GeneratedC
 INCLUDEPATH += ../GeneratedC/Subset_Structs
 
 HEADERS += \
-    Bitwalker.h \
     ../GeneratedC/opnETCS_Variables.h \
+    Bitwalker.h \
     ../GeneratedC/opnETCS_Decoder.h \
+    ../GeneratedC/opnETCS_DecoderBranch.h \
     ../GeneratedC/Subset_Structs/subset026_7.h \
     ../GeneratedC/Subset_Structs/Virtual_Balise_Cover_order.h \
     ../GeneratedC/Subset_Structs/Virtual_Balise_Cover_marker.h \
