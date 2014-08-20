@@ -19,6 +19,9 @@ PeekThenPoke.report: PeekThenPoke.c
 PokeThenPeek.report: PokeThenPeek.c
 	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp PokeThenPeek;);
 
+PeekNext.report: PeekNext.c
+	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp PeekNext;);
+
 Bit8.report: Bit8.c
 	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp Bit8;);
 
@@ -36,4 +39,5 @@ report:\
         Poke.report\
 	PeekThenPoke.report\
 	PokeThenPeek.report\
+	PeekNext.report\
 
