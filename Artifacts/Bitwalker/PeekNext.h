@@ -14,11 +14,11 @@
 
   assigns  Locals->CurrentBitposition;
 
+  ensures \old(Locals->CurrentBitposition) + Length == Locals->CurrentBitposition;
+
   behavior  invalid_bit_sequence:
     assumes (Locals->CurrentBitposition + Length)  > 8 * Locals->Length;
     assigns  Locals->CurrentBitposition;
-
-    ensures \old(Locals->CurrentBitposition) + Length == Locals->CurrentBitposition;
 
     ensures \result == 0;
 
@@ -30,8 +30,6 @@
     		(LeftBitInStream(\old(Locals->Bitstream), \old(Locals->CurrentBitposition)+i) <==> LeftBit64(\result, 64-Length + i));
 	
     ensures \forall integer i; 0 <= i < 64-Length ==> !LeftBit64(\result, i);
-
-    ensures \old(Locals->CurrentBitposition) + Length == Locals->CurrentBitposition;
 
   complete behaviors;
   disjoint behaviors;
