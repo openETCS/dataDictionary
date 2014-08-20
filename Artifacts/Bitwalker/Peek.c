@@ -16,11 +16,12 @@ uint64_t Bitwalker_Peek(unsigned int Start,
 
   /*@
     loop invariant 0 <= i <= Length;
+
     loop invariant \forall integer k; 0 <= k < i ==>
-                    (LeftBitInStream(Bitstream, Start+k) ==> LeftBit64(retval, 64-Length+k));
-    loop invariant \forall integer k; 0 <= k < i ==>
-                    (LeftBit64(retval, 64-Length+k) ==> LeftBitInStream(Bitstream, Start+k));
+                    (LeftBitInStream(Bitstream, Start+k) <==> LeftBit64(retval, 64-Length+k));
+
     loop invariant \forall integer k; 0 <= k < 64-Length ==> !LeftBit64(retval, k);
+
     loop assigns i, retval;
     loop variant Length - i;
   */
