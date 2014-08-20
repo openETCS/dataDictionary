@@ -21,7 +21,6 @@
   behavior  normal_case:
     assumes (Locals->CurrentBitposition + Length) <= 8 * Locals->Length;
     assigns  Locals->CurrentBitposition;
-    ensures \result < (1 << Length) ;
 
   complete behaviors;
   disjoint behaviors;
