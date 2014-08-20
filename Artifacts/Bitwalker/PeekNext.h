@@ -4,6 +4,7 @@
 
 #include "Locals.h"
 #include "ValidIncrementalLocals.h"
+#include "Bitwalker.h"
 
 /*@
   requires \valid(Locals);
@@ -21,7 +22,13 @@
   behavior  normal_case:
     assumes (Locals->CurrentBitposition + Length) <= 8 * Locals->Length;
     assigns  Locals->CurrentBitposition;
-    ensures \result < (1 << Length) ;
+
+    ensures \forall integer i; 0 <= i < Locals->Length ==>
+    		(LeftBitInStream(Locals->Bitstream, Locals->CurrentBitposition+i) <==> LeftBit64(\result, 64 - Locals->Length + i));
+	
+    ensures \forall integer i; 0 <= i < 64 - Locals->Length ==> !LeftBit64(\result, i);
+
+    ensures \old(Locals->CurrentBitposition) + \old(Locals->Length) == Locals->CurrentBitposition;
 
   complete behaviors;
   disjoint behaviors;
