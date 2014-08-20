@@ -7,7 +7,7 @@ uint64_t Bitwalker_Peek(unsigned int Start,
                         uint8_t Bitstream[],
                         unsigned int BitstreamSize)
 {
-  if ((Start + Length)  > 8 * BitstreamSize)
+  if ((Start + Length) > 8 * BitstreamSize)
   {
     return 0;
   }

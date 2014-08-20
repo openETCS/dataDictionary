@@ -17,15 +17,15 @@ Proof.
 
   - (* less *)
     replace ((Length_0 - 1 - k_0)%Z) with ((63 - (63 - (Length_0 - 1 - k_0)))%Z) by omega.
-    apply H32; auto with zarith.
+    rewrite H31; auto with zarith.
     replace (63 - (63 - (Length_0 - 1 - k_0)))%Z with ((Length_0 - 1 - k_0)%Z) by omega.
-    apply H34; auto with zarith.
+    apply H33; auto with zarith.
 
   - (* equal *)
     rewrite equal in *.
     rewrite <- H25.
-    rewrite H30.
-    assumption.
+    rewrite H29.
+    tauto.
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Peek_loop_inv_3_preserved.
