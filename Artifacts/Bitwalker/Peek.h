@@ -13,7 +13,7 @@
   assigns \nothing;
 
   behavior  invalid_bit_sequence:
-    assumes (Start + Length)  > 8 * BitstreamSize;
+    assumes (Start + Length) > 8 * BitstreamSize;
     assigns \nothing;
     ensures \result == 0;
 
