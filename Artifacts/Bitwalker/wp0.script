@@ -279,9 +279,11 @@ Proof.
   intros.
   subst x_0 x_1 x_2 x_3 x_4.
   subst a_0.
-  replace (i_0) with (Cdiv left_bit_0 8).
+  replace (i_0) with (Cdiv left_index_0 8).
   rewrite H18; auto with zarith.
   tauto.
+  symmetry.
+  auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_PokeThenPeek_assert.
