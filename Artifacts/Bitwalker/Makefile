@@ -31,6 +31,12 @@ Bit8Array.report: Bit8Array.c
 Bit64.report: Bit64.c
 	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp Bit64;);
 
+PeekFinish.report: PeekFinish.c
+	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp PeekFinish;);
+
+PokeFinish.report: PokeFinish.c
+	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp PokeFinish;);
+
 report:\
 	Bit8.report\
 	Bit8Array.report\
@@ -40,4 +46,6 @@ report:\
 	PeekThenPoke.report\
 	PokeThenPeek.report\
 	PeekNext.report\
+	PeekFinish.report\
+	PokeFinish.report\
 
