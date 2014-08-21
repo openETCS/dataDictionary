@@ -10,8 +10,9 @@ Goal typed_ref_BitTest_Bitwalker_IncrementalWalker_Poke_Next_normal_case_post_3.
 Hint Bitwalker_IncrementalWalker_Poke_Next,normal_case,property.
 Proof.
   intros.
+  (* rewrite <- H9 in *. *)
   subst x_4.
-  unfold is_uint32 in H5.
+  unfold is_uint32 in *.
 
   remember a_0 as cbp_addr.
   remember x_0 as cbp_old.
@@ -24,12 +25,37 @@ Proof.
   unfold P_Valid in *.
   destruct H10 as [A [B C]].
 
+  replace (shift Locals_0 0) with (Locals_0) in * by admit.
+  replace (shift (Mptr_0 .[ Locals_0]) 0) with (Mptr_0 .[ Locals_0]) in * by admit.
 
   subst x_6.
+  apply separated_sym in C.
+  apply separated_neq with (Locals_0) (3%Z) (Mptr_0 .[Locals_0]) (Mint_0 .[ shift Locals_0 1]).
+  exact C.
+  unfold included; simpl; auto with zarith.
 
-  unfold not.
-  intro.
-  apply shift_injective in H10.
+  assert((Cdiv (i_0 + x_1) 8 = (i_0 + x_1)/8)%Z).
+  apply Cdiv_cases; auto with zarith.
+  rewrite H10.
+  
+  unfold included; simpl; auto with zarith.
+  intuition.
+    assert((0 <= i_0 + x_1)%Z).
+      auto with zarith.
+
+    assert((0 <= (i_0 + x_1)/8)%Z).
+      (* apply Z.Zdiv_le. *)
+      admit.
+
+    auto with zarith.
+
+    subst a_1.
+    subst x_2.
+    subst x_3 x_5.
+    remember (Mint_0 .[ shift Locals_0 1]) as BitstreamSize.
+    assert(((i_0 + x_1) / 8 + 1 <= BitstreamSize)%Z).
+      admit.
+    auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Peek_loop_inv_2_preserved.
