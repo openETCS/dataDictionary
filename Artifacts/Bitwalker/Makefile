@@ -40,6 +40,9 @@ PeekFinish.report: PeekFinish.c
 PokeFinish.report: PokeFinish.c
 	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp PokeFinish;);
 
+Init.report: Init.c
+	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp Init;);
+
 report:\
 	Bit8.report\
 	Bit8Array.report\
@@ -52,4 +55,5 @@ report:\
 	PokeNext.report\
 	PeekFinish.report\
 	PokeFinish.report\
+	Init.report\
 
