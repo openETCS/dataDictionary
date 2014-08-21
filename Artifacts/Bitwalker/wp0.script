@@ -14,7 +14,22 @@ Proof.
   unfold is_uint32 in H5.
 
   remember a_0 as cbp_addr.
-  apply H27.
+  remember x_0 as cbp_old.
+  rewrite access_update_neq.
+  apply H27; auto with zarith.
+
+  subst a_3 a_4.
+  rewrite Heqcbp_addr.
+  subst a_0 a_2.
+  unfold P_Valid in *.
+  destruct H10 as [A [B C]].
+
+
+  subst x_6.
+
+  unfold not.
+  intro.
+  apply shift_injective in H10.
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Peek_loop_inv_2_preserved.
