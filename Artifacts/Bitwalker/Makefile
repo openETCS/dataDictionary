@@ -37,6 +37,9 @@ PeekFinish.report: PeekFinish.c
 PokeFinish.report: PokeFinish.c
 	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp PokeFinish;);
 
+init.report: init.c
+	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp init;);
+
 report:\
 	Bit8.report\
 	Bit8Array.report\
@@ -46,6 +49,8 @@ report:\
 	PeekThenPoke.report\
 	PokeThenPeek.report\
 	PeekNext.report\
+	PokeNext.report\
 	PeekFinish.report\
 	PokeFinish.report\
+	init.report\
 
