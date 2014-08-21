@@ -22,6 +22,9 @@ PokeThenPeek.report: PokeThenPeek.c
 PeekNext.report: PeekNext.c
 	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp PeekNext;);
 
+PokeNext.report: PokeNext.c
+	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp PokeNext;);
+
 Bit8.report: Bit8.c
 	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp Bit8;);
 
@@ -46,6 +49,7 @@ report:\
 	PeekThenPoke.report\
 	PokeThenPeek.report\
 	PeekNext.report\
+	PokeNext.report\
 	PeekFinish.report\
 	PokeFinish.report\
 

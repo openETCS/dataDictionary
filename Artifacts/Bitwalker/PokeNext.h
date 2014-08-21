@@ -14,7 +14,7 @@
   assigns  Locals->Bitstream[0..Locals->Length - 1];
 
   behavior  invalid_bit_sequence:
-    assumes (Locals->CurrentBitposition + Length)  > 8 * Locals->Length;
+    assumes (Locals->CurrentBitposition + Length) > 8 * Locals->Length;
     assigns \nothing;
     ensures \result == -1;
 
