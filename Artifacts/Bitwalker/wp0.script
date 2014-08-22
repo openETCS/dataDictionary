@@ -35,15 +35,20 @@ Proof.
   assumption. (* exact C. *)
   unfold included; simpl; auto with zarith.
 
-  assert(Helper1: (0 <= (Cdiv (i_0 + old_bitpos) 8))%Z).
-    assert((0 <= i_0 + old_bitpos)%Z) by auto with zarith.
-    assert((Cdiv (i_0 + old_bitpos) 8 = (i_0 + old_bitpos) / 8)%Z).
-    apply Cdiv_cases; auto with zarith.
-    rewrite H28.
-      admit.
+  assert(Helper0: (0 <= i_0 + old_bitpos)%Z) by auto with zarith.
+  assert(div_equal: (Cdiv (i_0 + old_bitpos) 8 = (i_0 + old_bitpos) / 8)%Z).
+        apply Cdiv_cases; auto with zarith.
 
-  assert(Helper2: (Cdiv (i_0 + old_bitpos) 8 < BitstreamSize)%Z).
-    admit.
+  assert(Helper1: (0 <= (Cdiv (i_0 + old_bitpos) 8))%Z).
+    rewrite div_equal.
+    apply Z_div_pos; auto with zarith.
+
+  rewrite div_equal.
+
+  assert ((i_0 + old_bitpos < Length_0 + old_bitpos)%Z) by auto with zarith.
+  assert(((i_0 + old_bitpos) < 8 * BitstreamSize)%Z) by auto with zarith.
+  assert(Helper2: ((i_0 + old_bitpos) / 8 < BitstreamSize)%Z).
+    apply Zdiv_lt_upper_bound; auto with zarith.
 
   unfold included; simpl; auto with zarith.
 
