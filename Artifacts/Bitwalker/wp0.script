@@ -38,10 +38,9 @@ Proof.
   assert(Helper1: (0 <= (Cdiv (i_0 + old_bitpos) 8))%Z).
     assert((0 <= i_0 + old_bitpos)%Z) by auto with zarith.
     assert((Cdiv (i_0 + old_bitpos) 8 = (i_0 + old_bitpos) / 8)%Z).
-    admit.
-  admit.
-  admit.
-    rewrite Cdiv_cases.
+    apply Cdiv_cases; auto with zarith.
+    rewrite H28.
+      admit.
 
   assert(Helper2: (Cdiv (i_0 + old_bitpos) 8 < BitstreamSize)%Z).
     admit.
