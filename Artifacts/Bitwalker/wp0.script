@@ -21,8 +21,8 @@ Proof.
 
   remember (Mint_0 .[ shift Locals_0 2]) as old_bitpos.
 
-  replace (shift Locals_0 0) with (Locals_0) in * by admit.
-  replace (shift (Mptr_0 .[ Locals_0]) 0) with (Mptr_0 .[ Locals_0]) in * by admit.
+  rewrite shift_zero in *.
+  rewrite shift_zero in *. (* strange to do it twice but it appears to be necessary *)
 
   remember (Mptr_0 .[ Locals_0]) as Bitstream.
   remember (Mint_0 .[ shift Locals_0 1]) as BitstreamSize.
