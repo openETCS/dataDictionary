@@ -2,7 +2,7 @@ SHELL=/bin/bash
 #Variables for counting invalid and valid proof goals; used in make-report targets
 # the variables will be overwritten by function startWP and startJessie in script script_functions.sh
 
-export SCRIPT_DIR=../Scripts
+export SCRIPT_DIR=Scripts
 #setup compiler flags
 INCLUDES=$(CPPFLAGS) -I$(FRAMAC_SHARE)/libc
 
