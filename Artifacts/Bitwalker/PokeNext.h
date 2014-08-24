@@ -40,7 +40,7 @@
 
     ensures \forall integer i; 0 <= i < Length ==>
     		(LeftBitInStream(Locals->Bitstream, \old(Locals->CurrentBitposition)+i) <==> LeftBit64(Value, (64-Length)+i));
-    
+
     ensures \result == 0;
 
   complete behaviors;
