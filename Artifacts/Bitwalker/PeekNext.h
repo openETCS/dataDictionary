@@ -28,7 +28,7 @@
 
     ensures \forall integer i; 0 <= i < Length ==>
     		(LeftBitInStream(\old(Locals->Bitstream), \old(Locals->CurrentBitposition)+i) <==> LeftBit64(\result, 64-Length + i));
-	
+
     ensures \forall integer i; 0 <= i < 64-Length ==> !LeftBit64(\result, i);
 
   complete behaviors;

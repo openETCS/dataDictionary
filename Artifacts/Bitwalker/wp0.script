@@ -357,4 +357,10 @@ Proof.
   auto with zarith.
 Qed.
 
+Goal typed_ref_BitTest_f_assign_part1.
+Hint default,f,fct-assigns,part-0.
+Proof.
+(* auto with zarith. *)
+Qed.
+
 
