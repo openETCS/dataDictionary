@@ -1,12 +1,13 @@
 
+int global_state;
+
 /*@
-   requires \valid(a);
-   assigns *a;
+   assigns global_state;
 
    behavior non_negative:
      assumes n >= 0;
-     assigns *a;
-     ensures *a == 0;
+     assigns global_state;
+     ensures global_state == 0;
      ensures \result == 1;
 
    behavior negative:
@@ -17,11 +18,11 @@
   complete behaviors;
   disjoint behaviors;
 */
-int f(int* a, int n)
+int f(int n)
 {
   if (n >= 0)
   {
-    *a = 0;
+    global_state = 0;
     return 1;
   }
   else
@@ -30,37 +31,25 @@ int f(int* a, int n)
   }
 }
 
-struct X
-{
-  int* a;
-  int  n;
-};
-
-typedef struct X X;
 
 /*@
-   requires \valid(x);
-   requires \valid(x->a);
-   requires \separated(x->a, &(x->n));
-   assigns  *(x->a);
-
    behavior non_negative:
-     assumes x->n >= 0;
-     assigns *(x->a);
-     ensures *(x->a) == 0;
+     assumes n >= 0;
+     assigns global_state;
+     ensures global_state == 0;
      ensures \result == 1;
 
    behavior negative:
-     assumes x->n < 0;
-     assigns *(x->a);
+     assumes n < 0;
+     assigns global_state;
      ensures \result == -1;
 
   complete behaviors;
   disjoint behaviors;
 */
-int g(X* x)
+int g(int n)
 {
-  return f(x->a, x->n);
+  return f(n);
 }
 
 
