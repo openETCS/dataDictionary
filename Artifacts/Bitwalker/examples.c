@@ -1,15 +1,11 @@
 
-
-#include "stdint.h"
-#include "stdlib.h"
-#include "Bits.h"
-
+#include "BitsFramaC.h"
 
 /*@
     assigns \nothing;
     ensures \forall integer i; 0 <= i < 32 ==> !BitTest(\result,i);
 */
-unsigned int example1()
+uint32_t example1()
 {
   return 0u;
 }
@@ -18,9 +14,9 @@ unsigned int example1()
     assigns \nothing;
     ensures BitTest(\result, 3);
 */
-unsigned int example2()
+uint32_t example2()
 {
-  unsigned int a = 1u << 3u;
+  uint32_t a = 1u << 3u;
   return a;
 }
 

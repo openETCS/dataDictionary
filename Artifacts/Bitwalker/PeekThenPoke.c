@@ -1,10 +1,12 @@
 
 #include "PeekThenPoke.h"
+#include "Peek.h"
+#include "Poke.h"
 
-int PeekThenPoke(unsigned int Start,
-                 unsigned int Length,
-                 uint8_t*     Bitstream,
-                 unsigned int BitstreamSize)
+int PeekThenPoke(uint32_t  Start,
+                 uint32_t  Length,
+                 uint8_t*  Bitstream,
+                 uint32_t  BitstreamSize)
 {
   int result = 0;
   uint64_t value = Bitwalker_Peek(Start, Length, Bitstream, BitstreamSize);

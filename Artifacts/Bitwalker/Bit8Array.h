@@ -2,9 +2,7 @@
 #ifndef Bit8Array_defined
 #define Bit8Array_defined
 
-#include <limits.h>
-#include <stdint.h>
-#include "Bits.h"
+#include "BitsFramaC.h"
 
 /*@
     requires \valid_read(stream + (0..number_bytes-1));
@@ -16,8 +14,8 @@
     ensures (\result != 0) <==> LeftBitInStream(stream, left_index);
 */
 int PeekBit8Array(uint8_t*      stream,
-                  unsigned int  number_bytes,
-                  unsigned int  left_index);
+                  uint32_t  number_bytes,
+                  uint32_t  left_index);
 
 
 
@@ -43,8 +41,8 @@ int PeekBit8Array(uint8_t*      stream,
                 ((LeftBitInStream(Bitstream, i) <==> \old(LeftBitInStream(Bitstream, i))));
 */
 void PokeBit8Array(uint8_t* Bitstream,
-                   unsigned int BitstreamSize,
-                   unsigned int left_index,
+                   uint32_t BitstreamSize,
+                   uint32_t left_index,
                    int flag);
 
 #endif

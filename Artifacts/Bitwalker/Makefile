@@ -3,57 +3,40 @@
 include Makefile.template
 
 SRC := $(wildcard *.c)
-OBJ := $(SRC:.c=*.o)
+OBJ := $(SRC:.c=.o)
 
 obj : $(OBJ)
 
-Peek.report: Peek.c
-	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp Peek;);
+clean::
+	$(RM) libBitwalker.a
+	$(RM) TestPeekThenPoke
+	
 
-Poke.report: Poke.c
-	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp Poke;);
+lib: libBitwalker.a
 
-PeekThenPoke.report: PeekThenPoke.c
-	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp PeekThenPoke;);
+libBitwalker.a : Bit8.o Bit8Array.o Bit64.o\
+		 Peek.o Poke.o\
+		 Init.o PeekNext.o PokeNext.o PeekFinish.o PokeFinish.o
+	ar cru	$@ $^
+	ranlib	$@
 
-PokeThenPeek.report: PokeThenPeek.c
-	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp PokeThenPeek;);
+TestPeekThenPoke: TestPeekThenPoke.o PeekThenPoke.o libBitwalker.a
+	$(CXX) -o $@ $^
+	./$@
 
-PeekNext.report: PeekNext.c
-	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp PeekNext;);
+tests:	TestPeekThenPoke
 
-PokeNext.report: PokeNext.c
-	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp PokeNext;);
-
-Bit8.report: Bit8.c
-	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp Bit8;);
-
-Bit8Array.report: Bit8Array.c
-	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp Bit8Array;);
-
-Bit64.report: Bit64.c
-	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp Bit64;);
-
-PeekFinish.report: PeekFinish.c
-	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp PeekFinish;);
-
-PokeFinish.report: PokeFinish.c
-	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp PokeFinish;);
-
-Init.report: Init.c
-	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp Init;);
-
-report:\
-	Bit8.report\
-	Bit8Array.report\
-	Bit64.report\
-        Peek.report\
-        Poke.report\
-	PeekThenPoke.report\
-	PokeThenPeek.report\
-	PeekNext.report\
-	PokeNext.report\
-	PeekFinish.report\
-	PokeFinish.report\
-	Init.report\
+report-wp:\
+	Bit8.report-wp\
+	Bit8Array.report-wp\
+	Bit64.report-wp\
+        Peek.report-wp\
+        Poke.report-wp\
+	PeekThenPoke.report-wp\
+	PokeThenPeek.report-wp\
+	Init.report-wp\
+	PeekNext.report-wp\
+	PokeNext.report-wp\
+	PeekFinish.report-wp\
+	PokeFinish.report-wp\
 

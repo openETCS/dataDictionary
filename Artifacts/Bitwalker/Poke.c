@@ -2,11 +2,11 @@
 #include "Bit8Array.h"
 #include "Bit64.h"
 
-int Bitwalker_Poke(unsigned int Start,
-                   unsigned int Length,
-                   uint8_t Bitstream[],
-                   unsigned int BitstreamSize,
-                   uint64_t Value)
+int Bitwalker_Poke(uint32_t  Start,
+                   uint32_t  Length,
+                   uint8_t*  Bitstream,
+                   uint32_t  BitstreamSize,
+                   uint64_t  Value)
 {
   if ((Start + Length)  > 8 * BitstreamSize)
   {
@@ -36,7 +36,7 @@ int Bitwalker_Poke(unsigned int Start,
     loop assigns i, Bitstream[0..BitstreamSize-1];
     loop variant Length - i;
   */
-  for (unsigned int i = 0; i < Length; ++i)
+  for (uint32_t i = 0; i < Length; ++i)
   {
     int flag = PeekBit64(Value, (64 - Length) + i);
     PokeBit8Array(Bitstream, BitstreamSize, Start + i, flag);

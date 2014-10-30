@@ -3,9 +3,7 @@
 #ifndef Bit8_defined
 #define Bit8_defined
 
-#include <limits.h>
-#include <stdint.h>
-#include "Bits.h"
+#include "BitsFramaC.h"
 
 /*@
     requires 0 <= left_index < 8;
@@ -14,7 +12,7 @@
 
     ensures (\result != 0) <==> LeftBit8(byte, left_index);
 */
-int PeekBit8(uint8_t byte, unsigned int left_index);
+int PeekBit8(uint8_t byte, uint32_t left_index);
 
 
 /*@
@@ -30,7 +28,7 @@ int PeekBit8(uint8_t byte, unsigned int left_index);
     ensures \forall integer i; (left_index < i < 8) ==>
               (LeftBit8(\result, i) <==> LeftBit8(byte, i));
 */
-uint8_t PokeBit8(uint8_t byte, unsigned int left_index, int flag);
+uint8_t PokeBit8(uint8_t byte, uint32_t left_index, int flag);
 
 #endif
 

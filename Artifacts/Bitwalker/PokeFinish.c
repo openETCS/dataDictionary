@@ -1,8 +1,7 @@
 #include "PokeFinish.h"
 
-int Bitwalker_IncrementalWalker_Poke_Finish(
-  T_Bitwalker_Incremental_Locals  *Locals)
+int Bitwalker_Poke_Finish(Bitwalker* bw)
 {
-  return Locals->CurrentBitposition;
+  return bw->Bitposition;
 }
 

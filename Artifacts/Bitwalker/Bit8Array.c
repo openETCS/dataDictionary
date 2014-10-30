@@ -3,20 +3,20 @@
 #include "Bit8.h"
 
 int PeekBit8Array(uint8_t*     stream,
-                  unsigned int number_bytes,
-                  unsigned int left_index)
+                  uint32_t number_bytes,
+                  uint32_t left_index)
 {
   return PeekBit8(stream[left_index / 8], left_index % 8);
 }
 
 
 void PokeBit8Array(uint8_t* Bitstream,
-                   unsigned int BitstreamSize,
-                   unsigned int left_index,
+                   uint32_t BitstreamSize,
+                   uint32_t left_index,
                    int flag)
 {
-  unsigned int i = left_index / 8u;
-  unsigned int k = left_index % 8u;
+  uint32_t i = left_index / 8u;
+  uint32_t k = left_index % 8u;
 
   Bitstream[i] = PokeBit8(Bitstream[i], k, flag);
 

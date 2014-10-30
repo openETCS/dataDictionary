@@ -1,14 +1,10 @@
 #include "Init.h"
 
 void
-Bitwalker_IncrementalWalker_Init(
-  T_Bitwalker_Incremental_Locals  *Locals,
-  uint8_t                          Bitstream[],
-  unsigned int                     Size,
-  unsigned int                     FirstBitposition)
+Bitwalker_Init(Bitwalker* bw, uint8_t* Bitstream, uint32_t Size, uint32_t Bitposition)
 {
-  Locals->Bitstream             = Bitstream;
-  Locals->Length                = Size;
-  Locals->CurrentBitposition    = FirstBitposition;
+  bw->Bitstream    = Bitstream;
+  bw->Size         = Size;
+  bw->Bitposition  = Bitposition;
 }
 

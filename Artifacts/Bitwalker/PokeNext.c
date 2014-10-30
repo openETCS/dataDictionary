@@ -2,19 +2,14 @@
 #include "PokeNext.h"
 #include "Poke.h"
 
-int Bitwalker_IncrementalWalker_Poke_Next(
-  T_Bitwalker_Incremental_Locals*  Locals,
-  unsigned int                     Length,
-  uint64_t                         Value)
+int Bitwalker_Poke_Next(Bitwalker* bw, uint32_t Length, uint64_t Value)
 {
   // plausibility check is done when reading the bits
-  int retval = Bitwalker_Poke(Locals->CurrentBitposition,
-                              Length,
-                              Locals->Bitstream,
-                              Locals->Length,
-                              Value);
-  //@ assert Locals->CurrentBitposition == \at(Locals->CurrentBitposition, Pre);
-  Locals->CurrentBitposition += Length;
+  int retval = Bitwalker_Poke(bw->Bitposition, Length, bw->Bitstream, bw->Size, Value);
+
+  //@ assert bw->Bitposition == \at(bw->Bitposition, Pre);
+  bw->Bitposition += Length;
+
   return retval;
 }
 

@@ -2,7 +2,7 @@
 #ifndef PokeThenPeek_defined
 #define PokeThenPeek_defined
 
-#include "Bitwalker.h"
+#include "BitsFramaC.h"
 
 /*@
     requires \valid(Bitstream + (0..BitstreamSize-1));
@@ -15,11 +15,11 @@
 
     ensures \result == Value;
 */
-uint64_t PokeThenPeek(unsigned int Start,
-                      unsigned int Length,
-                      uint8_t*     Bitstream,
-                      unsigned int BitstreamSize,
-                      uint64_t     Value);
+uint64_t PokeThenPeek(uint32_t  Start,
+                      uint32_t  Length,
+                      uint8_t*  Bitstream,
+                      uint32_t  BitstreamSize,
+                      uint64_t  Value);
 
 #endif
 

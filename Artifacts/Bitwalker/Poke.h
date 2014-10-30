@@ -1,7 +1,7 @@
 #ifndef Poke_defined
 #define Poke_defined
 
-#include "Bitwalker.h"
+#include "BitsFramaC.h"
 
 /*@
   requires writeable_bitstream:
@@ -41,10 +41,7 @@
   complete behaviors;
   disjoint behaviors;
 */
-int Bitwalker_Poke (unsigned int Start,
-                    unsigned int Length,
-                    uint8_t Bitstream[],
-                    unsigned int BitstreamSize,
-                    uint64_t Value);
+int Bitwalker_Poke (uint32_t Start, uint32_t Length,
+                    uint8_t* Bitstream, uint32_t BitstreamSize, uint64_t Value);
 
 #endif

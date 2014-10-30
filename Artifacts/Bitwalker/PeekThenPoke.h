@@ -2,7 +2,7 @@
 #ifndef PeekThenPoke_defined
 #define PeekThenPoke_defined
 
-#include "Bitwalker.h"
+#include "BitsFramaC.h"
 
 /*@
     requires \valid(Bitstream + (0..BitstreamSize-1));
@@ -17,10 +17,10 @@
     ensures \forall integer i; 0 <= i < 8 * BitstreamSize ==>
          (LeftBitInStream(Bitstream, i) <==> \old(LeftBitInStream(Bitstream, i)));
 */
-int PeekThenPoke(unsigned int Start,
-                 unsigned int Length,
-                 uint8_t*     Bitstream,
-                 unsigned int BitstreamSize);
+int PeekThenPoke(uint32_t Start,
+                 uint32_t Length,
+                 uint8_t* Bitstream,
+                 uint32_t BitstreamSize);
 
 #endif
 

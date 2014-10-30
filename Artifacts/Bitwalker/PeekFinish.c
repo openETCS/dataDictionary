@@ -1,8 +1,7 @@
 #include "PeekFinish.h"
 
-int Bitwalker_IncrementalWalker_Peek_Finish(
-  T_Bitwalker_Incremental_Locals  *Locals)
+int Bitwalker_Peek_Finish(Bitwalker* bw)
 {
-  return Locals->CurrentBitposition;
+  return bw->Bitposition;
 }
 

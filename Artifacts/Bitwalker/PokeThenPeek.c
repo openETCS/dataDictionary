@@ -1,11 +1,13 @@
 
 #include "PokeThenPeek.h"
+#include "Peek.h"
+#include "Poke.h"
 
-uint64_t PokeThenPeek(unsigned int Start,
-                      unsigned int Length,
-                      uint8_t*     Bitstream,
-                      unsigned int BitstreamSize,
-                      uint64_t     Value)
+uint64_t PokeThenPeek(uint32_t  Start,
+                      uint32_t  Length,
+                      uint8_t*  Bitstream,
+                      uint32_t  BitstreamSize,
+                      uint64_t  Value)
 {
   //@ assert \forall integer i; 0 <= i < 64-Length ==> !LeftBit64(Value, i);
   int      poke_result = 0;

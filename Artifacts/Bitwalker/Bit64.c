@@ -1,7 +1,7 @@
 
 #include "Bit64.h"
 
-int PeekBit64(uint64_t value, unsigned int left_index)
+int PeekBit64(uint64_t value, uint32_t left_index)
 {
   uint64_t mask = ((uint64_t) 1) << (63u - left_index);
   uint64_t flag = value & mask;
@@ -11,7 +11,7 @@ int PeekBit64(uint64_t value, unsigned int left_index)
 }
 
 
-uint64_t PokeBit64(uint64_t value, unsigned int left_index, int flag)
+uint64_t PokeBit64(uint64_t value, uint32_t left_index, int flag)
 {
   uint64_t mask = ((uint64_t) 1u) << (63 - left_index);
 

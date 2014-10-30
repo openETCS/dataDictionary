@@ -2,7 +2,7 @@
 #ifndef Peek_defined
 #define Peek_defined
 
-#include "Bitwalker.h"
+#include "BitsFramaC.h"
 
 /*@
   requires \valid_read(Bitstream + (0..BitstreamSize-1));
@@ -29,9 +29,9 @@
   complete behaviors;
   disjoint behaviors;
 */
-uint64_t Bitwalker_Peek(unsigned int Start,
-                        unsigned int Length,
-                        uint8_t Bitstream[],
-                        unsigned int BitstreamSize);
+uint64_t Bitwalker_Peek(uint32_t Start,
+                        uint32_t Length,
+                        uint8_t* Bitstream,
+                        uint32_t BitstreamSize);
 
 #endif
