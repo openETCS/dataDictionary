@@ -77,6 +77,13 @@ Proof.
   auto with zarith.
 Qed.
 
+Goal typed_ref_BitTest_Bitwalker_Peek_normal_case_post_3.
+Hint Bitwalker_Peek,normal_case,property.
+Proof.
+  intros.
+  admit.
+Qed.
+
 Goal typed_ref_BitTest_Bitwalker_Poke_Next_normal_case_post_3.
 Hint Bitwalker_Poke_Next,normal_case,property.
 Proof.
