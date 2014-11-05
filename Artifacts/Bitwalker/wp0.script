@@ -295,6 +295,18 @@ Proof.
   auto with zarith.
 Qed.
 
+Goal typed_ref_BitTest_PeekThenPoke_assert.
+Hint PeekThenPoke,property.
+Proof.
+  intros.
+  unfold is_uint32 in *.
+  subst x_0 x_1 x_2 a_1.
+
+  replace (i_0) with ((Start_0 + (i_0 - Start_0))%Z) by omega.
+
+  rewrite <- H21; auto with zarith.
+Qed.
+
 Goal typed_ref_BitTest_PeekThenPoke_assert_2.
 Hint PeekThenPoke,property.
 Proof.

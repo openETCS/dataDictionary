@@ -11,8 +11,6 @@ int PeekThenPoke(uint32_t  Start,
   int result = 0;
   uint64_t value = Bitwalker_Peek(Start, Length, Bitstream, BitstreamSize);
 
-  //@ assert value < (1 << Length);
-
   result =  Bitwalker_Poke(Start, Length, Bitstream, BitstreamSize, value);
 
   /*@ assert \forall integer i; Start <= i < Start + Length ==>
