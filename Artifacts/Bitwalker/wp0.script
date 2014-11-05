@@ -6,6 +6,77 @@ Proof.
 (* auto with zarith. *)
 Qed.
 
+Goal typed_ref_BitTest_Bitwalker_Peek_loop_inv_2_preserved.
+Hint Bitwalker_Peek,preserved.
+Proof.
+  intros.
+
+  subst x_1 x_2 x_3 x_4 x_5.
+
+  unfold is_uint8 in *.
+  unfold is_uint32 in *.
+  unfold is_uint64 in *.
+
+  assert(non_strict: (k_0 <= i_0)%Z) by assumption.
+    apply Zle_lt_or_eq in non_strict.
+  destruct non_strict as [less | equal].
+
+  - (* less *)
+    replace ((Length_0 - 1 - k_0)%Z) with ((63 - (63 - (Length_0 - 1 - k_0)))%Z) by omega.
+    rewrite H31; auto with zarith.
+    replace (63 - (63 - (Length_0 - 1 - k_0)))%Z with ((Length_0 - 1 - k_0)%Z) by omega.
+    apply H33; auto with zarith.
+
+  - (* equal *)
+    rewrite equal in *.
+    rewrite <- H25.
+    rewrite H29.
+    tauto.
+Qed.
+
+Goal typed_ref_BitTest_Bitwalker_Peek_loop_inv_3_established.
+Hint Bitwalker_Peek,established.
+Proof.
+  intros.
+  admit.
+Qed.
+
+Goal typed_ref_BitTest_Bitwalker_Peek_loop_inv_3_preserved.
+Hint Bitwalker_Peek,preserved.
+Proof.
+  intros.
+
+  subst x_1 x_2 x_3 x_4 x_5.
+
+  unfold is_uint8 in *.
+  unfold is_uint32 in *.
+  unfold is_uint64 in *.
+
+  assert(non_strict: (k_0 <= i_0)%Z) by assumption.
+    apply Zle_lt_or_eq in non_strict.
+  destruct non_strict as [less | equal].
+
+  - (* less *)
+    apply H35; auto with zarith.
+    replace ((Length_0 - 1 - k_0)%Z) with ((63 - (63 - (Length_0 - 1 - k_0)))%Z) by omega.    
+    apply H32; auto with zarith.
+    replace (63 - (63 - (Length_0 - 1 - k_0)))%Z with ((Length_0 - 1 - k_0)%Z) by omega.
+    assumption.
+  
+  - (* equal *)
+    rewrite equal in *.
+    apply H30.
+    apply H26.
+    assumption.
+    
+Qed.
+
+Goal typed_ref_BitTest_Bitwalker_Peek_normal_case_post_2.
+Hint Bitwalker_Peek,normal_case,property.
+Proof.
+  auto with zarith.
+Qed.
+
 Goal typed_ref_BitTest_Bitwalker_Poke_Next_normal_case_post_3.
 Hint Bitwalker_Poke_Next,normal_case,property.
 Proof.
@@ -56,70 +127,6 @@ Proof.
     assert(((i_0 + x_1) / 8 + 1 <= BitstreamSize)%Z).
       admit.
     auto with zarith.
-Qed.
-
-Goal typed_ref_BitTest_Bitwalker_Peek_loop_inv_2_preserved.
-Hint Bitwalker_Peek,preserved.
-Proof.
-  intros.
-
-  subst x_1 x_2 x_3 x_4 x_5.
-
-  unfold is_uint8 in *.
-  unfold is_uint32 in *.
-  unfold is_uint64 in *.
-
-  assert(non_strict: (k_0 <= i_0)%Z) by assumption.
-    apply Zle_lt_or_eq in non_strict.
-  destruct non_strict as [less | equal].
-
-  - (* less *)
-    replace ((Length_0 - 1 - k_0)%Z) with ((63 - (63 - (Length_0 - 1 - k_0)))%Z) by omega.
-    rewrite H31; auto with zarith.
-    replace (63 - (63 - (Length_0 - 1 - k_0)))%Z with ((Length_0 - 1 - k_0)%Z) by omega.
-    apply H33; auto with zarith.
-
-  - (* equal *)
-    rewrite equal in *.
-    rewrite <- H25.
-    rewrite H29.
-    tauto.
-Qed.
-
-Goal typed_ref_BitTest_Bitwalker_Peek_loop_inv_3_preserved.
-Hint Bitwalker_Peek,preserved.
-Proof.
-  intros.
-
-  subst x_1 x_2 x_3 x_4 x_5.
-
-  unfold is_uint8 in *.
-  unfold is_uint32 in *.
-  unfold is_uint64 in *.
-
-  assert(non_strict: (k_0 <= i_0)%Z) by assumption.
-    apply Zle_lt_or_eq in non_strict.
-  destruct non_strict as [less | equal].
-
-  - (* less *)
-    apply H35; auto with zarith.
-    replace ((Length_0 - 1 - k_0)%Z) with ((63 - (63 - (Length_0 - 1 - k_0)))%Z) by omega.    
-    apply H32; auto with zarith.
-    replace (63 - (63 - (Length_0 - 1 - k_0)))%Z with ((Length_0 - 1 - k_0)%Z) by omega.
-    assumption.
-  
-  - (* equal *)
-    rewrite equal in *.
-    apply H30.
-    apply H26.
-    assumption.
-    
-Qed.
-
-Goal typed_ref_BitTest_Bitwalker_Peek_normal_case_post_2.
-Hint Bitwalker_Peek,normal_case,property.
-Proof.
-  auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_2_preserved.
@@ -279,13 +286,6 @@ Proof.
   unfold bit_test.
   unfold to_uint8 in *.
   auto with zarith.
-Qed.
-
-Goal typed_ref_BitTest_PeekThenPoke_assert.
-Hint PeekThenPoke,property.
-Proof.
-  intros.
-  admit. (* used to apply lemma BitsAndMore from Bits.h *)
 Qed.
 
 Goal typed_ref_BitTest_PeekThenPoke_assert_2.
