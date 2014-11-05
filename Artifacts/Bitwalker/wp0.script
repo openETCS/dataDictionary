@@ -357,11 +357,11 @@ Goal typed_ref_BitTest_PokeThenPeek_assert_3.
 Hint PokeThenPeek,property.
 Proof.
   intros.
-  subst x_1 x_2.
+  subst x_1 x_2 x_3.
 
   replace ((63 - i_0)%Z) with ((Length_0 - 1 - (Length_0 + i_0 - 64))%Z) in * by omega.
 
-  rewrite H22; auto with zarith.
+  rewrite H23; auto with zarith.
 
 Qed.
 
