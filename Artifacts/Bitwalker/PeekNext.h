@@ -30,6 +30,8 @@
 
     ensures \forall integer i; 0 <= i < 64-Length ==> !LeftBit64(\result, i);
 
+    ensures \result < (1 << Length);
+
   complete behaviors;
   disjoint behaviors;
 */
