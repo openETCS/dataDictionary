@@ -48,13 +48,6 @@ Proof.
     tauto.
 Qed.
 
-Goal typed_ref_BitTest_Bitwalker_Peek_loop_inv_3_established.
-Hint Bitwalker_Peek,established.
-Proof.
-  intros.
-  admit.
-Qed.
-
 Goal typed_ref_BitTest_Bitwalker_Peek_loop_inv_3_preserved.
 Hint Bitwalker_Peek,preserved.
 Proof.
