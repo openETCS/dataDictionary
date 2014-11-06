@@ -8,8 +8,8 @@ OBJ := $(SRC:.c=.o)
 obj : $(OBJ)
 
 clean::
-	$(RM) libBitwalker.a
-	$(RM) TestPeekThenPoke
+	@$(RM) libBitwalker.a
+	@$(RM) TestPeekThenPoke
 	
 
 lib: libBitwalker.a
