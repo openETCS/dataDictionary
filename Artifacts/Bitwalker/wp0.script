@@ -17,7 +17,15 @@ Proof.
   unfold P_BitwalkerInvariant in *.
   destruct H9 as [A [B C]].
 
-  admit.
+  replace (shift bw_0 0) with (bw_0) in * by admit.
+  replace (shift (Mptr_0.[bw_0]) 0) with (Mptr_0.[bw_0]) in * by admit.
+
+  apply separated_sym in C.
+  apply separated_neq with (bw_0) (3%Z) (Mptr_0.[bw_0]) (Mint_0.[shift bw_0 1]).
+  assumption.
+  unfold included; simpl; auto with zarith.
+
+  admit. 
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Peek_loop_inv_2_preserved.
