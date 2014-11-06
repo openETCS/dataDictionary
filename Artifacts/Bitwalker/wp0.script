@@ -25,7 +25,12 @@ Proof.
   assumption.
   unfold included; simpl; auto with zarith.
 
-  admit. 
+  remember (Mptr_0 .[ bw_0]) as bitstream.
+  remember (Mint_0 .[ shift bw_0 1]) as size.
+
+  assert(0 <= (Cdiv x_4 8) < size)%Z by admit.
+  unfold included; simpl; auto with zarith.
+
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Peek_loop_inv_2_preserved.
