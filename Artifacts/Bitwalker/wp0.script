@@ -3,7 +3,21 @@
 Goal typed_ref_BitTest_Bitwalker_Peek_Next_normal_case_post.
 Hint Bitwalker_Peek_Next,normal_case,property.
 Proof.
-(* auto with zarith. *)
+  intros.
+
+  rewrite H22; auto with zarith.
+
+  replace ((Mint_0.[a_1 <- x_3]).[shift a_3 (Cdiv x_4 8)]) with (Mint_0.[shift a_3 (Cdiv x_4 8)]).
+  tauto.
+
+  rewrite access_update_neq.
+  auto.
+
+  subst a_1 a_2 a_3.
+  unfold P_BitwalkerInvariant in *.
+  destruct H9 as [A [B C]].
+
+  admit.
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Peek_loop_inv_2_preserved.
