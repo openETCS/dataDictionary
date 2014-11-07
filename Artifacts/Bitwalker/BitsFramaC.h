@@ -51,10 +51,11 @@
  
 /*
     // not used
-    lemma BitsAndMore :
-      \forall uint64_t x, integer n;
-        (0 <= n < 64)  ==>
-        ((x < (1 << n)) <==> (\forall integer i; 0 <= i && i < 64-n ==> !LeftBit64(x, i)));
+    lemma BitsAndBound :
+      \forall integer x, integer n;
+        0 <= x  ==>
+        0 <= n  ==>
+        ((x < (1 << n)) <==> (\forall integer k; n <= k ==> !BitTest(x, k)));
 */
 
 /*
