@@ -1,5 +1,3 @@
 
-library b4fc_bit : cbits;
-logic boolean LogicalBitTest(integer, integer) := \bit_test;
-predicate BitTest (integer, integer) := \bit_test;
+coq.file += "coq/BitLemmas.v";
 

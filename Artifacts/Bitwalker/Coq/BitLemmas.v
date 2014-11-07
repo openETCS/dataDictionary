@@ -3,6 +3,11 @@ Require Import ZArith.
 Require Import Memory.
 Open Local Scope Z_scope.
 
+
+library b4fc_bit : cbits;
+logic boolean LogicalBitTest(integer, integer) := \bit_test;
+predicate BitTest (integer, integer) := \bit_test;
+
 Lemma shift_zero :
    forall a, (shift a 0) = a.
 Proof.
