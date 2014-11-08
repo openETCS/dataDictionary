@@ -49,7 +49,7 @@
                          (Start+Length <= i < Size ==> (LeftBitInStream(Bitstream1, i) <==> LeftBitInStream(Bitstream2, i))));
 */
  
-/*@
+/*
     lemma BitsAndBound :
       \forall integer x, integer n;
         0 <= x  ==>
