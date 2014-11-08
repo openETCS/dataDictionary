@@ -5,11 +5,11 @@
 #include <stdint.h>
 #include <limits.h>
 
-/*@ axiomatic b4fc_btest
+/*@ axiomatic BitsFramaC 
   @ {
-  @   logic boolean LogicalBitTest(integer v, integer n);
+  @   logic       boolean LogicalBitTest(integer v, integer n);
   @
-  @   predicate     BitTest(integer v, integer n);
+  @   predicate   BitTest(integer v, integer n);
   @ }
 */
 
