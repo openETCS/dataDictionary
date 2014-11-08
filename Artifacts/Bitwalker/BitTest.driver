@@ -1,7 +1,7 @@
 
 coq.file += "Coq/BitLemmas.v";
 
-library BitsFramaC: cbits;
+library b4fc_bit : cbits;
 
 logic boolean LogicalBitTest(integer, integer) := \bit_test;
 

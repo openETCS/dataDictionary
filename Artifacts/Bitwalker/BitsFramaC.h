@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <limits.h>
 
-/*@ axiomatic BitsFramaC 
+/*@ axiomatic b4fc_bit 
   @ {
   @   logic       boolean LogicalBitTest(integer v, integer n);
   @
