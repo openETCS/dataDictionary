@@ -49,10 +49,10 @@ Proof.
   destruct non_strict as [less | equal].
 
   - (* less *)
+    rewrite <- H33; auto with zarith.
     replace ((Length_0 - 1 - k_0)%Z) with ((63 - (63 - (Length_0 - 1 - k_0)))%Z) by omega.
     rewrite H31; auto with zarith.
-    replace (63 - (63 - (Length_0 - 1 - k_0)))%Z with ((Length_0 - 1 - k_0)%Z) by omega.
-    apply H33; auto with zarith.
+    tauto.
 
   - (* equal *)
     rewrite equal in *.
