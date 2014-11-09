@@ -123,8 +123,8 @@ Proof.
   unfold P_BitwalkerInvariant in *.
   destruct H10 as [A [B C]].
 
-  replace (shift bw_0 0) with (bw_0) in * by admit.
-  replace (shift (Mptr_0 .[ bw_0]) 0) with (Mptr_0 .[ bw_0]) in * by admit.
+  rewrite shift_zero in *.
+  rewrite shift_zero in *.
 
   subst x_6.
   apply separated_sym in C.
