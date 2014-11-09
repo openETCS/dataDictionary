@@ -132,28 +132,13 @@ Proof.
   exact C.
   unfold included; simpl; auto with zarith.
 
-  assert((Cdiv (i_0 + x_1) 8 = (i_0 + x_1)/8)%Z).
-  apply Cdiv_cases; auto with zarith.
-  rewrite H10.
-  
+  remember (Mptr_0.[bw_0]) as BitStream.
+  remember (Mint_0.[shift bw_0 1]) as BitStreamSize.
+
+  assert ((0 <= (Cdiv (i_0 + x_1) 8) < BitStreamSize)%Z).
+    admit.
+
   unfold included; simpl; auto with zarith.
-  intuition.
-    assert((0 <= i_0 + x_1)%Z).
-      auto with zarith.
-
-    assert((0 <= (i_0 + x_1)/8)%Z).
-      (* apply Z.Zdiv_le. *)
-      admit.
-
-    auto with zarith.
-
-    subst a_1.
-    subst x_2.
-    subst x_3 x_5.
-    remember (Mint_0.[shift bw_0 1]) as BitstreamSize.
-    assert(((i_0 + x_1) / 8 + 1 <= BitstreamSize)%Z).
-      admit.
-    auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_2_preserved.
