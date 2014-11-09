@@ -135,8 +135,7 @@ Proof.
   remember (Mptr_0.[bw_0]) as BitStream.
   remember (Mint_0.[shift bw_0 1]) as BitStreamSize.
 
-  assert ((0 <= (Cdiv (i_0 + x_1) 8) < BitStreamSize)%Z).
-    admit.
+  assert ((0 <= (Cdiv (i_0 + x_1) 8) < BitStreamSize)%Z) by  admit.
 
   unfold included; simpl; auto with zarith.
 Qed.
