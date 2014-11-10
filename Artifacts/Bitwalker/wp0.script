@@ -108,25 +108,23 @@ Goal typed_ref_BitTest_Bitwalker_Poke_Next_normal_case_post_3.
 Hint Bitwalker_Poke_Next,normal_case,property.
 Proof.
   intros.
-  (* rewrite <- H9 in *. *)
-  subst x_4.
+
+  subst x_2 x_3 x_4 x_5 x_6.
+  subst a_0 a_1 a_2 a_3 a_4.
   unfold is_uint32 in *.
 
-  remember a_0 as cbp_addr.
-  remember x_0 as cbp_old.
+  remember i_0 as i.
+  remember x_0 as NewPosition.
+  remember x_1 as OldPosition.
   rewrite access_update_neq.
   apply H27; auto with zarith.
 
-  subst a_3 a_4.
-  rewrite Heqcbp_addr.
-  subst a_0 a_2.
   unfold P_BitwalkerInvariant in *.
   destruct H10 as [A [B C]].
 
   rewrite shift_zero in *.
   rewrite shift_zero in *.
 
-  subst x_6.
   apply separated_sym in C.
   apply separated_neq with (bw_0) (3%Z) (Mptr_0 .[bw_0]) (Mint_0 .[ shift bw_0 1]).
   exact C.
@@ -135,7 +133,7 @@ Proof.
   remember (Mptr_0.[bw_0]) as BitStream.
   remember (Mint_0.[shift bw_0 1]) as BitStreamSize.
 
-  assert ((0 <= (Cdiv (i_0 + x_1) 8) < BitStreamSize)%Z) by  admit.
+  assert ((0 <= (Cdiv (i + OldPosition) 8) < BitStreamSize)%Z) by  admit.
 
   unfold included; simpl; auto with zarith.
 Qed.
