@@ -14,7 +14,7 @@ clean::
 
 lib: libBitwalker.a
 
-libBitwalker.a : Bit8.o Bit8Array.o Bit64.o\
+libBitwalker.a : Bit8Array.o\
 		 Peek.o Poke.o\
 		 Init.o PeekNext.o PokeNext.o 
 	ar cru	$@ $^
@@ -27,9 +27,7 @@ TestPeekThenPoke: TestPeekThenPoke.o PeekThenPoke.o libBitwalker.a
 tests:	TestPeekThenPoke
 
 report-wp:\
-	Bit8.report-wp\
 	Bit8Array.report-wp\
-	Bit64.report-wp\
         Peek.report-wp\
         Poke.report-wp\
 	PeekThenPoke.report-wp\
