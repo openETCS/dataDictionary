@@ -16,7 +16,7 @@ lib: libBitwalker.a
 
 libBitwalker.a : Bit8.o Bit8Array.o Bit64.o\
 		 Peek.o Poke.o\
-		 Init.o PeekNext.o PokeNext.o PeekFinish.o PokeFinish.o
+		 Init.o PeekNext.o PokeNext.o 
 	ar cru	$@ $^
 	ranlib	$@
 
@@ -37,6 +37,4 @@ report-wp:\
 	Init.report-wp\
 	PeekNext.report-wp\
 	PokeNext.report-wp\
-	PeekFinish.report-wp\
-	PokeFinish.report-wp\
 
