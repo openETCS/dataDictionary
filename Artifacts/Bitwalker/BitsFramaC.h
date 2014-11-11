@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <limits.h>
 
-/*@ axiomatic b4fc_bit 
+/*@ axiomatic b4fc_bit
   @ {
   @   logic       boolean LogicalBitTest(integer v, integer n);
   @
@@ -27,28 +27,28 @@
         \forall integer i; 0 <= i < Length ==>
           (LeftBitInStream(Bitstream, Start + i) <==> LeftBit64(Value, 64-Length+i));
 */
- 
+
 /*@
    predicate
      NotSet{A}(uint64_t Value, integer Length) =
        \forall integer i; 0 <= i < Length ==>
          !LeftBit64(Value, i);
 */
- 
+
 /*@
    predicate
     IsCopied{A}(uint8_t* Bitstream, uint64_t Value, integer Start, integer Length) =
        \forall integer i; 0 <= i < Length ==>
                  (EqualBits(Bitstream, Value, Start, Length) && NotSet(Value, 64-i));
 */
- 
+
 /*@
    predicate
      Unchanged{A}(uint8_t* Bitstream1, uint8_t* Bitstream2, integer Start, integer Length, integer Size) =
        \forall integer i; ((0 <= i < Start ==> (LeftBitInStream(Bitstream1, i) <==> LeftBitInStream(Bitstream2, i))) &&
                          (Start+Length <= i < Size ==> (LeftBitInStream(Bitstream1, i) <==> LeftBitInStream(Bitstream2, i))));
 */
- 
+
 /*
     lemma BitsAndBound :
       \forall integer x, integer n;

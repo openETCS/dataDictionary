@@ -2,13 +2,13 @@
 #include "PokeNext.h"
 #include "Poke.h"
 
-int Bitwalker_Poke_Next(Bitwalker* bw, uint32_t Length, uint64_t Value)
+int Bitstream_Poke(Bitstream* stream, uint32_t length, uint64_t value)
 {
   // plausibility check is done when reading the bits
-  int retval = Bitwalker_Poke(bw->Bitposition, Length, bw->Bitstream, bw->Size, Value);
+  int retval = Bitwalker_Poke(stream->bitposition, length, stream->addr, stream->size, value);
 
-  //@ assert bw->Bitposition == \at(bw->Bitposition, Pre);
-  bw->Bitposition += Length;
+  //@ assert stream->bitposition == \at(stream->bitposition, Pre);
+  stream->bitposition += length;
 
   return retval;
 }

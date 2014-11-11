@@ -2,40 +2,40 @@
 #ifndef PeekNext_included
 #define PeekNext_included
 
-#include "Bitwalker.h"
-#include "BitwalkerInvariant.h"
+#include "Bitstream.h"
+#include "BitstreamInvariant.h"
 
 /*@
-  requires \valid(bw);
-  requires BitwalkerInvariant(bw);
-  requires 0 <= Length <= 64;
-  requires bw->Bitposition + Length <= UINT_MAX;
+  requires \valid(stream);
+  requires BitstreamInvariant(stream);
+  requires 0 <= length <= 64;
+  requires stream->bitposition + length <= UINT_MAX;
 
-  assigns  bw->Bitposition;
+  assigns  stream->bitposition;
 
-  ensures \old(bw->Bitposition) + Length == bw->Bitposition;
+  ensures \old(stream->bitposition) + length == stream->bitposition;
 
   behavior  invalid_bit_sequence:
-    assumes (bw->Bitposition + Length)  > 8 * bw->Size;
-    assigns  bw->Bitposition;
+    assumes (stream->bitposition + length)  > 8 * stream->size;
+    assigns  stream->bitposition;
 
     ensures \result == 0;
 
   behavior  normal_case:
-    assumes (bw->Bitposition + Length) <= 8 * bw->Size;
-    assigns  bw->Bitposition;
+    assumes (stream->bitposition + length) <= 8 * stream->size;
+    assigns  stream->bitposition;
 
-    ensures \forall integer i; 0 <= i < Length ==>
-    		(LeftBitInStream(\old(bw->Bitstream), \old(bw->Bitposition)+i) <==> LeftBit64(\result, 64-Length + i));
+    ensures \forall integer i; 0 <= i < length ==>
+    		(LeftBitInStream(\old(stream->addr), \old(stream->bitposition)+i) <==> LeftBit64(\result, 64-length + i));
 
-    ensures \forall integer i; 0 <= i < 64-Length ==> !LeftBit64(\result, i);
+    ensures \forall integer i; 0 <= i < 64-length ==> !LeftBit64(\result, i);
 
-    ensures \result < (1 << Length);
+    ensures \result < (1 << length);
 
   complete behaviors;
   disjoint behaviors;
 */
-uint64_t Bitwalker_Peek_Next(Bitwalker* bw, uint32_t Length);
+uint64_t Bitstream_Peek(Bitstream* stream, uint32_t length);
 
 #endif
 

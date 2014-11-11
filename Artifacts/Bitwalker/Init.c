@@ -1,10 +1,10 @@
 #include "Init.h"
 
 void
-Bitwalker_Init(Bitwalker* bw, uint8_t* Bitstream, uint32_t Size, uint32_t Bitposition)
+Bitstream_Init(Bitstream* stream, uint8_t* addr, uint32_t size, uint32_t bitposition)
 {
-  bw->Bitstream    = Bitstream;
-  bw->Size         = Size;
-  bw->Bitposition  = Bitposition;
+  stream->addr         = addr;
+  stream->size         = size;
+  stream->bitposition  = bitposition;
 }
 

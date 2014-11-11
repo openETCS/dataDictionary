@@ -1,26 +1,26 @@
 #ifndef INIT_H
 #define INIT_H
 
-#include "Bitwalker.h"
-#include "BitwalkerInvariant.h"
+#include "Bitstream.h"
+#include "BitstreamInvariant.h"
 
 /*@
-  requires \valid(bw);
-  requires \valid(Bitstream + (0..Size-1));
-  requires 8 * Size <= UINT_MAX;
-  requires Bitposition <= 8 * Size;
-  requires \separated(Bitstream + (0..Size-1), bw);
+  requires \valid(stream);
+  requires \valid(addr + (0..size-1));
+  requires 8 * size <= UINT_MAX;
+  requires bitposition <= 8 * size;
+  requires \separated(addr + (0..size-1), stream);
 
-  assigns  bw->Bitstream;
-  assigns  bw->Size;
-  assigns  bw->Bitposition;
+  assigns  stream->addr;
+  assigns  stream->size;
+  assigns  stream->bitposition;
 
-  ensures  bw->Bitstream == Bitstream;
-  ensures  bw->Size == Size;
-  ensures  bw->Bitposition == Bitposition;
-  ensures  BitwalkerInvariant(bw);
+  ensures  stream->addr == addr;
+  ensures  stream->size == size;
+  ensures  stream->bitposition == bitposition;
+  ensures  BitstreamInvariant(stream);
 */
-void Bitwalker_Init(Bitwalker*  bw, uint8_t* Bitstream, uint32_t Size, uint32_t Bitposition);
+void Bitstream_Init(Bitstream* stream, uint8_t* addr, uint32_t size, uint32_t bitposition);
 
 #endif
 
