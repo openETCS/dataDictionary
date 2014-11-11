@@ -1,6 +1,6 @@
 
-#ifndef PeekNext_included
-#define PeekNext_included
+#ifndef Bitstream_Read_included
+#define Bitstream_Read_included
 
 #include "Bitstream.h"
 #include "BitstreamInvariant.h"
@@ -35,7 +35,7 @@
   complete behaviors;
   disjoint behaviors;
 */
-uint64_t Bitstream_Peek(Bitstream* stream, uint32_t length);
+uint64_t Bitstream_Read(Bitstream* stream, uint32_t length);
 
 #endif
 

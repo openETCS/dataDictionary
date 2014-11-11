@@ -1,6 +1,6 @@
 
-#ifndef PokeNext_included
-#define PokeNext_included
+#ifndef Bitstream_Write_included
+#define Bitstream_Write_included
 
 #include "Bitstream.h"
 #include "BitstreamInvariant.h"
@@ -46,7 +46,7 @@
   complete behaviors;
   disjoint behaviors;
 */
-int  Bitstream_Poke(Bitstream* stream, uint32_t length, uint64_t value);
+int  Bitstream_Write(Bitstream* stream, uint32_t length, uint64_t value);
 
 #endif
 

@@ -1,4 +1,4 @@
-#include "Peek.h"
+#include "Bitwalker_Peek.h"
 #include "Bit8Array.h"
 #include "Bit64.h"
 

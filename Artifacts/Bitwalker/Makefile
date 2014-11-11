@@ -15,8 +15,8 @@ clean::
 lib: libBitwalker.a
 
 libBitwalker.a : Bit8Array.o\
-		 Peek.o Poke.o\
-		 Init.o PeekNext.o PokeNext.o 
+		 Bitwalker_Peek.o Bitwalker_Poke.o\
+		 Bitstream_Init.o Bitstream_Read.o Bitstream_Write.o 
 	ar cru	$@ $^
 	ranlib	$@
 
@@ -28,11 +28,11 @@ tests:	TestPeekThenPoke
 
 report-wp:\
 	Bit8Array.report-wp\
-        Peek.report-wp\
-        Poke.report-wp\
+        Bitwalker_Peek.report-wp\
+        Bitwalker_Poke.report-wp\
 	PeekThenPoke.report-wp\
 	PokeThenPeek.report-wp\
-	Init.report-wp\
-	PeekNext.report-wp\
-	PokeNext.report-wp\
+	Bitstream_Init.report-wp\
+	Bitstream_Read.report-wp\
+	Bitstream_Write.report-wp\
 

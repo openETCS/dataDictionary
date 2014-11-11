@@ -1,7 +1,7 @@
 
 #include "PeekThenPoke.h"
-#include "Peek.h"
-#include "Poke.h"
+#include "Bitwalker_Peek.h"
+#include "Bitwalker_Poke.h"
 
 int PeekThenPoke(uint32_t  Start,
                  uint32_t  Length,

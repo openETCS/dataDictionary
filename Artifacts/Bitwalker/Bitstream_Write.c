@@ -1,8 +1,8 @@
 
-#include "PokeNext.h"
-#include "Poke.h"
+#include "Bitstream_Write.h"
+#include "Bitwalker_Poke.h"
 
-int Bitstream_Poke(Bitstream* stream, uint32_t length, uint64_t value)
+int Bitstream_Write(Bitstream* stream, uint32_t length, uint64_t value)
 {
   // plausibility check is done when reading the bits
   int retval = Bitwalker_Poke(stream->bitposition, length, stream->addr, stream->size, value);
