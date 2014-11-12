@@ -2,12 +2,12 @@
 #include "Bit8Array.h"
 #include "Bit64.h"
 
-uint64_t Bitwalker_Peek(uint32_t  Start,
-                        uint32_t  Length,
-                        uint8_t*  Bitstream,
-                        uint32_t  BitstreamSize)
+uint64_t Bitwalker_Peek(uint32_t  start,
+                        uint32_t  length,
+                        uint8_t*  addr,
+                        uint32_t  size)
 {
-  if ((Start + Length) > 8 * BitstreamSize)
+  if ((start + length) > 8 * size)
   {
     return 0;
   }
@@ -15,21 +15,21 @@ uint64_t Bitwalker_Peek(uint32_t  Start,
   uint64_t retval = 0;
 
   /*@
-    loop invariant 0 <= i <= Length;
+    loop invariant 0 <= i <= length;
 
     loop invariant \forall integer k; 0 <= k < i ==>
-                    (LeftBitInStream(Bitstream, Start+k) <==> LeftBit64(retval, 64-Length+k));
+                    (LeftBitInStream(addr, start+k) <==> LeftBit64(retval, 64-length+k));
 
-    loop invariant \forall integer k; 0 <= k < 64-Length ==> !LeftBit64(retval, k);
+    loop invariant \forall integer k; 0 <= k < 64-length ==> !LeftBit64(retval, k);
 
     loop assigns i, retval;
-    loop variant Length - i;
+    loop variant length - i;
   */
-  for (uint32_t i = 0; i < Length; i++)
+  for (uint32_t i = 0; i < length; i++)
   {
-    //@ assert Start + i < 8 * BitstreamSize;
-    int flag = PeekBit8Array(Bitstream, BitstreamSize, Start + i);
-    retval = PokeBit64(retval, 64u - Length + i, flag);
+    //@ assert start + i < 8 * size;
+    int flag = PeekBit8Array(addr, size, start + i);
+    retval = PokeBit64(retval, 64u - length + i, flag);
   }
 
   return retval;
