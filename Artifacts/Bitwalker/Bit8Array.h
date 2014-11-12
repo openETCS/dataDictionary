@@ -5,45 +5,38 @@
 #include "BitsFramaC.h"
 
 /*@
-    requires \valid_read(stream + (0..number_bytes-1));
-    requires left_index < 8 * number_bytes;
-    requires 8 * number_bytes < UINT_MAX;
+    requires \valid_read(addr + (0..size-1));
+    requires left < 8 * size;
+    requires 8 * size < UINT_MAX;
 
     assigns \nothing;
 
-    ensures (\result != 0) <==> LeftBitInStream(stream, left_index);
+    ensures (\result != 0) <==> LeftBitInStream(addr, left);
 */
-int PeekBit8Array(uint8_t*      stream,
-                  uint32_t  number_bytes,
-                  uint32_t  left_index);
+int PeekBit8Array(uint8_t*  addr, uint32_t  size, uint32_t  left);
 
 
 
 /*@
-    requires 8 * BitstreamSize < UINT_MAX;
-    requires \valid(Bitstream+(0..BitstreamSize-1));
-    requires left_index < 8 * BitstreamSize;
+    requires 8 * size < UINT_MAX;
+    requires \valid(addr+(0..size-1));
+    requires left < 8 * size;
 
-    assigns Bitstream[0..BitstreamSize-1];
+    assigns addr[0..size-1];
 
-    ensures \forall integer i; (0 <= i < left_index/8) ==>
-                (Bitstream[i] == \old(Bitstream[i]));
+    ensures \forall integer i; 0 <= i < left/8 ==> addr[i] == \old(addr[i]);
 
-    ensures \forall integer i; (left_index/8 < i < BitstreamSize) ==>
-                (Bitstream[i] == \old(Bitstream[i]));
+    ensures \forall integer i; left/8 < i < size ==> addr[i] == \old(addr[i]);
 
-    ensures \forall integer i; (0 <= i < left_index) ==>
-                ((LeftBitInStream(Bitstream, i) <==> \old(LeftBitInStream(Bitstream, i))));
+    ensures \forall integer i; 0 <= i < left ==>
+                ((LeftBitInStream(addr, i) <==> \old(LeftBitInStream(addr, i))));
 
-    ensures LeftBitInStream(Bitstream,left_index) <==> (flag != 0);
+    ensures LeftBitInStream(addr, left) <==> (flag != 0);
 
-    ensures \forall integer i; (left_index < i < 8 * BitstreamSize) ==>
-                ((LeftBitInStream(Bitstream, i) <==> \old(LeftBitInStream(Bitstream, i))));
+    ensures \forall integer i; left < i < 8 * size ==>
+                ((LeftBitInStream(addr, i) <==> \old(LeftBitInStream(addr, i))));
 */
-void PokeBit8Array(uint8_t* Bitstream,
-                   uint32_t BitstreamSize,
-                   uint32_t left_index,
-                   int flag);
+void PokeBit8Array(uint8_t* addr, uint32_t size, uint32_t left, int flag);
 
 #endif
 

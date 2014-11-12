@@ -360,6 +360,12 @@ Proof.
   auto with zarith.
 Qed.
 
+Goal typed_ref_BitTest_PokeBit8_post_3.
+Hint PokeBit8,default,property.
+Proof.
+  intros.
+Qed.
+
 Goal typed_ref_BitTest_PokeThenPeek_assert.
 Hint PokeThenPeek,property.
 Proof.
