@@ -42,6 +42,6 @@
   disjoint behaviors;
 */
 int Bitwalker_Poke(uint32_t start, uint32_t length,
-                    uint8_t* addr, uint32_t size, uint64_t Value);
+                   uint8_t* addr, uint32_t size, uint64_t Value);
 
 #endif
