@@ -7,7 +7,7 @@
 /*@
   requires \valid_read(addr + (0..size-1));
   requires 0 <= length <= 64;
-  requires start + length <= UINT_MAX;
+  requires start + length <= UINT32_MAX;
   requires 8 * size <= UINT_MAX;
 
   assigns \nothing;

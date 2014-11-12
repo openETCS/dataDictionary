@@ -6,7 +6,7 @@
 
 /*@
     requires \valid(addr + (0..size-1));
-    requires 8 * size <= UINT_MAX;
+    requires 8 * size <= UINT32_MAX;
     requires 0 <= length < 64;
     requires start + length <= 8 * size;
     requires value < (1 << length);

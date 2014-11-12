@@ -9,7 +9,7 @@
   requires \valid(stream);
   requires BitstreamInvariant(stream);
   requires 0 <= length <= 64;
-  requires stream->bitposition + length <= UINT_MAX;
+  requires stream->bitposition + length <= UINT32_MAX;
 
   assigns  stream->bitposition;
 
