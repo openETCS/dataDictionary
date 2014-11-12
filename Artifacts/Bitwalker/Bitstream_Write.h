@@ -16,19 +16,19 @@
   ensures \old(stream->bitposition) + length == stream->bitposition;
 
   behavior  invalid_bit_sequence:
-    assumes (stream->bitposition + length) > 8 * stream->size;
+    assumes  stream->bitposition + length > 8 * stream->size;
 
     ensures \old(stream->bitposition) + length == stream->bitposition;
     ensures \result == -1;
 
   behavior  value_too_big:
-    assumes (1 << length) <= value && (stream->bitposition + length) <= 8 * stream->size;
+    assumes (1 << length) <= value && stream->bitposition + length <= 8 * stream->size;
 
     ensures \old(stream->bitposition) + length == stream->bitposition;
     ensures \result == -2;
 
   behavior  normal_case:
-    assumes value < (1 << length) && (stream->bitposition + length) <= 8 * stream->size;
+    assumes value < (1 << length) && stream->bitposition + length <= 8 * stream->size;
 
     assigns  stream->addr[0..stream->size - 1], stream->bitposition;
 
@@ -39,7 +39,8 @@
     		(LeftBitInStream(stream->addr, i) <==> \old(LeftBitInStream(stream->addr, i)));
 
     ensures \forall integer i; 0 <= i < length ==>
-    		(LeftBitInStream(stream->addr, \old(stream->bitposition)+i) <==> LeftBit64(value, (64-length)+i));
+    		(LeftBitInStream(stream->addr, \old(stream->bitposition)+i)
+            <==> LeftBit64(value, (64-length)+i));
 
     ensures \result == 0;
 

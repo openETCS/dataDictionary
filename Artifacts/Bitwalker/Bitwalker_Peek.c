@@ -2,10 +2,7 @@
 #include "Bit8Array.h"
 #include "Bit64.h"
 
-uint64_t Bitwalker_Peek(uint32_t  start,
-                        uint32_t  length,
-                        uint8_t*  addr,
-                        uint32_t  size)
+uint64_t Bitwalker_Peek(uint32_t  start, uint32_t  length, uint8_t*  addr, uint32_t  size)
 {
   if ((start + length) > 8 * size)
   {

@@ -17,10 +17,7 @@
     ensures \forall integer i; 0 <= i < 8 * size ==>
          (LeftBitInStream(addr, i) <==> \old(LeftBitInStream(addr, i)));
 */
-int PeekThenPoke(uint32_t start,
-                 uint32_t length,
-                 uint8_t* addr,
-                 uint32_t size);
+int PeekThenPoke(uint32_t start, uint32_t length, uint8_t* addr, uint32_t size);
 
 #endif
 

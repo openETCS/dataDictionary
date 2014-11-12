@@ -3,11 +3,7 @@
 #include "Bitwalker_Peek.h"
 #include "Bitwalker_Poke.h"
 
-uint64_t PokeThenPeek(uint32_t  start,
-                      uint32_t  length,
-                      uint8_t*  addr,
-                      uint32_t  size,
-                      uint64_t  value)
+uint64_t PokeThenPeek(uint32_t  start, uint32_t  length, uint8_t*  addr, uint32_t  size, uint64_t  value)
 {
   //@ assert \forall integer i; 0 <= i < 64-length ==> !LeftBit64(value, i);
   int      poke_result = 0;

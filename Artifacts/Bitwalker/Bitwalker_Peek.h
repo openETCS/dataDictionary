@@ -13,12 +13,12 @@
   assigns \nothing;
 
   behavior  invalid_bit_sequence:
-    assumes (start + length) > 8 * size;
+    assumes start + length > 8 * size;
     assigns \nothing;
     ensures \result == 0;
 
   behavior  normal_case:
-    assumes (start + length) <= 8 * size;
+    assumes start + length <= 8 * size;
     assigns \nothing;
 
     ensures \forall integer i; 0 <= i < length ==>
@@ -31,9 +31,6 @@
   complete behaviors;
   disjoint behaviors;
 */
-uint64_t Bitwalker_Peek(uint32_t start,
-                        uint32_t length,
-                        uint8_t* addr,
-                        uint32_t size);
+uint64_t Bitwalker_Peek(uint32_t start, uint32_t length, uint8_t* addr, uint32_t size);
 
 #endif
