@@ -1,6 +1,6 @@
 
-#ifndef Bitstream_Read_included
-#define Bitstream_Read_included
+#ifndef Bitstream_ReadInt32_included
+#define Bitstream_ReadInt32_included
 
 #include "Bitstream.h"
 #include "BitstreamInvariant.h"
@@ -8,7 +8,7 @@
 /*@
   requires \valid(stream);
   requires BitstreamInvariant(stream);
-  requires 0 <= length <= 64;
+  requires 0 <= length <= 32;
   requires stream->bitposition + length <= UINT_MAX;
 
   assigns  stream->bitposition;
@@ -26,16 +26,16 @@
     assigns  stream->bitposition;
 
     ensures \forall integer i; 0 <= i < length ==>
-    		(LeftBitInStream(\old(stream->addr), \old(stream->bitposition)+i) <==> LeftBit64(\result, 64-length + i));
+    		(LeftBitInStream(\old(stream->addr), \old(stream->bitposition)+i) <==> LeftBit32(\result, 32-length + i));
 
-    ensures \forall integer i; 0 <= i < 64-length ==> !LeftBit64(\result, i);
+    ensures \forall integer i; 0 <= i < 32-length ==> !LeftBit32(\result, i);
 
     ensures \result < (1 << length);
 
   complete behaviors;
   disjoint behaviors;
 */
-uint64_t Bitstream_Read(Bitstream* stream, uint32_t length);
+int32_t Bitstream_ReadInt32(Bitstream* stream, uint32_t length);
 
 #endif
 
