@@ -186,7 +186,7 @@ Proof.
   remember start_0 as start.
   remember length_0 as length.
   remember addr_0 as addr.
-  remember Value_0 as Value.
+  remember value_0 as value.
   remember Mint_0 as M0.
   remember Mint_1 as M1.
   remember Mint_2 as M2.
