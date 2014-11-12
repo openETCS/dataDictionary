@@ -19,6 +19,8 @@
 
 #define LeftBitInStream(Stream,Pos) (LeftBit8(Stream[BytePos(Pos)],((Pos)%8)))
 
+#define LeftBit32(Value,Pos)  (BitTest(Value,(31 - (Pos))))
+
 #define LeftBit64(Value,Pos)  (BitTest(Value,(63 - (Pos))))
 
 /*@
