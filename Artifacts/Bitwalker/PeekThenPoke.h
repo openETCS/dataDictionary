@@ -5,22 +5,22 @@
 #include "BitsFramaC.h"
 
 /*@
-    requires \valid(Bitstream + (0..BitstreamSize-1));
-    requires 8 * BitstreamSize <= UINT_MAX;
-    requires 0 <= Length < 64;
-    requires Start + Length <= 8 * BitstreamSize;
+    requires \valid(addr + (0..size-1));
+    requires 8 * size <= UINT_MAX;
+    requires 0 <= length < 64;
+    requires start + length <= 8 * size;
 
-    assigns Bitstream[0..BitstreamSize-1];
+    assigns addr[0..size-1];
 
     ensures \result == 0;
 
-    ensures \forall integer i; 0 <= i < 8 * BitstreamSize ==>
-         (LeftBitInStream(Bitstream, i) <==> \old(LeftBitInStream(Bitstream, i)));
+    ensures \forall integer i; 0 <= i < 8 * size ==>
+         (LeftBitInStream(addr, i) <==> \old(LeftBitInStream(addr, i)));
 */
-int PeekThenPoke(uint32_t Start,
-                 uint32_t Length,
-                 uint8_t* Bitstream,
-                 uint32_t BitstreamSize);
+int PeekThenPoke(uint32_t start,
+                 uint32_t length,
+                 uint8_t* addr,
+                 uint32_t size);
 
 #endif
 

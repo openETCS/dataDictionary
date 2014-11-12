@@ -304,7 +304,7 @@ Proof.
   unfold is_uint32 in *.
   subst x_0 x_1 x_2 a_1.
 
-  replace (i_0) with ((start_0 + (i_0 - start_0))%Z) by omega.
+  replace (i_0) with (((i_0 - start_0) + start_0)%Z) by omega.
 
   rewrite <- H21; auto with zarith.
 Qed.
