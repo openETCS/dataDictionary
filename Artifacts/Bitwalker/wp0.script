@@ -170,7 +170,11 @@ Goal typed_ref_BitTest_Bitwalker_Peek_normal_case_post_3.
 Hint Bitwalker_Peek,normal_case,property.
 Proof.
   intros.
-  admit.
+  unfold is_uint64 in *.
+  apply bits_and_bounds; auto with zarith.
+  intros.
+  replace (k) with (63 - (63 - k))%Z by omega.
+  apply H17; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_2_preserved.

@@ -53,10 +53,10 @@
 
 /*
     lemma BitsAndBound :
-      \forall integer x, integer n;
+      \forall uint64_t x, integer n;
         0 <= x  ==>
-        0 <= n  ==>
-        ((x < (1 << n)) <==> (\forall integer k; k >= n ==> !BitTest(x, k)));
+        0 <= n < 64 ==>
+        ((x < (1 << n)) <==> (\forall integer k; n <= k < 64 ==> !BitTest(x, k)));
 */
 
 /*
