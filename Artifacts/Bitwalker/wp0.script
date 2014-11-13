@@ -419,18 +419,4 @@ Proof.
   admit. (* apply Q_BitsAndEquality; assumption. *)
 Qed.
 
-Goal typed_ref_BitTest_SetBit64Left_post_3.
-Hint SetBit64Left,default,property.
-Proof.
-  intros.
-  subst x_1 x_2 x_3 x_4.
-  auto with zarith.
-Qed.
-
-Goal typed_ref_BitTest_lemma_BitsAndBound.
-Hint BitsAndBound,property.
-Proof.
-  admit.
-Qed.
-
 
