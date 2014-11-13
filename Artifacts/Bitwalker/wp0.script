@@ -19,12 +19,20 @@ Goal typed_ref_BitTest_Bitstream_ReadInt32_normal_case_post_2.
 Hint Bitstream_ReadInt32,normal_case,property.
 Proof.
   intros.
+  unfold is_uint64 in *.
 
-  replace (to_sint32 Bitstream_Read_0) with Bitstream_Read_0  by admit.
+  replace (to_sint32 Bitstream_Read_0) with Bitstream_Read_0.
 
   replace (31 - i_0)%Z with (63 - (32 + i_0))%Z by omega.
 
   apply H18; auto with zarith.
+
+  symmetry.
+  apply id_sint32.
+
+  unfold is_sint32.
+  auto with zarith.
+
 Qed.
 
 Goal typed_ref_BitTest_Bitstream_Read_normal_case_post.
