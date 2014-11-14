@@ -431,7 +431,30 @@ Goal typed_ref_BitTest_PokeThenPeek_post.
 Hint PokeThenPeek,default,property.
 Proof.
   intros.
-  admit. (* apply Q_BitsAndEquality; assumption. *)
+
+  assert(forall i_0 : int,
+      (0 <= i_0)%Z ->
+      (i_0 <= 63)%Z -> (bit_test PokeThenPeek_0 i_0 <-> bit_test value_0 i_0)).
+    intros.
+    replace (i_0) with (63 - (63-i_0))%Z by omega.
+    rewrite H16.
+    tauto.
+    auto with zarith.
+    auto with zarith.
+
+    assert(X: (forall x y,
+      is_uint64 x -> 
+      is_uint64 y ->
+      (forall i: int, (0 <= i) -> (i <= 63) -> (bit_test x i <-> bit_test y i)) -> 
+      x = y)%Z) by admit.
+
+   admit.
+
+    (* apply X in H24. auto with zarith. *)
+      
+
+  
+  (* admit.  apply Q_BitsAndEquality; assumption. *)
 Qed.
 
 
