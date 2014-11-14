@@ -40,8 +40,8 @@ Hint Bitstream_Read,normal_case,property.
 Proof.
   intros.
 
-  unfold is_uint32 in *.
   unfold is_uint64 in *.
+  unfold is_uint32 in *.
 
   rewrite H22; auto with zarith.
 
