@@ -19,6 +19,18 @@ Proof.
   admit.
 Qed.
 
+Lemma bits_equal_uint64 :
+   (forall x y,
+      is_uint64 x ->
+      is_uint64 y ->
+      (forall i: int, (0 <= i) -> (i <= 63) -> (bit_test x i <-> bit_test y i)) ->
+      x = y)%Z.
+Proof.
+  intros.
+  admit.
+Qed.
+
+
 Lemma bits_and_bounds :
   (forall x n,
         0 <= x ->
