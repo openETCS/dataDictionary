@@ -5,6 +5,7 @@
 
 # Frama-C/WP
 *.wp
+*.frama-c
 *.script.back
 
 # Coq
