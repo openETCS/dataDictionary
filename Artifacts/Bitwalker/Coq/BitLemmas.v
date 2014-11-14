@@ -1,17 +1,30 @@
 
 Require Import ZArith.
+Require Import Qedlib.
 Require Import Memory.
 Require Import Cint.
 Require Import BuiltIn.
 
 Open Local Scope Z_scope.
 
+
+Lemma Cdiv_bounds :
+        (forall n d x,
+         0 <= n ->
+         0 < d ->
+         n <= d * x ->
+         0 <= (Cdiv n d) < x)%Z.
+Proof.
+  intros.
+  admit.
+Qed.
+
 Lemma bits_and_bounds :
-  forall x n,
+  (forall x n,
         0 <= x ->
         0 <= n ->
-        ( (x < lsl 1 n)%Z <-> 
-        (forall k: int, (n <= k)%Z -> (k <= 63)%Z -> ~(bit_test x k))).
+        ( (x < lsl 1 n) <-> 
+        (forall k: int, n <= k -> k <= 63 -> ~(bit_test x k))))%Z.
 Proof.
   intros.
   split; admit.
