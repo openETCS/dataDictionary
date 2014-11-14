@@ -81,13 +81,15 @@ Hint Bitstream_Write,normal_case,property.
 Proof.
   intros.
 
-  subst x_2 x_3 x_4 x_5 x_6.
+  subst x_0 x_1 x_2 x_3 x_4 x_5 x_6.
   subst a_0 a_1 a_2 a_3 a_4.
   unfold is_uint32 in *.
 
   remember i_0 as i.
-  remember x_0 as NewPosition.
-  remember x_1 as OldPosition.
+  remember (Mptr_0.[stream_0]) as addr.
+  remember (Mint_0.[shift stream_0 1]) as size.
+  remember (Mint_0.[shift stream_0 2]) as bitpos.
+
   rewrite access_update_neq.
   apply H27; auto with zarith.
 
@@ -98,15 +100,16 @@ Proof.
   rewrite shift_zero in *.
 
   apply separated_sym in C.
-  apply separated_neq with (stream_0) (3%Z) (Mptr_0 .[stream_0]) (Mint_0 .[ shift stream_0 1]).
+  apply separated_neq with (stream_0) (3%Z) (addr) (size).
+  rewrite <- Heqsize in *.
+  rewrite <- Heqaddr in *.
   exact C.
   unfold included; simpl; auto with zarith.
 
-  remember (Mptr_0.[stream_0]) as addr.
-  remember (Mint_0.[shift stream_0 1]) as size.
+  assert ((0 <= (Cdiv (i + bitpos) 8) < size)%Z).
+    apply Cdiv_bounds; auto with zarith.
 
-  assert ((0 <= (Cdiv (i + OldPosition) 8) < size)%Z) by  admit.
-
+  rewrite <- Heqaddr.
   unfold included; simpl; auto with zarith.
 Qed.
 
