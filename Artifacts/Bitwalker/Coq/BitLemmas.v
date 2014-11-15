@@ -9,14 +9,21 @@ Open Local Scope Z_scope.
 
 
 Lemma Cdiv_bounds :
-        (forall n d x,
-         0 <= n ->
-         0 < d ->
-         n <= d * x ->
-         0 <= (Cdiv n d) < x)%Z.
+     (forall n d x,
+       n >= 0 ->
+       d > 0 ->
+       n < x * d ->
+       0 <= (Cdiv n d) < x)%Z.
 Proof.
   intros.
-  admit.
+  assert(X: Cdiv n d = n/d).
+    apply Cdiv_cases; omega.
+  rewrite X.
+
+  split.
+  + apply Z_div_pos; omega.
+  + apply Zdiv_lt_upper_bound; omega.
+
 Qed.
 
 Lemma bits_equal_uint64 :

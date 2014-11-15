@@ -46,33 +46,29 @@ Proof.
   rewrite H22; auto with zarith.
 
   replace ((Mint_0.[a_1 <- x_3]).[shift a_3 (Cdiv x_4 8)]) with (Mint_0.[shift a_3 (Cdiv x_4 8)]).
-  tauto.
+  + tauto.
+  + rewrite access_update_neq.
+    -  trivial.
+    -  subst a_0 a_1 a_2 a_3.
+       subst x_0 x_1 x_2 x_3 x_4.
 
-  rewrite access_update_neq.
-  auto.
+       unfold P_BitstreamInvariant in *.
+       destruct H9 as [A [B C]].
 
-  subst a_0 a_1 a_2 a_3.
-  subst x_0 x_1 x_2 x_3 x_4.
+       rewrite shift_zero in *.
+       rewrite shift_zero in *.
 
-  unfold P_BitstreamInvariant in *.
-  destruct H9 as [A [B C]].
+      remember (Mptr_0.[stream_0]) as addr.
+      remember (Mint_0.[shift stream_0 1]) as size.
+      remember (Mint_0.[shift stream_0 2]) as bitpos.
 
-  rewrite shift_zero in *.
-  rewrite shift_zero in *.
-
-  remember (Mptr_0.[stream_0]) as addr.
-  remember (Mint_0.[shift stream_0 1]) as size.
-  remember (Mint_0.[shift stream_0 2]) as bitpos.
-
-  apply separated_sym in C.
-  apply separated_neq with (stream_0) (3%Z) (addr) (size).
-  assumption.
-  unfold included; simpl; auto with zarith.
-
-  assert(0 <= (Cdiv (i_0 + bitpos) 8) < size)%Z.
-    apply Cdiv_bounds; auto with zarith.
-  
-  unfold included; simpl; auto with zarith.
+      apply separated_sym in C.
+      apply separated_neq with (stream_0) (3%Z) (addr) (size).
+      * assumption.
+      * unfold included; simpl; auto with zarith.
+      * assert(X: (0 <= (Cdiv (i_0 + bitpos) 8) < size)%Z).
+          apply Cdiv_bounds; auto with zarith.
+        unfold included; simpl; auto with zarith.
 
 Qed.
 
