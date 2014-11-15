@@ -38,7 +38,7 @@ Proof.
 Qed.
 
 
-Lemma bits_and_bounds :
+Lemma bits_and_bounds_uint64 :
   (forall x n,
         0 <= x ->
         0 <= n ->
