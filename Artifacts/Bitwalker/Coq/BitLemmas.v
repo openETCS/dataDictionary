@@ -30,8 +30,8 @@ Lemma bits_equal_uint64 :
    (forall x y,
       is_uint64 x ->
       is_uint64 y ->
-      (forall i: int, (0 <= i) -> (i <= 63) -> (bit_test x i <-> bit_test y i)) ->
-      x = y)%Z.
+      (forall i: int, (0 <= i)%Z -> (i <= 63)%Z -> (bit_test x i <-> bit_test y i)) ->
+      x = y).
 Proof.
   intros.
   admit.
