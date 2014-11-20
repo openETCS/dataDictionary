@@ -176,7 +176,7 @@ Hint Bitwalker_Peek,normal_case,property.
 Proof.
   intros.
   unfold is_uint64 in *.
-  apply bits_and_bounds_uint64; auto with zarith.
+  apply bits_and_bounds_uint; auto with zarith.
   intros.
   replace (k) with (63 - (63 - k))%Z by omega.
   apply H17; auto with zarith.
@@ -401,7 +401,7 @@ Goal typed_ref_BitTest_PokeThenPeek_assert.
 Hint PokeThenPeek,property.
 Proof.
  intros.
- rewrite bits_and_bounds_uint64 in H8.
+ rewrite bits_and_bounds_uint in H8.
  apply H8; auto with zarith.
  unfold is_uint64 in *.
  auto with zarith.

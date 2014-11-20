@@ -38,12 +38,12 @@ Proof.
 Qed.
 
 
-Lemma bits_and_bounds_uint64 :
+Lemma bits_and_bounds_uint :
   (forall x n,
         0 <= x ->
         0 <= n ->
         ( (x < lsl 1 n) <-> 
-        (forall k: int, n <= k -> k <= 63 -> ~(bit_test x k))))%Z.
+        (forall k: int, n <= k -> ~(bit_test x k))))%Z.
 Proof.
   intros.
   split; admit.
