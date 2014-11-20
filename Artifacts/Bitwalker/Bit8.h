@@ -26,13 +26,10 @@ static inline int PeekBit8(uint8_t byte, uint32_t left_index)
 
     assigns \nothing;
 
-    ensures \forall integer i; 0 <= i < left_index ==>
+    ensures \forall integer i; 0 <= i < 8 && i != left_index  ==>
               (LeftBit8(\result, i) <==> LeftBit8(byte, i));
 
     ensures LeftBit8(\result, left_index) <==> (flag != 0);
-
-    ensures \forall integer i; left_index < i < 8 ==>
-              (LeftBit8(\result, i) <==> LeftBit8(byte, i));
 */
 static inline uint8_t PokeBit8(uint8_t byte, uint32_t left_index, int flag)
 {
