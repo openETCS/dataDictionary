@@ -247,13 +247,12 @@ Proof.
   destruct non_strict as [less | equal].
 
   * (* k < i *)
-   rewrite H42; auto with zarith.
+   rewrite H40; auto with zarith.
 
   * (* k = i *)
    rewrite equal in *.
    rewrite <- H32.
-   rewrite H38.
-   tauto.
+   assumption.   
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_4_preserved.

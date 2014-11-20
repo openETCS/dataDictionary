@@ -26,13 +26,10 @@ static inline int PeekBit64(uint64_t value, uint32_t left)
 
     assigns \nothing;
 
-    ensures \forall integer i; 0 <= i < left ==>
+    ensures \forall integer i; (0 <= i < 64  &&  i != left) ==>
                 (LeftBit64(\result, i) <==> LeftBit64(value, i));
 
     ensures flag != 0  <==>  LeftBit64(\result, left);
-
-    ensures \forall integer i; left < i < 64 ==>
-                (LeftBit64(\result, i) <==> LeftBit64(value, i));
 */
 static inline uint64_t PokeBit64(uint64_t value, uint32_t left, int flag)
 {
