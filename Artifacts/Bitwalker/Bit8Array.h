@@ -24,11 +24,10 @@ int PeekBit8Array(uint8_t*  addr, uint32_t  size, uint32_t  left);
 
     assigns addr[0..size-1];
 
-    ensures \forall integer i; 0 <= i < left/8 ==> addr[i] == \old(addr[i]);
+    ensures \forall integer i; 0 <= i < size  &&  i != left/8 ==>
+                 addr[i] == \old(addr[i]);
 
-    ensures \forall integer i; left/8 < i < size ==> addr[i] == \old(addr[i]);
-
-    ensures \forall integer i; 0 <= i < 8 * size && i != left ==>
+    ensures \forall integer i; 0 <= i < 8 * size  &&  i != left ==>
                 ((LeftBitInStream(addr, i) <==> \old(LeftBitInStream(addr, i))));
 
     ensures LeftBitInStream(addr, left) <==> (flag != 0);

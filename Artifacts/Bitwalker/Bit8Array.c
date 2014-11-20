@@ -31,14 +31,9 @@ void PokeBit8Array(uint8_t* addr, uint32_t size, uint32_t left, int flag)
   // with an index that is different from "left/8" no bit is changed.
   /*@
     assert \forall integer l, j;
-      (0 <= l < left/8 && 0 <= j < 8) ==>
+      (0 <= l < size  &&  l != left/8  &&  0 <= j < 8) ==>
         (LeftBit8(addr[l], j) <==> \at(LeftBit8(addr[l], j), Pre));
   */
 
-  /*@
-    assert \forall integer l, j;
-      ((left/8 < l < size) && (0 <= j < 8)) ==>
-        (LeftBit8(addr[l], j) <==> \at(LeftBit8(addr[l], j), Pre));
-  */
 }
 
