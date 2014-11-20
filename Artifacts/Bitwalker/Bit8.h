@@ -6,15 +6,15 @@
 #include "BitsFramaC.h"
 
 /*@
-    requires 0 <= left_index < 8;
+    requires 0 <= left < 8;
 
     assigns \nothing;
 
-    ensures \result != 0 <==> LeftBit8(byte, left_index);
+    ensures \result != 0 <==> LeftBit8(byte, left);
 */
-static inline int PeekBit8(uint8_t byte, uint32_t left_index)
+static inline int PeekBit8(uint8_t byte, uint32_t left)
 {
-  uint8_t mask = ((uint8_t) 1) << (7u - left_index);
+  uint8_t mask = ((uint8_t) 1) << (7u - left);
   uint8_t flag = byte & mask;
 
   return flag != 0;
@@ -22,18 +22,18 @@ static inline int PeekBit8(uint8_t byte, uint32_t left_index)
 
 
 /*@
-    requires 0 <= left_index < 8;
+    requires 0 <= left < 8;
 
     assigns \nothing;
 
-    ensures \forall integer i; 0 <= i < 8 && i != left_index  ==>
+    ensures \forall integer i; (0 <= i < 8  &&  i != left)  ==>
               (LeftBit8(\result, i) <==> LeftBit8(byte, i));
 
-    ensures LeftBit8(\result, left_index) <==> (flag != 0);
+    ensures LeftBit8(\result, left) <==> (flag != 0);
 */
-static inline uint8_t PokeBit8(uint8_t byte, uint32_t left_index, int flag)
+static inline uint8_t PokeBit8(uint8_t byte, uint32_t left, int flag)
 {
-  uint8_t mask = ((uint8_t) 1) << (7u - left_index);
+  uint8_t mask = ((uint8_t) 1) << (7u - left);
 
   return (flag == 0) ? (byte & ~mask) : (byte | mask);
 }
