@@ -127,14 +127,12 @@ Proof.
   - (* less *)
     rewrite <- H33; auto with zarith.
     replace ((length_0 - 1 - k_0)%Z) with ((63 - (63 - (length_0 - 1 - k_0)))%Z) by omega.
-    rewrite H31; auto with zarith.
-    tauto.
+    apply H32; auto with zarith.
 
   - (* equal *)
     rewrite equal in *.
-    rewrite <- H25.
-    rewrite H29.
-    tauto.
+    rewrite <- H26.
+    assumption.
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Peek_loop_inv_3_preserved.
