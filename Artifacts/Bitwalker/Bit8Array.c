@@ -15,19 +15,14 @@ void PokeBit8Array(uint8_t* addr, uint32_t size, uint32_t left, int flag)
 
   addr[i] = PokeBit8(addr[i], k, flag);
 
-  // The following two assertions claim that in byte with index "left/8"
+  // The following assertion claims that in byte with index "left/8"
   // the bits with indices different from "k" do not change
   /*@
-    assert \forall integer j; 0 <= j < k ==>
+    assert \forall integer j; (0 <= j < 8  && j != k) ==>
       (LeftBit8(addr[left/8], j) <==> \at(LeftBit8(addr[left/8], j), Pre));
   */
 
-  /*@
-    assert \forall integer j; k < j < 8 ==>
-      (LeftBit8(addr[left/8], j) <==> \at(LeftBit8(addr[left/8], j), Pre));
-  */
-
-  // The following two assertions claim that in every byte
+  // The following assertion claims that in every byte
   // with an index that is different from "left/8" no bit is changed.
   /*@
     assert \forall integer l, j;
