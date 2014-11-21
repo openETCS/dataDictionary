@@ -4,6 +4,7 @@ Require Import Qedlib.
 Require Import Memory.
 Require Import Cint.
 Require Import BuiltIn.
+Require Import Cbits.
 
 Open Local Scope Z_scope.
 
@@ -46,7 +47,11 @@ Lemma bits_and_bounds_uint :
         (forall k: int, n <= k -> ~(bit_test x k))))%Z.
 Proof.
   intros.
-  split; admit.
+  split.
+  +  intros.
+     admit.
+  +  intros.
+     admit.
 Qed.
 
 Lemma shift_zero :
