@@ -49,7 +49,7 @@ Proof.
   intros.
   split.
   +  intros.
-     admit.
+     admit. (* is_uint64_lsl1_sup *)
   +  intros.
      admit.
 Qed.
