@@ -6,7 +6,7 @@
 #include "BitsFramaC.h"
 
 /*@
-    requires 0 <= left < 8;
+    requires left < 8;
 
     assigns \nothing;
 
@@ -22,7 +22,7 @@ static inline int PeekBit8(uint8_t byte, uint32_t left)
 
 
 /*@
-    requires 0 <= left < 8;
+    requires left < 8;
 
     assigns \nothing;
 

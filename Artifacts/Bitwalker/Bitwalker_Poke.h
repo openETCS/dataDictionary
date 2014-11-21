@@ -5,7 +5,7 @@
 
 /*@
   requires writeable_bitstream: \valid(addr + (0..size-1));
-  requires valid_length: 0 <= length < 64;
+  requires valid_length: length < 64;
   requires no_overflow_1: start + length <= UINT32_MAX;
   requires no_overflow_2: 8 * size <= UINT_MAX;
 

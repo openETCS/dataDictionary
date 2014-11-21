@@ -5,7 +5,7 @@
 #include "BitsFramaC.h"
 
 /*@
-   requires 0 <= left < 64;
+   requires left < 64;
 
    assigns \nothing;
 

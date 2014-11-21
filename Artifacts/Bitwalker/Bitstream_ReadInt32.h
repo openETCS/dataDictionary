@@ -8,7 +8,7 @@
 /*@
   requires \valid(stream);
   requires BitstreamInvariant(stream);
-  requires 0 <= length < 31;
+  requires length < 31;
   requires stream->bitposition + length <= UINT32_MAX;
 
   assigns  stream->bitposition;

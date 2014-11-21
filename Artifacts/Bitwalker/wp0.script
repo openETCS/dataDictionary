@@ -25,7 +25,7 @@ Proof.
 
   replace (31 - i_0)%Z with (63 - (32 + i_0))%Z by omega.
 
-  apply H18; auto with zarith.
+  apply H17; auto with zarith.
 
   symmetry.
   apply id_sint32.
@@ -43,7 +43,7 @@ Proof.
   unfold is_uint64 in *.
   unfold is_uint32 in *.
 
-  rewrite H22; auto with zarith.
+  rewrite H21; auto with zarith.
 
   replace ((Mint_0.[a_1 <- x_3]).[shift a_3 (Cdiv x_4 8)]) with (Mint_0.[shift a_3 (Cdiv x_4 8)]).
   + tauto.
@@ -53,7 +53,7 @@ Proof.
        subst x_0 x_1 x_2 x_3 x_4.
 
        unfold P_BitstreamInvariant in *.
-       destruct H9 as [A [B C]].
+       destruct H8 as [A [B C]].
 
        rewrite shift_zero in *.
        rewrite shift_zero in *.
@@ -87,10 +87,10 @@ Proof.
   remember (Mint_0.[shift stream_0 2]) as bitpos.
 
   rewrite access_update_neq.
-  apply H27; auto with zarith.
+  apply H26; auto with zarith.
 
   unfold P_BitstreamInvariant in *.
-  destruct H10 as [A [B C]].
+  destruct H9 as [A [B C]].
 
   rewrite shift_zero in *.
   rewrite shift_zero in *.
@@ -125,13 +125,13 @@ Proof.
   destruct non_strict as [less | equal].
 
   - (* less *)
-    rewrite <- H33; auto with zarith.
+    rewrite <- H32; auto with zarith.
     replace ((length_0 - 1 - k_0)%Z) with ((63 - (63 - (length_0 - 1 - k_0)))%Z) by omega.
-    apply H32; auto with zarith.
+    apply H31; auto with zarith.
 
   - (* equal *)
     rewrite equal in *.
-    rewrite <- H26.
+    rewrite <- H25.
     assumption.
 Qed.
 
@@ -179,7 +179,7 @@ Proof.
   apply bits_and_bounds_uint; auto with zarith.
   intros.
   replace (k) with (63 - (63 - k))%Z by omega.
-  apply H17; auto with zarith.
+  apply H16; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_2_preserved.
@@ -239,6 +239,7 @@ Proof.
   remember i_0 as i.
 
   subst x_0 x_1 x_2 x_3 x_5 x_6 x_7.
+  unfold is_uint64 in *.
   unfold is_uint32 in *.
   unfold  to_sint32 in *.
 
@@ -248,10 +249,12 @@ Proof.
 
   * (* k < i *)
    rewrite H40; auto with zarith.
+   rewrite <- H39; auto with zarith.
+   tauto.
 
   * (* k = i *)
    rewrite equal in *.
-   rewrite <- H32.
+   rewrite <- H31.
    assumption.   
 Qed.
 
@@ -349,7 +352,7 @@ Proof.
 
   replace (i_0) with (((i_0 - start_0) + start_0)%Z) by omega.
 
-  rewrite <- H21; auto with zarith.
+  rewrite <- H20; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_PeekThenPoke_assert_2.
@@ -401,11 +404,12 @@ Goal typed_ref_BitTest_PokeThenPeek_assert.
 Hint PokeThenPeek,property.
 Proof.
  intros.
- rewrite bits_and_bounds_uint in H8.
- apply H8; auto with zarith.
+ unfold is_uint32 in *.
  unfold is_uint64 in *.
- auto with zarith.
- assumption.
+ rewrite bits_and_bounds_uint in H7.
+ apply H7; auto with zarith.
+ omega.
+ omega.
 Qed.
 
 Goal typed_ref_BitTest_PokeThenPeek_assert_3.
@@ -416,7 +420,7 @@ Proof.
 
   replace ((63 - i_0)%Z) with ((length_0 - 1 - (length_0 + i_0 - 64))%Z) in * by omega.
 
-  rewrite H23; auto with zarith.
+  rewrite H22; auto with zarith.
 
 Qed.
 
@@ -429,9 +433,8 @@ Proof.
 
     intros.
     replace i with (63 - (63 - i))%Z by omega.
-    rewrite H16; auto with zarith.
+    rewrite H15; auto with zarith.
     intuition.
-
 Qed.
 
 
