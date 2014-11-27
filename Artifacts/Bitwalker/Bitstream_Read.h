@@ -9,24 +9,24 @@
   requires \valid(stream);
   requires BitstreamInvariant(stream);
   requires length <= 64;
-  requires stream->bitposition + length <= UINT32_MAX;
+  requires stream->bitpos + length <= UINT32_MAX;
 
-  assigns  stream->bitposition;
+  assigns  stream->bitpos;
 
-  ensures \old(stream->bitposition) + length == stream->bitposition;
+  ensures \old(stream->bitpos) + length == stream->bitpos;
 
   behavior  invalid_bit_sequence:
-    assumes  stream->bitposition + length  > 8 * stream->size;
-    assigns  stream->bitposition;
+    assumes  stream->bitpos + length  > 8 * stream->size;
+    assigns  stream->bitpos;
 
     ensures \result == 0;
 
   behavior  normal_case:
-    assumes  stream->bitposition + length <= 8 * stream->size;
-    assigns  stream->bitposition;
+    assumes  stream->bitpos + length <= 8 * stream->size;
+    assigns  stream->bitpos;
 
     ensures \forall integer i; 0 <= i < length ==>
-    		(LeftBitInStream(\old(stream->addr), \old(stream->bitposition)+i)
+    		(LeftBitInStream(\old(stream->addr), \old(stream->bitpos)+i)
             <==> LeftBit64(\result, 64-length + i));
 
     ensures \forall integer i; 0 <= i < 64-length ==> !LeftBit64(\result, i);
