@@ -16,7 +16,7 @@ lib: libBitwalker.a
 
 libBitwalker.a : Bit8.o Bit8Array.o Bit64.o\
 		 Bitwalker_Peek.o Bitwalker_Poke.o\
-		 Bitstream_Init.o Bitstream_Read.o Bitstream_ReadInt32.o Bitstream_Write.o 
+		 Bitstream_Init.o Bitstream_Read.o Bitstream_Write.o 
 	ar cru	$@ $^
 	ranlib	$@
 
@@ -36,6 +36,5 @@ report-wp:\
 	PokeThenPeek.report-wp\
 	Bitstream_Init.report-wp\
 	Bitstream_Read.report-wp\
-	Bitstream_ReadInt32.report-wp\
 	Bitstream_Write.report-wp\
 

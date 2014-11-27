@@ -16,19 +16,19 @@
   ensures \old(stream->bitpos) + length == stream->bitpos;
 
   behavior  invalid_bit_sequence:
-    assumes  stream->bitpos + length > 8 * stream->size;
+    assumes  !NormalBitsequence(stream, length);
 
     ensures \old(stream->bitpos) + length == stream->bitpos;
     ensures \result == -1;
 
   behavior  value_too_big:
-    assumes (1 << length) <= value && stream->bitpos + length <= 8 * stream->size;
+    assumes NormalBitsequence(stream, length) && (1 << length) <= value;
 
     ensures \old(stream->bitpos) + length == stream->bitpos;
     ensures \result == -2;
 
   behavior  normal_case:
-    assumes value < (1 << length) && stream->bitpos + length <= 8 * stream->size;
+    assumes NormalBitsequence(stream, length) && value < (1 << length);
 
     assigns  stream->addr[0..stream->size - 1], stream->bitpos;
 

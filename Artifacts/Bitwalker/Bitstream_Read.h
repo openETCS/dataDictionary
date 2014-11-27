@@ -16,13 +16,13 @@
   ensures \old(stream->bitpos) + length == stream->bitpos;
 
   behavior  invalid_bit_sequence:
-    assumes  stream->bitpos + length  > 8 * stream->size;
+    assumes  !NormalBitsequence(stream, length);
     assigns  stream->bitpos;
 
     ensures \result == 0;
 
   behavior  normal_case:
-    assumes  stream->bitpos + length <= 8 * stream->size;
+    assumes  NormalBitsequence(stream, length);
     assigns  stream->bitpos;
 
     ensures \forall integer i; 0 <= i < length ==>
