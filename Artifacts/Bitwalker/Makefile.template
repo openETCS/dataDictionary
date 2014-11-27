@@ -54,8 +54,8 @@ WP_PROVER_FLAGS += -wp-prover coq
 
 
 # run WP on command line 
-export WP=frama-c.byte 
-export WPGUI=frama-c-gui.byte
+export WP=frama-c 
+export WPGUI=frama-c-gui
 export WPREPORT=$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS)
 
 
