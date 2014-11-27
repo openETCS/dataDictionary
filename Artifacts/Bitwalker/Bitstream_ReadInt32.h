@@ -26,7 +26,7 @@
     assigns  stream->bitpos;
 
     ensures \forall integer i; 0 <= i < length ==>
-    		(LeftBitInStream(\old(stream->addr), \old(stream->bitpos)+i)
+    		(LeftBitInStream(stream->addr, \old(stream->bitpos)+i)
             <==> LeftBit32(\result, 32-length + i));
 
     ensures \forall integer i; 0 <= i < 32-length ==> !LeftBit32(\result, i);
