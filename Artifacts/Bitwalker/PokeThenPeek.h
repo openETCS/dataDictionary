@@ -15,7 +15,8 @@
 
     ensures \result == value;
 */
-uint64_t PokeThenPeek(uint32_t  start, uint32_t  length, uint8_t*  addr, uint32_t  size, uint64_t  value);
+uint64_t PokeThenPeek(uint32_t start, uint32_t length, uint8_t* addr, 
+                      uint32_t size, uint64_t value);
 
 #endif
 

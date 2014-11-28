@@ -458,7 +458,7 @@ Proof.
 
   replace ((63 - i_0)%Z) with ((length_0 - 1 - (length_0 + i_0 - 64))%Z) in * by omega.
 
-  rewrite H22; auto with zarith.
+  rewrite H22. auto with zarith.
 
 Qed.
 
