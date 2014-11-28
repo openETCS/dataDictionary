@@ -14,7 +14,10 @@
      stream->bitpos + length <= 8 * stream->size;
 
   predicate LeftBitInStream{L}(Bitstream* stream, integer i) =
-                LeftBit8Array(stream->addr, \at(stream->bitpos,L)+i);
+                LeftBit8Array(stream->addr, i);
+
+  predicate LeftBitInSequence{L}(Bitstream* stream, integer i) =
+                LeftBit8Array(stream->addr, \at(stream->bitpos,L) + i);
 
 */
 
