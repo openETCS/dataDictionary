@@ -41,11 +41,11 @@
     ensures \forall integer i; 0 <= i < \old(stream->bitpos) ==>
       (LeftBitInStream(stream, i) <==> \old(LeftBitInStream(stream, i)));
 
+    ensures \forall integer i; \old(stream->bitpos) <= i < stream->bitpos ==>
+      (LeftBitInStream(stream, i) <==> LeftBit64(value, 64 - stream->bitpos + i));
+
     ensures \forall integer i; stream->bitpos < i < 8 * stream->size  ==>
       (LeftBitInStream(stream, i) <==> \old(LeftBitInStream(stream, i)));
-
-    ensures \forall integer i; \old(stream->bitpos) <= i < stream->bitpos ==>
-      (LeftBitInStream(stream, i) <==> LeftBit64(value, 64 + i - stream->bitpos));
 
     ensures \result == 0;
 
