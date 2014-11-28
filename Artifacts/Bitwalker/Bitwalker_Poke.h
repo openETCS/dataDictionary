@@ -17,21 +17,21 @@
     ensures \result == -1;
 
   behavior  value_too_big:
-    assumes (1 << length) <= value && start + length <= 8 * size;
+    assumes (start + length <= 8 * size)  &&  (1 << length) <= value;
     assigns \nothing;
     ensures \result == -2;
 
   behavior  normal_case:
-    assumes value < (1 << length) && start + length <= 8 * size;
+    assumes (start + length <= 8 * size)  &&  value < (1 << length);
     assigns addr[0..size - 1];
 
     ensures \forall integer i; 0 <= i < start ==>
              (LeftBit8Array(addr, i) <==> \old(LeftBit8Array(addr, i)));
 
-    ensures \forall integer i; 0 <= i < length ==>
-             (LeftBit8Array(addr, start+i) <==> LeftBit64(value,(64-length)+i));
+    ensures \forall integer i; start <= i < start + length ==>
+             (LeftBit8Array(addr, i) <==> LeftBit64(value, 64 - length + i - start));
 
-    ensures \forall integer i; start+length <= i < 8*size ==>
+    ensures \forall integer i; start + length <= i < 8 * size ==>
              (LeftBit8Array(addr, i) <==> \old(LeftBit8Array(addr, i)));
 
     ensures \result == 0;

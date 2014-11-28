@@ -232,22 +232,22 @@ Proof.
   remember k_0 as k.
   remember i_0 as i.
 
-  subst x_0 x_1 x_2 x_3 x_5 x_6 x_7.
+  subst x_0 x_1 x_2 x_3 x_5 x_6.
   unfold is_uint64 in *.
   unfold is_uint32 in *.
   unfold  to_sint32 in *.
 
-  assert(non_strict: (k <= i)%Z) by assumption.
+  assert(non_strict: (k <= i + start)%Z) by assumption.
     apply Zle_lt_or_eq in non_strict.
   destruct non_strict as [less | equal].
 
-  * (* k < i *)
+  * (* k < i + start *)
    rewrite H40; auto with zarith.
-   rewrite <- H39; auto with zarith.
-   tauto.
 
-  * (* k = i *)
+  * (* k = i + start *)
    rewrite equal in *.
+   replace (length + start - 1 - (i + start))%Z
+     with  (length - 1 - i)%Z by omega.
    rewrite <- H31.
    assumption.   
 Qed.
