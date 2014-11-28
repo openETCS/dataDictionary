@@ -11,7 +11,8 @@ int PeekThenPoke(uint32_t  start, uint32_t  length, uint8_t*  addr, uint32_t  si
   result =  Bitwalker_Poke(start, length, addr, size, value);
 
   /*@ assert \forall integer i; start <= i < start + length ==>
-         (LeftBit8Array(addr, i) <==> \at(LeftBit8Array(addr, i), Pre)); */
+         (LeftBit8Array(addr, i) <==> \at(LeftBit8Array(addr, i), Pre));
+   */
 
   return result;
 }
