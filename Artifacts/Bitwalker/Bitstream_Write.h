@@ -39,13 +39,13 @@
     assigns  stream->bitpos;
 
     ensures \forall integer i; 0 <= i < \old(stream->bitpos) ==>
-    		(LeftBitInStream(stream->addr, i) <==> \old(LeftBitInStream(stream->addr, i)));
+    		(LeftBit8Array(stream->addr, i) <==> \old(LeftBit8Array(stream->addr, i)));
 
     ensures \forall integer i; stream->bitpos < i < 8 * stream->size  ==>
-    		(LeftBitInStream(stream->addr, i) <==> \old(LeftBitInStream(stream->addr, i)));
+    		(LeftBit8Array(stream->addr, i) <==> \old(LeftBit8Array(stream->addr, i)));
 
     ensures \forall integer i; 0 <= i < length ==>
-    		(LeftBitInStream(stream->addr, \old(stream->bitpos)+i)
+    		(LeftBit8Array(stream->addr, \old(stream->bitpos)+i)
             <==> LeftBit64(value, (64-length)+i));
 
     ensures \result == 0;

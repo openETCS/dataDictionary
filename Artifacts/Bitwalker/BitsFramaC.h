@@ -17,7 +17,7 @@
 
 #define LeftBit8(Value,Pos)  (BitTest(Value,(7 - (Pos))))
 
-#define LeftBitInStream(Stream,Pos) (LeftBit8(Stream[BytePos(Pos)],((Pos)%8)))
+#define LeftBit8Array(Stream,Pos) (LeftBit8(Stream[BytePos(Pos)],((Pos)%8)))
 
 #define LeftBit32(Value,Pos)  (BitTest(Value,(31 - (Pos))))
 
@@ -27,7 +27,7 @@
    predicate
      EqualBits{A}(uint8_t* Bitstream, uint64_t Value, integer Start, integer Length) =
         \forall integer i; 0 <= i < Length ==>
-          (LeftBitInStream(Bitstream, Start + i) <==> LeftBit64(Value, 64-Length+i));
+          (LeftBit8Array(Bitstream, Start + i) <==> LeftBit64(Value, 64-Length+i));
 */
 
 /*@
@@ -47,8 +47,8 @@
 /*@
    predicate
      Unchanged{A}(uint8_t* Bitstream1, uint8_t* Bitstream2, integer Start, integer Length, integer Size) =
-       \forall integer i; ((0 <= i < Start ==> (LeftBitInStream(Bitstream1, i) <==> LeftBitInStream(Bitstream2, i))) &&
-                         (Start+Length <= i < Size ==> (LeftBitInStream(Bitstream1, i) <==> LeftBitInStream(Bitstream2, i))));
+       \forall integer i; ((0 <= i < Start ==> (LeftBit8Array(Bitstream1, i) <==> LeftBit8Array(Bitstream2, i))) &&
+                         (Start+Length <= i < Size ==> (LeftBit8Array(Bitstream1, i) <==> LeftBit8Array(Bitstream2, i))));
 */
 
 /*

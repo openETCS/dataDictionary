@@ -15,7 +15,7 @@
     ensures \result == 0;
 
     ensures \forall integer i; 0 <= i < 8 * size ==>
-         (LeftBitInStream(addr, i) <==> \old(LeftBitInStream(addr, i)));
+         (LeftBit8Array(addr, i) <==> \old(LeftBit8Array(addr, i)));
 */
 int PeekThenPoke(uint32_t start, uint32_t length, uint8_t* addr, uint32_t size);
 

@@ -25,13 +25,13 @@ int Bitwalker_Poke(uint32_t  start,
   /*@
     loop invariant 0 <= i <= length;
     loop invariant \forall integer k; 0 <= k < start ==>
-                    (LeftBitInStream(addr, k) <==> \at(LeftBitInStream(addr, k), Pre));
+                    (LeftBit8Array(addr, k) <==> \at(LeftBit8Array(addr, k), Pre));
 
     loop invariant \forall integer k; 0 <= k < i ==>
-                    (LeftBitInStream(addr, start+k) <==> LeftBit64(value, (64-length)+k));
+                    (LeftBit8Array(addr, start+k) <==> LeftBit64(value, (64-length)+k));
 
     loop invariant \forall integer k; start+i <= k < 8*size ==>
-                    (LeftBitInStream(addr, k) <==> \at(LeftBitInStream(addr, k), Pre));
+                    (LeftBit8Array(addr, k) <==> \at(LeftBit8Array(addr, k), Pre));
 
     loop assigns i, addr[0..size-1];
     loop variant length - i;

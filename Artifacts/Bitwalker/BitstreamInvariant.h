@@ -12,6 +12,10 @@
 
   predicate NormalBitsequence(Bitstream* stream, uint32_t length) = 
      stream->bitpos + length <= 8 * stream->size;
+
+  predicate LeftBitInStream{L}(Bitstream* stream, integer i) =
+                LeftBit8Array(stream->addr, \at(stream->bitpos,L)+i);
+
 */
 
 #endif

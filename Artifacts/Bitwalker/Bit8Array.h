@@ -11,7 +11,7 @@
 
     assigns \nothing;
 
-    ensures (\result != 0) <==> LeftBitInStream(addr, left);
+    ensures (\result != 0) <==> LeftBit8Array(addr, left);
 */
 int PeekBit8Array(uint8_t*  addr, uint32_t  size, uint32_t  left);
 
@@ -28,9 +28,9 @@ int PeekBit8Array(uint8_t*  addr, uint32_t  size, uint32_t  left);
                  addr[i] == \old(addr[i]);
 
     ensures \forall integer i; 0 <= i < 8 * size  &&  i != left ==>
-                ((LeftBitInStream(addr, i) <==> \old(LeftBitInStream(addr, i))));
+                ((LeftBit8Array(addr, i) <==> \old(LeftBit8Array(addr, i))));
 
-    ensures LeftBitInStream(addr, left) <==> (flag != 0);
+    ensures LeftBit8Array(addr, left) <==> (flag != 0);
 */
 void PokeBit8Array(uint8_t* addr, uint32_t size, uint32_t left, int flag);
 

@@ -26,13 +26,13 @@
     assigns addr[0..size - 1];
 
     ensures \forall integer i; 0 <= i < start ==>
-             (LeftBitInStream(addr, i) <==> \old(LeftBitInStream(addr, i)));
+             (LeftBit8Array(addr, i) <==> \old(LeftBit8Array(addr, i)));
 
     ensures \forall integer i; 0 <= i < length ==>
-             (LeftBitInStream(addr, start+i) <==> LeftBit64(value,(64-length)+i));
+             (LeftBit8Array(addr, start+i) <==> LeftBit64(value,(64-length)+i));
 
     ensures \forall integer i; start+length <= i < 8*size ==>
-             (LeftBitInStream(addr, i) <==> \old(LeftBitInStream(addr, i)));
+             (LeftBit8Array(addr, i) <==> \old(LeftBit8Array(addr, i)));
 
     ensures \result == 0;
 

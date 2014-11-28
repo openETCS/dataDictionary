@@ -22,7 +22,7 @@
     assigns \nothing;
 
     ensures \forall integer i; 0 <= i < length ==>
-              (LeftBitInStream(addr, start+i) <==> LeftBit64(\result, 64-length + i));
+              (LeftBit8Array(addr, start+i) <==> LeftBit64(\result, 64-length + i));
 
     ensures \forall integer i; 0 <= i < 64-length ==> !LeftBit64(\result, i);
 
