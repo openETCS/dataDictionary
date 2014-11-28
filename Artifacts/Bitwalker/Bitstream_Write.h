@@ -11,26 +11,32 @@
   requires length <= 63;
   requires stream->bitpos + length <= UINT32_MAX;
 
-  assigns  stream->addr[0..stream->size - 1], stream->bitpos;
+  assigns  stream->addr[0..stream->size - 1];
+  assigns  stream->bitpos;
 
   ensures \old(stream->bitpos) + length == stream->bitpos;
 
   behavior  invalid_bit_sequence:
     assumes  !NormalBitsequence(stream, length);
 
-    ensures \old(stream->bitpos) + length == stream->bitpos;
+    assigns  stream->addr[0..stream->size - 1];
+    assigns  stream->bitpos;
+
     ensures \result == -1;
 
   behavior  value_too_big:
     assumes NormalBitsequence(stream, length) && (1 << length) <= value;
 
-    ensures \old(stream->bitpos) + length == stream->bitpos;
+    assigns  stream->addr[0..stream->size - 1];
+    assigns  stream->bitpos;
+
     ensures \result == -2;
 
   behavior  normal_case:
     assumes NormalBitsequence(stream, length) && value < (1 << length);
 
-    assigns  stream->addr[0..stream->size - 1], stream->bitpos;
+    assigns  stream->addr[0..stream->size - 1];
+    assigns  stream->bitpos;
 
     ensures \forall integer i; 0 <= i < \old(stream->bitpos) ==>
     		(LeftBitInStream(stream->addr, i) <==> \old(LeftBitInStream(stream->addr, i)));
