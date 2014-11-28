@@ -54,22 +54,34 @@ Hint Bitstream_Write,normal_case,property.
 Proof.
   intros.
 
-  subst x_0 x_1 x_2 x_3 x_4 x_5 x_6.
+  subst x_0 x_1 x_2 x_3 x_4 x_5.
   subst a_0 a_1 a_2 a_3 a_4.
   unfold P_NormalBitsequence in *.
+  unfold P_LeftBitInStream.
   unfold is_uint32 in *.
+
+  rewrite shift_zero in *.
+  rewrite shift_zero in *.
 
   remember i_0 as i.
   remember (Mptr_0.[stream_0]) as addr.
   remember (Mint_0.[shift stream_0 1]) as size.
   remember (Mint_0.[shift stream_0 2]) as bitpos.
+  remember (Mint_1.[shift stream_0 2]) as new_bitpos.
+  replace new_bitpos with bitpos in * by auto with zarith.
 
+  
   rewrite access_update_neq.
-  apply H29; auto with zarith.
+  replace (length_0 + bitpos - 1 - i)%Z 
+    with (length_0 - 1 - (i - bitpos))%Z by omega. 
+  rewrite H29; auto with zarith.
+
+  replace (i - bitpos + bitpos)%Z with (i)%Z by auto with zarith.
+  intuition.
 
   unfold P_BitstreamInvariant in *.
 
-  destruct H11 as [A [B C]].
+  destruct H10 as [A [B C]].
 
   rewrite shift_zero in *.
   rewrite shift_zero in *.
@@ -83,9 +95,12 @@ Proof.
 
   assert ((0 <= (Cdiv (i + bitpos) 8) < size)%Z).
     apply Cdiv_bounds; auto with zarith.
+  auto with zarith.
+  admit.
 
-  rewrite <- Heqaddr.
+  (* rewrite <- Heqaddr.*)
   unfold included; simpl; auto with zarith.
+  admit.
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Peek_loop_inv_2_preserved.
