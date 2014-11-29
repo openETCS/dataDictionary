@@ -72,25 +72,24 @@ Proof.
 
   
   rewrite access_update_neq.
-  rewrite H29; auto with zarith.
-  intuition.
+  + rewrite H29; auto with zarith.
+    intuition.
 
-  unfold P_BitstreamInvariant in *.
-  destruct H10 as [A [B C]].
+  + unfold P_BitstreamInvariant in *.
+    destruct H10 as [A [B C]].
+    rewrite shift_zero in *.
+    rewrite shift_zero in *.
 
-  rewrite shift_zero in *.
-  rewrite shift_zero in *.
+    apply separated_sym in C.
+    apply separated_neq with (stream_0) (3%Z) (addr) (size).
+    - rewrite <- Heqsize in *.
+      rewrite <- Heqaddr in *.
+      assumption.
+    - unfold included; simpl; omega.
 
-  apply separated_sym in C.
-  apply separated_neq with (stream_0) (3%Z) (addr) (size).
-  rewrite <- Heqsize in *.
-  rewrite <- Heqaddr in *.
-  assumption.
-  unfold included; simpl; omega.
-
-  assert ((0 <= (Cdiv i 8) < size)%Z).
-    apply Cdiv_bounds; omega.
-  unfold included; simpl; omega.
+    - assert ((0 <= (Cdiv i 8) < size)%Z).
+      apply Cdiv_bounds; omega.
+      unfold included; simpl; omega.
 Qed.
 
 Goal typed_ref_BitTest_Bitstream_Write_normal_case_post_3.
