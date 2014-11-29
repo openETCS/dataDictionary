@@ -456,23 +456,33 @@ Proof.
   intros.
   subst x_1 x_2 x_3.
 
-  replace ((63 - i_0)%Z) with ((length_0 - 1 - (length_0 + i_0 - 64))%Z) in * by omega.
+  replace (63 - i_0)%Z
+    with  (length_0 + start_0 - 1 - (length_0 + start_0 + i_0 - 64))%Z
+    by omega.
 
-  rewrite H22. auto with zarith.
+  rewrite H19; auto with zarith.
 
+  replace (length_0 + start_0 - 1 - (length_0 + start_0 + i_0 - 64))%Z
+    with (length_0 - 1 - (length_0 - 64 + i_0))%Z by omega.
+
+  admit.
+  (* apply H22. *)
+
+Qed.
+
+Goal typed_ref_BitTest_PokeThenPeek_assert_5.
+Hint PokeThenPeek,property.
+Proof.
+  intros.
+  replace (i_0)%Z with (63 - (63 - i_0))%Z by omega.
+  apply H17; omega.
 Qed.
 
 Goal typed_ref_BitTest_PokeThenPeek_post.
 Hint PokeThenPeek,default,property.
 Proof.
   intros.
-
   apply bits_equal_uint64; auto with zarith.
-
-    intros.
-    replace i with (63 - (63 - i))%Z by omega.
-    rewrite H15; auto with zarith.
-    intuition.
 Qed.
 
 

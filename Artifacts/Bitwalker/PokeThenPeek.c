@@ -20,6 +20,9 @@ uint64_t PokeThenPeek(uint32_t  start, uint32_t  length, uint8_t*  addr, uint32_
   /*@ assert  \forall integer i; 0 <= i < 64 ==>
              (LeftBit64(peek_result, i) <==> LeftBit64(value, i)); */
 
+  /*@ assert  \forall integer i; 0 <= i < 64 ==>
+             (BitTest(peek_result, i) <==> BitTest(value, i)); */
+
   return peek_result;
 }
 
