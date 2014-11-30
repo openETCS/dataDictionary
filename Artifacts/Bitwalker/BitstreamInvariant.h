@@ -16,6 +16,10 @@
   predicate LeftBitInStream{L}(Bitstream* stream, integer i) =
                 LeftBit8Array(stream->addr, i);
 
+  predicate BitstreamUnchanged{L}(Bitstream* stream, integer first, integer last) =
+   \forall integer i; first <= i < last ==>
+      (LeftBitInStream(stream, i) <==> \at(LeftBitInStream(stream, i), L)); 
+
 */
 
 #endif

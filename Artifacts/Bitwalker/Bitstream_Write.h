@@ -38,14 +38,12 @@
     assigns  stream->addr[0..stream->size - 1];
     assigns  stream->bitpos;
 
-    ensures \forall integer i; 0 <= i < \old(stream->bitpos) ==>
-      (LeftBitInStream(stream, i) <==> \old(LeftBitInStream(stream, i)));
+    ensures BitstreamUnchanged{Old}(stream, 0, \old(stream->bitpos));
 
     ensures \forall integer i; \old(stream->bitpos) <= i < stream->bitpos ==>
       (LeftBitInStream(stream, i) <==> LeftBit64(value, 64 - stream->bitpos + i));
 
-    ensures \forall integer i; stream->bitpos < i < 8 * stream->size  ==>
-      (LeftBitInStream(stream, i) <==> \old(LeftBitInStream(stream, i)));
+    ensures BitstreamUnchanged{Old}(stream, stream->bitpos, 8 * stream->size);
 
     ensures \result == 0;
 
