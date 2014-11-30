@@ -51,21 +51,5 @@
                          (Start+Length <= i < Size ==> (LeftBit8Array(Bitstream1, i) <==> LeftBit8Array(Bitstream2, i))));
 */
 
-/*
-    lemma BitsAndBound :
-      \forall uint64_t x, integer n;
-        0 <= x  ==>
-        0 <= n < 64 ==>
-        ((x < (1 << n)) <==> (\forall integer k; n <= k < 64 ==> !BitTest(x, k)));
-*/
-
-/*
-    // not used
-    lemma BitsAndEquality :
-       \forall uint64_t x, y;
-       (\forall integer i; 0 <= i && i < 64 ==> (LeftBit64(x, i) <==> LeftBit64(y, i)))
-       ==> (x == y);
-*/
-
 
 #endif
