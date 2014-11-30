@@ -30,7 +30,7 @@
     ensures \forall integer i; \old(stream->bitpos) <= i < stream->bitpos ==>
       (LeftBitInStream(stream, i) <==> LeftBit64(\result, 64 - stream->bitpos + i));
 
-    ensures \forall integer i; 0 <= i < 64-length ==> !LeftBit64(\result, i);
+    ensures LeftNotSet64(\result, 64 - length);
 
     ensures BitstreamUnchanged{Old}(stream, 0, 8*stream->size);
 

@@ -32,9 +32,11 @@
 
 /*@
    predicate
-     NotSet{A}(uint64_t Value, integer Length) =
-       \forall integer i; 0 <= i < Length ==>
-         !LeftBit64(Value, i);
+     LeftNotSet64{A}(uint64_t Value, integer Length) =
+       \forall integer i; 0 <= i < Length ==> !LeftBit64(Value, i);
+
+   predicate // legacy name
+     NotSet{A}(uint64_t Value, integer Length) = LeftNotSet64{A}(Value, Length);
 */
 
 /*@
