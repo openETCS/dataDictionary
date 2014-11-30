@@ -5,34 +5,42 @@ Hint Bitstream_Read,normal_case,property.
 Proof.
   intros.
 
+  subst a_0 a_1 a_2 a_3.
+  subst x_0 x_1 x_2 x_3.
+
   unfold is_uint64 in *.
   unfold is_uint32 in *.
+  unfold P_LeftBitInStream in *.
+  unfold P_BitstreamInvariant in *.
+  unfold P_NormalBitsequence in *.
+
+  rewrite shift_zero in *.
+  rewrite shift_zero in *.
+
+  remember (Mptr_0.[stream_0]) as addr.
+  remember (Mint_0.[shift stream_0 1]) as size.
+  remember (Mint_0.[shift stream_0 2]) as bitpos.
+  remember length_0 as length.
+  remember i_0 as i.
+
+  replace ((Mint_0 .[ shift stream_0 2 <- (length + bitpos)%Z]) .[ shift addr (Cdiv i 8)]) 
+    with  (Mint_0.[ shift addr (Cdiv i 8)]).
+
+  replace (length + bitpos - 1 - i)%Z with (length - 1 - (i - bitpos))%Z by omega.
 
   rewrite H22; auto with zarith.
+  replace (i - bitpos + bitpos)%Z with i%Z by omega.
 
-  replace ((Mint_0.[a_1 <- x_3]).[shift a_3 (Cdiv x_4 8)]) with (Mint_0.[shift a_3 (Cdiv x_4 8)]).
-  + tauto.
+  + intuition.
   + rewrite access_update_neq.
     -  trivial.
-    -  subst a_0 a_1 a_2 a_3.
-       subst x_0 x_1 x_2 x_3 x_4.
-
-       unfold P_BitstreamInvariant in *.
-       unfold P_NormalBitsequence in *.
-       destruct H8 as [A [B C]].
-
-       rewrite shift_zero in *.
-       rewrite shift_zero in *.
-
-      remember (Mptr_0.[stream_0]) as addr.
-      remember (Mint_0.[shift stream_0 1]) as size.
-      remember (Mint_0.[shift stream_0 2]) as bitpos.
+    -  destruct H7 as [A [B C]].
 
       apply separated_sym in C.
       apply separated_neq with (stream_0) (3%Z) (addr) (size).
       * assumption.
       * unfold included; simpl; auto with zarith.
-      * assert(X: (0 <= (Cdiv (i_0 + bitpos) 8) < size)%Z).
+      * assert(X: (0 <= (Cdiv i 8) < size)%Z).
           apply Cdiv_bounds; auto with zarith.
         unfold included; simpl; auto with zarith.
 
