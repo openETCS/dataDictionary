@@ -32,6 +32,9 @@
 
     ensures \forall integer i; 0 <= i < 64-length ==> !LeftBit64(\result, i);
 
+    ensures \forall integer i; 0 <= i < 8 * stream->size ==>
+      (LeftBitInStream(stream, i) <==> \old(LeftBitInStream(stream, i)));
+
     ensures \result < (1 << length);
 
   complete behaviors;
