@@ -40,8 +40,7 @@
 
     ensures BitstreamUnchanged{Old}(stream, 0, \old(stream->bitpos));
 
-    ensures \forall integer i; \old(stream->bitpos) <= i < stream->bitpos ==>
-      (LeftBitInStream(stream, i) <==> LeftBit64(value, 64 - stream->bitpos + i));
+    ensures BitstreamEqual64(stream, \old(stream->bitpos), stream->bitpos, value, 64 - stream->bitpos);
 
     ensures BitstreamUnchanged{Old}(stream, stream->bitpos, 8 * stream->size);
 

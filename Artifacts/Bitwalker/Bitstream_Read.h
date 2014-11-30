@@ -27,8 +27,7 @@
 
     assigns  stream->bitpos;
 
-    ensures \forall integer i; \old(stream->bitpos) <= i < stream->bitpos ==>
-      (LeftBitInStream(stream, i) <==> LeftBit64(\result, 64 - stream->bitpos + i));
+    ensures BitstreamEqual64(stream, \old(stream->bitpos), stream->bitpos, \result, 64 - stream->bitpos);
 
     ensures LeftNotSet64(\result, 64 - length);
 
