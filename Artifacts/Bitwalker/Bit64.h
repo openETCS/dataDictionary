@@ -2,7 +2,7 @@
 #ifndef Bit64_defined
 #define Bit64_defined
 
-#include "BitsFramaC.h"
+#include "FramaCBits.h"
 
 /*@
    requires left < 64;

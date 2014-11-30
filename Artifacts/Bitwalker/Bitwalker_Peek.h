@@ -2,7 +2,7 @@
 #ifndef Peek_defined
 #define Peek_defined
 
-#include "BitsFramaC.h"
+#include "FramaCBits.h"
 
 /*@
   requires \valid_read(addr + (0..size-1));

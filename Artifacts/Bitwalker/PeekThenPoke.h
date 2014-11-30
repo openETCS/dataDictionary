@@ -2,7 +2,7 @@
 #ifndef PeekThenPoke_defined
 #define PeekThenPoke_defined
 
-#include "BitsFramaC.h"
+#include "FramaCBits.h"
 
 /*@
     requires \valid(addr + (0..size-1));

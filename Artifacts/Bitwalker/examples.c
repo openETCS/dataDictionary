@@ -1,5 +1,5 @@
 
-#include "BitsFramaC.h"
+#include "FramaCBits.h"
 
 /*@
     assigns \nothing;

@@ -2,7 +2,7 @@
 #ifndef Bit8Array_defined
 #define Bit8Array_defined
 
-#include "BitsFramaC.h"
+#include "FramaCBits.h"
 
 /*@
     requires \valid_read(addr + (0..size-1));

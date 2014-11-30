@@ -3,7 +3,7 @@
 #ifndef Bit8_defined
 #define Bit8_defined
 
-#include "BitsFramaC.h"
+#include "FramaCBits.h"
 
 /*@
     requires left < 8;

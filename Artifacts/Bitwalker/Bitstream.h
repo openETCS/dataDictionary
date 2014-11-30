@@ -1,7 +1,7 @@
 #ifndef BITWALKER_H
 #define BITWALKER_H
 
-#include "BitsFramaC.h"
+#include "FramaCBits.h"
 
 struct Bitstream
 {

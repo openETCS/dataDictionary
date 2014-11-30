@@ -1,7 +1,7 @@
 #ifndef Bitwalker_Poke_defined
 #define Bitwalker_Poke_defined
 
-#include "BitsFramaC.h"
+#include "FramaCBits.h"
 
 /*@
   requires writeable_bitstream: \valid(addr + (0..size-1));

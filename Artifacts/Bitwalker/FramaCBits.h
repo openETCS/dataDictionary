@@ -1,6 +1,6 @@
 
-#ifndef BitsFramaC_defined
-#define BitsFramaC_defined
+#ifndef FramaCBits_defined
+#define FramaCBits_defined
 
 #include <stdint.h>
 #include <limits.h>
