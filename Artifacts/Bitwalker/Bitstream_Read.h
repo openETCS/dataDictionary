@@ -27,7 +27,7 @@
 
     assigns  stream->bitpos;
 
-    ensures BitstreamEqual64(stream, \old(stream->bitpos), stream->bitpos, \result, 64 - stream->bitpos);
+    ensures BitstreamEqual64(stream, \old(stream->bitpos), stream->bitpos, \result);
 
     ensures LeftNotSet64(\result, 64 - length);
 

@@ -40,7 +40,7 @@
 
     ensures BitstreamUnchanged{Old}(stream, 0, \old(stream->bitpos));
 
-    ensures BitstreamEqual64(stream, \old(stream->bitpos), stream->bitpos, value, 64 - stream->bitpos);
+    ensures BitstreamEqual64(stream, \old(stream->bitpos), stream->bitpos, value);
 
     ensures BitstreamUnchanged{Old}(stream, stream->bitpos, 8 * stream->size);
 

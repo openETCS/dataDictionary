@@ -17,13 +17,12 @@
                 LeftBit8Array(stream->addr, i);
 
   predicate BitstreamUnchanged{L}(Bitstream* stream, integer first, integer last) =
-   \forall integer i; first <= i < last ==>
+    \forall integer i; first <= i < last ==>
       (LeftBitInStream(stream, i) <==> \at(LeftBitInStream(stream, i), L));
 
-  predicate BitstreamEqual64{L}(Bitstream* stream , integer first, integer last,
-                                uint64_t value, integer to) = 
+  predicate BitstreamEqual64{L}(Bitstream* stream , integer first, integer last, uint64_t value) =
     \forall integer i; first <= i < last ==>
-      (LeftBitInStream(stream, i) <==> LeftBit64(value, to + i));
+      (LeftBitInStream(stream, i) <==> LeftBit64(value, 64 - last + i));
 
 */
 

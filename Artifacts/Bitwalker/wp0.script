@@ -30,7 +30,7 @@ Proof.
   replace ((Mint_0 .[ shift stream 2 <- (length + bitpos)%Z]) .[ shift addr (Cdiv i 8)]) 
     with  (Mint_0.[ shift addr (Cdiv i 8)]).
 
-  replace (63 - i - (64 - length - bitpos))%Z
+  replace (length + bitpos - 1 - i)%Z
     with  (length - 1 - (i - bitpos))%Z by omega.
 
 
