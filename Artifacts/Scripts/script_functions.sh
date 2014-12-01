@@ -107,7 +107,7 @@ function extract_raw_data_Wp()
     goalPattern=${wp_pattern}'[[:digit:]]+[[:blank:]]+goals[[:blank:]]+scheduled'
 
     #set -vx
-    prog="${WPREPORT} -wp-out ${alg}.wp ${alg}.c"
+    prog="${WPREPORT} -wp-par 1 -wp-out ${alg}.wp ${alg}.c"
 
     eval "$prog"> $tempFile
     #debug
