@@ -5,7 +5,6 @@ int PeekBit64(uint64_t value, uint32_t left)
 {
   uint64_t mask = ((uint64_t) 1) << (63u - left);
   uint64_t flag = value & mask;
-  //@ assert flag != 0 <==> LeftBit64(value, left);
 
   return flag != 0u;
 }
