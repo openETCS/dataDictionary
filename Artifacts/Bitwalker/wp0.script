@@ -425,30 +425,6 @@ Proof.
 
 Qed.
 
-Goal typed_ref_BitTest_PokeBit8Array_assert.
-Hint PokeBit8Array,property.
-Proof.
-  intros.
-  subst x_0 x_1 x_2 x_3 x_4.
-  rewrite H18; auto with zarith.
-  subst a_0.
-  assert(i_0 = Cdiv left_bit_0 8).
-  auto with zarith.
-Qed.
-
-Goal typed_ref_BitTest_PokeBit8Array_assert_2.
-Hint PokeBit8Array,property.
-Proof.
-  intros.
-  subst x_0 x_1 x_2 x_3 x_4.
-  subst a_0.
-  replace (i_0) with (Cdiv left_index_0 8).
-  rewrite H18; auto with zarith.
-  tauto.
-  symmetry.
-  auto with zarith.
-Qed.
-
 Goal typed_ref_BitTest_PokeBit8_post_3.
 Hint PokeBit8,default,property.
 Proof.
