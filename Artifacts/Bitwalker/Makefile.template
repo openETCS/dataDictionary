@@ -1,6 +1,6 @@
 SHELL=/bin/bash
 
-export SCRIPT_DIR=../Scripts
+export SCRIPT_DIR=Scripts
 #setup compiler flags
 INCLUDES=$(CPPFLAGS) -I$(FRAMAC_SHARE)/libc
 
