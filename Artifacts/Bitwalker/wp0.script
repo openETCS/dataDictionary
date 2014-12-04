@@ -298,13 +298,13 @@ Proof.
   destruct non_strict as [less | equal].
 
   * (* k < i + start *)
-   rewrite H40; auto with zarith.
+   rewrite H36; auto with zarith.
 
   * (* k = i + start *)
    rewrite equal in *.
    replace (length + start - 1 - (i + start))%Z
      with  (length - 1 - i)%Z by omega.
-   rewrite <- H31.
+   rewrite <- H26.
    assumption.   
 Qed.
 
