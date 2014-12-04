@@ -17,12 +17,12 @@
     ensures \result == -1;
 
   behavior  value_too_big:
-    assumes (start + length <= 8 * size)  &&  (1 << length) <= value;
+    assumes (start + length <= 8 * size)  &&  (1 << length) <= value && length < 64;
     assigns \nothing;
     ensures \result == -2;
 
   behavior  normal_case:
-    assumes (start + length <= 8 * size)  &&  value < (1 << length);
+    assumes (start + length <= 8 * size)  &&  (value < (1 << length) || length == 64);
     assigns addr[0..size - 1];
 
     ensures \forall integer i; 0 <= i < start ==>
