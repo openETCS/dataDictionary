@@ -125,7 +125,7 @@ Proof.
 
   intros.
 
-  subst x_0 x_1 x_2 x_3 x_4 x_5.
+  subst x_0 x_1 x_2 x_3 x_4 x_5 x_6.
   subst a_0 a_1 a_2 a_3 a_4.
  
 
@@ -139,16 +139,15 @@ Proof.
   remember (Mint_0.[shift stream 1]) as size.
   remember (Mint_0.[shift stream 2]) as bitpos.
   remember (Mint_1.[shift stream 2]) as new_bitpos.
-  rewrite H8 in *.
+  rewrite H7 in *.
   
   rewrite access_update_neq.
-  + rewrite H29; auto with zarith.
-    replace (63 - i - (64 - length - bitpos))%Z with (length + bitpos - 1 - i)%Z by omega.
+  + rewrite H30; auto with zarith.
     intuition.
 
   + 
-    destruct H9 as [A [B C]].
-
+    destruct H8 as [A [B C]].
+    clear H27 H28 H29 H30. (* simplify proof context *) 
     apply separated_sym in C.
     apply separated_neq with (stream) (3%Z) (addr) (size).
     - assumption.

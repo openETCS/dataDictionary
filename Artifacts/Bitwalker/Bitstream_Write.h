@@ -8,7 +8,7 @@
 /*@
   requires \valid(stream);
   requires BitstreamInvariant(stream);
-  requires length <= 63;
+  requires length <= 64;
   requires stream->bitpos + length <= UINT32_MAX;
 
   assigns  stream->addr[0..stream->size - 1];
@@ -25,7 +25,7 @@
     ensures \result == -1;
 
   behavior  value_too_big:
-    assumes NormalBitsequence(stream, length) && (1 << length) <= value;
+    assumes NormalBitsequence(stream, length) && (1 << length) <= value && (length < 64);
 
     assigns  stream->addr[0..stream->size - 1];
     assigns  stream->bitpos;
@@ -33,7 +33,7 @@
     ensures \result == -2;
 
   behavior  normal_case:
-    assumes NormalBitsequence(stream, length) && value < (1 << length);
+    assumes NormalBitsequence(stream, length) && (value < (1 << length) || length == 64);
 
     assigns  stream->addr[0..stream->size - 1];
     assigns  stream->bitpos;
