@@ -7,7 +7,7 @@
 /*@
     requires \valid(addr + (0..size-1));
     requires 8 * size <= UINT32_MAX;
-    requires length < 64;
+    requires length <= 64;
     requires start + length <= 8 * size;
 
     assigns addr[0..size-1];
