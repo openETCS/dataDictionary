@@ -9,10 +9,10 @@ uint64_t PokeThenPeek(uint32_t  start, uint32_t  length, uint8_t*  addr, uint32_
   int      poke_result = 0;
   uint64_t peek_result = 0u;
 
-  poke_result =  Bitwalker_Poke(start, length, addr, size, value);
+  poke_result =  Bitwalker_Poke(addr, size, start, length, value);
   //@ assert  poke_result == 0;
 
-  peek_result = Bitwalker_Peek(start, length, addr, size);
+  peek_result = Bitwalker_Peek(addr, size, start, length);
 
   /*@ assert \forall integer i; 64-length <= i < 64 ==>
              (LeftBit64(peek_result, i) <==> LeftBit64(value, i)); */

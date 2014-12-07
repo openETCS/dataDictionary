@@ -31,6 +31,6 @@
   complete behaviors;
   disjoint behaviors;
 */
-uint64_t Bitwalker_Peek(uint32_t start, uint32_t length, uint8_t* addr, uint32_t size);
+uint64_t Bitwalker_Peek(uint8_t* addr, uint32_t size, uint32_t start, uint32_t length);
 
 #endif

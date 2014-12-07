@@ -2,11 +2,7 @@
 #include "Bit8Array.h"
 #include "Bit64.h"
 
-int Bitwalker_Poke(uint32_t  start,
-                   uint32_t  length,
-                   uint8_t*  addr,
-                   uint32_t  size,
-                   uint64_t  value)
+int Bitwalker_Poke(uint8_t*  addr, uint32_t  size, uint32_t  start, uint32_t  length, uint64_t  value)
 {
   if ((start + length)  > 8 * size)
   {
