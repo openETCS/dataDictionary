@@ -39,16 +39,15 @@ Proof.
 
   + intuition.
   + rewrite access_update_neq.
-    -  trivial.
-    -  destruct H6 as [A [B C]].
+    - trivial.
+    - destruct H6 as [A [B C]].
 
-      apply separated_sym in C.
       apply separated_neq with (stream) (3%Z) (addr) (size).
       * assumption.
-      * unfold included; simpl; auto with zarith.
+      * unfold included; simpl; omega.
       * assert(X: (0 <= (Cdiv i 8) < size)%Z).
-          apply Cdiv_bounds; auto with zarith.
-        unfold included; simpl; auto with zarith.
+          apply Cdiv_bounds; omega.
+        unfold included; simpl; omega.
 
 Qed.
 
@@ -148,7 +147,6 @@ Proof.
   + 
     destruct H8 as [A [B C]].
     clear H27 H28 H29 H30. (* simplify proof context *) 
-    apply separated_sym in C.
     apply separated_neq with (stream) (3%Z) (addr) (size).
     - assumption.
     - unfold included; simpl; omega.

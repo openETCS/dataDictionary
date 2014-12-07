@@ -7,8 +7,8 @@
 /*@
   predicate BitstreamInvariant(Bitstream* stream) =
      \valid(stream->addr + (0..stream->size-1))  &&
-     8 * stream->size <= UINT32_MAX     &&
-     \separated(stream->addr + (0..stream->size-1), stream);
+     \separated(stream, stream->addr + (0..stream->size-1)) &&
+     8 * stream->size <= UINT32_MAX;   
 
   predicate NormalBitsequence(Bitstream* stream, uint32_t length) =
      stream->bitpos + length <= 8 * stream->size;
