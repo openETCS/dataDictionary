@@ -427,6 +427,12 @@ Proof.
 (* auto with zarith. *)
 Qed.
 
+Goal typed_ref_BitTest_PokeBit8Array_post_unchanged_bits.
+Hint PokeBit8Array,default,property,unchanged_bits.
+Proof.
+(* auto with zarith. *)
+Qed.
+
 Goal typed_ref_BitTest_PokeBit8_post_3.
 Hint PokeBit8,default,property.
 Proof.
