@@ -3,7 +3,7 @@
 #include "Bitwalker_Peek.h"
 #include "Bitwalker_Poke.h"
 
-int PeekThenPoke(uint32_t  start, uint32_t  length, uint8_t*  addr, uint32_t  size)
+int PeekThenPoke(uint8_t* addr, uint32_t size, uint32_t start, uint32_t length)
 {
   int result = 0;
   uint64_t value = Bitwalker_Peek(addr, size, start, length);
