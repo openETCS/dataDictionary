@@ -229,6 +229,17 @@ Proof.
   apply H16; auto with zarith.
 Qed.
 
+Goal typed_ref_BitTest_Bitwalker_Peek_normal_case_post_3_part2.
+Hint Bitwalker_Peek,normal_case,part-1,property.
+Proof.
+  intros.
+  unfold is_uint64 in *.
+  apply bits_and_bounds_uint; auto with zarith.
+  intros.
+  replace (k) with (63 - (63 - k))%Z by omega.
+  apply H16; auto with zarith.
+Qed.
+
 Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_2_preserved.
 Hint Bitwalker_Poke,preserved.
 Proof.
@@ -303,6 +314,85 @@ Proof.
      with  (length - 1 - i)%Z by omega.
    rewrite <- H26.
    assumption.   
+Qed.
+
+Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_3_preserved_part1.
+Hint Bitwalker_Poke,part-0,preserved.
+Proof.
+  intros.
+
+  remember start_0 as start.
+  remember length_0 as length.
+  remember addr_0 as addr.
+  remember value_0 as value.
+  remember Mint_0 as M0.
+  remember Mint_1 as M1.
+  remember Mint_2 as M2.
+
+  remember k_0 as k.
+  remember i_0 as i.
+
+  subst x_0 x_1 x_2 x_3 x_5 x_6.
+  unfold is_uint64 in *.
+  unfold is_uint32 in *.
+  unfold  to_sint32 in *.
+
+  assert(non_strict: (k <= i + start)%Z) by assumption.
+    apply Zle_lt_or_eq in non_strict.
+  destruct non_strict as [less | equal].
+
+  * (* k < i + start *)
+   rewrite H37; auto with zarith.
+   rewrite H40; auto with zarith.
+   intuition.
+
+  * (* k = i + start *)
+   rewrite equal in *.
+   replace (length + start - 1 - (i + start))%Z
+     with  (length - 1 - i)%Z by omega.
+   rewrite <- H35.
+   rewrite H31.
+   intuition.
+Qed.
+
+Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_3_preserved_part2.
+Hint Bitwalker_Poke,part-1,preserved.
+Proof.
+  intros.
+
+  remember start_0 as start.
+  remember length_0 as length.
+  remember addr_0 as addr.
+  remember value_0 as value.
+  remember Mint_0 as M0.
+  remember Mint_1 as M1.
+  remember Mint_2 as M2.
+
+  remember k_0 as k.
+  remember i_0 as i.
+
+  subst x_0 x_1 x_2 x_3 x_4.
+  unfold is_uint64 in *.
+  unfold is_uint32 in *.
+  unfold  to_sint32 in *.
+
+  assert(non_strict: (k <= i + start)%Z) by assumption.
+    apply Zle_lt_or_eq in non_strict.
+  destruct non_strict as [less | equal].
+
+  * (* k < i + start *)
+   rewrite H32; auto with zarith.
+   rewrite H35; auto with zarith.
+   intuition.
+
+  * (* k = i + start *)
+   rewrite equal in *.
+   rewrite <- H30; auto with zarith.
+   rewrite H26.
+   replace (63 + start - (i + start))%Z
+     with  (63 - i)%Z by omega.
+   intuition.
+
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_4_preserved.
