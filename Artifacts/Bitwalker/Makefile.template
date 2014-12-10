@@ -34,6 +34,7 @@ WP_FLAGS += -warn-signed-overflow
 #WP_FLAGS += -warn-unsigned-downcast
 WP_FLAGS += -warn-unsigned-overflow
 WP_FLAGS += -wp-rte
+WP_FLAGS += -wp-split
 WP_FLAGS += -wp-driver BitTest.driver
 WP_FLAGS += -wp-script $(SCRIPT)
 WP_FLAGS += -wp-model Typed+ref
