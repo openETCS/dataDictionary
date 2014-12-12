@@ -70,7 +70,7 @@ export WPREPORT=$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS)
 	@astyle -A1 -f -p -Y -z2 --indent=spaces -s2 $<
 
 # start WP on command line and run provers
-%.wp:%.c FORCE
+%.wp:%.c FORCE driver
 	@$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 1 -wp-out $(patsubst %.c,%.wp, $<)   $<
 
 
@@ -80,7 +80,7 @@ export WPREPORT=$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS)
 
 
 # start WP GUI and run provers
-%.wpgui:%.c FORCE
+%.wpgui:%.c FORCE driver
 	@($(WPGUI) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 4 -wp-out $(patsubst %.c,%.wp, $<)  $< &)
 
 
@@ -89,11 +89,12 @@ export WPREPORT=$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS)
 	@(frama-c-gui $(WP_FLAGS) -wp-prover none -wp-out $(patsubst %.c,%.wp, $<)  $< &)
 
 
-%.report-wp:%.c FORCE
+%.report-wp:%.c FORCE driver
 	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp $(basename $<););
 
 
 clean:: FORCE
+	@(cd Coq; make clean)
 	@$(RM) *.o
 	@$(RM) *.i
 	@$(RM) *.back
@@ -104,6 +105,9 @@ clean:: FORCE
 	@$(RM) -rf  *.wp
 	@$(RM) -rf  *.ml
 
+        
+driver:
+	@(cd Coq; make compile)
 
 format: FORCE
 	@astyle -A1 -f -p -Y -z2 --indent=spaces -s2 *.c *.h 
