@@ -81,7 +81,7 @@ export WPREPORT=$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS)
 
 # start WP GUI and run provers
 %.wpgui:%.c FORCE driver
-	@($(WPGUI) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 4 -wp-out $(patsubst %.c,%.wp, $<)  $< &)
+	@($(WPGUI) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 8 -wp-out $(patsubst %.c,%.wp, $<)  $< &)
 
 
 # start WP GUI but do not run provers
