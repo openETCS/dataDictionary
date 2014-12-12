@@ -21,10 +21,10 @@
     assumes start + length <= 8 * size;
     assigns \nothing;
 
-    ensures \forall integer i; 0 <= i < length ==>
+    ensures copied:  \forall integer i; 0 <= i < length ==>
               (LeftBit8Array(addr, start+i) <==> LeftBit64(\result, 64-length + i));
 
-    ensures \forall integer i; 0 <= i < 64-length ==> !LeftBit64(\result, i);
+    ensures not_set: \forall integer i; 0 <= i < 64-length ==> !LeftBit64(\result, i);
 
     ensures valid_result: \result < (1 << length);
 
