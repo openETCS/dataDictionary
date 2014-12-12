@@ -5,15 +5,15 @@
 #include "FramaCBits.h"
 
 /*@
-    requires \valid(addr + (0..size-1));
-    requires 8 * size <= UINT32_MAX;
-    requires length <= 64;
-    requires start + length <= 8 * size;
-    requires value < (1 << length);
+    requires array_length:  \valid(addr + (0..size-1));
+    requires bit_size:      8 * size <= UINT32_MAX;
+    requires max_length:    length <= 64;
+    requires max_pos:       start + length <= 8 * size;
+    requires max_value:     value < (1 << length);
 
     assigns addr[0..size-1];
 
-    ensures \result == value;
+    ensures result_value:  \result == value;
 */
 uint64_t PokeThenPeek(uint8_t* addr, uint32_t size,
                       uint32_t start, uint32_t length, uint64_t value);

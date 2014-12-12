@@ -704,4 +704,18 @@ Proof.
   apply bits_equal_uint64; auto with zarith.
 Qed.
 
+Goal typed_ref_BitTest_PokeThenPeek_post_result.
+Hint PokeThenPeek,default,property,result.
+Proof.
+  intros.
+  apply bits_equal_uint64; auto with zarith.
+Qed.
+
+Goal typed_ref_BitTest_PokeThenPeek_post_result_value.
+Hint PokeThenPeek,default,property,result_value.
+Proof.
+  intros.
+  apply bits_equal_uint64; auto with zarith.
+Qed.
+
 
