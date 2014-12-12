@@ -38,7 +38,7 @@
     assigns  stream->addr[0..stream->size - 1];
     assigns  stream->bitpos;
 
-    ensures BitstreamUnchanged{Old}(stream, 0, \old(stream->bitpos));
+    ensures unchanged_left: BitstreamUnchanged{Old}(stream, 0, \old(stream->bitpos));
 
     ensures BitstreamEqual64(stream, \old(stream->bitpos), stream->bitpos, value);
 
