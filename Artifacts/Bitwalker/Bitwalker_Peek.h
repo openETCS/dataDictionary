@@ -5,17 +5,17 @@
 #include "FramaCBits.h"
 
 /*@
-  requires \valid_read(addr + (0..size-1));
-  requires length <= 64;
-  requires start + length <= UINT32_MAX;
-  requires 8 * size <= UINT_MAX;
+  requires  array_length: \valid_read(addr + (0..size-1));
+  requires  bit_size:     8 * size <= UINT32_MAX;
+  requires  max_length:   length <= 64;
+  requires  max_pos:      start + length <= UINT32_MAX;
 
   assigns \nothing;
 
   behavior  invalid_bit_sequence:
     assumes start + length > 8 * size;
     assigns \nothing;
-    ensures \result == 0;
+    ensures invalid_result: \result == 0;
 
   behavior  normal_case:
     assumes start + length <= 8 * size;
@@ -26,7 +26,7 @@
 
     ensures \forall integer i; 0 <= i < 64-length ==> !LeftBit64(\result, i);
 
-    ensures \result < (1 << length);
+    ensures valid_result: \result < (1 << length);
 
   complete behaviors;
   disjoint behaviors;
