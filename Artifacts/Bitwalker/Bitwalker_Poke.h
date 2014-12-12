@@ -5,7 +5,7 @@
 
 /*@
   requires array_length: \valid(addr + (0..size-1));
-  requires bit_size:     8 * size <= UINT_MAX;
+  requires bit_size:     8 * size <= UINT32_MAX;
   requires max_length:   length <= 64;
   requires max_pos:      start + length <= UINT32_MAX;
 
