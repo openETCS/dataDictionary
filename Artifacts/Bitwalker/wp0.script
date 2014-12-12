@@ -623,6 +623,22 @@ Proof.
 
 Qed.
 
+Goal typed_ref_BitTest_PeekThenPoke_assert_copied.
+Hint PeekThenPoke,copied,property.
+Proof.
+  intros.
+  unfold is_uint32 in *.
+  subst x_0 x_1 a_0.
+  rewrite shift_zero in *.
+
+  replace (length_0 + start_0 - 1 - i_0)%Z
+    with  (length_0 - 1 - (i_0 - start_0))%Z by omega.
+
+  rewrite H14; auto with zarith.
+  replace (i_0 - start_0 + start_0)%Z with i_0%Z by omega.
+  intuition.
+Qed.
+
 Goal typed_ref_BitTest_PeekThenPoke_post_2.
 Hint PeekThenPoke,default,property.
 Proof.
