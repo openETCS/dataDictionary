@@ -11,9 +11,8 @@ int Bitwalker_Poke(uint8_t*  addr, uint32_t  size, uint32_t  start, uint32_t  le
 
   if (length < 64)
   {
-    // compute pow2(length)
+    // compute 2^length
     const uint64_t MaxValue = ((uint64_t) 1) << length;
-    //@ assert MaxValue == 1 << length;
 
     if (value >= MaxValue)
     {

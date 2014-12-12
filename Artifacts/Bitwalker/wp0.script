@@ -512,7 +512,7 @@ Proof.
   remember k_0 as k.
   remember i_0 as i.
 
-  subst x_0 x_1 x_2 x_3 x_5 x_6.
+  subst x_0 x_1 x_2 x_3 x_4 x_5.
   unfold is_uint64 in *.
   unfold is_uint32 in *.
   unfold  to_sint32 in *.
@@ -522,17 +522,14 @@ Proof.
   destruct non_strict as [less | equal].
 
   * (* k < i + start *)
-   rewrite H37; auto with zarith.
-   rewrite H40; auto with zarith.
-   intuition.
+   rewrite H38; auto with zarith.
 
   * (* k = i + start *)
    rewrite equal in *.
    replace (length + start - 1 - (i + start))%Z
      with  (length - 1 - i)%Z by omega.
-   rewrite <- H35.
-   rewrite H31.
-   intuition.
+   rewrite <- H29.
+   assumption.
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_copied_preserved_part2.
