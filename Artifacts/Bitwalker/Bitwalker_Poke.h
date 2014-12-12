@@ -4,17 +4,17 @@
 #include "FramaCBits.h"
 
 /*@
-  requires writeable_bitstream: \valid(addr + (0..size-1));
-  requires valid_length: length <= 64;
-  requires no_overflow_1: start + length <= UINT32_MAX;
-  requires no_overflow_2: 8 * size <= UINT_MAX;
+  requires array_length: \valid(addr + (0..size-1));
+  requires bit_size: 8 * size <= UINT_MAX;
+  requires max_length: length <= 64;
+  requires max_pos: start + length <= UINT32_MAX;
 
   assigns addr[0..size - 1];
 
   behavior  invalid_bit_sequence:
     assumes start + length  > 8 * size;
     assigns \nothing;
-    ensures \result == -1;
+    ensures invalid_result:  \result == -1;
 
   behavior  value_too_big:
     assumes (start + length <= 8 * size)  &&  (1 << length) <= value && length < 64;
@@ -34,7 +34,7 @@
     ensures \forall integer i; start + length <= i < 8 * size ==>
              (LeftBit8Array(addr, i) <==> \old(LeftBit8Array(addr, i)));
 
-    ensures \result == 0;
+    ensures valid_result: \result == 0;
 
   complete behaviors;
   disjoint behaviors;
