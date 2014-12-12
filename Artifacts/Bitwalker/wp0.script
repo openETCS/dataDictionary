@@ -676,6 +676,14 @@ Proof.
   intuition.
 Qed.
 
+Goal typed_ref_BitTest_PokeThenPeek_assert_2.
+Hint PokeThenPeek,property.
+Proof.
+  intros.
+  replace (i_0)%Z with (63 - (63 - i_0))%Z by omega.
+  apply H16; omega.
+Qed.
+
 Goal typed_ref_BitTest_PokeThenPeek_assert_3.
 Hint PokeThenPeek,property.
 Proof.
@@ -700,6 +708,25 @@ Proof.
  unfold is_uint32 in *.
  unfold is_uint64 in *.
  rewrite bits_and_bounds_uint in H7; auto with zarith.
+Qed.
+
+Goal typed_ref_BitTest_PokeThenPeek_assert_partial_copy.
+Hint PokeThenPeek,partial_copy,property.
+Proof.
+  intros.
+  subst x_1 x_2 x_3.
+
+  replace (63 - i_0)%Z  with
+        (length_0 - 1 - (length_0 + i_0 - 64))%Z by omega.
+  rewrite H21; auto with zarith.
+
+  replace (length_0 + start_0 - 1 - (length_0 + start_0 + i_0 - 64))%Z
+    with (length_0 - 1 - (length_0 - 64 + i_0))%Z by omega.
+
+  rewrite <- H18; auto with zarith.
+  replace (length_0 + start_0 - 1 - (length_0 + i_0 - 64 + start_0))%Z
+    with (length_0 - 1 - (length_0 + i_0 - 64))%Z by omega.
+  intuition.
 Qed.
 
 Goal typed_ref_BitTest_PokeThenPeek_post.
