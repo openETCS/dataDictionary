@@ -25,6 +25,13 @@
 
 /*@
    predicate
+     BitsUnchanged{L}(uint8_t* addr, integer first, integer last ) =
+        \forall integer i; first <= i < last ==>
+           LeftBit8Array(addr, i) <==> \at(LeftBit8Array(addr, i), L);
+*/
+
+/*@
+   predicate
      EqualBits{A}(uint8_t* Bitstream, uint64_t Value, integer Start, integer Length) =
         \forall integer i; 0 <= i < Length ==>
           (LeftBit8Array(Bitstream, Start + i) <==> LeftBit64(Value, 64-Length+i));
@@ -44,13 +51,6 @@
     IsCopied{A}(uint8_t* Bitstream, uint64_t Value, integer Start, integer Length) =
        \forall integer i; 0 <= i < Length ==>
                  (EqualBits(Bitstream, Value, Start, Length) && NotSet(Value, 64-i));
-*/
-
-/*@
-   predicate
-     Unchanged{A}(uint8_t* Bitstream1, uint8_t* Bitstream2, integer Start, integer Length, integer Size) =
-       \forall integer i; ((0 <= i < Start ==> (LeftBit8Array(Bitstream1, i) <==> LeftBit8Array(Bitstream2, i))) &&
-                         (Start+Length <= i < Size ==> (LeftBit8Array(Bitstream1, i) <==> LeftBit8Array(Bitstream2, i))));
 */
 
 

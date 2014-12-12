@@ -571,6 +571,22 @@ Proof.
    intuition.
 Qed.
 
+Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_unchanged_left_established_part1.
+Hint Bitwalker_Poke,established,part-0,unchanged_left.
+Proof.
+(* auto with zarith. *)
+Qed.
+
+Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_unchanged_left_established_part2.
+Hint Bitwalker_Poke,established,part-1,unchanged_left.
+Proof.
+(* --------------------------------------
+  
+From 'typed_ref_BitTest_Bitwalker_Poke_loop_inv_unchanged_left_established_part1': 
+(* auto with zarith. *)
+*)
+Qed.
+
 Goal typed_ref_BitTest_Bitwalker_Poke_normal_case_post_3.
 Hint Bitwalker_Poke,normal_case,property.
 Proof.

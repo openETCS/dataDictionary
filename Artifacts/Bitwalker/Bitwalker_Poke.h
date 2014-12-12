@@ -25,7 +25,8 @@
     assumes (start + length <= 8 * size)  &&  (value < (1 << length) || length == 64);
     assigns addr[0..size - 1];
 
-    ensures unchanged_left:  \forall integer i; 0 <= i < start ==>
+    //ensures unchanged_left:  BitsUnchanged{Old}(addr, 0, start);
+    ensures unchanged_left:   \forall integer i; 0 <= i < start ==>
              (LeftBit8Array(addr, i) <==> \old(LeftBit8Array(addr, i)));
 
     ensures copied:          \forall integer i; start <= i < start + length ==>

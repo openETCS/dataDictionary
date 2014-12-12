@@ -22,6 +22,7 @@ int Bitwalker_Poke(uint8_t*  addr, uint32_t  size, uint32_t  start, uint32_t  le
 
   /*@
     loop invariant index:  0 <= i <= length;
+    //     loop invariant unchanged_left:  BitsUnchanged{Pre}(addr, 0, start);
     loop invariant unchanged_left:  \forall integer k; 0 <= k < start ==>
            (LeftBit8Array(addr, k) <==> \at(LeftBit8Array(addr, k), Pre));
 
