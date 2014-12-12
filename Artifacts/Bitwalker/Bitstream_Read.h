@@ -6,10 +6,10 @@
 #include "BitstreamInvariant.h"
 
 /*@
-  requires \valid(stream);
-  requires BitstreamInvariant(stream);
-  requires length <= 64;
-  requires stream->bitpos + length <= UINT32_MAX;
+  requires valid_stream:     \valid(stream);
+  requires stream_invariant: BitstreamInvariant(stream);
+  requires max_pos:          stream->bitpos + length <= UINT32_MAX;
+  requires max_length:       length <= 64;
 
   assigns  stream->bitpos;
 
@@ -20,20 +20,20 @@
 
     assigns  stream->bitpos;
 
-    ensures \result == 0;
+    ensures invalid_result: \result == 0;
 
   behavior  normal_case:
     assumes  NormalBitsequence(stream, length);
 
     assigns  stream->bitpos;
 
-    ensures BitstreamEqual64(stream, \old(stream->bitpos), stream->bitpos, \result);
+    ensures copied:  BitstreamEqual64(stream, \old(stream->bitpos), stream->bitpos, \result);
 
-    ensures LeftNotSet64(\result, 64 - length);
+    ensures not_set: LeftNotSet64(\result, 64 - length);
 
-    ensures BitstreamUnchanged{Old}(stream, 0, 8*stream->size);
+    ensures unchanged: BitstreamUnchanged{Old}(stream, 0, 8*stream->size);
 
-    ensures \result < (1 << length);
+    ensures valid_result:  \result < (1 << length);
 
   complete behaviors;
   disjoint behaviors;
