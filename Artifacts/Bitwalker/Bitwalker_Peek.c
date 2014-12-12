@@ -24,7 +24,6 @@ uint64_t Bitwalker_Peek(uint8_t*  addr, uint32_t  size, uint32_t  start, uint32_
   */
   for (uint32_t i = 0; i < length; i++)
   {
-    //@ assert start + i < 8 * size;
     int flag = PeekBit8Array(addr, size, start + i);
     retval = PokeBit64(retval, 64u - length + i, flag);
   }
