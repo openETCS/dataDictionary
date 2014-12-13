@@ -51,56 +51,6 @@ Proof.
 
 Qed.
 
-Goal typed_ref_BitTest_Bitstream_Read_normal_case_post_2.
-Hint Bitstream_Read,normal_case,property.
-Proof.
-(* --------------------------------------
-  
-From 'typed_ref_BitTest_Bitstream_Read_normal_case_post': 
-  intros.
-
-  subst a_0 a_1 a_2 a_3.
-  subst x_0 x_1 x_2 x_3.
-
-  unfold is_uint64 in *.
-  unfold is_uint32 in *.
-  unfold P_LeftBitInStream in *.
-  unfold P_BitstreamInvariant in *.
-  unfold P_NormalBitsequence in *.
-
-  rewrite shift_zero in *.
-  rewrite shift_zero in *.
-
-  remember (Mptr_0.[stream_0]) as addr.
-  remember (Mint_0.[shift stream_0 1]) as size.
-  remember (Mint_0.[shift stream_0 2]) as bitpos.
-  remember length_0 as length.
-  remember i_0 as i.
-
-  replace ((Mint_0 .[ shift stream_0 2 <- (length + bitpos)%Z]) .[ shift addr (Cdiv i 8)]) 
-    with  (Mint_0.[ shift addr (Cdiv i 8)]).
-
-  replace (length + bitpos - 1 - i)%Z with (length - 1 - (i - bitpos))%Z by omega.
-
-  rewrite H22; auto with zarith.
-  replace (i - bitpos + bitpos)%Z with i%Z by omega.
-
-  + intuition.
-  + rewrite access_update_neq.
-    -  trivial.
-    -  destruct H7 as [A [B C]].
-
-      apply separated_sym in C.
-      apply separated_neq with (stream_0) (3%Z) (addr) (size).
-      * assumption.
-      * unfold included; simpl; auto with zarith.
-      * assert(X: (0 <= (Cdiv i 8) < size)%Z).
-          apply Cdiv_bounds; auto with zarith.
-        unfold included; simpl; auto with zarith.
-
-*)
-Qed.
-
 Goal typed_ref_BitTest_Bitstream_Read_normal_case_post_copied.
 Hint Bitstream_Read,copied,normal_case,property.
 Proof.
@@ -159,7 +109,6 @@ Proof.
   unfold P_NormalBitsequence in *.
   unfold is_uint32 in *.
   intuition.
-
 Qed.
 
 Goal typed_ref_BitTest_Bitstream_Write_normal_case_post.
@@ -484,37 +433,6 @@ Proof.
   auto with zarith.
 Qed.
 
-Goal typed_ref_BitTest_PeekThenPoke_assert.
-Hint PeekThenPoke,property.
-Proof.
-  intros.
-  unfold is_uint32 in *.
-  subst x_0 x_1 a_0.
-  rewrite shift_zero in *.
-
-  replace (length_0 + start_0 - 1 - i_0)%Z
-    with  (length_0 - 1 - (i_0 - start_0))%Z by omega.
-
-  rewrite H14; auto with zarith.
-  replace (i_0 - start_0 + start_0)%Z with i_0%Z by omega.
-  intuition.
-Qed.
-
-Goal typed_ref_BitTest_PeekThenPoke_assert_2.
-Hint PeekThenPoke,property.
-Proof.
-  intros.
-  unfold is_uint32 in *.
-  subst x_0 x_1 x_2 a_1.
-
-  replace (i_0) with ((start_0 + (i_0 - start_0))%Z) by omega.
-
-  rewrite <- H20; auto with zarith.
-  rewrite <- H19; auto with zarith.
-  intuition.
-
-Qed.
-
 Goal typed_ref_BitTest_PeekThenPoke_assert_copied.
 Hint PeekThenPoke,copied,property.
 Proof.
@@ -529,56 +447,6 @@ Proof.
   rewrite H14; auto with zarith.
   replace (i_0 - start_0 + start_0)%Z with i_0%Z by omega.
   intuition.
-Qed.
-
-Goal typed_ref_BitTest_PeekThenPoke_post_2.
-Hint PeekThenPoke,default,property.
-Proof.
-(* auto with zarith. *)
-Qed.
-
-Goal typed_ref_BitTest_PokeThenPeek_assert.
-Hint PokeThenPeek,property.
-Proof.
-  intros.
-  subst x_1 x_2 x_3.
-
-  replace (63 - i_0)%Z  with
-        (length_0 - 1 - (length_0 + i_0 - 64))%Z by omega.
-  rewrite H21; auto with zarith.
-
-  replace (length_0 + start_0 - 1 - (length_0 + start_0 + i_0 - 64))%Z
-    with (length_0 - 1 - (length_0 - 64 + i_0))%Z by omega.
-
-  rewrite <- H18; auto with zarith.
-  replace (length_0 + start_0 - 1 - (length_0 + i_0 - 64 + start_0))%Z
-    with (length_0 - 1 - (length_0 + i_0 - 64))%Z by omega.
-  intuition.
-Qed.
-
-Goal typed_ref_BitTest_PokeThenPeek_assert_2.
-Hint PokeThenPeek,property.
-Proof.
-  intros.
-  replace (i_0)%Z with (63 - (63 - i_0))%Z by omega.
-  apply H16; omega.
-Qed.
-
-Goal typed_ref_BitTest_PokeThenPeek_assert_3.
-Hint PokeThenPeek,property.
-Proof.
-Proof.
-  intros.
-  replace (i_0)%Z with (63 - (63 - i_0))%Z by omega.
-  apply H16; omega.
-Qed.
-
-Goal typed_ref_BitTest_PokeThenPeek_assert_5.
-Hint PokeThenPeek,property.
-Proof.
-  intros.
-  replace (i_0)%Z with (63 - (63 - i_0))%Z by omega.
-  apply H16; omega.
 Qed.
 
 Goal typed_ref_BitTest_PokeThenPeek_assert_bits_covered.
@@ -609,13 +477,6 @@ Proof.
   rewrite H18; auto with zarith.
   rewrite H19; auto with zarith.
   intuition.
-Qed.
-
-Goal typed_ref_BitTest_PokeThenPeek_post.
-Hint PokeThenPeek,default,property.
-Proof.
-  intros.
-  apply bits_equal_uint64; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_PokeThenPeek_post_result.
