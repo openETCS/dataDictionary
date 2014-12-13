@@ -32,9 +32,9 @@
 
 /*@
    predicate
-     EqualBits{A}(uint8_t* addr, uint64_t value, integer start, integer length) =
-        \forall integer i; 0 <= i < length ==>
-          (LeftBit8Array(addr, start + i) <==> LeftBit64(value, 64-length+i));
+     EqualBits64{A}(uint8_t* addr, integer first, integer last, uint64_t value, integer length) =
+        \forall integer i; first <= i < last ==>
+          (LeftBit8Array(addr, i) <==> LeftBit64(value, 64 - length + i - first));
 */
 
 /*@
