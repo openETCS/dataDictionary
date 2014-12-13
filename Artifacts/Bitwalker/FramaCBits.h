@@ -32,19 +32,19 @@
 
 /*@
    predicate
-     EqualBits{A}(uint8_t* Bitstream, uint64_t Value, integer Start, integer Length) =
-        \forall integer i; 0 <= i < Length ==>
-          (LeftBit8Array(Bitstream, Start + i) <==> LeftBit64(Value, 64-Length+i));
+     EqualBits{A}(uint8_t* addr, uint64_t value, integer start, integer length) =
+        \forall integer i; 0 <= i < length ==>
+          (LeftBit8Array(addr, start + i) <==> LeftBit64(value, 64-length+i));
 */
 
 /*@
    predicate
-     LeftNotSet64{A}(uint64_t Value, integer Length) =
-       \forall integer i; 0 <= i < Length ==> !LeftBit64(Value, i);
+     LeftNotSet64{A}(uint64_t value, integer length) =
+       \forall integer i; 0 <= i < length ==> !LeftBit64(value, i);
 
    predicate 
-     UpperBitsNotSet64{A}(integer Value, integer Length) = 
-       \forall integer i; Length <= i < 64 ==> !BitTest(Value, i);
+     UpperBitsNotSet64{A}(integer value, integer length) = 
+       \forall integer i; length <= i < 64 ==> !BitTest(value, i);
 */
 
 
