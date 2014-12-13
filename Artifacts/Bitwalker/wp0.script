@@ -294,62 +294,6 @@ Proof.
       unfold included; simpl; omega.
 Qed.
 
-Goal typed_ref_BitTest_Bitwalker_Peek_loop_inv_2_preserved.
-Hint Bitwalker_Peek,preserved.
-Proof.
-  intros.
-
-  subst x_1 x_2 x_3 x_4 x_5.
-
-  unfold is_uint8 in *.
-  unfold is_uint32 in *.
-  unfold is_uint64 in *.
-
-  assert(non_strict: (k_0 <= i_0)%Z) by assumption.
-    apply Zle_lt_or_eq in non_strict.
-  destruct non_strict as [less | equal].
-
-  - (* less *)
-    rewrite <- H32; auto with zarith.
-    replace ((length_0 - 1 - k_0)%Z) with ((63 - (63 - (length_0 - 1 - k_0)))%Z) by omega.
-    apply H31; auto with zarith.
-
-  - (* equal *)
-    rewrite equal in *.
-    rewrite <- H25.
-    assumption.
-Qed.
-
-Goal typed_ref_BitTest_Bitwalker_Peek_loop_inv_3_preserved.
-Hint Bitwalker_Peek,preserved.
-Proof.
-  intros.
-
-  subst x_1 x_2 x_3 x_4 x_5.
-
-  unfold is_uint8 in *.
-  unfold is_uint32 in *.
-  unfold is_uint64 in *.
-
-  assert(non_strict: (k_0 <= i_0)%Z) by assumption.
-    apply Zle_lt_or_eq in non_strict.
-  destruct non_strict as [less | equal].
-
-  - (* less *)
-    apply H35; auto with zarith.
-    replace ((length_0 - 1 - k_0)%Z) with ((63 - (63 - (length_0 - 1 - k_0)))%Z) by omega.    
-    apply H32; auto with zarith.
-    replace (63 - (63 - (length_0 - 1 - k_0)))%Z with ((length_0 - 1 - k_0)%Z) by omega.
-    assumption.
-  
-  - (* equal *)
-    rewrite equal in *.
-    apply H30.
-    apply H26.
-    assumption.
-    
-Qed.
-
 Goal typed_ref_BitTest_Bitwalker_Peek_loop_inv_copied_preserved.
 Hint Bitwalker_Peek,copied,preserved.
 Proof.
