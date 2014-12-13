@@ -42,8 +42,8 @@
      LeftNotSet64{A}(uint64_t value, integer length) =
        \forall integer i; 0 <= i < length ==> !LeftBit64(value, i);
 
-   predicate 
-     UpperBitsNotSet64{A}(integer value, integer length) = 
+   predicate
+     UpperBitsNotSet64{A}(integer value, integer length) =
        \forall integer i; length <= i < 64 ==> !BitTest(value, i);
 */
 
