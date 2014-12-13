@@ -590,7 +590,7 @@ Hint PokeThenPeek,full_copy2,property.
 Proof.
   intros.
   replace (i_0)%Z with (63 - (63 - i_0))%Z by omega.
-  apply H16; omega.
+  apply H17; omega.
 Qed.
 
 Goal typed_ref_BitTest_PokeThenPeek_assert_partial_copy.
