@@ -21,8 +21,8 @@
     assumes start + length <= 8 * size;
     assigns \nothing;
 
-    ensures copied:  \forall integer i; start <= i < start+length ==>
-              (LeftBit8Array(addr, i) <==> LeftBit64(\result, 64 - (start+length) + i));
+    ensures copied:  \forall integer i; start <= i < start + length ==>
+              (LeftBit8Array(addr, i) <==> LeftBit64(\result, 64 - length + i - start));
 
     ensures not_set: UpperBitsNotSet64(\result, length);
 
