@@ -369,10 +369,18 @@ Proof.
   intros.
   unfold is_uint64 in *.
   apply bits_and_bounds_uint; auto with zarith.
-  intros.
-  apply H15; auto with zarith.
-  replace (k) with (63 - (63 - k))%Z by omega.
 
+  intros.
+
+  assert (k < 64 \/ k >= 64)%Z by omega.
+  assert(lower_upper: (length_0 <= k < 64  \/  64 <= k)%Z).
+    destruct H19 as [lower_64 | upper_64].
+    left. omega. 
+    right. omega.
+
+  destruct lower_upper as [lower | upper].
+  +   apply H15; auto with zarith.
+  +   apply to_uint64_extraction_sup; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_copied_preserved_part1.

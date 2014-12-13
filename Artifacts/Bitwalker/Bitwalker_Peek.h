@@ -24,7 +24,7 @@
     ensures copied:  \forall integer i; 0 <= i < length ==>
               (LeftBit8Array(addr, start+i) <==> LeftBit64(\result, 64-length + i));
 
-    ensures not_set: \forall integer i; length <= i < 64 ==> !BitTest(\result, i);
+    ensures not_set: \forall integer i; length <= i < 64  ==> !BitTest(\result, i);
 
     ensures valid_result: \result < (1 << length);
 
