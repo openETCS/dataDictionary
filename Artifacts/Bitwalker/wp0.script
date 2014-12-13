@@ -299,7 +299,7 @@ Hint Bitwalker_Peek,copied,preserved.
 Proof.
   intros.
 
-  subst x_1 x_2 x_3 x_4 x_5.
+  subst x_0 x_1 x_2 x_3 x_4 x_5.
 
   unfold is_uint8 in *.
   unfold is_uint32 in *.
@@ -316,7 +316,7 @@ Proof.
 
   - (* equal *)
     rewrite equal in *.
-    rewrite <- H25.
+    rewrite <- H26.
     assumption.
 Qed.
 
@@ -331,8 +331,10 @@ Proof.
   unfold is_uint32 in *.
   unfold is_uint64 in *.
 
-  replace (k_0)%Z with (63 - (63 - k_0))%Z by omega.
-  rewrite H30; auto with zarith.
+  unfold P_UpperBitsNotSet64 in *.
+  intros.
+  replace (i_1)%Z with (63 - (63 - i_1))%Z by omega.
+  rewrite H28; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Peek_normal_case_post_2.
@@ -378,8 +380,10 @@ Proof.
     left. omega. 
     right. omega.
 
+  unfold P_UpperBitsNotSet64 in *.
+
   destruct lower_upper as [lower | upper].
-  +   apply H15; auto with zarith.
+  +   apply H11; auto with zarith.
   +   apply to_uint64_extraction_sup; auto with zarith.
 Qed.
 

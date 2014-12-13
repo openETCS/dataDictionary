@@ -47,12 +47,5 @@
        \forall integer i; Length <= i < 64 ==> !BitTest(Value, i);
 */
 
-/*@
-   predicate
-    IsCopied{A}(uint8_t* Bitstream, uint64_t Value, integer Start, integer Length) =
-       \forall integer i; 0 <= i < Length ==>
-                 (EqualBits(Bitstream, Value, Start, Length) && NotSet(Value, 64-i));
-*/
-
 
 #endif
