@@ -17,7 +17,7 @@ uint64_t Bitwalker_Peek(uint8_t*  addr, uint32_t  size, uint32_t  start, uint32_
     loop invariant copied: \forall integer k; 0 <= k < i ==>
                     (LeftBit8Array(addr, start+k) <==> LeftBit64(retval, 64-length+k));
 
-    loop invariant not_set: \forall integer k; k < 64-length ==> !LeftBit64(retval, k);
+    loop invariant not_set: \forall integer k; length <= k < 64 ==> !BitTest(retval, k);
 
     loop assigns i, retval;
     loop variant length - i;

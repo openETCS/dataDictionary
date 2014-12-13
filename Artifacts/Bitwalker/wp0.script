@@ -320,6 +320,21 @@ Proof.
     assumption.
 Qed.
 
+Goal typed_ref_BitTest_Bitwalker_Peek_loop_inv_not_set_preserved.
+Hint Bitwalker_Peek,not_set,preserved.
+Proof.
+  intros.
+
+  subst x_0 x_1 x_2 x_3 x_4.
+
+  unfold is_uint8 in *.
+  unfold is_uint32 in *.
+  unfold is_uint64 in *.
+
+  replace (k_0)%Z with (63 - (63 - k_0))%Z by omega.
+  rewrite H30; auto with zarith.
+Qed.
+
 Goal typed_ref_BitTest_Bitwalker_Peek_normal_case_post_2.
 Hint Bitwalker_Peek,normal_case,property.
 Proof.
@@ -355,8 +370,9 @@ Proof.
   unfold is_uint64 in *.
   apply bits_and_bounds_uint; auto with zarith.
   intros.
+  apply H15; auto with zarith.
   replace (k) with (63 - (63 - k))%Z by omega.
-  apply H16; auto with zarith.
+
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_copied_preserved_part1.
