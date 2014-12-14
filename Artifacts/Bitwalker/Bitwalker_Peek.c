@@ -12,19 +12,18 @@ uint64_t Bitwalker_Peek(uint8_t*  addr, uint32_t  size, uint32_t  start, uint32_
   uint64_t retval = 0;
 
   /*@
-    loop invariant 0 <= i <= length;
+    loop invariant index:  0 <= i <= length;
 
-    loop invariant \forall integer k; 0 <= k < i ==>
-                    (LeftBit8Array(addr, start+k) <==> LeftBit64(retval, 64-length+k));
+    loop invariant copied: \forall integer k; start <= k < start + i ==>
+                    (LeftBit8Array(addr, k) <==> LeftBit64(retval, 64 - length + k - start));
 
-    loop invariant \forall integer k; k < 64-length ==> !LeftBit64(retval, k);
+    loop invariant not_set: UpperBitsNotSet64(retval, length);
 
     loop assigns i, retval;
     loop variant length - i;
   */
   for (uint32_t i = 0; i < length; i++)
   {
-    //@ assert start + i < 8 * size;
     int flag = PeekBit8Array(addr, size, start + i);
     retval = PokeBit64(retval, 64u - length + i, flag);
   }

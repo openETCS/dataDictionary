@@ -51,54 +51,54 @@ Proof.
 
 Qed.
 
-Goal typed_ref_BitTest_Bitstream_Read_normal_case_post_2.
-Hint Bitstream_Read,normal_case,property.
+Goal typed_ref_BitTest_Bitstream_Read_normal_case_post_copied.
+Hint Bitstream_Read,copied,normal_case,property.
 Proof.
-(* --------------------------------------
-  
-From 'typed_ref_BitTest_Bitstream_Read_normal_case_post': 
   intros.
 
   subst a_0 a_1 a_2 a_3.
   subst x_0 x_1 x_2 x_3.
 
-  unfold is_uint64 in *.
-  unfold is_uint32 in *.
+  unfold P_BitstreamEqual64 in *.
   unfold P_LeftBitInStream in *.
   unfold P_BitstreamInvariant in *.
   unfold P_NormalBitsequence in *.
+  intros.
 
+  unfold is_uint64 in *.
+  unfold is_uint32 in *.
+ 
   rewrite shift_zero in *.
   rewrite shift_zero in *.
 
-  remember (Mptr_0.[stream_0]) as addr.
-  remember (Mint_0.[shift stream_0 1]) as size.
-  remember (Mint_0.[shift stream_0 2]) as bitpos.
+  remember stream_0 as stream.
   remember length_0 as length.
   remember i_0 as i.
+  remember (Mptr_0.[stream]) as addr.
+  remember (Mint_0.[shift stream 1]) as size.
+  remember (Mint_0.[shift stream 2]) as bitpos.
 
-  replace ((Mint_0 .[ shift stream_0 2 <- (length + bitpos)%Z]) .[ shift addr (Cdiv i 8)]) 
+  replace ((Mint_0 .[ shift stream 2 <- (length + bitpos)%Z]) .[ shift addr (Cdiv i 8)]) 
     with  (Mint_0.[ shift addr (Cdiv i 8)]).
 
-  replace (length + bitpos - 1 - i)%Z with (length - 1 - (i - bitpos))%Z by omega.
+  replace (length + bitpos - 1 - i)%Z
+    with  (length - 1 - (i - bitpos))%Z by omega.
 
-  rewrite H22; auto with zarith.
+
+  rewrite H21; auto with zarith.
   replace (i - bitpos + bitpos)%Z with i%Z by omega.
 
   + intuition.
   + rewrite access_update_neq.
-    -  trivial.
-    -  destruct H7 as [A [B C]].
+    - trivial.
+    - destruct H6 as [A [B C]].
 
-      apply separated_sym in C.
-      apply separated_neq with (stream_0) (3%Z) (addr) (size).
+      apply separated_neq with (stream) (3%Z) (addr) (size).
       * assumption.
-      * unfold included; simpl; auto with zarith.
+      * unfold included; simpl; omega.
       * assert(X: (0 <= (Cdiv i 8) < size)%Z).
-          apply Cdiv_bounds; auto with zarith.
-        unfold included; simpl; auto with zarith.
-
-*)
+          apply Cdiv_bounds; omega.
+        unfold included; simpl; omega.
 Qed.
 
 Goal typed_ref_BitTest_Bitstream_Write_complete_normal_case_value_too_big_invali___.
@@ -109,7 +109,50 @@ Proof.
   unfold P_NormalBitsequence in *.
   unfold is_uint32 in *.
   intuition.
+Qed.
 
+Goal typed_ref_BitTest_Bitstream_Write_normal_case_post.
+Hint Bitstream_Write,normal_case,property.
+Proof.
+  intros.
+  unfold P_BitstreamEqual64 in *.
+  unfold P_NormalBitsequence in *.
+  unfold P_LeftBitInStream.
+  unfold P_BitstreamInvariant in *.
+  unfold is_uint32 in *.
+
+  intros.
+
+  subst x_0 x_1 x_2 x_3 x_4 x_5 x_6.
+  subst a_0 a_1 a_2 a_3 a_4.
+ 
+
+  rewrite shift_zero in *.
+  rewrite shift_zero in *.
+
+  remember i_0 as i.
+  remember stream_0 as stream.
+  remember length_0 as length.
+  remember (Mptr_0.[stream]) as addr.
+  remember (Mint_0.[shift stream 1]) as size.
+  remember (Mint_0.[shift stream 2]) as bitpos.
+  remember (Mint_1.[shift stream 2]) as new_bitpos.
+  rewrite H7 in *.
+  
+  rewrite access_update_neq.
+  + rewrite H30; auto with zarith.
+    intuition.
+
+  + 
+    destruct H8 as [A [B C]].
+    clear H27 H28 H29 H30. (* simplify proof context *) 
+    apply separated_neq with (stream) (3%Z) (addr) (size).
+    - assumption.
+    - unfold included; simpl; omega.
+
+    - assert ((0 <= (Cdiv i 8) < size)%Z).
+      apply Cdiv_bounds; omega.
+      unfold included; simpl; omega.
 Qed.
 
 Goal typed_ref_BitTest_Bitstream_Write_normal_case_post_2.
@@ -156,66 +199,92 @@ Proof.
       unfold included; simpl; omega.
 Qed.
 
-Goal typed_ref_BitTest_Bitwalker_Peek_loop_inv_2_preserved.
-Hint Bitwalker_Peek,preserved.
+Goal typed_ref_BitTest_Bitstream_Write_normal_case_post_copied.
+Hint Bitstream_Write,copied,normal_case,property.
+Proof.
+  intros.
+  unfold P_BitstreamEqual64 in *.
+  unfold P_NormalBitsequence in *.
+  unfold P_LeftBitInStream.
+  unfold P_BitstreamInvariant in *.
+  unfold is_uint32 in *.
+
+  intros.
+
+  subst x_0 x_1 x_2 x_3 x_4 x_5 x_6.
+  subst a_0 a_1 a_2 a_3 a_4.
+ 
+
+  rewrite shift_zero in *.
+  rewrite shift_zero in *.
+
+  remember i_0 as i.
+  remember stream_0 as stream.
+  remember length_0 as length.
+  remember (Mptr_0.[stream]) as addr.
+  remember (Mint_0.[shift stream 1]) as size.
+  remember (Mint_0.[shift stream 2]) as bitpos.
+  remember (Mint_1.[shift stream 2]) as new_bitpos.
+  rewrite H7 in *.
+  
+  rewrite access_update_neq.
+  + rewrite H30; auto with zarith.
+    intuition.
+
+  + 
+    destruct H8 as [A [B C]].
+    clear H27 H28 H29 H30. (* simplify proof context *) 
+    apply separated_neq with (stream) (3%Z) (addr) (size).
+    - assumption.
+    - unfold included; simpl; omega.
+
+    - assert ((0 <= (Cdiv i 8) < size)%Z).
+      apply Cdiv_bounds; omega.
+      unfold included; simpl; omega.
+Qed.
+
+Goal typed_ref_BitTest_Bitwalker_Peek_loop_inv_copied_preserved.
+Hint Bitwalker_Peek,copied,preserved.
 Proof.
   intros.
 
-  subst x_1 x_2 x_3 x_4 x_5.
+  subst x_0 x_1 x_2 x_3 x_4.
 
   unfold is_uint8 in *.
   unfold is_uint32 in *.
   unfold is_uint64 in *.
 
-  assert(non_strict: (k_0 <= i_0)%Z) by assumption.
+  assert(non_strict: (k_0 <= i_0 + start_0)%Z) by assumption.
     apply Zle_lt_or_eq in non_strict.
   destruct non_strict as [less | equal].
 
   - (* less *)
     rewrite <- H32; auto with zarith.
-    replace ((length_0 - 1 - k_0)%Z) with ((63 - (63 - (length_0 - 1 - k_0)))%Z) by omega.
+    replace ((length_0 + start_0 - 1 - k_0)%Z) with ((63 - (63 - (length_0 + start_0 - 1 - k_0)))%Z) by omega.
     apply H31; auto with zarith.
 
   - (* equal *)
     rewrite equal in *.
-    rewrite <- H25.
+    replace (length_0 + start_0 - 1 - (i_0 + start_0))%Z with (length_0 - 1 - i_0)%Z by omega.
+    rewrite <- H26.
     assumption.
 Qed.
 
-Goal typed_ref_BitTest_Bitwalker_Peek_loop_inv_3_preserved.
-Hint Bitwalker_Peek,preserved.
+Goal typed_ref_BitTest_Bitwalker_Peek_loop_inv_not_set_preserved.
+Hint Bitwalker_Peek,not_set,preserved.
 Proof.
   intros.
 
-  subst x_1 x_2 x_3 x_4 x_5.
+  subst x_0 x_1 x_2 x_3 x_4.
 
   unfold is_uint8 in *.
   unfold is_uint32 in *.
   unfold is_uint64 in *.
 
-  assert(non_strict: (k_0 <= i_0)%Z) by assumption.
-    apply Zle_lt_or_eq in non_strict.
-  destruct non_strict as [less | equal].
-
-  - (* less *)
-    apply H35; auto with zarith.
-    replace ((length_0 - 1 - k_0)%Z) with ((63 - (63 - (length_0 - 1 - k_0)))%Z) by omega.    
-    apply H32; auto with zarith.
-    replace (63 - (63 - (length_0 - 1 - k_0)))%Z with ((length_0 - 1 - k_0)%Z) by omega.
-    assumption.
-  
-  - (* equal *)
-    rewrite equal in *.
-    apply H30.
-    apply H26.
-    assumption.
-    
-Qed.
-
-Goal typed_ref_BitTest_Bitwalker_Peek_normal_case_post_2.
-Hint Bitwalker_Peek,normal_case,property.
-Proof.
-  auto with zarith.
+  unfold P_UpperBitsNotSet64 in *.
+  intros.
+  replace (i_1)%Z with (63 - (63 - i_1))%Z by omega.
+  rewrite H28; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Peek_normal_case_post_3.
@@ -240,48 +309,30 @@ Proof.
   apply H16; auto with zarith.
 Qed.
 
-Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_2_preserved.
-Hint Bitwalker_Poke,preserved.
+Goal typed_ref_BitTest_Bitwalker_Peek_normal_case_post_valid_result_part2.
+Hint Bitwalker_Peek,normal_case,part-1,property,valid_result.
 Proof.
   intros.
+  unfold is_uint64 in *.
+  apply bits_and_bounds_uint; auto with zarith.
 
-  remember start_0 as start.
-  remember length_0 as length.
-  remember addr_0 as addr.
-  remember Value_0 as Value.
-  remember Mint_0 as M0.
-  remember Mint_1 as M1.
-  remember Mint_2 as M2.
+  intros.
 
-  remember k_0 as k.
-  remember i_0 as i.
+  assert (k < 64 \/ k >= 64)%Z by omega.
+  assert(lower_upper: (length_0 <= k < 64  \/  64 <= k)%Z).
+    destruct H19 as [lower_64 | upper_64].
+    left. omega. 
+    right. omega.
 
-  unfold is_uint32 in *.
+  unfold P_UpperBitsNotSet64 in *.
 
-  subst a_0 a_1 x_0 x_1 x_2 x_3 x_4 x_5 x_6.
-
-  assert(non_strict: (k <= i)%Z) by assumption.
-    apply Zle_lt_or_eq in non_strict.
-  destruct non_strict as [less | equal].
-
-  * (* k < i *)
-    subst x_8.
-    subst x_2.
-    apply H37; auto with zarith.
-      unfold is_uint32 in H14.
-      auto with zarith.
-
-  * (* k = i*)
-    subst x_8.
-    subst x_5 x_6 x_7.
-    subst x_2.
-    rewrite equal in *.
-    auto with zarith.
-     
+  destruct lower_upper as [lower | upper].
+  +   apply H11; auto with zarith.
+  +   apply to_uint64_extraction_sup; auto with zarith.
 Qed.
 
-Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_3_preserved.
-Hint Bitwalker_Poke,preserved.
+Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_copied_preserved_part1.
+Hint Bitwalker_Poke,copied,part-0,preserved.
 Proof.
   intros.
 
@@ -296,7 +347,7 @@ Proof.
   remember k_0 as k.
   remember i_0 as i.
 
-  subst x_0 x_1 x_2 x_3 x_5 x_6.
+  subst x_0 x_1 x_2 x_3 x_4 x_5.
   unfold is_uint64 in *.
   unfold is_uint32 in *.
   unfold  to_sint32 in *.
@@ -306,57 +357,18 @@ Proof.
   destruct non_strict as [less | equal].
 
   * (* k < i + start *)
-   rewrite H36; auto with zarith.
+   rewrite H38; auto with zarith.
 
   * (* k = i + start *)
    rewrite equal in *.
    replace (length + start - 1 - (i + start))%Z
      with  (length - 1 - i)%Z by omega.
-   rewrite <- H26.
-   assumption.   
+   rewrite <- H29.
+   assumption.
 Qed.
 
-Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_3_preserved_part1.
-Hint Bitwalker_Poke,part-0,preserved.
-Proof.
-  intros.
-
-  remember start_0 as start.
-  remember length_0 as length.
-  remember addr_0 as addr.
-  remember value_0 as value.
-  remember Mint_0 as M0.
-  remember Mint_1 as M1.
-  remember Mint_2 as M2.
-
-  remember k_0 as k.
-  remember i_0 as i.
-
-  subst x_0 x_1 x_2 x_3 x_5 x_6.
-  unfold is_uint64 in *.
-  unfold is_uint32 in *.
-  unfold  to_sint32 in *.
-
-  assert(non_strict: (k <= i + start)%Z) by assumption.
-    apply Zle_lt_or_eq in non_strict.
-  destruct non_strict as [less | equal].
-
-  * (* k < i + start *)
-   rewrite H37; auto with zarith.
-   rewrite H40; auto with zarith.
-   intuition.
-
-  * (* k = i + start *)
-   rewrite equal in *.
-   replace (length + start - 1 - (i + start))%Z
-     with  (length - 1 - i)%Z by omega.
-   rewrite <- H35.
-   rewrite H31.
-   intuition.
-Qed.
-
-Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_3_preserved_part2.
-Hint Bitwalker_Poke,part-1,preserved.
+Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_copied_preserved_part2.
+Hint Bitwalker_Poke,copied,part-1,preserved.
 Proof.
   intros.
 
@@ -392,71 +404,6 @@ Proof.
    replace (63 + start - (i + start))%Z
      with  (63 - i)%Z by omega.
    intuition.
-
-Qed.
-
-Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_4_preserved.
-Hint Bitwalker_Poke,preserved.
-Proof.
-  intros.
-  
-  remember start_0 as start.
-  remember length_0 as length.
-  remember addr_0 as addr.
-  remember Value_0 as Value.
-  remember Mint_0 as M0.
-  remember Mint_1 as M1.
-  remember Mint_2 as M2.
-
-  remember k_0 as k.
-  remember i_0 as i.
-
-  subst x_0 x_2 x_3 x_5 x_6 x_7 x_8.
-  unfold is_uint32 in *.
-
-  assert(non_strict: (k <= i)%Z) by assumption.
-    apply Zle_lt_or_eq in non_strict.
-  destruct non_strict as [less | equal].
-
-  * (* k < i *)
-    apply H39; auto with zarith.
-
-  * (* k = i *)
-    rewrite equal in *.
-    auto with zarith.
-
-Qed.
-
-Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_5_preserved.
-Hint Bitwalker_Poke,preserved.
-Proof.
-  intros.
-
-  remember start_0 as start.
-  remember length_0 as length.
-  remember addr_0 as addr.
-  remember Value_0 as Value.
-  remember Mint_0 as M0.
-  remember Mint_1 as M1.
-  remember Mint_2 as M2.
-
-  remember k_0 as k.
-  remember i_0 as i.
-
-  subst x_0 x_2 x_3 x_5 x_6 x_7 x_8.
-  unfold is_uint32 in *.
-
-  assert(non_strict: (k <= i)%Z) by assumption.
-    apply Zle_lt_or_eq in non_strict.
-  destruct non_strict as [less | equal].
-
-  * (* k < i *)
-    apply H44; auto with zarith.
-
-  * (* k = i *)
-    rewrite equal in *.
-    auto with zarith.
-
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Poke_normal_case_post_3.
@@ -480,8 +427,8 @@ Proof.
   auto with zarith.
 Qed.
 
-Goal typed_ref_BitTest_PeekThenPoke_assert.
-Hint PeekThenPoke,property.
+Goal typed_ref_BitTest_PeekThenPoke_assert_copied.
+Hint PeekThenPoke,copied,property.
 Proof.
   intros.
   unfold is_uint32 in *.
@@ -496,81 +443,45 @@ Proof.
   intuition.
 Qed.
 
-Goal typed_ref_BitTest_PeekThenPoke_assert_2.
-Hint PeekThenPoke,property.
-Proof.
-  intros.
-  unfold is_uint32 in *.
-  subst x_0 x_1 x_2 a_1.
-
-  replace (i_0) with ((start_0 + (i_0 - start_0))%Z) by omega.
-
-  rewrite <- H20; auto with zarith.
-  rewrite <- H19; auto with zarith.
-  intuition.
-
-Qed.
-
-Goal typed_ref_BitTest_PeekThenPoke_post_2.
-Hint PeekThenPoke,default,property.
-Proof.
-(* auto with zarith. *)
-Qed.
-
-Goal typed_ref_BitTest_PokeBit8Array_post_unchanged_bits.
-Hint PokeBit8Array,default,property,unchanged_bits.
-Proof.
-(* auto with zarith. *)
-Qed.
-
-Goal typed_ref_BitTest_PokeBit8_post_3.
-Hint PokeBit8,default,property.
-Proof.
-  intros.
-Qed.
-
-Goal typed_ref_BitTest_PokeThenPeek_assert.
-Hint PokeThenPeek,property.
+Goal typed_ref_BitTest_PokeThenPeek_assert_bits_covered.
+Hint PokeThenPeek,bits_covered,property.
 Proof.
  intros.
  unfold is_uint32 in *.
  unfold is_uint64 in *.
- rewrite bits_and_bounds_uint in H7.
- apply H7; auto with zarith.
- omega.
- omega.
+ rewrite bits_and_bounds_uint in H7; auto with zarith.
 Qed.
 
-Goal typed_ref_BitTest_PokeThenPeek_assert_3.
-Hint PokeThenPeek,property.
+Goal typed_ref_BitTest_PokeThenPeek_assert_full_copy2.
+Hint PokeThenPeek,full_copy2,property.
+Proof.
+  intros.
+  replace (i_0)%Z with (63 - (63 - i_0))%Z by omega.
+  apply H17; omega.
+Qed.
+
+Goal typed_ref_BitTest_PokeThenPeek_assert_partial_copy.
+Hint PokeThenPeek,partial_copy,property.
 Proof.
   intros.
   subst x_1 x_2 x_3.
 
-  replace (63 - i_0)%Z  with  
-        (length_0 - 1 - (length_0 + i_0 - 64))%Z by omega.
-  rewrite H21; auto with zarith.
-
-  replace (length_0 + start_0 - 1 - (length_0 + start_0 + i_0 - 64))%Z
-    with (length_0 - 1 - (length_0 - 64 + i_0))%Z by omega.
-
-  rewrite <- H18; auto with zarith.
-  replace (length_0 + start_0 - 1 - (length_0 + i_0 - 64 + start_0))%Z
-    with (length_0 - 1 - (length_0 + i_0 - 64))%Z by omega.
+  replace (63 - i_0)%Z  with
+        (length_0 + start_0 - 1 - (length_0 + start_0 + i_0 - 64))%Z by omega.
+  rewrite H18; auto with zarith.
+  rewrite H19; auto with zarith.
   intuition.
-
 Qed.
 
-Goal typed_ref_BitTest_PokeThenPeek_assert_5.
-Hint PokeThenPeek,property.
+Goal typed_ref_BitTest_PokeThenPeek_post_result.
+Hint PokeThenPeek,default,property,result.
 Proof.
   intros.
-  replace (i_0)%Z with (63 - (63 - i_0))%Z by omega.
-  apply H16; omega.
+  apply bits_equal_uint64; auto with zarith.
 Qed.
 
-Goal typed_ref_BitTest_PokeThenPeek_post.
-Hint PokeThenPeek,default,property.
+Goal typed_ref_BitTest_PokeThenPeek_post_result_value.
+Hint PokeThenPeek,default,property,result_value.
 Proof.
   intros.
   apply bits_equal_uint64; auto with zarith.

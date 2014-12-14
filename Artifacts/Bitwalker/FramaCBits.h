@@ -25,32 +25,26 @@
 
 /*@
    predicate
-     EqualBits{A}(uint8_t* Bitstream, uint64_t Value, integer Start, integer Length) =
-        \forall integer i; 0 <= i < Length ==>
-          (LeftBit8Array(Bitstream, Start + i) <==> LeftBit64(Value, 64-Length+i));
+     BitsUnchanged{L}(uint8_t* addr, integer first, integer last ) =
+        \forall integer i; first <= i < last ==>
+           LeftBit8Array(addr, i) <==> \at(LeftBit8Array(addr, i), L);
 */
 
 /*@
    predicate
-     LeftNotSet64{A}(uint64_t Value, integer Length) =
-       \forall integer i; 0 <= i < Length ==> !LeftBit64(Value, i);
-
-   predicate // legacy name
-     NotSet{A}(uint64_t Value, integer Length) = LeftNotSet64{A}(Value, Length);
+     EqualBits64{A}(uint8_t* addr, integer first, integer last, uint64_t value, integer length) =
+        \forall integer i; first <= i < last ==>
+          (LeftBit8Array(addr, i) <==> LeftBit64(value, 64 - length + i - first));
 */
 
 /*@
    predicate
-    IsCopied{A}(uint8_t* Bitstream, uint64_t Value, integer Start, integer Length) =
-       \forall integer i; 0 <= i < Length ==>
-                 (EqualBits(Bitstream, Value, Start, Length) && NotSet(Value, 64-i));
-*/
+     LeftNotSet64{A}(uint64_t value, integer length) =
+       \forall integer i; 0 <= i < length ==> !LeftBit64(value, i);
 
-/*@
    predicate
-     Unchanged{A}(uint8_t* Bitstream1, uint8_t* Bitstream2, integer Start, integer Length, integer Size) =
-       \forall integer i; ((0 <= i < Start ==> (LeftBit8Array(Bitstream1, i) <==> LeftBit8Array(Bitstream2, i))) &&
-                         (Start+Length <= i < Size ==> (LeftBit8Array(Bitstream1, i) <==> LeftBit8Array(Bitstream2, i))));
+     UpperBitsNotSet64{A}(integer value, integer length) =
+       \forall integer i; length <= i < 64 ==> !BitTest(value, i);
 */
 
 
