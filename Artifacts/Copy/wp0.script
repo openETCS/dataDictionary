@@ -11,6 +11,8 @@ Proof.
 
   rewrite shift_zero in *.
 
+  assert(X: forall M addr i, (F_Z_a (Load_S_Z (shift addr i) M) = M.[shift addr i])). admit.
+
   assert (less_equal: k_0 <= i_0) by omega.
   apply Zle_lt_or_eq in less_equal.
   destruct less_equal as [less | equal].
@@ -23,7 +25,11 @@ Proof.
     apply Q_Z_Eq_transitiv with (Load_S_Z (shift a_0 (3 * k_0)) Mint_1).
       + unfold IsS_Z.
         split. (* unfold Load_S_Z. unfold F_Z_a. *)
-        * admit.
+        * replace (F_Z_a (Load_S_Z (shift a_0 (3 * k_0)) Mint_2))%Z
+            with  (Mint_2.[shift a_0 (3 * k_0)])%Z.
+          admit.
+          rewrite <- X; trivial.
+            
         * admit.
       + admit.
       + admit.
