@@ -21,19 +21,22 @@ Proof.
                  (Load_S_Z (shift b_0 (3 * k_0)) Mint_1)) by (apply H21; auto with zarith).
 
     apply Q_Z_Eq_transitiv with (Load_S_Z (shift a_0 (3 * k_0)) Mint_1).
-      admit.
-      admit.
-      admit.
-      assumption.
-      apply Q_Z_Eq_transitiv with (Load_S_Z (shift b_0 (3 * k_0)) Mint_1).
+      + unfold IsS_Z.
+        split. (* unfold Load_S_Z. unfold F_Z_a. *)
+        * admit.
+        * admit.
+      + admit.
+      + admit.
+      + assumption.
+      + apply Q_Z_Eq_transitiv with (Load_S_Z (shift b_0 (3 * k_0)) Mint_1).
         admit.
         admit.
         admit.
         apply H20; auto with zarith.
-      apply Q_Z_Eq_symmetric.
-        admit.
-        admit.
-      assumption.
+        apply Q_Z_Eq_symmetric.
+        * admit.
+        * admit.
+        * assumption.
 
   -
     rewrite equal.
