@@ -4,35 +4,52 @@ Goal typed_ref_BitTest_copy_Z_loop_inv_2_preserved.
 Hint copy_Z,preserved.
 Proof.
   intros.
-  unfold P_IsEqual_Z in *.
-  intros.
+  (* unfold P_IsEqual_Z in I. intros. *)
 
   subst x_0 x_1 x_2.
   subst a_1 a_2 a_3 a_4 a_5.
 
   rewrite shift_zero in *.
 
-  assert (less_equal: i_1 <= i_0) by omega.
+  assert (less_equal: k_0 <= i_0) by omega.
   apply Zle_lt_or_eq in less_equal.
   destruct less_equal as [less | equal].
 
-  - assert(EqS_Z (Load_S_Z (shift a_0 (3 * i_1)) Mint_2)
-                 (Load_S_Z (shift a_0 (3 * i_1)) Mint_1)) by (apply H18; auto with zarith).
-    assert(EqS_Z (Load_S_Z (shift b_0 (3 * i_1)) Mint_2)
-                 (Load_S_Z (shift b_0 (3 * i_1)) Mint_1)) by (apply H19; auto with zarith).
+  - assert(EqS_Z (Load_S_Z (shift a_0 (3 * k_0)) Mint_2)
+                 (Load_S_Z (shift a_0 (3 * k_0)) Mint_1)) by (apply H19; auto with zarith).
+    assert(EqS_Z (Load_S_Z (shift b_0 (3 * k_0)) Mint_2)
+                 (Load_S_Z (shift b_0 (3 * k_0)) Mint_1)) by (apply H21; auto with zarith).
 
-    apply Q_Z_Eq_transitiv with (Load_S_Z (shift a_0 (3 * i_1)) Mint_1).
+    apply Q_Z_Eq_transitiv with (Load_S_Z (shift a_0 (3 * k_0)) Mint_1).
       admit.
       admit.
       admit.
-      admit.
+      assumption.
+      apply Q_Z_Eq_transitiv with (Load_S_Z (shift b_0 (3 * k_0)) Mint_1).
+        admit.
+        admit.
+        admit.
+        apply H20; auto with zarith.
       apply Q_Z_Eq_symmetric.
         admit.
         admit.
       assumption.
-    apply H18; auto with zarith.
 
-    apply H9; auto with zarith.
+  -
+    rewrite equal.
+    assert (EqS_Z (Load_S_Z (shift a_0 (3 * i_0)) Mint_2)
+                  (Load_S_Z (shift a_0 (3 * i_0)) Mint_1)) by admit.
+
+    apply Q_Z_Eq_transitiv with (Load_S_Z (shift a_0 (3 * i_0)) Mint_1).
+      admit.
+      admit.
+      admit.
+      assumption.
+    apply Q_Z_Eq_symmetric.
+      admit.
+      admit.
+    assumption.
+
 Qed.
 
 Goal typed_ref_BitTest_lemma_Z_Eq_transitiv.
