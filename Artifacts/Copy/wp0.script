@@ -21,7 +21,15 @@ Proof.
     assert(EqS_Z (Load_S_Z (shift b_0 (3 * i_1)) Mint_2)
                  (Load_S_Z (shift b_0 (3 * i_1)) Mint_1)) by (apply H19; auto with zarith).
 
-    apply Q_Z_Eq_transitiv with (z2_0 := (Load_S_Z (shift a_0 (3 * i_1)) Mint_1)).
+    apply Q_Z_Eq_transitiv with (Load_S_Z (shift a_0 (3 * i_1)) Mint_1).
+      admit.
+      admit.
+      admit.
+      admit.
+      apply Q_Z_Eq_symmetric.
+        admit.
+        admit.
+      assumption.
     apply H18; auto with zarith.
 
     apply H9; auto with zarith.
