@@ -228,8 +228,7 @@ Proof.
   rewrite H7 in *.
   
   rewrite access_update_neq.
-  + rewrite H30; auto with zarith.
-    intuition.
+  + apply H30; auto with zarith.
 
   + 
     destruct H8 as [A [B C]].
