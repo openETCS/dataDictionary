@@ -353,14 +353,15 @@ Proof.
   unfold is_uint32 in *.
   unfold  to_sint32 in *.
 
-  assert(non_strict: (k <= i + start)%Z) by assumption.
-    apply Zle_lt_or_eq in non_strict.
-  destruct non_strict as [less | equal].
+  case_lt k (i + start)%Z.
 
   * (* k < i + start *)
-   rewrite H38; auto with zarith.
+    intros.
+    rewrite H38; auto with zarith.
 
   * (* k = i + start *)
+   intros.
+   assert(equal: (k = i + start)%Z) by omega. 
    rewrite equal in *.
    replace (length + start - 1 - (i + start))%Z
      with  (length - 1 - i)%Z by omega.
@@ -389,22 +390,21 @@ Proof.
   unfold is_uint32 in *.
   unfold  to_sint32 in *.
 
-  assert(non_strict: (k <= i + start)%Z) by assumption.
-    apply Zle_lt_or_eq in non_strict.
-  destruct non_strict as [less | equal].
-
-  * (* k < i + start *)
+  case_lt k (i + start)%Z.
+  * 
+   intros.
    rewrite H32; auto with zarith.
-   rewrite H35; auto with zarith.
-   intuition.
+   symmetry.
+   apply H35; auto with zarith.
 
-  * (* k = i + start *)
+  * 
+   intros.
+   assert(equal: (k = i + start)%Z) by omega.
    rewrite equal in *.
    rewrite <- H30; auto with zarith.
-   rewrite H26.
-   replace (63 + start - (i + start))%Z
-     with  (63 - i)%Z by omega.
-   intuition.
+   replace (63 + start - (i + start))%Z  with  (63 - i)%Z by omega.
+   symmetry.
+   assumption.
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Poke_normal_case_post_3.
