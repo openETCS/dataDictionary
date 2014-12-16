@@ -22,7 +22,7 @@ Proof.
     assert(EqS_Z (Load_S_Z (shift b_0 (3 * k_0)) Mint_2)
                  (Load_S_Z (shift b_0 (3 * k_0)) Mint_1)) by (apply H21; auto with zarith).
 
-    apply Q_Z_Eq_transitiv with (Load_S_Z (shift a_0 (3 * k_0)) Mint_1).
+    apply Q_Z_Eq_transitive with (Load_S_Z (shift a_0 (3 * k_0)) Mint_1).
       + unfold IsS_Z.
         split. (* unfold Load_S_Z. unfold F_Z_a. *)
         * replace (F_Z_a (Load_S_Z (shift a_0 (3 * k_0)) Mint_2))%Z
@@ -34,7 +34,7 @@ Proof.
       + admit.
       + admit.
       + assumption.
-      + apply Q_Z_Eq_transitiv with (Load_S_Z (shift b_0 (3 * k_0)) Mint_1).
+      + apply Q_Z_Eq_transitive with (Load_S_Z (shift b_0 (3 * k_0)) Mint_1).
         admit.
         admit.
         admit.
@@ -49,7 +49,7 @@ Proof.
     assert (EqS_Z (Load_S_Z (shift a_0 (3 * i_0)) Mint_2)
                   (Load_S_Z (shift a_0 (3 * i_0)) Mint_1)) by admit.
 
-    apply Q_Z_Eq_transitiv with (Load_S_Z (shift a_0 (3 * i_0)) Mint_1).
+    apply Q_Z_Eq_transitive with (Load_S_Z (shift a_0 (3 * i_0)) Mint_1).
       admit.
       admit.
       admit.
@@ -61,8 +61,8 @@ Proof.
 
 Qed.
 
-Goal typed_ref_BitTest_lemma_Z_Eq_transitiv.
-Hint Z_Eq_transitiv,property.
+Goal typed_ref_BitTest_lemma_Z_Eq_transitive.
+Hint Z_Eq_transitive,property.
 Proof.
 (* auto with zarith. *)
 Qed.
