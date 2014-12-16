@@ -254,16 +254,17 @@ Proof.
   unfold is_uint32 in *.
   unfold is_uint64 in *.
 
-  assert(non_strict: (k_0 <= i_0 + start_0)%Z) by assumption.
-    apply Zle_lt_or_eq in non_strict.
-  destruct non_strict as [less | equal].
+  case_lt k_0 (i_0 + start_0)%Z.
 
   - (* less *)
+    intros less.
     rewrite <- H32; auto with zarith.
     replace ((length_0 + start_0 - 1 - k_0)%Z) with ((63 - (63 - (length_0 + start_0 - 1 - k_0)))%Z) by omega.
     apply H31; auto with zarith.
 
   - (* equal *)
+    intros.
+    assert(equal: (k_0 = i_0 + start_0)%Z) by auto with zarith.
     rewrite equal in *.
     replace (length_0 + start_0 - 1 - (i_0 + start_0))%Z with (length_0 - 1 - i_0)%Z by omega.
     rewrite <- H26.
