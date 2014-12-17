@@ -272,4 +272,10 @@ Proof.
   apply bits_equal_uint64; auto with zarith.
 Qed.
 
+Goal typed_ref_BitTest_ReadThenWrite_stmt_assign_part3.
+Hint *,ReadThenWrite,default,part-2,stmt-assigns,stream.
+Proof.
+(* auto with zarith. *)
+Qed.
+
 
