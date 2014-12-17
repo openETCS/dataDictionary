@@ -14,7 +14,7 @@
 
     ensures result_zero: \result == 0;
     ensures unchanged:   BitstreamUnchanged{Old}(stream, 0, 8 * stream->size);
-    ensures pos:         stream->bitpos == 2 * \old(stream->bitpos);
+    ensures pos:         stream->bitpos == \old(stream->bitpos) + 2 * length;
 */
 int ReadThenWrite(Bitstream* stream, uint32_t length)
 {
