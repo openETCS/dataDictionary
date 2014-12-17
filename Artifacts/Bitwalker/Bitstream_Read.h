@@ -27,13 +27,15 @@
 
     assigns  stream->bitpos;
 
-    ensures copied:  BitstreamEqual64(stream, \old(stream->bitpos), stream->bitpos, \result);
+    ensures increment:    stream->bitpos == \old(stream->bitpos) + length;
 
-    ensures not_set: LeftNotSet64(\result, 64 - length);
+    ensures copied:       BitstreamEqual64(stream, \old(stream->bitpos), stream->bitpos, \result);
 
-    ensures unchanged: BitstreamUnchanged{Old}(stream, 0, 8*stream->size);
+    ensures not_set:      LeftNotSet64(\result, 64 - length);
 
-    ensures valid_result:  \result < (1 << length);
+    ensures unchanged:    BitstreamUnchanged{Old}(stream, 0, 8*stream->size);
+
+    ensures valid_result: \result < (1 << length);
 
   complete behaviors;
   disjoint behaviors;
