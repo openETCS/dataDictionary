@@ -282,11 +282,15 @@ Goal typed_ref_BitTest_ReadThenWrite_stmt_post_2.
 Hint ReadThenWrite,default,property.
 Proof.
   intros.
+  rewrite shift_zero in *.
+  rewrite shift_zero in *.
   subst a_0 a_1.
-  subst x_0 x_1 x_2 x_3 x_4 x_5.
+  subst x_2 x_3 x_4 x_5.
   remember x_0 as addr.
   remember x_1 as size.
-  remember 
+  remember v_0 as length.
+
+  apply H24.
 Qed.
 
 

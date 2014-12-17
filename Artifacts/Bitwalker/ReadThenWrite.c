@@ -46,7 +46,7 @@ int ReadThenWrite(Bitstream* stream, uint32_t length)
       requires BitstreamInvariant(stream);
       requires length <= 64;
       requires NormalBitsequence(stream, length);
-      requires value < (1 << length);
+      requires value < (1 << length) || length == 64;
 
       assigns stream->addr[0..stream->size-1];
       assigns stream->bitpos;
