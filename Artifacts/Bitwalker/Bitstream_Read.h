@@ -13,7 +13,7 @@
 
   assigns  stream->bitpos;
 
-  ensures \old(stream->bitpos) + length == stream->bitpos;
+  ensures  increment: stream->bitpos == \old(stream->bitpos) + length;
 
   behavior  invalid_bit_sequence:
     assumes  !NormalBitsequence(stream, length);
@@ -26,8 +26,6 @@
     assumes  NormalBitsequence(stream, length);
 
     assigns  stream->bitpos;
-
-    ensures increment:    stream->bitpos == \old(stream->bitpos) + length;
 
     ensures copied:       BitstreamEqual64(stream, \old(stream->bitpos), stream->bitpos, \result);
 
