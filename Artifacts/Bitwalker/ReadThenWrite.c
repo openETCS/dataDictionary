@@ -14,7 +14,7 @@
 
     ensures unchanged:   BitstreamUnchanged{Old}(stream, 0, 8 * stream->size);
 */
-int ReadThenWrite(Bitstream* stream, uint32_t length)
+void ReadThenWrite(Bitstream* stream, const uint32_t length)
 {
   uint64_t value = Bitstream_Read(stream, length);
 
@@ -23,11 +23,10 @@ int ReadThenWrite(Bitstream* stream, uint32_t length)
    //@ assert value < (1 << length);
    //@ assert stream->bitpos == \at(stream->bitpos, Pre) + length;
 
-  int result =  Bitstream_Write(stream, length, value);
+  Bitstream_Write(stream, length, value);
 
   //@ assert unchanged_left:  BitstreamUnchanged{Pre}(stream, 0, \at(stream->bitpos, Pre));
   //@ assert copied:          BitstreamEqual64(stream, \at(stream->bitpos, Pre), stream->bitpos, value);
   //@ assert unchanged_right: BitstreamUnchanged{Pre}(stream, stream->bitpos, 8 * stream->size);
 
-  return result;
 }
