@@ -278,6 +278,11 @@ Proof.
   intros.
   subst x_0 x_1 x_2 x_3 x_4.
   subst a_1.
+
+  unfold P_BitstreamEqual64 in *.
+  intros.
+
+  apply H29; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_ReadThenWrite_stmt_assign_part3.
