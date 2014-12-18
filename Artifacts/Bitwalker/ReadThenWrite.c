@@ -7,7 +7,7 @@
     requires stream_inv:   BitstreamInvariant(stream);
     requires max_length:   length <= 64;
     requires max_pos:      stream->bitpos + length <= UINT32_MAX;
-    requires max_pos:      NormalBitsequence(stream, 2*length);
+    requires max_pos:      NormalBitsequence(stream, length);
 
     assigns stream->addr[0..stream->size-1];
     assigns stream->bitpos;
@@ -22,6 +22,9 @@ void ReadThenWrite(Bitstream* stream, const uint32_t length)
    //@ assert not_set: LeftNotSet64(value, 64 - length);
    //@ assert value < (1 << length);
    //@ assert stream->bitpos == \at(stream->bitpos, Pre) + length;
+
+  stream -= length;
+  //@ assert stream->bitpos == \at(stream->bitpos, Pre);
 
   Bitstream_Write(stream, length, value);
 
