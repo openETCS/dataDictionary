@@ -14,12 +14,9 @@ Proof.
       rewrite access_update_neq.
       - rewrite access_update.
         assumption.
-      - intuition.
-        subst a_1 a_2.
+      - subst a_1 a_2.
         rewrite shift_zero in *.
-        apply shift_injective in H3.
-        intuition.  
-
+        apply shift_different; omega.
     +  admit.
  
 Qed.
