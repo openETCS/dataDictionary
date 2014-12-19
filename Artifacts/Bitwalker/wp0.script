@@ -321,6 +321,78 @@ Proof.
   apply H27.
 Qed.
 
+Goal typed_ref_BitTest_ReadThenWrite_stmt_post_copied.
+Hint ReadThenWrite,copied,default,property.
+Proof.
+(* --------------------------------------
+  
+From 'typed_ref_BitTest_ReadThenWrite_stmt_post_2': 
+  intros.
+
+  unfold P_NormalBitsequence in *.
+  rewrite shift_zero in *.
+  rewrite shift_zero in *.
+  subst a_0 a_1.
+  subst x_1 x_2 x_3 x_4 x_5.
+  remember x_0 as addr.
+
+  remember (Mint_0.[ shift stream_0 1]) as size_0.
+  remember (Mint_0.[ shift stream_0 2]) as bitpos_0.
+ 
+  remember (m_0.[ shift stream_0 1]) as size_1.
+  remember (m_0.[ shift stream_0 2]) as bitpos_1.
+
+  remember (m_1.[ shift stream_0 1]) as size_2.
+  remember (m_1.[ shift stream_0 2]) as bitpos_2.
+
+  assert(L: v_0 = bitpos_1).
+    admit.
+  rewrite L in *.
+
+  remember (bitpos_1 - bitpos_0)%Z as length.
+
+  apply H27.
+*)
+(* --------------------------------------
+  
+From 'typed_ref_BitTest_ReadThenWrite_stmt_post_valid_result': 
+  intros.
+  unfold P_NormalBitsequence in *.
+  subst a_0.
+  subst x_0 x_1 x_2.
+
+  remember (Mint_0 .[ shift stream_0 1]) as size.
+  remember (Mint_0 .[ shift stream_0 2]) as bitpos.
+
+  assert(m_0 .[ shift stream_0 2] = v_0).
+    subst m_0.
+    rewrite access_update; reflexivity.
+  rewrite H16 in *.
+
+  assert(m_0 .[ shift stream_0 1] = size).
+    subst m_0.
+    rewrite access_update_neq; auto.
+    intuition.
+    apply shift_injective in H17.
+    intuition.
+  rewrite H17 in *.
+
+  apply H14.
+  remember v_0 as new_bitpos.
+  remember (new_bitpos - bitpos)%Z as length.
+  auto with zarith.
+
+*)
+Qed.
+
+Goal typed_ref_BitTest_ReadThenWrite_stmt_post_increment.
+Hint ReadThenWrite,default,increment,property.
+Proof.
+  intros.
+  subst x_0 x_1.
+  auto with zarith.
+Qed.
+
 Goal typed_ref_BitTest_ReadThenWrite_stmt_post_valid_result.
 Hint ReadThenWrite,default,property,valid_result.
 Proof.
@@ -335,22 +407,21 @@ Proof.
   assert(m_0 .[ shift stream_0 2] = v_0).
     subst m_0.
     rewrite access_update; reflexivity.
-  rewrite H17 in *.
+  rewrite H16 in *.
 
   assert(m_0 .[ shift stream_0 1] = size).
     subst m_0.
     rewrite access_update_neq; auto.
     intuition.
-    apply shift_injective in H18.
+    apply shift_injective in H17.
     intuition.
-  rewrite H18 in *.
+  rewrite H17 in *.
 
-  apply H15.
+  apply H14.
+  remember v_0 as new_bitpos.
+  remember (new_bitpos - bitpos)%Z as length.
+  auto with zarith.
 
-
-  subst m_0.
-  rewrite access_update.
-  rewrite access_update_neq.
 Qed.
 
 
