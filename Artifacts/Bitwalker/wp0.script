@@ -339,8 +339,11 @@ Proof.
 
   assert(m_0 .[ shift stream_0 1] = size).
     subst m_0.
-    rewrite access_update_neq.
-    auto.
+    rewrite access_update_neq; auto.
+    intuition.
+    apply shift_injective in H18.
+    intuition.
+  rewrite H18 in *.
 
   apply H15.
 
