@@ -39,10 +39,10 @@ WP_FLAGS += -warn-signed-overflow
 WP_FLAGS += -warn-unsigned-overflow
 
 #Qed options
-WP_FLAGS += -wp-no-simpl
-WP_FLAGS += -wp-no-clean
-WP_FLAGS += -wp-no-let
-WP_FLAGS += -wp-no-pruning
+#WP_FLAGS += -wp-no-simpl
+#WP_FLAGS += -wp-no-clean
+#WP_FLAGS += -wp-no-let
+#WP_FLAGS += -wp-no-pruning
 WP_FLAGS += -wp-no-bits
 
 WP_FLAGS += -wp-split
