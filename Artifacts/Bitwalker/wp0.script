@@ -285,6 +285,28 @@ Proof.
   apply H29; auto with zarith.
 Qed.
 
+Goal typed_ref_BitTest_ReadThenWrite_assert_result_bound.
+Hint ReadThenWrite,property,result_bound.
+Proof.
+  intros.
+
+  unfold P_NormalBitsequence in *.
+  subst a_0 a_1.
+  subst x_0 x_1 x_2 x_3.
+
+  remember (Mint_0.[ shift stream_0 1]) as size_0.
+  remember (Mint_0.[ shift stream_0 2]) as bitpos_0.
+ 
+  remember (m_0.[ shift stream_0 1]) as size_1.
+  remember (m_0.[ shift stream_0 2]) as bitpos_1.
+
+  assert(L: v_0 = bitpos_1).
+    admit.
+  rewrite L in *.
+
+  remember (bitpos_1 - bitpos_0)%Z as length.
+Qed.
+
 Goal typed_ref_BitTest_ReadThenWrite_stmt_assign_part3.
 Hint *,ReadThenWrite,default,part-2,result,stmt-assigns,stream.
 Proof.
@@ -397,6 +419,9 @@ Goal typed_ref_BitTest_ReadThenWrite_stmt_post_valid_result.
 Hint ReadThenWrite,default,property,valid_result.
 Proof.
   intros.
+  unfold is_uint32 in *.
+  unfold is_uint64 in *.
+
   unfold P_NormalBitsequence in *.
   subst a_0.
   subst x_0 x_1 x_2.
@@ -417,10 +442,15 @@ Proof.
     intuition.
   rewrite H17 in *.
 
-  apply H14.
   remember v_0 as new_bitpos.
   remember (new_bitpos - bitpos)%Z as length.
-  auto with zarith.
+  replace (64 + bitpos - new_bitpos)%Z with (64 - length)%Z in * by omega.
+
+  apply bits_and_bounds_uint; auto with zarith.
+  unfold P_LeftNotSet64 in *.
+  intros.
+  replace k%Z with (63 - (63 - k))%Z by omega.
+  apply H12; auto with zarith.
 
 Qed.
 

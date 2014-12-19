@@ -16,7 +16,7 @@
 */
 void ReadThenWrite(Bitstream* stream, const uint32_t length)
 {
-  /*@
+  /*
      requires valid_stream:     \valid(stream);
      requires stream_invariant: BitstreamInvariant(stream);
      requires max_length:       length <= 64;
@@ -28,16 +28,15 @@ void ReadThenWrite(Bitstream* stream, const uint32_t length)
 
      ensures increment:     stream->bitpos == \old(stream->bitpos) + length;
      ensures copied:        BitstreamEqual64{Pre}(stream, \old(stream->bitpos), stream->bitpos, value);
-     ensures not_set:       LeftNotSet64(value, 64 - length);
+     //ensures not_set:       LeftNotSet64(value, 64 - length);
      ensures unchanged:     BitstreamUnchanged{Pre}(stream, 0, 8*stream->size);
      ensures valid_result:  value < (1 << length);
   */
   uint64_t value = Bitstream_Read(stream, length);
 
-#ifdef jajaaj
    //@ assert copied:       BitstreamEqual64(stream, \at(stream->bitpos, Pre), stream->bitpos, value);
    //@ assert not_set:      LeftNotSet64(value, 64 - length);
-   //@ assert valid_result: value < (1 << length);
+   //@ assert result_bound: value < (1 << length);
    //@ assert increment:    stream->bitpos == \at(stream->bitpos, Pre) + length;
 
   stream->bitpos -= length;
@@ -60,5 +59,4 @@ void ReadThenWrite(Bitstream* stream, const uint32_t length)
   //@ assert unchanged_left:  BitstreamUnchanged{Pre}(stream, 0, \at(stream->bitpos, Pre));
   //@ assert copied:          BitstreamEqual64(stream, \at(stream->bitpos, Pre), stream->bitpos, value);
   //@ assert unchanged_right: BitstreamUnchanged{Pre}(stream, stream->bitpos, 8 * stream->size);
-#endif
 }
