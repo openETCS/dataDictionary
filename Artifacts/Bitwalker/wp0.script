@@ -321,4 +321,33 @@ Proof.
   apply H27.
 Qed.
 
+Goal typed_ref_BitTest_ReadThenWrite_stmt_post_valid_result.
+Hint ReadThenWrite,default,property,valid_result.
+Proof.
+  intros.
+  unfold P_NormalBitsequence in *.
+  subst a_0.
+  subst x_0 x_1 x_2.
+
+  remember (Mint_0 .[ shift stream_0 1]) as size.
+  remember (Mint_0 .[ shift stream_0 2]) as bitpos.
+
+  assert(m_0 .[ shift stream_0 2] = v_0).
+    subst m_0.
+    rewrite access_update; reflexivity.
+  rewrite H17 in *.
+
+  assert(m_0 .[ shift stream_0 1] = size).
+    subst m_0.
+    rewrite access_update_neq.
+    auto.
+
+  apply H15.
+
+
+  subst m_0.
+  rewrite access_update.
+  rewrite access_update_neq.
+Qed.
+
 
