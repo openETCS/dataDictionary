@@ -79,7 +79,7 @@ Qed.
 
 
 Lemma shift_different :
-   forall a, forall i j, i <> j -> (shift a i) <> (shift a j).
+   (forall a i j, i <> j -> (shift a i) <> (shift a j))%Z.
 Proof.
    intros.
    intuition.
