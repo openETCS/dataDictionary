@@ -39,7 +39,7 @@ void ReadThenWrite(Bitstream* stream, const uint32_t length)
    //@ assert valid_result: value < (1 << length);
    //@ assert increment:    stream->bitpos == \at(stream->bitpos, Pre) + length;
 
-  stream -= length;
+  stream->bitpos -= length;
   //@ assert stream->bitpos == \at(stream->bitpos, Pre);
 
   /*@
