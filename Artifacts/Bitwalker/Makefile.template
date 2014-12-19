@@ -29,15 +29,25 @@ SCRIPT?='wp0.script' # default script
 WP_FLAGS  =-cpp-command 'gcc -C -E -nostdinc $(INCLUDES)'
 WP_FLAGS += -pp-annot -no-unicode
 WP_FLAGS += -wp
+WP_FLAGS += -wp-model Typed+ref
+
+# RTE options
+WP_FLAGS += -wp-rte
 WP_FLAGS += -warn-signed-downcast
 WP_FLAGS += -warn-signed-overflow
 #WP_FLAGS += -warn-unsigned-downcast
 WP_FLAGS += -warn-unsigned-overflow
-WP_FLAGS += -wp-rte
+
+#Qed options
+#WP_FLAGS += -wp-no-simpl
+#WP_FLAGS += -wp-no-clean
+#WP_FLAGS += -wp-no-let
+#WP_FLAGS += -wp-no-pruning
+WP_FLAGS += -wp-no-bits
+
 WP_FLAGS += -wp-split
 WP_FLAGS += -wp-driver BitTest.driver
 WP_FLAGS += -wp-script $(SCRIPT)
-WP_FLAGS += -wp-model Typed+ref
 WP_FLAGS += -wp-timeout $(WP_TIMEOUT)
 WP_FLAGS += -wp-coq-timeout $(WP_COQ_TIMEOUT)
 WP_FLAGS += -wp-steps $(WP_ALT_ERGO_STEPS)

@@ -77,3 +77,15 @@ Proof.
   auto with zarith.
 Qed.
 
+
+Lemma shift_different :
+   (forall a i j, i <> j -> (shift a i) <> (shift a j))%Z.
+Proof.
+   intros.
+   intuition.
+   assert(offset (shift a i) = offset (shift a j)).
+     rewrite H0.
+     reflexivity.
+   simpl in H1.
+   auto with zarith.
+Qed.
