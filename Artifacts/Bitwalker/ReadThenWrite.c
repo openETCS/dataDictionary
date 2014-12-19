@@ -27,7 +27,7 @@ void ReadThenWrite(Bitstream* stream, const uint32_t length)
      assigns  value;
 
      ensures increment:     stream->bitpos == \old(stream->bitpos) + length;
-     ensures copied:        BitstreamEqual64(stream, \old(stream->bitpos), stream->bitpos, value);
+     ensures copied:        BitstreamEqual64{Old}(stream, \old(stream->bitpos), stream->bitpos, value);
      ensures not_set:       LeftNotSet64(value, 64 - length);
      ensures unchanged:     BitstreamUnchanged{Old}(stream, 0, 8*stream->size);
      ensures valid_result:  value < (1 << length);
