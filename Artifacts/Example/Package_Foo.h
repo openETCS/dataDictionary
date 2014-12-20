@@ -42,7 +42,7 @@ void Package_Foo_Init(Package_Foo* p);
     assigns *p;
 
     behavior normal_case:
-      assumes stream->bitpos + 28 <= 8 * stream->size;
+      assumes NormalBitsequence(stream, 28);
 
       assigns stream->bitpos;
       assigns *p;
@@ -51,7 +51,7 @@ void Package_Foo_Init(Package_Foo* p);
       ensures \result == 1;
 
     behavior error_case:
-      assumes stream->bitpos + 28 > 8 * stream->size;
+      assumes !NormalBitsequence(stream, 28);
 
       assigns \nothing;
 
