@@ -6,17 +6,17 @@
 
 struct Package_Foo
 {
-    uint64_t ABC;  // 8
-    uint64_t DEF;  // 3
-    uint64_t GHI;  // 17
-                   // total: 28 
+  uint64_t ABC;  // 8
+  uint64_t DEF;  // 3
+  uint64_t GHI;  // 17
+  // total: 28
 };
 
 typedef struct Package_Foo Package_Foo;
 
 //static inline uint32_t Package_Foo_Bits(const Package_Foo* p)
 //{
- //   return 28;
+//   return 28;
 //}
 
 /*@
