@@ -33,8 +33,6 @@
 
     ensures unchanged:    BitstreamUnchanged{Old}(stream, 0, 8*stream->size);
 
-    ensures valid_result: \result < (1 << length);
-
   complete behaviors;
   disjoint behaviors;
 */
