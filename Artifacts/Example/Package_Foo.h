@@ -52,9 +52,11 @@ void Package_Foo_Init(Package_Foo* p);
       ensures copied:  BitstreamEqual64(stream, \old(stream->bitpos),      \old(stream->bitpos) + 8,  p->ABC);
       ensures not_set: UpperBitsNotSet(p->ABC, 8);
 
-      //ensures copied:  BitstreamEqual64(stream, \old(stream->bitpos) + 8,  \old(stream->bitpos) + 11, p->DEF);
-      //ensures copied:  BitstreamEqual64(stream, \old(stream->bitpos) + 11, \old(stream->bitpos) + 28, p->GHI);
+      ensures copied:  BitstreamEqual64(stream, \old(stream->bitpos) + 8,  \old(stream->bitpos) + 11, p->DEF);
+      ensures not_set: UpperBitsNotSet(p->ABC, 3);
 
+      ensures copied:  BitstreamEqual64(stream, \old(stream->bitpos) + 11, \old(stream->bitpos) + 28, p->GHI);
+      ensures not_set: UpperBitsNotSet(p->ABC, 17);
 
       ensures stream->bitpos == \old(stream->bitpos) + 28;
       ensures \result == 1;
