@@ -22,7 +22,7 @@ int main()
 
     std::vector<uint8_t> SaveBitstream = Bitstream;
 
-    int result = PeekThenPoke(Start, Length, Bitstream.data(), BitstreamSize);
+    int result = PeekThenPoke(Bitstream.data(), BitstreamSize, Start, Length);
 
     assert(result == 0);
     assert(Bitstream == SaveBitstream);
