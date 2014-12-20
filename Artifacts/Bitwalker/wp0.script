@@ -85,11 +85,17 @@ Proof.
   unfold P_UpperBitsNotSet in *.
   
   intros.
-  assert(length_0 <= i_1 <= 63 \/ 63 <= i_1)%Z.
-  i_1 <= 63 \/ 63 <= i_1)%Z
-    
-  replace (i_1)%Z with (63 - (63 - i_1))%Z by omega.
-  rewrite H28; auto with zarith.
+  assert(i_1 < 64 \/ ~(i_1 < 64))%Z by tauto.
+  assert(length_0 <= i_1 < 64 \/ 64 <= i_1)%Z.
+    - destruct H31 as [leq | gt].
+      + left; auto with zarith.
+      + right; auto with zarith.
+    -
+      destruct H31 as [left | right].
+      + replace (i_1)%Z with (63 - (63 - i_1))%Z by omega.
+        rewrite H28; auto with zarith.
+      + apply to_uint64_extraction_sup; auto with zarith.
+        
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Peek_normal_case_post_3.
