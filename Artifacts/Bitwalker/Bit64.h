@@ -26,5 +26,16 @@ int PeekBit64(uint64_t value, uint32_t left);
 */
 uint64_t PokeBit64(uint64_t value, uint32_t left, int flag);
 
+
+/*@
+    requires  length <= 64;
+
+    assigns \nothing;
+
+    ensures \result <==> UpperBitsNotSet(value, length);
+*/
+int UpperBitsNotSet64(uint64_t value, uint32_t length);
+
+
 #endif
 

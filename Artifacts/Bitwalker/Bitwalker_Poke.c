@@ -2,29 +2,6 @@
 #include "Bit8Array.h"
 #include "Bit64.h"
 
-
-/*@
-    requires  length <= 64;
-
-    assigns \nothing;
-
-    ensures \result <==> UpperBitsNotSet(value, length);
-*/
-int UpperBitsNotSet64(uint64_t value, uint32_t length)
-{
-  if (length < 64)
-  {
-    // compute 2^length
-    const uint64_t MaxValue = ((uint64_t) 1) << length;
-
-    return (value >= MaxValue) ? 0 : 1;
-  }
-  else
-  {
-    return 1;
-  }
-}
-
 int Bitwalker_Poke(uint8_t*  addr, uint32_t  size, uint32_t  start, uint32_t  length, uint64_t  value)
 {
   if ((start + length)  > 8 * size)
@@ -36,7 +13,6 @@ int Bitwalker_Poke(uint8_t*  addr, uint32_t  size, uint32_t  start, uint32_t  le
   {
     /*@
       loop invariant index:  0 <= i <= length;
-      //     loop invariant unchanged_left:  BitsUnchanged{Pre}(addr, 0, start);
       loop invariant unchanged_left:  \forall integer k; 0 <= k < start ==>
              (LeftBit8Array(addr, k) <==> \at(LeftBit8Array(addr, k), Pre));
 
