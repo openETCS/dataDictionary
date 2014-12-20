@@ -14,10 +14,21 @@ struct Package_Foo
 
 typedef struct Package_Foo Package_Foo;
 
-//static inline uint32_t Package_Foo_Bits(const Package_Foo* p)
-//{
-//   return 28;
-//}
+
+/*@
+   predicate BitstreamEqual(Bitstream* stream, integer pos, Package_Foo* p) =
+      BitstreamEqual64(stream, pos, pos + 8, p->ABC) &&
+      BitstreamEqual64(stream, pos + 8, pos + 11, p->DEF) &&
+      BitstreamEqual64(stream, pos + 11, pos + 28, p->GHI);
+*/
+
+/*@
+   predicate UpperBitsNotSet(Package_Foo* p) =
+      UpperBitsNotSet(p->ABC, 8) &&
+      UpperBitsNotSet(p->DEF, 3) &&
+      UpperBitsNotSet(p->GHI, 17);
+*/
+
 
 /*@
     requires \valid(p);
@@ -49,16 +60,8 @@ void Package_Foo_Init(Package_Foo* p);
       assigns stream->bitpos;
       assigns *p;
 
-      ensures copied:  BitstreamEqual64(stream, \old(stream->bitpos),      \old(stream->bitpos) + 8,  p->ABC);
-      ensures not_set: UpperBitsNotSet(p->ABC, 8);
-
-      ensures copied:  BitstreamEqual64(stream, \old(stream->bitpos) + 8,  \old(stream->bitpos) + 11, p->DEF);
-      ensures not_set: UpperBitsNotSet(p->ABC, 3);
-
-      ensures copied:  BitstreamEqual64(stream, \old(stream->bitpos) + 11, \old(stream->bitpos) + 28, p->GHI);
-      ensures not_set: UpperBitsNotSet(p->ABC, 17);
-
-      ensures stream->bitpos == \old(stream->bitpos) + 28;
+      ensures BitstreamEqual(stream, \old(stream->bitpos), p);
+      ensures UpperBitsNotSet(p);
       ensures \result == 1;
 
     behavior error_case:
