@@ -46,7 +46,7 @@ WP_FLAGS += -warn-unsigned-overflow
 WP_FLAGS += -wp-no-bits
 
 WP_FLAGS += -wp-split
-WP_FLAGS += -wp-driver BitTest.driver
+WP_FLAGS += -wp-driver ../BitTest.driver
 WP_FLAGS += -wp-script $(SCRIPT)
 WP_FLAGS += -wp-timeout $(WP_TIMEOUT)
 WP_FLAGS += -wp-coq-timeout $(WP_COQ_TIMEOUT)
@@ -104,7 +104,7 @@ export WPREPORT=$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS)
 
 
 clean:: FORCE
-	@(cd Coq; make clean)
+	@(cd ../Coq; make clean)
 	@$(RM) *.o
 	@$(RM) *.i
 	@$(RM) *.back
@@ -117,7 +117,7 @@ clean:: FORCE
 
         
 driver:
-	@(cd Coq; make compile)
+	@(cd ../Coq; make compile)
 
 format: FORCE
 	@astyle -A1 -f -p -Y -z2 --indent=spaces -s2 *.c *.h 
