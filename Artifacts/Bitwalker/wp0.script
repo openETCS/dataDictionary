@@ -82,8 +82,12 @@ Proof.
   unfold is_uint32 in *.
   unfold is_uint64 in *.
 
-  unfold P_UpperBitsNotSet64 in *.
+  unfold P_UpperBitsNotSet in *.
+  
   intros.
+  assert(length_0 <= i_1 <= 63 \/ 63 <= i_1)%Z.
+  i_1 <= 63 \/ 63 <= i_1)%Z
+    
   replace (i_1)%Z with (63 - (63 - i_1))%Z by omega.
   rewrite H28; auto with zarith.
 Qed.

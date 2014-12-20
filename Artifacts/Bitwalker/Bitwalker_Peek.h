@@ -24,9 +24,7 @@
     ensures copied:  \forall integer i; start <= i < start + length ==>
               (LeftBit8Array(addr, i) <==> LeftBit64(\result, 64 - length + i - start));
 
-    ensures not_set: UpperBitsNotSet64(\result, length);
-
-    ensures valid_result: \result < (1 << length);
+    ensures not_set: UpperBitsNotSet(\result, length);
 
   complete behaviors;
   disjoint behaviors;

@@ -45,6 +45,10 @@
    predicate
      UpperBitsNotSet64{A}(integer value, integer length) =
        \forall integer i; length <= i < 64 ==> !BitTest(value, i);
+
+   predicate
+     UpperBitsNotSet{A}(integer value, integer length) =
+       \forall integer i; length <= i ==> !BitTest(value, i);
 */
 
 
