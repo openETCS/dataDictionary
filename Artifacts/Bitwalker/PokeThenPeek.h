@@ -9,7 +9,7 @@
     requires bit_size:      8 * size <= UINT32_MAX;
     requires max_length:    length <= 64;
     requires max_pos:       start + length <= 8 * size;
-    requires max_value:     value < (1 << length);
+    requires max_value:     UpperBitsNotSet(value, length);
 
     assigns addr[0..size-1];
 

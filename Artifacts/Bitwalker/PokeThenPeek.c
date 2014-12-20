@@ -5,8 +5,6 @@
 
 uint64_t PokeThenPeek(uint8_t* addr, uint32_t size, uint32_t start, uint32_t length, uint64_t value)
 {
-  //@ assert bits_covered: \forall integer i; 0 <= i < 64-length ==> !LeftBit64(value, i);
-
   int poke_result =  Bitwalker_Poke(addr, size, start, length, value);
   //@ assert result_zero:  poke_result == 0;
 

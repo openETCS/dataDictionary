@@ -34,10 +34,10 @@ void ReadThenWrite(Bitstream* stream, const uint32_t length)
   */
   uint64_t value = Bitstream_Read(stream, length);
 
-   //@ assert copied:       BitstreamEqual64(stream, \at(stream->bitpos, Pre), stream->bitpos, value);
-   //@ assert not_set:      LeftNotSet64(value, 64 - length);
-   //@ assert result_bound: value < (1 << length);
-   //@ assert increment:    stream->bitpos == \at(stream->bitpos, Pre) + length;
+  //@ assert copied:       BitstreamEqual64(stream, \at(stream->bitpos, Pre), stream->bitpos, value);
+  //@ assert not_set:      LeftNotSet64(value, 64 - length);
+  //@ assert result_bound: value < (1 << length);
+  //@ assert increment:    stream->bitpos == \at(stream->bitpos, Pre) + length;
 
   stream->bitpos -= length;
   //@ assert stream->bitpos == \at(stream->bitpos, Pre);

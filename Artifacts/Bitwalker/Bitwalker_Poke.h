@@ -17,12 +17,12 @@
     ensures invalid_result:  \result == -1;
 
   behavior  value_too_big:
-    assumes (start + length <= 8 * size)  &&  (1 << length) <= value && length < 64;
+    assumes (start + length <= 8 * size)  &&  !UpperBitsNotSet(value, length);
     assigns \nothing;
     ensures wrong_value_result:  \result == -2;
 
   behavior  normal_case:
-    assumes (start + length <= 8 * size)  &&  (value < (1 << length) || length == 64);
+    assumes (start + length <= 8 * size)  &&  UpperBitsNotSet(value, length);
     assigns addr[0..size - 1];
 
     //ensures unchanged_left:  BitsUnchanged{Old}(addr, 0, start);
