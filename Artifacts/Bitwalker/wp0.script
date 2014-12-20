@@ -290,20 +290,18 @@ Hint PokeThenPeek,full_copy2,property.
 Proof.
   intros.
   replace (i_0)%Z with (63 - (63 - i_0))%Z by omega.
-  apply H17; omega.
+  apply H16; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_PokeThenPeek_assert_partial_copy.
 Hint PokeThenPeek,partial_copy,property.
 Proof.
   intros.
-  subst x_1 x_2 x_3.
+  subst x_1 x_2.
 
   replace (63 - i_0)%Z  with
         (length_0 + start_0 - 1 - (length_0 + start_0 + i_0 - 64))%Z by omega.
-  rewrite H18; auto with zarith.
-  rewrite H19; auto with zarith.
-  reflexivity.
+  rewrite H17; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_PokeThenPeek_post_result.
