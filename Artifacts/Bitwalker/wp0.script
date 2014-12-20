@@ -142,6 +142,44 @@ Proof.
   +   apply to_uint64_extraction_sup; auto with zarith.
 Qed.
 
+Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_copied_preserved.
+Hint Bitwalker_Poke,copied,preserved.
+Proof.
+  intros.
+
+  remember start_0 as start.
+  remember length_0 as length.
+  remember addr_0 as addr.
+  remember value_0 as value.
+  remember Mint_0 as M0.
+  remember Mint_1 as M1.
+  remember Mint_2 as M2.
+
+  remember k_0 as k.
+  remember i_0 as i.
+
+  subst x_0 x_1 x_2 x_3 x_4 x_5.
+  unfold is_uint64 in *.
+  unfold is_uint32 in *.
+  unfold  to_sint32 in *.
+
+  case_lt k (i + start)%Z.
+  * 
+   intros.
+   rewrite H35; auto with zarith.
+   symmetry.
+   apply H38; auto with zarith.
+
+  * 
+   intros.
+   assert(equal: (k = i + start)%Z) by omega.
+   rewrite equal in *.
+   rewrite <- H33; auto with zarith.
+   replace (length + start - 1 - (i + start))%Z  with  (length - 1 - i)%Z by omega.
+   symmetry.
+   assumption.
+Qed.
+
 Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_copied_preserved_part1.
 Hint Bitwalker_Poke,copied,part-0,preserved.
 Proof.
