@@ -41,11 +41,19 @@ void Package_Foo_Init(Package_Foo* p);
     assigns stream->bitpos;
     assigns *p;
 
+    ensures unchanged:    BitstreamUnchanged{Old}(stream, 0, 8*stream->size);
+
     behavior normal_case:
       assumes NormalBitsequence(stream, 28);
 
       assigns stream->bitpos;
       assigns *p;
+
+      ensures copied:  BitstreamEqual64(stream, \old(stream->bitpos),      \old(stream->bitpos) + 8,  p->ABC);
+      ensures copied:  BitstreamEqual64(stream, \old(stream->bitpos) + 8,  \old(stream->bitpos) + 11, p->DEF);
+      ensures copied:  BitstreamEqual64(stream, \old(stream->bitpos) + 11, \old(stream->bitpos) + 28, p->GHI);
+
+      //ensures not_set:      LeftNotSet64(\result, 64 - length);
 
       ensures stream->bitpos == \old(stream->bitpos) + 28;
       ensures \result == 1;

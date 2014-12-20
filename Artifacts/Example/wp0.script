@@ -11,4 +11,19 @@ Proof.
   rewrite access_update_neq.
 Qed.
 
+Goal typed_ref_BitTest_Package_Foo_Decoder_normal_case_post_copied_2_part1.
+Hint Package_Foo_Decoder,copied,normal_case,part-0,property.
+Proof.
+  intros.
+  subst a_0 a_1 a_2 a_3 a_4.
+  subst x_0 x_1 x_2 x_3 x_4 x_5 x_6 x_7 x_8 x_9 x_10 x_11.
+
+  unfold P_BitstreamEqual64 in *.
+  intros.
+  subst m_4.
+  rewrite access_update_neq.
+    - apply H47.
+ unfold P_LeftBitInStream in *.
+Qed.
+
 
