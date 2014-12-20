@@ -25,7 +25,7 @@
     ensures valid_result:  \result == -1;
 
   behavior  value_too_big:
-    assumes NormalBitsequence(stream, length) && (1 << length) <= value && (length < 64);
+    assumes NormalBitsequence(stream, length) && !UpperBitsNotSet(value, length);
 
     assigns  stream->addr[0..stream->size - 1];
     assigns  stream->bitpos;
@@ -33,7 +33,7 @@
     ensures wrong_value_result: \result == -2;
 
   behavior  normal_case:
-    assumes NormalBitsequence(stream, length) && (value < (1 << length) || length == 64);
+    assumes NormalBitsequence(stream, length) && UpperBitsNotSet(value, length);
 
     assigns  stream->addr[0..stream->size - 1];
     assigns  stream->bitpos;

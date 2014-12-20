@@ -12,7 +12,7 @@ Proof.
 
   intros.
 
-  subst x_0 x_1 x_2 x_3 x_4 x_5 x_6.
+  subst x_0 x_1 x_2 x_3 x_4 x_5.
   subst a_0 a_1 a_2 a_3 a_4.
 
 
@@ -26,14 +26,14 @@ Proof.
   remember (Mint_0.[shift stream 1]) as size.
   remember (Mint_0.[shift stream 2]) as bitpos.
   remember (Mint_1.[shift stream 2]) as new_bitpos.
-  rewrite H7 in *.
+  rewrite H8 in *.
  
   rewrite access_update_neq.
-  + apply H30; auto with zarith.
+  + apply H29; auto with zarith.
 
   +
-    destruct H8 as [A [B C]].
-    clear H27 H28 H29 H30. (* simplify proof context *)
+    destruct H9 as [A [B C]].
+    clear H27 H28 H29. (* simplify proof context *)
     apply separated_neq with (stream) (3%Z) (addr) (size).
     - assumption.
     - unfold included; simpl; omega.
