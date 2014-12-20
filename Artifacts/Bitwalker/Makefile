@@ -1,6 +1,6 @@
 
 
-include Makefile.template
+include ../Makefile.template
 
 #WP_FLAGS += -wp-prop=-rte
 #WP_FLAGS += -wp-prop=-@lemma
