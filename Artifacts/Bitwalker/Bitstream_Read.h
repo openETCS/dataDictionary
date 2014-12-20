@@ -29,7 +29,7 @@
 
     ensures copied:       BitstreamEqual64(stream, \old(stream->bitpos), stream->bitpos, \result);
 
-    ensures not_set:      LeftNotSet64(\result, 64 - length);
+    ensures not_set:      UpperBitsNotSet(\result, length);
 
     ensures unchanged:    BitstreamUnchanged{Old}(stream, 0, 8*stream->size);
 
