@@ -4,7 +4,7 @@ include ../Makefile.template
 VPATH = ../Bitwalker
 CPPFLAGS += -I../Bitwalker
 
-Package_Foo.c: Package_Foo.h
+obj: Package_Foo_Init.o
 
 report-wp:\
-        Package_Foo.report-wp
+        Package_Foo_Init.report-wp

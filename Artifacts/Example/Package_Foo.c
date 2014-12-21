@@ -3,14 +3,6 @@
 #include "Bitstream_Read.h"
 #include "Bitstream_Write.h"
 
-void Package_Foo_Init(Package_Foo* p)
-{
-  p->ABC = 0;
-  p->DEF = 0;
-  p->GHI = 0;
-}
-
-
 int Package_Foo_Decoder(Bitstream* stream, Package_Foo* p)
 {
   if (stream->bitpos + 28 <= 8 * stream->size)

@@ -29,18 +29,6 @@ typedef struct Package_Foo Package_Foo;
       UpperBitsNotSet(p->GHI, 17);
 */
 
-
-/*@
-    requires \valid(p);
-
-    assigns  *p;
-
-    ensures  p->ABC == 0;
-    ensures  p->DEF == 0;
-    ensures  p->GHI == 0;
-*/
-void Package_Foo_Init(Package_Foo* p);
-
 /*@
     requires \valid(stream);
     requires BitstreamInvariant(stream);
