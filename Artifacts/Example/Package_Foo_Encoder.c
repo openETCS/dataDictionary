@@ -1,8 +1,6 @@
 
-#include "Package_Foo.h"
-#include "Bitstream_Read.h"
+#include "Package_Foo_Encoder.h"
 #include "Bitstream_Write.h"
-
 
 int Package_Foo_Enocder(Bitstream* stream, const Package_Foo* p)
 {
@@ -19,3 +17,4 @@ int Package_Foo_Enocder(Bitstream* stream, const Package_Foo* p)
      return 0;
   }
 }
+
