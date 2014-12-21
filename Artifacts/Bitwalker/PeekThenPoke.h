@@ -14,8 +14,7 @@
 
     ensures result_zero: \result == 0;
 
-    ensures unchanged:  \forall integer i; 0 <= i < 8 * size ==>
-         (LeftBit8Array(addr, i) <==> \old(LeftBit8Array(addr, i)));
+    ensures unchanged:  BitsUnchanged{Old}(addr, 0, 8*size);
 */
 int PeekThenPoke(uint8_t* addr, uint32_t size, uint32_t start, uint32_t length);
 

@@ -26,15 +26,12 @@
     assumes (start + length <= 8 * size)  &&  UpperBitsNotSet(value, length);
     assigns addr[0..size - 1];
 
-    //ensures unchanged_left:  BitsUnchanged{Old}(addr, 0, start);
-    ensures unchanged_left:   \forall integer i; 0 <= i < start ==>
-             (LeftBit8Array(addr, i) <==> \old(LeftBit8Array(addr, i)));
+    ensures unchanged_left:  BitsUnchanged{Old}(addr, 0, start);
 
     ensures copied:          \forall integer i; start <= i < start + length ==>
              (LeftBit8Array(addr, i) <==> LeftBit64(value, 64 - length + i - start));
 
-    ensures unchanged_right: \forall integer i; start + length <= i < 8 * size ==>
-             (LeftBit8Array(addr, i) <==> \old(LeftBit8Array(addr, i)));
+    ensures unchanged_right:  BitsUnchanged{Old}(addr, start + length, 8 * size);
 
     ensures valid_result: \result == 0;
 

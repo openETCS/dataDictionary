@@ -29,11 +29,11 @@ Proof.
   rewrite H8 in *.
  
   rewrite access_update_neq.
-  + apply H29; auto with zarith.
+  + apply H28; auto with zarith.
 
   +
     destruct H9 as [A [B C]].
-    clear H27 H28 H29. (* simplify proof context *)
+    (* clear H27 H28.  simplify proof context *)
     apply separated_neq with (stream) (3%Z) (addr) (size).
     - assumption.
     - unfold included; simpl; omega.
@@ -166,15 +166,15 @@ Proof.
   case_lt k (i + start)%Z.
   * 
    intros.
-   rewrite H35; auto with zarith.
+   rewrite H36; auto with zarith.
    symmetry.
-   apply H38; auto with zarith.
+   apply H37; auto with zarith.
 
   * 
    intros.
    assert(equal: (k = i + start)%Z) by omega.
    rewrite equal in *.
-   rewrite <- H33; auto with zarith.
+   rewrite <- H34; auto with zarith.
    replace (length + start - 1 - (i + start))%Z  with  (length - 1 - i)%Z by omega.
    symmetry.
    assumption.
@@ -255,6 +255,14 @@ Proof.
    assumption.
 Qed.
 
+Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_unchanged_left_established.
+Hint Bitwalker_Poke,established,unchanged_left.
+Proof.
+  intros.
+  unfold P_BitsUnchanged in *.
+  intros.
+Qed.
+
 Goal typed_ref_BitTest_Bitwalker_Poke_normal_case_post_3.
 Hint Bitwalker_Poke,normal_case,property.
 Proof.
@@ -276,6 +284,12 @@ Proof.
   auto with zarith.
 Qed.
 
+Goal typed_ref_BitTest_PeekThenPoke_post_unchanged.
+Hint PeekThenPoke,default,property,unchanged.
+Proof.
+(* auto with zarith. *)
+Qed.
+
 Goal typed_ref_BitTest_PokeThenPeek_assert_bits_covered.
 Hint PokeThenPeek,bits_covered,property.
 Proof.
@@ -290,7 +304,7 @@ Hint PokeThenPeek,full_copy2,property.
 Proof.
   intros.
   replace (i_0)%Z with (63 - (63 - i_0))%Z by omega.
-  apply H18; auto with zarith.
+  apply H19; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_PokeThenPeek_assert_partial_copy.
@@ -301,8 +315,8 @@ Proof.
 
   replace (63 - i_0)%Z  with
         (length_0 + start_0 - 1 - (length_0 + start_0 + i_0 - 64))%Z by omega.
-  rewrite H18; auto with zarith.
-  rewrite <- H19; auto with zarith.
+  rewrite H19; auto with zarith.
+  rewrite <- H20; auto with zarith.
   reflexivity.
 Qed.
 
