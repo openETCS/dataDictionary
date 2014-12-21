@@ -18,3 +18,6 @@ report-wp:\
 	Package_Foo_Decoder.report-wp\
 	Package_Foo_Encoder.report-wp\
 
+
+format: FORCE
+	@$(ASTYLE) *.c *.h

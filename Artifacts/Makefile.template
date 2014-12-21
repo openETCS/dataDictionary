@@ -65,8 +65,7 @@ export WP=frama-c
 export WPGUI=frama-c-gui
 export WPREPORT=$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS)
 
-export ASTYLE=astyle -A1 -H -f -p -Y -z2 --indent=tab -t8
-#export ASTYLE=astyle -A1 -H -f -p -Y -z2 --indent=spaces -s4
+export ASTYLE=astyle -A1 -H -f -p -Y -z2 --indent=spaces -s4
 
 %.format:%.c FORCE
 	@$(ASTYLE) $<
@@ -119,12 +118,6 @@ clean:: FORCE
         
 driver:
 	@(cd ../Coq; make compile)
-
-format: FORCE
-	@astyle -A1 -f -p -Y -z2 --indent=spaces -s2 *.c *.h 
-
-iformat: FORCE
-	@astyle -A1 -f -p -Y -z2 --indent=spaces -s2 -xC50 -xL *.i
 
 
 FORCE:
