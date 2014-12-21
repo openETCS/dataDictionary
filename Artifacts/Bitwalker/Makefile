@@ -16,6 +16,9 @@ clean::
 	@$(RM) TestPeekThenPoke
 	
 
+format: FORCE
+	@$(ASTYLE) *.c *.h
+
 lib: libBitwalker.a
 
 libBitwalker.a : Bit8.o Bit8Array.o Bit64.o\

@@ -5,9 +5,9 @@
 
 struct Bitstream
 {
-  uint8_t*  addr;
-  uint32_t  size;
-  uint32_t  bitpos;
+    uint8_t*  addr;
+    uint32_t  size;
+    uint32_t  bitpos;
 };
 
 typedef struct Bitstream Bitstream;
