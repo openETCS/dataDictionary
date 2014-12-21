@@ -320,6 +320,85 @@ Proof.
   apply bits_equal_uint64; auto with zarith.
 Qed.
 
+Goal typed_ref_BitTest_ReadThenWrite_assert_copied.
+Hint ReadThenWrite,copied,property.
+Proof.
+  intros.
+  unfold P_BitstreamEqual64 in *.
+  unfold P_NormalBitsequence in *.
+  subst a_0 a_1.
+  subst x_0 x_1.
+
+  remember (Mint_0 .[ shift stream_0 2]) as bitpos.
+  remember (Mint_0 .[ shift stream_0 1]) as size.
+
+  apply H15.
+
+  subst m_0.
+  rewrite access_update in *.
+  assert((Mint_0 .[ shift stream_0 2 <- v_0]) .[ shift stream_0 1] = Mint_0.[ shift stream_0 1]).
+    rewrite access_update_neq; auto with zarith.
+    admit.
+  rewrite H17 in *.
+  rewrite <- Heqsize in *.
+
+  unfold is_uint32 in *.
+  intuition.
+  auto with zarith.
+
+  rewrite access_update in *.
+Qed.
+
+Goal typed_ref_BitTest_ReadThenWrite_assert_copied1.
+Hint ReadThenWrite,copied1,property.
+Proof.
+  intros.
+  unfold P_BitstreamEqual64 in *.
+  unfold P_NormalBitsequence in *.
+  subst a_0 a_1.
+  subst x_0 x_1.
+
+  remember (Mint_0 .[ shift stream_0 2]) as bitpos.
+  remember (Mint_0 .[ shift stream_0 1]) as size.
+
+  apply H18.
+
+  subst m_0.
+  rewrite access_update in *.
+  assert((Mint_0 .[ shift stream_0 2 <- v_0]) .[ shift stream_0 1] = Mint_0.[ shift stream_0 1]).
+    rewrite access_update_neq; auto with zarith.
+    intuition.
+    apply shift_injective in H20.
+    intuition.
+  rewrite <- Heqsize in *.
+  rewrite H20 in *.
+
+  unfold is_uint32 in *.
+  intuition.
+
+Qed.
+
+Goal typed_ref_BitTest_ReadThenWrite_assert_copied2.
+Hint ReadThenWrite,copied2,property.
+Proof.
+  intros.
+  unfold P_BitstreamEqual64 in *.
+  subst a_0 a_1.
+  subst x_0 x_1.
+  remember x_2 as length.
+  remember (Mint_0 .[ shift stream_0 2]) as pos.
+
+  intros.
+  rewrite <- H18; auto with zarith.
+
+  subst m_1.
+  unfold P_LeftBitInStream in *.
+
+
+
+  assert((Mint_1 .[ shift stream_0 2 <- v_0]) = (Mint_0 .[ shift stream_0 2 <- v_0]).
+Qed.
+
 Goal typed_ref_BitTest_ReadThenWrite_assert_copied_2.
 Hint ReadThenWrite,copied,property.
 Proof.

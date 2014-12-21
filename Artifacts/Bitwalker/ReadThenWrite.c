@@ -28,26 +28,25 @@ void ReadThenWrite(Bitstream* stream, const uint32_t length)
 
        ensures increment:     stream->bitpos == \old(stream->bitpos) + length;
        ensures copied:        BitstreamEqual64{Pre}(stream, \old(stream->bitpos), stream->bitpos, value);
-       //ensures not_set:       LeftNotSet64(value, 64 - length);
+       ensures not_set:       UpperBitsNotSet(value, length);
        ensures unchanged:     BitstreamUnchanged{Pre}(stream, 0, 8*stream->size);
-       ensures valid_result:  value < (1 << length);
     */
     uint64_t value = Bitstream_Read(stream, length);
 
-    //@ assert copied:       BitstreamEqual64(stream, \at(stream->bitpos, Pre), stream->bitpos, value);
-    //@ assert not_set:      LeftNotSet64(value, 64 - length);
-    //@ assert result_bound: value < (1 << length);
+    //@ assert copied1:      BitstreamEqual64(stream, \at(stream->bitpos, Pre), stream->bitpos, value);
+    //@ assert not_set:      UpperBitsNotSet(value, length);
     //@ assert increment:    stream->bitpos == \at(stream->bitpos, Pre) + length;
 
     stream->bitpos -= length;
     //@ assert stream->bitpos == \at(stream->bitpos, Pre);
+    //@ assert NormalBitsequence(stream, length);
 
-    /*@
+    /*
         requires \valid(stream);
         requires BitstreamInvariant(stream);
         requires length <= 64;
         requires NormalBitsequence(stream, length);
-        requires value < (1 << length) || length == 64;
+        requires UpperBitsNotSet(value, length);
 
         assigns stream->addr[0..stream->size-1];
         assigns stream->bitpos;
@@ -57,6 +56,6 @@ void ReadThenWrite(Bitstream* stream, const uint32_t length)
     Bitstream_Write(stream, length, value);
 
     //@ assert unchanged_left:  BitstreamUnchanged{Pre}(stream, 0, \at(stream->bitpos, Pre));
-    //@ assert copied:          BitstreamEqual64(stream, \at(stream->bitpos, Pre), stream->bitpos, value);
+    //@ assert copied2:         BitstreamEqual64(stream, \at(stream->bitpos, Pre), stream->bitpos, value);
     //@ assert unchanged_right: BitstreamUnchanged{Pre}(stream, stream->bitpos, 8 * stream->size);
 }
