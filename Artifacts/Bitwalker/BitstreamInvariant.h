@@ -1,6 +1,6 @@
 
-#ifndef BitstreamInvariant_h
-#define BitstreamInvariant_h
+#ifndef BITSTREAMINVARIANT_H_INCLUDED
+#define BITSTREAMINVARIANT_H_INCLUDED
 
 #include "Bitstream.h"
 
@@ -25,5 +25,5 @@
 
 */
 
-#endif
+#endif // BITSTREAMINVARIANT_H_INCLUDED
 

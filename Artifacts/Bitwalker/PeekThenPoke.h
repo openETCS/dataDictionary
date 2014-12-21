@@ -1,6 +1,6 @@
 
-#ifndef PeekThenPoke_defined
-#define PeekThenPoke_defined
+#ifndef PEEKTHENPOKE_H_INCLUDED
+#define PEEKTHENPOKE_H_INCLUDED
 
 #include "FramaCBits.h"
 
@@ -19,5 +19,5 @@
 */
 int PeekThenPoke(uint8_t* addr, uint32_t size, uint32_t start, uint32_t length);
 
-#endif
+#endif // PEEKTHENPOKE_H_INCLUDED
 

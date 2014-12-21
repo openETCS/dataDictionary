@@ -1,6 +1,6 @@
 
-#ifndef Bitstream_Read_included
-#define Bitstream_Read_included
+#ifndef BITSTREAM_READ_H_INCLUDED
+#define BITSTREAM_READ_H_INCLUDED
 
 #include "Bitstream.h"
 #include "BitstreamInvariant.h"
@@ -38,5 +38,5 @@
 */
 uint64_t Bitstream_Read(Bitstream* stream, uint32_t length);
 
-#endif
+#endif // BITSTREAM_READ_H_INCLUDED
 

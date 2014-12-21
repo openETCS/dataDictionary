@@ -1,7 +1,7 @@
 
 
-#ifndef Bit8_defined
-#define Bit8_defined
+#ifndef BIT8_H_INCLUDED
+#define BIT8_H_INCLUDED
 
 #include "FramaCBits.h"
 
@@ -27,5 +27,5 @@ int PeekBit8(uint8_t byte, uint32_t left);
 */
 uint8_t PokeBit8(uint8_t byte, uint32_t left, int flag);
 
-#endif
+#endif // BIT8_H_INCLUDED
 

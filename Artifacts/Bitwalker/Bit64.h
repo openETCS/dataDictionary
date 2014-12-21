@@ -1,6 +1,6 @@
 
-#ifndef Bit64_defined
-#define Bit64_defined
+#ifndef BIT64_H_INCLUDED
+#define BIT64_H_INCLUDED
 
 #include "FramaCBits.h"
 
@@ -37,5 +37,5 @@ uint64_t PokeBit64(uint64_t value, uint32_t left, int flag);
 int UpperBitsNotSet64(uint64_t value, uint32_t length);
 
 
-#endif
+#endif  // BIT64_H_INCLUDED
 

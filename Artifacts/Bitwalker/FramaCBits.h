@@ -1,6 +1,6 @@
 
-#ifndef FramaCBits_defined
-#define FramaCBits_defined
+#ifndef FRAMACBITS_H_INCLUDED
+#define FRAMACBITS_H_INCLUDED
 
 #include <stdint.h>
 #include <limits.h>
@@ -44,4 +44,5 @@
 */
 
 
-#endif
+#endif  // FRAMACBITS_H_INCLUDED
+

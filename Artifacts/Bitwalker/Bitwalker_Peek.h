@@ -1,6 +1,6 @@
 
-#ifndef Peek_defined
-#define Peek_defined
+#ifndef BITWALKER_PEEK_H_INCLUDED
+#define BITWALKER_PEEK_H_INCLUDED
 
 #include "FramaCBits.h"
 
@@ -31,4 +31,5 @@
 */
 uint64_t Bitwalker_Peek(uint8_t* addr, uint32_t size, uint32_t start, uint32_t length);
 
-#endif
+#endif // BITWALKER_PEEK_H_INCLUDED
+

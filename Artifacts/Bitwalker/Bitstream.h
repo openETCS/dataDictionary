@@ -1,5 +1,6 @@
-#ifndef BITWALKER_H
-#define BITWALKER_H
+
+#ifndef BITSTREAM_H_INCLUDED
+#define BITSTREAM_H_INCLUDED
 
 #include "FramaCBits.h"
 
@@ -12,5 +13,5 @@ struct Bitstream
 
 typedef struct Bitstream Bitstream;
 
-#endif
+#endif // BITSTREAM_H_INCLUDED
 

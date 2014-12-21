@@ -1,6 +1,6 @@
 
-#ifndef Bit8Array_defined
-#define Bit8Array_defined
+#ifndef BIT8ARRAY_H_defined
+#define BIT8ARRAY_H_defined
 
 #include "FramaCBits.h"
 
@@ -35,5 +35,5 @@ int PeekBit8Array(uint8_t*  addr, uint32_t  size, uint32_t  left);
 */
 void PokeBit8Array(uint8_t* addr, uint32_t size, uint32_t left, int flag);
 
-#endif
+#endif // BIT8ARRAY_H_defined
 

@@ -1,5 +1,6 @@
-#ifndef INIT_H
-#define INIT_H
+
+#ifndef BITSTREAM_INIT_H_INCLUDED
+#define BITSTREAM_INIT_H_INCLUDED
 
 #include "Bitstream.h"
 #include "BitstreamInvariant.h"
@@ -22,5 +23,5 @@
 */
 void Bitstream_Init(Bitstream* stream, uint8_t* addr, uint32_t size, uint32_t bitpos);
 
-#endif
+#endif // BITSTREAM_INIT_H_INCLUDED
 

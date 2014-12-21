@@ -1,5 +1,6 @@
-#ifndef Bitwalker_Poke_defined
-#define Bitwalker_Poke_defined
+
+#ifndef BITWALKER_POKE_H_INCLUDED
+#define BITWALKER_POKE_H_INCLUDED
 
 #include "FramaCBits.h"
 
@@ -42,4 +43,5 @@
 */
 int Bitwalker_Poke(uint8_t* addr, uint32_t size, uint32_t start, uint32_t length, uint64_t value);
 
-#endif
+#endif // BITWALKER_POKE_H_INCLUDED
+

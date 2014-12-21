@@ -1,6 +1,6 @@
 
-#ifndef Bitstream_Write_included
-#define Bitstream_Write_included
+#ifndef BITSTREAM_WRITE_H_INCLUDED
+#define BITSTREAM_WRITE_H_INCLUDED
 
 #include "Bitstream.h"
 #include "BitstreamInvariant.h"
@@ -51,5 +51,5 @@
 */
 int  Bitstream_Write(Bitstream* stream, uint32_t length, uint64_t value);
 
-#endif
+#endif // BITSTREAM_WRITE_H_INCLUDED
 
