@@ -2,7 +2,7 @@
 #include "Package_Foo_Encoder.h"
 #include "Bitstream_Write.h"
 
-int Package_Foo_Enocder(Bitstream* stream, const Package_Foo* p)
+int Package_Foo_Encoder(Bitstream* stream, const Package_Foo* p)
 {
   if (stream->bitpos + 28 <= 8 * stream->size)
   {
