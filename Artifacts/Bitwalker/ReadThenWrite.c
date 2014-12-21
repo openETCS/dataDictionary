@@ -16,19 +16,22 @@
 */
 void ReadThenWrite(Bitstream* stream, const uint32_t length)
 {
+    //@ assert NormalBitsequence(stream, length);
+    //@ ghost uint32_t pos = stream->bitpos;
+
     uint64_t value = Bitstream_Read(stream, length);
 
-    //@ assert copied1:      BitstreamEqual64(stream, \at(stream->bitpos, Pre), stream->bitpos, value);
+    //@ assert copied1:      BitstreamEqual64(stream, pos, pos + length, value);
     //@ assert not_set:      UpperBitsNotSet(value, length);
-    //@ assert increment:    stream->bitpos == \at(stream->bitpos, Pre) + length;
+    //@ assert increment:    stream->bitpos == pos + length;
 
     stream->bitpos -= length;
-    //@ assert stream->bitpos == \at(stream->bitpos, Pre);
+    //@ assert stream->bitpos == pos;
     //@ assert NormalBitsequence(stream, length);
 
     Bitstream_Write(stream, length, value);
 
-    //@ assert unchanged_left:  BitstreamUnchanged{Pre}(stream, 0, \at(stream->bitpos, Pre));
-    //@ assert copied2:         BitstreamEqual64(stream, \at(stream->bitpos, Pre), stream->bitpos, value);
-    //@ assert unchanged_right: BitstreamUnchanged{Pre}(stream, stream->bitpos, 8 * stream->size);
+    //@ assert unchanged_left:  BitstreamUnchanged{Pre}(stream, 0, pos);
+    //@ assert copied2:         BitstreamEqual64(stream, pos, pos + length, value);
+    //@ assert unchanged_right: BitstreamUnchanged{Pre}(stream, pos + length, 8 * stream->size);
 }
