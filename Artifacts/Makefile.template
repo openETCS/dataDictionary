@@ -65,7 +65,7 @@ export WP=frama-c
 export WPGUI=frama-c-gui
 export WPREPORT=$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS)
 
-export ASTYLE=astyle -A1 -H -f -p -Y -z2 --indent=spaces -s4
+export ASTYLE=astyle -A1 -m0 -H -f -p -Y -z2 --indent=spaces -s4
 
 %.format:%.c FORCE
 	@$(ASTYLE) $<
