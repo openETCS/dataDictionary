@@ -14,7 +14,6 @@ struct Package_Foo
 
 typedef struct Package_Foo Package_Foo;
 
-
 /*@
    predicate BitstreamEqual(Bitstream* stream, integer pos, Package_Foo* p) =
       BitstreamEqual64(stream, pos, pos + 8, p->ABC) &&
@@ -28,41 +27,6 @@ typedef struct Package_Foo Package_Foo;
       UpperBitsNotSet(p->DEF, 3) &&
       UpperBitsNotSet(p->GHI, 17);
 */
-
-/*@
-    requires \valid(stream);
-    requires BitstreamInvariant(stream);
-    requires stream->bitpos + 28 <= UINT32_MAX;
-    requires \valid(p);
-    requires \separated(stream, p);
-    requires \separated(stream->addr + (0..stream->size-1), p);
-
-    assigns stream->bitpos;
-    assigns *p;
-
-    ensures unchanged:    BitstreamUnchanged{Old}(stream, 0, 8*stream->size);
-
-    behavior normal_case:
-      assumes NormalBitsequence(stream, 28);
-
-      assigns stream->bitpos;
-      assigns *p;
-
-      ensures BitstreamEqual(stream, \old(stream->bitpos), p);
-      ensures UpperBitsNotSet(p);
-      ensures \result == 1;
-
-    behavior error_case:
-      assumes !NormalBitsequence(stream, 28);
-
-      assigns \nothing;
-
-      ensures \result == 0;
-
-    complete behaviors;
-    disjoint behaviors;
-*/
-int Package_Foo_Decoder(Bitstream* stream, Package_Foo* p);
 
 
 /*@
