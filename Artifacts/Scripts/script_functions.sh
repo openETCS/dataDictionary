@@ -187,7 +187,7 @@ function reportWp()
              let "percent=(100*$valid)/$goalCount"
         else    percent=0
         fi
-    printf  "   verify  %-25s [%-3d %3d   (%-3d %3d %3d %3d)]     %3d%%\n" $1 $goalCount $valid $valid_qed $valid_alt_ergo $valid_cvc4 $valid_coq $percent
+    printf  "   verify  %-35s [%-4d %3d   (%-3d %3d %3d %3d)]     %3d%%\n" $1 $goalCount $valid $valid_qed $valid_alt_ergo $valid_cvc4 $valid_coq $percent
 
 
     unset goalCount
