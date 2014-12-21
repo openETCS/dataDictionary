@@ -361,17 +361,17 @@ Proof.
   remember (Mint_0 .[ shift stream_0 2]) as bitpos.
   remember (Mint_0 .[ shift stream_0 1]) as size.
 
-  apply H18.
+  apply H19.
 
   subst m_0.
   rewrite access_update in *.
   assert((Mint_0 .[ shift stream_0 2 <- v_0]) .[ shift stream_0 1] = Mint_0.[ shift stream_0 1]).
     rewrite access_update_neq; auto with zarith.
     intuition.
-    apply shift_injective in H20.
+    apply shift_injective in H21.
     intuition.
   rewrite <- Heqsize in *.
-  rewrite H20 in *.
+  rewrite H21 in *.
 
   unfold is_uint32 in *.
   intuition.
