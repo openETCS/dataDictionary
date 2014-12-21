@@ -8,11 +8,11 @@ int Package_Foo_UpperBitsNotSet(const Package_Foo* p)
       UpperBitsNotSet64(p->DEF, 3) &&
       UpperBitsNotSet64(p->GHI, 17))
   {
-     return 1;
+    return 1;
   }
   else
   {
-     return 0;
+    return 0;
   }
 }
 

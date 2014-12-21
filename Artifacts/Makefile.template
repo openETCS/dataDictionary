@@ -65,19 +65,20 @@ export WP=frama-c
 export WPGUI=frama-c-gui
 export WPREPORT=$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS)
 
-
+export ASTYLE=astyle -A1 -H -f -p -Y -z2 --indent=tab -t8
+#export ASTYLE=astyle -A1 -H -f -p -Y -z2 --indent=spaces -s4
 
 %.format:%.c FORCE
-	@astyle -A1 -f -p -Y -z2 --indent=spaces -s2 $<
+	@$(ASTYLE) $<
 
 %.format:%.cpp FORCE
-	@astyle -A1 -f -p -Y -z2 --indent=spaces -s2 $<
+	@$(ASTYLE) $<
 
 %.format:%.h FORCE
-	@astyle -A1 -f -p -Y -z2 --indent=spaces -s2 $<
+	@$(ASTYLE) $<
 
 %.format:%.hpp FORCE
-	@astyle -A1 -f -p -Y -z2 --indent=spaces -s2 $<
+	@$(ASTYLE) $<
 
 # start WP on command line and run provers
 %.wp:%.c FORCE driver
