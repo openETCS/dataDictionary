@@ -157,6 +157,9 @@ Proof.
   remember Mint_1 as M1.
   remember Mint_2 as M2.
 
+  unfold P_EqualBits64_1_ in *.
+  intro k_0. intros.
+
   remember k_0 as k.
   remember i_0 as i.
 
@@ -168,16 +171,16 @@ Proof.
   case_lt k (i + start)%Z.
   * 
    intros.
-   rewrite H36; auto with zarith.
+   rewrite H31; auto with zarith.
    symmetry.
-   apply H37; auto with zarith.
+   apply H35; auto with zarith.
 
   * 
    intros.
    assert(equal: (k = i + start)%Z) by omega.
    rewrite equal in *.
-   rewrite <- H34; auto with zarith.
-   replace (length + start - 1 - (i + start))%Z  with  (length - 1 - i)%Z by omega.
+   rewrite <- H33; auto with zarith.
+   replace (start + length - 1 - (i + start))%Z  with  (length - 1 - i)%Z by omega.
    symmetry.
    assumption.
 Qed.

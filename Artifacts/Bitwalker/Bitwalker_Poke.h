@@ -28,8 +28,9 @@
 
     ensures unchanged_left:  BitsUnchanged{Old}(addr, 0, start);
 
-    ensures copied:          \forall integer i; start <= i < start + length ==>
-             (LeftBit8Array(addr, i) <==> LeftBit64(value, 64 - length + i - start));
+    ensures copied:  EqualBits64(addr, start, start + length, value);
+    //ensures copied:          \forall integer i; start <= i < start + length ==>
+             //(LeftBit8Array(addr, i) <==> LeftBit64(value, 64 - length + i - start));
 
     ensures unchanged_right:  BitsUnchanged{Old}(addr, start + length, 8 * size);
 
