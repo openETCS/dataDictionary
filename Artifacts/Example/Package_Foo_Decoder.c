@@ -6,11 +6,13 @@ int Package_Foo_Decoder(Bitstream* stream, Package_Foo* p)
 {
     if (stream->bitpos + 28 <= 8 * stream->size)
     {
+        //@ assert NormalBitsequence(stream, 28);
         //@ ghost uint32_t pos = stream->bitpos;
 
+        //@ assert NormalBitsequence(stream, 8);
         p->ABC = Bitstream_Read(stream, 8);
         //@ assert stream->bitpos == pos + 8;
-        //@ assert BitstreamEqual64(stream, pos, pos + 8,  p->ABC);
+        //@ assert ABC_equal: BitstreamEqual64(stream, pos, pos + 8,  p->ABC);
         //@ assert UpperBitsNotSet(p->ABC, 8);
 
         p->DEF = Bitstream_Read(stream, 3);
