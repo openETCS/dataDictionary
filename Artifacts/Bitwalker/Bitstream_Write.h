@@ -33,7 +33,7 @@
     ensures wrong_value_result: \result == -2;
 
   behavior  normal_case:
-    assumes NormalBitsequence(stream, length) && UpperBitsNotSet(value, length);
+    assumes NormalBitsequence{Pre}(stream, length) && UpperBitsNotSet{Pre}(value, length);
 
     assigns  stream->addr[0..stream->size - 1];
     assigns  stream->bitpos;
