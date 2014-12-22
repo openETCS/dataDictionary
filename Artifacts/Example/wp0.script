@@ -11,6 +11,31 @@ Proof.
   rewrite access_update_neq.
 Qed.
 
+Goal typed_ref_BitTest_Package_Foo_Decoder_assert_2.
+Hint Package_Foo_Decoder,property.
+Proof.
+  intros.
+  subst a_0 a_1 a_2.
+  subst x_0 x_1 x_2 x_3 x_4 x_5.
+
+  unfold P_BitstreamEqual64 in *.
+  intros.
+  subst m_1.
+  rewrite access_update_neq.
+  subst m_0.
+  rewrite access_update in *.
+  remember (Mint_0 .[ shift stream_0 2]) as pos.
+  rewrite <- H33 in *.
+    rewrite <- H37; auto with zarith.
+
+
+  assert(((Mint_0 .[ shift stream_0 2 <- 8 + pos]) .[ shift p_0 0 <- v_0]) =
+           Mint_0 .[ shift p_0 0 <- v_0]).
+    rewrite -> access_update_neq.
+    - apply H47.
+ unfold P_LeftBitInStream in *.
+Qed.
+
 Goal typed_ref_BitTest_Package_Foo_Decoder_normal_case_post_copied_2_part1.
 Hint Package_Foo_Decoder,copied,normal_case,part-0,property.
 Proof.
