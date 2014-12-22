@@ -53,21 +53,23 @@ Proof.
   unfold is_uint8 in *.
   unfold is_uint32 in *.
   unfold is_uint64 in *.
+  unfold P_EqualBits64 in *.
+  intros k_0. intros.
 
   case_lt k_0 (i_0 + start_0)%Z.
 
   - (* less *)
     intros less.
-    rewrite <- H32; auto with zarith.
-    replace ((length_0 + start_0 - 1 - k_0)%Z) with ((63 - (63 - (length_0 + start_0 - 1 - k_0)))%Z) by omega.
-    apply H31; auto with zarith.
+    rewrite <- H27; auto with zarith.
+    replace ((start_0 + length_0 - 1 - k_0)%Z) with ((63 - (63 - (length_0 + start_0 - 1 - k_0)))%Z) by omega.
+    apply H30; auto with zarith.
 
   - (* equal *)
     intros.
     assert(equal: (k_0 = i_0 + start_0)%Z) by auto with zarith.
     rewrite equal in *.
-    replace (length_0 + start_0 - 1 - (i_0 + start_0))%Z with (length_0 - 1 - i_0)%Z by omega.
-    rewrite <- H26.
+    replace (start_0 + length_0 - 1 - (i_0 + start_0))%Z with (length_0 - 1 - i_0)%Z by omega.
+    rewrite <- H24.
     assumption.
 Qed.
 
@@ -87,15 +89,15 @@ Proof.
   intros.
   assert(i_1 < 64 \/ ~(i_1 < 64))%Z by tauto.
   assert(length_0 <= i_1 < 64 \/ 64 <= i_1)%Z.
+
     - destruct H31 as [leq | gt].
       + left; auto with zarith.
       + right; auto with zarith.
-    -
-      destruct H31 as [left | right].
+
+    - destruct H31 as [left | right].
       + replace (i_1)%Z with (63 - (63 - i_1))%Z by omega.
-        rewrite H28; auto with zarith.
+        rewrite H29; auto with zarith.
       + apply to_uint64_extraction_sup; auto with zarith.
-        
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Peek_normal_case_post_3.

@@ -30,7 +30,7 @@
            (LeftBit8Array(addr, i) <==> \at(LeftBit8Array(addr, i), L));
 */
 
-/*@
+/*
    predicate
      EqualBits64{A}(uint8_t* addr, integer first, integer last, uint64_t value, integer length) =
         \forall integer i; first <= i < last ==>
