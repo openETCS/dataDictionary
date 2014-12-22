@@ -19,6 +19,10 @@ Proof.
   rewrite shift_zero in *.
   rewrite shift_zero in *.
 
+  unfold P_EqualBits64_2_ in *.
+  unfold P_EqualBits64_1_ in *.
+  intros.
+
   remember i_0 as i.
   remember stream_0 as stream.
   remember length_0 as length.
