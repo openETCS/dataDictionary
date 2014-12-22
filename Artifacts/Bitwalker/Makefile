@@ -44,4 +44,5 @@ report-wp:\
 	Bitstream_Init.report-wp\
 	Bitstream_Read.report-wp\
 	Bitstream_Write.report-wp\
+	ReadThenWrite.report-wp\
 

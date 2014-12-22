@@ -17,7 +17,7 @@
   ensures  increment: stream->bitpos == \old(stream->bitpos) + length;
 
   behavior  invalid_bit_sequence:
-    assumes  !NormalBitsequence(stream, length);
+    assumes  !NormalBitsequence{Pre}(stream, length);
 
     assigns  stream->addr[0..stream->size - 1];
     assigns  stream->bitpos;
@@ -25,7 +25,7 @@
     ensures valid_result:  \result == -1;
 
   behavior  value_too_big:
-    assumes NormalBitsequence(stream, length) && !UpperBitsNotSet(value, length);
+    assumes NormalBitsequence{Pre}(stream, length) && !UpperBitsNotSet(value, length);
 
     assigns  stream->addr[0..stream->size - 1];
     assigns  stream->bitpos;

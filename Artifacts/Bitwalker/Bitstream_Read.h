@@ -16,7 +16,7 @@
   ensures  increment: stream->bitpos == \old(stream->bitpos) + length;
 
   behavior  invalid_bit_sequence:
-    assumes  !NormalBitsequence(stream, length);
+    assumes  !NormalBitsequence{Pre}(stream, length);
 
     assigns  stream->bitpos;
 
