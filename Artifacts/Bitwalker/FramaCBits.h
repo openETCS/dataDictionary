@@ -30,11 +30,17 @@
            (LeftBit8Array(addr, i) <==> \at(LeftBit8Array(addr, i), L));
 */
 
-/*
-   predicate
-     EqualBits64{A}(uint8_t* addr, integer first, integer last, uint64_t value, integer length) =
+/*@
+   predicate EqualBits64{A}(uint8_t* addr,
+                            integer first, integer last,
+                            uint64_t value, integer length) =
         \forall integer i; first <= i < last ==>
-          (LeftBit8Array(addr, i) <==> LeftBit64(value, 64 - length + i - first));
+           (LeftBit8Array(addr, i) <==>
+            LeftBit64(value, 64 - length + i - first));
+
+   // overloaded version
+   predicate EqualBits64{A}(uint8_t* addr, integer first, integer last, uint64_t value) =
+        EqualBits64(addr, first, last, value, last - first);
 */
 
 /*@

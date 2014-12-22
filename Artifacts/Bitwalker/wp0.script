@@ -53,7 +53,7 @@ Proof.
   unfold is_uint8 in *.
   unfold is_uint32 in *.
   unfold is_uint64 in *.
-  unfold P_EqualBits64 in *.
+  unfold P_EqualBits64_1_ in *.
   intros k_0. intros.
 
   case_lt k_0 (i_0 + start_0)%Z.

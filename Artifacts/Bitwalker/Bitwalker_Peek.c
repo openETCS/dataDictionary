@@ -2,14 +2,6 @@
 #include "Bit8Array.h"
 #include "Bit64.h"
 
-/*@
-   predicate
-     EqualBits64{A}(uint8_t* addr, integer first, integer last,
-                    uint64_t value, integer length) =
-        \forall integer i; first <= i < last ==>
-          (LeftBit8Array(addr, i) <==> LeftBit64(value, 64 - length + i - first));
-*/
-
 uint64_t Bitwalker_Peek(uint8_t*  addr, uint32_t  size, uint32_t  start, uint32_t  length)
 {
     if ((start + length) > 8 * size)
@@ -23,8 +15,6 @@ uint64_t Bitwalker_Peek(uint8_t*  addr, uint32_t  size, uint32_t  start, uint32_
       loop invariant index:  0 <= i <= length;
 
       loop invariant copied: EqualBits64(addr, start, start + i, retval, length);
-      //loop invariant copied: \forall integer k; start <= k < start + i ==>
-            //(LeftBit8Array(addr, k) <==> LeftBit64(retval, 64 - length + k - start));
 
       loop invariant not_set: UpperBitsNotSet(retval, length);
 
