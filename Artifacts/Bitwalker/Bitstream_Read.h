@@ -23,7 +23,7 @@
     ensures invalid_result: \result == 0;
 
   behavior  normal_case:
-    assumes  NormalBitsequence(stream, length);
+    assumes  NormalBitsequence{Pre}(stream, length);
 
     assigns  stream->bitpos;
 

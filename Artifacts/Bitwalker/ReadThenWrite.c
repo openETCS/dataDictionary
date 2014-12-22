@@ -21,7 +21,10 @@ void ReadThenWrite(Bitstream* stream, const uint32_t length)
 
     uint64_t value = Bitstream_Read(stream, length);
 
-    //@ assert copied1:      BitstreamEqual64(stream, pos, pos + length, value);
+    /*@ assert copied1:    \forall integer i; pos <= i < pos + length ==>
+      (LeftBitInStream(stream, i) <==> LeftBit64(value, 64 - length + i - pos)); */
+   
+    // assert copied1:      BitstreamEqual64(stream, pos, pos + length, value);
     //@ assert not_set:      UpperBitsNotSet(value, length);
     //@ assert increment:    stream->bitpos == pos + length;
 
