@@ -19,10 +19,11 @@ int Package_Foo_Encoder(Bitstream* stream, const Package_Foo* p)
                 assigns stream->bitpos;
                 assigns stream->addr[0..(stream->size-1)];
 
-                ensures ABC_bitpos: stream->bitpos == pos + 8;
-                ensures ABC_left:   BitstreamUnchanged{Old}(stream, 0, pos);
+                ensures ABC_bitpos: stream->bitpos == \old(stream->bitpos) + 8;
+                ensures ABC_size:   stream->size == \old(stream->size);
+                ensures ABC_left:   BitsUnchanged{Old}(stream->addr, 0, pos);
                 ensures ABC_equal:  BitstreamEqual64(stream, pos, pos + 8,  p->ABC);
-                ensures ABC_right:  BitstreamUnchanged{Old}(stream, pos + 8, 8 * stream->size);
+                ensures ABC_right:  BitsUnchanged{Old}(stream->addr, pos + 8, 8 * stream->size);
             */
             Bitstream_Write(stream, 8, p->ABC);
             //@ ghost post_ABC:
@@ -34,18 +35,15 @@ int Package_Foo_Encoder(Bitstream* stream, const Package_Foo* p)
                 assigns stream->bitpos;
                 assigns stream->addr[0..(stream->size-1)];
 
-                ensures DEF_bitpos: stream->bitpos == pos + 11;
-                ensures DEF_left:   BitstreamUnchanged{Old}(stream, 0, pos + 8);
+                ensures DEF_bitpos: stream->bitpos == \old(stream->bitpos) + 3;
+                ensures DEF_size:   stream->size == \old(stream->size);
+                ensures DEF_left:   BitsUnchanged{Old}(stream->addr, 0, pos + 8);
                 ensures DEF_equal:  BitstreamEqual64(stream, pos + 8, pos + 11,  p->DEF);
-                ensures DEF_right:  BitstreamUnchanged{Old}(stream, pos + 11, 8 * stream->size);
-                ensures ABC_equal:  EqualBits64(stream->addr, pos, pos + 8,  p->ABC);
-
-                //ensures BitstreamUnchanged{post_ABC}(stream, pos, pos + 8);
+                ensures DEF_right:  BitsUnchanged{Old}(stream->addr, pos + 11, 8 * stream->size);
             */
             Bitstream_Write(stream, 3, p->DEF);
 
-            // assert BitstreamUnchanged{post_ABC}(stream, pos, pos + 8);
-            //@ assert ABC_equal:  BitstreamEqual64(stream, pos, pos + 8,  p->ABC);
+            //@ assert stream->bitpos == pos + 11;
 
             /*@
                 requires GHI_normal: NormalBitsequence{Here}(stream, 17);
@@ -54,17 +52,18 @@ int Package_Foo_Encoder(Bitstream* stream, const Package_Foo* p)
                 assigns stream->bitpos;
                 assigns stream->addr[0..(stream->size-1)];
 
-                ensures GHI_bitpos: stream->bitpos == pos + 28;
-                ensures GHI_left:   BitstreamUnchanged{Old}(stream, 0, pos + 11);
+                ensures GHI_bitpos: stream->bitpos == \old(stream->bitpos) + 17;
+                ensures GHI_size:   stream->size == \old(stream->size);
+                ensures GHI_left:   BitsUnchanged{Old}(stream->addr, 0, pos + 11);
                 ensures GHI_equal:  BitstreamEqual64(stream, pos + 11, pos + 28,  p->GHI);
-                ensures GHI_right:  BitstreamUnchanged{Old}(stream, pos + 28, 8 * stream->size);
+                ensures GHI_right:  BitsUnchanged{Old}(stream->addr, pos + 28, 8 * stream->size);
             */
             Bitstream_Write(stream, 17, p->GHI);
 
             //@ assert ABC_equal:  BitstreamEqual64(stream, pos, pos + 8,  p->ABC);
             //@ assert DEF_equal:  BitstreamEqual64(stream, pos + 8, pos + 11,  p->DEF);
             //@ assert GHI_equal:  BitstreamEqual64(stream, pos + 11, pos + 28,  p->GHI);
-            //@ assert p_equal: BitstreamEqual(stream, pos, p);
+            //@ assert p_equal:    BitstreamEqual(stream, pos, p);
 
             return 1;
         }
