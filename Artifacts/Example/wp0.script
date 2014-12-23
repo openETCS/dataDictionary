@@ -158,6 +158,13 @@ Proof.
   apply H38; auto with zarith.
 Qed.
 
+Goal typed_ref_BitTest_Package_Foo_Decoder_assert_p_equal.
+Hint Package_Foo_Decoder,p_equal,property.
+Proof.
+  unfold P_BitstreamEqual in *.
+  intros.
+Qed.
+
 Goal typed_ref_BitTest_Package_Foo_Decoder_normal_case_post_copied_2_part1.
 Hint Package_Foo_Decoder,copied,normal_case,part-0,property.
 Proof.

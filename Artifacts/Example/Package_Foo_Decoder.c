@@ -45,6 +45,11 @@ int Package_Foo_Decoder(Bitstream* stream, Package_Foo* p)
         */
         p->GHI = Bitstream_Read(stream, 17);
 
+        //@ assert ABC_equal:  BitstreamEqual64(stream, pos, pos + 8,  p->ABC);
+        //@ assert DEF_equal:  BitstreamEqual64(stream, pos + 8, pos + 11,  p->DEF);
+        //@ assert GHI_equal:  BitstreamEqual64(stream, pos + 11, pos + 28,  p->GHI);
+        //@ assert p_equal: BitstreamEqual(stream, pos, p);
+
         return 1;
     }
     else
