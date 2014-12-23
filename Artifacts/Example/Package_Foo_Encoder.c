@@ -11,7 +11,7 @@ int Package_Foo_Encoder(Bitstream* stream, const Package_Foo* p)
         {
             //@ assert NormalBitsequence(stream, 28);
             //@ ghost uint32_t pos = stream->bitpos;
-            
+
             /*@
                 requires ABC_normal: NormalBitsequence(stream, 8);
                 requires ABC_upper:  UpperBitsNotSet(p->ABC, 8);
@@ -25,7 +25,7 @@ int Package_Foo_Encoder(Bitstream* stream, const Package_Foo* p)
                 ensures ABC_right:  BitstreamUnchanged{Old}(stream, pos + 8, 8 * stream->size);
             */
             Bitstream_Write(stream, 8, p->ABC);
-            post_ABC:
+post_ABC:
 
             /*@
                 requires DEF_normal: NormalBitsequence{Here}(stream, 3);
