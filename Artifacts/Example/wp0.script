@@ -192,4 +192,37 @@ From 'typed_ref_BitTest_Package_Foo_Decoder_normal_case_post_copied_2_part1':
 *)
 Qed.
 
+Goal typed_ref_BitTest_Package_Foo_Decoder_stmt_post_DEF_upper.
+Hint DEF_upper,Package_Foo_Decoder,default,property.
+Proof.
+  unfold P_UpperBitsNotSet_1_ in *.
+  intros.
+
+  rewrite shift_zero in *.
+  remember (Mint_0 .[ shift stream_0 2]) as pos.
+  remember (Mint_0 .[ shift stream_0 1]) as size.
+
+  rewrite H22 in *.
+  replace (8 + pos - 8)%Z with pos%Z in * by omega.
+  replace (3 + (8 + pos))%Z with (11 + pos)%Z in * by omega.
+
+  rewrite shift_zero in *.
+  remember (Mptr_0 .[ stream_0]) as addr.
+
+  remember (Mint_0 .[ shift stream_0 2 <- v_0]) as X.
+  remember (X .[ p_0 <- v_1]) as XX.
+
+  assert (XX .[ shift stream_0 2 <- 11 + pos].[ p_0] = XX.[p_0]).
+    rewrite access_update_neq.
+      reflexivity.
+      admit.
+  rewrite H36 in *.
+
+  rewrite HeqXX in *.
+  rewrite access_update in *.
+
+  apply H5.
+
+Qed.
+
 

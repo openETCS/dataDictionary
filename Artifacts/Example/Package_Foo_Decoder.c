@@ -22,21 +22,28 @@ int Package_Foo_Decoder(Bitstream* stream, Package_Foo* p)
         p->ABC = Bitstream_Read(stream, 8);
 
         /*@
-            requires DEF_normal: NormalBitsequence(stream, 3);
+            requires DEF_normal: NormalBitsequence{Here}(stream, 3);
 
             assigns stream->bitpos;
             assigns p->DEF;
 
-            ensures DEF_bitpos: stream->bitpos == pos + 3;
+            ensures DEF_bitpos: stream->bitpos == pos + 11;
             ensures DEF_equal:  BitstreamEqual64(stream, pos + 8, pos + 11,  p->DEF);
-            ensures DEF_upper:  UpperBitsNotSet(p->ABC, 3);
+            ensures DEF_upper:  UpperBitsNotSet(p->DEF, 3);
         */
         p->DEF = Bitstream_Read(stream, 3);
 
+        /*@
+            requires GHI_normal: NormalBitsequence(stream, 17);
+
+            assigns stream->bitpos;
+            assigns p->GHI;
+
+            ensures GHI_bitpos: stream->bitpos == pos + 28;
+            ensures GHI_equal:  BitstreamEqual64(stream, pos + 11, pos + 28,  p->GHI);
+            ensures GHI_upper:  UpperBitsNotSet(p->GHI, 17);
+        */
         p->GHI = Bitstream_Read(stream, 17);
-        //@ assert stream->bitpos == pos + 28;
-        //@ assert BitstreamEqual64(stream, pos + 11,  pos + 28,  p->GHI);
-        //@ assert UpperBitsNotSet(p->ABC, 17);
 
         return 1;
     }
