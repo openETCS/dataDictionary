@@ -25,7 +25,7 @@ int Package_Foo_Encoder(Bitstream* stream, const Package_Foo* p)
                 ensures ABC_right:  BitstreamUnchanged{Old}(stream, pos + 8, 8 * stream->size);
             */
             Bitstream_Write(stream, 8, p->ABC);
-post_ABC:
+            //@ ghost post_ABC:
 
             /*@
                 requires DEF_normal: NormalBitsequence{Here}(stream, 3);
@@ -38,10 +38,12 @@ post_ABC:
                 ensures DEF_left:   BitstreamUnchanged{Old}(stream, 0, pos + 8);
                 ensures DEF_equal:  BitstreamEqual64(stream, pos + 8, pos + 11,  p->DEF);
                 ensures DEF_right:  BitstreamUnchanged{Old}(stream, pos + 11, 8 * stream->size);
+
+                //ensures BitstreamUnchanged{post_ABC}(stream, pos, pos + 8);
             */
             Bitstream_Write(stream, 3, p->DEF);
 
-            //@ assert BitstreamUnchanged{post_ABC}(stream, pos, pos + 8);
+            // assert BitstreamUnchanged{post_ABC}(stream, pos, pos + 8);
             //@ assert ABC_equal:  BitstreamEqual64(stream, pos, pos + 8,  p->ABC);
 
             /*@
