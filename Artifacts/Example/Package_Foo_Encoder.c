@@ -38,6 +38,7 @@ int Package_Foo_Encoder(Bitstream* stream, const Package_Foo* p)
                 ensures DEF_left:   BitstreamUnchanged{Old}(stream, 0, pos + 8);
                 ensures DEF_equal:  BitstreamEqual64(stream, pos + 8, pos + 11,  p->DEF);
                 ensures DEF_right:  BitstreamUnchanged{Old}(stream, pos + 11, 8 * stream->size);
+                ensures ABC_equal:  EqualBits64(stream->addr, pos, pos + 8,  p->ABC);
 
                 //ensures BitstreamUnchanged{post_ABC}(stream, pos, pos + 8);
             */

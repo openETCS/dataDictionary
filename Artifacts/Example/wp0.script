@@ -35,4 +35,23 @@ Proof.
 
 Qed.
 
+Goal typed_ref_BitTest_Package_Foo_Encoder_stmt_post_ABC_equal_2.
+Hint ABC_equal,Package_Foo_Encoder,default,property.
+Proof.
+  unfold P_EqualBits64_2_ in *.
+  intros.
+
+  rewrite shift_zero in *.
+  rewrite shift_zero in *.
+
+  remember (Mptr_0 .[ stream_0]) as addr.
+  remember (Mint_0 .[ shift stream_0 1]) as size.
+  remember (Mint_0 .[ shift stream_0 2]) as pos.
+
+  rewrite H31 in *.
+  replace (8 + pos - 8)%Z with pos%Z in * by omega.
+  replace (8 + pos - pos)%Z with 8%Z in * by omega.
+  replace (3 + (8 + pos))%Z with (11 + pos)%Z in * by omega.
+Qed.
+
 

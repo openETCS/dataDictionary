@@ -23,9 +23,10 @@
       assigns stream->bitpos;
       assigns *p;
 
+      ensures \result == 1;
+      ensures stream->bitpos == \old(stream->bitpos) + 28;
       ensures BitstreamEqual(stream, \old(stream->bitpos), p);
       ensures UpperBitsNotSet(p);
-      ensures \result == 1;
 
     behavior error_case:
       assumes !NormalBitsequence(stream, 28);

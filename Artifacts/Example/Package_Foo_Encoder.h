@@ -37,6 +37,8 @@
 
       ensures \result == 1;
 
+      ensures stream->bitpos == \old(stream->bitpos) + 28;
+
       ensures unchanged_left:  BitstreamUnchanged{Old}(stream, 0, \old(stream->bitpos));
 
       ensures BitstreamEqual(stream, \old(stream->bitpos), p);
