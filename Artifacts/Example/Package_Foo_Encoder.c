@@ -11,6 +11,7 @@ int Package_Foo_Encoder(Bitstream* stream, const Package_Foo* p)
         {
             //@ assert NormalBitsequence(stream, 28);
             //@ ghost uint32_t pos = stream->bitpos;
+            //@ ghost uint32_t size = stream->size;
 
             /*@
                 requires ABC_normal: NormalBitsequence(stream, 8);
@@ -26,7 +27,8 @@ int Package_Foo_Encoder(Bitstream* stream, const Package_Foo* p)
                 ensures ABC_right:  BitsUnchanged{Old}(stream->addr, pos + 8, 8 * stream->size);
             */
             Bitstream_Write(stream, 8, p->ABC);
-            //@ ghost post_ABC:
+
+            //@ assert stream->size == size;
 
             /*@
                 requires DEF_normal: NormalBitsequence{Here}(stream, 3);
