@@ -124,4 +124,77 @@ Proof.
 
 Qed.
 
+Goal typed_ref_BitTest_Package_Foo_Encoder_stmt_post_GHI_equal.
+Hint GHI_equal,Package_Foo_Encoder,default,property.
+Proof.
+  unfold P_BitstreamEqual64 in *.
+  unfold P_EqualBits64_2_ in *.
+  unfold P_EqualBits64_1_ in *.
+  unfold P_BitstreamInvariant in *.
+  intros.
+
+  rewrite shift_zero in *.
+  rewrite shift_zero in *.
+
+  remember (Mptr_0 .[ stream_0]) as addr.
+  remember (Mint_0 .[ shift stream_0 1]) as size.
+  remember (Mint_0 .[ shift stream_0 2]) as pos.
+
+  rewrite H41 in *.
+  rewrite H42 in *.
+  replace (17 + (3 + (8 + pos)))%Z with (28 + pos)%Z in * by omega.
+  replace (3 + (8 + pos) + (28 + pos - (3 + (8 + pos))))%Z with (28 + pos)%Z in * by omega.
+  replace (8 + pos - pos)%Z with 8%Z in * by omega.
+  replace (11 + pos + (28 + pos - (11 + pos)))%Z with (28 + pos)%Z in * by omega.
+  replace (8 + pos + (11 + pos - (8 + pos)))%Z with (11 + pos)%Z in * by omega.
+  replace (3 + (8 + pos))%Z with (11 + pos)%Z in * by omega.
+
+  assert (Mint_0.[ shift stream_0 2 <- v_1].[ shift stream_0 1] = Mint_0.[shift stream_0 1]).
+    rewrite access_update_neq.
+    reflexivity.
+    apply shift_different; omega.
+
+  assert ((Mint_0.[shift stream_0 2 <- v_1]).[ shift stream_0 1] = Mint_1.[shift stream_0 1]).
+    apply H50.
+    apply separated_trans with (stream_0) (3).
+    unfold included; simpl; auto with zarith.
+    destruct H18 as [A [B C]].
+    assumption.
+  rewrite H56 in H57.
+  rewrite <- H57 in *.
+  rewrite <- Heqsize in *.
+
+  assert (Mint_1.[ shift stream_0 2 <- v_0].[ shift stream_0 1] = Mint_1.[shift stream_0 1]).
+    rewrite access_update_neq.
+    reflexivity.
+    apply shift_different; omega.
+
+  assert (Mint_1.[ shift stream_0 2 <- v_0].[ shift stream_0 1] = Mint_3.[shift stream_0 1]).
+    apply H49.
+    apply separated_trans with (stream_0) (3).
+    unfold included; simpl; auto with zarith.
+    destruct H18 as [A [B C]].
+    assumption.
+  rewrite H58 in H59.
+  rewrite <- H57 in H59.
+  rewrite <- H59 in *.
+
+  rewrite <- H53; auto with zarith.
+
+  rewrite access_update_neq.
+
+  assert(Mint_3 .[ shift p_0 2] = Mint_2 .[ shift p_0 2]).
+    apply H48.
+    apply separated_trans with (p_0) (3).
+    unfold included; simpl; auto with zarith.
+    apply separated_sym; assumption.
+  rewrite H60.
+  reflexivity.
+
+  apply separated_neq with (stream_0) (3) (p_0) (3).
+  assumption.
+  unfold included; simpl; auto with zarith.
+  unfold included; simpl; auto with zarith.
+Qed.
+
 

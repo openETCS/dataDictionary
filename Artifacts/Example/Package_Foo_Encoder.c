@@ -43,11 +43,10 @@ int Package_Foo_Encoder(Bitstream* stream, const Package_Foo* p)
             */
             Bitstream_Write(stream, 3, p->DEF);
 
-            //@ assert stream->bitpos == pos + 11;
-
             /*@
                 requires GHI_normal: NormalBitsequence{Here}(stream, 17);
                 requires GHI_upper:  UpperBitsNotSet(p->GHI, 17);
+                requires \separated(stream, p);
 
                 assigns stream->bitpos;
                 assigns stream->addr[0..(stream->size-1)];
