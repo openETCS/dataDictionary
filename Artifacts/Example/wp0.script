@@ -62,7 +62,6 @@ Proof.
   rewrite H42; auto with zarith.
   reflexivity.
 
-  admit.
 
 Qed.
 
