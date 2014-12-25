@@ -3,25 +3,16 @@
 Goal typed_ref_BitTest_Bitstream_Write_normal_case_post_copied.
 Hint Bitstream_Write,copied,normal_case,property.
 Proof.
-  intros.
   unfold P_BitstreamEqual64 in *.
+  unfold P_EqualBits64_2_ in *.
+  unfold P_EqualBits64_1_ in *.
   unfold P_NormalBitsequence in *.
-  unfold P_LeftBitInStream.
-  unfold P_BitstreamInvariant in *.
   unfold is_uint32 in *.
 
   intros.
 
-  subst x_0 x_1 x_2 x_3 x_4 x_5.
-  subst a_0 a_1 a_2 a_3 a_4.
-
-
   rewrite shift_zero in *.
   rewrite shift_zero in *.
-
-  unfold P_EqualBits64_2_ in *.
-  unfold P_EqualBits64_1_ in *.
-  intros.
 
   remember i_0 as i.
   remember stream_0 as stream.
@@ -29,19 +20,20 @@ Proof.
   remember (Mptr_0.[stream]) as addr.
   remember (Mint_0.[shift stream 1]) as size.
   remember (Mint_0.[shift stream 2]) as bitpos.
-  remember (Mint_1.[shift stream 2]) as new_bitpos.
   rewrite H8 in *.
- 
+
+  replace (length + bitpos - bitpos) with length in * by omega.
+
   rewrite access_update_neq.
   + apply H29; auto with zarith.
 
   + apply separated_neq with (stream) (3%Z) (addr) (size).
     - assumption.
-    - unfold included; simpl; omega.
+    - unfold included; simpl; auto with zarith.
 
     - assert ((0 <= (Cdiv i 8) < size)%Z).
       apply Cdiv_bounds; omega.
-      unfold included; simpl; omega.
+      unfold included; simpl; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Peek_loop_inv_copied_preserved.
