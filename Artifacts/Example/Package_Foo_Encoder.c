@@ -12,6 +12,7 @@ int Package_Foo_Encoder(Bitstream* stream, const Package_Foo* p)
             //@ assert NormalBitsequence(stream, 28);
             //@ ghost uint32_t pos = stream->bitpos;
             //@ ghost uint32_t size = stream->size;
+            //@ assert \separated(stream, stream->addr + (0..stream->size-1));
 
             /*@
                 requires ABC_normal: NormalBitsequence(stream, 8);
