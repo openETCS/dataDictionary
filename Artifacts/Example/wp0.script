@@ -201,9 +201,6 @@ Proof.
   unfold P_BitstreamEqual64 in *.
   unfold P_EqualBits64_2_ in *.
   unfold P_EqualBits64_1_ in *.
-  (* unfold P_BitstreamUnchanged in *.
-  unfold P_BitsUnchanged in *.
-  unfold P_LeftBitInStream in *. *)
 
   intros.
 
@@ -269,12 +266,12 @@ Proof.
   rewrite H10 in *.
   rewrite H11 in *.
 
-  rewrite <- H56; auto with zarith.
+  rewrite <- H55; auto with zarith.
 
   rewrite access_update_neq.
 
   assert(X3_2: Mint_3 .[ shift p_0 2] = Mint_2 .[ shift p_0 2]).
-    apply H48.
+    apply H47.
     apply separated_trans with (p_0) (3).
     unfold included; simpl; auto with zarith.
     apply separated_sym; assumption.

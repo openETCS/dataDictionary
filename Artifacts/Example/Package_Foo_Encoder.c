@@ -62,15 +62,9 @@ int Package_Foo_Encoder(Bitstream* stream, const Package_Foo* p)
                 ensures GHI_left:   BitsUnchanged{Here,Old}(stream->addr, 0, pos + 11);
                 ensures GHI_equal:  BitstreamEqual64(stream, pos + 11, pos + 28,  p->GHI);
                 ensures GHI_right:  BitsUnchanged{Here,Old}(stream->addr, pos + 28, 8 * stream->size);
-
-                //ensures ABC_GHI_equal:     BitstreamEqual64(stream, pos, pos + 8,  ABC);
-                //ensures DEF_GHI_equal:     BitstreamEqual64(stream, pos + 8, pos + 11,  DEF);
             */
             Bitstream_Write(stream, 17, p->GHI);
 
-            //@ assert ABC_final:  BitstreamEqual64(stream, pos, pos + 8,  p->ABC);
-            //@ assert DEF_:  BitsUnchanged{Here,post_DEF}(stream->addr, pos + 8, pos + 11);
-            //@ assert DEF_final:  BitstreamEqual64(stream, pos + 8, pos + 11,  p->DEF);
             return 1;
         }
         else
