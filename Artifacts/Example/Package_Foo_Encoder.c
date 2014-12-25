@@ -44,8 +44,8 @@ int Package_Foo_Encoder(Bitstream* stream, const Package_Foo* p)
                 ensures DEF_equal:  BitstreamEqual64(stream, pos + 8, pos + 11,  p->DEF);
                 ensures DEF_right:  BitsUnchanged{Old}(stream->addr, pos + 11, 8 * stream->size);
 
-                ensures ABC_keep:  p->ABC == \old(p->ABC);
-                ensures ABC_DEF_equal:  BitstreamEqual64(stream, pos, pos + 8,  p->ABC);
+                //ensures ABC_keep:  p->ABC == \old(p->ABC);
+                ensures ABC_DEF_equal: BitstreamEqual64(stream, pos, pos + 8,  p->ABC);
             */
             Bitstream_Write(stream, 3, p->DEF);
             //@ ghost post_DEF:
