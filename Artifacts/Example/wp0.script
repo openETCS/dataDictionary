@@ -86,6 +86,62 @@ Proof.
   admit.
 Qed.
 
+Goal typed_ref_BitTest_Package_Foo_Encoder_stmt_post_ABC_DEF_equal.
+Hint ABC_DEF_equal,Package_Foo_Encoder,default,property.
+Proof.
+  unfold P_BitstreamEqual64 in *.
+  unfold P_EqualBits64_2_ in *.
+  unfold P_EqualBits64_1_ in *.
+  intros.
+
+  rewrite shift_zero in *.
+  rewrite shift_zero in *.
+
+  remember (Mptr_0 .[ stream_0]) as addr.
+  remember (Mint_0 .[ shift stream_0 1]) as size.
+  remember (Mint_0 .[ shift stream_0 2]) as pos.
+
+  rewrite H33 in *.
+  replace (8 + pos - pos)%Z with 8%Z in * by omega.
+  replace (3 + (8 + pos))%Z with (11 + pos)%Z in * by omega.
+  replace (8 + pos + (11 + pos - (8 + pos)))%Z with (11 + pos)%Z in * by omega.
+
+  unfold is_uint32 in *.
+  unfold is_uint64 in *.
+
+  rewrite H11 in *.
+
+  assert(wish: forall i_0 : int,
+      i_0 < 8 + pos ->
+      pos <= i_0 -> 
+      (bit_test (Mint_2 .[ shift addr (Cdiv i_0 8)]) (7 - Cmod i_0 8) <->
+       bit_test (Mint_1 .[ shift addr (Cdiv i_0 8)]) (7 - Cmod i_0 8))).
+    admit.
+
+
+  assert (X2_1: Mint_2.[p_0] = Mint_1.[p_0]).
+  + apply H41.
+    apply separated_trans with (p_0) (3).
+    unfold included; simpl; auto with zarith.
+    apply separated_sym; assumption.
+  + rewrite X2_1 in *.
+    rewrite access_update_neq.
+    rewrite access_update_neq.
+    * rewrite H43; auto with zarith.
+      
+    * apply separated_neq with (stream_0) (3) (addr) (size).
+      assumption.
+      unfold included; simpl; auto with zarith.
+      assert ((0 <= (Cdiv i_0 8) < size)%Z).
+      - apply Cdiv_bounds; omega.
+      - unfold included; simpl; auto with zarith.
+
+    * apply separated_neq with (stream_0) (3) (p_0) (3).
+      assumption.
+      unfold included; simpl; auto with zarith.
+      unfold included; simpl; auto with zarith.
+Qed.
+
 Goal typed_ref_BitTest_Package_Foo_Encoder_stmt_post_DEF_GHI_equal.
 Hint DEF_GHI_equal,Package_Foo_Encoder,default,property.
 Proof.
