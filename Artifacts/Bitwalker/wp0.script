@@ -131,6 +131,10 @@ Qed.
 Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_copied_preserved.
 Hint Bitwalker_Poke,copied,preserved.
 Proof.
+  unfold P_EqualBits64_1_ in *.
+  unfold is_uint64 in *.
+  unfold is_uint32 in *.
+  unfold  to_sint32 in *.
   intros.
 
   remember start_0 as start.
@@ -141,18 +145,8 @@ Proof.
   remember Mint_1 as M1.
   remember Mint_2 as M2.
 
-  unfold P_EqualBits64_1_ in *.
-  intro k_0. intros.
 
-  remember k_0 as k.
-  remember i_0 as i.
-
-  subst x_0 x_1 x_2 x_3 x_4 x_5.
-  unfold is_uint64 in *.
-  unfold is_uint32 in *.
-  unfold  to_sint32 in *.
-
-  case_lt k (i + start)%Z.
+  case_lt i_1 (i_0 + start)%Z.
   * 
    intros.
    rewrite H31; auto with zarith.
@@ -161,10 +155,10 @@ Proof.
 
   * 
    intros.
-   assert(equal: (k = i + start)%Z) by omega.
+   assert(equal: (i_1 = i_0 + start)%Z) by omega.
    rewrite equal in *.
    rewrite <- H33; auto with zarith.
-   replace (start + length - 1 - (i + start))%Z  with  (length - 1 - i)%Z by omega.
+   replace (start + length - 1 - (i_0 + start))%Z  with  (length - 1 - i_0)%Z by omega.
    symmetry.
    assumption.
 Qed.
