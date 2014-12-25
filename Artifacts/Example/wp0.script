@@ -87,13 +87,12 @@ Proof.
     apply shift_different; omega.
 
   assert ((Mint_0.[shift stream_0 2 <- v_1]).[ shift stream_0 1] = Mint_1.[shift stream_0 1]).
-    apply H50.
+    apply H51.
     apply separated_trans with (stream_0) (3).
     unfold included; simpl; auto with zarith.
-    destruct H18 as [A [B C]].
     assumption.
-  rewrite H56 in H57.
-  rewrite <- H57 in *.
+  rewrite H57 in H58.
+  rewrite <- H58 in *.
   rewrite <- Heqsize in *.
 
   assert (Mint_1.[ shift stream_0 2 <- v_0].[ shift stream_0 1] = Mint_1.[shift stream_0 1]).
@@ -102,25 +101,24 @@ Proof.
     apply shift_different; omega.
 
   assert (Mint_1.[ shift stream_0 2 <- v_0].[ shift stream_0 1] = Mint_3.[shift stream_0 1]).
-    apply H49.
+    apply H50.
     apply separated_trans with (stream_0) (3).
     unfold included; simpl; auto with zarith.
-    destruct H18 as [A [B C]].
     assumption.
-  rewrite H58 in H59.
-  rewrite <- H57 in H59.
-  rewrite <- H59 in *.
+  rewrite H59 in H60.
+  rewrite <- H58 in H60.
+  rewrite <- H60 in *.
 
-  rewrite <- H53; auto with zarith.
+  rewrite <- H54; auto with zarith.
 
   rewrite access_update_neq.
 
   assert(Mint_3 .[ shift p_0 2] = Mint_2 .[ shift p_0 2]).
-    apply H48.
+    apply H49.
     apply separated_trans with (p_0) (3).
     unfold included; simpl; auto with zarith.
     apply separated_sym; assumption.
-  rewrite H60.
+  rewrite H61.
   reflexivity.
 
   apply separated_neq with (stream_0) (3) (p_0) (3).
