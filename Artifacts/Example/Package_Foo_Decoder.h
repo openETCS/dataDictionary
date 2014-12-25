@@ -15,7 +15,7 @@
     assigns stream->bitpos;
     assigns *p;
 
-    ensures unchanged:    BitstreamUnchanged{Old}(stream, 0, 8*stream->size);
+    ensures unchanged:    BitstreamUnchanged{Here,Old}(stream, 0, 8*stream->size);
 
     behavior normal_case:
       assumes NormalBitsequence(stream, 28);

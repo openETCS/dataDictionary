@@ -39,11 +39,11 @@
 
       ensures stream->bitpos == \old(stream->bitpos) + 28;
 
-      ensures unchanged_left:  BitstreamUnchanged{Old}(stream, 0, \old(stream->bitpos));
+      ensures unchanged_left:  BitstreamUnchanged{Here,Old}(stream, 0, \old(stream->bitpos));
 
       ensures BitstreamEqual(stream, \old(stream->bitpos), p);
 
-      ensures unchanged_right: BitstreamUnchanged{Old}(stream, stream->bitpos, 8 * stream->size);
+      ensures unchanged_right: BitstreamUnchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
 
     complete behaviors;
     disjoint behaviors;
