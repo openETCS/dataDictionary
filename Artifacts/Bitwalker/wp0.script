@@ -33,12 +33,9 @@ Proof.
   rewrite H8 in *.
  
   rewrite access_update_neq.
-  + apply H28; auto with zarith.
+  + apply H29; auto with zarith.
 
-  +
-    destruct H9 as [A [B C]].
-    (* clear H27 H28.  simplify proof context *)
-    apply separated_neq with (stream) (3%Z) (addr) (size).
+  + apply separated_neq with (stream) (3%Z) (addr) (size).
     - assumption.
     - unfold included; simpl; omega.
 
