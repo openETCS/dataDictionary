@@ -111,6 +111,66 @@ Proof.
     apply wish; auto with zarith.
 Qed.
 
+Goal typed_ref_BitTest_Package_Foo_Encoder_assert_DEF_final_2.
+Hint DEF_final,Package_Foo_Encoder,property.
+Proof.
+  unfold P_BitstreamEqual64 in *.
+  unfold P_EqualBits64_2_ in *.
+  unfold P_EqualBits64_1_ in *.
+  intros.
+
+  rewrite shift_zero in *.
+  rewrite shift_zero in *.
+
+  remember (Mptr_0 .[ stream_0]) as addr.
+  remember (Mint_0 .[ shift stream_0 1]) as size.
+  remember (Mint_0 .[ shift stream_0 2]) as pos.
+
+  replace (Mint_1 .[ shift stream_0 2]) with (pos - 11) in * by omega.
+
+  replace  (8 + (pos - 11)) with (pos - 3) in * by omega.
+  replace  (pos - 11 + (pos - 3 - (pos - 11))) with (pos - 3) in * by omega.
+  replace  (11 + (pos - 11)) with pos in * by omega.
+  replace  (pos - 3 + (pos - (pos - 3))) with pos in * by omega.
+  replace  (pos + (28 + (pos - 11) - pos)) with (17 + pos) in * by omega.
+
+  unfold is_uint32 in *.
+  unfold is_uint64 in *.
+
+  clear H52 H53 H55.
+
+  rewrite <- H13 in *.
+  rewrite <- H12 in *.
+
+  
+  assert (X: Mint_0 .[ shift stream_0 2 <- v_0].[shift p_0 1] = Mint_0.[shift p_0 1]).
+    rewrite access_update_neq.
+    reflexivity.
+    apply separated_neq with (stream_0) (3) (p_0) (3).
+    assumption.
+    unfold included; simpl; auto with zarith.
+    unfold included; simpl; auto with zarith.
+
+  assert (X3_0: Mint_0 .[ shift stream_0 2 <- v_0].[shift p_0 1] = Mint_3 .[ shift p_0 1]).
+  + apply H49.
+    apply separated_trans with (p_0) (3).
+    unfold included; simpl; auto with zarith.
+    apply separated_sym; assumption.
+  + rewrite X3_0 in X.
+    rewrite X.
+    rewrite H54; auto with zarith.
+
+  assert(wish: forall i_0 : int,
+      i_0 < pos ->
+      pos - 3 <= i_0 ->
+      (bit_test (Mint_0 .[ shift addr (Cdiv i_0 8)]) (7 - Cmod i_0 8) <->
+       bit_test (Mint_3 .[ shift addr (Cdiv i_0 8)]) (7 - Cmod i_0 8))).
+    admit.
+
+    apply wish; auto with zarith.
+
+Qed.
+
 Goal typed_ref_BitTest_Package_Foo_Encoder_normal_case_post_3.
 Hint Package_Foo_Encoder,normal_case,property.
 Proof.
