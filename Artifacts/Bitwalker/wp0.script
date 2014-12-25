@@ -25,9 +25,10 @@ Proof.
   replace (length + bitpos - bitpos) with length in * by omega.
 
   rewrite access_update_neq.
-  + apply H29; auto with zarith.
+  + apply H30; auto with zarith. 
 
-  + apply separated_neq with (stream) (3%Z) (addr) (size).
+  + clear H28 H29 H30.
+    apply separated_neq with (stream) (3%Z) (addr) (size).
     - assumption.
     - unfold included; simpl; auto with zarith.
 

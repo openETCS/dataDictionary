@@ -38,11 +38,11 @@
     assigns  stream->addr[0..stream->size - 1];
     assigns  stream->bitpos;
 
-    ensures unchanged_left:  BitstreamUnchanged{Old}(stream, 0, \old(stream->bitpos));
+    ensures unchanged_left:  BitstreamUnchanged{Here,Old}(stream, 0, \old(stream->bitpos));
 
     ensures copied: BitstreamEqual64(stream, \old(stream->bitpos), stream->bitpos, value);
 
-    ensures unchanged_right: BitstreamUnchanged{Old}(stream, stream->bitpos, 8 * stream->size);
+    ensures unchanged_right: BitstreamUnchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
 
     ensures valid_result:    \result == 0;
 

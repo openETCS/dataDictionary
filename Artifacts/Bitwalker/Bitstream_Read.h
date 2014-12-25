@@ -31,7 +31,7 @@
 
     ensures not_set:      UpperBitsNotSet(\result, length);
 
-    ensures unchanged:    BitstreamUnchanged{Old}(stream, 0, 8*stream->size);
+    ensures unchanged:    BitstreamUnchanged{Here,Old}(stream, 0, 8*stream->size);
 
   complete behaviors;
   disjoint behaviors;
