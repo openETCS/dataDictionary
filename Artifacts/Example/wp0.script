@@ -52,17 +52,38 @@ Proof.
   replace (3 + (8 + pos))%Z with (11 + pos)%Z in * by omega.
   replace (8 + pos + (11 + pos - (8 + pos)))%Z with (11 + pos)%Z in * by omega.
 
-  assert (Mint_2 .[ shift stream_0 1] = size) by admit.
-  rewrite H45 in *.
+  unfold is_uint32 in *.
+  unfold is_uint64 in *.
 
-  assert (Mint_2 .[shift p_0 1] = Mint_1 .[shift p_0 1]) by admit.
-  rewrite H46 in *.
+  assert (Mint_2 .[ shift stream_0 1] = Mint_0.[shift stream_0 1]).
+  - assert (Mint_0 .[ shift stream_0 2 <- v_0].[shift stream_0 1] = Mint_0.[shift stream_0 1]).
+    + rewrite access_update_neq.
+      * reflexivity.
+      * apply shift_different; omega.
+    + assert(Mint_0 .[ shift stream_0 2 <- v_0].[shift stream_0 1] = Mint_2.[shift stream_0 1]).
+      * apply H40.
+        apply separated_trans with (stream_0) (3).
+        unfold included; simpl; auto with zarith.
+        admit.
+      * rewrite <- H45.
+        rewrite <- H46.
+        auto.
 
-  rewrite access_update_neq.
-  rewrite H42; auto with zarith.
-  reflexivity.
+  - rewrite H45 in *.
+    rewrite <- Heqsize in *.
 
+    assert (Mint_2 .[shift p_0 1] = Mint_1 .[shift p_0 1]).
+    + admit.
+    + rewrite H46 in *.
 
+      rewrite access_update_neq.
+      * rewrite H42; auto with zarith.
+        reflexivity.
+      * apply separated_neq with (stream_0) (3) (p_0) (3).
+        admit.
+        unfold included; simpl; auto with zarith.
+        unfold included; simpl; auto with zarith.
+  
 Qed.
 
 Goal typed_ref_BitTest_Package_Foo_Encoder_stmt_post_GHI_equal.
