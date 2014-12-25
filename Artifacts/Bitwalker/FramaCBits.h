@@ -27,7 +27,8 @@
    predicate
      BitsUnchanged{L}(uint8_t* addr, integer first, integer last ) =
         \forall integer i; first <= i < last ==>
-           (LeftBit8Array(addr, i) <==> \at(LeftBit8Array(addr, i), L));
+           (BitTest(addr[i/8], (7 - i)%8) <==> \at(BitTest(addr[i/8], (7 - i)%8), L));
+           //(LeftBit8Array(addr, i) <==> \at(LeftBit8Array(addr, i), L));
 */
 
 /*@
