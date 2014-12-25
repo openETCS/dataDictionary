@@ -62,9 +62,10 @@ int Package_Foo_Encoder(Bitstream* stream, const Package_Foo* p)
             */
             Bitstream_Write(stream, 17, p->GHI);
 
-            //@ assert ABC_equal:  BitstreamEqual64(stream, pos, pos + 8,  p->ABC);
-            //@ assert DEF_equal:  BitstreamEqual64(stream, pos + 8, pos + 11,  p->DEF);
-            //@ assert GHI_equal:  BitstreamEqual64(stream, pos + 11, pos + 28,  p->GHI);
+            //@ assert bitpos_final: stream->bitpos == pos + 28;
+            //@ assert ABC_final:    BitstreamEqual64(stream, pos, pos + 8,  p->ABC);
+            //@ assert DEF_final:    BitstreamEqual64(stream, pos + 8, pos + 11,  p->DEF);
+            //@ assert GHI_final:    BitstreamEqual64(stream, pos + 11, pos + 28,  p->GHI);
             //@ assert p_equal:    BitstreamEqual(stream, pos, p);
 
             return 1;

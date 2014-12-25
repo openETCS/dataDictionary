@@ -81,44 +81,45 @@ Proof.
   replace (8 + pos + (11 + pos - (8 + pos)))%Z with (11 + pos)%Z in * by omega.
   replace (3 + (8 + pos))%Z with (11 + pos)%Z in * by omega.
 
-  assert (Mint_0.[ shift stream_0 2 <- v_1].[ shift stream_0 1] = Mint_0.[shift stream_0 1]).
+  assert (X0: Mint_0.[ shift stream_0 2 <- v_1].[ shift stream_0 1] = Mint_0.[shift stream_0 1]).
     rewrite access_update_neq.
     reflexivity.
     apply shift_different; omega.
 
-  assert ((Mint_0.[shift stream_0 2 <- v_1]).[ shift stream_0 1] = Mint_1.[shift stream_0 1]).
+  assert (X0_1: (Mint_0.[shift stream_0 2 <- v_1]).[ shift stream_0 1] = Mint_1.[shift stream_0 1]).
+    apply H52.
+    apply separated_trans with (stream_0) (3).
+    unfold included; simpl; auto with zarith.
+    assumption.
+  rewrite X0 in X0_1.
+  rewrite <- Heqsize in X0_1.
+  rewrite <- X0_1 in *.
+
+
+  assert (X1: Mint_1.[ shift stream_0 2 <- v_0].[ shift stream_0 1] = Mint_1.[shift stream_0 1]).
+    rewrite access_update_neq.
+    reflexivity.
+    apply shift_different; omega.
+
+  assert (X1_3: Mint_1.[ shift stream_0 2 <- v_0].[ shift stream_0 1] = Mint_3.[shift stream_0 1]).
     apply H51.
     apply separated_trans with (stream_0) (3).
     unfold included; simpl; auto with zarith.
     assumption.
-  rewrite H57 in H58.
-  rewrite <- H58 in *.
-  rewrite <- Heqsize in *.
+  rewrite X1 in X1_3.
+  rewrite <- X0_1 in X1_3.
+  rewrite <- X1_3 in *.
 
-  assert (Mint_1.[ shift stream_0 2 <- v_0].[ shift stream_0 1] = Mint_1.[shift stream_0 1]).
-    rewrite access_update_neq.
-    reflexivity.
-    apply shift_different; omega.
-
-  assert (Mint_1.[ shift stream_0 2 <- v_0].[ shift stream_0 1] = Mint_3.[shift stream_0 1]).
-    apply H50.
-    apply separated_trans with (stream_0) (3).
-    unfold included; simpl; auto with zarith.
-    assumption.
-  rewrite H59 in H60.
-  rewrite <- H58 in H60.
-  rewrite <- H60 in *.
-
-  rewrite <- H54; auto with zarith.
+  rewrite <- H55; auto with zarith.
 
   rewrite access_update_neq.
 
-  assert(Mint_3 .[ shift p_0 2] = Mint_2 .[ shift p_0 2]).
-    apply H49.
+  assert(X3_2: Mint_3 .[ shift p_0 2] = Mint_2 .[ shift p_0 2]).
+    apply H50.
     apply separated_trans with (p_0) (3).
     unfold included; simpl; auto with zarith.
     apply separated_sym; assumption.
-  rewrite H61.
+  rewrite X3_2.
   reflexivity.
 
   apply separated_neq with (stream_0) (3) (p_0) (3).
