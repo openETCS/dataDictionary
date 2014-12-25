@@ -41,7 +41,10 @@ Proof.
     rewrite <- Heqsize in *.
 
     assert (Mint_2 .[shift p_0 1] = Mint_1 .[shift p_0 1]).
-    + admit.
+    + apply H40.
+      apply separated_trans with (p_0) (3).
+      unfold included; simpl; auto with zarith.
+      apply separated_sym; assumption.
     + rewrite H47 in *.
 
       rewrite access_update_neq.
