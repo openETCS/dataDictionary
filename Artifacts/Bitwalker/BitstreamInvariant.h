@@ -13,11 +13,11 @@
   predicate NormalBitsequence{L}(Bitstream* stream, integer length) =
      stream->bitpos + length <= 8 * stream->size;
 
-  predicate LeftBitInStream{L}(Bitstream* stream, integer i) = LeftBit8Array(stream->addr, i);
+  predicate LeftBitInStream{L}(Bitstream* stream, integer i) = \at(LeftBit8Array(stream->addr, i),L);
 
-  predicate BitstreamUnchanged{L}(Bitstream* stream, integer first, integer last) =
+  predicate BitstreamUnchanged{A,B}(Bitstream* stream, integer first, integer last) =
     \forall integer i; first <= i < last ==>
-      (LeftBitInStream(stream, i) <==> \at(LeftBitInStream(stream, i), L));
+      (LeftBitInStream{A}(stream, i) <==> LeftBitInStream{B}(stream, i));
 
   predicate BitstreamEqual64{L}(Bitstream* stream , 
              integer first, integer last, uint64_t value) =

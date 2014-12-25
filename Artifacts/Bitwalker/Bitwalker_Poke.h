@@ -26,11 +26,11 @@
     assumes (start + length <= 8 * size)  &&  UpperBitsNotSet(value, length);
     assigns addr[0..size - 1];
 
-    ensures unchanged_left:  BitsUnchanged{Old}(addr, 0, start);
+    ensures unchanged_left:  BitsUnchanged{Here,Old}(addr, 0, start);
 
     ensures copied:  EqualBits64(addr, start, start + length, value);
 
-    ensures unchanged_right:  BitsUnchanged{Old}(addr, start + length, 8 * size);
+    ensures unchanged_right:  BitsUnchanged{Here,Old}(addr, start + length, 8 * size);
 
     ensures valid_result: \result == 0;
 

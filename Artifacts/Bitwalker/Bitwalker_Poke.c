@@ -13,11 +13,11 @@ int Bitwalker_Poke(uint8_t*  addr, uint32_t  size, uint32_t  start, uint32_t  le
     {
         /*@
           loop invariant index:  0 <= i <= length;
-          loop invariant unchanged_left:  BitsUnchanged{Pre}(addr, 0, start);
+          loop invariant unchanged_left:  BitsUnchanged{Here,Pre}(addr, 0, start);
 
           loop invariant copied: EqualBits64(addr, start, start + i, value, length);
 
-          loop invariant unchanged_right:  BitsUnchanged{Pre}(addr, start + i, 8 * size);
+          loop invariant unchanged_right:  BitsUnchanged{Here,Pre}(addr, start + i, 8 * size);
 
           loop assigns i, addr[0..size-1];
           loop variant length - i;

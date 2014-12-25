@@ -149,15 +149,15 @@ Proof.
   case_lt i_1 (i_0 + start)%Z.
   * 
    intros.
-   rewrite H31; auto with zarith.
+   rewrite H32; auto with zarith.
    symmetry.
-   apply H35; auto with zarith.
+   apply H36; auto with zarith.
 
   * 
    intros.
    assert(equal: (i_1 = i_0 + start)%Z) by omega.
    rewrite equal in *.
-   rewrite <- H33; auto with zarith.
+   rewrite <- H34; auto with zarith.
    replace (start + length - 1 - (i_0 + start))%Z  with  (length - 1 - i_0)%Z by omega.
    symmetry.
    assumption.
@@ -246,6 +246,118 @@ Proof.
   intros.
 Qed.
 
+Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_unchanged_left_preserved.
+Hint Bitwalker_Poke,preserved,unchanged_left.
+Proof.
+(* --------------------------------------
+  
+From 'typed_ref_BitTest_Bitwalker_Poke_loop_inv_copied_preserved_part2': 
+  intros.
+
+  remember start_0 as start.
+  remember length_0 as length.
+  remember addr_0 as addr.
+  remember value_0 as value.
+  remember Mint_0 as M0.
+  remember Mint_1 as M1.
+  remember Mint_2 as M2.
+
+  remember k_0 as k.
+  remember i_0 as i.
+
+  subst x_0 x_1 x_2 x_3 x_4.
+  unfold is_uint64 in *.
+  unfold is_uint32 in *.
+  unfold  to_sint32 in *.
+
+  case_lt k (i + start)%Z.
+  * 
+   intros.
+   rewrite H32; auto with zarith.
+   symmetry.
+   apply H35; auto with zarith.
+
+  * 
+   intros.
+   assert(equal: (k = i + start)%Z) by omega.
+   rewrite equal in *.
+   rewrite <- H30; auto with zarith.
+   replace (63 + start - (i + start))%Z  with  (63 - i)%Z by omega.
+   symmetry.
+   assumption.
+*)
+(* --------------------------------------
+  
+From 'typed_ref_BitTest_Bitwalker_Poke_loop_inv_copied_preserved': 
+  unfold P_EqualBits64_1_ in *.
+  unfold is_uint64 in *.
+  unfold is_uint32 in *.
+  unfold  to_sint32 in *.
+  intros.
+
+  remember start_0 as start.
+  remember length_0 as length.
+  remember addr_0 as addr.
+  remember value_0 as value.
+  remember Mint_0 as M0.
+  remember Mint_1 as M1.
+  remember Mint_2 as M2.
+
+
+  case_lt i_1 (i_0 + start)%Z.
+  * 
+   intros.
+   rewrite H32; auto with zarith.
+   symmetry.
+   apply H36; auto with zarith.
+
+  * 
+   intros.
+   assert(equal: (i_1 = i_0 + start)%Z) by omega.
+   rewrite equal in *.
+   rewrite <- H34; auto with zarith.
+   replace (start + length - 1 - (i_0 + start))%Z  with  (length - 1 - i_0)%Z by omega.
+   symmetry.
+   assumption.
+*)
+(* --------------------------------------
+  
+From 'typed_ref_BitTest_Bitwalker_Poke_loop_inv_copied_preserved_part1': 
+  intros.
+
+  remember start_0 as start.
+  remember length_0 as length.
+  remember addr_0 as addr.
+  remember value_0 as value.
+  remember Mint_0 as M0.
+  remember Mint_1 as M1.
+  remember Mint_2 as M2.
+
+  remember k_0 as k.
+  remember i_0 as i.
+
+  subst x_0 x_1 x_2 x_3 x_4 x_5.
+  unfold is_uint64 in *.
+  unfold is_uint32 in *.
+  unfold  to_sint32 in *.
+
+  case_lt k (i + start)%Z.
+
+  * (* k < i + start *)
+    intros.
+    rewrite H38; auto with zarith.
+
+  * (* k = i + start *)
+   intros.
+   assert(equal: (k = i + start)%Z) by omega. 
+   rewrite equal in *.
+   replace (length + start - 1 - (i + start))%Z
+     with  (length - 1 - i)%Z by omega.
+   rewrite <- H29.
+   assumption.
+*)
+Qed.
+
 Goal typed_ref_BitTest_Bitwalker_Poke_normal_case_post_3.
 Hint Bitwalker_Poke,normal_case,property.
 Proof.
@@ -293,23 +405,21 @@ Hint PokeThenPeek,full_copy2,property.
 Proof.
   intros.
   replace (i_0)%Z with (63 - (63 - i_0))%Z by omega.
-  apply H21; auto with zarith.
+  apply H22; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_PokeThenPeek_assert_partial_copy.
 Hint PokeThenPeek,partial_copy,property.
 Proof.
-  intros.
-  subst x_1 x_2.
   unfold P_EqualBits64_2_ in *.
   unfold P_EqualBits64_1_ in *.
+  intros.
+
   replace (length_0 + start_0 - start_0)%Z with length_0%Z in * by omega.
 
   replace (63 - i_0)%Z  with
         (start_0 + length_0 - 1 - (length_0 + start_0 + i_0 - 64))%Z by omega.
-  rewrite H19; auto with zarith.
-  rewrite <- H20; auto with zarith.
-  reflexivity.
+  rewrite H21; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_PokeThenPeek_post_result.
