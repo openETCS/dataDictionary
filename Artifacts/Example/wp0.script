@@ -61,29 +61,28 @@ Proof.
       * reflexivity.
       * apply shift_different; omega.
     + assert(Mint_0 .[ shift stream_0 2 <- v_0].[shift stream_0 1] = Mint_2.[shift stream_0 1]).
-      * apply H40.
+      * apply H41.
         apply separated_trans with (stream_0) (3).
         unfold included; simpl; auto with zarith.
-        admit.
-      * rewrite <- H45.
-        rewrite <- H46.
+        assumption.
+      * rewrite <- H46.
+        rewrite <- H47.
         auto.
 
-  - rewrite H45 in *.
+  - rewrite H46 in *.
     rewrite <- Heqsize in *.
 
     assert (Mint_2 .[shift p_0 1] = Mint_1 .[shift p_0 1]).
     + admit.
-    + rewrite H46 in *.
+    + rewrite H47 in *.
 
       rewrite access_update_neq.
-      * rewrite H42; auto with zarith.
+      * rewrite H43; auto with zarith.
         reflexivity.
       * apply separated_neq with (stream_0) (3) (p_0) (3).
-        admit.
+        assumption.
         unfold included; simpl; auto with zarith.
         unfold included; simpl; auto with zarith.
-  
 Qed.
 
 Goal typed_ref_BitTest_Package_Foo_Encoder_stmt_post_GHI_equal.
