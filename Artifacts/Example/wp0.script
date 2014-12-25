@@ -171,6 +171,12 @@ Proof.
 
 Qed.
 
+Goal typed_ref_BitTest_Package_Foo_Encoder_call_Package_Foo_UpperBitsNotSet_pre.
+Hint Package_Foo_Encoder,precond-Package_Foo_UpperBitsNotSet.
+Proof.
+(* auto with zarith. *)
+Qed.
+
 Goal typed_ref_BitTest_Package_Foo_Encoder_normal_case_post_3.
 Hint Package_Foo_Encoder,normal_case,property.
 Proof.

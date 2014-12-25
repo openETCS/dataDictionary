@@ -69,7 +69,7 @@ int Package_Foo_Encoder(Bitstream* stream, const Package_Foo* p)
             Bitstream_Write(stream, 17, p->GHI);
 
             //@ assert ABC_final:  BitstreamEqual64(stream, pos, pos + 8,  p->ABC);
-            //@ assert DEF_:  BitsUnchanged{post_DEF}(stream->addr, pos + 8, pos + 11);
+            //@ assert DEF_:  BitsUnchanged{post_DEF}(stream->addr, pos + 11, pos + 12);
             //@ assert DEF_final:  BitstreamEqual64(stream, pos + 8, pos + 11,  p->DEF);
             return 1;
         }
