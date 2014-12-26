@@ -16,21 +16,21 @@
     assigns stream->addr[0..(stream->size-1)];
 
     behavior invalid_bit_sequence:
-      assumes !NormalBitsequence(stream, 28);
+      assumes !NormalBitsequence{Pre}(stream, 28);
 
       assigns \nothing;
 
       ensures \result == -1;
 
     behavior values_too_big:
-      assumes NormalBitsequence(stream, 28) && !UpperBitsNotSet(p);
+      assumes NormalBitsequence{Pre}(stream, 28) && !UpperBitsNotSet{Pre}(p);
 
       assigns \nothing;
 
       ensures \result == -2;
 
     behavior normal_case:
-      assumes NormalBitsequence(stream, 28) && UpperBitsNotSet(p);
+      assumes NormalBitsequence{Pre}(stream, 28) && UpperBitsNotSet{Pre}(p);
 
       assigns stream->bitpos;
       assigns stream->addr[0..(stream->size-1)];
