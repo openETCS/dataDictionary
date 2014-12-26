@@ -31,6 +31,12 @@
 */
 
 /*@
+   predicate
+     EqualBitRange{A}(uint64_t x, uint64_t y, integer first, integer last) =
+        \forall integer i; first <= i < last ==> (BitTest(x, i) <==> BitTest(y, i));
+*/
+
+/*@
    predicate EqualBits64{A}(uint8_t* addr,
                             integer first, integer last,
                             uint64_t value, integer length) =
