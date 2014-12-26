@@ -165,23 +165,6 @@ Proof.
    assumption.
 Qed.
 
-Goal typed_ref_BitTest_PokeThenPeek_assert_bits_covered.
-Hint PokeThenPeek,bits_covered,property.
-Proof.
- intros.
- unfold is_uint32 in *.
- unfold is_uint64 in *.
- rewrite bits_and_bounds_uint in H7; auto with zarith.
-Qed.
-
-Goal typed_ref_BitTest_PokeThenPeek_assert_full_copy2.
-Hint PokeThenPeek,full_copy2,property.
-Proof.
-  intros.
-  replace (i_0)%Z with (63 - (63 - i_0))%Z by omega.
-  apply H22; auto with zarith.
-Qed.
-
 Goal typed_ref_BitTest_PokeThenPeek_assert_partial_copy.
 Hint PokeThenPeek,partial_copy,property.
 Proof.
@@ -189,18 +172,10 @@ Proof.
   unfold P_EqualBits64_1_ in *.
   intros.
 
-  replace (length_0 + start_0 - start_0)%Z with length_0%Z in * by omega.
+  replace (length_0 + start_0 - start_0)%Z with length_0 in * by omega.
+  replace (i_0)%Z  with  (start_0 + length_0 - 1 - (start_0 + length_0 - 1 - i_0 ))%Z by omega.
 
-  replace (63 - i_0)%Z  with
-        (start_0 + length_0 - 1 - (length_0 + start_0 + i_0 - 64))%Z by omega.
   rewrite H21; auto with zarith.
-Qed.
-
-Goal typed_ref_BitTest_PokeThenPeek_post_result.
-Hint PokeThenPeek,default,property,result.
-Proof.
-  intros.
-  apply bits_equal_uint64; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_PokeThenPeek_post_result_value.
