@@ -20,16 +20,15 @@ uint64_t PokeBit64(uint64_t value, uint32_t pos, int flag)
 
 int UpperBitsNotSet64(uint64_t value, uint32_t length)
 {
-    if (length < 64)
+    if (length == 64)
     {
-        // compute 2^length
-        const uint64_t MaxValue = ((uint64_t) 1) << length;
-
-        return (value >= MaxValue) ? 0 : 1;
+        return 1;
     }
     else
     {
-        return 1;
+        const uint64_t MaxValue = ((uint64_t) 1) << length;
+
+        return (value >= MaxValue) ? 0 : 1;
     }
 }
 
