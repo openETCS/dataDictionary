@@ -18,7 +18,7 @@
     ensures unchanged:    BitstreamUnchanged{Here,Old}(stream, 0, 8*stream->size);
 
     behavior normal_case:
-      assumes NormalBitsequence(stream, 28);
+      assumes NormalBitsequence{Pre}(stream, 28);
 
       assigns stream->bitpos;
       assigns *p;
@@ -29,7 +29,7 @@
       ensures UpperBitsNotSet(p);
 
     behavior error_case:
-      assumes !NormalBitsequence(stream, 28);
+      assumes !NormalBitsequence{Pre}(stream, 28);
 
       assigns \nothing;
 
