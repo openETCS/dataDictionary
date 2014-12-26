@@ -58,8 +58,9 @@ Proof.
     intros.
     assert(equal: (i_1 = i_0 + start_0)%Z) by auto with zarith.
     rewrite equal in *.
+    rewrite <- H29; auto with zarith.
     replace (start_0 + length_0 - 1 - (i_0 + start_0))%Z with (length_0 - 1 - i_0)%Z by omega.
-    rewrite <- H24.
+    symmetry.
     assumption.
 Qed.
 

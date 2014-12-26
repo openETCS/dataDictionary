@@ -8,26 +8,28 @@ uint64_t Bitwalker_Peek(uint8_t*  addr, uint32_t  size, uint32_t  start, uint32_
     {
         return 0;
     }
-
-    uint64_t retval = 0;
-
-    /*@
-      loop invariant index:  0 <= i <= length;
-
-      loop invariant copied: EqualBits64(addr, start, start + i, retval, length);
-
-      loop invariant not_set: UpperBitsNotSet(retval, length);
-
-      loop assigns i, retval;
-      loop variant length - i;
-    */
-    for (uint32_t i = 0; i < length; i++)
+    else
     {
-        int flag = PeekBit8Array(addr, size, start + i);
-        retval = PokeBit64(retval, 64u - length + i, flag);
-    }
+        uint64_t value = 0;
 
-    return retval;
+        /*@
+          loop invariant index:  0 <= i <= length;
+
+          loop invariant copied: EqualBits64(addr, start, start + i, value, length);
+
+          loop invariant not_set: UpperBitsNotSet(value, length);
+
+          loop assigns i, value;
+          loop variant length - i;
+        */
+        for (uint32_t i = 0; i < length; i++)
+        {
+            int flag = PeekBit8Array(addr, size, start + i);
+            value = PokeBit64(value, 64u - length + i, flag);
+        }
+
+        return value;
+    }
 }
 
 
