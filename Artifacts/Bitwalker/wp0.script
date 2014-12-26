@@ -211,6 +211,7 @@ Proof.
   unfold P_BitstreamEqual64 in *.
   unfold P_EqualBits64_2_ in * .
   unfold P_EqualBits64_1_ in * .
+  unfold P_EqualBitRange in *.
   intros.
 
   rewrite shift_zero in *.
@@ -224,14 +225,18 @@ Proof.
      with (v_0)%Z in * by omega.
 
   replace (i_0)%Z with (v_0 - 1 - (v_0 - 1 - i_0))%Z by omega.
-  rewrite H22; auto with zarith.
+  rewrite H19; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_WriteThenRead_post_unchanged.
 Hint WriteThenRead,default,property,unchanged.
 Proof.
+  unfold P_EqualBitRange in *.
   intros.
   apply bits_equal_uint64; auto.
+  intros.
+  symmetry.
+  apply H8; auto with zarith.
 Qed.
 
 

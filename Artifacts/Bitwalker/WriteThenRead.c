@@ -13,7 +13,7 @@
     assigns stream->addr[0..stream->size-1];
     assigns stream->bitpos;
 
-    ensures unchanged:   \result == value;
+    ensures unchanged:   value == \result;
 */
 uint64_t WriteThenRead(Bitstream* stream, const uint32_t length, uint64_t value)
 {
@@ -28,14 +28,9 @@ uint64_t WriteThenRead(Bitstream* stream, const uint32_t length, uint64_t value)
 
     uint64_t result = Bitstream_Read(stream, length);
 
-    //@ assert copied1:    BitstreamEqual64(stream, pos, pos + length, value);
-    //@ assert copied2:    BitstreamEqual64(stream, pos, pos + length, result);
-    //@ assert lower_bits: \forall integer i; 0 <= i < length ==>  (BitTest(value, i) <==> BitTest(result, i));
-
-    //@ assert not_set:    UpperBitsNotSet(result, length);
-    //@ assert upper_bits: \forall integer i; length <= i < 64 ==>  (BitTest(value, i) <==> BitTest(result, i));
-
-    //@ assert bit_equal:  \forall integer i; 0 <= i < 64 ==>  (BitTest(value, i) <==> BitTest(result, i));
+    //@ assert lower_bits: EqualBitRange(value, result, 0, length);
+    //@ assert upper_bits: EqualBitRange(value, result, length, 64);
+    //@ assert equal_bits: EqualBitRange(value, result, 0, 64);
 
     return result;
 }
