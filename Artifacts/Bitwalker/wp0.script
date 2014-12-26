@@ -204,4 +204,35 @@ Proof.
   rewrite is_uint64_lsl1_inf in H4; omega.
 Qed.
 
+Goal typed_ref_BitTest_WriteThenRead_assert_lower_bits.
+Hint WriteThenRead,lower_bits,property.
+Proof.
+  unfold P_BitstreamEqual64 in *.
+  unfold P_EqualBits64_2_ in * .
+  unfold P_EqualBits64_1_ in * .
+  intros.
+
+  rewrite shift_zero in *.
+  rewrite shift_zero in *.
+
+  remember (Mptr_0 .[ stream_0]) as addr.
+  remember (Mint_0 .[ shift stream_0 1]) as size.
+  remember (Mint_0 .[ shift stream_0 2]) as pos.
+
+  rewrite H7 in *.
+
+  replace (Mint_1 .[ shift stream_0 2] + (v_0 - (Mint_1 .[ shift stream_0 2])))%Z
+     with (v_0)%Z in * by omega.
+
+  replace (i_0)%Z with (v_0 - 1 - (v_0 - 1 - i_0))%Z by omega.
+  rewrite H23; auto with zarith.
+Qed.
+
+Goal typed_ref_BitTest_WriteThenRead_post_unchanged.
+Hint WriteThenRead,default,property,unchanged.
+Proof.
+  intros.
+  apply bits_equal_uint64; auto.
+Qed.
+
 
