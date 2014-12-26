@@ -151,18 +151,14 @@ Proof.
   case_lt i_1 (i_0 + start)%Z.
   * 
    intros.
-   rewrite H32; auto with zarith.
-   symmetry.
-   apply H36; auto with zarith.
+   rewrite H36; auto with zarith.
 
   * 
    intros.
    assert(equal: (i_1 = i_0 + start)%Z) by omega.
    rewrite equal in *.
-   rewrite <- H34; auto with zarith.
    replace (start + length - 1 - (i_0 + start))%Z  with  (length - 1 - i_0)%Z by omega.
-   symmetry.
-   assumption.
+   rewrite <- H28; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_PokeThenPeek_assert_partial_copy.
