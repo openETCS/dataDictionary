@@ -22,17 +22,11 @@ uint64_t WriteThenRead(Bitstream* stream, const uint32_t length, uint64_t value)
 
     Bitstream_Write(stream, length, value);
 
-    //@ assert unchanged_left:  BitstreamUnchanged{Here,Pre}(stream, 0, pos);
-    //@ assert copied1:         BitstreamEqual64(stream, pos, pos + length, value);
-    //@ assert unchanged_right: BitstreamUnchanged{Here,Pre}(stream, pos + length, 8 * stream->size);
-
     stream->bitpos -= length;
     //@ assert stream->bitpos == pos;
     //@ assert NormalBitsequence(stream, length);
 
     uint64_t result = Bitstream_Read(stream, length);
-    //@ assert stream->bitpos == pos + length;
-    //@ assert stream->size == \at(stream->size, Pre);
 
     //@ assert copied1:    BitstreamEqual64(stream, pos, pos + length, value);
     //@ assert copied2:    BitstreamEqual64(stream, pos, pos + length, result);

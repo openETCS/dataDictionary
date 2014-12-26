@@ -219,13 +219,11 @@ Proof.
   remember (Mint_0 .[ shift stream_0 1]) as size.
   remember (Mint_0 .[ shift stream_0 2]) as pos.
 
-  rewrite H7 in *.
-
   replace (Mint_1 .[ shift stream_0 2] + (v_0 - (Mint_1 .[ shift stream_0 2])))%Z
      with (v_0)%Z in * by omega.
 
   replace (i_0)%Z with (v_0 - 1 - (v_0 - 1 - i_0))%Z by omega.
-  rewrite H23; auto with zarith.
+  rewrite H22; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_WriteThenRead_post_unchanged.
