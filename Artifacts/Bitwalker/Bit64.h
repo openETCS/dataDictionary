@@ -15,16 +15,16 @@ int PeekBit64(uint64_t value, uint32_t left);
 
 
 /*@
-    requires pre: left < 64;
+    requires pre: pos < 64;
 
     assigns \nothing;
 
-    ensures unchanged_bits: \forall integer i; (0 <= i < 64  &&  i != left) ==>
+    ensures unchanged_bits: \forall integer i; (0 <= i < 64  &&  i != pos) ==>
                 (LeftBit64(\result, i) <==> LeftBit64(value, i));
 
-    ensures set_bit:  flag != 0  <==>  LeftBit64(\result, left);
+    ensures set_bit:  flag != 0  <==>  LeftBit64(\result, pos);
 */
-uint64_t PokeBit64(uint64_t value, uint32_t left, int flag);
+uint64_t PokeBit64(uint64_t value, uint32_t pos, int flag);
 
 
 /*@
