@@ -19,7 +19,7 @@
     \forall integer i; first <= i < last ==>
       (LeftBitInStream{A}(stream, i) <==> LeftBitInStream{B}(stream, i));
 
-  predicate BitstreamEqual64{L}(Bitstream* stream , 
+  predicate BitstreamEqual64{L}(Bitstream* stream ,
              integer first, integer last, uint64_t value) =
                 EqualBits64(stream->addr, first, last, value);
 
