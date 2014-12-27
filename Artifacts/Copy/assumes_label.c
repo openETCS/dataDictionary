@@ -1,13 +1,10 @@
 
-struct vector
+typedef struct vector
 {
     int* addr;
     unsigned int sz;
     unsigned int cap;
-};
-
-typedef struct vector vector;
-
+} vector;
 
 /*@
   predicate invariant{L}(vector* v) =
