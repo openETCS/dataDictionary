@@ -10,12 +10,12 @@ typedef struct vector vector;
 
 
 /*@
-  predicate invariant(vector* v) =
+  predicate invariant{L}(vector* v) =
          v->sz <= v->cap &&
          \valid(v->addr + (0..v->cap-1)) &&
          \separated(v, v->addr + (0..v->cap-1));
 
-  predicate full(vector* v) = (v->sz == v->cap);
+  predicate full{L}(vector* v) = (v->sz == v->cap);
 */
 
 /*@
@@ -26,7 +26,7 @@ typedef struct vector vector;
     assigns v->addr[v->sz];
 
     behavior enough_space:
-        assumes !full(v);
+        assumes !full{Pre}(v);
 
         assigns v->sz;
         assigns v->addr[v->sz];
@@ -36,9 +36,8 @@ typedef struct vector vector;
         ensures v->addr[\old(v->sz)] == x;
         ensures \forall integer i; 0 <= i < \old(v->sz)  ==>  v->addr[i] == \old(v->addr[i]);
 
-
    behavior no_space:
-       assumes full(v);
+       assumes full{Pre}(v);
 
        assigns \nothing;
 
@@ -59,5 +58,25 @@ int push_back(vector* v, int x)
     {
         return 0;
     }
+}
+
+/*@
+  requires \valid(v);
+  requires invariant(v);
+  requires v->sz + 1 < v->cap;
+
+  assigns v->sz;
+  assigns v->addr[v->sz];
+  assigns v->addr[v->sz + 1];
+
+  ensures v->sz == \old(v->sz) + 2;
+  ensures v->addr[\old(v->sz)] == x;
+  ensures v->addr[\old(v->sz) + 1] == x;
+  ensures \forall integer i; 0 <= i < \old(v->sz)  ==>  v->addr[i] == \old(v->addr[i]);
+*/
+void push_back_twice(vector* v, int x)
+{
+    push_back(v, x);
+    push_back(v, x);
 }
 
