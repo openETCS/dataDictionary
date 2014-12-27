@@ -77,6 +77,7 @@ int push_back(vector* v, int x)
 void push_back_twice(vector* v, int x)
 {
     push_back(v, x);
+    //@ assert !full(v);
     push_back(v, x);
 }
 

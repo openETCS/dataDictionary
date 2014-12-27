@@ -114,4 +114,13 @@ Proof.
   rewrite access_update_neq.
 Qed.
 
+Goal typed_ref_BitTest_push_back_twice_assert.
+Hint property,push_back_twice.
+Proof.
+
+   (*   ~(P_full m_0 v_2) *)
+   unfold is_uint32 in *.
+   intros.
+Qed.
+
 
