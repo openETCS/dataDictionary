@@ -21,7 +21,7 @@ int foo(short a)
 }
 
 
-struct Pair 
+struct Pair
 {
     int first, second;
 };

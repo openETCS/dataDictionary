@@ -4,9 +4,9 @@
 
 struct Z
 {
-  int a;
-  int b;
-  int c;
+    int a;
+    int b;
+    int c;
 };
 
 typedef struct Z Z;

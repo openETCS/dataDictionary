@@ -98,4 +98,20 @@ Proof.
 (* auto with zarith. *)
 Qed.
 
+Goal typed_ref_BitTest_push_back_enough_space_post_3_part1.
+Hint enough_space,part-0,property,push_back.
+Proof.
+  unfold is_uint32 in *.
+  intros.
+
+  rewrite shift_zero in *.
+
+  remember (Mptr_0 .[ v_0]) as addr.
+  remember (Mint_0 .[ shift v_0 1]) as size.
+  remember (Mint_0 .[ shift v_0 2]) as capacity.
+
+  rewrite access_update_neq.
+  rewrite access_update_neq.
+Qed.
+
 

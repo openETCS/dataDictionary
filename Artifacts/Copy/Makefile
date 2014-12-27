@@ -14,3 +14,5 @@ obj : $(OBJ)
 report-wp:\
 	copy_int.report-wp
 
+format:
+	$(ASTYLE) *.h *.c

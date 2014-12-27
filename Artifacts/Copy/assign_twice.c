@@ -3,8 +3,8 @@
 
 struct A
 {
-   unsigned int size;
-   unsigned int pos;
+    unsigned int size;
+    unsigned int pos;
 };
 
 typedef struct A A;
