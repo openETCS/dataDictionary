@@ -1,36 +1,46 @@
 
-#include "Bitstream_Read.h"
-#include "Bitstream_Write.h"
+#include "Package_Foo_Decoder.h"
+#include "Package_Foo_Encoder.h"
 
 /*@
     requires valid_stream: \valid(stream);
     requires stream_inv:   BitstreamInvariant(stream);
-    requires max_length:   length <= 64;
-    requires max_pos:      stream->bitpos + length <= UINT32_MAX;
-    requires max_pos:      NormalBitsequence(stream, length);
-    requires not_set:      UpperBitsNotSet(value, length);
+    requires max_pos:      stream->bitpos + 28 <= UINT32_MAX;
+    requires max_pos:      NormalBitsequence(stream, 28);
+
+    requires \valid(p);
+    requires \separated(stream, p);
+    requires \separated(stream->addr + (0..stream->size-1), p);
+
+    requires not_set:      UpperBitsNotSet(p);
 
     assigns stream->addr[0..stream->size-1];
     assigns stream->bitpos;
+    assigns *p;
 
-    ensures unchanged:   value == \result;
+    ensures unchanged:   *p == \old(*p);
 */
-uint64_t WriteThenRead(Bitstream* stream, const uint32_t length, uint64_t value)
+void Package_Foo_EncoderThenDecoder(Bitstream* stream, Package_Foo* p)
 {
-    //@ assert NormalBitsequence(stream, length);
+    const uint32_t length = 28;
     //@ ghost uint32_t pos = stream->bitpos;
 
-    Bitstream_Write(stream, length, value);
+    //@ assert NormalBitsequence(stream, length);
+    Package_Foo_Encoder(stream, p);
+
+    //@ assert unchanged_left:  BitstreamUnchanged{Here,Pre}(stream, 0, pos);
+    //@ assert copied2:         BitstreamEqual(stream, pos, p);
+    //@ assert unchanged_right: BitstreamUnchanged{Here,Pre}(stream, pos + length, 8 * stream->size);
 
     stream->bitpos -= length;
     //@ assert stream->bitpos == pos;
     //@ assert NormalBitsequence(stream, length);
 
-    uint64_t result = Bitstream_Read(stream, length);
+    Package_Foo_Decoder(stream, p);
 
-    //@ assert lower_bits: EqualBitRange(value, result, 0, length);
-    //@ assert upper_bits: EqualBitRange(value, result, length, 64);
-    //@ assert equal_bits: EqualBitRange(value, result, 0, 64);
-
-    return result;
+    //@ assert new_pos:    stream->bitpos == pos + length;
+    //@ assert size:       stream->size   == \at(stream->size, Pre);
+    //@ assert copied1:    BitstreamEqual(stream, pos, p);
+    //@ assert not_set:    UpperBitsNotSet(p);
+    //@ assert increment:  stream->bitpos == pos + length;
 }

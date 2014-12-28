@@ -1,4 +1,6 @@
 
+it: obj
+
 include ../Makefile.template
 
 VPATH = ../Bitwalker
@@ -11,6 +13,7 @@ obj:\
      	Package_Foo_Decoder.o\
      	Package_Foo_Encoder.o\
 	Package_Foo_DecoderThenEncoder.o\
+	Package_Foo_EncoderThenDecoder.o\
 
 
 report-wp:\
@@ -19,6 +22,7 @@ report-wp:\
 	Package_Foo_Decoder.report-wp\
 	Package_Foo_Encoder.report-wp\
 	Package_Foo_DecoderThenEncoder.report-wp\
+	Package_Foo_EncoderThenDecoder.report-wp\
 
 
 format: FORCE
