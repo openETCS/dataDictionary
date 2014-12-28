@@ -10,7 +10,7 @@ obj:\
      	Package_Foo_UpperBitsNotSet.o\
      	Package_Foo_Decoder.o\
      	Package_Foo_Encoder.o\
-	Package_Foo_DecodeThenEncode.o\
+	Package_Foo_DecoderThenEncoder.o\
 
 
 report-wp:\
@@ -18,7 +18,7 @@ report-wp:\
 	Package_Foo_UpperBitsNotSet.report-wp\
 	Package_Foo_Decoder.report-wp\
 	Package_Foo_Encoder.report-wp\
-	Package_Foo_DecodeThenEncode.report-wp\
+	Package_Foo_DecoderThenEncoder.report-wp\
 
 
 format: FORCE

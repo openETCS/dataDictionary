@@ -17,7 +17,7 @@
 
     ensures unchanged:   BitstreamUnchanged{Here,Old}(stream, 0, 8 * stream->size);
 */
-void Package_Foo_DecodeThenEncode(Bitstream* stream, Package_Foo* p)
+void Package_Foo_DecoderThenEncoder(Bitstream* stream, Package_Foo* p)
 {
     const uint32_t length = 28;
     //@ ghost uint32_t pos = stream->bitpos;
