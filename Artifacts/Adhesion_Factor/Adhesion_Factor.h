@@ -23,6 +23,11 @@ struct Adhesion_Factor
 typedef struct Adhesion_Factor Adhesion_Factor;
 
 /*@
+    logic integer BitSize{L}(Adhesion_Factor* p) = 56;
+*/
+
+
+/*@
    predicate BitstreamEqual(Bitstream* stream, integer pos, Adhesion_Factor* p) =
       BitstreamEqual64(stream, pos,      pos + 8,  p->NID_PACKET)  &&
       BitstreamEqual64(stream, pos + 8,  pos + 10, p->Q_DIR)       &&
