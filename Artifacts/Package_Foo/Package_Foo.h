@@ -15,6 +15,10 @@ struct Package_Foo
 typedef struct Package_Foo Package_Foo;
 
 /*@
+    logic integer BitSize{L}(Package_Foo* p) = 28;
+*/
+
+/*@
    predicate BitstreamEqual(Bitstream* stream, integer pos, Package_Foo* p) =
       BitstreamEqual64(stream, pos, pos + 8, p->ABC) &&
       BitstreamEqual64(stream, pos + 8, pos + 11, p->DEF) &&
