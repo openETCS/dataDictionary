@@ -10,9 +10,13 @@
 
     assigns  *p;
 
-    ensures  p->ABC == 0;
-    ensures  p->DEF == 0;
-    ensures  p->GHI == 0;
+    ensures  p->NID_PACKET == 0;
+    ensures  p->Q_DIR      == 0;
+    ensures  p->L_PACKET   == 0;
+    ensures  p->Q_SCALE    == 0;
+    ensures  p->D_ADHESION == 0;
+    ensures  p->L_ADHESION == 0;
+    ensures  p->M_ADHESION == 0;
 */
 void Adhesion_Factor_Init(Adhesion_Factor* p);
 
