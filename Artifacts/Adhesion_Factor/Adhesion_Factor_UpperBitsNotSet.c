@@ -1,8 +1,8 @@
 
-#include "Package_Foo_UpperBitsNotSet.h"
+#include "Adhesion_Factor_UpperBitsNotSet.h"
 #include "Bit64.h"
 
-int Package_Foo_UpperBitsNotSet(const Package_Foo* p)
+int Adhesion_Factor_UpperBitsNotSet(const Adhesion_Factor* p)
 {
     if (UpperBitsNotSet64(p->ABC, 8) &&
         UpperBitsNotSet64(p->DEF, 3) &&

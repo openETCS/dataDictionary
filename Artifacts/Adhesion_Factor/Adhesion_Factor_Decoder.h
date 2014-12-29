@@ -1,8 +1,8 @@
 
-#ifndef PACKAGE_FOO_DECODER_H_INCLUDED
-#define PACKAGE_FOO_DECODER_H_INCLUDED
+#ifndef ADHESION_FACTOR_DECODER_H_INCLUDED
+#define ADHESION_FACTOR_DECODER_H_INCLUDED
 
-#include "Package_Foo.h"
+#include "Adhesion_Factor.h"
 
 /*@
     requires \valid(stream);
@@ -38,7 +38,7 @@
     complete behaviors;
     disjoint behaviors;
 */
-int Package_Foo_Decoder(Bitstream* stream, Package_Foo* p);
+int Adhesion_Factor_Decoder(Bitstream* stream, Adhesion_Factor* p);
 
 
-#endif // PACKAGE_FOO_DECODER_H_INCLUDED
+#endif // ADHESION_FACTOR_DECODER_H_INCLUDED

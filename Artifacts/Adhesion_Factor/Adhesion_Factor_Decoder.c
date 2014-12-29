@@ -1,8 +1,8 @@
 
-#include "Package_Foo_Decoder.h"
+#include "Adhesion_Factor_Decoder.h"
 #include "Bitstream_Read.h"
 
-int Package_Foo_Decoder(Bitstream* stream, Package_Foo* p)
+int Adhesion_Factor_Decoder(Bitstream* stream, Adhesion_Factor* p)
 {
     if (stream->bitpos + 28 > 8 * stream->size)
     {

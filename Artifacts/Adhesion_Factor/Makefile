@@ -8,21 +8,21 @@ CPPFLAGS += -I../Bitwalker
 
 
 obj:\
-	Package_Foo_Init.o\
-     	Package_Foo_UpperBitsNotSet.o\
-     	Package_Foo_Decoder.o\
-     	Package_Foo_Encoder.o\
-	Package_Foo_DecoderThenEncoder.o\
-	Package_Foo_EncoderThenDecoder.o\
+	Adhesion_Factor_Init.o\
+     	Adhesion_Factor_UpperBitsNotSet.o\
+     	Adhesion_Factor_Decoder.o\
+     	Adhesion_Factor_Encoder.o\
+	Adhesion_Factor_DecoderThenEncoder.o\
+	Adhesion_Factor_EncoderThenDecoder.o\
 
 
 report-wp:\
-	Package_Foo_Init.report-wp\
-	Package_Foo_UpperBitsNotSet.report-wp\
-	Package_Foo_Decoder.report-wp\
-	Package_Foo_Encoder.report-wp\
-	Package_Foo_DecoderThenEncoder.report-wp\
-	Package_Foo_EncoderThenDecoder.report-wp\
+	Adhesion_Factor_Init.report-wp\
+	Adhesion_Factor_UpperBitsNotSet.report-wp\
+	Adhesion_Factor_Decoder.report-wp\
+	Adhesion_Factor_Encoder.report-wp\
+	Adhesion_Factor_DecoderThenEncoder.report-wp\
+	Adhesion_Factor_EncoderThenDecoder.report-wp\
 
 
 format: FORCE

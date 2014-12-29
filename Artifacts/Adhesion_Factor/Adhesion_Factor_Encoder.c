@@ -1,13 +1,13 @@
 
-#include "Package_Foo_Encoder.h"
-#include "Package_Foo_UpperBitsNotSet.h"
+#include "Adhesion_Factor_Encoder.h"
+#include "Adhesion_Factor_UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 
-int Package_Foo_Encoder(Bitstream* stream, const Package_Foo* p)
+int Adhesion_Factor_Encoder(Bitstream* stream, const Adhesion_Factor* p)
 {
     if (stream->bitpos + 28 <= 8 * stream->size)
     {
-        if (Package_Foo_UpperBitsNotSet(p))
+        if (Adhesion_Factor_UpperBitsNotSet(p))
         {
             //@ assert NormalBitsequence(stream, 28);
             //@ ghost uint32_t pos = stream->bitpos;

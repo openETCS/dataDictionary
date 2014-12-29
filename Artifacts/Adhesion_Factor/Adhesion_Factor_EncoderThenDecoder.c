@@ -1,6 +1,6 @@
 
-#include "Package_Foo_Decoder.h"
-#include "Package_Foo_Encoder.h"
+#include "Adhesion_Factor_Decoder.h"
+#include "Adhesion_Factor_Encoder.h"
 
 /*@
     requires valid_stream: \valid(stream);
@@ -20,13 +20,13 @@
 
     ensures unchanged:   *p == \old(*p);
 */
-void Package_Foo_EncoderThenDecoder(Bitstream* stream, Package_Foo* p)
+void Adhesion_Factor_EncoderThenDecoder(Bitstream* stream, Adhesion_Factor* p)
 {
     const uint32_t length = 28;
     //@ ghost uint32_t pos = stream->bitpos;
 
     //@ assert NormalBitsequence(stream, length);
-    Package_Foo_Encoder(stream, p);
+    Adhesion_Factor_Encoder(stream, p);
 
     //@ assert unchanged_left:  BitstreamUnchanged{Here,Pre}(stream, 0, pos);
     //@ assert copied2:         BitstreamEqual(stream, pos, p);
@@ -36,7 +36,7 @@ void Package_Foo_EncoderThenDecoder(Bitstream* stream, Package_Foo* p)
     //@ assert stream->bitpos == pos;
     //@ assert NormalBitsequence(stream, length);
 
-    Package_Foo_Decoder(stream, p);
+    Adhesion_Factor_Decoder(stream, p);
 
     //@ assert new_pos:    stream->bitpos == pos + length;
     //@ assert size:       stream->size   == \at(stream->size, Pre);
