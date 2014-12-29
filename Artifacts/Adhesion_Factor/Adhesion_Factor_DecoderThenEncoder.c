@@ -5,8 +5,8 @@
 /*@
     requires valid_stream: \valid(stream);
     requires stream_inv:   BitstreamInvariant(stream);
-    requires max_pos:      stream->bitpos + 28 <= UINT32_MAX;
-    requires max_pos:      NormalBitsequence(stream, 28);
+    requires max_pos:      stream->bitpos + BitSize(p) <= UINT32_MAX;
+    requires max_pos:      NormalBitsequence(stream, BitSize(p));
     requires \valid(p);
     requires \separated(stream, p);
     requires \separated(stream->addr + (0..stream->size-1), p);
@@ -19,7 +19,7 @@
 */
 void Adhesion_Factor_DecoderThenEncoder(Bitstream* stream, Adhesion_Factor* p)
 {
-    const uint32_t length = 28;
+    const uint32_t length = ADHESION_FACTOR_BITSIZE;
     //@ ghost uint32_t pos = stream->bitpos;
 
     //@ assert NormalBitsequence(stream, length);

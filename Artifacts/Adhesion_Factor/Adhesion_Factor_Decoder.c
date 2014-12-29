@@ -4,13 +4,13 @@
 
 int Adhesion_Factor_Decoder(Bitstream* stream, Adhesion_Factor* p)
 {
-    if (stream->bitpos + 56 > 8 * stream->size)
+    if (stream->bitpos + ADHESION_FACTOR_BITSIZE > 8 * stream->size)
     {
         return 0;
     }
     else
     {
-        //@ assert NormalBitsequence(stream, 56);
+        //@ assert NormalBitsequence(stream, ADHESION_FACTOR_BITSIZE);
         //@ ghost uint32_t pos = stream->bitpos;
 
         /*@

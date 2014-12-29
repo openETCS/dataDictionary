@@ -22,10 +22,11 @@ struct Adhesion_Factor
 
 typedef struct Adhesion_Factor Adhesion_Factor;
 
-/*@
-    logic integer BitSize{L}(Adhesion_Factor* p) = 56;
-*/
+#define ADHESION_FACTOR_BITSIZE 56
 
+/*@
+    logic integer BitSize{L}(Adhesion_Factor* p) = ADHESION_FACTOR_BITSIZE;
+*/
 
 /*@
    predicate BitstreamEqual(Bitstream* stream, integer pos, Adhesion_Factor* p) =
