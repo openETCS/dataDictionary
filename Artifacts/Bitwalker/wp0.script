@@ -37,8 +37,8 @@ Proof.
       unfold included; simpl; auto with zarith.
 Qed.
 
-Goal typed_ref_BitTest_Bitwalker_Peek_loop_inv_copied_preserved.
-Hint Bitwalker_Peek,copied,preserved.
+Goal typed_ref_BitTest_Bitwalker_Peek_Core_loop_inv_copied_preserved.
+Hint Bitwalker_Peek_Core,copied,preserved.
 Proof.
   unfold is_uint8 in *.
   unfold is_uint32 in *.
@@ -50,22 +50,22 @@ Proof.
 
   - (* less *)
     intros less.
-    rewrite <- H27; auto with zarith.
+    rewrite <- H24; auto with zarith.
     replace ((start_0 + length_0 - 1 - i_1)%Z) with ((63 - (63 - (length_0 + start_0 - 1 - i_1)))%Z) by omega.
-    apply H30; auto with zarith.
+    apply H27; auto with zarith.
 
   - (* equal *)
     intros.
     assert(equal: (i_1 = i_0 + start_0)%Z) by auto with zarith.
     rewrite equal in *.
-    rewrite <- H29; auto with zarith.
+    rewrite <- H26; auto with zarith.
     replace (start_0 + length_0 - 1 - (i_0 + start_0))%Z with (length_0 - 1 - i_0)%Z by omega.
     symmetry.
     assumption.
 Qed.
 
-Goal typed_ref_BitTest_Bitwalker_Peek_loop_inv_not_set_preserved.
-Hint Bitwalker_Peek,not_set,preserved.
+Goal typed_ref_BitTest_Bitwalker_Peek_Core_loop_inv_not_set_preserved.
+Hint Bitwalker_Peek_Core,not_set,preserved.
 Proof.
   unfold P_UpperBitsNotSet in *.
   unfold is_uint8 in *.
@@ -76,13 +76,13 @@ Proof.
   assert(i_1 < 64 \/ ~(i_1 < 64))%Z by tauto.
   assert(length_0 <= i_1 < 64 \/ 64 <= i_1)%Z.
 
-    - destruct H31 as [leq | gt].
+    - destruct H28 as [leq | gt].
       + left; auto with zarith.
       + right; auto with zarith.
 
-    - destruct H31 as [left | right].
+    - destruct H28 as [left | right].
       + replace (i_1)%Z with (63 - (63 - i_1))%Z by omega.
-        rewrite H29; auto with zarith.
+        rewrite H26; auto with zarith.
       + apply to_uint64_extraction_sup; auto with zarith.
 Qed.
 
