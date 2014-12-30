@@ -24,7 +24,7 @@
     ensures result:  \result == -1;
 
   behavior  value_too_big:
-    assumes Normal{Pre}(stream, length) && !UpperBitsNotSet(value, length);
+    assumes Normal{Pre}(stream, length) && !UpperBitsNotSet{Pre}(value, length);
 
     assigns stream->addr[0..stream->size - 1];
     assigns stream->bitpos;

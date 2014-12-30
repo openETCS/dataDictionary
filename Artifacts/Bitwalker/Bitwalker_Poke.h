@@ -36,12 +36,12 @@ void Bitwalker_Poke_Core(uint8_t* addr, uint32_t size, uint32_t start, uint32_t 
     ensures invalid_result:  \result == -1;
 
   behavior  value_too_big:
-    assumes (start + length <= 8 * size)  &&  !UpperBitsNotSet(value, length);
+    assumes (start + length <= 8 * size)  &&  !UpperBitsNotSet{Pre}(value, length);
     assigns \nothing;
     ensures wrong_value_result:  \result == -2;
 
   behavior  normal_case:
-    assumes (start + length <= 8 * size)  &&  UpperBitsNotSet(value, length);
+    assumes (start + length <= 8 * size)  &&  UpperBitsNotSet{Pre}(value, length);
     assigns addr[0..size - 1];
 
     ensures left:   BitsUnchanged{Here,Old}(addr, 0, start);
