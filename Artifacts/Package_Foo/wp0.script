@@ -24,7 +24,7 @@ Proof.
   unfold is_uint32 in *.
   unfold is_uint64 in *.
 
-  rewrite H9 in *.
+  rewrite H10 in *.
 
   rewrite <- H44; auto with zarith.
 
@@ -68,6 +68,7 @@ Proof.
 
   rewrite H10 in *.
   rewrite H11 in *.
+  rewrite H12 in *.
 
   rewrite <- H56; auto with zarith.
 

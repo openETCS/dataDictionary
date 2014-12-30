@@ -1,7 +1,7 @@
 
 #include "Package_Foo_Encoder.h"
 #include "Package_Foo_UpperBitsNotSet.h"
-#include "Bitstream_Write.h"
+#include "Bitstream_Write_Normal.h"
 
 int Package_Foo_Encoder(Bitstream* stream, const Package_Foo* p)
 {
@@ -27,7 +27,7 @@ int Package_Foo_Encoder(Bitstream* stream, const Package_Foo* p)
                 ensures ABC_equal:  BitstreamEqual64(stream, pos, pos + 8,  p->ABC);
                 ensures ABC_right:  BitsUnchanged{Here,Old}(stream->addr, pos + 8, 8 * stream->size);
             */
-            Bitstream_Write(stream, 8, p->ABC);
+            Bitstream_Write_Normal(stream, 8, p->ABC);
 
             //@ assert stream->size == size;
 
@@ -46,7 +46,7 @@ int Package_Foo_Encoder(Bitstream* stream, const Package_Foo* p)
 
                 //ensures ABC_DEF_equal: BitstreamEqual64(stream, pos, pos + 8,  p->ABC);
             */
-            Bitstream_Write(stream, 3, p->DEF);
+            Bitstream_Write_Normal(stream, 3, p->DEF);
             //@ ghost post_DEF:
 
             /*@
@@ -63,7 +63,7 @@ int Package_Foo_Encoder(Bitstream* stream, const Package_Foo* p)
                 ensures GHI_equal:  BitstreamEqual64(stream, pos + 11, pos + 28,  p->GHI);
                 ensures GHI_right:  BitsUnchanged{Here,Old}(stream->addr, pos + 28, 8 * stream->size);
             */
-            Bitstream_Write(stream, 17, p->GHI);
+            Bitstream_Write_Normal(stream, 17, p->GHI);
 
             return 1;
         }
