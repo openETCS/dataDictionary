@@ -7,8 +7,8 @@
 /*@
   requires valid_stream:     \valid(stream);
   requires stream_invariant: Invariant(stream);
-  requires max_pos:          stream->bitpos + length <= UINT32_MAX;
   requires max_length:       length <= 64;
+  requires max_pos:          stream->bitpos + length <= UINT32_MAX;
 
   assigns  stream->addr[0..stream->size - 1];
   assigns  stream->bitpos;
