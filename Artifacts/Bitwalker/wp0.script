@@ -184,8 +184,8 @@ Proof.
   rewrite is_uint64_lsl1_inf in H4; omega.
 Qed.
 
-Goal typed_ref_BitTest_WriteThenRead_assert_lower_bits.
-Hint WriteThenRead,lower_bits,property.
+Goal typed_ref_BitTest_Bitstream_WriteThenRead_assert_lower_bits.
+Hint Bitstream_WriteThenRead,lower_bits,property.
 Proof.
   unfold P_BitstreamEqual64 in *.
   unfold P_EqualBits64_2_ in * .
@@ -207,8 +207,8 @@ Proof.
   rewrite H20; auto with zarith.
 Qed.
 
-Goal typed_ref_BitTest_WriteThenRead_post_unchanged.
-Hint WriteThenRead,default,property,unchanged.
+Goal typed_ref_BitTest_Bitstream_WriteThenRead_post_unchanged.
+Hint Bitstream_WriteThenRead,default,property,unchanged.
 Proof.
   unfold P_EqualBitRange in *.
   intros.

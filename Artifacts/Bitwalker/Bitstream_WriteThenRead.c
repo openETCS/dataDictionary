@@ -15,7 +15,7 @@
 
     ensures unchanged:   value == \result;
 */
-uint64_t WriteThenRead(Bitstream* stream, const uint32_t length, uint64_t value)
+uint64_t Bitstream_WriteThenRead(Bitstream* stream, const uint32_t length, uint64_t value)
 {
     //@ assert Normal(stream, length);
     //@ ghost uint32_t pos = stream->bitpos;
@@ -34,3 +34,4 @@ uint64_t WriteThenRead(Bitstream* stream, const uint32_t length, uint64_t value)
 
     return result;
 }
+
