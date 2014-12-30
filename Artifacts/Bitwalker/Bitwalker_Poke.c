@@ -2,15 +2,8 @@
 #include "Bit8Array.h"
 #include "Bit64.h"
 
-int Bitwalker_Poke(uint8_t*  addr, uint32_t  size, uint32_t  start, uint32_t  length, uint64_t  value)
+void Bitwalker_Poke_Core(uint8_t* addr, uint32_t size, uint32_t start, uint32_t length, uint64_t value)
 {
-    if ((start + length)  > 8 * size)
-    {
-        return -1;	// error: invalid_bit_sequence
-    }
-
-    if (UpperBitsNotSet64(value, length))
-    {
         /*@
           loop invariant index:  0 <= i <= length;
           loop invariant unchanged_left:  BitsUnchanged{Here,Pre}(addr, 0, start);
@@ -27,8 +20,21 @@ int Bitwalker_Poke(uint8_t*  addr, uint32_t  size, uint32_t  start, uint32_t  le
             int flag = PeekBit64(value, (64 - length) + i);
             PokeBit8Array(addr, size, start + i, flag);
         }
+}
 
-        return 0;
+
+int Bitwalker_Poke(uint8_t*  addr, uint32_t  size, uint32_t  start, uint32_t  length, uint64_t  value)
+{
+    if ((start + length)  > 8 * size)
+    {
+        return -1;	// error: invalid_bit_sequence
+    }
+
+    if (UpperBitsNotSet64(value, length))
+    {
+       Bitwalker_Poke_Core(addr, size, start, length, value);
+
+       return 0;
     }
     else
     {

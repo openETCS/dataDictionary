@@ -86,8 +86,8 @@ Proof.
       + apply to_uint64_extraction_sup; auto with zarith.
 Qed.
 
-Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_copied_preserved.
-Hint Bitwalker_Poke,copied,preserved.
+Goal typed_ref_BitTest_Bitwalker_Poke_Core_loop_inv_copied_preserved.
+Hint Bitwalker_Poke_Core,copied,preserved.
 Proof.
   unfold P_EqualBits64_1_ in *.
   unfold is_uint64 in *.
@@ -107,14 +107,14 @@ Proof.
   case_lt i_1 (i_0 + start)%Z.
   * 
    intros.
-   rewrite H36; auto with zarith.
+   rewrite H31; auto with zarith.
 
   * 
    intros.
    assert(equal: (i_1 = i_0 + start)%Z) by omega.
    rewrite equal in *.
    replace (start + length - 1 - (i_0 + start))%Z  with  (length - 1 - i_0)%Z by omega.
-   rewrite <- H28; auto with zarith.
+   rewrite <- H23; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_PokeThenPeek_assert_partial_copy.
