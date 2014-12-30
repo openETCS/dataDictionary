@@ -13,11 +13,11 @@
 
   assigns addr[0..size - 1];
 
-  ensures unchanged_left:  BitsUnchanged{Here,Old}(addr, 0, start);
+  ensures left:   BitsUnchanged{Here,Old}(addr, 0, start);
 
-  ensures copied:          EqualBits64(addr, start, start + length, value);
+  ensures middle: EqualBits64(addr, start, start + length, value);
 
-  ensures unchanged_right: BitsUnchanged{Here,Old}(addr, start + length, 8 * size);
+  ensures right:  BitsUnchanged{Here,Old}(addr, start + length, 8 * size);
 */
 void Bitwalker_Poke_Core(uint8_t* addr, uint32_t size, uint32_t start, uint32_t length, uint64_t value);
 
@@ -44,11 +44,11 @@ void Bitwalker_Poke_Core(uint8_t* addr, uint32_t size, uint32_t start, uint32_t 
     assumes (start + length <= 8 * size)  &&  UpperBitsNotSet(value, length);
     assigns addr[0..size - 1];
 
-    ensures unchanged_left:  BitsUnchanged{Here,Old}(addr, 0, start);
+    ensures left:   BitsUnchanged{Here,Old}(addr, 0, start);
 
-    ensures copied:  EqualBits64(addr, start, start + length, value);
+    ensures middle: EqualBits64(addr, start, start + length, value);
 
-    ensures unchanged_right:  BitsUnchanged{Here,Old}(addr, start + length, 8 * size);
+    ensures right:  BitsUnchanged{Here,Old}(addr, start + length, 8 * size);
 
     ensures valid_result: \result == 0;
 
