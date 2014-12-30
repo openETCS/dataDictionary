@@ -28,11 +28,14 @@ uint64_t Bitwalker_Peek_Core(uint8_t* addr, uint32_t size, uint32_t start, uint3
 
   behavior  invalid_bit_sequence:
     assumes start + length > 8 * size;
+
     assigns \nothing;
+
     ensures invalid_result: \result == 0;
 
   behavior  normal_case:
     assumes start + length <= 8 * size;
+
     assigns \nothing;
 
     ensures copied:  EqualBits64(addr, start, start + length, \result);

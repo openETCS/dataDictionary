@@ -14,6 +14,7 @@ uint64_t Bitwalker_Peek_Core(uint8_t* addr, uint32_t size, uint32_t start, uint3
       loop invariant not_set: UpperBitsNotSet(value, length);
 
       loop assigns i, value;
+
       loop variant length - i;
     */
     for (uint32_t i = 0; i < length; i++)
