@@ -9,7 +9,7 @@
   requires invariant:   Invariant(stream);
   requires max_length:  length <= 64;
   requires max_pos:     stream->bitpos + length <= UINT32_MAX;
-  requires normal:      Normal(stream, length); 
+  requires normal:      Normal(stream, length);
 
   assigns  stream->bitpos;
 
