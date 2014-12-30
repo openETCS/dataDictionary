@@ -204,7 +204,7 @@ Proof.
      with (v_0)%Z in * by omega.
 
   replace (i_0)%Z with (v_0 - 1 - (v_0 - 1 - i_0))%Z by omega.
-  rewrite H19; auto with zarith.
+  rewrite H20; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_WriteThenRead_post_unchanged.
