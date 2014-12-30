@@ -26,9 +26,7 @@ Proof.
 
   rewrite H9 in *.
 
-  clear H42.
-  rewrite <- H43; auto with zarith.
-
+  rewrite <- H44; auto with zarith.
 
   assert (X2_0: Mint_2 .[shift p_0 1] = Mint_1 .[shift p_0 1]).
   + apply H39.
@@ -37,7 +35,7 @@ Proof.
     apply separated_sym; assumption.
   + rewrite X2_0 in *.
     rewrite access_update_neq.
-    * rewrite H43; auto with zarith.
+    * rewrite H44; auto with zarith.
       reflexivity.
     * apply separated_neq with (stream_0) (3) (p_0) (3).
       assumption.
@@ -71,7 +69,7 @@ Proof.
   rewrite H10 in *.
   rewrite H11 in *.
 
-  rewrite <- H55; auto with zarith.
+  rewrite <- H56; auto with zarith.
 
   rewrite access_update_neq.
 
