@@ -45,6 +45,8 @@
 
       ensures unchanged_right: BitstreamUnchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
 
+      ensures BitstreamInvariant(stream);
+
     complete behaviors;
     disjoint behaviors;
 */

@@ -27,6 +27,7 @@
       ensures stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures BitstreamEqual(stream, \old(stream->bitpos), p);
       ensures UpperBitsNotSet(p);
+      ensures BitstreamInvariant(stream);
 
     behavior error_case:
       assumes !NormalBitsequence{Pre}(stream, BitSize(p));
