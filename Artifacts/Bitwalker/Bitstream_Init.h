@@ -3,7 +3,6 @@
 #define BITSTREAM_INIT_H_INCLUDED
 
 #include "Bitstream.h"
-#include "BitstreamInvariant.h"
 
 /*@
   requires valid_stream: \valid(stream);
@@ -19,7 +18,7 @@
   ensures  copy_addr:   stream->addr == addr;
   ensures  copy_size:   stream->size == size;
   ensures  copy_bitpos: stream->bitpos == bitpos;
-  ensures  stream_invariant: BitstreamInvariant(stream);
+  ensures  invariant:   Invariant(stream);
 */
 void Bitstream_Init(Bitstream* stream, uint8_t* addr, uint32_t size, uint32_t bitpos);
 
