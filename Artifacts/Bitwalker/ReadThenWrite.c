@@ -4,10 +4,10 @@
 
 /*@
     requires valid_stream: \valid(stream);
-    requires stream_inv:   BitstreamInvariant(stream);
+    requires stream_inv:   Invariant(stream);
     requires max_length:   length <= 64;
     requires max_pos:      stream->bitpos + length <= UINT32_MAX;
-    requires max_pos:      NormalBitsequence(stream, length);
+    requires max_pos:      Normal(stream, length);
 
     assigns stream->addr[0..stream->size-1];
     assigns stream->bitpos;
@@ -16,7 +16,7 @@
 */
 void ReadThenWrite(Bitstream* stream, const uint32_t length)
 {
-    //@ assert NormalBitsequence(stream, length);
+    //@ assert Normal(stream, length);
     //@ ghost uint32_t pos = stream->bitpos;
 
     uint64_t value = Bitstream_Read(stream, length);
@@ -27,7 +27,7 @@ void ReadThenWrite(Bitstream* stream, const uint32_t length)
 
     stream->bitpos -= length;
     //@ assert stream->bitpos == pos;
-    //@ assert NormalBitsequence(stream, length);
+    //@ assert Normal(stream, length);
 
     Bitstream_Write(stream, length, value);
 

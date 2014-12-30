@@ -6,7 +6,7 @@ Proof.
   unfold P_BitstreamEqual64 in *.
   unfold P_EqualBits64_2_ in *.
   unfold P_EqualBits64_1_ in *.
-  unfold P_NormalBitsequence in *.
+  unfold P_Normal in *.
   unfold is_uint32 in *.
 
   intros.

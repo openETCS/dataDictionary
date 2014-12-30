@@ -3,11 +3,10 @@
 #define BITSTREAM_WRITE_H_INCLUDED
 
 #include "Bitstream.h"
-#include "BitstreamInvariant.h"
 
 /*@
   requires valid_stream:     \valid(stream);
-  requires stream_invariant: BitstreamInvariant(stream);
+  requires stream_invariant: Invariant(stream);
   requires max_pos:          stream->bitpos + length <= UINT32_MAX;
   requires max_length:       length <= 64;
 
@@ -17,7 +16,7 @@
   ensures  increment: stream->bitpos == \old(stream->bitpos) + length;
 
   behavior  invalid_bit_sequence:
-    assumes !NormalBitsequence{Pre}(stream, length);
+    assumes !Normal{Pre}(stream, length);
 
     assigns stream->addr[0..stream->size - 1];
     assigns stream->bitpos;
@@ -25,7 +24,7 @@
     ensures result:  \result == -1;
 
   behavior  value_too_big:
-    assumes NormalBitsequence{Pre}(stream, length) && !UpperBitsNotSet(value, length);
+    assumes Normal{Pre}(stream, length) && !UpperBitsNotSet(value, length);
 
     assigns stream->addr[0..stream->size - 1];
     assigns stream->bitpos;
@@ -33,7 +32,7 @@
     ensures result: \result == -2;
 
   behavior  normal_case:
-    assumes NormalBitsequence{Pre}(stream, length) && UpperBitsNotSet{Pre}(value, length);
+    assumes Normal{Pre}(stream, length) && UpperBitsNotSet{Pre}(value, length);
 
     assigns stream->addr[0..stream->size - 1];
     assigns stream->bitpos;
@@ -46,7 +45,7 @@
 
     ensures result: \result == 0;
 
-    ensures BitstreamInvariant(stream);
+    ensures Invariant(stream);
 
   complete behaviors;
   disjoint behaviors;

@@ -3,11 +3,10 @@
 #define BITSTREAM_READ_H_INCLUDED
 
 #include "Bitstream.h"
-#include "BitstreamInvariant.h"
 
 /*@
   requires valid_stream: \valid(stream);
-  requires invariant:    BitstreamInvariant(stream);
+  requires invariant:    Invariant(stream);
   requires max_pos:      stream->bitpos + length <= UINT32_MAX;
   requires max_length:   length <= 64;
 
@@ -16,14 +15,14 @@
   ensures  increment: stream->bitpos == \old(stream->bitpos) + length;
 
   behavior  invalid_bit_sequence:
-    assumes !NormalBitsequence{Pre}(stream, length);
+    assumes !Normal{Pre}(stream, length);
 
     assigns stream->bitpos;
 
     ensures invalid_result: \result == 0;
 
   behavior  normal_case:
-    assumes NormalBitsequence{Pre}(stream, length); // it is strange to add "Pre" here
+    assumes Normal{Pre}(stream, length); // it is strange to add "Pre" here
 
     assigns stream->bitpos;
 
@@ -33,7 +32,7 @@
 
     ensures unchanged: BitstreamUnchanged{Here,Old}(stream, 0, 8*stream->size);
 
-    ensures invariant: BitstreamInvariant(stream);
+    ensures invariant: Invariant(stream);
 
   complete behaviors;
   disjoint behaviors;
