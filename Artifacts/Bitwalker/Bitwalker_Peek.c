@@ -5,7 +5,6 @@
 uint64_t Bitwalker_Peek_Core(uint8_t* addr, uint32_t size, uint32_t start, uint32_t length)
 {
     uint64_t value = 0;
-    //@ assert start + length <= 8 * size;
 
     /*@
       loop invariant index:  0 <= i <= length;
@@ -35,7 +34,7 @@ uint64_t Bitwalker_Peek(uint8_t* addr, uint32_t size, uint32_t start, uint32_t l
     }
     else
     {
-       return Bitwalker_Peek_Core(addr, size, start, length);
+        return Bitwalker_Peek_Core(addr, size, start, length);
     }
 }
 
