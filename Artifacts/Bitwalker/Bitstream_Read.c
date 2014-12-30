@@ -1,12 +1,17 @@
 
 #include "Bitstream_Read.h"
-#include "Bitwalker_Peek.h"
+#include "Bitstream_Read_Normal.h"
 
 uint64_t Bitstream_Read(Bitstream* stream, uint32_t length)
 {
-    uint64_t retval = Bitwalker_Peek(stream->addr, stream->size, stream->bitpos, length);
-
-    stream->bitpos += length;
-    return retval;
+    if (stream->bitpos + length <= 8 * stream->size)
+    {
+        return Bitstream_Read_Normal(stream, length);
+    }
+    else
+    {
+        stream->bitpos += length;
+        return 0u;
+    }
 }
 
