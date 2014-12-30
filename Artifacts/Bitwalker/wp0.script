@@ -86,50 +86,6 @@ Proof.
       + apply to_uint64_extraction_sup; auto with zarith.
 Qed.
 
-Goal typed_ref_BitTest_Bitwalker_Peek_normal_case_post_3.
-Hint Bitwalker_Peek,normal_case,property.
-Proof.
-  intros.
-  unfold is_uint64 in *.
-  apply bits_and_bounds_uint; auto with zarith.
-  intros.
-  replace (k) with (63 - (63 - k))%Z by omega.
-  apply H16; auto with zarith.
-Qed.
-
-Goal typed_ref_BitTest_Bitwalker_Peek_normal_case_post_3_part2.
-Hint Bitwalker_Peek,normal_case,part-1,property.
-Proof.
-  intros.
-  unfold is_uint64 in *.
-  apply bits_and_bounds_uint; auto with zarith.
-  intros.
-  replace (k) with (63 - (63 - k))%Z by omega.
-  apply H16; auto with zarith.
-Qed.
-
-Goal typed_ref_BitTest_Bitwalker_Peek_normal_case_post_valid_result_part2.
-Hint Bitwalker_Peek,normal_case,part-1,property,valid_result.
-Proof.
-  intros.
-  unfold is_uint64 in *.
-  apply bits_and_bounds_uint; auto with zarith.
-
-  intros.
-
-  assert (k < 64 \/ k >= 64)%Z by omega.
-  assert(lower_upper: (length_0 <= k < 64  \/  64 <= k)%Z).
-    destruct H19 as [lower_64 | upper_64].
-    left. omega. 
-    right. omega.
-
-  unfold P_UpperBitsNotSet64 in *.
-
-  destruct lower_upper as [lower | upper].
-  +   apply H11; auto with zarith.
-  +   apply to_uint64_extraction_sup; auto with zarith.
-Qed.
-
 Goal typed_ref_BitTest_Bitwalker_Poke_loop_inv_copied_preserved.
 Hint Bitwalker_Poke,copied,preserved.
 Proof.
