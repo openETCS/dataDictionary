@@ -1,6 +1,6 @@
 
-#ifndef BITSTREAM_READ_H_INCLUDED
-#define BITSTREAM_READ_H_INCLUDED
+#ifndef BITSTREAM_READ_NORMAL_H_INCLUDED
+#define BITSTREAM_READ_NORMAL_H_INCLUDED
 
 #include "Bitstream.h"
 
@@ -27,5 +27,5 @@
 */
 uint64_t Bitstream_Read_Normal(Bitstream* stream, uint32_t length);
 
-#endif // BITSTREAM_READ_H_INCLUDED
+#endif // BITSTREAM_READ_NORMAL_H_INCLUDED
 

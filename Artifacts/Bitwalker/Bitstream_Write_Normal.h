@@ -1,6 +1,6 @@
 
-#ifndef BITSTREAM_WRITE_H_INCLUDED
-#define BITSTREAM_WRITE_H_INCLUDED
+#ifndef BITSTREAM_WRITE_NORMAL_H_INCLUDED
+#define BITSTREAM_WRITE_NORMAL_H_INCLUDED
 
 #include "Bitstream.h"
 
@@ -28,5 +28,5 @@
 */
 void  Bitstream_Write_Normal(Bitstream* stream, uint32_t length, uint64_t value);
 
-#endif // BITSTREAM_WRITE_H_INCLUDED
+#endif // BITSTREAM_WRITE_NORMAL_H_INCLUDED
 
