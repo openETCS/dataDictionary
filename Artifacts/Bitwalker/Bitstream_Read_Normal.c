@@ -4,9 +4,10 @@
 
 uint64_t Bitstream_Read_Normal(Bitstream* stream, uint32_t length)
 {
-    uint64_t retval = Bitwalker_Peek(stream->addr, stream->size, stream->bitpos, length);
+    uint64_t value = Bitwalker_Peek_Core(stream->addr, stream->size, stream->bitpos, length);
 
     stream->bitpos += length;
-    return retval;
+
+    return value;
 }
 
