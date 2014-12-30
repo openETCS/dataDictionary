@@ -4,9 +4,9 @@
 
 /*@
     requires valid_stream: \valid(stream);
-    requires stream_inv:   BitstreamInvariant(stream);
+    requires stream_inv:   Invariant(stream);
     requires max_pos:      stream->bitpos + 28 <= UINT32_MAX;
-    requires max_pos:      NormalBitsequence(stream, 28);
+    requires max_pos:      Normal(stream, 28);
     requires \valid(p);
     requires \separated(stream, p);
     requires \separated(stream->addr + (0..stream->size-1), p);
@@ -22,22 +22,22 @@ void Package_Foo_DecoderThenEncoder(Bitstream* stream, Package_Foo* p)
     const uint32_t length = 28;
     //@ ghost uint32_t pos = stream->bitpos;
 
-    //@ assert NormalBitsequence(stream, length);
+    //@ assert Normal(stream, length);
     Package_Foo_Decoder(stream, p);
 
     //@ assert new_pos:    stream->bitpos == pos + length;
     //@ assert size:       stream->size   == \at(stream->size, Pre);
-    //@ assert copied1:    BitstreamEqual(stream, pos, p);
+    //@ assert copied:     BitstreamEqual(stream, pos, p);
     //@ assert not_set:    UpperBitsNotSet(p);
     //@ assert increment:  stream->bitpos == pos + length;
 
     stream->bitpos -= length;
     //@ assert stream->bitpos == pos;
-    //@ assert NormalBitsequence(stream, length);
+    //@ assert Normal(stream, length);
 
     Package_Foo_Encoder(stream, p);
 
-    //@ assert unchanged_left:  BitstreamUnchanged{Here,Pre}(stream, 0, pos);
-    //@ assert copied2:         BitstreamEqual(stream, pos, p);
-    //@ assert unchanged_right: BitstreamUnchanged{Here,Pre}(stream, pos + length, 8 * stream->size);
+    //@ assert left:    BitstreamUnchanged{Here,Pre}(stream, 0, pos);
+    //@ assert middle:  BitstreamEqual(stream, pos, p);
+    //@ assert right:   BitstreamUnchanged{Here,Pre}(stream, pos + length, 8 * stream->size);
 }

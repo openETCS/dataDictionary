@@ -6,7 +6,7 @@
 
 /*@
     requires \valid(stream);
-    requires BitstreamInvariant(stream);
+    requires Invariant(stream);
     requires stream->bitpos + BitSize(p) <= UINT32_MAX;
     requires \valid(p);
     requires \separated(stream, p);
@@ -18,7 +18,7 @@
     ensures unchanged:    BitstreamUnchanged{Here,Old}(stream, 0, 8*stream->size);
 
     behavior normal_case:
-      assumes NormalBitsequence{Pre}(stream, BitSize(p));
+      assumes Normal{Pre}(stream, BitSize(p));
 
       assigns stream->bitpos;
       assigns *p;
@@ -27,10 +27,10 @@
       ensures stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures BitstreamEqual(stream, \old(stream->bitpos), p);
       ensures UpperBitsNotSet(p);
-      ensures BitstreamInvariant(stream);
+      ensures Invariant(stream);
 
     behavior error_case:
-      assumes !NormalBitsequence{Pre}(stream, BitSize(p));
+      assumes !Normal{Pre}(stream, BitSize(p));
 
       assigns \nothing;
 

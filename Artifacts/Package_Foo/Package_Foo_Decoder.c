@@ -10,11 +10,11 @@ int Package_Foo_Decoder(Bitstream* stream, Package_Foo* p)
     }
     else
     {
-        //@ assert NormalBitsequence(stream, 28);
+        //@ assert Normal(stream, 28);
         //@ ghost uint32_t pos = stream->bitpos;
 
         /*@
-            requires ABC_normal: NormalBitsequence(stream, 8);
+            requires ABC_normal: Normal(stream, 8);
 
             assigns stream->bitpos;
             assigns p->ABC;
@@ -26,7 +26,7 @@ int Package_Foo_Decoder(Bitstream* stream, Package_Foo* p)
         p->ABC = Bitstream_Read(stream, 8);
 
         /*@
-            requires DEF_normal: NormalBitsequence{Here}(stream, 3);
+            requires DEF_normal: Normal{Here}(stream, 3);
 
             assigns stream->bitpos;
             assigns p->DEF;
@@ -38,7 +38,7 @@ int Package_Foo_Decoder(Bitstream* stream, Package_Foo* p)
         p->DEF = Bitstream_Read(stream, 3);
 
         /*@
-            requires GHI_normal: NormalBitsequence(stream, 17);
+            requires GHI_normal: Normal(stream, 17);
 
             assigns stream->bitpos;
             assigns p->GHI;

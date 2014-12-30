@@ -2,7 +2,7 @@
 #ifndef PACKAGE_FOO_H_INCLUDED
 #define PACKAGE_FOO_H_INCLUDED
 
-#include "BitstreamInvariant.h"
+#include "Bitstream.h"
 
 struct Package_Foo
 {

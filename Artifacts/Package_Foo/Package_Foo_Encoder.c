@@ -9,13 +9,13 @@ int Package_Foo_Encoder(Bitstream* stream, const Package_Foo* p)
     {
         if (Package_Foo_UpperBitsNotSet(p))
         {
-            //@ assert NormalBitsequence(stream, 28);
+            //@ assert Normal(stream, 28);
             //@ ghost uint32_t pos = stream->bitpos;
             //@ ghost uint32_t size = stream->size;
             //@ assert \separated(stream, stream->addr + (0..stream->size-1));
 
             /*@
-                requires ABC_normal: NormalBitsequence(stream, 8);
+                requires ABC_normal: Normal(stream, 8);
                 requires ABC_upper:  UpperBitsNotSet(p->ABC, 8);
 
                 assigns stream->bitpos;
@@ -32,7 +32,7 @@ int Package_Foo_Encoder(Bitstream* stream, const Package_Foo* p)
             //@ assert stream->size == size;
 
             /*@
-                requires DEF_normal: NormalBitsequence{Here}(stream, 3);
+                requires DEF_normal: Normal{Here}(stream, 3);
                 requires DEF_upper:  UpperBitsNotSet(p->DEF, 3);
 
                 assigns stream->bitpos;
@@ -50,7 +50,7 @@ int Package_Foo_Encoder(Bitstream* stream, const Package_Foo* p)
             //@ ghost post_DEF:
 
             /*@
-                requires GHI_normal: NormalBitsequence{Here}(stream, 17);
+                requires GHI_normal: Normal{Here}(stream, 17);
                 requires GHI_upper:  UpperBitsNotSet(p->GHI, 17);
                 requires \separated(stream, p);
 

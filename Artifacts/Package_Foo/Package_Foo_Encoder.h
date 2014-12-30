@@ -6,7 +6,7 @@
 
 /*@
     requires \valid(stream);
-    requires BitstreamInvariant(stream);
+    requires Invariant(stream);
     requires stream->bitpos + BitSize(p) <= UINT32_MAX;
     requires \valid_read(p);
     requires \separated(stream, p);
@@ -16,21 +16,21 @@
     assigns stream->addr[0..(stream->size-1)];
 
     behavior invalid_bit_sequence:
-      assumes !NormalBitsequence{Pre}(stream, BitSize(p));
+      assumes !Normal{Pre}(stream, BitSize(p));
 
       assigns \nothing;
 
       ensures \result == -1;
 
     behavior values_too_big:
-      assumes NormalBitsequence{Pre}(stream, BitSize(p)) && !UpperBitsNotSet{Pre}(p);
+      assumes Normal{Pre}(stream, BitSize(p)) && !UpperBitsNotSet{Pre}(p);
 
       assigns \nothing;
 
       ensures \result == -2;
 
     behavior normal_case:
-      assumes NormalBitsequence{Pre}(stream, BitSize(p)) && UpperBitsNotSet{Pre}(p);
+      assumes Normal{Pre}(stream, BitSize(p)) && UpperBitsNotSet{Pre}(p);
 
       assigns stream->bitpos;
       assigns stream->addr[0..(stream->size-1)];
@@ -45,7 +45,7 @@
 
       ensures unchanged_right: BitstreamUnchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
 
-      ensures BitstreamInvariant(stream);
+      ensures Invariant(stream);
 
     complete behaviors;
     disjoint behaviors;
