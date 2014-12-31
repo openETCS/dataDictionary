@@ -156,8 +156,8 @@ Proof.
       + apply to_uint64_extraction_sup; auto with zarith.
 Qed.
 
-Goal typed_ref_BitTest_Bitwalker_Poke_Core_loop_inv_middle_preserved.
-Hint Bitwalker_Poke_Core,middle,preserved.
+Goal typed_ref_BitTest_Bitwalker_Poke_Normal_loop_inv_middle_preserved.
+Hint Bitwalker_Poke_Normal,middle,preserved.
 Proof.
   unfold P_EqualBits64_1_ in *.
   unfold is_uint64 in *.
