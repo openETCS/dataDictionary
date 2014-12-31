@@ -78,7 +78,7 @@ Proof.
   unfold is_uint32 in *.
   unfold is_uint64 in *.
   unfold P_EqualBits64_1_ in *.
-  unfold P_LeftEqualBitRange in *.
+  unfold P_LeftEqualBitRange_2_ in *.
   intros.
 
   case_lt i_1 (i_0 + start_0)%Z.
@@ -104,7 +104,7 @@ Goal typed_ref_BitTest_Bitwalker_Peek_Normal_loop_inv_not_set_preserved.
 Hint Bitwalker_Peek_Normal,not_set,preserved.
 Proof.
   unfold P_UpperBitsNotSet in *.
-  unfold P_LeftEqualBitRange in *.
+  unfold P_LeftEqualBitRange_2_ in *.
   unfold is_uint8 in *.
   unfold is_uint32 in *.
   unfold is_uint64 in *.
