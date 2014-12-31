@@ -134,17 +134,17 @@ Proof.
   remember addr_0 as addr.
   remember value_0 as value.
 
-  case_lt i_1 (i_0 + start)%Z.
+  case_lt i_1 i_0.
   * 
    intros.
-   rewrite H29; auto with zarith.
+   rewrite H24; auto with zarith.
 
   * 
    intros.
-   assert(equal: (i_1 = i_0 + start)%Z) by omega.
+   assert(equal: (i_1 = i_0)%Z) by omega.
    rewrite equal in *.
-   replace (start + length - 1 - (i_0 + start))%Z  with  (length - 1 - i_0)%Z by omega.
-   rewrite <- H23; auto with zarith.
+   replace (start + length)%Z  with  (length + start)%Z by omega.
+   rewrite <- H29; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_PokeBit8Array_post_left.
