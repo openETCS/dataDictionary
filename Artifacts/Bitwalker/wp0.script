@@ -173,7 +173,7 @@ Proof.
   case_lt i_1 (i_0 + start)%Z.
   * 
    intros.
-   rewrite H31; auto with zarith.
+   rewrite H30; auto with zarith.
 
   * 
    intros.

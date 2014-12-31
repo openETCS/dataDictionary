@@ -19,13 +19,13 @@ int PeekBit8Array(uint8_t*  addr, uint32_t  size, uint32_t  pos);
 
 /*@
     requires array_length:  \valid(addr + (0..size-1));
-    requires bit_size:      8*size < UINT32_MAX;
-    requires bit_index:     pos < 8*size;
+    requires bit_size:      8 * size < UINT32_MAX;
+    requires bit_index:     pos < 8 * size;
 
     assigns addr[0..size-1];
 
-    ensures unchanged_bytes:
-         \forall integer i; 0 <= i < size  &&  i != pos/8 ==> addr[i] == \old(addr[i]);
+    //ensures unchanged_bytes:
+         //\forall integer i; 0 <= i < size  &&  i != pos/8 ==> addr[i] == \old(addr[i]);
 
     ensures unchanged_bits:
          \forall integer i; 0 <= i < 8 * size  &&  i != pos ==>
