@@ -107,8 +107,8 @@ Proof.
       unfold included; simpl; auto with zarith.
 Qed.
 
-Goal typed_ref_BitTest_Bitwalker_Peek_Core_loop_inv_copied_preserved.
-Hint Bitwalker_Peek_Core,copied,preserved.
+Goal typed_ref_BitTest_Bitwalker_Peek_Normal_loop_inv_copied_preserved.
+Hint Bitwalker_Peek_Normal,copied,preserved.
 Proof.
   unfold is_uint8 in *.
   unfold is_uint32 in *.
@@ -134,8 +134,8 @@ Proof.
     assumption.
 Qed.
 
-Goal typed_ref_BitTest_Bitwalker_Peek_Core_loop_inv_not_set_preserved.
-Hint Bitwalker_Peek_Core,not_set,preserved.
+Goal typed_ref_BitTest_Bitwalker_Peek_Normal_loop_inv_not_set_preserved.
+Hint Bitwalker_Peek_Normal,not_set,preserved.
 Proof.
   unfold P_UpperBitsNotSet in *.
   unfold is_uint8 in *.

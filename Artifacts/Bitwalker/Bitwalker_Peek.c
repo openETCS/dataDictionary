@@ -1,41 +1,16 @@
 #include "Bitwalker_Peek.h"
-#include "Bit8Array.h"
+#include "Bitwalker_Peek_Normal.h"
 #include "Bit64.h"
-
-uint64_t Bitwalker_Peek_Core(uint8_t* addr, uint32_t size, uint32_t start, uint32_t length)
-{
-    uint64_t value = 0;
-
-    /*@
-      loop invariant index:  0 <= i <= length;
-
-      loop invariant copied: EqualBits64(addr, start, start + i, value, length);
-
-      loop invariant not_set: UpperBitsNotSet(value, length);
-
-      loop assigns i, value;
-
-      loop variant length - i;
-    */
-    for (uint32_t i = 0; i < length; i++)
-    {
-        int flag = PeekBit8Array(addr, size, start + i);
-        value = PokeBit64(value, 64u - length + i, flag);
-    }
-
-    return value;
-}
-
 
 uint64_t Bitwalker_Peek(uint8_t* addr, uint32_t size, uint32_t start, uint32_t length)
 {
     if ((start + length) > 8 * size)
     {
-        return 0;
+        return 0u;
     }
     else
     {
-        return Bitwalker_Peek_Core(addr, size, start, length);
+        return Bitwalker_Peek_Normal(addr, size, start, length);
     }
 }
 

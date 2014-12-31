@@ -22,7 +22,8 @@ format: FORCE
 lib: libBitwalker.a
 
 libBitwalker.a : Bit8.o Bit8Array.o Bit64.o\
-		 Bitwalker_Peek.o Bitwalker_Poke.o\
+		 Bitwalker_Peek_Normal.o Bitwalker_Peek.o\
+                 Bitwalker_Poke.o\
 		 Bitstream_Init.o Bitstream_Read.o Bitstream_Write.o 
 	ar cru	$@ $^
 	ranlib	$@
@@ -37,6 +38,7 @@ report-wp:\
 	Bit8.report-wp\
 	Bit8Array.report-wp\
 	Bit64.report-wp\
+        Bitwalker_Peek_Normal.report-wp\
         Bitwalker_Peek.report-wp\
         Bitwalker_Poke.report-wp\
 	PeekThenPoke.report-wp\
