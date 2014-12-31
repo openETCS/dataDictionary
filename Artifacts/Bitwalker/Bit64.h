@@ -5,13 +5,13 @@
 #include "FramaCBits.h"
 
 /*@
-   requires pre: left < 64;
+   requires pre: pos < 64;
 
    assigns \nothing;
 
-   ensures set_bit: \result != 0 <==> LeftBit64(value, left);
+   ensures set_bit: \result != 0 <==> LeftBit64(value, pos);
 */
-int PeekBit64(uint64_t value, uint32_t left);
+int PeekBit64(uint64_t value, uint32_t pos);
 
 
 /*@
@@ -19,10 +19,12 @@ int PeekBit64(uint64_t value, uint32_t left);
 
     assigns \nothing;
 
-    ensures unchanged_bits: \forall integer i; (0 <= i < 64  &&  i != pos) ==>
-                (LeftBit64(\result, i) <==> LeftBit64(value, i));
+    ensures left: \forall integer i; 0 <= i < pos ==>  (LeftBit64(\result, i) <==> LeftBit64(value, i));
 
     ensures set_bit:  flag != 0  <==>  LeftBit64(\result, pos);
+
+    ensures right: \forall integer i; pos < i < 64 ==> (LeftBit64(\result, i) <==> LeftBit64(value, i));
+
 */
 uint64_t PokeBit64(uint64_t value, uint32_t pos, int flag);
 
