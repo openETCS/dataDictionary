@@ -78,7 +78,7 @@ Proof.
   unfold is_uint32 in *.
   unfold is_uint64 in *.
   unfold P_EqualBits64_1_ in *.
-  unfold P_EqualBitRange_2_ in *.
+  unfold P_LeftEqualBitRange in *.
   intros.
 
   case_lt i_1 (i_0 + start_0)%Z.
@@ -86,7 +86,10 @@ Proof.
   - (* less *)
     intros less.
     rewrite <- H26; auto with zarith.
-
+    replace (start_0 + length_0 - 1 - i_1)%Z with 
+            (63 - (63 - (start_0 + length_0 - 1 - i_1)))%Z in * by omega.
+    apply H24; auto with zarith.
+    
   - (* equal *)
     intros.
     assert(equal: (i_1 = i_0 + start_0)%Z) by auto with zarith.
@@ -101,6 +104,7 @@ Goal typed_ref_BitTest_Bitwalker_Peek_Normal_loop_inv_not_set_preserved.
 Hint Bitwalker_Peek_Normal,not_set,preserved.
 Proof.
   unfold P_UpperBitsNotSet in *.
+  unfold P_LeftEqualBitRange in *.
   unfold is_uint8 in *.
   unfold is_uint32 in *.
   unfold is_uint64 in *.
@@ -115,7 +119,7 @@ Proof.
 
     - destruct H29 as [left | right].
       + replace (i_1)%Z with (63 - (63 - i_1))%Z by omega.
-        rewrite H27; auto with zarith.
+        rewrite H23; auto with zarith.
       + apply to_uint64_extraction_sup; auto with zarith.
 Qed.
 
