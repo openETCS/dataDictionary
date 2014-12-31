@@ -6,16 +6,10 @@
 int PeekThenPoke(uint8_t* addr, uint32_t size, uint32_t start, uint32_t length)
 {
     uint64_t value = Bitwalker_Peek(addr, size, start, length);
-
-    /*@ assert copied:  \forall integer i; start <= i < start + length ==>
-           (LeftBit8Array(addr, i) <==> LeftBit64(value, 64 - (start + length) + i));
-     */
+    //@ assert copied:  EqualBits64(addr, start, start + length, value);
 
     int result =  Bitwalker_Poke(addr, size, start, length, value);
-
-    /*@ assert copied_unchanged:  \forall integer i; start <= i < start + length ==>
-           (LeftBit8Array(addr, i) <==> \at(LeftBit8Array(addr, i), Pre));
-     */
+    //@ assert unchanged:  BitsUnchanged{Here,Pre}(addr, start, start + length);
 
     return result;
 }
