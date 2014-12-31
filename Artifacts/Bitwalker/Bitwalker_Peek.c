@@ -4,13 +4,13 @@
 
 uint64_t Bitwalker_Peek(uint8_t* addr, uint32_t size, uint32_t start, uint32_t length)
 {
-    if ((start + length) > 8 * size)
+    if ((start + length) <= 8 * size)
     {
-        return 0u;
+        return Bitwalker_Peek_Normal(addr, size, start, length);
     }
     else
     {
-        return Bitwalker_Peek_Normal(addr, size, start, length);
+        return 0u;
     }
 }
 
