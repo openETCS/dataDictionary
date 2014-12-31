@@ -6,26 +6,27 @@
 #include "FramaCBits.h"
 
 /*@
-    requires pre: left < 8;
+    requires pre: pos < 8;
 
     assigns \nothing;
 
-    ensures set_bit: \result != 0 <==> LeftBit8(byte, left);
+    ensures set_bit: \result != 0 <==> LeftBit8(byte, pos);
 */
-int PeekBit8(uint8_t byte, uint32_t left);
+int PeekBit8(uint8_t byte, uint32_t pos);
 
 
 /*@
-    requires left < 8;
+    requires pre: pos < 8;
 
     assigns \nothing;
 
-    ensures unchanged_bits: \forall integer i; (0 <= i < 8  &&  i != left)  ==>
-              (LeftBit8(\result, i) <==> LeftBit8(byte, i));
+    ensures left: \forall integer i; 0 <= i < pos  ==> (LeftBit8(\result, i) <==> LeftBit8(byte, i));
 
-    ensures set_bit: LeftBit8(\result, left) <==> (flag != 0);
+    ensures set_bit: LeftBit8(\result, pos) <==> (flag != 0);
+
+    ensures right: \forall integer i; pos < i < 8  ==> (LeftBit8(\result, i) <==> LeftBit8(byte, i));
 */
-uint8_t PokeBit8(uint8_t byte, uint32_t left, int flag);
+uint8_t PokeBit8(uint8_t byte, uint32_t pos, int flag);
 
 #endif // BIT8_H_INCLUDED
 
