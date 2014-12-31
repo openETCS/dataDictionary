@@ -173,7 +173,7 @@ Proof.
   case_lt i_1 (i_0 + start)%Z.
   * 
    intros.
-   rewrite H30; auto with zarith.
+   rewrite H29; auto with zarith.
 
   * 
    intros.
@@ -181,6 +181,22 @@ Proof.
    rewrite equal in *.
    replace (start + length - 1 - (i_0 + start))%Z  with  (length - 1 - i_0)%Z by omega.
    rewrite <- H23; auto with zarith.
+Qed.
+
+Goal typed_ref_BitTest_PokeBit8Array_post_left.
+Hint PokeBit8Array,default,left,property.
+Proof.
+(* --------------------------------------
+  
+From 'typed_ref_BitTest_PokeBit8Array_post_right': 
+(* auto with zarith. *)
+*)
+Qed.
+
+Goal typed_ref_BitTest_PokeBit8Array_post_right.
+Hint PokeBit8Array,default,property,right.
+Proof.
+(* auto with zarith. *)
 Qed.
 
 Goal typed_ref_BitTest_PokeThenPeek_assert_partial_copy.

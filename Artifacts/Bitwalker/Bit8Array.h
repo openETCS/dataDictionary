@@ -24,14 +24,12 @@ int PeekBit8Array(uint8_t*  addr, uint32_t  size, uint32_t  pos);
 
     assigns addr[0..size-1];
 
-    //ensures unchanged_bytes:
-         //\forall integer i; 0 <= i < size  &&  i != pos/8 ==> addr[i] == \old(addr[i]);
+    ensures left:   BitsUnchanged{Here,Old}(addr, 0, pos);
 
-    ensures unchanged_bits:
-         \forall integer i; 0 <= i < 8 * size  &&  i != pos ==>
-                ((LeftBit8Array(addr, i) <==> \old(LeftBit8Array(addr, i))));
+    ensures middle: LeftBit8Array(addr, pos) <==> (flag != 0);
 
-    ensures set_bit:   LeftBit8Array(addr, pos) <==> (flag != 0);
+    ensures right:  BitsUnchanged{Here,Old}(addr, pos + 1, 8 * size);
+
 */
 void PokeBit8Array(uint8_t* addr, uint32_t size, uint32_t pos, int flag);
 
