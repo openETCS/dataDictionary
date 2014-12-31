@@ -32,6 +32,10 @@
 
 /*@
    predicate
+     EqualBitRange{A}(uint8_t x, uint8_t y, integer first, integer last) =
+        \forall integer i; first <= i < last ==> (BitTest(x, i) <==> BitTest(y, i));
+
+   predicate
      EqualBitRange{A}(uint64_t x, uint64_t y, integer first, integer last) =
         \forall integer i; first <= i < last ==> (BitTest(x, i) <==> BitTest(y, i));
 */

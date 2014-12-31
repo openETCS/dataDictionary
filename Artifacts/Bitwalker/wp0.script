@@ -6,7 +6,7 @@ Proof.
   unfold P_BitstreamEqual64 in *.
   unfold P_EqualBits64_2_ in * .
   unfold P_EqualBits64_1_ in * .
-  unfold P_EqualBitRange in *.
+  unfold P_EqualBitRange_2_ in *.
   intros.
 
   rewrite shift_zero in *.
@@ -26,7 +26,7 @@ Qed.
 Goal typed_ref_BitTest_Bitstream_WriteThenRead_post_unchanged.
 Hint Bitstream_WriteThenRead,default,property,unchanged.
 Proof.
-  unfold P_EqualBitRange in *.
+  unfold P_EqualBitRange_2_ in *.
   intros.
   apply bits_equal_uint64; auto.
   intros.
@@ -168,7 +168,7 @@ Hint PokeThenPeek,partial_copy,property.
 Proof.
   unfold P_EqualBits64_2_ in *.
   unfold P_EqualBits64_1_ in *.
-  unfold P_EqualBitRange in *.
+  unfold P_EqualBitRange_2_ in *.
   intros.
 
   replace (length_0 + start_0 - start_0)%Z with length_0 in * by omega.
