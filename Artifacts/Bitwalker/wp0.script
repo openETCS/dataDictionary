@@ -169,10 +169,6 @@ Proof.
   remember length_0 as length.
   remember addr_0 as addr.
   remember value_0 as value.
-  remember Mint_0 as M0.
-  remember Mint_1 as M1.
-  remember Mint_2 as M2.
-
 
   case_lt i_1 (i_0 + start)%Z.
   * 
