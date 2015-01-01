@@ -1,7 +1,7 @@
    verify  Bit8                                [21    21   (10    8   3   0)]     100%
    verify  Bit8Array                           [21    21   (11   10   0   0)]     100%
-   verify  Bit64                               [28    28   (14   12   0   2)]     100%
-   verify  Bitwalker_Peek_Normal               [36    36   (21   12   1   2)]     100%
+   verify  Bit64                               [30    30   (14   14   0   2)]     100%
+   verify  Bitwalker_Peek_Normal               [36    36   (21   13   1   1)]     100%
    verify  Bitwalker_Peek                      [31    31   (29    2   0   0)]     100%
    verify  Bitwalker_Poke_Normal               [40    40   (17   22   0   1)]     100%
    verify  Bitwalker_Poke                      [66    66   (58    8   0   0)]     100%

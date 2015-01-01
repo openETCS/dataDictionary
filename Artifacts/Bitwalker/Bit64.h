@@ -19,11 +19,14 @@ int PeekBit64(uint64_t value, uint32_t pos);
 
     assigns \nothing;
 
-    ensures left:     LeftEqualBitRange(\result, value, 0,  pos);
+    ensures left:    LeftEqualBitRange(\result, value, 0,  pos);
 
-    ensures set_bit:  flag != 0  <==>  LeftBit64(\result, pos);
+    ensures set_bit: flag != 0  <==>  LeftBit64(\result, pos);
 
-    ensures right:    LeftEqualBitRange(\result, value, pos + 1,  64);
+    ensures right:   LeftEqualBitRange(\result, value, pos + 1,  64);
+
+    ensures upper:   \forall integer i; i >= 64 - pos ==>
+                         (UpperBitsNotSet(value, i) ==> UpperBitsNotSet(\result, i));
 
 */
 uint64_t PokeBit64(uint64_t value, uint32_t pos, int flag);
