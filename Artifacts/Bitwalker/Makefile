@@ -1,5 +1,5 @@
 
-MAKEFLAGS += --no-print-directory
+MAKEFLAGS += --no-print-directory --silent
 
 include ../Makefile.template
 
@@ -37,6 +37,9 @@ TestPeekThenPoke: TestPeekThenPoke.o PeekThenPoke.o libBitwalker.a
 	./$@
 
 tests:	TestPeekThenPoke
+
+par:
+	@time $(MAKE) -j 3 -O $(REPORT)
 
 log: FORCE
 	@(time $(MAKE) report > results.txt&)

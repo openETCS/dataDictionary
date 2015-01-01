@@ -4,6 +4,7 @@ export SCRIPT_DIR=../Scripts
 #setup compiler flags
 INCLUDES=$(CPPFLAGS) -I$(FRAMAC_SHARE)/libc
 
+VPATH = ../Coq
 
 SHARED_FLAGS=-Wall -pedantic
 #SHARED_FLAGS+=-Wconversion
@@ -81,17 +82,17 @@ export ASTYLE=astyle -A1 -m0 -H -f -p -Y -z2 --indent=spaces -s4
 	@$(ASTYLE) $<
 
 # start WP on command line and run provers
-%.wp:%.c FORCE driver
+%.wp:%.c FORCE 
 	@$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 1 -wp-out $(patsubst %.c,%.wp, $<)   $<
 
 
 # start WP on command line but do not run provers
-%.check:%.c FORCE
+%.check:%.c FORCE 
 	@($(WP) $(WP_FLAGS) -wp-prover none -wp-out $(patsubst %.c,%.wp, $<)  $< &)
 
 
 # start WP GUI and run provers
-%.wpgui:%.c FORCE driver
+%.wpgui:%.c FORCE 
 	@($(WPGUI) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 4 -wp-out $(patsubst %.c,%.wp, $<)  $< &)
 
 
@@ -100,7 +101,7 @@ export ASTYLE=astyle -A1 -m0 -H -f -p -Y -z2 --indent=spaces -s4
 	@(frama-c-gui $(WP_FLAGS) -wp-prover none -wp-out $(patsubst %.c,%.wp, $<)  $< &)
 
 
-%.report-wp:%.c FORCE driver
+%.report-wp:%.c FORCE 
 	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp $(basename $<););
 
 %.report:%.c
@@ -118,11 +119,6 @@ clean:: FORCE
 	@$(RM) -rf  .frama-c
 	@$(RM) -rf  *.wp
 	@$(RM) -rf  *.ml
-
-        
-driver:
-	@(cd ../Coq; $(MAKE) compile)
-
 
 FORCE:
 
