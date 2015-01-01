@@ -9,6 +9,7 @@ include ../Makefile.template
 
 SRC := $(wildcard *.c)
 OBJ := $(SRC:.c=.o)
+REPORT := $(SRC:.c=.report)
 
 obj : $(OBJ)
 
