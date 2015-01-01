@@ -1,5 +1,9 @@
 
-MAKEFLAGS += --no-print-directory
+MAKEFLAGS += --silent --no-print-directory
+
+WP_FLAGS += -wp-prop=DEF_equal
+#WP_FLAGS += -wp-prop=-@lemma
+#WP_FLAGS += -wp-prop=cea
 
 it: obj
 
@@ -7,7 +11,6 @@ it: obj
 SRC := $(wildcard *.c)
 OBJ := $(SRC:.c=.o)
 REPORT := $(SRC:.c=.report)
-
 
 
 include ../Makefile.template

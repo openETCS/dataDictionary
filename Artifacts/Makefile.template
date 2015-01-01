@@ -84,7 +84,7 @@ export ASTYLE=astyle -A1 -m0 -H -f -p -Y -z2 --indent=spaces -s4
 
 # start WP on command line and run provers
 %.wp:%.c FORCE 
-	(cd ../Coq && $(MAKE) compile)
+	@(cd ../Coq && $(MAKE) compile)
 	@$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 1 -wp-out $(patsubst %.c,%.wp, $<)   $<
 
 
@@ -95,7 +95,7 @@ export ASTYLE=astyle -A1 -m0 -H -f -p -Y -z2 --indent=spaces -s4
 
 # start WP GUI and run provers
 %.wpgui:%.c FORCE 
-	(cd ../Coq && $(MAKE) compile)
+	@(cd ../Coq && $(MAKE) compile)
 	@($(WPGUI) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 4 -wp-out $(patsubst %.c,%.wp, $<)  $< &)
 
 
