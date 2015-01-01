@@ -36,6 +36,9 @@ TestPeekThenPoke: TestPeekThenPoke.o PeekThenPoke.o libBitwalker.a
 
 tests:	TestPeekThenPoke
 
+log: FORCE
+	time make report-wp > results.txt
+
 report-wp:\
 	Bit8.report-wp\
 	Bit8Array.report-wp\
