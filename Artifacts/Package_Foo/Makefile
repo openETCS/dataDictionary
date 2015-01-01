@@ -1,4 +1,6 @@
 
+MAKEFLAGS += --no-print-directory
+
 it: obj
 
 include ../Makefile.template
@@ -16,13 +18,13 @@ obj:\
 	Package_Foo_EncoderThenDecoder.o\
 
 
-report-wp:\
-	Package_Foo_Init.report-wp\
-	Package_Foo_UpperBitsNotSet.report-wp\
-	Package_Foo_Decoder.report-wp\
-	Package_Foo_Encoder.report-wp\
-	Package_Foo_DecoderThenEncoder.report-wp\
-	Package_Foo_EncoderThenDecoder.report-wp\
+report:\
+	Package_Foo_Init.report\
+	Package_Foo_UpperBitsNotSet.report\
+	Package_Foo_Decoder.report\
+	Package_Foo_Encoder.report\
+	Package_Foo_DecoderThenEncoder.report\
+	Package_Foo_EncoderThenDecoder.report\
 
 
 format: FORCE
