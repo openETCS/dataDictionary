@@ -1,4 +1,5 @@
 
+MAKEFLAGS += --no-print-directory
 
 include ../Makefile.template
 
