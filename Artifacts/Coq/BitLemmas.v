@@ -8,7 +8,6 @@ Require Import Cbits.
 
 Open Local Scope Z_scope.
 
-
 Lemma Cdiv_bounds :
      (forall n d x,
        n >= 0 ->
@@ -24,7 +23,6 @@ Proof.
   split.
   + apply Z_div_pos; omega.
   + apply Zdiv_lt_upper_bound; omega.
-
 Qed.
 
 
