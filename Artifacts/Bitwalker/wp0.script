@@ -81,23 +81,21 @@ Proof.
   unfold P_LeftEqualBitRange_2_ in *.
   intros.
 
-  case_lt i_1 (i_0 + start_0)%Z.
+  case_lt i_1 i_0.
 
   - (* less *)
     intros less.
-    rewrite <- H26; auto with zarith.
+    rewrite <- H22; auto with zarith.
     replace (start_0 + length_0 - 1 - i_1)%Z with 
             (63 - (63 - (start_0 + length_0 - 1 - i_1)))%Z in * by omega.
-    apply H24; auto with zarith.
+    apply H28; auto with zarith.
     
   - (* equal *)
     intros.
-    assert(equal: (i_1 = i_0 + start_0)%Z) by auto with zarith.
+    assert(equal: i_1 = i_0) by auto with zarith.
     rewrite equal in *.
-    rewrite <- H28; auto with zarith.
-    replace (start_0 + length_0 - 1 - (i_0 + start_0))%Z with (length_0 - 1 - i_0)%Z by omega.
-    symmetry.
-    assumption.
+    replace (start_0 + length_0)%Z with (length_0 + start_0)%Z by omega.
+    rewrite <- H24; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Peek_Normal_loop_inv_not_set_preserved.
@@ -110,16 +108,16 @@ Proof.
   unfold is_uint64 in *.
   intros.
 
-  assert(i_1 < 64 \/ ~(i_1 < 64))%Z by tauto.
+  assert(DIS: (i_1 < 64 \/ ~(i_1 < 64))%Z) by tauto.
   assert(length_0 <= i_1 < 64 \/ 64 <= i_1)%Z.
 
-    - destruct H29 as [leq | gt].
+    - destruct DIS as [leq | gt].
       + left; auto with zarith.
       + right; auto with zarith.
 
-    - destruct H29 as [left | right].
+    - destruct DIS as [left | right].
       + replace (i_1)%Z with (63 - (63 - i_1))%Z by omega.
-        rewrite H23; auto with zarith.
+        rewrite H27; auto with zarith.
       + apply to_uint64_extraction_sup; auto with zarith.
 Qed.
 

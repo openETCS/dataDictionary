@@ -37,7 +37,7 @@ TestPeekThenPoke: TestPeekThenPoke.o PeekThenPoke.o libBitwalker.a
 tests:	TestPeekThenPoke
 
 log: FORCE
-	@((echo START; time make report-wp > results.txt; echo DONE&))
+	@(time make report-wp > results.txt&)
 	
 
 report-wp:\
