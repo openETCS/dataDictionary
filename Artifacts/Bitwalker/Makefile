@@ -37,24 +37,24 @@ TestPeekThenPoke: TestPeekThenPoke.o PeekThenPoke.o libBitwalker.a
 tests:	TestPeekThenPoke
 
 log: FORCE
-	@(time make report-wp > results.txt&)
+	@(time $(MAKE) report > results.txt&)
 	
 
-report-wp:\
-	Bit8.report-wp\
-	Bit8Array.report-wp\
-	Bit64.report-wp\
-        Bitwalker_Peek_Normal.report-wp\
-        Bitwalker_Peek.report-wp\
-        Bitwalker_Poke_Normal.report-wp\
-        Bitwalker_Poke.report-wp\
-	PeekThenPoke.report-wp\
-	PokeThenPeek.report-wp\
-	Bitstream_Init.report-wp\
-	Bitstream_Read_Normal.report-wp\
-	Bitstream_Read.report-wp\
-	Bitstream_Write_Normal.report-wp\
-	Bitstream_Write.report-wp\
-	Bitstream_ReadThenWrite.report-wp\
-	Bitstream_WriteThenRead.report-wp\
+report:\
+	Bit8.report\
+	Bit8Array.report\
+	Bit64.report\
+        Bitwalker_Peek_Normal.report\
+        Bitwalker_Peek.report\
+        Bitwalker_Poke_Normal.report\
+        Bitwalker_Poke.report\
+	PeekThenPoke.report\
+	PokeThenPeek.report\
+	Bitstream_Init.report\
+	Bitstream_Read_Normal.report\
+	Bitstream_Read.report\
+	Bitstream_Write_Normal.report\
+	Bitstream_Write.report\
+	Bitstream_ReadThenWrite.report\
+	Bitstream_WriteThenRead.report\
 

@@ -103,9 +103,12 @@ export ASTYLE=astyle -A1 -m0 -H -f -p -Y -z2 --indent=spaces -s4
 %.report-wp:%.c FORCE driver
 	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp $(basename $<););
 
+%.report:%.c
+	@+$(MAKE) $(patsubst %.c,%.report-wp, $<)
+
 
 clean:: FORCE
-	@(cd ../Coq; make clean)
+	@(cd ../Coq; $(MAKE) clean)
 	@$(RM) *.o
 	@$(RM) *.i
 	@$(RM) *.back
@@ -118,7 +121,7 @@ clean:: FORCE
 
         
 driver:
-	@(cd ../Coq; make compile)
+	@(cd ../Coq; $(MAKE) compile)
 
 
 FORCE:
