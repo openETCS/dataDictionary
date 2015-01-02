@@ -5,13 +5,13 @@
 #include "Package_Foo.h"
 
 /*@
+    requires \valid_read(p);
+
     requires Writeable(stream);
 
     requires Invariant(stream, BitSize(p));
 
-    requires \valid_read(p);
-    requires \separated(stream, p);
-    requires \separated(stream->addr + (0..stream->size-1), p);
+    requires Separated(stream, p);
 
     assigns stream->bitpos;
     assigns stream->addr[0..(stream->size-1)];

@@ -3,18 +3,17 @@
 #include "Package_Foo_Encoder.h"
 
 /*@
+    requires valid:     \valid(p);
+
+    requires upper:     UpperBitsNotSet(p);
+
     requires valid:     Writeable(stream);
 
     requires invariant: Invariant(stream, BitSize(p));
 
     requires normal:    Normal(stream, BitSize(p));
 
-    requires upper:     UpperBitsNotSet(p);
-
-    requires \valid(p);
-    requires \separated(stream, p);
-    requires \separated(stream->addr + (0..stream->size-1), p);
-
+    requires seprated:  Separated(stream, p);
 
     assigns stream->addr[0..stream->size-1];
     assigns stream->bitpos;

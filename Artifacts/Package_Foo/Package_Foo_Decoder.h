@@ -6,11 +6,12 @@
 
 /*@
     requires Readable(stream);
+
     requires Invariant(stream, BitSize(p));
 
     requires \valid(p);
-    requires \separated(stream, p);
-    requires \separated(stream->addr + (0..stream->size-1), p);
+
+    requires Separated(stream, p);
 
     assigns stream->bitpos;
     assigns *p;

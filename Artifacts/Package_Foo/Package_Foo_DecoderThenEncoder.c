@@ -5,13 +5,13 @@
 /*@
     requires valid:      Writeable(stream);
 
-    requires invariant: Invariant(stream, BitSize(p));
+    requires invariant:  Invariant(stream, BitSize(p));
 
     requires normal:     Normal(stream, BitSize(p));
 
     requires \valid(p);
-    requires \separated(stream, p);
-    requires \separated(stream->addr + (0..stream->size-1), p);
+
+    requires Separated(stream, p);
 
     assigns stream->addr[0..stream->size-1];
     assigns stream->bitpos;

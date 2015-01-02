@@ -19,13 +19,17 @@ typedef struct Package_Foo Package_Foo;
 */
 
 /*@
-   predicate BitstreamEqual(Bitstream* stream, integer pos, Package_Foo* p) =
+    predicate Separated(Bitstream* stream, Package_Foo* p) =
+     \separated(stream, p) &&
+     \separated(stream->addr + (0..stream->size-1), p);
+
+
+     predicate BitstreamEqual(Bitstream* stream, integer pos, Package_Foo* p) =
       BitstreamEqual64(stream, pos, pos + 8, p->ABC) &&
       BitstreamEqual64(stream, pos + 8, pos + 11, p->DEF) &&
       BitstreamEqual64(stream, pos + 11, pos + 28, p->GHI);
-*/
 
-/*@
+
    predicate UpperBitsNotSet(Package_Foo* p) =
       UpperBitsNotSet(p->ABC, 8) &&
       UpperBitsNotSet(p->DEF, 3) &&
