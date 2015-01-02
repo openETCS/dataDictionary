@@ -2,13 +2,13 @@
 #ifndef PEEKTHENPOKE_H_INCLUDED
 #define PEEKTHENPOKE_H_INCLUDED
 
-#include "FramaCBits.h"
+#include "Bitwalker.h"
 
 /*@
     requires array_length: \valid(addr + (0..size-1));
     requires bit_size:     8 * size <= UINT32_MAX;
     requires max_length:   length <= 64;
-    requires max_pos:      bitpos + length <= 8 * size;
+    requires max_pos:      NormalBitwalker(size, bitpos, length);
 
     assigns addr[0..size-1];
 

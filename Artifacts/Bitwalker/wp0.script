@@ -149,8 +149,8 @@ Proof.
   unfold P_EqualBitRange_2_ in *.
   intros.
 
-  replace (length_0 + start_0 - start_0)%Z with length_0 in * by omega.
-  replace (i_0)%Z  with  (start_0 + length_0 - 1 - (start_0 + length_0 - 1 - i_0 ))%Z by omega.
+  replace (bitpos_0 + length_0 - bitpos_0) with length_0 in * by omega.
+  replace (i_0)  with  (bitpos_0 + length_0 - 1 - (bitpos_0 + length_0 - 1 - i_0 )) by omega.
 
   rewrite H19; auto with zarith.
 Qed.

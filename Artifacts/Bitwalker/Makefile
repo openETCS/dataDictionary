@@ -11,7 +11,7 @@ SRC := $(wildcard *.c)
 OBJ := $(SRC:.c=.o)
 REPORT := $(SRC:.c=.report)
 
-obj : $(OBJ)
+it : $(OBJ)
 
 clean::
 	@$(RM) libBitwalker.a
