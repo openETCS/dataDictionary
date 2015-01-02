@@ -12,17 +12,12 @@
   requires not_set:      UpperBitsNotSet(value, length);
 
   assigns  stream->addr[0..stream->size - 1];
-  assigns  stream->bitpos;
 
-  ensures left:      BitstreamUnchanged{Here,Old}(stream, 0, \old(stream->bitpos));
+  ensures left:      BitstreamUnchanged{Here,Old}(stream, 0, stream->bitpos);
 
-  ensures middle:    BitstreamEqual64(stream, \old(stream->bitpos), stream->bitpos, value);
+  ensures middle:    BitstreamEqual64(stream, stream->bitpos, stream->bitpos + length, value);
 
-  ensures right:     BitstreamUnchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
-
-  ensures increment: stream->bitpos == \old(stream->bitpos) + length;
-
-  ensures size:      stream->size == \old(stream->size);
+  ensures right:     BitstreamUnchanged{Here,Old}(stream, stream->bitpos + length, 8 * stream->size);
 
   ensures invariant: Invariant(stream);
 */

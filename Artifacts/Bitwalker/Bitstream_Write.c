@@ -10,6 +10,7 @@ int Bitstream_Write(Bitstream* stream, uint32_t length, uint64_t value)
         if (UpperBitsNotSet64(value, length))
         {
             Bitstream_Write_Normal(stream, length, value);
+            stream->bitpos += length;
             return 0;
         }
         else
