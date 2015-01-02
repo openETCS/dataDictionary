@@ -5,7 +5,7 @@
 
 int Bitwalker_Poke(uint8_t*  addr, uint32_t  size, uint32_t  bitpos, uint32_t  length, uint64_t  value)
 {
-    if ((bitpos + length)  <= 8 * size)
+    if (NormalBitwalker(size, bitpos, length))
     {
         if (UpperBitsNotSet64(value, length))
         {

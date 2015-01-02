@@ -2,7 +2,7 @@
 #ifndef BITWALKER_POKE_H_INCLUDED
 #define BITWALKER_POKE_H_INCLUDED
 
-#include "FramaCBits.h"
+#include "Bitwalker.h"
 
 /*@
   requires array_length: \valid(addr + (0..size-1));
@@ -12,18 +12,9 @@
 
   assigns addr[0..size - 1];
 
-  behavior  invalid_bit_sequence:
-    assumes bitpos + length  > 8 * size;
-    assigns \nothing;
-    ensures invalid_result:  \result == -1;
-
-  behavior  value_too_big:
-    assumes (bitpos + length <= 8 * size)  &&  !UpperBitsNotSet{Pre}(value, length);
-    assigns \nothing;
-    ensures wrong_value_result:  \result == -2;
-
   behavior  normal_case:
-    assumes (bitpos + length <= 8 * size)  &&  UpperBitsNotSet{Pre}(value, length);
+    assumes NormalBitwalker{Pre}(size, bitpos, length)  &&  UpperBitsNotSet{Pre}(value, length);
+
     assigns addr[0..size - 1];
 
     ensures left:   BitsUnchanged{Here,Old}(addr, 0, bitpos);
@@ -33,6 +24,20 @@
     ensures right:  BitsUnchanged{Here,Old}(addr, bitpos + length, 8 * size);
 
     ensures valid_result: \result == 0;
+
+  behavior  value_too_big:
+    assumes NormalBitwalker{Pre}(size, bitpos, length)  &&  !UpperBitsNotSet{Pre}(value, length);
+
+    assigns \nothing;
+
+    ensures wrong_value_result:  \result == -2;
+
+  behavior  invalid_bit_sequence:
+    assumes !NormalBitwalker{Pre}(size, bitpos, length);
+
+    assigns \nothing;
+
+    ensures invalid_result:  \result == -1;
 
   complete behaviors;
   disjoint behaviors;
