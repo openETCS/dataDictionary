@@ -3,18 +3,16 @@
 #include "Bitstream_Write.h"
 
 /*@
-    requires valid:      \valid(stream);
+    requires valid:     Writeable(stream);
 
-    requires invariant:  Invariant(stream);
+    requires invariant: Invariant(stream, length);
 
-    requires overflow:   length <= 64;
-
-    requires normal:       Normal(stream, length);
+    requires normal:    Normal(stream, length);
 
     assigns stream->addr[0..stream->size-1];
     assigns stream->bitpos;
 
-    ensures unchanged:   BitstreamUnchanged{Here,Old}(stream, 0, 8 * stream->size);
+    ensures unchanged:  BitstreamUnchanged{Here,Old}(stream, 0, 8 * stream->size);
 */
 void Bitstream_ReadThenWrite(Bitstream* stream, const uint32_t length)
 {

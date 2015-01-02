@@ -5,13 +5,9 @@
 #include "Bitstream.h"
 
 /*@
-  requires valid:     \valid(stream);
+  requires valid:     Readable(stream);
 
-  requires invariant: Invariant(stream);
-
-  requires overflow:  stream->bitpos + length <= UINT32_MAX;
-
-  requires length:    length <= 64;
+  requires invariant: Invariant(stream, length);
 
   assigns  stream->bitpos;
 
@@ -27,8 +23,6 @@
     ensures not_set:   UpperBitsNotSet(\result, length);
 
     ensures unchanged: BitstreamUnchanged{Here,Old}(stream, 0, 8*stream->size);
-
-    ensures invariant: Invariant(stream);
 
   behavior  invalid_bit_sequence:
     assumes !Normal{Pre}(stream, length);

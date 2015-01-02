@@ -5,13 +5,9 @@
 #include "Bitstream.h"
 
 /*@
-  requires valid:     \valid(stream);
+  requires valid:     Writeable(stream);
 
-  requires invariant: Invariant(stream);
-
-  requires length:    length <= 64;
-
-  requires overflow:  stream->bitpos + length <= UINT32_MAX;
+  requires invariant: Invariant(stream, length);
 
   assigns  stream->addr[0..stream->size - 1];
   assigns  stream->bitpos;
@@ -31,8 +27,6 @@
     ensures right:  BitstreamUnchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
 
     ensures result: \result == 0;
-
-    ensures Invariant(stream);
 
   behavior  value_too_big:
     assumes Normal{Pre}(stream, length) && !UpperBitsNotSet{Pre}(value, length);

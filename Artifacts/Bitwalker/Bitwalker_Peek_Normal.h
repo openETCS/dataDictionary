@@ -5,11 +5,13 @@
 #include "Bitwalker.h"
 
 /*@
-  requires  invariant:  BitwalkerInvariant(addr, size, bitpos, length);
+  requires  valid:     Readable(addr, size);
 
-  requires  normal:     NormalBitwalker(size, bitpos, length);
+  requires  invariant: BitwalkerInvariant(addr, size, bitpos, length);
 
-  assigns \nothing;
+  requires  normal:    NormalBitwalker(size, bitpos, length);
+
+  assigns  \nothing;
 
   ensures  copied:      EqualBits64(addr, bitpos, bitpos + length, \result);
 

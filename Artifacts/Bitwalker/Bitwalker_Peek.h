@@ -5,7 +5,9 @@
 #include "Bitwalker.h"
 
 /*@
-  requires invariant:  BitwalkerInvariant(addr, size, bitpos, length);
+  requires valid:     Readable(addr, size);
+
+  requires invariant: BitwalkerInvariant(addr, size, bitpos, length);
 
   assigns \nothing;
 

@@ -5,11 +5,9 @@
 #include "Bitstream.h"
 
 /*@
-  requires valid:     \valid(stream);
+  requires valid:     Writeable(stream);
 
-  requires invariant: Invariant(stream);
-
-  requires length:    length <= 64;
+  requires invariant: Invariant(stream, length);
 
   requires normal:    Normal(stream, length);
 
@@ -22,8 +20,6 @@
   ensures middle:     BitstreamEqual64(stream, stream->bitpos, stream->bitpos + length, value);
 
   ensures right:      BitstreamUnchanged{Here,Old}(stream, stream->bitpos + length, 8 * stream->size);
-
-  ensures invariant:  Invariant(stream);
 */
 void  Bitstream_Write_Normal(Bitstream* stream, uint32_t length, uint64_t value);
 

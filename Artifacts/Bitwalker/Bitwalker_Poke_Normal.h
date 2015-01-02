@@ -5,11 +5,13 @@
 #include "Bitwalker.h"
 
 /*@
-  requires  invariant: BitwalkerInvariant(addr, size, bitpos, length);
+  requires valid:     Writeable(addr, size);
 
-  requires  normal:    NormalBitwalker(size, bitpos, length);
+  requires invariant: BitwalkerInvariant(addr, size, bitpos, length);
 
-  requires  upper:     UpperBitsNotSet(value, length);
+  requires normal:    NormalBitwalker(size, bitpos, length);
+
+  requires upper:     UpperBitsNotSet(value, length);
 
   assigns addr[0..size - 1];
 

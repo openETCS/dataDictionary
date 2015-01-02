@@ -5,11 +5,9 @@
 #include "Bitstream.h"
 
 /*@
-  requires valid:      \valid(stream);
+  requires valid:      Readable(stream);
 
-  requires invariant:  Invariant(stream);
-
-  requires length:     length <= 64;
+  requires invariant:  Invariant(stream, length);
 
   requires normal:     Normal(stream, length);
 
@@ -24,8 +22,6 @@
   ensures increment: stream->bitpos == \old(stream->bitpos) + length;
 
   ensures size:      stream->size == \old(stream->size);
-
-  ensures invariant: Invariant(stream);
 */
 uint64_t Bitstream_Read_Normal(Bitstream* stream, uint32_t length);
 

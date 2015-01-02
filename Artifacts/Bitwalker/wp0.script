@@ -22,7 +22,7 @@ Proof.
   remember (Mint_0 .[ shift stream_0 2]) as pos.
 
   replace (i_0)%Z with (v_0 - 1 - (v_0 - 1 - i_0))%Z by omega.
-  rewrite H20; auto with zarith.
+  rewrite H16; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_Bitstream_WriteThenRead_post_unchanged.
@@ -33,7 +33,7 @@ Proof.
   apply bits_equal_uint64; auto.
   intros.
   symmetry.
-  apply H8; auto with zarith.
+  apply H6; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_Bitstream_Write_normal_case_post_middle.
@@ -87,16 +87,16 @@ Proof.
 
   - (* less *)
     intros less.
-    rewrite <- H22; auto with zarith.
+    rewrite <- H23; auto with zarith.
     replace (bitpos_0 + length_0 - 1 - i_1)%Z with 
             (63 - (63 - (bitpos_0 + length_0 - 1 - i_1)))%Z in * by omega.
-    apply H29; auto with zarith.
+    apply H30; auto with zarith.
     
   - (* equal *)
     intros.
     assert(equal: i_1 = i_0) by auto with zarith.
     rewrite equal in *.
-    rewrite <- H24; auto with zarith.
+    rewrite <- H25; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Poke_Normal_loop_inv_middle_preserved.
@@ -116,14 +116,13 @@ Proof.
   case_lt i_1 i_0.
   * 
    intros.
-   rewrite H24; auto with zarith.
+   rewrite H25; auto with zarith.
 
   * 
    intros.
    assert(equal: (i_1 = i_0)%Z) by omega.
    rewrite equal in *.
-   replace (bitpos + length)%Z  with  (length + bitpos)%Z in * by omega.
-   rewrite <- H29; auto with zarith.
+   rewrite <- H30; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_PokeBit8Array_post_left.
@@ -151,7 +150,7 @@ Proof.
 
   replace (i_0)  with  (bitpos_0 + length_0 - 1 - (bitpos_0 + length_0 - 1 - i_0 )) by omega.
 
-  rewrite H15; auto with zarith.
+  rewrite H17; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_PokeThenPeek_post_result_value.

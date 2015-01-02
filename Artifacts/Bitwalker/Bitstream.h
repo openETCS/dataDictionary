@@ -14,10 +14,15 @@ struct Bitstream
 typedef struct Bitstream Bitstream;
 
 /*@
-  predicate Invariant{L}(Bitstream* stream) =
-     \valid(stream->addr + (0..stream->size-1))  &&
+  predicate Readable{L}(Bitstream* stream) = \valid(stream) &&
+         \valid_read(stream->addr + (0..stream->size-1));
+
+  predicate Writeable{L}(Bitstream* stream) = \valid(stream) &&
+         \valid(stream->addr + (0..stream->size-1));
+
+  predicate Invariant{L}(Bitstream* stream, integer length) =
      \separated(stream, stream->addr + (0..stream->size-1)) &&
-     8 * stream->size <= UINT32_MAX;
+     BitwalkerInvariant(stream->addr, stream->size, stream->bitpos, length);
 
   predicate Normal{L}(Bitstream* stream, integer length) =
      stream->bitpos + length <= 8 * stream->size;
