@@ -5,7 +5,6 @@
 /*@
     requires valid_stream: \valid(stream);
     requires stream_inv:   Invariant(stream);
-    requires max_pos:      stream->bitpos + 28 <= UINT32_MAX;
     requires max_pos:      Normal(stream, 28);
     requires \valid(p);
     requires \separated(stream, p);

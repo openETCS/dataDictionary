@@ -16,9 +16,9 @@ int Package_Foo_Decoder(Bitstream* stream, Package_Foo* p)
 
         stream->bitpos += 28;
 
-        //@ assert ABC_final:  BitstreamEqual64(stream, pos, pos + 8,  p->ABC);
-        //@ assert DEF_final:  BitstreamEqual64(stream, pos + 8, pos + 11,  p->DEF);
-        //@ assert GHI_final:  BitstreamEqual64(stream, pos + 11, pos + 28,  p->GHI);
+        //@ assert ABC:  BitstreamEqual64(stream, pos, pos + 8,  p->ABC);
+        //@ assert DEF:  BitstreamEqual64(stream, pos + 8, pos + 11,  p->DEF);
+        //@ assert GHI:  BitstreamEqual64(stream, pos + 11, pos + 28,  p->GHI);
 
         return 1;
     }
