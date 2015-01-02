@@ -8,7 +8,7 @@
   requires  array_length: \valid_read(addr + (0..size-1));
   requires  max_length:   length <= 64;
   requires  bit_size:     8 * size <= UINT32_MAX;
-  requires  max_pos:      bitpos + length <= 8 * size;
+  requires  normal:       NormalBitwalker(size, bitpos, length);
 
   assigns \nothing;
 
