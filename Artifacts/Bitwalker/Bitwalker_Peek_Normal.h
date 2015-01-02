@@ -2,7 +2,7 @@
 #ifndef BITWALKER_PEEK_NORMAL_H_INCLUDED
 #define BITWALKER_PEEK_NORMAL_H_INCLUDED
 
-#include "FramaCBits.h"
+#include "Bitwalker.h"
 
 /*@
   requires  array_length: \valid_read(addr + (0..size-1));

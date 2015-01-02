@@ -9,7 +9,7 @@ int Package_Foo_Encoder(Bitstream* stream, const Package_Foo* p)
     const uint32_t pos  = stream->bitpos;
     const uint32_t size = stream->size;
 
-    if (pos + 28 <= 8 * size)
+    if (NormalBitwalker(size, pos, 28))
     {
         if (Package_Foo_UpperBitsNotSet(p))
         {

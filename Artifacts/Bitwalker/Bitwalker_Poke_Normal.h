@@ -2,7 +2,7 @@
 #ifndef BITWALKER_POKE_NORMAL_H_INCLUDED
 #define BITWALKER_POKE_NORMAL_H_INCLUDED
 
-#include "FramaCBits.h"
+#include "Bitwalker.h"
 
 /*@
   requires array_length: \valid(addr + (0..size-1));

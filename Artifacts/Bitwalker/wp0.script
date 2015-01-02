@@ -86,15 +86,14 @@ Proof.
   - (* less *)
     intros less.
     rewrite <- H22; auto with zarith.
-    replace (start_0 + length_0 - 1 - i_1)%Z with 
-            (63 - (63 - (start_0 + length_0 - 1 - i_1)))%Z in * by omega.
+    replace (bitpos_0 + length_0 - 1 - i_1)%Z with 
+            (63 - (63 - (bitpos_0 + length_0 - 1 - i_1)))%Z in * by omega.
     apply H29; auto with zarith.
     
   - (* equal *)
     intros.
     assert(equal: i_1 = i_0) by auto with zarith.
     rewrite equal in *.
-    replace (start_0 + length_0)%Z with (length_0 + start_0)%Z by omega.
     rewrite <- H24; auto with zarith.
 Qed.
 
@@ -107,7 +106,7 @@ Proof.
   unfold  to_sint32 in *.
   intros.
 
-  remember start_0 as start.
+  remember bitpos_0 as bitpos.
   remember length_0 as length.
   remember addr_0 as addr.
   remember value_0 as value.
@@ -121,7 +120,7 @@ Proof.
    intros.
    assert(equal: (i_1 = i_0)%Z) by omega.
    rewrite equal in *.
-   replace (start + length)%Z  with  (length + start)%Z by omega.
+   replace (bitpos + length)%Z  with  (length + bitpos)%Z in * by omega.
    rewrite <- H29; auto with zarith.
 Qed.
 
