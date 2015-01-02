@@ -5,10 +5,7 @@
 #include "Bitwalker.h"
 
 /*@
-  requires array_length: \valid(addr + (0..size-1));
-  requires bit_size:     8 * size <= UINT32_MAX;
-  requires max_length:   length <= 64;
-  requires max_pos:      bitpos + length <= UINT32_MAX;
+  requires invariant: BitwalkerInvariant(addr, size, bitpos, length);
 
   assigns addr[0..size - 1];
 

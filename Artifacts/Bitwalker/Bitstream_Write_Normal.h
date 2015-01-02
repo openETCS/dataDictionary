@@ -5,21 +5,25 @@
 #include "Bitstream.h"
 
 /*@
-  requires valid:        \valid(stream);
-  requires invariant:    Invariant(stream);
-  requires max_length:   length <= 64;
-  requires normal:       Normal(stream, length);
-  requires not_set:      UpperBitsNotSet(value, length);
+  requires valid:     \valid(stream);
+
+  requires invariant: Invariant(stream);
+
+  requires length:    length <= 64;
+
+  requires normal:    Normal(stream, length);
+
+  requires upper:     UpperBitsNotSet(value, length);
 
   assigns  stream->addr[0..stream->size - 1];
 
-  ensures left:      BitstreamUnchanged{Here,Old}(stream, 0, stream->bitpos);
+  ensures left:       BitstreamUnchanged{Here,Old}(stream, 0, stream->bitpos);
 
-  ensures middle:    BitstreamEqual64(stream, stream->bitpos, stream->bitpos + length, value);
+  ensures middle:     BitstreamEqual64(stream, stream->bitpos, stream->bitpos + length, value);
 
-  ensures right:     BitstreamUnchanged{Here,Old}(stream, stream->bitpos + length, 8 * stream->size);
+  ensures right:      BitstreamUnchanged{Here,Old}(stream, stream->bitpos + length, 8 * stream->size);
 
-  ensures invariant: Invariant(stream);
+  ensures invariant:  Invariant(stream);
 */
 void  Bitstream_Write_Normal(Bitstream* stream, uint32_t length, uint64_t value);
 

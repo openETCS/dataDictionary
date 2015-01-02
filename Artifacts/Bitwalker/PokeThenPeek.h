@@ -5,11 +5,11 @@
 #include "Bitwalker.h"
 
 /*@
-    requires array_length:  \valid(addr + (0..size-1));
-    requires bit_size:      8 * size <= UINT32_MAX;
-    requires max_length:    length <= 64;
-    requires max_pos:       NormalBitwalker(size, bitpos, length);
-    requires max_value:     UpperBitsNotSet(value, length);
+    requires invariant:  BitwalkerInvariant(addr, size, bitpos, length);
+
+    requires normal:     NormalBitwalker(size, bitpos, length);
+
+    requires upper:      UpperBitsNotSet(value, length);
 
     assigns addr[0..size-1];
 

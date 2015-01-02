@@ -5,7 +5,7 @@
 
 int Bitstream_Write(Bitstream* stream, uint32_t length, uint64_t value)
 {
-    if ((stream->bitpos + length)  <= 8 * stream->size)
+    if (NormalBitwalker(stream->size, stream->bitpos, length))
     {
         if (UpperBitsNotSet64(value, length))
         {

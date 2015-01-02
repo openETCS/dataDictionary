@@ -5,31 +5,18 @@
 #include "Bitstream.h"
 
 /*@
-  requires valid_stream:     \valid(stream);
-  requires stream_invariant: Invariant(stream);
-  requires max_length:       length <= 64;
-  requires max_pos:          stream->bitpos + length <= UINT32_MAX;
+  requires valid:     \valid(stream);
+
+  requires invariant: Invariant(stream);
+
+  requires length:    length <= 64;
+
+  requires overflow:  stream->bitpos + length <= UINT32_MAX;
 
   assigns  stream->addr[0..stream->size - 1];
   assigns  stream->bitpos;
 
   ensures  increment: stream->bitpos == \old(stream->bitpos) + length;
-
-  behavior  invalid_bit_sequence:
-    assumes !Normal{Pre}(stream, length);
-
-    assigns stream->addr[0..stream->size - 1];
-    assigns stream->bitpos;
-
-    ensures result:  \result == -1;
-
-  behavior  value_too_big:
-    assumes Normal{Pre}(stream, length) && !UpperBitsNotSet{Pre}(value, length);
-
-    assigns stream->addr[0..stream->size - 1];
-    assigns stream->bitpos;
-
-    ensures result: \result == -2;
 
   behavior  normal_case:
     assumes Normal{Pre}(stream, length) && UpperBitsNotSet{Pre}(value, length);
@@ -46,6 +33,22 @@
     ensures result: \result == 0;
 
     ensures Invariant(stream);
+
+  behavior  value_too_big:
+    assumes Normal{Pre}(stream, length) && !UpperBitsNotSet{Pre}(value, length);
+
+    assigns stream->addr[0..stream->size - 1];
+    assigns stream->bitpos;
+
+    ensures result: \result == -2;
+
+  behavior  invalid_bit_sequence:
+    assumes !Normal{Pre}(stream, length);
+
+    assigns stream->addr[0..stream->size - 1];
+    assigns stream->bitpos;
+
+    ensures result:  \result == -1;
 
   complete behaviors;
   disjoint behaviors;

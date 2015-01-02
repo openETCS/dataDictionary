@@ -6,7 +6,9 @@
 
 /*@
     requires array_length:  \valid_read(addr + (0..size-1));
-    requires bit_size:      8 * size < UINT32_MAX;
+
+    requires bit_size:      8 * size <= UINT32_MAX;
+
     requires bit_index:     pos < 8 * size;
 
     assigns \nothing;
@@ -19,7 +21,9 @@ int PeekBit8Array(uint8_t*  addr, uint32_t  size, uint32_t  pos);
 
 /*@
     requires array_length:  \valid(addr + (0..size-1));
-    requires bit_size:      8 * size < UINT32_MAX;
+
+    requires bit_size:      8 * size <= UINT32_MAX;
+
     requires bit_index:     pos < 8 * size;
 
     assigns addr[0..size-1];

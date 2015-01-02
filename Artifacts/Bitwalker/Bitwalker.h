@@ -5,6 +5,14 @@
 #include "FramaCBits.h"
 
 /*@ predicate
+      BitwalkerInvariant{L}(uint8_t* addr, integer size, integer bitpos, integer length) =
+          \valid(addr + (0..size-1)) &&
+           8 * size <= UINT32_MAX  &&
+           length <= 64 &&
+           bitpos + length <= UINT32_MAX;
+*/
+
+/*@ predicate
       NormalBitwalker{L}(integer size, integer bitpos, integer length)
         = bitpos + length <= 8 * size;
 */

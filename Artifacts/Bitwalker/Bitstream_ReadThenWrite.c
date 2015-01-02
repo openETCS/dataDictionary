@@ -3,11 +3,13 @@
 #include "Bitstream_Write.h"
 
 /*@
-    requires valid_stream: \valid(stream);
-    requires stream_inv:   Invariant(stream);
-    requires max_length:   length <= 64;
-    requires max_pos:      stream->bitpos + length <= UINT32_MAX;
-    requires max_pos:      Normal(stream, length);
+    requires valid:      \valid(stream);
+
+    requires invariant:  Invariant(stream);
+
+    requires overflow:   length <= 64;
+
+    requires normal:       Normal(stream, length);
 
     assigns stream->addr[0..stream->size-1];
     assigns stream->bitpos;

@@ -5,21 +5,17 @@
 #include "Bitstream.h"
 
 /*@
-  requires valid_stream: \valid(stream);
-  requires invariant:    Invariant(stream);
-  requires max_pos:      stream->bitpos + length <= UINT32_MAX;
-  requires max_length:   length <= 64;
+  requires valid:     \valid(stream);
+
+  requires invariant: Invariant(stream);
+
+  requires overflow:  stream->bitpos + length <= UINT32_MAX;
+
+  requires length:    length <= 64;
 
   assigns  stream->bitpos;
 
   ensures  increment: stream->bitpos == \old(stream->bitpos) + length;
-
-  behavior  invalid_bit_sequence:
-    assumes !Normal{Pre}(stream, length);
-
-    assigns stream->bitpos;
-
-    ensures invalid_result: \result == 0;
 
   behavior  normal_case:
     assumes Normal{Pre}(stream, length); // it is strange to add "Pre" here
@@ -33,6 +29,13 @@
     ensures unchanged: BitstreamUnchanged{Here,Old}(stream, 0, 8*stream->size);
 
     ensures invariant: Invariant(stream);
+
+  behavior  invalid_bit_sequence:
+    assumes !Normal{Pre}(stream, length);
+
+    assigns stream->bitpos;
+
+    ensures invalid_result: \result == 0;
 
   complete behaviors;
   disjoint behaviors;

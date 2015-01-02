@@ -2,7 +2,7 @@
 #ifndef BITSTREAM_H_INCLUDED
 #define BITSTREAM_H_INCLUDED
 
-#include "FramaCBits.h"
+#include "Bitwalker.h"
 
 struct Bitstream
 {
