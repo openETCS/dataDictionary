@@ -5,9 +5,9 @@
 #include "Package_Foo.h"
 
 /*@
-    requires \valid(stream);
-    requires Invariant(stream);
-    requires stream->bitpos + BitSize(p) <= UINT32_MAX;
+    requires Readable(stream);
+    requires Invariant(stream, BitSize(p));
+
     requires \valid(p);
     requires \separated(stream, p);
     requires \separated(stream->addr + (0..stream->size-1), p);
@@ -27,7 +27,6 @@
       ensures stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures BitstreamEqual(stream, \old(stream->bitpos), p);
       ensures UpperBitsNotSet(p);
-      ensures Invariant(stream);
 
     behavior error_case:
       assumes !Normal{Pre}(stream, BitSize(p));

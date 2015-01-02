@@ -3,9 +3,12 @@
 #include "Package_Foo_Encoder.h"
 
 /*@
-    requires valid_stream: \valid(stream);
-    requires stream_inv:   Invariant(stream);
-    requires max_pos:      Normal(stream, 28);
+    requires valid:      Writeable(stream);
+
+    requires invariant: Invariant(stream, BitSize(p));
+
+    requires normal:     Normal(stream, BitSize(p));
+
     requires \valid(p);
     requires \separated(stream, p);
     requires \separated(stream->addr + (0..stream->size-1), p);

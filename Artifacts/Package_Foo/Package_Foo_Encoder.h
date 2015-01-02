@@ -5,9 +5,10 @@
 #include "Package_Foo.h"
 
 /*@
-    requires \valid(stream);
-    requires Invariant(stream);
-    requires stream->bitpos + BitSize(p) <= UINT32_MAX;
+    requires Writeable(stream);
+
+    requires Invariant(stream, BitSize(p));
+
     requires \valid_read(p);
     requires \separated(stream, p);
     requires \separated(stream->addr + (0..stream->size-1), p);
@@ -44,8 +45,6 @@
       ensures BitstreamEqual(stream, \old(stream->bitpos), p);
 
       ensures unchanged_right: BitstreamUnchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
-
-      ensures Invariant(stream);
 
     complete behaviors;
     disjoint behaviors;

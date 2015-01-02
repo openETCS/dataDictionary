@@ -1,6 +1,6 @@
    verify  Package_Foo_Init                    [9      9   (3     6   0   0)]     100%
    verify  Package_Foo_UpperBitsNotSet         [21    21   (14    7   0   0)]     100%
-   verify  Package_Foo_Decoder                 [94    94   (45   41   8   0)]     100%
-   verify  Package_Foo_Encoder                 [137  137   (82   49   6   0)]     100%
-   verify  Package_Foo_DecoderThenEncoder      [43    43   (17   21   5   0)]     100%
-   verify  Package_Foo_EncoderThenDecoder      [43    43   (19   19   5   0)]     100%
+   verify  Package_Foo_Decoder                 [95    95   (45   42   8   0)]     100%
+   verify  Package_Foo_Encoder                 [137  137   (81   50   6   0)]     100%
+   verify  Package_Foo_DecoderThenEncoder      [41    41   (15   20   6   0)]     100%
+   verify  Package_Foo_EncoderThenDecoder      [41    41   (18   16   7   0)]     100%
