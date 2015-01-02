@@ -4,7 +4,7 @@
    verify  Bitwalker                           [6      6   (3     3   0   0)]     100%
    verify  Bitwalker_Peek_Normal               [36    36   (19   15   1   1)]     100%
    verify  Bitwalker_Peek                      [33    33   (30    3   0   0)]     100%
-   verify  Bitwalker_Poke_Normal               [40    40   (15   24   0   1)]     100%
+   verify  Bitwalker_Poke_Normal               [40    40   (15   23   1   1)]     100%
    verify  Bitwalker_Poke                      [70    70   (60   10   0   0)]     100%
    verify  PeekThenPoke                        [13    13   (8     5   0   0)]     100%
    verify  PokeThenPeek                        [10    10   (5     3   0   2)]     100%
@@ -14,4 +14,4 @@
    verify  Bitstream_Write_Normal              [13    13   (1    10   2   0)]     100%
    verify  Bitstream_Write                     [104  104   (66   35   3   0)]     100%
    verify  Bitstream_ReadThenWrite             [35    35   (17   15   3   0)]     100%
-   verify  Bitstream_WriteThenRead             [31    31   (12   16   1   2)]     100%
+   verify  Bitstream_WriteThenRead             [31    31   (12   17   0   2)]     100%

@@ -11,7 +11,6 @@ Hint Bitstream_WriteThenRead,lower_bits,property.
 Proof.
   unfold P_BitstreamEqual64 in *.
   unfold P_EqualBits64_2_ in * .
-  unfold P_EqualBits64_1_ in * .
   unfold P_EqualBitRange_2_ in *.
   intros.
 
@@ -21,9 +20,6 @@ Proof.
   remember (Mptr_0 .[ stream_0]) as addr.
   remember (Mint_0 .[ shift stream_0 1]) as size.
   remember (Mint_0 .[ shift stream_0 2]) as pos.
-
-  replace (Mint_1 .[ shift stream_0 2] + (v_0 - (Mint_1 .[ shift stream_0 2])))%Z
-     with (v_0)%Z in * by omega.
 
   replace (i_0)%Z with (v_0 - 1 - (v_0 - 1 - i_0))%Z by omega.
   rewrite H20; auto with zarith.
@@ -150,11 +146,9 @@ Goal typed_ref_BitTest_PokeThenPeek_assert_partial_copy.
 Hint PokeThenPeek,partial_copy,property.
 Proof.
   unfold P_EqualBits64_2_ in *.
-  unfold P_EqualBits64_1_ in *.
   unfold P_EqualBitRange_2_ in *.
   intros.
 
-  replace (bitpos_0 + length_0 - bitpos_0) with length_0 in * by omega.
   replace (i_0)  with  (bitpos_0 + length_0 - 1 - (bitpos_0 + length_0 - 1 - i_0 )) by omega.
 
   rewrite H15; auto with zarith.
