@@ -4,7 +4,7 @@
    verify  Bitwalker                           [6      6   (3     3   0   0)]     100%
    verify  Bitwalker_Peek_Normal               [36    36   (19   15   1   1)]     100%
    verify  Bitwalker_Peek                      [33    33   (30    3   0   0)]     100%
-   verify  Bitwalker_Poke_Normal               [40    39   (15   23   0   1)]      97%
+   verify  Bitwalker_Poke_Normal               [40    40   (15   24   0   1)]     100%
    verify  Bitwalker_Poke                      [70    70   (60   10   0   0)]     100%
    verify  PeekThenPoke                        [13    13   (8     5   0   0)]     100%
    verify  PokeThenPeek                        [10    10   (5     3   0   2)]     100%
