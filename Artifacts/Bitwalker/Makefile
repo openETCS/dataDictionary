@@ -49,6 +49,7 @@ report:\
 	Bit8.report\
 	Bit8Array.report\
 	Bit64.report\
+        Bitwalker.report\
         Bitwalker_Peek_Normal.report\
         Bitwalker_Peek.report\
         Bitwalker_Poke_Normal.report\
