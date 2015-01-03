@@ -2,7 +2,7 @@
 #ifndef ADHESION_FACTOR_H_INCLUDED
 #define ADHESION_FACTOR_H_INCLUDED
 
-#include "BitstreamInvariant.h"
+#include "Bitstream.h"
 
 struct Adhesion_Factor
 {
@@ -29,6 +29,10 @@ typedef struct Adhesion_Factor Adhesion_Factor;
 */
 
 /*@
+    predicate Separated(Bitstream* stream, Adhesion_Factor* p) =
+      \separated(stream, p) &&
+      \separated(stream->addr + (0..stream->size-1), p);
+
    predicate BitstreamEqual(Bitstream* stream, integer pos, Adhesion_Factor* p) =
       BitstreamEqual64(stream, pos,      pos + 8,  p->NID_PACKET)  &&
       BitstreamEqual64(stream, pos + 8,  pos + 10, p->Q_DIR)       &&
@@ -37,9 +41,8 @@ typedef struct Adhesion_Factor Adhesion_Factor;
       BitstreamEqual64(stream, pos + 25, pos + 40, p->D_ADHESION)  &&
       BitstreamEqual64(stream, pos + 40, pos + 55, p->L_ADHESION)  &&
       BitstreamEqual64(stream, pos + 55, pos + 56, p->M_ADHESION);
-*/
 
-/*@
+
    predicate UpperBitsNotSet(Adhesion_Factor* p) =
       UpperBitsNotSet(p->NID_PACKET, 8)   &&
       UpperBitsNotSet(p->Q_DIR,      2)   &&
@@ -48,6 +51,7 @@ typedef struct Adhesion_Factor Adhesion_Factor;
       UpperBitsNotSet(p->D_ADHESION, 15)  &&
       UpperBitsNotSet(p->L_ADHESION, 15)  &&
       UpperBitsNotSet(p->M_ADHESION, 1);
+
 */
 
 #endif // ADHESION_FACTOR_H_INCLUDED
