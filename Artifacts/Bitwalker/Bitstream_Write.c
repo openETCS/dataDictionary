@@ -5,7 +5,7 @@
 
 int Bitstream_Write(Bitstream* stream, uint32_t length, uint64_t value)
 {
-    if (NormalBitwalker(stream->size, stream->bitpos, length))
+    if (NormalBitstream(stream, length))
     {
         if (UpperBitsNotSet64(value, length))
         {

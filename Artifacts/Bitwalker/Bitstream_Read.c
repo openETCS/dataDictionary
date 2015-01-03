@@ -4,7 +4,7 @@
 
 uint64_t Bitstream_Read(Bitstream* stream, uint32_t length)
 {
-    if (NormalBitwalker(stream->size, stream->bitpos, length))
+    if (NormalBitstream(stream, length))
     {
         return Bitstream_Read_Normal(stream, length);
     }
