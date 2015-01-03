@@ -22,7 +22,7 @@ typedef struct Bitstream Bitstream;
 
   predicate Invariant{L}(Bitstream* stream, integer length) =
      \separated(stream, stream->addr + (0..stream->size-1)) &&
-     BitwalkerInvariant(stream->addr, stream->size, stream->bitpos, length);
+     BitwalkerInvariant{L}(stream->addr, stream->size, stream->bitpos, length);
 
   predicate Normal{L}(Bitstream* stream, integer length) =
      stream->bitpos + length <= 8 * stream->size;
@@ -36,10 +36,9 @@ typedef struct Bitstream Bitstream;
 
   predicate BitstreamEqual64{L}(Bitstream* stream ,
              integer first, integer last, uint64_t value) =
-                EqualBits64(stream->addr, first, last, value);
+                EqualBits64{L}(stream->addr, first, last, value);
 
 */
-
 
 #endif // BITSTREAM_H_INCLUDED
 
