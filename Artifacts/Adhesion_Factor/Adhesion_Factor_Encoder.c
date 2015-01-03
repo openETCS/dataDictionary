@@ -1,69 +1,35 @@
 
 #include "Adhesion_Factor_Encoder.h"
 #include "Adhesion_Factor_UpperBitsNotSet.h"
-#include "Bitstream_Write.h"
+#include "Bitwalker_Poke_Normal.h"
 
 int Adhesion_Factor_Encoder(Bitstream* stream, const Adhesion_Factor* p)
 {
-    if (stream->bitpos + 28 <= 8 * stream->size)
+    if (NormalBitstream(stream, ADHESION_FACTOR_BITSIZE))
     {
         if (Adhesion_Factor_UpperBitsNotSet(p))
         {
-            //@ assert NormalBitsequence(stream, 28);
-            //@ ghost uint32_t pos = stream->bitpos;
-            //@ ghost uint32_t size = stream->size;
-            //@ assert \separated(stream, stream->addr + (0..stream->size-1));
+            uint8_t* addr = stream->addr;
+            const uint32_t size = stream->size;
+            const uint32_t pos = stream->bitpos;
 
-            /*@
-                requires ABC_normal: NormalBitsequence(stream, 8);
-                requires ABC_upper:  UpperBitsNotSet(p->ABC, 8);
+            Bitwalker_Poke_Normal(addr, size, pos,      8,  p->NID_PACKET);
+            Bitwalker_Poke_Normal(addr, size, pos + 8,  2,  p->Q_DIR);
+            Bitwalker_Poke_Normal(addr, size, pos + 10, 13, p->L_PACKET);
+            Bitwalker_Poke_Normal(addr, size, pos + 23, 2,  p->Q_SCALE);
+            Bitwalker_Poke_Normal(addr, size, pos + 25, 15, p->D_ADHESION);
+            Bitwalker_Poke_Normal(addr, size, pos + 40, 15, p->L_ADHESION);
+            Bitwalker_Poke_Normal(addr, size, pos + 55, 1,  p->M_ADHESION);
 
-                assigns stream->bitpos;
-                assigns stream->addr[0..(stream->size-1)];
+            stream->bitpos += ADHESION_FACTOR_BITSIZE;
 
-                ensures ABC_bitpos: stream->bitpos == \old(stream->bitpos) + 8;
-                ensures ABC_size:   stream->size == \old(stream->size);
-                ensures ABC_left:   BitsUnchanged{Here,Old}(stream->addr, 0, pos);
-                ensures ABC_equal:  BitstreamEqual64(stream, pos, pos + 8,  p->ABC);
-                ensures ABC_right:  BitsUnchanged{Here,Old}(stream->addr, pos + 8, 8 * stream->size);
-            */
-            Bitstream_Write(stream, 8, p->ABC);
-
-            //@ assert stream->size == size;
-
-            /*@
-                requires DEF_normal: NormalBitsequence{Here}(stream, 3);
-                requires DEF_upper:  UpperBitsNotSet(p->DEF, 3);
-
-                assigns stream->bitpos;
-                assigns stream->addr[0..(stream->size-1)];
-
-                ensures DEF_bitpos: stream->bitpos == \old(stream->bitpos) + 3;
-                ensures DEF_size:   stream->size == \old(stream->size);
-                ensures DEF_left:   BitsUnchanged{Here,Old}(stream->addr, 0, pos + 8);
-                ensures DEF_equal:  BitstreamEqual64(stream, pos + 8, pos + 11,  p->DEF);
-                ensures DEF_right:  BitsUnchanged{Here,Old}(stream->addr, pos + 11, 8 * stream->size);
-
-                //ensures ABC_DEF_equal: BitstreamEqual64(stream, pos, pos + 8,  p->ABC);
-            */
-            Bitstream_Write(stream, 3, p->DEF);
-            //@ ghost post_DEF:
-
-            /*@
-                requires GHI_normal: NormalBitsequence{Here}(stream, 17);
-                requires GHI_upper:  UpperBitsNotSet(p->GHI, 17);
-                requires \separated(stream, p);
-
-                assigns stream->bitpos;
-                assigns stream->addr[0..(stream->size-1)];
-
-                ensures GHI_bitpos: stream->bitpos == \old(stream->bitpos) + 17;
-                ensures GHI_size:   stream->size == \old(stream->size);
-                ensures GHI_left:   BitsUnchanged{Here,Old}(stream->addr, 0, pos + 11);
-                ensures GHI_equal:  BitstreamEqual64(stream, pos + 11, pos + 28,  p->GHI);
-                ensures GHI_right:  BitsUnchanged{Here,Old}(stream->addr, pos + 28, 8 * stream->size);
-            */
-            Bitstream_Write(stream, 17, p->GHI);
+            //@ assert NID_PACKET: BitstreamEqual64(stream, pos,      pos + 8,  p->NID_PACKET);
+            //@ assert Q_DIR:      BitstreamEqual64(stream, pos + 8,  pos + 10, p->Q_DIR);
+            //@ assert L_PACKET:   BitstreamEqual64(stream, pos + 10, pos + 23, p->L_PACKET);
+            //@ assert Q_SCALE:    BitstreamEqual64(stream, pos + 23, pos + 25, p->Q_SCALE);
+            //@ assert D_ADHESION: BitstreamEqual64(stream, pos + 25, pos + 40, p->D_ADHESION);
+            //@ assert L_ADHESION: BitstreamEqual64(stream, pos + 40, pos + 55, p->L_ADHESION);
+            //@ assert M_ADHESION: BitstreamEqual64(stream, pos + 55, pos + 56, p->M_ADHESION);
 
             return 1;
         }
