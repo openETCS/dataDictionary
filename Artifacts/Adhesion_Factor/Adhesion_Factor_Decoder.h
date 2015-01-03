@@ -5,12 +5,13 @@
 #include "Adhesion_Factor.h"
 
 /*@
-    requires \valid(stream);
-    requires BitstreamInvariant(stream);
-    requires stream->bitpos + BitSize(p) <= UINT32_MAX;
+    requires Readable(stream);
+
+    requires Invariant(stream, BitSize(p));
+
     requires \valid(p);
-    requires \separated(stream, p);
-    requires \separated(stream->addr + (0..stream->size-1), p);
+
+    requires Separated(stream, p);
 
     assigns stream->bitpos;
     assigns *p;
@@ -18,7 +19,7 @@
     ensures unchanged:    BitstreamUnchanged{Here,Old}(stream, 0, 8*stream->size);
 
     behavior normal_case:
-      assumes NormalBitsequence{Pre}(stream, BitSize(p));
+      assumes Normal{Pre}(stream, BitSize(p));
 
       assigns stream->bitpos;
       assigns *p;
@@ -29,7 +30,7 @@
       ensures UpperBitsNotSet(p);
 
     behavior error_case:
-      assumes !NormalBitsequence{Pre}(stream, BitSize(p));
+      assumes !Normal{Pre}(stream, BitSize(p));
 
       assigns \nothing;
 
