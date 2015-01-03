@@ -7,7 +7,16 @@ include ../Makefile.template
 #WP_FLAGS += -wp-prop=-@lemma
 #WP_FLAGS += -wp-prop=cea
 
-SRC := $(wildcard *.c)
+SRC :=  Bit8.c Bit8Array.c Bit64.c\
+        Bitwalker.c\
+        Bitwalker_Peek_Normal.c Bitwalker_Peek.c\
+        Bitwalker_Poke_Normal.c Bitwalker_Poke.c\
+	PeekThenPoke.c PokeThenPeek.c\
+	Bitstream.c Bitstream_Init.c\
+	Bitstream_Read_Normal.c Bitstream_Read.c\
+	Bitstream_Write_Normal.c Bitstream_Write.c\
+	Bitstream_ReadThenWrite.c Bitstream_WriteThenRead.c\
+
 OBJ := $(SRC:.c=.o)
 REPORT := $(SRC:.c=.report)
 
@@ -24,12 +33,7 @@ format: FORCE
 
 lib: libBitwalker.a
 
-libBitwalker.a : Bit8.o Bit8Array.o Bit64.o\
-		 Bitwalker_Peek_Normal.o Bitwalker_Peek.o\
-                 Bitwalker_Poke_Normal.o Bitwalker_Poke.o\
-		 Bitstream_Init.o\
-                 Bitstream_Read_Normal.o Bitstream_Read.o\
-                 Bitstream_Write_Normal.o Bitstream_Write.o 
+libBitwalker.a : $(OBJ)
 	ar cru	$@ $^
 	ranlib	$@
 
@@ -46,23 +50,5 @@ log: FORCE
 	@(time $(MAKE) report > results.txt&)
 	
 
-report:\
-	Bit8.report\
-	Bit8Array.report\
-	Bit64.report\
-        Bitwalker.report\
-        Bitwalker_Peek_Normal.report\
-        Bitwalker_Peek.report\
-        Bitwalker_Poke_Normal.report\
-        Bitwalker_Poke.report\
-	PeekThenPoke.report\
-	PokeThenPeek.report\
-	Bitstream.report\
-	Bitstream_Init.report\
-	Bitstream_Read_Normal.report\
-	Bitstream_Read.report\
-	Bitstream_Write_Normal.report\
-	Bitstream_Write.report\
-	Bitstream_ReadThenWrite.report\
-	Bitstream_WriteThenRead.report\
+report: $(REPORT)
 

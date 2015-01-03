@@ -1,17 +1,18 @@
    verify  Bit8                                [21    21   (10    8   3   0)]     100%
    verify  Bit8Array                           [21    21   (11   10   0   0)]     100%
    verify  Bit64                               [30    30   (14   14   0   2)]     100%
-   verify  Bitwalker                           [6      6   (3     3   0   0)]     100%
+   verify  Bitwalker                           [6      6   (1     5   0   0)]     100%
    verify  Bitwalker_Peek_Normal               [36    36   (19   15   1   1)]     100%
-   verify  Bitwalker_Peek                      [34    34   (31    3   0   0)]     100%
+   verify  Bitwalker_Peek                      [33    33   (32    1   0   0)]     100%
    verify  Bitwalker_Poke_Normal               [40    40   (15   23   1   1)]     100%
-   verify  Bitwalker_Poke                      [71    71   (61   10   0   0)]     100%
+   verify  Bitwalker_Poke                      [70    70   (62    8   0   0)]     100%
    verify  PeekThenPoke                        [15    15   (9     6   0   0)]     100%
    verify  PokeThenPeek                        [12    12   (6     4   0   2)]     100%
+   verify  Bitstream                           [7      7   (3     4   0   0)]     100%
    verify  Bitstream_Init                      [10    10   (3     7   0   0)]     100%
    verify  Bitstream_Read_Normal               [19    19   (7    10   2   0)]     100%
-   verify  Bitstream_Read                      [53    53   (36   17   0   0)]     100%
+   verify  Bitstream_Read                      [51    51   (40   11   0   0)]     100%
    verify  Bitstream_Write_Normal              [13    13   (1    10   2   0)]     100%
-   verify  Bitstream_Write                     [100  100   (62   35   3   0)]     100%
+   verify  Bitstream_Write                     [98    98   (67   28   3   0)]     100%
    verify  Bitstream_ReadThenWrite             [31    31   (12   16   3   0)]     100%
    verify  Bitstream_WriteThenRead             [27    27   (8    17   0   2)]     100%
