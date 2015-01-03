@@ -7,20 +7,24 @@ WP_FLAGS += -wp-prop=DEF_equal
 
 it: obj
 
+include ../Makefile.template
 
-SRC := $(wildcard *.c)
+#SRC := $(wildcard *.c)
+SRC :=  Package_Foo_Init.c\
+	Package_Foo_UpperBitsNotSet.c\
+	Package_Foo_Decoder.c\
+	Package_Foo_Encoder.c\
+	Package_Foo_DecoderThenEncoder.c\
+	Package_Foo_EncoderThenDecoder.c
+
 OBJ := $(SRC:.c=.o)
 REPORT := $(SRC:.c=.report)
-
-
-include ../Makefile.template
 
 VPATH = ../Bitwalker
 CPPFLAGS += -I../Bitwalker
 
-
 format: FORCE
-	@$(ASTYLE) *.c *.h
+	@$(ASTYLE) *.c *.h 
 
 obj: $(OBJ)
 
@@ -30,11 +34,5 @@ par:
 log: FORCE
 	@(time $(MAKE) report > results.txt&)
 
-report: \
-	Package_Foo_Init.report\
-	Package_Foo_UpperBitsNotSet.report\
-	Package_Foo_Decoder.report\
-	Package_Foo_Encoder.report\
-	Package_Foo_DecoderThenEncoder.report\
-	Package_Foo_EncoderThenDecoder.report\
+report: $(REPORT)
 
