@@ -14,6 +14,7 @@ REPORT := $(SRC:.c=.report)
 it : $(OBJ)
 
 clean::
+	@$(RM) $(OBJ)
 	@$(RM) libBitwalker.a
 	@$(RM) TestPeekThenPoke
 	
@@ -56,6 +57,7 @@ report:\
         Bitwalker_Poke.report\
 	PeekThenPoke.report\
 	PokeThenPeek.report\
+	Bitstream.report\
 	Bitstream_Init.report\
 	Bitstream_Read_Normal.report\
 	Bitstream_Read.report\

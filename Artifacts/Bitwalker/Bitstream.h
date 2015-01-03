@@ -22,10 +22,10 @@ typedef struct Bitstream Bitstream;
 
   predicate Invariant{L}(Bitstream* stream, integer length) =
      \separated(stream, stream->addr + (0..stream->size-1)) &&
-     BitwalkerInvariant{L}(stream->addr, stream->size, stream->bitpos, length);
+     BitwalkerInvariant{L}(stream->size, stream->bitpos, length);
 
   predicate Normal{L}(Bitstream* stream, integer length) =
-     stream->bitpos + length <= 8 * stream->size;
+     NormalBitwalker(stream->size, stream->bitpos, length);
 
   predicate LeftInBitstream{L}(Bitstream* stream, integer i) =
      \at(LeftBit8Array(stream->addr, i),L);
@@ -39,6 +39,17 @@ typedef struct Bitstream Bitstream;
                 EqualBits64{L}(stream->addr, first, last, value);
 
 */
+
+/*@
+  requires valid:     Readable(stream);
+  requires invariant: Invariant(stream, length);
+
+  assigns \nothing;
+
+  ensures \result <==> Normal(stream, length);
+*/
+int NormalBitstream(const Bitstream* stream, uint32_t length);
+
 
 #endif // BITSTREAM_H_INCLUDED
 

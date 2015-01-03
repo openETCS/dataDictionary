@@ -7,7 +7,7 @@
 /*@
   requires valid:     Writeable(addr, size);
 
-  requires invariant: BitwalkerInvariant(addr, size, bitpos, length);
+  requires invariant: BitwalkerInvariant(size, bitpos, length);
 
   requires normal:    NormalBitwalker(size, bitpos, length);
 
