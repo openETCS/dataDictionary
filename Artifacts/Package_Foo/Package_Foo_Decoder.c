@@ -4,7 +4,7 @@
 
 int Package_Foo_Decoder(Bitstream* stream, Package_Foo* p)
 {
-    if (NormalBitwalker(stream->size, stream->bitpos, 28))
+    if (NormalBitstream(stream, 28))
     {
         uint8_t* addr = stream->addr;
         const uint32_t size = stream->size;
