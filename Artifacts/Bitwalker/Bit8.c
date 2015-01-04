@@ -16,7 +16,9 @@ uint8_t PokeBit8(uint8_t value, uint32_t pos, int flag)
 
     if (flag == 0)
     {
+        //@ assert \forall integer i; 8 <= i ==> !BitTest(value, i);
         int tmp = value & ~mask;
+        //@ assert \forall integer i; 8 <= i ==> !BitTest(tmp, i);
         return tmp;
     }
     else

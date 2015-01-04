@@ -160,6 +160,12 @@ Proof.
 (* auto with zarith. *)
 Qed.
 
+Goal typed_ref_BitTest_PokeBit8_assert_rte_unsigned_downcast_3.
+Hint PokeBit8,property,rte,unsigned_downcast.
+Proof.
+(* auto with zarith. *)
+Qed.
+
 Goal typed_ref_BitTest_PokeThenPeek_assert_partial_copy.
 Hint PokeThenPeek,partial_copy,property.
 Proof.
