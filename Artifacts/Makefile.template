@@ -37,7 +37,7 @@ WP_FLAGS += -wp-model Typed+ref
 WP_FLAGS += -wp-rte
 WP_FLAGS += -warn-signed-downcast
 WP_FLAGS += -warn-signed-overflow
-#WP_FLAGS += -warn-unsigned-downcast
+WP_FLAGS += -warn-unsigned-downcast
 WP_FLAGS += -warn-unsigned-overflow
 WP_FLAGS += -wp-split
 
