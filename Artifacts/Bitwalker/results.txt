@@ -15,4 +15,4 @@
    verify  Bitstream_Write_Normal              [13    13   (1    10   2   0)]     100%
    verify  Bitstream_Write                     [98    98   (67   28   3   0)]     100%
    verify  Bitstream_ReadThenWrite             [31    31   (12   16   3   0)]     100%
-   verify  Bitstream_WriteThenRead             [27    27   (8    17   0   2)]     100%
+   verify  Bitstream_WriteThenRead             [28    28   (12   15   0   1)]     100%

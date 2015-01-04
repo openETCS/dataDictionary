@@ -28,12 +28,31 @@ Qed.
 Goal typed_ref_BitTest_Bitstream_WriteThenRead_post_unchanged.
 Hint Bitstream_WriteThenRead,default,property,unchanged.
 Proof.
-  unfold P_EqualBitRange_2_ in *.
+  unfold is_uint32 in *.
   intros.
   apply bits_equal_uint64; auto.
   intros.
-  symmetry.
-  apply H6; auto with zarith.
+
+  remember (v_0 - (Mint_1 .[ shift stream_0 2])) as length.
+  remember (Mint_0 .[ shift stream_0 2]) as bitpos.
+
+  unfold P_UpperBitsNotSet in *.
+  unfold P_BitstreamEqual64 in *.
+  unfold P_EqualBits64_2_ in *.
+
+  assert(X: 0 <= i < length \/ length <= i < 64).
+  +  assert (Y: (i < length) \/ ~(i < length)) by tauto.
+     destruct Y as [le | geq].
+     left; auto.
+     right; auto with zarith.
+
+  +  destruct X as [lower|upper].
+     - replace (i) with (v_0 - 1 - (v_0 - 1 - i)) in * by omega.
+       rewrite H17; auto with zarith.
+     - assert(~ bit_test Bitstream_WriteThenRead_0 i) by (apply H14; auto with zarith).
+       assert(~ bit_test value_0 i) by (apply H15; auto with zarith).
+       tauto.
+
 Qed.
 
 Goal typed_ref_BitTest_Bitstream_Write_normal_case_post_middle.
