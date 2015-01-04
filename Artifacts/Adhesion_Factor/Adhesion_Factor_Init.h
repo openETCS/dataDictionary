@@ -6,7 +6,7 @@
 
 
 /*@
-    requires \valid(p);
+    requires valid:  \valid(p);
 
     assigns  *p;
 

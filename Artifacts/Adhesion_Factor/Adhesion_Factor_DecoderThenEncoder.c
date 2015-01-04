@@ -3,15 +3,15 @@
 #include "Adhesion_Factor_Encoder.h"
 
 /*@
-    requires valid:      Writeable(stream);
+    requires valid_stream:      Writeable(stream);
 
-    requires invariant:  Invariant(stream, BitSize(p));
+    requires stream_invariant:  Invariant(stream, BitSize(p));
 
-    requires normal:     Normal(stream, BitSize(p));
+    requires normal:            Normal(stream, BitSize(p));
 
-    requires \valid(p);
+    requires valid_package:     \valid(p);
 
-    requires Separated(stream, p);
+    requires separation:        Separated(stream, p);
 
     assigns stream->addr[0..stream->size-1];
     assigns stream->bitpos;

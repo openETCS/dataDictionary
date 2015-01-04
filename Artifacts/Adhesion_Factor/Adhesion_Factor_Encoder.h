@@ -5,13 +5,13 @@
 #include "Adhesion_Factor.h"
 
 /*@
-    requires \valid_read(p);
+    requires valid_stream:      Writeable(stream);
 
-    requires Writeable(stream);
+    requires stream_invariant:  Invariant(stream, BitSize(p));
 
-    requires Invariant(stream, BitSize(p));
+    requires valid_package:     \valid_read(p);
 
-    requires Separated(stream, p);
+    requires separation:        Separated(stream, p);
 
     assigns stream->bitpos;
     assigns stream->addr[0..(stream->size-1)];
@@ -22,29 +22,29 @@
       assigns stream->bitpos;
       assigns stream->addr[0..(stream->size-1)];
 
-      ensures \result == 1;
+      ensures result:        \result == 1;
 
-      ensures stream->bitpos == \old(stream->bitpos) + BitSize(p);
+      ensures increment:     stream->bitpos == \old(stream->bitpos) + BitSize(p);
 
-      ensures left:   BitstreamUnchanged{Here,Old}(stream, 0, \old(stream->bitpos));
+      ensures left:          BitstreamUnchanged{Here,Old}(stream, 0, \old(stream->bitpos));
 
-      ensures middle: BitstreamEqual(stream, \old(stream->bitpos), p);
+      ensures middle:        BitstreamEqual(stream, \old(stream->bitpos), p);
 
-      ensures right:  BitstreamUnchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
+      ensures right:         BitstreamUnchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
 
     behavior values_too_big:
       assumes Normal{Pre}(stream, BitSize(p)) && !UpperBitsNotSet{Pre}(p);
 
       assigns \nothing;
 
-      ensures \result == -2;
+      ensures result:        \result == -2;
 
     behavior invalid_bit_sequence:
       assumes !Normal{Pre}(stream, BitSize(p));
 
       assigns \nothing;
 
-      ensures \result == -1;
+      ensures result:       \result == -1;
 
     complete behaviors;
     disjoint behaviors;

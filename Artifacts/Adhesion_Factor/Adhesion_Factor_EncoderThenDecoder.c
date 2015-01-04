@@ -3,17 +3,17 @@
 #include "Adhesion_Factor_Encoder.h"
 
 /*@
-    requires valid:     \valid(p);
+    requires valid_stream:      Writeable(stream);
 
-    requires upper:     UpperBitsNotSet(p);
+    requires stream_invariant:  Invariant(stream, BitSize(p));
 
-    requires valid:     Writeable(stream);
+    requires normal:            Normal(stream, BitSize(p));
 
-    requires invariant: Invariant(stream, BitSize(p));
+    requires valid_package:     \valid(p);
 
-    requires normal:    Normal(stream, BitSize(p));
+    requires upper:             UpperBitsNotSet(p);
 
-    requires seprated:  Separated(stream, p);
+    requires separation:        Separated(stream, p);
 
     assigns stream->addr[0..stream->size-1];
     assigns stream->bitpos;
@@ -41,5 +41,5 @@ void Adhesion_Factor_EncoderThenDecoder(Bitstream* stream, Adhesion_Factor* p)
 
     //@ assert copied:    BitstreamEqual(stream, pos, p);
     //@ assert upper:     UpperBitsNotSet(p);
-    //@ assert increment: stream->bitpos == pos + length;
 }
+

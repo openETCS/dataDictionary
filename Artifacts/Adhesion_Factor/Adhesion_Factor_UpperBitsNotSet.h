@@ -5,11 +5,11 @@
 #include "Adhesion_Factor.h"
 
 /*@
-    requires \valid_read(p);
+    requires valid:  \valid_read(p);
 
     assigns \nothing;
 
-    ensures \result <==> UpperBitsNotSet(p);
+    ensures result:  \result <==> UpperBitsNotSet(p);
 */
 int Adhesion_Factor_UpperBitsNotSet(const Adhesion_Factor* p);
 
