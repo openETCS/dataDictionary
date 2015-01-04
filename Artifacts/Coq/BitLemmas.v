@@ -25,6 +25,15 @@ Proof.
   + apply Zdiv_lt_upper_bound; omega.
 Qed.
 
+Lemma bitwise_and_not_uint8:
+  forall (a b : Z),
+  (is_uint8 a%Z) ->
+  (is_uint8 b%Z) ->
+  (0 <= (land a (lnot b)) <= 255)%Z.
+Proof.
+  admit.
+Qed.
+
 
 Lemma bits_equal_uint64 :
    (forall x y,

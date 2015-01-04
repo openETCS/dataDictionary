@@ -144,26 +144,36 @@ Proof.
    rewrite <- H30; auto with zarith.
 Qed.
 
-Goal typed_ref_BitTest_PokeBit8Array_post_left.
-Hint PokeBit8Array,default,left,property.
+Goal typed_ref_BitTest_PokeBit8_assert_helper_part1.
+Hint PokeBit8,helper,part-0,property.
 Proof.
-(* --------------------------------------
-  
-From 'typed_ref_BitTest_PokeBit8Array_post_right': 
-(* auto with zarith. *)
-*)
+  unfold is_uint8 in *.
+  intros.
+  apply bitwise_and_not_uint8; auto.
 Qed.
 
-Goal typed_ref_BitTest_PokeBit8Array_post_right.
-Hint PokeBit8Array,default,property,right.
+Goal typed_ref_BitTest_PokeBit8_assert_helper_part2.
+Hint PokeBit8,helper,part-1,property.
 Proof.
-(* auto with zarith. *)
+  unfold is_uint8 in *.
+  intros.
+  apply bitwise_and_not_uint8; auto.
 Qed.
 
-Goal typed_ref_BitTest_PokeBit8_assert_rte_unsigned_downcast_3.
-Hint PokeBit8,property,rte,unsigned_downcast.
+Goal typed_ref_BitTest_PokeBit8_assert_part1.
+Hint PokeBit8,part-0,property.
 Proof.
-(* auto with zarith. *)
+  unfold is_uint8 in *.
+  intros.
+  apply bitwise_and_not_uint8; auto.
+Qed.
+
+Goal typed_ref_BitTest_PokeBit8_assert_part2.
+Hint PokeBit8,part-1,property.
+Proof.
+  unfold is_uint8 in *.
+  intros.
+  apply bitwise_and_not_uint8; auto.
 Qed.
 
 Goal typed_ref_BitTest_PokeThenPeek_assert_partial_copy.
@@ -206,6 +216,23 @@ Proof.
   unfold P_UpperBitsNotSet in *.
   apply upper_bits_not_set; auto with zarith.
   rewrite is_uint64_lsl1_inf in H5; omega.
+Qed.
+
+Goal typed_ref_BitTest_lemma_bitwise_and_not_uint8.
+Hint bitwise_and_not_uint8,property.
+Proof.
+  unfold is_uint8 in *.
+  intros.
+  apply bitwise_and_lnot_uint8; auto.
+Qed.
+
+Goal typed_ref_BitTest_lemma_bitwise_and_uint8.
+Hint bitwise_and_uint8,property.
+Proof.
+  unfold is_uint8 in *.
+  intros.
+  split.
+
 Qed.
 
 
