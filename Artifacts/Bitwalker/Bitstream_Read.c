@@ -11,7 +11,7 @@ uint64_t Bitstream_Read(Bitstream* stream, uint32_t length)
     else
     {
         stream->bitpos += length;
-        return 0u;
+        return 0;
     }
 }
 

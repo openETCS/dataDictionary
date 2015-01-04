@@ -18,9 +18,9 @@
 
     assigns stream->bitpos;
 
-    ensures copied:    BitstreamEqual64(stream, \old(stream->bitpos), stream->bitpos, \result);
+    ensures equal:     BitstreamEqual64(stream, \old(stream->bitpos), stream->bitpos, \result);
 
-    ensures not_set:   UpperBitsNotSet(\result, length);
+    ensures upper:     UpperBitsNotSet(\result, length);
 
     ensures unchanged: BitstreamUnchanged{Here,Old}(stream, 0, 8*stream->size);
 
