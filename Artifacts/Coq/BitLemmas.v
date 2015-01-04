@@ -38,7 +38,7 @@ Proof.
 Qed.
 
 
-Lemma bits_and_bounds_uint :
+Lemma upper_bits_not_set :
   (forall x n,
         0 <= x ->
         0 <= n ->

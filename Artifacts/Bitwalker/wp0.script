@@ -189,7 +189,7 @@ Proof.
   rewrite is_uint64_lsl1_inf in H5; auto with zarith.
   intuition.
   assert (X: (forall i_0 : int, (length_0 <= i_0)%Z -> ~ bit_test value_0 i_0)) by auto with zarith.
-  rewrite <- bits_and_bounds_uint in X; auto with zarith.
+  rewrite <- upper_bits_not_set in X; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_UpperBitsNotSet64_post_not_set_part3.
@@ -198,7 +198,7 @@ Proof.
   unfold is_uint64 in *.
   intros.
   unfold P_UpperBitsNotSet in *.
-  apply bits_and_bounds_uint; auto with zarith.
+  apply upper_bits_not_set; auto with zarith.
   rewrite is_uint64_lsl1_inf in H5; omega.
 Qed.
 
