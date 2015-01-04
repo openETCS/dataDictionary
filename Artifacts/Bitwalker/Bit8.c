@@ -14,6 +14,16 @@ uint8_t PokeBit8(uint8_t value, uint32_t pos, int flag)
 {
     uint8_t mask = ((uint8_t) 1) << (7u - pos);
 
-    return (flag == 0) ? (value & ~mask) : (value | mask);
+    if (flag == 0)
+    {
+        int tmp = value & ~mask;
+        return tmp;
+    }
+    else
+    {
+       int tmp = value | mask;
+        return tmp;
+    }
+    //return (flag == 0) ? (value & ~mask) : (value | mask);
 }
 
