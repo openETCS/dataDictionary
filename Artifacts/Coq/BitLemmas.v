@@ -28,10 +28,29 @@ Qed.
 Lemma bitwise_and_not_uint8:
   forall (a b : Z),
   (is_uint8 a%Z) ->
-  (is_uint8 b%Z) ->
-  (0 <= (land a (lnot b)) <= 255)%Z.
+  (0 <= (land a  b) <= 255)%Z.
 Proof.
-  admit.
+  intros.
+  unfold is_uint8 in *.
+  assert(forall i: int,  (8%Z <= i)%Z -> ~(bit_test a i)%Z).
+    intros.
+    apply to_uint8_extraction_sup; auto with zarith.
+ 
+    assert(forall i: int,  (8%Z <= i)%Z -> ~(bit_test (land a b) i)%Z).
+      intros.
+      rewrite land_extraction; auto with zarith.
+      unfold not.
+      intros.
+      destruct H2 as [J B].
+      apply H0 in J; assumption.
+
+   cut (is_uint8(land a b)).
+     intros.
+     unfold is_uint8 in *. 
+     auto with zarith.
+
+   admit.
+
 Qed.
 
 
