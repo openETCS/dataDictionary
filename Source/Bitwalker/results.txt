@@ -1,4 +1,4 @@
-   verify  Bit8                                [33    33   (10    9  12   2)]     100%
+   verify  Bit8                                [21    21   (10    4   7   0)]     100%
    verify  Bit8Array                           [21    21   (11   10   0   0)]     100%
    verify  Bit64                               [30    30   (14    9   5   2)]     100%
    verify  Bitwalker                           [6      6   (1     5   0   0)]     100%
@@ -14,5 +14,5 @@
    verify  Bitstream_Read                      [51    51   (40   11   0   0)]     100%
    verify  Bitstream_Write_Normal              [13    13   (1    10   2   0)]     100%
    verify  Bitstream_Write                     [98    98   (67   30   1   0)]     100%
-   verify  Bitstream_ReadThenWrite             [31    31   (12   17   2   0)]     100%
+   verify  Bitstream_ReadThenWrite             [31    31   (12   16   3   0)]     100%
    verify  Bitstream_WriteThenRead             [28    28   (12   15   0   1)]     100%
