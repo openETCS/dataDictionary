@@ -4,11 +4,8 @@
 
 /*@
     requires valid_stream:      Writeable(stream);
-
     requires stream_invariant:  Invariant(stream, BitSize(p));
-
     requires normal:            Normal(stream, BitSize(p));
-
     requires valid_package:     \valid(p);
 
     requires separation:        Separated(stream, p);
@@ -27,10 +24,9 @@ void Adhesion_Factor_DecoderThenEncoder(Bitstream* stream, Adhesion_Factor* p)
     //@ assert Normal(stream, length);
     Adhesion_Factor_Decoder(stream, p);
 
-    //@ assert new_pos:    stream->bitpos == pos + length;
-    //@ assert size:       stream->size   == \at(stream->size, Pre);
-    //@ assert copied:     BitstreamEqual(stream, pos, p);
-    //@ assert not_set:    UpperBitsNotSet(p);
+    //@ assert pos:        stream->bitpos == pos + length;
+    //@ assert equal:      BitstreamEqual(stream, pos, p);
+    //@ assert upper:      UpperBitsNotSet(p);
     //@ assert increment:  stream->bitpos == pos + length;
 
     stream->bitpos -= length;

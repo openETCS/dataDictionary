@@ -6,11 +6,8 @@
 
 /*@
     requires valid_stream:      Writeable(stream);
-
     requires stream_invariant:  Invariant(stream, BitSize(p));
-
     requires valid_package:     \valid_read(p);
-
     requires separation:        Separated(stream, p);
 
     assigns stream->bitpos;
@@ -23,13 +20,9 @@
       assigns stream->addr[0..(stream->size-1)];
 
       ensures result:        \result == 1;
-
       ensures increment:     stream->bitpos == \old(stream->bitpos) + BitSize(p);
-
       ensures left:          BitstreamUnchanged{Here,Old}(stream, 0, \old(stream->bitpos));
-
       ensures middle:        BitstreamEqual(stream, \old(stream->bitpos), p);
-
       ensures right:         BitstreamUnchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
 
     behavior values_too_big:
@@ -50,7 +43,6 @@
     disjoint behaviors;
 */
 int Adhesion_Factor_Encoder(Bitstream* stream, const Adhesion_Factor* p);
-
 
 #endif // ADHESION_FACTOR_ENCODER_H_INCLUDED
 

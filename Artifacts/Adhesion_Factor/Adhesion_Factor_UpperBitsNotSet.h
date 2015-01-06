@@ -13,6 +13,5 @@
 */
 int Adhesion_Factor_UpperBitsNotSet(const Adhesion_Factor* p);
 
-
 #endif // ADHESION_FACTOR_UPPERBITSNOTSET_H_INCLUDED
 

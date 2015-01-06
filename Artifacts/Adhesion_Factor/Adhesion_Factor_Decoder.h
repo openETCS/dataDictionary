@@ -6,11 +6,8 @@
 
 /*@
     requires valid_stream:      Readable(stream);
-
     requires stream_invariant:  Invariant(stream, BitSize(p));
-
     requires valid_package:     \valid(p);
-
     requires separation:        Separated(stream, p);
 
     assigns stream->bitpos;
@@ -25,11 +22,8 @@
       assigns *p;
 
       ensures result:     \result == 1;
-
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
-
       ensures equal:      BitstreamEqual(stream, \old(stream->bitpos), p);
-
       ensures upper:      UpperBitsNotSet(p);
 
     behavior error_case:

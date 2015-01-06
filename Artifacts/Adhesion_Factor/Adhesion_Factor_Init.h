@@ -4,7 +4,6 @@
 
 #include "Adhesion_Factor.h"
 
-
 /*@
     requires valid:  \valid(p);
 
