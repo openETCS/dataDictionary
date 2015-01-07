@@ -9,14 +9,13 @@
 
    predicate Writeable{L}(uint8_t* addr, integer size) = \valid(addr + (0..size-1));
 
-   predicate
-     BitwalkerInvariant{L}(integer size, integer bitpos, integer length)
-        = 8 * size <= UINT32_MAX  &&
-           length <= 64 &&
-           bitpos + length <= UINT32_MAX;
+   predicate BitwalkerInvariant{L}(integer size, integer bitpos, integer length) =
+       8 * size <= UINT32_MAX         &&
+       length <= 64                   &&
+       bitpos + length <= UINT32_MAX;
 
-    predicate NormalBitwalker{L}(integer size, integer bitpos, integer length)
-        = bitpos + length <= 8 * size;
+    predicate NormalBitwalker{L}(integer size, integer bitpos, integer length) =
+       bitpos + length <= 8 * size;
 */
 
 
