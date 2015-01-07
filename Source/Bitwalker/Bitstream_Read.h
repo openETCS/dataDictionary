@@ -18,11 +18,11 @@
 
     assigns stream->bitpos;
 
-    ensures equal:     BitstreamEqual64(stream, \old(stream->bitpos), stream->bitpos, \result);
+    ensures equal:     EqualBits(stream, \old(stream->bitpos), stream->bitpos, \result);
 
     ensures upper:     UpperBitsNotSet(\result, length);
 
-    ensures unchanged: BitstreamUnchanged{Here,Old}(stream, 0, 8*stream->size);
+    ensures unchanged: EqualBits{Here,Old}(stream, 0, 8*stream->size);
 
   behavior  invalid_bit_sequence:
     assumes !Normal{Pre}(stream, length);

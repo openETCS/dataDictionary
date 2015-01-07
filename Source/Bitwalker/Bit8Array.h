@@ -28,11 +28,11 @@ int PeekBit8Array(uint8_t*  addr, uint32_t  size, uint32_t  pos);
 
     assigns addr[0..size-1];
 
-    ensures left:   BitsUnchanged{Here,Old}(addr, 0, pos);
+    ensures left:   EqualBits{Here,Old}(addr, 0, pos);
 
     ensures middle: LeftBit8Array(addr, pos) <==> (flag != 0);
 
-    ensures right:  BitsUnchanged{Here,Old}(addr, pos + 1, 8 * size);
+    ensures right:  EqualBits{Here,Old}(addr, pos + 1, 8 * size);
 
 */
 void PokeBit8Array(uint8_t* addr, uint32_t size, uint32_t pos, int flag);

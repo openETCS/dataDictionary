@@ -25,7 +25,7 @@
 
 /*@
    predicate
-     BitsUnchanged{A,B}(uint8_t* addr, integer first, integer last) =
+     EqualBits{A,B}(uint8_t* addr, integer first, integer last) =
         \forall integer i; first <= i < last ==>
            (\at(LeftBit8Array(addr, i), A) <==> \at(LeftBit8Array(addr, i), B));
 
@@ -45,14 +45,13 @@
      LeftEqualBitRange{A}(uint64_t x, uint64_t y, integer first, integer last) =
         \forall integer i; first <= i < last ==> (LeftBit64(x, i) <==> LeftBit64(y, i));
 
-   predicate EqualBits64{A}(uint8_t* addr,
-                            integer first, integer last,
-                            uint64_t value, integer length) =
+   predicate EqualBits{A}(uint8_t* addr, integer first, integer last,
+                          uint64_t value, integer length) =
         \forall integer i; first <= i < last ==>
            (LeftBit8Array(addr, i) <==> LeftBit64(value, 64 - length - first + i));
 
    // overloaded version
-   predicate EqualBits64{A}(uint8_t* addr, integer first, integer last, uint64_t value) =
+   predicate EqualBits{A}(uint8_t* addr, integer first, integer last, uint64_t value) =
         \forall integer i; first <= i < last ==>
            (LeftBit8Array(addr, i) <==> LeftBit64(value, 64 - last + i));
 

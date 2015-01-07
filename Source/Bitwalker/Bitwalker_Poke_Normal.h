@@ -15,11 +15,11 @@
 
   assigns addr[0..size - 1];
 
-  ensures  left:   BitsUnchanged{Here,Old}(addr, 0, bitpos);
+  ensures  left:   EqualBits{Here,Old}(addr, 0, bitpos);
 
-  ensures  middle: EqualBits64(addr, bitpos, bitpos + length, value);
+  ensures  middle: EqualBits(addr, bitpos, bitpos + length, value);
 
-  ensures  right:  BitsUnchanged{Here,Old}(addr, bitpos + length, 8 * size);
+  ensures  right:  EqualBits{Here,Old}(addr, bitpos + length, 8 * size);
 */
 void Bitwalker_Poke_Normal(uint8_t* addr, uint32_t size, uint32_t bitpos, uint32_t length, uint64_t value);
 

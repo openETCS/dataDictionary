@@ -9,7 +9,7 @@ uint64_t Bitwalker_Peek_Normal(uint8_t* addr, uint32_t size, uint32_t bitpos, ui
     /*@
       loop invariant index:  bitpos <= i <= bitpos + length;
 
-      loop invariant copied: EqualBits64(addr, bitpos, i, value, length);
+      loop invariant copied: EqualBits(addr, bitpos, i, value, length);
 
       loop invariant not_set: UpperBitsNotSet(value, length);
 

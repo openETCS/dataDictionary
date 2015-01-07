@@ -22,9 +22,9 @@ uint64_t Bitstream_WriteThenRead(Bitstream* stream, const uint32_t length, uint6
 
     Bitstream_Write(stream, length, value);
 
-    //@ assert left:   BitstreamUnchanged{Here,Pre}(stream, 0, pos);
-    //@ assert middle: BitstreamEqual64(stream, pos, pos + length, value);
-    //@ assert right:  BitstreamUnchanged{Here,Pre}(stream, pos + length, 8 * stream->size);
+    //@ assert left:   EqualBits{Here,Pre}(stream, 0, pos);
+    //@ assert middle: EqualBits(stream, pos, pos + length, value);
+    //@ assert right:  EqualBits{Here,Pre}(stream, pos + length, 8 * stream->size);
 
     stream->bitpos -= length;
     //@ assert stream->bitpos == pos;
@@ -32,8 +32,8 @@ uint64_t Bitstream_WriteThenRead(Bitstream* stream, const uint32_t length, uint6
 
     uint64_t result = Bitstream_Read(stream, length);
 
-    //@ assert copied:  BitstreamEqual64(stream, pos, pos + length, result);
-    //@ assert upper:   UpperBitsNotSet(result, length);
+    //@ assert equal:  EqualBits(stream, pos, pos + length, result);
+    //@ assert upper:  UpperBitsNotSet(result, length);
 
     return result;
 }

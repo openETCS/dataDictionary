@@ -20,11 +20,11 @@
     assigns stream->addr[0..stream->size - 1];
     assigns stream->bitpos;
 
-    ensures left:   BitstreamUnchanged{Here,Old}(stream, 0, \old(stream->bitpos));
+    ensures left:   EqualBits{Here,Old}(stream, 0, \old(stream->bitpos));
 
-    ensures middle: BitstreamEqual64(stream, \old(stream->bitpos), stream->bitpos, value);
+    ensures middle: EqualBits(stream, \old(stream->bitpos), stream->bitpos, value);
 
-    ensures right:  BitstreamUnchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
+    ensures right:  EqualBits{Here,Old}(stream, stream->bitpos, 8 * stream->size);
 
     ensures result: \result == 0;
 

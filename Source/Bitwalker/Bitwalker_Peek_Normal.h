@@ -13,7 +13,7 @@
 
   assigns  \nothing;
 
-  ensures  copied:      EqualBits64(addr, bitpos, bitpos + length, \result);
+  ensures  copied:      EqualBits(addr, bitpos, bitpos + length, \result);
 
   ensures  not_set:     UpperBitsNotSet(\result, length);
 */

@@ -15,11 +15,11 @@
 
   assigns  stream->addr[0..stream->size - 1];
 
-  ensures left:       BitstreamUnchanged{Here,Old}(stream, 0, stream->bitpos);
+  ensures left:       EqualBits{Here,Old}(stream, 0, stream->bitpos);
 
-  ensures middle:     BitstreamEqual64(stream, stream->bitpos, stream->bitpos + length, value);
+  ensures middle:     EqualBits(stream, stream->bitpos, stream->bitpos + length, value);
 
-  ensures right:      BitstreamUnchanged{Here,Old}(stream, stream->bitpos + length, 8 * stream->size);
+  ensures right:      EqualBits{Here,Old}(stream, stream->bitpos + length, 8 * stream->size);
 */
 void  Bitstream_Write_Normal(Bitstream* stream, uint32_t length, uint64_t value);
 

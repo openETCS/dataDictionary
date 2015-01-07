@@ -7,11 +7,11 @@ void Bitwalker_Poke_Normal(uint8_t* addr, uint32_t size, uint32_t bitpos, uint32
     /*@
       loop invariant index:  bitpos <= i <= bitpos + length;
 
-      loop invariant left:   BitsUnchanged{Here,Pre}(addr, 0, bitpos);
+      loop invariant left:   EqualBits{Here,Pre}(addr, 0, bitpos);
 
-      loop invariant middle: EqualBits64(addr, bitpos, i, value, length);
+      loop invariant middle: EqualBits(addr, bitpos, i, value, length);
 
-      loop invariant right:  BitsUnchanged{Here,Pre}(addr, i, 8 * size);
+      loop invariant right:  EqualBits{Here,Pre}(addr, i, 8 * size);
 
       loop assigns i, addr[0..size-1];
 
