@@ -7,6 +7,11 @@ it:
 	(cd Package_Foo     && $(MAKE) it)
 	(cd Adhesion_Factor && $(MAKE) it)
 
+format: 
+	(cd Bitwalker       && $(MAKE) format)
+	(cd Package_Foo     && $(MAKE) format)
+	(cd Adhesion_Factor && $(MAKE) format)
+
 report: 
 	(cd Bitwalker       && $(MAKE) report)
 	(cd Package_Foo     && $(MAKE) report)
