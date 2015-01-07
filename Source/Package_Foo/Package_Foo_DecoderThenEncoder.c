@@ -17,7 +17,7 @@
     assigns stream->bitpos;
     assigns *p;
 
-    ensures unchanged:   BitstreamUnchanged{Here,Old}(stream, 0, 8 * stream->size);
+    ensures unchanged:   EqualBits{Here,Old}(stream, 0, 8 * stream->size);
 */
 void Package_Foo_DecoderThenEncoder(Bitstream* stream, Package_Foo* p)
 {
@@ -27,9 +27,7 @@ void Package_Foo_DecoderThenEncoder(Bitstream* stream, Package_Foo* p)
     //@ assert Normal(stream, length);
     Package_Foo_Decoder(stream, p);
 
-    //@ assert new_pos:    stream->bitpos == pos + length;
-    //@ assert size:       stream->size   == \at(stream->size, Pre);
-    //@ assert copied:     BitstreamEqual(stream, pos, p);
+    //@ assert equal:      EqualBits(stream, pos, p);
     //@ assert not_set:    UpperBitsNotSet(p);
     //@ assert increment:  stream->bitpos == pos + length;
 
@@ -39,7 +37,7 @@ void Package_Foo_DecoderThenEncoder(Bitstream* stream, Package_Foo* p)
 
     Package_Foo_Encoder(stream, p);
 
-    //@ assert left:    BitstreamUnchanged{Here,Pre}(stream, 0, pos);
-    //@ assert middle:  BitstreamEqual(stream, pos, p);
-    //@ assert right:   BitstreamUnchanged{Here,Pre}(stream, pos + length, 8 * stream->size);
+    //@ assert left:    EqualBits{Here,Pre}(stream, 0, pos);
+    //@ assert middle:  EqualBits(stream, pos, p);
+    //@ assert right:   EqualBits{Here,Pre}(stream, pos + length, 8 * stream->size);
 }

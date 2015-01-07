@@ -40,11 +40,9 @@
 
       ensures stream->bitpos == \old(stream->bitpos) + BitSize(p);
 
-      ensures unchanged_left:  BitstreamUnchanged{Here,Old}(stream, 0, \old(stream->bitpos));
-
-      ensures BitstreamEqual(stream, \old(stream->bitpos), p);
-
-      ensures unchanged_right: BitstreamUnchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
+      ensures left:   EqualBits{Here,Old}(stream, 0, \old(stream->bitpos));
+      ensures middle: EqualBits(stream, \old(stream->bitpos), p);
+      ensures right:  EqualBits{Here,Old}(stream, stream->bitpos, 8 * stream->size);
 
     complete behaviors;
     disjoint behaviors;
