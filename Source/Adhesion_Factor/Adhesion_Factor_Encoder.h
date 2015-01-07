@@ -19,11 +19,11 @@
       assigns stream->bitpos;
       assigns stream->addr[0..(stream->size-1)];
 
-      ensures result:        \result == 1;
-      ensures increment:     stream->bitpos == \old(stream->bitpos) + BitSize(p);
-      ensures left:          BitstreamUnchanged{Here,Old}(stream, 0, \old(stream->bitpos));
-      ensures middle:        BitstreamEqual(stream, \old(stream->bitpos), p);
-      ensures right:         BitstreamUnchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
+      ensures result:     \result == 1;
+      ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
+      ensures left:       EqualBits{Here,Old}(stream, 0, \old(stream->bitpos));
+      ensures middle:     EqualBits(stream, \old(stream->bitpos), p);
+      ensures right:      EqualBits{Here,Old}(stream, stream->bitpos, 8 * stream->size);
 
     behavior values_too_big:
       assumes Normal{Pre}(stream, BitSize(p)) && !UpperBitsNotSet{Pre}(p);

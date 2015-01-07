@@ -20,13 +20,13 @@ int Adhesion_Factor_Decoder(Bitstream* stream, Adhesion_Factor* p)
 
         stream->bitpos += ADHESION_FACTOR_BITSIZE;
 
-        //@ assert NID_PACKET: BitstreamEqual64(stream, pos,      pos + 8,  p->NID_PACKET);
-        //@ assert Q_DIR:      BitstreamEqual64(stream, pos + 8,  pos + 10, p->Q_DIR);
-        //@ assert L_PACKET:   BitstreamEqual64(stream, pos + 10, pos + 23, p->L_PACKET);
-        //@ assert Q_SCALE:    BitstreamEqual64(stream, pos + 23, pos + 25, p->Q_SCALE);
-        //@ assert D_ADHESION: BitstreamEqual64(stream, pos + 25, pos + 40, p->D_ADHESION);
-        //@ assert L_ADHESION: BitstreamEqual64(stream, pos + 40, pos + 55, p->L_ADHESION);
-        //@ assert M_ADHESION: BitstreamEqual64(stream, pos + 55, pos + 56, p->M_ADHESION);
+        //@ assert NID_PACKET: EqualBits(stream, pos,      pos + 8,  p->NID_PACKET);
+        //@ assert Q_DIR:      EqualBits(stream, pos + 8,  pos + 10, p->Q_DIR);
+        //@ assert L_PACKET:   EqualBits(stream, pos + 10, pos + 23, p->L_PACKET);
+        //@ assert Q_SCALE:    EqualBits(stream, pos + 23, pos + 25, p->Q_SCALE);
+        //@ assert D_ADHESION: EqualBits(stream, pos + 25, pos + 40, p->D_ADHESION);
+        //@ assert L_ADHESION: EqualBits(stream, pos + 40, pos + 55, p->L_ADHESION);
+        //@ assert M_ADHESION: EqualBits(stream, pos + 55, pos + 56, p->M_ADHESION);
 
         return 1;
     }

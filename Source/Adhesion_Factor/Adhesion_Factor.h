@@ -31,14 +31,14 @@ typedef struct Adhesion_Factor Adhesion_Factor;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-   predicate BitstreamEqual(Bitstream* stream, integer pos, Adhesion_Factor* p) =
-      BitstreamEqual64(stream, pos,      pos + 8,  p->NID_PACKET)  &&
-      BitstreamEqual64(stream, pos + 8,  pos + 10, p->Q_DIR)       &&
-      BitstreamEqual64(stream, pos + 10, pos + 23, p->L_PACKET)    &&
-      BitstreamEqual64(stream, pos + 23, pos + 25, p->Q_SCALE)     &&
-      BitstreamEqual64(stream, pos + 25, pos + 40, p->D_ADHESION)  &&
-      BitstreamEqual64(stream, pos + 40, pos + 55, p->L_ADHESION)  &&
-      BitstreamEqual64(stream, pos + 55, pos + 56, p->M_ADHESION);
+   predicate EqualBits(Bitstream* stream, integer pos, Adhesion_Factor* p) =
+      EqualBits(stream, pos,      pos + 8,  p->NID_PACKET)  &&
+      EqualBits(stream, pos + 8,  pos + 10, p->Q_DIR)       &&
+      EqualBits(stream, pos + 10, pos + 23, p->L_PACKET)    &&
+      EqualBits(stream, pos + 23, pos + 25, p->Q_SCALE)     &&
+      EqualBits(stream, pos + 25, pos + 40, p->D_ADHESION)  &&
+      EqualBits(stream, pos + 40, pos + 55, p->L_ADHESION)  &&
+      EqualBits(stream, pos + 55, pos + 56, p->M_ADHESION);
 
 
    predicate UpperBitsNotSet(Adhesion_Factor* p) =
