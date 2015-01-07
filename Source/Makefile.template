@@ -21,6 +21,8 @@ WP_PROCESSES ?= 1
 
 #setup coq
 SCRIPT?='wp0.script' # default script
+coq-bitlemmas: FORCE
+	@(cd ../Coq && $(MAKE) compile)
 
 # We differentiate between two types of WP options:
 # 1) in WP_FLAGS we collect the general options
@@ -83,8 +85,7 @@ export ASTYLE=astyle -A1 -m0 -H -f -p -Y -z2 --indent=spaces -s4
 	@$(ASTYLE) $<
 
 # start WP on command line and run provers
-%.wp:%.c FORCE 
-	@(cd ../Coq && $(MAKE) compile)
+%.wp:%.c coq-bitlemmas FORCE
 	@$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 1 -wp-out $(patsubst %.c,%.wp, $<)   $<
 
 
@@ -94,8 +95,7 @@ export ASTYLE=astyle -A1 -m0 -H -f -p -Y -z2 --indent=spaces -s4
 
 
 # start WP GUI and run provers
-%.wpgui:%.c FORCE 
-	@(cd ../Coq && $(MAKE) compile)
+%.wpgui:%.c coq-bitlemmas FORCE
 	@($(WPGUI) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 4 -wp-out $(patsubst %.c,%.wp, $<)  $< &)
 
 
@@ -104,7 +104,7 @@ export ASTYLE=astyle -A1 -m0 -H -f -p -Y -z2 --indent=spaces -s4
 	@(frama-c-gui $(WP_FLAGS) -wp-prover none -wp-out $(patsubst %.c,%.wp, $<)  $< &)
 
 
-%.report-wp:%.c FORCE 
+%.report-wp:%.c coq-bitlemmas FORCE 
 	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp $(basename $<););
 
 %.report:%.c
