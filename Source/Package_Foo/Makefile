@@ -32,7 +32,7 @@ par:
 	@time $(MAKE) -j 3 -O $(REPORT)
 
 log: FORCE
-	@(time $(MAKE) report > results.txt&)
+	@(time $(MAKE) report > results.txt)
 
 report: $(REPORT)
 
