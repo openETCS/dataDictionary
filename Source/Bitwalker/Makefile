@@ -7,8 +7,7 @@ include ../Makefile.template
 #WP_FLAGS += -wp-prop=-@lemma
 #WP_FLAGS += -wp-prop=cea
 
-SRC :=  Bit8.c Bit8Array.c Bit64.c\
-        Bitwalker.c\
+SRC :=  Bitwalker.c\
         Bitwalker_Peek_Normal.c Bitwalker_Peek.c\
         Bitwalker_Poke_Normal.c Bitwalker_Poke.c\
 	PeekThenPoke.c PokeThenPeek.c\
@@ -44,7 +43,7 @@ TestPeekThenPoke: TestPeekThenPoke.o PeekThenPoke.o libBitwalker.a
 tests:	TestPeekThenPoke
 
 par:
-	@time $(MAKE) -j 3 -O $(REPORT)
+	@time $(MAKE) -j 2 -O $(REPORT)
 
 log: FORCE
 	@(time $(MAKE) report > results.txt)
