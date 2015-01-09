@@ -24,6 +24,8 @@
 #define LeftBit64(Value,Pos)  (BitTest(Value,(63 - (Pos))))
 
 /*@
+   predicate Invariant{A}(uint64_t x) = \true;
+
    predicate ZeroInitialized{A}(uint64_t x) = x == 0;
 
    predicate
