@@ -5,7 +5,8 @@
 #include "Adhesion_Factor.h"
 
 /*@
-    requires valid:  \valid_read(p);
+    requires valid:      \valid_read(p);
+    requires invariant:  Invariant(p);
 
     assigns \nothing;
 

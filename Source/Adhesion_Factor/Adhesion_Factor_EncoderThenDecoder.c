@@ -7,6 +7,7 @@
     requires stream_invariant:  Invariant(stream, BitSize(p));
     requires normal:            Normal(stream, BitSize(p));
     requires valid_package:     \valid(p);
+    requires invariant:         Invariant(p);
     requires upper:             UpperBitsNotSet(p);
     requires separation:        Separated(stream, p);
 

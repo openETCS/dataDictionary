@@ -9,7 +9,8 @@
 
     assigns  *p;
 
-    ensures  ZeroInitialized(p);
+    ensures  invariant: Invariant(p);
+    ensures  init:      ZeroInitialized(p);
 */
 void Adhesion_Factor_Init(Adhesion_Factor* p);
 

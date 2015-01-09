@@ -30,6 +30,15 @@ typedef struct Adhesion_Factor Adhesion_Factor;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
+    predicate Invariant(Adhesion_Factor* p) =
+      Invariant(p->NID_PACKET)        &&
+      Invariant(p->Q_DIR)             &&
+      Invariant(p->L_PACKET)          &&
+      Invariant(p->Q_SCALE)           &&
+      Invariant(p->D_ADHESION)        &&
+      Invariant(p->L_ADHESION)        &&
+      Invariant(p->M_ADHESION);
+
     predicate ZeroInitialized(Adhesion_Factor* p) =
       ZeroInitialized(p->NID_PACKET)        &&
       ZeroInitialized(p->Q_DIR)             &&

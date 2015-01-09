@@ -8,6 +8,7 @@
     requires valid_stream:      Writeable(stream);
     requires stream_invariant:  Invariant(stream, BitSize(p));
     requires valid_package:     \valid_read(p);
+    requires invariant:         Invariant(p);
     requires separation:        Separated(stream, p);
 
     assigns stream->bitpos;
