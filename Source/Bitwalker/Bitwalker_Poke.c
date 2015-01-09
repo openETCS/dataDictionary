@@ -1,6 +1,6 @@
 #include "Bitwalker_Poke.h"
 #include "Bitwalker_Poke_Normal.h"
-#include "Bit64.h"
+#include "UpperBitsNotSet.h"
 
 
 int Bitwalker_Poke(uint8_t*  addr, uint32_t  size, uint32_t  bitpos, uint32_t  length, uint64_t  value)
