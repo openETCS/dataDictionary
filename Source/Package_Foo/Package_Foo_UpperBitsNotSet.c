@@ -1,6 +1,6 @@
 
 #include "Package_Foo_UpperBitsNotSet.h"
-#include "Bit64.h"
+#include "UpperBitsNotSet.h"
 
 int Package_Foo_UpperBitsNotSet(const Package_Foo* p)
 {
