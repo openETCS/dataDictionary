@@ -10,9 +10,7 @@
 
     assigns  *p;
 
-    ensures  p->ABC == 0;
-    ensures  p->DEF == 0;
-    ensures  p->GHI == 0;
+    ensures  ZeroInitialized(p);
 */
 void Package_Foo_Init(Package_Foo* p);
 

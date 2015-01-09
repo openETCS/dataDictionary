@@ -30,6 +30,15 @@ typedef struct Adhesion_Factor Adhesion_Factor;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
+    predicate ZeroInitialized(Adhesion_Factor* p) =
+      ZeroInitialized(p->NID_PACKET)        &&
+      ZeroInitialized(p->Q_DIR)             &&
+      ZeroInitialized(p->L_PACKET)          &&
+      ZeroInitialized(p->Q_SCALE)           &&
+      ZeroInitialized(p->D_ADHESION)        &&
+      ZeroInitialized(p->L_ADHESION)        &&
+      ZeroInitialized(p->M_ADHESION);
+
     predicate EqualBits(Bitstream* stream, integer pos, Adhesion_Factor* p) =
       EqualBits(stream, pos,       pos + 8,   p->NID_PACKET)        &&
       EqualBits(stream, pos + 8,   pos + 10,  p->Q_DIR)             &&
