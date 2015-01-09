@@ -1,0 +1,138 @@
+
+SHELL=/bin/bash
+
+export SCRIPT_DIR=../Scripts
+#setup compiler flags
+INCLUDES=$(CPPFLAGS) -I$(FRAMAC_SHARE)/libc
+
+VPATH = ../Coq
+
+SHARED_FLAGS=-Wall -pedantic
+#SHARED_FLAGS+=-Wconversion
+CFLAGS=-std=c11 $(SHARED_FLAGS)
+CXXFLAGS=-std=c++11 $(SHARED_FLAGS)
+
+
+#setup wp
+WP_TIMEOUT ?= 20
+WP_COQ_TIMEOUT ?= 10
+WP_ALT_ERGO_STEPS ?= 1000
+WP_PROCESSES ?= 1
+
+#setup coq
+SCRIPT?='wp0.script' # default script
+coq-bitlemmas: FORCE
+	@(cd ../Coq && $(MAKE) compile)
+
+# We differentiate between two types of WP options:
+# 1) in WP_FLAGS we collect the general options
+# 2) in WP_PROVER_FLAGS we collect the ones where we select the provers
+# This allows us, for example, to start the gui very quickly and then
+# run the prover(s) on select proof obligtions.
+
+WP_FLAGS  =-cpp-command 'gcc -C -E -nostdinc $(INCLUDES)'
+WP_FLAGS += -pp-annot -no-unicode
+WP_FLAGS += -wp
+WP_FLAGS += -wp-model Typed+ref
+
+# RTE options and more
+WP_FLAGS += -wp-rte
+WP_FLAGS += -warn-signed-downcast
+WP_FLAGS += -warn-signed-overflow
+#WP_FLAGS += -warn-unsigned-downcast
+WP_FLAGS += -warn-unsigned-overflow
+WP_FLAGS += -wp-split
+
+#Qed options
+#WP_FLAGS += -wp-no-simpl
+#WP_FLAGS += -wp-no-clean
+#WP_FLAGS += -wp-no-let
+#WP_FLAGS += -wp-no-pruning
+WP_FLAGS += -wp-no-bits
+
+WP_FLAGS += -wp-driver ../BitTest.driver
+WP_FLAGS += -wp-script $(SCRIPT)
+WP_FLAGS += -wp-timeout $(WP_TIMEOUT)
+WP_FLAGS += -wp-coq-timeout $(WP_COQ_TIMEOUT)
+WP_FLAGS += -wp-steps $(WP_ALT_ERGO_STEPS)
+#WP_FLAGS += -wp-par $(WP_PROCESSES)
+
+
+#WP_PROVER_FLAGS += -wp-prover none
+WP_PROVER_FLAGS += -wp-prover alt-ergo
+WP_PROVER_FLAGS += -wp-prover cvc4
+WP_PROVER_FLAGS += -wp-prover coq 
+#WP_PROVER_FLAGS +=-wp-report console.report
+
+
+# run WP on command line 
+export WP=frama-c 
+export WPGUI=frama-c-gui
+export WPREPORT=$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS)
+
+
+ASTYLEOPTIONS += -A1
+ASTYLEOPTIONS += --break-blocks
+ASTYLEOPTIONS += --pad-oper
+ASTYLEOPTIONS += --pad-header
+ASTYLEOPTIONS += --indent-col1-comments
+ASTYLEOPTIONS += --lineend=linux
+ASTYLEOPTIONS += --add-brackets
+ASTYLEOPTIONS += --indent=spaces=4
+ASTYLEOPTIONS += --min-conditional-indent=0
+
+export ASTYLE=astyle $(ASTYLEOPTIONS)
+
+%.format:%.c FORCE
+	@$(ASTYLE) $<
+
+%.format:%.cpp FORCE
+	@$(ASTYLE) $<
+
+%.format:%.h FORCE
+	@$(ASTYLE) $<
+
+%.format:%.hpp FORCE
+	@$(ASTYLE) $<
+
+# start WP on command line and run provers
+%.wp:%.c coq-bitlemmas FORCE
+	@$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 1 -wp-out $(patsubst %.c,%.wp, $<)   $<
+
+
+# start WP on command line but do not run provers
+%.check:%.c FORCE 
+	@($(WP) $(WP_FLAGS) -wp-prover none -wp-out $(patsubst %.c,%.wp, $<)  $< &)
+
+
+# start WP GUI and run provers
+%.wpgui:%.c coq-bitlemmas FORCE
+	@($(WPGUI) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 4 -wp-out $(patsubst %.c,%.wp, $<)  $< &)
+
+
+# start WP GUI but do not run provers
+%.checkgui:%.c FORCE
+	@(frama-c-gui $(WP_FLAGS) -wp-prover none -wp-out $(patsubst %.c,%.wp, $<)  $< &)
+
+
+%.report-wp:%.c coq-bitlemmas FORCE 
+	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp $(basename $<););
+
+%.report:%.c
+	@+$(MAKE) $(patsubst %.c,%.report-wp, $<)
+
+
+clean:: FORCE
+	@(cd ../Coq && $(MAKE) clean)
+	@$(RM) *.o
+	@$(RM) *.i
+	@$(RM) *.back
+	@$(RM) *.orig
+	@$(RM) *.exe
+	@$(RM) -rf  *.debug
+	@$(RM) -rf  .frama-c
+	@$(RM) -rf  *.wp
+	@$(RM) -rf  *.ml
+
+FORCE:
+

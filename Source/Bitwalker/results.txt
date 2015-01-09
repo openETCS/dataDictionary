@@ -1,0 +1,16 @@
+   verify  UpperBitsNotSet                     [11    11   (6     3   0   2)]     100%
+   verify  Bitwalker                           [6      6   (1     5   0   0)]     100%
+   verify  Bitwalker_Peek_Normal               [97    97   (48   44   4   1)]     100%
+   verify  Bitwalker_Peek                      [52    52   (40   12   0   0)]     100%
+   verify  Bitwalker_Poke_Normal               [101  101   (44   53   3   1)]     100%
+   verify  Bitwalker_Poke                      [70    70   (62    8   0   0)]     100%
+   verify  PeekThenPoke                        [15    15   (9     6   0   0)]     100%
+   verify  PokeThenPeek                        [12    12   (6     4   0   2)]     100%
+   verify  Bitstream                           [7      7   (3     4   0   0)]     100%
+   verify  Bitstream_Init                      [10    10   (3     7   0   0)]     100%
+   verify  Bitstream_Read_Normal               [19    19   (7    10   2   0)]     100%
+   verify  Bitstream_Read                      [51    51   (40   11   0   0)]     100%
+   verify  Bitstream_Write_Normal              [13    13   (1    10   2   0)]     100%
+   verify  Bitstream_Write                     [98    98   (67   29   2   0)]     100%
+   verify  Bitstream_ReadThenWrite             [31    31   (12   16   3   0)]     100%
+   verify  Bitstream_WriteThenRead             [28    28   (12   15   0   1)]     100%
