@@ -2,7 +2,7 @@
 #ifndef TEMPORARY_SPEED_RESTRICTION_REVOCATION_UPPERBITSNOTSET_H_INCLUDED
 #define TEMPORARY_SPEED_RESTRICTION_REVOCATION_UPPERBITSNOTSET_H_INCLUDED
 
-#include "Adhesion_Factor.h"
+#include "Temporary_Speed_Restriction_Revocation.h"
 
 /*@
     requires valid:      \valid_read(p);

@@ -2,7 +2,7 @@
 #ifndef INHIBITION_OF_BALISE_GROUP_MESSAGE_CONSISTENCY_REACTION_UPPERBITSNOTSET_H_INCLUDED
 #define INHIBITION_OF_BALISE_GROUP_MESSAGE_CONSISTENCY_REACTION_UPPERBITSNOTSET_H_INCLUDED
 
-#include "Adhesion_Factor.h"
+#include "Inhibition_of_balise_group_message_consistency_reaction.h"
 
 /*@
     requires valid:      \valid_read(p);

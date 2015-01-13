@@ -2,7 +2,7 @@
 #ifndef REVERSING_AREA_INFORMATION_UPPERBITSNOTSET_H_INCLUDED
 #define REVERSING_AREA_INFORMATION_UPPERBITSNOTSET_H_INCLUDED
 
-#include "Adhesion_Factor.h"
+#include "Reversing_area_information.h"
 
 /*@
     requires valid:      \valid_read(p);

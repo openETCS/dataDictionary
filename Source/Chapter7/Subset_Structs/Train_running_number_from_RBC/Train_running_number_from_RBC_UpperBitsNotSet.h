@@ -2,7 +2,7 @@
 #ifndef TRAIN_RUNNING_NUMBER_FROM_RBC_UPPERBITSNOTSET_H_INCLUDED
 #define TRAIN_RUNNING_NUMBER_FROM_RBC_UPPERBITSNOTSET_H_INCLUDED
 
-#include "Adhesion_Factor.h"
+#include "Train_running_number_from_RBC.h"
 
 /*@
     requires valid:      \valid_read(p);

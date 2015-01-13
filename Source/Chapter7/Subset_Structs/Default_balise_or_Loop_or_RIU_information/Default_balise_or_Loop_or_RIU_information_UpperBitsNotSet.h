@@ -2,7 +2,7 @@
 #ifndef DEFAULT_BALISE_OR_LOOP_OR_RIU_INFORMATION_UPPERBITSNOTSET_H_INCLUDED
 #define DEFAULT_BALISE_OR_LOOP_OR_RIU_INFORMATION_UPPERBITSNOTSET_H_INCLUDED
 
-#include "Adhesion_Factor.h"
+#include "Default_balise_or_Loop_or_RIU_information.h"
 
 /*@
     requires valid:      \valid_read(p);

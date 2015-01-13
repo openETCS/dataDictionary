@@ -2,7 +2,7 @@
 #ifndef RADIO_NETWORK_REGISTRATION_UPPERBITSNOTSET_H_INCLUDED
 #define RADIO_NETWORK_REGISTRATION_UPPERBITSNOTSET_H_INCLUDED
 
-#include "Adhesion_Factor.h"
+#include "Radio_Network_registration.h"
 
 /*@
     requires valid:      \valid_read(p);

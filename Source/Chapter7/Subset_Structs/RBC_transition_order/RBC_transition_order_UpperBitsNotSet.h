@@ -2,7 +2,7 @@
 #ifndef RBC_TRANSITION_ORDER_UPPERBITSNOTSET_H_INCLUDED
 #define RBC_TRANSITION_ORDER_UPPERBITSNOTSET_H_INCLUDED
 
-#include "Adhesion_Factor.h"
+#include "RBC_transition_order.h"
 
 /*@
     requires valid:      \valid_read(p);

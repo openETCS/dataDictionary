@@ -2,7 +2,7 @@
 #ifndef SESSION_MANAGEMENT_UPPERBITSNOTSET_H_INCLUDED
 #define SESSION_MANAGEMENT_UPPERBITSNOTSET_H_INCLUDED
 
-#include "Adhesion_Factor.h"
+#include "Session_Management.h"
 
 /*@
     requires valid:      \valid_read(p);

@@ -2,7 +2,7 @@
 #ifndef EOLM_PACKET_UPPERBITSNOTSET_H_INCLUDED
 #define EOLM_PACKET_UPPERBITSNOTSET_H_INCLUDED
 
-#include "Adhesion_Factor.h"
+#include "EOLM_Packet.h"
 
 /*@
     requires valid:      \valid_read(p);
