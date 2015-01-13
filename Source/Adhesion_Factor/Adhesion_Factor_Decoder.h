@@ -41,3 +41,4 @@ int Adhesion_Factor_Decoder(Bitstream* stream, Adhesion_Factor* p);
 
 
 #endif // ADHESION_FACTOR_DECODER_H_INCLUDED
+
