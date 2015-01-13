@@ -1,6 +1,6 @@
-   verify  Adhesion_Factor_Init                [16    16   (0    16   0   0)]     100%
+   verify  Adhesion_Factor_Init                [16    16   (0    15   1   0)]     100%
    verify  Adhesion_Factor_UpperBitsNotSet     [45    45   (30   15   0   0)]     100%
    verify  Adhesion_Factor_Decoder             [143  143   (69   62  12   0)]     100%
-   verify  Adhesion_Factor_Encoder             [201  201   (118  64  19   0)]     100%
-   verify  Adhesion_Factor_DecoderThenEncoder  [39    39   (14   17   8   0)]     100%
+   verify  Adhesion_Factor_Encoder             [201  201   (118  63  20   0)]     100%
+   verify  Adhesion_Factor_DecoderThenEncoder  [39    39   (14   15  10   0)]     100%
    verify  Adhesion_Factor_EncoderThenDecoder  [37    37   (16   15   6   0)]     100%

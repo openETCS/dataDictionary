@@ -6,7 +6,7 @@
 
 /*@
     requires valid_stream:      Readable(stream);
-    requires stream_invariant:  Invariant(stream, BitSize(p));
+    requires stream_invariant:  Invariant(stream, MaxBitSize(p));
     requires valid_package:     \valid(p);
     requires separation:        Separated(stream, p);
 
@@ -16,7 +16,7 @@
     ensures unchanged:          EqualBits{Here,Old}(stream, 0, 8*stream->size);
 
     behavior normal_case:
-      assumes Normal{Pre}(stream, BitSize(p));
+      assumes Normal{Pre}(stream, MaxBitSize(p));
 
       assigns stream->bitpos;
       assigns *p;
@@ -28,7 +28,7 @@
       ensures upper:      UpperBitsNotSet(p);
 
     behavior error_case:
-      assumes !Normal{Pre}(stream, BitSize(p));
+      assumes !Normal{Pre}(stream, MaxBitSize(p));
 
       assigns \nothing;
 
