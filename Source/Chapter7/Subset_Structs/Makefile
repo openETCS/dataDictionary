@@ -1,16 +1,34 @@
-include Makefile.template
 
-VPATH := $(BITWALKER)
+MAKEFLAGS += --silent --no-print-directory
 
-CPPFLAGS= -I./ -I../ -I$(BITWALKER)
-CFLAGS=-Wall  --std=c99
+it: 
+	(cd Coq             && $(MAKE) it)
+	(cd Bitwalker       && $(MAKE) it)
+	(cd Package_Foo     && $(MAKE) it)
+	(cd Adhesion_Factor && $(MAKE) it)
 
-LIBS:= Bitwalker.a
+format: 
+	(cd Bitwalker       && $(MAKE) format)
+	(cd Package_Foo     && $(MAKE) format)
+	(cd Adhesion_Factor && $(MAKE) format)
 
-SRC := $(wildcard *.c)
-OBJ := $(SRC:.c=.o)
+report: 
+	(cd Bitwalker       && $(MAKE) report)
+	(cd Package_Foo     && $(MAKE) report)
+	(cd Adhesion_Factor && $(MAKE) report)
 
-objects: $(OBJ)
+par: 
+	(cd Bitwalker       && $(MAKE) par)
+	(cd Package_Foo     && $(MAKE) par)
+	(cd Adhesion_Factor && $(MAKE) par)
 
-AdhesionTest: Adhesion_Factor.o
-OnboardTest: Onboard_telephone_numbers.o PokeNext.o PeekNext.o Init.o PeekFinish.o PokeFinish.o Peek.o Poke.o Bit8Array.o Bit64.o Bit8.o
+log: 
+	(cd Bitwalker       && $(MAKE) log)
+	(cd Package_Foo     && $(MAKE) log)
+	(cd Adhesion_Factor && $(MAKE) log)
+
+clean: 
+	(cd Coq             && $(MAKE) clean)
+	(cd Bitwalker       && $(MAKE) clean)
+	(cd Package_Foo     && $(MAKE) clean)
+	(cd Adhesion_Factor && $(MAKE) clean)

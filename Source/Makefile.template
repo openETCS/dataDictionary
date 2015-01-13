@@ -1,11 +1,11 @@
 
 SHELL=/bin/bash
 
-export SCRIPT_DIR=../Scripts
+export SCRIPT_DIR=$(TOPDIR)/Scripts
 #setup compiler flags
 INCLUDES=$(CPPFLAGS) -I$(FRAMAC_SHARE)/libc
 
-VPATH = ../Coq
+VPATH = $(TOPDIR)/Coq
 
 SHARED_FLAGS=-Wall -pedantic
 #SHARED_FLAGS+=-Wconversion
@@ -22,7 +22,7 @@ WP_PROCESSES ?= 1
 #setup coq
 SCRIPT?='wp0.script' # default script
 coq-bitlemmas: FORCE
-	@(cd ../Coq && $(MAKE) compile)
+	@(cd $(TOPDIR)/Coq && $(MAKE) compile)
 
 # We differentiate between two types of WP options:
 # 1) in WP_FLAGS we collect the general options
@@ -50,7 +50,7 @@ WP_FLAGS += -wp-split
 #WP_FLAGS += -wp-no-pruning
 WP_FLAGS += -wp-no-bits
 
-WP_FLAGS += -wp-driver ../BitTest.driver
+WP_FLAGS += -wp-driver $(TOPDIR)/BitTest.driver
 WP_FLAGS += -wp-script $(SCRIPT)
 WP_FLAGS += -wp-timeout $(WP_TIMEOUT)
 WP_FLAGS += -wp-coq-timeout $(WP_COQ_TIMEOUT)
@@ -123,7 +123,7 @@ export ASTYLE=astyle $(ASTYLEOPTIONS)
 
 
 clean:: FORCE
-	@(cd ../Coq && $(MAKE) clean)
+	@(cd $(TOPDIR)/Coq && $(MAKE) clean)
 	@$(RM) *.o
 	@$(RM) *.i
 	@$(RM) *.back
