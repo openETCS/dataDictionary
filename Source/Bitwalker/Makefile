@@ -1,7 +1,9 @@
 
 MAKEFLAGS += --no-print-directory --silent
 
-include ../Makefile.template
+TOPDIR=..
+
+include $(TOPDIR)/Makefile.template
 
 #WP_FLAGS += -wp-prop=-rte
 #WP_FLAGS += -wp-prop=-@lemma
