@@ -26,6 +26,8 @@ typedef struct Adhesion_Factor Adhesion_Factor;
 /*@
     logic integer BitSize{L}(Adhesion_Factor* p) = ADHESION_FACTOR_BITSIZE;
 
+    logic integer MaxBitSize{L}(Adhesion_Factor* p) = BitSize(p);
+
     predicate Separated(Bitstream* stream, Adhesion_Factor* p) =
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);

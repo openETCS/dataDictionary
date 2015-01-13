@@ -4,8 +4,8 @@
 
 /*@
     requires valid_stream:      Writeable(stream);
-    requires stream_invariant:  Invariant(stream, BitSize(p));
-    requires normal:            Normal(stream, BitSize(p));
+    requires stream_invariant:  Invariant(stream, MaxBitSize(p));
+    requires normal:            Normal(stream, MaxBitSize(p));
     requires valid_package:     \valid(p);
     requires invariant:         Invariant(p);
 

@@ -6,7 +6,7 @@
 
 /*@
     requires valid_stream:      Writeable(stream);
-    requires stream_invariant:  Invariant(stream, BitSize(p));
+    requires stream_invariant:  Invariant(stream, MaxBitSize(p));
     requires valid_package:     \valid_read(p);
     requires invariant:         Invariant(p);
     requires separation:        Separated(stream, p);
@@ -15,7 +15,7 @@
     assigns stream->addr[0..(stream->size-1)];
 
     behavior normal_case:
-      assumes Normal{Pre}(stream, BitSize(p)) && UpperBitsNotSet{Pre}(p);
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && UpperBitsNotSet{Pre}(p);
 
       assigns stream->bitpos;
       assigns stream->addr[0..(stream->size-1)];
@@ -27,14 +27,14 @@
       ensures right:      EqualBits{Here,Old}(stream, stream->bitpos, 8 * stream->size);
 
     behavior values_too_big:
-      assumes Normal{Pre}(stream, BitSize(p)) && !UpperBitsNotSet{Pre}(p);
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && !UpperBitsNotSet{Pre}(p);
 
       assigns \nothing;
 
       ensures result:        \result == -2;
 
     behavior invalid_bit_sequence:
-      assumes !Normal{Pre}(stream, BitSize(p));
+      assumes !Normal{Pre}(stream, MaxBitSize(p));
 
       assigns \nothing;
 
