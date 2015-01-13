@@ -2,7 +2,7 @@
 #ifndef REVERSING_SUPERVISION_INFORMATION_UPPERBITSNOTSET_H_INCLUDED
 #define REVERSING_SUPERVISION_INFORMATION_UPPERBITSNOTSET_H_INCLUDED
 
-#include "Adhesion_Factor.h"
+#include "Reversing_supervision_information.h"
 
 /*@
     requires valid:      \valid_read(p);

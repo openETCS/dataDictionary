@@ -2,7 +2,7 @@
 #ifndef END_OF_INFORMATION_UPPERBITSNOTSET_H_INCLUDED
 #define END_OF_INFORMATION_UPPERBITSNOTSET_H_INCLUDED
 
-#include "Adhesion_Factor.h"
+#include "End_of_Information.h"
 
 /*@
     requires valid:      \valid_read(p);

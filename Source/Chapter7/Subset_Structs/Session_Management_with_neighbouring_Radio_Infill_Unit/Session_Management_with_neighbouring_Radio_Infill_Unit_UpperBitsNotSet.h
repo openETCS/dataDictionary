@@ -2,7 +2,7 @@
 #ifndef SESSION_MANAGEMENT_WITH_NEIGHBOURING_RADIO_INFILL_UNIT_UPPERBITSNOTSET_H_INCLUDED
 #define SESSION_MANAGEMENT_WITH_NEIGHBOURING_RADIO_INFILL_UNIT_UPPERBITSNOTSET_H_INCLUDED
 
-#include "Adhesion_Factor.h"
+#include "Session_Management_with_neighbouring_Radio_Infill_Unit.h"
 
 /*@
     requires valid:      \valid_read(p);

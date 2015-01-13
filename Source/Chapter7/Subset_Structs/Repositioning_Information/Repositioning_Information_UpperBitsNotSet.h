@@ -2,7 +2,7 @@
 #ifndef REPOSITIONING_INFORMATION_UPPERBITSNOTSET_H_INCLUDED
 #define REPOSITIONING_INFORMATION_UPPERBITSNOTSET_H_INCLUDED
 
-#include "Adhesion_Factor.h"
+#include "Repositioning_Information.h"
 
 /*@
     requires valid:      \valid_read(p);

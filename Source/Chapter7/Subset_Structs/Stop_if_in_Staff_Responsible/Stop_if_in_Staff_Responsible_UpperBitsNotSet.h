@@ -2,7 +2,7 @@
 #ifndef STOP_IF_IN_STAFF_RESPONSIBLE_UPPERBITSNOTSET_H_INCLUDED
 #define STOP_IF_IN_STAFF_RESPONSIBLE_UPPERBITSNOTSET_H_INCLUDED
 
-#include "Adhesion_Factor.h"
+#include "Stop_if_in_Staff_Responsible.h"
 
 /*@
     requires valid:      \valid_read(p);

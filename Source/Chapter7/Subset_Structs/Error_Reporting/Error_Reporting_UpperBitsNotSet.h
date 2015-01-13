@@ -2,7 +2,7 @@
 #ifndef ERROR_REPORTING_UPPERBITSNOTSET_H_INCLUDED
 #define ERROR_REPORTING_UPPERBITSNOTSET_H_INCLUDED
 
-#include "Adhesion_Factor.h"
+#include "Error_Reporting.h"
 
 /*@
     requires valid:      \valid_read(p);

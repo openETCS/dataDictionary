@@ -2,7 +2,7 @@
 #ifndef STOP_SHUNTING_ON_DESK_OPENING_UPPERBITSNOTSET_H_INCLUDED
 #define STOP_SHUNTING_ON_DESK_OPENING_UPPERBITSNOTSET_H_INCLUDED
 
-#include "Adhesion_Factor.h"
+#include "Stop_Shunting_on_desk_opening.h"
 
 /*@
     requires valid:      \valid_read(p);

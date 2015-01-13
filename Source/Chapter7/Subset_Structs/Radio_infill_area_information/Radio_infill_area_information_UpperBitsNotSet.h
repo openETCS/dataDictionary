@@ -2,7 +2,7 @@
 #ifndef RADIO_INFILL_AREA_INFORMATION_UPPERBITSNOTSET_H_INCLUDED
 #define RADIO_INFILL_AREA_INFORMATION_UPPERBITSNOTSET_H_INCLUDED
 
-#include "Adhesion_Factor.h"
+#include "Radio_infill_area_information.h"
 
 /*@
     requires valid:      \valid_read(p);

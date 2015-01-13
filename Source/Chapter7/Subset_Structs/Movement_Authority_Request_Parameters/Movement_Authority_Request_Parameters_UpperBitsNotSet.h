@@ -2,7 +2,7 @@
 #ifndef MOVEMENT_AUTHORITY_REQUEST_PARAMETERS_UPPERBITSNOTSET_H_INCLUDED
 #define MOVEMENT_AUTHORITY_REQUEST_PARAMETERS_UPPERBITSNOTSET_H_INCLUDED
 
-#include "Adhesion_Factor.h"
+#include "Movement_Authority_Request_Parameters.h"
 
 /*@
     requires valid:      \valid_read(p);

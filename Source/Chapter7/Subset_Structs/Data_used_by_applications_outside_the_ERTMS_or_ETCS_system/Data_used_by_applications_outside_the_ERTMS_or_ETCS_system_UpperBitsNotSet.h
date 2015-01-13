@@ -2,7 +2,7 @@
 #ifndef DATA_USED_BY_APPLICATIONS_OUTSIDE_THE_ERTMS_OR_ETCS_SYSTEM_UPPERBITSNOTSET_H_INCLUDED
 #define DATA_USED_BY_APPLICATIONS_OUTSIDE_THE_ERTMS_OR_ETCS_SYSTEM_UPPERBITSNOTSET_H_INCLUDED
 
-#include "Adhesion_Factor.h"
+#include "Data_used_by_applications_outside_the_ERTMS_or_ETCS_system.h"
 
 /*@
     requires valid:      \valid_read(p);

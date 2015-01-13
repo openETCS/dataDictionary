@@ -2,7 +2,7 @@
 #ifndef VIRTUAL_BALISE_COVER_MARKER_UPPERBITSNOTSET_H_INCLUDED
 #define VIRTUAL_BALISE_COVER_MARKER_UPPERBITSNOTSET_H_INCLUDED
 
-#include "Adhesion_Factor.h"
+#include "Virtual_Balise_Cover_marker.h"
 
 /*@
     requires valid:      \valid_read(p);

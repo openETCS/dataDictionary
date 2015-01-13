@@ -2,7 +2,7 @@
 #ifndef TRACK_CONDITION_CHANGE_OF_ALLOWED_CURRENT_CONSUMPTION_UPPERBITSNOTSET_H_INCLUDED
 #define TRACK_CONDITION_CHANGE_OF_ALLOWED_CURRENT_CONSUMPTION_UPPERBITSNOTSET_H_INCLUDED
 
-#include "Adhesion_Factor.h"
+#include "Track_Condition_Change_of_allowed_current_consumption.h"
 
 /*@
     requires valid:      \valid_read(p);

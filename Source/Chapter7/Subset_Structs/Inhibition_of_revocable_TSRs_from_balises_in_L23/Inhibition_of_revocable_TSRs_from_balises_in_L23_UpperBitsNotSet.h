@@ -2,7 +2,7 @@
 #ifndef INHIBITION_OF_REVOCABLE_TSRS_FROM_BALISES_IN_L23_UPPERBITSNOTSET_H_INCLUDED
 #define INHIBITION_OF_REVOCABLE_TSRS_FROM_BALISES_IN_L23_UPPERBITSNOTSET_H_INCLUDED
 
-#include "Adhesion_Factor.h"
+#include "Inhibition_of_revocable_TSRs_from_balises_in_L23.h"
 
 /*@
     requires valid:      \valid_read(p);

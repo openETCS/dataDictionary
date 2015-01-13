@@ -2,7 +2,7 @@
 #ifndef DEFAULT_GRADIENT_FOR_TEMPORARY_SPEED_RESTRICTION_UPPERBITSNOTSET_H_INCLUDED
 #define DEFAULT_GRADIENT_FOR_TEMPORARY_SPEED_RESTRICTION_UPPERBITSNOTSET_H_INCLUDED
 
-#include "Adhesion_Factor.h"
+#include "Default_Gradient_for_Temporary_Speed_Restriction.h"
 
 /*@
     requires valid:      \valid_read(p);
