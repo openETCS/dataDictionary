@@ -1,6 +1,6 @@
 
-#ifndef TRAIN_RUNNING_53_H_INCLUDED
-#define TRAIN_RUNNING_53_H_INCLUDED
+#ifndef TRAIN_RUNNING_NUMBER_H_INCLUDED
+#define TRAIN_RUNNING_NUMBER_H_INCLUDED
 
 #include "Bitstream.h"
 
@@ -17,10 +17,10 @@ struct Train_running_number
 
 typedef struct Train_running_number Train_running_number;
 
-#define TRAIN_RUNNING_53_BITSIZE 53
+#define TRAIN_RUNNING_NUMBER_BITSIZE 53
 
 /*@
-    logic integer BitSize{L}(Train_running_number* p) = TRAIN_RUNNING_53_BITSIZE;
+    logic integer BitSize{L}(Train_running_number* p) = TRAIN_RUNNING_NUMBER_BITSIZE;
 
     logic integer MaxBitSize{L}(Train_running_number* p) = BitSize(p);
 
@@ -51,5 +51,5 @@ typedef struct Train_running_number Train_running_number;
 
 */
 
-#endif // TRAIN_RUNNING_53_H_INCLUDED
+#endif // TRAIN_RUNNING_NUMBER_H_INCLUDED
 
