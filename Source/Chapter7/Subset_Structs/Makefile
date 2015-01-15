@@ -1,34 +1,50 @@
 
 MAKEFLAGS += --silent --no-print-directory
 
-it: 
-	(cd Coq             && $(MAKE) it)
-	(cd Bitwalker       && $(MAKE) it)
-	(cd Package_Foo     && $(MAKE) it)
-	(cd Adhesion_Factor && $(MAKE) it)
+it:
+	while read dir; do \
+		echo $$dir; \
+		$(MAKE) -C $$dir it -n; \
+	done <Static
 
-format: 
-	(cd Bitwalker       && $(MAKE) format)
-	(cd Package_Foo     && $(MAKE) format)
-	(cd Adhesion_Factor && $(MAKE) format)
+report:
+	while read dir; do \
+		echo $$dir; \
+		$(MAKE) -C $$dir report; \
+	done <Static
 
-report: 
-	(cd Bitwalker       && $(MAKE) report)
-	(cd Package_Foo     && $(MAKE) report)
-	(cd Adhesion_Factor && $(MAKE) report)
+clean:
+	while read dir; do \
+		$(MAKE) -C $$dir clean; \
+	done < ./Static
+#it: 
+#	(cd Coq             && $(MAKE) it)
+#	(cd Bitwalker       && $(MAKE) it)
+#	(cd Package_Foo     && $(MAKE) it)
+#	(cd Adhesion_Factor && $(MAKE) it)
 
-par: 
-	(cd Bitwalker       && $(MAKE) par)
-	(cd Package_Foo     && $(MAKE) par)
-	(cd Adhesion_Factor && $(MAKE) par)
+#format: 
+#	(cd Bitwalker       && $(MAKE) format)
+#	(cd Package_Foo     && $(MAKE) format)
+#	(cd Adhesion_Factor && $(MAKE) format)
 
-log: 
-	(cd Bitwalker       && $(MAKE) log)
-	(cd Package_Foo     && $(MAKE) log)
-	(cd Adhesion_Factor && $(MAKE) log)
+#report: 
+#	(cd Bitwalker       && $(MAKE) report)
+#	(cd Package_Foo     && $(MAKE) report)
+#	(cd Adhesion_Factor && $(MAKE) report)
 
-clean: 
-	(cd Coq             && $(MAKE) clean)
-	(cd Bitwalker       && $(MAKE) clean)
-	(cd Package_Foo     && $(MAKE) clean)
-	(cd Adhesion_Factor && $(MAKE) clean)
+#par: 
+#	(cd Bitwalker       && $(MAKE) par)
+#	(cd Package_Foo     && $(MAKE) par)
+#	(cd Adhesion_Factor && $(MAKE) par)
+
+#log: 
+#	(cd Bitwalker       && $(MAKE) log)
+#	(cd Package_Foo     && $(MAKE) log)
+#	(cd Adhesion_Factor && $(MAKE) log)
+
+#clean: 
+#	(cd Coq             && $(MAKE) clean)
+#	(cd Bitwalker       && $(MAKE) clean)
+#	(cd Package_Foo     && $(MAKE) clean)
+#	(cd Adhesion_Factor && $(MAKE) clean)
