@@ -8,7 +8,7 @@
     requires valid:  \valid(p);
 
     assigns  *p;
- 
+
     ensures  invariant: Invariant(p);
     ensures  init:      ZeroInitialized(p);
 */

@@ -4,7 +4,8 @@
 
 #include "Bitstream.h"
 
-struct TrainToTrack_Header {
+struct TrainToTrack_Header
+{
     uint64_t  NID_PACKET;         // # 8
     uint64_t  Q_DIR;              // # 2
     uint64_t  L_PACKET;           // # 13
@@ -23,10 +24,10 @@ typedef struct TrainToTrack_Header TrainToTrack_Header;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invraiant(TrainToTrack_Header* p) =
+    predicate Invariant(TrainToTrack_Header* p) =
       Invariant(p->NID_PACKET)       &&
       Invariant(p->Q_DIR)            &&
-      Invariant(L_PACKET);
+      Invariant(p->L_PACKET);
 
     predicate ZeroInitialized(TrainToTrack_Header* p) =
       ZeroInitialized(p->NID_PACKET)       &&
@@ -34,14 +35,14 @@ typedef struct TrainToTrack_Header TrainToTrack_Header;
       ZeroInitialized(p->L_PACKET);
 
     predicate EqualBits(Bitstream* stream, integer pos, TrainToTrack_Header* p) =
-      EqualBits(p->NID_PACKET,    8)   &&
-      EqualBits(p->Q_DIR,         2)   &&
-      EqualBits(p->L_PACKET,      13)  &&
+      EqualBits(stream, pos, pos + 8, p->NID_PACKET)   &&
+      EqualBits(stream, pos + 8, pos + 10, p->Q_DIR)   &&
+      EqualBits(stream, pos + 10, pos + 23, p->L_PACKET);
 
     predicate UpperBitsNotSet(TrainToTrack_Header* p) =
       UpperBitsNotSet(p->NID_PACKET,    8)   &&
       UpperBitsNotSet(p->Q_DIR,         2)   &&
-      UpperBitsNotSet(P->L_PACKET,      12);
+      UpperBitsNotSet(p->L_PACKET,      12);
 
 */
 
