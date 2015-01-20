@@ -23,10 +23,10 @@ typedef struct TrackToTrain_Header TrackToTrain_Header;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invraiant(TrackToTrain_Header* p) =
+    predicate Invariant(TrackToTrain_Header* p) =
       Invariant(p->NID_PACKET)       &&
       Invariant(p->Q_DIR)            &&
-      Invariant(L_PACKET);
+      Invariant(p->L_PACKET);
 
     predicate ZeroInitialized(TrackToTrain_Header* p) =
       ZeroInitialized(p->NID_PACKET)       &&
@@ -34,14 +34,14 @@ typedef struct TrackToTrain_Header TrackToTrain_Header;
       ZeroInitialized(p->L_PACKET);
 
     predicate EqualBits(Bitstream* stream, integer pos, TrackToTrain_Header* p) =
-      EqualBits(p->NID_PACKET,    8)   &&
-      EqualBits(p->Q_DIR,         2)   &&
-      EqualBits(p->L_PACKET,      13)  &&
+      EqualBits(stream, pos,       pos + 8,   p->NID_PACKET)   &&
+      EqualBits(stream, pos + 8,   pos + 10,  p->Q_DIR)        &&
+      EqualBits(stream, pos + 10,  pos + 23,  p->L_PACKET);
 
     predicate UpperBitsNotSet(TrackToTrain_Header* p) =
       UpperBitsNotSet(p->NID_PACKET,    8)   &&
       UpperBitsNotSet(p->Q_DIR,         2)   &&
-      UpperBitsNotSet(P->L_PACKET,      12);
+      UpperBitsNotSet(p->L_PACKET,      12);
 
 */
 
