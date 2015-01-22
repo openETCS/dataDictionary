@@ -6,11 +6,11 @@
 
 /*@
     requires valid:      \valid_read(p);
-    requires invariant:  Invariant(p);
+    requires invariant:  Invariant(&p->data);
 
     assigns \nothing;
 
-    ensures result:  \result <==> UpperBitsNotSet(p);
+    ensures result:  \result <==> UpperBitsNotSet(&p->data);
 */
 int Adhesion_Factor_UpperBitsNotSet(const Adhesion_Factor* p);
 

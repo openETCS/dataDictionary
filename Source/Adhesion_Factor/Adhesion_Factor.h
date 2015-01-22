@@ -38,29 +38,29 @@ typedef struct Adhesion_Factor Adhesion_Factor;
       \separated(stream->addr + (0..stream->size-1), p);
 
     predicate Invariant(Adhesion_Factor_Data* p) =
-      Invariant(p->data.Q_SCALE)           &&
-      Invariant(p->data.D_ADHESION)        &&
-      Invariant(p->data.L_ADHESION)        &&
-      Invariant(p->data.M_ADHESION);
+      Invariant(p->Q_SCALE)           &&
+      Invariant(p->D_ADHESION)        &&
+      Invariant(p->L_ADHESION)        &&
+      Invariant(p->M_ADHESION);
 
     predicate ZeroInitialized(Adhesion_Factor_Data* p) =
-      ZeroInitialized(p->data.Q_SCALE)           &&
-      ZeroInitialized(p->data.D_ADHESION)        &&
-      ZeroInitialized(p->data.L_ADHESION)        &&
-      ZeroInitialized(p->data.M_ADHESION);
+      ZeroInitialized(p->Q_SCALE)           &&
+      ZeroInitialized(p->D_ADHESION)        &&
+      ZeroInitialized(p->L_ADHESION)        &&
+      ZeroInitialized(p->M_ADHESION);
 
     predicate EqualBits(Bitstream* stream, integer pos, Adhesion_Factor_Data* p) =
-      EqualBits(stream, pos,       pos +  2,  p->data.Q_SCALE)           &&
-      EqualBits(stream, pos +  2,  pos + 17,  p->data.D_ADHESION)        &&
-      EqualBits(stream, pos + 17,  pos + 32,  p->data.L_ADHESION)        &&
-      EqualBits(stream, pos + 32,  pos + 33,  p->data.M_ADHESION);
+      EqualBits(stream, pos,       pos +  2,  p->Q_SCALE)           &&
+      EqualBits(stream, pos +  2,  pos + 17,  p->D_ADHESION)        &&
+      EqualBits(stream, pos + 17,  pos + 32,  p->L_ADHESION)        &&
+      EqualBits(stream, pos + 32,  pos + 33,  p->M_ADHESION);
 
 
     predicate UpperBitsNotSet(Adhesion_Factor_Data* p) =
-      UpperBitsNotSet(p->data.Q_SCALE,          2)   &&
-      UpperBitsNotSet(p->data.D_ADHESION,       15)  &&
-      UpperBitsNotSet(p->data.L_ADHESION,       15)  &&
-      UpperBitsNotSet(p->data.M_ADHESION,       1);
+      UpperBitsNotSet(p->Q_SCALE,          2)   &&
+      UpperBitsNotSet(p->D_ADHESION,       15)  &&
+      UpperBitsNotSet(p->L_ADHESION,       15)  &&
+      UpperBitsNotSet(p->M_ADHESION,       1);
 
 */
 
