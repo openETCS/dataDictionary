@@ -9,9 +9,11 @@
     requires stream_invariant:  Invariant(stream, MaxBitSize(p));
     requires valid_package:     \valid(p);
     requires separation:        Separated(stream, p);
+    requires equal:		EqualBits(stream, \old(stream->bitpos)-BitSize(p->header), p->header);
+    requires upper:             UpperBitsNotSet(p->header);
 
     assigns stream->bitpos;
-    assigns *p;
+    assigns p->data;
 
     ensures unchanged:          EqualBits{Here,Old}(stream, 0, 8*stream->size);
 
@@ -19,13 +21,16 @@
       assumes Normal{Pre}(stream, MaxBitSize(p));
 
       assigns stream->bitpos;
-      assigns *p;
+      assigns p->data;
 
-      ensures invariant:  Invariant(p);
-      ensures result:     \result == 1;
+      ensures invariant:  Invariant(p->header);
+      ensures invariant:  Invariant(p->data);
+      ensures result:     \result == 1; 
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
-      ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
-      ensures upper:      UpperBitsNotSet(p);
+      ensures equal:      EqualBits(stream, \old(stream->bitpos)-BitSize(p->header), p->header);
+      ensures equal:      EqualBits(stream, \old(stream->bitpos), p->data);
+      ensures upper:      UpperBitsNotSet(p->header);
+      ensures upper:      UpperBitsNotSet(p->data);
 
     behavior error_case:
       assumes !Normal{Pre}(stream, MaxBitSize(p));
