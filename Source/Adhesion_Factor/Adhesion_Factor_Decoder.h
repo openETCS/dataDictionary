@@ -9,6 +9,7 @@
     requires stream_invariant:  Invariant(stream, MaxBitSize(p));
     requires valid_package:     \valid(p);
     requires separation:        Separated(stream, p);
+    requires headerValidLength: stream->bitpos >= BitSize(&p->header);
     requires headerInvariant:   Invariant(&p->header);
     requires headerEqualBits:   EqualBits(stream, stream->bitpos - BitSize(&p->header), &p->header);
     requires headerUpperBits:   UpperBitsNotSet(&p->header);

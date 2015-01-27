@@ -51,7 +51,7 @@ typedef struct Adhesion_Factor Adhesion_Factor;
       ZeroInitialized(p->data.M_ADHESION);
 
     predicate EqualBits(Bitstream* stream, integer pos, Adhesion_Factor* p) =
-      EqualBits(stream, stream->bitpos - BitSize(&p->header),  &p->header)    &&
+      EqualBits(stream, pos - BitSize(&p->header),  &p->header)    &&
       EqualBits(stream, pos,       pos +  2,  p->data.Q_SCALE)                &&
       EqualBits(stream, pos +  2,  pos + 17,  p->data.D_ADHESION)             &&
       EqualBits(stream, pos + 17,  pos + 32,  p->data.L_ADHESION)             &&
