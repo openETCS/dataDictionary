@@ -3,11 +3,11 @@ MAKEFLAGS += --silent --no-print-directory
 
 it: obj
 
-TOPDIR=..
+TOPDIR=../..
 
 include $(TOPDIR)/Makefile.template
 VPATH = $(TOPDIR)/Bitwalker
-CPPFLAGS += -I$(TOPDIR)/Bitwalker -I./TrackToTrain_Header
+CPPFLAGS += -I$(TOPDIR)/Bitwalker
 
 SRC := $(wildcard *.c)
 
