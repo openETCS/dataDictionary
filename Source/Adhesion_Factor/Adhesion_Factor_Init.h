@@ -5,7 +5,9 @@
 #include "Adhesion_Factor.h"
 
 /*@
-    requires valid:  \valid(p);
+    requires valid:           \valid(p);
+    requires headerInvariant: Invariant(&p->header);
+    requires headerZeroInit:  ZeroInitialized(&p->header);
 
     assigns  *p;
  

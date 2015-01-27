@@ -5,12 +5,13 @@
 #include "Adhesion_Factor.h"
 
 /*@
-    requires valid:      \valid_read(p);
-    requires invariant:  Invariant(&p->data);
+    requires valid:            \valid_read(p);
+    requires invariant:        Invariant(p);
+    requires headerUpperBits:  UpperBitsNotSet(&p->header);
 
     assigns \nothing;
 
-    ensures result:  \result <==> UpperBitsNotSet(&p->data);
+    ensures result:  \result <==> UpperBitsNotSet(p);
 */
 int Adhesion_Factor_UpperBitsNotSet(const Adhesion_Factor* p);
 
