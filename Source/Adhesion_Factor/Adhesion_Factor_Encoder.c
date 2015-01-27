@@ -20,10 +20,10 @@ int Adhesion_Factor_Encoder(Bitstream* stream, const Adhesion_Factor* p)
 
             stream->bitpos += ADHESION_FACTOR_BITSIZE;
 
-            //@ assert Q_SCALE:           EqualBits(stream, pos + 23,  pos + 25,  p->data.Q_SCALE);
-            //@ assert D_ADHESION:        EqualBits(stream, pos + 25,  pos + 40,  p->data.D_ADHESION);
-            //@ assert L_ADHESION:        EqualBits(stream, pos + 40,  pos + 55,  p->data.L_ADHESION);
-            //@ assert M_ADHESION:        EqualBits(stream, pos + 55,  pos + 56,  p->data.M_ADHESION);
+            //@ assert Q_SCALE:           EqualBits(stream, pos,       pos + 2,   p->data.Q_SCALE);
+            //@ assert D_ADHESION:        EqualBits(stream, pos + 2,   pos + 17,  p->data.D_ADHESION);
+            //@ assert L_ADHESION:        EqualBits(stream, pos + 17,  pos + 32,  p->data.L_ADHESION);
+            //@ assert M_ADHESION:        EqualBits(stream, pos + 32,  pos + 33,  p->data.M_ADHESION);
 
             return 1;
         }

@@ -3,15 +3,7 @@
 #define ADHESION_FACTOR_H_INCLUDED
 
 #include "TrackToTrain_Header.h"
-
-struct Adhesion_Factor_Data {
-    uint64_t  Q_SCALE;          // # 2
-    uint64_t  D_ADHESION;       // # 15
-    uint64_t  L_ADHESION;       // # 15
-    uint64_t  M_ADHESION;       // # 1
-};
-
-typedef struct Adhesion_Factor_Data Adhesion_Factor_Data;
+#include "Adhesion_Factor_Data.h"
 
 struct Adhesion_Factor {
     // TransmissionMedia=Any
@@ -24,10 +16,8 @@ struct Adhesion_Factor {
 
 typedef struct Adhesion_Factor Adhesion_Factor;
 
-#define ADHESION_FACTOR_BITSIZE 33
-
 /*@
-    logic integer BitSize{L}(Adhesion_Factor* p) = ADHESION_FACTOR_BITSIZE;
+    logic integer BitSize{L}(Adhesion_Factor* p) = BitSize(&p->header) + BitSize(&p->data);
 
     logic integer MaxBitSize{L}(Adhesion_Factor* p) = BitSize(p);
 
@@ -36,33 +26,21 @@ typedef struct Adhesion_Factor Adhesion_Factor;
       \separated(stream->addr + (0..stream->size-1), p);
 
     predicate Invariant(Adhesion_Factor* p) =
-      Invariant(&p->header)                &&
-      Invariant(p->data.Q_SCALE)           &&
-      Invariant(p->data.D_ADHESION)        &&
-      Invariant(p->data.L_ADHESION)        &&
-      Invariant(p->data.M_ADHESION);
+      Invariant(&p->header)  &&
+      Invariant(&p->data);
 
     predicate ZeroInitialized(Adhesion_Factor* p) =
-      ZeroInitialized(&p->header)                &&
-      ZeroInitialized(p->data.Q_SCALE)           &&
-      ZeroInitialized(p->data.D_ADHESION)        &&
-      ZeroInitialized(p->data.L_ADHESION)        &&
-      ZeroInitialized(p->data.M_ADHESION);
+      ZeroInitialized(&p->header)  &&
+      ZeroInitialized(&p->data);
 
     predicate EqualBits(Bitstream* stream, integer pos, Adhesion_Factor* p) =
-      EqualBits(stream, pos - BitSize(&p->header), &p->header)                &&
-      EqualBits(stream, pos,       pos +  2,  p->data.Q_SCALE)                &&
-      EqualBits(stream, pos +  2,  pos + 17,  p->data.D_ADHESION)             &&
-      EqualBits(stream, pos + 17,  pos + 32,  p->data.L_ADHESION)             &&
-      EqualBits(stream, pos + 32,  pos + 33,  p->data.M_ADHESION);
+      EqualBits(stream, pos, &p->header)                        &&
+      EqualBits(stream, pos + BitSize(&p->header), &p->data); 
 
 
     predicate UpperBitsNotSet(Adhesion_Factor* p) =
       UpperBitsNotSet(&p->header)                    &&
-      UpperBitsNotSet(p->data.Q_SCALE,          2)   &&
-      UpperBitsNotSet(p->data.D_ADHESION,       15)  &&
-      UpperBitsNotSet(p->data.L_ADHESION,       15)  &&
-      UpperBitsNotSet(p->data.M_ADHESION,       1);
+      UpperBitsNotSet(&p->data);
 
 */
 
