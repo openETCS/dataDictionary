@@ -6,7 +6,7 @@
 
 /*@
     requires valid_stream:      Readable(stream);
-    requires stream_invariant:  Invariant(stream, BitSize(p));
+    requires stream_invariant:  Invariant(stream, MaxBitSize(p));
     requires valid_package:     \valid(p);
     requires separation:        Separated(stream, p);
 
@@ -16,18 +16,19 @@
     ensures unchanged:          EqualBits{Here,Old}(stream, 0, 8*stream->size);
 
     behavior normal_case:
-      assumes Normal{Pre}(stream, BitSize(p));
+      assumes Normal{Pre}(stream, MaxBitSize(p));
 
       assigns stream->bitpos;
       assigns *p;
 
+      ensures invariant:  Invariant(p);
       ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);
 
     behavior error_case:
-      assumes !Normal{Pre}(stream, BitSize(p));
+      assumes !Normal{Pre}(stream, MaxBitSize(p));
 
       assigns \nothing;
 
@@ -40,3 +41,4 @@ int Adhesion_Factor_Decoder(Bitstream* stream, Adhesion_Factor* p);
 
 
 #endif // ADHESION_FACTOR_DECODER_H_INCLUDED
+

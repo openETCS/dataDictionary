@@ -1,6 +1,7 @@
 
+TOPDIR=..
 
-include ../Makefile.template
+include $(TOPDIR)/Makefile.template
 
 #WP_FLAGS += -wp-prop=-rte
 #WP_FLAGS += -wp-prop=-@lemma

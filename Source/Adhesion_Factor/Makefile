@@ -1,13 +1,15 @@
 
 MAKEFLAGS += --silent --no-print-directory
 
+TOPDIR=../
+
 WP_FLAGS += -wp-prop=DEF_equal
 #WP_FLAGS += -wp-prop=-@lemma
 #WP_FLAGS += -wp-prop=cea
 
 it: obj
 
-include ../Makefile.template
+include $(TOPDIR)/Makefile.template
 
 #SRC := $(wildcard *.c)
 SRC :=  Adhesion_Factor_Init.c\

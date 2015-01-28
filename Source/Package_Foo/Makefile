@@ -1,13 +1,18 @@
 
 MAKEFLAGS += --silent --no-print-directory
 
+TOPDIR=..
+
 WP_FLAGS += -wp-prop=DEF_equal
 #WP_FLAGS += -wp-prop=-@lemma
 #WP_FLAGS += -wp-prop=cea
 
 it: obj
 
-include ../Makefile.template
+include $(TOPDIR)/Makefile.template
+
+VPATH = $(TOPDIR)/Bitwalker
+CPPFLAGS += -I$(TOPDIR)/Bitwalker
 
 #SRC := $(wildcard *.c)
 SRC :=  Package_Foo_Init.c\
@@ -19,9 +24,6 @@ SRC :=  Package_Foo_Init.c\
 
 OBJ := $(SRC:.c=.o)
 REPORT := $(SRC:.c=.report)
-
-VPATH = ../Bitwalker
-CPPFLAGS += -I../Bitwalker
 
 format: FORCE
 	@$(ASTYLE) *.c *.h 

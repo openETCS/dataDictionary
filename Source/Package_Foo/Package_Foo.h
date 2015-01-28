@@ -23,12 +23,15 @@ typedef struct Package_Foo Package_Foo;
      \separated(stream, p) &&
      \separated(stream->addr + (0..stream->size-1), p);
 
+    predicate ZeroInitialized(Package_Foo* p) =
+      ZeroInitialized(p->ABC)  && 
+      ZeroInitialized(p->DEF)  && 
+      ZeroInitialized(p->GHI);
 
      predicate EqualBits(Bitstream* stream, integer pos, Package_Foo* p) =
       EqualBits(stream, pos, pos + 8, p->ABC) &&
       EqualBits(stream, pos + 8, pos + 11, p->DEF) &&
       EqualBits(stream, pos + 11, pos + 28, p->GHI);
-
 
    predicate UpperBitsNotSet(Package_Foo* p) =
       UpperBitsNotSet(p->ABC, 8) &&
