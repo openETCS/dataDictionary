@@ -29,7 +29,7 @@
    predicate ZeroInitialized{A}(uint64_t x) = x == 0;
 
    predicate
-     EqualBits{A,B}(uint8_t* addr, integer first, integer last) =
+     Unchanged{A,B}(uint8_t* addr, integer first, integer last) =
         \forall integer i; first <= i < last ==>
            (\at(LeftBit8Array(addr, i), A) <==> \at(LeftBit8Array(addr, i), B));
 

@@ -9,7 +9,7 @@ int PeekThenPoke(uint8_t* addr, uint32_t size, uint32_t bitpos, uint32_t length)
     //@ assert equal:  EqualBits(addr, bitpos, bitpos + length, value);
 
     int result =  Bitwalker_Poke(addr, size, bitpos, length, value);
-    //@ assert unchanged:  EqualBits{Here,Pre}(addr, bitpos, bitpos + length);
+    //@ assert unchanged:  Unchanged{Here,Pre}(addr, bitpos, bitpos + length);
 
     return result;
 }

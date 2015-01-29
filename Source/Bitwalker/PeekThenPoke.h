@@ -15,7 +15,7 @@
 
     ensures result_zero: \result == 0;
 
-    ensures unchanged:   EqualBits{Here,Old}(addr, 0, 8*size);
+    ensures unchanged:   Unchanged{Here,Old}(addr, 0, 8*size);
 */
 int PeekThenPoke(uint8_t* addr, uint32_t size, uint32_t bitpos, uint32_t length);
 

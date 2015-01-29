@@ -30,7 +30,7 @@ typedef struct Bitstream Bitstream;
   predicate LeftInBitstream{L}(Bitstream* stream, integer i) =
      \at(LeftBit8Array(stream->addr, i),L);
 
-  predicate EqualBits{A,B}(Bitstream* stream, integer first, integer last) =
+  predicate Unchanged{A,B}(Bitstream* stream, integer first, integer last) =
      \forall integer i; first <= i < last ==>
         (LeftInBitstream{A}(stream, i) <==> LeftInBitstream{B}(stream, i));
 

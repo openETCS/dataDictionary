@@ -17,7 +17,7 @@
 
   ensures not_set:   UpperBitsNotSet(\result, length);
 
-  ensures unchanged: EqualBits{Here,Old}(stream, 0, 8*stream->size);
+  ensures unchanged: Unchanged{Here,Old}(stream, 0, 8*stream->size);
 
   ensures increment: stream->bitpos == \old(stream->bitpos) + length;
 

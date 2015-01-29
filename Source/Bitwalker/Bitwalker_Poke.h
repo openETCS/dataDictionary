@@ -16,11 +16,11 @@
 
     assigns addr[0..size - 1];
 
-    ensures left:   EqualBits{Here,Old}(addr, 0, bitpos);
+    ensures left:   Unchanged{Here,Old}(addr, 0, bitpos);
 
     ensures middle: EqualBits(addr, bitpos, bitpos + length, value);
 
-    ensures right:  EqualBits{Here,Old}(addr, bitpos + length, 8 * size);
+    ensures right:  Unchanged{Here,Old}(addr, bitpos + length, 8 * size);
 
     ensures valid_result: \result == 0;
 

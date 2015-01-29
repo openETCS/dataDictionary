@@ -37,8 +37,8 @@ Proof.
   remember (Mint_0 .[ shift stream_0 2]) as bitpos.
 
   unfold P_UpperBitsNotSet in *.
-  unfold P_EqualBits_5_ in *.
   unfold P_EqualBits_3_ in *.
+  unfold P_EqualBits_2_ in *.
 
   assert(X: 0 <= i < length \/ length <= i < 64).
   +  assert (Y: (i < length) \/ ~(i < length)) by tauto.
@@ -98,7 +98,7 @@ Proof.
   unfold is_uint8 in *.
   unfold is_uint32 in *.
   unfold is_uint64 in *.
-  unfold P_EqualBits_2_ in *.
+  unfold P_EqualBits_1_ in *.
   unfold P_LeftEqualBitRange_2_ in *.
   intros.
 
@@ -121,7 +121,7 @@ Qed.
 Goal typed_ref_BitTest_Bitwalker_Poke_Normal_loop_inv_middle_preserved.
 Hint Bitwalker_Poke_Normal,middle,preserved.
 Proof.
-  unfold P_EqualBits_2_ in *.
+  unfold P_EqualBits_1_ in *.
   unfold is_uint64 in *.
   unfold is_uint32 in *.
   unfold  to_sint32 in *.
@@ -142,6 +142,12 @@ Proof.
    assert(equal: (i_1 = i_0)%Z) by omega.
    rewrite equal in *.
    rewrite <- H30; auto with zarith.
+Qed.
+
+Goal typed_ref_BitTest_PokeBit8Array_post_left.
+Hint PokeBit8Array,default,left,property.
+Proof.
+(* auto with zarith. *)
 Qed.
 
 Goal typed_ref_BitTest_PokeBit8_assert_helper_part1.
@@ -179,7 +185,7 @@ Qed.
 Goal typed_ref_BitTest_PokeThenPeek_assert_partial_copy.
 Hint PokeThenPeek,partial_copy,property.
 Proof.
-  unfold P_EqualBits_3_ in *.
+  unfold P_EqualBits_2_ in *.
   unfold P_EqualBitRange_2_ in *.
   intros.
 

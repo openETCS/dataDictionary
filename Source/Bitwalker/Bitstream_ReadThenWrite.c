@@ -12,7 +12,7 @@
     assigns stream->addr[0..stream->size-1];
     assigns stream->bitpos;
 
-    ensures unchanged:  EqualBits{Here,Old}(stream, 0, 8 * stream->size);
+    ensures unchanged:  Unchanged{Here,Old}(stream, 0, 8 * stream->size);
 */
 void Bitstream_ReadThenWrite(Bitstream* stream, const uint32_t length)
 {
@@ -31,8 +31,8 @@ void Bitstream_ReadThenWrite(Bitstream* stream, const uint32_t length)
 
     Bitstream_Write(stream, length, value);
 
-    //@ assert left:   EqualBits{Here,Pre}(stream, 0, pos);
+    //@ assert left:   Unchanged{Here,Pre}(stream, 0, pos);
     //@ assert middle: EqualBits(stream, pos, pos + length, value);
-    //@ assert right:  EqualBits{Here,Pre}(stream, pos + length, 8 * stream->size);
+    //@ assert right:  Unchanged{Here,Pre}(stream, pos + length, 8 * stream->size);
 }
 

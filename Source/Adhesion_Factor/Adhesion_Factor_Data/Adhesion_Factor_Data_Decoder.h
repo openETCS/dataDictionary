@@ -13,7 +13,7 @@
     assigns stream->bitpos;
     assigns *p;
 
-    ensures unchanged:          EqualBits{Here,Old}(stream, 0, 8*stream->size);
+    ensures unchanged:          Unchanged{Here,Old}(stream, 0, 8*stream->size);
 
     behavior normal_case:
       assumes Normal{Pre}(stream, MaxBitSize(p));

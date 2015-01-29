@@ -22,9 +22,9 @@ uint64_t Bitstream_WriteThenRead(Bitstream* stream, const uint32_t length, uint6
 
     Bitstream_Write(stream, length, value);
 
-    //@ assert left:   EqualBits{Here,Pre}(stream, 0, pos);
+    //@ assert left:   Unchanged{Here,Pre}(stream, 0, pos);
     //@ assert middle: EqualBits(stream, pos, pos + length, value);
-    //@ assert right:  EqualBits{Here,Pre}(stream, pos + length, 8 * stream->size);
+    //@ assert right:  Unchanged{Here,Pre}(stream, pos + length, 8 * stream->size);
 
     stream->bitpos -= length;
     //@ assert stream->bitpos == pos;

@@ -22,7 +22,7 @@
 
     ensures upper:     UpperBitsNotSet(\result, length);
 
-    ensures unchanged: EqualBits{Here,Old}(stream, 0, 8*stream->size);
+    ensures unchanged: Unchanged{Here,Old}(stream, 0, 8*stream->size);
 
   behavior  invalid_bit_sequence:
     assumes !Normal{Pre}(stream, length);
