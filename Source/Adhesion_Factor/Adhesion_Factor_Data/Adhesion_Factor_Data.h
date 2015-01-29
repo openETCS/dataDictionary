@@ -4,10 +4,12 @@
 
 #include "Bitstream.h"
 
-struct Adhesion_Factor_Data {
+struct Adhesion_Factor_Data
+{
     // TransmissionMedia=Any
     // This packet is used when the trackside requests a change of the adhesion factor to be used in the brake model.
     // Packet Number = 71
+
     uint64_t  Q_SCALE;          // # 2
     uint64_t  D_ADHESION;       // # 15
     uint64_t  L_ADHESION;       // # 15
@@ -40,9 +42,9 @@ typedef struct Adhesion_Factor_Data Adhesion_Factor_Data;
       ZeroInitialized(p->M_ADHESION);
 
     predicate EqualBits(Bitstream* stream, integer pos, Adhesion_Factor_Data* p) =
-      EqualBits(stream, pos,       pos +  2,  p->Q_SCALE)                &&
-      EqualBits(stream, pos +  2,  pos + 17,  p->D_ADHESION)             &&
-      EqualBits(stream, pos + 17,  pos + 32,  p->L_ADHESION)             &&
+      EqualBits(stream, pos,       pos + 2,   p->Q_SCALE)           &&
+      EqualBits(stream, pos + 2,   pos + 17,  p->D_ADHESION)        &&
+      EqualBits(stream, pos + 17,  pos + 32,  p->L_ADHESION)        &&
       EqualBits(stream, pos + 32,  pos + 33,  p->M_ADHESION);
 
 
