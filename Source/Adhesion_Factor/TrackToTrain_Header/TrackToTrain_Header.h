@@ -34,7 +34,7 @@ typedef struct TrackToTrain_Header TrackToTrain_Header;
       ZeroInitialized(p->L_PACKET);
 
     predicate EqualBits(Bitstream* stream, integer pos, TrackToTrain_Header* p) =
-      EqualBits(stream, pos,       pos +  2,  p->NID_PACKET)   &&
+      EqualBits(stream, pos,       pos +  8,  p->NID_PACKET)   &&
       EqualBits(stream, pos +  8,  pos + 10,  p->Q_DIR)        &&
       EqualBits(stream, pos + 10,  pos + 23,  p->L_PACKET);
 
