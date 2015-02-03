@@ -14,7 +14,7 @@ int TrainToTrack_Header_Encoder(Bitstream* stream, const TrainToTrack_Header* p)
             const uint32_t pos = stream->bitpos;
 
             Bitwalker_Poke_Normal(addr, size, pos,  	 8,  p->NID_PACKET);
-            Bitwalker_Poke_Normal(addr, size, pos + 8,   21, p->L_PACKET);
+            Bitwalker_Poke_Normal(addr, size, pos + 8,   13, p->L_PACKET);
 
             stream->bitpos += TRAINTOTRACK_HEADER_BITSIZE;
 

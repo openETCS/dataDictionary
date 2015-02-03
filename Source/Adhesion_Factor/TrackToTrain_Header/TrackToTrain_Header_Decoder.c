@@ -11,14 +11,14 @@ int TrackToTrain_Header_Decoder(Bitstream* stream, TrackToTrain_Header* p)
         const uint32_t pos = stream->bitpos;
 
         p->NID_PACKET         = Bitwalker_Peek_Normal(addr, size, pos,       8);
-        p->Q_DIR              = Bitwalker_Peek_Normal(addr, size, pos + 8,   10);
-        p->L_PACKET           = Bitwalker_Peek_Normal(addr, size, pos + 10,  23);
+        p->Q_DIR              = Bitwalker_Peek_Normal(addr, size, pos + 8,   2);
+        p->L_PACKET           = Bitwalker_Peek_Normal(addr, size, pos + 10,  13);
 
         stream->bitpos += TRACKTOTRAIN_HEADER_BITSIZE;
 
-        //@ assert NID_PACKET:        EqualBits(stream, pos,       pos + 2,   p->NID_PACKET);
-        //@ assert Q_DIR:             EqualBits(stream, pos + 2,   pos + 17,  p->Q_DIR);
-        //@ assert L_PACKET:          EqualBits(stream, pos + 17,  pos + 32,  p->L_PACKET);
+        //@ assert NID_PACKET:        EqualBits(stream, pos,       pos + 8,   p->NID_PACKET);
+        //@ assert Q_DIR:             EqualBits(stream, pos + 8,   pos + 10,  p->Q_DIR);
+        //@ assert L_PACKET:          EqualBits(stream, pos + 10,  pos + 23,  p->L_PACKET);
 
         return 1;
     }
