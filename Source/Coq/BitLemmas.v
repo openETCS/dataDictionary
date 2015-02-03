@@ -54,7 +54,7 @@ Proof.
 Qed.
 
 
-Lemma bits_equal_uint64 :
+Lemma bits_equal_uint64 : (* see is_uint64_ext *)
    (forall x y,
       is_uint64 x ->
       is_uint64 y ->
