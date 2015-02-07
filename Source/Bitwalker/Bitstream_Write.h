@@ -6,7 +6,6 @@
 
 /*@
   requires valid:     Writeable(stream);
-
   requires invariant: Invariant(stream, length);
 
   assigns  stream->addr[0..stream->size - 1];

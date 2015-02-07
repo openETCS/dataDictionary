@@ -10,7 +10,7 @@
     assigns stream->addr[0..stream->size-1];
     assigns stream->bitpos;
 
-    ensures unchanged:   Unchanged{Here,Old}(stream, 0, 8 * stream->size);
+    ensures  unchanged:  Unchanged{Here,Old}(stream, 0, 8 * stream->size);
 */
 void Bitstream_ReadThenWrite(Bitstream* stream, const uint32_t length)
 {

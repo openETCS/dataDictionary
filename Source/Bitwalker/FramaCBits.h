@@ -14,13 +14,9 @@
 */
 
 #define BytePos(Pos) ((Pos)/8)
-
 #define LeftBit8(Value,Pos)  (BitTest(Value,(7 - (Pos))))
-
 #define LeftBit8Array(Stream,Pos) (LeftBit8(Stream[BytePos(Pos)],((Pos)%8)))
-
 #define LeftBit32(Value,Pos)  (BitTest(Value,(31 - (Pos))))
-
 #define LeftBit64(Value,Pos)  (BitTest(Value,(63 - (Pos))))
 
 /*@
