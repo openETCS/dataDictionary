@@ -118,6 +118,32 @@ Proof.
     rewrite <- H25; auto with zarith.
 Qed.
 
+Goal typed_ref_BitTest_Bitwalker_Peek_Normal_loop_inv_equal_preserved.
+Hint Bitwalker_Peek_Normal,equal,preserved.
+Proof.
+  unfold is_uint8 in *.
+  unfold is_uint32 in *.
+  unfold is_uint64 in *.
+  unfold P_EqualBits_1_ in *.
+  unfold P_LeftEqualBitRange_2_ in *.
+  intros.
+
+  case_lt i_1 i_0.
+  {
+    intros less.
+    rewrite <- H23; auto with zarith.
+    replace (bitpos_0 + length_0 - 1 - i_1)%Z with 
+            (63 - (63 - (bitpos_0 + length_0 - 1 - i_1)))%Z in * by omega.
+    apply H30; auto with zarith.
+  }
+  {
+    intros.
+    assert(equal: i_1 = i_0) by auto with zarith.
+    rewrite equal in *.
+    rewrite <- H25; auto with zarith.
+  }
+Qed.
+
 Goal typed_ref_BitTest_Bitwalker_Poke_Normal_loop_inv_middle_preserved.
 Hint Bitwalker_Poke_Normal,middle,preserved.
 Proof.

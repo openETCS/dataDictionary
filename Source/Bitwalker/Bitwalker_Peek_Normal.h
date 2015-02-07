@@ -5,17 +5,14 @@
 #include "Bitwalker.h"
 
 /*@
-  requires  valid:     Readable(addr, size);
-
-  requires  invariant: BitwalkerInvariant(size, bitpos, length);
-
-  requires  normal:    NormalBitwalker(size, bitpos, length);
+  requires  valid:      Readable(addr, size);
+  requires  invariant:  BitwalkerInvariant(size, bitpos, length);
+  requires  normal:     NormalBitwalker(size, bitpos, length);
 
   assigns  \nothing;
 
-  ensures  copied:      EqualBits(addr, bitpos, bitpos + length, \result);
-
-  ensures  not_set:     UpperBitsNotSet(\result, length);
+  ensures  equal:      EqualBits(addr, bitpos, bitpos + length, \result);
+  ensures  upper:      UpperBitsNotSet(\result, length);
 */
 uint64_t Bitwalker_Peek_Normal(uint8_t* addr, uint32_t size, uint32_t bitpos, uint32_t length);
 
