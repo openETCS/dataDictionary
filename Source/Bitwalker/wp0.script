@@ -217,7 +217,7 @@ Proof.
 
   replace (i_0)  with  (bitpos_0 + length_0 - 1 - (bitpos_0 + length_0 - 1 - i_0 )) by omega.
 
-  rewrite H17; auto with zarith.
+  rewrite H15; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_PokeThenPeek_post_result_value.
