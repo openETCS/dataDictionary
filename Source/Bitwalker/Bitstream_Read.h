@@ -6,7 +6,6 @@
 
 /*@
   requires valid:     Readable(stream);
-
   requires invariant: Invariant(stream, length);
 
   assigns  stream->bitpos;
@@ -19,9 +18,7 @@
     assigns stream->bitpos;
 
     ensures equal:     EqualBits(stream, \old(stream->bitpos), stream->bitpos, \result);
-
     ensures upper:     UpperBitsNotSet(\result, length);
-
     ensures unchanged: Unchanged{Here,Old}(stream, 0, 8*stream->size);
 
   behavior  invalid_bit_sequence:

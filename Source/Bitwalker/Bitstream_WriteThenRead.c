@@ -3,13 +3,10 @@
 #include "Bitstream_Write.h"
 
 /*@
-    requires valid:     Writeable(stream);
-
-    requires invariant: Invariant(stream, length);
-
-    requires normal:    Normal(stream, length);
-
-    requires upper:     UpperBitsNotSet(value, length);
+    requires valid:      Writeable(stream);
+    requires invariant:  Invariant(stream, length);
+    requires normal:     Normal(stream, length);
+    requires upper:      UpperBitsNotSet(value, length);
 
     assigns stream->addr[0..stream->size-1];
     assigns stream->bitpos;

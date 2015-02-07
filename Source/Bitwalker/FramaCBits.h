@@ -64,6 +64,5 @@
        \forall integer i; length <= i ==> !BitTest(value, i);
 */
 
-
 #endif  // FRAMACBITS_H_INCLUDED
 

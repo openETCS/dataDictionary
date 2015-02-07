@@ -13,3 +13,4 @@ int PeekThenPoke(uint8_t* addr, uint32_t size, uint32_t bitpos, uint32_t length)
 
     return result;
 }
+

@@ -21,11 +21,8 @@
     assigns stream->bitpos;
 
     ensures left:   Unchanged{Here,Old}(stream, 0, \old(stream->bitpos));
-
     ensures middle: EqualBits(stream, \old(stream->bitpos), stream->bitpos, value);
-
     ensures right:  Unchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
-
     ensures result: \result == 0;
 
   behavior  value_too_big:

@@ -6,22 +6,16 @@
 
 /*@
   requires valid:      Readable(stream);
-
   requires invariant:  Invariant(stream, length);
-
   requires normal:     Normal(stream, length);
 
   assigns  stream->bitpos;
 
-  ensures copied:    EqualBits(stream, \old(stream->bitpos), stream->bitpos, \result);
-
-  ensures not_set:   UpperBitsNotSet(\result, length);
-
-  ensures unchanged: Unchanged{Here,Old}(stream, 0, 8*stream->size);
-
-  ensures increment: stream->bitpos == \old(stream->bitpos) + length;
-
-  ensures size:      stream->size == \old(stream->size);
+  ensures equal:      EqualBits(stream, \old(stream->bitpos), stream->bitpos, \result);
+  ensures upper:      UpperBitsNotSet(\result, length);
+  ensures unchanged:  Unchanged{Here,Old}(stream, 0, 8*stream->size);
+  ensures increment:  stream->bitpos == \old(stream->bitpos) + length;
+  ensures size:       stream->size == \old(stream->size);
 */
 uint64_t Bitstream_Read_Normal(Bitstream* stream, uint32_t length);
 
