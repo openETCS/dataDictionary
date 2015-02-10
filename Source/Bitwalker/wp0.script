@@ -208,22 +208,6 @@ Proof.
   apply bitwise_and_not_uint8; auto.
 Qed.
 
-Goal typed_ref_BitTest_PokeBit8_post_pos_part1.
-Hint PokeBit8,default,part-0,pos,property.
-Proof.
-(* auto with zarith. *)
-Qed.
-
-Goal typed_ref_BitTest_PokeBit8_post_right_part2.
-Hint PokeBit8,default,part-1,property,right.
-Proof.
-(* --------------------------------------
-  
-From 'typed_ref_BitTest_PokeBit8_post_pos_part1': 
-(* auto with zarith. *)
-*)
-Qed.
-
 Goal typed_ref_BitTest_PokeThenPeek_assert_partial_copy.
 Hint PokeThenPeek,partial_copy,property.
 Proof.
