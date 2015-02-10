@@ -10,10 +10,10 @@ struct Adhesion_Factor_Data
     // This packet is used when the trackside requests a change of the adhesion factor to be used in the brake model.
     // Packet Number = 71
 
-    uint64_t  Q_SCALE;          // # 2
-    uint64_t  D_ADHESION;       // # 15
-    uint64_t  L_ADHESION;       // # 15
-    uint64_t  M_ADHESION;       // # 1
+    uint8_t  Q_SCALE;          // # 2
+    uint16_t  D_ADHESION;       // # 15
+    uint16_t  L_ADHESION;       // # 15
+    uint8_t  M_ADHESION;       // # 1
 };
 
 typedef struct Adhesion_Factor_Data Adhesion_Factor_Data;
