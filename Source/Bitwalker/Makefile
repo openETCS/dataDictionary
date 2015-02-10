@@ -11,13 +11,9 @@ include $(TOPDIR)/Makefile.template
 
 SRC :=  UpperBitsNotSet.c\
         Bitwalker.c\
-        Bitwalker_Peek_Normal.c Bitwalker_Peek.c\
-        Bitwalker_Poke_Normal.c Bitwalker_Poke.c\
+        Bitwalker_Peek_Normal.c Bitwalker_Poke_Normal.c\
 	PeekThenPoke.c PokeThenPeek.c\
 	Bitstream.c Bitstream_Init.c\
-	Bitstream_Read_Normal.c Bitstream_Read.c\
-	Bitstream_Write_Normal.c Bitstream_Write.c\
-	Bitstream_ReadThenWrite.c Bitstream_WriteThenRead.c\
 
 OBJ := $(SRC:.c=.o)
 REPORT := $(SRC:.c=.report)

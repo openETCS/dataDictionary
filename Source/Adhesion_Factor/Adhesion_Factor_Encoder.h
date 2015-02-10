@@ -10,6 +10,7 @@
     requires valid_package:     \valid_read(p);
     requires invariant:         Invariant(p);
     requires separation:        Separated(stream, p);
+    requires headerEqualBits:   EqualBits(stream, stream->bitpos - BitSize(&p->header), &p->header); 
 
     assigns stream->bitpos;
     assigns stream->addr[0..(stream->size-1)];
@@ -22,7 +23,7 @@
 
       ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
-      ensures left:       EqualBits{Here,Old}(stream, 0, \old(stream->bitpos));
+      ensures left:       EqualBits{Here,Old}(stream, -BitSize(&p->header), \old(stream->bitpos));
       ensures middle:     EqualBits(stream, \old(stream->bitpos), p);
       ensures right:      EqualBits{Here,Old}(stream, stream->bitpos, 8 * stream->size);
 

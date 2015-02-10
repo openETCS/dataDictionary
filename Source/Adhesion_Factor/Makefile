@@ -1,29 +1,18 @@
 
 MAKEFLAGS += --silent --no-print-directory
 
-TOPDIR=../
-
-WP_FLAGS += -wp-prop=DEF_equal
-#WP_FLAGS += -wp-prop=-@lemma
-#WP_FLAGS += -wp-prop=cea
-
 it: obj
 
-include $(TOPDIR)/Makefile.template
+TOPDIR=..
 
-#SRC := $(wildcard *.c)
-SRC :=  Adhesion_Factor_Init.c\
-	Adhesion_Factor_UpperBitsNotSet.c\
-	Adhesion_Factor_Decoder.c\
-	Adhesion_Factor_Encoder.c\
-	Adhesion_Factor_DecoderThenEncoder.c\
-	Adhesion_Factor_EncoderThenDecoder.c
+include $(TOPDIR)/Makefile.template
+VPATH = $(TOPDIR)/Bitwalker
+CPPFLAGS += -I$(TOPDIR)/Bitwalker -I./TrackToTrain_Header
+
+SRC := $(wildcard *.c)
 
 OBJ := $(SRC:.c=.o)
 REPORT := $(SRC:.c=.report)
-
-VPATH = ../Bitwalker
-CPPFLAGS += -I../Bitwalker
 
 format: FORCE
 	@$(ASTYLE) *.c *.h 

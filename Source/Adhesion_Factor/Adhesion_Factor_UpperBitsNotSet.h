@@ -5,8 +5,9 @@
 #include "Adhesion_Factor.h"
 
 /*@
-    requires valid:      \valid_read(p);
-    requires invariant:  Invariant(p);
+    requires valid:            \valid_read(p);
+    requires invariant:        Invariant(p);
+    requires headerUpperBits:  UpperBitsNotSet(&p->header);
 
     assigns \nothing;
 

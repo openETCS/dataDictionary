@@ -10,23 +10,17 @@ int Adhesion_Factor_Decoder(Bitstream* stream, Adhesion_Factor* p)
         const uint32_t size = stream->size;
         const uint32_t pos = stream->bitpos;
 
-        p->NID_PACKET         = Bitwalker_Peek_Normal(addr, size, pos,       8);
-        p->Q_DIR              = Bitwalker_Peek_Normal(addr, size, pos + 8,   2);
-        p->L_PACKET           = Bitwalker_Peek_Normal(addr, size, pos + 10,  13);
-        p->Q_SCALE            = Bitwalker_Peek_Normal(addr, size, pos + 23,  2);
-        p->D_ADHESION         = Bitwalker_Peek_Normal(addr, size, pos + 25,  15);
-        p->L_ADHESION         = Bitwalker_Peek_Normal(addr, size, pos + 40,  15);
-        p->M_ADHESION         = Bitwalker_Peek_Normal(addr, size, pos + 55,  1);
+        p->data.Q_SCALE            = Bitwalker_Peek_Normal(addr, size, pos,       2);
+        p->data.D_ADHESION         = Bitwalker_Peek_Normal(addr, size, pos + 2,   15);
+        p->data.L_ADHESION         = Bitwalker_Peek_Normal(addr, size, pos + 17,  15);
+        p->data.M_ADHESION         = Bitwalker_Peek_Normal(addr, size, pos + 32,  1);
 
         stream->bitpos += ADHESION_FACTOR_BITSIZE;
 
-        //@ assert NID_PACKET:        EqualBits(stream, pos,       pos + 8,   p->NID_PACKET);
-        //@ assert Q_DIR:             EqualBits(stream, pos + 8,   pos + 10,  p->Q_DIR);
-        //@ assert L_PACKET:          EqualBits(stream, pos + 10,  pos + 23,  p->L_PACKET);
-        //@ assert Q_SCALE:           EqualBits(stream, pos + 23,  pos + 25,  p->Q_SCALE);
-        //@ assert D_ADHESION:        EqualBits(stream, pos + 25,  pos + 40,  p->D_ADHESION);
-        //@ assert L_ADHESION:        EqualBits(stream, pos + 40,  pos + 55,  p->L_ADHESION);
-        //@ assert M_ADHESION:        EqualBits(stream, pos + 55,  pos + 56,  p->M_ADHESION);
+        //@ assert Q_SCALE:           EqualBits(stream, pos,       pos + 2,   p->data.Q_SCALE);
+        //@ assert D_ADHESION:        EqualBits(stream, pos + 2,   pos + 17,  p->data.D_ADHESION);
+        //@ assert L_ADHESION:        EqualBits(stream, pos + 17,  pos + 32,  p->data.L_ADHESION);
+        //@ assert M_ADHESION:        EqualBits(stream, pos + 32,  pos + 33,  p->data.M_ADHESION);
 
         return 1;
     }

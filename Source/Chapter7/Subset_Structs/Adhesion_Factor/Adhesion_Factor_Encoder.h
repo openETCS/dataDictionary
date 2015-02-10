@@ -8,14 +8,14 @@
     requires valid_stream:      Writeable(stream);
     requires stream_invariant:  Invariant(stream, MaxBitSize(p));
     requires valid_package:     \valid_read(p);
-    requires invariant:         Invariant(p);
+    requires invariant:         Invariant(&p->data);
     requires separation:        Separated(stream, p);
 
     assigns stream->bitpos;
     assigns stream->addr[0..(stream->size-1)];
 
     behavior normal_case:
-      assumes Normal{Pre}(stream, MaxBitSize(p)) && UpperBitsNotSet{Pre}(p);
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && UpperBitsNotSet{Pre}(&p->data);
 
       assigns stream->bitpos;
       assigns stream->addr[0..(stream->size-1)];
@@ -23,11 +23,11 @@
       ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures left:       EqualBits{Here,Old}(stream, 0, \old(stream->bitpos));
-      ensures middle:     EqualBits(stream, \old(stream->bitpos), p);
+      ensures middle:     EqualBits(stream, \old(stream->bitpos), &p->data);
       ensures right:      EqualBits{Here,Old}(stream, stream->bitpos, 8 * stream->size);
 
     behavior values_too_big:
-      assumes Normal{Pre}(stream, MaxBitSize(p)) && !UpperBitsNotSet{Pre}(p);
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && !UpperBitsNotSet{Pre}(&p->data);
 
       assigns \nothing;
 
