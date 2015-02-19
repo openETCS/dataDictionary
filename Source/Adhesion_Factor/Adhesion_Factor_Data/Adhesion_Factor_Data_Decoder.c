@@ -22,6 +22,11 @@ int Adhesion_Factor_Data_Decoder(Bitstream* stream, Adhesion_Factor_Data* p)
         //@ assert L_ADHESION:        EqualBits(stream, pos + 17,  pos + 32,  p->L_ADHESION);
         //@ assert M_ADHESION:        EqualBits(stream, pos + 32,  pos + 33,  p->M_ADHESION);
 
+	//@ assert Q_SCALE:           UpperBitsNotSet(p->Q_SCALE,    2);
+	//@ assert D_ADHESION:        UpperBitsNotSet(p->D_ADHESION, 15);
+	//@ assert L_ADHESION:        UpperBitsNotSet(p->L_ADHESION, 15);
+	//@ assert M_ADHESION:        UpperBitsNotSet(p->M_ADHESION, 1);
+
         return 1;
     }
     else
