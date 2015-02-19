@@ -6,8 +6,8 @@
 
 struct TrainToTrack_Header
 {
-    uint64_t  NID_PACKET;         // # 8
-    uint64_t  L_PACKET;           // # 13
+    uint8_t  NID_PACKET;         // # 8
+    uint16_t  L_PACKET;           // # 13
 };
 
 typedef struct TrainToTrack_Header TrainToTrack_Header;

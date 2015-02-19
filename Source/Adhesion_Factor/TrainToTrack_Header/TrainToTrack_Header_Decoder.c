@@ -18,6 +18,9 @@ int TrainToTrack_Header_Decoder(Bitstream* stream, TrainToTrack_Header* p)
         //@ assert NID_PACKET:        EqualBits(stream, pos,       pos + 8,   p->NID_PACKET);
         //@ assert L_PACKET:          EqualBits(stream, pos + 8,   pos + 21,  p->L_PACKET);
 
+	//@ assert NID_PACKET:        UpperBitsNotSet(p->NID_PACKET,         8);
+	//@ assert L_PACKET:          UpperBitsNotSet(p->L_PACKET,           13);
+
         return 1;
     }
     else

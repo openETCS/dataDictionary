@@ -16,6 +16,8 @@ int BothWays_Header_Decoder(Bitstream* stream, BothWays_Header* p)
 
         //@ assert NID_PACKET:        EqualBits(stream, pos,       pos + 8,   p->NID_PACKET);
 
+	//@ assert NID_PACKET:        UpperBitsNotSet(p->NID_PACKET,        8);
+
         return 1;
     }
     else

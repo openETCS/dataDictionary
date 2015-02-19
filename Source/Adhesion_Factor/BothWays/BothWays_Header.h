@@ -6,7 +6,7 @@
 
 struct BothWays_Header
 {
-    uint64_t  NID_PACKET;         // # 8
+    uint8_t  NID_PACKET;         // # 8
 };
 
 typedef struct BothWays_Header BothWays_Header;
