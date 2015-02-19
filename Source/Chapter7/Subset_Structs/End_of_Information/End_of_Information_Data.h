@@ -25,14 +25,14 @@ typedef struct End_of_Information_Data End_of_Information_Data;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(End_of_Information_Data* p) = TRUE;
+    predicate Invariant(End_of_Information_Data* p) = \true;
 
-    predicate ZeroInitialized(End_of_Information_Data* p) = TRUE;
+    predicate ZeroInitialized(End_of_Information_Data* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, End_of_Information_Data* p) = TRUE;
+    predicate EqualBits(Bitstream* stream, integer pos, End_of_Information_Data* p) = \true;
 
 
-    predicate UpperBitsNotSet(End_of_Information_Data* p) = TRUE;
+    predicate UpperBitsNotSet(End_of_Information_Data* p) = \true;
 
 */
 

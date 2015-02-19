@@ -3,7 +3,7 @@ MAKEFLAGS += --silent --no-print-directory
 
 it: obj
 
-TOPDIR=../../..
+TOPDIR=$(SOURCE)
 
 include $(TOPDIR)/Makefile.template
 VPATH = $(TOPDIR)/Bitwalker
