@@ -1,8 +1,8 @@
 
-#ifndef ADHESION_FACTOR_DATA_ENCODER_H_INCLUDED
-#define ADHESION_FACTOR_DATA_ENCODER_H_INCLUDED
+#ifndef ADHESION_FACTOR_ENCODER_H_INCLUDED
+#define ADHESION_FACTOR_ENCODER_H_INCLUDED
 
-#include "Adhesion_Factor_Data.h"
+#include "Adhesion_Factor.h"
 
 /*@
     requires valid_stream:      Writeable(stream);
@@ -43,7 +43,7 @@
     complete behaviors;
     disjoint behaviors;
 */
-int Adhesion_Factor_Data_Encoder(Bitstream* stream, const Adhesion_Factor_Data* p);
+int Adhesion_Factor_Encoder(Bitstream* stream, const Adhesion_Factor* p);
 
-#endif // ADHESION_FACTOR_DATA_ENCODER_H_INCLUDED
+#endif // ADHESION_FACTOR_ENCODER_H_INCLUDED
 

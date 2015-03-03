@@ -1,9 +1,10 @@
 
-#include "Adhesion_Factor_Data_Init.h"
+#include "Adhesion_Factor_Init.h"
 
-void Adhesion_Factor_Data_Init(Adhesion_Factor_Data* p)
+void Adhesion_Factor_Init(Adhesion_Factor* p)
 {
     p->Q_DIR             = 0;
+    p->L_PACKET          = 0;
     p->Q_SCALE           = 0;
     p->D_ADHESION        = 0;
     p->L_ADHESION        = 0;
