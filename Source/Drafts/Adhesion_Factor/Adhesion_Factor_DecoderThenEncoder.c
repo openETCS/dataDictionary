@@ -40,3 +40,4 @@ void Adhesion_Factor_DecoderThenEncoder(Bitstream* stream, Adhesion_Factor* p)
     //@ assert middle:  EqualBits(stream, pos, p);
     //@ assert right:   Unchanged{Here,Pre}(stream, pos + length, 8 * stream->size);
 }
+
