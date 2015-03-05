@@ -11,7 +11,7 @@ int Adhesion_Factor_Decoder(Bitstream* stream, Adhesion_Factor* p)
         const uint32_t pos = stream->bitpos;
 
         p->Q_DIR              = Bitwalker_Peek_Normal(addr, size, pos,       2);
-	p->L_PACKET           = Bitwalker_Peek_Normal(addr, size, pos,       13);
+	p->L_PACKET           = Bitwalker_Peek_Normal(addr, size, pos + 2,   13);
         p->Q_SCALE            = Bitwalker_Peek_Normal(addr, size, pos + 15,  2);
         p->D_ADHESION         = Bitwalker_Peek_Normal(addr, size, pos + 17,  15);
         p->L_ADHESION         = Bitwalker_Peek_Normal(addr, size, pos + 32,  15);
