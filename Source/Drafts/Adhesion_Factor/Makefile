@@ -9,6 +9,9 @@ include $(TOPDIR)/Makefile.template
 VPATH = $(TOPDIR)/Bitwalker
 CPPFLAGS += -I$(TOPDIR)/Bitwalker
 
+#WP_FLAGS += -wp-prop Q_DIR
+#WP_FLAGS += -wp-prop @assert
+
 SRC := $(wildcard *.c)
 
 OBJ := $(SRC:.c=.o)
