@@ -15,7 +15,7 @@
     assigns stream->bitpos;
     assigns *p;
 
-    ensures unchanged:   EqualBits{Here,Old}(stream, 0, 8 * stream->size);
+    ensures unchanged:   Unchanged{Here,Old}(stream, 0, 8 * stream->size);
 */
 void Adhesion_Factor_DecoderThenEncoder(Bitstream* stream, Adhesion_Factor* p)
 {
@@ -36,7 +36,7 @@ void Adhesion_Factor_DecoderThenEncoder(Bitstream* stream, Adhesion_Factor* p)
 
     Adhesion_Factor_Encoder(stream, p);
 
-    //@ assert left:    EqualBits{Here,Pre}(stream, 0, pos);
+    //@ assert left:    Unchanged{Here,Pre}(stream, 0, pos);
     //@ assert middle:  EqualBits(stream, pos, p);
-    //@ assert right:   EqualBits{Here,Pre}(stream, pos + length, 8 * stream->size);
+    //@ assert right:   Unchanged{Here,Pre}(stream, pos + length, 8 * stream->size);
 }

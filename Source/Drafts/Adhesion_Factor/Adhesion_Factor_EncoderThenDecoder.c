@@ -25,9 +25,9 @@ void Adhesion_Factor_EncoderThenDecoder(Bitstream* stream, Adhesion_Factor* p)
     //@ assert Normal(stream, length);
     Adhesion_Factor_Encoder(stream, p);
 
-    //@ assert left:    EqualBits{Here,Pre}(stream, 0, pos);
+    //@ assert left:    Unchanged{Here,Pre}(stream, 0, pos);
     //@ assert middle:  EqualBits(stream, pos, p);
-    //@ assert right:   EqualBits{Here,Pre}(stream, pos + length, 8 * stream->size);
+    //@ assert right:   Unchanged{Here,Pre}(stream, pos + length, 8 * stream->size);
 
     stream->bitpos -= length;
     //@ assert stream->bitpos == pos;
