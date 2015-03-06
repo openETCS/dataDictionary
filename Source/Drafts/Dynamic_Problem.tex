@@ -45,8 +45,8 @@
 
 \begin{document}
 	\section{Abstract}
-		We want to transfer a series of C-Structs via a bitstream. We have different C-Structs, that represent different packets. The packets are distinguished by the number of variables.
-		Furthermore the different variables may have different length and since we don't want to transfer unneccessary empty bits we only transfer the actual lengths of the variables.
+		We want to transfer an instance of a C-Structs (packet) via a bitstream. We have different C-Structs, that represent different packets. The packets are distinguished by the number of variables.
+		Furthermore the different variables may have different lengths and since we don't want to transfer unneccessary empty bits we only transfer the bits within the actual length of each variable.
 		The packet types are represented by different C-Structs, that may look as follows:
 		\begin{lstlisting}[mathescape]
 struct $\mathcal{A}$ {
@@ -56,14 +56,18 @@ struct $\mathcal{A}$ {
 	uint32_t $x_{4}$      // # 23
 };
 		\end{lstlisting}
-		The bitlengths that are transmitted if we choose to send a packet of the type $\mathcal{A}$, are 8, 13, 3, 23, hereafter represented by 
+		The bitlengths that are transmitted, if we choose to send a packet of the type $\mathcal{A}$, are 8, 13, 3, 23, hereafter represented by 
 		\begin{align*}
-			a_{1}, a_{2}, a_{3}, ... , a_{n}.
+			a_{1}, a_{2}, a_{3}, ... , a_{n}
+		\end{align*}
+		for each
+		\begin{align*}
+			x_{1}, x_{2}, x_{3}, ... , x_{n}.
 		\end{align*}
 	\section{Decoder and Encoder}
-		To format the content of a packet into a bitstream with the minimum size, necessary to transfer all data, we use a Encoder. It's inverse function is the Decoder, which reads the bits
+		To format the content of a packet into a bitstream with the minimum size, necessary to transfer all data, we use an Encoder. It's inverse function is the Decoder, which reads the bits
 		from the bitstream and transforms them into a correct packet.
-		These functions consist of calls of peek (Decoder) and poke (Encoder) calls. The number of peek and poke calls and their parameters differ from packet to packet.
+		These functions consist of calls of peek (Decoder) and poke (Encoder) calls. The number of peek and poke calls and their parameters depend on the number of variables and their lengths..
 		For the packet A the Decoder looks something like this:
 		\begin{lstlisting}[mathescape]
 $\mathcal{A}$-Decoder (Bitstream stream, $\mathcal{A}$ a) {
@@ -91,7 +95,7 @@ $\mathcal{A}$-Decoder (Bitstream stream, $\mathcal{A}$ a) {
 		For example in our $\mathcal{A}$ packet, the value of $x_{3}$ may only be significant, if $x_{2}$ has a certain value.
 		Since some data may be useless we don't want to waste any bandwidth on our transmittion media and therefore only transfer the needed data.
 		In the example we only want to transfer $x_{3}$ if $x_{2}$ has a certain value.
-		Our Decoder function might look like that:
+		Our Decoder function looks something like that:
 
 		\begin{lstlisting}[mathescape]
 $\mathcal{A}$-Decoder (Bitstream stream, $\mathcal{A}$ a) {
@@ -127,9 +131,9 @@ if ( $x_{2}$ == ... ) {
 			&v_{1}, v_{2}, v_{3}, ... , v_{n}	
 		\end{align*}
 		For a given packet $\mathcal{A}$ with a variable sequence $x_{1}, x_{2}, x_{3}, ... , x_{n}$ each $v_{i}$ determines whether or not variable $x_{i}$ was tranfered.
-		Assuming we have a $V$ array, than we don't have to use the if-block. Neither for the peek and poke nor for the bitpos determinataion.
+		Assuming we have a $V$-array, then we don't have to use the if-block. Neither for the peek and poke nor for the bitpos determinataion.
 		For each $x_{i}$ with $1\leq i\leq n$ we have the length of bits to read $a_{i}$ and the boolean $v_{i}$ that tells us whether or not the variable was transfered.
-		the Decoder might look like that:
+		the Decoder look something like that:
 		\begin{lstlisting}[mathescape]
 $\mathcal{A}$-Decoder (Bitstream stream, $\mathcal{A}$ a) {
 	a->$x_{1}$ = peek (stream, 8 * $v_{1}$);
