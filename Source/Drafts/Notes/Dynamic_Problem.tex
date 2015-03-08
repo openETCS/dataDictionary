@@ -40,9 +40,12 @@ for each
 \end{align*}
 
 \section{Decoder and Encoder}
-To format the content of a packet into a bitstream with the minimum size, necessary to transfer all data, we use an Encoder. It's inverse function is the Decoder, which reads the bits
+
+To format the content of a packet into a bitstream with the minimum size, necessary to transfer all data, we use an Encoder.
+It's inverse function is the Decoder, which reads the bits
 from the bitstream and transforms them into a correct packet.
-These functions consist of calls of peek (Decoder) and poke (Encoder) calls. The number of peek and poke calls and their parameters depend on the number of variables and their lengths..
+These functions consist of calls of peek (Decoder) and poke (Encoder) calls.
+The number of peek and poke calls and their parameters depend on the number of variables and their lengths..
 For the packet A the Decoder looks something like this:
 
 \begin{lstlisting}[mathescape]
@@ -53,9 +56,13 @@ $\mathcal{A}$-Decoder (Bitstream stream, $\mathcal{A}$ a) {
 	a->$x_{4}$ = peek (stream, 23);
 }
 \end{lstlisting}
-	\section{Bitpos}
-The Decoder example is a very simplified version of an actual Decoder. For the peek and poke calls we do actually need to set a bitpos
-that determines where in the stream the bits shall be read. The bitpos for each call depends on the bitpos and length of the previous call.
+
+\section{Bit Position}
+
+The Decoder example is a very simplified version of an actual Decoder.
+For the peek and poke calls we do actually need to set a bitpos
+that determines where in the stream the bits shall be read.
+The bitpos for each call depends on the bitpos and length of the previous call.
 For the packet $\mathcal{A}$ the bitpos count up as follows:\\
 variable   $a_{1}$, $a_{2}$, $a_{3}$, $a_{4}$\\
 length      8, 13,  3, 23\\
@@ -110,7 +117,8 @@ A different approach to the determination of bitpos in dynamic packets is to cre
 	&v_{1}, v_{2}, v_{3}, ... , v_{n}	
 \end{align*}
 For a given packet $\mathcal{A}$ with a variable sequence $x_{1}, x_{2}, x_{3}, ... , x_{n}$ each $v_{i}$ determines whether or not variable $x_{i}$ was transferred.
-Assuming we have a $V$-array, then we don't have to use the if-block. Neither for the peek and poke nor for the bitpos determination.
+Assuming we have a $V$-array, then we don't have to use the if-block.
+Neither for the peek and poke nor for the bitpos determination.
 For each $x_{i}$ with $1\leq i\leq n$ we have the length of bits to read $a_{i}$ and the boolean $v_{i}$ that tells us whether or not the variable was transferred.
 the Decoder look something like that:
 \begin{lstlisting}[mathescape]
