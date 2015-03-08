@@ -11,14 +11,14 @@
 \maketitle
 
 \section{Introduction}
-We want to transfer an instance of a C-Structs (packet) via a bitstream.
-We have different C-Structs, that represent different packets.
+We want to transfer an instance of a C-structures (packet) via a bitstream.
+We have different C-structures, that represent different packets.
 The packets are distinguished by the number of variables.
 Furthermore the different variables may have different lengths and
-since we don't want to transfer unneccessary empty bits we only transfer
+since we don't want to transfer unnecessary empty bits we only transfer
 the bits within the actual length of each variable.
 
-The packet types are represented by different C-Structs, that may look as follows:
+The packet types are represented by different C-structures, that may look as follows:
 
 \begin{lstlisting}[mathescape]
 struct $\mathcal{A}$ {
@@ -29,7 +29,7 @@ struct $\mathcal{A}$ {
 };
 \end{lstlisting}
 
-		The bitlengths that are transmitted, if we choose to send a packet of the type $\mathcal{A}$, are 8, 13, 3, 23, hereafter represented by 
+		The bit lengths that are transmitted, if we choose to send a packet of the type $\mathcal{A}$, are 8, 13, 3, 23, hereafter represented by 
 		\begin{align*}
 			a_{1}, a_{2}, a_{3}, ... , a_{n}
 		\end{align*}
@@ -63,10 +63,10 @@ $\mathcal{A}$-Decoder (Bitstream stream, $\mathcal{A}$ a) {
 			&S_{k+1} = S_{k} + a_{k}
 		\end{align*}
 	\section{Dynamic packets}
-		C-Structs of dynamic packets don't look any different from those of the previously introduced (static) packets.
-		The only differce is that, whether or not the value of a variable is of importance, may depend on the value of another variable.	
+		C-structures of dynamic packets don't look any different from those of the previously introduced (static) packets.
+		The only difference is that, whether or not the value of a variable is of importance, may depend on the value of another variable.	
 		For example in our $\mathcal{A}$ packet, the value of $x_{3}$ may only be significant, if $x_{2}$ has a certain value.
-		Since some data may be useless we don't want to waste any bandwidth on our transmittion media and therefore only transfer the needed data.
+		Since some data may be useless we don't want to waste any bandwidth on our transmission media and therefore only transfer the needed data.
 		In the example we only want to transfer $x_{3}$ if $x_{2}$ has a certain value.
 		Our Decoder function looks something like that:
 
@@ -103,9 +103,9 @@ if ( $x_{2}$ == ... ) {
 			&x_{1}, x_{2}, x_{3}, ... , x_{n}\\
 			&v_{1}, v_{2}, v_{3}, ... , v_{n}	
 		\end{align*}
-		For a given packet $\mathcal{A}$ with a variable sequence $x_{1}, x_{2}, x_{3}, ... , x_{n}$ each $v_{i}$ determines whether or not variable $x_{i}$ was tranfered.
-		Assuming we have a $V$-array, then we don't have to use the if-block. Neither for the peek and poke nor for the bitpos determinataion.
-		For each $x_{i}$ with $1\leq i\leq n$ we have the length of bits to read $a_{i}$ and the boolean $v_{i}$ that tells us whether or not the variable was transfered.
+		For a given packet $\mathcal{A}$ with a variable sequence $x_{1}, x_{2}, x_{3}, ... , x_{n}$ each $v_{i}$ determines whether or not variable $x_{i}$ was transferred.
+		Assuming we have a $V$-array, then we don't have to use the if-block. Neither for the peek and poke nor for the bitpos determination.
+		For each $x_{i}$ with $1\leq i\leq n$ we have the length of bits to read $a_{i}$ and the boolean $v_{i}$ that tells us whether or not the variable was transferred.
 		the Decoder look something like that:
 		\begin{lstlisting}[mathescape]
 $\mathcal{A}$-Decoder (Bitstream stream, $\mathcal{A}$ a) {
