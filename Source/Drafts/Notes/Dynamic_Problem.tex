@@ -1,61 +1,34 @@
-\documentclass{article}
+\documentclass[paper=a4,DIV=12]{scrartcl}
 
-\usepackage[utf8]{inputenc}
-\usepackage{pgfplots}
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{tikz}
-\usepackage{verbatim}
-\usepackage{amssymb}
-\usepackage{breqn}
-\usepackage{graphicx}
-\usepackage{color}
-\usepackage{fancyhdr}
-\usepackage{listings}
-\usepackage{float}
-\usepackage{stmaryrd}
-\usepackage{cancel}
+\input{preamble}
 
-\setlength{\headheight}{22pt}
-\pagestyle{fancy}
+\title{Representation of C Structures in Bit Streams}
 
-\lstdefinestyle{customc}{
-  belowcaptionskip=1\baselineskip,
-  breaklines=true,
-  frame=L,
-  xleftmargin=\parindent,
-  language=C,
-  showstringspaces=false,
-  basicstyle=\footnotesize\ttfamily,
-  keywordstyle=\bfseries\color{green!40!black},
-  commentstyle=\itshape\color{purple!40!black},
-  identifierstyle=\color{blue},
-  stringstyle=\color{orange},
-}
-
-\lstdefinestyle{customasm}{
-  belowcaptionskip=1\baselineskip,
-  frame=L,
-  xleftmargin=\parindent,
-  language=[x86masm]Assembler,
-  basicstyle=\footnotesize\ttfamily,
-  commentstyle=\itshape\color{purple!40!black},
-}
-\lstset{escapechar=@,style=customc}
+\author{Timon Lapawczyk \and Jens Gerlach}
 
 \begin{document}
-	\section{Abstract}
-		We want to transfer an instance of a C-Structs (packet) via a bitstream. We have different C-Structs, that represent different packets. The packets are distinguished by the number of variables.
-		Furthermore the different variables may have different lengths and since we don't want to transfer unneccessary empty bits we only transfer the bits within the actual length of each variable.
-		The packet types are represented by different C-Structs, that may look as follows:
-		\begin{lstlisting}[mathescape]
+
+\maketitle
+
+\section{Introduction}
+We want to transfer an instance of a C-Structs (packet) via a bitstream.
+We have different C-Structs, that represent different packets.
+The packets are distinguished by the number of variables.
+Furthermore the different variables may have different lengths and
+since we don't want to transfer unneccessary empty bits we only transfer
+the bits within the actual length of each variable.
+
+The packet types are represented by different C-Structs, that may look as follows:
+
+\begin{lstlisting}[mathescape]
 struct $\mathcal{A}$ {
 	uint8_t  $x_{1}$      // # 8
 	uint16_t $x_{2}$      // # 13
 	uint8_t  $x_{3}$      // # 3
 	uint32_t $x_{4}$      // # 23
 };
-		\end{lstlisting}
+\end{lstlisting}
+
 		The bitlengths that are transmitted, if we choose to send a packet of the type $\mathcal{A}$, are 8, 13, 3, 23, hereafter represented by 
 		\begin{align*}
 			a_{1}, a_{2}, a_{3}, ... , a_{n}
