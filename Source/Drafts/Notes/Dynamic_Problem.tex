@@ -60,14 +60,14 @@ $\mathcal{A}$-Decoder (Bitstream stream, $\mathcal{A}$ a) {
 \section{Bit Position}
 
 The Decoder example is a very simplified version of an actual Decoder.
-For the peek and poke calls we do actually need to set a bitpos
+For the peek and poke calls we do actually need to set a bit position
 that determines where in the stream the bits shall be read.
-The bitpos for each call depends on the bitpos and length of the previous call.
-For the packet $\mathcal{A}$ the bitpos count up as follows:\\
+The bit position for each call depends on the bit position and length of the previous call.
+For the packet $\mathcal{A}$ the bit position count up as follows:\\
 variable   $a_{1}$, $a_{2}$, $a_{3}$, $a_{4}$\\
 length      8, 13,  3, 23\\
-bitpos      0,  8, 21, 24\\
-For each variable $x_{k}$ we can calculate the bitpos $S_{k}$ as follows:
+bit position      0,  8, 21, 24\\
+For each variable $x_{k}$ we can calculate the bit position $S_{k}$ as follows:
 \begin{align*}
 	&S_{k} = \sum_{i=1}^{k-1} a_{i}\\
 	&S_{k+1} = S_{k} + a_{k}
@@ -93,11 +93,11 @@ $\mathcal{A}$-Decoder (Bitstream stream, $\mathcal{A}$ a) {
 }
 \end{lstlisting}
 
-But how do we calculate the bitpos for $x_{4}$, since it also depend on the value of $x_{2}$.
+But how do we calculate the bit position for $x_{4}$, since it also depend on the value of $x_{2}$.
 
 variable   $x_{1}$, $x_{2}$, $x_{3}$, $x_{4}$\\
 length        8, 13, 3, 23\\
-bitpos\\
+bit position\\
 $x_{2}$ == \ldots  0, 8, 21, 24\\
 $x_{2}$ != \ldots  0, 8, 21, 21\\
 
@@ -113,14 +113,14 @@ if ( $x_{2}$ == \ldots ) {
 
 \section{Valid Array}
 
-A different approach to the determination of bitpos in dynamic packets is to create a boolean array, that holds a valid flag for each variable.
+A different approach to the determination of bit position in dynamic packets is to create a boolean array, that holds a valid flag for each variable.
 \begin{align*}
 	&x_{1}, x_{2}, x_{3}, \ldots , x_{n}\\
 	&v_{1}, v_{2}, v_{3}, \ldots , v_{n}	
 \end{align*}
 For a given packet $\mathcal{A}$ with a variable sequence $x_{1}, x_{2}, x_{3}, \ldots , x_{n}$ each $v_{i}$ determines whether or not variable $x_{i}$ was transferred.
 Assuming we have a $V$-array, then we don't have to use the if-block.
-Neither for the peek and poke nor for the bitpos determination.
+Neither for the peek and poke nor for the bit position determination.
 For each $x_{i}$ with $1\leq i\leq n$ we have the length of bits to read $a_{i}$ and the boolean $v_{i}$ that tells us whether or not the variable was transferred.
 the Decoder look something like that:
 \begin{lstlisting}[mathescape]
