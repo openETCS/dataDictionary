@@ -11,14 +11,15 @@
 \maketitle
 
 \section{Introduction}
-We want to transfer an instance of a C-structures (packet) via a bitstream.
-We have different C-structures, that represent different packets.
+
+We want to transfer an instance of a C structures (packet) via a bitstream.
+We have different C structures, that represent different packets.
 The packets are distinguished by the number of variables.
 Furthermore the different variables may have different lengths and
 since we don't want to transfer unnecessary empty bits we only transfer
 the bits within the actual length of each variable.
 
-The packet types are represented by different C-structures, that may look as follows:
+The packet types are represented by different C structures, that may look as follows:
 
 \begin{lstlisting}[mathescape]
 struct $\mathcal{A}$ {
@@ -29,90 +30,96 @@ struct $\mathcal{A}$ {
 };
 \end{lstlisting}
 
-		The bit lengths that are transmitted, if we choose to send a packet of the type $\mathcal{A}$, are 8, 13, 3, 23, hereafter represented by 
-		\begin{align*}
-			a_{1}, a_{2}, a_{3}, ... , a_{n}
-		\end{align*}
-		for each
-		\begin{align*}
-			x_{1}, x_{2}, x_{3}, ... , x_{n}.
-		\end{align*}
-	\section{Decoder and Encoder}
-		To format the content of a packet into a bitstream with the minimum size, necessary to transfer all data, we use an Encoder. It's inverse function is the Decoder, which reads the bits
-		from the bitstream and transforms them into a correct packet.
-		These functions consist of calls of peek (Decoder) and poke (Encoder) calls. The number of peek and poke calls and their parameters depend on the number of variables and their lengths..
-		For the packet A the Decoder looks something like this:
-		\begin{lstlisting}[mathescape]
+The bit lengths that are transmitted, if we choose to send a packet of the type $\mathcal{A}$, are 8, 13, 3, 23, hereafter represented by 
+\begin{align*}
+	a_{1}, a_{2}, a_{3}, ... , a_{n}
+\end{align*}
+for each
+\begin{align*}
+	x_{1}, x_{2}, x_{3}, ... , x_{n}.
+\end{align*}
+
+\section{Decoder and Encoder}
+To format the content of a packet into a bitstream with the minimum size, necessary to transfer all data, we use an Encoder. It's inverse function is the Decoder, which reads the bits
+from the bitstream and transforms them into a correct packet.
+These functions consist of calls of peek (Decoder) and poke (Encoder) calls. The number of peek and poke calls and their parameters depend on the number of variables and their lengths..
+For the packet A the Decoder looks something like this:
+
+\begin{lstlisting}[mathescape]
 $\mathcal{A}$-Decoder (Bitstream stream, $\mathcal{A}$ a) {
 	a->$x_{1}$ = peek (stream, 8);
 	a->$x_{2}$ = peek (stream, 13);
 	a->$x_{3}$ = peek (stream, 3);
 	a->$x_{4}$ = peek (stream, 23);
 }
-		\end{lstlisting}
+\end{lstlisting}
 	\section{Bitpos}
-		The Decoder example is a very simplified version of an actual Decoder. For the peek and poke calls we do actually need to set a bitpos
-		that determines where in the stream the bits shall be read. The bitpos for each call depends on the bitpos and length of the previous call.
-		For the packet $\mathcal{A}$ the bitpos count up as follows:\\
-		variable   $a_{1}$, $a_{2}$, $a_{3}$, $a_{4}$\\
-		length      8, 13,  3, 23\\
-		bitpos      0,  8, 21, 24\\
-		For each variable $x_{k}$ we can calculate the bitpos $S_{k}$ as follows:
-		\begin{align*}
-			&S_{k} = \sum_{i=1}^{k-1} a_{i}\\
-			&S_{k+1} = S_{k} + a_{k}
-		\end{align*}
-	\section{Dynamic packets}
-		C-structures of dynamic packets don't look any different from those of the previously introduced (static) packets.
-		The only difference is that, whether or not the value of a variable is of importance, may depend on the value of another variable.	
-		For example in our $\mathcal{A}$ packet, the value of $x_{3}$ may only be significant, if $x_{2}$ has a certain value.
-		Since some data may be useless we don't want to waste any bandwidth on our transmission media and therefore only transfer the needed data.
-		In the example we only want to transfer $x_{3}$ if $x_{2}$ has a certain value.
-		Our Decoder function looks something like that:
+The Decoder example is a very simplified version of an actual Decoder. For the peek and poke calls we do actually need to set a bitpos
+that determines where in the stream the bits shall be read. The bitpos for each call depends on the bitpos and length of the previous call.
+For the packet $\mathcal{A}$ the bitpos count up as follows:\\
+variable   $a_{1}$, $a_{2}$, $a_{3}$, $a_{4}$\\
+length      8, 13,  3, 23\\
+bitpos      0,  8, 21, 24\\
+For each variable $x_{k}$ we can calculate the bitpos $S_{k}$ as follows:
+\begin{align*}
+	&S_{k} = \sum_{i=1}^{k-1} a_{i}\\
+	&S_{k+1} = S_{k} + a_{k}
+\end{align*}
 
-		\begin{lstlisting}[mathescape]
+\section{Dynamic packets}
+
+C structures of dynamic packets don't look any different from those of the previously introduced (static) packets.
+The only difference is that, whether or not the value of a variable is of importance, may depend on the value of another variable.	
+For example in our $\mathcal{A}$ packet, the value of $x_{3}$ may only be significant, if $x_{2}$ has a certain value.
+Since some data may be useless we don't want to waste any bandwidth on our transmission media and therefore only transfer the needed data.
+In the example we only want to transfer $x_{3}$ if $x_{2}$ has a certain value.
+Our Decoder function looks something like that:
+
+\begin{lstlisting}[mathescape]
 $\mathcal{A}$-Decoder (Bitstream stream, $\mathcal{A}$ a) {
 	a->$x_{1}$ = peek (stream, 8);
 	a->$x_{2}$ = peek (stream, 13);
 	if ( $x_{2}$ == ... ) {
-		a->$x_{3}$ = peek (stream, 3);
+a->$x_{3}$ = peek (stream, 3);
 	}
 	a->$x_{4}$ = peek (stream, 23);
 }
-		\end{lstlisting}
+\end{lstlisting}
 
-		But how do we calculate the bitpos for $x_{4}$, since it also depend on the value of $x_{2}$.\\
-		variable   $x_{1}$, $x_{2}$, $x_{3}$, $x_{4}$\\
-		length        8, 13, 3, 23\\
-		bitpos\\
-		$x_{2}$ == ...  0, 8, 21, 24\\
-		$x_{2}$ != ...  0, 8, 21, 21\\
-		Maybe with the same if/else block:
+But how do we calculate the bitpos for $x_{4}$, since it also depend on the value of $x_{2}$.\\
+variable   $x_{1}$, $x_{2}$, $x_{3}$, $x_{4}$\\
+length        8, 13, 3, 23\\
+bitpos\\
+$x_{2}$ == ...  0, 8, 21, 24\\
+$x_{2}$ != ...  0, 8, 21, 21\\
+Maybe with the same if/else block:
 
-		\begin{lstlisting}[mathescape]
+\begin{lstlisting}[mathescape]
 if ( $x_{2}$ == ... ) {
 	$S_{4}$ = $S_{3}$ + $a_{3}$
 } else {
 	$S_{4}$ = $S_{3}$
 }
-		\end{lstlisting}
+\end{lstlisting}
 
-	\section{Valid Array}
-		A different approach to the determination of bitpos in dynamic packets is to create a boolean array, that holds a valid flag for each variable.
-		\begin{align*}
-			&x_{1}, x_{2}, x_{3}, ... , x_{n}\\
-			&v_{1}, v_{2}, v_{3}, ... , v_{n}	
-		\end{align*}
-		For a given packet $\mathcal{A}$ with a variable sequence $x_{1}, x_{2}, x_{3}, ... , x_{n}$ each $v_{i}$ determines whether or not variable $x_{i}$ was transferred.
-		Assuming we have a $V$-array, then we don't have to use the if-block. Neither for the peek and poke nor for the bitpos determination.
-		For each $x_{i}$ with $1\leq i\leq n$ we have the length of bits to read $a_{i}$ and the boolean $v_{i}$ that tells us whether or not the variable was transferred.
-		the Decoder look something like that:
-		\begin{lstlisting}[mathescape]
+\section{Valid Array}
+
+A different approach to the determination of bitpos in dynamic packets is to create a boolean array, that holds a valid flag for each variable.
+\begin{align*}
+	&x_{1}, x_{2}, x_{3}, ... , x_{n}\\
+	&v_{1}, v_{2}, v_{3}, ... , v_{n}	
+\end{align*}
+For a given packet $\mathcal{A}$ with a variable sequence $x_{1}, x_{2}, x_{3}, ... , x_{n}$ each $v_{i}$ determines whether or not variable $x_{i}$ was transferred.
+Assuming we have a $V$-array, then we don't have to use the if-block. Neither for the peek and poke nor for the bitpos determination.
+For each $x_{i}$ with $1\leq i\leq n$ we have the length of bits to read $a_{i}$ and the boolean $v_{i}$ that tells us whether or not the variable was transferred.
+the Decoder look something like that:
+\begin{lstlisting}[mathescape]
 $\mathcal{A}$-Decoder (Bitstream stream, $\mathcal{A}$ a) {
 	a->$x_{1}$ = peek (stream, 8 * $v_{1}$);
 	a->$x_{2}$ = peek (stream, 13 * $v_{2}$);
 	a->$x_{3}$ = peek (stream, 3 * $v_{3}$);
 	a->$x_{4}$ = peek (stream, 23 * $v_{4}$);
 }
-		\end{lstlisting}
+\end{lstlisting}
+
 \end{document}
