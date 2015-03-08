@@ -32,11 +32,11 @@ struct $\mathcal{A}$ {
 
 The bit lengths that are transmitted, if we choose to send a packet of the type $\mathcal{A}$, are 8, 13, 3, 23, hereafter represented by 
 \begin{align*}
-	a_{1}, a_{2}, a_{3}, ... , a_{n}
+	a_{1}, a_{2}, a_{3}, \ldots , a_{n}
 \end{align*}
 for each
 \begin{align*}
-	x_{1}, x_{2}, x_{3}, ... , x_{n}.
+	x_{1}, x_{2}, x_{3}, \ldots , x_{n}.
 \end{align*}
 
 \section{Decoder and Encoder}
@@ -86,7 +86,7 @@ Our Decoder function looks something like that:
 $\mathcal{A}$-Decoder (Bitstream stream, $\mathcal{A}$ a) {
 	a->$x_{1}$ = peek (stream, 8);
 	a->$x_{2}$ = peek (stream, 13);
-	if ( $x_{2}$ == ... ) {
+	if ( $x_{2}$ == \ldots ) {
 a->$x_{3}$ = peek (stream, 3);
 	}
 	a->$x_{4}$ = peek (stream, 23);
@@ -97,12 +97,12 @@ But how do we calculate the bitpos for $x_{4}$, since it also depend on the valu
 variable   $x_{1}$, $x_{2}$, $x_{3}$, $x_{4}$\\
 length        8, 13, 3, 23\\
 bitpos\\
-$x_{2}$ == ...  0, 8, 21, 24\\
-$x_{2}$ != ...  0, 8, 21, 21\\
+$x_{2}$ == \ldots  0, 8, 21, 24\\
+$x_{2}$ != \ldots  0, 8, 21, 21\\
 Maybe with the same if/else block:
 
 \begin{lstlisting}[mathescape]
-if ( $x_{2}$ == ... ) {
+if ( $x_{2}$ == \ldots ) {
 	$S_{4}$ = $S_{3}$ + $a_{3}$
 } else {
 	$S_{4}$ = $S_{3}$
@@ -113,10 +113,10 @@ if ( $x_{2}$ == ... ) {
 
 A different approach to the determination of bitpos in dynamic packets is to create a boolean array, that holds a valid flag for each variable.
 \begin{align*}
-	&x_{1}, x_{2}, x_{3}, ... , x_{n}\\
-	&v_{1}, v_{2}, v_{3}, ... , v_{n}	
+	&x_{1}, x_{2}, x_{3}, \ldots , x_{n}\\
+	&v_{1}, v_{2}, v_{3}, \ldots , v_{n}	
 \end{align*}
-For a given packet $\mathcal{A}$ with a variable sequence $x_{1}, x_{2}, x_{3}, ... , x_{n}$ each $v_{i}$ determines whether or not variable $x_{i}$ was transferred.
+For a given packet $\mathcal{A}$ with a variable sequence $x_{1}, x_{2}, x_{3}, \ldots , x_{n}$ each $v_{i}$ determines whether or not variable $x_{i}$ was transferred.
 Assuming we have a $V$-array, then we don't have to use the if-block.
 Neither for the peek and poke nor for the bitpos determination.
 For each $x_{i}$ with $1\leq i\leq n$ we have the length of bits to read $a_{i}$ and the boolean $v_{i}$ that tells us whether or not the variable was transferred.
