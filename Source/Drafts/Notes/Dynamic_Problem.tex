@@ -1,4 +1,4 @@
-\documentclass[parskip=full,paper=a4,DIV=12]{scrartcl}
+\documentclass[parskip=half,paper=a4,DIV=12]{scrartcl}
 
 \input{preamble}
 
@@ -12,14 +12,12 @@
 
 \section{Introduction}
 
-We want to transfer an instance of a C structures (packet) via a bitstream.
-We have different C structures, that represent different packets.
-The packets are distinguished by the number of variables.
-Furthermore the different variables may have different lengths and
-since we don't want to transfer unnecessary empty bits we only transfer
-the bits within the actual length of each variable.
+We want to transmit simple C structures (packets) via bit streams.
+The C structures consist of members of various (unsigned) integer types.
+Moreover, it might happen that only a certain number of bits of a member
+shall be transmitted. 
 
-The packet types are represented by different C structures, that may look as follows:
+A packet types consists of $n$ member $x_1,\ldots, x_n$ and might look as follows:
 
 \begin{lstlisting}[mathescape]
 struct $\mathcal{A}$ {
@@ -30,14 +28,10 @@ struct $\mathcal{A}$ {
 };
 \end{lstlisting}
 
-The bit lengths that are transmitted, if we choose to send a packet of the type $\mathcal{A}$, are 8, 13, 3, 23, hereafter represented by 
-\begin{align*}
-	a_{1}, a_{2}, a_{3}, \ldots , a_{n}
-\end{align*}
-for each
-\begin{align*}
-	x_{1}, x_{2}, x_{3}, \ldots , x_{n}.
-\end{align*}
+If we choose to send\slash receive a packet of type $\mathcal{A}$, then
+we only have to transmit $47 = 8 + 13 + 3 + 23$ bits instead of 64 bits.
+
+In general, we denote the number of bits for a member $x_i$, with $1 \leq i \leq n$  by $a_i$.
 
 \section{Decoder and Encoder}
 
