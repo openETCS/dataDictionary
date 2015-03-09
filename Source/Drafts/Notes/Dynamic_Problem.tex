@@ -1,4 +1,4 @@
-\documentclass[parskip=half,paper=a4,DIV=12]{scrartcl}
+\documentclass[parskip=half,paper=a4,DIV=13]{scrartcl}
 
 \input{preamble}
 
@@ -35,19 +35,30 @@ In general, we denote the number of bits for a member $x_i$, with $1 \leq i \leq
 
 \section{Decoder and Encoder}
 
-To format the content of a packet into a bitstream with the minimum size, necessary to transfer all data, we use an Encoder.
-It's inverse function is the Decoder, which reads the bits
-from the bitstream and transforms them into a correct packet.
-These functions consist of calls of peek (Decoder) and poke (Encoder) calls.
-The number of peek and poke calls and their parameters depend on the number of variables and their lengths..
-For the packet A the Decoder looks something like this:
+For each packet type there is a \emph{decoder} and a \emph{encoder} function.
+\begin{itemize}
+\item
+The decoder extracts the specified bits from the bit stream and stores them
+in the individual packet members.
+\item
+The encoder, conversely, extracts the bits from the individual members
+and writes them into the bit stream.
+\end{itemize}
+
+The extraction function of the decoder is referred to as \emph{peek},
+whereas the extraction function of the encoder is referred to as \emph{poke}.
+The number of calls to peek and poke and the parameters depend on the number
+of variables and the required bit lengths.
+
+For the packet $\mathcal{A}$ the Decoder looks as follows
 
 \begin{lstlisting}[mathescape]
-$\mathcal{A}$-Decoder (Bitstream stream, $\mathcal{A}$ a) {
-	a->$x_{1}$ = peek (stream, 8);
-	a->$x_{2}$ = peek (stream, 13);
-	a->$x_{3}$ = peek (stream, 3);
-	a->$x_{4}$ = peek (stream, 23);
+$\mathcal{A}$ Decoder(Bitstream stream) {
+        $\mathcal{A}$ a;
+	a.$x_{1}$ = peek (stream, 8);
+	a.$x_{2}$ = peek (stream, 13);
+	a.$x_{3}$ = peek (stream, 3);
+	a.$x_{4}$ = peek (stream, 23);
 }
 \end{lstlisting}
 
@@ -77,13 +88,14 @@ In the example we only want to transfer $x_{3}$ if $x_{2}$ has a certain value.
 Our Decoder function looks something like that:
 
 \begin{lstlisting}[mathescape]
-$\mathcal{A}$-Decoder (Bitstream stream, $\mathcal{A}$ a) {
-	a->$x_{1}$ = peek (stream, 8);
-	a->$x_{2}$ = peek (stream, 13);
+$\mathcal{A}$ Decoder(Bitstream stream) {
+        $\mathcal{A}$ a;
+	a.$x_{1}$ = peek (stream, 8);
+	a.$x_{2}$ = peek (stream, 13);
 	if ($x_{2}$ == $\ldots$) {
-		a->$x_{3}$ = peek (stream, 3);
+		a.$x_{3}$ = peek (stream, 3);
 	}
-	a->$x_{4}$ = peek (stream, 23);
+	a.$x_{4}$ = peek (stream, 23);
 }
 \end{lstlisting}
 
@@ -119,10 +131,10 @@ For each $x_{i}$ with $1\leq i\leq n$ we have the length of bits to read $a_{i}$
 the Decoder look something like that:
 \begin{lstlisting}[mathescape]
 $\mathcal{A}$-Decoder (Bitstream stream, $\mathcal{A}$ a) {
-	a->$x_{1}$ = peek (stream, 8 * $v_{1}$);
-	a->$x_{2}$ = peek (stream, 13 * $v_{2}$);
-	a->$x_{3}$ = peek (stream, 3 * $v_{3}$);
-	a->$x_{4}$ = peek (stream, 23 * $v_{4}$);
+	a.$x_{1}$ = peek (stream, 8 * $v_{1}$);
+	a.$x_{2}$ = peek (stream, 13 * $v_{2}$);
+	a.$x_{3}$ = peek (stream, 3 * $v_{3}$);
+	a.$x_{4}$ = peek (stream, 23 * $v_{4}$);
 }
 \end{lstlisting}
 
