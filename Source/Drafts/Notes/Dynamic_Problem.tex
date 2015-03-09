@@ -80,7 +80,7 @@ Our Decoder function looks something like that:
 $\mathcal{A}$-Decoder (Bitstream stream, $\mathcal{A}$ a) {
 	a->$x_{1}$ = peek (stream, 8);
 	a->$x_{2}$ = peek (stream, 13);
-	if ($x_{2}$ == \ldots) {
+	if ($x_{2}$ == $\ldots$) {
 		a->$x_{3}$ = peek (stream, 3);
 	}
 	a->$x_{4}$ = peek (stream, 23);
@@ -92,13 +92,13 @@ But how do we calculate the bit position for $x_{4}$, since it also depend on th
 variable   $x_{1}$, $x_{2}$, $x_{3}$, $x_{4}$\\
 length        8, 13, 3, 23\\
 bit position\\
-$x_{2}$ == \ldots  0, 8, 21, 24\\
-$x_{2}$ != \ldots  0, 8, 21, 21\\
+$x_{2} = \ldots  0, 8, 21, 24$\\
+$x_{2} \neq \ldots  0, 8, 21, 21$\\
 
 Maybe with the same if/else block:
 
 \begin{lstlisting}[mathescape]
-if ( $x_{2}$ == \ldots ) {
+if ( $x_{2}$ == $\ldots$) {
 	$S_{4}$ = $S_{3}$ + $a_{3}$
 } else {
 	$S_{4}$ = $S_{3}$
