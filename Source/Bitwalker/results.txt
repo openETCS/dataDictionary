@@ -1,7 +1,7 @@
    verify  UpperBitsNotSet                     [11    11   (6     3   0   2)]     100%
    verify  Bitwalker                           [6      6   (1     5   0   0)]     100%
-   verify  Bitwalker_Peek_Normal               [97    97   (48   35  13   1)]     100%
-   verify  Bitwalker_Poke_Normal               [101  101   (44   44  12   1)]     100%
+   verify  Bitwalker_Peek_Normal               [97    97   (48   38  10   1)]     100%
+   verify  Bitwalker_Poke_Normal               [101  101   (44   47   9   1)]     100%
    verify  PeekThenPoke                        [16    16   (11    5   0   0)]     100%
    verify  PokeThenPeek                        [15    15   (9     4   0   2)]     100%
    verify  Bitstream                           [7      7   (3     4   0   0)]     100%
