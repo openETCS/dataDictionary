@@ -69,48 +69,58 @@ For the peek and poke calls we do actually need to set a bit position
 that determines where in the stream the bits shall be read.
 The bit position for each call depends on the bit position and length of the previous call.
 For the packet $\mathcal{A}$ the bit position count up as follows:\\
-variable   $a_{1}$, $a_{2}$, $a_{3}$, $a_{4}$\\
-length      8, 13,  3, 23\\
-bit position      0,  8, 21, 24\\
+\begin{center}
+\begin{tabular}{r | cccc}
+	variable &$x_{1}$ &$x_{2}$ &$x_{3}$ &$x_{4}$\\
+	length &8 &13 &3 &23\\
+	bit position &0 &8 &21 &24
+\end{tabular}
+\end{center}
 For each variable $x_{k}$ we can calculate the bit position $S_{k}$ as follows:
 \begin{align*}
-	&S_{k} = \sum_{i=1}^{k-1} a_{i}\\
-	&S_{k+1} = S_{k} + a_{k}
+	S_{k} = \sum_{i=1}^{k-1} a_{i}\\
 \end{align*}
-
+As described above, the bit position for each peek and poke call is determined by
+the bit position of the previous call and the length of the previous call.
+\begin{align*}
+	S_{k+1} = S_{k} + a_{k}
+\end{align*}
 \section{Dynamic packets}
 
 C structures of dynamic packets don't look any different from those of the previously introduced (static) packets.
-The only difference is that, whether or not the value of a variable is of importance, may depend on the value of another variable.	
-For example in our $\mathcal{A}$ packet, the value of $x_{3}$ may only be significant, if $x_{2}$ has a certain value.
-Since some data may be useless we don't want to waste any bandwidth on our transmission media and therefore only transfer the needed data.
-In the example we only want to transfer $x_{3}$ if $x_{2}$ has a certain value.
-Our Decoder function looks something like that:
+The only difference is that, whether or not the value of a variable is of importance, may depend on the value of another variable.
+For example in our $\mathcal{A}$ packet, the value of $x_{3}$ might only be significant, if $x_{2}$ has a certain value $y$.
+Just like with the unnecessary unset bits, we don't want to transfer data of no imortance.
+In the example we only want to transfer $x_{3}$ if $x_{2}$ has the value $y$.
+Our Decoder function then looks something like that:
 
 \begin{lstlisting}[mathescape]
 $\mathcal{A}$ Decoder(Bitstream stream) {
         $\mathcal{A}$ a;
 	a.$x_{1}$ = peek (stream, 8);
 	a.$x_{2}$ = peek (stream, 13);
-	if ($x_{2}$ == $\ldots$) {
+	if ($x_{2}$ == $y$) {
 		a.$x_{3}$ = peek (stream, 3);
 	}
 	a.$x_{4}$ = peek (stream, 23);
 }
 \end{lstlisting}
 
-But how do we calculate the bit position for $x_{4}$, since it also depend on the value of $x_{2}$.
+But how do we calculate $S_{4}$, since it also depends on the value of $x_{2}$?
 
-variable   $x_{1}$, $x_{2}$, $x_{3}$, $x_{4}$\\
-length        8, 13, 3, 23\\
-bit position\\
-$x_{2} = \ldots  0, 8, 21, 24$\\
-$x_{2} \neq \ldots  0, 8, 21, 21$\\
+\begin{center}
+\begin{tabular}{l r | cccc}
+	\multicolumn{2}{r|}{variable} &$x_{1}$ &$x_{2}$ &$x_{3}$ &$x_{4}$\\
+	\multicolumn{2}{r|}{length} &8 &13 &3 &23\\
+	\multirow{2}{*}{bit position} &$x_{2} = y$  &0 &8 &21 &\bf{24}\\
+	 &$x_{2} \neq y$  &0 &8 &21 &\bf{21}
+\end{tabular}
+\end{center}
 
-Maybe with the same if/else block:
+Maybe with the same if/else block as in the decoder:
 
 \begin{lstlisting}[mathescape]
-if ( $x_{2}$ == $\ldots$) {
+if ( $x_{2}$ == $y$) {
 	$S_{4}$ = $S_{3}$ + $a_{3}$
 } else {
 	$S_{4}$ = $S_{3}$
@@ -120,21 +130,101 @@ if ( $x_{2}$ == $\ldots$) {
 \section{Valid Array}
 
 A different approach to the determination of bit position in dynamic packets is to create a boolean array, that holds a valid flag for each variable.
-\begin{align*}
-	&x_{1}, x_{2}, x_{3}, \ldots , x_{n}\\
-	&v_{1}, v_{2}, v_{3}, \ldots , v_{n}	
-\end{align*}
+\begin{center}
+\begin{tabular}{ccccc}
+	$x_{1}$ &$x_{2}$ &$x_{3}$ &$\ldots$ &$x_{n}$\\
+	$v_{1}$ &$v_{2}$ &$v_{3}$ &$\ldots$ &$v_{n}$	
+\end{tabular}
+\end{center}
 For a given packet $\mathcal{A}$ with a variable sequence $x_{1}, x_{2}, x_{3}, \ldots , x_{n}$ each $v_{i}$ determines whether or not variable $x_{i}$ was transferred.
-Assuming we have a $V$-array, then we don't have to use the if-block.
-Neither for the peek and poke nor for the bit position determination.
+Assuming we have a $V$-array, we don't have to use the if-/else block anymore.
 For each $x_{i}$ with $1\leq i\leq n$ we have the length of bits to read $a_{i}$ and the boolean $v_{i}$ that tells us whether or not the variable was transferred.
-the Decoder look something like that:
+This allows a cleaner Decoder which looks something like that:
 \begin{lstlisting}[mathescape]
-$\mathcal{A}$-Decoder (Bitstream stream, $\mathcal{A}$ a) {
+$\mathcal{A}$ Decoder (Bitstream stream) {
+	$\mathcal{A}$ a;
 	a.$x_{1}$ = peek (stream, 8 * $v_{1}$);
 	a.$x_{2}$ = peek (stream, 13 * $v_{2}$);
 	a.$x_{3}$ = peek (stream, 3 * $v_{3}$);
 	a.$x_{4}$ = peek (stream, 23 * $v_{4}$);
+}
+\end{lstlisting}
+
+Since we found a way to build the decoder without all the if-/else blocks we can also think of a way to deternime the bit position $S_{k}^{\prime}$ for each variable.
+The bit position of $x_{i}$ is the same bit position as $x_{i-1}$ plus the length of $x_{i-1}$, but only if $v_{i-1}$ was true.
+Otherways $x_{i} = x_{i-1}$.
+\begin{align*}
+	S_{k+1}^{\prime} = S_{k} + a_{k} \cdot v_{k}
+\end{align*}
+From that we can write the bit position for each $k$ with $1 \leq k \leq n$ like
+\begin{align*}
+	S_{k}^{\prime} = \sum_{i=1}^{k-1} a_{i} \cdot v_{k}.\\
+\end{align*}
+
+\section{Valid Array calculation}
+
+Let $a_{i}^{\prime}$ be $a_{i}\cdot v_{i}$ for all $i$, with $1 \leq i \leq n$. From now on we will put a third parameter into out peek calls.
+\begin{center}
+	peek (stream, bit position, length);
+\end{center}
+Then we can write the decoder like that:
+\begin{lstlisting}[mathescape]
+$\mathcal{A}$ Decoder (Bitstream stream) {
+	$\mathcal{A}$ a;
+	a.$x_{1}$ = peek (stream, $S_{1}^{\prime}$, $a_{1}^{\prime}$);
+	a.$x_{2}$ = peek (stream, $S_{2}^{\prime}$, $a_{2}^{\prime}$);
+	a.$x_{3}$ = peek (stream, $S_{3}^{\prime}$, $a_{3}^{\prime}$);
+	a.$x_{4}$ = peek (stream, $S_{4}^{\prime}$, $a_{4}^{\prime}$);
+}
+\end{lstlisting}
+
+\section{Ideas}
+
+\begin{lstlisting}[mathescape]
+$\mathcal{A}$ Decoder (Bitstream stream) {
+	$\mathcal{A}$ a;
+	$S^{\prime} = pos$;
+	a.$x_{1}$ = peek (stream, $S^{\prime}$, $a_{1}^{\prime}$);
+	$S^{\prime}$ += $a_{1}^{\prime}$;
+	a.$x_{2}$ = peek (stream, $S^{\prime}$, $a_{2}^{\prime}$);
+	$S^{\prime}$ += $a_{2}^{\prime}$;
+	a.$x_{3}$ = peek (stream, $S^{\prime}$, $a_{3}^{\prime}$);
+	$S^{\prime}$ += $a_{3}^{\prime}$;
+	a.$x_{4}$ = peek (stream, $S^{\prime}$, $a_{4}^{\prime}$);
+	$S^{\prime}$ += $a_{4}^{\prime}$;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[mathescape]
+$\mathcal{A}$ Valid (V-Array *v, $\mathcal{A}$ *a) {
+	v[0] = 1;	# $x_{1}$
+	v[1] = 1;	# $x_{2}$
+	if (v[0] == y) {
+		v[2] = 1;	# $x_{3}$
+	} else {
+		v[2] = 0;	# $x_{3}$
+	}
+	v[3] = 1;	# $x_{4}$
+}
+\end{lstlisting}
+
+\begin{lstlisting}[mathescape]
+$\mathcal{A}$ Decoder (Bitstream stream) {
+	$\mathcal{A}$ a;
+	$\mathcal{A}$ V-Array v;
+	$S^{\prime}$ = $pos$;
+	a.$x_{1}$ = peek (stream, $S^{\prime}$, $a_{1}\cdot v[0]$);
+	$\mathcal{A}$ Valid (&v, &a);
+	$S^{\prime}$ += $a_{1}^{\prime}$;
+	a.$x_{2}$ = peek (stream, $S^{\prime}$, $a_{2}\cdot v[1]$);
+	$\mathcal{A}$ Valid (&v, &a);
+	$S^{\prime}$ += $a_{2}^{\prime}$;
+	a.$x_{3}$ = peek (stream, $S^{\prime}$, $a_{3}\cdot v[2]$);
+	$\mathcal{A}$ Valid (&v, &a);
+	$S^{\prime}$ += $a_{3}^{\prime}$;
+	a.$x_{4}$ = peek (stream, $S^{\prime}$, $a_{4}\cdot v[3]$);
+	$\mathcal{A}$ Valid (&v, &a);
+	$S^{\prime}$ += $a_{4}^{\prime}$;
 }
 \end{lstlisting}
 
