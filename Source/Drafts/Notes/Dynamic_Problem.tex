@@ -17,7 +17,7 @@ The C structures consist of members of various (unsigned) integer types.
 Moreover, it might happen that only a certain number of bits of a member
 shall be transmitted. 
 
-A packet types consists of $n$ member $x_1,\ldots, x_n$ and might look as follows:
+A packet types consists of $n$ member $x_1,\ldots, x_n$ and looks as follows:
 
 \begin{lstlisting}[mathescape]
 struct $\mathcal{A}$ {
@@ -50,7 +50,8 @@ whereas the extraction function of the encoder is referred to as \emph{poke}.
 The number of calls to peek and poke and the parameters depend on the number
 of variables and the required bit lengths.
 
-For the packet $\mathcal{A}$ the Decoder looks as follows
+\pagebreak
+For the packet $\mathcal{A}$ the decoder looks like this:
 
 \begin{lstlisting}[mathescape]
 $\mathcal{A}$ Decoder(Bitstream stream) {
@@ -64,11 +65,10 @@ $\mathcal{A}$ Decoder(Bitstream stream) {
 
 \section{Bit Position}
 
-The Decoder example is a very simplified version of an actual Decoder.
-For the peek and poke calls we do actually need to set a bit position
-that determines where in the stream the bits shall be read.
+The decoder example above is simplified in the fact, that for each peek call we do actually
+need to set a bit position that determines where in the stream the bits shall be read.
 The bit position for each call depends on the bit position and length of the previous call.
-For the packet $\mathcal{A}$ the bit position count up as follows:\\
+For the packet $\mathcal{A}$ the bit position counts up as follows:\\
 \begin{center}
 \begin{tabular}{r | cccc}
 	variable &$x_{1}$ &$x_{2}$ &$x_{3}$ &$x_{4}$\\
@@ -80,19 +80,39 @@ For each variable $x_{k}$ we can calculate the bit position $S_{k}$ as follows:
 \begin{align*}
 	S_{k} = \sum_{i=1}^{k-1} a_{i}\\
 \end{align*}
-As described above, the bit position for each peek and poke call is determined by
-the bit position of the previous call and the length of the previous call.
+As described above, the bit position for each peek call is determined by
+the bit position of the previous call and the length of the previous peek and can therefore expressed by
 \begin{align*}
-	S_{k+1} = S_{k} + a_{k}
+	S_{k+1} = S_{k} + a_{k}.
 \end{align*}
+
+The following decoder example includes the bit positions and each peek call reads like this:
+\begin{center}
+	peek (stream, bit position, length);
+\end{center}
+
+\begin{lstlisting}[mathescape]
+$\mathcal{A}$ Decoder(Bitstream stream) {
+        $\mathcal{A}$ a;
+	a.$x_{1}$ = peek (stream, 0,  8);
+	a.$x_{2}$ = peek (stream, 8,  13);
+	a.$x_{3}$ = peek (stream, 21, 3);
+	a.$x_{4}$ = peek (stream, 24, 23);
+}
+\end{lstlisting}
+
 \section{Dynamic packets}
 
-C structures of dynamic packets don't look any different from those of the previously introduced (static) packets.
-The only difference is that, whether or not the value of a variable is of importance, may depend on the value of another variable.
-For example in our $\mathcal{A}$ packet, the value of $x_{3}$ might only be significant, if $x_{2}$ has a certain value $y$.
+C structures of dynamic packets don't look any different from the previously introduced (static) packets.
+The only difference is that, whether or not the value of a variable is of importance, may depend
+on the value of a previously read variable.
+
+For example in the $\mathcal{A}$ packet, the value of $x_{3}$ might only be significant,
+if $x_{2}$ has the value $y$.
+
 Just like with the unnecessary unset bits, we don't want to transfer data of no imortance.
 In the example we only want to transfer $x_{3}$ if $x_{2}$ has the value $y$.
-Our Decoder function then looks something like that:
+The decoder function then looks like that:
 
 \begin{lstlisting}[mathescape]
 $\mathcal{A}$ Decoder(Bitstream stream) {
@@ -106,7 +126,11 @@ $\mathcal{A}$ Decoder(Bitstream stream) {
 }
 \end{lstlisting}
 
-But how do we calculate $S_{4}$, since it also depends on the value of $x_{2}$?
+The example does not include any bit positons yet. 
+In section 3 we defined the bit position of the peek call for each $x_{k}$ with $S_{k}$.
+$S_{k}$ depends on the bit position of $x_{k-1}$ and the length of $x_{k-1}$,
+but what if thet length of $x_{k-1}$ is variable?
+Since this gets a bit confusing lets bring up the table with the bit positions again. 
 
 \begin{center}
 \begin{tabular}{l r | cccc}
@@ -117,7 +141,8 @@ But how do we calculate $S_{4}$, since it also depends on the value of $x_{2}$?
 \end{tabular}
 \end{center}
 
-Maybe with the same if/else block as in the decoder:
+As we can see, the bit position of $x_{4}$ depends on the value of $x_{2}$, so we can use
+the same if-/else block as in the decoder above to determine it.
 
 \begin{lstlisting}[mathescape]
 if ( $x_{2}$ == $y$) {
@@ -129,45 +154,53 @@ if ( $x_{2}$ == $y$) {
 
 \section{Valid Array}
 
-A different approach to the determination of bit position in dynamic packets is to create a boolean array, that holds a valid flag for each variable.
+A different approach to the determination of bit positions in dynamic packets is to use
+a boolean array, that holds a valid flag for each variable.
 \begin{center}
 \begin{tabular}{ccccc}
 	$x_{1}$ &$x_{2}$ &$x_{3}$ &$\ldots$ &$x_{n}$\\
 	$v_{1}$ &$v_{2}$ &$v_{3}$ &$\ldots$ &$v_{n}$	
 \end{tabular}
 \end{center}
-For a given packet $\mathcal{A}$ with a variable sequence $x_{1}, x_{2}, x_{3}, \ldots , x_{n}$ each $v_{i}$ determines whether or not variable $x_{i}$ was transferred.
-Assuming we have a $V$-array, we don't have to use the if-/else block anymore.
-For each $x_{i}$ with $1\leq i\leq n$ we have the length of bits to read $a_{i}$ and the boolean $v_{i}$ that tells us whether or not the variable was transferred.
-This allows a cleaner Decoder which looks something like that:
+
+For a given packet $\mathcal{A}$ with a variable sequence $x_{1}, x_{2}, x_{3}, \ldots , x_{n}$
+each $v_{i}$ determines whether or not variable $x_{i}$ was transferred.
+
+To use the array to create a much cleaner decoder, we make use of the feature of the
+peek function, to also accept the length 0.
+
+For each $x_{i}$ with $1\leq i\leq n$ we have the length of bits to read $a_{i}$
+and the boolean $v_{i}$ that tells us whether or not the variable was transferred.
+
+With these bits of information we can calculate  $a_{i}^{\prime}$ as the actual length
+for each $x_{i}$ which may also be zero.
+\begin{align*}
+	a_{i}^{\prime} = a_{i} \cdot v_{i}.
+\end{align*}
+
+The new decoder (without bit positions) looks like this:
 \begin{lstlisting}[mathescape]
 $\mathcal{A}$ Decoder (Bitstream stream) {
 	$\mathcal{A}$ a;
-	a.$x_{1}$ = peek (stream, 8 * $v_{1}$);
-	a.$x_{2}$ = peek (stream, 13 * $v_{2}$);
-	a.$x_{3}$ = peek (stream, 3 * $v_{3}$);
-	a.$x_{4}$ = peek (stream, 23 * $v_{4}$);
+	a.$x_{1}$ = peek (stream, $a_{1}^{\prime}$);
+	a.$x_{2}$ = peek (stream, $a_{2}^{\prime}$);
+	a.$x_{3}$ = peek (stream, $a_{3}^{\prime}$);
+	a.$x_{4}$ = peek (stream, $a_{4}^{\prime}$);
 }
 \end{lstlisting}
 
-Since we found a way to build the decoder without all the if-/else blocks we can also think of a way to deternime the bit position $S_{k}^{\prime}$ for each variable.
-The bit position of $x_{i}$ is the same bit position as $x_{i-1}$ plus the length of $x_{i-1}$, but only if $v_{i-1}$ was true.
-Otherways $x_{i} = x_{i-1}$.
+Since we found a way to build the decoder without the if-/else blocks
+we may also think of a way to deternime the actual bit position $S_{k}^{\prime}$ for each variable.
+The bit position of the peek call for $x_{i}$ is the same bit position as $S_{i-1}^{\prime}$ plus the the actual length $a_{i-1}^{\prime}$.
 \begin{align*}
-	S_{k+1}^{\prime} = S_{k} + a_{k} \cdot v_{k}
+	S_{k+1}^{\prime} = S_{k} + a_{k}^{\prime}
 \end{align*}
-From that we can write the bit position for each $k$ with $1 \leq k \leq n$ like
+From that we can write the actual bit position for each $k$ with $1 \leq k \leq n$ like
 \begin{align*}
-	S_{k}^{\prime} = \sum_{i=1}^{k-1} a_{i} \cdot v_{k}.\\
+	S_{k}^{\prime} = \sum_{i=1}^{k-1} a_{i}^{\prime}.
 \end{align*}
 
-\section{Valid Array calculation}
-
-Let $a_{i}^{\prime}$ be $a_{i}\cdot v_{i}$ for all $i$, with $1 \leq i \leq n$. From now on we will put a third parameter into out peek calls.
-\begin{center}
-	peek (stream, bit position, length);
-\end{center}
-Then we can write the decoder like that:
+With the actual bit positions the decoder looks like this:
 \begin{lstlisting}[mathescape]
 $\mathcal{A}$ Decoder (Bitstream stream) {
 	$\mathcal{A}$ a;
