@@ -125,22 +125,28 @@ Proof.
   unfold is_uint32 in *.
   unfold is_uint64 in *.
   unfold P_EqualBits_1_ in *.
-  unfold P_LeftEqualBitRange_2_ in *.
+  unfold P_LeftEqualBitRange64 in *.
   intros.
 
-  case_lt i_1 i_0.
+  unfold shift_uint8 in *.
+
+  remember i_6 as bitpos.
+  remember i_5 as length.
+
+  case_lt i0 i_3.
   {
     intros less.
-    rewrite <- H23; auto with zarith.
-    replace (bitpos_0 + length_0 - 1 - i_1)%Z with 
-            (63 - (63 - (bitpos_0 + length_0 - 1 - i_1)))%Z in * by omega.
-    apply H30; auto with zarith.
+    rewrite <- H24; auto with zarith.
+    replace (bitpos + length - 1 - i0)%Z with 
+            (63 - (63 - (bitpos + length - 1 - i0)))%Z in * by omega.
+    apply H31; auto with zarith.
   }
   {
     intros.
-    assert(equal: i_1 = i_0) by auto with zarith.
+    assert(equal: i0 = i_3) by auto with zarith.
     rewrite equal in *.
-    rewrite <- H25; auto with zarith.
+    replace (bitpos + length)%Z with (length + bitpos)%Z by omega.
+    rewrite <- H26; auto with zarith.
   }
 Qed.
 
@@ -234,9 +240,12 @@ Proof.
   unfold P_UpperBitsNotSet.
   intros.
 
+  remember i_1 as value.
+  remember i   as length. 
+
   rewrite is_uint64_lsl1_inf in H5; auto with zarith.
   intuition.
-  assert (X: (forall i_0 : int, (length_0 <= i_0)%Z -> ~ bit_test value_0 i_0)) by auto with zarith.
+  assert (X: (forall i_0 : int, (length <= i_0)%Z -> ~ bit_test value i_0)) by auto with zarith.
   rewrite <- upper_bits_not_set in X; auto with zarith.
 Qed.
 
