@@ -25,9 +25,9 @@ static inline int PeekBit8(uint8_t value, uint32_t pos)
 
     assigns \nothing;
 
-    ensures left:   LeftEqualBitRange(\result, value, 0,  pos);
+    ensures left:   LeftEqualBitRange8(\result, value, 0,  pos);
     ensures pos:    LeftBit8(\result, pos) <==> (flag != 0);
-    ensures right:  LeftEqualBitRange(\result, value, pos + 1,  8);
+    ensures right:  LeftEqualBitRange8(\result, value, pos + 1,  8);
 */
 static inline uint8_t PokeBit8(uint8_t value, uint32_t pos, int flag)
 {

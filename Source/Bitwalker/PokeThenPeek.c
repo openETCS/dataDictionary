@@ -19,8 +19,8 @@ uint64_t PokeThenPeek(uint8_t* addr, uint32_t size, uint32_t bitpos, uint32_t le
 
     uint64_t peek_result = Bitwalker_Peek_Normal(addr, size, bitpos, length);
 
-    //@ assert partial_copy: EqualBitRange(peek_result, value, 0, length);
-    //@ assert full_copy:    EqualBitRange(peek_result, value, 0, 64);
+    //@ assert partial_copy: EqualBitRange64(peek_result, value, 0, length);
+    //@ assert full_copy:    EqualBitRange64(peek_result, value, 0, 64);
 
     return peek_result;
 }
