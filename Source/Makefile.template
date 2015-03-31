@@ -99,6 +99,9 @@ export ASTYLE=astyle $(ASTYLEOPTIONS)
 %.wp:%.c coq-bitlemmas FORCE
 	@$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 1 -wp-out $(patsubst %.c,%.wp, $<)   $<
 
+%.wp:%.h coq-bitlemmas FORCE
+	@$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 1 -wp-out $(patsubst %.h,%.wp, $<)   $<
+
 
 # start WP on command line but do not run provers
 %.check:%.c FORCE 
