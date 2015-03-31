@@ -30,7 +30,7 @@ coq-bitlemmas: FORCE
 # This allows us, for example, to start the gui very quickly and then
 # run the prover(s) on select proof obligtions.
 
-#WP_FLAGS  =-cpp-command 'gcc -C -E -nostdinc $(INCLUDES)'
+WP_FLAGS  =-cpp-command 'gcc -C -E $(INCLUDES)'
 WP_FLAGS += -pp-annot -no-unicode
 WP_FLAGS += -wp
 WP_FLAGS += -wp-model Typed+ref
