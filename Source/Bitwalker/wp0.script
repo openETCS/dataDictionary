@@ -220,10 +220,13 @@ Goal typed_ref_BitTest_PokeThenPeek_assert_partial_copy.
 Hint PokeThenPeek,partial_copy,property.
 Proof.
   unfold P_EqualBits_2_ in *.
-  unfold P_EqualBitRange_2_ in *.
+  unfold P_EqualBitRange64 in *.
   intros.
 
-  replace (i_0)  with  (bitpos_0 + length_0 - 1 - (bitpos_0 + length_0 - 1 - i_0 )) by omega.
+  remember i_1 as length.
+  remember i   as bitpos.
+
+  replace (i0)  with  (bitpos + length - 1 - (bitpos + length - 1 - i0 )) by omega.
 
   rewrite H15; auto with zarith.
 Qed.
