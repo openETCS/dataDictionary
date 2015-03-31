@@ -159,21 +159,23 @@ Proof.
   unfold  to_sint32 in *.
   intros.
 
-  remember bitpos_0 as bitpos.
-  remember length_0 as length.
-  remember addr_0 as addr.
-  remember value_0 as value.
+  remember i_5 as bitpos.
+  remember i_4 as length.
+  remember a   as addr.
+  remember i_3 as value.
 
-  case_lt i_1 i_0.
-  * 
+  case_lt i0 i_1.
+  {
    intros.
-   rewrite H25; auto with zarith.
-
-  * 
+   rewrite H26; auto with zarith.
+  }
+  {
    intros.
-   assert(equal: (i_1 = i_0)%Z) by omega.
+   assert(equal: (i0 = i_1)%Z) by omega.
    rewrite equal in *.
-   rewrite <- H30; auto with zarith.
+   replace (bitpos + length)%Z with (length + bitpos)%Z by omega.
+   rewrite <- H31; auto with zarith.
+  }
 Qed.
 
 Goal typed_ref_BitTest_PokeBit8Array_post_left.
