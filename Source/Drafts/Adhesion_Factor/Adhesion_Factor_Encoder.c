@@ -14,7 +14,7 @@ int Adhesion_Factor_Encoder(Bitstream* stream, const Adhesion_Factor* p)
             const uint32_t pos = stream->bitpos;
 
             Bitwalker_Poke_Normal(addr, size, pos,       2,  p->Q_DIR);
-	    Bitwalker_Poke_Normal(addr, size, pos + 2,   13, p->L_PACKER);
+	    Bitwalker_Poke_Normal(addr, size, pos + 2,   13, p->L_PACKET);
             Bitwalker_Poke_Normal(addr, size, pos + 15,  2,  p->Q_SCALE);
             Bitwalker_Poke_Normal(addr, size, pos + 17,  15, p->D_ADHESION);
             Bitwalker_Poke_Normal(addr, size, pos + 32,  15, p->L_ADHESION);
