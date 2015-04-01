@@ -23,7 +23,7 @@
       ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures left:       Unchanged{Here,Old}(stream, 0, \old(stream->bitpos));
-      ensures middle:     EqualBits(stream, \old(stream->bitpos), p);
+      ensures middle:     EqualBits{Here,Old}(stream, \old(stream->bitpos), p);
       ensures right:      Unchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
 
     behavior values_too_big:
