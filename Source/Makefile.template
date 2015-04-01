@@ -31,6 +31,7 @@ coq-bitlemmas: FORCE
 # run the prover(s) on select proof obligtions.
 
 WP_FLAGS  =-cpp-command 'gcc -C -E $(INCLUDES)'
+WP_FLAGS += -cpp-gnu-like
 WP_FLAGS += -pp-annot -no-unicode
 WP_FLAGS += -wp
 WP_FLAGS += -wp-model Typed+ref
