@@ -55,11 +55,6 @@ typedef struct Adhesion_Factor Adhesion_Factor;
       EqualBits{A}(stream, pos + 32,  pos + 47,  \at(p->L_ADHESION, B))        &&
       EqualBits{A}(stream, pos + 47,  pos + 48,  \at(p->M_ADHESION, B));
 
-    lemma AdhesionFactorEquality{A,B,C} :
-      \forall Bitstream* stream, integer pos, Adhesion_Factor* p;
-        EqualBits{A,B}(stream, pos, p) && EqualBits{C,B}(stream, pos, p) ==>
-        Unchanged{A,C}(stream, pos, pos + BitSize{B}(p));
-
     predicate UpperBitsNotSet(Adhesion_Factor* p) =
       UpperBitsNotSet(p->Q_DIR,            2)   &&
       UpperBitsNotSet(p->L_PACKET,         13)  &&
