@@ -21,7 +21,7 @@ uint64_t Bitstream_WriteThenRead(Bitstream* stream, uint32_t length, uint64_t va
 
     uint64_t result = Bitstream_Read(stream, length);
 
-    //@ assert partial_copy: EqualBitRange64(result, value, 0, length);
+    //@ assert partial_copy: EqualBits64(result, value, 0, length);
     //@ assert full_copy:    EqualBits64(result, value);
 
     return result;

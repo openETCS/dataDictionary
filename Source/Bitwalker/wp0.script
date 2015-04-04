@@ -125,7 +125,7 @@ Proof.
   unfold is_uint32 in *.
   unfold is_uint64 in *.
   unfold P_EqualBits_1_ in *.
-  unfold P_LeftEqualBitRange64 in *.
+  unfold P_LeftEqualBits64 in *.
   intros.
 
   unfold shift_uint8 in *.
@@ -148,6 +148,28 @@ Proof.
     replace (bitpos + length)%Z with (length + bitpos)%Z by omega.
     rewrite <- H26; auto with zarith.
   }
+Qed.
+
+Goal typed_ref_BitTest_Bitwalker_PokeThenPeek_assert_partial_copy.
+Hint Bitwalker_PokeThenPeek,partial_copy,property.
+Proof.
+  unfold P_EqualBits_2_ in *.
+  unfold P_EqualBitRange64 in *.
+  intros.
+
+  remember i_1 as length.
+  remember i   as bitpos.
+
+  replace (i0)  with  (bitpos + length - 1 - (bitpos + length - 1 - i0 )) by omega.
+
+  rewrite H15; auto with zarith.
+Qed.
+
+Goal typed_ref_BitTest_Bitwalker_PokeThenPeek_post_result_value.
+Hint Bitwalker_PokeThenPeek,default,property,result_value.
+Proof.
+  intros.
+  apply bits_equal_uint64; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_Bitwalker_Poke_Normal_loop_inv_middle_preserved.
@@ -214,28 +236,6 @@ Proof.
   unfold is_uint8 in *.
   intros.
   apply bitwise_and_not_uint8; auto.
-Qed.
-
-Goal typed_ref_BitTest_Bitwalker_PokeThenPeek_assert_partial_copy.
-Hint Bitwalker_PokeThenPeek,partial_copy,property.
-Proof.
-  unfold P_EqualBits_2_ in *.
-  unfold P_EqualBitRange64 in *.
-  intros.
-
-  remember i_1 as length.
-  remember i   as bitpos.
-
-  replace (i0)  with  (bitpos + length - 1 - (bitpos + length - 1 - i0 )) by omega.
-
-  rewrite H15; auto with zarith.
-Qed.
-
-Goal typed_ref_BitTest_Bitwalker_PokeThenPeek_post_result_value.
-Hint Bitwalker_PokeThenPeek,default,property,result_value.
-Proof.
-  intros.
-  apply bits_equal_uint64; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_UpperBitsNotSet64_post_not_set_part2.

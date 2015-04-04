@@ -3,7 +3,7 @@
    verify  Bitwalker_Peek_Normal               [97    97   (48   32  16   1)]     100%
    verify  Bitwalker_Poke_Normal               [101  101   (44   41  15   1)]     100%
    verify  Bitwalker_PeekThenPoke              [16    16   (11    5   0   0)]     100%
-   verify  Bitwalker_PokeThenPeek              [15    15   (9     4   0   2)]     100%
+   verify  Bitwalker_PokeThenPeek              [15    14   (10    3   1   0)]      93%
    verify  Bitstream                           [7      7   (3     4   0   0)]     100%
    verify  Bitstream_Init                      [10    10   (6     4   0   0)]     100%
    verify  Bitstream_Read                      [17    17   (7     9   1   0)]     100%
