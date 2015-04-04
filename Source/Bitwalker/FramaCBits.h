@@ -37,6 +37,9 @@
      EqualBitRange64{A}(uint64_t x, uint64_t y, integer first, integer last) =
         \forall integer i; first <= i < last ==> (BitTest(x, i) <==> BitTest(y, i));
 
+   predicate EqualBits64{A}(uint64_t x, uint64_t y) =
+      EqualBitRange64{A}(x, y, 0, 64);
+
    predicate
      LeftEqualBitRange8{A}(uint8_t x, uint8_t y, integer first, integer last) =
         \forall integer i; first <= i < last ==> (LeftBit8(x, i) <==> LeftBit8(y, i));
