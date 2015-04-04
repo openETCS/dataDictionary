@@ -34,8 +34,8 @@ typedef struct Bitstream Bitstream;
      \forall integer i; first <= i < last ==>
         (LeftInBitstream{A}(stream, i) <==> LeftInBitstream{B}(stream, i));
 
-  predicate EqualBits{L}(Bitstream* stream , integer first, integer last, uint64_t value) =
-                EqualBits{L}(stream->addr, first, last, value);
+  predicate EqualBits{L}(Bitstream* stream , integer length, uint64_t value) =
+      EqualBits{L}(stream->addr, stream->bitpos, stream->bitpos + length, value);
 
 */
 
