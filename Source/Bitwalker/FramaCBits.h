@@ -48,10 +48,6 @@
      LeftEqualBits64{A}(uint64_t x, uint64_t y, integer first, integer last) =
         \forall integer i; first <= i < last ==> (LeftBit64(x, i) <==> LeftBit64(y, i));
 
-   lemma LeftRight64:
-     \forall uint64_t x, y, integer first, last;
-     LeftEqualBits64(x, y, first, last) ==> EqualBits64(x, y, 64-last, 64-first);
-
    predicate EqualBits{A}(uint8_t* addr, integer first, integer last,
                           uint64_t value, integer length) =
         \forall integer i; first <= i < last ==>
