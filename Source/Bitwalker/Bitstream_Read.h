@@ -9,9 +9,10 @@
   requires  invariant:  Invariant(stream, length);
   requires  normal:     Normal(stream, length);
 
-  assigns  \nothing;
+  assigns  stream->bitpos;
 
-  ensures  equal:      EqualBits(stream, length, \result);
+  ensures  pos:        stream->bitpos == \old(stream->bitpos) + length;
+  ensures  changed:    EqualBits{Here,Old}(stream, \result);
   ensures  upper:      UpperBitsNotSet(\result, length);
 */
 uint64_t Bitstream_Read(Bitstream* stream, uint32_t length);
