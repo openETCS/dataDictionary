@@ -38,9 +38,11 @@ typedef struct Bitstream Bitstream;
      Unchanged{A,B}(stream, 0, \at(stream->bitpos,B)) &&
      Unchanged{A,B}(stream, \at(stream->bitpos,A), 8 * \at(stream->size,A));
 
-  predicate EqualBits{L}(Bitstream* stream , integer length, uint64_t value) =
-      EqualBits{L}(stream->addr, stream->bitpos, stream->bitpos + length, value);
+  predicate EqualBits{A}(Bitstream* stream, integer first, integer last, uint64_t value) =
+      EqualBits{A}(stream->addr, first, last, value);
 
+  predicate EqualBits{A,B}(Bitstream* stream, uint64_t value) =
+      EqualBits{A}(stream, \at(stream->bitpos,B), \at(stream->bitpos,A), value);
 */
 
 /*@
