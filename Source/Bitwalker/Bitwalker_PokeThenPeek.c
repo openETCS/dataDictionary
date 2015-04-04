@@ -1,5 +1,4 @@
 
-
 #include "Bitwalker_Peek_Normal.h"
 #include "Bitwalker_Poke_Normal.h"
 
@@ -13,7 +12,8 @@
 
     ensures result_value:  \result == value;
 */
-uint64_t PokeThenPeek(uint8_t* addr, uint32_t size, uint32_t bitpos, uint32_t length, uint64_t value)
+uint64_t Bitwalker_PokeThenPeek(uint8_t* addr, uint32_t size,
+                                uint32_t bitpos, uint32_t length, uint64_t value)
 {
     Bitwalker_Poke_Normal(addr, size, bitpos, length, value);
 

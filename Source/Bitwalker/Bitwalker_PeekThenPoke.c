@@ -1,5 +1,4 @@
 
-
 #include "Bitwalker.h"
 #include "Bitwalker_Peek_Normal.h"
 #include "Bitwalker_Poke_Normal.h"
@@ -13,7 +12,7 @@
 
     ensures  unchanged:  Unchanged{Here,Old}(addr, 0, 8*size);
 */
-void PeekThenPoke(uint8_t* addr, uint32_t size, uint32_t bitpos, uint32_t length)
+void Bitwalker_PeekThenPoke(uint8_t* addr, uint32_t size, uint32_t bitpos, uint32_t length)
 {
     uint64_t value = Bitwalker_Peek_Normal(addr, size, bitpos, length);
     //@ assert equal:  EqualBits(addr, bitpos, bitpos + length, value);

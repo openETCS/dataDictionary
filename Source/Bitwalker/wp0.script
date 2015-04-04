@@ -216,8 +216,8 @@ Proof.
   apply bitwise_and_not_uint8; auto.
 Qed.
 
-Goal typed_ref_BitTest_PokeThenPeek_assert_partial_copy.
-Hint PokeThenPeek,partial_copy,property.
+Goal typed_ref_BitTest_Bitwalker_PokeThenPeek_assert_partial_copy.
+Hint Bitwalker_PokeThenPeek,partial_copy,property.
 Proof.
   unfold P_EqualBits_2_ in *.
   unfold P_EqualBitRange64 in *.
@@ -231,8 +231,8 @@ Proof.
   rewrite H15; auto with zarith.
 Qed.
 
-Goal typed_ref_BitTest_PokeThenPeek_post_result_value.
-Hint PokeThenPeek,default,property,result_value.
+Goal typed_ref_BitTest_Bitwalker_PokeThenPeek_post_result_value.
+Hint Bitwalker_PokeThenPeek,default,property,result_value.
 Proof.
   intros.
   apply bits_equal_uint64; auto with zarith.
