@@ -15,6 +15,7 @@ SRC :=  UpperBitsNotSet.c\
 	Bitwalker_PeekThenPoke.c Bitwalker_PokeThenPeek.c\
 	Bitstream.c Bitstream_Init.c\
 	Bitstream_Read.c Bitstream_Write.c\
+	Bitstream_ReadThenWrite.c Bitstream_WriteThenRead.c\
 
 OBJ := $(SRC:.c=.o)
 REPORT := $(SRC:.c=.report)

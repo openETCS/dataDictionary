@@ -8,3 +8,5 @@
    verify  Bitstream_Init                      [10    10   (6     4   0   0)]     100%
    verify  Bitstream_Read                      [17    17   (7     9   1   0)]     100%
    verify  Bitstream_Write                     [19    19   (3    13   3   0)]     100%
+   verify  Bitstream_ReadThenWrite             [25    25   (13   10   2   0)]     100%
+   verify  Bitstream_WriteThenRead             [23    22   (12    5   5   0)]      95%
