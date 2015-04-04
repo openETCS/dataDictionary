@@ -154,7 +154,7 @@ Goal typed_ref_BitTest_Bitwalker_PokeThenPeek_assert_partial_copy.
 Hint Bitwalker_PokeThenPeek,partial_copy,property.
 Proof.
   unfold P_EqualBits_2_ in *.
-  unfold P_EqualBitRange64 in *.
+  unfold P_EqualBits64_1_ in *.
   intros.
 
   remember i_1 as length.
