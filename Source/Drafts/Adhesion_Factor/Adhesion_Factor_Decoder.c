@@ -1,6 +1,6 @@
 
 #include "Adhesion_Factor_Decoder.h"
-#include "Bitwalker_Peek_Normal.h"
+#include "Bitstream_Read.h"
 
 int Adhesion_Factor_Decoder(Bitstream* stream, Adhesion_Factor* p)
 {
@@ -10,21 +10,32 @@ int Adhesion_Factor_Decoder(Bitstream* stream, Adhesion_Factor* p)
         const uint32_t size = stream->size;
         const uint32_t pos = stream->bitpos;
 
-        p->Q_DIR              = Bitwalker_Peek_Normal(addr, size, pos,       2);
-	p->L_PACKET           = Bitwalker_Peek_Normal(addr, size, pos + 2,   13);
-        p->Q_SCALE            = Bitwalker_Peek_Normal(addr, size, pos + 15,  2);
-        p->D_ADHESION         = Bitwalker_Peek_Normal(addr, size, pos + 17,  15);
-        p->L_ADHESION         = Bitwalker_Peek_Normal(addr, size, pos + 32,  15);
-        p->M_ADHESION         = Bitwalker_Peek_Normal(addr, size, pos + 47,  1);
+        p->Q_DIR              = Bitstream_Read(stream, 2);
+        //@ assert Q_DIR:     stream->bitpos == pos + 2;
+        //@ assert Q_DIR:     EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
 
-        stream->bitpos += ADHESION_FACTOR_BITSIZE;
+	p->L_PACKET           = Bitstream_Read(stream, 13);
+        //@ assert L_PACKET:  stream->bitpos == pos + 15;
+	//@ assert L_PACKET:  EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
 
-        //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
-	//@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
-        //@ assert Q_SCALE:           EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE);
-        //@ assert D_ADHESION:        EqualBits(stream, pos + 17,  pos + 32,  p->D_ADHESION);
-        //@ assert L_ADHESION:        EqualBits(stream, pos + 32,  pos + 47,  p->L_ADHESION);
-        //@ assert M_ADHESION:        EqualBits(stream, pos + 47,  pos + 48,  p->M_ADHESION);
+        p->Q_SCALE            = Bitstream_Read(stream, 2);
+        //@ assert Q_SCALE:   stream->bitpos == pos + 17;
+        //@ assert Q_SCALE:   EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE);
+
+        p->D_ADHESION         = Bitstream_Read(stream, 15);
+        //@ assert D_ADHESION:   stream->bitpos == pos + 32;
+        //@ assert D_ADHESION:   EqualBits(stream, pos + 17,  pos + 32,  p->D_ADHESION);
+
+        p->L_ADHESION         = Bitstream_Read(stream, 15);
+        //@ assert L_ADHESION:   stream->bitpos == pos + 47;
+        //@ assert L_ADHESION:   EqualBits(stream, pos + 32,  pos + 47,  p->L_ADHESION);
+
+        p->M_ADHESION         = Bitstream_Read(stream, 1);
+        //@ assert M_ADHESION:   stream->bitpos == pos + 48;
+        //@ assert M_ADHESION:   EqualBits(stream, pos + 47,  pos + 48,  p->M_ADHESION);
+
+        //@ assert stream->bitpos == \at(stream->bitpos,Pre) + ADHESION_FACTOR_BITSIZE;
+
 
         //@ assert Q_DIR:             UpperBitsNotSet(p->Q_DIR,             2);
 	//@ assert L_PACKET:          UpperBitsNotSet(p->L_PACKET,          13);
