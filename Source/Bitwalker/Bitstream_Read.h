@@ -12,7 +12,7 @@
   assigns  stream->bitpos;
 
   ensures  pos:        stream->bitpos == \old(stream->bitpos) + length;
-  ensures  changed:    EqualBits{Here,Old}(stream, \result);
+  ensures  changed:    EqualBits(stream, \old(stream->bitpos), stream->bitpos, \result);
   ensures  upper:      UpperBitsNotSet(\result, length);
 */
 uint64_t Bitstream_Read(Bitstream* stream, uint32_t length);

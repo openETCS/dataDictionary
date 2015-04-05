@@ -14,13 +14,14 @@
 */
 void Bitstream_ReadThenWrite(Bitstream* stream, uint32_t length)
 {
+    //@ ghost uint32_t pos = stream->bitpos;
     uint64_t value = Bitstream_Read(stream, length);
-    //@ assert equal:  EqualBits{Here,Pre}(stream, value);
+    //@ assert equal:  EqualBits(stream, pos, pos+length, value);
 
     stream->bitpos -= length;
-    //@ assert stream->bitpos == \at(stream->bitpos, Pre);
+    //@ assert stream->bitpos == pos;
 
     Bitstream_Write(stream, length, value);
-    //@ assert unchanged:  Unchanged{Here,Pre}(stream, \at(stream->bitpos,Pre), stream->bitpos);
+    //@ assert unchanged:  Unchanged{Here,Pre}(stream, pos, stream->bitpos);
 }
 

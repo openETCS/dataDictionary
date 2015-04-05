@@ -14,8 +14,8 @@
   assigns stream->bitpos;
 
   ensures  pos:        stream->bitpos == \old(stream->bitpos) + length;
+  ensures  changed:    EqualBits(stream, \old(stream->bitpos), stream->bitpos, value);
   ensures  unchanged:  Unchanged{Here,Old}(stream);
-  ensures  changed:    EqualBits{Here,Old}(stream, value);
 */
 void Bitstream_Write(Bitstream* stream, uint32_t length, uint64_t value);
 

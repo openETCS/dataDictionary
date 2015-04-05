@@ -22,11 +22,15 @@
 */
 uint64_t Bitstream_WriteThenRead(Bitstream* stream, uint32_t length, uint64_t value)
 {
+    //@ ghost uint32_t pos = stream->bitpos;
     Bitstream_Write(stream, length, value);
+    //@ assert equal:  EqualBits(stream, pos, pos+length, value);
 
     stream->bitpos -= length;
+    //@ assert stream->bitpos == \at(stream->bitpos,Pre);
 
     uint64_t result = Bitstream_Read(stream, length);
+    //@ assert equal:  EqualBits(stream, pos, pos+length, result);
 
     //@ assert left:         LeftEqualBits64(result, value, 64-length, 64);
     //@ assert partial_copy: EqualBits64(result, value, 0, length);
