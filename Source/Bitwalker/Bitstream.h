@@ -34,10 +34,6 @@ typedef struct Bitstream Bitstream;
      \forall integer i;  first <= i < last ==>
         (LeftInBitstream{A}(stream, i) <==> LeftInBitstream{B}(stream, i));
 
-  predicate Unchanged{A,B}(Bitstream* stream) =
-     Unchanged{A,B}(stream, 0, \at(stream->bitpos,B)) &&
-     Unchanged{A,B}(stream, \at(stream->bitpos,A), 8 * \at(stream->size,A));
-
   predicate EqualBits{A}(Bitstream* stream, integer first, integer last, uint64_t value) =
       EqualBits{A}(stream->addr, first, last, value);
 
