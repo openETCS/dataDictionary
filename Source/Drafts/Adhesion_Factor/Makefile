@@ -10,6 +10,11 @@ VPATH = $(TOPDIR)/Bitwalker
 CPPFLAGS += -I$(TOPDIR)/Bitwalker
 
 #WP_FLAGS += -wp-prop Q_DIR
+#WP_FLAGS += -wp-prop L_PACKET
+#WP_FLAGS += -wp-prop Q_SCALE
+#WP_FLAGS += -wp-prop D_ADHESION
+#WP_FLAGS += -wp-prop L_ADHESION
+#WP_FLAGS += -wp-prop M_ADHESION
 #WP_FLAGS += -wp-prop @assert
 
 SRC := $(wildcard *.c)
