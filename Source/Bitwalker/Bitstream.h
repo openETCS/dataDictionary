@@ -49,6 +49,5 @@ typedef struct Bitstream Bitstream;
 */
 int NormalBitstream(const Bitstream* stream, uint32_t length);
 
-
 #endif // BITSTREAM_H_INCLUDED
 
