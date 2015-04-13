@@ -47,13 +47,13 @@ typedef struct Adhesion_Factor Adhesion_Factor;
       ZeroInitialized(p->L_ADHESION)        &&
       ZeroInitialized(p->M_ADHESION);
 
-    predicate EqualBits{A,B}(Bitstream* stream, integer pos, Adhesion_Factor* p) =
-      EqualBits{A}(stream, pos,       pos + 2,   \at(p->Q_DIR, B))             &&
-      EqualBits{A}(stream, pos + 2,   pos + 15,  \at(p->L_PACKET, B))          &&
-      EqualBits{A}(stream, pos + 15,  pos + 17,  \at(p->Q_SCALE, B))           &&
-      EqualBits{A}(stream, pos + 17,  pos + 32,  \at(p->D_ADHESION, B))        &&
-      EqualBits{A}(stream, pos + 32,  pos + 47,  \at(p->L_ADHESION, B))        &&
-      EqualBits{A}(stream, pos + 47,  pos + 48,  \at(p->M_ADHESION, B));
+    predicate EqualBits(Bitstream* stream, integer pos, Adhesion_Factor* p) =
+      EqualBits(stream, pos,       pos + 2,   p->Q_DIR             &&
+      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET          &&
+      EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE           &&
+      EqualBits(stream, pos + 17,  pos + 32,  p->D_ADHESION        &&
+      EqualBits(stream, pos + 32,  pos + 47,  p->L_ADHESION        &&
+      EqualBits(stream, pos + 47,  pos + 48,  p->M_ADHESION;
 
     predicate UpperBitsNotSet(Adhesion_Factor* p) =
       UpperBitsNotSet(p->Q_DIR,            2)   &&

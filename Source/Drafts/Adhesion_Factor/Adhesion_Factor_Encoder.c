@@ -13,14 +13,12 @@ int Adhesion_Factor_Encoder(Bitstream* stream, const Adhesion_Factor* p)
             const uint32_t size = stream->size;
             const uint32_t pos = stream->bitpos;
 
-            Bitwalker_Poke_Normal(addr, size, pos,       2,  p->Q_DIR);
-	    Bitwalker_Poke_Normal(addr, size, pos + 2,   13, p->L_PACKET);
-            Bitwalker_Poke_Normal(addr, size, pos + 15,  2,  p->Q_SCALE);
-            Bitwalker_Poke_Normal(addr, size, pos + 17,  15, p->D_ADHESION);
-            Bitwalker_Poke_Normal(addr, size, pos + 32,  15, p->L_ADHESION);
-            Bitwalker_Poke_Normal(addr, size, pos + 47,  1,  p->M_ADHESION);
-
-            stream->bitpos += ADHESION_FACTOR_BITSIZE;
+	    Bitstream_Write(stream, size, 2,  p->Q_DIR);
+	    Bitstream_Write(stream, size, 13, p->L_PACKET);
+	    Bitstream_Write(stream, size, 2,  p->Q_SCALE);
+	    Bitstream_Write(stream, size, 15, p->D_ADHESION);
+	    Bitstream_Write(stream, size, 15, p->L_ADHESION);
+	    Bitstream_Write(stream, size, 1,  p->M_ADHESION);
 
             //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
 	    //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);

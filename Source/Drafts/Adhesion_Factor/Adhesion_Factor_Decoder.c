@@ -90,6 +90,8 @@ int Adhesion_Factor_Decoder(Bitstream* stream, Adhesion_Factor* p)
         //@ assert M_ADHESION:        EqualBits(stream, pos + 47, pos + 48, p->M_ADHESION);
         //@ assert M_ADHESION:        UpperBitsNotSet(p->M_ADHESION,        1);
 
+	//@ assert final: EqualBits(stream, pos, p);
+
         return 1;
     }
     else
