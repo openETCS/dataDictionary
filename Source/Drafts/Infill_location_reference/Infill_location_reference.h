@@ -67,18 +67,24 @@ typedef struct Infill_location_reference Infill_location_reference;
     predicate Invariant(Infill_location_reference* p) = Invariant(p->Q_DIR)             && Invariant(p->L_PACKET)          && Invariant(p->Q_NEWCOUNTRY); predicate ZeroInitialized(Infill_location_reference* p) =
       ZeroInitialized(p->Q_DIR)             &&
       ZeroInitialized(p->L_PACKET)          &&
-      ZeroInitialized(p->Q_NEWCOUNTRY);
+      ZeroInitialized(p->Q_NEWCOUNTRY)      &&
+      ZeroInitialized(p->NID_C)             &&
+      ZeroInitialized(p->NID_BG);
 
     predicate EqualBits{L}(Bitstream* stream, integer pos, Infill_location_reference* p) =
       EqualBits(stream, pos + Q_DIR_B{L}(p), pos + Q_DIR_E{L}(p), p->Q_DIR) &&
       EqualBits(stream, pos + L_PACKET_B{L}(p), pos + L_PACKET_E{L}(p), p->L_PACKET) &&
-      EqualBits(stream, pos + Q_NEWCOUNTRY_B{L}(p), pos + Q_NEWCOUNTRY_E{L}(p), p->Q_NEWCOUNTRY);
+      EqualBits(stream, pos + Q_NEWCOUNTRY_B{L}(p), pos + Q_NEWCOUNTRY_E{L}(p), p->Q_NEWCOUNTRY) &&
+      EqualBits(stream, pos + NID_C_B{L}(p), pos + NID_C_E{L}(p), p->NID_C) &&
+      EqualBits(stream, pos + NID_BG_B{L}(p), pos + NID_BG_E{L}(p), p->NID_BG);
 
 
     predicate UpperBitsNotSet(Infill_location_reference* p) =
       UpperBitsNotSet(p->Q_DIR,            2)   &&
       UpperBitsNotSet(p->L_PACKET,         13)  &&
-      UpperBitsNotSet(p->Q_NEWCOUNTRY,     1);
+      UpperBitsNotSet(p->Q_NEWCOUNTRY,     1)   &&
+      UpperBitsNotSet(p->NID_C,            10)  &&
+      UpperBitsNotSet(p->NID_BG,           14);
 
 */
 

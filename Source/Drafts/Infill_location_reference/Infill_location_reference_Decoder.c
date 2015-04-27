@@ -42,10 +42,26 @@ int Infill_location_reference_Decoder(Bitstream* stream, Infill_location_referen
 
 	if (p->Q_NEWCOUNTRY == 1)
 	{
-	    p->NID_C		= Bitstream_Read(stream, 10);
+           /*@
+	      requires NID_C: stream->bitpos == pos + NID_C_B{Here}(p);
+	      assigns         stream->bitpos;
+	      assigns         p->NID_C;
+	      ensures  NID_C: stream->bitpos == pos + NID_C_E{Here}(p);
+	      ensures  NID_C: EqualBits(stream, pos + NID_C_B{Here}(p), pos + NID_C_E{Here}(p), p->NID_C);
+	      ensures  NID_C: UpperBitsNotSet(p->NID_C, 10);
+	   */
+	   { p->NID_C		= Bitstream_Read(stream, 10); }
 	}
 
-	p->NID_BG		= Bitstream_Read(stream, 14);
+        /*@
+	   requires NID_BG: stream->bitpos == pos + NID_BG_B{Here}(p);
+	   assigns         stream->bitpos;
+	   assigns         p->NID_BG;
+	   ensures  NID_BG: stream->bitpos == pos + NID_BG_E{Here}(p);
+	   ensures  NID_BG: EqualBits(stream, pos + NID_BG_B{Here}(p), pos + NID_BG_E{Here}(p), p->NID_BG);
+	   ensures  NID_BG: UpperBitsNotSet(p->NID_BG, 14);
+	*/
+	{ p->NID_BG		= Bitstream_Read(stream, 14); }
 
 	//@ assert stream->bitpos <= \at(stream->bitpos, Pre) + INFILL_LOCATION_REFERENCE_BITSIZE;
 
@@ -57,6 +73,12 @@ int Infill_location_reference_Decoder(Bitstream* stream, Infill_location_referen
 
 	//@ assert Q_NEQCOUNTRY:     EqualBits(stream, pos + Q_NEWCOUNTRY_B{Here}(p), pos + Q_NEWCOUNTRY_E{Here}(p), p->Q_NEWCOUNTRY);
 	//@ assert Q_NEWCOUNTRY:     UpperBitsNotSet(p->Q_NEWCOUNTRY, 1);
+
+	//@ assert NID_C:            EqualBits(stream, pos + NID_C_B{Here}(p), pos + NID_C_E{Here}(p), p->NID_C);
+	//@ assert NID_C:            UpperBitsNotSet(p->NID_C, 10);
+
+	//@ assert NID_BG:            EqualBits(stream, pos + NID_BG_B{Here}(p), pos + NID_BG_E{Here}(p), p->NID_BG);
+	//@ assert NID_BG:            UpperBitsNotSet(p->NID_BG, 10);
 
 	//@ assert final: EqualBits{Here}(stream, pos, p);
 
