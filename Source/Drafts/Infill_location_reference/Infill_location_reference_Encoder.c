@@ -16,15 +16,18 @@ int Infill_location_reference_Encoder(Bitstream* stream, const Infill_location_r
             Bitstream_Write(stream, 2,  p->Q_DIR);
             Bitstream_Write(stream, 13, p->L_PACKET);
             Bitstream_Write(stream, 1,  p->Q_NEWCOUNTRY);
-            Bitstream_Write(stream, 10, p->NID_C);
+
+	    if (p->Q_NEWCOUNTRY == 1)
+	    {
+                Bitstream_Write(stream, 10, p->NID_C);
+	    }
+
             Bitstream_Write(stream, 14, p->NID_BG);
 
 
             //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
             //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
             //@ assert Q_NEWCOUNTRY:      EqualBits(stream, pos + 15,  pos + 16,  p->Q_NEWCOUNTRY);
-            //@ assert NID_C:             EqualBits(stream, pos + 16,  pos + 26,  p->NID_C);
-            //@ assert NID_BG:            EqualBits(stream, pos + 26,  pos + 40,  p->NID_BG);
 
             return 1;
         }
