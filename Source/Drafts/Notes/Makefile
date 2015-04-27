@@ -10,6 +10,7 @@ spell:
 
 clean:
 	$(RM) Dynamic_Problem.pdf
+	$(RM) Conditionals.pdf
 	$(RM) *.aux
 	$(RM) *.bak
 	$(RM) *.log	
