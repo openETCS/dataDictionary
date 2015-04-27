@@ -35,7 +35,7 @@ void Adhesion_Factor_EncoderThenDecoder(Bitstream* stream, Adhesion_Factor* p)
 
     /*@
         assigns *p;
-
+        assigns stream->bitpos;
         ensures equal:  EqualBits(stream, pos, p);
         ensures upper:  UpperBitsNotSet(p);
     */
