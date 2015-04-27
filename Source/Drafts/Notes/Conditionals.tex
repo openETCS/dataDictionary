@@ -43,7 +43,7 @@ That makes the Decoder and Encoder functions a lot cleaner.
 In the example below all read calls are independent from one another.
 
 \begin{lstlisting}[mathescape]
-int Infill_Location_Reference_Decoder(Bitstream* stream, Infill_Location_Reference* p)
+int Infill_location_reference_Decoder(Bitstream* stream, Infill_location_reference* p)
 {
     if (NormalBitstream(stream, INFILL_LOCATION_REFERENCE_BITSIZE))
     {
@@ -94,7 +94,7 @@ if (p->Q_NEWCOUNTRY == 1)
 The first question at hand is how do we calculate the value for INFILL\_LOCATION\_REFERENCE\_BITSIZE
 to check NormalBitstream?
 
-Until now this value has been set in the Infill\_Location\_Reference.h file, as the sum of the bitsizes
+Until now this value has been set in the Infill\_location\_reference.h file, as the sum of the bitsizes
 of all variables.
 Now the actual bitsize may depend on one or more values, read during runtime.
 There is no access to these values when deciding, whether the stream is long enought to read the whole packet from.
