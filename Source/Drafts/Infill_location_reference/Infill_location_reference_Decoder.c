@@ -40,16 +40,32 @@ int Infill_location_reference_Decoder(Bitstream* stream, Infill_location_referen
 	*/
 	{ p->Q_NEWCOUNTRY		= Bitstream_Read(stream, 1); }
 
+	/*@
+	   requires NID_C: stream->bitpos == pos + NID_C_B{Here}(p);
+	   requires NID_C: UpperBitsNotSet(p->NID_C, 0);
+	   assigns  NID_C: stream->bitpos;
+	   assigns  NID_C: p->NID_C;
+
+	   behavior read:
+	     requires NID_C: \at(p->Q_NEWCOUNTRY,Here) == 1;
+
+             assigns  NID_C: stream->bitpos;
+	     assigns  NID_C: p->NID_C;
+
+	     ensures  NID_C: EqualBits(stream, pos + NID_C_B{Here}(p), pos + NID_C_B{Here}(p) + 10, p->NID_C);
+	     ensures  NID_C: UpperBitsNotSet(p->NID_C, 10);
+
+	   behavior unread:
+	     requires NID_C: \at(p->Q_NEWCOUNTRY,Here) != 1;
+
+	     assigns  \nothing;
+
+             ensures  NID_C: EqualBits(stream, pos + NID_C_B{Here}(p), pos + NID_C_B{Here}(p), p->NID_C);
+	     ensures  NID_C: UpperBitsNotSet(p->NID_C, 0);
+	       
+	*/
 	if (p->Q_NEWCOUNTRY == 1)
 	{
-           /*@
-	      requires NID_C: stream->bitpos == pos + NID_C_B{Here}(p);
-	      assigns         stream->bitpos;
-	      assigns         p->NID_C;
-	      ensures  NID_C: stream->bitpos == pos + NID_C_E{Here}(p);
-	      ensures  NID_C: EqualBits(stream, pos + NID_C_B{Here}(p), pos + NID_C_E{Here}(p), p->NID_C);
-	      ensures  NID_C: UpperBitsNotSet(p->NID_C, 10);
-	   */
 	   { p->NID_C		= Bitstream_Read(stream, 10); }
 	}
 
