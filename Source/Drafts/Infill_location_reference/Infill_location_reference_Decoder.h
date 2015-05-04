@@ -9,6 +9,7 @@
     requires stream_invariant:  Invariant(stream, MaxBitSize(p));
     requires valid_package:     \valid(p);
     requires separation:        Separated(stream, p);
+    requires zero_initialized:  ZeroInitialized(p);
 
     assigns stream->bitpos;
     assigns *p;

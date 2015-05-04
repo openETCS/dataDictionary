@@ -64,7 +64,14 @@ typedef struct Infill_location_reference Infill_location_reference;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Infill_location_reference* p) = Invariant(p->Q_DIR)             && Invariant(p->L_PACKET)          && Invariant(p->Q_NEWCOUNTRY); predicate ZeroInitialized(Infill_location_reference* p) =
+    predicate Invariant(Infill_location_reference* p) =
+      Invariant(p->Q_DIR)             &&
+      Invariant(p->L_PACKET)          &&
+      Invariant(p->Q_NEWCOUNTRY)      &&
+      Invariant(p->NID_C)             &&
+      Invariant(p->NID_BG);
+      
+    predicate ZeroInitialized(Infill_location_reference* p) =
       ZeroInitialized(p->Q_DIR)             &&
       ZeroInitialized(p->L_PACKET)          &&
       ZeroInitialized(p->Q_NEWCOUNTRY)      &&
