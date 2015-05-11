@@ -78,17 +78,17 @@ int Infill_location_reference_Decoder(Bitstream* stream, Infill_location_referen
         {
 	    /*@
 	       requires NID_C: stream->bitpos == pos + NID_C_B(p);
-               requires NID_C: p->Q_NEWCOUNTRY == 1;
-	       requires NID_C: ZeroInitialized(p->NID_C);
-	       requires NID_C: NID_C_E(p) == NID_C_B(p) + 10;
+               //requires NID_C: p->Q_NEWCOUNTRY == 1;
+	       //requires NID_C: ZeroInitialized(p->NID_C);
+	       //requires NID_C: NID_C_E(p) == NID_C_B(p) + 10;
 
 	       assigns         p->NID_C;
 	       assigns         stream->bitpos;
 
-	       ensures  NID_C: EqualBits(stream, pos + NID_C_B(p), pos + NID_C_E(p), p->NID_C);
-	       ensures  NID_C: EqualBits(stream, pos + NID_C_B(p), pos + NID_C_B(p) + 10, p->NID_C);
-	       ensures  NID_C: UpperBitsNotSet(p->NID_C, 10);
 	       ensures  NID_C: stream->bitpos == pos + NID_C_E(p);
+	       ensures  NID_C: EqualBits(stream, pos + NID_C_B(p), pos + NID_C_E(p), p->NID_C);
+	       ensures  NID_C: UpperBitsNotSet(p->NID_C, 10);
+	       //ensures  NID_C: EqualBits(stream, pos + NID_C_B(p), pos + NID_C_B(p) + 10, p->NID_C);
 	    */
             { p->NID_C		= Bitstream_Read(stream, 10); }
         }
