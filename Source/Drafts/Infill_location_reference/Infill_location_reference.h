@@ -43,17 +43,26 @@ typedef struct Infill_location_reference Infill_location_reference;
 
     logic integer NID_C_B{L}(Infill_location_reference* p) =
         Q_NEWCOUNTRY_E{L}(p);
+
     axiomatic NID_C_E_Axiomatic
     {
         logic integer NID_C_E{L}(Infill_location_reference* p)
 	    reads p->Q_NEWCOUNTRY;
 	
 	axiom NID_C_E_read{L}: \forall Infill_location_reference* p;
-	    p->Q_NEWCOUNTRY == 1 ==> NID_C_E{L}(p) == NID_C_B{L}(p) + 10;
+	    p->Q_NEWCOUNTRY == 1 ==> NID_C_E(p) == NID_C_B(p) + 10;
 
-	axiom NID_C_E_skip{L}: \forall Infill_location_reference* p;
-	    p->Q_NEWCOUNTRY != 1 ==> NID_C_E{L}(p) == NID_C_B{L}(p);
+	axiom NID_C_E_skip: \forall Infill_location_reference* p;
+	    p->Q_NEWCOUNTRY != 1 ==> NID_C_E(p) == NID_C_B(p);
     }
+
+    lemma NID_C_E_read_lemma:
+       \forall Infill_location_reference* p;
+           p->Q_NEWCOUNTRY == 1 ==> NID_C_E(p) == NID_C_B(p) + 10;
+
+    lemma NID_C_E_skip_lemma:
+       \forall Infill_location_reference* p;
+           p->Q_NEWCOUNTRY != 1 ==> NID_C_E(p) == NID_C_B(p);
 
     logic integer NID_BG_B{L}(Infill_location_reference* p) =
         NID_C_E{L}(p);

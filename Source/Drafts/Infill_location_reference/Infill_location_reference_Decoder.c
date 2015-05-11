@@ -50,22 +50,24 @@ int Infill_location_reference_Decoder(Bitstream* stream, Infill_location_referen
 	   ensures  NID_C: stream->bitpos == pos + NID_C_E(p);
 
 	   behavior read:
-	     assumes NID_C: \at(p->Q_NEWCOUNTRY,Here) == 1;
+	     assumes NID_C:  p->Q_NEWCOUNTRY == 1;
+	     requires NID_C: NID_C_E(p) == NID_C_B(p) + 10;
 
              assigns         stream->bitpos;
 	     assigns         p->NID_C;
 
-	     ensures  NID_C: NID_C_E(p) == NID_C_B(p) + 10;
+	     ensures  NID_C: p->Q_NEWCOUNTRY == 1;
+	     ensures  NID_C: pos + NID_C_E(p) == pos + NID_C_B(p) + 10;
 	     ensures  NID_C: EqualBits(stream, pos + NID_C_B(p), pos + NID_C_B(p) + 10, p->NID_C);
 	     ensures  NID_C: EqualBits(stream, pos + NID_C_B(p), pos + NID_C_E(p), p->NID_C);
 	     ensures  NID_C: UpperBitsNotSet(p->NID_C, 10);
 
 	   behavior skip:
 	     assumes NID_C: \at(p->Q_NEWCOUNTRY,Here) != 1;
+	     requires  NID_C: NID_C_E(p) == NID_C_B(p);
 
 	     assigns         \nothing;
 
-	     ensures  NID_C: NID_C_E(p) == NID_C_B(p);
              ensures  NID_C: EqualBits(stream, pos + NID_C_B(p), pos + NID_C_B(p), p->NID_C);
 	     ensures  NID_C: EqualBits(stream, pos + NID_C_B(p), pos + NID_C_E(p), p->NID_C);
 	       

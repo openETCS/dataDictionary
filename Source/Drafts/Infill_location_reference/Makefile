@@ -10,6 +10,8 @@ VPATH = $(TOPDIR)/Bitwalker
 CPPFLAGS += -I$(TOPDIR)/Bitwalker
 
 #WP_FLAGS += -wp-prop NID_C
+#WP_FLAGS += -wp-prop @assigns
+WP_FLAGS += -wp-bhv read,skip
 
 SRC := $(wildcard *.c)
 
