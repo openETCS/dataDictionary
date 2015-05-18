@@ -3,15 +3,19 @@ MAKEFLAGS += --silent --no-print-directory
 
 it: obj
 
-TOPDIR=$(SOURCE)
+TOPDIR=../..
 
 include $(TOPDIR)/Makefile.template
 VPATH = $(TOPDIR)/Bitwalker
 CPPFLAGS += -I$(TOPDIR)/Bitwalker
 
-#WP_FLAGS += -wp-prop NID_C
-#WP_FLAGS += -wp-prop @assigns
-#WP_FLAGS += -wp-bhv read,skip
+#WP_FLAGS += -wp-prop Q_DIR
+#WP_FLAGS += -wp-prop L_PACKET
+#WP_FLAGS += -wp-prop Q_SCALE
+#WP_FLAGS += -wp-prop D_ADHESION
+#WP_FLAGS += -wp-prop L_ADHESION
+#WP_FLAGS += -wp-prop M_ADHESION
+#WP_FLAGS += -wp-prop @assert
 
 SRC := $(wildcard *.c)
 

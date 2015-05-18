@@ -35,6 +35,7 @@ WP_FLAGS += -cpp-gnu-like
 WP_FLAGS += -pp-annot -no-unicode
 WP_FLAGS += -wp
 WP_FLAGS += -wp-model Typed+ref
+WP_FLAGS += -kernel-msg-key pp
 
 # RTE options and more
 WP_FLAGS += -wp-rte

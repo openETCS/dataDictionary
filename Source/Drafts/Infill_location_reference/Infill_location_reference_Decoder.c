@@ -91,6 +91,10 @@ int Infill_location_reference_Decoder(Bitstream* stream, Infill_location_referen
 	       //ensures  NID_C: EqualBits(stream, pos + NID_C_B(p), pos + NID_C_B(p) + 10, p->NID_C);
 	    */
             { p->NID_C		= Bitstream_Read(stream, 10); }
+
+	    //@ assert  NID_C: stream->bitpos == pos + NID_C_E(p);
+	    //@ assert  NID_C: EqualBits(stream, pos + NID_C_B(p), pos + NID_C_E(p), p->NID_C);
+	    //@ assert  NID_C: UpperBitsNotSet(p->NID_C, 10);
         }
 
         /*@
