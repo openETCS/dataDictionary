@@ -5,18 +5,23 @@ BasePacketPtr Decoder_Branch(Bitstream* stream, Packet_Header header)
 {
     switch(header.NID_PACKET)
     {
-       case 71: // Adhesion_Factor
+       case 71 :
        {
-           //BasePacketPtr ret(new Adhesion_Factor());
-	   //Adhesion_Factor_Decoder(stream, &(ret->core));
-	   //return ret;
-	   return BasePacketPtr(new Adhesion_Factor(stream));
+           Adhesion_FactorPtr ret(new Adhesion_Factor());
+
+	   if(Adhesion_Factor_Decoder(stream, &(ret->core)) == 1)
+	   {
+	       return ret;
+	   }
+	   else
+	   {
+	       return BasePacketPtr();
+	   }
        }
        default :
        {
            return BasePacketPtr(); 
        }
-
     };
 }
 
