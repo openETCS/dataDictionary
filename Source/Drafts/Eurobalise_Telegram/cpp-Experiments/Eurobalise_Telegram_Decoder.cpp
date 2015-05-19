@@ -1,6 +1,6 @@
 
-#include "Eurobalise_Telegram.cpp"
-#include "Decoder_Branch.cpp"
+#include "Eurobalise_Telegram.h"
+#include "Decoder_Branch.h"
 #include "Packet_Header.h"
 
 typedef std::vector<BasePacketPtr> PacketSequence;

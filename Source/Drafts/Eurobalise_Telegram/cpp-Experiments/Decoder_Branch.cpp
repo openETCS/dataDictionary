@@ -7,9 +7,10 @@ BasePacketPtr Decoder_Branch(Bitstream* stream, Packet_Header header)
     {
        case 71: // Adhesion_Factor
        {
-           BasePacketPtr ret(new Adhesion_Factor());
-	   Adhesion_Factor_Decoder(stream, &(ret->core));
-	   return ret;
+           //BasePacketPtr ret(new Adhesion_Factor());
+	   //Adhesion_Factor_Decoder(stream, &(ret->core));
+	   //return ret;
+	   return BasePacketPtr(new Adhesion_Factor(stream));
        }
        default :
        {
