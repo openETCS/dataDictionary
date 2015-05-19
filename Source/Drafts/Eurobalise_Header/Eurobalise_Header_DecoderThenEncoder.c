@@ -44,6 +44,7 @@ void Eurobalise_Header_DecoderThenEncoder(Bitstream* stream, Eurobalise_Header* 
 
         assigns stream->addr[0..stream->size-1];
         assigns stream->bitpos;
+	assigns p;
 
         ensures left:   Unchanged{Here,Old}(stream, 0, pos);
         ensures middle: EqualBits(stream, pos, p);

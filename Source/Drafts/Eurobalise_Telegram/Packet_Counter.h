@@ -8,7 +8,7 @@
 */
 struct Packet_Counter
 {
-    // Maybe the Eurobalise_Header can be returned with the Counter.
+    // The Eurobalise_Header might be stored in here as well.
     int Adhesion_Factor_Counter;
     int Gradient_Profile_Counter; 
     int Infill_location_reference_Counter;

@@ -5,14 +5,14 @@
 /*
     Reads a complete telegram from the stream.
     The function starts with reading a Eurobalise_Header and finished 
-    after reading an End_of_informatik packet (NID_PACKET = 255).
+    after reading an End_of_information packet (NID_PACKET = 255).
 */
 void Eurobalise_Telegram_Decoder(Bitstream* stream, Packet_Counter* counter)
 {
     Packet_Counter_Init(counter);
 
     // Read the Eurobalise Header
-    // TODO This Header has to be returnes somehow
+    // TODO This Header has to be returned somehow
     Eurobalise_Header_Decoder(stream, &(counter->Header));
 
     // We use this instance to store the packet ID for the next packet to read. 
@@ -27,13 +27,14 @@ void Eurobalise_Telegram_Decoder(Bitstream* stream, Packet_Counter* counter)
 	// we don't need to list it as a parameter.
 	Decoder_Branch(stream, &packetID);
 
+	// TODO The counter for the packet has to increment here.
+
 	if(packetID->NID_PACKET == 255)
 	{
 	    // We just read the End_of_information packet
 	    // which does always mark the end of an Eurobalise telegram
             break;
 	}
-	// TODO The counter for the packet has to increment here.
     }
 }
 
