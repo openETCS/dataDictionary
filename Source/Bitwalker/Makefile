@@ -38,7 +38,7 @@ libBitwalker.a : $(OBJ)
 	ar cru	$@ $^
 	ranlib	$@
 
-TestPeekThenPoke: TestPeekThenPoke.o Bitwalker_PeekThenPoke.o libBitwalker.a
+TestPeekThenPoke: TestPeekThenPoke.o libBitwalker.a
 	$(CXX) -o $@ $^
 	./$@
 
