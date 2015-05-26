@@ -1,17 +1,17 @@
 TOPDIR=../../..
 
 VPATH = $(TOPDIR)/Bitwalker
+
+include $(TOPDIR)/Makefile.template
+
 #CXX = c++
 CPPFLAGS += -I./Packet_Header -I./Subset_Structs -I. -I$(TOPDIR)/Bitwalker
-CXXFLAGS += -std=c++11
 LDFLAGS += -L $(TOPDIR)/Bitwalker -lBitwalker -LSubset_Structs -lsubset_structs
 
 it: decoder_test
 
-decoder_test: decoder_test.o Eurobalise_Telegram.o 
+decoder_test: decoder_test.o Eurobalise_Telegram.o Eurobalise_Header_Encoder.o Decoder_Branch.o\
+        Packet_Header/Packet_Header_Decoder.o
 	$(CXX) -o $@ $+ $(LDFLAGS)
-
-clean:
-	$(RM) *.o
 
 

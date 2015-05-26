@@ -1,5 +1,8 @@
 
+
 TOPDIR=../../../..
+
+include $(TOPDIR)/Makefile.template
 
 VPATH = $(TOPDIR)/Bitwalker
 #CXX = c++
@@ -15,7 +18,7 @@ libsubset_structs.a : $(OBJ)
 	ar cru  $@ $^
 	ranlib  $@
 
-clean:
+clean::
 	$(RM) libsubset_structs.a
 	$(RM) *.o
 

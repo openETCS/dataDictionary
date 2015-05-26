@@ -2,11 +2,8 @@
 #include "Eurobalise_Telegram.h"
 #include "Eurobalise_Header_Encoder.h"
 
-extern "C"
-{
 #include "Bitstream_Init.h"
 #include "subsets.h"
-}
 
 #include <cassert>
 

@@ -14,7 +14,7 @@ typedef struct Packet_Header Packet_Header;
 #define PACKET_HEADER_BITSIZE 8
 
 /*@
-    logic integer BitSize{L}(Packet_Header* p) = HEADER_BITSIZE;
+    logic integer BitSize{L}(Packet_Header* p) = PACKET_HEADER_BITSIZE;
 
     logic integer MaxBitSize{L}(Packet_Header* p) = BitSize(p);
 

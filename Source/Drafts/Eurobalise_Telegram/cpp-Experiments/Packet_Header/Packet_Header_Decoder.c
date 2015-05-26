@@ -4,7 +4,7 @@
 
 int Packet_Header_Decoder(Bitstream* stream, Packet_Header* p)
 {
-    if (NormalBitstream(stream, HEADER_BITSIZE))
+    if (NormalBitstream(stream, PACKET_HEADER_BITSIZE))
     {
         uint8_t* addr = stream->addr;
         const uint32_t size = stream->size;
