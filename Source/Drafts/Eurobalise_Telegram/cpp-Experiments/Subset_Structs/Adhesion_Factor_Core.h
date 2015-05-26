@@ -18,6 +18,25 @@ struct Adhesion_Factor_Core
     uint32_t  M_ADHESION;       // # 1
 };
 
+#ifdef __cplusplus
+
+inline bool operator==(const Adhesion_Factor_Core& a, const Adhesion_Factor_Core& b)
+{
+    return (a.Q_DIR == b.Q_DIR) &&
+           (a.L_PACKET == b.L_PACKET) &&
+           (a.Q_SCALE == b.Q_SCALE) &&
+           (a.D_ADHESION == b.D_ADHESION) &&
+           (a.L_ADHESION == b.L_ADHESION) &&
+           (a.M_ADHESION == b.M_ADHESION);
+}
+
+inline bool operator!=(const Adhesion_Factor_Core& a, const Adhesion_Factor_Core& b)
+{
+    return !(a == b);
+}
+
+#endif // __cplusplus
+
 typedef struct Adhesion_Factor_Core Adhesion_Factor_Core;
 
 #define ADHESION_FACTOR_CORE_BITSIZE 48

@@ -5,7 +5,7 @@ void Eurobalise_Telegram::Decoder(Bitstream* stream)
 {
     Packet_Header packetID;
 
-    Eurobalise_Header_Decoder(stream, &(header));
+    int error = Eurobalise_Header_Decoder(stream, &(header));
 
     while(true)
     {

@@ -15,6 +15,21 @@ struct End_of_Information_Core
 
 };
 
+#ifdef __cplusplus
+ 
+inline bool operator==(const End_of_Information_Core& a, const End_of_Information_Core& b)
+{
+    return true;
+}
+ 
+inline bool operator!=(const End_of_Information_Core& a, const End_of_Information_Core& b)
+{
+    return !(a == b);
+}
+
+#endif // __cplusplus
+
+
 typedef struct End_of_Information_Core End_of_Information_Core;
 
 #define END_OF_INFORMATION_CORE_BITSIZE 0

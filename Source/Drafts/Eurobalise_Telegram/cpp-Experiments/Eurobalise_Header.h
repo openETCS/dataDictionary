@@ -21,7 +21,7 @@ struct Eurobalise_Header
 
 #ifdef __cplusplus
 
-bool operator==(const Eurobalise_Header& a, const Eurobalise_Header& b)
+inline bool operator==(const Eurobalise_Header& a, const Eurobalise_Header& b)
 {
    return (a.Q_UPDOWN == b.Q_UPDOWN) &&
           (a.M_VERSION == b.M_VERSION) &&
@@ -35,12 +35,14 @@ bool operator==(const Eurobalise_Header& a, const Eurobalise_Header& b)
           (a.Q_LINK == b.Q_LINK);
 }
 
-bool operator!=(const Eurobalise_Header& a, const Eurobalise_Header& b)
+inline bool operator!=(const Eurobalise_Header& a, const Eurobalise_Header& b)
 {
     return !(a == b);
 }
 
 #endif // __cplusplus
+
+
 
 typedef struct Eurobalise_Header Eurobalise_Header;
 
