@@ -1,14 +1,28 @@
-TOPDIR=../../..
 
-VPATH = $(TOPDIR)/Bitwalker
+MAKEFLAGS += --no-print-directory --silent
+
+TOPDIR=../../..
+export BITWALKER=$(TOPDIR)/Bitwalker
+export GENERATED_PACKETS=Subset_Structs
 
 include $(TOPDIR)/Makefile.template
 
 #CXX = c++
-CPPFLAGS += -I./Packet_Header -I./Subset_Structs -I. -I$(TOPDIR)/Bitwalker
-LDFLAGS += -L $(TOPDIR)/Bitwalker -lBitwalker -LSubset_Structs -lsubset_structs
+CPPFLAGS += -I.
 
-it: decoder_test
+CPPFLAGS += -I$(BITWALKER)
+LDFLAGS += -L$(BITWALKER) -lBitwalker
+
+CPPFLAGS += -I$(GENERATED_PACKETS)
+LDFLAGS += -L$(GENERATED_PACKETS) -lsubset_structs
+
+CPPFLAGS += -I./Packet_Header
+
+lib:
+	@(cd $(BITWALKER) && $(MAKE) lib)
+	@(cd $(GENERATED_PACKETS) && $(MAKE) lib)
+
+it: lib decoder_test
 
 decoder_test: decoder_test.o Eurobalise_Telegram.o\
 	Eurobalise_Header_Encoder.o Eurobalise_Header_Decoder.o\
@@ -18,3 +32,7 @@ decoder_test: decoder_test.o Eurobalise_Telegram.o\
 	$(CXX) -o $@ $+ $(LDFLAGS)
 
 
+clean::
+	@$(RM) decoder_test
+	@(cd $(BITWALKER) && $(MAKE) clean)
+	@(cd $(GENERATED_PACKETS) && $(MAKE) clean)
