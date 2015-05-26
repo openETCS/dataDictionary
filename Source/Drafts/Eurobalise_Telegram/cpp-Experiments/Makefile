@@ -4,7 +4,7 @@ VPATH = $(TOPDIR)/Bitwalker
 #CXX = c++
 CPPFLAGS += -I./Packet_Header -I./Subset_Structs -I. -I$(TOPDIR)/Bitwalker
 CXXFLAGS += -std=c++11
-LDFLAGS += -L $(TOPDIR)/Bitwalker -lBitwalker
+LDFLAGS += -L $(TOPDIR)/Bitwalker -lBitwalker -LSubset_Structs -lsubset_structs
 
 it: decoder_test
 

@@ -2,7 +2,7 @@
 #ifndef ADHESION_FACTOR_H_INCLUDED
 #define ADHESION_FACTOR_H_INCLUDED
 
-extern "C
+extern "C"
 {
 #include "Bitstream.h"
 #include "Adhesion_Factor_Core.h"
