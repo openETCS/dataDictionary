@@ -5,6 +5,8 @@ TOPDIR=../../..
 export BITWALKER=$(TOPDIR)/Bitwalker
 export GENERATED_PACKETS=Subset_Structs
 
+#VPATH = Packet_Header
+
 include $(TOPDIR)/Makefile.template
 
 #CXX = c++
@@ -27,8 +29,8 @@ it: lib decoder_test
 decoder_test: decoder_test.o Eurobalise_Telegram.o\
 	Eurobalise_Header_Encoder.o Eurobalise_Header_Decoder.o\
 	Eurobalise_Header_UpperBitsNotSet.o Decoder_Branch.o\
-        Packet_Header_Decoder.o Packet_Header_Encoder.o\
-	Packet_Header_UpperBitsNotSet.o
+        Packet_Header/Packet_Header_Decoder.o Packet_Header/Packet_Header_Encoder.o\
+	Packet_Header/Packet_Header_UpperBitsNotSet.o
 	$(CXX) -o $@ $+ $(LDFLAGS)
 
 
