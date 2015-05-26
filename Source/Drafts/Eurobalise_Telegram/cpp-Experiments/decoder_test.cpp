@@ -1,6 +1,7 @@
 
 #include "Eurobalise_Telegram.h"
 #include "Eurobalise_Header_Encoder.h"
+#include "Bitstream_Init.h"
 #include "subsets.h"
 #include <cassert>
 
@@ -38,9 +39,9 @@ int main ()
     Packet_Header c1;
     c1.NID_PACKET = 255;
 
+    std::vector<uint8_t> raw_stream(1000);
     Bitstream stream;
-    stream.size = 1000;
-    stream.bitpos = 0;
+    Bitstream_Init(&stream, &(raw_stream[0]), raw_stream.size(), 0);
 
     Eurobalise_Header_Encoder(&stream, &head);
     Train_running_number_Encoder(&stream, &a);
@@ -59,7 +60,7 @@ int main ()
     auto c_ret = std::static_pointer_cast<End_of_Information>(telegram.packets[2]);
 
     // TODO compare structs here
-    assert(head_ret == head);
+    assert(*head_ret == head);
     assert(a_ret->core == a);
     assert(b_ret->core == b);
     assert(c_ret->core == c);

@@ -1,6 +1,6 @@
 
 #ifndef TRAIN_RUNNING_NUMBER_H_INCLUDED
-#define TRAIN_RUNNING_NUMBER_H_INLCUDED
+#define TRAIN_RUNNING_NUMBER_H_INCLUDED
 
 #include "Bitstream.h"
 #include "BasePacket.h"

@@ -5,11 +5,10 @@ CXX = c++
 CPPFLAGS += -I./Packet_Header -I./Subset_Structs -I. -I$(TOPDIR)/Bitwalker
 CXXFLAGS += -std=c++11
 
-SRC := $(wildcard *.cpp)
 
-OBJ := $(SRC:.cpp=.o)
+it: decoder_test
 
-it: $(OBJ)
+decoder_test: Eurobalise_Telegram.o decoder_test.o
 
 clean:
 	$(RM) *.o
