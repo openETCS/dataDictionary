@@ -20,10 +20,10 @@ struct Adhesion_Factor_Core
 
 typedef struct Adhesion_Factor_Core Adhesion_Factor_Core;
 
-#define ADHESION_FACTOR_BITSIZE 48
+#define ADHESION_FACTOR_CORE_BITSIZE 48
 
 /*@
-    logic integer BitSize{L}(Adhesion_Factor_Core* p) = ADHESION_FACTOR_BITSIZE;
+    logic integer BitSize{L}(Adhesion_Factor_Core* p) = ADHESION_FACTOR_CORE_BITSIZE;
 
     logic integer MaxBitSize{L}(Adhesion_Factor_Core* p) = BitSize(p);
 

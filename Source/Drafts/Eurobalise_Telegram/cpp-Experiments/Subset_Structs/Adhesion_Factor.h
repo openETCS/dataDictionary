@@ -2,9 +2,12 @@
 #ifndef ADHESION_FACTOR_H_INCLUDED
 #define ADHESION_FACTOR_H_INCLUDED
 
+extern "C
+{
 #include "Bitstream.h"
-#include "BasePacket.h"
 #include "Adhesion_Factor_Core.h"
+}
+#include "BasePacket.h"
 
 struct Adhesion_Factor : public BasePacket
 {

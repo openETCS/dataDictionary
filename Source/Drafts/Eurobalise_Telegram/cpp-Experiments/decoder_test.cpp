@@ -5,9 +5,9 @@
 extern "C"
 {
 #include "Bitstream_Init.h"
+#include "subsets.h"
 }
 
-#include "subsets.h"
 #include <cassert>
 
 int main ()
