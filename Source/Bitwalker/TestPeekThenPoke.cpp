@@ -5,10 +5,7 @@
 #include <vector>
 #include <iostream>
 
-extern "C"
-{
-  void PeekThenPoke(uint8_t* addr, uint32_t size, uint32_t bitpos, uint32_t length);
-}
+void Bitwalker_PeekThenPoke(uint8_t* addr, uint32_t size, uint32_t bitpos, uint32_t length);
 
 int main()
 {
@@ -23,7 +20,7 @@ int main()
 
     std::vector<uint8_t> SaveBitstream = Bitstream;
 
-    PeekThenPoke(Bitstream.data(), BitstreamSize, Start, Length);
+    Bitwalker_PeekThenPoke(Bitstream.data(), BitstreamSize, Start, Length);
 
     assert(Bitstream == SaveBitstream);
 

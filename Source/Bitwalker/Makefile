@@ -9,6 +9,7 @@ include $(TOPDIR)/Makefile.template
 #WP_FLAGS += -wp-prop=-@lemma
 #WP_FLAGS += -wp-prop=cea
 
+
 SRC :=  UpperBitsNotSet.c\
         Bitwalker.c\
         Bitwalker_Peek_Normal.c Bitwalker_Poke_Normal.c\
@@ -37,7 +38,7 @@ libBitwalker.a : $(OBJ)
 	ar cru	$@ $^
 	ranlib	$@
 
-TestPeekThenPoke: TestPeekThenPoke.o PeekThenPoke.o libBitwalker.a
+TestPeekThenPoke: TestPeekThenPoke.o Bitwalker_PeekThenPoke.o libBitwalker.a
 	$(CXX) -o $@ $^
 	./$@
 
