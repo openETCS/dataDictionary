@@ -1,11 +1,11 @@
 
 #include "Eurobalise_Telegram.h"
 #include "Eurobalise_Header_Encoder.h"
-
+#include "Packet_Header_Encoder.h"
 #include "Bitstream_Init.h"
 #include "subsets.h"
-
 #include <cassert>
+#include <iostream>
 
 int main ()
 {
@@ -45,12 +45,17 @@ int main ()
     Bitstream stream;
     Bitstream_Init(&stream, &(raw_stream[0]), raw_stream.size(), 0);
 
+    uint32_t init_pos = stream.bitpos;
+
     Eurobalise_Header_Encoder(&stream, &head);
+    Packet_Header_Encoder(&stream, &a1);
     Train_running_number_Encoder(&stream, &a);
+    Packet_Header_Encoder(&stream, &b1);
     Adhesion_Factor_Encoder(&stream, &b);
+    Packet_Header_Encoder(&stream, &c1);
     End_of_Information_Encoder(&stream, &c);
 
-    stream.bitpos = stream.bitpos - (50 + 53 + 56 + 0); 
+    stream.bitpos = init_pos;
 
     Eurobalise_Telegram telegram;
 
@@ -61,13 +66,13 @@ int main ()
     auto b_ret = std::static_pointer_cast<Adhesion_Factor>(telegram.packets[1]);
     auto c_ret = std::static_pointer_cast<End_of_Information>(telegram.packets[2]);
 
-    // TODO compare structs here
-    assert (head == head);
-    //{
-       //assert(a_ret->core == a);
-       //assert(b_ret->core == b);
-       //assert(c_ret->core == c);
-    //}
+    assert(head_ret == head);
+    assert(a_ret->core == a);
+    assert(b_ret->core == b);
+    assert(c_ret->core == c);
 
+    std::cout << "successful test of Eurobalise_Telegram_Decoder" << std::endl;
+
+    return EXIT_SUCCESS;
 }
 

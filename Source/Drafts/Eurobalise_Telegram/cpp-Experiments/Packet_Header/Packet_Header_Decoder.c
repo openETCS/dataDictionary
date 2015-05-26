@@ -1,6 +1,7 @@
 
 #include "Packet_Header_Decoder.h"
 #include "Bitwalker_Peek_Normal.h"
+//#include <iostream>
 
 int Packet_Header_Decoder(Bitstream* stream, Packet_Header* p)
 {
@@ -11,6 +12,8 @@ int Packet_Header_Decoder(Bitstream* stream, Packet_Header* p)
         const uint32_t pos = stream->bitpos;
 
         p->NID_PACKET         = Bitwalker_Peek_Normal(addr, size, pos,       8);
+
+	//std::cout << "writing " << int(p->NID_PACKET) << " into the packet header" << std::endl;
 
         stream->bitpos += PACKET_HEADER_BITSIZE;
 
