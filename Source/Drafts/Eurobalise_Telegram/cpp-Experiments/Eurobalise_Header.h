@@ -19,6 +19,29 @@ struct Eurobalise_Header
     uint32_t  Q_LINK;           // # 1
 };
 
+#ifdef __cplusplus
+
+bool operator==(const Eurobalise_Header& a, const Eurobalise_Header& b)
+{
+   return (a.Q_UPDOWN == b.Q_UPDOWN) &&
+          (a.M_VERSION == b.M_VERSION) &&
+          (a.Q_MEDIA == b.Q_MEDIA) &&
+          (a.N_PIG == b.N_PIG) &&
+          (a.N_TOTAL == b.N_TOTAL) &&
+          (a.M_DUP == b.M_DUP) &&
+          (a.M_MCOUNT == b.M_MCOUNT) &&
+          (a.NID_C == b.NID_C) &&
+          (a.NID_BG == b.NID_BG) &&
+          (a.Q_LINK == b.Q_LINK);
+}
+
+bool operator!=(const Eurobalise_Header& a, const Eurobalise_Header& b)
+{
+    return !(a == b);
+}
+
+#endif // __cplusplus
+
 typedef struct Eurobalise_Header Eurobalise_Header;
 
 #define EUROBALISE_HEADER_BITSIZE 50
