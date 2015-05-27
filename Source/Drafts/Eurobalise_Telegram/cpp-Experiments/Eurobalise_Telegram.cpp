@@ -38,3 +38,31 @@ bool Eurobalise_Telegram::Decoder(Bitstream* stream)
     return true;
 }
 
+bool Eurobalise_Telegram::Encoder(Bitstream* stream)
+{
+    uint32_t old_pos = stream->bitpos;
+
+    if(Eurobalise_Header_Encoder(stream, &header) != 1)
+    {
+        return false;
+    }
+
+    int i = 0;
+
+    while(packets[i] && (stream->bitpos <= 1023 + old_pos))
+    {
+        if(Encoder_Branch(stream, packets[i]) != 1)
+	{
+	    return false;
+	}
+        ++i;
+    }
+
+    if(packets[i-1].id != 255)
+    {
+        return false;
+    }
+
+    return true;
+}
+

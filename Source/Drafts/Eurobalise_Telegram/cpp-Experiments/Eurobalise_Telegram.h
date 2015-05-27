@@ -15,6 +15,7 @@ struct Eurobalise_Telegram
     PacketSequence packets;
 
     bool Decoder(Bitstream* stream);
+    bool Encoder(Bitstream* stream);
 };
 
 #endif // EUROBALISE_TELEGRAM_H_INCLUDED

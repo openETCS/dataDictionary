@@ -18,13 +18,13 @@ SRC :=  $(wildcard *.c)
 
 OBJ := $(SRC:.c=.o)
 
-lib: libsubset_structs.a
+lib: libpacket_header.a
 
-libsubset_structs.a : $(OBJ)
+libpacket_header.a : $(OBJ)
 	ar cru  $@ $^
 	ranlib  $@
 
 clean::
-	$(RM) libsubset_structs.a
+	$(RM) libpacket_header.a
 	$(RM) *.o
 

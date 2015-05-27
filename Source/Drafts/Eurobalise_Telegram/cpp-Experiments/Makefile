@@ -4,6 +4,8 @@ MAKEFLAGS += --no-print-directory --silent
 TOPDIR=../../..
 export BITWALKER=$(TOPDIR)/Bitwalker
 export GENERATED_PACKETS=Subset_Structs
+export PACKET_HEADER=Packet_Header
+export TELEGRAM_HEADER=Eurobalise_Header
 
 #VPATH = Packet_Header
 
@@ -18,19 +20,21 @@ LDFLAGS += -L$(BITWALKER) -lBitwalker
 CPPFLAGS += -I$(GENERATED_PACKETS)
 LDFLAGS += -L$(GENERATED_PACKETS) -lsubset_structs
 
-CPPFLAGS += -I./Packet_Header
+CPPFLAGS += -I$(PACKET_HEADER)
+LDFLAGS += -L$(PACKET_HEADER) -lpacket_header
+
+CPPFLAGS += -I$(TELEGRAM_HEADER)
+LDFLAGS += -L$(TELEGRAM_HEADER) -ltelegram_header
 
 lib:
 	@(cd $(BITWALKER) && $(MAKE) lib)
 	@(cd $(GENERATED_PACKETS) && $(MAKE) lib)
+	@(cd $(PACKET_HEADER) && $(MAKE) lib)
+	@(cd $(TELEGRAM_HEADER) && $(MAKE) lib)
 
 it: lib decoder_test
 
-decoder_test: decoder_test.o Eurobalise_Telegram.o\
-	Eurobalise_Header_Encoder.o Eurobalise_Header_Decoder.o\
-	Eurobalise_Header_UpperBitsNotSet.o Decoder_Branch.o\
-        Packet_Header/Packet_Header_Decoder.o Packet_Header/Packet_Header_Encoder.o\
-	Packet_Header/Packet_Header_UpperBitsNotSet.o
+decoder_test: decoder_test.o Eurobalise_Telegram.o Decoder_Branch.o
 	$(CXX) -o $@ $+ $(LDFLAGS)
 
 
@@ -38,3 +42,5 @@ clean::
 	@$(RM) decoder_test
 	@(cd $(BITWALKER) && $(MAKE) clean)
 	@(cd $(GENERATED_PACKETS) && $(MAKE) clean)
+	@(cd $(PACKET_HEADER) && $(MAKE) clean)
+	@(cd $(TELEGRAM_HEADER) && $(MAKE) clean)

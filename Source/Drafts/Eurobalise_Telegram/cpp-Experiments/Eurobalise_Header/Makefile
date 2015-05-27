@@ -2,11 +2,11 @@
 MAKEFLAGS += --no-print-directory --silent
 
 TOPDIR=../../../..
-
-include $(TOPDIR)/Makefile.template
 export BITWALKER=$(TOPDIR)/Bitwalker
 
 #VPATH = $(TOPDIR)/Bitwalker
+
+include $(TOPDIR)/Makefile.template
 
 #CXX = c++
 CPPFLAGS += -I.
@@ -18,13 +18,13 @@ SRC :=  $(wildcard *.c)
 
 OBJ := $(SRC:.c=.o)
 
-lib: libsubset_structs.a
+lib: libtelegram_header.a
 
-libsubset_structs.a : $(OBJ)
+libtelegram_header.a : $(OBJ)
 	ar cru  $@ $^
 	ranlib  $@
 
 clean::
-	$(RM) libsubset_structs.a
+	$(RM) libtelegram_header.a
 	$(RM) *.o
 
