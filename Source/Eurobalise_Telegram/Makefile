@@ -28,6 +28,10 @@ LDFLAGS += -L$(TELEGRAM_HEADER) -ltelegram_header
 CPPFLAGS += -I$(BITWALKER)
 LDFLAGS += -L$(BITWALKER) -lBitwalker
 
+test: it
+	./decoder_test
+	./encoder_test
+
 lib:
 	@(cd $(BITWALKER) && $(MAKE) lib)
 	@(cd $(GENERATED_PACKETS) && $(MAKE) lib)
