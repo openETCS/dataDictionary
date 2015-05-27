@@ -53,7 +53,7 @@ int main ()
 
     std::vector<uint8_t> raw_stream(1000);
     Bitstream stream;
-    Bitstream_Init(&stream, &(raw_stream[0]), raw_stream.size(), 0);
+    Bitstream_Init(&stream, &(raw_stream[0]), raw_stream.size(), 73);
 
     uint32_t init_pos = stream.bitpos;
 
