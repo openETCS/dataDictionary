@@ -10,6 +10,7 @@
 int main ()
 {
     Eurobalise_Header head;
+    {
     head.Q_UPDOWN = 0;
     head.M_VERSION = 3;
     head.Q_MEDIA = 0;
@@ -20,26 +21,35 @@ int main ()
     head.NID_C  = 120;
     head.NID_BG = 49;
     head.Q_LINK = 1;
+    }
 
     Train_running_number_Core a;
+    {
     a.L_PACKET = 53;
     a.NID_OPERATIONAL = 9;
+    }
+
     Packet_Header a1;
     a1.NID_PACKET = 5;
 
     Adhesion_Factor_Core b;
+    {
     b.Q_DIR = 1;
     b.L_PACKET = 56;
     b.Q_SCALE = 1;
     b.D_ADHESION = 9;
     b.L_ADHESION = 24;
     b.M_ADHESION = 0;
+    }
+
     Packet_Header b1;
     b1.NID_PACKET = 71;
 
     End_of_Information_Core c;
     Packet_Header c1;
     c1.NID_PACKET = 255;
+
+    // auto c_save = c;
 
     std::vector<uint8_t> raw_stream(1000);
     Bitstream stream;
