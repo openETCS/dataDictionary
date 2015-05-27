@@ -1,5 +1,12 @@
 
 #include "Eurobalise_Telegram.h"
+#include "Eurobalise_Header_Decoder.h"
+#include "Eurobalise_Header_Encoder.h"
+#include "Packet_Header_Decoder.h"
+#include "Packet_Header_Encoder.h"
+#include "Decoder_Branch.h"
+#include "Encoder_Branch.h"
+
 //#include <iostream>
 
 bool Eurobalise_Telegram::Decoder(Bitstream* stream)
@@ -58,7 +65,7 @@ bool Eurobalise_Telegram::Encoder(Bitstream* stream)
         ++i;
     }
 
-    if(packets[i-1].id != 255)
+    if(packets[i-1]->id != 255)
     {
         return false;
     }

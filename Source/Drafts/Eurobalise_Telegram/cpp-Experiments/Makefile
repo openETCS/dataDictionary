@@ -34,7 +34,8 @@ lib:
 	@(cd $(PACKET_HEADER) && $(MAKE) lib)
 	@(cd $(TELEGRAM_HEADER) && $(MAKE) lib)
 
-decoder_test: decoder_test.o Eurobalise_Telegram.o Decoder_Branch.o
+decoder_test: decoder_test.o Eurobalise_Telegram.o\
+		Decoder_Branch.o Encoder_Branch.o
 	$(CXX) -o $@ $+ $(LDFLAGS)
 
 

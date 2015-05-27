@@ -3,9 +3,7 @@
 #define EUROBALISE_TELEGRAM_H_INCLUDED
 
 #include "Eurobalise_Header.h"
-#include "Eurobalise_Header_Decoder.h"
-#include "Packet_Header_Decoder.h"
-#include "Decoder_Branch.h"
+#include "BasePacket.h"
 
 typedef std::vector<BasePacketPtr> PacketSequence;
 

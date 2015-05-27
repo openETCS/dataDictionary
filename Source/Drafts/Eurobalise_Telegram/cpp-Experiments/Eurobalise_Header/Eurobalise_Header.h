@@ -43,7 +43,6 @@ inline bool operator!=(const Eurobalise_Header& a, const Eurobalise_Header& b)
 #endif // __cplusplus
 
 
-
 typedef struct Eurobalise_Header Eurobalise_Header;
 
 #define EUROBALISE_HEADER_BITSIZE 50
