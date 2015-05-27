@@ -14,7 +14,19 @@ struct BasePacket
     BasePacket(int id1) : id(id1) {}
 
     virtual void print(std::ostream& stream) const = 0;
+
+    virtual bool equals(const BasePacket& p) const = 0;
 };
+
+inline bool operator== (const BasePacket& a, const BasePacket& b)
+{
+    return a.equals(b);
+}
+
+inline bool operator!= (const BasePacket& a, const BasePacket& b)
+{
+    return !(a == b);
+}
 
 inline std::ostream& operator<< (std::ostream& stream, const BasePacket& p)
 {

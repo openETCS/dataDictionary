@@ -91,12 +91,8 @@ int main ()
     // *** decode from the stream to the new telegram ***
     telegram_new.Decoder(&stream);
 
-    /*
-    assert(telegram_new.header == telegram.header);
-    assert(telegram_new.packets.size() == telegram.packets.size());
-    assert(telegram_new.packets == telegram.packets);
+    std::cout << telegram_new << std::endl;
     assert(telegram_new == telegram);
-    */
 
     std::cout << "successful test of Eurobalise_Telegram Encoder then Decoder" << std::endl;
 

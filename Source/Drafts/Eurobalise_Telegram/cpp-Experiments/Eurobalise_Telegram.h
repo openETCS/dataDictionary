@@ -29,8 +29,19 @@ inline std::ostream& operator<< (std::ostream& stream, const Eurobalise_Telegram
 
 inline bool operator==(const Eurobalise_Telegram& a, const Eurobalise_Telegram& b)
 {
-    return (a.header == b.header) &&
-           (a.packets == b.packets);
+    if(a.header == b.header)
+    {
+        if(a.packets.size() == b.packets.size())
+	{
+           bool result = true;   	
+	   for(size_t i = 0; i < a.packets.size(); ++i)
+	   {
+               result = result && (*(a.packets[i]) == *(b.packets[i]));
+	   }
+	   return result;
+	}
+    }
+    return false;
 }
 
 inline bool operator!=(const Eurobalise_Telegram& a, const Eurobalise_Telegram& b)

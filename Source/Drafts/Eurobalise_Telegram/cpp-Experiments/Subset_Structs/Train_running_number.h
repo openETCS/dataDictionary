@@ -18,17 +18,18 @@ struct Train_running_number : public BasePacket
 	<< core.L_PACKET << ','
 	<< core.NID_OPERATIONAL << ')';
     }
+
+    bool equals(const BasePacket& p) const
+    {
+        auto q = dynamic_cast<const Train_running_number*>(&p);
+	if(q)
+	{
+           return (core.L_PACKET == q->core.L_PACKET) &&
+	          (core.NID_OPERATIONAL == q->core.NID_OPERATIONAL);
+	}
+	return false;
+    }
 };
-
-inline bool operator==(const Train_running_number& a, const Train_running_number& b)
-{
-     return (a.core == b.core);
-}
-
-inline bool operator!=(const Train_running_number& a, const Train_running_number& b)
-{
-     return !(a == b);
-}
 
 typedef std::shared_ptr<Train_running_number> Train_running_numberPtr;
 
