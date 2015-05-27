@@ -56,11 +56,11 @@ bool Eurobalise_Telegram::Encoder(Bitstream* stream)
     }
 
     // check that last packet denotes end of message
-    assert(packets.back()->id != 255);
+    assert(packets.back()->id == 255);
 
     for(auto p = packets.begin(); p != packets.end(); ++p)
     {
-        packetID.NID_PACKET = p->id;
+        packetID.NID_PACKET = (*p)->id;
 	if(Packet_Header_Encoder(stream, &packetID) != 1)
 	{
 	    return false;

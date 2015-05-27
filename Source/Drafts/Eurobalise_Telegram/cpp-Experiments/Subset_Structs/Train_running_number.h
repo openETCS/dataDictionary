@@ -11,6 +11,11 @@ struct Train_running_number : public BasePacket
     Train_running_number_Core core;
 
     Train_running_number() : BasePacket(5) {}
+
+    void print(std::ostream& stream) const
+    {
+        stream << '(' << id << ',' << core << ')';
+    }
 };
 
 #ifdef __cplusplus

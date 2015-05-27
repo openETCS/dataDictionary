@@ -11,6 +11,18 @@ struct Adhesion_Factor : public BasePacket
     Adhesion_Factor_Core core;
 
     Adhesion_Factor() : BasePacket(71) {}
+
+    void print(std::ostream& stream) const
+    {
+        stream << '(' << id << ','
+	<< core.Q_DIR << ','
+	<< core.L_PACKET << ','
+	<< core.Q_SCALE << ','
+	<< core.Q_SCALE << ','
+	<< core.D_ADHESION << ','
+	<< core.L_ADHESION << ','
+	<< core.M_ADHESION << ')';
+    }
 };
 
 #ifdef __cplusplus

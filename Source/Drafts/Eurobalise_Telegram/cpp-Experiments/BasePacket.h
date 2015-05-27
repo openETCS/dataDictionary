@@ -11,7 +11,15 @@ struct BasePacket
     int id;
 
     BasePacket(int id1) : id(id1) {}
+
+    virtual void print(std::ostream& stream) const = 0;
 };
+
+inline std::ostream& operator<< (std::ostream& stream, const BasePacket& p)
+{
+    p.print(stream);
+    return stream;
+}
 
 typedef std::shared_ptr<BasePacket> BasePacketPtr;
 

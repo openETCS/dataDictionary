@@ -21,6 +21,25 @@ struct Eurobalise_Header
 
 #ifdef __cplusplus
 
+#include <iostream>
+
+inline std::ostream& operator<< (std::ostream& stream, const Eurobalise_Header& p)
+{
+   stream << '('
+          << uint64_t(p.Q_UPDOWN) << ','
+          << uint64_t(p.M_VERSION) << ','
+          << uint64_t(p.Q_MEDIA) << ','
+          << uint64_t(p.N_PIG) << ','
+          << uint64_t(p.N_TOTAL) << ','
+          << uint64_t(p.M_DUP) << ','
+          << uint64_t(p.M_MCOUNT) << ','
+          << uint64_t(p.NID_C) << ','
+          << uint64_t(p.NID_BG) << ','
+          << uint64_t(p.Q_LINK) << ')';
+   
+    return stream;
+}
+
 inline bool operator==(const Eurobalise_Header& a, const Eurobalise_Header& b)
 {
    return (a.Q_UPDOWN == b.Q_UPDOWN) &&

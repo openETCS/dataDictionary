@@ -11,6 +11,11 @@ struct End_of_Information : public BasePacket
     End_of_Information_Core core;
 
     End_of_Information() : BasePacket(255) {}
+
+    void print(std::ostream& stream) const
+    {
+        stream << '(' << id << ')';
+    }
 };
 
 #ifdef __cplusplus

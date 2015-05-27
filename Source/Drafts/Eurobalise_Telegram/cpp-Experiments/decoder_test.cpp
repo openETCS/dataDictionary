@@ -11,22 +11,22 @@ int main ()
 {
     Eurobalise_Header head;
     {
-    head.Q_UPDOWN = 0;
-    head.M_VERSION = 3;
-    head.Q_MEDIA = 0;
-    head.N_PIG = 4;
-    head.N_TOTAL = 3;
-    head.M_DUP = 3;
-    head.M_MCOUNT = 34;
-    head.NID_C  = 120;
-    head.NID_BG = 49;
-    head.Q_LINK = 1;
+        head.Q_UPDOWN = 0;
+        head.M_VERSION = 3;
+        head.Q_MEDIA = 0;
+        head.N_PIG = 4;
+        head.N_TOTAL = 3;
+        head.M_DUP = 3;
+        head.M_MCOUNT = 34;
+        head.NID_C  = 120;
+        head.NID_BG = 49;
+        head.Q_LINK = 1;
     }
 
     Train_running_number_Core a;
     {
-    a.L_PACKET = 53;
-    a.NID_OPERATIONAL = 9;
+        a.L_PACKET = 53;
+        a.NID_OPERATIONAL = 9;
     }
 
     Packet_Header a1;
@@ -34,12 +34,12 @@ int main ()
 
     Adhesion_Factor_Core b;
     {
-    b.Q_DIR = 1;
-    b.L_PACKET = 56;
-    b.Q_SCALE = 1;
-    b.D_ADHESION = 9;
-    b.L_ADHESION = 24;
-    b.M_ADHESION = 0;
+        b.Q_DIR = 1;
+        b.L_PACKET = 56;
+        b.Q_SCALE = 1;
+        b.D_ADHESION = 9;
+        b.L_ADHESION = 24;
+        b.M_ADHESION = 0;
     }
 
     Packet_Header b1;
