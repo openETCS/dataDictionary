@@ -9,6 +9,8 @@ export TELEGRAM_HEADER=Eurobalise_Header
 
 #VPATH = Packet_Header
 
+it: lib decoder_test
+
 include $(TOPDIR)/Makefile.template
 
 #CXX = c++
@@ -31,8 +33,6 @@ lib:
 	@(cd $(GENERATED_PACKETS) && $(MAKE) lib)
 	@(cd $(PACKET_HEADER) && $(MAKE) lib)
 	@(cd $(TELEGRAM_HEADER) && $(MAKE) lib)
-
-it: lib decoder_test
 
 decoder_test: decoder_test.o Eurobalise_Telegram.o Decoder_Branch.o
 	$(CXX) -o $@ $+ $(LDFLAGS)
