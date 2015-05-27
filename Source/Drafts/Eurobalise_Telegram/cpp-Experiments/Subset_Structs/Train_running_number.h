@@ -14,11 +14,11 @@ struct Train_running_number : public BasePacket
 
     void print(std::ostream& stream) const
     {
-        stream << '(' << id << ',' << core << ')';
+        stream << '(' << id << ','
+	<< core.L_PACKET << ','
+	<< core.NID_OPERATIONAL << ')';
     }
 };
-
-#ifdef __cplusplus
 
 inline bool operator==(const Train_running_number& a, const Train_running_number& b)
 {
@@ -29,8 +29,6 @@ inline bool operator!=(const Train_running_number& a, const Train_running_number
 {
      return !(a == b);
 }
-
-#endif // __cplusplus
 
 typedef std::shared_ptr<Train_running_number> Train_running_numberPtr;
 

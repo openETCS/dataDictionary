@@ -16,14 +16,6 @@ struct Train_running_number_Core
 
 #ifdef __cplusplus
 
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Train_running_number_Core& p)
-{
-    stream << '(' << p.L_PACKET << ',' << p.NID_OPERATIONAL << ')';
-    return stream;
-}
-
 inline bool operator==(const Train_running_number_Core& a, const Train_running_number_Core& b)
 {
     return (a.L_PACKET == b.L_PACKET) &&
@@ -34,7 +26,6 @@ inline bool operator!=(const Train_running_number_Core& a, const Train_running_n
 {
     return !(a == b);
 }
-
 
 #endif // __cplusplus
 

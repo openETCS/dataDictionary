@@ -25,8 +25,6 @@ struct Adhesion_Factor : public BasePacket
     }
 };
 
-#ifdef __cplusplus
-
 inline bool operator==(const Adhesion_Factor& a, const Adhesion_Factor& b)
 {
     return (a.core == b.core);
@@ -36,8 +34,6 @@ inline bool operator!=(const Adhesion_Factor& a, const Adhesion_Factor& b)
 {
     return !(a == b);
 }
-
-#endif // __cplusplus
 
 typedef std::shared_ptr<Adhesion_Factor> Adhesion_FactorPtr;
 
