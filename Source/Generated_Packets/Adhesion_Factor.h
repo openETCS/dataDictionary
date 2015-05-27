@@ -12,7 +12,7 @@ struct Adhesion_Factor : public BasePacket
 
     Adhesion_Factor() : BasePacket(71) {}
 
-    void print(std::ostream& stream) const
+    void print(std::ostream& stream) const override
     {
         stream << '(' << id << ','
 	<< core.Q_DIR << ','
@@ -23,10 +23,9 @@ struct Adhesion_Factor : public BasePacket
 	<< core.M_ADHESION << ')';
     }
 
-    bool equals(const BasePacket& p) const
+    bool equals(const BasePacket& p) const override
     {
-        auto q = dynamic_cast< const Adhesion_Factor*>(&p);
-	if(q)
+	if(auto q = dynamic_cast<const Adhesion_Factor*>(&p))
 	{
 	    return (core.Q_DIR == q->core.Q_DIR) &&
                    (core.L_PACKET == q->core.L_PACKET) &&

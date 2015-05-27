@@ -6,26 +6,23 @@
 #include "BasePacket.h"
 #include "End_of_Information_Core.h"
 
+// this packet is special, I think we should not generate it automatically
+
 struct End_of_Information : public BasePacket
 {
     End_of_Information_Core core;
 
     End_of_Information() : BasePacket(255) {}
 
-    void print(std::ostream& stream) const
+    void print(std::ostream& stream) const override
     {
         stream << '(' << id << ')';
     }
 
-    bool equals(const BasePacket& p) const
+    bool equals(const BasePacket& p) const override
     {
-        auto q = dynamic_cast< const End_of_Information*>(&p);
-	if(q)
-	{
-	    return true;
-	}
-	return false;
-     }
+	return  dynamic_cast<const End_of_Information*>(&p);
+    }
 };
 
 typedef std::shared_ptr<End_of_Information> End_of_InformationPtr;
