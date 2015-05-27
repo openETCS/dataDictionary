@@ -1,6 +1,5 @@
 
 #include "Decoder_Branch.h"
-//#include <iostream>
 
 BasePacketPtr Decoder_Branch(Bitstream* stream, Packet_Header header)
 {
@@ -12,7 +11,6 @@ BasePacketPtr Decoder_Branch(Bitstream* stream, Packet_Header header)
 
         if (Train_running_number_Decoder(stream, &(ret->core)) == 1)
         {
-            //std::cout << "packet 5" << std::endl;
             return ret;
         }
         else
@@ -27,7 +25,6 @@ BasePacketPtr Decoder_Branch(Bitstream* stream, Packet_Header header)
 
         if (Adhesion_Factor_Decoder(stream, &(ret->core)) == 1)
         {
-            //std::cout << "packet 71" << std::endl;
             return ret;
         }
         else
@@ -42,7 +39,6 @@ BasePacketPtr Decoder_Branch(Bitstream* stream, Packet_Header header)
 
         if (End_of_Information_Decoder(stream, &(ret->core)) == 1)
         {
-            //std::cout << "packet 255" << std::endl;
             return ret;
         }
         else
@@ -53,7 +49,6 @@ BasePacketPtr Decoder_Branch(Bitstream* stream, Packet_Header header)
 
     default :
     {
-        //std::cout << "No packet for " << header.NID_PACKET << std::endl;
         return BasePacketPtr();
     }
     };
