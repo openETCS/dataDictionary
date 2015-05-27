@@ -48,6 +48,7 @@ bool Eurobalise_Telegram::Decoder(Bitstream* stream)
 bool Eurobalise_Telegram::Encoder(Bitstream* stream)
 {
     uint32_t old_pos = stream->bitpos;
+    Packet_Header packetID;
 
     if(Eurobalise_Header_Encoder(stream, &header) != 1)
     {
@@ -59,6 +60,11 @@ bool Eurobalise_Telegram::Encoder(Bitstream* stream)
 
     for(auto p = packets.begin(); p != packets.end(); ++p)
     {
+        packetID.NID_PACKET = p->id;
+	if(Packet_Header_Encoder(stream, &packetID) != 1)
+	{
+	    return false;
+	}
         if(Encoder_Branch(stream, *p) != 1)
 	{
 	    return false;

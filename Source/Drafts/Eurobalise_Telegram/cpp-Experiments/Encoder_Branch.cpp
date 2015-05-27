@@ -1,16 +1,8 @@
 
 #include "Encoder_Branch.h"
-#include "Packet_Header_Encoder.h"
-//#include <iostream>
 
 bool Encoder_Branch(Bitstream* stream, BasePacketPtr packet)
 {
-    Packet_Header header;
-    header.NID_PACKET = packet->id;
-    if(Packet_Header_Encoder(stream, &header) != 1)
-    {
-       return false;
-    } 
 
     switch(packet->id)
     {
