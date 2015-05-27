@@ -7,7 +7,7 @@
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
 
-//#include <iostream>
+#include <cassert>
 
 bool Eurobalise_Telegram::Decoder(Bitstream* stream)
 {
@@ -54,20 +54,15 @@ bool Eurobalise_Telegram::Encoder(Bitstream* stream)
         return false;
     }
 
-    int i = 0;
+    // check that last packet denotes end of message
+    assert(packets.back()->id != 255);
 
-    while(packets[i] && (stream->bitpos <= 1023 + old_pos))
+    for(auto p = packets.begin(); p != packets.end(); ++p)
     {
-        if(Encoder_Branch(stream, packets[i]) != 1)
+        if(Encoder_Branch(stream, *p) != 1)
 	{
 	    return false;
 	}
-        ++i;
-    }
-
-    if(packets[i-1]->id != 255)
-    {
-        return false;
     }
 
     return true;
