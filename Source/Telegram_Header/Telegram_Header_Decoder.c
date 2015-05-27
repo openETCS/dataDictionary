@@ -1,10 +1,10 @@
 
-#include "Eurobalise_Header_Decoder.h"
+#include "Telegram_Header_Decoder.h"
 #include "Bitstream_Read.h"
 
-int Eurobalise_Header_Decoder(Bitstream* stream, Eurobalise_Header* p)
+int Telegram_Header_Decoder(Bitstream* stream, Telegram_Header* p)
 {
-    if (NormalBitstream(stream, EUROBALISE_HEADER_BITSIZE))
+    if (NormalBitstream(stream, TELEGRAM_HEADER_BITSIZE))
     {
         uint8_t* addr = stream->addr;
 	const uint32_t size = stream->size;
@@ -110,7 +110,7 @@ int Eurobalise_Header_Decoder(Bitstream* stream, Eurobalise_Header* p)
 	*/
 	{ p->Q_LINK    = Bitstream_Read(stream, 1); }
 
-        //@ assert stream->bitpos == \at(stream->bitpos,Pre) + EUROBALISE_HEADER_BITSIZE;
+        //@ assert stream->bitpos == \at(stream->bitpos,Pre) + TELEGRAM_HEADER_BITSIZE;
 
 	//@ assert  Q_UPDOWN: EqualBits(stream, pos, pos + 1, p->Q_UPDOWN);
 	//@ assert  Q_UPDOWN: UpperBitsNotSet(p->Q_UPDOWN, 1);

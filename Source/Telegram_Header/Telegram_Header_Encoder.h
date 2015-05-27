@@ -1,8 +1,8 @@
 
-#ifndef EUROBALISE_HEADER_ENCODER_H_INCLUDED
-#define EUROBALISE_HEADER_ENCODER_H_INCLUDED
+#ifndef TELEGRAM_HEADER_ENCODER_H_INCLUDED
+#define TELEGRAM_HEADER_ENCODER_H_INCLUDED
 
-#include "Eurobalise_Header.h"
+#include "Telegram_Header.h"
 
 /*@
     requires valid_stream:      Writeable(stream);
@@ -43,7 +43,7 @@
     complete behaviors;
     disjoint behaviors;
 */
-int Eurobalise_Header_Encoder(Bitstream* stream, const Eurobalise_Header* p);
+int Telegram_Header_Encoder(Bitstream* stream, const Telegram_Header* p);
 
-#endif // EUROBALISE_HEADER_ENCODER_H_INCLUDED
+#endif // TELEGRAM_HEADER_ENCODER_H_INCLUDED
 

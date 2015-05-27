@@ -1,6 +1,6 @@
 
 #include "Eurobalise_Telegram.h"
-#include "Eurobalise_Header_Encoder.h"
+#include "Telegram_Header_Encoder.h"
 #include "Packet_Header_Encoder.h"
 #include "Bitstream_Init.h"
 #include "subsets.h"
@@ -9,7 +9,7 @@
 
 int main ()
 {
-    Eurobalise_Header head;
+    Telegram_Header head;
     {
         head.Q_UPDOWN = 0;
         head.M_VERSION = 3;
@@ -57,7 +57,7 @@ int main ()
 
     uint32_t init_pos = stream.bitpos;
 
-    Eurobalise_Header_Encoder(&stream, &head);
+    Telegram_Header_Encoder(&stream, &head);
     Packet_Header_Encoder(&stream, &a1);
     Train_running_number_Encoder(&stream, &a);
     Packet_Header_Encoder(&stream, &b1);
@@ -71,7 +71,7 @@ int main ()
 
     telegram.Decoder(&stream);
 
-    Eurobalise_Header head_ret = telegram.header;
+    Telegram_Header head_ret = telegram.header;
     auto a_ret = std::static_pointer_cast<Train_running_number>(telegram.packets[0]);
     auto b_ret = std::static_pointer_cast<Adhesion_Factor>(telegram.packets[1]);
     auto c_ret = std::static_pointer_cast<End_of_Information>(telegram.packets[2]);

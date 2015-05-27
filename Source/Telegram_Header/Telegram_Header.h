@@ -1,10 +1,10 @@
 
-#ifndef EUROBALISE_HEADER_H_INCLUDED
-#define EUROBALISE_HEADER_H_INCLUDED
+#ifndef TELEGRAM_HEADER_H_INCLUDED
+#define TELEGRAM_HEADER_H_INCLUDED
 
 #include "Bitstream.h"
 
-struct Eurobalise_Header
+struct Telegram_Header
 {
 
     uint32_t  Q_UPDOWN;         // # 1
@@ -23,7 +23,7 @@ struct Eurobalise_Header
 
 #include <iostream>
 
-inline std::ostream& operator<< (std::ostream& stream, const Eurobalise_Header& p)
+inline std::ostream& operator<< (std::ostream& stream, const Telegram_Header& p)
 {
    stream << '('
           << uint64_t(p.Q_UPDOWN) << ','
@@ -40,7 +40,7 @@ inline std::ostream& operator<< (std::ostream& stream, const Eurobalise_Header& 
     return stream;
 }
 
-inline bool operator==(const Eurobalise_Header& a, const Eurobalise_Header& b)
+inline bool operator==(const Telegram_Header& a, const Telegram_Header& b)
 {
    return (a.Q_UPDOWN == b.Q_UPDOWN) &&
           (a.M_VERSION == b.M_VERSION) &&
@@ -54,7 +54,7 @@ inline bool operator==(const Eurobalise_Header& a, const Eurobalise_Header& b)
           (a.Q_LINK == b.Q_LINK);
 }
 
-inline bool operator!=(const Eurobalise_Header& a, const Eurobalise_Header& b)
+inline bool operator!=(const Telegram_Header& a, const Telegram_Header& b)
 {
     return !(a == b);
 }
@@ -62,20 +62,20 @@ inline bool operator!=(const Eurobalise_Header& a, const Eurobalise_Header& b)
 #endif // __cplusplus
 
 
-typedef struct Eurobalise_Header Eurobalise_Header;
+typedef struct Telegram_Header Telegram_Header;
 
-#define EUROBALISE_HEADER_BITSIZE 50
+#define TELEGRAM_HEADER_BITSIZE 50
 
 /*@
-    logic integer BitSize{L}(Eurobalise_Header* p) = EUROBALISE_HEADER_BITSIZE;
+    logic integer BitSize{L}(Telegram_Header* p) = TELEGRAM_HEADER_BITSIZE;
 
-    logic integer MaxBitSize{L}(Eurobalise_Header* p) = BitSize(p);
+    logic integer MaxBitSize{L}(Telegram_Header* p) = BitSize(p);
 
-    predicate Separated(Bitstream* stream, Eurobalise_Header* p) =
+    predicate Separated(Bitstream* stream, Telegram_Header* p) =
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Eurobalise_Header* p) =
+    predicate Invariant(Telegram_Header* p) =
       Invariant(p->Q_UPDOWN)       &&
       Invariant(p->M_VERSION)      &&
       Invariant(p->Q_MEDIA)        &&
@@ -87,7 +87,7 @@ typedef struct Eurobalise_Header Eurobalise_Header;
       Invariant(p->NID_BG)         &&
       Invariant(p->Q_LINK);
 
-    predicate ZeroInitialized(Eurobalise_Header* p) =
+    predicate ZeroInitialized(Telegram_Header* p) =
       ZeroInitialized(p->Q_UPDOWN)       &&
       ZeroInitialized(p->M_VERSION)      &&
       ZeroInitialized(p->Q_MEDIA)        &&
@@ -99,7 +99,7 @@ typedef struct Eurobalise_Header Eurobalise_Header;
       ZeroInitialized(p->NID_BG)         &&
       ZeroInitialized(p->Q_LINK);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Eurobalise_Header* p) =
+    predicate EqualBits(Bitstream* stream, integer pos, Telegram_Header* p) =
       EqualBits(stream, pos,      pos + 1,  p->Q_UPDOWN)  &&
       EqualBits(stream, pos + 1,  pos + 8,  p->M_VERSION) &&
       EqualBits(stream, pos + 8,  pos + 9,  p->Q_MEDIA)   &&
@@ -111,7 +111,7 @@ typedef struct Eurobalise_Header Eurobalise_Header;
       EqualBits(stream, pos + 35, pos + 49, p->NID_BG)    &&
       EqualBits(stream, pos + 49, pos + 50, p->Q_LINK);
 
-    predicate UpperBitsNotSet(Eurobalise_Header* p) =
+    predicate UpperBitsNotSet(Telegram_Header* p) =
       UpperBitsNotSet(p->Q_UPDOWN,  1)      &&
       UpperBitsNotSet(p->M_VERSION, 7)      &&
       UpperBitsNotSet(p->Q_MEDIA,   1)      &&
@@ -125,4 +125,4 @@ typedef struct Eurobalise_Header Eurobalise_Header;
 
 */
 
-#endif // EUROBALISE_HEADER_H_INCLUDED
+#endif // TELEGRAM_HEADER_H_INCLUDED

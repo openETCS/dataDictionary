@@ -1,7 +1,7 @@
 
 #include "Eurobalise_Telegram.h"
-#include "Eurobalise_Header_Decoder.h"
-#include "Eurobalise_Header_Encoder.h"
+#include "Telegram_Header_Decoder.h"
+#include "Telegram_Header_Encoder.h"
 #include "Packet_Header_Decoder.h"
 #include "Packet_Header_Encoder.h"
 #include "Decoder_Branch.h"
@@ -13,7 +13,7 @@ bool Eurobalise_Telegram::Decoder(Bitstream* stream)
 {
     Packet_Header packetID;
 
-    if (Eurobalise_Header_Decoder(stream, &(header)) != 1)
+    if (Telegram_Header_Decoder(stream, &(header)) != 1)
     {
         return false;
     }
@@ -50,7 +50,7 @@ bool Eurobalise_Telegram::Encoder(Bitstream* stream)
     uint32_t old_pos = stream->bitpos;
     Packet_Header packetID;
 
-    if(Eurobalise_Header_Encoder(stream, &header) != 1)
+    if(Telegram_Header_Encoder(stream, &header) != 1)
     {
         return false;
     }

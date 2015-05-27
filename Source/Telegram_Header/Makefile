@@ -1,7 +1,7 @@
 
 MAKEFLAGS += --no-print-directory --silent
 
-TOPDIR=../../../..
+TOPDIR=..
 export BITWALKER=$(TOPDIR)/Bitwalker
 
 #VPATH = $(TOPDIR)/Bitwalker

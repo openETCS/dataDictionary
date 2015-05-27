@@ -1,8 +1,8 @@
 
-#include "Eurobalise_Header_UpperBitsNotSet.h"
+#include "Telegram_Header_UpperBitsNotSet.h"
 #include "UpperBitsNotSet.h"
 
-int Eurobalise_Header_UpperBitsNotSet(const Eurobalise_Header* p)
+int Telegram_Header_UpperBitsNotSet(const Telegram_Header* p)
 {
     if (UpperBitsNotSet64(p->Q_UPDOWN,      1)  &&
         UpperBitsNotSet64(p->M_VERSION,     7)  &&

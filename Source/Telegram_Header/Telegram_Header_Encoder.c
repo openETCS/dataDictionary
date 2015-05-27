@@ -1,13 +1,13 @@
 
-#include "Eurobalise_Header_Encoder.h"
-#include "Eurobalise_Header_UpperBitsNotSet.h"
+#include "Telegram_Header_Encoder.h"
+#include "Telegram_Header_UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 
-int Eurobalise_Header_Encoder(Bitstream* stream, const Eurobalise_Header* p)
+int Telegram_Header_Encoder(Bitstream* stream, const Telegram_Header* p)
 {
-    if (NormalBitstream(stream, EUROBALISE_HEADER_BITSIZE))
+    if (NormalBitstream(stream, TELEGRAM_HEADER_BITSIZE))
     {
-        if (Eurobalise_Header_UpperBitsNotSet(p))
+        if (Telegram_Header_UpperBitsNotSet(p))
         {
             uint8_t* addr = stream->addr;
             const uint32_t size = stream->size;

@@ -1,7 +1,7 @@
 
 MAKEFLAGS += --no-print-directory --silent
 
-TOPDIR=../../../..
+TOPDIR=..
 
 include $(TOPDIR)/Makefile.template
 export BITWALKER=$(TOPDIR)/Bitwalker

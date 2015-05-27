@@ -1,6 +1,6 @@
 
 #include "Eurobalise_Telegram.h"
-#include "Eurobalise_Header_Encoder.h"
+#include "Telegram_Header_Encoder.h"
 #include "Packet_Header_Encoder.h"
 #include "Bitstream_Init.h"
 #include "subsets.h"
@@ -13,7 +13,7 @@ int main ()
     Eurobalise_Telegram telegram;
 
     // declare and initialize a telegram header
-    Eurobalise_Header head;
+    Telegram_Header head;
     {
         head.Q_UPDOWN = 0;
         head.M_VERSION = 3;

@@ -1,11 +1,11 @@
 
 MAKEFLAGS += --no-print-directory --silent
 
-TOPDIR=../../..
+TOPDIR=..
 export BITWALKER=$(TOPDIR)/Bitwalker
-export GENERATED_PACKETS=Subset_Structs
-export PACKET_HEADER=Packet_Header
-export TELEGRAM_HEADER=Eurobalise_Header
+export GENERATED_PACKETS=$(TOPDIR)/Generated_Packets
+export PACKET_HEADER=$(TOPDIR)/Packet_Header
+export TELEGRAM_HEADER=$(TOPDIR)/Telegram_Header
 
 #VPATH = Packet_Header
 
@@ -44,6 +44,7 @@ encoder_test: encoder_test.o Eurobalise_Telegram.o\
 
 clean::
 	@$(RM) decoder_test
+	@$(RM) encoder_test
 	@(cd $(BITWALKER) && $(MAKE) clean)
 	@(cd $(GENERATED_PACKETS) && $(MAKE) clean)
 	@(cd $(PACKET_HEADER) && $(MAKE) clean)
