@@ -1,66 +1,47 @@
 
 #include "Encoder_Branch.h"
+#include "Packet_Header_Encoder.h"
 //#include <iostream>
 
 bool Encoder_Branch(Bitstream* stream, BasePacketPtr packet)
 {
-    switch(packet.id)
+    Packet_Header header;
+    header.NID_PACKET = packet->id;
+    if(Packet_Header_Encoder(stream, &header) != 1)
     {
+       return false;
+    } 
+
+    switch(packet->id)
+    {
+
        case 5 :
        {
-	   Packet_Header head;
-	   head.NID_PACKET = 5;
+           auto ptr = std::static_pointer_cast<Train_running_number>(packet);
 
-	   if(Packet_Header_Encoder(&stream, &head) != 1)
-	   {
-	       return false;
-	   }
-
-	   if(Train_running_number_Encoder(stream, &(packet->core) != 1)
-	   {
-	       return false;
-	   }
-
-	   return true;
+	   return Train_running_number_Encoder(stream, &(ptr->core)) == 1;
        }
+
        case 71 :
        {
-	   Packet_Header head;
-	   head.NID_PACKET = 71;
+           auto ptr = std::static_pointer_cast<Adhesion_Factor>(packet);
 
-	   if(Packet_Header_Encoder(&stream, &head) != 1)
-	   {
-	       return false;
-	   }
-
-	   if(Adhesion_Factor_Encoder(stream, &(packet->core) != 1)
-	   {
-	       return false;
-	   }
-
-	   return true;
+	   return Adhesion_Factor_Encoder(stream, &(ptr->core)) == 1;
        }
+
        case 255 :
        {
-	   Packet_Header head;
-	   head.NID_PACKET = 255;
+           auto ptr = std::static_pointer_cast<End_of_Information>(packet);
 
-	   if(Packet_Header_Encoder(&stream, &head) != 1)
-	   {
-	       return false;
-	   }
-
-	   if(End_of_Information_Encoder(stream, &(packet->core) != 1)
-	   {
-	       return false;
-	   }
-
-	   return true;
+	   return End_of_Information_Encoder(stream, &(ptr->core)) == 1;
        }
+
        default :
        {
            return false;
        }
+
     };
+
 }
 
