@@ -42,7 +42,7 @@ bool operator!=(const Eurobalise_Telegram& a, const Eurobalise_Telegram& b)
     return !(a == b);
 }
 
-bool Eurobalise_Telegram::Decoder(Bitstream* stream)
+bool Eurobalise_Telegram::decode(Bitstream* stream)
 {
     Packet_Header packetID;
 
@@ -60,26 +60,27 @@ bool Eurobalise_Telegram::Decoder(Bitstream* stream)
         //std::cout << stream->bitpos << std::endl;
 
         Packet_Header_Decoder(stream, &packetID);
-        //std::cout << "decoding packet number " << packetID.NID_PACKET << std::endl;
         auto packet = Decoder_Branch(stream, packetID);
 
-        if (!packet)
+        if (packet)
+        {
+            packets.push_back(packet);
+
+            if (packetID.NID_PACKET == 255)
+            {
+                break;
+            }
+        }
+        else
         {
             return false;
-        }
-
-        packets.push_back(packet);
-
-        if (packetID.NID_PACKET == 255)
-        {
-            break;
         }
     }
 
     return true;
 }
 
-bool Eurobalise_Telegram::Encoder(Bitstream* stream) const
+bool Eurobalise_Telegram::encode(Bitstream* stream) const
 {
     uint32_t old_pos = stream->bitpos;
     Packet_Header packetID;

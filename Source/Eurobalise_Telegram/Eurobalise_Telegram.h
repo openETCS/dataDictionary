@@ -13,9 +13,9 @@ struct Eurobalise_Telegram
     Telegram_Header header;
     PacketSequence packets;
 
-    bool Decoder(Bitstream* stream);
+    bool decode(Bitstream* stream);
 
-    bool Encoder(Bitstream* stream) const;
+    bool encode(Bitstream* stream) const;
 };
 
 std::ostream& operator<<(std::ostream& stream, const Eurobalise_Telegram& p);
