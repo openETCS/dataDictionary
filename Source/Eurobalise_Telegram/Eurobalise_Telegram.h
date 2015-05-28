@@ -17,32 +17,9 @@ struct Eurobalise_Telegram
     bool Encoder(Bitstream* stream);
 };
 
-inline std::ostream& operator<< (std::ostream& stream, const Eurobalise_Telegram& p)
-{
-    stream << p.header << "\n";
-    for(auto i = p.packets.begin(); i != p.packets.end(); ++i)
-    {
-        stream << *(*i) << "\n";
-    }
-    return stream;
-}
+std::ostream& operator<< (std::ostream& stream, const Eurobalise_Telegram& p);
 
-inline bool operator==(const Eurobalise_Telegram& a, const Eurobalise_Telegram& b)
-{
-    if(a.header == b.header)
-    {
-        if(a.packets.size() == b.packets.size())
-	{
-           bool result = true;   	
-	   for(size_t i = 0; i < a.packets.size(); ++i)
-	   {
-               result = result && (*(a.packets[i]) == *(b.packets[i]));
-	   }
-	   return result;
-	}
-    }
-    return false;
-}
+bool operator==(const Eurobalise_Telegram& a, const Eurobalise_Telegram& b);
 
 inline bool operator!=(const Eurobalise_Telegram& a, const Eurobalise_Telegram& b)
 {
