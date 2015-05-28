@@ -13,10 +13,12 @@
 std::ostream& operator<< (std::ostream& stream, const Eurobalise_Telegram& p)
 {
     stream << '(' << p.header << ",";
-    for(auto i = p.packets.begin(); i != p.packets.end(); ++i)
+
+    for (auto i = p.packets.begin(); i != p.packets.end(); ++i)
     {
         stream << *(*i);
-        if (i+1 != p.packets.end())
+
+        if (i + 1 != p.packets.end())
         {
             stream << ',';
         }
@@ -24,25 +26,29 @@ std::ostream& operator<< (std::ostream& stream, const Eurobalise_Telegram& p)
         {
             stream << ')';
         }
-           
+
     }
+
     return stream;
 }
 
 bool operator==(const Eurobalise_Telegram& a, const Eurobalise_Telegram& b)
 {
-    if(a.header == b.header)
+    if (a.header == b.header)
     {
-        if(a.packets.size() == b.packets.size())
+        if (a.packets.size() == b.packets.size())
         {
-           bool result = true;
-           for(size_t i = 0; i < a.packets.size(); ++i)
-           {
-               result = result && (*(a.packets[i]) == *(b.packets[i]));
-           }
-           return result;
+            bool result = true;
+
+            for (size_t i = 0; i < a.packets.size(); ++i)
+            {
+                result = result && (*(a.packets[i]) == *(b.packets[i]));
+            }
+
+            return result;
         }
     }
+
     return false;
 }
 

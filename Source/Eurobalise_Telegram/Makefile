@@ -46,6 +46,11 @@ encoder_test: encoder_test.o Eurobalise_Telegram.o\
                 Decoder_Branch.o Encoder_Branch.o
 	$(CXX) -o $@ $+ $(LDFLAGS)
 
+FORMAT := $(wildcard *.h) $(wildcard *.cpp)
+
+format: FORCE
+	$(ASTYLE) $(FORMAT)
+
 clean::
 	@$(RM) decoder_test
 	@$(RM) encoder_test
