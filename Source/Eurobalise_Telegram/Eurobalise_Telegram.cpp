@@ -79,7 +79,7 @@ bool Eurobalise_Telegram::Decoder(Bitstream* stream)
     return true;
 }
 
-bool Eurobalise_Telegram::Encoder(Bitstream* stream)
+bool Eurobalise_Telegram::Encoder(Bitstream* stream) const
 {
     uint32_t old_pos = stream->bitpos;
     Packet_Header packetID;
