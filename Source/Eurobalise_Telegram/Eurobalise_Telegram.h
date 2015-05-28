@@ -17,14 +17,11 @@ struct Eurobalise_Telegram
     bool Encoder(Bitstream* stream);
 };
 
-std::ostream& operator<< (std::ostream& stream, const Eurobalise_Telegram& p);
+std::ostream& operator<<(std::ostream& stream, const Eurobalise_Telegram& p);
 
 bool operator==(const Eurobalise_Telegram& a, const Eurobalise_Telegram& b);
 
-inline bool operator!=(const Eurobalise_Telegram& a, const Eurobalise_Telegram& b)
-{
-    return !(a == b);
-}
+bool operator!=(const Eurobalise_Telegram& a, const Eurobalise_Telegram& b);
 
 #endif // EUROBALISE_TELEGRAM_H_INCLUDED
 

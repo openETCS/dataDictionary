@@ -37,6 +37,11 @@ bool operator==(const Eurobalise_Telegram& a, const Eurobalise_Telegram& b)
     return false;
 }
 
+bool operator!=(const Eurobalise_Telegram& a, const Eurobalise_Telegram& b)
+{
+    return !(a == b);
+}
+
 bool Eurobalise_Telegram::Decoder(Bitstream* stream)
 {
     Packet_Header packetID;
