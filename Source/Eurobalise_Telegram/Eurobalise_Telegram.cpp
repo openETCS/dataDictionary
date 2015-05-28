@@ -12,10 +12,19 @@
 
 std::ostream& operator<< (std::ostream& stream, const Eurobalise_Telegram& p)
 {
-    stream << p.header << "\n";
+    stream << '(' << p.header << ",";
     for(auto i = p.packets.begin(); i != p.packets.end(); ++i)
     {
-        stream << *(*i) << "\n";
+        stream << *(*i);
+        if (i+1 != p.packets.end())
+        {
+            stream << ',';
+        }
+        else
+        {
+            stream << ')';
+        }
+           
     }
     return stream;
 }
