@@ -22,14 +22,14 @@ int main ()
 
     Train_running_number a = create_Train_running_number();
     {
-        Packet_Header h{5};
+        Packet_Header h{a.id};
         Packet_Header_Encoder(&stream, &h);
         Train_running_number_Encoder(&stream, &a.core);
     }
 
     Adhesion_Factor b = create_Adhesion_Factor();
     {
-        Packet_Header h{71};
+        Packet_Header h{b.id};
         Packet_Header_Encoder(&stream, &h);
         Adhesion_Factor_Encoder(&stream, &b.core);
     }
@@ -37,7 +37,7 @@ int main ()
 
     End_of_Information c;
     {
-        Packet_Header h{255};
+        Packet_Header h{c.id};
         Packet_Header_Encoder(&stream, &h);
         End_of_Information_Encoder(&stream, &c.core);
     }
