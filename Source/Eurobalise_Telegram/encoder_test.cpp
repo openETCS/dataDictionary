@@ -16,26 +16,16 @@ int main ()
     // declare and initialize a telegram header
     telegram.header = create_Telegram_Header();
 
-
     // create a pointer to a data packet including core data packet 1
     // and push this pointer into the telegam packet vector
-    {
-        auto a_packet = std::make_shared<Train_running_number>();
-        *a_packet  = create_Train_running_number();
-        telegram.packets.push_back(a_packet);
-    }
-
+    telegram.add(std::make_shared<Train_running_number>(create_Train_running_number()));
 
     // create a pointer to a data packet including core data packet 2
     // and push this spointer into the telegram packet vector
-    {
-        auto b_packet = std::make_shared<Adhesion_Factor>();
-        *b_packet = create_Adhesion_Factor();
-        telegram.packets.push_back(b_packet);
-    }
+    telegram.add(std::make_shared<Adhesion_Factor>(create_Adhesion_Factor()));
 
     // add end of information package to packet sequence
-    telegram.packets.push_back(std::make_shared<End_of_Information>());
+    telegram.add(std::make_shared<End_of_Information>());
 
     std::cout << telegram << std::endl;
 
