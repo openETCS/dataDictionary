@@ -13,9 +13,14 @@ struct Eurobalise_Telegram
     Telegram_Header header;
     PacketSequence packets;
 
-    void add(BasePacketPtr p) 
+    void add(BasePacketPtr p)
     {
-       packets.push_back(p);
+        packets.push_back(p);
+    }
+
+    BasePacketPtr packet(size_t i) const
+    {
+        return packets[i];
     }
 
     bool decode(Bitstream& stream);

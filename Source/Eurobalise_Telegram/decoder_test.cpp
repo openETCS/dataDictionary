@@ -22,14 +22,14 @@ int main ()
 
     Train_running_number a = create_Train_running_number();
     {
-        Packet_Header h{a.id};
+        Packet_Header h {a.id};
         Packet_Header_Encoder(&stream, &h);
         Train_running_number_Encoder(&stream, &a.core);
     }
 
     Adhesion_Factor b = create_Adhesion_Factor();
     {
-        Packet_Header h{b.id};
+        Packet_Header h {b.id};
         Packet_Header_Encoder(&stream, &h);
         Adhesion_Factor_Encoder(&stream, &b.core);
     }
@@ -37,7 +37,7 @@ int main ()
 
     End_of_Information c;
     {
-        Packet_Header h{c.id};
+        Packet_Header h {c.id};
         Packet_Header_Encoder(&stream, &h);
         End_of_Information_Encoder(&stream, &c.core);
     }
@@ -50,9 +50,9 @@ int main ()
 
     assert(telegram.header == header);
 
-    assert(a == *std::static_pointer_cast<Train_running_number>(telegram.packets[0]));
-    assert(b == *std::static_pointer_cast<Adhesion_Factor>(telegram.packets[1]));
-    assert(c == *std::static_pointer_cast<End_of_Information>(telegram.packets[2]));
+    assert(a == *std::static_pointer_cast<Train_running_number>(telegram.packet(0)));
+    assert(b == *std::static_pointer_cast<Adhesion_Factor>(telegram.packet(1)));
+    assert(c == *std::static_pointer_cast<End_of_Information>(telegram.packet(2)));
 
     std::cout << "successful test of Eurobalise_Telegram_Decoder" << std::endl;
 
