@@ -4,6 +4,7 @@
 #include "Packet_Header_Encoder.h"
 #include "Bitstream_Init.h"
 #include "subsets.h"
+#include "create.h"
 #include <cassert>
 #include <iostream>
 
@@ -13,52 +14,27 @@ int main ()
     Eurobalise_Telegram telegram;
 
     // declare and initialize a telegram header
-    Telegram_Header head;
-    {
-        head.Q_UPDOWN = 0;
-        head.M_VERSION = 3;
-        head.Q_MEDIA = 0;
-        head.N_PIG = 4;
-        head.N_TOTAL = 3;
-        head.M_DUP = 3;
-        head.M_MCOUNT = 34;
-        head.NID_C  = 120;
-        head.NID_BG = 49;
-        head.Q_LINK = 1;
-    }
+    telegram.header = create_Telegram_Header();
 
-    // write the telegram header into the telegram
-    telegram.header = head;
-
-    // declare and initialize core data packet 1
-    Train_running_number_Core a;
-    {
-        a.L_PACKET = 53;
-        a.NID_OPERATIONAL = 9;
-    }
 
     // create a pointer to a data packet including core data packet 1
     // and push this pointer into the telegam packet vector
-    auto a_packet = std::make_shared<Train_running_number>();
-    a_packet->core = a;
-    telegram.packets.push_back(a_packet);
-
-    // declare and initialize core data packet 2
-    Adhesion_Factor_Core b;
     {
-        b.Q_DIR = 1;
-        b.L_PACKET = 56;
-        b.Q_SCALE = 1;
-        b.D_ADHESION = 9;
-        b.L_ADHESION = 24;
-        b.M_ADHESION = 0;
+        auto a_packet = std::make_shared<Train_running_number>();
+        Train_running_number_Core a = create_Train_running_number_Core();
+        a_packet->core = a;
+        telegram.packets.push_back(a_packet);
     }
+
 
     // create a pointer to a data packet including core data packet 2
     // and push this spointer into the telegram packet vector
-    auto b_packet = std::make_shared<Adhesion_Factor>();
-    b_packet->core = b;
-    telegram.packets.push_back(b_packet);
+    {
+        auto b_packet = std::make_shared<Adhesion_Factor>();
+        Adhesion_Factor_Core b = create_Adhesion_Factor_Core();
+        b_packet->core = b;
+        telegram.packets.push_back(b_packet);
+    }
 
     // declare core data packet 3 (end of telegram)
     End_of_Information_Core c;

@@ -38,12 +38,15 @@ lib:
 	@(cd $(PACKET_HEADER) && $(MAKE) lib)
 	@(cd $(TELEGRAM_HEADER) && $(MAKE) lib)
 
-decoder_test: decoder_test.o Eurobalise_Telegram.o\
-		Decoder_Branch.o Encoder_Branch.o
+SRC=Eurobalise_Telegram.cpp Decoder_Branch.cpp Encoder_Branch.cpp\
+    create.cpp
+
+OBJ := $(SRC:.cpp=.o)
+
+decoder_test: decoder_test.o $(OBJ)
 	$(CXX) -o $@ $+ $(LDFLAGS)
 
-encoder_test: encoder_test.o Eurobalise_Telegram.o\
-                Decoder_Branch.o Encoder_Branch.o
+encoder_test: encoder_test.o $(OBJ)
 	$(CXX) -o $@ $+ $(LDFLAGS)
 
 FORMAT := $(wildcard *.h) $(wildcard *.cpp)
