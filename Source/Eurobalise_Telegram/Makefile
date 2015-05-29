@@ -29,8 +29,8 @@ CPPFLAGS += -I$(BITWALKER)
 LDFLAGS += -L$(BITWALKER) -lBitwalker
 
 test: it
-	./decoder_test
 	./encoder_test
+	./decoder_test
 
 lib:
 	@(cd $(BITWALKER) && $(MAKE) lib)

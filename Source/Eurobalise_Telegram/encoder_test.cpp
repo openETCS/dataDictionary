@@ -27,7 +27,7 @@ int main ()
     // add end of information package to packet sequence
     telegram.add(std::make_shared<End_of_Information>());
 
-    //std::cout << telegram << std::endl;
+    std::cout << telegram << std::endl;
 
     // declare and initialize the stream
     std::vector<uint8_t> raw_stream(1000);
@@ -49,7 +49,7 @@ int main ()
     // *** decode from the stream to the new telegram ***
     telegram_new.decode(stream);
 
-    //std::cout << telegram_new << std::endl;
+    std::cout << telegram_new << std::endl;
     assert(telegram_new == telegram);
 
     std::cout << "successful test of Eurobalise_Telegram encode then decode" << std::endl;

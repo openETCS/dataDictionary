@@ -14,7 +14,8 @@ struct Adhesion_Factor : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << id << ','
+        stream << '('
+        << uint64_t(id) << ','
 	<< core.Q_DIR << ','
 	<< core.L_PACKET << ','
 	<< core.Q_SCALE << ','

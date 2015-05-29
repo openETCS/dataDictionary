@@ -15,7 +15,7 @@ struct Train_running_number : public BasePacket
     void print(std::ostream& stream) const override
     {
         stream << '(' 
-               << id << ','
+               << uint64_t(id) << ','
 	       << core.L_PACKET << ','
 	       << core.NID_OPERATIONAL << ')';
     }

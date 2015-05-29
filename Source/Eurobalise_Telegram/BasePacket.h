@@ -3,13 +3,14 @@
 #define BASEPACKET_H_INCLUDED
 
 #include <cstdlib>
+#include <cstdint>
 #include <memory>
 #include <vector>
 #include <iostream>
 
 struct BasePacket
 {
-    int id;
+    uint8_t id;
 
     BasePacket(int id1) : id(id1) {}
 
