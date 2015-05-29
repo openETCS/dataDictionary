@@ -49,9 +49,9 @@ int main ()
 
     assert(telegram.header == header);
 
-    assert(a == *std::static_pointer_cast<Train_running_number>(telegram.packet(0)));
-    assert(b == *std::static_pointer_cast<Adhesion_Factor>(telegram.packet(1)));
-    assert(c == *std::static_pointer_cast<End_of_Information>(telegram.packet(2)));
+    assert(a == *std::static_pointer_cast<Train_running_number>(telegram[0]));
+    assert(b == *std::static_pointer_cast<Adhesion_Factor>(telegram[1]));
+    assert(c == *std::static_pointer_cast<End_of_Information>(telegram[2]));
 
     std::cout << "successful test of Eurobalise_Telegram_Decoder" << std::endl;
 

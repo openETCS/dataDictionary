@@ -18,15 +18,9 @@ struct Eurobalise_Telegram
         packets.push_back(p);
     }
 
-    BasePacketPtr packet(size_t i) const
+    BasePacketPtr operator[](size_t i) const
     {
         return packets[i];
-    }
-
-    template<typename T>
-    T get(size_t i) const
-    {
-         return std::static_pointer_cast<T>(packet(i));
     }
 
     bool decode(Bitstream& stream);
