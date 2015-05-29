@@ -21,28 +21,28 @@ Telegram_Header create_Telegram_Header()
     return a;
 }
 
-Train_running_number_Core create_Train_running_number_Core()
+Train_running_number create_Train_running_number()
 {
-    Train_running_number_Core a;
+    Train_running_number a;
     {
-        a.L_PACKET = 53;
-        a.NID_OPERATIONAL = 9;
+        a.core.L_PACKET = 53;
+        a.core.NID_OPERATIONAL = 9;
     }
 
     return a;
 }
 
 
-Adhesion_Factor_Core create_Adhesion_Factor_Core()
+Adhesion_Factor create_Adhesion_Factor()
 {
-    Adhesion_Factor_Core a;
+    Adhesion_Factor a;
     {
-        a.Q_DIR = 1;
-        a.L_PACKET = 56;
-        a.Q_SCALE = 1;
-        a.D_ADHESION = 9;
-        a.L_ADHESION = 24;
-        a.M_ADHESION = 0;
+        a.core.Q_DIR = 1;
+        a.core.L_PACKET = 56;
+        a.core.Q_SCALE = 1;
+        a.core.D_ADHESION = 9;
+        a.core.L_ADHESION = 24;
+        a.core.M_ADHESION = 0;
     }
 
     return a;

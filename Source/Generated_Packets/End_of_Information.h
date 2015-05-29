@@ -12,7 +12,7 @@ struct End_of_Information : public BasePacket
 {
     End_of_Information_Core core;
 
-    End_of_Information() : BasePacket(255) {}
+    End_of_Information() : BasePacket(255), core() {}
 
     void print(std::ostream& stream) const override
     {

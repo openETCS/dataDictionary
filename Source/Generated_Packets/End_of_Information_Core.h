@@ -12,7 +12,6 @@ struct End_of_Information_Core
     // part of the message/telegram when receiving eight bits set to one
     // in the NID_PACKET field.       
     // Packet Number = 255
-
 };
 
 #ifdef __cplusplus
