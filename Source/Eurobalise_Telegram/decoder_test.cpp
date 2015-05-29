@@ -69,7 +69,7 @@ int main ()
 
     Eurobalise_Telegram telegram;
 
-    telegram.decode(&stream);
+    telegram.decode(stream);
 
     Telegram_Header head_ret = telegram.header;
     auto a_ret = std::static_pointer_cast<Train_running_number>(telegram.packets[0]);

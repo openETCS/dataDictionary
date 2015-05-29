@@ -57,24 +57,22 @@ bool operator!=(const Eurobalise_Telegram& a, const Eurobalise_Telegram& b)
     return !(a == b);
 }
 
-bool Eurobalise_Telegram::decode(Bitstream* stream)
+bool Eurobalise_Telegram::decode(Bitstream& stream)
 {
     Packet_Header packetID;
 
-    if (Telegram_Header_Decoder(stream, &(header)) != 1)
+    if (Telegram_Header_Decoder(&stream, &(header)) != 1)
     {
         return false;
     }
 
     //std::cout << stream->bitpos << std::endl;
 
-    uint32_t old_pos = stream->bitpos;
+    uint32_t old_pos = stream.bitpos;
 
-    while (stream->bitpos <= 1023 + old_pos)
+    while (stream.bitpos <= 1023 + old_pos)
     {
-        //std::cout << stream->bitpos << std::endl;
-
-        Packet_Header_Decoder(stream, &packetID);
+        Packet_Header_Decoder(&stream, &packetID);
         auto packet = Decoder_Branch(stream, packetID);
 
         if (packet)
@@ -95,12 +93,12 @@ bool Eurobalise_Telegram::decode(Bitstream* stream)
     return true;
 }
 
-bool Eurobalise_Telegram::encode(Bitstream* stream) const
+bool Eurobalise_Telegram::encode(Bitstream& stream) const
 {
-    uint32_t old_pos = stream->bitpos;
+    uint32_t old_pos = stream.bitpos;
     Packet_Header packetID;
 
-    if (Telegram_Header_Encoder(stream, &header) != 1)
+    if (Telegram_Header_Encoder(&stream, &header) != 1)
     {
         return false;
     }
@@ -112,7 +110,7 @@ bool Eurobalise_Telegram::encode(Bitstream* stream) const
     {
         packetID.NID_PACKET = (*p)->id;
 
-        if (Packet_Header_Encoder(stream, &packetID) != 1)
+        if (Packet_Header_Encoder(&stream, &packetID) != 1)
         {
             return false;
         }

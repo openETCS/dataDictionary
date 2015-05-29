@@ -7,7 +7,7 @@
 #include "Packet_Header.h"
 #include "BasePacket.h"
 
-BasePacketPtr Decoder_Branch(Bitstream* stream, Packet_Header header);
+BasePacketPtr Decoder_Branch(Bitstream& stream, Packet_Header header);
 
 #endif // DECODER_BRANCH_H_INCLUDED
 

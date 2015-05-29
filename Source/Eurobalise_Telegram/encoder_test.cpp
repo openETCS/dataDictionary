@@ -80,7 +80,7 @@ int main ()
     uint32_t init_pos = stream.bitpos;
 
     // *** encode the telegram to the stream ***
-    telegram.encode(&stream);
+    telegram.encode(stream);
 
     // reset to the old bitpos
     stream.bitpos = init_pos;
@@ -89,7 +89,7 @@ int main ()
     Eurobalise_Telegram telegram_new;
 
     // *** decode from the stream to the new telegram ***
-    telegram_new.decode(&stream);
+    telegram_new.decode(stream);
 
     std::cout << telegram_new << std::endl;
     assert(telegram_new == telegram);
