@@ -23,6 +23,12 @@ struct Eurobalise_Telegram
         return packets[i];
     }
 
+    template<typename T>
+    T get(size_t i) const
+    {
+         return std::static_pointer_cast<T>(packet(i));
+    }
+
     bool decode(Bitstream& stream);
 
     bool encode(Bitstream& stream) const;

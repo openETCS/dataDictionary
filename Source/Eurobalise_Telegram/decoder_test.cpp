@@ -34,7 +34,6 @@ int main ()
         Adhesion_Factor_Encoder(&stream, &b.core);
     }
 
-
     End_of_Information c;
     {
         Packet_Header h {c.id};
