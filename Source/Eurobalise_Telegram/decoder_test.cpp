@@ -8,6 +8,12 @@
 #include <cassert>
 #include <iostream>
 
+template<typename Packet>
+void assert_equal(const Packet& packet, BasePacketPtr ptr)
+{
+    assert(packet == *std::static_pointer_cast<Packet>(ptr));
+}
+
 int main ()
 {
 
@@ -49,9 +55,9 @@ int main ()
 
     assert(telegram.header == header);
 
-    assert(a == *std::static_pointer_cast<Train_running_number>(telegram[0]));
-    assert(b == *std::static_pointer_cast<Adhesion_Factor>(telegram[1]));
-    assert(c == *std::static_pointer_cast<End_of_Information>(telegram[2]));
+    assert_equal(a, telegram.packets[0]);
+    assert_equal(b, telegram.packets[1]);
+    assert_equal(c, telegram.packets[2]);
 
     std::cout << "successful test of Eurobalise_Telegram_Decoder" << std::endl;
 
