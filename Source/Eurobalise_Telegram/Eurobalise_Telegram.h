@@ -18,11 +18,6 @@ struct Eurobalise_Telegram
         packets.push_back(p);
     }
 
-    BasePacketPtr operator[](size_t i) const
-    {
-        return packets[i];
-    }
-
     bool decode(Bitstream& stream);
 
     bool encode(Bitstream& stream) const;
