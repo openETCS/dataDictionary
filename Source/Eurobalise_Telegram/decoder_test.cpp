@@ -11,7 +11,9 @@
 template<typename Packet>
 void assert_equal(const Packet& packet, BasePacketPtr ptr)
 {
-    assert(packet == *std::static_pointer_cast<Packet>(ptr));
+    auto x = std::dynamic_pointer_cast<Packet>(ptr);
+    assert(x);
+    assert(packet == *x);
 }
 
 int main ()
