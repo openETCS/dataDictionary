@@ -6,9 +6,7 @@ int Inhibition_of_revocable_TSRs_from_balises_in_L23_Decoder(Bitstream* stream, 
 {
     if (NormalBitstream(stream, INHIBITION_OF_REVOCABLE_TSRS_FROM_BALISES_IN_L23_CORE_BITSIZE))
     {
-        uint8_t* addr = stream->addr;
-        const uint32_t size = stream->size;
-        const uint32_t pos = stream->bitpos;
+        //@ ghost const uint32_t pos = stream->bitpos;
 
 	/*@
 	  requires Q_DIR:          stream->bitpos == pos + 0;

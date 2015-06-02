@@ -7,7 +7,7 @@ INCLUDES=$(CPPFLAGS) -I$(FRAMAC_SHARE)/libc
 
 VPATH = $(TOPDIR)/Coq
 
-SHARED_FLAGS=-Wall -Wno-unused -O3
+SHARED_FLAGS=-Wall -pedantic -O3
 #SHARED_FLAGS+=-Wconversion
 CFLAGS= -x c++ -std=c++11 $(SHARED_FLAGS)
 CXXFLAGS=-std=c++11 $(SHARED_FLAGS)

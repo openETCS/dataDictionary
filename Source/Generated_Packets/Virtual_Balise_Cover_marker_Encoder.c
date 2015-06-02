@@ -9,9 +9,7 @@ int Virtual_Balise_Cover_marker_Encoder(Bitstream* stream, const Virtual_Balise_
     {
         if (Virtual_Balise_Cover_marker_UpperBitsNotSet(p))
         {
-            uint8_t* addr = stream->addr;
-            const uint32_t size = stream->size;
-            const uint32_t pos = stream->bitpos;
+            //@ ghost const uint32_t pos = stream->bitpos;
 
             Bitstream_Write(stream, 6,  p->NID_VBCMK);
 

@@ -6,9 +6,7 @@ int Error_Reporting_Decoder(Bitstream* stream, Error_Reporting_Core* p)
 {
     if (NormalBitstream(stream, ERROR_REPORTING_CORE_BITSIZE))
     {
-        uint8_t* addr = stream->addr;
-        const uint32_t size = stream->size;
-        const uint32_t pos = stream->bitpos;
+        //@ ghost const uint32_t pos = stream->bitpos;
 
 	/*@
 	  requires L_PACKET:       stream->bitpos == pos + 0;

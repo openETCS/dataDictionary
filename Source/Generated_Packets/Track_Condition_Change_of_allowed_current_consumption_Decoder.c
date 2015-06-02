@@ -6,9 +6,7 @@ int Track_Condition_Change_of_allowed_current_consumption_Decoder(Bitstream* str
 {
     if (NormalBitstream(stream, TRACK_CONDITION_CHANGE_OF_ALLOWED_CURRENT_CONSUMPTION_CORE_BITSIZE))
     {
-        uint8_t* addr = stream->addr;
-        const uint32_t size = stream->size;
-        const uint32_t pos = stream->bitpos;
+        //@ ghost const uint32_t pos = stream->bitpos;
 
 	/*@
 	  requires Q_DIR:          stream->bitpos == pos + 0;

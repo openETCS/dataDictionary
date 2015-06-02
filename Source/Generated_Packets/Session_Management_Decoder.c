@@ -6,9 +6,7 @@ int Session_Management_Decoder(Bitstream* stream, Session_Management_Core* p)
 {
     if (NormalBitstream(stream, SESSION_MANAGEMENT_CORE_BITSIZE))
     {
-        uint8_t* addr = stream->addr;
-        const uint32_t size = stream->size;
-        const uint32_t pos = stream->bitpos;
+        //@ ghost const uint32_t pos = stream->bitpos;
 
 	/*@
 	  requires Q_DIR:          stream->bitpos == pos + 0;

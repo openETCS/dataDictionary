@@ -6,9 +6,7 @@ int RBC_transition_order_Decoder(Bitstream* stream, RBC_transition_order_Core* p
 {
     if (NormalBitstream(stream, RBC_TRANSITION_ORDER_CORE_BITSIZE))
     {
-        uint8_t* addr = stream->addr;
-        const uint32_t size = stream->size;
-        const uint32_t pos = stream->bitpos;
+        //@ ghost const uint32_t pos = stream->bitpos;
 
 	/*@
 	  requires Q_DIR:          stream->bitpos == pos + 0;

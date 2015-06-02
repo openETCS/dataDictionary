@@ -6,9 +6,7 @@ int Movement_Authority_Request_Parameters_Decoder(Bitstream* stream, Movement_Au
 {
     if (NormalBitstream(stream, MOVEMENT_AUTHORITY_REQUEST_PARAMETERS_CORE_BITSIZE))
     {
-        uint8_t* addr = stream->addr;
-        const uint32_t size = stream->size;
-        const uint32_t pos = stream->bitpos;
+        //@ ghost const uint32_t pos = stream->bitpos;
 
 	/*@
 	  requires Q_DIR:          stream->bitpos == pos + 0;

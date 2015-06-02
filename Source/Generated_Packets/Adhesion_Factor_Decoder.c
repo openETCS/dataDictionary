@@ -6,9 +6,7 @@ int Adhesion_Factor_Decoder(Bitstream* stream, Adhesion_Factor_Core* p)
 {
     if (NormalBitstream(stream, ADHESION_FACTOR_CORE_BITSIZE))
     {
-        uint8_t* addr = stream->addr;
-        const uint32_t size = stream->size;
-        const uint32_t pos = stream->bitpos;
+        //@ ghost const uint32_t pos = stream->bitpos;
 
 	/*@
 	  requires Q_DIR:          stream->bitpos == pos + 0;

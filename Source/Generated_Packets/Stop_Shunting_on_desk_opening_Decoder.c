@@ -6,9 +6,7 @@ int Stop_Shunting_on_desk_opening_Decoder(Bitstream* stream, Stop_Shunting_on_de
 {
     if (NormalBitstream(stream, STOP_SHUNTING_ON_DESK_OPENING_CORE_BITSIZE))
     {
-        uint8_t* addr = stream->addr;
-        const uint32_t size = stream->size;
-        const uint32_t pos = stream->bitpos;
+        //@ ghost const uint32_t pos = stream->bitpos;
 
 	/*@
 	  requires Q_DIR:          stream->bitpos == pos + 0;

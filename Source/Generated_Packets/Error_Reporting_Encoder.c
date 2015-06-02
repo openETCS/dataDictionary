@@ -9,9 +9,7 @@ int Error_Reporting_Encoder(Bitstream* stream, const Error_Reporting_Core* p)
     {
         if (Error_Reporting_UpperBitsNotSet(p))
         {
-            uint8_t* addr = stream->addr;
-            const uint32_t size = stream->size;
-            const uint32_t pos = stream->bitpos;
+            //@ ghost const uint32_t pos = stream->bitpos;
 
             Bitstream_Write(stream, 13, p->L_PACKET);
             Bitstream_Write(stream, 8,  p->M_ERROR);

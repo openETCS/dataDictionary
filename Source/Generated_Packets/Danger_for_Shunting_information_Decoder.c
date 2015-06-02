@@ -6,9 +6,7 @@ int Danger_for_Shunting_information_Decoder(Bitstream* stream, Danger_for_Shunti
 {
     if (NormalBitstream(stream, DANGER_FOR_SHUNTING_INFORMATION_CORE_BITSIZE))
     {
-        uint8_t* addr = stream->addr;
-        const uint32_t size = stream->size;
-        const uint32_t pos = stream->bitpos;
+        //@ ghost const uint32_t pos = stream->bitpos;
 
 	/*@
 	  requires Q_DIR:          stream->bitpos == pos + 0;

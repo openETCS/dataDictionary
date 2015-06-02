@@ -9,9 +9,7 @@ int Track_Condition_Change_of_allowed_current_consumption_Encoder(Bitstream* str
     {
         if (Track_Condition_Change_of_allowed_current_consumption_UpperBitsNotSet(p))
         {
-            uint8_t* addr = stream->addr;
-            const uint32_t size = stream->size;
-            const uint32_t pos = stream->bitpos;
+            //@ ghost const uint32_t pos = stream->bitpos;
 
             Bitstream_Write(stream, 2,  p->Q_DIR);
             Bitstream_Write(stream, 13, p->L_PACKET);

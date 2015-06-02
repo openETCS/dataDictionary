@@ -6,9 +6,7 @@ int Level_23_transition_information_Decoder(Bitstream* stream, Level_23_transiti
 {
     if (NormalBitstream(stream, LEVEL_23_TRANSITION_INFORMATION_CORE_BITSIZE))
     {
-        uint8_t* addr = stream->addr;
-        const uint32_t size = stream->size;
-        const uint32_t pos = stream->bitpos;
+        //@ ghost const uint32_t pos = stream->bitpos;
 
 	/*@
 	  requires L_PACKET:       stream->bitpos == pos + 0;
