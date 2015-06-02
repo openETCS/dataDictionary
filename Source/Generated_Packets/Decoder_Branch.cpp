@@ -148,6 +148,7 @@ BasePacketPtr Decoder_Branch_TrainToTrack(Bitstream& stream, Packet_Header heade
 
     default :
     {
+        std::cerr << "Error, unrecognized Packet in " << __FILE__ << std::endl;
         return BasePacketPtr();
     }
     };
@@ -985,6 +986,7 @@ BasePacketPtr Decoder_Branch_TrackToTrain(Bitstream& stream, Packet_Header heade
 
     default :
     {
+        std::cerr << "Error, unrecognized Packet in " << __FILE__ << std::endl;
         return BasePacketPtr();
     }
     };
