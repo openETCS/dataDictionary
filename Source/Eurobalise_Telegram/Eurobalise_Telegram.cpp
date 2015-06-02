@@ -73,7 +73,15 @@ bool Eurobalise_Telegram::decode(Bitstream& stream)
     while (stream.bitpos <= 1023 + old_pos)
     {
         Packet_Header_Decoder(&stream, &packetID);
-        auto packet = Decoder_Branch(stream, packetID);
+	
+	if (header.Q_UPDOWN == 1)
+	{
+            auto packet = Decoder_Branch_TrackToTrain(stream, packetID);
+	}
+	else if (header.Q_UPDOWN == 0)
+	{
+            auto packet = Decoder_Branch_TrainToTrack(stream, packetID);
+	}
 
         if (packet)
         {
