@@ -6,9 +6,7 @@ int Train_running_number_from_RBC_Decoder(Bitstream* stream, Train_running_numbe
 {
     if (NormalBitstream(stream, TRAIN_RUNNING_NUMBER_FROM_RBC_CORE_BITSIZE))
     {
-        uint8_t* addr = stream->addr;
-        const uint32_t size = stream->size;
-        const uint32_t pos = stream->bitpos;
+        //@ ghost const uint32_t pos = stream->bitpos;
 
 	/*@
 	  requires Q_DIR:          stream->bitpos == pos + 0;

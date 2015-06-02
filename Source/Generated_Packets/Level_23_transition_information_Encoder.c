@@ -9,9 +9,7 @@ int Level_23_transition_information_Encoder(Bitstream* stream, const Level_23_tr
     {
         if (Level_23_transition_information_UpperBitsNotSet(p))
         {
-            uint8_t* addr = stream->addr;
-            const uint32_t size = stream->size;
-            const uint32_t pos = stream->bitpos;
+            //@ ghost const uint32_t pos = stream->bitpos;
 
             Bitstream_Write(stream, 13, p->L_PACKET);
             Bitstream_Write(stream, 24, p->NID_LTRBG);

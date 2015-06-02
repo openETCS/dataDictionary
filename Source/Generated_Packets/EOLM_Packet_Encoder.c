@@ -9,9 +9,7 @@ int EOLM_Packet_Encoder(Bitstream* stream, const EOLM_Packet_Core* p)
     {
         if (EOLM_Packet_UpperBitsNotSet(p))
         {
-            uint8_t* addr = stream->addr;
-            const uint32_t size = stream->size;
-            const uint32_t pos = stream->bitpos;
+            //@ ghost const uint32_t pos = stream->bitpos;
 
             Bitstream_Write(stream, 2,  p->Q_DIR);
             Bitstream_Write(stream, 13, p->L_PACKET);

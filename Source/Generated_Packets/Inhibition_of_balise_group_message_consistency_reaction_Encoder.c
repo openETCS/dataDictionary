@@ -9,9 +9,7 @@ int Inhibition_of_balise_group_message_consistency_reaction_Encoder(Bitstream* s
     {
         if (Inhibition_of_balise_group_message_consistency_reaction_UpperBitsNotSet(p))
         {
-            uint8_t* addr = stream->addr;
-            const uint32_t size = stream->size;
-            const uint32_t pos = stream->bitpos;
+            //@ ghost const uint32_t pos = stream->bitpos;
 
             Bitstream_Write(stream, 2,  p->Q_DIR);
             Bitstream_Write(stream, 13, p->L_PACKET);

@@ -9,9 +9,7 @@ int Telegram_Header_Encoder(Bitstream* stream, const Telegram_Header* p)
     {
         if (Telegram_Header_UpperBitsNotSet(p))
         {
-            uint8_t* addr = stream->addr;
-            const uint32_t size = stream->size;
-            const uint32_t pos = stream->bitpos;
+            //@ ghost const uint32_t pos = stream->bitpos;
 
 	    Bitstream_Write(stream, 1,  p->Q_UPDOWN);
 	    Bitstream_Write(stream, 7,  p->M_VERSION);

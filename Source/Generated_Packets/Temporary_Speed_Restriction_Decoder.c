@@ -6,9 +6,7 @@ int Temporary_Speed_Restriction_Decoder(Bitstream* stream, Temporary_Speed_Restr
 {
     if (NormalBitstream(stream, TEMPORARY_SPEED_RESTRICTION_CORE_BITSIZE))
     {
-        uint8_t* addr = stream->addr;
-        const uint32_t size = stream->size;
-        const uint32_t pos = stream->bitpos;
+        //@ ghost const uint32_t pos = stream->bitpos;
 
 	/*@
 	  requires Q_DIR:          stream->bitpos == pos + 0;

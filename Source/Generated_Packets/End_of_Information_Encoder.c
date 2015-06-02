@@ -9,9 +9,7 @@ int End_of_Information_Encoder(Bitstream* stream, const End_of_Information_Core*
     {
         if (End_of_Information_UpperBitsNotSet(p))
         {
-            uint8_t* addr = stream->addr;
-            const uint32_t size = stream->size;
-            const uint32_t pos = stream->bitpos;
+            //@ ghost const uint32_t pos = stream->bitpos;
 
 
 

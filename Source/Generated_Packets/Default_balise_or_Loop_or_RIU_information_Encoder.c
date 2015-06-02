@@ -9,9 +9,7 @@ int Default_balise_or_Loop_or_RIU_information_Encoder(Bitstream* stream, const D
     {
         if (Default_balise_or_Loop_or_RIU_information_UpperBitsNotSet(p))
         {
-            uint8_t* addr = stream->addr;
-            const uint32_t size = stream->size;
-            const uint32_t pos = stream->bitpos;
+            //@ ghost const uint32_t pos = stream->bitpos;
 
             Bitstream_Write(stream, 2,  p->Q_DIR);
             Bitstream_Write(stream, 13, p->L_PACKET);

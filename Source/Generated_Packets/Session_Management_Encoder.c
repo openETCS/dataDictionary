@@ -9,9 +9,7 @@ int Session_Management_Encoder(Bitstream* stream, const Session_Management_Core*
     {
         if (Session_Management_UpperBitsNotSet(p))
         {
-            uint8_t* addr = stream->addr;
-            const uint32_t size = stream->size;
-            const uint32_t pos = stream->bitpos;
+            //@ ghost const uint32_t pos = stream->bitpos;
 
             Bitstream_Write(stream, 2,  p->Q_DIR);
             Bitstream_Write(stream, 13, p->L_PACKET);

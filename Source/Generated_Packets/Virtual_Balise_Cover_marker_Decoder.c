@@ -6,9 +6,7 @@ int Virtual_Balise_Cover_marker_Decoder(Bitstream* stream, Virtual_Balise_Cover_
 {
     if (NormalBitstream(stream, VIRTUAL_BALISE_COVER_MARKER_CORE_BITSIZE))
     {
-        uint8_t* addr = stream->addr;
-        const uint32_t size = stream->size;
-        const uint32_t pos = stream->bitpos;
+        //@ ghost const uint32_t pos = stream->bitpos;
 
 	/*@
 	  requires NID_VBCMK:      stream->bitpos == pos + 0;

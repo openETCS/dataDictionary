@@ -9,9 +9,7 @@ int Train_running_number_Encoder(Bitstream* stream, const Train_running_number_C
     {
         if (Train_running_number_UpperBitsNotSet(p))
         {
-            uint8_t* addr = stream->addr;
-            const uint32_t size = stream->size;
-            const uint32_t pos = stream->bitpos;
+            //@ ghost const uint32_t pos = stream->bitpos;
 
             Bitstream_Write(stream, 13, p->L_PACKET);
             Bitstream_Write(stream, 32, p->NID_OPERATIONAL);

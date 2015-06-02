@@ -6,9 +6,7 @@ int Train_running_number_Decoder(Bitstream* stream, Train_running_number_Core* p
 {
     if (NormalBitstream(stream, TRAIN_RUNNING_NUMBER_CORE_BITSIZE))
     {
-        uint8_t* addr = stream->addr;
-        const uint32_t size = stream->size;
-        const uint32_t pos = stream->bitpos;
+        //@ ghost const uint32_t pos = stream->bitpos;
 
 	/*@
 	  requires L_PACKET:       stream->bitpos == pos + 0;
