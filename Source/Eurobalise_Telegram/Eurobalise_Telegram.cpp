@@ -124,7 +124,7 @@ bool Eurobalise_Telegram::encode(Bitstream& stream) const
 	}
 	else if (header.Q_UPDOWN == 0)
 	{
-            if (Encoder_Branch_TrackToTrack(stream, *p) != 1)
+            if (Encoder_Branch_TrackToTrain(stream, *p) != 1)
             {
                 return false;
             }
