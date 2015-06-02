@@ -25,7 +25,8 @@ int main ()
 
     uint32_t init_pos = stream.bitpos;
 
-    Telegram_Header header = create_Telegram_Header();
+    Telegram_Header header = create_Telegram_Header_TrainToTrack();
+    // Telegram_Header header = create_Telegram_Header_TrackToTrain();
     Telegram_Header_Encoder(&stream, &header);
 
     Train_running_number a = create_Train_running_number();
@@ -35,12 +36,28 @@ int main ()
         Train_running_number_Encoder(&stream, &a.core);
     }
 
-    Adhesion_Factor b = create_Adhesion_Factor();
+    Error_Reporting b = create_Error_Reporting();
     {
         Packet_Header h {b.id};
         Packet_Header_Encoder(&stream, &h);
-        Adhesion_Factor_Encoder(&stream, &b.core);
+        Error_Reporting_Encoder(&stream, &b.core);
     }
+    
+/*    
+    Temporary_Speed_Restriction a = create_Temporary_Speed_Restriction();
+    {
+        Packet_Header h {a.id};
+	Packet_Header_Encoder(&stream, &h);
+	Temporary_Speed_Restriction_Encoder(&stream, &a.core);
+    }
+
+    Adhesion_Factor b = create_Adhesion_Factor();
+    {
+        Packet_Header h {b.id};
+	Packet_Header_Encoder(&stream, &h);
+	Adhesion_Factor_Encoder(&stream, &b.core);
+    }
+*/   
 
     End_of_Information c;
     {
