@@ -1,6 +1,6 @@
 
 #ifndef SUBSETS_H_INCLUDED
-#define SUBSETS_H_INLCUDED
+#define SUBSETS_H_INCLUDED
 
 #include "Adhesion_Factor_Encoder.h"
 #include "Danger_for_Shunting_information_Encoder.h"
