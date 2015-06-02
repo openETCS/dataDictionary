@@ -73,15 +73,18 @@ bool Eurobalise_Telegram::decode(Bitstream& stream)
     while (stream.bitpos <= 1023 + old_pos)
     {
         Packet_Header_Decoder(&stream, &packetID);
-	
-	if (header.Q_UPDOWN == 1)
-	{
-            auto packet = Decoder_Branch_TrackToTrain(stream, packetID);
-	}
-	else if (header.Q_UPDOWN == 0)
-	{
-            auto packet = Decoder_Branch_TrainToTrack(stream, packetID);
-	}
+
+        BasePacketPtr packet;
+
+        if (header.Q_UPDOWN == 1)
+        {
+            packet = Decoder_Branch_TrackToTrain(stream, packetID);
+        }
+        else
+        {
+            assert(header.Q_UPDOWN == 0);
+            packet = Decoder_Branch_TrainToTrack(stream, packetID);
+        }
 
         if (packet)
         {
@@ -124,23 +127,23 @@ bool Eurobalise_Telegram::encode(Bitstream& stream) const
         }
 
         if (header.Q_UPDOWN == 1)
-	{
+        {
             if (Encoder_Branch_TrainToTrack(stream, *p) != 1)
             {
                 return false;
             }
-	}
-	else if (header.Q_UPDOWN == 0)
-	{
+        }
+        else if (header.Q_UPDOWN == 0)
+        {
             if (Encoder_Branch_TrackToTrain(stream, *p) != 1)
             {
                 return false;
             }
-	}
-	else
-	{
+        }
+        else
+        {
             return false;
-	}
+        }
     }
 
     return true;
