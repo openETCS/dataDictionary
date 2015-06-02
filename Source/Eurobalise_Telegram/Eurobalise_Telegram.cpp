@@ -7,6 +7,7 @@
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
 
+#include <iostream>
 #include <cassert>
 
 
@@ -135,8 +136,8 @@ bool Eurobalise_Telegram::encode(Bitstream& stream) const
         }
         else if (header.Q_UPDOWN == 0)
         {
-            if (Encoder_Branch_TrackToTrain(stream, *p) != 1)
-            {
+	    if (Encoder_Branch_TrackToTrain(stream, *p) != 1)
+	    {
                 return false;
             }
         }

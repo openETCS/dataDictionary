@@ -14,7 +14,11 @@ struct Stop_if_in_Staff_Responsible : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << uint64_t(id) << ')';
+        stream << '('
+	       << uint64_t(id) << ','
+               << core.Q_DIR << ','
+               << core.L_PACKET << ','
+               << core.Q_SRSTOP << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -27,7 +31,7 @@ struct Stop_if_in_Staff_Responsible : public BasePacket
                 (core.Q_SRSTOP == q->core.Q_SRSTOP);
 	}
 	return false;
-     }
+    }
 };
 
 typedef std::shared_ptr<Stop_if_in_Staff_Responsible> Stop_if_in_Staff_ResponsiblePtr;

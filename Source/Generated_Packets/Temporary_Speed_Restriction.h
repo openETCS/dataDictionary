@@ -14,7 +14,16 @@ struct Temporary_Speed_Restriction : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << uint64_t(id) << ')';
+        stream << '('
+	       << uint64_t(id) << ','
+               << core.Q_DIR << ','
+               << core.L_PACKET << ','
+               << core.Q_SCALE << ','
+               << core.NID_TSR << ','
+               << core.D_TSR << ','
+               << core.L_TSR << ','
+               << core.Q_FRONT << ','
+               << core.V_TSR << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -32,7 +41,7 @@ struct Temporary_Speed_Restriction : public BasePacket
                 (core.V_TSR == q->core.V_TSR);
 	}
 	return false;
-     }
+    }
 };
 
 typedef std::shared_ptr<Temporary_Speed_Restriction> Temporary_Speed_RestrictionPtr;

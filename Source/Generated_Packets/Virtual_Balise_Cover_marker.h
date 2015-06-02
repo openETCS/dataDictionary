@@ -14,7 +14,9 @@ struct Virtual_Balise_Cover_marker : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << uint64_t(id) << ')';
+        stream << '('
+	       << uint64_t(id) << ','
+               << core.NID_VBCMK << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -25,7 +27,7 @@ struct Virtual_Balise_Cover_marker : public BasePacket
                 (core.NID_VBCMK == q->core.NID_VBCMK);
 	}
 	return false;
-     }
+    }
 };
 
 typedef std::shared_ptr<Virtual_Balise_Cover_marker> Virtual_Balise_Cover_markerPtr;

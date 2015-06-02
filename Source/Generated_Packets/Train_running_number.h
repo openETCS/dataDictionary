@@ -14,7 +14,10 @@ struct Train_running_number : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << uint64_t(id) << ')';
+        stream << '('
+	       << uint64_t(id) << ','
+               << core.L_PACKET << ','
+               << core.NID_OPERATIONAL << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -26,7 +29,7 @@ struct Train_running_number : public BasePacket
                 (core.NID_OPERATIONAL == q->core.NID_OPERATIONAL);
 	}
 	return false;
-     }
+    }
 };
 
 typedef std::shared_ptr<Train_running_number> Train_running_numberPtr;

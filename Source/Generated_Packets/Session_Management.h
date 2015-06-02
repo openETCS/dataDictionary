@@ -14,7 +14,15 @@ struct Session_Management : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << uint64_t(id) << ')';
+        stream << '('
+	       << uint64_t(id) << ','
+               << core.Q_DIR << ','
+               << core.L_PACKET << ','
+               << core.Q_RBC << ','
+               << core.NID_C << ','
+               << core.NID_RBC << ','
+               << core.NID_RADIO << ','
+               << core.Q_SLEEPSESSION << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -31,7 +39,7 @@ struct Session_Management : public BasePacket
                 (core.Q_SLEEPSESSION == q->core.Q_SLEEPSESSION);
 	}
 	return false;
-     }
+    }
 };
 
 typedef std::shared_ptr<Session_Management> Session_ManagementPtr;

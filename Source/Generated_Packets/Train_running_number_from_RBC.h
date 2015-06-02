@@ -14,7 +14,11 @@ struct Train_running_number_from_RBC : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << uint64_t(id) << ')';
+        stream << '('
+	       << uint64_t(id) << ','
+               << core.Q_DIR << ','
+               << core.L_PACKET << ','
+               << core.NID_OPERATIONAL << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -27,7 +31,7 @@ struct Train_running_number_from_RBC : public BasePacket
                 (core.NID_OPERATIONAL == q->core.NID_OPERATIONAL);
 	}
 	return false;
-     }
+    }
 };
 
 typedef std::shared_ptr<Train_running_number_from_RBC> Train_running_number_from_RBCPtr;

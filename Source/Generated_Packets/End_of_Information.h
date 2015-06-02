@@ -14,7 +14,8 @@ struct End_of_Information : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << uint64_t(id) << ')';
+        stream << '('
+	       << uint64_t(id) << ')';
     }
 
     bool equals(const BasePacket& p) const override

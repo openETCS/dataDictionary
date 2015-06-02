@@ -14,7 +14,12 @@ struct Default_Gradient_for_Temporary_Speed_Restriction : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << uint64_t(id) << ')';
+        stream << '('
+	       << uint64_t(id) << ','
+               << core.Q_DIR << ','
+               << core.L_PACKET << ','
+               << core.Q_GDIR << ','
+               << core.G_TSR << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -28,7 +33,7 @@ struct Default_Gradient_for_Temporary_Speed_Restriction : public BasePacket
                 (core.G_TSR == q->core.G_TSR);
 	}
 	return false;
-     }
+    }
 };
 
 typedef std::shared_ptr<Default_Gradient_for_Temporary_Speed_Restriction> Default_Gradient_for_Temporary_Speed_RestrictionPtr;

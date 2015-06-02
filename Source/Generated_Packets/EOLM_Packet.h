@@ -14,7 +14,16 @@ struct EOLM_Packet : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << uint64_t(id) << ')';
+        stream << '('
+	       << uint64_t(id) << ','
+               << core.Q_DIR << ','
+               << core.L_PACKET << ','
+               << core.Q_SCALE << ','
+               << core.NID_LOOP << ','
+               << core.D_LOOP << ','
+               << core.L_LOOP << ','
+               << core.Q_LOOPDIR << ','
+               << core.Q_SSCODE << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -32,7 +41,7 @@ struct EOLM_Packet : public BasePacket
                 (core.Q_SSCODE == q->core.Q_SSCODE);
 	}
 	return false;
-     }
+    }
 };
 
 typedef std::shared_ptr<EOLM_Packet> EOLM_PacketPtr;

@@ -14,7 +14,10 @@ struct Default_balise_or_Loop_or_RIU_information : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << uint64_t(id) << ')';
+        stream << '('
+	       << uint64_t(id) << ','
+               << core.Q_DIR << ','
+               << core.L_PACKET << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -26,7 +29,7 @@ struct Default_balise_or_Loop_or_RIU_information : public BasePacket
                 (core.L_PACKET == q->core.L_PACKET);
 	}
 	return false;
-     }
+    }
 };
 
 typedef std::shared_ptr<Default_balise_or_Loop_or_RIU_information> Default_balise_or_Loop_or_RIU_informationPtr;

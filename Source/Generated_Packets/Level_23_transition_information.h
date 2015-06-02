@@ -14,7 +14,10 @@ struct Level_23_transition_information : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << uint64_t(id) << ')';
+        stream << '('
+	       << uint64_t(id) << ','
+               << core.L_PACKET << ','
+               << core.NID_LTRBG << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -26,7 +29,7 @@ struct Level_23_transition_information : public BasePacket
                 (core.NID_LTRBG == q->core.NID_LTRBG);
 	}
 	return false;
-     }
+    }
 };
 
 typedef std::shared_ptr<Level_23_transition_information> Level_23_transition_informationPtr;

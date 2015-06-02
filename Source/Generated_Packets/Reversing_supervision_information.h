@@ -14,7 +14,13 @@ struct Reversing_supervision_information : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << uint64_t(id) << ')';
+        stream << '('
+	       << uint64_t(id) << ','
+               << core.Q_DIR << ','
+               << core.L_PACKET << ','
+               << core.Q_SCALE << ','
+               << core.D_REVERSE << ','
+               << core.V_REVERSE << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -29,7 +35,7 @@ struct Reversing_supervision_information : public BasePacket
                 (core.V_REVERSE == q->core.V_REVERSE);
 	}
 	return false;
-     }
+    }
 };
 
 typedef std::shared_ptr<Reversing_supervision_information> Reversing_supervision_informationPtr;

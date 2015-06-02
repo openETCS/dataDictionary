@@ -14,7 +14,10 @@ struct Error_Reporting : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << uint64_t(id) << ')';
+        stream << '('
+	       << uint64_t(id) << ','
+               << core.L_PACKET << ','
+               << core.M_ERROR << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -26,7 +29,7 @@ struct Error_Reporting : public BasePacket
                 (core.M_ERROR == q->core.M_ERROR);
 	}
 	return false;
-     }
+    }
 };
 
 typedef std::shared_ptr<Error_Reporting> Error_ReportingPtr;

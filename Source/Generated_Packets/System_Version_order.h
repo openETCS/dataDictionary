@@ -14,7 +14,11 @@ struct System_Version_order : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << uint64_t(id) << ')';
+        stream << '('
+	       << uint64_t(id) << ','
+               << core.Q_DIR << ','
+               << core.L_PACKET << ','
+               << core.M_VERSION << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -27,7 +31,7 @@ struct System_Version_order : public BasePacket
                 (core.M_VERSION == q->core.M_VERSION);
 	}
 	return false;
-     }
+    }
 };
 
 typedef std::shared_ptr<System_Version_order> System_Version_orderPtr;

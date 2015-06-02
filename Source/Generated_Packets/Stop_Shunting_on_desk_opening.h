@@ -14,7 +14,10 @@ struct Stop_Shunting_on_desk_opening : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << uint64_t(id) << ')';
+        stream << '('
+	       << uint64_t(id) << ','
+               << core.Q_DIR << ','
+               << core.L_PACKET << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -26,7 +29,7 @@ struct Stop_Shunting_on_desk_opening : public BasePacket
                 (core.L_PACKET == q->core.L_PACKET);
 	}
 	return false;
-     }
+    }
 };
 
 typedef std::shared_ptr<Stop_Shunting_on_desk_opening> Stop_Shunting_on_desk_openingPtr;

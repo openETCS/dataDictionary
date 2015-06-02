@@ -6,7 +6,7 @@ Telegram_Header create_Telegram_Header()
 {
     Telegram_Header a;
     {
-        a.Q_UPDOWN = 0;
+        a.Q_UPDOWN = 1;
         a.M_VERSION = 3;
         a.Q_MEDIA = 0;
         a.N_PIG = 4;

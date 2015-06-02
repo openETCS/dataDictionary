@@ -14,7 +14,14 @@ struct Adhesion_Factor : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << uint64_t(id) << ')';
+        stream << '('
+	       << uint64_t(id) << ','
+               << core.Q_DIR << ','
+               << core.L_PACKET << ','
+               << core.Q_SCALE << ','
+               << core.D_ADHESION << ','
+               << core.L_ADHESION << ','
+               << core.M_ADHESION << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -30,7 +37,7 @@ struct Adhesion_Factor : public BasePacket
                 (core.M_ADHESION == q->core.M_ADHESION);
 	}
 	return false;
-     }
+    }
 };
 
 typedef std::shared_ptr<Adhesion_Factor> Adhesion_FactorPtr;

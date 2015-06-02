@@ -14,7 +14,11 @@ struct Danger_for_Shunting_information : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << uint64_t(id) << ')';
+        stream << '('
+	       << uint64_t(id) << ','
+               << core.Q_DIR << ','
+               << core.L_PACKET << ','
+               << core.Q_ASPECT << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -27,7 +31,7 @@ struct Danger_for_Shunting_information : public BasePacket
                 (core.Q_ASPECT == q->core.Q_ASPECT);
 	}
 	return false;
-     }
+    }
 };
 
 typedef std::shared_ptr<Danger_for_Shunting_information> Danger_for_Shunting_informationPtr;

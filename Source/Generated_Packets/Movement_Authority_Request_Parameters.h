@@ -14,7 +14,13 @@ struct Movement_Authority_Request_Parameters : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << uint64_t(id) << ')';
+        stream << '('
+	       << uint64_t(id) << ','
+               << core.Q_DIR << ','
+               << core.L_PACKET << ','
+               << core.T_MAR << ','
+               << core.T_TIMEOUTRQST << ','
+               << core.T_CYCRQST << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -29,7 +35,7 @@ struct Movement_Authority_Request_Parameters : public BasePacket
                 (core.T_CYCRQST == q->core.T_CYCRQST);
 	}
 	return false;
-     }
+    }
 };
 
 typedef std::shared_ptr<Movement_Authority_Request_Parameters> Movement_Authority_Request_ParametersPtr;

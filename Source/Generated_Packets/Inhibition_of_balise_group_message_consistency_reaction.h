@@ -14,7 +14,10 @@ struct Inhibition_of_balise_group_message_consistency_reaction : public BasePack
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << uint64_t(id) << ')';
+        stream << '('
+	       << uint64_t(id) << ','
+               << core.Q_DIR << ','
+               << core.L_PACKET << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -26,7 +29,7 @@ struct Inhibition_of_balise_group_message_consistency_reaction : public BasePack
                 (core.L_PACKET == q->core.L_PACKET);
 	}
 	return false;
-     }
+    }
 };
 
 typedef std::shared_ptr<Inhibition_of_balise_group_message_consistency_reaction> Inhibition_of_balise_group_message_consistency_reactionPtr;

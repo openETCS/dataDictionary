@@ -14,7 +14,11 @@ struct Radio_Network_registration : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << uint64_t(id) << ')';
+        stream << '('
+	       << uint64_t(id) << ','
+               << core.Q_DIR << ','
+               << core.L_PACKET << ','
+               << core.NID_MN << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -27,7 +31,7 @@ struct Radio_Network_registration : public BasePacket
                 (core.NID_MN == q->core.NID_MN);
 	}
 	return false;
-     }
+    }
 };
 
 typedef std::shared_ptr<Radio_Network_registration> Radio_Network_registrationPtr;
