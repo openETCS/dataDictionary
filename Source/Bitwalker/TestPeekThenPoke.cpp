@@ -1,13 +1,11 @@
 
-extern "C"
-{
-#include "PeekThenPoke.h"
-}
-
+#include <cstdint>
 #include <cstdlib>
 #include <cassert>
 #include <vector>
 #include <iostream>
+
+void Bitwalker_PeekThenPoke(uint8_t* addr, uint32_t size, uint32_t bitpos, uint32_t length);
 
 int main()
 {
@@ -22,9 +20,8 @@ int main()
 
     std::vector<uint8_t> SaveBitstream = Bitstream;
 
-    int result = PeekThenPoke(Bitstream.data(), BitstreamSize, Start, Length);
+    Bitwalker_PeekThenPoke(Bitstream.data(), BitstreamSize, Start, Length);
 
-    assert(result == 0);
     assert(Bitstream == SaveBitstream);
 
     std::cout << "successful test of PeekThenPoke" << std::endl;

@@ -9,14 +9,13 @@ include $(TOPDIR)/Makefile.template
 #WP_FLAGS += -wp-prop=-@lemma
 #WP_FLAGS += -wp-prop=cea
 
+
 SRC :=  UpperBitsNotSet.c\
         Bitwalker.c\
-        Bitwalker_Peek_Normal.c Bitwalker_Peek.c\
-        Bitwalker_Poke_Normal.c Bitwalker_Poke.c\
-	PeekThenPoke.c PokeThenPeek.c\
+        Bitwalker_Peek_Normal.c Bitwalker_Poke_Normal.c\
+	Bitwalker_PeekThenPoke.c Bitwalker_PokeThenPeek.c\
 	Bitstream.c Bitstream_Init.c\
-	Bitstream_Read_Normal.c Bitstream_Read.c\
-	Bitstream_Write_Normal.c Bitstream_Write.c\
+	Bitstream_Read.c Bitstream_Write.c\
 	Bitstream_ReadThenWrite.c Bitstream_WriteThenRead.c\
 
 OBJ := $(SRC:.c=.o)
@@ -39,7 +38,7 @@ libBitwalker.a : $(OBJ)
 	ar cru	$@ $^
 	ranlib	$@
 
-TestPeekThenPoke: TestPeekThenPoke.o PeekThenPoke.o libBitwalker.a
+TestPeekThenPoke: TestPeekThenPoke.o libBitwalker.a
 	$(CXX) -o $@ $^
 	./$@
 

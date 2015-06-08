@@ -10,15 +10,16 @@ int Level_23_transition_information_Decoder(Bitstream* stream, Level_23_transiti
         const uint32_t size = stream->size;
         const uint32_t pos = stream->bitpos;
 
-        p->NID_PACKET         = Bitwalker_Peek_Normal(addr, size, pos,       8);
-        p->L_PACKET           = Bitwalker_Peek_Normal(addr, size, pos + 8,   13);
-        p->NID_LTRBG          = Bitwalker_Peek_Normal(addr, size, pos + 21,  24);
+        p->L_PACKET           = Bitwalker_Peek_Normal(addr, size, pos,       13);
+        p->NID_LTRBG          = Bitwalker_Peek_Normal(addr, size, pos + 13,  24);
 
         stream->bitpos += LEVEL_23_TRANSITION_INFORMATION_BITSIZE;
 
-        //@ assert NID_PACKET:        EqualBits(stream, pos,       pos + 8,   p->NID_PACKET);
-        //@ assert L_PACKET:          EqualBits(stream, pos + 8,   pos + 21,  p->L_PACKET);
-        //@ assert NID_LTRBG:         EqualBits(stream, pos + 21,  pos + 45,  p->NID_LTRBG);
+        //@ assert L_PACKET:          EqualBits(stream, pos,       pos + 13,  p->L_PACKET);
+        //@ assert NID_LTRBG:         EqualBits(stream, pos + 13,  pos + 37,  p->NID_LTRBG);
+
+        //@ assert L_PACKET:          UpperBitsNotSet(p->L_PACKET,          13);
+        //@ assert NID_LTRBG:         UpperBitsNotSet(p->NID_LTRBG,         24);
 
         return 1;
     }

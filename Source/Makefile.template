@@ -7,9 +7,9 @@ INCLUDES=$(CPPFLAGS) -I$(FRAMAC_SHARE)/libc
 
 VPATH = $(TOPDIR)/Coq
 
-SHARED_FLAGS=-Wall -pedantic
+SHARED_FLAGS=-Wall -pedantic -O3
 #SHARED_FLAGS+=-Wconversion
-CFLAGS=-std=c11 $(SHARED_FLAGS)
+CFLAGS= -x c++ -std=c++11 $(SHARED_FLAGS)
 CXXFLAGS=-std=c++11 $(SHARED_FLAGS)
 
 
@@ -30,10 +30,12 @@ coq-bitlemmas: FORCE
 # This allows us, for example, to start the gui very quickly and then
 # run the prover(s) on select proof obligtions.
 
-WP_FLAGS  =-cpp-command 'gcc -C -E -nostdinc $(INCLUDES)'
+WP_FLAGS  =-cpp-command 'gcc -C -E $(INCLUDES)'
+WP_FLAGS += -cpp-gnu-like
 WP_FLAGS += -pp-annot -no-unicode
 WP_FLAGS += -wp
 WP_FLAGS += -wp-model Typed+ref
+WP_FLAGS += -kernel-msg-key pp
 
 # RTE options and more
 WP_FLAGS += -wp-rte
@@ -75,10 +77,12 @@ ASTYLEOPTIONS += -A1
 ASTYLEOPTIONS += --break-blocks
 ASTYLEOPTIONS += --pad-oper
 ASTYLEOPTIONS += --pad-header
-ASTYLEOPTIONS += --indent-col1-comments
 ASTYLEOPTIONS += --lineend=linux
 ASTYLEOPTIONS += --add-brackets
 ASTYLEOPTIONS += --indent=spaces=4
+ASTYLEOPTIONS += --indent-classes
+ASTYLEOPTIONS += --indent-switches
+ASTYLEOPTIONS += --indent-col1-comments
 ASTYLEOPTIONS += --min-conditional-indent=0
 
 export ASTYLE=astyle $(ASTYLEOPTIONS)
@@ -98,6 +102,9 @@ export ASTYLE=astyle $(ASTYLEOPTIONS)
 # start WP on command line and run provers
 %.wp:%.c coq-bitlemmas FORCE
 	@$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 1 -wp-out $(patsubst %.c,%.wp, $<)   $<
+
+%.wp:%.h coq-bitlemmas FORCE
+	@$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 1 -wp-out $(patsubst %.h,%.wp, $<)   $<
 
 
 # start WP on command line but do not run provers

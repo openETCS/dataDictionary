@@ -10,17 +10,19 @@ int Radio_Network_registration_Decoder(Bitstream* stream, Radio_Network_registra
         const uint32_t size = stream->size;
         const uint32_t pos = stream->bitpos;
 
-        p->NID_PACKET         = Bitwalker_Peek_Normal(addr, size, pos,       8);
-        p->Q_DIR              = Bitwalker_Peek_Normal(addr, size, pos + 8,   2);
-        p->L_PACKET           = Bitwalker_Peek_Normal(addr, size, pos + 10,  13);
-        p->NID_MN             = Bitwalker_Peek_Normal(addr, size, pos + 23,  24);
+        p->Q_DIR              = Bitwalker_Peek_Normal(addr, size, pos,       2);
+        p->L_PACKET           = Bitwalker_Peek_Normal(addr, size, pos + 2,   13);
+        p->NID_MN             = Bitwalker_Peek_Normal(addr, size, pos + 15,  24);
 
         stream->bitpos += RADIO_NETWORK_REGISTRATION_BITSIZE;
 
-        //@ assert NID_PACKET:        EqualBits(stream, pos,       pos + 8,   p->NID_PACKET);
-        //@ assert Q_DIR:             EqualBits(stream, pos + 8,   pos + 10,  p->Q_DIR);
-        //@ assert L_PACKET:          EqualBits(stream, pos + 10,  pos + 23,  p->L_PACKET);
-        //@ assert NID_MN:            EqualBits(stream, pos + 23,  pos + 47,  p->NID_MN);
+        //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
+        //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
+        //@ assert NID_MN:            EqualBits(stream, pos + 15,  pos + 39,  p->NID_MN);
+
+        //@ assert Q_DIR:             UpperBitsNotSet(p->Q_DIR,             2);
+        //@ assert L_PACKET:          UpperBitsNotSet(p->L_PACKET,          13);
+        //@ assert NID_MN:            UpperBitsNotSet(p->NID_MN,            24);
 
         return 1;
     }

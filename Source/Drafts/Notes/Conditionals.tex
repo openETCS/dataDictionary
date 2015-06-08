@@ -1,0 +1,114 @@
+\documentclass[parskip=half,paper=a4,DIV=13]{scrartcl}
+
+\input{preamble}
+
+\title{Decoder and Encoder for Dynamic C-Structures}
+
+\author{Timon Lapawczyk}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+The Decoder and Encoder functions for all static packets now make use of the Bitstream\_Write
+and Bitstream\_Read functions. Therefore one does not have to calculate the bitpositions himself
+when it comes to the C-Code.
+
+However this does not apply to the formal specification.
+While checking a predicate like Equal-Bits, frama-c can not access the states within the function,
+to obtain the current bitpos.
+
+\begin{lstlisting}[mathescape]
+predicate EqualBits(Bitstream* stream, integer pos, Adhesion_Factor* p) =
+    EqualBits(stream, pos,       pos + 2,   p->Q_DIR)          &&
+    EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)       &&
+    EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)        &&
+    EqualBits(stream, pos + 17,  pos + 32,  p->D_ADHESION)     &&
+    EqualBits(stream, pos + 32,  pos + 47,  p->L_ADHESION)     &&
+    EqualBits(stream, pos + 47,  pos + 48,  p->M_ADHESION);
+\end{lstlisting}
+
+In the next step we focus on the C-Code and leave the formal specification aside.
+Hence we can for now ignore the problem with the predicates and focus on other problems.
+
+\section{Bitstream\_Write and Bitstream\_Read}
+
+With the switch to the Bitstream functions the current bitpos is saved within the Bitstream
+structure and rewritten during the Bitstream\_Read and Bitstream\_Write calls.
+
+That makes the Decoder and Encoder functions a lot cleaner.
+
+In the example below all read calls are independent from one another.
+
+\begin{lstlisting}[mathescape]
+int Infill_location_reference_Decoder(Bitstream* stream, Infill_location_reference* p)
+{
+    if (NormalBitstream(stream, INFILL_LOCATION_REFERENCE_BITSIZE))
+    {
+        uint8_t* addr = stream->addr;
+	const uint32_t size = stream->size;
+	const uint32_t pos = stream->bitpos;
+
+	p->Q_DIR           = Bitstream_Read(stream, 2);
+	p->L_PACKET        = Bitstream_Read(stream, 13);
+	p->Q_NEWCOUNTRY    = Bitstream_Read(stream, 1);
+	p->NID_C           = Bitstream_Read(stream, 10);
+	p->NID_BG          = Bitstream_Read(stream, 14);
+
+	return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+\end{lstlisting}
+
+\section{Optional variables}
+
+As it happens, the example above contains an optional variable.
+
+\begin{itemize}
+
+\item
+The value for NID\_C is only read if Q\_NEWCOUNTRY has the value 1.
+\item
+The dependency of the value Q\_NEWCOUNTRY can be realized via an if clause.
+\item
+Since all Bitstream\_Read calls are independent the bitpos for NID\_BG remains unchanged
+if NID\_C is not read and adds up automatically if NID\_C is read.
+
+\end{itemize}
+
+The NID\_C line from above changes into
+
+\begin{lstlisting}[mathescape]
+if (p->Q_NEWCOUNTRY == 1)
+{
+    p->NID_C         = Bitstream_Read(stream, 10);
+}
+\end{lstlisting}
+
+The first question at hand is how do we calculate the value for INFILL\_LOCATION\_REFERENCE\_BITSIZE
+to check NormalBitstream?
+
+Until now this value has been set in the Infill\_location\_reference.h file, as the sum of the bitsizes
+of all variables.
+Now the actual bitsize may depend on one or more values, read during runtime.
+There is no access to these values when deciding, whether the stream is long enought to read the whole packet from.
+
+To maintain some error handling we do not change this value.
+We can still assure to capture all error cases, where there are not enought bits to read from, in the stream.
+However we can not assure anymore that a return of 0 means that there were not enought bits.
+A not read optional variable might have also been the cause of the error.
+
+\section{Bitsize in Decoder Branch}
+
+Maybe we can recycle some of our thoughts on the header files. The L\_PACKET value equals the number
+of bits, that are actually transferred and therefore the neccessary length of the stream.
+If we read the L\_PACKET bits together with the NID\_PACKET value in the decoder branch,
+we can hand it on to the decoder.
+
+\end{document}

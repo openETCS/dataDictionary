@@ -5,49 +5,21 @@
 #include "Bitstream.h"
 
 /*@
-  requires valid:     Writeable(stream);
+  requires valid:      Writeable(stream);
+  requires invariant:  Invariant(stream, length);
+  requires normal:     Normal(stream, length);
+  requires upper:      UpperBitsNotSet(value, length);
 
-  requires invariant: Invariant(stream, length);
+  assigns stream->addr[0..stream->size - 1];
+  assigns stream->bitpos;
 
-  assigns  stream->addr[0..stream->size - 1];
-  assigns  stream->bitpos;
-
-  ensures  increment: stream->bitpos == \old(stream->bitpos) + length;
-
-  behavior  normal_case:
-    assumes Normal{Pre}(stream, length) && UpperBitsNotSet{Pre}(value, length);
-
-    assigns stream->addr[0..stream->size - 1];
-    assigns stream->bitpos;
-
-    ensures left:   EqualBits{Here,Old}(stream, 0, \old(stream->bitpos));
-
-    ensures middle: EqualBits(stream, \old(stream->bitpos), stream->bitpos, value);
-
-    ensures right:  EqualBits{Here,Old}(stream, stream->bitpos, 8 * stream->size);
-
-    ensures result: \result == 0;
-
-  behavior  value_too_big:
-    assumes Normal{Pre}(stream, length) && !UpperBitsNotSet{Pre}(value, length);
-
-    assigns stream->addr[0..stream->size - 1];
-    assigns stream->bitpos;
-
-    ensures result: \result == -2;
-
-  behavior  invalid_bit_sequence:
-    assumes !Normal{Pre}(stream, length);
-
-    assigns stream->addr[0..stream->size - 1];
-    assigns stream->bitpos;
-
-    ensures result:  \result == -1;
-
-  complete behaviors;
-  disjoint behaviors;
+  ensures  pos:        stream->bitpos == \old(stream->bitpos) + length;
+  ensures  changed:    EqualBits(stream, \old(stream->bitpos), stream->bitpos, value);
+  ensures  unchanged:  Unchanged{Here,Old}(stream, 0, \old(stream->bitpos));
+  ensures  unchanged:  Unchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
+  ensures  size:       stream->size == \old(stream->size);
 */
-int  Bitstream_Write(Bitstream* stream, uint32_t length, uint64_t value);
+void Bitstream_Write(Bitstream* stream, uint32_t length, uint64_t value);
 
 #endif // BITSTREAM_WRITE_H_INCLUDED
 

@@ -13,15 +13,13 @@ int Train_running_number_Encoder(Bitstream* stream, const Train_running_number* 
             const uint32_t size = stream->size;
             const uint32_t pos = stream->bitpos;
 
-            Bitwalker_Poke_Normal(addr, size, pos,       8,  p->NID_PACKET);
-            Bitwalker_Poke_Normal(addr, size, pos + 8,   13, p->L_PACKET);
-            Bitwalker_Poke_Normal(addr, size, pos + 21,  32, p->NID_OPERATIONAL);
+            Bitwalker_Poke_Normal(addr, size, pos,       13, p->L_PACKET);
+            Bitwalker_Poke_Normal(addr, size, pos + 13,  32, p->NID_OPERATIONAL);
 
             stream->bitpos += TRAIN_RUNNING_NUMBER_BITSIZE;
 
-            //@ assert NID_PACKET:        EqualBits(stream, pos,       pos + 8,   p->NID_PACKET);
-            //@ assert L_PACKET:          EqualBits(stream, pos + 8,   pos + 21,  p->L_PACKET);
-            //@ assert NID_OPERATIONAL:   EqualBits(stream, pos + 21,  pos + 53,  p->NID_OPERATIONAL);
+            //@ assert L_PACKET:          EqualBits(stream, pos,       pos + 13,  p->L_PACKET);
+            //@ assert NID_OPERATIONAL:   EqualBits(stream, pos + 13,  pos + 45,  p->NID_OPERATIONAL);
 
             return 1;
         }

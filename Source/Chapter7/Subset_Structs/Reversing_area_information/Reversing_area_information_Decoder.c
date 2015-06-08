@@ -10,21 +10,25 @@ int Reversing_area_information_Decoder(Bitstream* stream, Reversing_area_informa
         const uint32_t size = stream->size;
         const uint32_t pos = stream->bitpos;
 
-        p->NID_PACKET         = Bitwalker_Peek_Normal(addr, size, pos,       8);
-        p->Q_DIR              = Bitwalker_Peek_Normal(addr, size, pos + 8,   2);
-        p->L_PACKET           = Bitwalker_Peek_Normal(addr, size, pos + 10,  13);
-        p->Q_SCALE            = Bitwalker_Peek_Normal(addr, size, pos + 23,  2);
-        p->D_STARTREVERSE     = Bitwalker_Peek_Normal(addr, size, pos + 25,  15);
-        p->L_REVERSEAREA      = Bitwalker_Peek_Normal(addr, size, pos + 40,  15);
+        p->Q_DIR              = Bitwalker_Peek_Normal(addr, size, pos,       2);
+        p->L_PACKET           = Bitwalker_Peek_Normal(addr, size, pos + 2,   13);
+        p->Q_SCALE            = Bitwalker_Peek_Normal(addr, size, pos + 15,  2);
+        p->D_STARTREVERSE     = Bitwalker_Peek_Normal(addr, size, pos + 17,  15);
+        p->L_REVERSEAREA      = Bitwalker_Peek_Normal(addr, size, pos + 32,  15);
 
         stream->bitpos += REVERSING_AREA_INFORMATION_BITSIZE;
 
-        //@ assert NID_PACKET:        EqualBits(stream, pos,       pos + 8,   p->NID_PACKET);
-        //@ assert Q_DIR:             EqualBits(stream, pos + 8,   pos + 10,  p->Q_DIR);
-        //@ assert L_PACKET:          EqualBits(stream, pos + 10,  pos + 23,  p->L_PACKET);
-        //@ assert Q_SCALE:           EqualBits(stream, pos + 23,  pos + 25,  p->Q_SCALE);
-        //@ assert D_STARTREVERSE:    EqualBits(stream, pos + 25,  pos + 40,  p->D_STARTREVERSE);
-        //@ assert L_REVERSEAREA:     EqualBits(stream, pos + 40,  pos + 55,  p->L_REVERSEAREA);
+        //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
+        //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
+        //@ assert Q_SCALE:           EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE);
+        //@ assert D_STARTREVERSE:    EqualBits(stream, pos + 17,  pos + 32,  p->D_STARTREVERSE);
+        //@ assert L_REVERSEAREA:     EqualBits(stream, pos + 32,  pos + 47,  p->L_REVERSEAREA);
+
+        //@ assert Q_DIR:             UpperBitsNotSet(p->Q_DIR,             2);
+        //@ assert L_PACKET:          UpperBitsNotSet(p->L_PACKET,          13);
+        //@ assert Q_SCALE:           UpperBitsNotSet(p->Q_SCALE,           2);
+        //@ assert D_STARTREVERSE:    UpperBitsNotSet(p->D_STARTREVERSE,    15);
+        //@ assert L_REVERSEAREA:     UpperBitsNotSet(p->L_REVERSEAREA,     15);
 
         return 1;
     }

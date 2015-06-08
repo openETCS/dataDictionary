@@ -1,28 +1,12 @@
 
 #include "Bitstream_Write.h"
-#include "Bitstream_Write_Normal.h"
-#include "UpperBitsNotSet.h"
+#include "Bitwalker_Poke_Normal.h"
 
-int Bitstream_Write(Bitstream* stream, uint32_t length, uint64_t value)
+void Bitstream_Write(Bitstream* stream, uint32_t length, uint64_t value)
 {
-    if (NormalBitstream(stream, length))
-    {
-        if (UpperBitsNotSet64(value, length))
-        {
-            Bitstream_Write_Normal(stream, length, value);
-            stream->bitpos += length;
-            return 0;
-        }
-        else
-        {
-            stream->bitpos += length;
-            return -2;
-        }
-    }
-    else
-    {
-        stream->bitpos += length;
-        return -1;
-    }
+    Bitwalker_Poke_Normal(stream->addr, stream->size, stream->bitpos, length, value);
+    //@ assert EqualBits(stream, stream->bitpos, stream->bitpos + length, value);
+    stream->bitpos += length;
+    //@ assert EqualBits(stream, \at(stream->bitpos,Pre), stream->bitpos, value);
 }
 

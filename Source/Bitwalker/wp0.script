@@ -6,6 +6,30 @@ Proof.
 (* auto with zarith. *)
 Qed.
 
+Goal typed_ref_BitTest_Bitstream_WriteThenRead_assert_left.
+Hint Bitstream_WriteThenRead,left,property.
+Proof.
+  unfold P_LeftEqualBits64 in *.
+  intros.
+
+  remember i as newpos.
+  remember (t_2 .[ shiftfield_F_Bitstream_bitpos a]) as oldpos.
+  remember (t_3 .[ shiftfield_F_Bitstream_addr a]) as addr.
+  pose (length := newpos - oldpos).
+  replace (newpos - oldpos) with length in * by auto.
+
+  unfold P_EqualBits_3_ in *.
+  rewrite <- Heqaddr in *.
+  unfold P_EqualBits_2_ in *.
+
+  remember (t_1 .[ shiftfield_F_Bitstream_bitpos a <- newpos]) as stream.
+
+  replace (63-i0) with (newpos - 1 - (i0 - 64 + newpos)) by omega.
+
+  rewrite H18; auto with zarith.
+
+Qed.
+
 Goal typed_ref_BitTest_Bitstream_WriteThenRead_assert_lower_bits.
 Hint Bitstream_WriteThenRead,lower_bits,property.
 Proof.
@@ -25,6 +49,58 @@ Proof.
   rewrite H16; auto with zarith.
 Qed.
 
+Goal typed_ref_BitTest_Bitstream_WriteThenRead_assert_partial_copy.
+Hint Bitstream_WriteThenRead,partial_copy,property.
+Proof.
+(* --------------------------------------
+  
+From 'typed_ref_BitTest_Bitstream_WriteThenRead_assert_lower_bits': 
+  unfold P_EqualBits in *.
+  unfold P_EqualBits_2_ in * .
+  unfold P_EqualBitRange_2_ in *.
+  intros.
+
+  rewrite shift_zero in *.
+  rewrite shift_zero in *.
+
+  remember (Mptr_0 .[ stream_0]) as addr.
+  remember (Mint_0 .[ shift stream_0 1]) as size.
+  remember (Mint_0 .[ shift stream_0 2]) as pos.
+
+  replace (i_0)%Z with (v_0 - 1 - (v_0 - 1 - i_0))%Z by omega.
+  rewrite H16; auto with zarith.
+*)
+(* --------------------------------------
+  
+From 'typed_ref_BitTest_Bitstream_WriteThenRead_post_unchanged': 
+  unfold is_uint32 in *.
+  intros.
+  apply bits_equal_uint64; auto.
+  intros.
+
+  remember (v_0 - (Mint_1 .[ shift stream_0 2])) as length.
+  remember (Mint_0 .[ shift stream_0 2]) as bitpos.
+
+  unfold P_UpperBitsNotSet in *.
+  unfold P_EqualBits_3_ in *.
+  unfold P_EqualBits_2_ in *.
+
+  assert(X: 0 <= i < length \/ length <= i < 64).
+  +  assert (Y: (i < length) \/ ~(i < length)) by tauto.
+     destruct Y as [le | geq].
+     left; auto.
+     right; auto with zarith.
+
+  +  destruct X as [lower|upper].
+     - replace (i) with (v_0 - 1 - (v_0 - 1 - i)) in * by omega.
+       rewrite H17; auto with zarith.
+     - assert(~ bit_test Bitstream_WriteThenRead_0 i) by (apply H14; auto with zarith).
+       assert(~ bit_test value_0 i) by (apply H15; auto with zarith).
+       tauto.
+
+*)
+Qed.
+
 Goal typed_ref_BitTest_Bitstream_WriteThenRead_post_unchanged.
 Hint Bitstream_WriteThenRead,default,property,unchanged.
 Proof.
@@ -37,8 +113,8 @@ Proof.
   remember (Mint_0 .[ shift stream_0 2]) as bitpos.
 
   unfold P_UpperBitsNotSet in *.
-  unfold P_EqualBits_5_ in *.
   unfold P_EqualBits_3_ in *.
+  unfold P_EqualBits_2_ in *.
 
   assert(X: 0 <= i < length \/ length <= i < 64).
   +  assert (Y: (i < length) \/ ~(i < length)) by tauto.
@@ -98,7 +174,7 @@ Proof.
   unfold is_uint8 in *.
   unfold is_uint32 in *.
   unfold is_uint64 in *.
-  unfold P_EqualBits_2_ in *.
+  unfold P_EqualBits_1_ in *.
   unfold P_LeftEqualBitRange_2_ in *.
   intros.
 
@@ -118,30 +194,92 @@ Proof.
     rewrite <- H25; auto with zarith.
 Qed.
 
+Goal typed_ref_BitTest_Bitwalker_Peek_Normal_loop_inv_equal_preserved.
+Hint Bitwalker_Peek_Normal,equal,preserved.
+Proof.
+  unfold is_uint8 in *.
+  unfold is_uint32 in *.
+  unfold is_uint64 in *.
+  unfold P_EqualBits_1_ in *.
+  unfold P_LeftEqualBits64 in *.
+  intros.
+
+  unfold shift_uint8 in *.
+
+  remember i_6 as bitpos.
+  remember i_5 as length.
+
+  case_lt i0 i_3.
+  {
+    intros less.
+    rewrite <- H24; auto with zarith.
+    replace (bitpos + length - 1 - i0)%Z with 
+            (63 - (63 - (bitpos + length - 1 - i0)))%Z in * by omega.
+    apply H31; auto with zarith.
+  }
+  {
+    intros.
+    assert(equal: i0 = i_3) by auto with zarith.
+    rewrite equal in *.
+    replace (bitpos + length)%Z with (length + bitpos)%Z by omega.
+    rewrite <- H26; auto with zarith.
+  }
+Qed.
+
+Goal typed_ref_BitTest_Bitwalker_PokeThenPeek_assert_partial_copy.
+Hint Bitwalker_PokeThenPeek,partial_copy,property.
+Proof.
+  unfold P_EqualBits_2_ in *.
+  unfold P_EqualBits64_1_ in *.
+  intros.
+
+  remember i_1 as length.
+  remember i   as bitpos.
+
+  replace (i0)  with  (bitpos + length - 1 - (bitpos + length - 1 - i0 )) by omega.
+
+  rewrite H15; auto with zarith.
+Qed.
+
+Goal typed_ref_BitTest_Bitwalker_PokeThenPeek_post_result_value.
+Hint Bitwalker_PokeThenPeek,default,property,result_value.
+Proof.
+  intros.
+  apply bits_equal_uint64; auto with zarith.
+Qed.
+
 Goal typed_ref_BitTest_Bitwalker_Poke_Normal_loop_inv_middle_preserved.
 Hint Bitwalker_Poke_Normal,middle,preserved.
 Proof.
-  unfold P_EqualBits_2_ in *.
+  unfold P_EqualBits_1_ in *.
   unfold is_uint64 in *.
   unfold is_uint32 in *.
   unfold  to_sint32 in *.
   intros.
 
-  remember bitpos_0 as bitpos.
-  remember length_0 as length.
-  remember addr_0 as addr.
-  remember value_0 as value.
+  remember i_5 as bitpos.
+  remember i_4 as length.
+  remember a   as addr.
+  remember i_3 as value.
 
-  case_lt i_1 i_0.
-  * 
+  case_lt i0 i_1.
+  {
    intros.
-   rewrite H25; auto with zarith.
-
-  * 
+   rewrite H26; auto with zarith.
+  }
+  {
    intros.
-   assert(equal: (i_1 = i_0)%Z) by omega.
+   assert(equal: (i0 = i_1)%Z) by omega.
    rewrite equal in *.
-   rewrite <- H30; auto with zarith.
+   replace (bitpos + length)%Z with (length + bitpos)%Z by omega.
+   rewrite <- H31; auto with zarith.
+  }
+Qed.
+
+Goal typed_ref_BitTest_PokeBit8Array_post_left.
+Hint PokeBit8Array,default,left,property.
+Proof.
+(* auto with zarith. *)
 Qed.
 
 Goal typed_ref_BitTest_PokeBit8_assert_helper_part1.
@@ -176,25 +314,6 @@ Proof.
   apply bitwise_and_not_uint8; auto.
 Qed.
 
-Goal typed_ref_BitTest_PokeThenPeek_assert_partial_copy.
-Hint PokeThenPeek,partial_copy,property.
-Proof.
-  unfold P_EqualBits_3_ in *.
-  unfold P_EqualBitRange_2_ in *.
-  intros.
-
-  replace (i_0)  with  (bitpos_0 + length_0 - 1 - (bitpos_0 + length_0 - 1 - i_0 )) by omega.
-
-  rewrite H17; auto with zarith.
-Qed.
-
-Goal typed_ref_BitTest_PokeThenPeek_post_result_value.
-Hint PokeThenPeek,default,property,result_value.
-Proof.
-  intros.
-  apply bits_equal_uint64; auto with zarith.
-Qed.
-
 Goal typed_ref_BitTest_UpperBitsNotSet64_post_not_set_part2.
 Hint UpperBitsNotSet64,default,not_set,part-1,property.
 Proof.
@@ -202,9 +321,12 @@ Proof.
   unfold P_UpperBitsNotSet.
   intros.
 
+  remember i_1 as value.
+  remember i   as length. 
+
   rewrite is_uint64_lsl1_inf in H5; auto with zarith.
   intuition.
-  assert (X: (forall i_0 : int, (length_0 <= i_0)%Z -> ~ bit_test value_0 i_0)) by auto with zarith.
+  assert (X: (forall i_0 : int, (length <= i_0)%Z -> ~ bit_test value i_0)) by auto with zarith.
   rewrite <- upper_bits_not_set in X; auto with zarith.
 Qed.
 
@@ -216,6 +338,17 @@ Proof.
   unfold P_UpperBitsNotSet in *.
   apply upper_bits_not_set; auto with zarith.
   rewrite is_uint64_lsl1_inf in H5; omega.
+Qed.
+
+Goal typed_ref_BitTest_lemma_LeftRight64.
+Hint LeftRight64,property.
+Proof.
+  intros.
+  unfold P_EqualBits64_1_.
+  unfold P_LeftEqualBits64 in *.
+  intros.
+  replace i0 with (63 - (63 - i0))%Z by omega.
+  apply H1; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_lemma_bitwise_and_not_uint8.
