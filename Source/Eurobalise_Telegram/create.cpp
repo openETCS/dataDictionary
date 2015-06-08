@@ -100,3 +100,16 @@ Adhesion_Factor create_Adhesion_Factor()
     return a;
 }
 
+Infill_location_reference create_Infill_location_reference(int i)
+{
+    Infill_location_reference a;
+    {
+        a.core.Q_DIR = 1;
+	a.core.L_PACKET = 48;
+	a.core.Q_NEWCOUNTRY = i;
+	a.core.NID_C = (i*123);
+	a.core.NID_BG = 258;
+    }
+
+    return a;
+}

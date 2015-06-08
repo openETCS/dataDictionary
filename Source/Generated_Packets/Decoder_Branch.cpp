@@ -7,38 +7,32 @@ BasePacketPtr Decoder_Branch_TrainToTrack(Bitstream& stream, Packet_Header heade
     {
         case 0 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Position_Report>();
 
-                auto ret = std::make_shared<Position_Report>();
-
-                if (Position_Report_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Position_Report_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 1 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Position_Report_based_on_two_balise_groups>();
 
-                auto ret = std::make_shared<Position_Report_based_on_two_balise_groups>();
-
-                if (Position_Report_based_on_two_balise_groups_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Position_Report_based_on_two_balise_groups_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 3 :
         {
             /*  Not implemented
@@ -117,21 +111,18 @@ BasePacketPtr Decoder_Branch_TrainToTrack(Bitstream& stream, Packet_Header heade
         }
         case 44 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Data_used_by_applications_outside_the_ERTMS_or_ETCS_system>();
 
-                auto ret = std::make_shared<Data_used_by_applications_outside_the_ERTMS_or_ETCS_system>();
-
-                if (Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 255 :
         {
             auto ret = std::make_shared<End_of_Information>();
@@ -222,21 +213,18 @@ BasePacketPtr Decoder_Branch_TrackToTrain(Bitstream& stream, Packet_Header heade
         }
         case 6 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Virtual_Balise_Cover_order>();
 
-                auto ret = std::make_shared<Virtual_Balise_Cover_order>();
-
-                if (Virtual_Balise_Cover_order_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Virtual_Balise_Cover_order_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 12 :
         {
             /*  Not implemented
@@ -338,21 +326,18 @@ BasePacketPtr Decoder_Branch_TrackToTrain(Bitstream& stream, Packet_Header heade
         }
         case 39 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Track_Condition_Change_of_traction_system>();
 
-                auto ret = std::make_shared<Track_Condition_Change_of_traction_system>();
-
-                if (Track_Condition_Change_of_traction_system_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Track_Condition_Change_of_traction_system_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 40 :
         {
             auto ret = std::make_shared<Track_Condition_Change_of_allowed_current_consumption>();
@@ -400,21 +385,18 @@ BasePacketPtr Decoder_Branch_TrackToTrain(Bitstream& stream, Packet_Header heade
 
         case 44 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Data_used_by_applications_outside_the_ERTMSETCS_system>();
 
-                auto ret = std::make_shared<Data_used_by_applications_outside_the_ERTMSETCS_system>();
-
-                if (Data_used_by_applications_outside_the_ERTMSETCS_system_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Data_used_by_applications_outside_the_ERTMSETCS_system_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 45 :
         {
             auto ret = std::make_shared<Radio_Network_registration>();
@@ -739,38 +721,32 @@ BasePacketPtr Decoder_Branch_TrackToTrain(Bitstream& stream, Packet_Header heade
         }
         case 88 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Level_Crossing_information>();
 
-                auto ret = std::make_shared<Level_Crossing_information>();
-
-                if (Level_Crossing_information_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Level_Crossing_information_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 90 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Track_Ahead_Free_up_to_level_23_transition_location>();
 
-                auto ret = std::make_shared<Track_Ahead_Free_up_to_level_23_transition_location>();
-
-                if (Track_Ahead_Free_up_to_level_23_transition_location_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Track_Ahead_Free_up_to_level_23_transition_location_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 131 :
         {
             auto ret = std::make_shared<RBC_transition_order>();
@@ -843,21 +819,18 @@ BasePacketPtr Decoder_Branch_TrackToTrain(Bitstream& stream, Packet_Header heade
 
         case 136 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Infill_location_reference>();
 
-                auto ret = std::make_shared<Infill_location_reference>();
-
-                if (Infill_location_reference_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Infill_location_reference_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 137 :
         {
             auto ret = std::make_shared<Stop_if_in_Staff_Responsible>();

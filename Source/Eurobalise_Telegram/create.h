@@ -13,6 +13,7 @@ Train_running_number create_Train_running_number();
 
 Temporary_Speed_Restriction create_Temporary_Speed_Restriction();
 Adhesion_Factor create_Adhesion_Factor();
+Infill_location_reference create_Infill_location_reference(int i);
 
 #endif /* CREATE_H_INCLUDED */
 

@@ -9,7 +9,7 @@ export TELEGRAM_HEADER=$(TOPDIR)/Telegram_Header
 
 #VPATH = Packet_Header
 
-it: lib decoder_test encoder_test
+it: lib decoder_test encoder_test conditional_encoder_test conditional_decoder_test
 
 include $(TOPDIR)/Makefile.template
 
@@ -31,6 +31,8 @@ LDFLAGS += -L$(BITWALKER) -lBitwalker
 test: it
 	./encoder_test
 	./decoder_test
+	./conditional_encoder_test
+	./conditional_decoder_test
 
 lib:
 	@(cd $(BITWALKER) && $(MAKE) lib)
@@ -49,6 +51,12 @@ decoder_test: decoder_test.o $(OBJ)
 encoder_test: encoder_test.o $(OBJ)
 	$(CXX) -o $@ $+ $(LDFLAGS)
 
+conditional_decoder_test: conditional_decoder_test.o $(OBJ)
+	$(CXX) -o $@ $+ $(LDFLAGS)
+
+conditional_encoder_test: conditional_encoder_test.o $(OBJ)
+	$(CXX) -o $@ $+ $(LDFLAGS)
+
 FORMAT := $(wildcard *.h) $(wildcard *.cpp)
 
 format: FORCE
@@ -57,6 +65,8 @@ format: FORCE
 clean::
 	@$(RM) decoder_test
 	@$(RM) encoder_test
+	@$(RM) conditional_decoder_test
+	@$(RM) conditional_encoder_test
 	@(cd $(BITWALKER) && $(MAKE) clean)
 	@(cd $(GENERATED_PACKETS) && $(MAKE) clean)
 	@(cd $(PACKET_HEADER) && $(MAKE) clean)

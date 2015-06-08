@@ -9,32 +9,20 @@ bool Encoder_Branch_TrainToTrack(Bitstream& stream, BasePacketPtr packet)
     {
         case 0 :
         {
+            auto ptr = std::dynamic_pointer_cast<Position_Report>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Position_Report_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Position_Report>(packet);
-                assert(ptr);
-
-                return Position_Report_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 1 :
         {
+            auto ptr = std::dynamic_pointer_cast<Position_Report_based_on_two_balise_groups>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Position_Report_based_on_two_balise_groups_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Position_Report_based_on_two_balise_groups>(packet);
-                assert(ptr);
-
-                return Position_Report_based_on_two_balise_groups_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 3 :
@@ -96,17 +84,11 @@ bool Encoder_Branch_TrainToTrack(Bitstream& stream, BasePacketPtr packet)
 
         case 44 :
         {
+            auto ptr = std::dynamic_pointer_cast<Data_used_by_applications_outside_the_ERTMS_or_ETCS_system>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Data_used_by_applications_outside_the_ERTMS_or_ETCS_system>(packet);
-                assert(ptr);
-
-                return Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 255 :
@@ -183,17 +165,11 @@ bool Encoder_Branch_TrackToTrain(Bitstream& stream, BasePacketPtr packet)
 
         case 6 :
         {
+            auto ptr = std::dynamic_pointer_cast<Virtual_Balise_Cover_order>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Virtual_Balise_Cover_order_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Virtual_Balise_Cover_order>(packet);
-                assert(ptr);
-
-                return Virtual_Balise_Cover_order_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 12 :
@@ -282,17 +258,11 @@ bool Encoder_Branch_TrackToTrain(Bitstream& stream, BasePacketPtr packet)
 
         case 39 :
         {
+            auto ptr = std::dynamic_pointer_cast<Track_Condition_Change_of_traction_system>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Track_Condition_Change_of_traction_system_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Track_Condition_Change_of_traction_system>(packet);
-                assert(ptr);
-
-                return Track_Condition_Change_of_traction_system_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 40 :
@@ -330,17 +300,11 @@ bool Encoder_Branch_TrackToTrain(Bitstream& stream, BasePacketPtr packet)
 
         case 44 :
         {
+            auto ptr = std::dynamic_pointer_cast<Data_used_by_applications_outside_the_ERTMSETCS_system>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Data_used_by_applications_outside_the_ERTMSETCS_system_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Data_used_by_applications_outside_the_ERTMSETCS_system>(packet);
-                assert(ptr);
-
-                return Data_used_by_applications_outside_the_ERTMSETCS_system_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 45 :
@@ -609,32 +573,20 @@ bool Encoder_Branch_TrackToTrain(Bitstream& stream, BasePacketPtr packet)
 
         case 88 :
         {
+            auto ptr = std::dynamic_pointer_cast<Level_Crossing_information>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Level_Crossing_information_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Level_Crossing_information>(packet);
-                assert(ptr);
-
-                return Level_Crossing_information_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 90 :
         {
+            auto ptr = std::dynamic_pointer_cast<Track_Ahead_Free_up_to_level_23_transition_location>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Track_Ahead_Free_up_to_level_23_transition_location_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Track_Ahead_Free_up_to_level_23_transition_location>(packet);
-                assert(ptr);
-
-                return Track_Ahead_Free_up_to_level_23_transition_location_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 131 :
@@ -684,17 +636,11 @@ bool Encoder_Branch_TrackToTrain(Bitstream& stream, BasePacketPtr packet)
 
         case 136 :
         {
+            auto ptr = std::dynamic_pointer_cast<Infill_location_reference>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Infill_location_reference_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Infill_location_reference>(packet);
-                assert(ptr);
-
-                return Infill_location_reference_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 137 :
