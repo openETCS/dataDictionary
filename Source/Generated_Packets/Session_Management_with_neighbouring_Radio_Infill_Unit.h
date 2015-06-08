@@ -15,13 +15,13 @@ struct Session_Management_with_neighbouring_Radio_Infill_Unit : public BasePacke
     void print(std::ostream& stream) const override
     {
         stream << '('
-	       << uint64_t(id) << ','
-               << core.Q_DIR << ','
-               << core.L_PACKET << ','
-               << core.Q_RIU << ','
-               << core.NID_C << ','
-               << core.NID_RIU << ','
-               << core.NID_RADIO << ')';
+	       << +id << ','
+               << +core.Q_DIR << ','
+               << +core.L_PACKET << ','
+               << +core.Q_RIU << ','
+               << +core.NID_C << ','
+               << +core.NID_RIU << ','
+               << +core.NID_RADIO << ')';
     }
 
     bool equals(const BasePacket& p) const override

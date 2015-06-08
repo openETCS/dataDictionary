@@ -15,12 +15,12 @@ struct Reversing_area_information : public BasePacket
     void print(std::ostream& stream) const override
     {
         stream << '('
-	       << uint64_t(id) << ','
-               << core.Q_DIR << ','
-               << core.L_PACKET << ','
-               << core.Q_SCALE << ','
-               << core.D_STARTREVERSE << ','
-               << core.L_REVERSEAREA << ')';
+	       << +id << ','
+               << +core.Q_DIR << ','
+               << +core.L_PACKET << ','
+               << +core.Q_SCALE << ','
+               << +core.D_STARTREVERSE << ','
+               << +core.L_REVERSEAREA << ')';
     }
 
     bool equals(const BasePacket& p) const override

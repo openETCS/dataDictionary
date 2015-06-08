@@ -15,23 +15,23 @@ struct Position_Report_based_on_two_balise_groups : public BasePacket
     void print(std::ostream& stream) const override
     {
         stream << '('
-	       << uint64_t(id) << ','
-               << core.L_PACKET << ','
-               << core.Q_SCALE << ','
-               << core.NID_LRBG << ','
-               << core.NID_PRVLRBG << ','
-               << core.D_LRBG << ','
-               << core.Q_DIRLRBG << ','
-               << core.Q_DLRBG << ','
-               << core.L_DOUBTOVER << ','
-               << core.L_DOUBTUNDER << ','
-               << core.Q_LENGTH << ','
-               << core.L_TRAININT << ','
-               << core.V_TRAIN << ','
-               << core.Q_DIRTRAIN << ','
-               << core.M_MODE << ','
-               << core.M_LEVEL << ','
-               << core.NID_NTC << ')';
+	       << +id << ','
+               << +core.L_PACKET << ','
+               << +core.Q_SCALE << ','
+               << +core.NID_LRBG << ','
+               << +core.NID_PRVLRBG << ','
+               << +core.D_LRBG << ','
+               << +core.Q_DIRLRBG << ','
+               << +core.Q_DLRBG << ','
+               << +core.L_DOUBTOVER << ','
+               << +core.L_DOUBTUNDER << ','
+               << +core.Q_LENGTH << ','
+               << +core.L_TRAININT << ','
+               << +core.V_TRAIN << ','
+               << +core.Q_DIRTRAIN << ','
+               << +core.M_MODE << ','
+               << +core.M_LEVEL << ','
+               << +core.NID_NTC << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -49,12 +49,12 @@ struct Position_Report_based_on_two_balise_groups : public BasePacket
                 (core.L_DOUBTOVER == q->core.L_DOUBTOVER) &&
                 (core.L_DOUBTUNDER == q->core.L_DOUBTUNDER) &&
                 (core.Q_LENGTH == q->core.Q_LENGTH) &&
-                (core.L_TRAININT == q->core.L_TRAININT) &&
-                (core.V_TRAIN == q->core.V_TRAIN) &&
-                (core.Q_DIRTRAIN == q->core.Q_DIRTRAIN) &&
-                (core.M_MODE == q->core.M_MODE) &&
-                (core.M_LEVEL == q->core.M_LEVEL) &&
-                (core.NID_NTC == q->core.NID_NTC);
+                ((!(core.Q_LENGTH == 1) || (core.Q_LENGTH == 2)) || (
+                (core.L_TRAININT == q->core.L_TRAININT)
+                )) &&
+                ((!core.M_LEVEL == 1) || (
+                (core.NID_NTC == q->core.NID_NTC)
+                ));
 	}
 	return false;
     }

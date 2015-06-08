@@ -15,10 +15,10 @@ struct Data_used_by_applications_outside_the_ERTMS_or_ETCS_system : public BaseP
     void print(std::ostream& stream) const override
     {
         stream << '('
-	       << uint64_t(id) << ','
-               << core.L_PACKET << ','
-               << core.NID_XUSER << ','
-               << core.Other_data_depending_on__NID_XUSER << ')';
+	       << +id << ','
+               << +core.L_PACKET << ','
+               << +core.NID_XUSER << ','
+               << +core.Other_data_depending_on__NID_XUSER << ')';
     }
 
     bool equals(const BasePacket& p) const override

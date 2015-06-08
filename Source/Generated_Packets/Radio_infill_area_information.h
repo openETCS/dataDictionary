@@ -15,16 +15,16 @@ struct Radio_infill_area_information : public BasePacket
     void print(std::ostream& stream) const override
     {
         stream << '('
-	       << uint64_t(id) << ','
-               << core.Q_DIR << ','
-               << core.L_PACKET << ','
-               << core.Q_SCALE << ','
-               << core.Q_RIU << ','
-               << core.NID_C << ','
-               << core.NID_RIU << ','
-               << core.NID_RADIO << ','
-               << core.D_INFILL << ','
-               << core.NID_BG << ')';
+	       << +id << ','
+               << +core.Q_DIR << ','
+               << +core.L_PACKET << ','
+               << +core.Q_SCALE << ','
+               << +core.Q_RIU << ','
+               << +core.NID_C << ','
+               << +core.NID_RIU << ','
+               << +core.NID_RADIO << ','
+               << +core.D_INFILL << ','
+               << +core.NID_BG << ')';
     }
 
     bool equals(const BasePacket& p) const override

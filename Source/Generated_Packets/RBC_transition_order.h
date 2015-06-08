@@ -15,15 +15,15 @@ struct RBC_transition_order : public BasePacket
     void print(std::ostream& stream) const override
     {
         stream << '('
-	       << uint64_t(id) << ','
-               << core.Q_DIR << ','
-               << core.L_PACKET << ','
-               << core.Q_SCALE << ','
-               << core.D_RBCTR << ','
-               << core.NID_C << ','
-               << core.NID_RBC << ','
-               << core.NID_RADIO << ','
-               << core.Q_SLEEPSESSION << ')';
+	       << +id << ','
+               << +core.Q_DIR << ','
+               << +core.L_PACKET << ','
+               << +core.Q_SCALE << ','
+               << +core.D_RBCTR << ','
+               << +core.NID_C << ','
+               << +core.NID_RBC << ','
+               << +core.NID_RADIO << ','
+               << +core.Q_SLEEPSESSION << ')';
     }
 
     bool equals(const BasePacket& p) const override

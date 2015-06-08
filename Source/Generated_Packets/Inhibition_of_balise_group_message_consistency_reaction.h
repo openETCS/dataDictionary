@@ -15,9 +15,9 @@ struct Inhibition_of_balise_group_message_consistency_reaction : public BasePack
     void print(std::ostream& stream) const override
     {
         stream << '('
-	       << uint64_t(id) << ','
-               << core.Q_DIR << ','
-               << core.L_PACKET << ')';
+	       << +id << ','
+               << +core.Q_DIR << ','
+               << +core.L_PACKET << ')';
     }
 
     bool equals(const BasePacket& p) const override

@@ -15,12 +15,12 @@ struct Track_Condition_Change_of_allowed_current_consumption : public BasePacket
     void print(std::ostream& stream) const override
     {
         stream << '('
-	       << uint64_t(id) << ','
-               << core.Q_DIR << ','
-               << core.L_PACKET << ','
-               << core.Q_SCALE << ','
-               << core.D_CURRENT << ','
-               << core.M_CURRENT << ')';
+	       << +id << ','
+               << +core.Q_DIR << ','
+               << +core.L_PACKET << ','
+               << +core.Q_SCALE << ','
+               << +core.D_CURRENT << ','
+               << +core.M_CURRENT << ')';
     }
 
     bool equals(const BasePacket& p) const override

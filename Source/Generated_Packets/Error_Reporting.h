@@ -15,9 +15,9 @@ struct Error_Reporting : public BasePacket
     void print(std::ostream& stream) const override
     {
         stream << '('
-	       << uint64_t(id) << ','
-               << core.L_PACKET << ','
-               << core.M_ERROR << ')';
+	       << +id << ','
+               << +core.L_PACKET << ','
+               << +core.M_ERROR << ')';
     }
 
     bool equals(const BasePacket& p) const override

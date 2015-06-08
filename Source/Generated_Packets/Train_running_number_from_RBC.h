@@ -15,10 +15,10 @@ struct Train_running_number_from_RBC : public BasePacket
     void print(std::ostream& stream) const override
     {
         stream << '('
-	       << uint64_t(id) << ','
-               << core.Q_DIR << ','
-               << core.L_PACKET << ','
-               << core.NID_OPERATIONAL << ')';
+	       << +id << ','
+               << +core.Q_DIR << ','
+               << +core.L_PACKET << ','
+               << +core.NID_OPERATIONAL << ')';
     }
 
     bool equals(const BasePacket& p) const override

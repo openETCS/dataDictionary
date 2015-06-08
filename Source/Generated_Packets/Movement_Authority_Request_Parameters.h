@@ -15,12 +15,12 @@ struct Movement_Authority_Request_Parameters : public BasePacket
     void print(std::ostream& stream) const override
     {
         stream << '('
-	       << uint64_t(id) << ','
-               << core.Q_DIR << ','
-               << core.L_PACKET << ','
-               << core.T_MAR << ','
-               << core.T_TIMEOUTRQST << ','
-               << core.T_CYCRQST << ')';
+	       << +id << ','
+               << +core.Q_DIR << ','
+               << +core.L_PACKET << ','
+               << +core.T_MAR << ','
+               << +core.T_TIMEOUTRQST << ','
+               << +core.T_CYCRQST << ')';
     }
 
     bool equals(const BasePacket& p) const override

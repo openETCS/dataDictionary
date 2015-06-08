@@ -15,12 +15,12 @@ struct Infill_location_reference : public BasePacket
     void print(std::ostream& stream) const override
     {
         stream << '('
-	       << uint64_t(id) << ','
-               << core.Q_DIR << ','
-               << core.L_PACKET << ','
-               << core.Q_NEWCOUNTRY << ','
-               << core.NID_C << ','
-               << core.NID_BG << ')';
+	       << +id << ','
+               << +core.Q_DIR << ','
+               << +core.L_PACKET << ','
+               << +core.Q_NEWCOUNTRY << ','
+               << +core.NID_C << ','
+               << +core.NID_BG << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -31,8 +31,9 @@ struct Infill_location_reference : public BasePacket
                 (core.Q_DIR == q->core.Q_DIR) &&
                 (core.L_PACKET == q->core.L_PACKET) &&
                 (core.Q_NEWCOUNTRY == q->core.Q_NEWCOUNTRY) &&
-                (core.NID_C == q->core.NID_C) &&
-                (core.NID_BG == q->core.NID_BG);
+                ((!core.Q_NEWCOUNTRY == 1) || (
+                (core.NID_C == q->core.NID_C)
+                ));
 	}
 	return false;
     }

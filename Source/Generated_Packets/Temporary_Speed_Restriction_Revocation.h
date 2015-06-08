@@ -15,10 +15,10 @@ struct Temporary_Speed_Restriction_Revocation : public BasePacket
     void print(std::ostream& stream) const override
     {
         stream << '('
-	       << uint64_t(id) << ','
-               << core.Q_DIR << ','
-               << core.L_PACKET << ','
-               << core.NID_TSR << ')';
+	       << +id << ','
+               << +core.Q_DIR << ','
+               << +core.L_PACKET << ','
+               << +core.NID_TSR << ')';
     }
 
     bool equals(const BasePacket& p) const override

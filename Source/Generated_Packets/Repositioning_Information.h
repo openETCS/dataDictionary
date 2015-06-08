@@ -15,11 +15,11 @@ struct Repositioning_Information : public BasePacket
     void print(std::ostream& stream) const override
     {
         stream << '('
-	       << uint64_t(id) << ','
-               << core.Q_DIR << ','
-               << core.L_PACKET << ','
-               << core.Q_SCALE << ','
-               << core.L_SECTION << ')';
+	       << +id << ','
+               << +core.Q_DIR << ','
+               << +core.L_PACKET << ','
+               << +core.Q_SCALE << ','
+               << +core.L_SECTION << ')';
     }
 
     bool equals(const BasePacket& p) const override

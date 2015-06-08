@@ -15,8 +15,8 @@ struct Virtual_Balise_Cover_marker : public BasePacket
     void print(std::ostream& stream) const override
     {
         stream << '('
-	       << uint64_t(id) << ','
-               << core.NID_VBCMK << ')';
+	       << +id << ','
+               << +core.NID_VBCMK << ')';
     }
 
     bool equals(const BasePacket& p) const override

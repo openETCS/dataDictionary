@@ -15,13 +15,13 @@ struct Virtual_Balise_Cover_order : public BasePacket
     void print(std::ostream& stream) const override
     {
         stream << '('
-	       << uint64_t(id) << ','
-               << core.Q_DIR << ','
-               << core.L_PACKET << ','
-               << core.Q_VBCO << ','
-               << core.NID_VBCMK << ','
-               << core.NID_C << ','
-               << core.T_VBC << ')';
+	       << +id << ','
+               << +core.Q_DIR << ','
+               << +core.L_PACKET << ','
+               << +core.Q_VBCO << ','
+               << +core.NID_VBCMK << ','
+               << +core.NID_C << ','
+               << +core.T_VBC << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -34,7 +34,9 @@ struct Virtual_Balise_Cover_order : public BasePacket
                 (core.Q_VBCO == q->core.Q_VBCO) &&
                 (core.NID_VBCMK == q->core.NID_VBCMK) &&
                 (core.NID_C == q->core.NID_C) &&
-                (core.T_VBC == q->core.T_VBC);
+                ((!core.Q_VBCO == 1) || (
+                (core.T_VBC == q->core.T_VBC)
+                ));
 	}
 	return false;
     }

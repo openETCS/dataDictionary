@@ -15,9 +15,9 @@ struct Level_23_transition_information : public BasePacket
     void print(std::ostream& stream) const override
     {
         stream << '('
-	       << uint64_t(id) << ','
-               << core.L_PACKET << ','
-               << core.NID_LTRBG << ')';
+	       << +id << ','
+               << +core.L_PACKET << ','
+               << +core.NID_LTRBG << ')';
     }
 
     bool equals(const BasePacket& p) const override

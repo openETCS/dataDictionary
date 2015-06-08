@@ -15,10 +15,10 @@ struct Radio_Network_registration : public BasePacket
     void print(std::ostream& stream) const override
     {
         stream << '('
-	       << uint64_t(id) << ','
-               << core.Q_DIR << ','
-               << core.L_PACKET << ','
-               << core.NID_MN << ')';
+	       << +id << ','
+               << +core.Q_DIR << ','
+               << +core.L_PACKET << ','
+               << +core.NID_MN << ')';
     }
 
     bool equals(const BasePacket& p) const override

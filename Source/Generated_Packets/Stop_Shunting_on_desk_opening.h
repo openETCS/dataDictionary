@@ -15,9 +15,9 @@ struct Stop_Shunting_on_desk_opening : public BasePacket
     void print(std::ostream& stream) const override
     {
         stream << '('
-	       << uint64_t(id) << ','
-               << core.Q_DIR << ','
-               << core.L_PACKET << ')';
+	       << +id << ','
+               << +core.Q_DIR << ','
+               << +core.L_PACKET << ')';
     }
 
     bool equals(const BasePacket& p) const override

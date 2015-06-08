@@ -15,10 +15,10 @@ struct Stop_if_in_Staff_Responsible : public BasePacket
     void print(std::ostream& stream) const override
     {
         stream << '('
-	       << uint64_t(id) << ','
-               << core.Q_DIR << ','
-               << core.L_PACKET << ','
-               << core.Q_SRSTOP << ')';
+	       << +id << ','
+               << +core.Q_DIR << ','
+               << +core.L_PACKET << ','
+               << +core.Q_SRSTOP << ')';
     }
 
     bool equals(const BasePacket& p) const override

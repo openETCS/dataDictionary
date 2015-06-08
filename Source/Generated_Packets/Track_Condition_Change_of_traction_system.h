@@ -15,13 +15,13 @@ struct Track_Condition_Change_of_traction_system : public BasePacket
     void print(std::ostream& stream) const override
     {
         stream << '('
-	       << uint64_t(id) << ','
-               << core.Q_DIR << ','
-               << core.L_PACKET << ','
-               << core.Q_SCALE << ','
-               << core.D_TRACTION << ','
-               << core.M_VOLTAGE << ','
-               << core.NID_CTRACTION << ')';
+	       << +id << ','
+               << +core.Q_DIR << ','
+               << +core.L_PACKET << ','
+               << +core.Q_SCALE << ','
+               << +core.D_TRACTION << ','
+               << +core.M_VOLTAGE << ','
+               << +core.NID_CTRACTION << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -34,7 +34,9 @@ struct Track_Condition_Change_of_traction_system : public BasePacket
                 (core.Q_SCALE == q->core.Q_SCALE) &&
                 (core.D_TRACTION == q->core.D_TRACTION) &&
                 (core.M_VOLTAGE == q->core.M_VOLTAGE) &&
-                (core.NID_CTRACTION == q->core.NID_CTRACTION);
+                ((!core.M_VOLTAGE != 0) || (
+                (core.NID_CTRACTION == q->core.NID_CTRACTION)
+                ));
 	}
 	return false;
     }

@@ -15,10 +15,10 @@ struct Danger_for_Shunting_information : public BasePacket
     void print(std::ostream& stream) const override
     {
         stream << '('
-	       << uint64_t(id) << ','
-               << core.Q_DIR << ','
-               << core.L_PACKET << ','
-               << core.Q_ASPECT << ')';
+	       << +id << ','
+               << +core.Q_DIR << ','
+               << +core.L_PACKET << ','
+               << +core.Q_ASPECT << ')';
     }
 
     bool equals(const BasePacket& p) const override

@@ -15,13 +15,13 @@ struct Adhesion_Factor : public BasePacket
     void print(std::ostream& stream) const override
     {
         stream << '('
-	       << uint64_t(id) << ','
-               << core.Q_DIR << ','
-               << core.L_PACKET << ','
-               << core.Q_SCALE << ','
-               << core.D_ADHESION << ','
-               << core.L_ADHESION << ','
-               << core.M_ADHESION << ')';
+	       << +id << ','
+               << +core.Q_DIR << ','
+               << +core.L_PACKET << ','
+               << +core.Q_SCALE << ','
+               << +core.D_ADHESION << ','
+               << +core.L_ADHESION << ','
+               << +core.M_ADHESION << ')';
     }
 
     bool equals(const BasePacket& p) const override
