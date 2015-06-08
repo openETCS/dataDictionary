@@ -653,38 +653,32 @@ BasePacketPtr Decoder_Branch_TrackToTrain(Bitstream& stream, Packet_Header heade
 
         case 72 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Packet_for_sending_plain_text_messages>();
 
-                auto ret = std::make_shared<Packet_for_sending_plain_text_messages>();
-
-                if (Packet_for_sending_plain_text_messages_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Packet_for_sending_plain_text_messages_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 76 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Packet_for_sending_fixed_text_messages>();
 
-                auto ret = std::make_shared<Packet_for_sending_fixed_text_messages>();
-
-                if (Packet_for_sending_fixed_text_messages_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Packet_for_sending_fixed_text_messages_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 79 :
         {
             /*  Not implemented

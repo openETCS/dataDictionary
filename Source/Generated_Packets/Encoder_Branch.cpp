@@ -513,32 +513,20 @@ bool Encoder_Branch_TrackToTrain(Bitstream& stream, BasePacketPtr packet)
 
         case 72 :
         {
+            auto ptr = std::dynamic_pointer_cast<Packet_for_sending_plain_text_messages>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Packet_for_sending_plain_text_messages_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Packet_for_sending_plain_text_messages>(packet);
-                assert(ptr);
-
-                return Packet_for_sending_plain_text_messages_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 76 :
         {
+            auto ptr = std::dynamic_pointer_cast<Packet_for_sending_fixed_text_messages>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Packet_for_sending_fixed_text_messages_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Packet_for_sending_fixed_text_messages>(packet);
-                assert(ptr);
-
-                return Packet_for_sending_fixed_text_messages_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 79 :
