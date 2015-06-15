@@ -86,7 +86,11 @@ typedef struct Position_Report_based_on_two_balise_groups_Core Position_Report_b
       Invariant(p->Q_DLRBG)           &&
       Invariant(p->L_DOUBTOVER)       &&
       Invariant(p->L_DOUBTUNDER)      &&
-      Invariant(p->Q_LENGTH);
+      Invariant(p->Q_LENGTH)          &&
+      Invariant(p->V_TRAIN)           &&
+      Invariant(p->Q_DIRTRAIN)        &&
+      Invariant(p->M_MODE)            &&
+      Invariant(p->M_LEVEL);
 
     predicate ZeroInitialized(Position_Report_based_on_two_balise_groups_Core* p) =
       ZeroInitialized(p->L_PACKET)          &&
@@ -98,7 +102,11 @@ typedef struct Position_Report_based_on_two_balise_groups_Core Position_Report_b
       ZeroInitialized(p->Q_DLRBG)           &&
       ZeroInitialized(p->L_DOUBTOVER)       &&
       ZeroInitialized(p->L_DOUBTUNDER)      &&
-      ZeroInitialized(p->Q_LENGTH);
+      ZeroInitialized(p->Q_LENGTH)          &&
+      ZeroInitialized(p->V_TRAIN)           &&
+      ZeroInitialized(p->Q_DIRTRAIN)        &&
+      ZeroInitialized(p->M_MODE)            &&
+      ZeroInitialized(p->M_LEVEL);
 
     predicate EqualBits(Bitstream* stream, integer pos, Position_Report_based_on_two_balise_groups_Core* p) =
       EqualBits(stream, pos,       pos + 13,  p->L_PACKET)          &&
@@ -110,7 +118,11 @@ typedef struct Position_Report_based_on_two_balise_groups_Core Position_Report_b
       EqualBits(stream, pos + 80,  pos + 82,  p->Q_DLRBG)           &&
       EqualBits(stream, pos + 82,  pos + 97,  p->L_DOUBTOVER)       &&
       EqualBits(stream, pos + 97,  pos + 112, p->L_DOUBTUNDER)      &&
-      EqualBits(stream, pos + 112, pos + 114, p->Q_LENGTH);
+      EqualBits(stream, pos + 112, pos + 114, p->Q_LENGTH)          &&
+      EqualBits(stream, pos + 129, pos + 136, p->V_TRAIN)           &&
+      EqualBits(stream, pos + 136, pos + 138, p->Q_DIRTRAIN)        &&
+      EqualBits(stream, pos + 138, pos + 142, p->M_MODE)            &&
+      EqualBits(stream, pos + 142, pos + 145, p->M_LEVEL);
 
     predicate UpperBitsNotSet(Position_Report_based_on_two_balise_groups_Core* p) =
       UpperBitsNotSet(p->L_PACKET,         13)  &&
@@ -122,7 +134,11 @@ typedef struct Position_Report_based_on_two_balise_groups_Core Position_Report_b
       UpperBitsNotSet(p->Q_DLRBG,          2)   &&
       UpperBitsNotSet(p->L_DOUBTOVER,      15)  &&
       UpperBitsNotSet(p->L_DOUBTUNDER,     15)  &&
-      UpperBitsNotSet(p->Q_LENGTH,         2);
+      UpperBitsNotSet(p->Q_LENGTH,         2)   &&
+      UpperBitsNotSet(p->V_TRAIN,          7)   &&
+      UpperBitsNotSet(p->Q_DIRTRAIN,       2)   &&
+      UpperBitsNotSet(p->M_MODE,           4)   &&
+      UpperBitsNotSet(p->M_LEVEL,          3);
 
 */
 

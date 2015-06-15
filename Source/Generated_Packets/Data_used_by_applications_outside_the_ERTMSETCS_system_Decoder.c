@@ -43,15 +43,25 @@ int Data_used_by_applications_outside_the_ERTMSETCS_system_Decoder(Bitstream* st
 	{ p->NID_NTC		= Bitstream_Read(stream, 8); }
         }
 
+	/*@
+	  requires Other_data_depending_on__NID_XUSER: stream->bitpos == pos + 32;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->Other_data_depending_on__NID_XUSER;
+	  ensures  Other_data_depending_on__NID_XUSER: stream->bitpos == pos + 40;
+	  ensures  Other_data_depending_on__NID_XUSER: EqualBits(stream, pos + 32, pos + 40, p->Other_data_depending_on__NID_XUSER);
+	  ensures  Other_data_depending_on__NID_XUSER: UpperBitsNotSet(p->Other_data_depending_on__NID_XUSER, 8);
+	*/
 	{ p->Other_data_depending_on__NID_XUSER		= Bitstream_Read(stream, 8); }
 
         //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
         //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
         //@ assert NID_XUSER:         EqualBits(stream, pos + 15,  pos + 24,  p->NID_XUSER);
+        //@ assert Other_data_depending_on__NID_XUSER: EqualBits(stream, pos + 32,  pos + 40,  p->Other_data_depending_on__NID_XUSER);
 
         //@ assert Q_DIR:             UpperBitsNotSet(p->Q_DIR,             2);
         //@ assert L_PACKET:          UpperBitsNotSet(p->L_PACKET,          13);
         //@ assert NID_XUSER:         UpperBitsNotSet(p->NID_XUSER,         9);
+        //@ assert Other_data_depending_on__NID_XUSER: UpperBitsNotSet(p->Other_data_depending_on__NID_XUSER, 8);
 
 	//@ assert final: EqualBits(stream, pos, p);
 

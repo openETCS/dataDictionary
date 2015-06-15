@@ -113,12 +113,44 @@ int Position_Report_based_on_two_balise_groups_Decoder(Bitstream* stream, Positi
 	{ p->L_TRAININT		= Bitstream_Read(stream, 15); }
         }
 
+	/*@
+	  requires V_TRAIN:        stream->bitpos == pos + 129;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->V_TRAIN;
+	  ensures  V_TRAIN:        stream->bitpos == pos + 136;
+	  ensures  V_TRAIN:        EqualBits(stream, pos + 129, pos + 136, p->V_TRAIN);
+	  ensures  V_TRAIN:        UpperBitsNotSet(p->V_TRAIN, 7);
+	*/
 	{ p->V_TRAIN		= Bitstream_Read(stream, 7); }
 
+	/*@
+	  requires Q_DIRTRAIN:     stream->bitpos == pos + 136;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->Q_DIRTRAIN;
+	  ensures  Q_DIRTRAIN:     stream->bitpos == pos + 138;
+	  ensures  Q_DIRTRAIN:     EqualBits(stream, pos + 136, pos + 138, p->Q_DIRTRAIN);
+	  ensures  Q_DIRTRAIN:     UpperBitsNotSet(p->Q_DIRTRAIN, 2);
+	*/
 	{ p->Q_DIRTRAIN		= Bitstream_Read(stream, 2); }
 
+	/*@
+	  requires M_MODE:         stream->bitpos == pos + 138;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->M_MODE;
+	  ensures  M_MODE:         stream->bitpos == pos + 142;
+	  ensures  M_MODE:         EqualBits(stream, pos + 138, pos + 142, p->M_MODE);
+	  ensures  M_MODE:         UpperBitsNotSet(p->M_MODE, 4);
+	*/
 	{ p->M_MODE		= Bitstream_Read(stream, 4); }
 
+	/*@
+	  requires M_LEVEL:        stream->bitpos == pos + 142;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->M_LEVEL;
+	  ensures  M_LEVEL:        stream->bitpos == pos + 145;
+	  ensures  M_LEVEL:        EqualBits(stream, pos + 142, pos + 145, p->M_LEVEL);
+	  ensures  M_LEVEL:        UpperBitsNotSet(p->M_LEVEL, 3);
+	*/
 	{ p->M_LEVEL		= Bitstream_Read(stream, 3); }
 
         if (p->M_LEVEL == 1)
@@ -136,6 +168,10 @@ int Position_Report_based_on_two_balise_groups_Decoder(Bitstream* stream, Positi
         //@ assert L_DOUBTOVER:       EqualBits(stream, pos + 82,  pos + 97,  p->L_DOUBTOVER);
         //@ assert L_DOUBTUNDER:      EqualBits(stream, pos + 97,  pos + 112, p->L_DOUBTUNDER);
         //@ assert Q_LENGTH:          EqualBits(stream, pos + 112, pos + 114, p->Q_LENGTH);
+        //@ assert V_TRAIN:           EqualBits(stream, pos + 129, pos + 136, p->V_TRAIN);
+        //@ assert Q_DIRTRAIN:        EqualBits(stream, pos + 136, pos + 138, p->Q_DIRTRAIN);
+        //@ assert M_MODE:            EqualBits(stream, pos + 138, pos + 142, p->M_MODE);
+        //@ assert M_LEVEL:           EqualBits(stream, pos + 142, pos + 145, p->M_LEVEL);
 
         //@ assert L_PACKET:          UpperBitsNotSet(p->L_PACKET,          13);
         //@ assert Q_SCALE:           UpperBitsNotSet(p->Q_SCALE,           2);
@@ -147,6 +183,10 @@ int Position_Report_based_on_two_balise_groups_Decoder(Bitstream* stream, Positi
         //@ assert L_DOUBTOVER:       UpperBitsNotSet(p->L_DOUBTOVER,       15);
         //@ assert L_DOUBTUNDER:      UpperBitsNotSet(p->L_DOUBTUNDER,      15);
         //@ assert Q_LENGTH:          UpperBitsNotSet(p->Q_LENGTH,          2);
+        //@ assert V_TRAIN:           UpperBitsNotSet(p->V_TRAIN,           7);
+        //@ assert Q_DIRTRAIN:        UpperBitsNotSet(p->Q_DIRTRAIN,        2);
+        //@ assert M_MODE:            UpperBitsNotSet(p->M_MODE,            4);
+        //@ assert M_LEVEL:           UpperBitsNotSet(p->M_LEVEL,           3);
 
 	//@ assert final: EqualBits(stream, pos, p);
 

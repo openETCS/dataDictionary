@@ -33,7 +33,8 @@ struct Infill_location_reference : public BasePacket
                 (core.Q_NEWCOUNTRY == q->core.Q_NEWCOUNTRY) &&
                 (!(core.Q_NEWCOUNTRY == 1) || (
                 (core.NID_C == q->core.NID_C)
-                ));
+                )) &&
+                (core.NID_BG == q->core.NID_BG);
 	}
 	return false;
     }

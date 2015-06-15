@@ -52,6 +52,10 @@ struct Position_Report_based_on_two_balise_groups : public BasePacket
                 (!((core.Q_LENGTH == 1) || (core.Q_LENGTH == 2)) || (
                 (core.L_TRAININT == q->core.L_TRAININT)
                 )) &&
+                (core.V_TRAIN == q->core.V_TRAIN) &&
+                (core.Q_DIRTRAIN == q->core.Q_DIRTRAIN) &&
+                (core.M_MODE == q->core.M_MODE) &&
+                (core.M_LEVEL == q->core.M_LEVEL) &&
                 (!(core.M_LEVEL == 1) || (
                 (core.NID_NTC == q->core.NID_NTC)
                 ));

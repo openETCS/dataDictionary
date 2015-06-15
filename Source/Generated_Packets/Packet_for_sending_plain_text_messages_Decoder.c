@@ -93,12 +93,44 @@ int Packet_for_sending_plain_text_messages_Decoder(Bitstream* stream, Packet_for
 	{ p->NID_NTC0		= Bitstream_Read(stream, 8); }
         }
 
+	/*@
+	  requires L_TEXTDISPLAY:  stream->bitpos == pos + 50;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->L_TEXTDISPLAY;
+	  ensures  L_TEXTDISPLAY:  stream->bitpos == pos + 65;
+	  ensures  L_TEXTDISPLAY:  EqualBits(stream, pos + 50, pos + 65, p->L_TEXTDISPLAY);
+	  ensures  L_TEXTDISPLAY:  UpperBitsNotSet(p->L_TEXTDISPLAY, 15);
+	*/
 	{ p->L_TEXTDISPLAY		= Bitstream_Read(stream, 15); }
 
+	/*@
+	  requires T_TEXTDISPLAY:  stream->bitpos == pos + 65;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->T_TEXTDISPLAY;
+	  ensures  T_TEXTDISPLAY:  stream->bitpos == pos + 75;
+	  ensures  T_TEXTDISPLAY:  EqualBits(stream, pos + 65, pos + 75, p->T_TEXTDISPLAY);
+	  ensures  T_TEXTDISPLAY:  UpperBitsNotSet(p->T_TEXTDISPLAY, 10);
+	*/
 	{ p->T_TEXTDISPLAY		= Bitstream_Read(stream, 10); }
 
+	/*@
+	  requires M_MODETEXTDISPLAY1: stream->bitpos == pos + 75;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->M_MODETEXTDISPLAY1;
+	  ensures  M_MODETEXTDISPLAY1: stream->bitpos == pos + 79;
+	  ensures  M_MODETEXTDISPLAY1: EqualBits(stream, pos + 75, pos + 79, p->M_MODETEXTDISPLAY1);
+	  ensures  M_MODETEXTDISPLAY1: UpperBitsNotSet(p->M_MODETEXTDISPLAY1, 4);
+	*/
 	{ p->M_MODETEXTDISPLAY1		= Bitstream_Read(stream, 4); }
 
+	/*@
+	  requires M_LEVELTEXTDISPLAY1: stream->bitpos == pos + 79;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->M_LEVELTEXTDISPLAY1;
+	  ensures  M_LEVELTEXTDISPLAY1: stream->bitpos == pos + 82;
+	  ensures  M_LEVELTEXTDISPLAY1: EqualBits(stream, pos + 79, pos + 82, p->M_LEVELTEXTDISPLAY1);
+	  ensures  M_LEVELTEXTDISPLAY1: UpperBitsNotSet(p->M_LEVELTEXTDISPLAY1, 3);
+	*/
 	{ p->M_LEVELTEXTDISPLAY1		= Bitstream_Read(stream, 3); }
 
         if (p->M_LEVELTEXTDISPLAY1 == 1)
@@ -106,6 +138,14 @@ int Packet_for_sending_plain_text_messages_Decoder(Bitstream* stream, Packet_for
 	{ p->NID_NTC1		= Bitstream_Read(stream, 8); }
         }
 
+	/*@
+	  requires Q_TEXTCONFIRM:  stream->bitpos == pos + 90;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->Q_TEXTCONFIRM;
+	  ensures  Q_TEXTCONFIRM:  stream->bitpos == pos + 92;
+	  ensures  Q_TEXTCONFIRM:  EqualBits(stream, pos + 90, pos + 92, p->Q_TEXTCONFIRM);
+	  ensures  Q_TEXTCONFIRM:  UpperBitsNotSet(p->Q_TEXTCONFIRM, 2);
+	*/
 	{ p->Q_TEXTCONFIRM		= Bitstream_Read(stream, 2); }
 
         if (p->Q_TEXTCONFIRM != 0)
@@ -124,8 +164,24 @@ int Packet_for_sending_plain_text_messages_Decoder(Bitstream* stream, Packet_for
 	{ p->NID_RBC		= Bitstream_Read(stream, 14); }
         }
 
+	/*@
+	  requires L_TEXT:         stream->bitpos == pos + 126;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->L_TEXT;
+	  ensures  L_TEXT:         stream->bitpos == pos + 134;
+	  ensures  L_TEXT:         EqualBits(stream, pos + 126, pos + 134, p->L_TEXT);
+	  ensures  L_TEXT:         UpperBitsNotSet(p->L_TEXT, 8);
+	*/
 	{ p->L_TEXT		= Bitstream_Read(stream, 8); }
 
+	/*@
+	  requires X_TEXT:         stream->bitpos == pos + 134;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->X_TEXT;
+	  ensures  X_TEXT:         stream->bitpos == pos + 142;
+	  ensures  X_TEXT:         EqualBits(stream, pos + 134, pos + 142, p->X_TEXT);
+	  ensures  X_TEXT:         UpperBitsNotSet(p->X_TEXT, 8);
+	*/
 	{ p->X_TEXT		= Bitstream_Read(stream, 8); }
 
         //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
@@ -136,6 +192,13 @@ int Packet_for_sending_plain_text_messages_Decoder(Bitstream* stream, Packet_for
         //@ assert D_TEXTDISPLAY:     EqualBits(stream, pos + 20,  pos + 35,  p->D_TEXTDISPLAY);
         //@ assert M_MODETEXTDISPLAY0: EqualBits(stream, pos + 35,  pos + 39,  p->M_MODETEXTDISPLAY0);
         //@ assert M_LEVELTEXTDISPLAY0: EqualBits(stream, pos + 39,  pos + 42,  p->M_LEVELTEXTDISPLAY0);
+        //@ assert L_TEXTDISPLAY:     EqualBits(stream, pos + 50,  pos + 65,  p->L_TEXTDISPLAY);
+        //@ assert T_TEXTDISPLAY:     EqualBits(stream, pos + 65,  pos + 75,  p->T_TEXTDISPLAY);
+        //@ assert M_MODETEXTDISPLAY1: EqualBits(stream, pos + 75,  pos + 79,  p->M_MODETEXTDISPLAY1);
+        //@ assert M_LEVELTEXTDISPLAY1: EqualBits(stream, pos + 79,  pos + 82,  p->M_LEVELTEXTDISPLAY1);
+        //@ assert Q_TEXTCONFIRM:     EqualBits(stream, pos + 90,  pos + 92,  p->Q_TEXTCONFIRM);
+        //@ assert L_TEXT:            EqualBits(stream, pos + 126, pos + 134, p->L_TEXT);
+        //@ assert X_TEXT:            EqualBits(stream, pos + 134, pos + 142, p->X_TEXT);
 
         //@ assert Q_DIR:             UpperBitsNotSet(p->Q_DIR,             2);
         //@ assert L_PACKET:          UpperBitsNotSet(p->L_PACKET,          13);
@@ -145,6 +208,13 @@ int Packet_for_sending_plain_text_messages_Decoder(Bitstream* stream, Packet_for
         //@ assert D_TEXTDISPLAY:     UpperBitsNotSet(p->D_TEXTDISPLAY,     15);
         //@ assert M_MODETEXTDISPLAY0: UpperBitsNotSet(p->M_MODETEXTDISPLAY0, 4);
         //@ assert M_LEVELTEXTDISPLAY0: UpperBitsNotSet(p->M_LEVELTEXTDISPLAY0, 3);
+        //@ assert L_TEXTDISPLAY:     UpperBitsNotSet(p->L_TEXTDISPLAY,     15);
+        //@ assert T_TEXTDISPLAY:     UpperBitsNotSet(p->T_TEXTDISPLAY,     10);
+        //@ assert M_MODETEXTDISPLAY1: UpperBitsNotSet(p->M_MODETEXTDISPLAY1, 4);
+        //@ assert M_LEVELTEXTDISPLAY1: UpperBitsNotSet(p->M_LEVELTEXTDISPLAY1, 3);
+        //@ assert Q_TEXTCONFIRM:     UpperBitsNotSet(p->Q_TEXTCONFIRM,     2);
+        //@ assert L_TEXT:            UpperBitsNotSet(p->L_TEXT,            8);
+        //@ assert X_TEXT:            UpperBitsNotSet(p->X_TEXT,            8);
 
 	//@ assert final: EqualBits(stream, pos, p);
 

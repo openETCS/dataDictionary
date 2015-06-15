@@ -33,7 +33,8 @@ struct Data_used_by_applications_outside_the_ERTMSETCS_system : public BasePacke
                 (core.NID_XUSER == q->core.NID_XUSER) &&
                 (!(core.NID_XUSER == 102) || (
                 (core.NID_NTC == q->core.NID_NTC)
-                ));
+                )) &&
+                (core.Other_data_depending_on__NID_XUSER == q->core.Other_data_depending_on__NID_XUSER);
 	}
 	return false;
     }

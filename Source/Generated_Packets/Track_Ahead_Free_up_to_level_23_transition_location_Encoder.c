@@ -25,6 +25,7 @@ int Track_Ahead_Free_up_to_level_23_transition_location_Encoder(Bitstream* strea
             //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
             //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
             //@ assert Q_NEWCOUNTRY:      EqualBits(stream, pos + 15,  pos + 16,  p->Q_NEWCOUNTRY);
+            //@ assert NID_BG:            EqualBits(stream, pos + 26,  pos + 40,  p->NID_BG);
 
             return 1;
         }

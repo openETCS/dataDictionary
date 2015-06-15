@@ -47,6 +47,10 @@ int Position_Report_based_on_two_balise_groups_Encoder(Bitstream* stream, const 
             //@ assert L_DOUBTOVER:       EqualBits(stream, pos + 82,  pos + 97,  p->L_DOUBTOVER);
             //@ assert L_DOUBTUNDER:      EqualBits(stream, pos + 97,  pos + 112, p->L_DOUBTUNDER);
             //@ assert Q_LENGTH:          EqualBits(stream, pos + 112, pos + 114, p->Q_LENGTH);
+            //@ assert V_TRAIN:           EqualBits(stream, pos + 129, pos + 136, p->V_TRAIN);
+            //@ assert Q_DIRTRAIN:        EqualBits(stream, pos + 136, pos + 138, p->Q_DIRTRAIN);
+            //@ assert M_MODE:            EqualBits(stream, pos + 138, pos + 142, p->M_MODE);
+            //@ assert M_LEVEL:           EqualBits(stream, pos + 142, pos + 145, p->M_LEVEL);
 
             return 1;
         }

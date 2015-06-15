@@ -58,6 +58,12 @@ int Packet_for_sending_fixed_text_messages_Encoder(Bitstream* stream, const Pack
             //@ assert D_TEXTDISPLAY:     EqualBits(stream, pos + 20,  pos + 35,  p->D_TEXTDISPLAY);
             //@ assert M_MODETEXTDISPLAY0: EqualBits(stream, pos + 35,  pos + 39,  p->M_MODETEXTDISPLAY0);
             //@ assert M_LEVELTEXTDISPLAY0: EqualBits(stream, pos + 39,  pos + 42,  p->M_LEVELTEXTDISPLAY0);
+            //@ assert L_TEXTDISPLAY:     EqualBits(stream, pos + 50,  pos + 65,  p->L_TEXTDISPLAY);
+            //@ assert T_TEXTDISPLAY:     EqualBits(stream, pos + 65,  pos + 75,  p->T_TEXTDISPLAY);
+            //@ assert M_MODETEXTDISPLAY1: EqualBits(stream, pos + 75,  pos + 79,  p->M_MODETEXTDISPLAY1);
+            //@ assert M_LEVELTEXTDISPLAY1: EqualBits(stream, pos + 79,  pos + 82,  p->M_LEVELTEXTDISPLAY1);
+            //@ assert Q_TEXTCONFIRM:     EqualBits(stream, pos + 90,  pos + 92,  p->Q_TEXTCONFIRM);
+            //@ assert Q_TEXT:            EqualBits(stream, pos + 126, pos + 134, p->Q_TEXT);
 
             return 1;
         }

@@ -53,22 +53,26 @@ typedef struct Track_Ahead_Free_up_to_level_23_transition_location_Core Track_Ah
     predicate Invariant(Track_Ahead_Free_up_to_level_23_transition_location_Core* p) =
       Invariant(p->Q_DIR)             &&
       Invariant(p->L_PACKET)          &&
-      Invariant(p->Q_NEWCOUNTRY);
+      Invariant(p->Q_NEWCOUNTRY)      &&
+      Invariant(p->NID_BG);
 
     predicate ZeroInitialized(Track_Ahead_Free_up_to_level_23_transition_location_Core* p) =
       ZeroInitialized(p->Q_DIR)             &&
       ZeroInitialized(p->L_PACKET)          &&
-      ZeroInitialized(p->Q_NEWCOUNTRY);
+      ZeroInitialized(p->Q_NEWCOUNTRY)      &&
+      ZeroInitialized(p->NID_BG);
 
     predicate EqualBits(Bitstream* stream, integer pos, Track_Ahead_Free_up_to_level_23_transition_location_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
       EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
-      EqualBits(stream, pos + 15,  pos + 16,  p->Q_NEWCOUNTRY);
+      EqualBits(stream, pos + 15,  pos + 16,  p->Q_NEWCOUNTRY)      &&
+      EqualBits(stream, pos + 26,  pos + 40,  p->NID_BG);
 
     predicate UpperBitsNotSet(Track_Ahead_Free_up_to_level_23_transition_location_Core* p) =
       UpperBitsNotSet(p->Q_DIR,            2)   &&
       UpperBitsNotSet(p->L_PACKET,         13)  &&
-      UpperBitsNotSet(p->Q_NEWCOUNTRY,     1);
+      UpperBitsNotSet(p->Q_NEWCOUNTRY,     1)   &&
+      UpperBitsNotSet(p->NID_BG,           14);
 
 */
 

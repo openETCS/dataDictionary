@@ -90,7 +90,14 @@ typedef struct Packet_for_sending_plain_text_messages_Core Packet_for_sending_pl
       Invariant(p->Q_TEXTDISPLAY)     &&
       Invariant(p->D_TEXTDISPLAY)     &&
       Invariant(p->M_MODETEXTDISPLAY0) &&
-      Invariant(p->M_LEVELTEXTDISPLAY0);
+      Invariant(p->M_LEVELTEXTDISPLAY0) &&
+      Invariant(p->L_TEXTDISPLAY)     &&
+      Invariant(p->T_TEXTDISPLAY)     &&
+      Invariant(p->M_MODETEXTDISPLAY1) &&
+      Invariant(p->M_LEVELTEXTDISPLAY1) &&
+      Invariant(p->Q_TEXTCONFIRM)     &&
+      Invariant(p->L_TEXT)            &&
+      Invariant(p->X_TEXT);
 
     predicate ZeroInitialized(Packet_for_sending_plain_text_messages_Core* p) =
       ZeroInitialized(p->Q_DIR)             &&
@@ -100,7 +107,14 @@ typedef struct Packet_for_sending_plain_text_messages_Core Packet_for_sending_pl
       ZeroInitialized(p->Q_TEXTDISPLAY)     &&
       ZeroInitialized(p->D_TEXTDISPLAY)     &&
       ZeroInitialized(p->M_MODETEXTDISPLAY0) &&
-      ZeroInitialized(p->M_LEVELTEXTDISPLAY0);
+      ZeroInitialized(p->M_LEVELTEXTDISPLAY0) &&
+      ZeroInitialized(p->L_TEXTDISPLAY)     &&
+      ZeroInitialized(p->T_TEXTDISPLAY)     &&
+      ZeroInitialized(p->M_MODETEXTDISPLAY1) &&
+      ZeroInitialized(p->M_LEVELTEXTDISPLAY1) &&
+      ZeroInitialized(p->Q_TEXTCONFIRM)     &&
+      ZeroInitialized(p->L_TEXT)            &&
+      ZeroInitialized(p->X_TEXT);
 
     predicate EqualBits(Bitstream* stream, integer pos, Packet_for_sending_plain_text_messages_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
@@ -110,7 +124,14 @@ typedef struct Packet_for_sending_plain_text_messages_Core Packet_for_sending_pl
       EqualBits(stream, pos + 19,  pos + 20,  p->Q_TEXTDISPLAY)     &&
       EqualBits(stream, pos + 20,  pos + 35,  p->D_TEXTDISPLAY)     &&
       EqualBits(stream, pos + 35,  pos + 39,  p->M_MODETEXTDISPLAY0) &&
-      EqualBits(stream, pos + 39,  pos + 42,  p->M_LEVELTEXTDISPLAY0);
+      EqualBits(stream, pos + 39,  pos + 42,  p->M_LEVELTEXTDISPLAY0) &&
+      EqualBits(stream, pos + 50,  pos + 65,  p->L_TEXTDISPLAY)     &&
+      EqualBits(stream, pos + 65,  pos + 75,  p->T_TEXTDISPLAY)     &&
+      EqualBits(stream, pos + 75,  pos + 79,  p->M_MODETEXTDISPLAY1) &&
+      EqualBits(stream, pos + 79,  pos + 82,  p->M_LEVELTEXTDISPLAY1) &&
+      EqualBits(stream, pos + 90,  pos + 92,  p->Q_TEXTCONFIRM)     &&
+      EqualBits(stream, pos + 126, pos + 134, p->L_TEXT)            &&
+      EqualBits(stream, pos + 134, pos + 142, p->X_TEXT);
 
     predicate UpperBitsNotSet(Packet_for_sending_plain_text_messages_Core* p) =
       UpperBitsNotSet(p->Q_DIR,            2)   &&
@@ -120,7 +141,14 @@ typedef struct Packet_for_sending_plain_text_messages_Core Packet_for_sending_pl
       UpperBitsNotSet(p->Q_TEXTDISPLAY,    1)   &&
       UpperBitsNotSet(p->D_TEXTDISPLAY,    15)  &&
       UpperBitsNotSet(p->M_MODETEXTDISPLAY0,4)   &&
-      UpperBitsNotSet(p->M_LEVELTEXTDISPLAY0,3);
+      UpperBitsNotSet(p->M_LEVELTEXTDISPLAY0,3)   &&
+      UpperBitsNotSet(p->L_TEXTDISPLAY,    15)  &&
+      UpperBitsNotSet(p->T_TEXTDISPLAY,    10)  &&
+      UpperBitsNotSet(p->M_MODETEXTDISPLAY1,4)   &&
+      UpperBitsNotSet(p->M_LEVELTEXTDISPLAY1,3)   &&
+      UpperBitsNotSet(p->Q_TEXTCONFIRM,    2)   &&
+      UpperBitsNotSet(p->L_TEXT,           8)   &&
+      UpperBitsNotSet(p->X_TEXT,           8);
 
 */
 

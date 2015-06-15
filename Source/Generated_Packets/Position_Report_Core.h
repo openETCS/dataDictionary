@@ -79,7 +79,11 @@ typedef struct Position_Report_Core Position_Report_Core;
       Invariant(p->Q_DLRBG)           &&
       Invariant(p->L_DOUBTOVER)       &&
       Invariant(p->L_DOUBTUNDER)      &&
-      Invariant(p->Q_LENGTH);
+      Invariant(p->Q_LENGTH)          &&
+      Invariant(p->V_TRAIN)           &&
+      Invariant(p->Q_DIRTRAIN)        &&
+      Invariant(p->M_MODE)            &&
+      Invariant(p->M_LEVEL);
 
     predicate ZeroInitialized(Position_Report_Core* p) =
       ZeroInitialized(p->L_PACKET)          &&
@@ -90,7 +94,11 @@ typedef struct Position_Report_Core Position_Report_Core;
       ZeroInitialized(p->Q_DLRBG)           &&
       ZeroInitialized(p->L_DOUBTOVER)       &&
       ZeroInitialized(p->L_DOUBTUNDER)      &&
-      ZeroInitialized(p->Q_LENGTH);
+      ZeroInitialized(p->Q_LENGTH)          &&
+      ZeroInitialized(p->V_TRAIN)           &&
+      ZeroInitialized(p->Q_DIRTRAIN)        &&
+      ZeroInitialized(p->M_MODE)            &&
+      ZeroInitialized(p->M_LEVEL);
 
     predicate EqualBits(Bitstream* stream, integer pos, Position_Report_Core* p) =
       EqualBits(stream, pos,       pos + 13,  p->L_PACKET)          &&
@@ -101,7 +109,11 @@ typedef struct Position_Report_Core Position_Report_Core;
       EqualBits(stream, pos + 56,  pos + 58,  p->Q_DLRBG)           &&
       EqualBits(stream, pos + 58,  pos + 73,  p->L_DOUBTOVER)       &&
       EqualBits(stream, pos + 73,  pos + 88,  p->L_DOUBTUNDER)      &&
-      EqualBits(stream, pos + 88,  pos + 90,  p->Q_LENGTH);
+      EqualBits(stream, pos + 88,  pos + 90,  p->Q_LENGTH)          &&
+      EqualBits(stream, pos + 105, pos + 112, p->V_TRAIN)           &&
+      EqualBits(stream, pos + 112, pos + 114, p->Q_DIRTRAIN)        &&
+      EqualBits(stream, pos + 114, pos + 118, p->M_MODE)            &&
+      EqualBits(stream, pos + 118, pos + 121, p->M_LEVEL);
 
     predicate UpperBitsNotSet(Position_Report_Core* p) =
       UpperBitsNotSet(p->L_PACKET,         13)  &&
@@ -112,7 +124,11 @@ typedef struct Position_Report_Core Position_Report_Core;
       UpperBitsNotSet(p->Q_DLRBG,          2)   &&
       UpperBitsNotSet(p->L_DOUBTOVER,      15)  &&
       UpperBitsNotSet(p->L_DOUBTUNDER,     15)  &&
-      UpperBitsNotSet(p->Q_LENGTH,         2);
+      UpperBitsNotSet(p->Q_LENGTH,         2)   &&
+      UpperBitsNotSet(p->V_TRAIN,          7)   &&
+      UpperBitsNotSet(p->Q_DIRTRAIN,       2)   &&
+      UpperBitsNotSet(p->M_MODE,           4)   &&
+      UpperBitsNotSet(p->M_LEVEL,          3);
 
 */
 

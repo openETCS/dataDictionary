@@ -25,6 +25,7 @@ int Data_used_by_applications_outside_the_ERTMSETCS_system_Encoder(Bitstream* st
             //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
             //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
             //@ assert NID_XUSER:         EqualBits(stream, pos + 15,  pos + 24,  p->NID_XUSER);
+            //@ assert Other_data_depending_on__NID_XUSER: EqualBits(stream, pos + 32,  pos + 40,  p->Other_data_depending_on__NID_XUSER);
 
             return 1;
         }

@@ -55,9 +55,14 @@ struct Packet_for_sending_fixed_text_messages : public BasePacket
                 (!(core.M_LEVELTEXTDISPLAY0 == 1) || (
                 (core.NID_NTC0 == q->core.NID_NTC0)
                 )) &&
+                (core.L_TEXTDISPLAY == q->core.L_TEXTDISPLAY) &&
+                (core.T_TEXTDISPLAY == q->core.T_TEXTDISPLAY) &&
+                (core.M_MODETEXTDISPLAY1 == q->core.M_MODETEXTDISPLAY1) &&
+                (core.M_LEVELTEXTDISPLAY1 == q->core.M_LEVELTEXTDISPLAY1) &&
                 (!(core.M_LEVELTEXTDISPLAY1 == 1) || (
                 (core.NID_NTC1 == q->core.NID_NTC1)
                 )) &&
+                (core.Q_TEXTCONFIRM == q->core.Q_TEXTCONFIRM) &&
                 (!(core.Q_TEXTCONFIRM != 0) || (
                 (core.Q_CONFTEXTDISPLAY == q->core.Q_CONFTEXTDISPLAY) &&
                 (core.Q_TEXTREPORT == q->core.Q_TEXTREPORT)
@@ -66,7 +71,8 @@ struct Packet_for_sending_fixed_text_messages : public BasePacket
                 (core.NID_TEXTMESSAGE == q->core.NID_TEXTMESSAGE) &&
                 (core.NID_C == q->core.NID_C) &&
                 (core.NID_RBC == q->core.NID_RBC)
-                ));
+                )) &&
+                (core.Q_TEXT == q->core.Q_TEXT);
 	}
 	return false;
     }
