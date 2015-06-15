@@ -40,7 +40,7 @@ int Packet_for_sending_plain_text_messages_Encoder(Bitstream* stream, const Pack
             Bitstream_Write(stream, 1,  p->Q_TEXTREPORT);
             }
 
-            if ((p->|| (p->))
+            if (p->Q_TEXTREPORT == 1)
             {
             Bitstream_Write(stream, 8,  p->NID_TEXTMESSAGE);
             Bitstream_Write(stream, 10, p->NID_C);

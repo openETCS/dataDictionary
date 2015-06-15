@@ -39,6 +39,8 @@
 #include "Position_Report_based_on_two_balise_groups.h"
 #include "Position_Report.h"
 #include "Track_Condition_Change_of_traction_system.h"
+#include "Packet_for_sending_fixed_text_messages.h"
+#include "Packet_for_sending_plain_text_messages.h"
 
 #include "Adhesion_Factor_Decoder.h"
 #include "Danger_for_Shunting_information_Decoder.h"
@@ -77,6 +79,8 @@
 #include "Position_Report_based_on_two_balise_groups_Decoder.h"
 #include "Position_Report_Decoder.h"
 #include "Track_Condition_Change_of_traction_system_Decoder.h"
+#include "Packet_for_sending_fixed_text_messages_Decoder.h"
+#include "Packet_for_sending_plain_text_messages_Decoder.h"
 
 #include "Adhesion_Factor_Encoder.h"
 #include "Danger_for_Shunting_information_Encoder.h"
@@ -115,6 +119,8 @@
 #include "Position_Report_based_on_two_balise_groups_Encoder.h"
 #include "Position_Report_Encoder.h"
 #include "Track_Condition_Change_of_traction_system_Encoder.h"
+#include "Packet_for_sending_fixed_text_messages_Encoder.h"
+#include "Packet_for_sending_plain_text_messages_Encoder.h"
 
 #endif // SUBSETS_H_INCLUDED
 

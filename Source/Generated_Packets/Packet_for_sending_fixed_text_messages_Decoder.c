@@ -115,7 +115,7 @@ int Packet_for_sending_fixed_text_messages_Decoder(Bitstream* stream, Packet_for
 	{ p->Q_TEXTREPORT		= Bitstream_Read(stream, 1); }
         }
 
-        if ((p->|| (p->))
+        if (p->Q_TEXTREPORT == 1)
         {
 	{ p->NID_TEXTMESSAGE		= Bitstream_Read(stream, 8); }
 

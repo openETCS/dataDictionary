@@ -62,7 +62,7 @@ struct Packet_for_sending_fixed_text_messages : public BasePacket
                 (core.Q_CONFTEXTDISPLAY == q->core.Q_CONFTEXTDISPLAY) &&
                 (core.Q_TEXTREPORT == q->core.Q_TEXTREPORT)
                 )) &&
-                ((!(core.|| (core.)) || (
+                ((!core.Q_TEXTREPORT == 1) || (
                 (core.NID_TEXTMESSAGE == q->core.NID_TEXTMESSAGE) &&
                 (core.NID_C == q->core.NID_C) &&
                 (core.NID_RBC == q->core.NID_RBC)
