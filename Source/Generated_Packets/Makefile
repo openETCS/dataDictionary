@@ -3,6 +3,8 @@ MAKEFLAGS += --no-print-directory --silent
 
 TOPDIR=..
 
+it: lib
+
 include $(TOPDIR)/Makefile.template
 export BITWALKER=$(TOPDIR)/Bitwalker
 
@@ -12,11 +14,15 @@ export BITWALKER=$(TOPDIR)/Bitwalker
 CPPFLAGS += -I.
 
 CPPFLAGS += -I$(BITWALKER)
+CPPFLAGS += -I$(TOPDIR)/Eurobalise_Telegram
+CPPFLAGS += -I$(TOPDIR)/Packet_Header
+
 LDFLAGS += -L$(BITWALKER) -lBitwalker
 
 SRC :=  $(wildcard *.c)
+SRCXX :=  $(wildcard *.cpp)
 
-OBJ := $(SRC:.c=.o)
+OBJ := $(SRC:.c=.o) $(SRCXX:.cpp=.o)
 
 lib: libgenerated_packets.a
 

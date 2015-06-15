@@ -40,8 +40,7 @@ lib:
 	@(cd $(PACKET_HEADER) && $(MAKE) lib)
 	@(cd $(TELEGRAM_HEADER) && $(MAKE) lib)
 
-SRC=Eurobalise_Telegram.cpp $(GENERATED_PACKETS)/Decoder_Branch.cpp $(GENERATED_PACKETS)/Encoder_Branch.cpp\
-    create.cpp
+SRC=Eurobalise_Telegram.cpp create.cpp
 
 OBJ := $(SRC:.cpp=.o)
 
