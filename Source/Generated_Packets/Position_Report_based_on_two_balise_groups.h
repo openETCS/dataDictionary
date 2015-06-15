@@ -49,10 +49,10 @@ struct Position_Report_based_on_two_balise_groups : public BasePacket
                 (core.L_DOUBTOVER == q->core.L_DOUBTOVER) &&
                 (core.L_DOUBTUNDER == q->core.L_DOUBTUNDER) &&
                 (core.Q_LENGTH == q->core.Q_LENGTH) &&
-                ((!(core.Q_LENGTH == 1) || (core.Q_LENGTH == 2)) || (
+                (!((core.Q_LENGTH == 1) || (core.Q_LENGTH == 2)) || (
                 (core.L_TRAININT == q->core.L_TRAININT)
                 )) &&
-                ((!core.M_LEVEL == 1) || (
+                (!(core.M_LEVEL == 1) || (
                 (core.NID_NTC == q->core.NID_NTC)
                 ));
 	}

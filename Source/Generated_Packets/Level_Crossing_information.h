@@ -40,11 +40,11 @@ struct Level_Crossing_information : public BasePacket
                 (core.D_LX == q->core.D_LX) &&
                 (core.L_LX == q->core.L_LX) &&
                 (core.Q_LXSTATUS == q->core.Q_LXSTATUS) &&
-                ((!core.Q_LXSTATUS == 1) || (
+                (!(core.Q_LXSTATUS == 1) || (
                 (core.V_LX == q->core.V_LX) &&
                 (core.Q_STOPLX == q->core.Q_STOPLX)
                 )) &&
-                ((!core.Q_STOPLX == 1) || (
+                (!(core.Q_STOPLX == 1) || (
                 (core.L_STOPLX == q->core.L_STOPLX)
                 ));
 	}

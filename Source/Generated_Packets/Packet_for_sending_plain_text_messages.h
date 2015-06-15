@@ -53,17 +53,17 @@ struct Packet_for_sending_plain_text_messages : public BasePacket
                 (core.D_TEXTDISPLAY == q->core.D_TEXTDISPLAY) &&
                 (core.M_MODETEXTDISPLAY0 == q->core.M_MODETEXTDISPLAY0) &&
                 (core.M_LEVELTEXTDISPLAY0 == q->core.M_LEVELTEXTDISPLAY0) &&
-                ((!core.M_LEVELTEXTDISPLAY0 == 1) || (
+                (!(core.M_LEVELTEXTDISPLAY0 == 1) || (
                 (core.NID_NTC0 == q->core.NID_NTC0)
                 )) &&
-                ((!core.M_LEVELTEXTDISPLAY1 == 1) || (
+                (!(core.M_LEVELTEXTDISPLAY1 == 1) || (
                 (core.NID_NTC1 == q->core.NID_NTC1)
                 )) &&
-                ((!core.Q_TEXTCONFIRM != 0) || (
+                (!(core.Q_TEXTCONFIRM != 0) || (
                 (core.Q_CONFTEXTDISPLAY == q->core.Q_CONFTEXTDISPLAY) &&
                 (core.Q_TEXTREPORT == q->core.Q_TEXTREPORT)
                 )) &&
-                ((!core.Q_TEXTREPORT == 1) || (
+                (!(core.Q_TEXTREPORT == 1) || (
                 (core.NID_TEXTMESSAGE == q->core.NID_TEXTMESSAGE) &&
                 (core.NID_C == q->core.NID_C) &&
                 (core.NID_RBC == q->core.NID_RBC)

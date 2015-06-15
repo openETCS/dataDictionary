@@ -34,7 +34,7 @@ struct Track_Condition_Change_of_traction_system : public BasePacket
                 (core.Q_SCALE == q->core.Q_SCALE) &&
                 (core.D_TRACTION == q->core.D_TRACTION) &&
                 (core.M_VOLTAGE == q->core.M_VOLTAGE) &&
-                ((!core.M_VOLTAGE != 0) || (
+                (!(core.M_VOLTAGE != 0) || (
                 (core.NID_CTRACTION == q->core.NID_CTRACTION)
                 ));
 	}

@@ -31,7 +31,7 @@ struct Track_Ahead_Free_up_to_level_23_transition_location : public BasePacket
                 (core.Q_DIR == q->core.Q_DIR) &&
                 (core.L_PACKET == q->core.L_PACKET) &&
                 (core.Q_NEWCOUNTRY == q->core.Q_NEWCOUNTRY) &&
-                ((!core.Q_NEWCOUNTRY == 1) || (
+                (!(core.Q_NEWCOUNTRY == 1) || (
                 (core.NID_C == q->core.NID_C)
                 ));
 	}

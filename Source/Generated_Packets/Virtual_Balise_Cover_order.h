@@ -34,7 +34,7 @@ struct Virtual_Balise_Cover_order : public BasePacket
                 (core.Q_VBCO == q->core.Q_VBCO) &&
                 (core.NID_VBCMK == q->core.NID_VBCMK) &&
                 (core.NID_C == q->core.NID_C) &&
-                ((!core.Q_VBCO == 1) || (
+                (!(core.Q_VBCO == 1) || (
                 (core.T_VBC == q->core.T_VBC)
                 ));
 	}
