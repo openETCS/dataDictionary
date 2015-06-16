@@ -14,21 +14,19 @@ struct Danger_for_Shunting_information : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '('
-	       << +id << ','
-               << +core.Q_DIR << ','
-               << +core.L_PACKET << ','
-               << +core.Q_ASPECT << ')';
+        stream << '(' << +id << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
     {
 	if(auto q = dynamic_cast<const Danger_for_Shunting_information*>(&p))
 	{
-	    return
-                (core.Q_DIR == q->core.Q_DIR) &&
-                (core.L_PACKET == q->core.L_PACKET) &&
-                (core.Q_ASPECT == q->core.Q_ASPECT);
+	    bool status = true;
+
+	    status = status && (id == q->id);
+	    status = status && (core == q->core);
+
+	    return status;
 	}
 	return false;
     }

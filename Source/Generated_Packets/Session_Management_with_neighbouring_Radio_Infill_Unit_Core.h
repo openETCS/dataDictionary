@@ -3,6 +3,7 @@
 #define SESSION_MANAGEMENT_WITH_NEIGHBOURING_RADIO_INFILL_UNIT_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct Session_Management_with_neighbouring_Radio_Infill_Unit_Core
 {
@@ -22,15 +23,31 @@ struct Session_Management_with_neighbouring_Radio_Infill_Unit_Core
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const Session_Management_with_neighbouring_Radio_Infill_Unit_Core& p)
+{
+    stream 
+       << +p.Q_DIR << ','
+       << +p.L_PACKET << ','
+       << +p.Q_RIU << ','
+       << +p.NID_C << ','
+       << +p.NID_RIU << ','
+       << +p.NID_RADIO;
+
+    return stream;
+}
+
 inline bool operator==(const Session_Management_with_neighbouring_Radio_Infill_Unit_Core& a, const Session_Management_with_neighbouring_Radio_Infill_Unit_Core& b)
 {
-    return
-        (a.Q_DIR == b.Q_DIR) &&
-        (a.L_PACKET == b.L_PACKET) &&
-        (a.Q_RIU == b.Q_RIU) &&
-        (a.NID_C == b.NID_C) &&
-        (a.NID_RIU == b.NID_RIU) &&
-        (a.NID_RADIO == b.NID_RADIO);
+    bool status = true;
+    
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_RIU == b.Q_RIU);
+    status = status && (a.NID_C == b.NID_C);
+    status = status && (a.NID_RIU == b.NID_RIU);
+    status = status && (a.NID_RADIO == b.NID_RADIO);
+
+    return status;
 }
 
 inline bool operator!=(const Session_Management_with_neighbouring_Radio_Infill_Unit_Core& a, const Session_Management_with_neighbouring_Radio_Infill_Unit_Core& b)

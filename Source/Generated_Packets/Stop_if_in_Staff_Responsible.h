@@ -14,21 +14,19 @@ struct Stop_if_in_Staff_Responsible : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '('
-	       << +id << ','
-               << +core.Q_DIR << ','
-               << +core.L_PACKET << ','
-               << +core.Q_SRSTOP << ')';
+        stream << '(' << +id << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
     {
 	if(auto q = dynamic_cast<const Stop_if_in_Staff_Responsible*>(&p))
 	{
-	    return
-                (core.Q_DIR == q->core.Q_DIR) &&
-                (core.L_PACKET == q->core.L_PACKET) &&
-                (core.Q_SRSTOP == q->core.Q_SRSTOP);
+	    bool status = true;
+
+	    status = status && (id == q->id);
+	    status = status && (core == q->core);
+
+	    return status;
 	}
 	return false;
     }

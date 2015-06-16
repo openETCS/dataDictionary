@@ -3,6 +3,7 @@
 #define STOP_IF_IN_STAFF_RESPONSIBLE_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct Stop_if_in_Staff_Responsible_Core
 {
@@ -17,12 +18,25 @@ struct Stop_if_in_Staff_Responsible_Core
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const Stop_if_in_Staff_Responsible_Core& p)
+{
+    stream 
+       << +p.Q_DIR << ','
+       << +p.L_PACKET << ','
+       << +p.Q_SRSTOP;
+
+    return stream;
+}
+
 inline bool operator==(const Stop_if_in_Staff_Responsible_Core& a, const Stop_if_in_Staff_Responsible_Core& b)
 {
-    return
-        (a.Q_DIR == b.Q_DIR) &&
-        (a.L_PACKET == b.L_PACKET) &&
-        (a.Q_SRSTOP == b.Q_SRSTOP);
+    bool status = true;
+    
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SRSTOP == b.Q_SRSTOP);
+
+    return status;
 }
 
 inline bool operator!=(const Stop_if_in_Staff_Responsible_Core& a, const Stop_if_in_Staff_Responsible_Core& b)

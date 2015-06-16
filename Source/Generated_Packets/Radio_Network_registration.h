@@ -14,21 +14,19 @@ struct Radio_Network_registration : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '('
-	       << +id << ','
-               << +core.Q_DIR << ','
-               << +core.L_PACKET << ','
-               << +core.NID_MN << ')';
+        stream << '(' << +id << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
     {
 	if(auto q = dynamic_cast<const Radio_Network_registration*>(&p))
 	{
-	    return
-                (core.Q_DIR == q->core.Q_DIR) &&
-                (core.L_PACKET == q->core.L_PACKET) &&
-                (core.NID_MN == q->core.NID_MN);
+	    bool status = true;
+
+	    status = status && (id == q->id);
+	    status = status && (core == q->core);
+
+	    return status;
 	}
 	return false;
     }

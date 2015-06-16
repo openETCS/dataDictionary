@@ -3,6 +3,7 @@
 #define ADHESION_FACTOR_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct Adhesion_Factor_Core
 {
@@ -21,15 +22,31 @@ struct Adhesion_Factor_Core
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const Adhesion_Factor_Core& p)
+{
+    stream 
+       << +p.Q_DIR << ','
+       << +p.L_PACKET << ','
+       << +p.Q_SCALE << ','
+       << +p.D_ADHESION << ','
+       << +p.L_ADHESION << ','
+       << +p.M_ADHESION;
+
+    return stream;
+}
+
 inline bool operator==(const Adhesion_Factor_Core& a, const Adhesion_Factor_Core& b)
 {
-    return
-        (a.Q_DIR == b.Q_DIR) &&
-        (a.L_PACKET == b.L_PACKET) &&
-        (a.Q_SCALE == b.Q_SCALE) &&
-        (a.D_ADHESION == b.D_ADHESION) &&
-        (a.L_ADHESION == b.L_ADHESION) &&
-        (a.M_ADHESION == b.M_ADHESION);
+    bool status = true;
+    
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SCALE == b.Q_SCALE);
+    status = status && (a.D_ADHESION == b.D_ADHESION);
+    status = status && (a.L_ADHESION == b.L_ADHESION);
+    status = status && (a.M_ADHESION == b.M_ADHESION);
+
+    return status;
 }
 
 inline bool operator!=(const Adhesion_Factor_Core& a, const Adhesion_Factor_Core& b)

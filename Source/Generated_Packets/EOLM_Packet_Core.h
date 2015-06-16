@@ -3,6 +3,7 @@
 #define EOLM_PACKET_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct EOLM_Packet_Core
 {
@@ -22,17 +23,35 @@ struct EOLM_Packet_Core
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const EOLM_Packet_Core& p)
+{
+    stream 
+       << +p.Q_DIR << ','
+       << +p.L_PACKET << ','
+       << +p.Q_SCALE << ','
+       << +p.NID_LOOP << ','
+       << +p.D_LOOP << ','
+       << +p.L_LOOP << ','
+       << +p.Q_LOOPDIR << ','
+       << +p.Q_SSCODE;
+
+    return stream;
+}
+
 inline bool operator==(const EOLM_Packet_Core& a, const EOLM_Packet_Core& b)
 {
-    return
-        (a.Q_DIR == b.Q_DIR) &&
-        (a.L_PACKET == b.L_PACKET) &&
-        (a.Q_SCALE == b.Q_SCALE) &&
-        (a.NID_LOOP == b.NID_LOOP) &&
-        (a.D_LOOP == b.D_LOOP) &&
-        (a.L_LOOP == b.L_LOOP) &&
-        (a.Q_LOOPDIR == b.Q_LOOPDIR) &&
-        (a.Q_SSCODE == b.Q_SSCODE);
+    bool status = true;
+    
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SCALE == b.Q_SCALE);
+    status = status && (a.NID_LOOP == b.NID_LOOP);
+    status = status && (a.D_LOOP == b.D_LOOP);
+    status = status && (a.L_LOOP == b.L_LOOP);
+    status = status && (a.Q_LOOPDIR == b.Q_LOOPDIR);
+    status = status && (a.Q_SSCODE == b.Q_SSCODE);
+
+    return status;
 }
 
 inline bool operator!=(const EOLM_Packet_Core& a, const EOLM_Packet_Core& b)

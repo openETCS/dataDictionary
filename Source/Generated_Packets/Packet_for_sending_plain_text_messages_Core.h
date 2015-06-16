@@ -3,6 +3,7 @@
 #define PACKET_FOR_SENDING_PLAIN_TEXT_MESSAGES_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct Packet_for_sending_plain_text_messages_Core
 {
@@ -35,31 +36,49 @@ struct Packet_for_sending_plain_text_messages_Core
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const Packet_for_sending_plain_text_messages_Core& p)
+{
+    stream 
+       << +p.Q_DIR << ','
+       << +p.L_PACKET << ','
+       << +p.Q_SCALE << ','
+       << +p.Q_TEXTCLASS << ','
+       << +p.Q_TEXTDISPLAY << ','
+       << +p.D_TEXTDISPLAY << ','
+       << +p.M_MODETEXTDISPLAY0 << ','
+       << +p.M_LEVELTEXTDISPLAY0 << ','
+       << +p.L_TEXTDISPLAY << ','
+       << +p.T_TEXTDISPLAY << ','
+       << +p.M_MODETEXTDISPLAY1 << ','
+       << +p.M_LEVELTEXTDISPLAY1 << ','
+       << +p.Q_TEXTCONFIRM << ','
+       << +p.L_TEXT << ','
+       << +p.X_TEXT;
+
+    return stream;
+}
+
 inline bool operator==(const Packet_for_sending_plain_text_messages_Core& a, const Packet_for_sending_plain_text_messages_Core& b)
 {
-    return
-        (a.Q_DIR == b.Q_DIR) &&
-        (a.L_PACKET == b.L_PACKET) &&
-        (a.Q_SCALE == b.Q_SCALE) &&
-        (a.Q_TEXTCLASS == b.Q_TEXTCLASS) &&
-        (a.Q_TEXTDISPLAY == b.Q_TEXTDISPLAY) &&
-        (a.D_TEXTDISPLAY == b.D_TEXTDISPLAY) &&
-        (a.M_MODETEXTDISPLAY0 == b.M_MODETEXTDISPLAY0) &&
-        (a.M_LEVELTEXTDISPLAY0 == b.M_LEVELTEXTDISPLAY0) &&
-        (a.NID_NTC0 == b.NID_NTC0) &&
-        (a.L_TEXTDISPLAY == b.L_TEXTDISPLAY) &&
-        (a.T_TEXTDISPLAY == b.T_TEXTDISPLAY) &&
-        (a.M_MODETEXTDISPLAY1 == b.M_MODETEXTDISPLAY1) &&
-        (a.M_LEVELTEXTDISPLAY1 == b.M_LEVELTEXTDISPLAY1) &&
-        (a.NID_NTC1 == b.NID_NTC1) &&
-        (a.Q_TEXTCONFIRM == b.Q_TEXTCONFIRM) &&
-        (a.Q_CONFTEXTDISPLAY == b.Q_CONFTEXTDISPLAY) &&
-        (a.Q_TEXTREPORT == b.Q_TEXTREPORT) &&
-        (a.NID_TEXTMESSAGE == b.NID_TEXTMESSAGE) &&
-        (a.NID_C == b.NID_C) &&
-        (a.NID_RBC == b.NID_RBC) &&
-        (a.L_TEXT == b.L_TEXT) &&
-        (a.X_TEXT == b.X_TEXT);
+    bool status = true;
+    
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SCALE == b.Q_SCALE);
+    status = status && (a.Q_TEXTCLASS == b.Q_TEXTCLASS);
+    status = status && (a.Q_TEXTDISPLAY == b.Q_TEXTDISPLAY);
+    status = status && (a.D_TEXTDISPLAY == b.D_TEXTDISPLAY);
+    status = status && (a.M_MODETEXTDISPLAY0 == b.M_MODETEXTDISPLAY0);
+    status = status && (a.M_LEVELTEXTDISPLAY0 == b.M_LEVELTEXTDISPLAY0);
+    status = status && (a.L_TEXTDISPLAY == b.L_TEXTDISPLAY);
+    status = status && (a.T_TEXTDISPLAY == b.T_TEXTDISPLAY);
+    status = status && (a.M_MODETEXTDISPLAY1 == b.M_MODETEXTDISPLAY1);
+    status = status && (a.M_LEVELTEXTDISPLAY1 == b.M_LEVELTEXTDISPLAY1);
+    status = status && (a.Q_TEXTCONFIRM == b.Q_TEXTCONFIRM);
+    status = status && (a.L_TEXT == b.L_TEXT);
+    status = status && (a.X_TEXT == b.X_TEXT);
+
+    return status;
 }
 
 inline bool operator!=(const Packet_for_sending_plain_text_messages_Core& a, const Packet_for_sending_plain_text_messages_Core& b)

@@ -14,39 +14,19 @@ struct Level_Crossing_information : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '('
-	       << +id << ','
-               << +core.Q_DIR << ','
-               << +core.L_PACKET << ','
-               << +core.Q_SCALE << ','
-               << +core.NID_LX << ','
-               << +core.D_LX << ','
-               << +core.L_LX << ','
-               << +core.Q_LXSTATUS << ','
-               << +core.V_LX << ','
-               << +core.Q_STOPLX << ','
-               << +core.L_STOPLX << ')';
+        stream << '(' << +id << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
     {
 	if(auto q = dynamic_cast<const Level_Crossing_information*>(&p))
 	{
-	    return
-                (core.Q_DIR == q->core.Q_DIR) &&
-                (core.L_PACKET == q->core.L_PACKET) &&
-                (core.Q_SCALE == q->core.Q_SCALE) &&
-                (core.NID_LX == q->core.NID_LX) &&
-                (core.D_LX == q->core.D_LX) &&
-                (core.L_LX == q->core.L_LX) &&
-                (core.Q_LXSTATUS == q->core.Q_LXSTATUS) &&
-                (!(core.Q_LXSTATUS == 1) || (
-                (core.V_LX == q->core.V_LX) &&
-                (core.Q_STOPLX == q->core.Q_STOPLX)
-                )) &&
-                (!(core.Q_STOPLX == 1) || (
-                (core.L_STOPLX == q->core.L_STOPLX)
-                ));
+	    bool status = true;
+
+	    status = status && (id == q->id);
+	    status = status && (core == q->core);
+
+	    return status;
 	}
 	return false;
     }

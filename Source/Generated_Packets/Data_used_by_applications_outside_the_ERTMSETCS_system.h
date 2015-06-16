@@ -14,27 +14,19 @@ struct Data_used_by_applications_outside_the_ERTMSETCS_system : public BasePacke
 
     void print(std::ostream& stream) const override
     {
-        stream << '('
-	       << +id << ','
-               << +core.Q_DIR << ','
-               << +core.L_PACKET << ','
-               << +core.NID_XUSER << ','
-               << +core.NID_NTC << ','
-               << +core.Other_data_depending_on__NID_XUSER << ')';
+        stream << '(' << +id << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
     {
 	if(auto q = dynamic_cast<const Data_used_by_applications_outside_the_ERTMSETCS_system*>(&p))
 	{
-	    return
-                (core.Q_DIR == q->core.Q_DIR) &&
-                (core.L_PACKET == q->core.L_PACKET) &&
-                (core.NID_XUSER == q->core.NID_XUSER) &&
-                (!(core.NID_XUSER == 102) || (
-                (core.NID_NTC == q->core.NID_NTC)
-                )) &&
-                (core.Other_data_depending_on__NID_XUSER == q->core.Other_data_depending_on__NID_XUSER);
+	    bool status = true;
+
+	    status = status && (id == q->id);
+	    status = status && (core == q->core);
+
+	    return status;
 	}
 	return false;
     }

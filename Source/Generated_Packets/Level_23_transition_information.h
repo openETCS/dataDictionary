@@ -14,19 +14,19 @@ struct Level_23_transition_information : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '('
-	       << +id << ','
-               << +core.L_PACKET << ','
-               << +core.NID_LTRBG << ')';
+        stream << '(' << +id << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
     {
 	if(auto q = dynamic_cast<const Level_23_transition_information*>(&p))
 	{
-	    return
-                (core.L_PACKET == q->core.L_PACKET) &&
-                (core.NID_LTRBG == q->core.NID_LTRBG);
+	    bool status = true;
+
+	    status = status && (id == q->id);
+	    status = status && (core == q->core);
+
+	    return status;
 	}
 	return false;
     }

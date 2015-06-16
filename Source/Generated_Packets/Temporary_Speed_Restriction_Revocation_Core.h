@@ -3,6 +3,7 @@
 #define TEMPORARY_SPEED_RESTRICTION_REVOCATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct Temporary_Speed_Restriction_Revocation_Core
 {
@@ -17,12 +18,25 @@ struct Temporary_Speed_Restriction_Revocation_Core
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const Temporary_Speed_Restriction_Revocation_Core& p)
+{
+    stream 
+       << +p.Q_DIR << ','
+       << +p.L_PACKET << ','
+       << +p.NID_TSR;
+
+    return stream;
+}
+
 inline bool operator==(const Temporary_Speed_Restriction_Revocation_Core& a, const Temporary_Speed_Restriction_Revocation_Core& b)
 {
-    return
-        (a.Q_DIR == b.Q_DIR) &&
-        (a.L_PACKET == b.L_PACKET) &&
-        (a.NID_TSR == b.NID_TSR);
+    bool status = true;
+    
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.NID_TSR == b.NID_TSR);
+
+    return status;
 }
 
 inline bool operator!=(const Temporary_Speed_Restriction_Revocation_Core& a, const Temporary_Speed_Restriction_Revocation_Core& b)

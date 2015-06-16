@@ -3,6 +3,7 @@
 #define TEMPORARY_SPEED_RESTRICTION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct Temporary_Speed_Restriction_Core
 {
@@ -22,17 +23,35 @@ struct Temporary_Speed_Restriction_Core
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const Temporary_Speed_Restriction_Core& p)
+{
+    stream 
+       << +p.Q_DIR << ','
+       << +p.L_PACKET << ','
+       << +p.Q_SCALE << ','
+       << +p.NID_TSR << ','
+       << +p.D_TSR << ','
+       << +p.L_TSR << ','
+       << +p.Q_FRONT << ','
+       << +p.V_TSR;
+
+    return stream;
+}
+
 inline bool operator==(const Temporary_Speed_Restriction_Core& a, const Temporary_Speed_Restriction_Core& b)
 {
-    return
-        (a.Q_DIR == b.Q_DIR) &&
-        (a.L_PACKET == b.L_PACKET) &&
-        (a.Q_SCALE == b.Q_SCALE) &&
-        (a.NID_TSR == b.NID_TSR) &&
-        (a.D_TSR == b.D_TSR) &&
-        (a.L_TSR == b.L_TSR) &&
-        (a.Q_FRONT == b.Q_FRONT) &&
-        (a.V_TSR == b.V_TSR);
+    bool status = true;
+    
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SCALE == b.Q_SCALE);
+    status = status && (a.NID_TSR == b.NID_TSR);
+    status = status && (a.D_TSR == b.D_TSR);
+    status = status && (a.L_TSR == b.L_TSR);
+    status = status && (a.Q_FRONT == b.Q_FRONT);
+    status = status && (a.V_TSR == b.V_TSR);
+
+    return status;
 }
 
 inline bool operator!=(const Temporary_Speed_Restriction_Core& a, const Temporary_Speed_Restriction_Core& b)

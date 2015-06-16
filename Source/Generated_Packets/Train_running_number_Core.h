@@ -3,6 +3,7 @@
 #define TRAIN_RUNNING_NUMBER_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct Train_running_number_Core
 {
@@ -16,11 +17,23 @@ struct Train_running_number_Core
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const Train_running_number_Core& p)
+{
+    stream 
+       << +p.L_PACKET << ','
+       << +p.NID_OPERATIONAL;
+
+    return stream;
+}
+
 inline bool operator==(const Train_running_number_Core& a, const Train_running_number_Core& b)
 {
-    return
-        (a.L_PACKET == b.L_PACKET) &&
-        (a.NID_OPERATIONAL == b.NID_OPERATIONAL);
+    bool status = true;
+    
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.NID_OPERATIONAL == b.NID_OPERATIONAL);
+
+    return status;
 }
 
 inline bool operator!=(const Train_running_number_Core& a, const Train_running_number_Core& b)

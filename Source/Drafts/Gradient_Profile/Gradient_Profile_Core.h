@@ -51,7 +51,8 @@ inline bool operator==(const Gradient_Profile_Core& a, const Gradient_Profile_Co
     status = status && (a.D_GRADIENT == b.D_GRADIENT);
     status = status && (a.Q_GDIR == b.Q_GDIR);
     status = status && (a.G_A == b.G_A);
-    if (a.N_ITER == b.N_ITER) {
+    if (a.N_ITER == b.N_ITER)
+    {
         for (uint32_t i = 0; i < a.N_ITER; ++i)
         {
             status = status && (a.sub_1[i] == b.sub_1[i]);

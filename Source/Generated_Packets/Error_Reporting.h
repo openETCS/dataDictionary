@@ -14,19 +14,19 @@ struct Error_Reporting : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '('
-	       << +id << ','
-               << +core.L_PACKET << ','
-               << +core.M_ERROR << ')';
+        stream << '(' << +id << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
     {
 	if(auto q = dynamic_cast<const Error_Reporting*>(&p))
 	{
-	    return
-                (core.L_PACKET == q->core.L_PACKET) &&
-                (core.M_ERROR == q->core.M_ERROR);
+	    bool status = true;
+
+	    status = status && (id == q->id);
+	    status = status && (core == q->core);
+
+	    return status;
 	}
 	return false;
     }

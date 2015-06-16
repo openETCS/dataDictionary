@@ -14,25 +14,19 @@ struct Track_Condition_Change_of_allowed_current_consumption : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '('
-	       << +id << ','
-               << +core.Q_DIR << ','
-               << +core.L_PACKET << ','
-               << +core.Q_SCALE << ','
-               << +core.D_CURRENT << ','
-               << +core.M_CURRENT << ')';
+        stream << '(' << +id << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
     {
 	if(auto q = dynamic_cast<const Track_Condition_Change_of_allowed_current_consumption*>(&p))
 	{
-	    return
-                (core.Q_DIR == q->core.Q_DIR) &&
-                (core.L_PACKET == q->core.L_PACKET) &&
-                (core.Q_SCALE == q->core.Q_SCALE) &&
-                (core.D_CURRENT == q->core.D_CURRENT) &&
-                (core.M_CURRENT == q->core.M_CURRENT);
+	    bool status = true;
+
+	    status = status && (id == q->id);
+	    status = status && (core == q->core);
+
+	    return status;
 	}
 	return false;
     }

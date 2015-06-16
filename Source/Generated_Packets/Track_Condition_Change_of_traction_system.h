@@ -14,29 +14,19 @@ struct Track_Condition_Change_of_traction_system : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '('
-	       << +id << ','
-               << +core.Q_DIR << ','
-               << +core.L_PACKET << ','
-               << +core.Q_SCALE << ','
-               << +core.D_TRACTION << ','
-               << +core.M_VOLTAGE << ','
-               << +core.NID_CTRACTION << ')';
+        stream << '(' << +id << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
     {
 	if(auto q = dynamic_cast<const Track_Condition_Change_of_traction_system*>(&p))
 	{
-	    return
-                (core.Q_DIR == q->core.Q_DIR) &&
-                (core.L_PACKET == q->core.L_PACKET) &&
-                (core.Q_SCALE == q->core.Q_SCALE) &&
-                (core.D_TRACTION == q->core.D_TRACTION) &&
-                (core.M_VOLTAGE == q->core.M_VOLTAGE) &&
-                (!(core.M_VOLTAGE != 0) || (
-                (core.NID_CTRACTION == q->core.NID_CTRACTION)
-                ));
+	    bool status = true;
+
+	    status = status && (id == q->id);
+	    status = status && (core == q->core);
+
+	    return status;
 	}
 	return false;
     }

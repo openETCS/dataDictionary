@@ -3,6 +3,7 @@
 #define POSITION_REPORT_BASED_ON_TWO_BALISE_GROUPS_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct Position_Report_based_on_two_balise_groups_Core
 {
@@ -35,25 +36,47 @@ struct Position_Report_based_on_two_balise_groups_Core
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const Position_Report_based_on_two_balise_groups_Core& p)
+{
+    stream 
+       << +p.L_PACKET << ','
+       << +p.Q_SCALE << ','
+       << +p.NID_LRBG << ','
+       << +p.NID_PRVLRBG << ','
+       << +p.D_LRBG << ','
+       << +p.Q_DIRLRBG << ','
+       << +p.Q_DLRBG << ','
+       << +p.L_DOUBTOVER << ','
+       << +p.L_DOUBTUNDER << ','
+       << +p.Q_LENGTH << ','
+       << +p.V_TRAIN << ','
+       << +p.Q_DIRTRAIN << ','
+       << +p.M_MODE << ','
+       << +p.M_LEVEL;
+
+    return stream;
+}
+
 inline bool operator==(const Position_Report_based_on_two_balise_groups_Core& a, const Position_Report_based_on_two_balise_groups_Core& b)
 {
-    return
-        (a.L_PACKET == b.L_PACKET) &&
-        (a.Q_SCALE == b.Q_SCALE) &&
-        (a.NID_LRBG == b.NID_LRBG) &&
-        (a.NID_PRVLRBG == b.NID_PRVLRBG) &&
-        (a.D_LRBG == b.D_LRBG) &&
-        (a.Q_DIRLRBG == b.Q_DIRLRBG) &&
-        (a.Q_DLRBG == b.Q_DLRBG) &&
-        (a.L_DOUBTOVER == b.L_DOUBTOVER) &&
-        (a.L_DOUBTUNDER == b.L_DOUBTUNDER) &&
-        (a.Q_LENGTH == b.Q_LENGTH) &&
-        (a.L_TRAININT == b.L_TRAININT) &&
-        (a.V_TRAIN == b.V_TRAIN) &&
-        (a.Q_DIRTRAIN == b.Q_DIRTRAIN) &&
-        (a.M_MODE == b.M_MODE) &&
-        (a.M_LEVEL == b.M_LEVEL) &&
-        (a.NID_NTC == b.NID_NTC);
+    bool status = true;
+    
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SCALE == b.Q_SCALE);
+    status = status && (a.NID_LRBG == b.NID_LRBG);
+    status = status && (a.NID_PRVLRBG == b.NID_PRVLRBG);
+    status = status && (a.D_LRBG == b.D_LRBG);
+    status = status && (a.Q_DIRLRBG == b.Q_DIRLRBG);
+    status = status && (a.Q_DLRBG == b.Q_DLRBG);
+    status = status && (a.L_DOUBTOVER == b.L_DOUBTOVER);
+    status = status && (a.L_DOUBTUNDER == b.L_DOUBTUNDER);
+    status = status && (a.Q_LENGTH == b.Q_LENGTH);
+    status = status && (a.V_TRAIN == b.V_TRAIN);
+    status = status && (a.Q_DIRTRAIN == b.Q_DIRTRAIN);
+    status = status && (a.M_MODE == b.M_MODE);
+    status = status && (a.M_LEVEL == b.M_LEVEL);
+
+    return status;
 }
 
 inline bool operator!=(const Position_Report_based_on_two_balise_groups_Core& a, const Position_Report_based_on_two_balise_groups_Core& b)

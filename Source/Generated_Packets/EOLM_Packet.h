@@ -14,31 +14,19 @@ struct EOLM_Packet : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '('
-	       << +id << ','
-               << +core.Q_DIR << ','
-               << +core.L_PACKET << ','
-               << +core.Q_SCALE << ','
-               << +core.NID_LOOP << ','
-               << +core.D_LOOP << ','
-               << +core.L_LOOP << ','
-               << +core.Q_LOOPDIR << ','
-               << +core.Q_SSCODE << ')';
+        stream << '(' << +id << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
     {
 	if(auto q = dynamic_cast<const EOLM_Packet*>(&p))
 	{
-	    return
-                (core.Q_DIR == q->core.Q_DIR) &&
-                (core.L_PACKET == q->core.L_PACKET) &&
-                (core.Q_SCALE == q->core.Q_SCALE) &&
-                (core.NID_LOOP == q->core.NID_LOOP) &&
-                (core.D_LOOP == q->core.D_LOOP) &&
-                (core.L_LOOP == q->core.L_LOOP) &&
-                (core.Q_LOOPDIR == q->core.Q_LOOPDIR) &&
-                (core.Q_SSCODE == q->core.Q_SSCODE);
+	    bool status = true;
+
+	    status = status && (id == q->id);
+	    status = status && (core == q->core);
+
+	    return status;
 	}
 	return false;
     }

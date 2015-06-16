@@ -18,7 +18,7 @@ void assert_equal(const Packet& packet, BasePacketPtr ptr)
 
 int main ()
 {
-
+    std::cout << "--- Testing the decode function of Eurobalise Telegram with conditional packets." << std::endl;
     std::vector<uint8_t> raw_stream(1000);
     Bitstream stream;
     Bitstream_Init(&stream, &(raw_stream[0]), raw_stream.size(), 73);
@@ -27,13 +27,16 @@ int main ()
 
     // Telegram_Header header = create_Telegram_Header_TrainToTrack();
     Telegram_Header header = create_Telegram_Header_TrackToTrain();
+    std::cout << " Encoding Telegram Header: " << header << std::endl;
     Telegram_Header_Encoder(&stream, &header);
 
+    std::cout << " Encoding data packets:" << std::endl;
 /*
     Train_running_number a = create_Train_running_number();
     {
         Packet_Header h {a.id};
         Packet_Header_Encoder(&stream, &h);
+	std::cout << "    Encoding packet " << a << std::endl;
         Train_running_number_Encoder(&stream, &a.core);
     }
 
@@ -41,6 +44,7 @@ int main ()
     {
         Packet_Header h {b.id};
         Packet_Header_Encoder(&stream, &h);
+	std::cout << "    Encoding packet " << b << std::endl;
         Error_Reporting_Encoder(&stream, &b.core);
     }
 */
@@ -49,6 +53,7 @@ int main ()
     {
         Packet_Header h {a.id};
 	Packet_Header_Encoder(&stream, &h);
+	std::cout << "    Encoding packet " << a << std::endl;
 	Temporary_Speed_Restriction_Encoder(&stream, &a.core);
     }
 
@@ -56,6 +61,7 @@ int main ()
     {
         Packet_Header h {b.id};
 	Packet_Header_Encoder(&stream, &h);
+	std::cout << "    Encoding packet " << b << std::endl;
 	Adhesion_Factor_Encoder(&stream, &b.core);
     }
 
@@ -63,6 +69,7 @@ int main ()
     {
         Packet_Header h {c.id};
 	Packet_Header_Encoder(&stream, &h);
+	std::cout << "    Encoding packet " << c << std::endl;
 	Infill_location_reference_Encoder(&stream, &c.core);
     }
 
@@ -70,6 +77,7 @@ int main ()
     {
         Packet_Header h {d.id};
 	Packet_Header_Encoder(&stream, &h);
+	std::cout << "    Encoding packet " << d << std::endl;
 	Infill_location_reference_Encoder(&stream, &d.core);
     }
 
@@ -77,6 +85,7 @@ int main ()
     {
         Packet_Header h {e.id};
         Packet_Header_Encoder(&stream, &h);
+	std::cout << "    Encoding packet " << e << std::endl;
         End_of_Information_Encoder(&stream, &e.core);
     }
 
@@ -84,7 +93,10 @@ int main ()
 
     Eurobalise_Telegram telegram;
 
+    std::cout << " Decoding Eurobalise Telegram." << std::endl;
     telegram.decode(stream);
+
+    std::cout << " Decoder Output: " << telegram << std::endl;
 
     assert(telegram.header == header);
 
@@ -92,7 +104,7 @@ int main ()
     assert_equal(b, telegram.packets[1]);
     assert_equal(c, telegram.packets[2]);
 
-    std::cout << "successful conditional decoder test" << std::endl;
+    std::cout << " Test successfull.\n" << std::endl;
 
     return EXIT_SUCCESS;
 }

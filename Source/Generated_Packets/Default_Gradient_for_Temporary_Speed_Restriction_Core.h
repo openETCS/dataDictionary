@@ -3,6 +3,7 @@
 #define DEFAULT_GRADIENT_FOR_TEMPORARY_SPEED_RESTRICTION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct Default_Gradient_for_Temporary_Speed_Restriction_Core
 {
@@ -19,13 +20,27 @@ struct Default_Gradient_for_Temporary_Speed_Restriction_Core
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const Default_Gradient_for_Temporary_Speed_Restriction_Core& p)
+{
+    stream 
+       << +p.Q_DIR << ','
+       << +p.L_PACKET << ','
+       << +p.Q_GDIR << ','
+       << +p.G_TSR;
+
+    return stream;
+}
+
 inline bool operator==(const Default_Gradient_for_Temporary_Speed_Restriction_Core& a, const Default_Gradient_for_Temporary_Speed_Restriction_Core& b)
 {
-    return
-        (a.Q_DIR == b.Q_DIR) &&
-        (a.L_PACKET == b.L_PACKET) &&
-        (a.Q_GDIR == b.Q_GDIR) &&
-        (a.G_TSR == b.G_TSR);
+    bool status = true;
+    
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_GDIR == b.Q_GDIR);
+    status = status && (a.G_TSR == b.G_TSR);
+
+    return status;
 }
 
 inline bool operator!=(const Default_Gradient_for_Temporary_Speed_Restriction_Core& a, const Default_Gradient_for_Temporary_Speed_Restriction_Core& b)

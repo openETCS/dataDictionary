@@ -14,21 +14,19 @@ struct Data_used_by_applications_outside_the_ERTMS_or_ETCS_system : public BaseP
 
     void print(std::ostream& stream) const override
     {
-        stream << '('
-	       << +id << ','
-               << +core.L_PACKET << ','
-               << +core.NID_XUSER << ','
-               << +core.Other_data_depending_on__NID_XUSER << ')';
+        stream << '(' << +id << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
     {
 	if(auto q = dynamic_cast<const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system*>(&p))
 	{
-	    return
-                (core.L_PACKET == q->core.L_PACKET) &&
-                (core.NID_XUSER == q->core.NID_XUSER) &&
-                (core.Other_data_depending_on__NID_XUSER == q->core.Other_data_depending_on__NID_XUSER);
+	    bool status = true;
+
+	    status = status && (id == q->id);
+	    status = status && (core == q->core);
+
+	    return status;
 	}
 	return false;
     }

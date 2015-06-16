@@ -3,6 +3,7 @@
 #define TRACK_CONDITION_CHANGE_OF_TRACTION_SYSTEM_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct Track_Condition_Change_of_traction_system_Core
 {
@@ -20,15 +21,29 @@ struct Track_Condition_Change_of_traction_system_Core
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Change_of_traction_system_Core& p)
+{
+    stream 
+       << +p.Q_DIR << ','
+       << +p.L_PACKET << ','
+       << +p.Q_SCALE << ','
+       << +p.D_TRACTION << ','
+       << +p.M_VOLTAGE;
+
+    return stream;
+}
+
 inline bool operator==(const Track_Condition_Change_of_traction_system_Core& a, const Track_Condition_Change_of_traction_system_Core& b)
 {
-    return
-        (a.Q_DIR == b.Q_DIR) &&
-        (a.L_PACKET == b.L_PACKET) &&
-        (a.Q_SCALE == b.Q_SCALE) &&
-        (a.D_TRACTION == b.D_TRACTION) &&
-        (a.M_VOLTAGE == b.M_VOLTAGE) &&
-        (a.NID_CTRACTION == b.NID_CTRACTION);
+    bool status = true;
+    
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SCALE == b.Q_SCALE);
+    status = status && (a.D_TRACTION == b.D_TRACTION);
+    status = status && (a.M_VOLTAGE == b.M_VOLTAGE);
+
+    return status;
 }
 
 inline bool operator!=(const Track_Condition_Change_of_traction_system_Core& a, const Track_Condition_Change_of_traction_system_Core& b)

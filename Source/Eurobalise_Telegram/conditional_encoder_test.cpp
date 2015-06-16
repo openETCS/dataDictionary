@@ -10,6 +10,7 @@
 
 int main ()
 {
+    std::cout << "--- Testing the encode and decode functions of Eurobalise Telegram consecutively with conditional packets." << std::endl;
     // declare a telegram
     Eurobalise_Telegram telegram;
 
@@ -30,7 +31,7 @@ int main ()
     // add end of information package to packet sequence
     telegram.add(std::make_shared<End_of_Information>());
 
-    std::cout << telegram << std::endl;
+    std::cout << " Encoder Input: " << telegram << std::endl;
 
     // declare and initialize the stream
     std::vector<uint8_t> raw_stream(1000);
@@ -41,6 +42,7 @@ int main ()
     uint32_t init_pos = stream.bitpos;
 
     // *** encode the telegram to the stream ***
+    std::cout << " Encoding Eurobalise Telegram." << std::endl;
     telegram.encode(stream);
 
     // reset to the old bitpos
@@ -50,12 +52,13 @@ int main ()
     Eurobalise_Telegram telegram_new;
 
     // *** decode from the stream to the new telegram ***
+    std::cout << " Decoding Eurobalise Telegram." << std::endl;
     telegram_new.decode(stream);
 
-    std::cout << telegram_new << std::endl;
+    std::cout << " Decoder Ouput: " << telegram_new << std::endl;
     assert(telegram_new == telegram);
 
-    std::cout << "successful conditional encoder test" << std::endl;
+    std::cout << " Test successfull.\n" << std::endl;
 
     return EXIT_SUCCESS;
 }

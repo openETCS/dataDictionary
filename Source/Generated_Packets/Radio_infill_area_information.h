@@ -14,33 +14,19 @@ struct Radio_infill_area_information : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '('
-	       << +id << ','
-               << +core.Q_DIR << ','
-               << +core.L_PACKET << ','
-               << +core.Q_SCALE << ','
-               << +core.Q_RIU << ','
-               << +core.NID_C << ','
-               << +core.NID_RIU << ','
-               << +core.NID_RADIO << ','
-               << +core.D_INFILL << ','
-               << +core.NID_BG << ')';
+        stream << '(' << +id << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
     {
 	if(auto q = dynamic_cast<const Radio_infill_area_information*>(&p))
 	{
-	    return
-                (core.Q_DIR == q->core.Q_DIR) &&
-                (core.L_PACKET == q->core.L_PACKET) &&
-                (core.Q_SCALE == q->core.Q_SCALE) &&
-                (core.Q_RIU == q->core.Q_RIU) &&
-                (core.NID_C == q->core.NID_C) &&
-                (core.NID_RIU == q->core.NID_RIU) &&
-                (core.NID_RADIO == q->core.NID_RADIO) &&
-                (core.D_INFILL == q->core.D_INFILL) &&
-                (core.NID_BG == q->core.NID_BG);
+	    bool status = true;
+
+	    status = status && (id == q->id);
+	    status = status && (core == q->core);
+
+	    return status;
 	}
 	return false;
     }

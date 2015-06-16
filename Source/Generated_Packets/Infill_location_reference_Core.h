@@ -3,6 +3,7 @@
 #define INFILL_LOCATION_REFERENCE_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct Infill_location_reference_Core
 {
@@ -20,14 +21,27 @@ struct Infill_location_reference_Core
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const Infill_location_reference_Core& p)
+{
+    stream 
+       << +p.Q_DIR << ','
+       << +p.L_PACKET << ','
+       << +p.Q_NEWCOUNTRY << ','
+       << +p.NID_BG;
+
+    return stream;
+}
+
 inline bool operator==(const Infill_location_reference_Core& a, const Infill_location_reference_Core& b)
 {
-    return
-        (a.Q_DIR == b.Q_DIR) &&
-        (a.L_PACKET == b.L_PACKET) &&
-        (a.Q_NEWCOUNTRY == b.Q_NEWCOUNTRY) &&
-        (a.NID_C == b.NID_C) &&
-        (a.NID_BG == b.NID_BG);
+    bool status = true;
+    
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_NEWCOUNTRY == b.Q_NEWCOUNTRY);
+    status = status && (a.NID_BG == b.NID_BG);
+
+    return status;
 }
 
 inline bool operator!=(const Infill_location_reference_Core& a, const Infill_location_reference_Core& b)

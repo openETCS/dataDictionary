@@ -14,65 +14,19 @@ struct Packet_for_sending_fixed_text_messages : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '('
-	       << +id << ','
-               << +core.Q_DIR << ','
-               << +core.L_PACKET << ','
-               << +core.Q_SCALE << ','
-               << +core.Q_TEXTCLASS << ','
-               << +core.Q_TEXTDISPLAY << ','
-               << +core.D_TEXTDISPLAY << ','
-               << +core.M_MODETEXTDISPLAY0 << ','
-               << +core.M_LEVELTEXTDISPLAY0 << ','
-               << +core.NID_NTC0 << ','
-               << +core.L_TEXTDISPLAY << ','
-               << +core.T_TEXTDISPLAY << ','
-               << +core.M_MODETEXTDISPLAY1 << ','
-               << +core.M_LEVELTEXTDISPLAY1 << ','
-               << +core.NID_NTC1 << ','
-               << +core.Q_TEXTCONFIRM << ','
-               << +core.Q_CONFTEXTDISPLAY << ','
-               << +core.Q_TEXTREPORT << ','
-               << +core.NID_TEXTMESSAGE << ','
-               << +core.NID_C << ','
-               << +core.NID_RBC << ','
-               << +core.Q_TEXT << ')';
+        stream << '(' << +id << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
     {
 	if(auto q = dynamic_cast<const Packet_for_sending_fixed_text_messages*>(&p))
 	{
-	    return
-                (core.Q_DIR == q->core.Q_DIR) &&
-                (core.L_PACKET == q->core.L_PACKET) &&
-                (core.Q_SCALE == q->core.Q_SCALE) &&
-                (core.Q_TEXTCLASS == q->core.Q_TEXTCLASS) &&
-                (core.Q_TEXTDISPLAY == q->core.Q_TEXTDISPLAY) &&
-                (core.D_TEXTDISPLAY == q->core.D_TEXTDISPLAY) &&
-                (core.M_MODETEXTDISPLAY0 == q->core.M_MODETEXTDISPLAY0) &&
-                (core.M_LEVELTEXTDISPLAY0 == q->core.M_LEVELTEXTDISPLAY0) &&
-                (!(core.M_LEVELTEXTDISPLAY0 == 1) || (
-                (core.NID_NTC0 == q->core.NID_NTC0)
-                )) &&
-                (core.L_TEXTDISPLAY == q->core.L_TEXTDISPLAY) &&
-                (core.T_TEXTDISPLAY == q->core.T_TEXTDISPLAY) &&
-                (core.M_MODETEXTDISPLAY1 == q->core.M_MODETEXTDISPLAY1) &&
-                (core.M_LEVELTEXTDISPLAY1 == q->core.M_LEVELTEXTDISPLAY1) &&
-                (!(core.M_LEVELTEXTDISPLAY1 == 1) || (
-                (core.NID_NTC1 == q->core.NID_NTC1)
-                )) &&
-                (core.Q_TEXTCONFIRM == q->core.Q_TEXTCONFIRM) &&
-                (!(core.Q_TEXTCONFIRM != 0) || (
-                (core.Q_CONFTEXTDISPLAY == q->core.Q_CONFTEXTDISPLAY) &&
-                (core.Q_TEXTREPORT == q->core.Q_TEXTREPORT)
-                )) &&
-                (!(core.Q_TEXTREPORT == 1) || (
-                (core.NID_TEXTMESSAGE == q->core.NID_TEXTMESSAGE) &&
-                (core.NID_C == q->core.NID_C) &&
-                (core.NID_RBC == q->core.NID_RBC)
-                )) &&
-                (core.Q_TEXT == q->core.Q_TEXT);
+	    bool status = true;
+
+	    status = status && (id == q->id);
+	    status = status && (core == q->core);
+
+	    return status;
 	}
 	return false;
     }

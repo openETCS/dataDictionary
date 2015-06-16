@@ -3,6 +3,7 @@
 #define DATA_USED_BY_APPLICATIONS_OUTSIDE_THE_ERTMS_OR_ETCS_SYSTEM_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core
 {
@@ -18,12 +19,25 @@ struct Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& p)
+{
+    stream 
+       << +p.L_PACKET << ','
+       << +p.NID_XUSER << ','
+       << +p.Other_data_depending_on__NID_XUSER;
+
+    return stream;
+}
+
 inline bool operator==(const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& a, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& b)
 {
-    return
-        (a.L_PACKET == b.L_PACKET) &&
-        (a.NID_XUSER == b.NID_XUSER) &&
-        (a.Other_data_depending_on__NID_XUSER == b.Other_data_depending_on__NID_XUSER);
+    bool status = true;
+    
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.NID_XUSER == b.NID_XUSER);
+    status = status && (a.Other_data_depending_on__NID_XUSER == b.Other_data_depending_on__NID_XUSER);
+
+    return status;
 }
 
 inline bool operator!=(const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& a, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& b)

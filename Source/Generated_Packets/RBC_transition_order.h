@@ -14,31 +14,19 @@ struct RBC_transition_order : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '('
-	       << +id << ','
-               << +core.Q_DIR << ','
-               << +core.L_PACKET << ','
-               << +core.Q_SCALE << ','
-               << +core.D_RBCTR << ','
-               << +core.NID_C << ','
-               << +core.NID_RBC << ','
-               << +core.NID_RADIO << ','
-               << +core.Q_SLEEPSESSION << ')';
+        stream << '(' << +id << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
     {
 	if(auto q = dynamic_cast<const RBC_transition_order*>(&p))
 	{
-	    return
-                (core.Q_DIR == q->core.Q_DIR) &&
-                (core.L_PACKET == q->core.L_PACKET) &&
-                (core.Q_SCALE == q->core.Q_SCALE) &&
-                (core.D_RBCTR == q->core.D_RBCTR) &&
-                (core.NID_C == q->core.NID_C) &&
-                (core.NID_RBC == q->core.NID_RBC) &&
-                (core.NID_RADIO == q->core.NID_RADIO) &&
-                (core.Q_SLEEPSESSION == q->core.Q_SLEEPSESSION);
+	    bool status = true;
+
+	    status = status && (id == q->id);
+	    status = status && (core == q->core);
+
+	    return status;
 	}
 	return false;
     }

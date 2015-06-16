@@ -14,17 +14,19 @@ struct Virtual_Balise_Cover_marker : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '('
-	       << +id << ','
-               << +core.NID_VBCMK << ')';
+        stream << '(' << +id << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
     {
 	if(auto q = dynamic_cast<const Virtual_Balise_Cover_marker*>(&p))
 	{
-	    return
-                (core.NID_VBCMK == q->core.NID_VBCMK);
+	    bool status = true;
+
+	    status = status && (id == q->id);
+	    status = status && (core == q->core);
+
+	    return status;
 	}
 	return false;
     }
