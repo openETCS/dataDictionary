@@ -1,6 +1,6 @@
 
 #include "Gradient_Profile_Decoder.h"
-#include "Gradient_Profile_1_Decoder.h"
+#include "Gradient_Profile_Core_1_Decoder.h"
 #include "Bitstream_Read.h"
 
 int Gradient_Profile_Decoder(Bitstream* stream, Gradient_Profile_Core* p)
@@ -71,15 +71,15 @@ int Gradient_Profile_Decoder(Bitstream* stream, Gradient_Profile_Core* p)
 	
 	/*@
 	  requires N_ITER:        stream->bitpos == pos + 41;
-	  assigns              stream->bitpos;
-	  assigns              p->N_ITER;
+	  assigns                 stream->bitpos;
+	  assigns                 p->N_ITER;
 	  ensures  N_ITER:        stream->bitpos == pos + 46;
 	  ensures  N_ITER:        EqualBits(stream, pos + 41, pos + 46, p->N_ITER);
 	  ensures  N_ITER:        UpperBitsNotSet(p->N_ITER, 5);
 	*/
 	{ p->N_ITER		= Bitstream_Read(stream, 5); }
 
-	{ Gradient_Profile_1_Decoder(stream, p->GRADIENT_PROFILE_1, p->N_ITER); }
+	{ Gradient_Profile_Core_1_Decoder(stream, p->sub_1, p->N_ITER); }
 
         //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
         //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);

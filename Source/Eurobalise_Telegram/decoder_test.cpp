@@ -44,6 +44,7 @@ int main ()
     }
     
 /*
+
     Temporary_Speed_Restriction a = create_Temporary_Speed_Restriction();
     {
         Packet_Header h {a.id};
@@ -57,7 +58,8 @@ int main ()
 	Packet_Header_Encoder(&stream, &h);
 	Adhesion_Factor_Encoder(&stream, &b.core);
     }
-*/   
+
+*/
 
     End_of_Information c;
     {

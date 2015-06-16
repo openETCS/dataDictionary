@@ -15,6 +15,7 @@ Temporary_Speed_Restriction create_Temporary_Speed_Restriction();
 Adhesion_Factor create_Adhesion_Factor();
 Infill_location_reference create_Infill_location_reference(int i);
 Gradient_Profile create_Gradient_Profile();
+Gradient_Profile_Core_1 create_Gradient_Profile_Core_1(uint16_t i, uint32_t j, uint8_t k);
 
 #endif /* CREATE_H_INCLUDED */
 

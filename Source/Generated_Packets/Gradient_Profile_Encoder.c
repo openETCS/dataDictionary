@@ -1,7 +1,7 @@
 
 #include "Gradient_Profile_Encoder.h"
 #include "Gradient_Profile_UpperBitsNotSet.h"
-#include "Gradient_Profile_1_Encoder.h"
+#include "Gradient_Profile_Core_1_Encoder.h"
 #include "Bitstream_Write.h"
 
 int Gradient_Profile_Encoder(Bitstream* stream, const Gradient_Profile_Core* p)
@@ -19,7 +19,7 @@ int Gradient_Profile_Encoder(Bitstream* stream, const Gradient_Profile_Core* p)
             Bitstream_Write(stream, 1,  p->Q_GDIR);
             Bitstream_Write(stream, 8,  p->G_A);
 	    Bitstream_Write(stream, 5,  p->N_ITER);
-	    Gradient_Profile_1_Encoder(stream, p->GRADIENT_PROFILE_1, p->N_ITER);
+	    Gradient_Profile_Core_1_Encoder(stream, p->sub_1, p->N_ITER);
 
 
             //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);

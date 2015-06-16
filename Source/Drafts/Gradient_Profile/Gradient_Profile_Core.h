@@ -3,7 +3,7 @@
 #define GRADIENT_PROFILE_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include "Gradient_Profile_1.h"
+#include "Gradient_Profile_Core_1.h"
 
 struct Gradient_Profile_Core
 {
@@ -19,22 +19,50 @@ struct Gradient_Profile_Core
     uint32_t  Q_GDIR;           // # 1
     uint8_t   G_A;              // # 8
     uint8_t   N_ITER;		// # 5
-    Gradient_Profile_1 GRADIENT_PROFILE_1[31];
+    Gradient_Profile_Core_1 sub_1[31];
 };
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const Gradient_Profile_Core& p)
+{
+    stream << +p.Q_DIR << ','
+	   << +p.L_PACKET << ','
+	   << +p.Q_SCALE << ','
+           << +p.D_GRADIENT << ','
+           << +p.Q_GDIR << ','
+	   << +p.G_A << ','
+	   << +p.N_ITER;
+    for (uint32_t i = 0; i < p.N_ITER; ++i)
+    {
+        stream << ',' << p.sub_1[i];
+    }
+
+    return stream;
+}
+
 inline bool operator==(const Gradient_Profile_Core& a, const Gradient_Profile_Core& b)
 {
-    return
-        (a.Q_DIR == b.Q_DIR) &&
-        (a.L_PACKET == b.L_PACKET) &&
-        (a.Q_SCALE == b.Q_SCALE) &&
-        (a.D_GRADIENT == b.D_GRADIENT) &&
-	(a.Q_GDIR == b.Q_GDIR) &&
-	(a.G_A == b.G_A) &&
-        (a.N_ITER == b.N_ITER) &&
-        (a.GRADIENT_PROFILE_1 == b.GRADIENT_PROFILE_1);
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SCALE == b.Q_SCALE);
+    status = status && (a.D_GRADIENT == b.D_GRADIENT);
+    status = status && (a.Q_GDIR == b.Q_GDIR);
+    status = status && (a.G_A == b.G_A);
+    if (a.N_ITER == b.N_ITER) {
+        for (uint32_t i = 0; i < a.N_ITER; ++i)
+        {
+            status = status && (a.sub_1[i] == b.sub_1[i]);
+        }
+    }
+    else
+    {
+        status = false;
+    }
+
+    return status;
 }
 
 inline bool operator!=(const Gradient_Profile_Core& a, const Gradient_Profile_Core& b)
