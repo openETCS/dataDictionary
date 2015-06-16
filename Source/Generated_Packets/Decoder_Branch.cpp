@@ -292,7 +292,6 @@ BasePacketPtr Decoder_Branch_TrackToTrain(Bitstream& stream, Packet_Header heade
 
         case 21 :
         {
-            /*  Not implemented
 
                 auto ret = std::make_shared<Gradient_Profile>();
 
@@ -304,7 +303,6 @@ BasePacketPtr Decoder_Branch_TrackToTrain(Bitstream& stream, Packet_Header heade
                 {
                     return BasePacketPtr();
                 }
-            */
             return BasePacketPtr();
         }
         case 27 :

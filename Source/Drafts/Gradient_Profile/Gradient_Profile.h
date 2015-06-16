@@ -22,13 +22,35 @@ struct Gradient_Profile : public BasePacket
                << +core.D_GRADIENT << ','
                << +core.Q_GDIR << ','
                << +core.G_A << ','
-               << +core.N_ITER << ')';
+               << +core.N_ITER;
+	for (uint32_t i = 0; i < core.N_ITER; ++i)
+	{
+            stream << &core.GRADIENT_PROFILE_1[i];
+	}
+	stream << ')';
     }
 
     bool equals(const BasePacket& p) const override
     {
 	if(auto q = dynamic_cast<const Gradient_Profile*>(&p))
 	{
+	    bool status = true;
+
+	    (core.Q_DIR == q->core.Q_DIR)? status = status : status = false;
+	    (core.L_PACKET == q->core.L_PACKET)? status = status : status = false;
+	    (core.Q_SCALE == q->core.Q_SCALE)? status = status : status = false;
+	    (core.D_GRADIENT == q->core.D_GRADIENT)? status = status : status = false;
+	    (core.Q_GDIR == q->core.Q_GDIR)? status = status : status = false;
+	    (core.G_A == q->core.G_A)? status = status : status = false;
+	    (core.N_ITER == q->core.N_ITER)? status = status : status = false;
+	    for (uint32_t i = 0; i < core.N_ITER; ++i)
+	    {
+	        (core.GRADIENT_PROFILE_1[i] == q->core.GRADIENT_PROFILE_1[i])? status = status : status = false;
+	    }
+
+	    return status;
+
+	    /*
 	    return
                 (core.Q_DIR == q->core.Q_DIR) &&
                 (core.L_PACKET == q->core.L_PACKET) &&
@@ -37,6 +59,7 @@ struct Gradient_Profile : public BasePacket
                 (core.Q_GDIR == q->core.Q_GDIR) &&
                 (core.G_A == q->core.G_A) &&
 		(core.N_ITER == q->core.N_ITER);
+            */
 	}
 	return false;
     }

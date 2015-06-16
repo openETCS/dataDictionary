@@ -3,12 +3,21 @@
 #define GRADIENT_PROFILE_1_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct Gradient_Profile_1
 {
     uint16_t  D_GRADIENT;       // # 15
     uint32_t  Q_GDIR;           // # 1
     uint8_t   G_A;              // # 8
+
+    void print(std::ostream& stream)
+    {
+        stream << '['
+               << +D_GRADIENT << ','
+               << +Q_GDIR << ','
+               << +G_A << ']';
+    }
 };
 
 #ifdef __cplusplus

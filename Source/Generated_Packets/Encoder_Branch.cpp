@@ -229,14 +229,12 @@ bool Encoder_Branch_TrackToTrain(Bitstream& stream, BasePacketPtr packet)
         case 21 :
         {
 
-            /*  Not implemented
 
                 auto ptr = std::dynamic_pointer_cast<Gradient_Profile>(packet);
                 assert(ptr);
 
                 return Gradient_Profile_Encoder(&stream, &(ptr->core)) == 1;
 
-            */
 
             return false;
         }

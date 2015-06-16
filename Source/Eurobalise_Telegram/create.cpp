@@ -113,3 +113,18 @@ Infill_location_reference create_Infill_location_reference(int i)
 
     return a;
 }
+
+Gradient_Profile create_Gradient_Profile()
+{
+    Gradient_Profile a;
+    {
+        a.core.Q_DIR = 1;
+	a.core.L_PACKET = 48;
+	a.core.Q_SCALE = 1;
+	a.core.D_GRADIENT = 123;
+	a.core.NID_BG = 258;
+    }
+
+    return a;
+}
+
