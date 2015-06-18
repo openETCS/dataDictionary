@@ -3,6 +3,7 @@
 #define RADIO_NETWORK_REGISTRATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct Radio_Network_registration_Core
 {
@@ -18,12 +19,25 @@ struct Radio_Network_registration_Core
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const Radio_Network_registration_Core& p)
+{
+    stream 
+       << +p.Q_DIR << ','
+       << +p.L_PACKET << ','
+       << +p.NID_MN;
+
+    return stream;
+}
+
 inline bool operator==(const Radio_Network_registration_Core& a, const Radio_Network_registration_Core& b)
 {
-    return
-        (a.Q_DIR == b.Q_DIR) &&
-        (a.L_PACKET == b.L_PACKET) &&
-        (a.NID_MN == b.NID_MN);
+    bool status = true;
+    
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.NID_MN == b.NID_MN);
+
+    return status;
 }
 
 inline bool operator!=(const Radio_Network_registration_Core& a, const Radio_Network_registration_Core& b)

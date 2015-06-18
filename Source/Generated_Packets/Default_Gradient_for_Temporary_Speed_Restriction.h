@@ -14,23 +14,19 @@ struct Default_Gradient_for_Temporary_Speed_Restriction : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '('
-	       << uint64_t(id) << ','
-               << core.Q_DIR << ','
-               << core.L_PACKET << ','
-               << core.Q_GDIR << ','
-               << core.G_TSR << ')';
+        stream << '(' << +id << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
     {
 	if(auto q = dynamic_cast<const Default_Gradient_for_Temporary_Speed_Restriction*>(&p))
 	{
-	    return
-                (core.Q_DIR == q->core.Q_DIR) &&
-                (core.L_PACKET == q->core.L_PACKET) &&
-                (core.Q_GDIR == q->core.Q_GDIR) &&
-                (core.G_TSR == q->core.G_TSR);
+	    bool status = true;
+
+	    status = status && (id == q->id);
+	    status = status && (core == q->core);
+
+	    return status;
 	}
 	return false;
     }

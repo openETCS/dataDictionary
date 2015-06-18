@@ -3,6 +3,7 @@
 #define LEVEL_23_TRANSITION_INFORMATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct Level_23_transition_information_Core
 {
@@ -16,11 +17,23 @@ struct Level_23_transition_information_Core
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const Level_23_transition_information_Core& p)
+{
+    stream 
+       << +p.L_PACKET << ','
+       << +p.NID_LTRBG;
+
+    return stream;
+}
+
 inline bool operator==(const Level_23_transition_information_Core& a, const Level_23_transition_information_Core& b)
 {
-    return
-        (a.L_PACKET == b.L_PACKET) &&
-        (a.NID_LTRBG == b.NID_LTRBG);
+    bool status = true;
+    
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.NID_LTRBG == b.NID_LTRBG);
+
+    return status;
 }
 
 inline bool operator!=(const Level_23_transition_information_Core& a, const Level_23_transition_information_Core& b)

@@ -3,6 +3,7 @@
 #define RADIO_INFILL_AREA_INFORMATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct Radio_infill_area_information_Core
 {
@@ -22,18 +23,37 @@ struct Radio_infill_area_information_Core
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const Radio_infill_area_information_Core& p)
+{
+    stream 
+       << +p.Q_DIR << ','
+       << +p.L_PACKET << ','
+       << +p.Q_SCALE << ','
+       << +p.Q_RIU << ','
+       << +p.NID_C << ','
+       << +p.NID_RIU << ','
+       << +p.NID_RADIO << ','
+       << +p.D_INFILL << ','
+       << +p.NID_BG;
+
+    return stream;
+}
+
 inline bool operator==(const Radio_infill_area_information_Core& a, const Radio_infill_area_information_Core& b)
 {
-    return
-        (a.Q_DIR == b.Q_DIR) &&
-        (a.L_PACKET == b.L_PACKET) &&
-        (a.Q_SCALE == b.Q_SCALE) &&
-        (a.Q_RIU == b.Q_RIU) &&
-        (a.NID_C == b.NID_C) &&
-        (a.NID_RIU == b.NID_RIU) &&
-        (a.NID_RADIO == b.NID_RADIO) &&
-        (a.D_INFILL == b.D_INFILL) &&
-        (a.NID_BG == b.NID_BG);
+    bool status = true;
+    
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SCALE == b.Q_SCALE);
+    status = status && (a.Q_RIU == b.Q_RIU);
+    status = status && (a.NID_C == b.NID_C);
+    status = status && (a.NID_RIU == b.NID_RIU);
+    status = status && (a.NID_RADIO == b.NID_RADIO);
+    status = status && (a.D_INFILL == b.D_INFILL);
+    status = status && (a.NID_BG == b.NID_BG);
+
+    return status;
 }
 
 inline bool operator!=(const Radio_infill_area_information_Core& a, const Radio_infill_area_information_Core& b)

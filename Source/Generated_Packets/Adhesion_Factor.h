@@ -14,27 +14,19 @@ struct Adhesion_Factor : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '('
-	       << uint64_t(id) << ','
-               << core.Q_DIR << ','
-               << core.L_PACKET << ','
-               << core.Q_SCALE << ','
-               << core.D_ADHESION << ','
-               << core.L_ADHESION << ','
-               << core.M_ADHESION << ')';
+        stream << '(' << +id << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
     {
 	if(auto q = dynamic_cast<const Adhesion_Factor*>(&p))
 	{
-	    return
-                (core.Q_DIR == q->core.Q_DIR) &&
-                (core.L_PACKET == q->core.L_PACKET) &&
-                (core.Q_SCALE == q->core.Q_SCALE) &&
-                (core.D_ADHESION == q->core.D_ADHESION) &&
-                (core.L_ADHESION == q->core.L_ADHESION) &&
-                (core.M_ADHESION == q->core.M_ADHESION);
+	    bool status = true;
+
+	    status = status && (id == q->id);
+	    status = status && (core == q->core);
+
+	    return status;
 	}
 	return false;
     }

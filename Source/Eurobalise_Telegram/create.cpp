@@ -100,3 +100,49 @@ Adhesion_Factor create_Adhesion_Factor()
     return a;
 }
 
+Infill_location_reference create_Infill_location_reference(int i)
+{
+    Infill_location_reference a;
+    {
+        a.core.Q_DIR = 1;
+	a.core.L_PACKET = 48;
+	a.core.Q_NEWCOUNTRY = i;
+	a.core.NID_C = 123;
+	a.core.NID_BG = 258;
+    }
+
+    return a;
+}
+
+Gradient_Profile_Core_1 create_Gradient_Profile_Core_1(uint16_t i, uint32_t j, uint8_t k)
+{
+    Gradient_Profile_Core_1 a;
+    {
+      a.D_GRADIENT = i;
+      a.Q_GDIR = j;
+      a.G_A = k;
+    }
+
+    return a;
+}
+
+Gradient_Profile create_Gradient_Profile()
+{
+    Gradient_Profile a;
+    {
+        a.core.Q_DIR = 1;
+	a.core.L_PACKET = 48;
+	a.core.Q_SCALE = 1;
+	a.core.D_GRADIENT = 123;
+	a.core.Q_GDIR = 0;
+	a.core.G_A = 4;
+	a.core.N_ITER = 4;
+	a.core.sub_1[0] = create_Gradient_Profile_Core_1(328, 1, 36);
+	a.core.sub_1[1] = create_Gradient_Profile_Core_1(65, 0, 89);
+	a.core.sub_1[2] = create_Gradient_Profile_Core_1(19, 0, 129);
+	a.core.sub_1[3] = create_Gradient_Profile_Core_1(889, 1, 201);
+    }
+
+    return a;
+}
+

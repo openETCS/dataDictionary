@@ -3,6 +3,7 @@
 #define REPOSITIONING_INFORMATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct Repositioning_Information_Core
 {
@@ -18,13 +19,27 @@ struct Repositioning_Information_Core
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const Repositioning_Information_Core& p)
+{
+    stream 
+       << +p.Q_DIR << ','
+       << +p.L_PACKET << ','
+       << +p.Q_SCALE << ','
+       << +p.L_SECTION;
+
+    return stream;
+}
+
 inline bool operator==(const Repositioning_Information_Core& a, const Repositioning_Information_Core& b)
 {
-    return
-        (a.Q_DIR == b.Q_DIR) &&
-        (a.L_PACKET == b.L_PACKET) &&
-        (a.Q_SCALE == b.Q_SCALE) &&
-        (a.L_SECTION == b.L_SECTION);
+    bool status = true;
+    
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SCALE == b.Q_SCALE);
+    status = status && (a.L_SECTION == b.L_SECTION);
+
+    return status;
 }
 
 inline bool operator!=(const Repositioning_Information_Core& a, const Repositioning_Information_Core& b)

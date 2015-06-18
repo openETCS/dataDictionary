@@ -3,6 +3,7 @@
 #define VIRTUAL_BALISE_COVER_MARKER_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct Virtual_Balise_Cover_marker_Core
 {
@@ -16,10 +17,21 @@ struct Virtual_Balise_Cover_marker_Core
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const Virtual_Balise_Cover_marker_Core& p)
+{
+    stream 
+       << +p.NID_VBCMK;
+
+    return stream;
+}
+
 inline bool operator==(const Virtual_Balise_Cover_marker_Core& a, const Virtual_Balise_Cover_marker_Core& b)
 {
-    return
-        (a.NID_VBCMK == b.NID_VBCMK);
+    bool status = true;
+    
+    status = status && (a.NID_VBCMK == b.NID_VBCMK);
+
+    return status;
 }
 
 inline bool operator!=(const Virtual_Balise_Cover_marker_Core& a, const Virtual_Balise_Cover_marker_Core& b)

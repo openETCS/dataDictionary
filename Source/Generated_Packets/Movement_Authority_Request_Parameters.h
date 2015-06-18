@@ -14,25 +14,19 @@ struct Movement_Authority_Request_Parameters : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '('
-	       << uint64_t(id) << ','
-               << core.Q_DIR << ','
-               << core.L_PACKET << ','
-               << core.T_MAR << ','
-               << core.T_TIMEOUTRQST << ','
-               << core.T_CYCRQST << ')';
+        stream << '(' << +id << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
     {
 	if(auto q = dynamic_cast<const Movement_Authority_Request_Parameters*>(&p))
 	{
-	    return
-                (core.Q_DIR == q->core.Q_DIR) &&
-                (core.L_PACKET == q->core.L_PACKET) &&
-                (core.T_MAR == q->core.T_MAR) &&
-                (core.T_TIMEOUTRQST == q->core.T_TIMEOUTRQST) &&
-                (core.T_CYCRQST == q->core.T_CYCRQST);
+	    bool status = true;
+
+	    status = status && (id == q->id);
+	    status = status && (core == q->core);
+
+	    return status;
 	}
 	return false;
     }

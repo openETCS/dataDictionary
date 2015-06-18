@@ -3,6 +3,7 @@
 #define END_OF_INFORMATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct End_of_Information_Core
 {
@@ -17,9 +18,19 @@ struct End_of_Information_Core
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const End_of_Information_Core& p)
+{
+    
+
+    return stream;
+}
+
 inline bool operator==(const End_of_Information_Core& a, const End_of_Information_Core& b)
 {
-    return true;
+    bool status = true;
+    
+
+    return status;
 }
 
 inline bool operator!=(const End_of_Information_Core& a, const End_of_Information_Core& b)

@@ -3,6 +3,7 @@
 #define TRACK_CONDITION_CHANGE_OF_ALLOWED_CURRENT_CONSUMPTION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct Track_Condition_Change_of_allowed_current_consumption_Core
 {
@@ -19,14 +20,29 @@ struct Track_Condition_Change_of_allowed_current_consumption_Core
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Change_of_allowed_current_consumption_Core& p)
+{
+    stream 
+       << +p.Q_DIR << ','
+       << +p.L_PACKET << ','
+       << +p.Q_SCALE << ','
+       << +p.D_CURRENT << ','
+       << +p.M_CURRENT;
+
+    return stream;
+}
+
 inline bool operator==(const Track_Condition_Change_of_allowed_current_consumption_Core& a, const Track_Condition_Change_of_allowed_current_consumption_Core& b)
 {
-    return
-        (a.Q_DIR == b.Q_DIR) &&
-        (a.L_PACKET == b.L_PACKET) &&
-        (a.Q_SCALE == b.Q_SCALE) &&
-        (a.D_CURRENT == b.D_CURRENT) &&
-        (a.M_CURRENT == b.M_CURRENT);
+    bool status = true;
+    
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SCALE == b.Q_SCALE);
+    status = status && (a.D_CURRENT == b.D_CURRENT);
+    status = status && (a.M_CURRENT == b.M_CURRENT);
+
+    return status;
 }
 
 inline bool operator!=(const Track_Condition_Change_of_allowed_current_consumption_Core& a, const Track_Condition_Change_of_allowed_current_consumption_Core& b)
