@@ -36,7 +36,7 @@ test: it
 	./test_issue31_1
 	./test_issue31_2
 
-issue31: lib test_issue31_1
+issue31: lib test_issue31_1 test_issue31_2
 	./test_issue31_1
 	./test_issue31_2
 	
