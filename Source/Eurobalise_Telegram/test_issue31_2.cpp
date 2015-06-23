@@ -6,6 +6,7 @@
 #include "subsets.h"
 #include "create.h"
 #include <cassert>
+#include "UpperBitsNotSet.h"
 #include <iostream>
 
 template<typename Packet>
@@ -26,6 +27,8 @@ int main ()
 
     uint32_t init_pos = stream.bitpos;
 
+    Eurobalise_Telegram telegram;
+
     Telegram_Header header;
     {
         header.Q_UPDOWN  = 1;
@@ -40,8 +43,7 @@ int main ()
 	header.Q_LINK	 = 1;
     }
 
-    std::cout << " Encoding Telegram Header: " << header << std::endl;
-    Telegram_Header_Encoder(&stream, &header);
+    telegram.header = header;
 
     Session_Management a;
     {
@@ -53,12 +55,9 @@ int main ()
 	a.core.NID_RBC	= 1515;
 	a.core.NID_RADIO = 14185023402016767;
 	a.core.Q_SLEEPSESSION	= 0;
-
-        Packet_Header h {a.id};
-        Packet_Header_Encoder(&stream, &h);
-	std::cout << "    Encoding packet " << a << std::endl;
-        Session_Management_Encoder(&stream, &a.core);
     }
+
+    telegram.add(std::make_shared<Session_Management>(a));
 
     National_Values b;
     {
@@ -98,12 +97,9 @@ int main ()
         b.core.M_NVAVADH = 1;
         b.core.M_NVEBCL = 1;
         b.core.Q_NVKINT = 0;
-
-        Packet_Header h {b.id};
-        Packet_Header_Encoder(&stream, &h);
-	std::cout << "    Encoding packet " << b << std::endl;
-        National_Values_Encoder(&stream, &b.core);
     }
+    
+    telegram.add(std::make_shared<National_Values>(b));
 
     Level_Transition_Order c;
     {
@@ -115,32 +111,34 @@ int main ()
 	c.core.M_LEVELTR = 3;
 	c.core.L_ACKLEVELTR = 100;
 	c.core.N_ITER_1 = 0;
-
-        Packet_Header h {c.id};
-        Packet_Header_Encoder(&stream, &h);
-	std::cout << "    Encoding packet " << c << std::endl;
-        Level_Transition_Order_Encoder(&stream, &c.core);
     }
 
+    telegram.add(std::make_shared<Level_Transition_Order>(c));
 
-    End_of_Information f;
-    {
-        Packet_Header h {f.id};
-        Packet_Header_Encoder(&stream, &h);
-	std::cout << "    Encoding packet " << f << std::endl;
-        End_of_Information_Encoder(&stream, &f.core);
-    }
+    End_of_Information d;
+
+    telegram.add(std::make_shared<End_of_Information>(d));
+
+    std::cout << " Encoder Input: " << telegram << std::endl;
+
+    std::cout << " Encoding Eurobalise Telegram." << std::endl;
+    telegram.encode(stream);
 
     stream.bitpos = init_pos;
 
-    Eurobalise_Telegram telegram;
+    Eurobalise_Telegram new_telegram;
 
     std::cout << " Decoding Eurobalise Telegram." << std::endl;
-    telegram.decode(stream);
+    new_telegram.decode(stream);
 
-    std::cout << " Decoder Output: " << telegram << std::endl;
+    std::cout << " Decoder Output: " << new_telegram << std::endl;
 
-    assert(telegram.header == header);
+    assert(telegram.header == new_telegram.header);
+    assert(telegram.packets[0]->id == new_telegram.packets[0]->id);
+    assert(telegram.packets[1]->id == new_telegram.packets[1]->id);
+    assert(telegram.packets[2]->id == new_telegram.packets[2]->id);
+    assert(telegram.packets[3]->id == new_telegram.packets[3]->id);
+    assert(telegram == new_telegram);
 
     std::cout << " Test successful." << std::endl;
     std::cout << std::endl;
