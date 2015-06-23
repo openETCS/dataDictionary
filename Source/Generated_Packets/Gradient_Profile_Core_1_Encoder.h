@@ -43,7 +43,7 @@
     complete behaviors;
     disjoint behaviors;
 */
-int Gradient_Profile_Core_1_Encoder(Bitstream* stream, const Gradient_Profile_Core_1* p, uint8_t N_ITER);
+int Gradient_Profile_Core_1_Encoder(Bitstream* stream, const Gradient_Profile_Core_1* p);
 
 #endif // GRADIENT_PROFILE_CORE_1_ENCODER_H_INCLUDED
 

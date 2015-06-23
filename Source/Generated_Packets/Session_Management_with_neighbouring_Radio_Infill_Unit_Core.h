@@ -70,21 +70,9 @@ typedef struct Session_Management_with_neighbouring_Radio_Infill_Unit_Core Sessi
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p) =
-      Invariant(p->Q_DIR)             &&
-      Invariant(p->L_PACKET)          &&
-      Invariant(p->Q_RIU)             &&
-      Invariant(p->NID_C)             &&
-      Invariant(p->NID_RIU)           &&
-      Invariant(p->NID_RADIO);
+    predicate Invariant(Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p) = \true;
 
-    predicate ZeroInitialized(Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p) =
-      ZeroInitialized(p->Q_DIR)             &&
-      ZeroInitialized(p->L_PACKET)          &&
-      ZeroInitialized(p->Q_RIU)             &&
-      ZeroInitialized(p->NID_C)             &&
-      ZeroInitialized(p->NID_RIU)           &&
-      ZeroInitialized(p->NID_RADIO);
+    predicate ZeroInitialized(Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p) = \true;
 
     predicate EqualBits(Bitstream* stream, integer pos, Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&

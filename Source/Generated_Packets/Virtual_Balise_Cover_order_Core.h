@@ -28,7 +28,8 @@ inline std::ostream& operator<<(std::ostream& stream, const Virtual_Balise_Cover
        << +p.L_PACKET << ','
        << +p.Q_VBCO << ','
        << +p.NID_VBCMK << ','
-       << +p.NID_C;
+       << +p.NID_C << ','
+       << +p.T_VBC;
 
     return stream;
 }
@@ -42,6 +43,10 @@ inline bool operator==(const Virtual_Balise_Cover_order_Core& a, const Virtual_B
     status = status && (a.Q_VBCO == b.Q_VBCO);
     status = status && (a.NID_VBCMK == b.NID_VBCMK);
     status = status && (a.NID_C == b.NID_C);
+    if (a.Q_VBCO == 1)
+    {
+    status = status && (a.T_VBC == b.T_VBC);
+    }
 
     return status;
 }
@@ -66,19 +71,9 @@ typedef struct Virtual_Balise_Cover_order_Core Virtual_Balise_Cover_order_Core;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Virtual_Balise_Cover_order_Core* p) =
-      Invariant(p->Q_DIR)             &&
-      Invariant(p->L_PACKET)          &&
-      Invariant(p->Q_VBCO)            &&
-      Invariant(p->NID_VBCMK)         &&
-      Invariant(p->NID_C);
+    predicate Invariant(Virtual_Balise_Cover_order_Core* p) = \true;
 
-    predicate ZeroInitialized(Virtual_Balise_Cover_order_Core* p) =
-      ZeroInitialized(p->Q_DIR)             &&
-      ZeroInitialized(p->L_PACKET)          &&
-      ZeroInitialized(p->Q_VBCO)            &&
-      ZeroInitialized(p->NID_VBCMK)         &&
-      ZeroInitialized(p->NID_C);
+    predicate ZeroInitialized(Virtual_Balise_Cover_order_Core* p) = \true;
 
     predicate EqualBits(Bitstream* stream, integer pos, Virtual_Balise_Cover_order_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&

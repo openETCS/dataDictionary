@@ -18,11 +18,6 @@ int Movement_Authority_Request_Parameters_Encoder(Bitstream* stream, const Movem
             Bitstream_Write(stream, 8,  p->T_CYCRQST);
 
 
-            //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
-            //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
-            //@ assert T_MAR:             EqualBits(stream, pos + 15,  pos + 23,  p->T_MAR);
-            //@ assert T_TIMEOUTRQST:     EqualBits(stream, pos + 23,  pos + 33,  p->T_TIMEOUTRQST);
-            //@ assert T_CYCRQST:         EqualBits(stream, pos + 33,  pos + 41,  p->T_CYCRQST);
 
             return 1;
         }

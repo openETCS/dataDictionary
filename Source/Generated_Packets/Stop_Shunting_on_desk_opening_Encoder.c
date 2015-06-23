@@ -15,8 +15,6 @@ int Stop_Shunting_on_desk_opening_Encoder(Bitstream* stream, const Stop_Shunting
             Bitstream_Write(stream, 13, p->L_PACKET);
 
 
-            //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
-            //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
 
             return 1;
         }

@@ -34,7 +34,10 @@ inline std::ostream& operator<<(std::ostream& stream, const Level_Crossing_infor
        << +p.NID_LX << ','
        << +p.D_LX << ','
        << +p.L_LX << ','
-       << +p.Q_LXSTATUS;
+       << +p.Q_LXSTATUS << ','
+       << +p.V_LX << ','
+       << +p.Q_STOPLX << ','
+       << +p.L_STOPLX;
 
     return stream;
 }
@@ -50,6 +53,15 @@ inline bool operator==(const Level_Crossing_information_Core& a, const Level_Cro
     status = status && (a.D_LX == b.D_LX);
     status = status && (a.L_LX == b.L_LX);
     status = status && (a.Q_LXSTATUS == b.Q_LXSTATUS);
+    if (a.Q_LXSTATUS == 1)
+    {
+    status = status && (a.V_LX == b.V_LX);
+    status = status && (a.Q_STOPLX == b.Q_STOPLX);
+    }
+    if (a.Q_STOPLX == 1)
+    {
+    status = status && (a.L_STOPLX == b.L_STOPLX);
+    }
 
     return status;
 }
@@ -74,23 +86,9 @@ typedef struct Level_Crossing_information_Core Level_Crossing_information_Core;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Level_Crossing_information_Core* p) =
-      Invariant(p->Q_DIR)             &&
-      Invariant(p->L_PACKET)          &&
-      Invariant(p->Q_SCALE)           &&
-      Invariant(p->NID_LX)            &&
-      Invariant(p->D_LX)              &&
-      Invariant(p->L_LX)              &&
-      Invariant(p->Q_LXSTATUS);
+    predicate Invariant(Level_Crossing_information_Core* p) = \true;
 
-    predicate ZeroInitialized(Level_Crossing_information_Core* p) =
-      ZeroInitialized(p->Q_DIR)             &&
-      ZeroInitialized(p->L_PACKET)          &&
-      ZeroInitialized(p->Q_SCALE)           &&
-      ZeroInitialized(p->NID_LX)            &&
-      ZeroInitialized(p->D_LX)              &&
-      ZeroInitialized(p->L_LX)              &&
-      ZeroInitialized(p->Q_LXSTATUS);
+    predicate ZeroInitialized(Level_Crossing_information_Core* p) = \true;
 
     predicate EqualBits(Bitstream* stream, integer pos, Level_Crossing_information_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&

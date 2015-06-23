@@ -21,14 +21,6 @@ int RBC_transition_order_Encoder(Bitstream* stream, const RBC_transition_order_C
             Bitstream_Write(stream, 1,  p->Q_SLEEPSESSION);
 
 
-            //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
-            //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
-            //@ assert Q_SCALE:           EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE);
-            //@ assert D_RBCTR:           EqualBits(stream, pos + 17,  pos + 32,  p->D_RBCTR);
-            //@ assert NID_C:             EqualBits(stream, pos + 32,  pos + 42,  p->NID_C);
-            //@ assert NID_RBC:           EqualBits(stream, pos + 42,  pos + 56,  p->NID_RBC);
-            //@ assert NID_RADIO:         EqualBits(stream, pos + 56,  pos + 120, p->NID_RADIO);
-            //@ assert Q_SLEEPSESSION:    EqualBits(stream, pos + 120, pos + 121, p->Q_SLEEPSESSION);
 
             return 1;
         }

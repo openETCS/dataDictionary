@@ -74,25 +74,9 @@ typedef struct RBC_transition_order_Core RBC_transition_order_Core;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(RBC_transition_order_Core* p) =
-      Invariant(p->Q_DIR)             &&
-      Invariant(p->L_PACKET)          &&
-      Invariant(p->Q_SCALE)           &&
-      Invariant(p->D_RBCTR)           &&
-      Invariant(p->NID_C)             &&
-      Invariant(p->NID_RBC)           &&
-      Invariant(p->NID_RADIO)         &&
-      Invariant(p->Q_SLEEPSESSION);
+    predicate Invariant(RBC_transition_order_Core* p) = \true;
 
-    predicate ZeroInitialized(RBC_transition_order_Core* p) =
-      ZeroInitialized(p->Q_DIR)             &&
-      ZeroInitialized(p->L_PACKET)          &&
-      ZeroInitialized(p->Q_SCALE)           &&
-      ZeroInitialized(p->D_RBCTR)           &&
-      ZeroInitialized(p->NID_C)             &&
-      ZeroInitialized(p->NID_RBC)           &&
-      ZeroInitialized(p->NID_RADIO)         &&
-      ZeroInitialized(p->Q_SLEEPSESSION);
+    predicate ZeroInitialized(RBC_transition_order_Core* p) = \true;
 
     predicate EqualBits(Bitstream* stream, integer pos, RBC_transition_order_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&

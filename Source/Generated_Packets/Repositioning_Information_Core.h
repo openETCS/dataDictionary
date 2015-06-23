@@ -62,17 +62,9 @@ typedef struct Repositioning_Information_Core Repositioning_Information_Core;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Repositioning_Information_Core* p) =
-      Invariant(p->Q_DIR)             &&
-      Invariant(p->L_PACKET)          &&
-      Invariant(p->Q_SCALE)           &&
-      Invariant(p->L_SECTION);
+    predicate Invariant(Repositioning_Information_Core* p) = \true;
 
-    predicate ZeroInitialized(Repositioning_Information_Core* p) =
-      ZeroInitialized(p->Q_DIR)             &&
-      ZeroInitialized(p->L_PACKET)          &&
-      ZeroInitialized(p->Q_SCALE)           &&
-      ZeroInitialized(p->L_SECTION);
+    predicate ZeroInitialized(Repositioning_Information_Core* p) = \true;
 
     predicate EqualBits(Bitstream* stream, integer pos, Repositioning_Information_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&

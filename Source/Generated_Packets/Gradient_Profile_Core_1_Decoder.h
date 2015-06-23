@@ -37,7 +37,7 @@
     complete behaviors;
     disjoint behaviors;
 */
-int Gradient_Profile_Core_1_Decoder(Bitstream* stream, Gradient_Profile_Core_1* p, uint8_t N_ITER);
+int Gradient_Profile_Core_1_Decoder(Bitstream* stream, Gradient_Profile_Core_1* p);
 
 
 #endif // GRADIENT_PROFILE_CORE_1_DECODER_H_INCLUDED

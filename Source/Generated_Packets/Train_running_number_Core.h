@@ -56,13 +56,9 @@ typedef struct Train_running_number_Core Train_running_number_Core;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Train_running_number_Core* p) =
-      Invariant(p->L_PACKET)          &&
-      Invariant(p->NID_OPERATIONAL);
+    predicate Invariant(Train_running_number_Core* p) = \true;
 
-    predicate ZeroInitialized(Train_running_number_Core* p) =
-      ZeroInitialized(p->L_PACKET)          &&
-      ZeroInitialized(p->NID_OPERATIONAL);
+    predicate ZeroInitialized(Train_running_number_Core* p) = \true;
 
     predicate EqualBits(Bitstream* stream, integer pos, Train_running_number_Core* p) =
       EqualBits(stream, pos,       pos + 13,  p->L_PACKET)          &&

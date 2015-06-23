@@ -36,19 +36,6 @@ int Position_Report_Encoder(Bitstream* stream, const Position_Report_Core* p)
 
 
 
-            //@ assert L_PACKET:          EqualBits(stream, pos,       pos + 13,  p->L_PACKET);
-            //@ assert Q_SCALE:           EqualBits(stream, pos + 13,  pos + 15,  p->Q_SCALE);
-            //@ assert NID_LRBG:          EqualBits(stream, pos + 15,  pos + 39,  p->NID_LRBG);
-            //@ assert D_LRBG:            EqualBits(stream, pos + 39,  pos + 54,  p->D_LRBG);
-            //@ assert Q_DIRLRBG:         EqualBits(stream, pos + 54,  pos + 56,  p->Q_DIRLRBG);
-            //@ assert Q_DLRBG:           EqualBits(stream, pos + 56,  pos + 58,  p->Q_DLRBG);
-            //@ assert L_DOUBTOVER:       EqualBits(stream, pos + 58,  pos + 73,  p->L_DOUBTOVER);
-            //@ assert L_DOUBTUNDER:      EqualBits(stream, pos + 73,  pos + 88,  p->L_DOUBTUNDER);
-            //@ assert Q_LENGTH:          EqualBits(stream, pos + 88,  pos + 90,  p->Q_LENGTH);
-            //@ assert V_TRAIN:           EqualBits(stream, pos + 105, pos + 112, p->V_TRAIN);
-            //@ assert Q_DIRTRAIN:        EqualBits(stream, pos + 112, pos + 114, p->Q_DIRTRAIN);
-            //@ assert M_MODE:            EqualBits(stream, pos + 114, pos + 118, p->M_MODE);
-            //@ assert M_LEVEL:           EqualBits(stream, pos + 118, pos + 121, p->M_LEVEL);
 
             return 1;
         }

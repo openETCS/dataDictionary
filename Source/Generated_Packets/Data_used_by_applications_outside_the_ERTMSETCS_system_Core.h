@@ -27,6 +27,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Data_used_by_applica
        << +p.Q_DIR << ','
        << +p.L_PACKET << ','
        << +p.NID_XUSER << ','
+       << +p.NID_NTC << ','
        << +p.Other_data_depending_on__NID_XUSER;
 
     return stream;
@@ -39,6 +40,10 @@ inline bool operator==(const Data_used_by_applications_outside_the_ERTMSETCS_sys
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.NID_XUSER == b.NID_XUSER);
+    if (a.NID_XUSER == 102)
+    {
+    status = status && (a.NID_NTC == b.NID_NTC);
+    }
     status = status && (a.Other_data_depending_on__NID_XUSER == b.Other_data_depending_on__NID_XUSER);
 
     return status;
@@ -64,17 +69,9 @@ typedef struct Data_used_by_applications_outside_the_ERTMSETCS_system_Core Data_
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Data_used_by_applications_outside_the_ERTMSETCS_system_Core* p) =
-      Invariant(p->Q_DIR)             &&
-      Invariant(p->L_PACKET)          &&
-      Invariant(p->NID_XUSER)         &&
-      Invariant(p->Other_data_depending_on__NID_XUSER);
+    predicate Invariant(Data_used_by_applications_outside_the_ERTMSETCS_system_Core* p) = \true;
 
-    predicate ZeroInitialized(Data_used_by_applications_outside_the_ERTMSETCS_system_Core* p) =
-      ZeroInitialized(p->Q_DIR)             &&
-      ZeroInitialized(p->L_PACKET)          &&
-      ZeroInitialized(p->NID_XUSER)         &&
-      ZeroInitialized(p->Other_data_depending_on__NID_XUSER);
+    predicate ZeroInitialized(Data_used_by_applications_outside_the_ERTMSETCS_system_Core* p) = \true;
 
     predicate EqualBits(Bitstream* stream, integer pos, Data_used_by_applications_outside_the_ERTMSETCS_system_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&

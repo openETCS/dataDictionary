@@ -28,7 +28,8 @@ inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Chan
        << +p.L_PACKET << ','
        << +p.Q_SCALE << ','
        << +p.D_TRACTION << ','
-       << +p.M_VOLTAGE;
+       << +p.M_VOLTAGE << ','
+       << +p.NID_CTRACTION;
 
     return stream;
 }
@@ -42,6 +43,10 @@ inline bool operator==(const Track_Condition_Change_of_traction_system_Core& a, 
     status = status && (a.Q_SCALE == b.Q_SCALE);
     status = status && (a.D_TRACTION == b.D_TRACTION);
     status = status && (a.M_VOLTAGE == b.M_VOLTAGE);
+    if (a.M_VOLTAGE != 0)
+    {
+    status = status && (a.NID_CTRACTION == b.NID_CTRACTION);
+    }
 
     return status;
 }
@@ -66,19 +71,9 @@ typedef struct Track_Condition_Change_of_traction_system_Core Track_Condition_Ch
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Track_Condition_Change_of_traction_system_Core* p) =
-      Invariant(p->Q_DIR)             &&
-      Invariant(p->L_PACKET)          &&
-      Invariant(p->Q_SCALE)           &&
-      Invariant(p->D_TRACTION)        &&
-      Invariant(p->M_VOLTAGE);
+    predicate Invariant(Track_Condition_Change_of_traction_system_Core* p) = \true;
 
-    predicate ZeroInitialized(Track_Condition_Change_of_traction_system_Core* p) =
-      ZeroInitialized(p->Q_DIR)             &&
-      ZeroInitialized(p->L_PACKET)          &&
-      ZeroInitialized(p->Q_SCALE)           &&
-      ZeroInitialized(p->D_TRACTION)        &&
-      ZeroInitialized(p->M_VOLTAGE);
+    predicate ZeroInitialized(Track_Condition_Change_of_traction_system_Core* p) = \true;
 
     predicate EqualBits(Bitstream* stream, integer pos, Track_Condition_Change_of_traction_system_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&

@@ -17,10 +17,6 @@ int Repositioning_Information_Encoder(Bitstream* stream, const Repositioning_Inf
             Bitstream_Write(stream, 15, p->L_SECTION);
 
 
-            //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
-            //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
-            //@ assert Q_SCALE:           EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE);
-            //@ assert L_SECTION:         EqualBits(stream, pos + 17,  pos + 32,  p->L_SECTION);
 
             return 1;
         }

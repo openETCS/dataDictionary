@@ -57,13 +57,9 @@ typedef struct Default_balise_or_Loop_or_RIU_information_Core Default_balise_or_
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Default_balise_or_Loop_or_RIU_information_Core* p) =
-      Invariant(p->Q_DIR)             &&
-      Invariant(p->L_PACKET);
+    predicate Invariant(Default_balise_or_Loop_or_RIU_information_Core* p) = \true;
 
-    predicate ZeroInitialized(Default_balise_or_Loop_or_RIU_information_Core* p) =
-      ZeroInitialized(p->Q_DIR)             &&
-      ZeroInitialized(p->L_PACKET);
+    predicate ZeroInitialized(Default_balise_or_Loop_or_RIU_information_Core* p) = \true;
 
     predicate EqualBits(Bitstream* stream, integer pos, Default_balise_or_Loop_or_RIU_information_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&

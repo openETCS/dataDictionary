@@ -17,20 +17,20 @@ int Packet_for_sending_fixed_text_messages_Encoder(Bitstream* stream, const Pack
             Bitstream_Write(stream, 2,  p->Q_TEXTCLASS);
             Bitstream_Write(stream, 1,  p->Q_TEXTDISPLAY);
             Bitstream_Write(stream, 15, p->D_TEXTDISPLAY);
-            Bitstream_Write(stream, 4,  p->M_MODETEXTDISPLAY0);
-            Bitstream_Write(stream, 3,  p->M_LEVELTEXTDISPLAY0);
-            if (p->M_LEVELTEXTDISPLAY0 == 1)
+            Bitstream_Write(stream, 4,  p->M_MODETEXTDISPLAY_0);
+            Bitstream_Write(stream, 3,  p->M_LEVELTEXTDISPLAY_0);
+            if (p->M_LEVELTEXTDISPLAY_0 == 1)
             {
-            Bitstream_Write(stream, 8,  p->NID_NTC0);
+            Bitstream_Write(stream, 8,  p->NID_NTC_0);
             }
 
             Bitstream_Write(stream, 15, p->L_TEXTDISPLAY);
             Bitstream_Write(stream, 10, p->T_TEXTDISPLAY);
-            Bitstream_Write(stream, 4,  p->M_MODETEXTDISPLAY1);
-            Bitstream_Write(stream, 3,  p->M_LEVELTEXTDISPLAY1);
-            if (p->M_LEVELTEXTDISPLAY1 == 1)
+            Bitstream_Write(stream, 4,  p->M_MODETEXTDISPLAY_1);
+            Bitstream_Write(stream, 3,  p->M_LEVELTEXTDISPLAY_1);
+            if (p->M_LEVELTEXTDISPLAY_1 == 1)
             {
-            Bitstream_Write(stream, 8,  p->NID_NTC1);
+            Bitstream_Write(stream, 8,  p->NID_NTC_1);
             }
 
             Bitstream_Write(stream, 2,  p->Q_TEXTCONFIRM);
@@ -50,20 +50,6 @@ int Packet_for_sending_fixed_text_messages_Encoder(Bitstream* stream, const Pack
             Bitstream_Write(stream, 8,  p->Q_TEXT);
 
 
-            //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
-            //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
-            //@ assert Q_SCALE:           EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE);
-            //@ assert Q_TEXTCLASS:       EqualBits(stream, pos + 17,  pos + 19,  p->Q_TEXTCLASS);
-            //@ assert Q_TEXTDISPLAY:     EqualBits(stream, pos + 19,  pos + 20,  p->Q_TEXTDISPLAY);
-            //@ assert D_TEXTDISPLAY:     EqualBits(stream, pos + 20,  pos + 35,  p->D_TEXTDISPLAY);
-            //@ assert M_MODETEXTDISPLAY0: EqualBits(stream, pos + 35,  pos + 39,  p->M_MODETEXTDISPLAY0);
-            //@ assert M_LEVELTEXTDISPLAY0: EqualBits(stream, pos + 39,  pos + 42,  p->M_LEVELTEXTDISPLAY0);
-            //@ assert L_TEXTDISPLAY:     EqualBits(stream, pos + 50,  pos + 65,  p->L_TEXTDISPLAY);
-            //@ assert T_TEXTDISPLAY:     EqualBits(stream, pos + 65,  pos + 75,  p->T_TEXTDISPLAY);
-            //@ assert M_MODETEXTDISPLAY1: EqualBits(stream, pos + 75,  pos + 79,  p->M_MODETEXTDISPLAY1);
-            //@ assert M_LEVELTEXTDISPLAY1: EqualBits(stream, pos + 79,  pos + 82,  p->M_LEVELTEXTDISPLAY1);
-            //@ assert Q_TEXTCONFIRM:     EqualBits(stream, pos + 90,  pos + 92,  p->Q_TEXTCONFIRM);
-            //@ assert Q_TEXT:            EqualBits(stream, pos + 126, pos + 134, p->Q_TEXT);
 
             return 1;
         }

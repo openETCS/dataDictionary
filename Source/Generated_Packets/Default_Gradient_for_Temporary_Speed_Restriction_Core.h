@@ -63,17 +63,9 @@ typedef struct Default_Gradient_for_Temporary_Speed_Restriction_Core Default_Gra
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Default_Gradient_for_Temporary_Speed_Restriction_Core* p) =
-      Invariant(p->Q_DIR)             &&
-      Invariant(p->L_PACKET)          &&
-      Invariant(p->Q_GDIR)            &&
-      Invariant(p->G_TSR);
+    predicate Invariant(Default_Gradient_for_Temporary_Speed_Restriction_Core* p) = \true;
 
-    predicate ZeroInitialized(Default_Gradient_for_Temporary_Speed_Restriction_Core* p) =
-      ZeroInitialized(p->Q_DIR)             &&
-      ZeroInitialized(p->L_PACKET)          &&
-      ZeroInitialized(p->Q_GDIR)            &&
-      ZeroInitialized(p->G_TSR);
+    predicate ZeroInitialized(Default_Gradient_for_Temporary_Speed_Restriction_Core* p) = \true;
 
     predicate EqualBits(Bitstream* stream, integer pos, Default_Gradient_for_Temporary_Speed_Restriction_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&

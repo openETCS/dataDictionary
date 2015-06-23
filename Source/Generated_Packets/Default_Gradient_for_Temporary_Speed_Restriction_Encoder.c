@@ -17,10 +17,6 @@ int Default_Gradient_for_Temporary_Speed_Restriction_Encoder(Bitstream* stream, 
             Bitstream_Write(stream, 8,  p->G_TSR);
 
 
-            //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
-            //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
-            //@ assert Q_GDIR:            EqualBits(stream, pos + 15,  pos + 16,  p->Q_GDIR);
-            //@ assert G_TSR:             EqualBits(stream, pos + 16,  pos + 24,  p->G_TSR);
 
             return 1;
         }

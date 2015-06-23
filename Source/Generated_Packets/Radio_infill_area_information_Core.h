@@ -76,27 +76,9 @@ typedef struct Radio_infill_area_information_Core Radio_infill_area_information_
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Radio_infill_area_information_Core* p) =
-      Invariant(p->Q_DIR)             &&
-      Invariant(p->L_PACKET)          &&
-      Invariant(p->Q_SCALE)           &&
-      Invariant(p->Q_RIU)             &&
-      Invariant(p->NID_C)             &&
-      Invariant(p->NID_RIU)           &&
-      Invariant(p->NID_RADIO)         &&
-      Invariant(p->D_INFILL)          &&
-      Invariant(p->NID_BG);
+    predicate Invariant(Radio_infill_area_information_Core* p) = \true;
 
-    predicate ZeroInitialized(Radio_infill_area_information_Core* p) =
-      ZeroInitialized(p->Q_DIR)             &&
-      ZeroInitialized(p->L_PACKET)          &&
-      ZeroInitialized(p->Q_SCALE)           &&
-      ZeroInitialized(p->Q_RIU)             &&
-      ZeroInitialized(p->NID_C)             &&
-      ZeroInitialized(p->NID_RIU)           &&
-      ZeroInitialized(p->NID_RADIO)         &&
-      ZeroInitialized(p->D_INFILL)          &&
-      ZeroInitialized(p->NID_BG);
+    predicate ZeroInitialized(Radio_infill_area_information_Core* p) = \true;
 
     predicate EqualBits(Bitstream* stream, integer pos, Radio_infill_area_information_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&

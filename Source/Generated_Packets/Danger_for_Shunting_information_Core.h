@@ -59,15 +59,9 @@ typedef struct Danger_for_Shunting_information_Core Danger_for_Shunting_informat
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Danger_for_Shunting_information_Core* p) =
-      Invariant(p->Q_DIR)             &&
-      Invariant(p->L_PACKET)          &&
-      Invariant(p->Q_ASPECT);
+    predicate Invariant(Danger_for_Shunting_information_Core* p) = \true;
 
-    predicate ZeroInitialized(Danger_for_Shunting_information_Core* p) =
-      ZeroInitialized(p->Q_DIR)             &&
-      ZeroInitialized(p->L_PACKET)          &&
-      ZeroInitialized(p->Q_ASPECT);
+    predicate ZeroInitialized(Danger_for_Shunting_information_Core* p) = \true;
 
     predicate EqualBits(Bitstream* stream, integer pos, Danger_for_Shunting_information_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&

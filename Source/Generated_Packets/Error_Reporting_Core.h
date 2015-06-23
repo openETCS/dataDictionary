@@ -56,13 +56,9 @@ typedef struct Error_Reporting_Core Error_Reporting_Core;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Error_Reporting_Core* p) =
-      Invariant(p->L_PACKET)          &&
-      Invariant(p->M_ERROR);
+    predicate Invariant(Error_Reporting_Core* p) = \true;
 
-    predicate ZeroInitialized(Error_Reporting_Core* p) =
-      ZeroInitialized(p->L_PACKET)          &&
-      ZeroInitialized(p->M_ERROR);
+    predicate ZeroInitialized(Error_Reporting_Core* p) = \true;
 
     predicate EqualBits(Bitstream* stream, integer pos, Error_Reporting_Core* p) =
       EqualBits(stream, pos,       pos + 13,  p->L_PACKET)          &&

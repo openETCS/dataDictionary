@@ -56,13 +56,9 @@ typedef struct Level_23_transition_information_Core Level_23_transition_informat
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Level_23_transition_information_Core* p) =
-      Invariant(p->L_PACKET)          &&
-      Invariant(p->NID_LTRBG);
+    predicate Invariant(Level_23_transition_information_Core* p) = \true;
 
-    predicate ZeroInitialized(Level_23_transition_information_Core* p) =
-      ZeroInitialized(p->L_PACKET)          &&
-      ZeroInitialized(p->NID_LTRBG);
+    predicate ZeroInitialized(Level_23_transition_information_Core* p) = \true;
 
     predicate EqualBits(Bitstream* stream, integer pos, Level_23_transition_information_Core* p) =
       EqualBits(stream, pos,       pos + 13,  p->L_PACKET)          &&
