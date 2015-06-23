@@ -36,6 +36,11 @@ test: it
 	./test_issue31_1
 	./test_issue31_2
 
+issue31: lib test_issue31_1
+	./test_issue31_1
+	./test_issue31_2
+	
+
 lib:
 	@(cd $(BITWALKER) && $(MAKE) lib)
 	@(cd $(GENERATED_PACKETS) && $(MAKE) lib)
@@ -76,7 +81,10 @@ clean::
 	@$(RM) conditional_encoder_test
 	@$(RM) test_issue31_1
 	@$(RM) test_issue31_2
+	@$(RM) dynamic_decoder_test
+	@$(RM) dynamic_encoder_test
 	@(cd $(BITWALKER) && $(MAKE) clean)
 	@(cd $(GENERATED_PACKETS) && $(MAKE) clean)
 	@(cd $(PACKET_HEADER) && $(MAKE) clean)
 	@(cd $(TELEGRAM_HEADER) && $(MAKE) clean)
+
