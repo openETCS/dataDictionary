@@ -29,7 +29,7 @@ inline std::ostream& operator<<(std::ostream& stream, const International_Static
        {
            stream << ',' << p.sub_2_1[i];
        }
-    
+   
 
     return stream;
 }
@@ -89,8 +89,7 @@ typedef struct International_Static_Speed_Profile_Core_2 International_Static_Sp
     predicate UpperBitsNotSet(International_Static_Speed_Profile_Core_2* p) =
       UpperBitsNotSet(p->D_STATIC_k,       15)  &&
       UpperBitsNotSet(p->V_STATIC_k,       7)   &&
-      UpperBitsNotSet(p->Q_FRONT_k,        1)   &&
-      UpperBitsNotSet(p->N_ITER_2_1         5;
+      UpperBitsNotSet(p->Q_FRONT_k,        1);
 
 */
 

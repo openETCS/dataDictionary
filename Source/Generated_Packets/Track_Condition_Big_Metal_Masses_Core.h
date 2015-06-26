@@ -37,7 +37,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Big_
        {
            stream << ',' << p.sub_1[i];
        }
-    
+   
 
     return stream;
 }
@@ -103,8 +103,7 @@ typedef struct Track_Condition_Big_Metal_Masses_Core Track_Condition_Big_Metal_M
       UpperBitsNotSet(p->L_PACKET,         13)  &&
       UpperBitsNotSet(p->Q_SCALE,          2)   &&
       UpperBitsNotSet(p->D_TRACKCOND,      15)  &&
-      UpperBitsNotSet(p->L_TRACKCOND,      15)  &&
-      UpperBitsNotSet(p->N_ITER_1           5;
+      UpperBitsNotSet(p->L_TRACKCOND,      15);
 
 */
 

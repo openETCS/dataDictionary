@@ -33,7 +33,7 @@ inline std::ostream& operator<<(std::ostream& stream, const National_Values_Core
        {
            stream << ',' << p.sub_3_1[i];
        }
-    
+   
 
     return stream;
 }
@@ -98,8 +98,7 @@ typedef struct National_Values_Core_3 National_Values_Core_3;
     predicate UpperBitsNotSet(National_Values_Core_3* p) =
       UpperBitsNotSet(p->Q_NVKVINTSET_k,   2)   &&
       UpperBitsNotSet(p->V_NVKVINT_k,      7)   &&
-      UpperBitsNotSet(p->M_NVKVINT_k,      7)   &&
-      UpperBitsNotSet(p->N_ITER_3_1         5;
+      UpperBitsNotSet(p->M_NVKVINT_k,      7);
 
 */
 

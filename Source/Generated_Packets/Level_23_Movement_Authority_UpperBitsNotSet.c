@@ -9,6 +9,7 @@ int Level_23_Movement_Authority_UpperBitsNotSet(const Level_23_Movement_Authorit
         UpperBitsNotSet64(p->Q_SCALE,           2)   &&
         UpperBitsNotSet64(p->V_LOA,             7)   &&
         UpperBitsNotSet64(p->T_LOA,             10)  &&
+        UpperBitsNotSet64(p->N_ITER_1,          5)   &&
         UpperBitsNotSet64(p->L_ENDSECTION,      15)  &&
         UpperBitsNotSet64(p->Q_SECTIONTIMER,    1)   &&
         UpperBitsNotSet64(p->T_SECTIONTIMER,    10)  &&

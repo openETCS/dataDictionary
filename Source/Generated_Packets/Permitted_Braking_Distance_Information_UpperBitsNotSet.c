@@ -14,7 +14,8 @@ int Permitted_Braking_Distance_Information_UpperBitsNotSet(const Permitted_Braki
         UpperBitsNotSet64(p->G_PBDSR,           8)   &&
         UpperBitsNotSet64(p->Q_PBDSR,           1)   &&
         UpperBitsNotSet64(p->D_PBDSR,           15)  &&
-        UpperBitsNotSet64(p->L_PBDSR,           15))
+        UpperBitsNotSet64(p->L_PBDSR,           15)  &&
+        UpperBitsNotSet64(p->N_ITER_1,          5))
     {
         return 1;
     }

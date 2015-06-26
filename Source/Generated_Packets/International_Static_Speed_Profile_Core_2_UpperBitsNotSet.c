@@ -6,7 +6,8 @@ int International_Static_Speed_Profile_Core_2_UpperBitsNotSet(const Internationa
 {
     if (UpperBitsNotSet64(p->D_STATIC_k,        15)  &&
         UpperBitsNotSet64(p->V_STATIC_k,        7)   &&
-        UpperBitsNotSet64(p->Q_FRONT_k,         1))
+        UpperBitsNotSet64(p->Q_FRONT_k,         1)   &&
+        UpperBitsNotSet64(p->N_ITER_2_1,        5))
     {
         return 1;
     }

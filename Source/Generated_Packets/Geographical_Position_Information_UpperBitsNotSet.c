@@ -12,7 +12,8 @@ int Geographical_Position_Information_UpperBitsNotSet(const Geographical_Positio
         UpperBitsNotSet64(p->NID_BG,            14)  &&
         UpperBitsNotSet64(p->D_POSOFF,          15)  &&
         UpperBitsNotSet64(p->Q_MPOSITION,       1)   &&
-        UpperBitsNotSet64(p->M_POSITION,        24))
+        UpperBitsNotSet64(p->M_POSITION,        24)  &&
+        UpperBitsNotSet64(p->N_ITER_1,          5))
     {
         return 1;
     }

@@ -11,7 +11,8 @@ int Track_Condition_UpperBitsNotSet(const Track_Condition_Core* p)
         UpperBitsNotSet64(p->D_TRACKINIT,       15)  &&
         UpperBitsNotSet64(p->D_TRACKCOND,       15)  &&
         UpperBitsNotSet64(p->L_TRACKCOND,       15)  &&
-        UpperBitsNotSet64(p->M_TRACKCOND,       4))
+        UpperBitsNotSet64(p->M_TRACKCOND,       4)   &&
+        UpperBitsNotSet64(p->N_ITER_1,          5))
     {
         return 1;
     }

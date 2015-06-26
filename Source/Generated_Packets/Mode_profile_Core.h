@@ -44,7 +44,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Mode_profile_Core& p
        {
            stream << ',' << p.sub_1[i];
        }
-    
+   
 
     return stream;
 }
@@ -122,8 +122,7 @@ typedef struct Mode_profile_Core Mode_profile_Core;
       UpperBitsNotSet(p->V_MAMODE,         7)   &&
       UpperBitsNotSet(p->L_MAMODE,         15)  &&
       UpperBitsNotSet(p->L_ACKMAMODE,      15)  &&
-      UpperBitsNotSet(p->Q_MAMODE,         1)   &&
-      UpperBitsNotSet(p->N_ITER_1           5;
+      UpperBitsNotSet(p->Q_MAMODE,         1);
 
 */
 

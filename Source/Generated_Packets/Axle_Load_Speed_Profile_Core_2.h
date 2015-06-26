@@ -29,7 +29,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Axle_Load_Speed_Prof
        {
            stream << ',' << p.sub_2_1[i];
        }
-    
+   
 
     return stream;
 }
@@ -82,8 +82,7 @@ typedef struct Axle_Load_Speed_Profile_Core_2 Axle_Load_Speed_Profile_Core_2;
 
     predicate EqualBits(Bitstream* stream, integer pos, Axle_Load_Speed_Profile_Core_2* p) = \true;
 
-    predicate UpperBitsNotSet(Axle_Load_Speed_Profile_Core_2* p) =
-      UpperBitsNotSet(p->N_ITER_2_1         5;
+    predicate UpperBitsNotSet(Axle_Load_Speed_Profile_Core_2* p) = \true;
 
 */
 

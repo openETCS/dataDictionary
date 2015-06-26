@@ -12,7 +12,9 @@ int Validated_train_data_UpperBitsNotSet(const Validated_train_data_Core* p)
         UpperBitsNotSet64(p->M_LOADINGGAUGE,    8)   &&
         UpperBitsNotSet64(p->M_AXLELOADCAT,     7)   &&
         UpperBitsNotSet64(p->M_AIRTIGHT,        2)   &&
-        UpperBitsNotSet64(p->N_AXLE,            10))
+        UpperBitsNotSet64(p->N_AXLE,            10)  &&
+        UpperBitsNotSet64(p->N_ITER_1,          5)   &&
+        UpperBitsNotSet64(p->N_ITER_2,          5))
     {
         return 1;
     }

@@ -28,7 +28,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Onboard_telephone_nu
        {
            stream << ',' << p.sub_1[i];
        }
-    
+   
 
     return stream;
 }
@@ -82,8 +82,7 @@ typedef struct Onboard_telephone_numbers_Core Onboard_telephone_numbers_Core;
       EqualBits(stream, pos,       pos + 13,  p->L_PACKET);
 
     predicate UpperBitsNotSet(Onboard_telephone_numbers_Core* p) =
-      UpperBitsNotSet(p->L_PACKET,         13)  &&
-      UpperBitsNotSet(p->N_ITER_1           5;
+      UpperBitsNotSet(p->L_PACKET,         13);
 
 */
 

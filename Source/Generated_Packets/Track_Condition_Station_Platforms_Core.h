@@ -45,7 +45,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Stat
        {
            stream << ',' << p.sub_1[i];
        }
-    
+   
 
     return stream;
 }
@@ -118,8 +118,7 @@ typedef struct Track_Condition_Station_Platforms_Core Track_Condition_Station_Pl
       UpperBitsNotSet(p->Q_DIR,            2)   &&
       UpperBitsNotSet(p->L_PACKET,         13)  &&
       UpperBitsNotSet(p->Q_SCALE,          2)   &&
-      UpperBitsNotSet(p->Q_TRACKINIT,      1)   &&
-      UpperBitsNotSet(p->N_ITER_1           5;
+      UpperBitsNotSet(p->Q_TRACKINIT,      1);
 
 */
 

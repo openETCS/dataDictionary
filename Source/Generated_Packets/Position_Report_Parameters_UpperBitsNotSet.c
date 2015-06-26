@@ -9,7 +9,8 @@ int Position_Report_Parameters_UpperBitsNotSet(const Position_Report_Parameters_
         UpperBitsNotSet64(p->Q_SCALE,           2)   &&
         UpperBitsNotSet64(p->T_CYCLOC,          8)   &&
         UpperBitsNotSet64(p->D_CYCLOC,          15)  &&
-        UpperBitsNotSet64(p->M_LOC,             3))
+        UpperBitsNotSet64(p->M_LOC,             3)   &&
+        UpperBitsNotSet64(p->N_ITER_1,          5))
     {
         return 1;
     }

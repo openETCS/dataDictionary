@@ -13,7 +13,8 @@ int Linking_UpperBitsNotSet(const Linking_Core* p)
         UpperBitsNotSet64(p->NID_BG,            14)  &&
         UpperBitsNotSet64(p->Q_LINKORIENTATION, 1)   &&
         UpperBitsNotSet64(p->Q_LINKREACTION,    2)   &&
-        UpperBitsNotSet64(p->Q_LOCACC,          6))
+        UpperBitsNotSet64(p->Q_LOCACC,          6)   &&
+        UpperBitsNotSet64(p->N_ITER_1,          5))
     {
         return 1;
     }

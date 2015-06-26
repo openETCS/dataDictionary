@@ -46,7 +46,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Staff_Responsible_di
        {
            stream << ',' << p.sub_1[i];
        }
-    
+   
 
     return stream;
 }
@@ -129,8 +129,7 @@ typedef struct Staff_Responsible_distance_Information_from_loop_Core Staff_Respo
       UpperBitsNotSet(p->NID_BG_0,         14)  &&
       UpperBitsNotSet(p->Q_NEWCOUNTRY_1,   1)   &&
       UpperBitsNotSet(p->NID_BG_1,         14)  &&
-      UpperBitsNotSet(p->D_SR,             15)  &&
-      UpperBitsNotSet(p->N_ITER_1           5;
+      UpperBitsNotSet(p->D_SR,             15);
 
 */
 

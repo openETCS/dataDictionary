@@ -47,13 +47,13 @@ inline std::ostream& operator<<(std::ostream& stream, const Axle_Load_Speed_Prof
        {
            stream << ',' << p.sub_1[i];
        }
-    stream
+    stream << ','
        << +p.N_ITER_2;
        for (uint32_t i = 0; i < p.N_ITER_2; ++i)
        {
            stream << ',' << p.sub_2[i];
        }
-    
+   
 
     return stream;
 }
@@ -136,9 +136,7 @@ typedef struct Axle_Load_Speed_Profile_Core Axle_Load_Speed_Profile_Core;
       UpperBitsNotSet(p->Q_DIR,            2)   &&
       UpperBitsNotSet(p->L_PACKET,         13)  &&
       UpperBitsNotSet(p->Q_SCALE,          2)   &&
-      UpperBitsNotSet(p->Q_TRACKINIT,      1)   &&
-      UpperBitsNotSet(p->N_ITER_1           5 &&
-      UpperBitsNotSet(p->N_ITER_2           5;
+      UpperBitsNotSet(p->Q_TRACKINIT,      1);
 
 */
 

@@ -12,7 +12,8 @@ int Mode_profile_UpperBitsNotSet(const Mode_profile_Core* p)
         UpperBitsNotSet64(p->V_MAMODE,          7)   &&
         UpperBitsNotSet64(p->L_MAMODE,          15)  &&
         UpperBitsNotSet64(p->L_ACKMAMODE,       15)  &&
-        UpperBitsNotSet64(p->Q_MAMODE,          1))
+        UpperBitsNotSet64(p->Q_MAMODE,          1)   &&
+        UpperBitsNotSet64(p->N_ITER_1,          5))
     {
         return 1;
     }

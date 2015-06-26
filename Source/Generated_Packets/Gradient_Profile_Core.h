@@ -40,7 +40,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Gradient_Profile_Cor
        {
            stream << ',' << p.sub_1[i];
        }
-    
+   
 
     return stream;
 }
@@ -109,8 +109,7 @@ typedef struct Gradient_Profile_Core Gradient_Profile_Core;
       UpperBitsNotSet(p->Q_SCALE,          2)   &&
       UpperBitsNotSet(p->D_GRADIENT,       15)  &&
       UpperBitsNotSet(p->Q_GDIR,           1)   &&
-      UpperBitsNotSet(p->G_A,              8)   &&
-      UpperBitsNotSet(p->N_ITER_1           5;
+      UpperBitsNotSet(p->G_A,              8);
 
 */
 

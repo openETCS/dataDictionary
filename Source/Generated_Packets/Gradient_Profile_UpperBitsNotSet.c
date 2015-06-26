@@ -9,7 +9,8 @@ int Gradient_Profile_UpperBitsNotSet(const Gradient_Profile_Core* p)
         UpperBitsNotSet64(p->Q_SCALE,           2)   &&
         UpperBitsNotSet64(p->D_GRADIENT,        15)  &&
         UpperBitsNotSet64(p->Q_GDIR,            1)   &&
-        UpperBitsNotSet64(p->G_A,               8))
+        UpperBitsNotSet64(p->G_A,               8)   &&
+        UpperBitsNotSet64(p->N_ITER_1,          5))
     {
         return 1;
     }

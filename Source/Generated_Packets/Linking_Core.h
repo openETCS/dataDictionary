@@ -46,7 +46,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Linking_Core& p)
        {
            stream << ',' << p.sub_1[i];
        }
-    
+   
 
     return stream;
 }
@@ -128,8 +128,7 @@ typedef struct Linking_Core Linking_Core;
       UpperBitsNotSet(p->NID_BG,           14)  &&
       UpperBitsNotSet(p->Q_LINKORIENTATION,1)   &&
       UpperBitsNotSet(p->Q_LINKREACTION,   2)   &&
-      UpperBitsNotSet(p->Q_LOCACC,         6)   &&
-      UpperBitsNotSet(p->N_ITER_1           5;
+      UpperBitsNotSet(p->Q_LOCACC,         6);
 
 */
 

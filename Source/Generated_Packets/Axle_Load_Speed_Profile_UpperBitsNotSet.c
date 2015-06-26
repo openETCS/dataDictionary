@@ -11,7 +11,9 @@ int Axle_Load_Speed_Profile_UpperBitsNotSet(const Axle_Load_Speed_Profile_Core* 
         UpperBitsNotSet64(p->D_TRACKINIT,       15)  &&
         UpperBitsNotSet64(p->D_AXLELOAD,        15)  &&
         UpperBitsNotSet64(p->L_AXLELOAD,        15)  &&
-        UpperBitsNotSet64(p->Q_FRONT,           1))
+        UpperBitsNotSet64(p->Q_FRONT,           1)   &&
+        UpperBitsNotSet64(p->N_ITER_1,          5)   &&
+        UpperBitsNotSet64(p->N_ITER_2,          5))
     {
         return 1;
     }

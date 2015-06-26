@@ -31,7 +31,7 @@ inline std::ostream& operator<<(std::ostream& stream, const List_of_Balises_in_S
        {
            stream << ',' << p.sub_1[i];
        }
-    
+   
 
     return stream;
 }
@@ -88,8 +88,7 @@ typedef struct List_of_Balises_in_SR_Authority_Core List_of_Balises_in_SR_Author
 
     predicate UpperBitsNotSet(List_of_Balises_in_SR_Authority_Core* p) =
       UpperBitsNotSet(p->Q_DIR,            2)   &&
-      UpperBitsNotSet(p->L_PACKET,         13)  &&
-      UpperBitsNotSet(p->N_ITER_1           5;
+      UpperBitsNotSet(p->L_PACKET,         13);
 
 */
 

@@ -9,7 +9,9 @@ int International_Static_Speed_Profile_UpperBitsNotSet(const International_Stati
         UpperBitsNotSet64(p->Q_SCALE,           2)   &&
         UpperBitsNotSet64(p->D_STATIC,          15)  &&
         UpperBitsNotSet64(p->V_STATIC,          7)   &&
-        UpperBitsNotSet64(p->Q_FRONT,           1))
+        UpperBitsNotSet64(p->Q_FRONT,           1)   &&
+        UpperBitsNotSet64(p->N_ITER_1,          5)   &&
+        UpperBitsNotSet64(p->N_ITER_2,          5))
     {
         return 1;
     }

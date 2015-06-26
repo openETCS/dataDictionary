@@ -47,13 +47,13 @@ inline std::ostream& operator<<(std::ostream& stream, const Validated_train_data
        {
            stream << ',' << p.sub_1[i];
        }
-    stream
+    stream << ','
        << +p.N_ITER_2;
        for (uint32_t i = 0; i < p.N_ITER_2; ++i)
        {
            stream << ',' << p.sub_2[i];
        }
-    
+   
 
     return stream;
 }
@@ -143,9 +143,7 @@ typedef struct Validated_train_data_Core Validated_train_data_Core;
       UpperBitsNotSet(p->M_LOADINGGAUGE,   8)   &&
       UpperBitsNotSet(p->M_AXLELOADCAT,    7)   &&
       UpperBitsNotSet(p->M_AIRTIGHT,       2)   &&
-      UpperBitsNotSet(p->N_AXLE,           10)  &&
-      UpperBitsNotSet(p->N_ITER_1           5 &&
-      UpperBitsNotSet(p->N_ITER_2           5;
+      UpperBitsNotSet(p->N_AXLE,           10);
 
 */
 

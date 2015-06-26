@@ -42,13 +42,13 @@ inline std::ostream& operator<<(std::ostream& stream, const International_Static
        {
            stream << ',' << p.sub_1[i];
        }
-    stream
+    stream << ','
        << +p.N_ITER_2;
        for (uint32_t i = 0; i < p.N_ITER_2; ++i)
        {
            stream << ',' << p.sub_2[i];
        }
-    
+   
 
     return stream;
 }
@@ -129,9 +129,7 @@ typedef struct International_Static_Speed_Profile_Core International_Static_Spee
       UpperBitsNotSet(p->Q_SCALE,          2)   &&
       UpperBitsNotSet(p->D_STATIC,         15)  &&
       UpperBitsNotSet(p->V_STATIC,         7)   &&
-      UpperBitsNotSet(p->Q_FRONT,          1)   &&
-      UpperBitsNotSet(p->N_ITER_1           5 &&
-      UpperBitsNotSet(p->N_ITER_2           5;
+      UpperBitsNotSet(p->Q_FRONT,          1);
 
 */
 

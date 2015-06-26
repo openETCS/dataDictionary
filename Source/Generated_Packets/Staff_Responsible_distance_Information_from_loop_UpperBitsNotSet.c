@@ -13,7 +13,8 @@ int Staff_Responsible_distance_Information_from_loop_UpperBitsNotSet(const Staff
         UpperBitsNotSet64(p->Q_NEWCOUNTRY_1,    1)   &&
         UpperBitsNotSet64(p->NID_C_1,           10)  &&
         UpperBitsNotSet64(p->NID_BG_1,          14)  &&
-        UpperBitsNotSet64(p->D_SR,              15))
+        UpperBitsNotSet64(p->D_SR,              15)  &&
+        UpperBitsNotSet64(p->N_ITER_1,          5))
     {
         return 1;
     }

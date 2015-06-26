@@ -48,7 +48,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Route_Suitability_Da
        {
            stream << ',' << p.sub_1[i];
        }
-    
+   
 
     return stream;
 }
@@ -136,8 +136,7 @@ typedef struct Route_Suitability_Data_Core Route_Suitability_Data_Core;
       UpperBitsNotSet(p->Q_DIR,            2)   &&
       UpperBitsNotSet(p->L_PACKET,         13)  &&
       UpperBitsNotSet(p->Q_SCALE,          2)   &&
-      UpperBitsNotSet(p->Q_TRACKINIT,      1)   &&
-      UpperBitsNotSet(p->N_ITER_1           5;
+      UpperBitsNotSet(p->Q_TRACKINIT,      1);
 
 */
 

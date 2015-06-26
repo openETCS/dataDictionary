@@ -10,6 +10,7 @@ int Level_1_Movement_Authority_UpperBitsNotSet(const Level_1_Movement_Authority_
         UpperBitsNotSet64(p->V_MAIN,            7)   &&
         UpperBitsNotSet64(p->V_LOA,             7)   &&
         UpperBitsNotSet64(p->T_LOA,             10)  &&
+        UpperBitsNotSet64(p->N_ITER_1,          5)   &&
         UpperBitsNotSet64(p->L_ENDSECTION,      15)  &&
         UpperBitsNotSet64(p->Q_SECTIONTIMER,    1)   &&
         UpperBitsNotSet64(p->T_SECTIONTIMER,    10)  &&

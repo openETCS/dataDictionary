@@ -82,7 +82,7 @@ inline std::ostream& operator<<(std::ostream& stream, const National_Values_Core
        {
            stream << ',' << p.sub_1[i];
        }
-    stream
+    stream << ','
        << +p.V_NVSHUNT << ','
        << +p.V_NVSTFF << ','
        << +p.V_NVONSIGHT << ','
@@ -122,13 +122,13 @@ inline std::ostream& operator<<(std::ostream& stream, const National_Values_Core
        {
            stream << ',' << p.sub_2[i];
        }
-    stream
+    stream << ','
        << +p.N_ITER_3;
        for (uint32_t i = 0; i < p.N_ITER_3; ++i)
        {
            stream << ',' << p.sub_3[i];
        }
-    stream
+    stream << ','
        << +p.L_NVKRINT << ','
        << +p.M_NVKRINT << ','
        << +p.N_ITER_4;
@@ -136,7 +136,7 @@ inline std::ostream& operator<<(std::ostream& stream, const National_Values_Core
        {
            stream << ',' << p.sub_4[i];
        }
-    stream
+    stream << ','
        << +p.M_NVKTINT;
 
     return stream;
@@ -385,7 +385,6 @@ typedef struct National_Values_Core National_Values_Core;
       UpperBitsNotSet(p->Q_SCALE,          2)   &&
       UpperBitsNotSet(p->D_VALIDNV,        15)  &&
       UpperBitsNotSet(p->NID_C,            10)  &&
-      UpperBitsNotSet(p->N_ITER_1           5 &&
       UpperBitsNotSet(p->V_NVSHUNT,        7)   &&
       UpperBitsNotSet(p->V_NVSTFF,         7)   &&
       UpperBitsNotSet(p->V_NVONSIGHT,      7)   &&
@@ -417,11 +416,8 @@ typedef struct National_Values_Core National_Values_Core;
       UpperBitsNotSet(p->Q_NVKINT,         1)   &&
       UpperBitsNotSet(p->V_NVKVINT,        7)   &&
       UpperBitsNotSet(p->M_NVKVINT,        7)   &&
-      UpperBitsNotSet(p->N_ITER_2           5 &&
-      UpperBitsNotSet(p->N_ITER_3           5 &&
       UpperBitsNotSet(p->L_NVKRINT,        5)   &&
       UpperBitsNotSet(p->M_NVKRINT,        5)   &&
-      UpperBitsNotSet(p->N_ITER_4           5 &&
       UpperBitsNotSet(p->M_NVKTINT,        5);
 
 */
