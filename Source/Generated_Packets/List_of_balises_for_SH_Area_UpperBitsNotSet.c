@@ -4,7 +4,8 @@
 
 int List_of_balises_for_SH_Area_UpperBitsNotSet(const List_of_balises_for_SH_Area_Core* p)
 {
-    if (1)
+    if (UpperBitsNotSet64(p->Q_DIR,             2)   &&
+        UpperBitsNotSet64(p->L_PACKET,          13))
     {
         return 1;
     }

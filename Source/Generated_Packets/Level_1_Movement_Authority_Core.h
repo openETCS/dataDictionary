@@ -168,6 +168,7 @@ typedef struct Level_1_Movement_Authority_Core Level_1_Movement_Authority_Core;
       UpperBitsNotSet(p->V_MAIN,           7)   &&
       UpperBitsNotSet(p->V_LOA,            7)   &&
       UpperBitsNotSet(p->T_LOA,            10)  &&
+      UpperBitsNotSet(p->N_ITER_1           5 &&
       UpperBitsNotSet(p->L_ENDSECTION,     15)  &&
       UpperBitsNotSet(p->Q_SECTIONTIMER,   1)   &&
       UpperBitsNotSet(p->T_SECTIONTIMER,   10)  &&

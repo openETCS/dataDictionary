@@ -143,7 +143,9 @@ typedef struct Validated_train_data_Core Validated_train_data_Core;
       UpperBitsNotSet(p->M_LOADINGGAUGE,   8)   &&
       UpperBitsNotSet(p->M_AXLELOADCAT,    7)   &&
       UpperBitsNotSet(p->M_AIRTIGHT,       2)   &&
-      UpperBitsNotSet(p->N_AXLE,           10);
+      UpperBitsNotSet(p->N_AXLE,           10)  &&
+      UpperBitsNotSet(p->N_ITER_1           5 &&
+      UpperBitsNotSet(p->N_ITER_2           5;
 
 */
 

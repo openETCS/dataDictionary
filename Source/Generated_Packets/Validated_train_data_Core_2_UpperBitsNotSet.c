@@ -4,7 +4,7 @@
 
 int Validated_train_data_Core_2_UpperBitsNotSet(const Validated_train_data_Core_2* p)
 {
-    if (1)
+    if (UpperBitsNotSet64(p->NID_NTC_n,         8))
     {
         return 1;
     }

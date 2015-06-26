@@ -128,7 +128,8 @@ typedef struct Linking_Core Linking_Core;
       UpperBitsNotSet(p->NID_BG,           14)  &&
       UpperBitsNotSet(p->Q_LINKORIENTATION,1)   &&
       UpperBitsNotSet(p->Q_LINKREACTION,   2)   &&
-      UpperBitsNotSet(p->Q_LOCACC,         6);
+      UpperBitsNotSet(p->Q_LOCACC,         6)   &&
+      UpperBitsNotSet(p->N_ITER_1           5;
 
 */
 

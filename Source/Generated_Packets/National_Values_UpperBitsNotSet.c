@@ -37,7 +37,15 @@ int National_Values_UpperBitsNotSet(const National_Values_Core* p)
         UpperBitsNotSet64(p->Q_NVLOCACC,        6)   &&
         UpperBitsNotSet64(p->M_NVAVADH,         5)   &&
         UpperBitsNotSet64(p->M_NVEBCL,          4)   &&
-        UpperBitsNotSet64(p->Q_NVKINT,          1))
+        UpperBitsNotSet64(p->Q_NVKINT,          1)   &&
+        UpperBitsNotSet64(p->Q_NVKVINTSET,      2)   &&
+        UpperBitsNotSet64(p->A_NVP12,           6)   &&
+        UpperBitsNotSet64(p->A_NVP23,           6)   &&
+        UpperBitsNotSet64(p->V_NVKVINT,         7)   &&
+        UpperBitsNotSet64(p->M_NVKVINT,         7)   &&
+        UpperBitsNotSet64(p->L_NVKRINT,         5)   &&
+        UpperBitsNotSet64(p->M_NVKRINT,         5)   &&
+        UpperBitsNotSet64(p->M_NVKTINT,         5))
     {
         return 1;
     }

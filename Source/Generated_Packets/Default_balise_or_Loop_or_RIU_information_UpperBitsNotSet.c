@@ -4,7 +4,8 @@
 
 int Default_balise_or_Loop_or_RIU_information_UpperBitsNotSet(const Default_balise_or_Loop_or_RIU_information_Core* p)
 {
-    if (1)
+    if (UpperBitsNotSet64(p->Q_DIR,             2)   &&
+        UpperBitsNotSet64(p->L_PACKET,          13))
     {
         return 1;
     }

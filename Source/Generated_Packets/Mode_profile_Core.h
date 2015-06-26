@@ -122,7 +122,8 @@ typedef struct Mode_profile_Core Mode_profile_Core;
       UpperBitsNotSet(p->V_MAMODE,         7)   &&
       UpperBitsNotSet(p->L_MAMODE,         15)  &&
       UpperBitsNotSet(p->L_ACKMAMODE,      15)  &&
-      UpperBitsNotSet(p->Q_MAMODE,         1);
+      UpperBitsNotSet(p->Q_MAMODE,         1)   &&
+      UpperBitsNotSet(p->N_ITER_1           5;
 
 */
 

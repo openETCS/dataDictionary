@@ -385,6 +385,7 @@ typedef struct National_Values_Core National_Values_Core;
       UpperBitsNotSet(p->Q_SCALE,          2)   &&
       UpperBitsNotSet(p->D_VALIDNV,        15)  &&
       UpperBitsNotSet(p->NID_C,            10)  &&
+      UpperBitsNotSet(p->N_ITER_1           5 &&
       UpperBitsNotSet(p->V_NVSHUNT,        7)   &&
       UpperBitsNotSet(p->V_NVSTFF,         7)   &&
       UpperBitsNotSet(p->V_NVONSIGHT,      7)   &&
@@ -416,8 +417,11 @@ typedef struct National_Values_Core National_Values_Core;
       UpperBitsNotSet(p->Q_NVKINT,         1)   &&
       UpperBitsNotSet(p->V_NVKVINT,        7)   &&
       UpperBitsNotSet(p->M_NVKVINT,        7)   &&
+      UpperBitsNotSet(p->N_ITER_2           5 &&
+      UpperBitsNotSet(p->N_ITER_3           5 &&
       UpperBitsNotSet(p->L_NVKRINT,        5)   &&
       UpperBitsNotSet(p->M_NVKRINT,        5)   &&
+      UpperBitsNotSet(p->N_ITER_4           5 &&
       UpperBitsNotSet(p->M_NVKTINT,        5);
 
 */

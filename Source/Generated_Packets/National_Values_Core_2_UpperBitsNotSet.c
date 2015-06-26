@@ -4,7 +4,8 @@
 
 int National_Values_Core_2_UpperBitsNotSet(const National_Values_Core_2* p)
 {
-    if (1)
+    if (UpperBitsNotSet64(p->V_NVKVINT_n,       7)   &&
+        UpperBitsNotSet64(p->M_NVKVINT_n,       7))
     {
         return 1;
     }

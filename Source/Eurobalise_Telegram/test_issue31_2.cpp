@@ -85,7 +85,7 @@ int main ()
         b.core.D_NVOVTRP = 200;
         b.core.T_NVOVTRP = 60;
         b.core.D_NVPOTRP = 200;
-        b.core.M_NVCONTACT = 10;
+        b.core.M_NVCONTACT = 1;
         b.core.T_NVCONTACT = 255;
         b.core.M_NVDERUN = 1;
         b.core.D_NVSTFF = 32767;

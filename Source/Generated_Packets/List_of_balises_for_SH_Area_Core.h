@@ -88,7 +88,8 @@ typedef struct List_of_balises_for_SH_Area_Core List_of_balises_for_SH_Area_Core
 
     predicate UpperBitsNotSet(List_of_balises_for_SH_Area_Core* p) =
       UpperBitsNotSet(p->Q_DIR,            2)   &&
-      UpperBitsNotSet(p->L_PACKET,         13);
+      UpperBitsNotSet(p->L_PACKET,         13)  &&
+      UpperBitsNotSet(p->N_ITER_1           5;
 
 */
 

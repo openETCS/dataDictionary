@@ -108,7 +108,8 @@ typedef struct Position_Report_Parameters_Core Position_Report_Parameters_Core;
       UpperBitsNotSet(p->Q_SCALE,          2)   &&
       UpperBitsNotSet(p->T_CYCLOC,         8)   &&
       UpperBitsNotSet(p->D_CYCLOC,         15)  &&
-      UpperBitsNotSet(p->M_LOC,            3);
+      UpperBitsNotSet(p->M_LOC,            3)   &&
+      UpperBitsNotSet(p->N_ITER_1           5;
 
 */
 

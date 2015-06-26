@@ -82,7 +82,8 @@ typedef struct Onboard_telephone_numbers_Core Onboard_telephone_numbers_Core;
       EqualBits(stream, pos,       pos + 13,  p->L_PACKET);
 
     predicate UpperBitsNotSet(Onboard_telephone_numbers_Core* p) =
-      UpperBitsNotSet(p->L_PACKET,         13);
+      UpperBitsNotSet(p->L_PACKET,         13)  &&
+      UpperBitsNotSet(p->N_ITER_1           5;
 
 */
 

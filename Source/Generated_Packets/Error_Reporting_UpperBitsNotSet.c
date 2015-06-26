@@ -4,7 +4,8 @@
 
 int Error_Reporting_UpperBitsNotSet(const Error_Reporting_Core* p)
 {
-    if (1)
+    if (UpperBitsNotSet64(p->L_PACKET,          13)  &&
+        UpperBitsNotSet64(p->M_ERROR,           8))
     {
         return 1;
     }

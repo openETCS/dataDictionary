@@ -4,7 +4,7 @@
 
 int Onboard_telephone_numbers_UpperBitsNotSet(const Onboard_telephone_numbers_Core* p)
 {
-    if (1)
+    if (UpperBitsNotSet64(p->L_PACKET,          13))
     {
         return 1;
     }

@@ -124,7 +124,8 @@ typedef struct Geographical_Position_Information_Core Geographical_Position_Info
       UpperBitsNotSet(p->NID_BG,           14)  &&
       UpperBitsNotSet(p->D_POSOFF,         15)  &&
       UpperBitsNotSet(p->Q_MPOSITION,      1)   &&
-      UpperBitsNotSet(p->M_POSITION,       24);
+      UpperBitsNotSet(p->M_POSITION,       24)  &&
+      UpperBitsNotSet(p->N_ITER_1           5;
 
 */
 

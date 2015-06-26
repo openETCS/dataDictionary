@@ -99,7 +99,8 @@ typedef struct Conditional_Level_Transition_Order_Core Conditional_Level_Transit
     predicate UpperBitsNotSet(Conditional_Level_Transition_Order_Core* p) =
       UpperBitsNotSet(p->Q_DIR,            2)   &&
       UpperBitsNotSet(p->L_PACKET,         13)  &&
-      UpperBitsNotSet(p->M_LEVELTR,        3);
+      UpperBitsNotSet(p->M_LEVELTR,        3)   &&
+      UpperBitsNotSet(p->N_ITER_1           5;
 
 */
 

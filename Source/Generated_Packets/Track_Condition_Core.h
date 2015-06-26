@@ -115,7 +115,8 @@ typedef struct Track_Condition_Core Track_Condition_Core;
       UpperBitsNotSet(p->Q_DIR,            2)   &&
       UpperBitsNotSet(p->L_PACKET,         13)  &&
       UpperBitsNotSet(p->Q_SCALE,          2)   &&
-      UpperBitsNotSet(p->Q_TRACKINIT,      1);
+      UpperBitsNotSet(p->Q_TRACKINIT,      1)   &&
+      UpperBitsNotSet(p->N_ITER_1           5;
 
 */
 
