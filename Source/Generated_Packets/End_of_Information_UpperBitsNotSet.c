@@ -4,7 +4,10 @@
 
 int End_of_Information_UpperBitsNotSet(const End_of_Information_Core* p)
 {
-    if (1)
+    bool status = true;
+
+
+    if (status)
     {
         return 1;
     }

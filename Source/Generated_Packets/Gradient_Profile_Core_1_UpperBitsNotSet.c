@@ -4,9 +4,13 @@
 
 int Gradient_Profile_Core_1_UpperBitsNotSet(const Gradient_Profile_Core_1* p)
 {
-    if (UpperBitsNotSet64(p->D_GRADIENT_k,      15)  &&
-        UpperBitsNotSet64(p->Q_GDIR_k,          1)   &&
-        UpperBitsNotSet64(p->G_A_k,             8))
+    bool status = true;
+
+    status = status && UpperBitsNotSet64(p->D_GRADIENT_k,      15);
+    status = status && UpperBitsNotSet64(p->Q_GDIR_k,          1) ;
+    status = status && UpperBitsNotSet64(p->G_A_k,             8) ;
+
+    if (status)
     {
         return 1;
     }

@@ -4,8 +4,12 @@
 
 int National_Values_Core_4_UpperBitsNotSet(const National_Values_Core_4* p)
 {
-    if (UpperBitsNotSet64(p->L_NVKRINT_l,       5)   &&
-        UpperBitsNotSet64(p->M_NVKRINT_l,       5))
+    bool status = true;
+
+    status = status && UpperBitsNotSet64(p->L_NVKRINT_l,       5) ;
+    status = status && UpperBitsNotSet64(p->M_NVKRINT_l,       5) ;
+
+    if (status)
     {
         return 1;
     }

@@ -4,7 +4,11 @@
 
 int Onboard_telephone_numbers_Core_1_UpperBitsNotSet(const Onboard_telephone_numbers_Core_1* p)
 {
-    if (UpperBitsNotSet64(p->NID_RADIO_k,       64))
+    bool status = true;
+
+    status = status && UpperBitsNotSet64(p->NID_RADIO_k,       64);
+
+    if (status)
     {
         return 1;
     }

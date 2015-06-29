@@ -4,7 +4,11 @@
 
 int Virtual_Balise_Cover_marker_UpperBitsNotSet(const Virtual_Balise_Cover_marker_Core* p)
 {
-    if (UpperBitsNotSet64(p->NID_VBCMK,         6))
+    bool status = true;
+
+    status = status && UpperBitsNotSet64(p->NID_VBCMK,         6) ;
+
+    if (status)
     {
         return 1;
     }
