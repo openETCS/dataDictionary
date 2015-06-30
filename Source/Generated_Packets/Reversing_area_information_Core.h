@@ -3,6 +3,7 @@
 #define REVERSING_AREA_INFORMATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct Reversing_area_information_Core
 {
@@ -20,14 +21,29 @@ struct Reversing_area_information_Core
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const Reversing_area_information_Core& p)
+{
+    stream 
+       << +p.Q_DIR << ','
+       << +p.L_PACKET << ','
+       << +p.Q_SCALE << ','
+       << +p.D_STARTREVERSE << ','
+       << +p.L_REVERSEAREA;
+
+    return stream;
+}
+
 inline bool operator==(const Reversing_area_information_Core& a, const Reversing_area_information_Core& b)
 {
-    return
-        (a.Q_DIR == b.Q_DIR) &&
-        (a.L_PACKET == b.L_PACKET) &&
-        (a.Q_SCALE == b.Q_SCALE) &&
-        (a.D_STARTREVERSE == b.D_STARTREVERSE) &&
-        (a.L_REVERSEAREA == b.L_REVERSEAREA);
+    bool status = true;
+    
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SCALE == b.Q_SCALE);
+    status = status && (a.D_STARTREVERSE == b.D_STARTREVERSE);
+    status = status && (a.L_REVERSEAREA == b.L_REVERSEAREA);
+
+    return status;
 }
 
 inline bool operator!=(const Reversing_area_information_Core& a, const Reversing_area_information_Core& b)

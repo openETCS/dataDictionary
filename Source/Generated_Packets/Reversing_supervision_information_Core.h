@@ -3,6 +3,7 @@
 #define REVERSING_SUPERVISION_INFORMATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct Reversing_supervision_information_Core
 {
@@ -20,14 +21,29 @@ struct Reversing_supervision_information_Core
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const Reversing_supervision_information_Core& p)
+{
+    stream 
+       << +p.Q_DIR << ','
+       << +p.L_PACKET << ','
+       << +p.Q_SCALE << ','
+       << +p.D_REVERSE << ','
+       << +p.V_REVERSE;
+
+    return stream;
+}
+
 inline bool operator==(const Reversing_supervision_information_Core& a, const Reversing_supervision_information_Core& b)
 {
-    return
-        (a.Q_DIR == b.Q_DIR) &&
-        (a.L_PACKET == b.L_PACKET) &&
-        (a.Q_SCALE == b.Q_SCALE) &&
-        (a.D_REVERSE == b.D_REVERSE) &&
-        (a.V_REVERSE == b.V_REVERSE);
+    bool status = true;
+    
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SCALE == b.Q_SCALE);
+    status = status && (a.D_REVERSE == b.D_REVERSE);
+    status = status && (a.V_REVERSE == b.V_REVERSE);
+
+    return status;
 }
 
 inline bool operator!=(const Reversing_supervision_information_Core& a, const Reversing_supervision_information_Core& b)

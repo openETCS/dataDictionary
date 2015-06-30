@@ -3,6 +3,7 @@
 #define DANGER_FOR_SHUNTING_INFORMATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct Danger_for_Shunting_information_Core
 {
@@ -17,12 +18,25 @@ struct Danger_for_Shunting_information_Core
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const Danger_for_Shunting_information_Core& p)
+{
+    stream 
+       << +p.Q_DIR << ','
+       << +p.L_PACKET << ','
+       << +p.Q_ASPECT;
+
+    return stream;
+}
+
 inline bool operator==(const Danger_for_Shunting_information_Core& a, const Danger_for_Shunting_information_Core& b)
 {
-    return
-        (a.Q_DIR == b.Q_DIR) &&
-        (a.L_PACKET == b.L_PACKET) &&
-        (a.Q_ASPECT == b.Q_ASPECT);
+    bool status = true;
+    
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_ASPECT == b.Q_ASPECT);
+
+    return status;
 }
 
 inline bool operator!=(const Danger_for_Shunting_information_Core& a, const Danger_for_Shunting_information_Core& b)

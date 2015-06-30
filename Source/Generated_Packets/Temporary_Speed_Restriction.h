@@ -14,31 +14,19 @@ struct Temporary_Speed_Restriction : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '('
-	       << uint64_t(id) << ','
-               << core.Q_DIR << ','
-               << core.L_PACKET << ','
-               << core.Q_SCALE << ','
-               << core.NID_TSR << ','
-               << core.D_TSR << ','
-               << core.L_TSR << ','
-               << core.Q_FRONT << ','
-               << core.V_TSR << ')';
+        stream << '(' << +id << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
     {
 	if(auto q = dynamic_cast<const Temporary_Speed_Restriction*>(&p))
 	{
-	    return
-                (core.Q_DIR == q->core.Q_DIR) &&
-                (core.L_PACKET == q->core.L_PACKET) &&
-                (core.Q_SCALE == q->core.Q_SCALE) &&
-                (core.NID_TSR == q->core.NID_TSR) &&
-                (core.D_TSR == q->core.D_TSR) &&
-                (core.L_TSR == q->core.L_TSR) &&
-                (core.Q_FRONT == q->core.Q_FRONT) &&
-                (core.V_TSR == q->core.V_TSR);
+	    bool status = true;
+
+	    status = status && (id == q->id);
+	    status = status && (core == q->core);
+
+	    return status;
 	}
 	return false;
     }

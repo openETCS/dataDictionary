@@ -14,27 +14,19 @@ struct Session_Management_with_neighbouring_Radio_Infill_Unit : public BasePacke
 
     void print(std::ostream& stream) const override
     {
-        stream << '('
-	       << uint64_t(id) << ','
-               << core.Q_DIR << ','
-               << core.L_PACKET << ','
-               << core.Q_RIU << ','
-               << core.NID_C << ','
-               << core.NID_RIU << ','
-               << core.NID_RADIO << ')';
+        stream << '(' << +id << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
     {
 	if(auto q = dynamic_cast<const Session_Management_with_neighbouring_Radio_Infill_Unit*>(&p))
 	{
-	    return
-                (core.Q_DIR == q->core.Q_DIR) &&
-                (core.L_PACKET == q->core.L_PACKET) &&
-                (core.Q_RIU == q->core.Q_RIU) &&
-                (core.NID_C == q->core.NID_C) &&
-                (core.NID_RIU == q->core.NID_RIU) &&
-                (core.NID_RADIO == q->core.NID_RADIO);
+	    bool status = true;
+
+	    status = status && (id == q->id);
+	    status = status && (core == q->core);
+
+	    return status;
 	}
 	return false;
     }

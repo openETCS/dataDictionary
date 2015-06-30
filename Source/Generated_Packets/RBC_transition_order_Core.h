@@ -3,6 +3,7 @@
 #define RBC_TRANSITION_ORDER_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct RBC_transition_order_Core
 {
@@ -22,17 +23,35 @@ struct RBC_transition_order_Core
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const RBC_transition_order_Core& p)
+{
+    stream 
+       << +p.Q_DIR << ','
+       << +p.L_PACKET << ','
+       << +p.Q_SCALE << ','
+       << +p.D_RBCTR << ','
+       << +p.NID_C << ','
+       << +p.NID_RBC << ','
+       << +p.NID_RADIO << ','
+       << +p.Q_SLEEPSESSION;
+
+    return stream;
+}
+
 inline bool operator==(const RBC_transition_order_Core& a, const RBC_transition_order_Core& b)
 {
-    return
-        (a.Q_DIR == b.Q_DIR) &&
-        (a.L_PACKET == b.L_PACKET) &&
-        (a.Q_SCALE == b.Q_SCALE) &&
-        (a.D_RBCTR == b.D_RBCTR) &&
-        (a.NID_C == b.NID_C) &&
-        (a.NID_RBC == b.NID_RBC) &&
-        (a.NID_RADIO == b.NID_RADIO) &&
-        (a.Q_SLEEPSESSION == b.Q_SLEEPSESSION);
+    bool status = true;
+    
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SCALE == b.Q_SCALE);
+    status = status && (a.D_RBCTR == b.D_RBCTR);
+    status = status && (a.NID_C == b.NID_C);
+    status = status && (a.NID_RBC == b.NID_RBC);
+    status = status && (a.NID_RADIO == b.NID_RADIO);
+    status = status && (a.Q_SLEEPSESSION == b.Q_SLEEPSESSION);
+
+    return status;
 }
 
 inline bool operator!=(const RBC_transition_order_Core& a, const RBC_transition_order_Core& b)

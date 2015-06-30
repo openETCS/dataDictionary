@@ -3,6 +3,7 @@
 #define SYSTEM_VERSION_ORDER_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct System_Version_order_Core
 {
@@ -18,12 +19,25 @@ struct System_Version_order_Core
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const System_Version_order_Core& p)
+{
+    stream 
+       << +p.Q_DIR << ','
+       << +p.L_PACKET << ','
+       << +p.M_VERSION;
+
+    return stream;
+}
+
 inline bool operator==(const System_Version_order_Core& a, const System_Version_order_Core& b)
 {
-    return
-        (a.Q_DIR == b.Q_DIR) &&
-        (a.L_PACKET == b.L_PACKET) &&
-        (a.M_VERSION == b.M_VERSION);
+    bool status = true;
+    
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.M_VERSION == b.M_VERSION);
+
+    return status;
 }
 
 inline bool operator!=(const System_Version_order_Core& a, const System_Version_order_Core& b)

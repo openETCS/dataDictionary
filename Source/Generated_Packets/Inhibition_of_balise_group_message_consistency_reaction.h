@@ -14,19 +14,19 @@ struct Inhibition_of_balise_group_message_consistency_reaction : public BasePack
 
     void print(std::ostream& stream) const override
     {
-        stream << '('
-	       << uint64_t(id) << ','
-               << core.Q_DIR << ','
-               << core.L_PACKET << ')';
+        stream << '(' << +id << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
     {
 	if(auto q = dynamic_cast<const Inhibition_of_balise_group_message_consistency_reaction*>(&p))
 	{
-	    return
-                (core.Q_DIR == q->core.Q_DIR) &&
-                (core.L_PACKET == q->core.L_PACKET);
+	    bool status = true;
+
+	    status = status && (id == q->id);
+	    status = status && (core == q->core);
+
+	    return status;
 	}
 	return false;
     }

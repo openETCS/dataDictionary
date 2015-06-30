@@ -3,6 +3,7 @@
 #define MOVEMENT_AUTHORITY_REQUEST_PARAMETERS_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include <iostream>
 
 struct Movement_Authority_Request_Parameters_Core
 {
@@ -20,14 +21,29 @@ struct Movement_Authority_Request_Parameters_Core
 
 #ifdef __cplusplus
 
+inline std::ostream& operator<<(std::ostream& stream, const Movement_Authority_Request_Parameters_Core& p)
+{
+    stream 
+       << +p.Q_DIR << ','
+       << +p.L_PACKET << ','
+       << +p.T_MAR << ','
+       << +p.T_TIMEOUTRQST << ','
+       << +p.T_CYCRQST;
+
+    return stream;
+}
+
 inline bool operator==(const Movement_Authority_Request_Parameters_Core& a, const Movement_Authority_Request_Parameters_Core& b)
 {
-    return
-        (a.Q_DIR == b.Q_DIR) &&
-        (a.L_PACKET == b.L_PACKET) &&
-        (a.T_MAR == b.T_MAR) &&
-        (a.T_TIMEOUTRQST == b.T_TIMEOUTRQST) &&
-        (a.T_CYCRQST == b.T_CYCRQST);
+    bool status = true;
+    
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.T_MAR == b.T_MAR);
+    status = status && (a.T_TIMEOUTRQST == b.T_TIMEOUTRQST);
+    status = status && (a.T_CYCRQST == b.T_CYCRQST);
+
+    return status;
 }
 
 inline bool operator!=(const Movement_Authority_Request_Parameters_Core& a, const Movement_Authority_Request_Parameters_Core& b)

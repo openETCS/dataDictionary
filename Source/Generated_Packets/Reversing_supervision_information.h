@@ -14,25 +14,19 @@ struct Reversing_supervision_information : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '('
-	       << uint64_t(id) << ','
-               << core.Q_DIR << ','
-               << core.L_PACKET << ','
-               << core.Q_SCALE << ','
-               << core.D_REVERSE << ','
-               << core.V_REVERSE << ')';
+        stream << '(' << +id << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
     {
 	if(auto q = dynamic_cast<const Reversing_supervision_information*>(&p))
 	{
-	    return
-                (core.Q_DIR == q->core.Q_DIR) &&
-                (core.L_PACKET == q->core.L_PACKET) &&
-                (core.Q_SCALE == q->core.Q_SCALE) &&
-                (core.D_REVERSE == q->core.D_REVERSE) &&
-                (core.V_REVERSE == q->core.V_REVERSE);
+	    bool status = true;
+
+	    status = status && (id == q->id);
+	    status = status && (core == q->core);
+
+	    return status;
 	}
 	return false;
     }

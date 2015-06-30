@@ -9,7 +9,9 @@ export TELEGRAM_HEADER=$(TOPDIR)/Telegram_Header
 
 #VPATH = Packet_Header
 
-it: lib decoder_test encoder_test
+it:	lib decoder_test encoder_test\
+	conditional_encoder_test conditional_decoder_test\
+	dynamic_decoder_test dynamic_encoder_test\
 
 include $(TOPDIR)/Makefile.template
 
@@ -31,6 +33,14 @@ LDFLAGS += -L$(BITWALKER) -lBitwalker
 test: it
 	./encoder_test
 	./decoder_test
+	./conditional_encoder_test
+	./conditional_decoder_test
+	./dynamic_encoder_test
+	./dynamic_decoder_test
+
+issue31: lib test_issue31_1
+	./test_issue31_1
+	
 
 lib:
 	@(cd $(BITWALKER) && $(MAKE) lib)
@@ -38,8 +48,7 @@ lib:
 	@(cd $(PACKET_HEADER) && $(MAKE) lib)
 	@(cd $(TELEGRAM_HEADER) && $(MAKE) lib)
 
-SRC=Eurobalise_Telegram.cpp $(GENERATED_PACKETS)/Decoder_Branch.cpp $(GENERATED_PACKETS)/Encoder_Branch.cpp\
-    create.cpp
+SRC=Eurobalise_Telegram.cpp create.cpp
 
 OBJ := $(SRC:.cpp=.o)
 
@@ -47,6 +56,21 @@ decoder_test: decoder_test.o $(OBJ)
 	$(CXX) -o $@ $+ $(LDFLAGS)
 
 encoder_test: encoder_test.o $(OBJ)
+	$(CXX) -o $@ $+ $(LDFLAGS)
+
+conditional_decoder_test: conditional_decoder_test.o $(OBJ)
+	$(CXX) -o $@ $+ $(LDFLAGS)
+
+conditional_encoder_test: conditional_encoder_test.o $(OBJ)
+	$(CXX) -o $@ $+ $(LDFLAGS)
+
+dynamic_decoder_test: dynamic_decoder_test.o $(OBJ)
+	$(CXX) -o $@ $+ $(LDFLAGS)
+
+dynamic_encoder_test: dynamic_encoder_test.o $(OBJ)
+	$(CXX) -o $@ $+ $(LDFLAGS)
+
+test_issue31_1: test_issue31_1.o $(OBJ)
 	$(CXX) -o $@ $+ $(LDFLAGS)
 
 FORMAT := $(wildcard *.h) $(wildcard *.cpp)
@@ -57,6 +81,11 @@ format: FORCE
 clean::
 	@$(RM) decoder_test
 	@$(RM) encoder_test
+	@$(RM) conditional_decoder_test
+	@$(RM) conditional_encoder_test
+	@$(RM) dynamic_decoder_test
+	@$(RM) dynamic_encoder_test
+	@$(RM) test_issue31_1
 	@(cd $(BITWALKER) && $(MAKE) clean)
 	@(cd $(GENERATED_PACKETS) && $(MAKE) clean)
 	@(cd $(PACKET_HEADER) && $(MAKE) clean)
