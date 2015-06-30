@@ -120,7 +120,7 @@ inline bool operator!=(const Level_23_Movement_Authority_Core& a, const Level_23
 
 typedef struct Level_23_Movement_Authority_Core Level_23_Movement_Authority_Core;
 
-#define LEVEL_23_MOVEMENT_AUTHORITY_CORE_BITSIZE 218
+#define LEVEL_23_MOVEMENT_AUTHORITY_CORE_BITSIZE 1119
 
 /*@
     logic integer BitSize{L}(Level_23_Movement_Authority_Core* p) = LEVEL_23_MOVEMENT_AUTHORITY_CORE_BITSIZE;
@@ -135,49 +135,9 @@ typedef struct Level_23_Movement_Authority_Core Level_23_Movement_Authority_Core
 
     predicate ZeroInitialized(Level_23_Movement_Authority_Core* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, Level_23_Movement_Authority_Core* p) =
-      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
-      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
-      EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)           &&
-      EqualBits(stream, pos + 17,  pos + 24,  p->V_LOA)             &&
-      EqualBits(stream, pos + 24,  pos + 34,  p->T_LOA)             &&
-      EqualBits(stream, pos + 80,  pos + 95,  p->L_ENDSECTION)      &&
-      EqualBits(stream, pos + 95,  pos + 96,  p->Q_SECTIONTIMER)    &&
-      EqualBits(stream, pos + 96,  pos + 106, p->T_SECTIONTIMER)    &&
-      EqualBits(stream, pos + 106, pos + 121, p->D_SECTIONTIMERSTOPLOC) &&
-      EqualBits(stream, pos + 121, pos + 122, p->Q_ENDTIMER)        &&
-      EqualBits(stream, pos + 122, pos + 132, p->T_ENDTIMER)        &&
-      EqualBits(stream, pos + 132, pos + 147, p->D_ENDTIMERSTARTLOC) &&
-      EqualBits(stream, pos + 147, pos + 148, p->Q_DANGERPOINT)     &&
-      EqualBits(stream, pos + 148, pos + 163, p->D_DP)              &&
-      EqualBits(stream, pos + 163, pos + 170, p->V_RELEASEDP)       &&
-      EqualBits(stream, pos + 170, pos + 171, p->Q_OVERLAP)         &&
-      EqualBits(stream, pos + 171, pos + 186, p->D_STARTOL)         &&
-      EqualBits(stream, pos + 186, pos + 196, p->T_OL)              &&
-      EqualBits(stream, pos + 196, pos + 211, p->D_OL)              &&
-      EqualBits(stream, pos + 211, pos + 218, p->V_RELEASEOL);
+    predicate EqualBits(Bitstream* stream, integer pos, Level_23_Movement_Authority_Core* p) = \true;
 
-    predicate UpperBitsNotSet(Level_23_Movement_Authority_Core* p) =
-      UpperBitsNotSet(p->Q_DIR,            2)   &&
-      UpperBitsNotSet(p->L_PACKET,         13)  &&
-      UpperBitsNotSet(p->Q_SCALE,          2)   &&
-      UpperBitsNotSet(p->V_LOA,            7)   &&
-      UpperBitsNotSet(p->T_LOA,            10)  &&
-      UpperBitsNotSet(p->L_ENDSECTION,     15)  &&
-      UpperBitsNotSet(p->Q_SECTIONTIMER,   1)   &&
-      UpperBitsNotSet(p->T_SECTIONTIMER,   10)  &&
-      UpperBitsNotSet(p->D_SECTIONTIMERSTOPLOC,15)  &&
-      UpperBitsNotSet(p->Q_ENDTIMER,       1)   &&
-      UpperBitsNotSet(p->T_ENDTIMER,       10)  &&
-      UpperBitsNotSet(p->D_ENDTIMERSTARTLOC,15)  &&
-      UpperBitsNotSet(p->Q_DANGERPOINT,    1)   &&
-      UpperBitsNotSet(p->D_DP,             15)  &&
-      UpperBitsNotSet(p->V_RELEASEDP,      7)   &&
-      UpperBitsNotSet(p->Q_OVERLAP,        1)   &&
-      UpperBitsNotSet(p->D_STARTOL,        15)  &&
-      UpperBitsNotSet(p->T_OL,             10)  &&
-      UpperBitsNotSet(p->D_OL,             15)  &&
-      UpperBitsNotSet(p->V_RELEASEOL,      7);
+    predicate UpperBitsNotSet(Level_23_Movement_Authority_Core* p) = \true;
 
 */
 

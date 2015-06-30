@@ -63,7 +63,7 @@ inline bool operator!=(const Temporary_Speed_Restriction_Core& a, const Temporar
 
 typedef struct Temporary_Speed_Restriction_Core Temporary_Speed_Restriction_Core;
 
-#define TEMPORARY_SPEED_RESTRICTION_CORE_BITSIZE 63
+#define TEMPORARY_SPEED_RESTRICTION_CORE_BITSIZE 2295
 
 /*@
     logic integer BitSize{L}(Temporary_Speed_Restriction_Core* p) = TEMPORARY_SPEED_RESTRICTION_CORE_BITSIZE;
@@ -78,25 +78,9 @@ typedef struct Temporary_Speed_Restriction_Core Temporary_Speed_Restriction_Core
 
     predicate ZeroInitialized(Temporary_Speed_Restriction_Core* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, Temporary_Speed_Restriction_Core* p) =
-      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
-      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
-      EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)           &&
-      EqualBits(stream, pos + 17,  pos + 25,  p->NID_TSR)           &&
-      EqualBits(stream, pos + 25,  pos + 40,  p->D_TSR)             &&
-      EqualBits(stream, pos + 40,  pos + 55,  p->L_TSR)             &&
-      EqualBits(stream, pos + 55,  pos + 56,  p->Q_FRONT)           &&
-      EqualBits(stream, pos + 56,  pos + 63,  p->V_TSR);
+    predicate EqualBits(Bitstream* stream, integer pos, Temporary_Speed_Restriction_Core* p) = \true;
 
-    predicate UpperBitsNotSet(Temporary_Speed_Restriction_Core* p) =
-      UpperBitsNotSet(p->Q_DIR,            2)   &&
-      UpperBitsNotSet(p->L_PACKET,         13)  &&
-      UpperBitsNotSet(p->Q_SCALE,          2)   &&
-      UpperBitsNotSet(p->NID_TSR,          8)   &&
-      UpperBitsNotSet(p->D_TSR,            15)  &&
-      UpperBitsNotSet(p->L_TSR,            15)  &&
-      UpperBitsNotSet(p->Q_FRONT,          1)   &&
-      UpperBitsNotSet(p->V_TSR,            7);
+    predicate UpperBitsNotSet(Temporary_Speed_Restriction_Core* p) = \true;
 
 */
 

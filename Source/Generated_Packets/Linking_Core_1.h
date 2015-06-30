@@ -60,7 +60,7 @@ inline bool operator!=(const Linking_Core_1& a, const Linking_Core_1& b)
 
 typedef struct Linking_Core_1 Linking_Core_1;
 
-#define LINKING_CORE_1_CORE_BITSIZE 120
+#define LINKING_CORE_1_CORE_BITSIZE 509
 
 /*@
     logic integer BitSize{L}(Linking_Core_1* p) = LINKING_CORE_1_CORE_BITSIZE;
@@ -75,21 +75,9 @@ typedef struct Linking_Core_1 Linking_Core_1;
 
     predicate ZeroInitialized(Linking_Core_1* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, Linking_Core_1* p) =
-      EqualBits(stream, pos + 71,  pos + 86,  p->D_LINK_k)          &&
-      EqualBits(stream, pos + 86,  pos + 87,  p->Q_NEWCOUNTRY_k)    &&
-      EqualBits(stream, pos + 97,  pos + 111, p->NID_BG_k)          &&
-      EqualBits(stream, pos + 111, pos + 112, p->Q_LINKORIENTATION_k) &&
-      EqualBits(stream, pos + 112, pos + 114, p->Q_LINKREACTION_k)  &&
-      EqualBits(stream, pos + 114, pos + 120, p->Q_LOCACC_k);
+    predicate EqualBits(Bitstream* stream, integer pos, Linking_Core_1* p) = \true;
 
-    predicate UpperBitsNotSet(Linking_Core_1* p) =
-      UpperBitsNotSet(p->D_LINK_k,         15)  &&
-      UpperBitsNotSet(p->Q_NEWCOUNTRY_k,   1)   &&
-      UpperBitsNotSet(p->NID_BG_k,         14)  &&
-      UpperBitsNotSet(p->Q_LINKORIENTATION_k,1)   &&
-      UpperBitsNotSet(p->Q_LINKREACTION_k, 2)   &&
-      UpperBitsNotSet(p->Q_LOCACC_k,       6);
+    predicate UpperBitsNotSet(Linking_Core_1* p) = \true;
 
 */
 

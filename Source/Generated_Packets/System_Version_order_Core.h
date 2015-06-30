@@ -49,7 +49,7 @@ inline bool operator!=(const System_Version_order_Core& a, const System_Version_
 
 typedef struct System_Version_order_Core System_Version_order_Core;
 
-#define SYSTEM_VERSION_ORDER_CORE_BITSIZE 22
+#define SYSTEM_VERSION_ORDER_CORE_BITSIZE 28
 
 /*@
     logic integer BitSize{L}(System_Version_order_Core* p) = SYSTEM_VERSION_ORDER_CORE_BITSIZE;
@@ -71,9 +71,9 @@ typedef struct System_Version_order_Core System_Version_order_Core;
       ZeroInitialized(p->M_VERSION);
 
     predicate EqualBits(Bitstream* stream, integer pos, System_Version_order_Core* p) =
-      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
-      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
-      EqualBits(stream, pos + 15,  pos + 22,  p->M_VERSION);
+      EqualBits(stream, pos + 6,   pos + 8,   p->Q_DIR)             &&
+      EqualBits(stream, pos + 8,   pos + 21,  p->L_PACKET)          &&
+      EqualBits(stream, pos + 21,  pos + 28,  p->M_VERSION);
 
     predicate UpperBitsNotSet(System_Version_order_Core* p) =
       UpperBitsNotSet(p->Q_DIR,            2)   &&

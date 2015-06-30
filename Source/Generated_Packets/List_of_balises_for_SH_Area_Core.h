@@ -67,7 +67,7 @@ inline bool operator!=(const List_of_balises_for_SH_Area_Core& a, const List_of_
 
 typedef struct List_of_balises_for_SH_Area_Core List_of_balises_for_SH_Area_Core;
 
-#define LIST_OF_BALISES_FOR_SH_AREA_CORE_BITSIZE 45
+#define LIST_OF_BALISES_FOR_SH_AREA_CORE_BITSIZE 1781
 
 /*@
     logic integer BitSize{L}(List_of_balises_for_SH_Area_Core* p) = LIST_OF_BALISES_FOR_SH_AREA_CORE_BITSIZE;
@@ -82,13 +82,9 @@ typedef struct List_of_balises_for_SH_Area_Core List_of_balises_for_SH_Area_Core
 
     predicate ZeroInitialized(List_of_balises_for_SH_Area_Core* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, List_of_balises_for_SH_Area_Core* p) =
-      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
-      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
+    predicate EqualBits(Bitstream* stream, integer pos, List_of_balises_for_SH_Area_Core* p) = \true;
 
-    predicate UpperBitsNotSet(List_of_balises_for_SH_Area_Core* p) =
-      UpperBitsNotSet(p->Q_DIR,            2)   &&
-      UpperBitsNotSet(p->L_PACKET,         13);
+    predicate UpperBitsNotSet(List_of_balises_for_SH_Area_Core* p) = \true;
 
 */
 

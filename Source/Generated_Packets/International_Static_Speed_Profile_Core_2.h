@@ -66,7 +66,7 @@ inline bool operator!=(const International_Static_Speed_Profile_Core_2& a, const
 
 typedef struct International_Static_Speed_Profile_Core_2 International_Static_Speed_Profile_Core_2;
 
-#define INTERNATIONAL_STATIC_SPEED_PROFILE_CORE_2_CORE_BITSIZE 112
+#define INTERNATIONAL_STATIC_SPEED_PROFILE_CORE_2_CORE_BITSIZE 1333
 
 /*@
     logic integer BitSize{L}(International_Static_Speed_Profile_Core_2* p) = INTERNATIONAL_STATIC_SPEED_PROFILE_CORE_2_CORE_BITSIZE;
@@ -81,15 +81,9 @@ typedef struct International_Static_Speed_Profile_Core_2 International_Static_Sp
 
     predicate ZeroInitialized(International_Static_Speed_Profile_Core_2* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, International_Static_Speed_Profile_Core_2* p) =
-      EqualBits(stream, pos + 67,  pos + 82,  p->D_STATIC_k)        &&
-      EqualBits(stream, pos + 82,  pos + 89,  p->V_STATIC_k)        &&
-      EqualBits(stream, pos + 89,  pos + 90,  p->Q_FRONT_k);
+    predicate EqualBits(Bitstream* stream, integer pos, International_Static_Speed_Profile_Core_2* p) = \true;
 
-    predicate UpperBitsNotSet(International_Static_Speed_Profile_Core_2* p) =
-      UpperBitsNotSet(p->D_STATIC_k,       15)  &&
-      UpperBitsNotSet(p->V_STATIC_k,       7)   &&
-      UpperBitsNotSet(p->Q_FRONT_k,        1);
+    predicate UpperBitsNotSet(International_Static_Speed_Profile_Core_2* p) = \true;
 
 */
 

@@ -54,7 +54,7 @@ inline bool operator!=(const Permitted_Braking_Distance_Information_Core_1& a, c
 
 typedef struct Permitted_Braking_Distance_Information_Core_1 Permitted_Braking_Distance_Information_Core_1;
 
-#define PERMITTED_BRAKING_DISTANCE_INFORMATION_CORE_1_CORE_BITSIZE 148
+#define PERMITTED_BRAKING_DISTANCE_INFORMATION_CORE_1_CORE_BITSIZE 2067
 
 /*@
     logic integer BitSize{L}(Permitted_Braking_Distance_Information_Core_1* p) = PERMITTED_BRAKING_DISTANCE_INFORMATION_CORE_1_CORE_BITSIZE;

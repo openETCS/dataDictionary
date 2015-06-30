@@ -111,7 +111,7 @@ inline bool operator!=(const Axle_Load_Speed_Profile_Core& a, const Axle_Load_Sp
 
 typedef struct Axle_Load_Speed_Profile_Core Axle_Load_Speed_Profile_Core;
 
-#define AXLE_LOAD_SPEED_PROFILE_CORE_BITSIZE 138
+#define AXLE_LOAD_SPEED_PROFILE_CORE_BITSIZE 1919
 
 /*@
     logic integer BitSize{L}(Axle_Load_Speed_Profile_Core* p) = AXLE_LOAD_SPEED_PROFILE_CORE_BITSIZE;
@@ -126,17 +126,9 @@ typedef struct Axle_Load_Speed_Profile_Core Axle_Load_Speed_Profile_Core;
 
     predicate ZeroInitialized(Axle_Load_Speed_Profile_Core* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, Axle_Load_Speed_Profile_Core* p) =
-      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
-      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
-      EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)           &&
-      EqualBits(stream, pos + 17,  pos + 18,  p->Q_TRACKINIT);
+    predicate EqualBits(Bitstream* stream, integer pos, Axle_Load_Speed_Profile_Core* p) = \true;
 
-    predicate UpperBitsNotSet(Axle_Load_Speed_Profile_Core* p) =
-      UpperBitsNotSet(p->Q_DIR,            2)   &&
-      UpperBitsNotSet(p->L_PACKET,         13)  &&
-      UpperBitsNotSet(p->Q_SCALE,          2)   &&
-      UpperBitsNotSet(p->Q_TRACKINIT,      1);
+    predicate UpperBitsNotSet(Axle_Load_Speed_Profile_Core* p) = \true;
 
 */
 

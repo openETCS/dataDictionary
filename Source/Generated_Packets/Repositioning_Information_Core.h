@@ -51,7 +51,7 @@ inline bool operator!=(const Repositioning_Information_Core& a, const Reposition
 
 typedef struct Repositioning_Information_Core Repositioning_Information_Core;
 
-#define REPOSITIONING_INFORMATION_CORE_BITSIZE 32
+#define REPOSITIONING_INFORMATION_CORE_BITSIZE 1151
 
 /*@
     logic integer BitSize{L}(Repositioning_Information_Core* p) = REPOSITIONING_INFORMATION_CORE_BITSIZE;
@@ -66,17 +66,9 @@ typedef struct Repositioning_Information_Core Repositioning_Information_Core;
 
     predicate ZeroInitialized(Repositioning_Information_Core* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, Repositioning_Information_Core* p) =
-      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
-      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
-      EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)           &&
-      EqualBits(stream, pos + 17,  pos + 32,  p->L_SECTION);
+    predicate EqualBits(Bitstream* stream, integer pos, Repositioning_Information_Core* p) = \true;
 
-    predicate UpperBitsNotSet(Repositioning_Information_Core* p) =
-      UpperBitsNotSet(p->Q_DIR,            2)   &&
-      UpperBitsNotSet(p->L_PACKET,         13)  &&
-      UpperBitsNotSet(p->Q_SCALE,          2)   &&
-      UpperBitsNotSet(p->L_SECTION,        15);
+    predicate UpperBitsNotSet(Repositioning_Information_Core* p) = \true;
 
 */
 

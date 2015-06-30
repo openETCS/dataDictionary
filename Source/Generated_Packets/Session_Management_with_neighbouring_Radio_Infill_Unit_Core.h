@@ -59,7 +59,7 @@ inline bool operator!=(const Session_Management_with_neighbouring_Radio_Infill_U
 
 typedef struct Session_Management_with_neighbouring_Radio_Infill_Unit_Core Session_Management_with_neighbouring_Radio_Infill_Unit_Core;
 
-#define SESSION_MANAGEMENT_WITH_NEIGHBOURING_RADIO_INFILL_UNIT_CORE_BITSIZE 104
+#define SESSION_MANAGEMENT_WITH_NEIGHBOURING_RADIO_INFILL_UNIT_CORE_BITSIZE 4143
 
 /*@
     logic integer BitSize{L}(Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p) = SESSION_MANAGEMENT_WITH_NEIGHBOURING_RADIO_INFILL_UNIT_CORE_BITSIZE;
@@ -74,21 +74,9 @@ typedef struct Session_Management_with_neighbouring_Radio_Infill_Unit_Core Sessi
 
     predicate ZeroInitialized(Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p) =
-      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
-      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
-      EqualBits(stream, pos + 15,  pos + 16,  p->Q_RIU)             &&
-      EqualBits(stream, pos + 16,  pos + 26,  p->NID_C)             &&
-      EqualBits(stream, pos + 26,  pos + 40,  p->NID_RIU)           &&
-      EqualBits(stream, pos + 40,  pos + 104, p->NID_RADIO);
+    predicate EqualBits(Bitstream* stream, integer pos, Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p) = \true;
 
-    predicate UpperBitsNotSet(Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p) =
-      UpperBitsNotSet(p->Q_DIR,            2)   &&
-      UpperBitsNotSet(p->L_PACKET,         13)  &&
-      UpperBitsNotSet(p->Q_RIU,            1)   &&
-      UpperBitsNotSet(p->NID_C,            10)  &&
-      UpperBitsNotSet(p->NID_RIU,          14)  &&
-      UpperBitsNotSet(p->NID_RADIO,        64);
+    predicate UpperBitsNotSet(Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p) = \true;
 
 */
 

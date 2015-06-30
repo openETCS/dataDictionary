@@ -54,7 +54,7 @@ inline bool operator!=(const Mode_profile_Core_1& a, const Mode_profile_Core_1& 
 
 typedef struct Mode_profile_Core_1 Mode_profile_Core_1;
 
-#define MODE_PROFILE_CORE_1_CORE_BITSIZE 132
+#define MODE_PROFILE_CORE_1_CORE_BITSIZE 3354
 
 /*@
     logic integer BitSize{L}(Mode_profile_Core_1* p) = MODE_PROFILE_CORE_1_CORE_BITSIZE;
@@ -69,21 +69,9 @@ typedef struct Mode_profile_Core_1 Mode_profile_Core_1;
 
     predicate ZeroInitialized(Mode_profile_Core_1* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, Mode_profile_Core_1* p) =
-      EqualBits(stream, pos + 77,  pos + 92,  p->D_MAMODE_k)        &&
-      EqualBits(stream, pos + 92,  pos + 94,  p->M_MAMODE_k)        &&
-      EqualBits(stream, pos + 94,  pos + 101, p->V_MAMODE_k)        &&
-      EqualBits(stream, pos + 101, pos + 116, p->L_MAMODE_k)        &&
-      EqualBits(stream, pos + 116, pos + 131, p->L_ACKMAMODE_k)     &&
-      EqualBits(stream, pos + 131, pos + 132, p->Q_MAMODE_k);
+    predicate EqualBits(Bitstream* stream, integer pos, Mode_profile_Core_1* p) = \true;
 
-    predicate UpperBitsNotSet(Mode_profile_Core_1* p) =
-      UpperBitsNotSet(p->D_MAMODE_k,       15)  &&
-      UpperBitsNotSet(p->M_MAMODE_k,       2)   &&
-      UpperBitsNotSet(p->V_MAMODE_k,       7)   &&
-      UpperBitsNotSet(p->L_MAMODE_k,       15)  &&
-      UpperBitsNotSet(p->L_ACKMAMODE_k,    15)  &&
-      UpperBitsNotSet(p->Q_MAMODE_k,       1);
+    predicate UpperBitsNotSet(Mode_profile_Core_1* p) = \true;
 
 */
 

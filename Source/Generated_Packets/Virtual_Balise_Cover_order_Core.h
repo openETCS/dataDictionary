@@ -60,7 +60,7 @@ inline bool operator!=(const Virtual_Balise_Cover_order_Core& a, const Virtual_B
 
 typedef struct Virtual_Balise_Cover_order_Core Virtual_Balise_Cover_order_Core;
 
-#define VIRTUAL_BALISE_COVER_ORDER_CORE_BITSIZE 40
+#define VIRTUAL_BALISE_COVER_ORDER_CORE_BITSIZE 549
 
 /*@
     logic integer BitSize{L}(Virtual_Balise_Cover_order_Core* p) = VIRTUAL_BALISE_COVER_ORDER_CORE_BITSIZE;
@@ -75,19 +75,9 @@ typedef struct Virtual_Balise_Cover_order_Core Virtual_Balise_Cover_order_Core;
 
     predicate ZeroInitialized(Virtual_Balise_Cover_order_Core* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, Virtual_Balise_Cover_order_Core* p) =
-      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
-      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
-      EqualBits(stream, pos + 15,  pos + 16,  p->Q_VBCO)            &&
-      EqualBits(stream, pos + 16,  pos + 22,  p->NID_VBCMK)         &&
-      EqualBits(stream, pos + 22,  pos + 32,  p->NID_C);
+    predicate EqualBits(Bitstream* stream, integer pos, Virtual_Balise_Cover_order_Core* p) = \true;
 
-    predicate UpperBitsNotSet(Virtual_Balise_Cover_order_Core* p) =
-      UpperBitsNotSet(p->Q_DIR,            2)   &&
-      UpperBitsNotSet(p->L_PACKET,         13)  &&
-      UpperBitsNotSet(p->Q_VBCO,           1)   &&
-      UpperBitsNotSet(p->NID_VBCMK,        6)   &&
-      UpperBitsNotSet(p->NID_C,            10);
+    predicate UpperBitsNotSet(Virtual_Balise_Cover_order_Core* p) = \true;
 
 */
 

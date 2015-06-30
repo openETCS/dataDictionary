@@ -65,7 +65,7 @@ inline bool operator!=(const Radio_infill_area_information_Core& a, const Radio_
 
 typedef struct Radio_infill_area_information_Core Radio_infill_area_information_Core;
 
-#define RADIO_INFILL_AREA_INFORMATION_CORE_BITSIZE 135
+#define RADIO_INFILL_AREA_INFORMATION_CORE_BITSIZE 3745
 
 /*@
     logic integer BitSize{L}(Radio_infill_area_information_Core* p) = RADIO_INFILL_AREA_INFORMATION_CORE_BITSIZE;
@@ -80,27 +80,9 @@ typedef struct Radio_infill_area_information_Core Radio_infill_area_information_
 
     predicate ZeroInitialized(Radio_infill_area_information_Core* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, Radio_infill_area_information_Core* p) =
-      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
-      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
-      EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)           &&
-      EqualBits(stream, pos + 17,  pos + 18,  p->Q_RIU)             &&
-      EqualBits(stream, pos + 18,  pos + 28,  p->NID_C)             &&
-      EqualBits(stream, pos + 28,  pos + 42,  p->NID_RIU)           &&
-      EqualBits(stream, pos + 42,  pos + 106, p->NID_RADIO)         &&
-      EqualBits(stream, pos + 106, pos + 121, p->D_INFILL)          &&
-      EqualBits(stream, pos + 121, pos + 135, p->NID_BG);
+    predicate EqualBits(Bitstream* stream, integer pos, Radio_infill_area_information_Core* p) = \true;
 
-    predicate UpperBitsNotSet(Radio_infill_area_information_Core* p) =
-      UpperBitsNotSet(p->Q_DIR,            2)   &&
-      UpperBitsNotSet(p->L_PACKET,         13)  &&
-      UpperBitsNotSet(p->Q_SCALE,          2)   &&
-      UpperBitsNotSet(p->Q_RIU,            1)   &&
-      UpperBitsNotSet(p->NID_C,            10)  &&
-      UpperBitsNotSet(p->NID_RIU,          14)  &&
-      UpperBitsNotSet(p->NID_RADIO,        64)  &&
-      UpperBitsNotSet(p->D_INFILL,         15)  &&
-      UpperBitsNotSet(p->NID_BG,           14);
+    predicate UpperBitsNotSet(Radio_infill_area_information_Core* p) = \true;
 
 */
 

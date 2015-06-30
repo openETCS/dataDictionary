@@ -42,7 +42,7 @@ inline bool operator!=(const Axle_Load_Speed_Profile_Core_2_1& a, const Axle_Loa
 
 typedef struct Axle_Load_Speed_Profile_Core_2_1 Axle_Load_Speed_Profile_Core_2_1;
 
-#define AXLE_LOAD_SPEED_PROFILE_CORE_2_1_CORE_BITSIZE 138
+#define AXLE_LOAD_SPEED_PROFILE_CORE_2_1_CORE_BITSIZE 1919
 
 /*@
     logic integer BitSize{L}(Axle_Load_Speed_Profile_Core_2_1* p) = AXLE_LOAD_SPEED_PROFILE_CORE_2_1_CORE_BITSIZE;

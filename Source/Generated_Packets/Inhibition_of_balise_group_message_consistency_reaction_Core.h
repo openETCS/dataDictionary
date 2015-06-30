@@ -48,7 +48,7 @@ inline bool operator!=(const Inhibition_of_balise_group_message_consistency_reac
 
 typedef struct Inhibition_of_balise_group_message_consistency_reaction_Core Inhibition_of_balise_group_message_consistency_reaction_Core;
 
-#define INHIBITION_OF_BALISE_GROUP_MESSAGE_CONSISTENCY_REACTION_CORE_BITSIZE 15
+#define INHIBITION_OF_BALISE_GROUP_MESSAGE_CONSISTENCY_REACTION_CORE_BITSIZE 4158
 
 /*@
     logic integer BitSize{L}(Inhibition_of_balise_group_message_consistency_reaction_Core* p) = INHIBITION_OF_BALISE_GROUP_MESSAGE_CONSISTENCY_REACTION_CORE_BITSIZE;
@@ -63,13 +63,9 @@ typedef struct Inhibition_of_balise_group_message_consistency_reaction_Core Inhi
 
     predicate ZeroInitialized(Inhibition_of_balise_group_message_consistency_reaction_Core* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, Inhibition_of_balise_group_message_consistency_reaction_Core* p) =
-      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
-      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
+    predicate EqualBits(Bitstream* stream, integer pos, Inhibition_of_balise_group_message_consistency_reaction_Core* p) = \true;
 
-    predicate UpperBitsNotSet(Inhibition_of_balise_group_message_consistency_reaction_Core* p) =
-      UpperBitsNotSet(p->Q_DIR,            2)   &&
-      UpperBitsNotSet(p->L_PACKET,         13);
+    predicate UpperBitsNotSet(Inhibition_of_balise_group_message_consistency_reaction_Core* p) = \true;
 
 */
 

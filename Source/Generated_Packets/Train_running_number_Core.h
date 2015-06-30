@@ -45,7 +45,7 @@ inline bool operator!=(const Train_running_number_Core& a, const Train_running_n
 
 typedef struct Train_running_number_Core Train_running_number_Core;
 
-#define TRAIN_RUNNING_NUMBER_CORE_BITSIZE 45
+#define TRAIN_RUNNING_NUMBER_CORE_BITSIZE 4603
 
 /*@
     logic integer BitSize{L}(Train_running_number_Core* p) = TRAIN_RUNNING_NUMBER_CORE_BITSIZE;
@@ -60,13 +60,9 @@ typedef struct Train_running_number_Core Train_running_number_Core;
 
     predicate ZeroInitialized(Train_running_number_Core* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, Train_running_number_Core* p) =
-      EqualBits(stream, pos,       pos + 13,  p->L_PACKET)          &&
-      EqualBits(stream, pos + 13,  pos + 45,  p->NID_OPERATIONAL);
+    predicate EqualBits(Bitstream* stream, integer pos, Train_running_number_Core* p) = \true;
 
-    predicate UpperBitsNotSet(Train_running_number_Core* p) =
-      UpperBitsNotSet(p->L_PACKET,         13)  &&
-      UpperBitsNotSet(p->NID_OPERATIONAL,  32);
+    predicate UpperBitsNotSet(Train_running_number_Core* p) = \true;
 
 */
 

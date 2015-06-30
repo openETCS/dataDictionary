@@ -45,7 +45,7 @@ inline bool operator!=(const Conditional_Level_Transition_Order_Core_1& a, const
 
 typedef struct Conditional_Level_Transition_Order_Core_1 Conditional_Level_Transition_Order_Core_1;
 
-#define CONDITIONAL_LEVEL_TRANSITION_ORDER_CORE_1_CORE_BITSIZE 42
+#define CONDITIONAL_LEVEL_TRANSITION_ORDER_CORE_1_CORE_BITSIZE 1736
 
 /*@
     logic integer BitSize{L}(Conditional_Level_Transition_Order_Core_1* p) = CONDITIONAL_LEVEL_TRANSITION_ORDER_CORE_1_CORE_BITSIZE;
@@ -60,11 +60,9 @@ typedef struct Conditional_Level_Transition_Order_Core_1 Conditional_Level_Trans
 
     predicate ZeroInitialized(Conditional_Level_Transition_Order_Core_1* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, Conditional_Level_Transition_Order_Core_1* p) =
-      EqualBits(stream, pos + 31,  pos + 34,  p->M_LEVELTR_k);
+    predicate EqualBits(Bitstream* stream, integer pos, Conditional_Level_Transition_Order_Core_1* p) = \true;
 
-    predicate UpperBitsNotSet(Conditional_Level_Transition_Order_Core_1* p) =
-      UpperBitsNotSet(p->M_LEVELTR_k,      3);
+    predicate UpperBitsNotSet(Conditional_Level_Transition_Order_Core_1* p) = \true;
 
 */
 

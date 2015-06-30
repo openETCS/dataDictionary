@@ -48,7 +48,7 @@ inline bool operator!=(const Temporary_Speed_Restriction_Revocation_Core& a, con
 
 typedef struct Temporary_Speed_Restriction_Revocation_Core Temporary_Speed_Restriction_Revocation_Core;
 
-#define TEMPORARY_SPEED_RESTRICTION_REVOCATION_CORE_BITSIZE 23
+#define TEMPORARY_SPEED_RESTRICTION_REVOCATION_CORE_BITSIZE 2318
 
 /*@
     logic integer BitSize{L}(Temporary_Speed_Restriction_Revocation_Core* p) = TEMPORARY_SPEED_RESTRICTION_REVOCATION_CORE_BITSIZE;
@@ -63,15 +63,9 @@ typedef struct Temporary_Speed_Restriction_Revocation_Core Temporary_Speed_Restr
 
     predicate ZeroInitialized(Temporary_Speed_Restriction_Revocation_Core* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, Temporary_Speed_Restriction_Revocation_Core* p) =
-      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
-      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
-      EqualBits(stream, pos + 15,  pos + 23,  p->NID_TSR);
+    predicate EqualBits(Bitstream* stream, integer pos, Temporary_Speed_Restriction_Revocation_Core* p) = \true;
 
-    predicate UpperBitsNotSet(Temporary_Speed_Restriction_Revocation_Core* p) =
-      UpperBitsNotSet(p->Q_DIR,            2)   &&
-      UpperBitsNotSet(p->L_PACKET,         13)  &&
-      UpperBitsNotSet(p->NID_TSR,          8);
+    predicate UpperBitsNotSet(Temporary_Speed_Restriction_Revocation_Core* p) = \true;
 
 */
 

@@ -66,7 +66,7 @@ inline bool operator!=(const Route_Suitability_Data_Core_1& a, const Route_Suita
 
 typedef struct Route_Suitability_Data_Core_1 Route_Suitability_Data_Core_1;
 
-#define ROUTE_SUITABILITY_DATA_CORE_1_CORE_BITSIZE 130
+#define ROUTE_SUITABILITY_DATA_CORE_1_CORE_BITSIZE 2746
 
 /*@
     logic integer BitSize{L}(Route_Suitability_Data_Core_1* p) = ROUTE_SUITABILITY_DATA_CORE_1_CORE_BITSIZE;
@@ -81,13 +81,9 @@ typedef struct Route_Suitability_Data_Core_1 Route_Suitability_Data_Core_1;
 
     predicate ZeroInitialized(Route_Suitability_Data_Core_1* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, Route_Suitability_Data_Core_1* p) =
-      EqualBits(stream, pos + 84,  pos + 99,  p->D_SUITABILITY_k)   &&
-      EqualBits(stream, pos + 99,  pos + 101, p->Q_SUITABILITY_k);
+    predicate EqualBits(Bitstream* stream, integer pos, Route_Suitability_Data_Core_1* p) = \true;
 
-    predicate UpperBitsNotSet(Route_Suitability_Data_Core_1* p) =
-      UpperBitsNotSet(p->D_SUITABILITY_k,  15)  &&
-      UpperBitsNotSet(p->Q_SUITABILITY_k,  2);
+    predicate UpperBitsNotSet(Route_Suitability_Data_Core_1* p) = \true;
 
 */
 

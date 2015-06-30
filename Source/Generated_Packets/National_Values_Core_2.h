@@ -42,7 +42,7 @@ inline bool operator!=(const National_Values_Core_2& a, const National_Values_Co
 
 typedef struct National_Values_Core_2 National_Values_Core_2;
 
-#define NATIONAL_VALUES_CORE_2_CORE_BITSIZE 279
+#define NATIONAL_VALUES_CORE_2_CORE_BITSIZE 307
 
 /*@
     logic integer BitSize{L}(National_Values_Core_2* p) = NATIONAL_VALUES_CORE_2_CORE_BITSIZE;
@@ -57,13 +57,9 @@ typedef struct National_Values_Core_2 National_Values_Core_2;
 
     predicate ZeroInitialized(National_Values_Core_2* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, National_Values_Core_2* p) =
-      EqualBits(stream, pos + 265, pos + 272, p->V_NVKVINT_n)       &&
-      EqualBits(stream, pos + 272, pos + 279, p->M_NVKVINT_n);
+    predicate EqualBits(Bitstream* stream, integer pos, National_Values_Core_2* p) = \true;
 
-    predicate UpperBitsNotSet(National_Values_Core_2* p) =
-      UpperBitsNotSet(p->V_NVKVINT_n,      7)   &&
-      UpperBitsNotSet(p->M_NVKVINT_n,      7);
+    predicate UpperBitsNotSet(National_Values_Core_2* p) = \true;
 
 */
 

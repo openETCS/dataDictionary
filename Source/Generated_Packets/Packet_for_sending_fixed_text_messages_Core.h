@@ -113,7 +113,7 @@ inline bool operator!=(const Packet_for_sending_fixed_text_messages_Core& a, con
 
 typedef struct Packet_for_sending_fixed_text_messages_Core Packet_for_sending_fixed_text_messages_Core;
 
-#define PACKET_FOR_SENDING_FIXED_TEXT_MESSAGES_CORE_BITSIZE 134
+#define PACKET_FOR_SENDING_FIXED_TEXT_MESSAGES_CORE_BITSIZE 3070
 
 /*@
     logic integer BitSize{L}(Packet_for_sending_fixed_text_messages_Core* p) = PACKET_FOR_SENDING_FIXED_TEXT_MESSAGES_CORE_BITSIZE;
@@ -128,37 +128,9 @@ typedef struct Packet_for_sending_fixed_text_messages_Core Packet_for_sending_fi
 
     predicate ZeroInitialized(Packet_for_sending_fixed_text_messages_Core* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, Packet_for_sending_fixed_text_messages_Core* p) =
-      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
-      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
-      EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)           &&
-      EqualBits(stream, pos + 17,  pos + 19,  p->Q_TEXTCLASS)       &&
-      EqualBits(stream, pos + 19,  pos + 20,  p->Q_TEXTDISPLAY)     &&
-      EqualBits(stream, pos + 20,  pos + 35,  p->D_TEXTDISPLAY)     &&
-      EqualBits(stream, pos + 35,  pos + 39,  p->M_MODETEXTDISPLAY_0) &&
-      EqualBits(stream, pos + 39,  pos + 42,  p->M_LEVELTEXTDISPLAY_0) &&
-      EqualBits(stream, pos + 50,  pos + 65,  p->L_TEXTDISPLAY)     &&
-      EqualBits(stream, pos + 65,  pos + 75,  p->T_TEXTDISPLAY)     &&
-      EqualBits(stream, pos + 75,  pos + 79,  p->M_MODETEXTDISPLAY_1) &&
-      EqualBits(stream, pos + 79,  pos + 82,  p->M_LEVELTEXTDISPLAY_1) &&
-      EqualBits(stream, pos + 90,  pos + 92,  p->Q_TEXTCONFIRM)     &&
-      EqualBits(stream, pos + 126, pos + 134, p->Q_TEXT);
+    predicate EqualBits(Bitstream* stream, integer pos, Packet_for_sending_fixed_text_messages_Core* p) = \true;
 
-    predicate UpperBitsNotSet(Packet_for_sending_fixed_text_messages_Core* p) =
-      UpperBitsNotSet(p->Q_DIR,            2)   &&
-      UpperBitsNotSet(p->L_PACKET,         13)  &&
-      UpperBitsNotSet(p->Q_SCALE,          2)   &&
-      UpperBitsNotSet(p->Q_TEXTCLASS,      2)   &&
-      UpperBitsNotSet(p->Q_TEXTDISPLAY,    1)   &&
-      UpperBitsNotSet(p->D_TEXTDISPLAY,    15)  &&
-      UpperBitsNotSet(p->M_MODETEXTDISPLAY_0,4)   &&
-      UpperBitsNotSet(p->M_LEVELTEXTDISPLAY_0,3)   &&
-      UpperBitsNotSet(p->L_TEXTDISPLAY,    15)  &&
-      UpperBitsNotSet(p->T_TEXTDISPLAY,    10)  &&
-      UpperBitsNotSet(p->M_MODETEXTDISPLAY_1,4)   &&
-      UpperBitsNotSet(p->M_LEVELTEXTDISPLAY_1,3)   &&
-      UpperBitsNotSet(p->Q_TEXTCONFIRM,    2)   &&
-      UpperBitsNotSet(p->Q_TEXT,           8);
+    predicate UpperBitsNotSet(Packet_for_sending_fixed_text_messages_Core* p) = \true;
 
 */
 

@@ -51,7 +51,7 @@ inline bool operator!=(const Staff_Responsible_distance_Information_from_loop_Co
 
 typedef struct Staff_Responsible_distance_Information_from_loop_Core_1 Staff_Responsible_distance_Information_from_loop_Core_1;
 
-#define STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_1_CORE_BITSIZE 127
+#define STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_1_CORE_BITSIZE 901
 
 /*@
     logic integer BitSize{L}(Staff_Responsible_distance_Information_from_loop_Core_1* p) = STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_1_CORE_BITSIZE;
@@ -66,15 +66,9 @@ typedef struct Staff_Responsible_distance_Information_from_loop_Core_1 Staff_Res
 
     predicate ZeroInitialized(Staff_Responsible_distance_Information_from_loop_Core_1* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, Staff_Responsible_distance_Information_from_loop_Core_1* p) =
-      EqualBits(stream, pos + 87,  pos + 88,  p->Q_NEWCOUNTRY_k)    &&
-      EqualBits(stream, pos + 98,  pos + 112, p->NID_BG_k)          &&
-      EqualBits(stream, pos + 112, pos + 127, p->D_SR_k);
+    predicate EqualBits(Bitstream* stream, integer pos, Staff_Responsible_distance_Information_from_loop_Core_1* p) = \true;
 
-    predicate UpperBitsNotSet(Staff_Responsible_distance_Information_from_loop_Core_1* p) =
-      UpperBitsNotSet(p->Q_NEWCOUNTRY_k,   1)   &&
-      UpperBitsNotSet(p->NID_BG_k,         14)  &&
-      UpperBitsNotSet(p->D_SR_k,           15);
+    predicate UpperBitsNotSet(Staff_Responsible_distance_Information_from_loop_Core_1* p) = \true;
 
 */
 

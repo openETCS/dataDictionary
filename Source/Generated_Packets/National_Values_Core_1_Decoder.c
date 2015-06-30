@@ -9,16 +9,16 @@ int National_Values_Core_1_Decoder(Bitstream* stream, National_Values_Core_1* p)
         //@ ghost const uint32_t pos = stream->bitpos;
 
 	/*@
-	  requires NID_C_p:        stream->bitpos == pos + 47;
+	  requires NID_C_p:        stream->bitpos == pos + 75;
 	  assigns        	   stream->bitpos;
 	  assigns		   p->NID_C_p;
-	  ensures  NID_C_p:        stream->bitpos == pos + 57;
-	  ensures  NID_C_p:        EqualBits(stream, pos + 47, pos + 57, p->NID_C_p);
+	  ensures  NID_C_p:        stream->bitpos == pos + 85;
+	  ensures  NID_C_p:        EqualBits(stream, pos + 75, pos + 85, p->NID_C_p);
 	  ensures  NID_C_p:        UpperBitsNotSet(p->NID_C_p, 10);
 	*/
 	{ p->NID_C_p		= Bitstream_Read(stream, 10); }
 
-        //@ assert NID_C_p:           EqualBits(stream, pos + 47,  pos + 57,  p->NID_C_p);
+        //@ assert NID_C_p:           EqualBits(stream, pos + 75,  pos + 85,  p->NID_C_p);
 
         //@ assert NID_C_p:           UpperBitsNotSet(p->NID_C_p,           10);
 

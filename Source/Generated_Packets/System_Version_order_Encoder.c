@@ -16,9 +16,9 @@ int System_Version_order_Encoder(Bitstream* stream, const System_Version_order_C
             Bitstream_Write(stream, 7,  p->M_VERSION);
 
 
-            //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
-            //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
-            //@ assert M_VERSION:         EqualBits(stream, pos + 15,  pos + 22,  p->M_VERSION);
+            //@ assert Q_DIR:             EqualBits(stream, pos + 6,   pos + 8,   p->Q_DIR);
+            //@ assert L_PACKET:          EqualBits(stream, pos + 8,   pos + 21,  p->L_PACKET);
+            //@ assert M_VERSION:         EqualBits(stream, pos + 21,  pos + 28,  p->M_VERSION);
 
             return 1;
         }

@@ -42,7 +42,7 @@ inline bool operator!=(const Position_Report_Parameters_Core_1& a, const Positio
 
 typedef struct Position_Report_Parameters_Core_1 Position_Report_Parameters_Core_1;
 
-#define POSITION_REPORT_PARAMETERS_CORE_1_CORE_BITSIZE 64
+#define POSITION_REPORT_PARAMETERS_CORE_1_CORE_BITSIZE 2172
 
 /*@
     logic integer BitSize{L}(Position_Report_Parameters_Core_1* p) = POSITION_REPORT_PARAMETERS_CORE_1_CORE_BITSIZE;
@@ -57,13 +57,9 @@ typedef struct Position_Report_Parameters_Core_1 Position_Report_Parameters_Core
 
     predicate ZeroInitialized(Position_Report_Parameters_Core_1* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, Position_Report_Parameters_Core_1* p) =
-      EqualBits(stream, pos + 48,  pos + 63,  p->D_LOC_k)           &&
-      EqualBits(stream, pos + 63,  pos + 64,  p->Q_LGTLOC_k);
+    predicate EqualBits(Bitstream* stream, integer pos, Position_Report_Parameters_Core_1* p) = \true;
 
-    predicate UpperBitsNotSet(Position_Report_Parameters_Core_1* p) =
-      UpperBitsNotSet(p->D_LOC_k,          15)  &&
-      UpperBitsNotSet(p->Q_LGTLOC_k,       1);
+    predicate UpperBitsNotSet(Position_Report_Parameters_Core_1* p) = \true;
 
 */
 

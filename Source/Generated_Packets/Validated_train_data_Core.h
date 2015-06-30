@@ -108,7 +108,7 @@ inline bool operator!=(const Validated_train_data_Core& a, const Validated_train
 
 typedef struct Validated_train_data_Core Validated_train_data_Core;
 
-#define VALIDATED_TRAIN_DATA_CORE_BITSIZE 110
+#define VALIDATED_TRAIN_DATA_CORE_BITSIZE 4750
 
 /*@
     logic integer BitSize{L}(Validated_train_data_Core* p) = VALIDATED_TRAIN_DATA_CORE_BITSIZE;
@@ -123,27 +123,9 @@ typedef struct Validated_train_data_Core Validated_train_data_Core;
 
     predicate ZeroInitialized(Validated_train_data_Core* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, Validated_train_data_Core* p) =
-      EqualBits(stream, pos,       pos + 13,  p->L_PACKET)          &&
-      EqualBits(stream, pos + 13,  pos + 17,  p->NC_CDTRAIN)        &&
-      EqualBits(stream, pos + 17,  pos + 32,  p->NC_TRAIN)          &&
-      EqualBits(stream, pos + 32,  pos + 44,  p->L_TRAIN)           &&
-      EqualBits(stream, pos + 44,  pos + 51,  p->V_MAXTRAIN)        &&
-      EqualBits(stream, pos + 51,  pos + 59,  p->M_LOADINGGAUGE)    &&
-      EqualBits(stream, pos + 59,  pos + 66,  p->M_AXLELOADCAT)     &&
-      EqualBits(stream, pos + 66,  pos + 68,  p->M_AIRTIGHT)        &&
-      EqualBits(stream, pos + 68,  pos + 78,  p->N_AXLE);
+    predicate EqualBits(Bitstream* stream, integer pos, Validated_train_data_Core* p) = \true;
 
-    predicate UpperBitsNotSet(Validated_train_data_Core* p) =
-      UpperBitsNotSet(p->L_PACKET,         13)  &&
-      UpperBitsNotSet(p->NC_CDTRAIN,       4)   &&
-      UpperBitsNotSet(p->NC_TRAIN,         15)  &&
-      UpperBitsNotSet(p->L_TRAIN,          12)  &&
-      UpperBitsNotSet(p->V_MAXTRAIN,       7)   &&
-      UpperBitsNotSet(p->M_LOADINGGAUGE,   8)   &&
-      UpperBitsNotSet(p->M_AXLELOADCAT,    7)   &&
-      UpperBitsNotSet(p->M_AIRTIGHT,       2)   &&
-      UpperBitsNotSet(p->N_AXLE,           10);
+    predicate UpperBitsNotSet(Validated_train_data_Core* p) = \true;
 
 */
 

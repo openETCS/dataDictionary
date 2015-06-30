@@ -42,7 +42,7 @@ inline bool operator!=(const Track_Condition_Big_Metal_Masses_Core_1& a, const T
 
 typedef struct Track_Condition_Big_Metal_Masses_Core_1 Track_Condition_Big_Metal_Masses_Core_1;
 
-#define TRACK_CONDITION_BIG_METAL_MASSES_CORE_1_CORE_BITSIZE 82
+#define TRACK_CONDITION_BIG_METAL_MASSES_CORE_1_CORE_BITSIZE 2400
 
 /*@
     logic integer BitSize{L}(Track_Condition_Big_Metal_Masses_Core_1* p) = TRACK_CONDITION_BIG_METAL_MASSES_CORE_1_CORE_BITSIZE;
@@ -57,13 +57,9 @@ typedef struct Track_Condition_Big_Metal_Masses_Core_1 Track_Condition_Big_Metal
 
     predicate ZeroInitialized(Track_Condition_Big_Metal_Masses_Core_1* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, Track_Condition_Big_Metal_Masses_Core_1* p) =
-      EqualBits(stream, pos + 52,  pos + 67,  p->D_TRACKCOND_k)     &&
-      EqualBits(stream, pos + 67,  pos + 82,  p->L_TRACKCOND_k);
+    predicate EqualBits(Bitstream* stream, integer pos, Track_Condition_Big_Metal_Masses_Core_1* p) = \true;
 
-    predicate UpperBitsNotSet(Track_Condition_Big_Metal_Masses_Core_1* p) =
-      UpperBitsNotSet(p->D_TRACKCOND_k,    15)  &&
-      UpperBitsNotSet(p->L_TRACKCOND_k,    15);
+    predicate UpperBitsNotSet(Track_Condition_Big_Metal_Masses_Core_1* p) = \true;
 
 */
 

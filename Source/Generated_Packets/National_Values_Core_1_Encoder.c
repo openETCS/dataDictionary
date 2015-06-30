@@ -14,7 +14,7 @@ int National_Values_Core_1_Encoder(Bitstream* stream, const National_Values_Core
             Bitstream_Write(stream, 10, p->NID_C_p);
 
 
-            //@ assert NID_C_p:           EqualBits(stream, pos + 47,  pos + 57,  p->NID_C_p);
+            //@ assert NID_C_p:           EqualBits(stream, pos + 75,  pos + 85,  p->NID_C_p);
 
             return 1;
         }

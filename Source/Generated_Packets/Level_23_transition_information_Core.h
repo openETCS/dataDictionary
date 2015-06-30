@@ -45,7 +45,7 @@ inline bool operator!=(const Level_23_transition_information_Core& a, const Leve
 
 typedef struct Level_23_transition_information_Core Level_23_transition_information_Core;
 
-#define LEVEL_23_TRANSITION_INFORMATION_CORE_BITSIZE 37
+#define LEVEL_23_TRANSITION_INFORMATION_CORE_BITSIZE 4640
 
 /*@
     logic integer BitSize{L}(Level_23_transition_information_Core* p) = LEVEL_23_TRANSITION_INFORMATION_CORE_BITSIZE;
@@ -60,13 +60,9 @@ typedef struct Level_23_transition_information_Core Level_23_transition_informat
 
     predicate ZeroInitialized(Level_23_transition_information_Core* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, Level_23_transition_information_Core* p) =
-      EqualBits(stream, pos,       pos + 13,  p->L_PACKET)          &&
-      EqualBits(stream, pos + 13,  pos + 37,  p->NID_LTRBG);
+    predicate EqualBits(Bitstream* stream, integer pos, Level_23_transition_information_Core* p) = \true;
 
-    predicate UpperBitsNotSet(Level_23_transition_information_Core* p) =
-      UpperBitsNotSet(p->L_PACKET,         13)  &&
-      UpperBitsNotSet(p->NID_LTRBG,        24);
+    predicate UpperBitsNotSet(Level_23_transition_information_Core* p) = \true;
 
 */
 

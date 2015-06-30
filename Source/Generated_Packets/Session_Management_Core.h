@@ -61,7 +61,7 @@ inline bool operator!=(const Session_Management_Core& a, const Session_Managemen
 
 typedef struct Session_Management_Core Session_Management_Core;
 
-#define SESSION_MANAGEMENT_CORE_BITSIZE 105
+#define SESSION_MANAGEMENT_CORE_BITSIZE 1615
 
 /*@
     logic integer BitSize{L}(Session_Management_Core* p) = SESSION_MANAGEMENT_CORE_BITSIZE;
@@ -76,23 +76,9 @@ typedef struct Session_Management_Core Session_Management_Core;
 
     predicate ZeroInitialized(Session_Management_Core* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, Session_Management_Core* p) =
-      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
-      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
-      EqualBits(stream, pos + 15,  pos + 16,  p->Q_RBC)             &&
-      EqualBits(stream, pos + 16,  pos + 26,  p->NID_C)             &&
-      EqualBits(stream, pos + 26,  pos + 40,  p->NID_RBC)           &&
-      EqualBits(stream, pos + 40,  pos + 104, p->NID_RADIO)         &&
-      EqualBits(stream, pos + 104, pos + 105, p->Q_SLEEPSESSION);
+    predicate EqualBits(Bitstream* stream, integer pos, Session_Management_Core* p) = \true;
 
-    predicate UpperBitsNotSet(Session_Management_Core* p) =
-      UpperBitsNotSet(p->Q_DIR,            2)   &&
-      UpperBitsNotSet(p->L_PACKET,         13)  &&
-      UpperBitsNotSet(p->Q_RBC,            1)   &&
-      UpperBitsNotSet(p->NID_C,            10)  &&
-      UpperBitsNotSet(p->NID_RBC,          14)  &&
-      UpperBitsNotSet(p->NID_RADIO,        64)  &&
-      UpperBitsNotSet(p->Q_SLEEPSESSION,   1);
+    predicate UpperBitsNotSet(Session_Management_Core* p) = \true;
 
 */
 

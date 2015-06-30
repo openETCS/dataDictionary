@@ -42,7 +42,7 @@ inline bool operator!=(const End_of_Information_Core& a, const End_of_Informatio
 
 typedef struct End_of_Information_Core End_of_Information_Core;
 
-#define END_OF_INFORMATION_CORE_BITSIZE 0
+#define END_OF_INFORMATION_CORE_BITSIZE 4780
 
 /*@
     logic integer BitSize{L}(End_of_Information_Core* p) = END_OF_INFORMATION_CORE_BITSIZE;

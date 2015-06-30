@@ -45,7 +45,7 @@ inline bool operator!=(const Validated_train_data_Core_1& a, const Validated_tra
 
 typedef struct Validated_train_data_Core_1 Validated_train_data_Core_1;
 
-#define VALIDATED_TRAIN_DATA_CORE_1_CORE_BITSIZE 97
+#define VALIDATED_TRAIN_DATA_CORE_1_CORE_BITSIZE 4737
 
 /*@
     logic integer BitSize{L}(Validated_train_data_Core_1* p) = VALIDATED_TRAIN_DATA_CORE_1_CORE_BITSIZE;
@@ -60,11 +60,9 @@ typedef struct Validated_train_data_Core_1 Validated_train_data_Core_1;
 
     predicate ZeroInitialized(Validated_train_data_Core_1* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, Validated_train_data_Core_1* p) =
-      EqualBits(stream, pos + 83,  pos + 87,  p->M_VOLTAGE_k);
+    predicate EqualBits(Bitstream* stream, integer pos, Validated_train_data_Core_1* p) = \true;
 
-    predicate UpperBitsNotSet(Validated_train_data_Core_1* p) =
-      UpperBitsNotSet(p->M_VOLTAGE_k,      4);
+    predicate UpperBitsNotSet(Validated_train_data_Core_1* p) = \true;
 
 */
 

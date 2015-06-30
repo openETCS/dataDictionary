@@ -91,7 +91,7 @@ inline bool operator!=(const Geographical_Position_Information_Core& a, const Ge
 
 typedef struct Geographical_Position_Information_Core Geographical_Position_Information_Core;
 
-#define GEOGRAPHICAL_POSITION_INFORMATION_CORE_BITSIZE 152
+#define GEOGRAPHICAL_POSITION_INFORMATION_CORE_BITSIZE 3222
 
 /*@
     logic integer BitSize{L}(Geographical_Position_Information_Core* p) = GEOGRAPHICAL_POSITION_INFORMATION_CORE_BITSIZE;
@@ -106,25 +106,9 @@ typedef struct Geographical_Position_Information_Core Geographical_Position_Info
 
     predicate ZeroInitialized(Geographical_Position_Information_Core* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, Geographical_Position_Information_Core* p) =
-      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
-      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
-      EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)           &&
-      EqualBits(stream, pos + 17,  pos + 18,  p->Q_NEWCOUNTRY)      &&
-      EqualBits(stream, pos + 28,  pos + 42,  p->NID_BG)            &&
-      EqualBits(stream, pos + 42,  pos + 57,  p->D_POSOFF)          &&
-      EqualBits(stream, pos + 57,  pos + 58,  p->Q_MPOSITION)       &&
-      EqualBits(stream, pos + 58,  pos + 82,  p->M_POSITION);
+    predicate EqualBits(Bitstream* stream, integer pos, Geographical_Position_Information_Core* p) = \true;
 
-    predicate UpperBitsNotSet(Geographical_Position_Information_Core* p) =
-      UpperBitsNotSet(p->Q_DIR,            2)   &&
-      UpperBitsNotSet(p->L_PACKET,         13)  &&
-      UpperBitsNotSet(p->Q_SCALE,          2)   &&
-      UpperBitsNotSet(p->Q_NEWCOUNTRY,     1)   &&
-      UpperBitsNotSet(p->NID_BG,           14)  &&
-      UpperBitsNotSet(p->D_POSOFF,         15)  &&
-      UpperBitsNotSet(p->Q_MPOSITION,      1)   &&
-      UpperBitsNotSet(p->M_POSITION,       24);
+    predicate UpperBitsNotSet(Geographical_Position_Information_Core* p) = \true;
 
 */
 

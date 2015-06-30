@@ -48,7 +48,7 @@ inline bool operator!=(const Level_Transition_Order_Core_1& a, const Level_Trans
 
 typedef struct Level_Transition_Order_Core_1 Level_Transition_Order_Core_1;
 
-#define LEVEL_TRANSITION_ORDER_CORE_1_CORE_BITSIZE 89
+#define LEVEL_TRANSITION_ORDER_CORE_1_CORE_BITSIZE 1510
 
 /*@
     logic integer BitSize{L}(Level_Transition_Order_Core_1* p) = LEVEL_TRANSITION_ORDER_CORE_1_CORE_BITSIZE;
@@ -63,13 +63,9 @@ typedef struct Level_Transition_Order_Core_1 Level_Transition_Order_Core_1;
 
     predicate ZeroInitialized(Level_Transition_Order_Core_1* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, Level_Transition_Order_Core_1* p) =
-      EqualBits(stream, pos + 63,  pos + 66,  p->M_LEVELTR_k)       &&
-      EqualBits(stream, pos + 74,  pos + 89,  p->L_ACKLEVELTR_k);
+    predicate EqualBits(Bitstream* stream, integer pos, Level_Transition_Order_Core_1* p) = \true;
 
-    predicate UpperBitsNotSet(Level_Transition_Order_Core_1* p) =
-      UpperBitsNotSet(p->M_LEVELTR_k,      3)   &&
-      UpperBitsNotSet(p->L_ACKLEVELTR_k,   15);
+    predicate UpperBitsNotSet(Level_Transition_Order_Core_1* p) = \true;
 
 */
 

@@ -80,7 +80,7 @@ inline bool operator!=(const Gradient_Profile_Core& a, const Gradient_Profile_Co
 
 typedef struct Gradient_Profile_Core Gradient_Profile_Core;
 
-#define GRADIENT_PROFILE_CORE_BITSIZE 70
+#define GRADIENT_PROFILE_CORE_BITSIZE 1221
 
 /*@
     logic integer BitSize{L}(Gradient_Profile_Core* p) = GRADIENT_PROFILE_CORE_BITSIZE;
@@ -95,21 +95,9 @@ typedef struct Gradient_Profile_Core Gradient_Profile_Core;
 
     predicate ZeroInitialized(Gradient_Profile_Core* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, Gradient_Profile_Core* p) =
-      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
-      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
-      EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)           &&
-      EqualBits(stream, pos + 17,  pos + 32,  p->D_GRADIENT)        &&
-      EqualBits(stream, pos + 32,  pos + 33,  p->Q_GDIR)            &&
-      EqualBits(stream, pos + 33,  pos + 41,  p->G_A);
+    predicate EqualBits(Bitstream* stream, integer pos, Gradient_Profile_Core* p) = \true;
 
-    predicate UpperBitsNotSet(Gradient_Profile_Core* p) =
-      UpperBitsNotSet(p->Q_DIR,            2)   &&
-      UpperBitsNotSet(p->L_PACKET,         13)  &&
-      UpperBitsNotSet(p->Q_SCALE,          2)   &&
-      UpperBitsNotSet(p->D_GRADIENT,       15)  &&
-      UpperBitsNotSet(p->Q_GDIR,           1)   &&
-      UpperBitsNotSet(p->G_A,              8);
+    predicate UpperBitsNotSet(Gradient_Profile_Core* p) = \true;
 
 */
 

@@ -48,7 +48,7 @@ inline bool operator!=(const Level_1_Movement_Authority_Core_1& a, const Level_1
 
 typedef struct Level_1_Movement_Authority_Core_1 Level_1_Movement_Authority_Core_1;
 
-#define LEVEL_1_MOVEMENT_AUTHORITY_CORE_1_CORE_BITSIZE 87
+#define LEVEL_1_MOVEMENT_AUTHORITY_CORE_1_CORE_BITSIZE 636
 
 /*@
     logic integer BitSize{L}(Level_1_Movement_Authority_Core_1* p) = LEVEL_1_MOVEMENT_AUTHORITY_CORE_1_CORE_BITSIZE;
@@ -63,17 +63,9 @@ typedef struct Level_1_Movement_Authority_Core_1 Level_1_Movement_Authority_Core
 
     predicate ZeroInitialized(Level_1_Movement_Authority_Core_1* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, Level_1_Movement_Authority_Core_1* p) =
-      EqualBits(stream, pos + 46,  pos + 61,  p->L_SECTION_k)       &&
-      EqualBits(stream, pos + 61,  pos + 62,  p->Q_SECTIONTIMER_k)  &&
-      EqualBits(stream, pos + 62,  pos + 72,  p->T_SECTIONTIMER_k)  &&
-      EqualBits(stream, pos + 72,  pos + 87,  p->D_SECTIONTIMERSTOPLOC_k);
+    predicate EqualBits(Bitstream* stream, integer pos, Level_1_Movement_Authority_Core_1* p) = \true;
 
-    predicate UpperBitsNotSet(Level_1_Movement_Authority_Core_1* p) =
-      UpperBitsNotSet(p->L_SECTION_k,      15)  &&
-      UpperBitsNotSet(p->Q_SECTIONTIMER_k, 1)   &&
-      UpperBitsNotSet(p->T_SECTIONTIMER_k, 10)  &&
-      UpperBitsNotSet(p->D_SECTIONTIMERSTOPLOC_k,15);
+    predicate UpperBitsNotSet(Level_1_Movement_Authority_Core_1* p) = \true;
 
 */
 
