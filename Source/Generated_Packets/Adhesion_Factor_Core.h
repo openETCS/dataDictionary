@@ -58,7 +58,7 @@ inline bool operator!=(const Adhesion_Factor_Core& a, const Adhesion_Factor_Core
 
 typedef struct Adhesion_Factor_Core Adhesion_Factor_Core;
 
-#define ADHESION_FACTOR_CORE_BITSIZE 2794
+#define ADHESION_FACTOR_CORE_BITSIZE 48
 
 /*@
     logic integer BitSize{L}(Adhesion_Factor_Core* p) = ADHESION_FACTOR_CORE_BITSIZE;
@@ -69,13 +69,37 @@ typedef struct Adhesion_Factor_Core Adhesion_Factor_Core;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Adhesion_Factor_Core* p) = \true;
+    predicate Invariant(Adhesion_Factor_Core* p) =
+      Invariant(p->Q_DIR)             &&
+      Invariant(p->L_PACKET)          &&
+      Invariant(p->Q_SCALE)           &&
+      Invariant(p->D_ADHESION)        &&
+      Invariant(p->L_ADHESION)        &&
+      Invariant(p->M_ADHESION);
 
-    predicate ZeroInitialized(Adhesion_Factor_Core* p) = \true;
+    predicate ZeroInitialized(Adhesion_Factor_Core* p) =
+      ZeroInitialized(p->Q_DIR)             &&
+      ZeroInitialized(p->L_PACKET)          &&
+      ZeroInitialized(p->Q_SCALE)           &&
+      ZeroInitialized(p->D_ADHESION)        &&
+      ZeroInitialized(p->L_ADHESION)        &&
+      ZeroInitialized(p->M_ADHESION);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Adhesion_Factor_Core* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Adhesion_Factor_Core* p) =
+      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
+      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
+      EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)           &&
+      EqualBits(stream, pos + 17,  pos + 32,  p->D_ADHESION)        &&
+      EqualBits(stream, pos + 32,  pos + 47,  p->L_ADHESION)        &&
+      EqualBits(stream, pos + 47,  pos + 48,  p->M_ADHESION);
 
-    predicate UpperBitsNotSet(Adhesion_Factor_Core* p) = \true;
+    predicate UpperBitsNotSet(Adhesion_Factor_Core* p) =
+      UpperBitsNotSet(p->Q_DIR,            2)   &&
+      UpperBitsNotSet(p->L_PACKET,         13)  &&
+      UpperBitsNotSet(p->Q_SCALE,          2)   &&
+      UpperBitsNotSet(p->D_ADHESION,       15)  &&
+      UpperBitsNotSet(p->L_ADHESION,       15)  &&
+      UpperBitsNotSet(p->M_ADHESION,       1);
 
 */
 

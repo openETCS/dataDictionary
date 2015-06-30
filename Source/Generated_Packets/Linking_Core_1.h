@@ -60,7 +60,7 @@ inline bool operator!=(const Linking_Core_1& a, const Linking_Core_1& b)
 
 typedef struct Linking_Core_1 Linking_Core_1;
 
-#define LINKING_CORE_1_CORE_BITSIZE 509
+#define LINKING_CORE_1_CORE_BITSIZE 120
 
 /*@
     logic integer BitSize{L}(Linking_Core_1* p) = LINKING_CORE_1_CORE_BITSIZE;

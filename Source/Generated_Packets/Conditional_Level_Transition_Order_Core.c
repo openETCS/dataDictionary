@@ -54,6 +54,9 @@ int Conditional_Level_Transition_Order_Encoder(Bitstream* stream, const Conditio
             }
 
 
+            //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
+            //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
+            //@ assert M_LEVELTR:         EqualBits(stream, pos + 15,  pos + 18,  p->M_LEVELTR);
 
             return 1;
         }
@@ -74,10 +77,34 @@ int Conditional_Level_Transition_Order_Decoder(Bitstream* stream, Conditional_Le
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 
+	/*@
+	  requires Q_DIR:          stream->bitpos == pos + 0;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->Q_DIR;
+	  ensures  Q_DIR:          stream->bitpos == pos + 2;
+	  ensures  Q_DIR:          EqualBits(stream, pos + 0, pos + 2, p->Q_DIR);
+	  ensures  Q_DIR:          UpperBitsNotSet(p->Q_DIR, 2);
+	*/
 	{ p->Q_DIR		= Bitstream_Read(stream, 2); }
 
+	/*@
+	  requires L_PACKET:       stream->bitpos == pos + 2;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->L_PACKET;
+	  ensures  L_PACKET:       stream->bitpos == pos + 15;
+	  ensures  L_PACKET:       EqualBits(stream, pos + 2, pos + 15, p->L_PACKET);
+	  ensures  L_PACKET:       UpperBitsNotSet(p->L_PACKET, 13);
+	*/
 	{ p->L_PACKET		= Bitstream_Read(stream, 13); }
 
+	/*@
+	  requires M_LEVELTR:      stream->bitpos == pos + 15;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->M_LEVELTR;
+	  ensures  M_LEVELTR:      stream->bitpos == pos + 18;
+	  ensures  M_LEVELTR:      EqualBits(stream, pos + 15, pos + 18, p->M_LEVELTR);
+	  ensures  M_LEVELTR:      UpperBitsNotSet(p->M_LEVELTR, 3);
+	*/
 	{ p->M_LEVELTR		= Bitstream_Read(stream, 3); }
 
         if (p->M_LEVELTR == 1)
@@ -91,7 +118,13 @@ int Conditional_Level_Transition_Order_Decoder(Bitstream* stream, Conditional_Le
         {
             Conditional_Level_Transition_Order_Core_1_Decoder(stream, &(p->sub_1[i]));
         }
+        //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
+        //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
+        //@ assert M_LEVELTR:         EqualBits(stream, pos + 15,  pos + 18,  p->M_LEVELTR);
 
+        //@ assert Q_DIR:             UpperBitsNotSet(p->Q_DIR,             2);
+        //@ assert L_PACKET:          UpperBitsNotSet(p->L_PACKET,          13);
+        //@ assert M_LEVELTR:         UpperBitsNotSet(p->M_LEVELTR,         3);
 
 	//@ assert final: EqualBits(stream, pos, p);
 

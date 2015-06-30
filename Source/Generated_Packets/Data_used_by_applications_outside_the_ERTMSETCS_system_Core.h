@@ -58,7 +58,7 @@ inline bool operator!=(const Data_used_by_applications_outside_the_ERTMSETCS_sys
 
 typedef struct Data_used_by_applications_outside_the_ERTMSETCS_system_Core Data_used_by_applications_outside_the_ERTMSETCS_system_Core;
 
-#define DATA_USED_BY_APPLICATIONS_OUTSIDE_THE_ERTMSETCS_SYSTEM_CORE_BITSIZE 1655
+#define DATA_USED_BY_APPLICATIONS_OUTSIDE_THE_ERTMSETCS_SYSTEM_CORE_BITSIZE 40
 
 /*@
     logic integer BitSize{L}(Data_used_by_applications_outside_the_ERTMSETCS_system_Core* p) = DATA_USED_BY_APPLICATIONS_OUTSIDE_THE_ERTMSETCS_SYSTEM_CORE_BITSIZE;
@@ -69,13 +69,25 @@ typedef struct Data_used_by_applications_outside_the_ERTMSETCS_system_Core Data_
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Data_used_by_applications_outside_the_ERTMSETCS_system_Core* p) = \true;
+    predicate Invariant(Data_used_by_applications_outside_the_ERTMSETCS_system_Core* p) =
+      Invariant(p->Q_DIR)             &&
+      Invariant(p->L_PACKET)          &&
+      Invariant(p->NID_XUSER);
 
-    predicate ZeroInitialized(Data_used_by_applications_outside_the_ERTMSETCS_system_Core* p) = \true;
+    predicate ZeroInitialized(Data_used_by_applications_outside_the_ERTMSETCS_system_Core* p) =
+      ZeroInitialized(p->Q_DIR)             &&
+      ZeroInitialized(p->L_PACKET)          &&
+      ZeroInitialized(p->NID_XUSER);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Data_used_by_applications_outside_the_ERTMSETCS_system_Core* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Data_used_by_applications_outside_the_ERTMSETCS_system_Core* p) =
+      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
+      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
+      EqualBits(stream, pos + 15,  pos + 24,  p->NID_XUSER);
 
-    predicate UpperBitsNotSet(Data_used_by_applications_outside_the_ERTMSETCS_system_Core* p) = \true;
+    predicate UpperBitsNotSet(Data_used_by_applications_outside_the_ERTMSETCS_system_Core* p) =
+      UpperBitsNotSet(p->Q_DIR,            2)   &&
+      UpperBitsNotSet(p->L_PACKET,         13)  &&
+      UpperBitsNotSet(p->NID_XUSER,        9);
 
 */
 

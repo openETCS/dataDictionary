@@ -48,7 +48,7 @@ inline bool operator!=(const Train_running_number_from_RBC_Core& a, const Train_
 
 typedef struct Train_running_number_from_RBC_Core Train_running_number_from_RBC_Core;
 
-#define TRAIN_RUNNING_NUMBER_FROM_RBC_CORE_BITSIZE 4015
+#define TRAIN_RUNNING_NUMBER_FROM_RBC_CORE_BITSIZE 47
 
 /*@
     logic integer BitSize{L}(Train_running_number_from_RBC_Core* p) = TRAIN_RUNNING_NUMBER_FROM_RBC_CORE_BITSIZE;
@@ -59,13 +59,25 @@ typedef struct Train_running_number_from_RBC_Core Train_running_number_from_RBC_
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Train_running_number_from_RBC_Core* p) = \true;
+    predicate Invariant(Train_running_number_from_RBC_Core* p) =
+      Invariant(p->Q_DIR)             &&
+      Invariant(p->L_PACKET)          &&
+      Invariant(p->NID_OPERATIONAL);
 
-    predicate ZeroInitialized(Train_running_number_from_RBC_Core* p) = \true;
+    predicate ZeroInitialized(Train_running_number_from_RBC_Core* p) =
+      ZeroInitialized(p->Q_DIR)             &&
+      ZeroInitialized(p->L_PACKET)          &&
+      ZeroInitialized(p->NID_OPERATIONAL);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Train_running_number_from_RBC_Core* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Train_running_number_from_RBC_Core* p) =
+      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
+      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
+      EqualBits(stream, pos + 15,  pos + 47,  p->NID_OPERATIONAL);
 
-    predicate UpperBitsNotSet(Train_running_number_from_RBC_Core* p) = \true;
+    predicate UpperBitsNotSet(Train_running_number_from_RBC_Core* p) =
+      UpperBitsNotSet(p->Q_DIR,            2)   &&
+      UpperBitsNotSet(p->L_PACKET,         13)  &&
+      UpperBitsNotSet(p->NID_OPERATIONAL,  32);
 
 */
 

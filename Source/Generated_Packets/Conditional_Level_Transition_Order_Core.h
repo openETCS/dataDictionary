@@ -76,7 +76,7 @@ inline bool operator!=(const Conditional_Level_Transition_Order_Core& a, const C
 
 typedef struct Conditional_Level_Transition_Order_Core Conditional_Level_Transition_Order_Core;
 
-#define CONDITIONAL_LEVEL_TRANSITION_ORDER_CORE_BITSIZE 1736
+#define CONDITIONAL_LEVEL_TRANSITION_ORDER_CORE_BITSIZE 42
 
 /*@
     logic integer BitSize{L}(Conditional_Level_Transition_Order_Core* p) = CONDITIONAL_LEVEL_TRANSITION_ORDER_CORE_BITSIZE;
@@ -87,13 +87,25 @@ typedef struct Conditional_Level_Transition_Order_Core Conditional_Level_Transit
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Conditional_Level_Transition_Order_Core* p) = \true;
+    predicate Invariant(Conditional_Level_Transition_Order_Core* p) =
+      Invariant(p->Q_DIR)             &&
+      Invariant(p->L_PACKET)          &&
+      Invariant(p->M_LEVELTR);
 
-    predicate ZeroInitialized(Conditional_Level_Transition_Order_Core* p) = \true;
+    predicate ZeroInitialized(Conditional_Level_Transition_Order_Core* p) =
+      ZeroInitialized(p->Q_DIR)             &&
+      ZeroInitialized(p->L_PACKET)          &&
+      ZeroInitialized(p->M_LEVELTR);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Conditional_Level_Transition_Order_Core* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Conditional_Level_Transition_Order_Core* p) =
+      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
+      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
+      EqualBits(stream, pos + 15,  pos + 18,  p->M_LEVELTR);
 
-    predicate UpperBitsNotSet(Conditional_Level_Transition_Order_Core* p) = \true;
+    predicate UpperBitsNotSet(Conditional_Level_Transition_Order_Core* p) =
+      UpperBitsNotSet(p->Q_DIR,            2)   &&
+      UpperBitsNotSet(p->L_PACKET,         13)  &&
+      UpperBitsNotSet(p->M_LEVELTR,        3);
 
 */
 

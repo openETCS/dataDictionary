@@ -93,7 +93,7 @@ inline bool operator!=(const Track_Condition_Station_Platforms_Core& a, const Tr
 
 typedef struct Track_Condition_Station_Platforms_Core Track_Condition_Station_Platforms_Core;
 
-#define TRACK_CONDITION_STATION_PLATFORMS_CORE_BITSIZE 2616
+#define TRACK_CONDITION_STATION_PLATFORMS_CORE_BITSIZE 110
 
 /*@
     logic integer BitSize{L}(Track_Condition_Station_Platforms_Core* p) = TRACK_CONDITION_STATION_PLATFORMS_CORE_BITSIZE;
@@ -104,13 +104,29 @@ typedef struct Track_Condition_Station_Platforms_Core Track_Condition_Station_Pl
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Track_Condition_Station_Platforms_Core* p) = \true;
+    predicate Invariant(Track_Condition_Station_Platforms_Core* p) =
+      Invariant(p->Q_DIR)             &&
+      Invariant(p->L_PACKET)          &&
+      Invariant(p->Q_SCALE)           &&
+      Invariant(p->Q_TRACKINIT);
 
-    predicate ZeroInitialized(Track_Condition_Station_Platforms_Core* p) = \true;
+    predicate ZeroInitialized(Track_Condition_Station_Platforms_Core* p) =
+      ZeroInitialized(p->Q_DIR)             &&
+      ZeroInitialized(p->L_PACKET)          &&
+      ZeroInitialized(p->Q_SCALE)           &&
+      ZeroInitialized(p->Q_TRACKINIT);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Track_Condition_Station_Platforms_Core* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Track_Condition_Station_Platforms_Core* p) =
+      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
+      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
+      EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)           &&
+      EqualBits(stream, pos + 17,  pos + 18,  p->Q_TRACKINIT);
 
-    predicate UpperBitsNotSet(Track_Condition_Station_Platforms_Core* p) = \true;
+    predicate UpperBitsNotSet(Track_Condition_Station_Platforms_Core* p) =
+      UpperBitsNotSet(p->Q_DIR,            2)   &&
+      UpperBitsNotSet(p->L_PACKET,         13)  &&
+      UpperBitsNotSet(p->Q_SCALE,          2)   &&
+      UpperBitsNotSet(p->Q_TRACKINIT,      1);
 
 */
 

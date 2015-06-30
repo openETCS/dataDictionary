@@ -86,7 +86,7 @@ inline bool operator!=(const Level_Transition_Order_Core& a, const Level_Transit
 
 typedef struct Level_Transition_Order_Core Level_Transition_Order_Core;
 
-#define LEVEL_TRANSITION_ORDER_CORE_BITSIZE 1510
+#define LEVEL_TRANSITION_ORDER_CORE_BITSIZE 89
 
 /*@
     logic integer BitSize{L}(Level_Transition_Order_Core* p) = LEVEL_TRANSITION_ORDER_CORE_BITSIZE;
@@ -97,13 +97,33 @@ typedef struct Level_Transition_Order_Core Level_Transition_Order_Core;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Level_Transition_Order_Core* p) = \true;
+    predicate Invariant(Level_Transition_Order_Core* p) =
+      Invariant(p->Q_DIR)             &&
+      Invariant(p->L_PACKET)          &&
+      Invariant(p->Q_SCALE)           &&
+      Invariant(p->D_LEVELTR)         &&
+      Invariant(p->M_LEVELTR);
 
-    predicate ZeroInitialized(Level_Transition_Order_Core* p) = \true;
+    predicate ZeroInitialized(Level_Transition_Order_Core* p) =
+      ZeroInitialized(p->Q_DIR)             &&
+      ZeroInitialized(p->L_PACKET)          &&
+      ZeroInitialized(p->Q_SCALE)           &&
+      ZeroInitialized(p->D_LEVELTR)         &&
+      ZeroInitialized(p->M_LEVELTR);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Level_Transition_Order_Core* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Level_Transition_Order_Core* p) =
+      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
+      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
+      EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)           &&
+      EqualBits(stream, pos + 17,  pos + 32,  p->D_LEVELTR)         &&
+      EqualBits(stream, pos + 32,  pos + 35,  p->M_LEVELTR);
 
-    predicate UpperBitsNotSet(Level_Transition_Order_Core* p) = \true;
+    predicate UpperBitsNotSet(Level_Transition_Order_Core* p) =
+      UpperBitsNotSet(p->Q_DIR,            2)   &&
+      UpperBitsNotSet(p->L_PACKET,         13)  &&
+      UpperBitsNotSet(p->Q_SCALE,          2)   &&
+      UpperBitsNotSet(p->D_LEVELTR,        15)  &&
+      UpperBitsNotSet(p->M_LEVELTR,        3);
 
 */
 

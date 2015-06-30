@@ -48,7 +48,7 @@ inline bool operator!=(const Track_Condition_Station_Platforms_Core_1& a, const 
 
 typedef struct Track_Condition_Station_Platforms_Core_1 Track_Condition_Station_Platforms_Core_1;
 
-#define TRACK_CONDITION_STATION_PLATFORMS_CORE_1_CORE_BITSIZE 2616
+#define TRACK_CONDITION_STATION_PLATFORMS_CORE_1_CORE_BITSIZE 110
 
 /*@
     logic integer BitSize{L}(Track_Condition_Station_Platforms_Core_1* p) = TRACK_CONDITION_STATION_PLATFORMS_CORE_1_CORE_BITSIZE;

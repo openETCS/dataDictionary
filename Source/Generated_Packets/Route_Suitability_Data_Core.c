@@ -103,6 +103,10 @@ int Route_Suitability_Data_Encoder(Bitstream* stream, const Route_Suitability_Da
 
 
 
+            //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
+            //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
+            //@ assert Q_SCALE:           EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE);
+            //@ assert Q_TRACKINIT:       EqualBits(stream, pos + 17,  pos + 18,  p->Q_TRACKINIT);
 
             return 1;
         }
@@ -123,12 +127,44 @@ int Route_Suitability_Data_Decoder(Bitstream* stream, Route_Suitability_Data_Cor
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 
+	/*@
+	  requires Q_DIR:          stream->bitpos == pos + 0;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->Q_DIR;
+	  ensures  Q_DIR:          stream->bitpos == pos + 2;
+	  ensures  Q_DIR:          EqualBits(stream, pos + 0, pos + 2, p->Q_DIR);
+	  ensures  Q_DIR:          UpperBitsNotSet(p->Q_DIR, 2);
+	*/
 	{ p->Q_DIR		= Bitstream_Read(stream, 2); }
 
+	/*@
+	  requires L_PACKET:       stream->bitpos == pos + 2;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->L_PACKET;
+	  ensures  L_PACKET:       stream->bitpos == pos + 15;
+	  ensures  L_PACKET:       EqualBits(stream, pos + 2, pos + 15, p->L_PACKET);
+	  ensures  L_PACKET:       UpperBitsNotSet(p->L_PACKET, 13);
+	*/
 	{ p->L_PACKET		= Bitstream_Read(stream, 13); }
 
+	/*@
+	  requires Q_SCALE:        stream->bitpos == pos + 15;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->Q_SCALE;
+	  ensures  Q_SCALE:        stream->bitpos == pos + 17;
+	  ensures  Q_SCALE:        EqualBits(stream, pos + 15, pos + 17, p->Q_SCALE);
+	  ensures  Q_SCALE:        UpperBitsNotSet(p->Q_SCALE, 2);
+	*/
 	{ p->Q_SCALE		= Bitstream_Read(stream, 2); }
 
+	/*@
+	  requires Q_TRACKINIT:    stream->bitpos == pos + 17;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->Q_TRACKINIT;
+	  ensures  Q_TRACKINIT:    stream->bitpos == pos + 18;
+	  ensures  Q_TRACKINIT:    EqualBits(stream, pos + 17, pos + 18, p->Q_TRACKINIT);
+	  ensures  Q_TRACKINIT:    UpperBitsNotSet(p->Q_TRACKINIT, 1);
+	*/
 	{ p->Q_TRACKINIT		= Bitstream_Read(stream, 1); }
 
         if (p->Q_TRACKINIT == 1)
@@ -169,7 +205,15 @@ int Route_Suitability_Data_Decoder(Bitstream* stream, Route_Suitability_Data_Cor
             Route_Suitability_Data_Core_1_Decoder(stream, &(p->sub_1[i]));
         }        }
 
+        //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
+        //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
+        //@ assert Q_SCALE:           EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE);
+        //@ assert Q_TRACKINIT:       EqualBits(stream, pos + 17,  pos + 18,  p->Q_TRACKINIT);
 
+        //@ assert Q_DIR:             UpperBitsNotSet(p->Q_DIR,             2);
+        //@ assert L_PACKET:          UpperBitsNotSet(p->L_PACKET,          13);
+        //@ assert Q_SCALE:           UpperBitsNotSet(p->Q_SCALE,           2);
+        //@ assert Q_TRACKINIT:       UpperBitsNotSet(p->Q_TRACKINIT,       1);
 
 	//@ assert final: EqualBits(stream, pos, p);
 

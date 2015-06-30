@@ -42,6 +42,7 @@ int List_of_Balises_in_SR_Authority_Core_1_Encoder(Bitstream* stream, const List
             Bitstream_Write(stream, 14, p->NID_BG_k);
 
 
+            //@ assert Q_NEWCOUNTRY_k:    EqualBits(stream, pos + 20,  pos + 21,  p->Q_NEWCOUNTRY_k);
 
             return 1;
         }
@@ -62,6 +63,14 @@ int List_of_Balises_in_SR_Authority_Core_1_Decoder(Bitstream* stream, List_of_Ba
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 
+	/*@
+	  requires Q_NEWCOUNTRY_k: stream->bitpos == pos + 20;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->Q_NEWCOUNTRY_k;
+	  ensures  Q_NEWCOUNTRY_k: stream->bitpos == pos + 21;
+	  ensures  Q_NEWCOUNTRY_k: EqualBits(stream, pos + 20, pos + 21, p->Q_NEWCOUNTRY_k);
+	  ensures  Q_NEWCOUNTRY_k: UpperBitsNotSet(p->Q_NEWCOUNTRY_k, 1);
+	*/
 	{ p->Q_NEWCOUNTRY_k		= Bitstream_Read(stream, 1); }
 
         if (p->Q_NEWCOUNTRY_k == 1)
@@ -71,7 +80,9 @@ int List_of_Balises_in_SR_Authority_Core_1_Decoder(Bitstream* stream, List_of_Ba
 
 	{ p->NID_BG_k		= Bitstream_Read(stream, 14); }
 
+        //@ assert Q_NEWCOUNTRY_k:    EqualBits(stream, pos + 20,  pos + 21,  p->Q_NEWCOUNTRY_k);
 
+        //@ assert Q_NEWCOUNTRY_k:    UpperBitsNotSet(p->Q_NEWCOUNTRY_k,    1);
 
 	//@ assert final: EqualBits(stream, pos, p);
 

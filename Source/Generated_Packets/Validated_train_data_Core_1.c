@@ -40,6 +40,7 @@ int Validated_train_data_Core_1_Encoder(Bitstream* stream, const Validated_train
 
 
 
+            //@ assert M_VOLTAGE_k:       EqualBits(stream, pos + 83,  pos + 87,  p->M_VOLTAGE_k);
 
             return 1;
         }
@@ -60,6 +61,14 @@ int Validated_train_data_Core_1_Decoder(Bitstream* stream, Validated_train_data_
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 
+	/*@
+	  requires M_VOLTAGE_k:    stream->bitpos == pos + 83;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->M_VOLTAGE_k;
+	  ensures  M_VOLTAGE_k:    stream->bitpos == pos + 87;
+	  ensures  M_VOLTAGE_k:    EqualBits(stream, pos + 83, pos + 87, p->M_VOLTAGE_k);
+	  ensures  M_VOLTAGE_k:    UpperBitsNotSet(p->M_VOLTAGE_k, 4);
+	*/
 	{ p->M_VOLTAGE_k		= Bitstream_Read(stream, 4); }
 
         if ((p->M_VOLTAGE_k != 0) && (p->NID_CTRACTION_k != 0))
@@ -67,7 +76,9 @@ int Validated_train_data_Core_1_Decoder(Bitstream* stream, Validated_train_data_
 	{ p->NID_CTRACTION_k		= Bitstream_Read(stream, 10); }
         }
 
+        //@ assert M_VOLTAGE_k:       EqualBits(stream, pos + 83,  pos + 87,  p->M_VOLTAGE_k);
 
+        //@ assert M_VOLTAGE_k:       UpperBitsNotSet(p->M_VOLTAGE_k,       4);
 
 	//@ assert final: EqualBits(stream, pos, p);
 

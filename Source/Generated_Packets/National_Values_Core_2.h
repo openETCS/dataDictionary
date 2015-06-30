@@ -42,7 +42,7 @@ inline bool operator!=(const National_Values_Core_2& a, const National_Values_Co
 
 typedef struct National_Values_Core_2 National_Values_Core_2;
 
-#define NATIONAL_VALUES_CORE_2_CORE_BITSIZE 307
+#define NATIONAL_VALUES_CORE_2_CORE_BITSIZE 279
 
 /*@
     logic integer BitSize{L}(National_Values_Core_2* p) = NATIONAL_VALUES_CORE_2_CORE_BITSIZE;

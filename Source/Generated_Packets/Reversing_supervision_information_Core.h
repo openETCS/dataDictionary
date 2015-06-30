@@ -55,7 +55,7 @@ inline bool operator!=(const Reversing_supervision_information_Core& a, const Re
 
 typedef struct Reversing_supervision_information_Core Reversing_supervision_information_Core;
 
-#define REVERSING_SUPERVISION_INFORMATION_CORE_BITSIZE 3968
+#define REVERSING_SUPERVISION_INFORMATION_CORE_BITSIZE 39
 
 /*@
     logic integer BitSize{L}(Reversing_supervision_information_Core* p) = REVERSING_SUPERVISION_INFORMATION_CORE_BITSIZE;
@@ -66,13 +66,33 @@ typedef struct Reversing_supervision_information_Core Reversing_supervision_info
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Reversing_supervision_information_Core* p) = \true;
+    predicate Invariant(Reversing_supervision_information_Core* p) =
+      Invariant(p->Q_DIR)             &&
+      Invariant(p->L_PACKET)          &&
+      Invariant(p->Q_SCALE)           &&
+      Invariant(p->D_REVERSE)         &&
+      Invariant(p->V_REVERSE);
 
-    predicate ZeroInitialized(Reversing_supervision_information_Core* p) = \true;
+    predicate ZeroInitialized(Reversing_supervision_information_Core* p) =
+      ZeroInitialized(p->Q_DIR)             &&
+      ZeroInitialized(p->L_PACKET)          &&
+      ZeroInitialized(p->Q_SCALE)           &&
+      ZeroInitialized(p->D_REVERSE)         &&
+      ZeroInitialized(p->V_REVERSE);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Reversing_supervision_information_Core* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Reversing_supervision_information_Core* p) =
+      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
+      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
+      EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)           &&
+      EqualBits(stream, pos + 17,  pos + 32,  p->D_REVERSE)         &&
+      EqualBits(stream, pos + 32,  pos + 39,  p->V_REVERSE);
 
-    predicate UpperBitsNotSet(Reversing_supervision_information_Core* p) = \true;
+    predicate UpperBitsNotSet(Reversing_supervision_information_Core* p) =
+      UpperBitsNotSet(p->Q_DIR,            2)   &&
+      UpperBitsNotSet(p->L_PACKET,         13)  &&
+      UpperBitsNotSet(p->Q_SCALE,          2)   &&
+      UpperBitsNotSet(p->D_REVERSE,        15)  &&
+      UpperBitsNotSet(p->V_REVERSE,        7);
 
 */
 

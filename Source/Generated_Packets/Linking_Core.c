@@ -66,6 +66,11 @@ int Linking_Encoder(Bitstream* stream, const Linking_Core* p)
             }
 
 
+            //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
+            //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
+            //@ assert Q_SCALE:           EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE);
+            //@ assert D_LINK:            EqualBits(stream, pos + 17,  pos + 32,  p->D_LINK);
+            //@ assert Q_NEWCOUNTRY:      EqualBits(stream, pos + 32,  pos + 33,  p->Q_NEWCOUNTRY);
 
             return 1;
         }
@@ -86,14 +91,54 @@ int Linking_Decoder(Bitstream* stream, Linking_Core* p)
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 
+	/*@
+	  requires Q_DIR:          stream->bitpos == pos + 0;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->Q_DIR;
+	  ensures  Q_DIR:          stream->bitpos == pos + 2;
+	  ensures  Q_DIR:          EqualBits(stream, pos + 0, pos + 2, p->Q_DIR);
+	  ensures  Q_DIR:          UpperBitsNotSet(p->Q_DIR, 2);
+	*/
 	{ p->Q_DIR		= Bitstream_Read(stream, 2); }
 
+	/*@
+	  requires L_PACKET:       stream->bitpos == pos + 2;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->L_PACKET;
+	  ensures  L_PACKET:       stream->bitpos == pos + 15;
+	  ensures  L_PACKET:       EqualBits(stream, pos + 2, pos + 15, p->L_PACKET);
+	  ensures  L_PACKET:       UpperBitsNotSet(p->L_PACKET, 13);
+	*/
 	{ p->L_PACKET		= Bitstream_Read(stream, 13); }
 
+	/*@
+	  requires Q_SCALE:        stream->bitpos == pos + 15;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->Q_SCALE;
+	  ensures  Q_SCALE:        stream->bitpos == pos + 17;
+	  ensures  Q_SCALE:        EqualBits(stream, pos + 15, pos + 17, p->Q_SCALE);
+	  ensures  Q_SCALE:        UpperBitsNotSet(p->Q_SCALE, 2);
+	*/
 	{ p->Q_SCALE		= Bitstream_Read(stream, 2); }
 
+	/*@
+	  requires D_LINK:         stream->bitpos == pos + 17;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->D_LINK;
+	  ensures  D_LINK:         stream->bitpos == pos + 32;
+	  ensures  D_LINK:         EqualBits(stream, pos + 17, pos + 32, p->D_LINK);
+	  ensures  D_LINK:         UpperBitsNotSet(p->D_LINK, 15);
+	*/
 	{ p->D_LINK		= Bitstream_Read(stream, 15); }
 
+	/*@
+	  requires Q_NEWCOUNTRY:   stream->bitpos == pos + 32;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->Q_NEWCOUNTRY;
+	  ensures  Q_NEWCOUNTRY:   stream->bitpos == pos + 33;
+	  ensures  Q_NEWCOUNTRY:   EqualBits(stream, pos + 32, pos + 33, p->Q_NEWCOUNTRY);
+	  ensures  Q_NEWCOUNTRY:   UpperBitsNotSet(p->Q_NEWCOUNTRY, 1);
+	*/
 	{ p->Q_NEWCOUNTRY		= Bitstream_Read(stream, 1); }
 
         if (p->Q_NEWCOUNTRY == 1)
@@ -115,7 +160,17 @@ int Linking_Decoder(Bitstream* stream, Linking_Core* p)
         {
             Linking_Core_1_Decoder(stream, &(p->sub_1[i]));
         }
+        //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
+        //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
+        //@ assert Q_SCALE:           EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE);
+        //@ assert D_LINK:            EqualBits(stream, pos + 17,  pos + 32,  p->D_LINK);
+        //@ assert Q_NEWCOUNTRY:      EqualBits(stream, pos + 32,  pos + 33,  p->Q_NEWCOUNTRY);
 
+        //@ assert Q_DIR:             UpperBitsNotSet(p->Q_DIR,             2);
+        //@ assert L_PACKET:          UpperBitsNotSet(p->L_PACKET,          13);
+        //@ assert Q_SCALE:           UpperBitsNotSet(p->Q_SCALE,           2);
+        //@ assert D_LINK:            UpperBitsNotSet(p->D_LINK,            15);
+        //@ assert Q_NEWCOUNTRY:      UpperBitsNotSet(p->Q_NEWCOUNTRY,      1);
 
 	//@ assert final: EqualBits(stream, pos, p);
 

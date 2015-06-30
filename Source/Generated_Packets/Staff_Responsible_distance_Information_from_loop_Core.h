@@ -96,7 +96,7 @@ inline bool operator!=(const Staff_Responsible_distance_Information_from_loop_Co
 
 typedef struct Staff_Responsible_distance_Information_from_loop_Core Staff_Responsible_distance_Information_from_loop_Core;
 
-#define STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_BITSIZE 901
+#define STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_BITSIZE 127
 
 /*@
     logic integer BitSize{L}(Staff_Responsible_distance_Information_from_loop_Core* p) = STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_BITSIZE;
@@ -107,13 +107,29 @@ typedef struct Staff_Responsible_distance_Information_from_loop_Core Staff_Respo
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Staff_Responsible_distance_Information_from_loop_Core* p) = \true;
+    predicate Invariant(Staff_Responsible_distance_Information_from_loop_Core* p) =
+      Invariant(p->Q_DIR)             &&
+      Invariant(p->L_PACKET)          &&
+      Invariant(p->Q_SCALE)           &&
+      Invariant(p->Q_NEWCOUNTRY_0);
 
-    predicate ZeroInitialized(Staff_Responsible_distance_Information_from_loop_Core* p) = \true;
+    predicate ZeroInitialized(Staff_Responsible_distance_Information_from_loop_Core* p) =
+      ZeroInitialized(p->Q_DIR)             &&
+      ZeroInitialized(p->L_PACKET)          &&
+      ZeroInitialized(p->Q_SCALE)           &&
+      ZeroInitialized(p->Q_NEWCOUNTRY_0);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Staff_Responsible_distance_Information_from_loop_Core* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Staff_Responsible_distance_Information_from_loop_Core* p) =
+      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
+      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
+      EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)           &&
+      EqualBits(stream, pos + 17,  pos + 18,  p->Q_NEWCOUNTRY_0);
 
-    predicate UpperBitsNotSet(Staff_Responsible_distance_Information_from_loop_Core* p) = \true;
+    predicate UpperBitsNotSet(Staff_Responsible_distance_Information_from_loop_Core* p) =
+      UpperBitsNotSet(p->Q_DIR,            2)   &&
+      UpperBitsNotSet(p->L_PACKET,         13)  &&
+      UpperBitsNotSet(p->Q_SCALE,          2)   &&
+      UpperBitsNotSet(p->Q_NEWCOUNTRY_0,   1);
 
 */
 

@@ -48,7 +48,7 @@ inline bool operator!=(const Danger_for_Shunting_information_Core& a, const Dang
 
 typedef struct Danger_for_Shunting_information_Core Danger_for_Shunting_information_Core;
 
-#define DANGER_FOR_SHUNTING_INFORMATION_CORE_BITSIZE 3610
+#define DANGER_FOR_SHUNTING_INFORMATION_CORE_BITSIZE 16
 
 /*@
     logic integer BitSize{L}(Danger_for_Shunting_information_Core* p) = DANGER_FOR_SHUNTING_INFORMATION_CORE_BITSIZE;
@@ -59,13 +59,25 @@ typedef struct Danger_for_Shunting_information_Core Danger_for_Shunting_informat
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Danger_for_Shunting_information_Core* p) = \true;
+    predicate Invariant(Danger_for_Shunting_information_Core* p) =
+      Invariant(p->Q_DIR)             &&
+      Invariant(p->L_PACKET)          &&
+      Invariant(p->Q_ASPECT);
 
-    predicate ZeroInitialized(Danger_for_Shunting_information_Core* p) = \true;
+    predicate ZeroInitialized(Danger_for_Shunting_information_Core* p) =
+      ZeroInitialized(p->Q_DIR)             &&
+      ZeroInitialized(p->L_PACKET)          &&
+      ZeroInitialized(p->Q_ASPECT);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Danger_for_Shunting_information_Core* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Danger_for_Shunting_information_Core* p) =
+      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
+      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
+      EqualBits(stream, pos + 15,  pos + 16,  p->Q_ASPECT);
 
-    predicate UpperBitsNotSet(Danger_for_Shunting_information_Core* p) = \true;
+    predicate UpperBitsNotSet(Danger_for_Shunting_information_Core* p) =
+      UpperBitsNotSet(p->Q_DIR,            2)   &&
+      UpperBitsNotSet(p->L_PACKET,         13)  &&
+      UpperBitsNotSet(p->Q_ASPECT,         1);
 
 */
 

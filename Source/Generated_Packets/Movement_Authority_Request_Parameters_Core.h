@@ -55,7 +55,7 @@ inline bool operator!=(const Movement_Authority_Request_Parameters_Core& a, cons
 
 typedef struct Movement_Authority_Request_Parameters_Core Movement_Authority_Request_Parameters_Core;
 
-#define MOVEMENT_AUTHORITY_REQUEST_PARAMETERS_CORE_BITSIZE 2108
+#define MOVEMENT_AUTHORITY_REQUEST_PARAMETERS_CORE_BITSIZE 41
 
 /*@
     logic integer BitSize{L}(Movement_Authority_Request_Parameters_Core* p) = MOVEMENT_AUTHORITY_REQUEST_PARAMETERS_CORE_BITSIZE;
@@ -66,13 +66,33 @@ typedef struct Movement_Authority_Request_Parameters_Core Movement_Authority_Req
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Movement_Authority_Request_Parameters_Core* p) = \true;
+    predicate Invariant(Movement_Authority_Request_Parameters_Core* p) =
+      Invariant(p->Q_DIR)             &&
+      Invariant(p->L_PACKET)          &&
+      Invariant(p->T_MAR)             &&
+      Invariant(p->T_TIMEOUTRQST)     &&
+      Invariant(p->T_CYCRQST);
 
-    predicate ZeroInitialized(Movement_Authority_Request_Parameters_Core* p) = \true;
+    predicate ZeroInitialized(Movement_Authority_Request_Parameters_Core* p) =
+      ZeroInitialized(p->Q_DIR)             &&
+      ZeroInitialized(p->L_PACKET)          &&
+      ZeroInitialized(p->T_MAR)             &&
+      ZeroInitialized(p->T_TIMEOUTRQST)     &&
+      ZeroInitialized(p->T_CYCRQST);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Movement_Authority_Request_Parameters_Core* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Movement_Authority_Request_Parameters_Core* p) =
+      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
+      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
+      EqualBits(stream, pos + 15,  pos + 23,  p->T_MAR)             &&
+      EqualBits(stream, pos + 23,  pos + 33,  p->T_TIMEOUTRQST)     &&
+      EqualBits(stream, pos + 33,  pos + 41,  p->T_CYCRQST);
 
-    predicate UpperBitsNotSet(Movement_Authority_Request_Parameters_Core* p) = \true;
+    predicate UpperBitsNotSet(Movement_Authority_Request_Parameters_Core* p) =
+      UpperBitsNotSet(p->Q_DIR,            2)   &&
+      UpperBitsNotSet(p->L_PACKET,         13)  &&
+      UpperBitsNotSet(p->T_MAR,            8)   &&
+      UpperBitsNotSet(p->T_TIMEOUTRQST,    10)  &&
+      UpperBitsNotSet(p->T_CYCRQST,        8);
 
 */
 

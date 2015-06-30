@@ -79,7 +79,7 @@ inline bool operator!=(const Position_Report_Parameters_Core& a, const Position_
 
 typedef struct Position_Report_Parameters_Core Position_Report_Parameters_Core;
 
-#define POSITION_REPORT_PARAMETERS_CORE_BITSIZE 2172
+#define POSITION_REPORT_PARAMETERS_CORE_BITSIZE 64
 
 /*@
     logic integer BitSize{L}(Position_Report_Parameters_Core* p) = POSITION_REPORT_PARAMETERS_CORE_BITSIZE;
@@ -90,13 +90,37 @@ typedef struct Position_Report_Parameters_Core Position_Report_Parameters_Core;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Position_Report_Parameters_Core* p) = \true;
+    predicate Invariant(Position_Report_Parameters_Core* p) =
+      Invariant(p->Q_DIR)             &&
+      Invariant(p->L_PACKET)          &&
+      Invariant(p->Q_SCALE)           &&
+      Invariant(p->T_CYCLOC)          &&
+      Invariant(p->D_CYCLOC)          &&
+      Invariant(p->M_LOC);
 
-    predicate ZeroInitialized(Position_Report_Parameters_Core* p) = \true;
+    predicate ZeroInitialized(Position_Report_Parameters_Core* p) =
+      ZeroInitialized(p->Q_DIR)             &&
+      ZeroInitialized(p->L_PACKET)          &&
+      ZeroInitialized(p->Q_SCALE)           &&
+      ZeroInitialized(p->T_CYCLOC)          &&
+      ZeroInitialized(p->D_CYCLOC)          &&
+      ZeroInitialized(p->M_LOC);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Position_Report_Parameters_Core* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Position_Report_Parameters_Core* p) =
+      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
+      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
+      EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)           &&
+      EqualBits(stream, pos + 17,  pos + 25,  p->T_CYCLOC)          &&
+      EqualBits(stream, pos + 25,  pos + 40,  p->D_CYCLOC)          &&
+      EqualBits(stream, pos + 40,  pos + 43,  p->M_LOC);
 
-    predicate UpperBitsNotSet(Position_Report_Parameters_Core* p) = \true;
+    predicate UpperBitsNotSet(Position_Report_Parameters_Core* p) =
+      UpperBitsNotSet(p->Q_DIR,            2)   &&
+      UpperBitsNotSet(p->L_PACKET,         13)  &&
+      UpperBitsNotSet(p->Q_SCALE,          2)   &&
+      UpperBitsNotSet(p->T_CYCLOC,         8)   &&
+      UpperBitsNotSet(p->D_CYCLOC,         15)  &&
+      UpperBitsNotSet(p->M_LOC,            3);
 
 */
 

@@ -75,7 +75,7 @@ inline bool operator!=(const Level_Crossing_information_Core& a, const Level_Cro
 
 typedef struct Level_Crossing_information_Core Level_Crossing_information_Core;
 
-#define LEVEL_CROSSING_INFORMATION_CORE_BITSIZE 3433
+#define LEVEL_CROSSING_INFORMATION_CORE_BITSIZE 79
 
 /*@
     logic integer BitSize{L}(Level_Crossing_information_Core* p) = LEVEL_CROSSING_INFORMATION_CORE_BITSIZE;
@@ -86,13 +86,41 @@ typedef struct Level_Crossing_information_Core Level_Crossing_information_Core;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Level_Crossing_information_Core* p) = \true;
+    predicate Invariant(Level_Crossing_information_Core* p) =
+      Invariant(p->Q_DIR)             &&
+      Invariant(p->L_PACKET)          &&
+      Invariant(p->Q_SCALE)           &&
+      Invariant(p->NID_LX)            &&
+      Invariant(p->D_LX)              &&
+      Invariant(p->L_LX)              &&
+      Invariant(p->Q_LXSTATUS);
 
-    predicate ZeroInitialized(Level_Crossing_information_Core* p) = \true;
+    predicate ZeroInitialized(Level_Crossing_information_Core* p) =
+      ZeroInitialized(p->Q_DIR)             &&
+      ZeroInitialized(p->L_PACKET)          &&
+      ZeroInitialized(p->Q_SCALE)           &&
+      ZeroInitialized(p->NID_LX)            &&
+      ZeroInitialized(p->D_LX)              &&
+      ZeroInitialized(p->L_LX)              &&
+      ZeroInitialized(p->Q_LXSTATUS);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Level_Crossing_information_Core* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Level_Crossing_information_Core* p) =
+      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
+      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
+      EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)           &&
+      EqualBits(stream, pos + 17,  pos + 25,  p->NID_LX)            &&
+      EqualBits(stream, pos + 25,  pos + 40,  p->D_LX)              &&
+      EqualBits(stream, pos + 40,  pos + 55,  p->L_LX)              &&
+      EqualBits(stream, pos + 55,  pos + 56,  p->Q_LXSTATUS);
 
-    predicate UpperBitsNotSet(Level_Crossing_information_Core* p) = \true;
+    predicate UpperBitsNotSet(Level_Crossing_information_Core* p) =
+      UpperBitsNotSet(p->Q_DIR,            2)   &&
+      UpperBitsNotSet(p->L_PACKET,         13)  &&
+      UpperBitsNotSet(p->Q_SCALE,          2)   &&
+      UpperBitsNotSet(p->NID_LX,           8)   &&
+      UpperBitsNotSet(p->D_LX,             15)  &&
+      UpperBitsNotSet(p->L_LX,             15)  &&
+      UpperBitsNotSet(p->Q_LXSTATUS,       1);
 
 */
 

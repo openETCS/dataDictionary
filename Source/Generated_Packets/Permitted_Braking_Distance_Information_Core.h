@@ -100,7 +100,7 @@ inline bool operator!=(const Permitted_Braking_Distance_Information_Core& a, con
 
 typedef struct Permitted_Braking_Distance_Information_Core Permitted_Braking_Distance_Information_Core;
 
-#define PERMITTED_BRAKING_DISTANCE_INFORMATION_CORE_BITSIZE 2067
+#define PERMITTED_BRAKING_DISTANCE_INFORMATION_CORE_BITSIZE 148
 
 /*@
     logic integer BitSize{L}(Permitted_Braking_Distance_Information_Core* p) = PERMITTED_BRAKING_DISTANCE_INFORMATION_CORE_BITSIZE;
@@ -111,13 +111,29 @@ typedef struct Permitted_Braking_Distance_Information_Core Permitted_Braking_Dis
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Permitted_Braking_Distance_Information_Core* p) = \true;
+    predicate Invariant(Permitted_Braking_Distance_Information_Core* p) =
+      Invariant(p->Q_DIR)             &&
+      Invariant(p->L_PACKET)          &&
+      Invariant(p->Q_SCALE)           &&
+      Invariant(p->Q_TRACKINIT);
 
-    predicate ZeroInitialized(Permitted_Braking_Distance_Information_Core* p) = \true;
+    predicate ZeroInitialized(Permitted_Braking_Distance_Information_Core* p) =
+      ZeroInitialized(p->Q_DIR)             &&
+      ZeroInitialized(p->L_PACKET)          &&
+      ZeroInitialized(p->Q_SCALE)           &&
+      ZeroInitialized(p->Q_TRACKINIT);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Permitted_Braking_Distance_Information_Core* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Permitted_Braking_Distance_Information_Core* p) =
+      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
+      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
+      EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)           &&
+      EqualBits(stream, pos + 17,  pos + 18,  p->Q_TRACKINIT);
 
-    predicate UpperBitsNotSet(Permitted_Braking_Distance_Information_Core* p) = \true;
+    predicate UpperBitsNotSet(Permitted_Braking_Distance_Information_Core* p) =
+      UpperBitsNotSet(p->Q_DIR,            2)   &&
+      UpperBitsNotSet(p->L_PACKET,         13)  &&
+      UpperBitsNotSet(p->Q_SCALE,          2)   &&
+      UpperBitsNotSet(p->Q_TRACKINIT,      1);
 
 */
 

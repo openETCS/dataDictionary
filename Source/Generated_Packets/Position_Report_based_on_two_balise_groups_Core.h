@@ -98,7 +98,7 @@ inline bool operator!=(const Position_Report_based_on_two_balise_groups_Core& a,
 
 typedef struct Position_Report_based_on_two_balise_groups_Core Position_Report_based_on_two_balise_groups_Core;
 
-#define POSITION_REPORT_BASED_ON_TWO_BALISE_GROUPS_CORE_BITSIZE 4455
+#define POSITION_REPORT_BASED_ON_TWO_BALISE_GROUPS_CORE_BITSIZE 153
 
 /*@
     logic integer BitSize{L}(Position_Report_based_on_two_balise_groups_Core* p) = POSITION_REPORT_BASED_ON_TWO_BALISE_GROUPS_CORE_BITSIZE;
@@ -109,13 +109,53 @@ typedef struct Position_Report_based_on_two_balise_groups_Core Position_Report_b
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Position_Report_based_on_two_balise_groups_Core* p) = \true;
+    predicate Invariant(Position_Report_based_on_two_balise_groups_Core* p) =
+      Invariant(p->L_PACKET)          &&
+      Invariant(p->Q_SCALE)           &&
+      Invariant(p->NID_LRBG)          &&
+      Invariant(p->NID_PRVLRBG)       &&
+      Invariant(p->D_LRBG)            &&
+      Invariant(p->Q_DIRLRBG)         &&
+      Invariant(p->Q_DLRBG)           &&
+      Invariant(p->L_DOUBTOVER)       &&
+      Invariant(p->L_DOUBTUNDER)      &&
+      Invariant(p->Q_LENGTH);
 
-    predicate ZeroInitialized(Position_Report_based_on_two_balise_groups_Core* p) = \true;
+    predicate ZeroInitialized(Position_Report_based_on_two_balise_groups_Core* p) =
+      ZeroInitialized(p->L_PACKET)          &&
+      ZeroInitialized(p->Q_SCALE)           &&
+      ZeroInitialized(p->NID_LRBG)          &&
+      ZeroInitialized(p->NID_PRVLRBG)       &&
+      ZeroInitialized(p->D_LRBG)            &&
+      ZeroInitialized(p->Q_DIRLRBG)         &&
+      ZeroInitialized(p->Q_DLRBG)           &&
+      ZeroInitialized(p->L_DOUBTOVER)       &&
+      ZeroInitialized(p->L_DOUBTUNDER)      &&
+      ZeroInitialized(p->Q_LENGTH);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Position_Report_based_on_two_balise_groups_Core* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Position_Report_based_on_two_balise_groups_Core* p) =
+      EqualBits(stream, pos,       pos + 13,  p->L_PACKET)          &&
+      EqualBits(stream, pos + 13,  pos + 15,  p->Q_SCALE)           &&
+      EqualBits(stream, pos + 15,  pos + 39,  p->NID_LRBG)          &&
+      EqualBits(stream, pos + 39,  pos + 63,  p->NID_PRVLRBG)       &&
+      EqualBits(stream, pos + 63,  pos + 78,  p->D_LRBG)            &&
+      EqualBits(stream, pos + 78,  pos + 80,  p->Q_DIRLRBG)         &&
+      EqualBits(stream, pos + 80,  pos + 82,  p->Q_DLRBG)           &&
+      EqualBits(stream, pos + 82,  pos + 97,  p->L_DOUBTOVER)       &&
+      EqualBits(stream, pos + 97,  pos + 112, p->L_DOUBTUNDER)      &&
+      EqualBits(stream, pos + 112, pos + 114, p->Q_LENGTH);
 
-    predicate UpperBitsNotSet(Position_Report_based_on_two_balise_groups_Core* p) = \true;
+    predicate UpperBitsNotSet(Position_Report_based_on_two_balise_groups_Core* p) =
+      UpperBitsNotSet(p->L_PACKET,         13)  &&
+      UpperBitsNotSet(p->Q_SCALE,          2)   &&
+      UpperBitsNotSet(p->NID_LRBG,         24)  &&
+      UpperBitsNotSet(p->NID_PRVLRBG,      24)  &&
+      UpperBitsNotSet(p->D_LRBG,           15)  &&
+      UpperBitsNotSet(p->Q_DIRLRBG,        2)   &&
+      UpperBitsNotSet(p->Q_DLRBG,          2)   &&
+      UpperBitsNotSet(p->L_DOUBTOVER,      15)  &&
+      UpperBitsNotSet(p->L_DOUBTUNDER,     15)  &&
+      UpperBitsNotSet(p->Q_LENGTH,         2);
 
 */
 

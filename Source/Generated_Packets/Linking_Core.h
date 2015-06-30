@@ -93,7 +93,7 @@ inline bool operator!=(const Linking_Core& a, const Linking_Core& b)
 
 typedef struct Linking_Core Linking_Core;
 
-#define LINKING_CORE_BITSIZE 509
+#define LINKING_CORE_BITSIZE 120
 
 /*@
     logic integer BitSize{L}(Linking_Core* p) = LINKING_CORE_BITSIZE;
@@ -104,13 +104,33 @@ typedef struct Linking_Core Linking_Core;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Linking_Core* p) = \true;
+    predicate Invariant(Linking_Core* p) =
+      Invariant(p->Q_DIR)             &&
+      Invariant(p->L_PACKET)          &&
+      Invariant(p->Q_SCALE)           &&
+      Invariant(p->D_LINK)            &&
+      Invariant(p->Q_NEWCOUNTRY);
 
-    predicate ZeroInitialized(Linking_Core* p) = \true;
+    predicate ZeroInitialized(Linking_Core* p) =
+      ZeroInitialized(p->Q_DIR)             &&
+      ZeroInitialized(p->L_PACKET)          &&
+      ZeroInitialized(p->Q_SCALE)           &&
+      ZeroInitialized(p->D_LINK)            &&
+      ZeroInitialized(p->Q_NEWCOUNTRY);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Linking_Core* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Linking_Core* p) =
+      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
+      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
+      EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)           &&
+      EqualBits(stream, pos + 17,  pos + 32,  p->D_LINK)            &&
+      EqualBits(stream, pos + 32,  pos + 33,  p->Q_NEWCOUNTRY);
 
-    predicate UpperBitsNotSet(Linking_Core* p) = \true;
+    predicate UpperBitsNotSet(Linking_Core* p) =
+      UpperBitsNotSet(p->Q_DIR,            2)   &&
+      UpperBitsNotSet(p->L_PACKET,         13)  &&
+      UpperBitsNotSet(p->Q_SCALE,          2)   &&
+      UpperBitsNotSet(p->D_LINK,           15)  &&
+      UpperBitsNotSet(p->Q_NEWCOUNTRY,     1);
 
 */
 

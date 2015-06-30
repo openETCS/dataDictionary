@@ -45,7 +45,7 @@ inline bool operator!=(const Stop_Shunting_on_desk_opening_Core& a, const Stop_S
 
 typedef struct Stop_Shunting_on_desk_opening_Core Stop_Shunting_on_desk_opening_Core;
 
-#define STOP_SHUNTING_ON_DESK_OPENING_CORE_BITSIZE 3826
+#define STOP_SHUNTING_ON_DESK_OPENING_CORE_BITSIZE 15
 
 /*@
     logic integer BitSize{L}(Stop_Shunting_on_desk_opening_Core* p) = STOP_SHUNTING_ON_DESK_OPENING_CORE_BITSIZE;
@@ -56,13 +56,21 @@ typedef struct Stop_Shunting_on_desk_opening_Core Stop_Shunting_on_desk_opening_
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Stop_Shunting_on_desk_opening_Core* p) = \true;
+    predicate Invariant(Stop_Shunting_on_desk_opening_Core* p) =
+      Invariant(p->Q_DIR)             &&
+      Invariant(p->L_PACKET);
 
-    predicate ZeroInitialized(Stop_Shunting_on_desk_opening_Core* p) = \true;
+    predicate ZeroInitialized(Stop_Shunting_on_desk_opening_Core* p) =
+      ZeroInitialized(p->Q_DIR)             &&
+      ZeroInitialized(p->L_PACKET);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Stop_Shunting_on_desk_opening_Core* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Stop_Shunting_on_desk_opening_Core* p) =
+      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
+      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
 
-    predicate UpperBitsNotSet(Stop_Shunting_on_desk_opening_Core* p) = \true;
+    predicate UpperBitsNotSet(Stop_Shunting_on_desk_opening_Core* p) =
+      UpperBitsNotSet(p->Q_DIR,            2)   &&
+      UpperBitsNotSet(p->L_PACKET,         13);
 
 */
 

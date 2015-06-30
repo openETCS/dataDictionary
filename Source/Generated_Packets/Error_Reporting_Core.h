@@ -45,7 +45,7 @@ inline bool operator!=(const Error_Reporting_Core& a, const Error_Reporting_Core
 
 typedef struct Error_Reporting_Core Error_Reporting_Core;
 
-#define ERROR_REPORTING_CORE_BITSIZE 4558
+#define ERROR_REPORTING_CORE_BITSIZE 21
 
 /*@
     logic integer BitSize{L}(Error_Reporting_Core* p) = ERROR_REPORTING_CORE_BITSIZE;
@@ -56,13 +56,21 @@ typedef struct Error_Reporting_Core Error_Reporting_Core;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Error_Reporting_Core* p) = \true;
+    predicate Invariant(Error_Reporting_Core* p) =
+      Invariant(p->L_PACKET)          &&
+      Invariant(p->M_ERROR);
 
-    predicate ZeroInitialized(Error_Reporting_Core* p) = \true;
+    predicate ZeroInitialized(Error_Reporting_Core* p) =
+      ZeroInitialized(p->L_PACKET)          &&
+      ZeroInitialized(p->M_ERROR);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Error_Reporting_Core* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Error_Reporting_Core* p) =
+      EqualBits(stream, pos,       pos + 13,  p->L_PACKET)          &&
+      EqualBits(stream, pos + 13,  pos + 21,  p->M_ERROR);
 
-    predicate UpperBitsNotSet(Error_Reporting_Core* p) = \true;
+    predicate UpperBitsNotSet(Error_Reporting_Core* p) =
+      UpperBitsNotSet(p->L_PACKET,         13)  &&
+      UpperBitsNotSet(p->M_ERROR,          8);
 
 */
 

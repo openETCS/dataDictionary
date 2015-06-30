@@ -87,7 +87,7 @@ inline bool operator!=(const Mode_profile_Core& a, const Mode_profile_Core& b)
 
 typedef struct Mode_profile_Core Mode_profile_Core;
 
-#define MODE_PROFILE_CORE_BITSIZE 3354
+#define MODE_PROFILE_CORE_BITSIZE 132
 
 /*@
     logic integer BitSize{L}(Mode_profile_Core* p) = MODE_PROFILE_CORE_BITSIZE;
@@ -98,13 +98,49 @@ typedef struct Mode_profile_Core Mode_profile_Core;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Mode_profile_Core* p) = \true;
+    predicate Invariant(Mode_profile_Core* p) =
+      Invariant(p->Q_DIR)             &&
+      Invariant(p->L_PACKET)          &&
+      Invariant(p->Q_SCALE)           &&
+      Invariant(p->D_MAMODE)          &&
+      Invariant(p->M_MAMODE)          &&
+      Invariant(p->V_MAMODE)          &&
+      Invariant(p->L_MAMODE)          &&
+      Invariant(p->L_ACKMAMODE)       &&
+      Invariant(p->Q_MAMODE);
 
-    predicate ZeroInitialized(Mode_profile_Core* p) = \true;
+    predicate ZeroInitialized(Mode_profile_Core* p) =
+      ZeroInitialized(p->Q_DIR)             &&
+      ZeroInitialized(p->L_PACKET)          &&
+      ZeroInitialized(p->Q_SCALE)           &&
+      ZeroInitialized(p->D_MAMODE)          &&
+      ZeroInitialized(p->M_MAMODE)          &&
+      ZeroInitialized(p->V_MAMODE)          &&
+      ZeroInitialized(p->L_MAMODE)          &&
+      ZeroInitialized(p->L_ACKMAMODE)       &&
+      ZeroInitialized(p->Q_MAMODE);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Mode_profile_Core* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Mode_profile_Core* p) =
+      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
+      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
+      EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)           &&
+      EqualBits(stream, pos + 17,  pos + 32,  p->D_MAMODE)          &&
+      EqualBits(stream, pos + 32,  pos + 34,  p->M_MAMODE)          &&
+      EqualBits(stream, pos + 34,  pos + 41,  p->V_MAMODE)          &&
+      EqualBits(stream, pos + 41,  pos + 56,  p->L_MAMODE)          &&
+      EqualBits(stream, pos + 56,  pos + 71,  p->L_ACKMAMODE)       &&
+      EqualBits(stream, pos + 71,  pos + 72,  p->Q_MAMODE);
 
-    predicate UpperBitsNotSet(Mode_profile_Core* p) = \true;
+    predicate UpperBitsNotSet(Mode_profile_Core* p) =
+      UpperBitsNotSet(p->Q_DIR,            2)   &&
+      UpperBitsNotSet(p->L_PACKET,         13)  &&
+      UpperBitsNotSet(p->Q_SCALE,          2)   &&
+      UpperBitsNotSet(p->D_MAMODE,         15)  &&
+      UpperBitsNotSet(p->M_MAMODE,         2)   &&
+      UpperBitsNotSet(p->V_MAMODE,         7)   &&
+      UpperBitsNotSet(p->L_MAMODE,         15)  &&
+      UpperBitsNotSet(p->L_ACKMAMODE,      15)  &&
+      UpperBitsNotSet(p->Q_MAMODE,         1);
 
 */
 

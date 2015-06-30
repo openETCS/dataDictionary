@@ -52,7 +52,7 @@ inline bool operator!=(const Default_Gradient_for_Temporary_Speed_Restriction_Co
 
 typedef struct Default_Gradient_for_Temporary_Speed_Restriction_Core Default_Gradient_for_Temporary_Speed_Restriction_Core;
 
-#define DEFAULT_GRADIENT_FOR_TEMPORARY_SPEED_RESTRICTION_CORE_BITSIZE 4039
+#define DEFAULT_GRADIENT_FOR_TEMPORARY_SPEED_RESTRICTION_CORE_BITSIZE 24
 
 /*@
     logic integer BitSize{L}(Default_Gradient_for_Temporary_Speed_Restriction_Core* p) = DEFAULT_GRADIENT_FOR_TEMPORARY_SPEED_RESTRICTION_CORE_BITSIZE;
@@ -63,13 +63,29 @@ typedef struct Default_Gradient_for_Temporary_Speed_Restriction_Core Default_Gra
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Default_Gradient_for_Temporary_Speed_Restriction_Core* p) = \true;
+    predicate Invariant(Default_Gradient_for_Temporary_Speed_Restriction_Core* p) =
+      Invariant(p->Q_DIR)             &&
+      Invariant(p->L_PACKET)          &&
+      Invariant(p->Q_GDIR)            &&
+      Invariant(p->G_TSR);
 
-    predicate ZeroInitialized(Default_Gradient_for_Temporary_Speed_Restriction_Core* p) = \true;
+    predicate ZeroInitialized(Default_Gradient_for_Temporary_Speed_Restriction_Core* p) =
+      ZeroInitialized(p->Q_DIR)             &&
+      ZeroInitialized(p->L_PACKET)          &&
+      ZeroInitialized(p->Q_GDIR)            &&
+      ZeroInitialized(p->G_TSR);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Default_Gradient_for_Temporary_Speed_Restriction_Core* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Default_Gradient_for_Temporary_Speed_Restriction_Core* p) =
+      EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
+      EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
+      EqualBits(stream, pos + 15,  pos + 16,  p->Q_GDIR)            &&
+      EqualBits(stream, pos + 16,  pos + 24,  p->G_TSR);
 
-    predicate UpperBitsNotSet(Default_Gradient_for_Temporary_Speed_Restriction_Core* p) = \true;
+    predicate UpperBitsNotSet(Default_Gradient_for_Temporary_Speed_Restriction_Core* p) =
+      UpperBitsNotSet(p->Q_DIR,            2)   &&
+      UpperBitsNotSet(p->L_PACKET,         13)  &&
+      UpperBitsNotSet(p->Q_GDIR,           1)   &&
+      UpperBitsNotSet(p->G_TSR,            8);
 
 */
 

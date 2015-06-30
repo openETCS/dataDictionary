@@ -41,6 +41,7 @@ int Onboard_telephone_numbers_Encoder(Bitstream* stream, const Onboard_telephone
             }
 
 
+            //@ assert L_PACKET:          EqualBits(stream, pos,       pos + 13,  p->L_PACKET);
 
             return 1;
         }
@@ -61,6 +62,14 @@ int Onboard_telephone_numbers_Decoder(Bitstream* stream, Onboard_telephone_numbe
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 
+	/*@
+	  requires L_PACKET:       stream->bitpos == pos + 0;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->L_PACKET;
+	  ensures  L_PACKET:       stream->bitpos == pos + 13;
+	  ensures  L_PACKET:       EqualBits(stream, pos + 0, pos + 13, p->L_PACKET);
+	  ensures  L_PACKET:       UpperBitsNotSet(p->L_PACKET, 13);
+	*/
 	{ p->L_PACKET		= Bitstream_Read(stream, 13); }
 
 	{ p->N_ITER_1		= Bitstream_Read(stream, 5); }
@@ -69,7 +78,9 @@ int Onboard_telephone_numbers_Decoder(Bitstream* stream, Onboard_telephone_numbe
         {
             Onboard_telephone_numbers_Core_1_Decoder(stream, &(p->sub_1[i]));
         }
+        //@ assert L_PACKET:          EqualBits(stream, pos,       pos + 13,  p->L_PACKET);
 
+        //@ assert L_PACKET:          UpperBitsNotSet(p->L_PACKET,          13);
 
 	//@ assert final: EqualBits(stream, pos, p);
 

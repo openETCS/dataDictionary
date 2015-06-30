@@ -63,7 +63,7 @@ inline bool operator!=(const Onboard_telephone_numbers_Core& a, const Onboard_te
 
 typedef struct Onboard_telephone_numbers_Core Onboard_telephone_numbers_Core;
 
-#define ONBOARD_TELEPHONE_NUMBERS_CORE_BITSIZE 4537
+#define ONBOARD_TELEPHONE_NUMBERS_CORE_BITSIZE 82
 
 /*@
     logic integer BitSize{L}(Onboard_telephone_numbers_Core* p) = ONBOARD_TELEPHONE_NUMBERS_CORE_BITSIZE;
@@ -74,13 +74,17 @@ typedef struct Onboard_telephone_numbers_Core Onboard_telephone_numbers_Core;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Onboard_telephone_numbers_Core* p) = \true;
+    predicate Invariant(Onboard_telephone_numbers_Core* p) =
+      Invariant(p->L_PACKET);
 
-    predicate ZeroInitialized(Onboard_telephone_numbers_Core* p) = \true;
+    predicate ZeroInitialized(Onboard_telephone_numbers_Core* p) =
+      ZeroInitialized(p->L_PACKET);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Onboard_telephone_numbers_Core* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Onboard_telephone_numbers_Core* p) =
+      EqualBits(stream, pos,       pos + 13,  p->L_PACKET);
 
-    predicate UpperBitsNotSet(Onboard_telephone_numbers_Core* p) = \true;
+    predicate UpperBitsNotSet(Onboard_telephone_numbers_Core* p) =
+      UpperBitsNotSet(p->L_PACKET,         13);
 
 */
 
