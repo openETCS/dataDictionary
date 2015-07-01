@@ -60,15 +60,9 @@ typedef struct Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core D
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p) =
-      Invariant(p->L_PACKET)          &&
-      Invariant(p->NID_XUSER)         &&
-      Invariant(p->Other_data_depending_on__NID_XUSER);
+    predicate Invariant(Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p) = \true;
 
-    predicate ZeroInitialized(Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p) =
-      ZeroInitialized(p->L_PACKET)          &&
-      ZeroInitialized(p->NID_XUSER)         &&
-      ZeroInitialized(p->Other_data_depending_on__NID_XUSER);
+    predicate ZeroInitialized(Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p) = \true;
 
     predicate EqualBits(Bitstream* stream, integer pos, Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p) =
       EqualBits(stream, pos,       pos + 13,  p->L_PACKET)          &&

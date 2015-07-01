@@ -15,8 +15,6 @@ int Error_Reporting_Encoder(Bitstream* stream, const Error_Reporting_Core* p)
             Bitstream_Write(stream, 8,  p->M_ERROR);
 
 
-            //@ assert L_PACKET:          EqualBits(stream, pos,       pos + 13,  p->L_PACKET);
-            //@ assert M_ERROR:           EqualBits(stream, pos + 13,  pos + 21,  p->M_ERROR);
 
             return 1;
         }

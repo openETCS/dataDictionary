@@ -16,9 +16,6 @@ int Danger_for_Shunting_information_Encoder(Bitstream* stream, const Danger_for_
             Bitstream_Write(stream, 1,  p->Q_ASPECT);
 
 
-            //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
-            //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
-            //@ assert Q_ASPECT:          EqualBits(stream, pos + 15,  pos + 16,  p->Q_ASPECT);
 
             return 1;
         }

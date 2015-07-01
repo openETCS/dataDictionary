@@ -2,15 +2,27 @@
 #include "Gradient_Profile_Core_1_Decoder.h"
 #include "Bitstream_Read.h"
 
-int Gradient_Profile_Core_1_Decoder(Bitstream* stream, Gradient_Profile_Core_1* p, uint8_t N_ITER)
+int Gradient_Profile_Core_1_Decoder(Bitstream* stream, Gradient_Profile_Core_1* p)
 {
-	for (uint32_t i = 0; i < N_ITER; ++i)
-	{
-	    { p[i].D_GRADIENT	= Bitstream_Read(stream, 15); }
-	    { p[i].Q_GDIR	= Bitstream_Read(stream, 1); }
-	    { p[i].G_A		= Bitstream_Read(stream, 8); }
-	}
+    if (NormalBitstream(stream, GRADIENT_PROFILE_CORE_1_CORE_BITSIZE))
+    {
+        //@ ghost const uint32_t pos = stream->bitpos;
+
+	{ p->D_GRADIENT_k		= Bitstream_Read(stream, 15); }
+
+	{ p->Q_GDIR_k		= Bitstream_Read(stream, 1); }
+
+	{ p->G_A_k		= Bitstream_Read(stream, 8); }
+
+
+
+	//@ assert final: EqualBits(stream, pos, p);
 
         return 1;
+    }
+    else
+    {
+        return 0;
+    }
 }
 

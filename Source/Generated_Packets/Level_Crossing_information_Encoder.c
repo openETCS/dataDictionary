@@ -31,13 +31,6 @@ int Level_Crossing_information_Encoder(Bitstream* stream, const Level_Crossing_i
 
 
 
-            //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
-            //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
-            //@ assert Q_SCALE:           EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE);
-            //@ assert NID_LX:            EqualBits(stream, pos + 17,  pos + 25,  p->NID_LX);
-            //@ assert D_LX:              EqualBits(stream, pos + 25,  pos + 40,  p->D_LX);
-            //@ assert L_LX:              EqualBits(stream, pos + 40,  pos + 55,  p->L_LX);
-            //@ assert Q_LXSTATUS:        EqualBits(stream, pos + 55,  pos + 56,  p->Q_LXSTATUS);
 
             return 1;
         }

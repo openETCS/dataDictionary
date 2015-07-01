@@ -16,9 +16,6 @@ int Stop_if_in_Staff_Responsible_Encoder(Bitstream* stream, const Stop_if_in_Sta
             Bitstream_Write(stream, 1,  p->Q_SRSTOP);
 
 
-            //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
-            //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
-            //@ assert Q_SRSTOP:          EqualBits(stream, pos + 15,  pos + 16,  p->Q_SRSTOP);
 
             return 1;
         }

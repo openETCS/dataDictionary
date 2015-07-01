@@ -29,6 +29,7 @@ lib: libgenerated_packets.a
 libgenerated_packets.a : $(OBJ)
 	ar cru  $@ $^
 	ranlib  $@
+	$(RM) $(OBJ)
 
 clean::
 	$(RM) libgenerated_packets.a

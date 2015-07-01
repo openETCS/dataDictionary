@@ -59,15 +59,9 @@ typedef struct Stop_if_in_Staff_Responsible_Core Stop_if_in_Staff_Responsible_Co
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Stop_if_in_Staff_Responsible_Core* p) =
-      Invariant(p->Q_DIR)             &&
-      Invariant(p->L_PACKET)          &&
-      Invariant(p->Q_SRSTOP);
+    predicate Invariant(Stop_if_in_Staff_Responsible_Core* p) = \true;
 
-    predicate ZeroInitialized(Stop_if_in_Staff_Responsible_Core* p) =
-      ZeroInitialized(p->Q_DIR)             &&
-      ZeroInitialized(p->L_PACKET)          &&
-      ZeroInitialized(p->Q_SRSTOP);
+    predicate ZeroInitialized(Stop_if_in_Staff_Responsible_Core* p) = \true;
 
     predicate EqualBits(Bitstream* stream, integer pos, Stop_if_in_Staff_Responsible_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&

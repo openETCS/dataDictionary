@@ -27,6 +27,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Track_Ahead_Free_up_
        << +p.Q_DIR << ','
        << +p.L_PACKET << ','
        << +p.Q_NEWCOUNTRY << ','
+       << +p.NID_C << ','
        << +p.NID_BG;
 
     return stream;
@@ -39,6 +40,10 @@ inline bool operator==(const Track_Ahead_Free_up_to_level_23_transition_location
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.Q_NEWCOUNTRY == b.Q_NEWCOUNTRY);
+    if (a.Q_NEWCOUNTRY == 1)
+    {
+    status = status && (a.NID_C == b.NID_C);
+    }
     status = status && (a.NID_BG == b.NID_BG);
 
     return status;
@@ -64,17 +69,9 @@ typedef struct Track_Ahead_Free_up_to_level_23_transition_location_Core Track_Ah
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Track_Ahead_Free_up_to_level_23_transition_location_Core* p) =
-      Invariant(p->Q_DIR)             &&
-      Invariant(p->L_PACKET)          &&
-      Invariant(p->Q_NEWCOUNTRY)      &&
-      Invariant(p->NID_BG);
+    predicate Invariant(Track_Ahead_Free_up_to_level_23_transition_location_Core* p) = \true;
 
-    predicate ZeroInitialized(Track_Ahead_Free_up_to_level_23_transition_location_Core* p) =
-      ZeroInitialized(p->Q_DIR)             &&
-      ZeroInitialized(p->L_PACKET)          &&
-      ZeroInitialized(p->Q_NEWCOUNTRY)      &&
-      ZeroInitialized(p->NID_BG);
+    predicate ZeroInitialized(Track_Ahead_Free_up_to_level_23_transition_location_Core* p) = \true;
 
     predicate EqualBits(Bitstream* stream, integer pos, Track_Ahead_Free_up_to_level_23_transition_location_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&

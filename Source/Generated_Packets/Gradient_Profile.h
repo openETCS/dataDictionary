@@ -14,7 +14,7 @@ struct Gradient_Profile : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << +id << core << ')';
+        stream << '(' << +id << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -23,7 +23,7 @@ struct Gradient_Profile : public BasePacket
 	{
 	    bool status = true;
 
-            status = status && (id == q->id); 
+	    status = status && (id == q->id);
 	    status = status && (core == q->core);
 
 	    return status;

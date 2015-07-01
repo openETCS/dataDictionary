@@ -113,7 +113,7 @@ Infill_location_reference create_Infill_location_reference(int i)
 
     return a;
 }
-
+/*
 Gradient_Profile_Core_1 create_Gradient_Profile_Core_1(uint16_t i, uint32_t j, uint8_t k)
 {
     Gradient_Profile_Core_1 a;
@@ -145,4 +145,4 @@ Gradient_Profile create_Gradient_Profile()
 
     return a;
 }
-
+*/

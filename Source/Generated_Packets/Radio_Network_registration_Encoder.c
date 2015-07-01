@@ -16,9 +16,6 @@ int Radio_Network_registration_Encoder(Bitstream* stream, const Radio_Network_re
             Bitstream_Write(stream, 24, p->NID_MN);
 
 
-            //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
-            //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
-            //@ assert NID_MN:            EqualBits(stream, pos + 15,  pos + 39,  p->NID_MN);
 
             return 1;
         }

@@ -74,25 +74,9 @@ typedef struct Temporary_Speed_Restriction_Core Temporary_Speed_Restriction_Core
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Temporary_Speed_Restriction_Core* p) =
-      Invariant(p->Q_DIR)             &&
-      Invariant(p->L_PACKET)          &&
-      Invariant(p->Q_SCALE)           &&
-      Invariant(p->NID_TSR)           &&
-      Invariant(p->D_TSR)             &&
-      Invariant(p->L_TSR)             &&
-      Invariant(p->Q_FRONT)           &&
-      Invariant(p->V_TSR);
+    predicate Invariant(Temporary_Speed_Restriction_Core* p) = \true;
 
-    predicate ZeroInitialized(Temporary_Speed_Restriction_Core* p) =
-      ZeroInitialized(p->Q_DIR)             &&
-      ZeroInitialized(p->L_PACKET)          &&
-      ZeroInitialized(p->Q_SCALE)           &&
-      ZeroInitialized(p->NID_TSR)           &&
-      ZeroInitialized(p->D_TSR)             &&
-      ZeroInitialized(p->L_TSR)             &&
-      ZeroInitialized(p->Q_FRONT)           &&
-      ZeroInitialized(p->V_TSR);
+    predicate ZeroInitialized(Temporary_Speed_Restriction_Core* p) = \true;
 
     predicate EqualBits(Bitstream* stream, integer pos, Temporary_Speed_Restriction_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&

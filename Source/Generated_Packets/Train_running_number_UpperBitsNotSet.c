@@ -4,8 +4,12 @@
 
 int Train_running_number_UpperBitsNotSet(const Train_running_number_Core* p)
 {
-    if (UpperBitsNotSet64(p->L_PACKET,          13)  &&
-        UpperBitsNotSet64(p->NID_OPERATIONAL,   32))
+    bool status = true;
+
+    status = status && UpperBitsNotSet64(p->L_PACKET,          13);
+    status = status && UpperBitsNotSet64(p->NID_OPERATIONAL,   32);
+
+    if (status)
     {
         return 1;
     }

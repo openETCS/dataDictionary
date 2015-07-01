@@ -26,6 +26,8 @@ int main ()
 
     uint32_t init_pos = stream.bitpos;
 
+    Eurobalise_Telegram telegram;
+
     Telegram_Header header;
     {
         header.Q_UPDOWN  = 1;
@@ -40,27 +42,27 @@ int main ()
 	header.Q_LINK	 = 1;
     }
 
-    std::cout << " Encoding Telegram Header: " << header << std::endl;
-    Telegram_Header_Encoder(&stream, &header);
+    telegram.header = header;
 
     End_of_Information f;
-    {
-        Packet_Header h {f.id};
-        Packet_Header_Encoder(&stream, &h);
-	std::cout << "    Encoding packet " << f << std::endl;
-        End_of_Information_Encoder(&stream, &f.core);
-    }
+
+    telegram.add(std::make_shared<End_of_Information>(f));
+
+    std::cout << " Encoder Input: " << telegram << std::endl;
+
+    std::cout << " Encoding Eurobalise Telegram." << std::endl;
+    telegram.encode(stream);
 
     stream.bitpos = init_pos;
 
-    Eurobalise_Telegram telegram;
+    Eurobalise_Telegram new_telegram;
 
     std::cout << " Decoding Eurobalise Telegram." << std::endl;
-    telegram.decode(stream);
+    new_telegram.decode(stream);
 
     std::cout << " Decoder Output: " << telegram << std::endl;
 
-    assert(telegram.header == header);
+    assert(telegram == new_telegram);
 
     std::cout << " Test successful." << std::endl;
     std::cout << std::endl;

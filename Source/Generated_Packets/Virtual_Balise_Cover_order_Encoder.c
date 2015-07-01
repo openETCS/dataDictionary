@@ -23,11 +23,6 @@ int Virtual_Balise_Cover_order_Encoder(Bitstream* stream, const Virtual_Balise_C
 
 
 
-            //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
-            //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
-            //@ assert Q_VBCO:            EqualBits(stream, pos + 15,  pos + 16,  p->Q_VBCO);
-            //@ assert NID_VBCMK:         EqualBits(stream, pos + 16,  pos + 22,  p->NID_VBCMK);
-            //@ assert NID_C:             EqualBits(stream, pos + 22,  pos + 32,  p->NID_C);
 
             return 1;
         }

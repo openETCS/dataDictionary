@@ -15,8 +15,6 @@ int Level_23_transition_information_Encoder(Bitstream* stream, const Level_23_tr
             Bitstream_Write(stream, 24, p->NID_LTRBG);
 
 
-            //@ assert L_PACKET:          EqualBits(stream, pos,       pos + 13,  p->L_PACKET);
-            //@ assert NID_LTRBG:         EqualBits(stream, pos + 13,  pos + 37,  p->NID_LTRBG);
 
             return 1;
         }

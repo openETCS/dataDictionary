@@ -18,11 +18,6 @@ int Track_Condition_Change_of_allowed_current_consumption_Encoder(Bitstream* str
             Bitstream_Write(stream, 10, p->M_CURRENT);
 
 
-            //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
-            //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
-            //@ assert Q_SCALE:           EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE);
-            //@ assert D_CURRENT:         EqualBits(stream, pos + 17,  pos + 32,  p->D_CURRENT);
-            //@ assert M_CURRENT:         EqualBits(stream, pos + 32,  pos + 42,  p->M_CURRENT);
 
             return 1;
         }

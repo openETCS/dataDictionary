@@ -16,9 +16,6 @@ int Temporary_Speed_Restriction_Revocation_Encoder(Bitstream* stream, const Temp
             Bitstream_Write(stream, 8,  p->NID_TSR);
 
 
-            //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
-            //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
-            //@ assert NID_TSR:           EqualBits(stream, pos + 15,  pos + 23,  p->NID_TSR);
 
             return 1;
         }

@@ -23,11 +23,6 @@ int Track_Condition_Change_of_traction_system_Encoder(Bitstream* stream, const T
 
 
 
-            //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
-            //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
-            //@ assert Q_SCALE:           EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE);
-            //@ assert D_TRACTION:        EqualBits(stream, pos + 17,  pos + 32,  p->D_TRACTION);
-            //@ assert M_VOLTAGE:         EqualBits(stream, pos + 32,  pos + 36,  p->M_VOLTAGE);
 
             return 1;
         }

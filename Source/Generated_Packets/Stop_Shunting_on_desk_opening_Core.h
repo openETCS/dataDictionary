@@ -56,13 +56,9 @@ typedef struct Stop_Shunting_on_desk_opening_Core Stop_Shunting_on_desk_opening_
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Stop_Shunting_on_desk_opening_Core* p) =
-      Invariant(p->Q_DIR)             &&
-      Invariant(p->L_PACKET);
+    predicate Invariant(Stop_Shunting_on_desk_opening_Core* p) = \true;
 
-    predicate ZeroInitialized(Stop_Shunting_on_desk_opening_Core* p) =
-      ZeroInitialized(p->Q_DIR)             &&
-      ZeroInitialized(p->L_PACKET);
+    predicate ZeroInitialized(Stop_Shunting_on_desk_opening_Core* p) = \true;
 
     predicate EqualBits(Bitstream* stream, integer pos, Stop_Shunting_on_desk_opening_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&

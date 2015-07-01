@@ -65,19 +65,9 @@ typedef struct Track_Condition_Change_of_allowed_current_consumption_Core Track_
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Track_Condition_Change_of_allowed_current_consumption_Core* p) =
-      Invariant(p->Q_DIR)             &&
-      Invariant(p->L_PACKET)          &&
-      Invariant(p->Q_SCALE)           &&
-      Invariant(p->D_CURRENT)         &&
-      Invariant(p->M_CURRENT);
+    predicate Invariant(Track_Condition_Change_of_allowed_current_consumption_Core* p) = \true;
 
-    predicate ZeroInitialized(Track_Condition_Change_of_allowed_current_consumption_Core* p) =
-      ZeroInitialized(p->Q_DIR)             &&
-      ZeroInitialized(p->L_PACKET)          &&
-      ZeroInitialized(p->Q_SCALE)           &&
-      ZeroInitialized(p->D_CURRENT)         &&
-      ZeroInitialized(p->M_CURRENT);
+    predicate ZeroInitialized(Track_Condition_Change_of_allowed_current_consumption_Core* p) = \true;
 
     predicate EqualBits(Bitstream* stream, integer pos, Track_Condition_Change_of_allowed_current_consumption_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&

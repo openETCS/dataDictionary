@@ -4,11 +4,15 @@
 
 int Reversing_supervision_information_UpperBitsNotSet(const Reversing_supervision_information_Core* p)
 {
-    if (UpperBitsNotSet64(p->Q_DIR,             2)   &&
-        UpperBitsNotSet64(p->L_PACKET,          13)  &&
-        UpperBitsNotSet64(p->Q_SCALE,           2)   &&
-        UpperBitsNotSet64(p->D_REVERSE,         15)  &&
-        UpperBitsNotSet64(p->V_REVERSE,         7))
+    bool status = true;
+
+    status = status && UpperBitsNotSet64(p->Q_DIR,             2) ;
+    status = status && UpperBitsNotSet64(p->L_PACKET,          13);
+    status = status && UpperBitsNotSet64(p->Q_SCALE,           2) ;
+    status = status && UpperBitsNotSet64(p->D_REVERSE,         15);
+    status = status && UpperBitsNotSet64(p->V_REVERSE,         7) ;
+
+    if (status)
     {
         return 1;
     }

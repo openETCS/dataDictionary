@@ -59,13 +59,9 @@ typedef struct Inhibition_of_balise_group_message_consistency_reaction_Core Inhi
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Inhibition_of_balise_group_message_consistency_reaction_Core* p) =
-      Invariant(p->Q_DIR)             &&
-      Invariant(p->L_PACKET);
+    predicate Invariant(Inhibition_of_balise_group_message_consistency_reaction_Core* p) = \true;
 
-    predicate ZeroInitialized(Inhibition_of_balise_group_message_consistency_reaction_Core* p) =
-      ZeroInitialized(p->Q_DIR)             &&
-      ZeroInitialized(p->L_PACKET);
+    predicate ZeroInitialized(Inhibition_of_balise_group_message_consistency_reaction_Core* p) = \true;
 
     predicate EqualBits(Bitstream* stream, integer pos, Inhibition_of_balise_group_message_consistency_reaction_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&

@@ -15,8 +15,6 @@ int Train_running_number_Encoder(Bitstream* stream, const Train_running_number_C
             Bitstream_Write(stream, 32, p->NID_OPERATIONAL);
 
 
-            //@ assert L_PACKET:          EqualBits(stream, pos,       pos + 13,  p->L_PACKET);
-            //@ assert NID_OPERATIONAL:   EqualBits(stream, pos + 13,  pos + 45,  p->NID_OPERATIONAL);
 
             return 1;
         }

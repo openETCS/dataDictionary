@@ -16,9 +16,6 @@ int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Encoder(Bitstream
             Bitstream_Write(stream, 8,  p->Other_data_depending_on__NID_XUSER);
 
 
-            //@ assert L_PACKET:          EqualBits(stream, pos,       pos + 13,  p->L_PACKET);
-            //@ assert NID_XUSER:         EqualBits(stream, pos + 13,  pos + 22,  p->NID_XUSER);
-            //@ assert Other_data_depending_on__NID_XUSER: EqualBits(stream, pos + 22,  pos + 30,  p->Other_data_depending_on__NID_XUSER);
 
             return 1;
         }

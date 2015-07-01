@@ -16,9 +16,6 @@ int Train_running_number_from_RBC_Encoder(Bitstream* stream, const Train_running
             Bitstream_Write(stream, 32, p->NID_OPERATIONAL);
 
 
-            //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
-            //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
-            //@ assert NID_OPERATIONAL:   EqualBits(stream, pos + 15,  pos + 47,  p->NID_OPERATIONAL);
 
             return 1;
         }

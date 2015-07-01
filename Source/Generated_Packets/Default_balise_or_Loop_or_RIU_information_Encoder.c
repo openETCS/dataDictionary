@@ -15,8 +15,6 @@ int Default_balise_or_Loop_or_RIU_information_Encoder(Bitstream* stream, const D
             Bitstream_Write(stream, 13, p->L_PACKET);
 
 
-            //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
-            //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
 
             return 1;
         }
