@@ -111,7 +111,7 @@ inline bool operator!=(const Route_Suitability_Data_Core& a, const Route_Suitabi
 
 typedef struct Route_Suitability_Data_Core Route_Suitability_Data_Core;
 
-#define ROUTE_SUITABILITY_DATA_CORE_BITSIZE 130
+#define ROUTE_SUITABILITY_DATA_CORE_BITSIZE 18
 
 /*@
     logic integer BitSize{L}(Route_Suitability_Data_Core* p) = ROUTE_SUITABILITY_DATA_CORE_BITSIZE;

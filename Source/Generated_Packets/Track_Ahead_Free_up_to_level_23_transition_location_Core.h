@@ -58,7 +58,7 @@ inline bool operator!=(const Track_Ahead_Free_up_to_level_23_transition_location
 
 typedef struct Track_Ahead_Free_up_to_level_23_transition_location_Core Track_Ahead_Free_up_to_level_23_transition_location_Core;
 
-#define TRACK_AHEAD_FREE_UP_TO_LEVEL_23_TRANSITION_LOCATION_CORE_BITSIZE 40
+#define TRACK_AHEAD_FREE_UP_TO_LEVEL_23_TRANSITION_LOCATION_CORE_BITSIZE 30
 
 /*@
     logic integer BitSize{L}(Track_Ahead_Free_up_to_level_23_transition_location_Core* p) = TRACK_AHEAD_FREE_UP_TO_LEVEL_23_TRANSITION_LOCATION_CORE_BITSIZE;

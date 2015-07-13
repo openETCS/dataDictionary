@@ -45,7 +45,7 @@ inline bool operator!=(const Track_Condition_Core_1& a, const Track_Condition_Co
 
 typedef struct Track_Condition_Core_1 Track_Condition_Core_1;
 
-#define TRACK_CONDITION_CORE_1_CORE_BITSIZE 106
+#define TRACK_CONDITION_CORE_1_CORE_BITSIZE 34
 
 /*@
     logic integer BitSize{L}(Track_Condition_Core_1* p) = TRACK_CONDITION_CORE_1_CORE_BITSIZE;

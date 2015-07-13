@@ -58,7 +58,7 @@ inline bool operator!=(const Data_used_by_applications_outside_the_ERTMSETCS_sys
 
 typedef struct Data_used_by_applications_outside_the_ERTMSETCS_system_Core Data_used_by_applications_outside_the_ERTMSETCS_system_Core;
 
-#define DATA_USED_BY_APPLICATIONS_OUTSIDE_THE_ERTMSETCS_SYSTEM_CORE_BITSIZE 40
+#define DATA_USED_BY_APPLICATIONS_OUTSIDE_THE_ERTMSETCS_SYSTEM_CORE_BITSIZE 32
 
 /*@
     logic integer BitSize{L}(Data_used_by_applications_outside_the_ERTMSETCS_system_Core* p) = DATA_USED_BY_APPLICATIONS_OUTSIDE_THE_ERTMSETCS_SYSTEM_CORE_BITSIZE;

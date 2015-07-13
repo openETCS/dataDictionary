@@ -48,7 +48,7 @@ inline bool operator!=(const Level_23_Movement_Authority_Core_1& a, const Level_
 
 typedef struct Level_23_Movement_Authority_Core_1 Level_23_Movement_Authority_Core_1;
 
-#define LEVEL_23_MOVEMENT_AUTHORITY_CORE_1_CORE_BITSIZE 80
+#define LEVEL_23_MOVEMENT_AUTHORITY_CORE_1_CORE_BITSIZE 41
 
 /*@
     logic integer BitSize{L}(Level_23_Movement_Authority_Core_1* p) = LEVEL_23_MOVEMENT_AUTHORITY_CORE_1_CORE_BITSIZE;
@@ -72,10 +72,10 @@ typedef struct Level_23_Movement_Authority_Core_1 Level_23_Movement_Authority_Co
       ZeroInitialized(p->D_SECTIONTIMERSTOPLOC_k);
 
     predicate EqualBits(Bitstream* stream, integer pos, Level_23_Movement_Authority_Core_1* p) =
-      EqualBits(stream, pos + 39,  pos + 54,  p->L_SECTION_k)       &&
-      EqualBits(stream, pos + 54,  pos + 55,  p->Q_SECTIONTIMER_k)  &&
-      EqualBits(stream, pos + 55,  pos + 65,  p->T_SECTIONTIMER_k)  &&
-      EqualBits(stream, pos + 65,  pos + 80,  p->D_SECTIONTIMERSTOPLOC_k);
+      EqualBits(stream, pos,       pos + 15,  p->L_SECTION_k)       &&
+      EqualBits(stream, pos + 15,  pos + 16,  p->Q_SECTIONTIMER_k)  &&
+      EqualBits(stream, pos + 16,  pos + 26,  p->T_SECTIONTIMER_k)  &&
+      EqualBits(stream, pos + 26,  pos + 41,  p->D_SECTIONTIMERSTOPLOC_k);
 
     predicate UpperBitsNotSet(Level_23_Movement_Authority_Core_1* p) =
       UpperBitsNotSet(p->L_SECTION_k,      15)  &&

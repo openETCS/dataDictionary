@@ -68,6 +68,7 @@ inline bool operator==(const Track_Condition_Station_Platforms_Core& a, const Tr
     status = status && (a.L_TRACKCOND == b.L_TRACKCOND);
     status = status && (a.M_PLATFORM == b.M_PLATFORM);
     status = status && (a.Q_PLATFORM == b.Q_PLATFORM);
+    status = status && (a.N_ITER_1 == b.N_ITER_1);
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)
@@ -93,7 +94,7 @@ inline bool operator!=(const Track_Condition_Station_Platforms_Core& a, const Tr
 
 typedef struct Track_Condition_Station_Platforms_Core Track_Condition_Station_Platforms_Core;
 
-#define TRACK_CONDITION_STATION_PLATFORMS_CORE_BITSIZE 110
+#define TRACK_CONDITION_STATION_PLATFORMS_CORE_BITSIZE 18
 
 /*@
     logic integer BitSize{L}(Track_Condition_Station_Platforms_Core* p) = TRACK_CONDITION_STATION_PLATFORMS_CORE_BITSIZE;

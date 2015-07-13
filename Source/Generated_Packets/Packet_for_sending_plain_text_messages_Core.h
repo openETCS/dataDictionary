@@ -116,7 +116,7 @@ inline bool operator!=(const Packet_for_sending_plain_text_messages_Core& a, con
 
 typedef struct Packet_for_sending_plain_text_messages_Core Packet_for_sending_plain_text_messages_Core;
 
-#define PACKET_FOR_SENDING_PLAIN_TEXT_MESSAGES_CORE_BITSIZE 142
+#define PACKET_FOR_SENDING_PLAIN_TEXT_MESSAGES_CORE_BITSIZE 92
 
 /*@
     logic integer BitSize{L}(Packet_for_sending_plain_text_messages_Core* p) = PACKET_FOR_SENDING_PLAIN_TEXT_MESSAGES_CORE_BITSIZE;

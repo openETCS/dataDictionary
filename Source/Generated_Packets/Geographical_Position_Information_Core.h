@@ -91,7 +91,7 @@ inline bool operator!=(const Geographical_Position_Information_Core& a, const Ge
 
 typedef struct Geographical_Position_Information_Core Geographical_Position_Information_Core;
 
-#define GEOGRAPHICAL_POSITION_INFORMATION_CORE_BITSIZE 152
+#define GEOGRAPHICAL_POSITION_INFORMATION_CORE_BITSIZE 72
 
 /*@
     logic integer BitSize{L}(Geographical_Position_Information_Core* p) = GEOGRAPHICAL_POSITION_INFORMATION_CORE_BITSIZE;

@@ -31,7 +31,7 @@ int Onboard_telephone_numbers_Core_1_Encoder(Bitstream* stream, const Onboard_te
             Bitstream_Write(stream, 64, p->NID_RADIO_k);
 
 
-            //@ assert NID_RADIO_k:       EqualBits(stream, pos + 18,  pos + 82,  p->NID_RADIO_k);
+            //@ assert NID_RADIO_k:       EqualBits(stream, pos,       pos + 64,  p->NID_RADIO_k);
 
             return 1;
         }
@@ -53,16 +53,16 @@ int Onboard_telephone_numbers_Core_1_Decoder(Bitstream* stream, Onboard_telephon
         //@ ghost const uint32_t pos = stream->bitpos;
 
 	/*@
-	  requires NID_RADIO_k:    stream->bitpos == pos + 18;
+	  requires NID_RADIO_k:    stream->bitpos == pos + 0;
 	  assigns        	   stream->bitpos;
 	  assigns		   p->NID_RADIO_k;
-	  ensures  NID_RADIO_k:    stream->bitpos == pos + 82;
-	  ensures  NID_RADIO_k:    EqualBits(stream, pos + 18, pos + 82, p->NID_RADIO_k);
+	  ensures  NID_RADIO_k:    stream->bitpos == pos + 64;
+	  ensures  NID_RADIO_k:    EqualBits(stream, pos + 0, pos + 64, p->NID_RADIO_k);
 	  ensures  NID_RADIO_k:    UpperBitsNotSet(p->NID_RADIO_k, 64);
 	*/
 	{ p->NID_RADIO_k		= Bitstream_Read(stream, 64); }
 
-        //@ assert NID_RADIO_k:       EqualBits(stream, pos + 18,  pos + 82,  p->NID_RADIO_k);
+        //@ assert NID_RADIO_k:       EqualBits(stream, pos,       pos + 64,  p->NID_RADIO_k);
 
         //@ assert NID_RADIO_k:       UpperBitsNotSet(p->NID_RADIO_k,       64);
 

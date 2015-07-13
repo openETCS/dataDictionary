@@ -98,7 +98,7 @@ inline bool operator!=(const Position_Report_based_on_two_balise_groups_Core& a,
 
 typedef struct Position_Report_based_on_two_balise_groups_Core Position_Report_based_on_two_balise_groups_Core;
 
-#define POSITION_REPORT_BASED_ON_TWO_BALISE_GROUPS_CORE_BITSIZE 153
+#define POSITION_REPORT_BASED_ON_TWO_BALISE_GROUPS_CORE_BITSIZE 130
 
 /*@
     logic integer BitSize{L}(Position_Report_based_on_two_balise_groups_Core* p) = POSITION_REPORT_BASED_ON_TWO_BALISE_GROUPS_CORE_BITSIZE;

@@ -80,7 +80,7 @@ inline bool operator!=(const Gradient_Profile_Core& a, const Gradient_Profile_Co
 
 typedef struct Gradient_Profile_Core Gradient_Profile_Core;
 
-#define GRADIENT_PROFILE_CORE_BITSIZE 70
+#define GRADIENT_PROFILE_CORE_BITSIZE 41
 
 /*@
     logic integer BitSize{L}(Gradient_Profile_Core* p) = GRADIENT_PROFILE_CORE_BITSIZE;

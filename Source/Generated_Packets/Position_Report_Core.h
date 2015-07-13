@@ -91,7 +91,7 @@ inline bool operator!=(const Position_Report_Core& a, const Position_Report_Core
 
 typedef struct Position_Report_Core Position_Report_Core;
 
-#define POSITION_REPORT_CORE_BITSIZE 129
+#define POSITION_REPORT_CORE_BITSIZE 106
 
 /*@
     logic integer BitSize{L}(Position_Report_Core* p) = POSITION_REPORT_CORE_BITSIZE;

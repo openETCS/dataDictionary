@@ -75,6 +75,7 @@ inline bool operator==(const Permitted_Braking_Distance_Information_Core& a, con
     status = status && (a.Q_PBDSR == b.Q_PBDSR);
     status = status && (a.D_PBDSR == b.D_PBDSR);
     status = status && (a.L_PBDSR == b.L_PBDSR);
+    status = status && (a.N_ITER_1 == b.N_ITER_1);
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)
@@ -100,7 +101,7 @@ inline bool operator!=(const Permitted_Braking_Distance_Information_Core& a, con
 
 typedef struct Permitted_Braking_Distance_Information_Core Permitted_Braking_Distance_Information_Core;
 
-#define PERMITTED_BRAKING_DISTANCE_INFORMATION_CORE_BITSIZE 148
+#define PERMITTED_BRAKING_DISTANCE_INFORMATION_CORE_BITSIZE 18
 
 /*@
     logic integer BitSize{L}(Permitted_Braking_Distance_Information_Core* p) = PERMITTED_BRAKING_DISTANCE_INFORMATION_CORE_BITSIZE;

@@ -255,7 +255,7 @@ inline bool operator!=(const National_Values_Core& a, const National_Values_Core
 
 typedef struct National_Values_Core National_Values_Core;
 
-#define NATIONAL_VALUES_CORE_BITSIZE 361
+#define NATIONAL_VALUES_CORE_BITSIZE 232
 
 /*@
     logic integer BitSize{L}(National_Values_Core* p) = NATIONAL_VALUES_CORE_BITSIZE;
@@ -344,35 +344,35 @@ typedef struct National_Values_Core National_Values_Core;
       EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)           &&
       EqualBits(stream, pos + 17,  pos + 32,  p->D_VALIDNV)         &&
       EqualBits(stream, pos + 32,  pos + 42,  p->NID_C)             &&
-      EqualBits(stream, pos + 57,  pos + 64,  p->V_NVSHUNT)         &&
-      EqualBits(stream, pos + 64,  pos + 71,  p->V_NVSTFF)          &&
-      EqualBits(stream, pos + 71,  pos + 78,  p->V_NVONSIGHT)       &&
-      EqualBits(stream, pos + 78,  pos + 85,  p->V_NVLIMSUPERV)     &&
-      EqualBits(stream, pos + 85,  pos + 92,  p->V_NVUNFIT)         &&
-      EqualBits(stream, pos + 92,  pos + 99,  p->V_NVREL)           &&
-      EqualBits(stream, pos + 99,  pos + 114, p->D_NVROLL)          &&
-      EqualBits(stream, pos + 114, pos + 115, p->Q_NVSBTSMPERM)     &&
-      EqualBits(stream, pos + 115, pos + 116, p->Q_NVEMRRLS)        &&
-      EqualBits(stream, pos + 116, pos + 117, p->Q_NVGUIPERM)       &&
-      EqualBits(stream, pos + 117, pos + 118, p->Q_NVSBFBPERM)      &&
-      EqualBits(stream, pos + 118, pos + 119, p->Q_NVINHSMICPERM)   &&
-      EqualBits(stream, pos + 119, pos + 126, p->V_NVALLOWOVTRP)    &&
-      EqualBits(stream, pos + 126, pos + 133, p->V_NVSUPOVTRP)      &&
-      EqualBits(stream, pos + 133, pos + 148, p->D_NVOVTRP)         &&
-      EqualBits(stream, pos + 148, pos + 156, p->T_NVOVTRP)         &&
-      EqualBits(stream, pos + 156, pos + 171, p->D_NVPOTRP)         &&
-      EqualBits(stream, pos + 171, pos + 173, p->M_NVCONTACT)       &&
-      EqualBits(stream, pos + 173, pos + 181, p->T_NVCONTACT)       &&
-      EqualBits(stream, pos + 181, pos + 182, p->M_NVDERUN)         &&
-      EqualBits(stream, pos + 182, pos + 197, p->D_NVSTFF)          &&
-      EqualBits(stream, pos + 197, pos + 198, p->Q_NVDRIVER_ADHES)  &&
-      EqualBits(stream, pos + 198, pos + 204, p->A_NVMAXREDADH1)    &&
-      EqualBits(stream, pos + 204, pos + 210, p->A_NVMAXREDADH2)    &&
-      EqualBits(stream, pos + 210, pos + 216, p->A_NVMAXREDADH3)    &&
-      EqualBits(stream, pos + 216, pos + 222, p->Q_NVLOCACC)        &&
-      EqualBits(stream, pos + 222, pos + 227, p->M_NVAVADH)         &&
-      EqualBits(stream, pos + 227, pos + 231, p->M_NVEBCL)          &&
-      EqualBits(stream, pos + 231, pos + 232, p->Q_NVKINT);
+      EqualBits(stream, pos + 42,  pos + 49,  p->V_NVSHUNT)         &&
+      EqualBits(stream, pos + 49,  pos + 56,  p->V_NVSTFF)          &&
+      EqualBits(stream, pos + 56,  pos + 63,  p->V_NVONSIGHT)       &&
+      EqualBits(stream, pos + 63,  pos + 70,  p->V_NVLIMSUPERV)     &&
+      EqualBits(stream, pos + 70,  pos + 77,  p->V_NVUNFIT)         &&
+      EqualBits(stream, pos + 77,  pos + 84,  p->V_NVREL)           &&
+      EqualBits(stream, pos + 84,  pos + 99,  p->D_NVROLL)          &&
+      EqualBits(stream, pos + 99,  pos + 100, p->Q_NVSBTSMPERM)     &&
+      EqualBits(stream, pos + 100, pos + 101, p->Q_NVEMRRLS)        &&
+      EqualBits(stream, pos + 101, pos + 102, p->Q_NVGUIPERM)       &&
+      EqualBits(stream, pos + 102, pos + 103, p->Q_NVSBFBPERM)      &&
+      EqualBits(stream, pos + 103, pos + 104, p->Q_NVINHSMICPERM)   &&
+      EqualBits(stream, pos + 104, pos + 111, p->V_NVALLOWOVTRP)    &&
+      EqualBits(stream, pos + 111, pos + 118, p->V_NVSUPOVTRP)      &&
+      EqualBits(stream, pos + 118, pos + 133, p->D_NVOVTRP)         &&
+      EqualBits(stream, pos + 133, pos + 141, p->T_NVOVTRP)         &&
+      EqualBits(stream, pos + 141, pos + 156, p->D_NVPOTRP)         &&
+      EqualBits(stream, pos + 156, pos + 158, p->M_NVCONTACT)       &&
+      EqualBits(stream, pos + 158, pos + 166, p->T_NVCONTACT)       &&
+      EqualBits(stream, pos + 166, pos + 167, p->M_NVDERUN)         &&
+      EqualBits(stream, pos + 167, pos + 182, p->D_NVSTFF)          &&
+      EqualBits(stream, pos + 182, pos + 183, p->Q_NVDRIVER_ADHES)  &&
+      EqualBits(stream, pos + 183, pos + 189, p->A_NVMAXREDADH1)    &&
+      EqualBits(stream, pos + 189, pos + 195, p->A_NVMAXREDADH2)    &&
+      EqualBits(stream, pos + 195, pos + 201, p->A_NVMAXREDADH3)    &&
+      EqualBits(stream, pos + 201, pos + 207, p->Q_NVLOCACC)        &&
+      EqualBits(stream, pos + 207, pos + 212, p->M_NVAVADH)         &&
+      EqualBits(stream, pos + 212, pos + 216, p->M_NVEBCL)          &&
+      EqualBits(stream, pos + 216, pos + 217, p->Q_NVKINT);
 
     predicate UpperBitsNotSet(National_Values_Core* p) =
       UpperBitsNotSet(p->Q_DIR,            2)   &&

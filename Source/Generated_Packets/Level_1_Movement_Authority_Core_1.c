@@ -37,10 +37,10 @@ int Level_1_Movement_Authority_Core_1_Encoder(Bitstream* stream, const Level_1_M
             Bitstream_Write(stream, 15, p->D_SECTIONTIMERSTOPLOC_k);
 
 
-            //@ assert L_SECTION_k:       EqualBits(stream, pos + 46,  pos + 61,  p->L_SECTION_k);
-            //@ assert Q_SECTIONTIMER_k:  EqualBits(stream, pos + 61,  pos + 62,  p->Q_SECTIONTIMER_k);
-            //@ assert T_SECTIONTIMER_k:  EqualBits(stream, pos + 62,  pos + 72,  p->T_SECTIONTIMER_k);
-            //@ assert D_SECTIONTIMERSTOPLOC_k: EqualBits(stream, pos + 72,  pos + 87,  p->D_SECTIONTIMERSTOPLOC_k);
+            //@ assert L_SECTION_k:       EqualBits(stream, pos,       pos + 15,  p->L_SECTION_k);
+            //@ assert Q_SECTIONTIMER_k:  EqualBits(stream, pos + 15,  pos + 16,  p->Q_SECTIONTIMER_k);
+            //@ assert T_SECTIONTIMER_k:  EqualBits(stream, pos + 16,  pos + 26,  p->T_SECTIONTIMER_k);
+            //@ assert D_SECTIONTIMERSTOPLOC_k: EqualBits(stream, pos + 26,  pos + 41,  p->D_SECTIONTIMERSTOPLOC_k);
 
             return 1;
         }
@@ -62,49 +62,49 @@ int Level_1_Movement_Authority_Core_1_Decoder(Bitstream* stream, Level_1_Movemen
         //@ ghost const uint32_t pos = stream->bitpos;
 
 	/*@
-	  requires L_SECTION_k:    stream->bitpos == pos + 46;
+	  requires L_SECTION_k:    stream->bitpos == pos + 0;
 	  assigns        	   stream->bitpos;
 	  assigns		   p->L_SECTION_k;
-	  ensures  L_SECTION_k:    stream->bitpos == pos + 61;
-	  ensures  L_SECTION_k:    EqualBits(stream, pos + 46, pos + 61, p->L_SECTION_k);
+	  ensures  L_SECTION_k:    stream->bitpos == pos + 15;
+	  ensures  L_SECTION_k:    EqualBits(stream, pos + 0, pos + 15, p->L_SECTION_k);
 	  ensures  L_SECTION_k:    UpperBitsNotSet(p->L_SECTION_k, 15);
 	*/
 	{ p->L_SECTION_k		= Bitstream_Read(stream, 15); }
 
 	/*@
-	  requires Q_SECTIONTIMER_k: stream->bitpos == pos + 61;
+	  requires Q_SECTIONTIMER_k: stream->bitpos == pos + 15;
 	  assigns        	   stream->bitpos;
 	  assigns		   p->Q_SECTIONTIMER_k;
-	  ensures  Q_SECTIONTIMER_k: stream->bitpos == pos + 62;
-	  ensures  Q_SECTIONTIMER_k: EqualBits(stream, pos + 61, pos + 62, p->Q_SECTIONTIMER_k);
+	  ensures  Q_SECTIONTIMER_k: stream->bitpos == pos + 16;
+	  ensures  Q_SECTIONTIMER_k: EqualBits(stream, pos + 15, pos + 16, p->Q_SECTIONTIMER_k);
 	  ensures  Q_SECTIONTIMER_k: UpperBitsNotSet(p->Q_SECTIONTIMER_k, 1);
 	*/
 	{ p->Q_SECTIONTIMER_k		= Bitstream_Read(stream, 1); }
 
 	/*@
-	  requires T_SECTIONTIMER_k: stream->bitpos == pos + 62;
+	  requires T_SECTIONTIMER_k: stream->bitpos == pos + 16;
 	  assigns        	   stream->bitpos;
 	  assigns		   p->T_SECTIONTIMER_k;
-	  ensures  T_SECTIONTIMER_k: stream->bitpos == pos + 72;
-	  ensures  T_SECTIONTIMER_k: EqualBits(stream, pos + 62, pos + 72, p->T_SECTIONTIMER_k);
+	  ensures  T_SECTIONTIMER_k: stream->bitpos == pos + 26;
+	  ensures  T_SECTIONTIMER_k: EqualBits(stream, pos + 16, pos + 26, p->T_SECTIONTIMER_k);
 	  ensures  T_SECTIONTIMER_k: UpperBitsNotSet(p->T_SECTIONTIMER_k, 10);
 	*/
 	{ p->T_SECTIONTIMER_k		= Bitstream_Read(stream, 10); }
 
 	/*@
-	  requires D_SECTIONTIMERSTOPLOC_k: stream->bitpos == pos + 72;
+	  requires D_SECTIONTIMERSTOPLOC_k: stream->bitpos == pos + 26;
 	  assigns        	   stream->bitpos;
 	  assigns		   p->D_SECTIONTIMERSTOPLOC_k;
-	  ensures  D_SECTIONTIMERSTOPLOC_k: stream->bitpos == pos + 87;
-	  ensures  D_SECTIONTIMERSTOPLOC_k: EqualBits(stream, pos + 72, pos + 87, p->D_SECTIONTIMERSTOPLOC_k);
+	  ensures  D_SECTIONTIMERSTOPLOC_k: stream->bitpos == pos + 41;
+	  ensures  D_SECTIONTIMERSTOPLOC_k: EqualBits(stream, pos + 26, pos + 41, p->D_SECTIONTIMERSTOPLOC_k);
 	  ensures  D_SECTIONTIMERSTOPLOC_k: UpperBitsNotSet(p->D_SECTIONTIMERSTOPLOC_k, 15);
 	*/
 	{ p->D_SECTIONTIMERSTOPLOC_k		= Bitstream_Read(stream, 15); }
 
-        //@ assert L_SECTION_k:       EqualBits(stream, pos + 46,  pos + 61,  p->L_SECTION_k);
-        //@ assert Q_SECTIONTIMER_k:  EqualBits(stream, pos + 61,  pos + 62,  p->Q_SECTIONTIMER_k);
-        //@ assert T_SECTIONTIMER_k:  EqualBits(stream, pos + 62,  pos + 72,  p->T_SECTIONTIMER_k);
-        //@ assert D_SECTIONTIMERSTOPLOC_k: EqualBits(stream, pos + 72,  pos + 87,  p->D_SECTIONTIMERSTOPLOC_k);
+        //@ assert L_SECTION_k:       EqualBits(stream, pos,       pos + 15,  p->L_SECTION_k);
+        //@ assert Q_SECTIONTIMER_k:  EqualBits(stream, pos + 15,  pos + 16,  p->Q_SECTIONTIMER_k);
+        //@ assert T_SECTIONTIMER_k:  EqualBits(stream, pos + 16,  pos + 26,  p->T_SECTIONTIMER_k);
+        //@ assert D_SECTIONTIMERSTOPLOC_k: EqualBits(stream, pos + 26,  pos + 41,  p->D_SECTIONTIMERSTOPLOC_k);
 
         //@ assert L_SECTION_k:       UpperBitsNotSet(p->L_SECTION_k,       15);
         //@ assert Q_SECTIONTIMER_k:  UpperBitsNotSet(p->Q_SECTIONTIMER_k,  1);

@@ -58,7 +58,7 @@ inline bool operator!=(const Infill_location_reference_Core& a, const Infill_loc
 
 typedef struct Infill_location_reference_Core Infill_location_reference_Core;
 
-#define INFILL_LOCATION_REFERENCE_CORE_BITSIZE 40
+#define INFILL_LOCATION_REFERENCE_CORE_BITSIZE 30
 
 /*@
     logic integer BitSize{L}(Infill_location_reference_Core* p) = INFILL_LOCATION_REFERENCE_CORE_BITSIZE;

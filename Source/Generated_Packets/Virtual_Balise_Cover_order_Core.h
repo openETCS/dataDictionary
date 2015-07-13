@@ -60,7 +60,7 @@ inline bool operator!=(const Virtual_Balise_Cover_order_Core& a, const Virtual_B
 
 typedef struct Virtual_Balise_Cover_order_Core Virtual_Balise_Cover_order_Core;
 
-#define VIRTUAL_BALISE_COVER_ORDER_CORE_BITSIZE 40
+#define VIRTUAL_BALISE_COVER_ORDER_CORE_BITSIZE 32
 
 /*@
     logic integer BitSize{L}(Virtual_Balise_Cover_order_Core* p) = VIRTUAL_BALISE_COVER_ORDER_CORE_BITSIZE;

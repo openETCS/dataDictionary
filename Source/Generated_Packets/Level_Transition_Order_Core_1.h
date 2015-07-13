@@ -48,7 +48,7 @@ inline bool operator!=(const Level_Transition_Order_Core_1& a, const Level_Trans
 
 typedef struct Level_Transition_Order_Core_1 Level_Transition_Order_Core_1;
 
-#define LEVEL_TRANSITION_ORDER_CORE_1_CORE_BITSIZE 89
+#define LEVEL_TRANSITION_ORDER_CORE_1_CORE_BITSIZE 18
 
 /*@
     logic integer BitSize{L}(Level_Transition_Order_Core_1* p) = LEVEL_TRANSITION_ORDER_CORE_1_CORE_BITSIZE;

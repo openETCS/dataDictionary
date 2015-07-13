@@ -75,6 +75,7 @@ inline bool operator==(const Axle_Load_Speed_Profile_Core& a, const Axle_Load_Sp
     status = status && (a.D_AXLELOAD == b.D_AXLELOAD);
     status = status && (a.L_AXLELOAD == b.L_AXLELOAD);
     status = status && (a.Q_FRONT == b.Q_FRONT);
+    status = status && (a.N_ITER_1 == b.N_ITER_1);
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)
@@ -86,6 +87,7 @@ inline bool operator==(const Axle_Load_Speed_Profile_Core& a, const Axle_Load_Sp
     {
         status = false;
     }
+    status = status && (a.N_ITER_2 == b.N_ITER_2);
     if (a.N_ITER_2 == b.N_ITER_2)
     {
         for (uint32_t i = 0; i < a.N_ITER_2; ++i)
@@ -111,7 +113,7 @@ inline bool operator!=(const Axle_Load_Speed_Profile_Core& a, const Axle_Load_Sp
 
 typedef struct Axle_Load_Speed_Profile_Core Axle_Load_Speed_Profile_Core;
 
-#define AXLE_LOAD_SPEED_PROFILE_CORE_BITSIZE 138
+#define AXLE_LOAD_SPEED_PROFILE_CORE_BITSIZE 18
 
 /*@
     logic integer BitSize{L}(Axle_Load_Speed_Profile_Core* p) = AXLE_LOAD_SPEED_PROFILE_CORE_BITSIZE;

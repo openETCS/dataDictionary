@@ -60,7 +60,7 @@ inline bool operator!=(const Track_Condition_Change_of_traction_system_Core& a, 
 
 typedef struct Track_Condition_Change_of_traction_system_Core Track_Condition_Change_of_traction_system_Core;
 
-#define TRACK_CONDITION_CHANGE_OF_TRACTION_SYSTEM_CORE_BITSIZE 46
+#define TRACK_CONDITION_CHANGE_OF_TRACTION_SYSTEM_CORE_BITSIZE 36
 
 /*@
     logic integer BitSize{L}(Track_Condition_Change_of_traction_system_Core* p) = TRACK_CONDITION_CHANGE_OF_TRACTION_SYSTEM_CORE_BITSIZE;

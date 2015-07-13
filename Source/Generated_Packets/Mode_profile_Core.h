@@ -87,7 +87,7 @@ inline bool operator!=(const Mode_profile_Core& a, const Mode_profile_Core& b)
 
 typedef struct Mode_profile_Core Mode_profile_Core;
 
-#define MODE_PROFILE_CORE_BITSIZE 132
+#define MODE_PROFILE_CORE_BITSIZE 72
 
 /*@
     logic integer BitSize{L}(Mode_profile_Core* p) = MODE_PROFILE_CORE_BITSIZE;

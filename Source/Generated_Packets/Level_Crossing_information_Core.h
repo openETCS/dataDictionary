@@ -75,7 +75,7 @@ inline bool operator!=(const Level_Crossing_information_Core& a, const Level_Cro
 
 typedef struct Level_Crossing_information_Core Level_Crossing_information_Core;
 
-#define LEVEL_CROSSING_INFORMATION_CORE_BITSIZE 79
+#define LEVEL_CROSSING_INFORMATION_CORE_BITSIZE 56
 
 /*@
     logic integer BitSize{L}(Level_Crossing_information_Core* p) = LEVEL_CROSSING_INFORMATION_CORE_BITSIZE;

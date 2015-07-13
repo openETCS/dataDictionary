@@ -51,7 +51,7 @@ int International_Static_Speed_Profile_Core_1_Encoder(Bitstream* stream, const I
             Bitstream_Write(stream, 7,  p->V_DIFF_n);
 
 
-            //@ assert Q_DIFF_n:          EqualBits(stream, pos + 45,  pos + 47,  p->Q_DIFF_n);
+            //@ assert Q_DIFF_n:          EqualBits(stream, pos,       pos + 2,   p->Q_DIFF_n);
 
             return 1;
         }
@@ -73,11 +73,11 @@ int International_Static_Speed_Profile_Core_1_Decoder(Bitstream* stream, Interna
         //@ ghost const uint32_t pos = stream->bitpos;
 
 	/*@
-	  requires Q_DIFF_n:       stream->bitpos == pos + 45;
+	  requires Q_DIFF_n:       stream->bitpos == pos + 0;
 	  assigns        	   stream->bitpos;
 	  assigns		   p->Q_DIFF_n;
-	  ensures  Q_DIFF_n:       stream->bitpos == pos + 47;
-	  ensures  Q_DIFF_n:       EqualBits(stream, pos + 45, pos + 47, p->Q_DIFF_n);
+	  ensures  Q_DIFF_n:       stream->bitpos == pos + 2;
+	  ensures  Q_DIFF_n:       EqualBits(stream, pos + 0, pos + 2, p->Q_DIFF_n);
 	  ensures  Q_DIFF_n:       UpperBitsNotSet(p->Q_DIFF_n, 2);
 	*/
 	{ p->Q_DIFF_n		= Bitstream_Read(stream, 2); }
@@ -94,7 +94,7 @@ int International_Static_Speed_Profile_Core_1_Decoder(Bitstream* stream, Interna
 
 	{ p->V_DIFF_n		= Bitstream_Read(stream, 7); }
 
-        //@ assert Q_DIFF_n:          EqualBits(stream, pos + 45,  pos + 47,  p->Q_DIFF_n);
+        //@ assert Q_DIFF_n:          EqualBits(stream, pos,       pos + 2,   p->Q_DIFF_n);
 
         //@ assert Q_DIFF_n:          UpperBitsNotSet(p->Q_DIFF_n,          2);
 

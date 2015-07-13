@@ -65,6 +65,7 @@ inline bool operator==(const Track_Condition_Core& a, const Track_Condition_Core
     status = status && (a.D_TRACKCOND == b.D_TRACKCOND);
     status = status && (a.L_TRACKCOND == b.L_TRACKCOND);
     status = status && (a.M_TRACKCOND == b.M_TRACKCOND);
+    status = status && (a.N_ITER_1 == b.N_ITER_1);
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)
@@ -90,7 +91,7 @@ inline bool operator!=(const Track_Condition_Core& a, const Track_Condition_Core
 
 typedef struct Track_Condition_Core Track_Condition_Core;
 
-#define TRACK_CONDITION_CORE_BITSIZE 106
+#define TRACK_CONDITION_CORE_BITSIZE 18
 
 /*@
     logic integer BitSize{L}(Track_Condition_Core* p) = TRACK_CONDITION_CORE_BITSIZE;
