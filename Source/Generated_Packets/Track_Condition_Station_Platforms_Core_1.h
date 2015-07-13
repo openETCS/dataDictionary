@@ -59,13 +59,29 @@ typedef struct Track_Condition_Station_Platforms_Core_1 Track_Condition_Station_
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Track_Condition_Station_Platforms_Core_1* p) = \true;
+    predicate Invariant(Track_Condition_Station_Platforms_Core_1* p) =
+      Invariant(p->D_TRACKCOND_k)     &&
+      Invariant(p->L_TRACKCOND_k)     &&
+      Invariant(p->M_PLATFORM_k)      &&
+      Invariant(p->Q_PLATFORM_k);
 
-    predicate ZeroInitialized(Track_Condition_Station_Platforms_Core_1* p) = \true;
+    predicate ZeroInitialized(Track_Condition_Station_Platforms_Core_1* p) =
+      ZeroInitialized(p->D_TRACKCOND_k)     &&
+      ZeroInitialized(p->L_TRACKCOND_k)     &&
+      ZeroInitialized(p->M_PLATFORM_k)      &&
+      ZeroInitialized(p->Q_PLATFORM_k);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Track_Condition_Station_Platforms_Core_1* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Track_Condition_Station_Platforms_Core_1* p) =
+      EqualBits(stream, pos,       pos + 15,  p->D_TRACKCOND_k)     &&
+      EqualBits(stream, pos + 15,  pos + 30,  p->L_TRACKCOND_k)     &&
+      EqualBits(stream, pos + 30,  pos + 34,  p->M_PLATFORM_k)      &&
+      EqualBits(stream, pos + 34,  pos + 36,  p->Q_PLATFORM_k);
 
-    predicate UpperBitsNotSet(Track_Condition_Station_Platforms_Core_1* p) = \true;
+    predicate UpperBitsNotSet(Track_Condition_Station_Platforms_Core_1* p) =
+      UpperBitsNotSet(p->D_TRACKCOND_k,    15)  &&
+      UpperBitsNotSet(p->L_TRACKCOND_k,    15)  &&
+      UpperBitsNotSet(p->M_PLATFORM_k,     4)   &&
+      UpperBitsNotSet(p->Q_PLATFORM_k,     2);
 
 */
 

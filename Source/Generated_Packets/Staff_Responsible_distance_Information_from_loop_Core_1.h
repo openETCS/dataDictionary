@@ -62,13 +62,17 @@ typedef struct Staff_Responsible_distance_Information_from_loop_Core_1 Staff_Res
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Staff_Responsible_distance_Information_from_loop_Core_1* p) = \true;
+    predicate Invariant(Staff_Responsible_distance_Information_from_loop_Core_1* p) =
+      Invariant(p->Q_NEWCOUNTRY_k);
 
-    predicate ZeroInitialized(Staff_Responsible_distance_Information_from_loop_Core_1* p) = \true;
+    predicate ZeroInitialized(Staff_Responsible_distance_Information_from_loop_Core_1* p) =
+      ZeroInitialized(p->Q_NEWCOUNTRY_k);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Staff_Responsible_distance_Information_from_loop_Core_1* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Staff_Responsible_distance_Information_from_loop_Core_1* p) =
+      EqualBits(stream, pos,       pos + 1,   p->Q_NEWCOUNTRY_k);
 
-    predicate UpperBitsNotSet(Staff_Responsible_distance_Information_from_loop_Core_1* p) = \true;
+    predicate UpperBitsNotSet(Staff_Responsible_distance_Information_from_loop_Core_1* p) =
+      UpperBitsNotSet(p->Q_NEWCOUNTRY_k,   1);
 
 */
 

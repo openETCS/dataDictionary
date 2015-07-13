@@ -63,7 +63,7 @@ inline bool operator!=(const Onboard_telephone_numbers_Core& a, const Onboard_te
 
 typedef struct Onboard_telephone_numbers_Core Onboard_telephone_numbers_Core;
 
-#define ONBOARD_TELEPHONE_NUMBERS_CORE_BITSIZE 13
+#define ONBOARD_TELEPHONE_NUMBERS_CORE_BITSIZE 18
 
 /*@
     logic integer BitSize{L}(Onboard_telephone_numbers_Core* p) = ONBOARD_TELEPHONE_NUMBERS_CORE_BITSIZE;

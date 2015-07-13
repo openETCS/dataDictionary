@@ -56,13 +56,17 @@ typedef struct Conditional_Level_Transition_Order_Core_1 Conditional_Level_Trans
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Conditional_Level_Transition_Order_Core_1* p) = \true;
+    predicate Invariant(Conditional_Level_Transition_Order_Core_1* p) =
+      Invariant(p->M_LEVELTR_k);
 
-    predicate ZeroInitialized(Conditional_Level_Transition_Order_Core_1* p) = \true;
+    predicate ZeroInitialized(Conditional_Level_Transition_Order_Core_1* p) =
+      ZeroInitialized(p->M_LEVELTR_k);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Conditional_Level_Transition_Order_Core_1* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Conditional_Level_Transition_Order_Core_1* p) =
+      EqualBits(stream, pos,       pos + 3,   p->M_LEVELTR_k);
 
-    predicate UpperBitsNotSet(Conditional_Level_Transition_Order_Core_1* p) = \true;
+    predicate UpperBitsNotSet(Conditional_Level_Transition_Order_Core_1* p) =
+      UpperBitsNotSet(p->M_LEVELTR_k,      3);
 
 */
 

@@ -76,7 +76,7 @@ inline bool operator!=(const Conditional_Level_Transition_Order_Core& a, const C
 
 typedef struct Conditional_Level_Transition_Order_Core Conditional_Level_Transition_Order_Core;
 
-#define CONDITIONAL_LEVEL_TRANSITION_ORDER_CORE_BITSIZE 18
+#define CONDITIONAL_LEVEL_TRANSITION_ORDER_CORE_BITSIZE 23
 
 /*@
     logic integer BitSize{L}(Conditional_Level_Transition_Order_Core* p) = CONDITIONAL_LEVEL_TRANSITION_ORDER_CORE_BITSIZE;

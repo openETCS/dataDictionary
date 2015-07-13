@@ -53,13 +53,21 @@ typedef struct National_Values_Core_3_1 National_Values_Core_3_1;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(National_Values_Core_3_1* p) = \true;
+    predicate Invariant(National_Values_Core_3_1* p) =
+      Invariant(p->V_NVKVINT_k_m)     &&
+      Invariant(p->M_NVKVINT_k_m);
 
-    predicate ZeroInitialized(National_Values_Core_3_1* p) = \true;
+    predicate ZeroInitialized(National_Values_Core_3_1* p) =
+      ZeroInitialized(p->V_NVKVINT_k_m)     &&
+      ZeroInitialized(p->M_NVKVINT_k_m);
 
-    predicate EqualBits(Bitstream* stream, integer pos, National_Values_Core_3_1* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, National_Values_Core_3_1* p) =
+      EqualBits(stream, pos,       pos + 7,   p->V_NVKVINT_k_m)     &&
+      EqualBits(stream, pos + 7,   pos + 14,  p->M_NVKVINT_k_m);
 
-    predicate UpperBitsNotSet(National_Values_Core_3_1* p) = \true;
+    predicate UpperBitsNotSet(National_Values_Core_3_1* p) =
+      UpperBitsNotSet(p->V_NVKVINT_k_m,    7)   &&
+      UpperBitsNotSet(p->M_NVKVINT_k_m,    7);
 
 */
 

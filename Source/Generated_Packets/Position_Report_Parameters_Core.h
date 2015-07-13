@@ -79,7 +79,7 @@ inline bool operator!=(const Position_Report_Parameters_Core& a, const Position_
 
 typedef struct Position_Report_Parameters_Core Position_Report_Parameters_Core;
 
-#define POSITION_REPORT_PARAMETERS_CORE_BITSIZE 43
+#define POSITION_REPORT_PARAMETERS_CORE_BITSIZE 48
 
 /*@
     logic integer BitSize{L}(Position_Report_Parameters_Core* p) = POSITION_REPORT_PARAMETERS_CORE_BITSIZE;

@@ -100,7 +100,7 @@ inline bool operator!=(const International_Static_Speed_Profile_Core& a, const I
 
 typedef struct International_Static_Speed_Profile_Core International_Static_Speed_Profile_Core;
 
-#define INTERNATIONAL_STATIC_SPEED_PROFILE_CORE_BITSIZE 40
+#define INTERNATIONAL_STATIC_SPEED_PROFILE_CORE_BITSIZE 50
 
 /*@
     logic integer BitSize{L}(International_Static_Speed_Profile_Core* p) = INTERNATIONAL_STATIC_SPEED_PROFILE_CORE_BITSIZE;

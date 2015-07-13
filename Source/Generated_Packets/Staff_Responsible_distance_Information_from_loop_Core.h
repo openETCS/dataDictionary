@@ -96,7 +96,7 @@ inline bool operator!=(const Staff_Responsible_distance_Information_from_loop_Co
 
 typedef struct Staff_Responsible_distance_Information_from_loop_Core Staff_Responsible_distance_Information_from_loop_Core;
 
-#define STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_BITSIZE 62
+#define STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_BITSIZE 67
 
 /*@
     logic integer BitSize{L}(Staff_Responsible_distance_Information_from_loop_Core* p) = STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_BITSIZE;

@@ -56,6 +56,7 @@ int National_Values_Core_3_Encoder(Bitstream* stream, const National_Values_Core
             }
 
 
+            //@ assert Q_NVKVINTSET_k:    EqualBits(stream, pos,       pos + 2,   p->Q_NVKVINTSET_k);
 
             return 1;
         }
@@ -76,6 +77,14 @@ int National_Values_Core_3_Decoder(Bitstream* stream, National_Values_Core_3* p)
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 
+	/*@
+	  requires Q_NVKVINTSET_k: stream->bitpos == pos + 0;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->Q_NVKVINTSET_k;
+	  ensures  Q_NVKVINTSET_k: stream->bitpos == pos + 2;
+	  ensures  Q_NVKVINTSET_k: EqualBits(stream, pos + 0, pos + 2, p->Q_NVKVINTSET_k);
+	  ensures  Q_NVKVINTSET_k: UpperBitsNotSet(p->Q_NVKVINTSET_k, 2);
+	*/
 	{ p->Q_NVKVINTSET_k		= Bitstream_Read(stream, 2); }
 
         if (p->Q_NVKVINTSET_k == 1)
@@ -95,7 +104,9 @@ int National_Values_Core_3_Decoder(Bitstream* stream, National_Values_Core_3* p)
         {
             National_Values_Core_3_1_Decoder(stream, &(p->sub_3_1[i]));
         }
+        //@ assert Q_NVKVINTSET_k:    EqualBits(stream, pos,       pos + 2,   p->Q_NVKVINTSET_k);
 
+        //@ assert Q_NVKVINTSET_k:    UpperBitsNotSet(p->Q_NVKVINTSET_k,    2);
 
 	//@ assert final: EqualBits(stream, pos, p);
 

@@ -65,13 +65,37 @@ typedef struct Permitted_Braking_Distance_Information_Core_1 Permitted_Braking_D
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Permitted_Braking_Distance_Information_Core_1* p) = \true;
+    predicate Invariant(Permitted_Braking_Distance_Information_Core_1* p) =
+      Invariant(p->D_PBD_k)           &&
+      Invariant(p->Q_GDIR_k)          &&
+      Invariant(p->G_PBDSR_k)         &&
+      Invariant(p->Q_PBDSR_k)         &&
+      Invariant(p->D_PBDSR_k)         &&
+      Invariant(p->L_PBDSR_k);
 
-    predicate ZeroInitialized(Permitted_Braking_Distance_Information_Core_1* p) = \true;
+    predicate ZeroInitialized(Permitted_Braking_Distance_Information_Core_1* p) =
+      ZeroInitialized(p->D_PBD_k)           &&
+      ZeroInitialized(p->Q_GDIR_k)          &&
+      ZeroInitialized(p->G_PBDSR_k)         &&
+      ZeroInitialized(p->Q_PBDSR_k)         &&
+      ZeroInitialized(p->D_PBDSR_k)         &&
+      ZeroInitialized(p->L_PBDSR_k);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Permitted_Braking_Distance_Information_Core_1* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Permitted_Braking_Distance_Information_Core_1* p) =
+      EqualBits(stream, pos,       pos + 15,  p->D_PBD_k)           &&
+      EqualBits(stream, pos + 15,  pos + 16,  p->Q_GDIR_k)          &&
+      EqualBits(stream, pos + 16,  pos + 24,  p->G_PBDSR_k)         &&
+      EqualBits(stream, pos + 24,  pos + 25,  p->Q_PBDSR_k)         &&
+      EqualBits(stream, pos + 25,  pos + 40,  p->D_PBDSR_k)         &&
+      EqualBits(stream, pos + 40,  pos + 55,  p->L_PBDSR_k);
 
-    predicate UpperBitsNotSet(Permitted_Braking_Distance_Information_Core_1* p) = \true;
+    predicate UpperBitsNotSet(Permitted_Braking_Distance_Information_Core_1* p) =
+      UpperBitsNotSet(p->D_PBD_k,          15)  &&
+      UpperBitsNotSet(p->Q_GDIR_k,         1)   &&
+      UpperBitsNotSet(p->G_PBDSR_k,        8)   &&
+      UpperBitsNotSet(p->Q_PBDSR_k,        1)   &&
+      UpperBitsNotSet(p->D_PBDSR_k,        15)  &&
+      UpperBitsNotSet(p->L_PBDSR_k,        15);
 
 */
 

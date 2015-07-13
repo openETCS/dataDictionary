@@ -48,6 +48,7 @@ int Geographical_Position_Information_Core_1_Encoder(Bitstream* stream, const Ge
             Bitstream_Write(stream, 24, p->M_POSITION_k);
 
 
+            //@ assert Q_NEWCOUNTRY_k:    EqualBits(stream, pos,       pos + 1,   p->Q_NEWCOUNTRY_k);
 
             return 1;
         }
@@ -68,6 +69,14 @@ int Geographical_Position_Information_Core_1_Decoder(Bitstream* stream, Geograph
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 
+	/*@
+	  requires Q_NEWCOUNTRY_k: stream->bitpos == pos + 0;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->Q_NEWCOUNTRY_k;
+	  ensures  Q_NEWCOUNTRY_k: stream->bitpos == pos + 1;
+	  ensures  Q_NEWCOUNTRY_k: EqualBits(stream, pos + 0, pos + 1, p->Q_NEWCOUNTRY_k);
+	  ensures  Q_NEWCOUNTRY_k: UpperBitsNotSet(p->Q_NEWCOUNTRY_k, 1);
+	*/
 	{ p->Q_NEWCOUNTRY_k		= Bitstream_Read(stream, 1); }
 
         if (p->Q_NEWCOUNTRY_k == 1)
@@ -83,7 +92,9 @@ int Geographical_Position_Information_Core_1_Decoder(Bitstream* stream, Geograph
 
 	{ p->M_POSITION_k		= Bitstream_Read(stream, 24); }
 
+        //@ assert Q_NEWCOUNTRY_k:    EqualBits(stream, pos,       pos + 1,   p->Q_NEWCOUNTRY_k);
 
+        //@ assert Q_NEWCOUNTRY_k:    UpperBitsNotSet(p->Q_NEWCOUNTRY_k,    1);
 
 	//@ assert final: EqualBits(stream, pos, p);
 

@@ -108,7 +108,7 @@ inline bool operator!=(const Validated_train_data_Core& a, const Validated_train
 
 typedef struct Validated_train_data_Core Validated_train_data_Core;
 
-#define VALIDATED_TRAIN_DATA_CORE_BITSIZE 78
+#define VALIDATED_TRAIN_DATA_CORE_BITSIZE 88
 
 /*@
     logic integer BitSize{L}(Validated_train_data_Core* p) = VALIDATED_TRAIN_DATA_CORE_BITSIZE;

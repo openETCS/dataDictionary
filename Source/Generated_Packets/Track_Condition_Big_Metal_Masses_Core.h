@@ -76,7 +76,7 @@ inline bool operator!=(const Track_Condition_Big_Metal_Masses_Core& a, const Tra
 
 typedef struct Track_Condition_Big_Metal_Masses_Core Track_Condition_Big_Metal_Masses_Core;
 
-#define TRACK_CONDITION_BIG_METAL_MASSES_CORE_BITSIZE 47
+#define TRACK_CONDITION_BIG_METAL_MASSES_CORE_BITSIZE 52
 
 /*@
     logic integer BitSize{L}(Track_Condition_Big_Metal_Masses_Core* p) = TRACK_CONDITION_BIG_METAL_MASSES_CORE_BITSIZE;

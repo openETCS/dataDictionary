@@ -69,6 +69,8 @@ int Route_Suitability_Data_Core_1_Encoder(Bitstream* stream, const Route_Suitabi
 
 
 
+            //@ assert D_SUITABILITY_k:   EqualBits(stream, pos,       pos + 15,  p->D_SUITABILITY_k);
+            //@ assert Q_SUITABILITY_k:   EqualBits(stream, pos + 15,  pos + 17,  p->Q_SUITABILITY_k);
 
             return 1;
         }
@@ -89,8 +91,24 @@ int Route_Suitability_Data_Core_1_Decoder(Bitstream* stream, Route_Suitability_D
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 
+	/*@
+	  requires D_SUITABILITY_k: stream->bitpos == pos + 0;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->D_SUITABILITY_k;
+	  ensures  D_SUITABILITY_k: stream->bitpos == pos + 15;
+	  ensures  D_SUITABILITY_k: EqualBits(stream, pos + 0, pos + 15, p->D_SUITABILITY_k);
+	  ensures  D_SUITABILITY_k: UpperBitsNotSet(p->D_SUITABILITY_k, 15);
+	*/
 	{ p->D_SUITABILITY_k		= Bitstream_Read(stream, 15); }
 
+	/*@
+	  requires Q_SUITABILITY_k: stream->bitpos == pos + 15;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->Q_SUITABILITY_k;
+	  ensures  Q_SUITABILITY_k: stream->bitpos == pos + 17;
+	  ensures  Q_SUITABILITY_k: EqualBits(stream, pos + 15, pos + 17, p->Q_SUITABILITY_k);
+	  ensures  Q_SUITABILITY_k: UpperBitsNotSet(p->Q_SUITABILITY_k, 2);
+	*/
 	{ p->Q_SUITABILITY_k		= Bitstream_Read(stream, 2); }
 
         if (p->Q_SUITABILITY_k == 0)
@@ -113,7 +131,11 @@ int Route_Suitability_Data_Core_1_Decoder(Bitstream* stream, Route_Suitability_D
 	{ p->NID_CTRACTION_k		= Bitstream_Read(stream, 10); }
         }
 
+        //@ assert D_SUITABILITY_k:   EqualBits(stream, pos,       pos + 15,  p->D_SUITABILITY_k);
+        //@ assert Q_SUITABILITY_k:   EqualBits(stream, pos + 15,  pos + 17,  p->Q_SUITABILITY_k);
 
+        //@ assert D_SUITABILITY_k:   UpperBitsNotSet(p->D_SUITABILITY_k,   15);
+        //@ assert Q_SUITABILITY_k:   UpperBitsNotSet(p->Q_SUITABILITY_k,   2);
 
 	//@ assert final: EqualBits(stream, pos, p);
 

@@ -67,7 +67,7 @@ inline bool operator!=(const List_of_balises_for_SH_Area_Core& a, const List_of_
 
 typedef struct List_of_balises_for_SH_Area_Core List_of_balises_for_SH_Area_Core;
 
-#define LIST_OF_BALISES_FOR_SH_AREA_CORE_BITSIZE 15
+#define LIST_OF_BALISES_FOR_SH_AREA_CORE_BITSIZE 20
 
 /*@
     logic integer BitSize{L}(List_of_balises_for_SH_Area_Core* p) = LIST_OF_BALISES_FOR_SH_AREA_CORE_BITSIZE;

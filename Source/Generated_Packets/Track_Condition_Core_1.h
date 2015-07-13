@@ -56,13 +56,25 @@ typedef struct Track_Condition_Core_1 Track_Condition_Core_1;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Track_Condition_Core_1* p) = \true;
+    predicate Invariant(Track_Condition_Core_1* p) =
+      Invariant(p->D_TRACKCOND_k)     &&
+      Invariant(p->L_TRACKCOND_k)     &&
+      Invariant(p->M_TRACKCOND_k);
 
-    predicate ZeroInitialized(Track_Condition_Core_1* p) = \true;
+    predicate ZeroInitialized(Track_Condition_Core_1* p) =
+      ZeroInitialized(p->D_TRACKCOND_k)     &&
+      ZeroInitialized(p->L_TRACKCOND_k)     &&
+      ZeroInitialized(p->M_TRACKCOND_k);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Track_Condition_Core_1* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Track_Condition_Core_1* p) =
+      EqualBits(stream, pos,       pos + 15,  p->D_TRACKCOND_k)     &&
+      EqualBits(stream, pos + 15,  pos + 30,  p->L_TRACKCOND_k)     &&
+      EqualBits(stream, pos + 30,  pos + 34,  p->M_TRACKCOND_k);
 
-    predicate UpperBitsNotSet(Track_Condition_Core_1* p) = \true;
+    predicate UpperBitsNotSet(Track_Condition_Core_1* p) =
+      UpperBitsNotSet(p->D_TRACKCOND_k,    15)  &&
+      UpperBitsNotSet(p->L_TRACKCOND_k,    15)  &&
+      UpperBitsNotSet(p->M_TRACKCOND_k,    4);
 
 */
 

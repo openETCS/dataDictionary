@@ -42,7 +42,7 @@ inline bool operator!=(const National_Values_Core_2& a, const National_Values_Co
 
 typedef struct National_Values_Core_2 National_Values_Core_2;
 
-#define NATIONAL_VALUES_CORE_2_CORE_BITSIZE 24
+#define NATIONAL_VALUES_CORE_2_CORE_BITSIZE 14
 
 /*@
     logic integer BitSize{L}(National_Values_Core_2* p) = NATIONAL_VALUES_CORE_2_CORE_BITSIZE;
@@ -53,13 +53,21 @@ typedef struct National_Values_Core_2 National_Values_Core_2;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(National_Values_Core_2* p) = \true;
+    predicate Invariant(National_Values_Core_2* p) =
+      Invariant(p->V_NVKVINT_n)       &&
+      Invariant(p->M_NVKVINT_n);
 
-    predicate ZeroInitialized(National_Values_Core_2* p) = \true;
+    predicate ZeroInitialized(National_Values_Core_2* p) =
+      ZeroInitialized(p->V_NVKVINT_n)       &&
+      ZeroInitialized(p->M_NVKVINT_n);
 
-    predicate EqualBits(Bitstream* stream, integer pos, National_Values_Core_2* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, National_Values_Core_2* p) =
+      EqualBits(stream, pos,       pos + 7,   p->V_NVKVINT_n)       &&
+      EqualBits(stream, pos + 7,   pos + 14,  p->M_NVKVINT_n);
 
-    predicate UpperBitsNotSet(National_Values_Core_2* p) = \true;
+    predicate UpperBitsNotSet(National_Values_Core_2* p) =
+      UpperBitsNotSet(p->V_NVKVINT_n,      7)   &&
+      UpperBitsNotSet(p->M_NVKVINT_n,      7);
 
 */
 

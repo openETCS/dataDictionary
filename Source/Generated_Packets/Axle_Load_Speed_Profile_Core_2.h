@@ -66,7 +66,7 @@ inline bool operator!=(const Axle_Load_Speed_Profile_Core_2& a, const Axle_Load_
 
 typedef struct Axle_Load_Speed_Profile_Core_2 Axle_Load_Speed_Profile_Core_2;
 
-#define AXLE_LOAD_SPEED_PROFILE_CORE_2_CORE_BITSIZE 45
+#define AXLE_LOAD_SPEED_PROFILE_CORE_2_CORE_BITSIZE 36
 
 /*@
     logic integer BitSize{L}(Axle_Load_Speed_Profile_Core_2* p) = AXLE_LOAD_SPEED_PROFILE_CORE_2_CORE_BITSIZE;
@@ -77,13 +77,25 @@ typedef struct Axle_Load_Speed_Profile_Core_2 Axle_Load_Speed_Profile_Core_2;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Axle_Load_Speed_Profile_Core_2* p) = \true;
+    predicate Invariant(Axle_Load_Speed_Profile_Core_2* p) =
+      Invariant(p->D_AXLELOAD_k)      &&
+      Invariant(p->L_AXLELOAD_k)      &&
+      Invariant(p->Q_FRONT_k);
 
-    predicate ZeroInitialized(Axle_Load_Speed_Profile_Core_2* p) = \true;
+    predicate ZeroInitialized(Axle_Load_Speed_Profile_Core_2* p) =
+      ZeroInitialized(p->D_AXLELOAD_k)      &&
+      ZeroInitialized(p->L_AXLELOAD_k)      &&
+      ZeroInitialized(p->Q_FRONT_k);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Axle_Load_Speed_Profile_Core_2* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Axle_Load_Speed_Profile_Core_2* p) =
+      EqualBits(stream, pos,       pos + 15,  p->D_AXLELOAD_k)      &&
+      EqualBits(stream, pos + 15,  pos + 30,  p->L_AXLELOAD_k)      &&
+      EqualBits(stream, pos + 30,  pos + 31,  p->Q_FRONT_k);
 
-    predicate UpperBitsNotSet(Axle_Load_Speed_Profile_Core_2* p) = \true;
+    predicate UpperBitsNotSet(Axle_Load_Speed_Profile_Core_2* p) =
+      UpperBitsNotSet(p->D_AXLELOAD_k,     15)  &&
+      UpperBitsNotSet(p->L_AXLELOAD_k,     15)  &&
+      UpperBitsNotSet(p->Q_FRONT_k,        1);
 
 */
 

@@ -68,13 +68,17 @@ typedef struct Geographical_Position_Information_Core_1 Geographical_Position_In
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Geographical_Position_Information_Core_1* p) = \true;
+    predicate Invariant(Geographical_Position_Information_Core_1* p) =
+      Invariant(p->Q_NEWCOUNTRY_k);
 
-    predicate ZeroInitialized(Geographical_Position_Information_Core_1* p) = \true;
+    predicate ZeroInitialized(Geographical_Position_Information_Core_1* p) =
+      ZeroInitialized(p->Q_NEWCOUNTRY_k);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Geographical_Position_Information_Core_1* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Geographical_Position_Information_Core_1* p) =
+      EqualBits(stream, pos,       pos + 1,   p->Q_NEWCOUNTRY_k);
 
-    predicate UpperBitsNotSet(Geographical_Position_Information_Core_1* p) = \true;
+    predicate UpperBitsNotSet(Geographical_Position_Information_Core_1* p) =
+      UpperBitsNotSet(p->Q_NEWCOUNTRY_k,   1);
 
 */
 

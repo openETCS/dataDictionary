@@ -53,13 +53,21 @@ typedef struct Axle_Load_Speed_Profile_Core_2_1 Axle_Load_Speed_Profile_Core_2_1
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Axle_Load_Speed_Profile_Core_2_1* p) = \true;
+    predicate Invariant(Axle_Load_Speed_Profile_Core_2_1* p) =
+      Invariant(p->M_AXLELOADCAT_k_m) &&
+      Invariant(p->V_AXLELOAD_k_m);
 
-    predicate ZeroInitialized(Axle_Load_Speed_Profile_Core_2_1* p) = \true;
+    predicate ZeroInitialized(Axle_Load_Speed_Profile_Core_2_1* p) =
+      ZeroInitialized(p->M_AXLELOADCAT_k_m) &&
+      ZeroInitialized(p->V_AXLELOAD_k_m);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Axle_Load_Speed_Profile_Core_2_1* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Axle_Load_Speed_Profile_Core_2_1* p) =
+      EqualBits(stream, pos,       pos + 7,   p->M_AXLELOADCAT_k_m) &&
+      EqualBits(stream, pos + 7,   pos + 14,  p->V_AXLELOAD_k_m);
 
-    predicate UpperBitsNotSet(Axle_Load_Speed_Profile_Core_2_1* p) = \true;
+    predicate UpperBitsNotSet(Axle_Load_Speed_Profile_Core_2_1* p) =
+      UpperBitsNotSet(p->M_AXLELOADCAT_k_m,7)   &&
+      UpperBitsNotSet(p->V_AXLELOAD_k_m,   7);
 
 */
 

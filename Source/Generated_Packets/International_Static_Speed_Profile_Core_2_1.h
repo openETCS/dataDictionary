@@ -65,13 +65,17 @@ typedef struct International_Static_Speed_Profile_Core_2_1 International_Static_
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(International_Static_Speed_Profile_Core_2_1* p) = \true;
+    predicate Invariant(International_Static_Speed_Profile_Core_2_1* p) =
+      Invariant(p->Q_DIFF_k_m);
 
-    predicate ZeroInitialized(International_Static_Speed_Profile_Core_2_1* p) = \true;
+    predicate ZeroInitialized(International_Static_Speed_Profile_Core_2_1* p) =
+      ZeroInitialized(p->Q_DIFF_k_m);
 
-    predicate EqualBits(Bitstream* stream, integer pos, International_Static_Speed_Profile_Core_2_1* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, International_Static_Speed_Profile_Core_2_1* p) =
+      EqualBits(stream, pos,       pos + 2,   p->Q_DIFF_k_m);
 
-    predicate UpperBitsNotSet(International_Static_Speed_Profile_Core_2_1* p) = \true;
+    predicate UpperBitsNotSet(International_Static_Speed_Profile_Core_2_1* p) =
+      UpperBitsNotSet(p->Q_DIFF_k_m,       2);
 
 */
 

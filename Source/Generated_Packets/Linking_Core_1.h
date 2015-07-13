@@ -71,13 +71,21 @@ typedef struct Linking_Core_1 Linking_Core_1;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Linking_Core_1* p) = \true;
+    predicate Invariant(Linking_Core_1* p) =
+      Invariant(p->D_LINK_k)          &&
+      Invariant(p->Q_NEWCOUNTRY_k);
 
-    predicate ZeroInitialized(Linking_Core_1* p) = \true;
+    predicate ZeroInitialized(Linking_Core_1* p) =
+      ZeroInitialized(p->D_LINK_k)          &&
+      ZeroInitialized(p->Q_NEWCOUNTRY_k);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Linking_Core_1* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Linking_Core_1* p) =
+      EqualBits(stream, pos,       pos + 15,  p->D_LINK_k)          &&
+      EqualBits(stream, pos + 15,  pos + 16,  p->Q_NEWCOUNTRY_k);
 
-    predicate UpperBitsNotSet(Linking_Core_1* p) = \true;
+    predicate UpperBitsNotSet(Linking_Core_1* p) =
+      UpperBitsNotSet(p->D_LINK_k,         15)  &&
+      UpperBitsNotSet(p->Q_NEWCOUNTRY_k,   1);
 
 */
 

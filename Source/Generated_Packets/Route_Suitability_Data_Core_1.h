@@ -77,13 +77,21 @@ typedef struct Route_Suitability_Data_Core_1 Route_Suitability_Data_Core_1;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Route_Suitability_Data_Core_1* p) = \true;
+    predicate Invariant(Route_Suitability_Data_Core_1* p) =
+      Invariant(p->D_SUITABILITY_k)   &&
+      Invariant(p->Q_SUITABILITY_k);
 
-    predicate ZeroInitialized(Route_Suitability_Data_Core_1* p) = \true;
+    predicate ZeroInitialized(Route_Suitability_Data_Core_1* p) =
+      ZeroInitialized(p->D_SUITABILITY_k)   &&
+      ZeroInitialized(p->Q_SUITABILITY_k);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Route_Suitability_Data_Core_1* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Route_Suitability_Data_Core_1* p) =
+      EqualBits(stream, pos,       pos + 15,  p->D_SUITABILITY_k)   &&
+      EqualBits(stream, pos + 15,  pos + 17,  p->Q_SUITABILITY_k);
 
-    predicate UpperBitsNotSet(Route_Suitability_Data_Core_1* p) = \true;
+    predicate UpperBitsNotSet(Route_Suitability_Data_Core_1* p) =
+      UpperBitsNotSet(p->D_SUITABILITY_k,  15)  &&
+      UpperBitsNotSet(p->Q_SUITABILITY_k,  2);
 
 */
 

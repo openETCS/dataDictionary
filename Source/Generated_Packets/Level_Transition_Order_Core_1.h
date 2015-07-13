@@ -59,13 +59,17 @@ typedef struct Level_Transition_Order_Core_1 Level_Transition_Order_Core_1;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Level_Transition_Order_Core_1* p) = \true;
+    predicate Invariant(Level_Transition_Order_Core_1* p) =
+      Invariant(p->M_LEVELTR_k);
 
-    predicate ZeroInitialized(Level_Transition_Order_Core_1* p) = \true;
+    predicate ZeroInitialized(Level_Transition_Order_Core_1* p) =
+      ZeroInitialized(p->M_LEVELTR_k);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Level_Transition_Order_Core_1* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Level_Transition_Order_Core_1* p) =
+      EqualBits(stream, pos,       pos + 3,   p->M_LEVELTR_k);
 
-    predicate UpperBitsNotSet(Level_Transition_Order_Core_1* p) = \true;
+    predicate UpperBitsNotSet(Level_Transition_Order_Core_1* p) =
+      UpperBitsNotSet(p->M_LEVELTR_k,      3);
 
 */
 

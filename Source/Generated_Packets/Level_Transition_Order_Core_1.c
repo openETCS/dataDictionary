@@ -42,6 +42,7 @@ int Level_Transition_Order_Core_1_Encoder(Bitstream* stream, const Level_Transit
             Bitstream_Write(stream, 15, p->L_ACKLEVELTR_k);
 
 
+            //@ assert M_LEVELTR_k:       EqualBits(stream, pos,       pos + 3,   p->M_LEVELTR_k);
 
             return 1;
         }
@@ -62,6 +63,14 @@ int Level_Transition_Order_Core_1_Decoder(Bitstream* stream, Level_Transition_Or
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 
+	/*@
+	  requires M_LEVELTR_k:    stream->bitpos == pos + 0;
+	  assigns        	   stream->bitpos;
+	  assigns		   p->M_LEVELTR_k;
+	  ensures  M_LEVELTR_k:    stream->bitpos == pos + 3;
+	  ensures  M_LEVELTR_k:    EqualBits(stream, pos + 0, pos + 3, p->M_LEVELTR_k);
+	  ensures  M_LEVELTR_k:    UpperBitsNotSet(p->M_LEVELTR_k, 3);
+	*/
 	{ p->M_LEVELTR_k		= Bitstream_Read(stream, 3); }
 
         if (p->M_LEVELTR_k == 1)
@@ -71,7 +80,9 @@ int Level_Transition_Order_Core_1_Decoder(Bitstream* stream, Level_Transition_Or
 
 	{ p->L_ACKLEVELTR_k		= Bitstream_Read(stream, 15); }
 
+        //@ assert M_LEVELTR_k:       EqualBits(stream, pos,       pos + 3,   p->M_LEVELTR_k);
 
+        //@ assert M_LEVELTR_k:       UpperBitsNotSet(p->M_LEVELTR_k,       3);
 
 	//@ assert final: EqualBits(stream, pos, p);
 
