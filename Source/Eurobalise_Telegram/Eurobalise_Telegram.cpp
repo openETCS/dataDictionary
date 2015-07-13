@@ -6,7 +6,9 @@
 #include "Packet_Header_Encoder.h"
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
+#include "Bitwalker_Peek_Normal.h"
 
+#include "Bitwalker_Peek_Normal.h"
 #include <iostream>
 #include <cassert>
 
@@ -70,10 +72,26 @@ bool Eurobalise_Telegram::decode(Bitstream& stream)
     //std::cout << stream->bitpos << std::endl;
 
     const uint32_t old_pos = stream.bitpos;
+    uint32_t current_pos = stream.bitpos + 8;
+    uint16_t current_l_packet = 0;
 
     while (stream.bitpos <= 1023 + old_pos)
     {
         Packet_Header_Decoder(&stream, &packetID);
+
+	if (current_pos != stream.bitpos)
+	{
+	    return false;
+	}
+
+	if (packetID.NID_PACKET == 255)
+	{
+	    current_l_packet = 8;
+	}
+	else
+	{
+            current_l_packet = Bitwalker_Peek_Normal(stream.bitpos, stream.size, 0, 13);
+	}
 
         BasePacketPtr packet;
 
@@ -100,6 +118,8 @@ bool Eurobalise_Telegram::decode(Bitstream& stream)
         {
             return false;
         }
+
+	current_pos = current_pos + current_l_packet;
     }
 
     return true;
