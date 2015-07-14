@@ -255,7 +255,7 @@ inline bool operator!=(const National_Values_Core& a, const National_Values_Core
 
 typedef struct National_Values_Core National_Values_Core;
 
-#define NATIONAL_VALUES_CORE_BITSIZE 361
+#define NATIONAL_VALUES_CORE_BITSIZE 222
 
 /*@
     logic integer BitSize{L}(National_Values_Core* p) = NATIONAL_VALUES_CORE_BITSIZE;
@@ -271,156 +271,116 @@ typedef struct National_Values_Core National_Values_Core;
       Invariant(p->L_PACKET)          &&
       Invariant(p->Q_SCALE)           &&
       Invariant(p->D_VALIDNV)         &&
-      Invariant(p->NID_C)             &&
-      Invariant(p->V_NVSHUNT)         &&
-      Invariant(p->V_NVSTFF)          &&
-      Invariant(p->V_NVONSIGHT)       &&
-      Invariant(p->V_NVLIMSUPERV)     &&
-      Invariant(p->V_NVUNFIT)         &&
-      Invariant(p->V_NVREL)           &&
-      Invariant(p->D_NVROLL)          &&
-      Invariant(p->Q_NVSBTSMPERM)     &&
-      Invariant(p->Q_NVEMRRLS)        &&
-      Invariant(p->Q_NVGUIPERM)       &&
-      Invariant(p->Q_NVSBFBPERM)      &&
-      Invariant(p->Q_NVINHSMICPERM)   &&
-      Invariant(p->V_NVALLOWOVTRP)    &&
-      Invariant(p->V_NVSUPOVTRP)      &&
-      Invariant(p->D_NVOVTRP)         &&
-      Invariant(p->T_NVOVTRP)         &&
-      Invariant(p->D_NVPOTRP)         &&
-      Invariant(p->M_NVCONTACT)       &&
-      Invariant(p->T_NVCONTACT)       &&
-      Invariant(p->M_NVDERUN)         &&
-      Invariant(p->D_NVSTFF)          &&
-      Invariant(p->Q_NVDRIVER_ADHES)  &&
-      Invariant(p->A_NVMAXREDADH1)    &&
-      Invariant(p->A_NVMAXREDADH2)    &&
-      Invariant(p->A_NVMAXREDADH3)    &&
-      Invariant(p->Q_NVLOCACC)        &&
-      Invariant(p->M_NVAVADH)         &&
-      Invariant(p->M_NVEBCL)          &&
-      Invariant(p->Q_NVKINT);
+      Invariant(p->NID_C);
 
     predicate ZeroInitialized(National_Values_Core* p) =
       ZeroInitialized(p->Q_DIR)             &&
       ZeroInitialized(p->L_PACKET)          &&
       ZeroInitialized(p->Q_SCALE)           &&
       ZeroInitialized(p->D_VALIDNV)         &&
-      ZeroInitialized(p->NID_C)             &&
-      ZeroInitialized(p->V_NVSHUNT)         &&
-      ZeroInitialized(p->V_NVSTFF)          &&
-      ZeroInitialized(p->V_NVONSIGHT)       &&
-      ZeroInitialized(p->V_NVLIMSUPERV)     &&
-      ZeroInitialized(p->V_NVUNFIT)         &&
-      ZeroInitialized(p->V_NVREL)           &&
-      ZeroInitialized(p->D_NVROLL)          &&
-      ZeroInitialized(p->Q_NVSBTSMPERM)     &&
-      ZeroInitialized(p->Q_NVEMRRLS)        &&
-      ZeroInitialized(p->Q_NVGUIPERM)       &&
-      ZeroInitialized(p->Q_NVSBFBPERM)      &&
-      ZeroInitialized(p->Q_NVINHSMICPERM)   &&
-      ZeroInitialized(p->V_NVALLOWOVTRP)    &&
-      ZeroInitialized(p->V_NVSUPOVTRP)      &&
-      ZeroInitialized(p->D_NVOVTRP)         &&
-      ZeroInitialized(p->T_NVOVTRP)         &&
-      ZeroInitialized(p->D_NVPOTRP)         &&
-      ZeroInitialized(p->M_NVCONTACT)       &&
-      ZeroInitialized(p->T_NVCONTACT)       &&
-      ZeroInitialized(p->M_NVDERUN)         &&
-      ZeroInitialized(p->D_NVSTFF)          &&
-      ZeroInitialized(p->Q_NVDRIVER_ADHES)  &&
-      ZeroInitialized(p->A_NVMAXREDADH1)    &&
-      ZeroInitialized(p->A_NVMAXREDADH2)    &&
-      ZeroInitialized(p->A_NVMAXREDADH3)    &&
-      ZeroInitialized(p->Q_NVLOCACC)        &&
-      ZeroInitialized(p->M_NVAVADH)         &&
-      ZeroInitialized(p->M_NVEBCL)          &&
-      ZeroInitialized(p->Q_NVKINT);
+      ZeroInitialized(p->NID_C);
 
     predicate EqualBits(Bitstream* stream, integer pos, National_Values_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
       EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
       EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)           &&
       EqualBits(stream, pos + 17,  pos + 32,  p->D_VALIDNV)         &&
-      EqualBits(stream, pos + 32,  pos + 42,  p->NID_C)             &&
-      EqualBits(stream, pos + 57,  pos + 64,  p->V_NVSHUNT)         &&
-      EqualBits(stream, pos + 64,  pos + 71,  p->V_NVSTFF)          &&
-      EqualBits(stream, pos + 71,  pos + 78,  p->V_NVONSIGHT)       &&
-      EqualBits(stream, pos + 78,  pos + 85,  p->V_NVLIMSUPERV)     &&
-      EqualBits(stream, pos + 85,  pos + 92,  p->V_NVUNFIT)         &&
-      EqualBits(stream, pos + 92,  pos + 99,  p->V_NVREL)           &&
-      EqualBits(stream, pos + 99,  pos + 114, p->D_NVROLL)          &&
-      EqualBits(stream, pos + 114, pos + 115, p->Q_NVSBTSMPERM)     &&
-      EqualBits(stream, pos + 115, pos + 116, p->Q_NVEMRRLS)        &&
-      EqualBits(stream, pos + 116, pos + 117, p->Q_NVGUIPERM)       &&
-      EqualBits(stream, pos + 117, pos + 118, p->Q_NVSBFBPERM)      &&
-      EqualBits(stream, pos + 118, pos + 119, p->Q_NVINHSMICPERM)   &&
-      EqualBits(stream, pos + 119, pos + 126, p->V_NVALLOWOVTRP)    &&
-      EqualBits(stream, pos + 126, pos + 133, p->V_NVSUPOVTRP)      &&
-      EqualBits(stream, pos + 133, pos + 148, p->D_NVOVTRP)         &&
-      EqualBits(stream, pos + 148, pos + 156, p->T_NVOVTRP)         &&
-      EqualBits(stream, pos + 156, pos + 171, p->D_NVPOTRP)         &&
-      EqualBits(stream, pos + 171, pos + 173, p->M_NVCONTACT)       &&
-      EqualBits(stream, pos + 173, pos + 181, p->T_NVCONTACT)       &&
-      EqualBits(stream, pos + 181, pos + 182, p->M_NVDERUN)         &&
-      EqualBits(stream, pos + 182, pos + 197, p->D_NVSTFF)          &&
-      EqualBits(stream, pos + 197, pos + 198, p->Q_NVDRIVER_ADHES)  &&
-      EqualBits(stream, pos + 198, pos + 204, p->A_NVMAXREDADH1)    &&
-      EqualBits(stream, pos + 204, pos + 210, p->A_NVMAXREDADH2)    &&
-      EqualBits(stream, pos + 210, pos + 216, p->A_NVMAXREDADH3)    &&
-      EqualBits(stream, pos + 216, pos + 222, p->Q_NVLOCACC)        &&
-      EqualBits(stream, pos + 222, pos + 227, p->M_NVAVADH)         &&
-      EqualBits(stream, pos + 227, pos + 231, p->M_NVEBCL)          &&
-      EqualBits(stream, pos + 231, pos + 232, p->Q_NVKINT)          &&
-      EqualBits(stream, pos + 246, pos + 253, p->V_NVKVINT)         &&
-      EqualBits(stream, pos + 253, pos + 260, p->M_NVKVINT)         &&
-      EqualBits(stream, pos + 331, pos + 336, p->L_NVKRINT)         &&
-      EqualBits(stream, pos + 336, pos + 341, p->M_NVKRINT)         &&
-      EqualBits(stream, pos + 356, pos + 361, p->M_NVKTINT);
+      EqualBits(stream, pos + 32,  pos + 42,  p->NID_C);
 
     predicate UpperBitsNotSet(National_Values_Core* p) =
       UpperBitsNotSet(p->Q_DIR,            2)   &&
       UpperBitsNotSet(p->L_PACKET,         13)  &&
       UpperBitsNotSet(p->Q_SCALE,          2)   &&
       UpperBitsNotSet(p->D_VALIDNV,        15)  &&
-      UpperBitsNotSet(p->NID_C,            10)  &&
-      UpperBitsNotSet(p->V_NVSHUNT,        7)   &&
-      UpperBitsNotSet(p->V_NVSTFF,         7)   &&
-      UpperBitsNotSet(p->V_NVONSIGHT,      7)   &&
-      UpperBitsNotSet(p->V_NVLIMSUPERV,    7)   &&
-      UpperBitsNotSet(p->V_NVUNFIT,        7)   &&
-      UpperBitsNotSet(p->V_NVREL,          7)   &&
-      UpperBitsNotSet(p->D_NVROLL,         15)  &&
-      UpperBitsNotSet(p->Q_NVSBTSMPERM,    1)   &&
-      UpperBitsNotSet(p->Q_NVEMRRLS,       1)   &&
-      UpperBitsNotSet(p->Q_NVGUIPERM,      1)   &&
-      UpperBitsNotSet(p->Q_NVSBFBPERM,     1)   &&
-      UpperBitsNotSet(p->Q_NVINHSMICPERM,  1)   &&
-      UpperBitsNotSet(p->V_NVALLOWOVTRP,   7)   &&
-      UpperBitsNotSet(p->V_NVSUPOVTRP,     7)   &&
-      UpperBitsNotSet(p->D_NVOVTRP,        15)  &&
-      UpperBitsNotSet(p->T_NVOVTRP,        8)   &&
-      UpperBitsNotSet(p->D_NVPOTRP,        15)  &&
-      UpperBitsNotSet(p->M_NVCONTACT,      2)   &&
-      UpperBitsNotSet(p->T_NVCONTACT,      8)   &&
-      UpperBitsNotSet(p->M_NVDERUN,        1)   &&
-      UpperBitsNotSet(p->D_NVSTFF,         15)  &&
-      UpperBitsNotSet(p->Q_NVDRIVER_ADHES, 1)   &&
-      UpperBitsNotSet(p->A_NVMAXREDADH1,   6)   &&
-      UpperBitsNotSet(p->A_NVMAXREDADH2,   6)   &&
-      UpperBitsNotSet(p->A_NVMAXREDADH3,   6)   &&
-      UpperBitsNotSet(p->Q_NVLOCACC,       6)   &&
-      UpperBitsNotSet(p->M_NVAVADH,        5)   &&
-      UpperBitsNotSet(p->M_NVEBCL,         4)   &&
-      UpperBitsNotSet(p->Q_NVKINT,         1)   &&
-      UpperBitsNotSet(p->V_NVKVINT,        7)   &&
-      UpperBitsNotSet(p->M_NVKVINT,        7)   &&
-      UpperBitsNotSet(p->L_NVKRINT,        5)   &&
-      UpperBitsNotSet(p->M_NVKRINT,        5)   &&
-      UpperBitsNotSet(p->M_NVKTINT,        5);
+      UpperBitsNotSet(p->NID_C,            10);
 
 */
+
+/*@
+    requires valid:      \valid_read(p);
+    requires invariant:  Invariant(p);
+
+    assigns \nothing;
+
+    ensures result:  \result <==> UpperBitsNotSet(p);
+*/
+int National_Values_UpperBitsNotSet(const National_Values_Core* p);
+
+/*@
+    requires valid_stream:      Writeable(stream);
+    requires stream_invariant:  Invariant(stream, MaxBitSize(p));
+    requires valid_package:     \valid_read(p);
+    requires invariant:         Invariant(p);
+    requires separation:        Separated(stream, p);
+
+    assigns stream->bitpos;
+    assigns stream->addr[0..(stream->size-1)];
+
+    behavior normal_case:
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && UpperBitsNotSet{Pre}(p);
+
+      assigns stream->bitpos;
+      assigns stream->addr[0..(stream->size-1)];
+
+      ensures result:     \result == 1;
+      ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
+      ensures left:       Unchanged{Here,Old}(stream, 0, \old(stream->bitpos));
+      ensures middle:     EqualBits(stream, \old(stream->bitpos), p);
+      ensures right:      Unchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
+
+    behavior values_too_big:
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && !UpperBitsNotSet{Pre}(p);
+
+      assigns \nothing;
+
+      ensures result:        \result == -2;
+
+    behavior invalid_bit_sequence:
+      assumes !Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns \nothing;
+
+      ensures result:       \result == -1;
+
+    complete behaviors;
+    disjoint behaviors;
+*/
+int National_Values_Encoder(Bitstream* stream, const National_Values_Core* p);
+
+/*@
+    requires valid_stream:      Readable(stream);
+    requires stream_invariant:  Invariant(stream, MaxBitSize(p));
+    requires valid_package:     \valid(p);
+    requires separation:        Separated(stream, p);
+
+    assigns stream->bitpos;
+    assigns *p;
+
+    ensures unchanged:          Unchanged{Here,Old}(stream, 0, 8*stream->size);
+
+    behavior normal_case:
+      assumes Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns stream->bitpos;
+      assigns *p;
+
+      ensures invariant:  Invariant(p);
+      ensures result:     \result == 1; 
+      ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
+      ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
+      ensures upper:      UpperBitsNotSet(p);
+
+    behavior error_case:
+      assumes !Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns \nothing;
+
+      ensures result: \result == 0;
+
+    complete behaviors;
+    disjoint behaviors;
+*/
+int National_Values_Decoder(Bitstream* stream, National_Values_Core* p);
 
 #endif // NATIONAL_VALUES_CORE_H_INCLUDED
 

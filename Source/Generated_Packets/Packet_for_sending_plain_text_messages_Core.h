@@ -116,7 +116,7 @@ inline bool operator!=(const Packet_for_sending_plain_text_messages_Core& a, con
 
 typedef struct Packet_for_sending_plain_text_messages_Core Packet_for_sending_plain_text_messages_Core;
 
-#define PACKET_FOR_SENDING_PLAIN_TEXT_MESSAGES_CORE_BITSIZE 142
+#define PACKET_FOR_SENDING_PLAIN_TEXT_MESSAGES_CORE_BITSIZE 92
 
 /*@
     logic integer BitSize{L}(Packet_for_sending_plain_text_messages_Core* p) = PACKET_FOR_SENDING_PLAIN_TEXT_MESSAGES_CORE_BITSIZE;
@@ -127,9 +127,25 @@ typedef struct Packet_for_sending_plain_text_messages_Core Packet_for_sending_pl
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Packet_for_sending_plain_text_messages_Core* p) = \true;
+    predicate Invariant(Packet_for_sending_plain_text_messages_Core* p) =
+      Invariant(p->Q_DIR)             &&
+      Invariant(p->L_PACKET)          &&
+      Invariant(p->Q_SCALE)           &&
+      Invariant(p->Q_TEXTCLASS)       &&
+      Invariant(p->Q_TEXTDISPLAY)     &&
+      Invariant(p->D_TEXTDISPLAY)     &&
+      Invariant(p->M_MODETEXTDISPLAY_0) &&
+      Invariant(p->M_LEVELTEXTDISPLAY_0);
 
-    predicate ZeroInitialized(Packet_for_sending_plain_text_messages_Core* p) = \true;
+    predicate ZeroInitialized(Packet_for_sending_plain_text_messages_Core* p) =
+      ZeroInitialized(p->Q_DIR)             &&
+      ZeroInitialized(p->L_PACKET)          &&
+      ZeroInitialized(p->Q_SCALE)           &&
+      ZeroInitialized(p->Q_TEXTCLASS)       &&
+      ZeroInitialized(p->Q_TEXTDISPLAY)     &&
+      ZeroInitialized(p->D_TEXTDISPLAY)     &&
+      ZeroInitialized(p->M_MODETEXTDISPLAY_0) &&
+      ZeroInitialized(p->M_LEVELTEXTDISPLAY_0);
 
     predicate EqualBits(Bitstream* stream, integer pos, Packet_for_sending_plain_text_messages_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
@@ -139,14 +155,7 @@ typedef struct Packet_for_sending_plain_text_messages_Core Packet_for_sending_pl
       EqualBits(stream, pos + 19,  pos + 20,  p->Q_TEXTDISPLAY)     &&
       EqualBits(stream, pos + 20,  pos + 35,  p->D_TEXTDISPLAY)     &&
       EqualBits(stream, pos + 35,  pos + 39,  p->M_MODETEXTDISPLAY_0) &&
-      EqualBits(stream, pos + 39,  pos + 42,  p->M_LEVELTEXTDISPLAY_0) &&
-      EqualBits(stream, pos + 50,  pos + 65,  p->L_TEXTDISPLAY)     &&
-      EqualBits(stream, pos + 65,  pos + 75,  p->T_TEXTDISPLAY)     &&
-      EqualBits(stream, pos + 75,  pos + 79,  p->M_MODETEXTDISPLAY_1) &&
-      EqualBits(stream, pos + 79,  pos + 82,  p->M_LEVELTEXTDISPLAY_1) &&
-      EqualBits(stream, pos + 90,  pos + 92,  p->Q_TEXTCONFIRM)     &&
-      EqualBits(stream, pos + 126, pos + 134, p->L_TEXT)            &&
-      EqualBits(stream, pos + 134, pos + 142, p->X_TEXT);
+      EqualBits(stream, pos + 39,  pos + 42,  p->M_LEVELTEXTDISPLAY_0);
 
     predicate UpperBitsNotSet(Packet_for_sending_plain_text_messages_Core* p) =
       UpperBitsNotSet(p->Q_DIR,            2)   &&
@@ -156,16 +165,95 @@ typedef struct Packet_for_sending_plain_text_messages_Core Packet_for_sending_pl
       UpperBitsNotSet(p->Q_TEXTDISPLAY,    1)   &&
       UpperBitsNotSet(p->D_TEXTDISPLAY,    15)  &&
       UpperBitsNotSet(p->M_MODETEXTDISPLAY_0,4)   &&
-      UpperBitsNotSet(p->M_LEVELTEXTDISPLAY_0,3)   &&
-      UpperBitsNotSet(p->L_TEXTDISPLAY,    15)  &&
-      UpperBitsNotSet(p->T_TEXTDISPLAY,    10)  &&
-      UpperBitsNotSet(p->M_MODETEXTDISPLAY_1,4)   &&
-      UpperBitsNotSet(p->M_LEVELTEXTDISPLAY_1,3)   &&
-      UpperBitsNotSet(p->Q_TEXTCONFIRM,    2)   &&
-      UpperBitsNotSet(p->L_TEXT,           8)   &&
-      UpperBitsNotSet(p->X_TEXT,           8);
+      UpperBitsNotSet(p->M_LEVELTEXTDISPLAY_0,3);
 
 */
+
+/*@
+    requires valid:      \valid_read(p);
+    requires invariant:  Invariant(p);
+
+    assigns \nothing;
+
+    ensures result:  \result <==> UpperBitsNotSet(p);
+*/
+int Packet_for_sending_plain_text_messages_UpperBitsNotSet(const Packet_for_sending_plain_text_messages_Core* p);
+
+/*@
+    requires valid_stream:      Writeable(stream);
+    requires stream_invariant:  Invariant(stream, MaxBitSize(p));
+    requires valid_package:     \valid_read(p);
+    requires invariant:         Invariant(p);
+    requires separation:        Separated(stream, p);
+
+    assigns stream->bitpos;
+    assigns stream->addr[0..(stream->size-1)];
+
+    behavior normal_case:
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && UpperBitsNotSet{Pre}(p);
+
+      assigns stream->bitpos;
+      assigns stream->addr[0..(stream->size-1)];
+
+      ensures result:     \result == 1;
+      ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
+      ensures left:       Unchanged{Here,Old}(stream, 0, \old(stream->bitpos));
+      ensures middle:     EqualBits(stream, \old(stream->bitpos), p);
+      ensures right:      Unchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
+
+    behavior values_too_big:
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && !UpperBitsNotSet{Pre}(p);
+
+      assigns \nothing;
+
+      ensures result:        \result == -2;
+
+    behavior invalid_bit_sequence:
+      assumes !Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns \nothing;
+
+      ensures result:       \result == -1;
+
+    complete behaviors;
+    disjoint behaviors;
+*/
+int Packet_for_sending_plain_text_messages_Encoder(Bitstream* stream, const Packet_for_sending_plain_text_messages_Core* p);
+
+/*@
+    requires valid_stream:      Readable(stream);
+    requires stream_invariant:  Invariant(stream, MaxBitSize(p));
+    requires valid_package:     \valid(p);
+    requires separation:        Separated(stream, p);
+
+    assigns stream->bitpos;
+    assigns *p;
+
+    ensures unchanged:          Unchanged{Here,Old}(stream, 0, 8*stream->size);
+
+    behavior normal_case:
+      assumes Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns stream->bitpos;
+      assigns *p;
+
+      ensures invariant:  Invariant(p);
+      ensures result:     \result == 1; 
+      ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
+      ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
+      ensures upper:      UpperBitsNotSet(p);
+
+    behavior error_case:
+      assumes !Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns \nothing;
+
+      ensures result: \result == 0;
+
+    complete behaviors;
+    disjoint behaviors;
+*/
+int Packet_for_sending_plain_text_messages_Decoder(Bitstream* stream, Packet_for_sending_plain_text_messages_Core* p);
 
 #endif // PACKET_FOR_SENDING_PLAIN_TEXT_MESSAGES_CORE_H_INCLUDED
 

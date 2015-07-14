@@ -91,7 +91,7 @@ inline bool operator!=(const Geographical_Position_Information_Core& a, const Ge
 
 typedef struct Geographical_Position_Information_Core Geographical_Position_Information_Core;
 
-#define GEOGRAPHICAL_POSITION_INFORMATION_CORE_BITSIZE 152
+#define GEOGRAPHICAL_POSITION_INFORMATION_CORE_BITSIZE 77
 
 /*@
     logic integer BitSize{L}(Geographical_Position_Information_Core* p) = GEOGRAPHICAL_POSITION_INFORMATION_CORE_BITSIZE;
@@ -102,31 +102,117 @@ typedef struct Geographical_Position_Information_Core Geographical_Position_Info
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Geographical_Position_Information_Core* p) = \true;
+    predicate Invariant(Geographical_Position_Information_Core* p) =
+      Invariant(p->Q_DIR)             &&
+      Invariant(p->L_PACKET)          &&
+      Invariant(p->Q_SCALE)           &&
+      Invariant(p->Q_NEWCOUNTRY);
 
-    predicate ZeroInitialized(Geographical_Position_Information_Core* p) = \true;
+    predicate ZeroInitialized(Geographical_Position_Information_Core* p) =
+      ZeroInitialized(p->Q_DIR)             &&
+      ZeroInitialized(p->L_PACKET)          &&
+      ZeroInitialized(p->Q_SCALE)           &&
+      ZeroInitialized(p->Q_NEWCOUNTRY);
 
     predicate EqualBits(Bitstream* stream, integer pos, Geographical_Position_Information_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
       EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
       EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)           &&
-      EqualBits(stream, pos + 17,  pos + 18,  p->Q_NEWCOUNTRY)      &&
-      EqualBits(stream, pos + 28,  pos + 42,  p->NID_BG)            &&
-      EqualBits(stream, pos + 42,  pos + 57,  p->D_POSOFF)          &&
-      EqualBits(stream, pos + 57,  pos + 58,  p->Q_MPOSITION)       &&
-      EqualBits(stream, pos + 58,  pos + 82,  p->M_POSITION);
+      EqualBits(stream, pos + 17,  pos + 18,  p->Q_NEWCOUNTRY);
 
     predicate UpperBitsNotSet(Geographical_Position_Information_Core* p) =
       UpperBitsNotSet(p->Q_DIR,            2)   &&
       UpperBitsNotSet(p->L_PACKET,         13)  &&
       UpperBitsNotSet(p->Q_SCALE,          2)   &&
-      UpperBitsNotSet(p->Q_NEWCOUNTRY,     1)   &&
-      UpperBitsNotSet(p->NID_BG,           14)  &&
-      UpperBitsNotSet(p->D_POSOFF,         15)  &&
-      UpperBitsNotSet(p->Q_MPOSITION,      1)   &&
-      UpperBitsNotSet(p->M_POSITION,       24);
+      UpperBitsNotSet(p->Q_NEWCOUNTRY,     1);
 
 */
+
+/*@
+    requires valid:      \valid_read(p);
+    requires invariant:  Invariant(p);
+
+    assigns \nothing;
+
+    ensures result:  \result <==> UpperBitsNotSet(p);
+*/
+int Geographical_Position_Information_UpperBitsNotSet(const Geographical_Position_Information_Core* p);
+
+/*@
+    requires valid_stream:      Writeable(stream);
+    requires stream_invariant:  Invariant(stream, MaxBitSize(p));
+    requires valid_package:     \valid_read(p);
+    requires invariant:         Invariant(p);
+    requires separation:        Separated(stream, p);
+
+    assigns stream->bitpos;
+    assigns stream->addr[0..(stream->size-1)];
+
+    behavior normal_case:
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && UpperBitsNotSet{Pre}(p);
+
+      assigns stream->bitpos;
+      assigns stream->addr[0..(stream->size-1)];
+
+      ensures result:     \result == 1;
+      ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
+      ensures left:       Unchanged{Here,Old}(stream, 0, \old(stream->bitpos));
+      ensures middle:     EqualBits(stream, \old(stream->bitpos), p);
+      ensures right:      Unchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
+
+    behavior values_too_big:
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && !UpperBitsNotSet{Pre}(p);
+
+      assigns \nothing;
+
+      ensures result:        \result == -2;
+
+    behavior invalid_bit_sequence:
+      assumes !Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns \nothing;
+
+      ensures result:       \result == -1;
+
+    complete behaviors;
+    disjoint behaviors;
+*/
+int Geographical_Position_Information_Encoder(Bitstream* stream, const Geographical_Position_Information_Core* p);
+
+/*@
+    requires valid_stream:      Readable(stream);
+    requires stream_invariant:  Invariant(stream, MaxBitSize(p));
+    requires valid_package:     \valid(p);
+    requires separation:        Separated(stream, p);
+
+    assigns stream->bitpos;
+    assigns *p;
+
+    ensures unchanged:          Unchanged{Here,Old}(stream, 0, 8*stream->size);
+
+    behavior normal_case:
+      assumes Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns stream->bitpos;
+      assigns *p;
+
+      ensures invariant:  Invariant(p);
+      ensures result:     \result == 1; 
+      ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
+      ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
+      ensures upper:      UpperBitsNotSet(p);
+
+    behavior error_case:
+      assumes !Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns \nothing;
+
+      ensures result: \result == 0;
+
+    complete behaviors;
+    disjoint behaviors;
+*/
+int Geographical_Position_Information_Decoder(Bitstream* stream, Geographical_Position_Information_Core* p);
 
 #endif // GEOGRAPHICAL_POSITION_INFORMATION_CORE_H_INCLUDED
 

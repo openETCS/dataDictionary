@@ -93,7 +93,7 @@ inline bool operator!=(const Linking_Core& a, const Linking_Core& b)
 
 typedef struct Linking_Core Linking_Core;
 
-#define LINKING_CORE_BITSIZE 120
+#define LINKING_CORE_BITSIZE 61
 
 /*@
     logic integer BitSize{L}(Linking_Core* p) = LINKING_CORE_BITSIZE;
@@ -104,33 +104,121 @@ typedef struct Linking_Core Linking_Core;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Linking_Core* p) = \true;
+    predicate Invariant(Linking_Core* p) =
+      Invariant(p->Q_DIR)             &&
+      Invariant(p->L_PACKET)          &&
+      Invariant(p->Q_SCALE)           &&
+      Invariant(p->D_LINK)            &&
+      Invariant(p->Q_NEWCOUNTRY);
 
-    predicate ZeroInitialized(Linking_Core* p) = \true;
+    predicate ZeroInitialized(Linking_Core* p) =
+      ZeroInitialized(p->Q_DIR)             &&
+      ZeroInitialized(p->L_PACKET)          &&
+      ZeroInitialized(p->Q_SCALE)           &&
+      ZeroInitialized(p->D_LINK)            &&
+      ZeroInitialized(p->Q_NEWCOUNTRY);
 
     predicate EqualBits(Bitstream* stream, integer pos, Linking_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
       EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
       EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)           &&
       EqualBits(stream, pos + 17,  pos + 32,  p->D_LINK)            &&
-      EqualBits(stream, pos + 32,  pos + 33,  p->Q_NEWCOUNTRY)      &&
-      EqualBits(stream, pos + 43,  pos + 57,  p->NID_BG)            &&
-      EqualBits(stream, pos + 57,  pos + 58,  p->Q_LINKORIENTATION) &&
-      EqualBits(stream, pos + 58,  pos + 60,  p->Q_LINKREACTION)    &&
-      EqualBits(stream, pos + 60,  pos + 66,  p->Q_LOCACC);
+      EqualBits(stream, pos + 32,  pos + 33,  p->Q_NEWCOUNTRY);
 
     predicate UpperBitsNotSet(Linking_Core* p) =
       UpperBitsNotSet(p->Q_DIR,            2)   &&
       UpperBitsNotSet(p->L_PACKET,         13)  &&
       UpperBitsNotSet(p->Q_SCALE,          2)   &&
       UpperBitsNotSet(p->D_LINK,           15)  &&
-      UpperBitsNotSet(p->Q_NEWCOUNTRY,     1)   &&
-      UpperBitsNotSet(p->NID_BG,           14)  &&
-      UpperBitsNotSet(p->Q_LINKORIENTATION,1)   &&
-      UpperBitsNotSet(p->Q_LINKREACTION,   2)   &&
-      UpperBitsNotSet(p->Q_LOCACC,         6);
+      UpperBitsNotSet(p->Q_NEWCOUNTRY,     1);
 
 */
+
+/*@
+    requires valid:      \valid_read(p);
+    requires invariant:  Invariant(p);
+
+    assigns \nothing;
+
+    ensures result:  \result <==> UpperBitsNotSet(p);
+*/
+int Linking_UpperBitsNotSet(const Linking_Core* p);
+
+/*@
+    requires valid_stream:      Writeable(stream);
+    requires stream_invariant:  Invariant(stream, MaxBitSize(p));
+    requires valid_package:     \valid_read(p);
+    requires invariant:         Invariant(p);
+    requires separation:        Separated(stream, p);
+
+    assigns stream->bitpos;
+    assigns stream->addr[0..(stream->size-1)];
+
+    behavior normal_case:
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && UpperBitsNotSet{Pre}(p);
+
+      assigns stream->bitpos;
+      assigns stream->addr[0..(stream->size-1)];
+
+      ensures result:     \result == 1;
+      ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
+      ensures left:       Unchanged{Here,Old}(stream, 0, \old(stream->bitpos));
+      ensures middle:     EqualBits(stream, \old(stream->bitpos), p);
+      ensures right:      Unchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
+
+    behavior values_too_big:
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && !UpperBitsNotSet{Pre}(p);
+
+      assigns \nothing;
+
+      ensures result:        \result == -2;
+
+    behavior invalid_bit_sequence:
+      assumes !Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns \nothing;
+
+      ensures result:       \result == -1;
+
+    complete behaviors;
+    disjoint behaviors;
+*/
+int Linking_Encoder(Bitstream* stream, const Linking_Core* p);
+
+/*@
+    requires valid_stream:      Readable(stream);
+    requires stream_invariant:  Invariant(stream, MaxBitSize(p));
+    requires valid_package:     \valid(p);
+    requires separation:        Separated(stream, p);
+
+    assigns stream->bitpos;
+    assigns *p;
+
+    ensures unchanged:          Unchanged{Here,Old}(stream, 0, 8*stream->size);
+
+    behavior normal_case:
+      assumes Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns stream->bitpos;
+      assigns *p;
+
+      ensures invariant:  Invariant(p);
+      ensures result:     \result == 1; 
+      ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
+      ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
+      ensures upper:      UpperBitsNotSet(p);
+
+    behavior error_case:
+      assumes !Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns \nothing;
+
+      ensures result: \result == 0;
+
+    complete behaviors;
+    disjoint behaviors;
+*/
+int Linking_Decoder(Bitstream* stream, Linking_Core* p);
 
 #endif // LINKING_CORE_H_INCLUDED
 

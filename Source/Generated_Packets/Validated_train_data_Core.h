@@ -108,7 +108,7 @@ inline bool operator!=(const Validated_train_data_Core& a, const Validated_train
 
 typedef struct Validated_train_data_Core Validated_train_data_Core;
 
-#define VALIDATED_TRAIN_DATA_CORE_BITSIZE 110
+#define VALIDATED_TRAIN_DATA_CORE_BITSIZE 88
 
 /*@
     logic integer BitSize{L}(Validated_train_data_Core* p) = VALIDATED_TRAIN_DATA_CORE_BITSIZE;
@@ -119,9 +119,27 @@ typedef struct Validated_train_data_Core Validated_train_data_Core;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Validated_train_data_Core* p) = \true;
+    predicate Invariant(Validated_train_data_Core* p) =
+      Invariant(p->L_PACKET)          &&
+      Invariant(p->NC_CDTRAIN)        &&
+      Invariant(p->NC_TRAIN)          &&
+      Invariant(p->L_TRAIN)           &&
+      Invariant(p->V_MAXTRAIN)        &&
+      Invariant(p->M_LOADINGGAUGE)    &&
+      Invariant(p->M_AXLELOADCAT)     &&
+      Invariant(p->M_AIRTIGHT)        &&
+      Invariant(p->N_AXLE);
 
-    predicate ZeroInitialized(Validated_train_data_Core* p) = \true;
+    predicate ZeroInitialized(Validated_train_data_Core* p) =
+      ZeroInitialized(p->L_PACKET)          &&
+      ZeroInitialized(p->NC_CDTRAIN)        &&
+      ZeroInitialized(p->NC_TRAIN)          &&
+      ZeroInitialized(p->L_TRAIN)           &&
+      ZeroInitialized(p->V_MAXTRAIN)        &&
+      ZeroInitialized(p->M_LOADINGGAUGE)    &&
+      ZeroInitialized(p->M_AXLELOADCAT)     &&
+      ZeroInitialized(p->M_AIRTIGHT)        &&
+      ZeroInitialized(p->N_AXLE);
 
     predicate EqualBits(Bitstream* stream, integer pos, Validated_train_data_Core* p) =
       EqualBits(stream, pos,       pos + 13,  p->L_PACKET)          &&
@@ -146,6 +164,92 @@ typedef struct Validated_train_data_Core Validated_train_data_Core;
       UpperBitsNotSet(p->N_AXLE,           10);
 
 */
+
+/*@
+    requires valid:      \valid_read(p);
+    requires invariant:  Invariant(p);
+
+    assigns \nothing;
+
+    ensures result:  \result <==> UpperBitsNotSet(p);
+*/
+int Validated_train_data_UpperBitsNotSet(const Validated_train_data_Core* p);
+
+/*@
+    requires valid_stream:      Writeable(stream);
+    requires stream_invariant:  Invariant(stream, MaxBitSize(p));
+    requires valid_package:     \valid_read(p);
+    requires invariant:         Invariant(p);
+    requires separation:        Separated(stream, p);
+
+    assigns stream->bitpos;
+    assigns stream->addr[0..(stream->size-1)];
+
+    behavior normal_case:
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && UpperBitsNotSet{Pre}(p);
+
+      assigns stream->bitpos;
+      assigns stream->addr[0..(stream->size-1)];
+
+      ensures result:     \result == 1;
+      ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
+      ensures left:       Unchanged{Here,Old}(stream, 0, \old(stream->bitpos));
+      ensures middle:     EqualBits(stream, \old(stream->bitpos), p);
+      ensures right:      Unchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
+
+    behavior values_too_big:
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && !UpperBitsNotSet{Pre}(p);
+
+      assigns \nothing;
+
+      ensures result:        \result == -2;
+
+    behavior invalid_bit_sequence:
+      assumes !Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns \nothing;
+
+      ensures result:       \result == -1;
+
+    complete behaviors;
+    disjoint behaviors;
+*/
+int Validated_train_data_Encoder(Bitstream* stream, const Validated_train_data_Core* p);
+
+/*@
+    requires valid_stream:      Readable(stream);
+    requires stream_invariant:  Invariant(stream, MaxBitSize(p));
+    requires valid_package:     \valid(p);
+    requires separation:        Separated(stream, p);
+
+    assigns stream->bitpos;
+    assigns *p;
+
+    ensures unchanged:          Unchanged{Here,Old}(stream, 0, 8*stream->size);
+
+    behavior normal_case:
+      assumes Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns stream->bitpos;
+      assigns *p;
+
+      ensures invariant:  Invariant(p);
+      ensures result:     \result == 1; 
+      ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
+      ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
+      ensures upper:      UpperBitsNotSet(p);
+
+    behavior error_case:
+      assumes !Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns \nothing;
+
+      ensures result: \result == 0;
+
+    complete behaviors;
+    disjoint behaviors;
+*/
+int Validated_train_data_Decoder(Bitstream* stream, Validated_train_data_Core* p);
 
 #endif // VALIDATED_TRAIN_DATA_CORE_H_INCLUDED
 

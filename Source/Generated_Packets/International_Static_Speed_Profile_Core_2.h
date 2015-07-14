@@ -66,7 +66,7 @@ inline bool operator!=(const International_Static_Speed_Profile_Core_2& a, const
 
 typedef struct International_Static_Speed_Profile_Core_2 International_Static_Speed_Profile_Core_2;
 
-#define INTERNATIONAL_STATIC_SPEED_PROFILE_CORE_2_CORE_BITSIZE 112
+#define INTERNATIONAL_STATIC_SPEED_PROFILE_CORE_2_CORE_BITSIZE 28
 
 /*@
     logic integer BitSize{L}(International_Static_Speed_Profile_Core_2* p) = INTERNATIONAL_STATIC_SPEED_PROFILE_CORE_2_CORE_BITSIZE;
@@ -77,14 +77,20 @@ typedef struct International_Static_Speed_Profile_Core_2 International_Static_Sp
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(International_Static_Speed_Profile_Core_2* p) = \true;
+    predicate Invariant(International_Static_Speed_Profile_Core_2* p) =
+      Invariant(p->D_STATIC_k)        &&
+      Invariant(p->V_STATIC_k)        &&
+      Invariant(p->Q_FRONT_k);
 
-    predicate ZeroInitialized(International_Static_Speed_Profile_Core_2* p) = \true;
+    predicate ZeroInitialized(International_Static_Speed_Profile_Core_2* p) =
+      ZeroInitialized(p->D_STATIC_k)        &&
+      ZeroInitialized(p->V_STATIC_k)        &&
+      ZeroInitialized(p->Q_FRONT_k);
 
     predicate EqualBits(Bitstream* stream, integer pos, International_Static_Speed_Profile_Core_2* p) =
-      EqualBits(stream, pos + 67,  pos + 82,  p->D_STATIC_k)        &&
-      EqualBits(stream, pos + 82,  pos + 89,  p->V_STATIC_k)        &&
-      EqualBits(stream, pos + 89,  pos + 90,  p->Q_FRONT_k);
+      EqualBits(stream, pos,       pos + 15,  p->D_STATIC_k)        &&
+      EqualBits(stream, pos + 15,  pos + 22,  p->V_STATIC_k)        &&
+      EqualBits(stream, pos + 22,  pos + 23,  p->Q_FRONT_k);
 
     predicate UpperBitsNotSet(International_Static_Speed_Profile_Core_2* p) =
       UpperBitsNotSet(p->D_STATIC_k,       15)  &&
@@ -92,6 +98,92 @@ typedef struct International_Static_Speed_Profile_Core_2 International_Static_Sp
       UpperBitsNotSet(p->Q_FRONT_k,        1);
 
 */
+
+/*@
+    requires valid:      \valid_read(p);
+    requires invariant:  Invariant(p);
+
+    assigns \nothing;
+
+    ensures result:  \result <==> UpperBitsNotSet(p);
+*/
+int International_Static_Speed_Profile_Core_2_UpperBitsNotSet(const International_Static_Speed_Profile_Core_2* p);
+
+/*@
+    requires valid_stream:      Writeable(stream);
+    requires stream_invariant:  Invariant(stream, MaxBitSize(p));
+    requires valid_package:     \valid_read(p);
+    requires invariant:         Invariant(p);
+    requires separation:        Separated(stream, p);
+
+    assigns stream->bitpos;
+    assigns stream->addr[0..(stream->size-1)];
+
+    behavior normal_case:
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && UpperBitsNotSet{Pre}(p);
+
+      assigns stream->bitpos;
+      assigns stream->addr[0..(stream->size-1)];
+
+      ensures result:     \result == 1;
+      ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
+      ensures left:       Unchanged{Here,Old}(stream, 0, \old(stream->bitpos));
+      ensures middle:     EqualBits(stream, \old(stream->bitpos), p);
+      ensures right:      Unchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
+
+    behavior values_too_big:
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && !UpperBitsNotSet{Pre}(p);
+
+      assigns \nothing;
+
+      ensures result:        \result == -2;
+
+    behavior invalid_bit_sequence:
+      assumes !Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns \nothing;
+
+      ensures result:       \result == -1;
+
+    complete behaviors;
+    disjoint behaviors;
+*/
+int International_Static_Speed_Profile_Core_2_Encoder(Bitstream* stream, const International_Static_Speed_Profile_Core_2* p);
+
+/*@
+    requires valid_stream:      Readable(stream);
+    requires stream_invariant:  Invariant(stream, MaxBitSize(p));
+    requires valid_package:     \valid(p);
+    requires separation:        Separated(stream, p);
+
+    assigns stream->bitpos;
+    assigns *p;
+
+    ensures unchanged:          Unchanged{Here,Old}(stream, 0, 8*stream->size);
+
+    behavior normal_case:
+      assumes Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns stream->bitpos;
+      assigns *p;
+
+      ensures invariant:  Invariant(p);
+      ensures result:     \result == 1; 
+      ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
+      ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
+      ensures upper:      UpperBitsNotSet(p);
+
+    behavior error_case:
+      assumes !Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns \nothing;
+
+      ensures result: \result == 0;
+
+    complete behaviors;
+    disjoint behaviors;
+*/
+int International_Static_Speed_Profile_Core_2_Decoder(Bitstream* stream, International_Static_Speed_Profile_Core_2* p);
 
 #endif // INTERNATIONAL_STATIC_SPEED_PROFILE_CORE_2_CORE_H_INCLUDED
 

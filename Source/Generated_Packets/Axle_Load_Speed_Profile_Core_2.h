@@ -41,6 +41,7 @@ inline bool operator==(const Axle_Load_Speed_Profile_Core_2& a, const Axle_Load_
     status = status && (a.D_AXLELOAD_k == b.D_AXLELOAD_k);
     status = status && (a.L_AXLELOAD_k == b.L_AXLELOAD_k);
     status = status && (a.Q_FRONT_k == b.Q_FRONT_k);
+    status = status && (a.N_ITER_2_1 == b.N_ITER_2_1);
     if (a.N_ITER_2_1 == b.N_ITER_2_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_2_1; ++i)
@@ -65,7 +66,7 @@ inline bool operator!=(const Axle_Load_Speed_Profile_Core_2& a, const Axle_Load_
 
 typedef struct Axle_Load_Speed_Profile_Core_2 Axle_Load_Speed_Profile_Core_2;
 
-#define AXLE_LOAD_SPEED_PROFILE_CORE_2_CORE_BITSIZE 138
+#define AXLE_LOAD_SPEED_PROFILE_CORE_2_CORE_BITSIZE 36
 
 /*@
     logic integer BitSize{L}(Axle_Load_Speed_Profile_Core_2* p) = AXLE_LOAD_SPEED_PROFILE_CORE_2_CORE_BITSIZE;
@@ -76,15 +77,113 @@ typedef struct Axle_Load_Speed_Profile_Core_2 Axle_Load_Speed_Profile_Core_2;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Axle_Load_Speed_Profile_Core_2* p) = \true;
+    predicate Invariant(Axle_Load_Speed_Profile_Core_2* p) =
+      Invariant(p->D_AXLELOAD_k)      &&
+      Invariant(p->L_AXLELOAD_k)      &&
+      Invariant(p->Q_FRONT_k);
 
-    predicate ZeroInitialized(Axle_Load_Speed_Profile_Core_2* p) = \true;
+    predicate ZeroInitialized(Axle_Load_Speed_Profile_Core_2* p) =
+      ZeroInitialized(p->D_AXLELOAD_k)      &&
+      ZeroInitialized(p->L_AXLELOAD_k)      &&
+      ZeroInitialized(p->Q_FRONT_k);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Axle_Load_Speed_Profile_Core_2* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, Axle_Load_Speed_Profile_Core_2* p) =
+      EqualBits(stream, pos,       pos + 15,  p->D_AXLELOAD_k)      &&
+      EqualBits(stream, pos + 15,  pos + 30,  p->L_AXLELOAD_k)      &&
+      EqualBits(stream, pos + 30,  pos + 31,  p->Q_FRONT_k);
 
-    predicate UpperBitsNotSet(Axle_Load_Speed_Profile_Core_2* p) = \true;
+    predicate UpperBitsNotSet(Axle_Load_Speed_Profile_Core_2* p) =
+      UpperBitsNotSet(p->D_AXLELOAD_k,     15)  &&
+      UpperBitsNotSet(p->L_AXLELOAD_k,     15)  &&
+      UpperBitsNotSet(p->Q_FRONT_k,        1);
 
 */
+
+/*@
+    requires valid:      \valid_read(p);
+    requires invariant:  Invariant(p);
+
+    assigns \nothing;
+
+    ensures result:  \result <==> UpperBitsNotSet(p);
+*/
+int Axle_Load_Speed_Profile_Core_2_UpperBitsNotSet(const Axle_Load_Speed_Profile_Core_2* p);
+
+/*@
+    requires valid_stream:      Writeable(stream);
+    requires stream_invariant:  Invariant(stream, MaxBitSize(p));
+    requires valid_package:     \valid_read(p);
+    requires invariant:         Invariant(p);
+    requires separation:        Separated(stream, p);
+
+    assigns stream->bitpos;
+    assigns stream->addr[0..(stream->size-1)];
+
+    behavior normal_case:
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && UpperBitsNotSet{Pre}(p);
+
+      assigns stream->bitpos;
+      assigns stream->addr[0..(stream->size-1)];
+
+      ensures result:     \result == 1;
+      ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
+      ensures left:       Unchanged{Here,Old}(stream, 0, \old(stream->bitpos));
+      ensures middle:     EqualBits(stream, \old(stream->bitpos), p);
+      ensures right:      Unchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
+
+    behavior values_too_big:
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && !UpperBitsNotSet{Pre}(p);
+
+      assigns \nothing;
+
+      ensures result:        \result == -2;
+
+    behavior invalid_bit_sequence:
+      assumes !Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns \nothing;
+
+      ensures result:       \result == -1;
+
+    complete behaviors;
+    disjoint behaviors;
+*/
+int Axle_Load_Speed_Profile_Core_2_Encoder(Bitstream* stream, const Axle_Load_Speed_Profile_Core_2* p);
+
+/*@
+    requires valid_stream:      Readable(stream);
+    requires stream_invariant:  Invariant(stream, MaxBitSize(p));
+    requires valid_package:     \valid(p);
+    requires separation:        Separated(stream, p);
+
+    assigns stream->bitpos;
+    assigns *p;
+
+    ensures unchanged:          Unchanged{Here,Old}(stream, 0, 8*stream->size);
+
+    behavior normal_case:
+      assumes Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns stream->bitpos;
+      assigns *p;
+
+      ensures invariant:  Invariant(p);
+      ensures result:     \result == 1; 
+      ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
+      ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
+      ensures upper:      UpperBitsNotSet(p);
+
+    behavior error_case:
+      assumes !Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns \nothing;
+
+      ensures result: \result == 0;
+
+    complete behaviors;
+    disjoint behaviors;
+*/
+int Axle_Load_Speed_Profile_Core_2_Decoder(Bitstream* stream, Axle_Load_Speed_Profile_Core_2* p);
 
 #endif // AXLE_LOAD_SPEED_PROFILE_CORE_2_CORE_H_INCLUDED
 

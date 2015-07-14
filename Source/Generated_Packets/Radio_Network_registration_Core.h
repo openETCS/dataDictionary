@@ -60,9 +60,15 @@ typedef struct Radio_Network_registration_Core Radio_Network_registration_Core;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Radio_Network_registration_Core* p) = \true;
+    predicate Invariant(Radio_Network_registration_Core* p) =
+      Invariant(p->Q_DIR)             &&
+      Invariant(p->L_PACKET)          &&
+      Invariant(p->NID_MN);
 
-    predicate ZeroInitialized(Radio_Network_registration_Core* p) = \true;
+    predicate ZeroInitialized(Radio_Network_registration_Core* p) =
+      ZeroInitialized(p->Q_DIR)             &&
+      ZeroInitialized(p->L_PACKET)          &&
+      ZeroInitialized(p->NID_MN);
 
     predicate EqualBits(Bitstream* stream, integer pos, Radio_Network_registration_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
@@ -75,6 +81,92 @@ typedef struct Radio_Network_registration_Core Radio_Network_registration_Core;
       UpperBitsNotSet(p->NID_MN,           24);
 
 */
+
+/*@
+    requires valid:      \valid_read(p);
+    requires invariant:  Invariant(p);
+
+    assigns \nothing;
+
+    ensures result:  \result <==> UpperBitsNotSet(p);
+*/
+int Radio_Network_registration_UpperBitsNotSet(const Radio_Network_registration_Core* p);
+
+/*@
+    requires valid_stream:      Writeable(stream);
+    requires stream_invariant:  Invariant(stream, MaxBitSize(p));
+    requires valid_package:     \valid_read(p);
+    requires invariant:         Invariant(p);
+    requires separation:        Separated(stream, p);
+
+    assigns stream->bitpos;
+    assigns stream->addr[0..(stream->size-1)];
+
+    behavior normal_case:
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && UpperBitsNotSet{Pre}(p);
+
+      assigns stream->bitpos;
+      assigns stream->addr[0..(stream->size-1)];
+
+      ensures result:     \result == 1;
+      ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
+      ensures left:       Unchanged{Here,Old}(stream, 0, \old(stream->bitpos));
+      ensures middle:     EqualBits(stream, \old(stream->bitpos), p);
+      ensures right:      Unchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
+
+    behavior values_too_big:
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && !UpperBitsNotSet{Pre}(p);
+
+      assigns \nothing;
+
+      ensures result:        \result == -2;
+
+    behavior invalid_bit_sequence:
+      assumes !Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns \nothing;
+
+      ensures result:       \result == -1;
+
+    complete behaviors;
+    disjoint behaviors;
+*/
+int Radio_Network_registration_Encoder(Bitstream* stream, const Radio_Network_registration_Core* p);
+
+/*@
+    requires valid_stream:      Readable(stream);
+    requires stream_invariant:  Invariant(stream, MaxBitSize(p));
+    requires valid_package:     \valid(p);
+    requires separation:        Separated(stream, p);
+
+    assigns stream->bitpos;
+    assigns *p;
+
+    ensures unchanged:          Unchanged{Here,Old}(stream, 0, 8*stream->size);
+
+    behavior normal_case:
+      assumes Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns stream->bitpos;
+      assigns *p;
+
+      ensures invariant:  Invariant(p);
+      ensures result:     \result == 1; 
+      ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
+      ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
+      ensures upper:      UpperBitsNotSet(p);
+
+    behavior error_case:
+      assumes !Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns \nothing;
+
+      ensures result: \result == 0;
+
+    complete behaviors;
+    disjoint behaviors;
+*/
+int Radio_Network_registration_Decoder(Bitstream* stream, Radio_Network_registration_Core* p);
 
 #endif // RADIO_NETWORK_REGISTRATION_CORE_H_INCLUDED
 

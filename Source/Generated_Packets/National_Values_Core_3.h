@@ -75,7 +75,7 @@ inline bool operator!=(const National_Values_Core_3& a, const National_Values_Co
 
 typedef struct National_Values_Core_3 National_Values_Core_3;
 
-#define NATIONAL_VALUES_CORE_3_CORE_BITSIZE 331
+#define NATIONAL_VALUES_CORE_3_CORE_BITSIZE 21
 
 /*@
     logic integer BitSize{L}(National_Values_Core_3* p) = NATIONAL_VALUES_CORE_3_CORE_BITSIZE;
@@ -86,21 +86,105 @@ typedef struct National_Values_Core_3 National_Values_Core_3;
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(National_Values_Core_3* p) = \true;
+    predicate Invariant(National_Values_Core_3* p) =
+      Invariant(p->Q_NVKVINTSET_k);
 
-    predicate ZeroInitialized(National_Values_Core_3* p) = \true;
+    predicate ZeroInitialized(National_Values_Core_3* p) =
+      ZeroInitialized(p->Q_NVKVINTSET_k);
 
     predicate EqualBits(Bitstream* stream, integer pos, National_Values_Core_3* p) =
-      EqualBits(stream, pos + 284, pos + 286, p->Q_NVKVINTSET_k)    &&
-      EqualBits(stream, pos + 298, pos + 305, p->V_NVKVINT_k)       &&
-      EqualBits(stream, pos + 305, pos + 312, p->M_NVKVINT_k);
+      EqualBits(stream, pos,       pos + 2,   p->Q_NVKVINTSET_k);
 
     predicate UpperBitsNotSet(National_Values_Core_3* p) =
-      UpperBitsNotSet(p->Q_NVKVINTSET_k,   2)   &&
-      UpperBitsNotSet(p->V_NVKVINT_k,      7)   &&
-      UpperBitsNotSet(p->M_NVKVINT_k,      7);
+      UpperBitsNotSet(p->Q_NVKVINTSET_k,   2);
 
 */
+
+/*@
+    requires valid:      \valid_read(p);
+    requires invariant:  Invariant(p);
+
+    assigns \nothing;
+
+    ensures result:  \result <==> UpperBitsNotSet(p);
+*/
+int National_Values_Core_3_UpperBitsNotSet(const National_Values_Core_3* p);
+
+/*@
+    requires valid_stream:      Writeable(stream);
+    requires stream_invariant:  Invariant(stream, MaxBitSize(p));
+    requires valid_package:     \valid_read(p);
+    requires invariant:         Invariant(p);
+    requires separation:        Separated(stream, p);
+
+    assigns stream->bitpos;
+    assigns stream->addr[0..(stream->size-1)];
+
+    behavior normal_case:
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && UpperBitsNotSet{Pre}(p);
+
+      assigns stream->bitpos;
+      assigns stream->addr[0..(stream->size-1)];
+
+      ensures result:     \result == 1;
+      ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
+      ensures left:       Unchanged{Here,Old}(stream, 0, \old(stream->bitpos));
+      ensures middle:     EqualBits(stream, \old(stream->bitpos), p);
+      ensures right:      Unchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
+
+    behavior values_too_big:
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && !UpperBitsNotSet{Pre}(p);
+
+      assigns \nothing;
+
+      ensures result:        \result == -2;
+
+    behavior invalid_bit_sequence:
+      assumes !Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns \nothing;
+
+      ensures result:       \result == -1;
+
+    complete behaviors;
+    disjoint behaviors;
+*/
+int National_Values_Core_3_Encoder(Bitstream* stream, const National_Values_Core_3* p);
+
+/*@
+    requires valid_stream:      Readable(stream);
+    requires stream_invariant:  Invariant(stream, MaxBitSize(p));
+    requires valid_package:     \valid(p);
+    requires separation:        Separated(stream, p);
+
+    assigns stream->bitpos;
+    assigns *p;
+
+    ensures unchanged:          Unchanged{Here,Old}(stream, 0, 8*stream->size);
+
+    behavior normal_case:
+      assumes Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns stream->bitpos;
+      assigns *p;
+
+      ensures invariant:  Invariant(p);
+      ensures result:     \result == 1; 
+      ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
+      ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
+      ensures upper:      UpperBitsNotSet(p);
+
+    behavior error_case:
+      assumes !Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns \nothing;
+
+      ensures result: \result == 0;
+
+    complete behaviors;
+    disjoint behaviors;
+*/
+int National_Values_Core_3_Decoder(Bitstream* stream, National_Values_Core_3* p);
 
 #endif // NATIONAL_VALUES_CORE_3_CORE_H_INCLUDED
 

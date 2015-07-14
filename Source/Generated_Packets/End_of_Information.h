@@ -14,13 +14,21 @@ struct End_of_Information : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '('
-	       << uint64_t(id) << ')';
+        stream << '(' << +id << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
     {
-	return dynamic_cast<const End_of_Information*>(&p);
+	if(auto q = dynamic_cast<const End_of_Information*>(&p))
+	{
+	    bool status = true;
+
+	    status = status && (id == q->id);
+	    status = status && (core == q->core);
+
+	    return status;
+	}
+	return false;
     }
 };
 

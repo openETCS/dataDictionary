@@ -96,7 +96,7 @@ inline bool operator!=(const Staff_Responsible_distance_Information_from_loop_Co
 
 typedef struct Staff_Responsible_distance_Information_from_loop_Core Staff_Responsible_distance_Information_from_loop_Core;
 
-#define STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_BITSIZE 127
+#define STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_BITSIZE 67
 
 /*@
     logic integer BitSize{L}(Staff_Responsible_distance_Information_from_loop_Core* p) = STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_BITSIZE;
@@ -107,31 +107,117 @@ typedef struct Staff_Responsible_distance_Information_from_loop_Core Staff_Respo
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Staff_Responsible_distance_Information_from_loop_Core* p) = \true;
+    predicate Invariant(Staff_Responsible_distance_Information_from_loop_Core* p) =
+      Invariant(p->Q_DIR)             &&
+      Invariant(p->L_PACKET)          &&
+      Invariant(p->Q_SCALE)           &&
+      Invariant(p->Q_NEWCOUNTRY_0);
 
-    predicate ZeroInitialized(Staff_Responsible_distance_Information_from_loop_Core* p) = \true;
+    predicate ZeroInitialized(Staff_Responsible_distance_Information_from_loop_Core* p) =
+      ZeroInitialized(p->Q_DIR)             &&
+      ZeroInitialized(p->L_PACKET)          &&
+      ZeroInitialized(p->Q_SCALE)           &&
+      ZeroInitialized(p->Q_NEWCOUNTRY_0);
 
     predicate EqualBits(Bitstream* stream, integer pos, Staff_Responsible_distance_Information_from_loop_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
       EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
       EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)           &&
-      EqualBits(stream, pos + 17,  pos + 18,  p->Q_NEWCOUNTRY_0)    &&
-      EqualBits(stream, pos + 28,  pos + 42,  p->NID_BG_0)          &&
-      EqualBits(stream, pos + 42,  pos + 43,  p->Q_NEWCOUNTRY_1)    &&
-      EqualBits(stream, pos + 53,  pos + 67,  p->NID_BG_1)          &&
-      EqualBits(stream, pos + 67,  pos + 82,  p->D_SR);
+      EqualBits(stream, pos + 17,  pos + 18,  p->Q_NEWCOUNTRY_0);
 
     predicate UpperBitsNotSet(Staff_Responsible_distance_Information_from_loop_Core* p) =
       UpperBitsNotSet(p->Q_DIR,            2)   &&
       UpperBitsNotSet(p->L_PACKET,         13)  &&
       UpperBitsNotSet(p->Q_SCALE,          2)   &&
-      UpperBitsNotSet(p->Q_NEWCOUNTRY_0,   1)   &&
-      UpperBitsNotSet(p->NID_BG_0,         14)  &&
-      UpperBitsNotSet(p->Q_NEWCOUNTRY_1,   1)   &&
-      UpperBitsNotSet(p->NID_BG_1,         14)  &&
-      UpperBitsNotSet(p->D_SR,             15);
+      UpperBitsNotSet(p->Q_NEWCOUNTRY_0,   1);
 
 */
+
+/*@
+    requires valid:      \valid_read(p);
+    requires invariant:  Invariant(p);
+
+    assigns \nothing;
+
+    ensures result:  \result <==> UpperBitsNotSet(p);
+*/
+int Staff_Responsible_distance_Information_from_loop_UpperBitsNotSet(const Staff_Responsible_distance_Information_from_loop_Core* p);
+
+/*@
+    requires valid_stream:      Writeable(stream);
+    requires stream_invariant:  Invariant(stream, MaxBitSize(p));
+    requires valid_package:     \valid_read(p);
+    requires invariant:         Invariant(p);
+    requires separation:        Separated(stream, p);
+
+    assigns stream->bitpos;
+    assigns stream->addr[0..(stream->size-1)];
+
+    behavior normal_case:
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && UpperBitsNotSet{Pre}(p);
+
+      assigns stream->bitpos;
+      assigns stream->addr[0..(stream->size-1)];
+
+      ensures result:     \result == 1;
+      ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
+      ensures left:       Unchanged{Here,Old}(stream, 0, \old(stream->bitpos));
+      ensures middle:     EqualBits(stream, \old(stream->bitpos), p);
+      ensures right:      Unchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
+
+    behavior values_too_big:
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && !UpperBitsNotSet{Pre}(p);
+
+      assigns \nothing;
+
+      ensures result:        \result == -2;
+
+    behavior invalid_bit_sequence:
+      assumes !Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns \nothing;
+
+      ensures result:       \result == -1;
+
+    complete behaviors;
+    disjoint behaviors;
+*/
+int Staff_Responsible_distance_Information_from_loop_Encoder(Bitstream* stream, const Staff_Responsible_distance_Information_from_loop_Core* p);
+
+/*@
+    requires valid_stream:      Readable(stream);
+    requires stream_invariant:  Invariant(stream, MaxBitSize(p));
+    requires valid_package:     \valid(p);
+    requires separation:        Separated(stream, p);
+
+    assigns stream->bitpos;
+    assigns *p;
+
+    ensures unchanged:          Unchanged{Here,Old}(stream, 0, 8*stream->size);
+
+    behavior normal_case:
+      assumes Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns stream->bitpos;
+      assigns *p;
+
+      ensures invariant:  Invariant(p);
+      ensures result:     \result == 1; 
+      ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
+      ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
+      ensures upper:      UpperBitsNotSet(p);
+
+    behavior error_case:
+      assumes !Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns \nothing;
+
+      ensures result: \result == 0;
+
+    complete behaviors;
+    disjoint behaviors;
+*/
+int Staff_Responsible_distance_Information_from_loop_Decoder(Bitstream* stream, Staff_Responsible_distance_Information_from_loop_Core* p);
 
 #endif // STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_H_INCLUDED
 
