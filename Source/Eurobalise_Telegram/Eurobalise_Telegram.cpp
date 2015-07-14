@@ -114,11 +114,17 @@ bool Eurobalise_Telegram::encode(Bitstream& stream) const
         return false;
     }
 
+    uint32_t old_pos = stream.bitpos;
+
     // check that last packet denotes end of message
     assert(packets.back()->id == 255);
 
     for (auto p = packets.begin(); p != packets.end(); ++p)
     {
+        if (stream.bitpos > 1023 + old_pos) {
+	    return false;
+	}
+
         packetID.NID_PACKET = (*p)->id;
 
         if (Packet_Header_Encoder(&stream, &packetID) != 1)

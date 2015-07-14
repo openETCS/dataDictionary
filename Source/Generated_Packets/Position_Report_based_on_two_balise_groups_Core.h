@@ -49,10 +49,12 @@ inline std::ostream& operator<<(std::ostream& stream, const Position_Report_base
        << +p.L_DOUBTOVER << ','
        << +p.L_DOUBTUNDER << ','
        << +p.Q_LENGTH << ','
+       << +p.L_TRAININT << ','
        << +p.V_TRAIN << ','
        << +p.Q_DIRTRAIN << ','
        << +p.M_MODE << ','
-       << +p.M_LEVEL;
+       << +p.M_LEVEL << ','
+       << +p.NID_NTC;
 
     return stream;
 }
@@ -71,10 +73,18 @@ inline bool operator==(const Position_Report_based_on_two_balise_groups_Core& a,
     status = status && (a.L_DOUBTOVER == b.L_DOUBTOVER);
     status = status && (a.L_DOUBTUNDER == b.L_DOUBTUNDER);
     status = status && (a.Q_LENGTH == b.Q_LENGTH);
+    if ((a.Q_LENGTH == 1) || (a.Q_LENGTH == 2))
+    {
+    status = status && (a.L_TRAININT == b.L_TRAININT);
+    }
     status = status && (a.V_TRAIN == b.V_TRAIN);
     status = status && (a.Q_DIRTRAIN == b.Q_DIRTRAIN);
     status = status && (a.M_MODE == b.M_MODE);
     status = status && (a.M_LEVEL == b.M_LEVEL);
+    if (a.M_LEVEL == 1)
+    {
+    status = status && (a.NID_NTC == b.NID_NTC);
+    }
 
     return status;
 }
@@ -88,7 +98,7 @@ inline bool operator!=(const Position_Report_based_on_two_balise_groups_Core& a,
 
 typedef struct Position_Report_based_on_two_balise_groups_Core Position_Report_based_on_two_balise_groups_Core;
 
-#define POSITION_REPORT_BASED_ON_TWO_BALISE_GROUPS_CORE_BITSIZE 153
+#define POSITION_REPORT_BASED_ON_TWO_BALISE_GROUPS_CORE_BITSIZE 130
 
 /*@
     logic integer BitSize{L}(Position_Report_based_on_two_balise_groups_Core* p) = POSITION_REPORT_BASED_ON_TWO_BALISE_GROUPS_CORE_BITSIZE;
@@ -109,11 +119,7 @@ typedef struct Position_Report_based_on_two_balise_groups_Core Position_Report_b
       Invariant(p->Q_DLRBG)           &&
       Invariant(p->L_DOUBTOVER)       &&
       Invariant(p->L_DOUBTUNDER)      &&
-      Invariant(p->Q_LENGTH)          &&
-      Invariant(p->V_TRAIN)           &&
-      Invariant(p->Q_DIRTRAIN)        &&
-      Invariant(p->M_MODE)            &&
-      Invariant(p->M_LEVEL);
+      Invariant(p->Q_LENGTH);
 
     predicate ZeroInitialized(Position_Report_based_on_two_balise_groups_Core* p) =
       ZeroInitialized(p->L_PACKET)          &&
@@ -125,11 +131,7 @@ typedef struct Position_Report_based_on_two_balise_groups_Core Position_Report_b
       ZeroInitialized(p->Q_DLRBG)           &&
       ZeroInitialized(p->L_DOUBTOVER)       &&
       ZeroInitialized(p->L_DOUBTUNDER)      &&
-      ZeroInitialized(p->Q_LENGTH)          &&
-      ZeroInitialized(p->V_TRAIN)           &&
-      ZeroInitialized(p->Q_DIRTRAIN)        &&
-      ZeroInitialized(p->M_MODE)            &&
-      ZeroInitialized(p->M_LEVEL);
+      ZeroInitialized(p->Q_LENGTH);
 
     predicate EqualBits(Bitstream* stream, integer pos, Position_Report_based_on_two_balise_groups_Core* p) =
       EqualBits(stream, pos,       pos + 13,  p->L_PACKET)          &&
@@ -141,11 +143,7 @@ typedef struct Position_Report_based_on_two_balise_groups_Core Position_Report_b
       EqualBits(stream, pos + 80,  pos + 82,  p->Q_DLRBG)           &&
       EqualBits(stream, pos + 82,  pos + 97,  p->L_DOUBTOVER)       &&
       EqualBits(stream, pos + 97,  pos + 112, p->L_DOUBTUNDER)      &&
-      EqualBits(stream, pos + 112, pos + 114, p->Q_LENGTH)          &&
-      EqualBits(stream, pos + 129, pos + 136, p->V_TRAIN)           &&
-      EqualBits(stream, pos + 136, pos + 138, p->Q_DIRTRAIN)        &&
-      EqualBits(stream, pos + 138, pos + 142, p->M_MODE)            &&
-      EqualBits(stream, pos + 142, pos + 145, p->M_LEVEL);
+      EqualBits(stream, pos + 112, pos + 114, p->Q_LENGTH);
 
     predicate UpperBitsNotSet(Position_Report_based_on_two_balise_groups_Core* p) =
       UpperBitsNotSet(p->L_PACKET,         13)  &&
@@ -157,13 +155,95 @@ typedef struct Position_Report_based_on_two_balise_groups_Core Position_Report_b
       UpperBitsNotSet(p->Q_DLRBG,          2)   &&
       UpperBitsNotSet(p->L_DOUBTOVER,      15)  &&
       UpperBitsNotSet(p->L_DOUBTUNDER,     15)  &&
-      UpperBitsNotSet(p->Q_LENGTH,         2)   &&
-      UpperBitsNotSet(p->V_TRAIN,          7)   &&
-      UpperBitsNotSet(p->Q_DIRTRAIN,       2)   &&
-      UpperBitsNotSet(p->M_MODE,           4)   &&
-      UpperBitsNotSet(p->M_LEVEL,          3);
+      UpperBitsNotSet(p->Q_LENGTH,         2);
 
 */
+
+/*@
+    requires valid:      \valid_read(p);
+    requires invariant:  Invariant(p);
+
+    assigns \nothing;
+
+    ensures result:  \result <==> UpperBitsNotSet(p);
+*/
+int Position_Report_based_on_two_balise_groups_UpperBitsNotSet(const Position_Report_based_on_two_balise_groups_Core* p);
+
+/*@
+    requires valid_stream:      Writeable(stream);
+    requires stream_invariant:  Invariant(stream, MaxBitSize(p));
+    requires valid_package:     \valid_read(p);
+    requires invariant:         Invariant(p);
+    requires separation:        Separated(stream, p);
+
+    assigns stream->bitpos;
+    assigns stream->addr[0..(stream->size-1)];
+
+    behavior normal_case:
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && UpperBitsNotSet{Pre}(p);
+
+      assigns stream->bitpos;
+      assigns stream->addr[0..(stream->size-1)];
+
+      ensures result:     \result == 1;
+      ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
+      ensures left:       Unchanged{Here,Old}(stream, 0, \old(stream->bitpos));
+      ensures middle:     EqualBits(stream, \old(stream->bitpos), p);
+      ensures right:      Unchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
+
+    behavior values_too_big:
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && !UpperBitsNotSet{Pre}(p);
+
+      assigns \nothing;
+
+      ensures result:        \result == -2;
+
+    behavior invalid_bit_sequence:
+      assumes !Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns \nothing;
+
+      ensures result:       \result == -1;
+
+    complete behaviors;
+    disjoint behaviors;
+*/
+int Position_Report_based_on_two_balise_groups_Encoder(Bitstream* stream, const Position_Report_based_on_two_balise_groups_Core* p);
+
+/*@
+    requires valid_stream:      Readable(stream);
+    requires stream_invariant:  Invariant(stream, MaxBitSize(p));
+    requires valid_package:     \valid(p);
+    requires separation:        Separated(stream, p);
+
+    assigns stream->bitpos;
+    assigns *p;
+
+    ensures unchanged:          Unchanged{Here,Old}(stream, 0, 8*stream->size);
+
+    behavior normal_case:
+      assumes Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns stream->bitpos;
+      assigns *p;
+
+      ensures invariant:  Invariant(p);
+      ensures result:     \result == 1; 
+      ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
+      ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
+      ensures upper:      UpperBitsNotSet(p);
+
+    behavior error_case:
+      assumes !Normal{Pre}(stream, MaxBitSize(p));
+
+      assigns \nothing;
+
+      ensures result: \result == 0;
+
+    complete behaviors;
+    disjoint behaviors;
+*/
+int Position_Report_based_on_two_balise_groups_Decoder(Bitstream* stream, Position_Report_based_on_two_balise_groups_Core* p);
 
 #endif // POSITION_REPORT_BASED_ON_TWO_BALISE_GROUPS_CORE_H_INCLUDED
 

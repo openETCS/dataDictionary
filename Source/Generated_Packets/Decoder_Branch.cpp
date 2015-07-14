@@ -35,21 +35,18 @@ BasePacketPtr Decoder_Branch_TrainToTrack(Bitstream& stream, Packet_Header heade
 
         case 3 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Onboard_telephone_numbers>();
 
-                auto ret = std::make_shared<Onboard_telephone_numbers>();
-
-                if (Onboard_telephone_numbers_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Onboard_telephone_numbers_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 4 :
         {
             auto ret = std::make_shared<Error_Reporting>();
@@ -94,21 +91,18 @@ BasePacketPtr Decoder_Branch_TrainToTrack(Bitstream& stream, Packet_Header heade
 
         case 11 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Validated_train_data>();
 
-                auto ret = std::make_shared<Validated_train_data>();
-
-                if (Validated_train_data_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Validated_train_data_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 44 :
         {
             auto ret = std::make_shared<Data_used_by_applications_outside_the_ERTMS_or_ETCS_system>();
@@ -179,38 +173,32 @@ BasePacketPtr Decoder_Branch_TrackToTrain(Bitstream& stream, Packet_Header heade
 
         case 3 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<National_Values>();
 
-                auto ret = std::make_shared<National_Values>();
-
-                if (National_Values_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (National_Values_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 5 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Linking>();
 
-                auto ret = std::make_shared<Linking>();
-
-                if (Linking_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Linking_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 6 :
         {
             auto ret = std::make_shared<Virtual_Balise_Cover_order>();
@@ -227,55 +215,46 @@ BasePacketPtr Decoder_Branch_TrackToTrain(Bitstream& stream, Packet_Header heade
 
         case 12 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Level_1_Movement_Authority>();
 
-                auto ret = std::make_shared<Level_1_Movement_Authority>();
-
-                if (Level_1_Movement_Authority_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Level_1_Movement_Authority_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 13 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Staff_Responsible_distance_Information_from_loop>();
 
-                auto ret = std::make_shared<Staff_Responsible_distance_Information_from_loop>();
-
-                if (Staff_Responsible_distance_Information_from_loop_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Staff_Responsible_distance_Information_from_loop_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 15 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Level_23_Movement_Authority>();
 
-                auto ret = std::make_shared<Level_23_Movement_Authority>();
-
-                if (Level_23_Movement_Authority_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Level_23_Movement_Authority_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 16 :
         {
             auto ret = std::make_shared<Repositioning_Information>();
@@ -292,36 +271,32 @@ BasePacketPtr Decoder_Branch_TrackToTrain(Bitstream& stream, Packet_Header heade
 
         case 21 :
         {
+            auto ret = std::make_shared<Gradient_Profile>();
 
-                auto ret = std::make_shared<Gradient_Profile>();
-
-                if (Gradient_Profile_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            return BasePacketPtr();
+            if (Gradient_Profile_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 27 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<International_Static_Speed_Profile>();
 
-                auto ret = std::make_shared<International_Static_Speed_Profile>();
-
-                if (International_Static_Speed_Profile_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (International_Static_Speed_Profile_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 39 :
         {
             auto ret = std::make_shared<Track_Condition_Change_of_traction_system>();
@@ -352,21 +327,18 @@ BasePacketPtr Decoder_Branch_TrackToTrain(Bitstream& stream, Packet_Header heade
 
         case 41 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Level_Transition_Order>();
 
-                auto ret = std::make_shared<Level_Transition_Order>();
-
-                if (Level_Transition_Order_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Level_Transition_Order_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 42 :
         {
             auto ret = std::make_shared<Session_Management>();
@@ -411,72 +383,60 @@ BasePacketPtr Decoder_Branch_TrackToTrain(Bitstream& stream, Packet_Header heade
 
         case 46 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Conditional_Level_Transition_Order>();
 
-                auto ret = std::make_shared<Conditional_Level_Transition_Order>();
-
-                if (Conditional_Level_Transition_Order_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Conditional_Level_Transition_Order_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 49 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<List_of_balises_for_SH_Area>();
 
-                auto ret = std::make_shared<List_of_balises_for_SH_Area>();
-
-                if (List_of_balises_for_SH_Area_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (List_of_balises_for_SH_Area_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 51 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Axle_Load_Speed_Profile>();
 
-                auto ret = std::make_shared<Axle_Load_Speed_Profile>();
-
-                if (Axle_Load_Speed_Profile_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Axle_Load_Speed_Profile_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 52 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Permitted_Braking_Distance_Information>();
 
-                auto ret = std::make_shared<Permitted_Braking_Distance_Information>();
-
-                if (Permitted_Braking_Distance_Information_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Permitted_Braking_Distance_Information_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 57 :
         {
             auto ret = std::make_shared<Movement_Authority_Request_Parameters>();
@@ -493,38 +453,32 @@ BasePacketPtr Decoder_Branch_TrackToTrain(Bitstream& stream, Packet_Header heade
 
         case 58 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Position_Report_Parameters>();
 
-                auto ret = std::make_shared<Position_Report_Parameters>();
-
-                if (Position_Report_Parameters_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Position_Report_Parameters_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 63 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<List_of_Balises_in_SR_Authority>();
 
-                auto ret = std::make_shared<List_of_Balises_in_SR_Authority>();
-
-                if (List_of_Balises_in_SR_Authority_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (List_of_Balises_in_SR_Authority_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 64 :
         {
             auto ret = std::make_shared<Inhibition_of_revocable_TSRs_from_balises_in_L23>();
@@ -569,72 +523,60 @@ BasePacketPtr Decoder_Branch_TrackToTrain(Bitstream& stream, Packet_Header heade
 
         case 67 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Track_Condition_Big_Metal_Masses>();
 
-                auto ret = std::make_shared<Track_Condition_Big_Metal_Masses>();
-
-                if (Track_Condition_Big_Metal_Masses_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Track_Condition_Big_Metal_Masses_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 68 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Track_Condition>();
 
-                auto ret = std::make_shared<Track_Condition>();
-
-                if (Track_Condition_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Track_Condition_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 69 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Track_Condition_Station_Platforms>();
 
-                auto ret = std::make_shared<Track_Condition_Station_Platforms>();
-
-                if (Track_Condition_Station_Platforms_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Track_Condition_Station_Platforms_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 70 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Route_Suitability_Data>();
 
-                auto ret = std::make_shared<Route_Suitability_Data>();
-
-                if (Route_Suitability_Data_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Route_Suitability_Data_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 71 :
         {
             auto ret = std::make_shared<Adhesion_Factor>();
@@ -679,38 +621,32 @@ BasePacketPtr Decoder_Branch_TrackToTrain(Bitstream& stream, Packet_Header heade
 
         case 79 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Geographical_Position_Information>();
 
-                auto ret = std::make_shared<Geographical_Position_Information>();
-
-                if (Geographical_Position_Information_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Geographical_Position_Information_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 80 :
         {
-            /*  Not implemented
+            auto ret = std::make_shared<Mode_profile>();
 
-                auto ret = std::make_shared<Mode_profile>();
-
-                if (Mode_profile_Decoder(&stream, &(ret->core)) == 1)
-                {
-                    return ret;
-                }
-                else
-                {
-                    return BasePacketPtr();
-                }
-            */
-            return BasePacketPtr();
+            if (Mode_profile_Decoder(&stream, &(ret->core)) == 1)
+            {
+                return ret;
+            }
+            else
+            {
+                return BasePacketPtr();
+            }
         }
+
         case 88 :
         {
             auto ret = std::make_shared<Level_Crossing_information>();

@@ -27,17 +27,11 @@ bool Encoder_Branch_TrainToTrack(Bitstream& stream, BasePacketPtr packet)
 
         case 3 :
         {
+            auto ptr = std::dynamic_pointer_cast<Onboard_telephone_numbers>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Onboard_telephone_numbers_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Onboard_telephone_numbers>(packet);
-                assert(ptr);
-
-                return Onboard_telephone_numbers_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 4 :
@@ -69,17 +63,11 @@ bool Encoder_Branch_TrainToTrack(Bitstream& stream, BasePacketPtr packet)
 
         case 11 :
         {
+            auto ptr = std::dynamic_pointer_cast<Validated_train_data>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Validated_train_data_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Validated_train_data>(packet);
-                assert(ptr);
-
-                return Validated_train_data_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 44 :
@@ -135,32 +123,20 @@ bool Encoder_Branch_TrackToTrain(Bitstream& stream, BasePacketPtr packet)
 
         case 3 :
         {
+            auto ptr = std::dynamic_pointer_cast<National_Values>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return National_Values_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<National_Values>(packet);
-                assert(ptr);
-
-                return National_Values_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 5 :
         {
+            auto ptr = std::dynamic_pointer_cast<Linking>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Linking_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Linking>(packet);
-                assert(ptr);
-
-                return Linking_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 6 :
@@ -174,47 +150,29 @@ bool Encoder_Branch_TrackToTrain(Bitstream& stream, BasePacketPtr packet)
 
         case 12 :
         {
+            auto ptr = std::dynamic_pointer_cast<Level_1_Movement_Authority>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Level_1_Movement_Authority_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Level_1_Movement_Authority>(packet);
-                assert(ptr);
-
-                return Level_1_Movement_Authority_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 13 :
         {
+            auto ptr = std::dynamic_pointer_cast<Staff_Responsible_distance_Information_from_loop>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Staff_Responsible_distance_Information_from_loop_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Staff_Responsible_distance_Information_from_loop>(packet);
-                assert(ptr);
-
-                return Staff_Responsible_distance_Information_from_loop_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 15 :
         {
+            auto ptr = std::dynamic_pointer_cast<Level_23_Movement_Authority>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Level_23_Movement_Authority_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Level_23_Movement_Authority>(packet);
-                assert(ptr);
-
-                return Level_23_Movement_Authority_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 16 :
@@ -228,30 +186,20 @@ bool Encoder_Branch_TrackToTrain(Bitstream& stream, BasePacketPtr packet)
 
         case 21 :
         {
+            auto ptr = std::dynamic_pointer_cast<Gradient_Profile>(packet);
+            assert(ptr);
 
+            return Gradient_Profile_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Gradient_Profile>(packet);
-                assert(ptr);
-
-                return Gradient_Profile_Encoder(&stream, &(ptr->core)) == 1;
-
-
-            return false;
         }
 
         case 27 :
         {
+            auto ptr = std::dynamic_pointer_cast<International_Static_Speed_Profile>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return International_Static_Speed_Profile_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<International_Static_Speed_Profile>(packet);
-                assert(ptr);
-
-                return International_Static_Speed_Profile_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 39 :
@@ -274,17 +222,11 @@ bool Encoder_Branch_TrackToTrain(Bitstream& stream, BasePacketPtr packet)
 
         case 41 :
         {
+            auto ptr = std::dynamic_pointer_cast<Level_Transition_Order>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Level_Transition_Order_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Level_Transition_Order>(packet);
-                assert(ptr);
-
-                return Level_Transition_Order_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 42 :
@@ -316,62 +258,38 @@ bool Encoder_Branch_TrackToTrain(Bitstream& stream, BasePacketPtr packet)
 
         case 46 :
         {
+            auto ptr = std::dynamic_pointer_cast<Conditional_Level_Transition_Order>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Conditional_Level_Transition_Order_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Conditional_Level_Transition_Order>(packet);
-                assert(ptr);
-
-                return Conditional_Level_Transition_Order_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 49 :
         {
+            auto ptr = std::dynamic_pointer_cast<List_of_balises_for_SH_Area>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return List_of_balises_for_SH_Area_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<List_of_balises_for_SH_Area>(packet);
-                assert(ptr);
-
-                return List_of_balises_for_SH_Area_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 51 :
         {
+            auto ptr = std::dynamic_pointer_cast<Axle_Load_Speed_Profile>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Axle_Load_Speed_Profile_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Axle_Load_Speed_Profile>(packet);
-                assert(ptr);
-
-                return Axle_Load_Speed_Profile_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 52 :
         {
+            auto ptr = std::dynamic_pointer_cast<Permitted_Braking_Distance_Information>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Permitted_Braking_Distance_Information_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Permitted_Braking_Distance_Information>(packet);
-                assert(ptr);
-
-                return Permitted_Braking_Distance_Information_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 57 :
@@ -385,32 +303,20 @@ bool Encoder_Branch_TrackToTrain(Bitstream& stream, BasePacketPtr packet)
 
         case 58 :
         {
+            auto ptr = std::dynamic_pointer_cast<Position_Report_Parameters>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Position_Report_Parameters_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Position_Report_Parameters>(packet);
-                assert(ptr);
-
-                return Position_Report_Parameters_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 63 :
         {
+            auto ptr = std::dynamic_pointer_cast<List_of_Balises_in_SR_Authority>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return List_of_Balises_in_SR_Authority_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<List_of_Balises_in_SR_Authority>(packet);
-                assert(ptr);
-
-                return List_of_Balises_in_SR_Authority_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 64 :
@@ -442,62 +348,38 @@ bool Encoder_Branch_TrackToTrain(Bitstream& stream, BasePacketPtr packet)
 
         case 67 :
         {
+            auto ptr = std::dynamic_pointer_cast<Track_Condition_Big_Metal_Masses>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Track_Condition_Big_Metal_Masses_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Track_Condition_Big_Metal_Masses>(packet);
-                assert(ptr);
-
-                return Track_Condition_Big_Metal_Masses_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 68 :
         {
+            auto ptr = std::dynamic_pointer_cast<Track_Condition>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Track_Condition_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Track_Condition>(packet);
-                assert(ptr);
-
-                return Track_Condition_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 69 :
         {
+            auto ptr = std::dynamic_pointer_cast<Track_Condition_Station_Platforms>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Track_Condition_Station_Platforms_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Track_Condition_Station_Platforms>(packet);
-                assert(ptr);
-
-                return Track_Condition_Station_Platforms_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 70 :
         {
+            auto ptr = std::dynamic_pointer_cast<Route_Suitability_Data>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Route_Suitability_Data_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Route_Suitability_Data>(packet);
-                assert(ptr);
-
-                return Route_Suitability_Data_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 71 :
@@ -529,32 +411,20 @@ bool Encoder_Branch_TrackToTrain(Bitstream& stream, BasePacketPtr packet)
 
         case 79 :
         {
+            auto ptr = std::dynamic_pointer_cast<Geographical_Position_Information>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Geographical_Position_Information_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Geographical_Position_Information>(packet);
-                assert(ptr);
-
-                return Geographical_Position_Information_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 80 :
         {
+            auto ptr = std::dynamic_pointer_cast<Mode_profile>(packet);
+            assert(ptr);
 
-            /*  Not implemented
+            return Mode_profile_Encoder(&stream, &(ptr->core)) == 1;
 
-                auto ptr = std::dynamic_pointer_cast<Mode_profile>(packet);
-                assert(ptr);
-
-                return Mode_profile_Encoder(&stream, &(ptr->core)) == 1;
-
-            */
-
-            return false;
         }
 
         case 88 :
