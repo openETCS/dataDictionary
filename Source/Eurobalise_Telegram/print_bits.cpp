@@ -4,7 +4,7 @@
 
 void print(const Bitstream& stream, uint32_t from, uint32_t to)
 {
-    for(uint32_t i = from; i != to; ++i)
+    for (uint32_t i = from; i != to; ++i)
     {
         if (((i - from) % 4) == 0)
         {
