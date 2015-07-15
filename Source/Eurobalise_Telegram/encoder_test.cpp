@@ -8,6 +8,9 @@
 #include <cassert>
 #include <iostream>
 
+// for debug reasons
+#include <bitset>
+
 int main ()
 {
     std::cout << "--- Testing the encode and decode functions of Eurobalise Telegram consecutively." << std::endl;
@@ -41,6 +44,39 @@ int main ()
     // *** encode the telegram to the stream ***
     std::cout << " Encoding Eurobalise Telegram." << std::endl;
     telegram.encode(stream);
+
+    
+    //test bitoutput of stream
+    for (int n=0; n<30; ++n)
+    {
+        std::cout << (int)raw_stream[n];
+        std::cout << " ";      
+        if ((int)raw_stream[n] < 10) std::cout << " ";
+        if ((int)raw_stream[n] < 100) std::cout << " ";
+    }    
+    
+    std::cout << "\n";
+    
+    for (int n=0; n<30; ++n)
+    {
+        std::cout << std::hex << (int)raw_stream[n];
+        std::cout << "  ";       
+        if ((int)raw_stream[n] < 16) std::cout << " ";
+    }  
+
+    std::cout << "\n";
+   
+    for (int n=0; n<30; ++n)
+    {
+        if ((n%10)==0) std::cout << "\n";
+        std::cout << std::bitset<8>((int)raw_stream[n]);
+        std::cout << "  ";      
+    }  
+
+    std::cout << "\n";
+
+
+
 
     // reset to the old bitpos
     stream.bitpos = init_pos;

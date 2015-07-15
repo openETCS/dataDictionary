@@ -9,6 +9,10 @@
 #include "UpperBitsNotSet.h"
 #include <iostream>
 
+// for debug reasons
+#include <bitset>
+
+
 template<typename Packet>
 void assert_equal(const Packet& packet, BasePacketPtr ptr)
 {
@@ -143,6 +147,39 @@ int main ()
     std::cout << " Test successful." << std::endl;
     std::cout << std::endl;
 
+
+    
+    //test bitoutput of stream
+    for (int n=0; n<100; ++n)
+      {
+	std::cout << (int)raw_stream[n];
+	std::cout << " ";
+	if ((int)raw_stream[n] < 10) std::cout << " ";
+	if ((int)raw_stream[n] < 100) std::cout << " ";
+      }
+
+    std::cout << "\n";
+
+    for (int n=0; n<100; ++n)
+      {
+	std::cout << std::hex << (int)raw_stream[n];
+	std::cout << "  ";
+	if ((int)raw_stream[n] < 16) std::cout << " ";
+      }
+
+    std::cout << "\n";
+
+    for (int n=0; n<100; ++n)
+      {
+	if ((n%10)==0) std::cout << "\n";
+	std::cout << std::bitset<8>((int)raw_stream[n]);
+	std::cout << "  ";
+      }
+
+    std::cout << "\n";
+
+
+    
     return EXIT_SUCCESS;
 }
 
