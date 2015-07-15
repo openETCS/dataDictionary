@@ -54,7 +54,7 @@ int main ()
     std::cout << " Encoding Eurobalise Telegram." << std::endl;
     telegram.encode(stream);
 
-    std::cout << std::endl;
+    std::cout << " print from position " << init_pos << " to " << stream.bitpos <<  std::endl;
     print(stream, init_pos, stream.bitpos);
     std::cout << std::endl;
     std::cout << std::endl;
