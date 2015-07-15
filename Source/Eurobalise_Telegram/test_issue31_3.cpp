@@ -29,15 +29,15 @@ int main ()
     Telegram_Header header;
     {
         header.Q_UPDOWN  = 1;
-	header.M_VERSION = 32;
-	header.Q_MEDIA	 = 0;
-	header.N_PIG	 = 0;
-	header.N_TOTAL	 = 1;
-	header.M_DUP	 = 0;
-	header.M_MCOUNT	 = 0;
-	header.NID_C	 = 64;
-	header.NID_BG	 = 3;
-	header.Q_LINK	 = 1;
+        header.M_VERSION = 32;
+        header.Q_MEDIA	 = 0;
+        header.N_PIG	 = 0;
+        header.N_TOTAL	 = 1;
+        header.M_DUP	 = 0;
+        header.M_MCOUNT	 = 0;
+        header.NID_C	 = 64;
+        header.NID_BG	 = 3;
+        header.Q_LINK	 = 1;
     }
 
     std::cout << " Encoding Telegram Header: " << header << std::endl;
@@ -47,22 +47,22 @@ int main ()
     {
         // NID_PACKET = 42;
         a.core.Q_DIR =	1;
-	a.core.L_PACKET = 113;
-	a.core.Q_RBC	= 1;
-	a.core.NID_C	= 352;
-	a.core.NID_RBC	= 1515;
-	a.core.NID_RADIO = 14185023402016767;
-	a.core.Q_SLEEPSESSION	= 0;
+        a.core.L_PACKET = 113;
+        a.core.Q_RBC	= 1;
+        a.core.NID_C	= 352;
+        a.core.NID_RBC	= 1515;
+        a.core.NID_RADIO = 14185023402016767;
+        a.core.Q_SLEEPSESSION	= 0;
 
         Packet_Header h {a.id};
         Packet_Header_Encoder(&stream, &h);
-	std::cout << "    Encoding packet " << a << std::endl;
+        std::cout << "    Encoding packet " << a << std::endl;
         Session_Management_Encoder(&stream, &a.core);
     }
 
     National_Values b;
     {
-	// NID_PACKET = 3;
+        // NID_PACKET = 3;
         b.core.Q_DIR = 1;
         b.core.L_PACKET = 230;
         b.core.Q_SCALE = 1;
@@ -101,24 +101,24 @@ int main ()
 
         Packet_Header h {b.id};
         Packet_Header_Encoder(&stream, &h);
-	std::cout << "    Encoding packet " << b << std::endl;
+        std::cout << "    Encoding packet " << b << std::endl;
         National_Values_Encoder(&stream, &b.core);
     }
 
     Level_Transition_Order c;
     {
         // NID_PACKET = 41;
-	c.core.Q_DIR = 1;
-	c.core.L_PACKET = 63;
-	c.core.Q_SCALE = 1;
-	c.core.D_LEVELTR = 300;
-	c.core.M_LEVELTR = 3;
-	c.core.L_ACKLEVELTR = 100;
-	c.core.N_ITER_1 = 0;
+        c.core.Q_DIR = 1;
+        c.core.L_PACKET = 63;
+        c.core.Q_SCALE = 1;
+        c.core.D_LEVELTR = 300;
+        c.core.M_LEVELTR = 3;
+        c.core.L_ACKLEVELTR = 100;
+        c.core.N_ITER_1 = 0;
 
         Packet_Header h {c.id};
         Packet_Header_Encoder(&stream, &h);
-	std::cout << "    Encoding packet " << c << std::endl;
+        std::cout << "    Encoding packet " << c << std::endl;
         Level_Transition_Order_Encoder(&stream, &c.core);
     }
 
@@ -127,7 +127,7 @@ int main ()
     {
         Packet_Header h {f.id};
         Packet_Header_Encoder(&stream, &h);
-	std::cout << "    Encoding packet " << f << std::endl;
+        std::cout << "    Encoding packet " << f << std::endl;
         End_of_Information_Encoder(&stream, &f.core);
     }
 

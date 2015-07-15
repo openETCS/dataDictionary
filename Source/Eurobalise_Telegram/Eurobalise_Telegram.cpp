@@ -121,9 +121,10 @@ bool Eurobalise_Telegram::encode(Bitstream& stream) const
 
     for (auto p = packets.begin(); p != packets.end(); ++p)
     {
-        if (stream.bitpos > 1023 + old_pos) {
-	    return false;
-	}
+        if (stream.bitpos > 1023 + old_pos)
+        {
+            return false;
+        }
 
         packetID.NID_PACKET = (*p)->id;
 
@@ -141,8 +142,8 @@ bool Eurobalise_Telegram::encode(Bitstream& stream) const
         }
         else if (header.Q_UPDOWN == 1)
         {
-	    if (Encoder_Branch_TrackToTrain(stream, *p) != 1)
-	    {
+            if (Encoder_Branch_TrackToTrain(stream, *p) != 1)
+            {
                 return false;
             }
         }

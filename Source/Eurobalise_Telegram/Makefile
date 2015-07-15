@@ -69,12 +69,20 @@ test_issue31_1: test_issue31_1.o $(OBJ)
 test_issue31_2: test_issue31_2.o $(OBJ)
 	$(CXX) -o $@ $+ $(LDFLAGS)
 
+print_bits: print_bits.o
+	$(CXX) -o $@ $+
+
+bits: print_bits
+	./print_bits
+	
+
 FORMAT := $(wildcard *.h) $(wildcard *.cpp)
 
 format: FORCE
 	$(ASTYLE) $(FORMAT)
 
 clean::
+	@$(RM) print_bits
 	@$(RM) decoder_test
 	@$(RM) encoder_test
 	@$(RM) conditional_decoder_test
