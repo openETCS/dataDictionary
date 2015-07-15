@@ -5,6 +5,7 @@
 #include "Bitstream_Init.h"
 #include "subsets.h"
 #include "create.h"
+#include "print_bits.h"
 #include <cassert>
 #include <iostream>
 
@@ -52,6 +53,11 @@ int main ()
 
     std::cout << " Encoding Eurobalise Telegram." << std::endl;
     telegram.encode(stream);
+
+    std::cout << std::endl;
+    print(stream, init_pos, stream.bitpos);
+    std::cout << std::endl;
+    std::cout << std::endl;
 
     stream.bitpos = init_pos;
 

@@ -4,6 +4,9 @@
 
 #include <cstdint>
 #include <iostream>
+#include "Bitstream.h"
+
+extern void print(const Bitstream& stream, uint32_t from, uint32_t to);
 
 template<typename UnsignedType>
 inline bool left_bit(UnsignedType value, uint32_t pos)
