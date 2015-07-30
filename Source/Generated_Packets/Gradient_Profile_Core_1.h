@@ -3,7 +3,6 @@
 #define GRADIENT_PROFILE_CORE_1_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Gradient_Profile_Core_1
 {
@@ -14,6 +13,8 @@ struct Gradient_Profile_Core_1
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Gradient_Profile_Core_1& p)
 {

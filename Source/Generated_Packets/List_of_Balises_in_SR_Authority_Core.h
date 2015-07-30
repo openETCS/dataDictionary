@@ -3,7 +3,6 @@
 #define LIST_OF_BALISES_IN_SR_AUTHORITY_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 #include "List_of_Balises_in_SR_Authority_Core_1.h"
 
 struct List_of_Balises_in_SR_Authority_Core
@@ -20,6 +19,8 @@ struct List_of_Balises_in_SR_Authority_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const List_of_Balises_in_SR_Authority_Core& p)
 {

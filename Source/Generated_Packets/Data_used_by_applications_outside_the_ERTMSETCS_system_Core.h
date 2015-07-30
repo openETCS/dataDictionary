@@ -3,7 +3,6 @@
 #define DATA_USED_BY_APPLICATIONS_OUTSIDE_THE_ERTMSETCS_SYSTEM_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Data_used_by_applications_outside_the_ERTMSETCS_system_Core
 {
@@ -20,6 +19,8 @@ struct Data_used_by_applications_outside_the_ERTMSETCS_system_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Data_used_by_applications_outside_the_ERTMSETCS_system_Core& p)
 {

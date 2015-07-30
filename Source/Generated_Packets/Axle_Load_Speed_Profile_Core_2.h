@@ -3,7 +3,6 @@
 #define AXLE_LOAD_SPEED_PROFILE_CORE_2_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 #include "Axle_Load_Speed_Profile_Core_2_1.h"
 
 struct Axle_Load_Speed_Profile_Core_2
@@ -17,6 +16,8 @@ struct Axle_Load_Speed_Profile_Core_2
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Axle_Load_Speed_Profile_Core_2& p)
 {

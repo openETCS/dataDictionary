@@ -3,7 +3,6 @@
 #define DEFAULT_BALISE_OR_LOOP_OR_RIU_INFORMATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Default_balise_or_Loop_or_RIU_information_Core
 {
@@ -17,6 +16,8 @@ struct Default_balise_or_Loop_or_RIU_information_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Default_balise_or_Loop_or_RIU_information_Core& p)
 {

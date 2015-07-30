@@ -3,7 +3,6 @@
 #define VALIDATED_TRAIN_DATA_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 #include "Validated_train_data_Core_1.h"
 #include "Validated_train_data_Core_2.h"
 
@@ -29,6 +28,8 @@ struct Validated_train_data_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Validated_train_data_Core& p)
 {

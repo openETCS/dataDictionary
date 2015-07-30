@@ -3,7 +3,6 @@
 #define ADHESION_FACTOR_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Adhesion_Factor_Core
 {
@@ -21,6 +20,8 @@ struct Adhesion_Factor_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Adhesion_Factor_Core& p)
 {

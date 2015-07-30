@@ -3,7 +3,6 @@
 #define MODE_PROFILE_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 #include "Mode_profile_Core_1.h"
 
 struct Mode_profile_Core
@@ -26,6 +25,8 @@ struct Mode_profile_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Mode_profile_Core& p)
 {

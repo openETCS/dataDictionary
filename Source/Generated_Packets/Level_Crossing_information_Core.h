@@ -3,7 +3,6 @@
 #define LEVEL_CROSSING_INFORMATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Level_Crossing_information_Core
 {
@@ -24,6 +23,8 @@ struct Level_Crossing_information_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Level_Crossing_information_Core& p)
 {
