@@ -23,6 +23,10 @@ REPORT := $(SRC:.c=.report)
 
 it : $(OBJ)
 
+wp: coq-bitlemmas FORCE
+	@$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 1 -wp-out allbitwalker.out \
+		UpperBitsNotSet.c Bitwalker.c Bitwalker_Peek_Normal.c
+
 clean::
 	@$(RM) $(OBJ)
 	@$(RM) libBitwalker.a
