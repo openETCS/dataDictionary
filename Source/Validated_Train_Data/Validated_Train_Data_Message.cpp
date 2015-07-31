@@ -11,39 +11,6 @@
 #include <iostream>
 #include <cassert>
 
-
-std::ostream& operator<< (std::ostream& stream, const Validated_Train_Data_Message& p)
-{
-    stream << '('
-           << +p.NID_MESSAGE << ","
-           << +p.L_MESSAGE << ","
-           << +p.T_TRAIN << ","
-	   << +p.NID_ENGINE << ","
-           << *(p.packet_0_1) << ","
-           << *(p.packet_11) << ")";
-
-    return stream;
-}
-
-bool operator==(const Validated_Train_Data_Message& a, const Validated_Train_Data_Message& b)
-{
-    bool result = true;
-    
-    result = result && (a.NID_MESSAGE == b.NID_MESSAGE);
-    result = result && (a.L_MESSAGE == b.L_MESSAGE);
-    result = result && (a.T_TRAIN == b.T_TRAIN);
-    result = result && (a.NID_ENGINE == b.NID_ENGINE);
-    result = result && (*(a.packet_0_1) == *(b.packet_0_1));
-    result = result && (*(a.packet_11) == *(b.packet_11));
-
-    return result;
-}
-
-bool operator!=(const Validated_Train_Data_Message& a, const Validated_Train_Data_Message& b)
-{
-    return !(a == b);
-}
-
 bool Validated_Train_Data_Message::decode(Bitstream& stream)
 {
     NID_MESSAGE = Bitstream_Read(&stream, 8);

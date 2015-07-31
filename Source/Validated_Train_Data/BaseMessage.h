@@ -17,8 +17,6 @@ struct BaseMessage
     virtual bool equals(const BaseMessage& p) const = 0;
 };
 
-std::ostream& operator<<(std::ostream& stream, const BaseMessage& p);
-
 inline bool operator==(const BaseMessage& a, const BaseMessage& b)
 {
     return a.equals(b);
