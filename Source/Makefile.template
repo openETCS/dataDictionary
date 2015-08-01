@@ -114,8 +114,8 @@ export ASTYLE=astyle $(ASTYLEOPTIONS)
 	@$(WP) $(WP_FLAGS) -wp-check -wp-out $(patsubst %.c,%.wp, $<)  $< 
 
 
-%.why3:%.c FORCE
-	@($(WP) $(WP_FLAGS)  -wp-prover why3ide -wp-out $(patsubst %.c,%.wp, $<)  $< &)
+%.gen:%.c FORCE
+	@$(WP) $(WP_FLAGS)  -wp-gen -wp-out $(patsubst %.c,%.wp, $<)  $< 
 
 
 # start WP GUI and run provers
