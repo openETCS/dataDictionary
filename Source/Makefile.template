@@ -90,7 +90,7 @@ export WPREPORT=$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS)
 %.gen:%.c FORCE
 	@$(WP) $(WP_FLAGS)  -wp-gen -wp-out $(patsubst %.c,%.wp, $<)  $< 
 
-%.why3:%.c FORCE
+%.why3ide:%.c FORCE
 	@($(WP) $(WP_FLAGS)  -wp-prover why3ide -wp-out $(patsubst %.c,%.wp, $<)  $< &)
 
 
