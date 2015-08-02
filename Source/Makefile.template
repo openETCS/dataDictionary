@@ -117,6 +117,9 @@ export ASTYLE=astyle $(ASTYLEOPTIONS)
 %.gen:%.c FORCE
 	@$(WP) $(WP_FLAGS)  -wp-gen -wp-out $(patsubst %.c,%.wp, $<)  $< 
 
+%.why3:%.c FORCE
+	@($(WP) $(WP_FLAGS)  -wp-prover why3ide -wp-out $(patsubst %.c,%.wp, $<)  $< &)
+
 
 # start WP GUI and run provers
 %.wpgui:%.c coq-bitlemmas FORCE
