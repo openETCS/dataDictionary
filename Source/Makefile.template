@@ -74,33 +74,6 @@ export WP=frama-c
 export WPGUI=frama-c-gui
 export WPREPORT=$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS)
 
-
-ASTYLEOPTIONS += -A1
-ASTYLEOPTIONS += --break-blocks
-ASTYLEOPTIONS += --pad-oper
-ASTYLEOPTIONS += --pad-header
-ASTYLEOPTIONS += --lineend=linux
-ASTYLEOPTIONS += --add-brackets
-ASTYLEOPTIONS += --indent=spaces=4
-ASTYLEOPTIONS += --indent-classes
-ASTYLEOPTIONS += --indent-switches
-ASTYLEOPTIONS += --indent-col1-comments
-ASTYLEOPTIONS += --min-conditional-indent=0
-
-export ASTYLE=astyle $(ASTYLEOPTIONS)
-
-%.format:%.c FORCE
-	@$(ASTYLE) $<
-
-%.format:%.cpp FORCE
-	@$(ASTYLE) $<
-
-%.format:%.h FORCE
-	@$(ASTYLE) $<
-
-%.format:%.hpp FORCE
-	@$(ASTYLE) $<
-
 # start WP on command line and run provers
 %.wp:%.c coq-bitlemmas FORCE
 	@$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 1 -wp-out $(patsubst %.c,%.wp, $<)   $<
@@ -136,6 +109,32 @@ export ASTYLE=astyle $(ASTYLEOPTIONS)
 
 %.report:%.c
 	@+$(MAKE) $(patsubst %.c,%.report-wp, $<)
+
+ASTYLEOPTIONS += -A1
+ASTYLEOPTIONS += --break-blocks
+ASTYLEOPTIONS += --pad-oper
+ASTYLEOPTIONS += --pad-header
+ASTYLEOPTIONS += --lineend=linux
+ASTYLEOPTIONS += --add-brackets
+ASTYLEOPTIONS += --indent=spaces=4
+ASTYLEOPTIONS += --indent-classes
+ASTYLEOPTIONS += --indent-switches
+ASTYLEOPTIONS += --indent-col1-comments
+ASTYLEOPTIONS += --min-conditional-indent=0
+
+export ASTYLE=astyle $(ASTYLEOPTIONS)
+
+%.format:%.c FORCE
+	@$(ASTYLE) $<
+
+%.format:%.cpp FORCE
+	@$(ASTYLE) $<
+
+%.format:%.h FORCE
+	@$(ASTYLE) $<
+
+%.format:%.hpp FORCE
+	@$(ASTYLE) $<
 
 
 clean:: FORCE
