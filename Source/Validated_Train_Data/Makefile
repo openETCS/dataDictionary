@@ -40,7 +40,7 @@ lib:
 	@(cd $(PACKET_HEADER) && $(MAKE) lib)
 	@(cd $(TELEGRAM_HEADER) && $(MAKE) lib)
 
-SRC=Validated_Train_Data_Message.cpp create.cpp
+SRC=Validated_Train_Data_Message.cpp 
 
 OBJ := $(SRC:.cpp=.o)
 
