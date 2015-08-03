@@ -3,7 +3,6 @@
 #define ERROR_REPORTING_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Error_Reporting_Core
 {
@@ -16,6 +15,8 @@ struct Error_Reporting_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Error_Reporting_Core& p)
 {

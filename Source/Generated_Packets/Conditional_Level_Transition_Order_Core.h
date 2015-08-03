@@ -3,7 +3,6 @@
 #define CONDITIONAL_LEVEL_TRANSITION_ORDER_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 #include "Conditional_Level_Transition_Order_Core_1.h"
 
 struct Conditional_Level_Transition_Order_Core
@@ -22,6 +21,8 @@ struct Conditional_Level_Transition_Order_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Conditional_Level_Transition_Order_Core& p)
 {

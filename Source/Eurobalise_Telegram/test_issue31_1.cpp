@@ -5,6 +5,7 @@
 #include "Bitstream_Init.h"
 #include "subsets.h"
 #include "create.h"
+#include "print_bits.h"
 #include <cassert>
 #include <iostream>
 
@@ -22,7 +23,7 @@ int main ()
 
     std::vector<uint8_t> raw_stream(1000);
     Bitstream stream;
-    Bitstream_Init(&stream, &(raw_stream[0]), raw_stream.size(), 73);
+    Bitstream_Init(&stream, &(raw_stream[0]), raw_stream.size(), 0);
 
     uint32_t init_pos = stream.bitpos;
 
@@ -31,15 +32,15 @@ int main ()
     Telegram_Header header;
     {
         header.Q_UPDOWN  = 1;
-	header.M_VERSION = 32;
-	header.Q_MEDIA	 = 0;
-	header.N_PIG	 = 1;
-	header.N_TOTAL	 = 1;
-	header.M_DUP	 = 0;
-	header.M_MCOUNT	 = 0;
-	header.NID_C	 = 64;
-	header.NID_BG	 = 3;
-	header.Q_LINK	 = 1;
+        header.M_VERSION = 32;
+        header.Q_MEDIA	 = 0;
+        header.N_PIG	 = 1;
+        header.N_TOTAL	 = 1;
+        header.M_DUP	 = 0;
+        header.M_MCOUNT	 = 0;
+        header.NID_C	 = 64;
+        header.NID_BG	 = 3;
+        header.Q_LINK	 = 1;
     }
 
     telegram.header = header;
@@ -52,6 +53,11 @@ int main ()
 
     std::cout << " Encoding Eurobalise Telegram." << std::endl;
     telegram.encode(stream);
+
+    std::cout << " print from position " << init_pos << " to " << stream.bitpos <<  std::endl;
+    print(stream, init_pos, stream.bitpos);
+    std::cout << std::endl;
+    std::cout << std::endl;
 
     stream.bitpos = init_pos;
 

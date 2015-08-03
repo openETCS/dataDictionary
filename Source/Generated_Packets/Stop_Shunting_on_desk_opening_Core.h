@@ -3,7 +3,6 @@
 #define STOP_SHUNTING_ON_DESK_OPENING_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Stop_Shunting_on_desk_opening_Core
 {
@@ -16,6 +15,8 @@ struct Stop_Shunting_on_desk_opening_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Stop_Shunting_on_desk_opening_Core& p)
 {

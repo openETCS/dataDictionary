@@ -3,7 +3,6 @@
 #define PACKET_FOR_SENDING_PLAIN_TEXT_MESSAGES_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Packet_for_sending_plain_text_messages_Core
 {
@@ -35,6 +34,8 @@ struct Packet_for_sending_plain_text_messages_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Packet_for_sending_plain_text_messages_Core& p)
 {

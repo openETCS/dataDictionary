@@ -3,7 +3,6 @@
 #define STOP_IF_IN_STAFF_RESPONSIBLE_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Stop_if_in_Staff_Responsible_Core
 {
@@ -17,6 +16,8 @@ struct Stop_if_in_Staff_Responsible_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Stop_if_in_Staff_Responsible_Core& p)
 {

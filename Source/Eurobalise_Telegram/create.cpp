@@ -48,7 +48,7 @@ Error_Reporting create_Error_Reporting()
 {
     Error_Reporting a;
     {
-        a.core.L_PACKET = 30;
+        a.core.L_PACKET = 29;
 	a.core.M_ERROR = 18;
     }
 
@@ -73,13 +73,13 @@ Temporary_Speed_Restriction create_Temporary_Speed_Restriction()
     Temporary_Speed_Restriction a;
     {
         a.core.Q_DIR = 1;
-	a.core.L_PACKET = 71;
-	a.core.Q_SCALE = 1;
-	a.core.NID_TSR = 45;
-	a.core.D_TSR = 120;
-	a.core.L_TSR = 39;
-	a.core.Q_FRONT = 0;
-	a.core.V_TSR = 12;
+        a.core.L_PACKET = 71;
+        a.core.Q_SCALE = 1;
+        a.core.NID_TSR = 45;
+        a.core.D_TSR = 120;
+        a.core.L_TSR = 39;
+        a.core.Q_FRONT = 0;
+        a.core.V_TSR = 12;
     }
 
     return a;
@@ -105,7 +105,7 @@ Infill_location_reference create_Infill_location_reference(int i)
     Infill_location_reference a;
     {
         a.core.Q_DIR = 1;
-	a.core.L_PACKET = 48;
+	a.core.L_PACKET = 38+(10*i);
 	a.core.Q_NEWCOUNTRY = i;
 	a.core.NID_C = 123;
 	a.core.NID_BG = 258;

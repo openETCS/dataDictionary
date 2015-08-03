@@ -3,7 +3,6 @@
 #define STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_1_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Staff_Responsible_distance_Information_from_loop_Core_1
 {
@@ -15,6 +14,8 @@ struct Staff_Responsible_distance_Information_from_loop_Core_1
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Staff_Responsible_distance_Information_from_loop_Core_1& p)
 {

@@ -3,7 +3,6 @@
 #define LINKING_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 #include "Linking_Core_1.h"
 
 struct Linking_Core
@@ -27,6 +26,8 @@ struct Linking_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Linking_Core& p)
 {

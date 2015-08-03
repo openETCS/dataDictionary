@@ -3,7 +3,6 @@
 #define SESSION_MANAGEMENT_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Session_Management_Core
 {
@@ -22,6 +21,8 @@ struct Session_Management_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Session_Management_Core& p)
 {
