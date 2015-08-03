@@ -3,7 +3,6 @@
 #define POSITION_REPORT_PARAMETERS_CORE_1_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Position_Report_Parameters_Core_1
 {
@@ -13,6 +12,8 @@ struct Position_Report_Parameters_Core_1
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Position_Report_Parameters_Core_1& p)
 {

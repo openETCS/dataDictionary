@@ -3,7 +3,6 @@
 #define LIST_OF_BALISES_FOR_SH_AREA_CORE_1_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct List_of_balises_for_SH_Area_Core_1
 {
@@ -14,6 +13,8 @@ struct List_of_balises_for_SH_Area_Core_1
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const List_of_balises_for_SH_Area_Core_1& p)
 {

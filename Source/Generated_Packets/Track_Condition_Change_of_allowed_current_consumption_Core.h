@@ -3,7 +3,6 @@
 #define TRACK_CONDITION_CHANGE_OF_ALLOWED_CURRENT_CONSUMPTION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Track_Condition_Change_of_allowed_current_consumption_Core
 {
@@ -19,6 +18,8 @@ struct Track_Condition_Change_of_allowed_current_consumption_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Change_of_allowed_current_consumption_Core& p)
 {

@@ -3,7 +3,6 @@
 #define DEFAULT_GRADIENT_FOR_TEMPORARY_SPEED_RESTRICTION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Default_Gradient_for_Temporary_Speed_Restriction_Core
 {
@@ -19,6 +18,8 @@ struct Default_Gradient_for_Temporary_Speed_Restriction_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Default_Gradient_for_Temporary_Speed_Restriction_Core& p)
 {

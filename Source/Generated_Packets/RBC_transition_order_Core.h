@@ -3,7 +3,6 @@
 #define RBC_TRANSITION_ORDER_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct RBC_transition_order_Core
 {
@@ -22,6 +21,8 @@ struct RBC_transition_order_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const RBC_transition_order_Core& p)
 {

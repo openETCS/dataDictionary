@@ -3,7 +3,6 @@
 #define REVERSING_AREA_INFORMATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Reversing_area_information_Core
 {
@@ -20,6 +19,8 @@ struct Reversing_area_information_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Reversing_area_information_Core& p)
 {

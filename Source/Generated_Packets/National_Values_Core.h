@@ -3,7 +3,6 @@
 #define NATIONAL_VALUES_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 #include "National_Values_Core_1.h"
 #include "National_Values_Core_2.h"
 #include "National_Values_Core_3.h"
@@ -68,6 +67,8 @@ struct National_Values_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const National_Values_Core& p)
 {

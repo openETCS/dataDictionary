@@ -3,7 +3,6 @@
 #define TRAIN_RUNNING_NUMBER_FROM_RBC_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Train_running_number_from_RBC_Core
 {
@@ -17,6 +16,8 @@ struct Train_running_number_from_RBC_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Train_running_number_from_RBC_Core& p)
 {

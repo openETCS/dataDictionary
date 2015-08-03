@@ -3,7 +3,6 @@
 #define TEMPORARY_SPEED_RESTRICTION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Temporary_Speed_Restriction_Core
 {
@@ -22,6 +21,8 @@ struct Temporary_Speed_Restriction_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Temporary_Speed_Restriction_Core& p)
 {

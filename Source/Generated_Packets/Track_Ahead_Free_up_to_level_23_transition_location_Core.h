@@ -3,7 +3,6 @@
 #define TRACK_AHEAD_FREE_UP_TO_LEVEL_23_TRANSITION_LOCATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Track_Ahead_Free_up_to_level_23_transition_location_Core
 {
@@ -20,6 +19,8 @@ struct Track_Ahead_Free_up_to_level_23_transition_location_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Track_Ahead_Free_up_to_level_23_transition_location_Core& p)
 {

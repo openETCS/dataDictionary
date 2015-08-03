@@ -3,7 +3,6 @@
 #define EOLM_PACKET_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct EOLM_Packet_Core
 {
@@ -22,6 +21,8 @@ struct EOLM_Packet_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const EOLM_Packet_Core& p)
 {

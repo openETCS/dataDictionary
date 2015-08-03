@@ -3,7 +3,6 @@
 #define INHIBITION_OF_REVOCABLE_TSRS_FROM_BALISES_IN_L23_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Inhibition_of_revocable_TSRs_from_balises_in_L23_Core
 {
@@ -17,6 +16,8 @@ struct Inhibition_of_revocable_TSRs_from_balises_in_L23_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Inhibition_of_revocable_TSRs_from_balises_in_L23_Core& p)
 {
