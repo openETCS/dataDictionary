@@ -3,7 +3,6 @@
 #define PERMITTED_BRAKING_DISTANCE_INFORMATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 #include "Permitted_Braking_Distance_Information_Core_1.h"
 
 struct Permitted_Braking_Distance_Information_Core
@@ -30,6 +29,8 @@ struct Permitted_Braking_Distance_Information_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Permitted_Braking_Distance_Information_Core& p)
 {

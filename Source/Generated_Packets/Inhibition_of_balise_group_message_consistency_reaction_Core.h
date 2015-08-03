@@ -3,7 +3,6 @@
 #define INHIBITION_OF_BALISE_GROUP_MESSAGE_CONSISTENCY_REACTION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Inhibition_of_balise_group_message_consistency_reaction_Core
 {
@@ -19,6 +18,8 @@ struct Inhibition_of_balise_group_message_consistency_reaction_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Inhibition_of_balise_group_message_consistency_reaction_Core& p)
 {

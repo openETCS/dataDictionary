@@ -3,7 +3,6 @@
 #define INFILL_LOCATION_REFERENCE_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Infill_location_reference_Core
 {
@@ -20,6 +19,8 @@ struct Infill_location_reference_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Infill_location_reference_Core& p)
 {

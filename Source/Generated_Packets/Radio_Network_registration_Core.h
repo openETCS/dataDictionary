@@ -3,7 +3,6 @@
 #define RADIO_NETWORK_REGISTRATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Radio_Network_registration_Core
 {
@@ -18,6 +17,8 @@ struct Radio_Network_registration_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Radio_Network_registration_Core& p)
 {

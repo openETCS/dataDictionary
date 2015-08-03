@@ -3,7 +3,6 @@
 #define VIRTUAL_BALISE_COVER_MARKER_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Virtual_Balise_Cover_marker_Core
 {
@@ -16,6 +15,8 @@ struct Virtual_Balise_Cover_marker_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Virtual_Balise_Cover_marker_Core& p)
 {

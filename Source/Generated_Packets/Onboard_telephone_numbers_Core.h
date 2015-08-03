@@ -3,7 +3,6 @@
 #define ONBOARD_TELEPHONE_NUMBERS_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 #include "Onboard_telephone_numbers_Core_1.h"
 
 struct Onboard_telephone_numbers_Core
@@ -18,6 +17,8 @@ struct Onboard_telephone_numbers_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Onboard_telephone_numbers_Core& p)
 {

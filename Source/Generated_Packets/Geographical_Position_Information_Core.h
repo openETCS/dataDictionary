@@ -3,7 +3,6 @@
 #define GEOGRAPHICAL_POSITION_INFORMATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 #include "Geographical_Position_Information_Core_1.h"
 
 struct Geographical_Position_Information_Core
@@ -27,6 +26,8 @@ struct Geographical_Position_Information_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Geographical_Position_Information_Core& p)
 {

@@ -1,4 +1,6 @@
 
+#.SECONDARY:
+
 MAKEFLAGS += --no-print-directory --silent
 
 TOPDIR=..
@@ -20,8 +22,15 @@ SRC :=  UpperBitsNotSet.c\
 
 OBJ := $(SRC:.c=.o)
 REPORT := $(SRC:.c=.report)
+CHECK :=  $(SRC:.c=.check)
 
 it : $(OBJ)
+
+wp: coq-bitlemmas FORCE
+	@$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 1 -wp-out allbitwalker.out \
+		UpperBitsNotSet.c Bitwalker.c Bitwalker_Peek_Normal.c
+
+check: $(CHECK)
 
 clean::
 	@$(RM) $(OBJ)

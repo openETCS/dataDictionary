@@ -3,7 +3,6 @@
 #define TRAIN_RUNNING_NUMBER_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Train_running_number_Core
 {
@@ -16,6 +15,8 @@ struct Train_running_number_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Train_running_number_Core& p)
 {

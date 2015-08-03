@@ -3,7 +3,6 @@
 #define LEVEL_23_MOVEMENT_AUTHORITY_CORE_1_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Level_23_Movement_Authority_Core_1
 {
@@ -15,6 +14,8 @@ struct Level_23_Movement_Authority_Core_1
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Level_23_Movement_Authority_Core_1& p)
 {

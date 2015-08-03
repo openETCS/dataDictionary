@@ -3,7 +3,6 @@
 #define SYSTEM_VERSION_ORDER_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct System_Version_order_Core
 {
@@ -18,6 +17,8 @@ struct System_Version_order_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const System_Version_order_Core& p)
 {
