@@ -47,7 +47,7 @@ lib:
 	@(cd $(PACKET_HEADER) && $(MAKE) lib)
 	@(cd $(TELEGRAM_HEADER) && $(MAKE) lib)
 
-SRC=Eurobalise_Telegram.cpp create.cpp
+SRC= print_bits.cpp Eurobalise_Telegram.cpp create.cpp
 
 OBJ := $(SRC:.cpp=.o)
 
@@ -63,11 +63,18 @@ conditional_decoder_test: conditional_decoder_test.o $(OBJ)
 conditional_encoder_test: conditional_encoder_test.o $(OBJ)
 	$(CXX) -o $@ $+ $(LDFLAGS)
 
-test_issue31_1: test_issue31_1.o $(OBJ)
+test_issue31_1: test_issue31_1.o $(OBJ) 
 	$(CXX) -o $@ $+ $(LDFLAGS)
 
-test_issue31_2: test_issue31_2.o $(OBJ)
+test_issue31_2: test_issue31_2.o $(OBJ) 
 	$(CXX) -o $@ $+ $(LDFLAGS)
+
+print_bits: print_bits.o
+	$(CXX) -o $@ $+
+
+bits: print_bits
+	./print_bits
+	
 
 FORMAT := $(wildcard *.h) $(wildcard *.cpp)
 
@@ -75,6 +82,7 @@ format: FORCE
 	$(ASTYLE) $(FORMAT)
 
 clean::
+	@$(RM) print_bits
 	@$(RM) decoder_test
 	@$(RM) encoder_test
 	@$(RM) conditional_decoder_test

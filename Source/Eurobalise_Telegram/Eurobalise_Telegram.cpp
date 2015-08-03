@@ -72,35 +72,29 @@ bool Eurobalise_Telegram::decode(Bitstream& stream)
     //std::cout << stream->bitpos << std::endl;
 
     const uint32_t old_pos = stream.bitpos;
-    uint32_t current_pos = stream.bitpos + 8;
+    uint32_t current_pos = stream.bitpos;
     uint16_t current_l_packet = 0;
 
     while (stream.bitpos <= 1023 + old_pos)
     {
-        Packet_Header_Decoder(&stream, &packetID);
-
 	if (current_pos != stream.bitpos)
 	{
+	    std::cout << stream.bitpos << " != " << current_pos << std::endl;
 	    return false;
 	}
 
-	if (packetID.NID_PACKET == 255)
-	{
-	    current_l_packet = 8;
-	}
-	else
-	{
-            current_l_packet = Bitwalker_Peek_Normal(stream.bitpos, stream.size, 0, 13);
-	}
+        Packet_Header_Decoder(&stream, &packetID);
 
         BasePacketPtr packet;
 
         if (header.Q_UPDOWN == 1)
         {
+            current_l_packet = Bitwalker_Peek_Normal(stream.addr, stream.size, stream.bitpos+2, 13);
             packet = Decoder_Branch_TrackToTrain(stream, packetID);
         }
         else
         {
+            current_l_packet = Bitwalker_Peek_Normal(stream.addr, stream.size, stream.bitpos, 13);
             assert(header.Q_UPDOWN == 0);
             packet = Decoder_Branch_TrainToTrack(stream, packetID);
         }
@@ -141,9 +135,10 @@ bool Eurobalise_Telegram::encode(Bitstream& stream) const
 
     for (auto p = packets.begin(); p != packets.end(); ++p)
     {
-        if (stream.bitpos > 1023 + old_pos) {
-	    return false;
-	}
+        if (stream.bitpos > 1023 + old_pos)
+        {
+            return false;
+        }
 
         packetID.NID_PACKET = (*p)->id;
 
@@ -161,8 +156,8 @@ bool Eurobalise_Telegram::encode(Bitstream& stream) const
         }
         else if (header.Q_UPDOWN == 1)
         {
-	    if (Encoder_Branch_TrackToTrain(stream, *p) != 1)
-	    {
+            if (Encoder_Branch_TrackToTrain(stream, *p) != 1)
+            {
                 return false;
             }
         }

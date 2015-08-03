@@ -17,7 +17,7 @@ int main ()
     // declare and initialize a telegram header
     telegram.header = create_Telegram_Header_TrainToTrack();
     // telegram.header = create_Telegram_Header_TrackToTrain();
-// create a pointer to a data packet including core data packet 1
+    // create a pointer to a data packet including core data packet 1
     // and push this pointer into the telegam packet vector
     telegram.add(std::make_shared<Train_running_number>(create_Train_running_number()));
     telegram.add(std::make_shared<Error_Reporting>(create_Error_Reporting()));

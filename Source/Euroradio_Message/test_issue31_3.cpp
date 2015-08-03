@@ -68,7 +68,7 @@ int main ()
 	message.packet_11 = std::make_shared<Validated_train_data>(b);
     }
 
-    std::cout << " Encoder Input: " << message << std::endl;
+    std::cout << " Encoder Input:  " << message << std::endl;
 
     std::cout << " Encoding Valid_Train_Data message." << std::endl;
     message.encode(stream);
