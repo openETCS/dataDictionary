@@ -3,7 +3,6 @@
 #define LEVEL_23_TRANSITION_INFORMATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Level_23_transition_information_Core
 {
@@ -16,6 +15,8 @@ struct Level_23_transition_information_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Level_23_transition_information_Core& p)
 {

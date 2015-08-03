@@ -3,7 +3,6 @@
 #define DANGER_FOR_SHUNTING_INFORMATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Danger_for_Shunting_information_Core
 {
@@ -17,6 +16,8 @@ struct Danger_for_Shunting_information_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Danger_for_Shunting_information_Core& p)
 {

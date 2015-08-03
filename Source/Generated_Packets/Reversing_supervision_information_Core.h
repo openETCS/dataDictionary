@@ -3,7 +3,6 @@
 #define REVERSING_SUPERVISION_INFORMATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Reversing_supervision_information_Core
 {
@@ -20,6 +19,8 @@ struct Reversing_supervision_information_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Reversing_supervision_information_Core& p)
 {

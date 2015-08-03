@@ -3,7 +3,6 @@
 #define TRACK_CONDITION_STATION_PLATFORMS_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 #include "Track_Condition_Station_Platforms_Core_1.h"
 
 struct Track_Condition_Station_Platforms_Core
@@ -27,6 +26,8 @@ struct Track_Condition_Station_Platforms_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Station_Platforms_Core& p)
 {

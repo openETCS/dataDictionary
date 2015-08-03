@@ -3,7 +3,6 @@
 #define MOVEMENT_AUTHORITY_REQUEST_PARAMETERS_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Movement_Authority_Request_Parameters_Core
 {
@@ -20,6 +19,8 @@ struct Movement_Authority_Request_Parameters_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Movement_Authority_Request_Parameters_Core& p)
 {

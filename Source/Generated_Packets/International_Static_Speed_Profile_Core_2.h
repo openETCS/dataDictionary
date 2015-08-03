@@ -3,7 +3,6 @@
 #define INTERNATIONAL_STATIC_SPEED_PROFILE_CORE_2_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 #include "International_Static_Speed_Profile_Core_2_1.h"
 
 struct International_Static_Speed_Profile_Core_2
@@ -17,6 +16,8 @@ struct International_Static_Speed_Profile_Core_2
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const International_Static_Speed_Profile_Core_2& p)
 {

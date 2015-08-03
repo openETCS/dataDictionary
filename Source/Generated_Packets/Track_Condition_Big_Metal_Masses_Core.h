@@ -3,7 +3,6 @@
 #define TRACK_CONDITION_BIG_METAL_MASSES_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 #include "Track_Condition_Big_Metal_Masses_Core_1.h"
 
 struct Track_Condition_Big_Metal_Masses_Core
@@ -23,6 +22,8 @@ struct Track_Condition_Big_Metal_Masses_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Big_Metal_Masses_Core& p)
 {

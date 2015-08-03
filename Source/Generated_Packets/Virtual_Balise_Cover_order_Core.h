@@ -3,7 +3,6 @@
 #define VIRTUAL_BALISE_COVER_ORDER_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Virtual_Balise_Cover_order_Core
 {
@@ -20,6 +19,8 @@ struct Virtual_Balise_Cover_order_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Virtual_Balise_Cover_order_Core& p)
 {

@@ -3,7 +3,6 @@
 #define ROUTE_SUITABILITY_DATA_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 #include "Route_Suitability_Data_Core_1.h"
 
 struct Route_Suitability_Data_Core
@@ -28,6 +27,8 @@ struct Route_Suitability_Data_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Route_Suitability_Data_Core& p)
 {

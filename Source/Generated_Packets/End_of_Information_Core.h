@@ -3,7 +3,6 @@
 #define END_OF_INFORMATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct End_of_Information_Core
 {
@@ -17,6 +16,8 @@ struct End_of_Information_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const End_of_Information_Core& p)
 {

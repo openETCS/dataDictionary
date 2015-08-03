@@ -3,7 +3,6 @@
 #define RADIO_INFILL_AREA_INFORMATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include <iostream>
 
 struct Radio_infill_area_information_Core
 {
@@ -22,6 +21,8 @@ struct Radio_infill_area_information_Core
 };
 
 #ifdef __cplusplus
+
+#include <iostream>
 
 inline std::ostream& operator<<(std::ostream& stream, const Radio_infill_area_information_Core& p)
 {
