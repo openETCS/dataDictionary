@@ -27,7 +27,7 @@ struct MA_Request_Message : public BaseMessage
 
 	for (auto i = optional_packets.begin(); i != optional_packets.end(); ++i)
 	{
-	    if (i = optional_packets.begin())
+	    if (i == optional_packets.begin())
 	    {
 	        stream << ',';
 	    }
@@ -51,11 +51,11 @@ struct MA_Request_Message : public BaseMessage
             status = status && (Q_MARQSTREASON == q->Q_MARQSTREASON);
             status = status && (*packet_0_1 == *(q->packet_0_1));
 
-            if (optional_packets.size() == q.optional_packets.size())
+            if (optional_packets.size() == q->optional_packets.size())
 	    {
 	        for (size_t i = 0; i < optional_packets.size(); ++i)
 	        {
-	            status = status && (*(optional_packets[i]) == *(q.optional_packets[i]));
+	            status = status && (*(optional_packets[i]) == *(q->optional_packets[i]));
 	        }
 	    }
 	    else

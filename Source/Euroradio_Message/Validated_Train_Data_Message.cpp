@@ -13,6 +13,8 @@
 
 bool Validated_Train_Data_Message::decode(Bitstream& stream)
 {
+    uint32_t old_pos = stream.bitpos;
+
     NID_MESSAGE = Bitstream_Read(&stream, 8);
     L_MESSAGE = Bitstream_Read(&stream, 10);
     T_TRAIN = Bitstream_Read(&stream, 32);
@@ -34,11 +36,20 @@ bool Validated_Train_Data_Message::decode(Bitstream& stream)
         return false;
     }
 
+    if (stream.bitpos > old_pos + (8 * L_MESSAGE))
+    {
+        return false;
+    }
+
+    stream.bitpos = old_pos + (8 * L_MESSAGE);
+
     return true;
 }
 
 bool Validated_Train_Data_Message::encode(Bitstream& stream) const
 {
+    uint32_t old_pos = stream.bitpos;
+
     Bitstream_Write(&stream, 8, NID_MESSAGE);
     Bitstream_Write(&stream, 10, L_MESSAGE);
     Bitstream_Write(&stream, 32, T_TRAIN);
@@ -66,6 +77,13 @@ bool Validated_Train_Data_Message::encode(Bitstream& stream) const
     {
         return false;
     }
+
+    if (stream.bitpos > old_pos + (8 * L_MESSAGE))
+    {
+        return false;
+    }
+
+    stream.bitpos = old_pos + (8 * L_MESSAGE);
 
     return true;
 } 

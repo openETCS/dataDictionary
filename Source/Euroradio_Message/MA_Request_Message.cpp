@@ -13,7 +13,7 @@
 
 bool MA_Request_Message::decode(Bitstream& stream)
 {
-    uint32_t old_pos = stream->bitpos;
+    uint32_t old_pos = stream.bitpos;
 
     NID_MESSAGE = Bitstream_Read(&stream, 8);
     L_MESSAGE = Bitstream_Read(&stream, 10);
@@ -29,16 +29,20 @@ bool MA_Request_Message::decode(Bitstream& stream)
     {
         return false;
     }
-
-    while (old_pos + L_MESSAGE <= stream->bitpos + 7)
+    
+    while (old_pos + (8 * L_MESSAGE) > stream.bitpos + 7)
     {
-        BasePacketPtr = packet;
+        BasePacketPtr packet;
 
         Packet_Header_Decoder(&stream, &packetID);
 
         packet = Decoder_Branch_TrainToTrack(stream, packetID);
         if (packet)
         {
+	    if (packet->id != 9)
+	    {
+                return false;
+	    }
 	    optional_packets.push_back(packet);
         }
 	else
@@ -47,13 +51,20 @@ bool MA_Request_Message::decode(Bitstream& stream)
 	}
     }
 
-    stream->bitpos = old_pos + L_MESSAGE;
+    if (stream.bitpos > old_pos + (8 * L_MESSAGE))
+    {
+        return false;
+    }
+
+    stream.bitpos = old_pos + (8 * L_MESSAGE);
 
     return true;
 }
 
 bool MA_Request_Message::encode(Bitstream& stream) const
 {
+    uint32_t old_pos = stream.bitpos;
+
     Bitstream_Write(&stream, 8, NID_MESSAGE);
     Bitstream_Write(&stream, 10, L_MESSAGE);
     Bitstream_Write(&stream, 32, T_TRAIN);
@@ -72,16 +83,27 @@ bool MA_Request_Message::encode(Bitstream& stream) const
         return false;
     }
 
-    packetID.NID_PACKET = packet_11->id;
+    for (auto p = optional_packets.begin(); p != optional_packets.end(); ++p)
+    {
+        packetID.NID_PACKET = (*p)->id;
 
-    if (Packet_Header_Encoder(&stream, &packetID) != 1)
+	if (Packet_Header_Encoder(&stream, &packetID) != 1)
+	{
+	    return false;
+	}
+
+        if (Encoder_Branch_TrainToTrack(stream, *p) != 1)
+	{
+	    return false;
+	}
+    }
+
+    if (stream.bitpos > old_pos + (8 * L_MESSAGE))
     {
         return false;
     }
-    if (Encoder_Branch_TrainToTrack(stream, packet_11) != 1)
-    {
-        return false;
-    }
+
+    stream.bitpos = old_pos + (8 * L_MESSAGE);
 
     return true;
 } 
