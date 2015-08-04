@@ -10,10 +10,14 @@ typedef std::vector<BasePacketPtr> PacketSequence;
 
 struct MA_Request_Message : public Euroradio_Message
 {
+    uint16_t L_MESSAGE;     // # 10
+    uint32_t T_TRAIN;       // # 32
     uint32_t NID_ENGINE;    // # 24
     uint8_t Q_MARQSTREASON; // # 5
     BasePacketPtr packet_0_1;
     PacketSequence optional_packets;
+
+    MA_Request_Message() : Euroradio_Message(132) {}
 
     void print(std::ostream& stream) const override
     {

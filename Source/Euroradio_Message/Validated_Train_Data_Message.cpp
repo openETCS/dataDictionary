@@ -15,7 +15,6 @@ bool Validated_Train_Data_Message::decode(Bitstream& stream)
 {
     uint32_t old_pos = stream.bitpos;
 
-    NID_MESSAGE = Bitstream_Read(&stream, 8);
     L_MESSAGE = Bitstream_Read(&stream, 10);
     T_TRAIN = Bitstream_Read(&stream, 32);
     NID_ENGINE = Bitstream_Read(&stream, 24);

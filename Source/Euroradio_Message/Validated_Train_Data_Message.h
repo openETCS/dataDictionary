@@ -8,9 +8,13 @@
 
 struct Validated_Train_Data_Message : public Euroradio_Message
 {
+    uint16_t L_MESSAGE;   // # 10
+    uint32_t T_TRAIN;     // # 32
     uint32_t NID_ENGINE;  // # 24
     BasePacketPtr packet_0_1;
     BasePacketPtr packet_11;
+
+    Validated_Train_Data_Message() : Euroradio_Message(129) {}
 
     void print(std::ostream& stream) const override
     {

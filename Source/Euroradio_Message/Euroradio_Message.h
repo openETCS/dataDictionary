@@ -9,12 +9,16 @@
 struct Euroradio_Message
 {
     uint8_t  NID_MESSAGE; // # 8
-    uint16_t L_MESSAGE;   // # 10
-    uint32_t T_TRAIN;     // # 32
 
-    virtual void print(std::ostream& stream) const = 0;
+    Euroradio_Message();
 
-    virtual bool equals(const Euroradio_Message& p) const = 0;
+    Euroradio_Message(int nid) : NID_MESSAGE(nid) {}
+
+    virtual void print(std::ostream& stream) const;
+
+    virtual bool equals(const Euroradio_Message& p) const;
+
+    bool decode(Bitstream& stream);
 };
 
 inline bool operator==(const Euroradio_Message& a, const Euroradio_Message& b)
@@ -34,6 +38,10 @@ inline std::ostream& operator<< (std::ostream& stream, const Euroradio_Message& 
 }
 
 typedef std::shared_ptr<Euroradio_Message> Euroradio_MessagePtr;
+
+Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream);
+
+bool Euroradio_Message_Encoder(Bitstream& stream, Euroradio_MessagePtr p);
 
 #endif // EURORADIO_MESSAGE_H_INCLUDED
 
