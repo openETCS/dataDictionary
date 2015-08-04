@@ -2,11 +2,11 @@
 #ifndef VALIDATED_TRAIN_DATA_Message_H_INCLUDED
 #define VALIDATED_TRAIN_DATA_Message_H_INCLUDED
 
-#include "BaseMessage.h"
+#include "Euroradio_Message.h"
 #include "Bitstream.h"
 #include <iostream>
 
-struct Validated_Train_Data_Message : public BaseMessage
+struct Validated_Train_Data_Message : public Euroradio_Message
 {
     uint32_t NID_ENGINE;  // # 24
     BasePacketPtr packet_0_1;
@@ -23,7 +23,7 @@ struct Validated_Train_Data_Message : public BaseMessage
                << *(packet_11) << ")";
     }
 
-    bool equals(const BaseMessage& p) const override
+    bool equals(const Euroradio_Message& p) const override
     {
 	if (auto q = dynamic_cast<const Validated_Train_Data_Message*>(&p))
 	{

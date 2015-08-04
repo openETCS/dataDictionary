@@ -2,13 +2,13 @@
 #ifndef MA_REQUEST_MESSAGE_H_INCLUDED
 #define MA_REQUEST_MESSAGE_H_INCLUDED
 
-#include "BaseMessage.h"
+#include "Euroradio_Message.h"
 #include "Bitstream.h"
 #include <iostream>
 
 typedef std::vector<BasePacketPtr> PacketSequence;
 
-struct MA_Request_Message : public BaseMessage
+struct MA_Request_Message : public Euroradio_Message
 {
     uint32_t NID_ENGINE;    // # 24
     uint8_t Q_MARQSTREASON; // # 5
@@ -38,7 +38,7 @@ struct MA_Request_Message : public BaseMessage
 	stream << ')';
     }
 
-    bool equals(const BaseMessage& p) const override
+    bool equals(const Euroradio_Message& p) const override
     {
 	if (auto q = dynamic_cast<const MA_Request_Message*>(&p))
 	{
