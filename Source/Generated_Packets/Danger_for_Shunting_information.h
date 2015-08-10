@@ -30,6 +30,11 @@ struct Danger_for_Shunting_information : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Danger_for_Shunting_information> Danger_for_Shunting_informationPtr;

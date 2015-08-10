@@ -30,6 +30,11 @@ struct Level_Transition_Order : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Level_Transition_Order> Level_Transition_OrderPtr;

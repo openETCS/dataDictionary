@@ -30,6 +30,11 @@ struct EOLM_Packet : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<EOLM_Packet> EOLM_PacketPtr;

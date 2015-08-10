@@ -30,6 +30,11 @@ struct Validated_train_data : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Validated_train_data> Validated_train_dataPtr;

@@ -30,6 +30,11 @@ struct Geographical_Position_Information : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Geographical_Position_Information> Geographical_Position_InformationPtr;

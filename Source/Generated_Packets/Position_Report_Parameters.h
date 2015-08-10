@@ -30,6 +30,11 @@ struct Position_Report_Parameters : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Position_Report_Parameters> Position_Report_ParametersPtr;

@@ -30,6 +30,11 @@ struct Temporary_Speed_Restriction : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Temporary_Speed_Restriction> Temporary_Speed_RestrictionPtr;

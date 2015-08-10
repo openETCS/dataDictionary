@@ -30,6 +30,11 @@ struct Level_1_Movement_Authority : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Level_1_Movement_Authority> Level_1_Movement_AuthorityPtr;

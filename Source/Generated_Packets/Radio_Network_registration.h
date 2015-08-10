@@ -30,6 +30,11 @@ struct Radio_Network_registration : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Radio_Network_registration> Radio_Network_registrationPtr;

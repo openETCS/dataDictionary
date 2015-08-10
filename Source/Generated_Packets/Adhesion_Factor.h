@@ -30,6 +30,11 @@ struct Adhesion_Factor : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Adhesion_Factor> Adhesion_FactorPtr;

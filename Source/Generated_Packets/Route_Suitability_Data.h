@@ -30,6 +30,11 @@ struct Route_Suitability_Data : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Route_Suitability_Data> Route_Suitability_DataPtr;

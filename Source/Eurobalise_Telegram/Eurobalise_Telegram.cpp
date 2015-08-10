@@ -2,8 +2,7 @@
 #include "Eurobalise_Telegram.h"
 #include "Telegram_Header_Decoder.h"
 #include "Telegram_Header_Encoder.h"
-#include "Packet_Header_Decoder.h"
-#include "Packet_Header_Encoder.h"
+#include "Packet_Header.h"
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
 #include "Bitwalker_Peek_Normal.h"
@@ -73,7 +72,6 @@ bool Eurobalise_Telegram::decode(Bitstream& stream)
 
     const uint32_t old_pos = stream.bitpos;
     uint32_t current_pos = stream.bitpos;
-    uint16_t current_l_packet = 0;
 
     while (stream.bitpos <= 1023 + old_pos)
     {
@@ -89,12 +87,10 @@ bool Eurobalise_Telegram::decode(Bitstream& stream)
 
         if (header.Q_UPDOWN == 1)
         {
-            current_l_packet = Bitwalker_Peek_Normal(stream.addr, stream.size, stream.bitpos+2, 13);
             packet = Decoder_Branch_TrackToTrain(stream, packetID);
         }
         else
         {
-            current_l_packet = Bitwalker_Peek_Normal(stream.addr, stream.size, stream.bitpos, 13);
             assert(header.Q_UPDOWN == 0);
             packet = Decoder_Branch_TrainToTrack(stream, packetID);
         }
@@ -113,7 +109,7 @@ bool Eurobalise_Telegram::decode(Bitstream& stream)
             return false;
         }
 
-	current_pos = current_pos + current_l_packet;
+	current_pos += (*packet).length();
     }
 
     return true;

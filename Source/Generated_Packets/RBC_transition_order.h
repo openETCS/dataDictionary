@@ -30,6 +30,11 @@ struct RBC_transition_order : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<RBC_transition_order> RBC_transition_orderPtr;

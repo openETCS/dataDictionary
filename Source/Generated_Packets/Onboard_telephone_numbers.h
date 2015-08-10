@@ -30,6 +30,11 @@ struct Onboard_telephone_numbers : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Onboard_telephone_numbers> Onboard_telephone_numbersPtr;

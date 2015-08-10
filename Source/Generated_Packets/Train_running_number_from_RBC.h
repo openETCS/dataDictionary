@@ -30,6 +30,11 @@ struct Train_running_number_from_RBC : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Train_running_number_from_RBC> Train_running_number_from_RBCPtr;
