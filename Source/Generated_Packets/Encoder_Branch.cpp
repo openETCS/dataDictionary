@@ -5,7 +5,7 @@
 bool Encoder_Branch_TrainToTrack(Bitstream& stream, BasePacketPtr packet)
 {
 
-    switch (packet->id)
+    switch (packet->header.NID_PACKET)
     {
         case 0 :
         {
@@ -101,7 +101,7 @@ bool Encoder_Branch_TrainToTrack(Bitstream& stream, BasePacketPtr packet)
 bool Encoder_Branch_TrackToTrain(Bitstream& stream, BasePacketPtr packet)
 {
 
-    switch (packet->id)
+    switch (packet->header.NID_PACKET)
     {
         case 0 :
         {

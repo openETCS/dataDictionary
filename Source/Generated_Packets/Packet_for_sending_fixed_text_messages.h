@@ -14,7 +14,7 @@ struct Packet_for_sending_fixed_text_messages : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << +id << ',' << core << ')';
+        stream << '(' << +header.NID_PACKET << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -23,7 +23,7 @@ struct Packet_for_sending_fixed_text_messages : public BasePacket
 	{
 	    bool status = true;
 
-	    status = status && (id == q->id);
+	    status = status && (header.NID_PACKET == q->header.NID_PACKET);
 	    status = status && (core == q->core);
 
 	    return status;

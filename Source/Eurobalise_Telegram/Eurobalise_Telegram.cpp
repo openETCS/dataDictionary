@@ -61,8 +61,6 @@ bool operator!=(const Eurobalise_Telegram& a, const Eurobalise_Telegram& b)
 
 bool Eurobalise_Telegram::decode(Bitstream& stream)
 {
-    Packet_Header packetID;
-
     if (Telegram_Header_Decoder(&stream, &(header)) != 1)
     {
         return false;
@@ -81,25 +79,26 @@ bool Eurobalise_Telegram::decode(Bitstream& stream)
 	    return false;
 	}
 
-        Packet_Header_Decoder(&stream, &packetID);
+	Packet_Header packet_header;
+        Packet_Header_Decoder(&stream, &packet_header);
 
-        BasePacketPtr packet;
+        BasePacketPtr ptr;
 
         if (header.Q_UPDOWN == 1)
         {
-            packet = Decoder_Branch_TrackToTrain(stream, packetID);
+            ptr = Decoder_Branch_TrackToTrain(stream, packet_header);
         }
         else
         {
             assert(header.Q_UPDOWN == 0);
-            packet = Decoder_Branch_TrainToTrack(stream, packetID);
+            ptr = Decoder_Branch_TrainToTrack(stream, packet_header);
         }
 
-        if (packet)
+        if (ptr)
         {
-            packets.push_back(packet);
+            packets.push_back(ptr);
 
-            if (packetID.NID_PACKET == 255)
+            if (ptr->header.NID_PACKET == 255)
             {
                 break;
             }
@@ -109,16 +108,13 @@ bool Eurobalise_Telegram::decode(Bitstream& stream)
             return false;
         }
 
-	current_pos += (*packet).length();
+	current_pos += (*ptr).length();
     }
-
-    return true;
+return true;
 }
 
 bool Eurobalise_Telegram::encode(Bitstream& stream) const
 {
-    Packet_Header packetID;
-
     if (Telegram_Header_Encoder(&stream, &header) != 1)
     {
         return false;
@@ -127,7 +123,7 @@ bool Eurobalise_Telegram::encode(Bitstream& stream) const
     uint32_t old_pos = stream.bitpos;
 
     // check that last packet denotes end of message
-    assert(packets.back()->id == 255);
+    assert(packets.back()->header.NID_PACKET == 255);
 
     for (auto p = packets.begin(); p != packets.end(); ++p)
     {
@@ -136,9 +132,7 @@ bool Eurobalise_Telegram::encode(Bitstream& stream) const
             return false;
         }
 
-        packetID.NID_PACKET = (*p)->id;
-
-        if (Packet_Header_Encoder(&stream, &packetID) != 1)
+        if (Packet_Header_Encoder(&stream, &((*p)->header)) != 1)
         {
             return false;
         }

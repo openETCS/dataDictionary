@@ -33,16 +33,14 @@ int main ()
     std::cout << " Encoding data packets:" << std::endl;
     Train_running_number a = create_Train_running_number();
     {
-        Packet_Header h {a.id};
-        Packet_Header_Encoder(&stream, &h);
+        Packet_Header_Encoder(&stream, &(a.header));
         std::cout << "    Encoding packet " << a << std::endl;
         Train_running_number_Encoder(&stream, &a.core);
     }
 
     Error_Reporting b = create_Error_Reporting();
     {
-        Packet_Header h {b.id};
-        Packet_Header_Encoder(&stream, &h);
+        Packet_Header_Encoder(&stream, &(b.header));
         std::cout << "    Encoding packet " << b << std::endl;
         Error_Reporting_Encoder(&stream, &b.core);
     }
@@ -51,16 +49,14 @@ int main ()
 
         Temporary_Speed_Restriction a = create_Temporary_Speed_Restriction();
         {
-            Packet_Header h {a.id};
-    	Packet_Header_Encoder(&stream, &h);
+    	Packet_Header_Encoder(&stream, &(a.header));
     	std::cout << "    Encoding packet " << a << std::endl;
     	Temporary_Speed_Restriction_Encoder(&stream, &a.core);
         }
 
         Adhesion_Factor b = create_Adhesion_Factor();
         {
-            Packet_Header h {b.id};
-    	Packet_Header_Encoder(&stream, &h);
+    	Packet_Header_Encoder(&stream, &(b.header));
     	std::cout << "    Encoding packet " << b << std::endl;
     	Adhesion_Factor_Encoder(&stream, &b.core);
         }
@@ -69,8 +65,7 @@ int main ()
 
     End_of_Information c;
     {
-        Packet_Header h {c.id};
-        Packet_Header_Encoder(&stream, &h);
+        Packet_Header_Encoder(&stream, &(c.header));
         std::cout << "    Encoding packet " << c << std::endl;
         End_of_Information_Encoder(&stream, &c.core);
     }

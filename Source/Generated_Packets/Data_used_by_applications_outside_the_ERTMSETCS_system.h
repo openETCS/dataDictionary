@@ -14,7 +14,7 @@ struct Data_used_by_applications_outside_the_ERTMSETCS_system : public BasePacke
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << +id << ',' << core << ')';
+        stream << '(' << +header.NID_PACKET << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -23,7 +23,7 @@ struct Data_used_by_applications_outside_the_ERTMSETCS_system : public BasePacke
 	{
 	    bool status = true;
 
-	    status = status && (id == q->id);
+	    status = status && (header.NID_PACKET == q->header.NID_PACKET);
 	    status = status && (core == q->core);
 
 	    return status;
