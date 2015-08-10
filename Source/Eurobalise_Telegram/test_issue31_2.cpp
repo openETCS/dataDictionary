@@ -1,7 +1,7 @@
 
 #include "Eurobalise_Telegram.h"
 #include "Telegram_Header_Encoder.h"
-#include "Packet_Header_Encoder.h"
+#include "Packet_Header.h"
 #include "Bitstream_Init.h"
 #include "subsets.h"
 #include "create.h"
@@ -134,10 +134,10 @@ int main ()
     std::cout << " Decoder Output: " << new_telegram << std::endl;
 
     assert(telegram.header == new_telegram.header);
-    assert(telegram.packets[0]->id == new_telegram.packets[0]->id);
-    assert(telegram.packets[1]->id == new_telegram.packets[1]->id);
-    assert(telegram.packets[2]->id == new_telegram.packets[2]->id);
-    assert(telegram.packets[3]->id == new_telegram.packets[3]->id);
+    assert(telegram.packets[0]->header.NID_PACKET == new_telegram.packets[0]->header.NID_PACKET);
+    assert(telegram.packets[1]->header.NID_PACKET == new_telegram.packets[1]->header.NID_PACKET);
+    assert(telegram.packets[2]->header.NID_PACKET == new_telegram.packets[2]->header.NID_PACKET);
+    assert(telegram.packets[3]->header.NID_PACKET == new_telegram.packets[3]->header.NID_PACKET);
     assert(telegram == new_telegram);
 
     std::cout << " Test successful." << std::endl;

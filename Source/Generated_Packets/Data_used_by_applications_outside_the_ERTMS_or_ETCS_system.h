@@ -14,7 +14,7 @@ struct Data_used_by_applications_outside_the_ERTMS_or_ETCS_system : public BaseP
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << +id << ',' << core << ')';
+        stream << '(' << +header.NID_PACKET << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -23,12 +23,17 @@ struct Data_used_by_applications_outside_the_ERTMS_or_ETCS_system : public BaseP
 	{
 	    bool status = true;
 
-	    status = status && (id == q->id);
+	    status = status && (header.NID_PACKET == q->header.NID_PACKET);
 	    status = status && (core == q->core);
 
 	    return status;
 	}
 	return false;
+    }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
     }
 };
 

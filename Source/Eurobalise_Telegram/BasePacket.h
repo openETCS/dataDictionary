@@ -2,6 +2,7 @@
 #ifndef BASEPACKET_H_INCLUDED
 #define BASEPACKET_H_INCLUDED
 
+#include "Packet_Header.h"
 #include <cstdlib>
 #include <cstdint>
 #include <memory>
@@ -10,13 +11,18 @@
 
 struct BasePacket
 {
-    uint8_t id;
+    Packet_Header header;
 
-    BasePacket(int id1) : id(id1) {}
+    BasePacket(uint8_t nid)
+    {
+        header.NID_PACKET = nid;
+    }
 
     virtual void print(std::ostream& stream) const = 0;
 
     virtual bool equals(const BasePacket& p) const = 0;
+
+    virtual uint16_t length() const = 0;
 };
 
 inline bool operator== (const BasePacket& a, const BasePacket& b)

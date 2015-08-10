@@ -1,7 +1,6 @@
 
 #include "Validated_Train_Data_Message.h"
-#include "Packet_Header_Decoder.h"
-#include "Packet_Header_Encoder.h"
+#include "Packet_Header.h"
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
 #include "Bitstream_Write.h"

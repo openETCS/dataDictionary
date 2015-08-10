@@ -1,7 +1,7 @@
 
 #include "Eurobalise_Telegram.h"
 #include "Telegram_Header_Encoder.h"
-#include "Packet_Header_Encoder.h"
+#include "Packet_Header.h"
 #include "Bitstream_Init.h"
 #include "subsets.h"
 #include "create.h"
@@ -33,16 +33,14 @@ int main ()
     /*
         Train_running_number a = create_Train_running_number();
         {
-            Packet_Header h {a.id};
-            Packet_Header_Encoder(&stream, &h);
+            Packet_Header_Encoder(&stream, &(a.header));
     	std::cout << "    Encoding packet " << a << std::endl;
             Train_running_number_Encoder(&stream, &a.core);
         }
 
         Error_Reporting b = create_Error_Reporting();
         {
-            Packet_Header h {b.id};
-            Packet_Header_Encoder(&stream, &h);
+            Packet_Header_Encoder(&stream, &(b.header));
     	std::cout << "    Encoding packet " << b << std::endl;
             Error_Reporting_Encoder(&stream, &b.core);
         }
@@ -50,48 +48,42 @@ int main ()
 
     Temporary_Speed_Restriction a = create_Temporary_Speed_Restriction();
     {
-        Packet_Header h {a.id};
-        Packet_Header_Encoder(&stream, &h);
+        Packet_Header_Encoder(&stream, &(a.header));
         std::cout << "    Encoding packet " << a << std::endl;
         Temporary_Speed_Restriction_Encoder(&stream, &a.core);
     }
 
     Adhesion_Factor b = create_Adhesion_Factor();
     {
-        Packet_Header h {b.id};
-        Packet_Header_Encoder(&stream, &h);
+        Packet_Header_Encoder(&stream, &(b.header));
         std::cout << "    Encoding packet " << b << std::endl;
         Adhesion_Factor_Encoder(&stream, &b.core);
     }
 
     Infill_location_reference c = create_Infill_location_reference(1);
     {
-        Packet_Header h {c.id};
-        Packet_Header_Encoder(&stream, &h);
+        Packet_Header_Encoder(&stream, &(c.header));
         std::cout << "    Encoding packet " << c << std::endl;
         Infill_location_reference_Encoder(&stream, &c.core);
     }
 
     Infill_location_reference d = create_Infill_location_reference(0);
     {
-        Packet_Header h {d.id};
-        Packet_Header_Encoder(&stream, &h);
+        Packet_Header_Encoder(&stream, &(d.header));
         std::cout << "    Encoding packet " << d << std::endl;
         Infill_location_reference_Encoder(&stream, &d.core);
     }
 
     Gradient_Profile e = create_Gradient_Profile();
     {
-        Packet_Header h {e.id};
-        Packet_Header_Encoder(&stream, &h);
+        Packet_Header_Encoder(&stream, &(e.header));
         std::cout << "    Encoding packet " << e << std::endl;
         Gradient_Profile_Encoder(&stream, &e.core);
     }
 
     End_of_Information f;
     {
-        Packet_Header h {f.id};
-        Packet_Header_Encoder(&stream, &h);
+        Packet_Header_Encoder(&stream, &(f.header));
         std::cout << "    Encoding packet " << f << std::endl;
         End_of_Information_Encoder(&stream, &f.core);
     }

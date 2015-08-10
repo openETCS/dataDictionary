@@ -14,7 +14,7 @@ struct Adhesion_Factor : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << +id << ',' << core << ')';
+        stream << '(' << +header.NID_PACKET << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
@@ -23,12 +23,17 @@ struct Adhesion_Factor : public BasePacket
 	{
 	    bool status = true;
 
-	    status = status && (id == q->id);
+	    status = status && (header.NID_PACKET == q->header.NID_PACKET);
 	    status = status && (core == q->core);
 
 	    return status;
 	}
 	return false;
+    }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
     }
 };
 

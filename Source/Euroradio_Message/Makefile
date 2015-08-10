@@ -6,6 +6,7 @@ export BITWALKER=$(TOPDIR)/Bitwalker
 export GENERATED_PACKETS=$(TOPDIR)/Generated_Packets
 export PACKET_HEADER=$(TOPDIR)/Packet_Header
 export TELEGRAM_HEADER=$(TOPDIR)/Telegram_Header
+export BASE_PACKET=$(TOPDIR)/Eurobalise_Telegram
 
 #VPATH = Packet_Header
 
@@ -27,6 +28,8 @@ LDFLAGS += -L$(TELEGRAM_HEADER) -ltelegram_header
 
 CPPFLAGS += -I$(BITWALKER)
 LDFLAGS += -L$(BITWALKER) -lBitwalker
+
+CPPFLAGS += -I$(BASE_PACKET)
 
 test: it
 	./test_issue31_3

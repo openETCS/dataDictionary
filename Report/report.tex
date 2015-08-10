@@ -1,0 +1,167 @@
+
+\documentclass[paper=a4,12pt,DIV16,BCOR8mm,twoside]{scrreprt}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[english]{babel}
+
+\usepackage[pdftex]{graphicx}
+\usepackage{xspace}
+\usepackage{textcomp}
+
+% needed for FloatBarrier
+\usepackage[section]{placeins}
+
+\usepackage{verbatim}
+\usepackage[nomargin,inline,final]{fixme}
+
+\usepackage{comment}
+
+%\usepackage[firstpage]{draftwatermark}
+%\SetWatermarkScale{4}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{txfonts}
+\usepackage{mathtools}
+
+\usepackage{booktabs}
+\usepackage{rotating}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{multicol}
+
+
+\usepackage{listings}
+\input{listing}
+\input{newcommands}
+
+\usepackage{float}
+\usepackage{chngcntr}
+\counterwithout{footnote}{chapter}
+
+% need to appear as last \usepackage to avoid nonsensical warnings,
+% cf. http://mrunix.de/forums/showthread.php?t=38657#8
+\usepackage[pdftex]{hyperref}
+
+\floatstyle{plain}
+\newfloat{listing}{thp}{lop1}[chapter]
+\floatname{listing}{Listing}
+\newfloat{predfun}{thp}{lop2}[chapter]
+\floatname{predfun}{Listing}
+
+
+% share counters of all floats:
+\makeatletter
+\let\c@listing\c@figure
+\let\c@predfun\c@figure
+%\let\c@lemma\c@figure
+\let\c@table\c@figure
+\makeatother
+
+% suppress hyperref warnings
+\makeatletter
+\def\Hy@Warning#1{}
+\def\Hy@WarningNoLine#1{}
+\makeatother
+
+\renewcommand\floatpagefraction{.95}
+\renewcommand\topfraction{.95}
+\renewcommand\bottomfraction{.95}
+\renewcommand\textfraction{.05}
+\setlength{\unitlength}{1mm}
+
+\setlength\topsep{1.5\baselineskip}  % larger space around theorem-like environments
+
+\addtolength{\parskip}{0.5\baselineskip}
+\parindent=0cm
+
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{2}
+
+\begin{document}
+
+\include{title}
+%\include{copyright}
+%\include{foreword}
+%\include{changes}
+
+%\listoffixmes
+\tableofcontents
+%\listof{predfun}{List of Logic Specifications}
+%\listoffigures
+%\listoftables
+
+\chapter{Introduction}
+
+\part{Bit Manipulation}
+
+\chapter{The \inl{Bitstream} Layer}
+
+\section{The Type \inl{Bitstream}}
+\subsection{The Function \inl{Bitstream_Read}}
+\subsection{The Function \inl{Bitstream_Write}}
+\subsection{The Function \inl{NormalBitstream}}
+
+\section{Predicates}
+\subsection{\inl{Readable} and \inl{Writeable}}
+\subsection{\inl{Invariant} and \inl{Normal}}
+\subsection{\inl{EqualBits} and \inl{Unchanged}}
+\subsection{\inl{UpperBitsNotSet}}
+
+\section{Formal Specification}
+\subsection{The Function \inl{Bitstream_Read}}
+\subsection{The Function \inl{Bitstream_Write}}
+\subsection{The Function \inl{NormalBitstream}}
+
+\section{Implementation}
+\subsection{The Function \inl{Bitstream_Read}}
+\subsection{The Function \inl{Bitstream_Write}}
+\subsection{The Function \inl{NormalBitstream}}
+
+\section{Formal Verification}
+\subsection{\inl{Bitstream_ReadThenWrite}}
+\subsection{\inl{Bitstream_WriteThenRead}}
+
+\chapter{The \inl{Bitwalker} Layer}
+
+\section{Predicates}
+
+\section{Formal Specification}
+\subsection{The Function \inl{Bitwalker_Peek_Normal}}
+\subsection{The Function \inl{Bitwalker_Poke_Normal}}
+
+\section{Implementation}
+\subsection{The Function \inl{Bitwalker_Peek_Normal}}
+\subsection{The Function \inl{Bitwalker_Poke_Normal}}
+
+\section{Formal Verification}
+
+\chapter{Auxiliary Bit Functions}
+
+\part{Packets from Chapter 7}
+
+\chapter{Packets}
+
+\part{Telegram and Messages from Chapter 8}
+\chapter{Eurobalise Telegrams}
+\chapter{Radio Messages}
+
+\cleardoublepage
+
+%\appendix
+%\include{history}
+ 
+
+% jg:  the "phantomsection" is a hack to fix the wrong reference to bibliography
+% see also http://sumanta679.wordpress.com/2009/05/15/latex-list-of-table-list-of-figures-and-bibliography-in-toc/
+%\newpage
+%\phantomsection \label{listoffig}
+%\addcontentsline{toc}{chapter}{Bibliography}
+%\bibliographystyle{unsrt}
+%\bibliography{bibliography}
+
+\end{document}
+
