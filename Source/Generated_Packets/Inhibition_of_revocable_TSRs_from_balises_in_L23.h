@@ -30,6 +30,11 @@ struct Inhibition_of_revocable_TSRs_from_balises_in_L23 : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Inhibition_of_revocable_TSRs_from_balises_in_L23> Inhibition_of_revocable_TSRs_from_balises_in_L23Ptr;

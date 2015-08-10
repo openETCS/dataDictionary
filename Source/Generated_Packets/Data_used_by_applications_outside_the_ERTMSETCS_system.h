@@ -30,6 +30,11 @@ struct Data_used_by_applications_outside_the_ERTMSETCS_system : public BasePacke
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Data_used_by_applications_outside_the_ERTMSETCS_system> Data_used_by_applications_outside_the_ERTMSETCS_systemPtr;

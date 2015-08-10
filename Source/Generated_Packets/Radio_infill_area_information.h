@@ -30,6 +30,11 @@ struct Radio_infill_area_information : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Radio_infill_area_information> Radio_infill_area_informationPtr;

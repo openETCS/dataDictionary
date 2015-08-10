@@ -30,6 +30,11 @@ struct Track_Condition_Station_Platforms : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Track_Condition_Station_Platforms> Track_Condition_Station_PlatformsPtr;

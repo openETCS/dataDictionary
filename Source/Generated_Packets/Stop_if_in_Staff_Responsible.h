@@ -30,6 +30,11 @@ struct Stop_if_in_Staff_Responsible : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Stop_if_in_Staff_Responsible> Stop_if_in_Staff_ResponsiblePtr;

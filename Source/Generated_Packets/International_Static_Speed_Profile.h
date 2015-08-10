@@ -30,6 +30,11 @@ struct International_Static_Speed_Profile : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<International_Static_Speed_Profile> International_Static_Speed_ProfilePtr;

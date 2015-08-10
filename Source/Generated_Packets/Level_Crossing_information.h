@@ -30,6 +30,11 @@ struct Level_Crossing_information : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Level_Crossing_information> Level_Crossing_informationPtr;

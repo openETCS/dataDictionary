@@ -30,6 +30,11 @@ struct Data_used_by_applications_outside_the_ERTMS_or_ETCS_system : public BaseP
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Data_used_by_applications_outside_the_ERTMS_or_ETCS_system> Data_used_by_applications_outside_the_ERTMS_or_ETCS_systemPtr;

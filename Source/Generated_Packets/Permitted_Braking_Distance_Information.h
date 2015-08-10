@@ -30,6 +30,11 @@ struct Permitted_Braking_Distance_Information : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Permitted_Braking_Distance_Information> Permitted_Braking_Distance_InformationPtr;

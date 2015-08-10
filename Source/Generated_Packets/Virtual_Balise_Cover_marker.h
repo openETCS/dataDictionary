@@ -30,6 +30,11 @@ struct Virtual_Balise_Cover_marker : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  14;
+    }
 };
 
 typedef std::shared_ptr<Virtual_Balise_Cover_marker> Virtual_Balise_Cover_markerPtr;

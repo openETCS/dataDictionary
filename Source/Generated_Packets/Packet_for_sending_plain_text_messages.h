@@ -30,6 +30,11 @@ struct Packet_for_sending_plain_text_messages : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Packet_for_sending_plain_text_messages> Packet_for_sending_plain_text_messagesPtr;

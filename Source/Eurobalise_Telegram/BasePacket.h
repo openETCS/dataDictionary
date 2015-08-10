@@ -17,6 +17,8 @@ struct BasePacket
     virtual void print(std::ostream& stream) const = 0;
 
     virtual bool equals(const BasePacket& p) const = 0;
+
+    virtual uint16_t length() const = 0;
 };
 
 inline bool operator== (const BasePacket& a, const BasePacket& b)

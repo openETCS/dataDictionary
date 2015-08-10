@@ -30,6 +30,11 @@ struct Reversing_area_information : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Reversing_area_information> Reversing_area_informationPtr;

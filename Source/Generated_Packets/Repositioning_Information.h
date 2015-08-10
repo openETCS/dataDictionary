@@ -30,6 +30,11 @@ struct Repositioning_Information : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Repositioning_Information> Repositioning_InformationPtr;

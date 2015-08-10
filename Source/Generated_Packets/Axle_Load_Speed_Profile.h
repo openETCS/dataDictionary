@@ -30,6 +30,11 @@ struct Axle_Load_Speed_Profile : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Axle_Load_Speed_Profile> Axle_Load_Speed_ProfilePtr;

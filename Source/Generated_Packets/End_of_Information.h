@@ -30,6 +30,11 @@ struct End_of_Information : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  8;
+    }
 };
 
 typedef std::shared_ptr<End_of_Information> End_of_InformationPtr;

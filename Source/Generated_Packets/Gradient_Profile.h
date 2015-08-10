@@ -30,6 +30,11 @@ struct Gradient_Profile : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Gradient_Profile> Gradient_ProfilePtr;

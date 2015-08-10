@@ -30,6 +30,11 @@ struct Mode_profile : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Mode_profile> Mode_profilePtr;

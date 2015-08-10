@@ -30,6 +30,11 @@ struct Inhibition_of_balise_group_message_consistency_reaction : public BasePack
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Inhibition_of_balise_group_message_consistency_reaction> Inhibition_of_balise_group_message_consistency_reactionPtr;

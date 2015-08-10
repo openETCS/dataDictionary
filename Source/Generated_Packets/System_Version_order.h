@@ -30,6 +30,11 @@ struct System_Version_order : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<System_Version_order> System_Version_orderPtr;

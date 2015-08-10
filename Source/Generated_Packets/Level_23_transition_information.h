@@ -30,6 +30,11 @@ struct Level_23_transition_information : public BasePacket
 	}
 	return false;
     }
+    
+    uint16_t length() const override
+    {
+        return  core.L_PACKET;
+    }
 };
 
 typedef std::shared_ptr<Level_23_transition_information> Level_23_transition_informationPtr;
