@@ -3,6 +3,6 @@
 
 int NormalBitstream(const Bitstream* stream, uint32_t length)
 {
-    return NormalBitwalker(stream->size, stream->bitpos, length);
+    return stream->bitpos + length <= 8 * stream->size;
 }
 
