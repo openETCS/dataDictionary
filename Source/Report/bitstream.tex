@@ -147,8 +147,41 @@ In other words, the following precondition must also be satisfied.
 
 \subsection{The Function \inl{NormalBitstream}}
 
+\fxfatal{does this function belong to the public interface?}
+
 \section{Predicates}
+
+In this section we define several \acsl predicates that will be of use when
+formally specifiying the functions \bitstreamread and \bitstreamwrite.
+
+
+\begin{listing}[hbt]
+\begin{lstlisting}[style=acsl-block]
+/*@
+  predicate 
+    Readable{L}(Bitstream* stream) =
+        \valid(stream) &&
+        \valid_read(stream->addr + (0..stream->size-1));
+
+  predicate
+    Writeable{L}(Bitstream* stream) =
+        \valid(stream) &&
+        \valid(stream->addr + (0..stream->size-1));
+*/
+\end{lstlisting}
+\caption{\label{lst:readable-writeable} The predicates \readable and \writeable}
+\end{listing}
+
+Both predicates in Listing~\ref{lst:readable-writeable}
+take as argument a valid pointer to \bitstream.
+They differ only in the fact that in the case of \readable
+the array \inl{addr[0..size-1]} is only declared as \emph{valid for reading}.
+In the case of \writeable this array is generally valid, that is, both for reading and writing.
+
 \subsection{The Predicates \readable and \writeable}
+
+Listing~\ref{lst:readable-writeable} shows the two predicates \readable and \writeable.
+
 \subsection{The Predicates \invariant and \normal}
 \subsection{The Predicates \equalbits and \unchanged}
 \subsection{The Predicate \upperbitsnotset}
