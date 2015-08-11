@@ -36,6 +36,38 @@ We therefore use the scheme of Figure~\ref{fig:bit-stream} for indexing bits wit
 \end{figure}
 
 \section{The Type \bitstream and Related Functions}
+
+The type \bitstream in Listing~\ref{lst:bitstream} is our \isoc representation of a bit stream.
+
+
+\begin{listing}[hbt]
+\begin{center}
+\begin{lstlisting}[style=acsl-block]
+struct Bitstream
+{
+    uint8_t*  addr;
+    uint32_t  size;
+    uint32_t  bitpos;
+};
+
+typedef struct Bitstream Bitstream;
+\end{lstlisting}
+\end{center}
+\caption{\label{lst:bitstream} The type \bitstream}
+\end{listing}
+
+Figure~\ref{fig:bit-stream-type}  shows that for an object of type \bitstream the field \inl{addr} is the
+starting address of a byte array of \inl{size} elements and that the field \inl{bitpos}
+denotes a bit position within this byte array.
+
+\begin{figure}[hbt]
+\begin{center}
+\includegraphics[scale=0.85]{Figures/bit-stream-type.pdf}
+\caption{Indexing in a bit stream}
+\label{fig:bit-stream-type}
+\end{center}
+\end{figure}
+
 \subsection{The Function \bitstreamread}
 \subsection{The Function \inl{Bitstream_Write}}
 \subsection{The Function \inl{NormalBitstream}}
