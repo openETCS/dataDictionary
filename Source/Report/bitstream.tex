@@ -183,8 +183,54 @@ the array \inl{addr[0..size-1]} is only declared as \emph{valid for reading}.
 In the case of \writeable this array is generally valid, that is, both for reading and writing.
 
 \subsection{The Predicates \invariant and \normal}
+
+\begin{listing}[hbt]
+\begin{lstlisting}[style=acsl-block]
+/*@
+  predicate 
+    Invariant{L}(Bitstream* stream, integer length) =
+        \separated(stream, stream->addr + (0..stream->size-1)) &&
+        BitwalkerInvariant{L}(stream->size, stream->bitpos, length);
+
+  predicate
+    Normal{L}(Bitstream* stream, integer length) =
+      NormalBitwalker(stream->size, stream->bitpos, length);
+*/
+\end{lstlisting}
+\caption{\label{lst:invariant-normal} The predicates \invariant and \normal}
+\end{listing}
+
+\clearpage
+
 \subsection{The Predicates \equalbits and \unchanged}
+
+\begin{listing}[hbt]
+\begin{lstlisting}[style=acsl-block]
+/*@
+  predicate
+   EqualBits{A}(Bitstream* stream, integer first, integer last, uint64_t value) =
+      EqualBits{A}(stream->addr, first, last, value);
+
+  predicate
+    Unchanged{A,B}(Bitstream* stream, integer first, integer last) =
+     \forall integer i;  first <= i < last ==>
+        (LeftInBitstream{A}(stream, i) <==> LeftInBitstream{B}(stream, i));
+\end{lstlisting}
+\caption{\label{lst:equalbits-unchanged} The predicates \equalbits and \unchanged}
+\end{listing}
+
+
 \subsection{The Predicate \upperbitsnotset}
+
+\begin{listing}[hbt]
+\begin{lstlisting}[style=acsl-block]
+/*@
+   predicate
+     UpperBitsNotSet{A}(integer value, integer length) =
+       \forall integer i; length <= i ==> !BitTest(value, i);
+\end{lstlisting}
+\caption{\label{lst:upperbitsnotset} The predicate \upperbitsnotset}
+\end{listing}
 
 \section{Formal Specification}
 \subsection{The Function \bitstreamread}
