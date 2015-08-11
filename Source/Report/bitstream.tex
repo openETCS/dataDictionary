@@ -68,6 +68,13 @@ denotes a bit position within this byte array.
 \end{center}
 \end{figure}
 
+An obvious type invariant of \bitstream is the condition
+\begin{align}
+    0 \leq \mathtt{bitpos} < 8 \cdot \mathtt{size}
+\end{align}
+
+\clearpage
+
 \subsection{The Function \bitstreamread}
 
 The function \bitstreamread, whose declaration is shown in Listing~\ref{lst:bitstream-read-declaration}
@@ -88,10 +95,16 @@ The informal semantics of \bitstreamread is depicted in Figure~\ref{fig:bit-stre
 \begin{figure}[hbt]
 \begin{center}
 \includegraphics[scale=0.85]{Figures/bit-stream-read.pdf}
-\caption{The type \bitstream}
+\caption{Informal description of \bitstreamread}
 \label{fig:bit-stream-read}
 \end{center}
 \end{figure}
+
+Figure~\ref{fig:bit-stream-read} also suggests the following preconditions of \bitstreamread
+\begin{align}
+   0 &\leq \mathtt{length} <= 64 \\
+   \mathtt{bitpos} + \mathtt{length} &\leq 8 \cdot \mathtt{size}
+\end{align}
 
 \subsection{The Function \inl{Bitstream_Write}}
 
