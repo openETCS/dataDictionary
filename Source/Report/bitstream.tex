@@ -2,7 +2,11 @@
 
 \chapter{The \inl{Bitstream} Layer}
 
-\section{The Type \bitstream}
+Conceptually, a \emph{bit stream}~$b$ is a sequence~$b_0,\ldots,b_{n-1}$ of $n$~bits.
+Since the \isoc programming language does not allow to directly declare bit sequences
+we represent bit streams as \emph{byte arrays}, that is as arrays of type \inl{uint8_t}.
+
+\section{The Type \bitstream and Related Functions}
 \subsection{The Function \bitstreamread}
 \subsection{The Function \inl{Bitstream_Write}}
 \subsection{The Function \inl{NormalBitstream}}
