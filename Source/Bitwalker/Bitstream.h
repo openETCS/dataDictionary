@@ -29,12 +29,9 @@ typedef struct Bitstream Bitstream;
   predicate Normal{L}(Bitstream* stream, integer length) =
      stream->bitpos + length <= 8 * stream->size;
 
-  predicate LeftInBitstream{L}(Bitstream* stream, integer i) =
-     \at(LeftBit8Array(stream->addr, i),L);
-
   predicate Unchanged{A,B}(Bitstream* stream, integer first, integer last) =
      \forall integer i;  first <= i < last ==>
-        (LeftInBitstream{A}(stream, i) <==> LeftInBitstream{B}(stream, i));
+        (\at(LeftBit8Array(stream->addr, i),A) <==> \at(LeftBit8Array(stream->addr, i),B));
 
   predicate EqualBits{A}(Bitstream* stream, integer first, integer last, uint64_t value) =
       EqualBits{A}(stream->addr, first, last, value);
