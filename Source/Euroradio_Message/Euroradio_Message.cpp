@@ -1,26 +1,18 @@
 
 #include "Euroradio_Message.h"
+#include "Message_Header.h"
 #include "Validated_Train_Data_Message.h"
 #include "MA_Request_Message.h"
 #include "Bitstream_Read.h"
 #include <iostream>
 #include <cassert>
 
-Euroradio_Message::Euroradio_Message() {}
-
-bool Euroradio_Message::decode(Bitstream& stream)
-{
-    NID_MESSAGE = Bitstream_Read(&stream, 8);
-
-    return true;
-}
-
 Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
 {
-    Euroradio_MessagePtr message = std::make_shared<Euroradio_Message>();
-    (*message).decode(stream);
+    Message_Header messageID;
+    Message_Header_Decoder(&stream, &messageID);
 
-    switch(message->NID_MESSAGE)
+    switch(messageID.NID_MESSAGE)
     {
         case 129 :
 	{
@@ -52,7 +44,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
 
 	default :
 	{
-	    std::cout << "NID_MESSAGE " << +message->NID_MESSAGE << std::endl;
+	    std::cout << "NID_MESSAGE " << +messageID.NID_MESSAGE << std::endl;
 	    std::cerr << "Error, unrecognized Euroradio Message in " << __FILE__ << std::endl;
 	    return Euroradio_MessagePtr();
 	}
@@ -63,7 +55,9 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
 
 bool Euroradio_Message_Encoder(Bitstream& stream, Euroradio_MessagePtr p)
 {
-    switch(p->NID_MESSAGE)
+    Message_Header_Encoder(&stream, &(p->header));
+
+    switch(p->header.NID_MESSAGE)
     {
         case 129 :
 	{
@@ -83,7 +77,7 @@ bool Euroradio_Message_Encoder(Bitstream& stream, Euroradio_MessagePtr p)
 
 	default :
 	{
-	    std::cout << "NID_MESSAGE " << +p->NID_MESSAGE << std::endl;
+	    std::cout << "NID_MESSAGE " << +p->header.NID_MESSAGE << std::endl;
 	    std::cerr << "Error, unrecognized Euroradio Message in " << __FILE__ << std::endl;
 	    return false;
 	}

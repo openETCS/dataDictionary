@@ -62,7 +62,7 @@ int main ()
 
     Validated_Train_Data_Message message;
     {
-        message.NID_MESSAGE = 129;
+        // NID_MESSAGE = 129;
 	message.L_MESSAGE = 36;
 	message.T_TRAIN = 0;
 	message.NID_ENGINE = 0;
@@ -72,7 +72,7 @@ int main ()
 
     MA_Request_Message message2;
     {
-        message2.NID_MESSAGE = 132;
+        // NID_MESSAGE = 132;
 	message2.L_MESSAGE = 25; // (50 + 29 + 114 + 7) / 8
 	message2.T_TRAIN = 1;
 	message2.NID_ENGINE = 923;
@@ -89,7 +89,7 @@ int main ()
 
     MA_Request_Message message3;
     {
-        message3.NID_MESSAGE = 132;
+        // NID_MESSAGE = 132;
 	message3.L_MESSAGE = 30; // (50 + 29 + 114 + 45 + 7) / 8
 	message3.T_TRAIN = 0;
 	message3.NID_ENGINE = 0;
@@ -104,7 +104,7 @@ int main ()
     stream.bitpos = init_pos;
     std::cout << " Decoding Validated_Train_Data message." << std::endl;
     Euroradio_MessagePtr new_message = Euroradio_Message_Decoder(stream);
-    std::cout << " Decoder Output: " << new_message << "\n" << std::endl;
+    std::cout << " Decoder Output: " << (*new_message) << "\n" << std::endl;
     assert(message == *new_message);
 
     init_pos = stream.bitpos;
@@ -114,7 +114,7 @@ int main ()
     stream.bitpos = init_pos;
     std::cout << " Decoding MA_Request message." << std::endl;
     Euroradio_MessagePtr new_message2 = Euroradio_Message_Decoder(stream);
-    std::cout << " Decoder Output: " << new_message2 << "\n" <<std::endl;
+    std::cout << " Decoder Output: " << (*new_message2) << "\n" <<std::endl;
     assert(message2 == *new_message2);
 
     init_pos = stream.bitpos;
@@ -124,7 +124,7 @@ int main ()
     stream.bitpos = init_pos;
     std::cout << " Decoding MA_Request message." << std::endl;
     Euroradio_MessagePtr new_message3 = Euroradio_Message_Decoder(stream);
-    std::cout << " Decoder Output: " << new_message3 << "\n" << std::endl;
+    std::cout << " Decoder Output: " << (*new_message3) << "\n" << std::endl;
     assert(message3 == *new_message3);
 
     std::cout << " Test successful." << std::endl;

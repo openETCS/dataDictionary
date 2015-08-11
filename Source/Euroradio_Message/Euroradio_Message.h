@@ -3,22 +3,22 @@
 #define EURORADIO_MESSAGE_H_INCLUDED
 
 #include "BasePacket.h"
+#include "Message_Header.h"
 #include "Bitstream.h"
 #include <iostream>
 
 struct Euroradio_Message
 {
-    uint8_t  NID_MESSAGE; // # 8
+    Message_Header header;
 
-    Euroradio_Message();
+    Euroradio_Message(uint8_t nid)
+    {
+        header.NID_MESSAGE = nid;
+    }
 
-    Euroradio_Message(int nid) : NID_MESSAGE(nid) {}
+    virtual void print(std::ostream& stream) const = 0;
 
-    virtual void print(std::ostream& stream) const;
-
-    virtual bool equals(const Euroradio_Message& p) const;
-
-    bool decode(Bitstream& stream);
+    virtual bool equals(const Euroradio_Message& p) const = 0;
 };
 
 inline bool operator==(const Euroradio_Message& a, const Euroradio_Message& b)

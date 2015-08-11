@@ -60,7 +60,7 @@ int main ()
 
     Validated_Train_Data_Message message;
     {
-        message.NID_MESSAGE = 129;
+        // NID_MESSAGE = 129;
 	message.L_MESSAGE = 36;
 	message.T_TRAIN = 0;
 	message.NID_ENGINE = 0;

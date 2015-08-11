@@ -44,7 +44,7 @@ lib:
 	@(cd $(PACKET_HEADER) && $(MAKE) lib)
 	@(cd $(TELEGRAM_HEADER) && $(MAKE) lib)
 
-SRC=Validated_Train_Data_Message.cpp MA_Request_Message.cpp Euroradio_Message.cpp
+SRC=Validated_Train_Data_Message.cpp MA_Request_Message.cpp Euroradio_Message.cpp Message_Header.cpp
 
 OBJ := $(SRC:.cpp=.o)
 

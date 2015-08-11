@@ -48,15 +48,11 @@ bool Validated_Train_Data_Message::encode(Bitstream& stream) const
 {
     uint32_t old_pos = stream.bitpos;
 
-    Bitstream_Write(&stream, 8, NID_MESSAGE);
     Bitstream_Write(&stream, 10, L_MESSAGE);
     Bitstream_Write(&stream, 32, T_TRAIN);
     Bitstream_Write(&stream, 24, NID_ENGINE);
 
-    Packet_Header packetID;
-    packetID.NID_PACKET = packet_0_1->id;
-
-    if (Packet_Header_Encoder(&stream, &packetID) != 1)
+    if (Packet_Header_Encoder(&stream, &(packet_0_1->header)) != 1)
     {
         return false;
     }
@@ -65,9 +61,7 @@ bool Validated_Train_Data_Message::encode(Bitstream& stream) const
         return false;
     }
 
-    packetID.NID_PACKET = packet_11->id;
-
-    if (Packet_Header_Encoder(&stream, &packetID) != 1)
+    if (Packet_Header_Encoder(&stream, &(packet_11->header)) != 1)
     {
         return false;
     }

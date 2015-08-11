@@ -19,7 +19,7 @@ struct Validated_Train_Data_Message : public Euroradio_Message
     void print(std::ostream& stream) const override
     {
         stream << '('
-               << +NID_MESSAGE << ","
+               << +header.NID_MESSAGE << ","
                << +L_MESSAGE << ","
                << +T_TRAIN << ","
 	       << +NID_ENGINE << ","
@@ -33,7 +33,7 @@ struct Validated_Train_Data_Message : public Euroradio_Message
 	{
             bool status = true;
     
-            status = status && (NID_MESSAGE == q->NID_MESSAGE);
+            status = status && (header.NID_MESSAGE == q->header.NID_MESSAGE);
             status = status && (L_MESSAGE == q->L_MESSAGE);
             status = status && (T_TRAIN == q->T_TRAIN);
             status = status && (NID_ENGINE == q->NID_ENGINE);

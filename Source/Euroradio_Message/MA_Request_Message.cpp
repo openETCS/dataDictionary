@@ -1,7 +1,6 @@
 
 #include "MA_Request_Message.h"
-#include "Packet_Header_Decoder.h"
-#include "Packet_Header_Encoder.h"
+#include "Packet_Header.h"
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
 #include "Bitstream_Write.h"
@@ -29,7 +28,7 @@ bool MA_Request_Message::decode(Bitstream& stream)
         return false;
     }
     
-    while (old_pos + (8 * L_MESSAGE) > stream.bitpos + 7)
+    while (old_pos + (8 * L_MESSAGE) > stream.bitpos + 8 + 7)
     {
         BasePacketPtr packet;
 
@@ -38,7 +37,7 @@ bool MA_Request_Message::decode(Bitstream& stream)
         packet = Decoder_Branch_TrainToTrack(stream, packetID);
         if (packet)
         {
-	    if (packet->id != 9)
+	    if (packet->header.NID_PACKET != 9)
 	    {
                 return false;
 	    }
@@ -64,14 +63,13 @@ bool MA_Request_Message::encode(Bitstream& stream) const
 {
     uint32_t old_pos = stream.bitpos;
 
-    Bitstream_Write(&stream, 8, NID_MESSAGE);
     Bitstream_Write(&stream, 10, L_MESSAGE);
     Bitstream_Write(&stream, 32, T_TRAIN);
     Bitstream_Write(&stream, 24, NID_ENGINE);
     Bitstream_Write(&stream, 5, Q_MARQSTREASON);
 
     Packet_Header packetID;
-    packetID.NID_PACKET = packet_0_1->id;
+    packetID.NID_PACKET = packet_0_1->header.NID_PACKET;
 
     if (Packet_Header_Encoder(&stream, &packetID) != 1)
     {
@@ -84,7 +82,7 @@ bool MA_Request_Message::encode(Bitstream& stream) const
 
     for (auto p = optional_packets.begin(); p != optional_packets.end(); ++p)
     {
-        packetID.NID_PACKET = (*p)->id;
+        packetID.NID_PACKET = (*p)->header.NID_PACKET;
 
 	if (Packet_Header_Encoder(&stream, &packetID) != 1)
 	{
