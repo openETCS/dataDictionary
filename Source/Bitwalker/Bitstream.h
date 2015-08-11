@@ -27,7 +27,7 @@ typedef struct Bitstream Bitstream;
       stream->bitpos + length <= UINT32_MAX;
 
   predicate Normal{L}(Bitstream* stream, integer length) =
-     NormalBitwalker(stream->size, stream->bitpos, length);
+     stream->bitpos + length <= 8 * stream->size;
 
   predicate LeftInBitstream{L}(Bitstream* stream, integer i) =
      \at(LeftBit8Array(stream->addr, i),L);
