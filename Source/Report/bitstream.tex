@@ -70,6 +70,7 @@ denotes a bit position within this byte array.
 
 An obvious type invariant of \bitstream is the condition
 \begin{align}
+\label{eq:bit-stream-invariant}
     0 \leq \mathtt{bitpos} < 8 \cdot \mathtt{size}
 \end{align}
 
@@ -101,12 +102,48 @@ The informal semantics of \bitstreamread is depicted in Figure~\ref{fig:bit-stre
 \end{figure}
 
 Figure~\ref{fig:bit-stream-read} also suggests the following preconditions of \bitstreamread
+\begin{subequations}
+\label{eq:bit-stream-read-pre}
 \begin{align}
-   0 &\leq \mathtt{length} <= 64 \\
+   \mathtt{length} &\leq 64 \\
    \mathtt{bitpos} + \mathtt{length} &\leq 8 \cdot \mathtt{size}
 \end{align}
+\end{subequations}
 
-\subsection{The Function \inl{Bitstream_Write}}
+\clearpage
+
+\subsection{The Function \bitstreamwrite}
+
+The Function \bitstreamwrite (see Listing~\ref{lst:bitstream-write-declaration})
+is, in simple terms, the inverse of \bitstreamread.
+It takes \inl{length} bits of the argument \inl{value} and writes it into the bit stream.
+
+\begin{listing}[hbt]
+\begin{lstlisting}[style=acsl-block]
+    void Bitstream_Write(Bitstream* stream, uint32_t length, 
+                         uint64_t value);
+\end{lstlisting}
+\caption{\label{lst:bitstream-write-declaration} Declaration of \bitstreamwrite}
+\end{listing}
+
+The informal semantics of \bitstreamwrite is depicted in Figure~\ref{fig:bit-stream-write}.
+
+\begin{figure}[hbt]
+\begin{center}
+\includegraphics[scale=0.85]{Figures/bit-stream-write.pdf}
+\caption{Informal description of \bitstreamwrite}
+\label{fig:bit-stream-write}
+\end{center}
+\end{figure}
+
+In addition to the preconditions~\eqref{eq:bit-stream-read-pre} one must ensure
+that the argument \inl{value} can be represented by \inl{length} bits.
+In other words, the following precondition must also be satisfied.
+
+\begin{align}
+\label{eq:bit-stream-write-pre}
+    \mathtt{value} < 2^{\mathtt{length}}
+\end{align}
 
 \subsection{The Function \inl{NormalBitstream}}
 
