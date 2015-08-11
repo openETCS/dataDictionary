@@ -22,7 +22,9 @@ typedef struct Bitstream Bitstream;
 
   predicate Invariant{L}(Bitstream* stream, integer length) =
      \separated(stream, stream->addr + (0..stream->size-1)) &&
-     BitwalkerInvariant{L}(stream->size, stream->bitpos, length);
+      8 * stream->size <= UINT32_MAX  &&
+      length <= 64  &&
+      stream->bitpos + length <= UINT32_MAX;
 
   predicate Normal{L}(Bitstream* stream, integer length) =
      NormalBitwalker(stream->size, stream->bitpos, length);
