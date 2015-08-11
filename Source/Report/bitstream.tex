@@ -155,6 +155,10 @@ In this section we define several \acsl predicates that will be of use when
 formally specifiying the functions \bitstreamread and \bitstreamwrite.
 
 
+\subsection{The Predicates \readable and \writeable}
+
+Listing~\ref{lst:readable-writeable} shows the two predicates \readable and \writeable.
+
 \begin{listing}[hbt]
 \begin{lstlisting}[style=acsl-block]
 /*@
@@ -177,10 +181,6 @@ take as argument a valid pointer to \bitstream.
 They differ only in the fact that in the case of \readable
 the array \inl{addr[0..size-1]} is only declared as \emph{valid for reading}.
 In the case of \writeable this array is generally valid, that is, both for reading and writing.
-
-\subsection{The Predicates \readable and \writeable}
-
-Listing~\ref{lst:readable-writeable} shows the two predicates \readable and \writeable.
 
 \subsection{The Predicates \invariant and \normal}
 \subsection{The Predicates \equalbits and \unchanged}
