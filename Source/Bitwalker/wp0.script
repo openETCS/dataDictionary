@@ -6,6 +6,12 @@ Proof.
 (* auto with zarith. *)
 Qed.
 
+Goal typed_ref_BitTest_Bitstream_Read_loop_inv_equal_preserved.
+Hint Bitstream_Read,equal,preserved.
+Proof.
+(* auto with zarith. *)
+Qed.
+
 Goal typed_ref_BitTest_Bitstream_Read_post_unchanged.
 Hint Bitstream_Read,default,property,unchanged.
 Proof.
