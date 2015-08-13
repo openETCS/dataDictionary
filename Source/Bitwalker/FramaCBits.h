@@ -41,7 +41,7 @@
       EqualBits64{A}(x, y, 0, 64);
 
    predicate
-     LeftEqualBitRange8{A}(uint8_t x, uint8_t y, integer first, integer last) =
+     LeftEqualBits8{A}(uint8_t x, uint8_t y, integer first, integer last) =
         \forall integer i; first <= i < last ==> (LeftBit8(x, i) <==> LeftBit8(y, i));
 
    predicate
