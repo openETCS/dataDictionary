@@ -6,8 +6,8 @@
 
 /*@
   requires  valid:      Readable(addr, size);
-  requires  invariant:  BitwalkerInvariant(size, bitpos, length);
-  requires  normal:     NormalBitwalker(size, bitpos, length);
+  requires  invariant:  Invariant(size, bitpos, length);
+  requires  normal:     Normal(size, bitpos, length);
 
   assigns   \nothing;
 

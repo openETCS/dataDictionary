@@ -6,8 +6,8 @@
 
 /*@
   requires valid:      Writeable(addr, size);
-  requires invariant:  BitwalkerInvariant(size, bitpos, length);
-  requires normal:     NormalBitwalker(size, bitpos, length);
+  requires invariant:  Invariant(size, bitpos, length);
+  requires normal:     Normal(size, bitpos, length);
   requires upper:      UpperBitsNotSet(value, length);
 
   assigns addr[0..size-1];
