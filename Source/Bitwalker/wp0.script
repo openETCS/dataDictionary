@@ -240,59 +240,6 @@ Proof.
   }
 Qed.
 
-Goal typed_ref_BitTest_Bitwalker_PokeThenPeek_assert_partial_copy.
-Hint Bitwalker_PokeThenPeek,partial_copy,property.
-Proof.
-  unfold P_EqualBits_2_ in *.
-  unfold P_EqualBits_1_ in *.
-  unfold P_EqualBits64_1_ in *.
-  intros.
-
-  remember i_1 as length.
-  remember i   as bitpos.
-
-  replace (bitpos + length - bitpos) with length in * by omega.
-
-  replace (i0)  with  (bitpos + length - 1 - (bitpos + length - 1 - i0 )) by omega.
-
-  rewrite H15; auto with zarith.
-Qed.
-
-Goal typed_ref_BitTest_Bitwalker_PokeThenPeek_post_result_value.
-Hint Bitwalker_PokeThenPeek,default,property,result_value.
-Proof.
-  intros.
-  apply bits_equal_uint64; auto with zarith.
-Qed.
-
-Goal typed_ref_BitTest_Bitwalker_Poke_Normal_loop_inv_middle_preserved.
-Hint Bitwalker_Poke_Normal,middle,preserved.
-Proof.
-  unfold P_EqualBits_1_ in *.
-  unfold is_uint64 in *.
-  unfold is_uint32 in *.
-  unfold  to_sint32 in *.
-  intros.
-
-  remember i_5 as bitpos.
-  remember i_4 as length.
-  remember a   as addr.
-  remember i_3 as value.
-
-  case_lt i0 i_1.
-  {
-   intros.
-   rewrite H26; auto with zarith.
-  }
-  {
-   intros.
-   assert(equal: (i0 = i_1)%Z) by omega.
-   rewrite equal in *.
-   replace (bitpos + length)%Z with (length + bitpos)%Z by omega.
-   rewrite <- H31; auto with zarith.
-  }
-Qed.
-
 Goal typed_ref_BitTest_PokeBit8Array_post_left.
 Hint PokeBit8Array,default,left,property.
 Proof.
