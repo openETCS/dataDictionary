@@ -3,13 +3,6 @@
 #include "Bitstream_Write.h"
 
 /*@
-   lemma LeftRight64:
-     \forall uint64_t x, y, integer first, last;
-     LeftEqualBits64(x, y, first, last) ==> EqualBits64(x, y, 64-last, 64-first);
-
-*/
-
-/*@
     requires valid:      Writeable(stream);
     requires invariant:  Invariant(stream, length);
     requires normal:     Normal(stream, length);
