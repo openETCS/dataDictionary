@@ -4,7 +4,7 @@
 
 #include "FramaCBits.h"
 
-// not an inline function because it cannot verified automatically right now
+// not an inline function because it cannot be verified automatically right now
 
 /*@
     requires pre: length <= 64;
