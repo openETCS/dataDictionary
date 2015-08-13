@@ -46,7 +46,7 @@
 
    predicate
      LeftEqualBits64{A}(uint64_t x, uint64_t y, integer first, integer last) =
-        \forall integer i; first <= i < last ==> (LeftBit64(x, i) <==> LeftBit64(y, i));
+        \forall integer i; 64 - last <= i < 64 - first ==> (BitTest(x, i) <==> BitTest(y, i));
 
    predicate EqualBits{A}(uint8_t* addr, integer first, integer last,
                           uint64_t value, integer length) =
