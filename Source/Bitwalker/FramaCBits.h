@@ -42,7 +42,7 @@
 
    predicate
      LeftEqualBits8{A}(uint8_t x, uint8_t y, integer first, integer last) =
-        \forall integer i; first <= i < last ==> (LeftBit8(x, i) <==> LeftBit8(y, i));
+        \forall integer i; 8 - last <= i < 8 - first ==> (BitTest(x, i) <==> BitTest(y, i));
 
    predicate
      LeftEqualBits64{A}(uint64_t x, uint64_t y, integer first, integer last) =
