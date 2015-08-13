@@ -182,6 +182,12 @@ Proof.
       unfold included; simpl; auto with zarith.
 Qed.
 
+Goal typed_ref_BitTest_Bitwalker_Read_assert_2.
+Hint Bitwalker_Read,property.
+Proof.
+(* auto with zarith. *)
+Qed.
+
 Goal typed_ref_BitTest_Bitwalker_Read_loop_inv_copied_preserved.
 Hint Bitwalker_Read,copied,preserved.
 Proof.
@@ -224,6 +230,8 @@ Proof.
   remember i_5 as length.
   remember i_1 as size.
   remember i0 as k.
+  remember i_2 as value.
+  remember i as flag.
 
   case_lt k i_3.
   {
@@ -231,7 +239,9 @@ Proof.
     rewrite <- H24; auto with zarith.
     replace (bitpos + length - 1 - k)%Z with 
             (63 - (63 - (bitpos + length - 1 - k)))%Z in * by omega.
-    apply H31; auto with zarith.
+
+ 
+    apply H32; auto with zarith.
   }
   {
     intros.
