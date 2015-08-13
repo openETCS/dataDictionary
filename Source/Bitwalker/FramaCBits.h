@@ -30,17 +30,6 @@
            (\at(LeftBit8Array(addr, i), A) <==> \at(LeftBit8Array(addr, i), B));
 
    predicate
-     EqualBitRange8{A}(uint8_t x, uint8_t y, integer first, integer last) =
-        \forall integer i; first <= i < last ==> (BitTest(x, i) <==> BitTest(y, i));
-
-   predicate
-     EqualBits64{A}(uint64_t x, uint64_t y, integer first, integer last) =
-        \forall integer i; first <= i < last ==> (BitTest(x, i) <==> BitTest(y, i));
-
-   predicate EqualBits64{A}(uint64_t x, uint64_t y) =
-      EqualBits64{A}(x, y, 0, 64);
-
-   predicate
      LeftEqualBits8{A}(uint8_t x, uint8_t y, integer first, integer last) =
         \forall integer i; 8 - last <= i < 8 - first ==> (BitTest(x, i) <==> BitTest(y, i));
 
