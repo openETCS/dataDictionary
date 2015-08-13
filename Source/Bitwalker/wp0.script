@@ -38,7 +38,7 @@ Proof.
   remember (t_1 .[ shiftfield_F_Bitstream_bitpos a <- newpos]) as stream.
 
   replace (oldpos + (newpos - oldpos)) with newpos in * by omega.
-  replace (63-i0) with (newpos - 1 - (i0 - 64 + newpos)) by omega.
+  replace i0 with (newpos - 1 - (newpos - 1 - i0)) by omega.
 
   rewrite H18; auto with zarith.
 
