@@ -13,9 +13,8 @@ include $(TOPDIR)/Makefile.template
 
 
 SRC :=  UpperBitsNotSet.c\
-        Bitwalker.c\
         Bitwalker_Read.c Bitwalker_Write.c\
-	Bitstream.c Bitstream_Init.c\
+	Bitstream_Init.c Bitstream_Normal.c\
 	Bitstream_Read.c Bitstream_Write.c\
 	Bitstream_ReadThenWrite.c Bitstream_WriteThenRead.c\
 

@@ -43,15 +43,6 @@ typedef struct Bitstream Bitstream;
 
 */
 
-/*@
-  requires valid:     Readable(stream);
-  requires invariant: Invariant(stream, length);
-
-  assigns \nothing;
-
-  ensures \result <==> Normal(stream, length);
-*/
-int NormalBitstream(const Bitstream* stream, uint32_t length);
 
 #endif // BITSTREAM_H_INCLUDED
 
