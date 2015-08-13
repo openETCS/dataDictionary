@@ -188,70 +188,6 @@ Proof.
 (* auto with zarith. *)
 Qed.
 
-Goal typed_ref_BitTest_Bitwalker_Read_loop_inv_copied_preserved.
-Hint Bitwalker_Read,copied,preserved.
-Proof.
-  unfold is_uint8 in *.
-  unfold is_uint32 in *.
-  unfold is_uint64 in *.
-  unfold P_EqualBits_1_ in *.
-  unfold P_LeftEqualBitRange_2_ in *.
-  intros.
-
-  case_lt i_1 i_0.
-
-  - (* less *)
-    intros less.
-    rewrite <- H23; auto with zarith.
-    replace (bitpos_0 + length_0 - 1 - i_1)%Z with 
-            (63 - (63 - (bitpos_0 + length_0 - 1 - i_1)))%Z in * by omega.
-    apply H30; auto with zarith.
-    
-  - (* equal *)
-    intros.
-    assert(equal: i_1 = i_0) by auto with zarith.
-    rewrite equal in *.
-    rewrite <- H25; auto with zarith.
-Qed.
-
-Goal typed_ref_BitTest_Bitwalker_Read_loop_inv_equal_preserved.
-Hint Bitwalker_Read,equal,preserved.
-Proof.
-  unfold is_uint8 in *.
-  unfold is_uint32 in *.
-  unfold is_uint64 in *.
-  unfold P_EqualBits_1_ in *.
-  unfold P_LeftEqualBits64 in *.
-  intros.
-
-  unfold shift_uint8 in *.
-
-  remember i_6 as bitpos.
-  remember i_5 as length.
-  remember i_1 as size.
-  remember i0 as k.
-  remember i_2 as value.
-  remember i as flag.
-
-  case_lt k i_3.
-  {
-    intros less.
-    rewrite <- H24; auto with zarith.
-    replace (bitpos + length - 1 - k)%Z with 
-            (63 - (63 - (bitpos + length - 1 - k)))%Z in * by omega.
-
- 
-    apply H32; auto with zarith.
-  }
-  {
-    intros.
-    assert(equal: k = i_3) by auto with zarith.
-    rewrite equal in *.
-    replace (bitpos + length)%Z with (length + bitpos)%Z by omega.
-    rewrite <- H26; auto with zarith.
-  }
-Qed.
-
 Goal typed_ref_BitTest_SetBit8Array_post_left.
 Hint SetBit8Array,default,left,property.
 Proof.
@@ -314,17 +250,6 @@ Proof.
   unfold P_UpperBitsNotSet in *.
   apply upper_bits_not_set; auto with zarith.
   rewrite is_uint64_lsl1_inf in H5; omega.
-Qed.
-
-Goal typed_ref_BitTest_lemma_LeftRight64.
-Hint LeftRight64,property.
-Proof.
-  intros.
-  unfold P_EqualBits64_1_.
-  unfold P_LeftEqualBits64 in *.
-  intros.
-  replace i0 with (63 - (63 - i0))%Z by omega.
-  apply H1; auto with zarith.
 Qed.
 
 Goal typed_ref_BitTest_lemma_bitwise_and_not_uint8.
