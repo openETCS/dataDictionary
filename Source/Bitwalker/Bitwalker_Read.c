@@ -1,14 +1,8 @@
-#include "Bitwalker_Peek_Normal.h"
+#include "Bitwalker_Read.h"
 #include "Bit8Array.h"
 #include "Bit64.h"
 
-/*@
-  lemma reorder_1 :
-     \forall integer x, y, z;
-      x + y - 1 - z == 63 - (63 - (x + y - 1 - z));
-*/
-
-uint64_t Bitwalker_Peek_Normal(uint8_t* addr, uint32_t size, uint32_t bitpos, uint32_t length)
+uint64_t Bitwalker_Read(uint8_t* addr, uint32_t size, uint32_t bitpos, uint32_t length)
 {
     uint64_t value = 0;
 

@@ -1,8 +1,8 @@
-#include "Bitwalker_Poke_Normal.h"
+#include "Bitwalker_Write.h"
 #include "Bit8Array.h"
 #include "Bit64.h"
 
-void Bitwalker_Poke_Normal(uint8_t* addr, uint32_t size, uint32_t bitpos, uint32_t length, uint64_t value)
+void Bitwalker_Write(uint8_t* addr, uint32_t size, uint32_t bitpos, uint32_t length, uint64_t value)
 {
     /*@
       loop invariant bound:   bitpos <= i <= bitpos + length;

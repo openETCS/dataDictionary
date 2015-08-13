@@ -14,7 +14,7 @@ include $(TOPDIR)/Makefile.template
 
 SRC :=  UpperBitsNotSet.c\
         Bitwalker.c\
-        Bitwalker_Peek_Normal.c Bitwalker_Poke_Normal.c\
+        Bitwalker_Read.c Bitwalker_Write.c\
 	Bitstream.c Bitstream_Init.c\
 	Bitstream_Read.c Bitstream_Write.c\
 	Bitstream_ReadThenWrite.c Bitstream_WriteThenRead.c\
@@ -24,10 +24,6 @@ REPORT := $(SRC:.c=.report)
 CHECK :=  $(SRC:.c=.check)
 
 it : $(OBJ)
-
-wp: coq-bitlemmas FORCE
-	@$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 1 -wp-out allbitwalker.out \
-		UpperBitsNotSet.c Bitwalker.c Bitwalker_Peek_Normal.c
 
 check: $(CHECK)
 
