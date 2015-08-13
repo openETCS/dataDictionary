@@ -1,5 +1,5 @@
 #include "Bitwalker_Read.h"
-#include "Bit8Array.h"
+#include "Bit8.h"
 #include "Bit64.h"
 
 uint64_t Bitwalker_Read(uint8_t* addr, uint32_t size, uint32_t bitpos, uint32_t length)
