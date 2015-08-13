@@ -25,13 +25,11 @@ typedef struct Bitstream Bitstream;
   predicate
     Invariant{L}(Bitstream* stream, integer length) =
       \separated(stream, stream->addr + (0..stream->size-1)) &&
-      8 * stream->size <= UINT32_MAX  &&
-      length <= 64  &&
-      stream->bitpos + length <= UINT32_MAX;
+      Invariant(stream->size, stream->bitpos, length);
 
   predicate
     Normal{L}(Bitstream* stream, integer length) =
-      stream->bitpos + length <= 8 * stream->size;
+      Normal(stream->size, stream->bitpos, length);
 
   predicate
     Unchanged{A,B}(Bitstream* stream, integer first, integer last) =
