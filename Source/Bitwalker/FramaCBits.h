@@ -55,8 +55,7 @@
 
    // overloaded version
    predicate EqualBits{A}(uint8_t* addr, integer first, integer last, uint64_t value) =
-        \forall integer i; first <= i < last ==>
-           (LeftBit8Array(addr, i) <==> LeftBit64(value, 64 - last + i));
+      EqualBits{A}(addr, first, last, value, last - first);
 
    predicate
      UpperBitsNotSet{A}(integer value, integer length) =
