@@ -9,7 +9,7 @@
 
     assigns \nothing;
 
-    ensures pos:  \result != 0 <==> LeftBit8(value, pos);
+    ensures pos:  \result != 0 <==> Bit8(value, pos);
 */
 static inline int TestBit8(uint8_t value, uint32_t pos)
 {
@@ -25,9 +25,9 @@ static inline int TestBit8(uint8_t value, uint32_t pos)
 
     assigns \nothing;
 
-    ensures left:   LeftEqualBits8(\result, value, 0,  pos);
-    ensures pos:    LeftBit8(\result, pos) <==> (flag != 0);
-    ensures right:  LeftEqualBits8(\result, value, pos + 1,  8);
+    ensures left:   EqualBits8(\result, value, 0,  pos);
+    ensures pos:    Bit8(\result, pos) <==> (flag != 0);
+    ensures right:  EqualBits8(\result, value, pos + 1,  8);
 */
 static inline uint8_t SetBit8(uint8_t value, uint32_t pos, int flag)
 {
@@ -45,7 +45,7 @@ static inline uint8_t SetBit8(uint8_t value, uint32_t pos, int flag)
 
     assigns \nothing;
 
-    ensures result:  \result != 0 <==> LeftBit8Array(addr, pos);
+    ensures result:  \result != 0 <==> Bit8Array(addr, pos);
 */
 static inline int TestBit8Array(uint8_t*  addr, uint32_t size, uint32_t pos)
 {
@@ -61,7 +61,7 @@ static inline int TestBit8Array(uint8_t*  addr, uint32_t size, uint32_t pos)
     assigns addr[0..size-1];
 
     ensures left:   Unchanged{Here,Old}(addr, 0, pos);
-    ensures middle: LeftBit8Array(addr, pos) <==> (flag != 0);
+    ensures middle: Bit8Array(addr, pos) <==> (flag != 0);
     ensures right:  Unchanged{Here,Old}(addr, pos + 1, 8 * size);
 */
 static inline void SetBit8Array(uint8_t* addr, uint32_t size, uint32_t pos, int flag)
@@ -76,7 +76,7 @@ static inline void SetBit8Array(uint8_t* addr, uint32_t size, uint32_t pos, int 
     /*@
       assert bits_in_byte:
         \forall integer j; (0 <= j < 8  && j != k) ==>
-        (LeftBit8(addr[pos/8], j) <==> \at(LeftBit8(addr[pos/8], j), Pre));
+        (Bit8(addr[pos/8], j) <==> \at(Bit8(addr[pos/8], j), Pre));
     */
 
     // The following assertion claims that in every byte
@@ -85,7 +85,7 @@ static inline void SetBit8Array(uint8_t* addr, uint32_t size, uint32_t pos, int 
     /*@
         assert other_bytes:
         \forall integer l, j; (0 <= l < size  &&  l != pos/8  &&  0 <= j < 8) ==>
-          (LeftBit8(addr[l], j) <==> \at(LeftBit8(addr[l], j), Pre));
+          (Bit8(addr[l], j) <==> \at(Bit8(addr[l], j), Pre));
     */
 
 }

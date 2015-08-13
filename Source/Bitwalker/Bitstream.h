@@ -34,8 +34,8 @@ typedef struct Bitstream Bitstream;
   predicate
     Unchanged{A,B}(Bitstream* stream, integer first, integer last) =
       \forall integer i;  first <= i < last ==>
-        (\at(LeftBit8Array(stream->addr, i),A) <==>
-         \at(LeftBit8Array(stream->addr, i),B));
+        (\at(Bit8Array(stream->addr, i),A) <==>
+         \at(Bit8Array(stream->addr, i),B));
 
   predicate
     EqualBits{A}(Bitstream* stream, integer first, integer last, uint64_t value) =

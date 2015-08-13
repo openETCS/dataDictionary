@@ -14,10 +14,10 @@
 */
 
 #define BytePos(Pos) ((Pos)/8)
-#define LeftBit8(Value,Pos)  (BitTest(Value,(7 - (Pos))))
-#define LeftBit8Array(Stream,Pos) (LeftBit8(Stream[BytePos(Pos)],((Pos)%8)))
-#define LeftBit32(Value,Pos)  (BitTest(Value,(31 - (Pos))))
-#define LeftBit64(Value,Pos)  (BitTest(Value,(63 - (Pos))))
+#define Bit8(Value,Pos)  (BitTest(Value,(7 - (Pos))))
+#define Bit8Array(Stream,Pos) (Bit8(Stream[BytePos(Pos)],((Pos)%8)))
+#define Bit32(Value,Pos)  (BitTest(Value,(31 - (Pos))))
+#define Bit64(Value,Pos)  (BitTest(Value,(63 - (Pos))))
 
 /*@
    predicate Invariant{A}(uint64_t x) = \true;
@@ -27,20 +27,20 @@
    predicate
      Unchanged{A,B}(uint8_t* addr, integer first, integer last) =
         \forall integer i; first <= i < last ==>
-           (\at(LeftBit8Array(addr, i), A) <==> \at(LeftBit8Array(addr, i), B));
+           (\at(Bit8Array(addr, i), A) <==> \at(Bit8Array(addr, i), B));
 
    predicate
-     LeftEqualBits8{A}(uint8_t x, uint8_t y, integer first, integer last) =
+     EqualBits8{A}(uint8_t x, uint8_t y, integer first, integer last) =
         \forall integer i; 8 - last <= i < 8 - first ==> (BitTest(x, i) <==> BitTest(y, i));
 
    predicate
-     LeftEqualBits64{A}(uint64_t x, uint64_t y, integer first, integer last) =
+     EqualBits64{A}(uint64_t x, uint64_t y, integer first, integer last) =
         \forall integer i; 64 - last <= i < 64 - first ==> (BitTest(x, i) <==> BitTest(y, i));
 
    predicate EqualBits{A}(uint8_t* addr, integer first, integer last,
                           uint64_t value, integer length) =
         \forall integer i; first <= i < last ==>
-           (LeftBit8Array(addr, i) <==> LeftBit64(value, 64 - (first + length) + i));
+           (Bit8Array(addr, i) <==> Bit64(value, 64 - (first + length) + i));
 
    // overloaded version
    predicate EqualBits{A}(uint8_t* addr, integer first, integer last, uint64_t value) =

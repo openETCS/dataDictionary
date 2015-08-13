@@ -21,7 +21,7 @@ Qed.
 Goal typed_ref_BitTest_Bitstream_WriteThenRead_assert_left.
 Hint Bitstream_WriteThenRead,left,property.
 Proof.
-  unfold P_LeftEqualBits64 in *.
+  unfold P_EqualBits64 in *.
   intros.
 
   remember i as newpos.
