@@ -1,5 +1,5 @@
    verify  UpperBitsNotSet                     [11    11   (6     3   0   0   2)]     100%
-   verify  Bitwalker_Read                      [99    99   (49   33  16   1   0)]     100%
+   verify  Bitwalker_Read                      [97    97   (48   32  16   1   0)]     100%
    verify  Bitwalker_Write                     [101  101   (44   41  15   1   0)]     100%
    verify  Bitstream_Init                      [10    10   (6     4   0   0   0)]     100%
    verify  Bitstream_Normal                    [8      8   (1     7   0   0   0)]     100%
