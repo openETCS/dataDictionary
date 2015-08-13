@@ -222,18 +222,20 @@ Proof.
 
   remember i_6 as bitpos.
   remember i_5 as length.
+  remember i_1 as size.
+  remember i0 as k.
 
-  case_lt i0 i_3.
+  case_lt k i_3.
   {
     intros less.
     rewrite <- H24; auto with zarith.
-    replace (bitpos + length - 1 - i0)%Z with 
-            (63 - (63 - (bitpos + length - 1 - i0)))%Z in * by omega.
+    replace (bitpos + length - 1 - k)%Z with 
+            (63 - (63 - (bitpos + length - 1 - k)))%Z in * by omega.
     apply H31; auto with zarith.
   }
   {
     intros.
-    assert(equal: i0 = i_3) by auto with zarith.
+    assert(equal: k = i_3) by auto with zarith.
     rewrite equal in *.
     replace (bitpos + length)%Z with (length + bitpos)%Z by omega.
     rewrite <- H26; auto with zarith.
