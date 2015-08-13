@@ -16,8 +16,8 @@ void Bitwalker_Write(uint8_t* addr, uint32_t size, uint32_t bitpos, uint32_t len
     */
     for (uint32_t i = bitpos; i < bitpos + length; ++i)
     {
-        int flag = PeekBit64(value, (64 - length) + (i - bitpos));
-        PokeBit8Array(addr, size, i, flag);
+        int flag = TestBit64(value, (64 - length) + (i - bitpos));
+        SetBit8Array(addr, size, i, flag);
     }
 }
 

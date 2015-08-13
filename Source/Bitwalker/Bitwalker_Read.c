@@ -16,8 +16,8 @@ uint64_t Bitwalker_Read(uint8_t* addr, uint32_t size, uint32_t bitpos, uint32_t 
     */
     for (uint32_t i = bitpos; i < bitpos + length; ++i)
     {
-        int flag = PeekBit8Array(addr, size, i);
-        value = PokeBit64(value, (64u - length) + (i - bitpos), flag);
+        int flag = TestBit8Array(addr, size, i);
+        value = SetBit64(value, (64u - length) + (i - bitpos), flag);
     }
 
     return value;

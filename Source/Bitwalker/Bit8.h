@@ -11,7 +11,7 @@
 
     ensures pos:  \result != 0 <==> LeftBit8(value, pos);
 */
-static inline int PeekBit8(uint8_t value, uint32_t pos)
+static inline int TestBit8(uint8_t value, uint32_t pos)
 {
     uint8_t mask = ((uint8_t) 1) << (7u - pos);
     uint8_t flag = value & mask;
@@ -29,7 +29,7 @@ static inline int PeekBit8(uint8_t value, uint32_t pos)
     ensures pos:    LeftBit8(\result, pos) <==> (flag != 0);
     ensures right:  LeftEqualBitRange8(\result, value, pos + 1,  8);
 */
-static inline uint8_t PokeBit8(uint8_t value, uint32_t pos, int flag)
+static inline uint8_t SetBit8(uint8_t value, uint32_t pos, int flag)
 {
     uint8_t mask = ((uint8_t) 1) << (7u - pos);
 
@@ -47,9 +47,9 @@ static inline uint8_t PokeBit8(uint8_t value, uint32_t pos, int flag)
 
     ensures result:  \result != 0 <==> LeftBit8Array(addr, pos);
 */
-static inline int PeekBit8Array(uint8_t*  addr, uint32_t size, uint32_t pos)
+static inline int TestBit8Array(uint8_t*  addr, uint32_t size, uint32_t pos)
 {
-    return PeekBit8(addr[pos / 8], pos % 8);
+    return TestBit8(addr[pos / 8], pos % 8);
 }
 
 
@@ -64,12 +64,12 @@ static inline int PeekBit8Array(uint8_t*  addr, uint32_t size, uint32_t pos)
     ensures middle: LeftBit8Array(addr, pos) <==> (flag != 0);
     ensures right:  Unchanged{Here,Old}(addr, pos + 1, 8 * size);
 */
-static inline void PokeBit8Array(uint8_t* addr, uint32_t size, uint32_t pos, int flag)
+static inline void SetBit8Array(uint8_t* addr, uint32_t size, uint32_t pos, int flag)
 {
     uint32_t i = pos / 8u;
     uint32_t k = pos % 8u;
 
-    addr[i] = PokeBit8(addr[i], k, flag);
+    addr[i] = SetBit8(addr[i], k, flag);
 
     // The following assertion claims that in byte with index "pos/8"
     // the bits with indices different from "k" do not change
