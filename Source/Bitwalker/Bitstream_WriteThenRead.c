@@ -3,22 +3,6 @@
 #include "Bitstream_Write.h"
 
 /*@
-   lemma X:
-     \forall integer first, last, uint64_t x, y;
-       0 <= last - first <= 64 ==>
-        (\forall integer i; first <= i < last ==>
-        (BitTest(x, last - 1 - i) <==> BitTest(y, last - 1 - i))) ==>
-        EqualBits64(x, y, 64 - (last - first), 64);
-
-   lemma CompareBit64:
-     \forall uint8_t* addr, integer first, last, uint64_t x, y;
-       0 <= last - first <= 64 ==>
-       EqualBits(addr, first, last, x) ==>
-       EqualBits(addr, first, last, y) ==>
-       EqualBits64(x, y, 64 - (last - first), 64);
-*/
-
-/*@
     requires valid:      Writeable(stream);
     requires invariant:  Invariant(stream, length);
     requires normal:     Normal(stream, length);
@@ -40,7 +24,8 @@ uint64_t Bitstream_WriteThenRead(Bitstream* stream, uint32_t length, uint64_t va
     //@ assert stream->bitpos == \at(stream->bitpos,Pre);
 
     uint64_t result = Bitstream_Read(stream, length);
-    //@ assert equal:  EqualBits(stream, pos, pos+length, result);
+    //@ assert equal_result: EqualBits(stream, pos, pos+length, result);
+    //@ assert equal_value:  EqualBits(stream, pos, pos+length, value);
     //@ assert left:   EqualBits64(result, value, 64-length, 64);
 
     return result;

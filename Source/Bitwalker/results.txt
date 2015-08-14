@@ -1,2 +1,9 @@
-../Makefile.template:113: recipe for target 'UpperBitsNotSet.report-wp' failed
-../Makefile.template:116: recipe for target 'UpperBitsNotSet.report' failed
+   verify  UpperBitsNotSet                     [11    11   (6     3   0   0   2)]     100%
+   verify  Bitwalker_Read                      [97    97   (48   32  16   1   0)]     100%
+   verify  Bitwalker_Write                     [101  101   (44   41  15   1   0)]     100%
+   verify  Bitstream_Init                      [10    10   (6     4   0   0   0)]     100%
+   verify  Bitstream_Normal                    [8      8   (1     7   0   0   0)]     100%
+   verify  Bitstream_Read                      [19    19   (8     9   2   0   0)]     100%
+   verify  Bitstream_Write                     [21    21   (4    12   5   0   0)]     100%
+   verify  Bitstream_ReadThenWrite             [28    28   (16   11   1   0   0)]     100%
+   verify  Bitstream_WriteThenRead             [29    29   (18   10   0   0   1)]     100%
