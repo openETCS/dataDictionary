@@ -4,6 +4,6 @@
    verify  Bitstream_Init                      [10    10   (6     4   0   0   0)]     100%
    verify  Bitstream_Normal                    [8      8   (1     7   0   0   0)]     100%
    verify  Bitstream_Read                      [19    19   (8     9   2   0   0)]     100%
-   verify  Bitstream_Write                     [21    21   (4    11   5   1   0)]     100%
-   verify  Bitstream_ReadThenWrite             [28    28   (16   10   2   0   0)]     100%
+   verify  Bitstream_Write                     [21    21   (4    12   5   0   0)]     100%
+   verify  Bitstream_ReadThenWrite             [28    28   (16   11   1   0   0)]     100%
    verify  Bitstream_WriteThenRead             [28    28   (17   10   0   0   1)]     100%

@@ -252,6 +252,13 @@ Proof.
   rewrite is_uint64_lsl1_inf in H5; omega.
 Qed.
 
+Goal typed_ref_BitTest_lemma_CompareBit64.
+Hint CompareBit64,property.
+Proof.
+  intros.
+  unfold P_EqualBits_2_ in *.
+Qed.
+
 Goal typed_ref_BitTest_lemma_bitwise_and_not_uint8.
 Hint bitwise_and_not_uint8,property.
 Proof.
