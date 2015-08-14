@@ -36,6 +36,8 @@ Proof.
   unfold P_EqualBits_1_ in *.
 
   remember (t_1 .[ shiftfield_F_Bitstream_bitpos a <- newpos]) as stream.
+  remember i_2 as result.
+  remember i_1 as value.
 
   replace (oldpos + (newpos - oldpos)) with newpos in * by omega.
   replace i0 with (newpos - 1 - (newpos - 1 - i0)) by omega.
