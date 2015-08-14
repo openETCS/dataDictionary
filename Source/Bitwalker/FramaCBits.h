@@ -40,12 +40,12 @@
    predicate EqualBits{A}(uint8_t* addr, integer first, integer last,
                           uint64_t value, integer length) =
         \forall integer i; first <= i < last ==>
-           (Bit8Array(addr, i) <==> Bit64(value, (64 - (length + first)) + i));
+           (Bit8Array(addr, i) <==> BitTest(value, length + first - 1 - i));
 
    // overloaded version
    predicate EqualBits{A}(uint8_t* addr, integer first, integer last, uint64_t value) =
         \forall integer i; first <= i < last ==>
-           (Bit8Array(addr, i) <==> Bit64(value, (64 - last) + i));
+           (Bit8Array(addr, i) <==> BitTest(value, last - 1 - i));
 
    predicate
      UpperBitsNotSet{A}(integer value, integer length) =

@@ -40,7 +40,20 @@ Proof.
 
   replace i0 with (newpos - 1 - (newpos - 1 - i0)) by omega.
 
-  rewrite H18; auto with zarith.
+  assert(X: forall k : int,
+      k < newpos ->
+      oldpos <= k ->
+      (bit_test value (newpos - 1 - k) <-> bit_test result (newpos - 1 -k))).
+  {
+     intros.
+     rewrite H19; auto with zarith.
+  }
+
+  rewrite X; auto with zarith.
+
+  replace (newpos - 1 - (newpos - 1 - i0)) with i0 by omega.
+
+  intuition.
 
 Qed.
 
@@ -255,8 +268,26 @@ Qed.
 Goal typed_ref_BitTest_lemma_CompareBit64.
 Hint CompareBit64,property.
 Proof.
-  intros.
+  unfold P_EqualBits64.
   unfold P_EqualBits_2_ in *.
+  intros.
+
+  assert(X: forall i0 : int,
+     (i0 < i_2)%Z ->
+     (i_3 <= i0)%Z ->
+     (bit_test i_1 (i_2 - 1 - i0) <-> bit_test i (i_2 - 1 - i0))).
+  {
+     intros.
+     rewrite H3; auto with zarith.
+  }
+
+  replace i0 with (i_2 - 1 - (i_2 - 1 - i0))%Z by omega.
+  rewrite X; auto with zarith.
+  intuition.
+
+ (*  remember i_3 as first.
+     remember i_2 as last.
+  *)
 Qed.
 
 Goal typed_ref_BitTest_lemma_bitwise_and_not_uint8.

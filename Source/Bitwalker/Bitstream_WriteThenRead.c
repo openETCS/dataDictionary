@@ -2,12 +2,13 @@
 #include "Bitstream_Read.h"
 #include "Bitstream_Write.h"
 
-/*
+/*@
    lemma CompareBit64:
      \forall uint8_t* addr, integer first, last, uint64_t x, y;
-        EqualBits(addr, first, last, x) ==> EqualBits(addr, first, last, y) ==> 
-        \forall integer k; 0 <= k < last - first ==> (BitTest(x, k) <==> BitTest(y, k));
-
+       0 <= last - first <= 64 ==>
+       EqualBits(addr, first, last, x) ==>
+       EqualBits(addr, first, last, y) ==>
+       EqualBits64(x, y, 64 - (last - first), 64);
 */
 
 /*@
