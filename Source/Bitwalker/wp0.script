@@ -290,6 +290,20 @@ Proof.
   *)
 Qed.
 
+Goal typed_ref_BitTest_lemma_X.
+Hint X,property.
+Proof.
+  unfold P_EqualBits64 in *.
+  intros.
+  remember i_3 as first.
+  remember i_2 as last.
+  remember i as x.
+  remember i_1 as y.
+
+  replace i0 with (last - 1 - (last - 1 - i0))%Z by omega.
+  rewrite H3; intuition.
+Qed.
+
 Goal typed_ref_BitTest_lemma_bitwise_and_not_uint8.
 Hint bitwise_and_not_uint8,property.
 Proof.

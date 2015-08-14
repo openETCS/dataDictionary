@@ -3,6 +3,13 @@
 #include "Bitstream_Write.h"
 
 /*@
+   lemma X:
+     \forall integer first, last, uint64_t x, y;
+       0 <= last - first <= 64 ==>
+        (\forall integer i; first <= i < last ==>
+        (BitTest(x, last - 1 - i) <==> BitTest(y, last - 1 - i))) ==>
+        EqualBits64(x, y, 64 - (last - first), 64);
+
    lemma CompareBit64:
      \forall uint8_t* addr, integer first, last, uint64_t x, y;
        0 <= last - first <= 64 ==>
