@@ -239,6 +239,27 @@ Proof.
   apply bitwise_and_not_uint8; auto.
 Qed.
 
+Goal typed_ref_BitTest_UpperBitsNotSet64_assert_equiv.
+Hint UpperBitsNotSet64,equiv,property.
+Proof.
+  unfold is_uint64 in *.
+  unfold P_UpperBitsNotSet.
+  intros.
+
+  remember i_1 as value.
+  remember i   as length.
+  split.
+  {
+      intros.
+      rewrite <- upper_bits_not_set in H5; auto with zarith.
+      rewrite is_uint64_lsl1_inf; auto with zarith.
+  }
+  {
+    rewrite <- upper_bits_not_set; auto with zarith.
+    rewrite is_uint64_lsl1_inf; omega.
+  }
+Qed.
+
 Goal typed_ref_BitTest_UpperBitsNotSet64_post_not_set_part2.
 Hint UpperBitsNotSet64,default,not_set,part-1,property.
 Proof.
