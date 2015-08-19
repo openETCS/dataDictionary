@@ -12,14 +12,11 @@
 #include "Bitstream_Read.h"
 #include "Bitstream_Write.h"
 
-#include "Bitstream_ReadThenWrite.c"
-#include "Bitstream_WriteThenRead.c"
-
+#include "Bitwalker_Read.c"
+#include "Bitwalker_Write.c"
 #include "Bitstream_Init.c"
 #include "Bitstream_Normal.c"
 #include "Bitstream_Read.c"
 #include "Bitstream_Write.c"
-#include "Bitwalker_Read.c"
-#include "Bitwalker_Write.c"
 #include "UpperBitsNotSet.c"
 
