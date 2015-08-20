@@ -7,7 +7,7 @@
 struct Validated_train_data_Core_2
 {
 
-    uint8_t   NID_NTC_n;        // # 8
+    uint64_t   NID_NTC_n;        // # 8
 };
 
 #ifdef __cplusplus

@@ -10,12 +10,12 @@ struct Track_Condition_Change_of_traction_system_Core
     // The packet gives information about change of the traction system. 
     // Packet Number = 39
 
-    uint32_t  Q_DIR;            // # 2
-    uint16_t  L_PACKET;         // # 13
-    uint32_t  Q_SCALE;          // # 2
-    uint16_t  D_TRACTION;       // # 15
-    uint32_t  M_VOLTAGE;        // # 4
-    uint16_t  NID_CTRACTION;    // # 10
+    uint64_t  Q_DIR;            // # 2
+    uint64_t  L_PACKET;         // # 13
+    uint64_t  Q_SCALE;          // # 2
+    uint64_t  D_TRACTION;       // # 15
+    uint64_t  M_VOLTAGE;        // # 4
+    uint64_t  NID_CTRACTION;    // # 10
 };
 
 #ifdef __cplusplus

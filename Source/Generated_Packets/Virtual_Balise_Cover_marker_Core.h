@@ -11,7 +11,7 @@ struct Virtual_Balise_Cover_marker_Core
     // a VBC         
     // Packet Number = 0
 
-    uint8_t   NID_VBCMK;        // # 6
+    uint64_t   NID_VBCMK;        // # 6
 };
 
 #ifdef __cplusplus

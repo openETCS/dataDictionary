@@ -10,12 +10,12 @@ struct Virtual_Balise_Cover_order_Core
     // The packet sets/removes a Virtual Balise Cover.    
     // Packet Number = 6
 
-    uint32_t  Q_DIR;            // # 2
-    uint16_t  L_PACKET;         // # 13
-    uint32_t  Q_VBCO;           // # 1
-    uint8_t   NID_VBCMK;        // # 6
-    uint16_t  NID_C;            // # 10
-    uint8_t   T_VBC;            // # 8
+    uint64_t  Q_DIR;            // # 2
+    uint64_t  L_PACKET;         // # 13
+    uint64_t  Q_VBCO;           // # 1
+    uint64_t   NID_VBCMK;        // # 6
+    uint64_t  NID_C;            // # 10
+    uint64_t   T_VBC;            // # 8
 };
 
 #ifdef __cplusplus

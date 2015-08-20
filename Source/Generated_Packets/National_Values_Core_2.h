@@ -7,8 +7,8 @@
 struct National_Values_Core_2
 {
 
-    uint8_t   V_NVKVINT_n;      // # 7
-    uint8_t   M_NVKVINT_n;      // # 7
+    uint64_t   V_NVKVINT_n;      // # 7
+    uint64_t   M_NVKVINT_n;      // # 7
 };
 
 #ifdef __cplusplus

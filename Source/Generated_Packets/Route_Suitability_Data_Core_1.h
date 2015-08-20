@@ -7,12 +7,12 @@
 struct Route_Suitability_Data_Core_1
 {
 
-    uint16_t  D_SUITABILITY_k;  // # 15
-    uint8_t   Q_SUITABILITY_k;  // # 2
-    uint8_t   M_LINEGAUGE_k;    // # 8
-    uint8_t   M_AXLELOADCAT_k;  // # 7
-    uint8_t   M_VOLTAGE_k;      // # 4
-    uint16_t  NID_CTRACTION_k;  // # 10
+    uint64_t  D_SUITABILITY_k;  // # 15
+    uint64_t   Q_SUITABILITY_k;  // # 2
+    uint64_t   M_LINEGAUGE_k;    // # 8
+    uint64_t   M_AXLELOADCAT_k;  // # 7
+    uint64_t   M_VOLTAGE_k;      // # 4
+    uint64_t  NID_CTRACTION_k;  // # 10
 };
 
 #ifdef __cplusplus

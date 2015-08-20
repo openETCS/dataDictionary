@@ -8,10 +8,10 @@
 struct Axle_Load_Speed_Profile_Core_2
 {
 
-    uint16_t  D_AXLELOAD_k;     // # 15
-    uint16_t  L_AXLELOAD_k;     // # 15
-    uint8_t   Q_FRONT_k;        // # 1
-    uint8_t   N_ITER_2_1;       // # 5
+    uint64_t  D_AXLELOAD_k;     // # 15
+    uint64_t  L_AXLELOAD_k;     // # 15
+    uint64_t   Q_FRONT_k;        // # 1
+    uint64_t   N_ITER_2_1;       // # 5
     Axle_Load_Speed_Profile_Core_2_1   sub_2_1[31];
 };
 

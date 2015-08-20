@@ -7,8 +7,8 @@
 struct Conditional_Level_Transition_Order_Core_1
 {
 
-    uint8_t   M_LEVELTR_k;      // # 3
-    uint8_t   NID_NTC_k;        // # 8
+    uint64_t   M_LEVELTR_k;      // # 3
+    uint64_t   NID_NTC_k;        // # 8
 };
 
 #ifdef __cplusplus

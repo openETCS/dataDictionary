@@ -7,8 +7,8 @@
 struct Track_Condition_Big_Metal_Masses_Core_1
 {
 
-    uint16_t  D_TRACKCOND_k;    // # 15
-    uint16_t  L_TRACKCOND_k;    // # 15
+    uint64_t  D_TRACKCOND_k;    // # 15
+    uint64_t  L_TRACKCOND_k;    // # 15
 };
 
 #ifdef __cplusplus

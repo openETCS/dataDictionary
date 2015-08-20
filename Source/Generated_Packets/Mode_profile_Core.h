@@ -11,16 +11,16 @@ struct Mode_profile_Core
     // Mode profile associated to an MA     
     // Packet Number = 80
 
-    uint32_t  Q_DIR;            // # 2
-    uint16_t  L_PACKET;         // # 13
-    uint32_t  Q_SCALE;          // # 2
-    uint16_t  D_MAMODE;         // # 15
-    uint32_t  M_MAMODE;         // # 2
-    uint8_t   V_MAMODE;         // # 7
-    uint16_t  L_MAMODE;         // # 15
-    uint16_t  L_ACKMAMODE;      // # 15
-    uint32_t  Q_MAMODE;         // # 1
-    uint8_t   N_ITER_1;         // # 5
+    uint64_t  Q_DIR;            // # 2
+    uint64_t  L_PACKET;         // # 13
+    uint64_t  Q_SCALE;          // # 2
+    uint64_t  D_MAMODE;         // # 15
+    uint64_t  M_MAMODE;         // # 2
+    uint64_t   V_MAMODE;         // # 7
+    uint64_t  L_MAMODE;         // # 15
+    uint64_t  L_ACKMAMODE;      // # 15
+    uint64_t  Q_MAMODE;         // # 1
+    uint64_t   N_ITER_1;         // # 5
     Mode_profile_Core_1   sub_1[31];
 };
 

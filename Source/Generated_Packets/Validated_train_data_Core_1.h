@@ -7,8 +7,8 @@
 struct Validated_train_data_Core_1
 {
 
-    uint8_t   M_VOLTAGE_k;      // # 4
-    uint16_t  NID_CTRACTION_k;  // # 10
+    uint64_t   M_VOLTAGE_k;      // # 4
+    uint64_t  NID_CTRACTION_k;  // # 10
 };
 
 #ifdef __cplusplus

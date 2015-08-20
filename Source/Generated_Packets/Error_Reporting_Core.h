@@ -10,8 +10,8 @@ struct Error_Reporting_Core
     // Error reporting to the RBC      
     // Packet Number = 4
 
-    uint16_t  L_PACKET;         // # 13
-    uint32_t  M_ERROR;          // # 8
+    uint64_t  L_PACKET;         // # 13
+    uint64_t  M_ERROR;          // # 8
 };
 
 #ifdef __cplusplus

@@ -11,11 +11,11 @@ struct Reversing_area_information_Core
     // on-board          
     // Packet Number = 138
 
-    uint32_t  Q_DIR;            // # 2
-    uint16_t  L_PACKET;         // # 13
-    uint32_t  Q_SCALE;          // # 2
-    uint16_t  D_STARTREVERSE;   // # 15
-    uint16_t  L_REVERSEAREA;    // # 15
+    uint64_t  Q_DIR;            // # 2
+    uint64_t  L_PACKET;         // # 13
+    uint64_t  Q_SCALE;          // # 2
+    uint64_t  D_STARTREVERSE;   // # 15
+    uint64_t  L_REVERSEAREA;    // # 15
 };
 
 #ifdef __cplusplus

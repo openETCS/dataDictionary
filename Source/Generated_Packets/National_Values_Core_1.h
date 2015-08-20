@@ -7,7 +7,7 @@
 struct National_Values_Core_1
 {
 
-    uint16_t  NID_C_p;          // # 10
+    uint64_t  NID_C_p;          // # 10
 };
 
 #ifdef __cplusplus

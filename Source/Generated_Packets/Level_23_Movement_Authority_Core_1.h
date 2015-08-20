@@ -7,10 +7,10 @@
 struct Level_23_Movement_Authority_Core_1
 {
 
-    uint16_t  L_SECTION_k;      // # 15
-    uint8_t   Q_SECTIONTIMER_k; // # 1
-    uint16_t  T_SECTIONTIMER_k; // # 10
-    uint16_t  D_SECTIONTIMERSTOPLOC_k;// # 15
+    uint64_t  L_SECTION_k;      // # 15
+    uint64_t   Q_SECTIONTIMER_k; // # 1
+    uint64_t  T_SECTIONTIMER_k; // # 10
+    uint64_t  D_SECTIONTIMERSTOPLOC_k;// # 15
 };
 
 #ifdef __cplusplus

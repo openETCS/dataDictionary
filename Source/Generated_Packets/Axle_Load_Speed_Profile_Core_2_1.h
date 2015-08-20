@@ -7,8 +7,8 @@
 struct Axle_Load_Speed_Profile_Core_2_1
 {
 
-    uint8_t   M_AXLELOADCAT_k_m;// # 7
-    uint8_t   V_AXLELOAD_k_m;   // # 7
+    uint64_t   M_AXLELOADCAT_k_m;// # 7
+    uint64_t   V_AXLELOAD_k_m;   // # 7
 };
 
 #ifdef __cplusplus

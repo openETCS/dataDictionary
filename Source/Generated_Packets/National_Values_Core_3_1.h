@@ -7,8 +7,8 @@
 struct National_Values_Core_3_1
 {
 
-    uint8_t   V_NVKVINT_k_m;    // # 7
-    uint8_t   M_NVKVINT_k_m;    // # 7
+    uint64_t   V_NVKVINT_k_m;    // # 7
+    uint64_t   M_NVKVINT_k_m;    // # 7
 };
 
 #ifdef __cplusplus

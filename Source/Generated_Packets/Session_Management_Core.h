@@ -11,13 +11,13 @@ struct Session_Management_Core
     // with which a session shall be established or terminated.  
     // Packet Number = 42
 
-    uint32_t  Q_DIR;            // # 2
-    uint16_t  L_PACKET;         // # 13
-    uint32_t  Q_RBC;            // # 1
-    uint16_t  NID_C;            // # 10
-    uint16_t  NID_RBC;          // # 14
+    uint64_t  Q_DIR;            // # 2
+    uint64_t  L_PACKET;         // # 13
+    uint64_t  Q_RBC;            // # 1
+    uint64_t  NID_C;            // # 10
+    uint64_t  NID_RBC;          // # 14
     uint64_t  NID_RADIO;        // # 64
-    uint32_t  Q_SLEEPSESSION;   // # 1
+    uint64_t  Q_SLEEPSESSION;   // # 1
 };
 
 #ifdef __cplusplus

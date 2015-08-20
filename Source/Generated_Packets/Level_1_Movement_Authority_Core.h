@@ -11,29 +11,29 @@ struct Level_1_Movement_Authority_Core
     // Transmission of a movement authority for level 1.   
     // Packet Number = 12
 
-    uint32_t  Q_DIR;            // # 2
-    uint16_t  L_PACKET;         // # 13
-    uint32_t  Q_SCALE;          // # 2
-    uint8_t   V_MAIN;           // # 7
-    uint8_t   V_LOA;            // # 7
-    uint16_t  T_LOA;            // # 10
-    uint8_t   N_ITER_1;         // # 5
+    uint64_t  Q_DIR;            // # 2
+    uint64_t  L_PACKET;         // # 13
+    uint64_t  Q_SCALE;          // # 2
+    uint64_t   V_MAIN;           // # 7
+    uint64_t   V_LOA;            // # 7
+    uint64_t  T_LOA;            // # 10
+    uint64_t   N_ITER_1;         // # 5
     Level_1_Movement_Authority_Core_1   sub_1[31];
-    uint16_t  L_ENDSECTION;     // # 15
-    uint32_t  Q_SECTIONTIMER;   // # 1
-    uint16_t  T_SECTIONTIMER;   // # 10
-    uint16_t  D_SECTIONTIMERSTOPLOC;// # 15
-    uint32_t  Q_ENDTIMER;       // # 1
-    uint16_t  T_ENDTIMER;       // # 10
-    uint16_t  D_ENDTIMERSTARTLOC;// # 15
-    uint32_t  Q_DANGERPOINT;    // # 1
-    uint16_t  D_DP;             // # 15
-    uint8_t   V_RELEASEDP;      // # 7
-    uint32_t  Q_OVERLAP;        // # 1
-    uint16_t  D_STARTOL;        // # 15
-    uint16_t  T_OL;             // # 10
-    uint16_t  D_OL;             // # 15
-    uint8_t   V_RELEASEOL;      // # 7
+    uint64_t  L_ENDSECTION;     // # 15
+    uint64_t  Q_SECTIONTIMER;   // # 1
+    uint64_t  T_SECTIONTIMER;   // # 10
+    uint64_t  D_SECTIONTIMERSTOPLOC;// # 15
+    uint64_t  Q_ENDTIMER;       // # 1
+    uint64_t  T_ENDTIMER;       // # 10
+    uint64_t  D_ENDTIMERSTARTLOC;// # 15
+    uint64_t  Q_DANGERPOINT;    // # 1
+    uint64_t  D_DP;             // # 15
+    uint64_t   V_RELEASEDP;      // # 7
+    uint64_t  Q_OVERLAP;        // # 1
+    uint64_t  D_STARTOL;        // # 15
+    uint64_t  T_OL;             // # 10
+    uint64_t  D_OL;             // # 15
+    uint64_t   V_RELEASEOL;      // # 7
 };
 
 #ifdef __cplusplus

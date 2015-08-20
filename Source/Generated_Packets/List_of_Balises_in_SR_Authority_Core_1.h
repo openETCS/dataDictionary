@@ -7,9 +7,9 @@
 struct List_of_Balises_in_SR_Authority_Core_1
 {
 
-    uint8_t   Q_NEWCOUNTRY_k;   // # 1
-    uint16_t  NID_C_k;          // # 10
-    uint16_t  NID_BG_k;         // # 14
+    uint64_t   Q_NEWCOUNTRY_k;   // # 1
+    uint64_t  NID_C_k;          // # 10
+    uint64_t  NID_BG_k;         // # 14
 };
 
 #ifdef __cplusplus

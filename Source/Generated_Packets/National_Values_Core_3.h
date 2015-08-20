@@ -8,12 +8,12 @@
 struct National_Values_Core_3
 {
 
-    uint8_t   Q_NVKVINTSET_k;   // # 2
-    uint8_t   A_NVP12_k;        // # 6
-    uint8_t   A_NVP23_k;        // # 6
-    uint8_t   V_NVKVINT_k;      // # 7
-    uint8_t   M_NVKVINT_k;      // # 7
-    uint8_t   N_ITER_3_1;       // # 5
+    uint64_t   Q_NVKVINTSET_k;   // # 2
+    uint64_t   A_NVP12_k;        // # 6
+    uint64_t   A_NVP23_k;        // # 6
+    uint64_t   V_NVKVINT_k;      // # 7
+    uint64_t   M_NVKVINT_k;      // # 7
+    uint64_t   N_ITER_3_1;       // # 5
     National_Values_Core_3_1   sub_3_1[31];
 };
 

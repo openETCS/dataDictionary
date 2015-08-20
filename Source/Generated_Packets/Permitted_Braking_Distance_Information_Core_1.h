@@ -7,12 +7,12 @@
 struct Permitted_Braking_Distance_Information_Core_1
 {
 
-    uint16_t  D_PBD_k;          // # 15
-    uint8_t   Q_GDIR_k;         // # 1
-    uint8_t   G_PBDSR_k;        // # 8
-    uint8_t   Q_PBDSR_k;        // # 1
-    uint16_t  D_PBDSR_k;        // # 15
-    uint16_t  L_PBDSR_k;        // # 15
+    uint64_t  D_PBD_k;          // # 15
+    uint64_t   Q_GDIR_k;         // # 1
+    uint64_t   G_PBDSR_k;        // # 8
+    uint64_t   Q_PBDSR_k;        // # 1
+    uint64_t  D_PBDSR_k;        // # 15
+    uint64_t  L_PBDSR_k;        // # 15
 };
 
 #ifdef __cplusplus

@@ -9,28 +9,28 @@ struct Packet_for_sending_plain_text_messages_Core
     // TransmissionMedia=Balise, RBC
     // Packet Number = 72
 
-    uint32_t  Q_DIR;            // # 2
-    uint16_t  L_PACKET;         // # 13
-    uint32_t  Q_SCALE;          // # 2
-    uint32_t  Q_TEXTCLASS;      // # 2
-    uint32_t  Q_TEXTDISPLAY;    // # 1
-    uint16_t  D_TEXTDISPLAY;    // # 15
-    uint8_t   M_MODETEXTDISPLAY_0;// # 4
-    uint8_t   M_LEVELTEXTDISPLAY_0;// # 3
-    uint8_t   NID_NTC_0;        // # 8
-    uint16_t  L_TEXTDISPLAY;    // # 15
-    uint16_t  T_TEXTDISPLAY;    // # 10
-    uint8_t   M_MODETEXTDISPLAY_1;// # 4
-    uint8_t   M_LEVELTEXTDISPLAY_1;// # 3
-    uint8_t   NID_NTC_1;        // # 8
-    uint32_t  Q_TEXTCONFIRM;    // # 2
-    uint32_t  Q_CONFTEXTDISPLAY;// # 1
-    uint32_t  Q_TEXTREPORT;     // # 1
-    uint8_t   NID_TEXTMESSAGE;  // # 8
-    uint16_t  NID_C;            // # 10
-    uint16_t  NID_RBC;          // # 14
-    uint8_t   L_TEXT;           // # 8
-    uint8_t   X_TEXT;           // # 8
+    uint64_t  Q_DIR;            // # 2
+    uint64_t  L_PACKET;         // # 13
+    uint64_t  Q_SCALE;          // # 2
+    uint64_t  Q_TEXTCLASS;      // # 2
+    uint64_t  Q_TEXTDISPLAY;    // # 1
+    uint64_t  D_TEXTDISPLAY;    // # 15
+    uint64_t   M_MODETEXTDISPLAY_0;// # 4
+    uint64_t   M_LEVELTEXTDISPLAY_0;// # 3
+    uint64_t   NID_NTC_0;        // # 8
+    uint64_t  L_TEXTDISPLAY;    // # 15
+    uint64_t  T_TEXTDISPLAY;    // # 10
+    uint64_t   M_MODETEXTDISPLAY_1;// # 4
+    uint64_t   M_LEVELTEXTDISPLAY_1;// # 3
+    uint64_t   NID_NTC_1;        // # 8
+    uint64_t  Q_TEXTCONFIRM;    // # 2
+    uint64_t  Q_CONFTEXTDISPLAY;// # 1
+    uint64_t  Q_TEXTREPORT;     // # 1
+    uint64_t   NID_TEXTMESSAGE;  // # 8
+    uint64_t  NID_C;            // # 10
+    uint64_t  NID_RBC;          // # 14
+    uint64_t   L_TEXT;           // # 8
+    uint64_t   X_TEXT;           // # 8
 };
 
 #ifdef __cplusplus

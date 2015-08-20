@@ -7,13 +7,13 @@
 struct Linking_Core_1
 {
 
-    uint16_t  D_LINK_k;         // # 15
-    uint8_t   Q_NEWCOUNTRY_k;   // # 1
-    uint16_t  NID_C_k;          // # 10
-    uint16_t  NID_BG_k;         // # 14
-    uint8_t   Q_LINKORIENTATION_k;// # 1
-    uint8_t   Q_LINKREACTION_k; // # 2
-    uint8_t   Q_LOCACC_k;       // # 6
+    uint64_t  D_LINK_k;         // # 15
+    uint64_t   Q_NEWCOUNTRY_k;   // # 1
+    uint64_t  NID_C_k;          // # 10
+    uint64_t  NID_BG_k;         // # 14
+    uint64_t   Q_LINKORIENTATION_k;// # 1
+    uint64_t   Q_LINKREACTION_k; // # 2
+    uint64_t   Q_LOCACC_k;       // # 6
 };
 
 #ifdef __cplusplus

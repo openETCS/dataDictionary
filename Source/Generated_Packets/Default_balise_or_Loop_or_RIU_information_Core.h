@@ -11,8 +11,8 @@ struct Default_balise_or_Loop_or_RIU_information_Core
     // contains default information due to a fault of the trackside equipment.
     // Packet Number = 254
 
-    uint32_t  Q_DIR;            // # 2
-    uint16_t  L_PACKET;         // # 13
+    uint64_t  Q_DIR;            // # 2
+    uint64_t  L_PACKET;         // # 13
 };
 
 #ifdef __cplusplus

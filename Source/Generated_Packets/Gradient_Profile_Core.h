@@ -13,13 +13,13 @@ struct Gradient_Profile_Core
     // for the given distance.       
     // Packet Number = 21
 
-    uint32_t  Q_DIR;            // # 2
-    uint16_t  L_PACKET;         // # 13
-    uint32_t  Q_SCALE;          // # 2
-    uint16_t  D_GRADIENT;       // # 15
-    uint32_t  Q_GDIR;           // # 1
-    uint8_t   G_A;              // # 8
-    uint8_t   N_ITER_1;         // # 5
+    uint64_t  Q_DIR;            // # 2
+    uint64_t  L_PACKET;         // # 13
+    uint64_t  Q_SCALE;          // # 2
+    uint64_t  D_GRADIENT;       // # 15
+    uint64_t  Q_GDIR;           // # 1
+    uint64_t   G_A;              // # 8
+    uint64_t   N_ITER_1;         // # 5
     Gradient_Profile_Core_1   sub_1[31];
 };
 

@@ -7,8 +7,8 @@
 struct Position_Report_Parameters_Core_1
 {
 
-    uint16_t  D_LOC_k;          // # 15
-    uint8_t   Q_LGTLOC_k;       // # 1
+    uint64_t  D_LOC_k;          // # 15
+    uint64_t   Q_LGTLOC_k;       // # 1
 };
 
 #ifdef __cplusplus
