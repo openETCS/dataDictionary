@@ -1,17 +1,4 @@
 
-#include "FramaCBits.h"
-#include "Bit64.h"
-#include "Bit8.h"
-#include "Bitwalker.h"
-#include "Bitwalker_Read.h"
-#include "Bitwalker_Write.h"
-#include "UpperBitsNotSet.h"
-#include "Bitstream.h"
-#include "Bitstream_Init.h"
-#include "Bitstream_Normal.h"
-#include "Bitstream_Read.h"
-#include "Bitstream_Write.h"
-
 #include "Bitwalker_Read.c"
 #include "Bitwalker_Write.c"
 #include "Bitstream_Init.c"
