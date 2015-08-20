@@ -43,5 +43,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream);
 
 bool Euroradio_Message_Encoder(Bitstream& stream, Euroradio_MessagePtr p);
 
+typedef std::vector<BasePacketPtr> PacketSequence;
+
 #endif // EURORADIO_MESSAGE_H_INCLUDED
 

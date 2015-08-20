@@ -1,5 +1,5 @@
 
-#include "Validated_Train_Data_Message.h"
+#include "MA_Request_Message.h"
 #include "Packet_Header.h"
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
@@ -10,15 +10,14 @@
 #include <iostream>
 #include <cassert>
 
-bool Validated_Train_Data_Message::decode(Bitstream& stream)
+bool MA_Request_Message::decode(Bitstream& stream)
 {
     uint32_t old_pos = stream.bitpos;
 
     L_MESSAGE = Bitstream_Read(&stream, 10);
     T_TRAIN = Bitstream_Read(&stream, 32);
     NID_ENGINE = Bitstream_Read(&stream, 24);
-
-    Packet_Header packetID;
+    Q_MARQSTREASON = Bitstream_Read(&stream, 5);
 
     Packet_Header_Decoder(&stream, &packetID);
     packet_0_1 = Decoder_Branch_TrainToTrack(stream, packetID);
@@ -27,11 +26,25 @@ bool Validated_Train_Data_Message::decode(Bitstream& stream)
         return false;
     }
 
-    Packet_Header_Decoder(&stream, &packetID);
-    packet_11 = Decoder_Branch_TrainToTrack(stream, packetID);
-    if (!packet_11)
+    while (old_pos + (8 * L_MESSAGE) > stream.bitpos + 8 + 7)
     {
-        return false;
+        BasePacketPtr packet;
+
+        Packet_Header_Decoder(&stream, &packetID);
+
+        packet = Decoder_Branch_TrainToTrack(stream, packetID);
+        if (packet)
+        {
+            if (packet->header.NID_PACKET != 9)
+            {
+                return false;
+            }
+            optional_packets.push_back(packet);
+        }
+        else
+        {
+            return false;
+        }
     }
 
     if (stream.bitpos > old_pos + (8 * L_MESSAGE))
@@ -44,13 +57,14 @@ bool Validated_Train_Data_Message::decode(Bitstream& stream)
     return true;
 }
 
-bool Validated_Train_Data_Message::encode(Bitstream& stream) const
+bool MA_Request_Message::encode(Bitstream& stream) const
 {
     uint32_t old_pos = stream.bitpos;
 
     Bitstream_Write(&stream, 10, L_MESSAGE);
     Bitstream_Write(&stream, 32, T_TRAIN);
     Bitstream_Write(&stream, 24, NID_ENGINE);
+    Bitstream_Write(&stream, 5, Q_MARQSTREASON);
 
     if (Packet_Header_Encoder(&stream, &(packet_0_1->header)) != 1)
     {
@@ -61,13 +75,19 @@ bool Validated_Train_Data_Message::encode(Bitstream& stream) const
         return false;
     }
 
-    if (Packet_Header_Encoder(&stream, &(packet_11->header)) != 1)
+
+    for (auto p = optional_packets.begin(); p != optional_packets.end(); ++p)
     {
-        return false;
-    }
-    if (Encoder_Branch_TrainToTrack(stream, packet_11) != 1)
-    {
-        return false;
+
+        if (Packet_Header_Encoder(&stream, &((*p)->header)) != 1)
+        {
+            return false;
+        }
+
+        if (Encoder_Branch_TrainToTrack(stream, *p) != 1)
+        {
+            return false;
+        }
     }
 
     if (stream.bitpos > old_pos + (8 * L_MESSAGE))

@@ -1,5 +1,5 @@
 
-#include "Validated_Train_Data_Message.h"
+#include "Request_to_shorten_MA_is_rejected_Message.h"
 #include "Packet_Header.h"
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
@@ -10,7 +10,7 @@
 #include <iostream>
 #include <cassert>
 
-bool Validated_Train_Data_Message::decode(Bitstream& stream)
+bool Request_to_shorten_MA_is_rejected_Message::decode(Bitstream& stream)
 {
     uint32_t old_pos = stream.bitpos;
 
@@ -18,18 +18,9 @@ bool Validated_Train_Data_Message::decode(Bitstream& stream)
     T_TRAIN = Bitstream_Read(&stream, 32);
     NID_ENGINE = Bitstream_Read(&stream, 24);
 
-    Packet_Header packetID;
-
     Packet_Header_Decoder(&stream, &packetID);
     packet_0_1 = Decoder_Branch_TrainToTrack(stream, packetID);
     if (!packet_0_1)
-    {
-        return false;
-    }
-
-    Packet_Header_Decoder(&stream, &packetID);
-    packet_11 = Decoder_Branch_TrainToTrack(stream, packetID);
-    if (!packet_11)
     {
         return false;
     }
@@ -44,7 +35,7 @@ bool Validated_Train_Data_Message::decode(Bitstream& stream)
     return true;
 }
 
-bool Validated_Train_Data_Message::encode(Bitstream& stream) const
+bool Request_to_shorten_MA_is_rejected_Message::encode(Bitstream& stream) const
 {
     uint32_t old_pos = stream.bitpos;
 
@@ -57,15 +48,6 @@ bool Validated_Train_Data_Message::encode(Bitstream& stream) const
         return false;
     }
     if (Encoder_Branch_TrainToTrack(stream, packet_0_1) != 1)
-    {
-        return false;
-    }
-
-    if (Packet_Header_Encoder(&stream, &(packet_11->header)) != 1)
-    {
-        return false;
-    }
-    if (Encoder_Branch_TrainToTrack(stream, packet_11) != 1)
     {
         return false;
     }

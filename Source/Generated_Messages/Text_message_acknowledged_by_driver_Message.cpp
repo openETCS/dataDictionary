@@ -1,5 +1,5 @@
 
-#include "Validated_Train_Data_Message.h"
+#include "Text_message_acknowledged_by_driver_Message.h"
 #include "Packet_Header.h"
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
@@ -10,26 +10,18 @@
 #include <iostream>
 #include <cassert>
 
-bool Validated_Train_Data_Message::decode(Bitstream& stream)
+bool Text_message_acknowledged_by_driver_Message::decode(Bitstream& stream)
 {
     uint32_t old_pos = stream.bitpos;
 
     L_MESSAGE = Bitstream_Read(&stream, 10);
     T_TRAIN = Bitstream_Read(&stream, 32);
     NID_ENGINE = Bitstream_Read(&stream, 24);
-
-    Packet_Header packetID;
+    NID_TEXTMESSAGE = Bitstream_Read(&stream, 8);
 
     Packet_Header_Decoder(&stream, &packetID);
     packet_0_1 = Decoder_Branch_TrainToTrack(stream, packetID);
     if (!packet_0_1)
-    {
-        return false;
-    }
-
-    Packet_Header_Decoder(&stream, &packetID);
-    packet_11 = Decoder_Branch_TrainToTrack(stream, packetID);
-    if (!packet_11)
     {
         return false;
     }
@@ -44,28 +36,20 @@ bool Validated_Train_Data_Message::decode(Bitstream& stream)
     return true;
 }
 
-bool Validated_Train_Data_Message::encode(Bitstream& stream) const
+bool Text_message_acknowledged_by_driver_Message::encode(Bitstream& stream) const
 {
     uint32_t old_pos = stream.bitpos;
 
     Bitstream_Write(&stream, 10, L_MESSAGE);
     Bitstream_Write(&stream, 32, T_TRAIN);
     Bitstream_Write(&stream, 24, NID_ENGINE);
+    Bitstream_Write(&stream, 8, NID_TEXTMESSAGE);
 
     if (Packet_Header_Encoder(&stream, &(packet_0_1->header)) != 1)
     {
         return false;
     }
     if (Encoder_Branch_TrainToTrack(stream, packet_0_1) != 1)
-    {
-        return false;
-    }
-
-    if (Packet_Header_Encoder(&stream, &(packet_11->header)) != 1)
-    {
-        return false;
-    }
-    if (Encoder_Branch_TrainToTrack(stream, packet_11) != 1)
     {
         return false;
     }
