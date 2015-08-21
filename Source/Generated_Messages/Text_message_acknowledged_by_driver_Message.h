@@ -13,8 +13,6 @@ struct Text_message_acknowledged_by_driver_Message : public Euroradio_Message
     uint32_t  NID_ENGINE       ;  // # 24
     uint8_t  NID_TEXTMESSAGE   ;  // # 8
 
-
-    Packet_Header packetID;
     BasePacketPtr  packet_0_1;
 
     Text_message_acknowledged_by_driver_Message() : Euroradio_Message(158) {}

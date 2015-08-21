@@ -12,8 +12,6 @@ struct End_of_Mission_Message : public Euroradio_Message
     uint32_t  T_TRAIN          ;  // # 32
     uint32_t  NID_ENGINE       ;  // # 24
 
-
-    Packet_Header packetID;
     BasePacketPtr  packet_0_1;
 
     End_of_Mission_Message() : Euroradio_Message(150) {}

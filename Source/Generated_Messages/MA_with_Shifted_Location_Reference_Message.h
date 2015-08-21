@@ -15,8 +15,6 @@ struct MA_with_Shifted_Location_Reference_Message : public Euroradio_Message
     uint8_t  Q_SCALE           ;  // # 2
     uint16_t  D_REF            ;  // # 16
 
-
-    Packet_Header packetID;
     BasePacketPtr  packet_15;
     PacketSequence  optional_packets;
 

@@ -14,8 +14,6 @@ struct Acknowledgement_of_Emergency_Stop_Message : public Euroradio_Message
     uint8_t  NID_EM            ;  // # 4
     uint8_t  Q_EMERGENCYSTOP   ;  // # 2
 
-
-    Packet_Header packetID;
     BasePacketPtr  packet_0_1;
 
     Acknowledgement_of_Emergency_Stop_Message() : Euroradio_Message(147) {}

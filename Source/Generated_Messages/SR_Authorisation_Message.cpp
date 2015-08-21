@@ -6,7 +6,7 @@
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
 
-#include "Bitwalker_Peek_Normal.h"
+#include "Bitwalker_Read.h"
 #include <iostream>
 #include <cassert>
 
@@ -20,6 +20,8 @@ bool SR_Authorisation_Message::decode(Bitstream& stream)
     NID_LRBG = Bitstream_Read(&stream, 24);
     Q_SCALE = Bitstream_Read(&stream, 2);
     D_SR = Bitstream_Read(&stream, 15);
+
+    Packet_Header packetID;
 
     while (old_pos + (8 * L_MESSAGE) > stream.bitpos + 8 + 7)
     {

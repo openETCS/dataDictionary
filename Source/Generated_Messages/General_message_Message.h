@@ -13,8 +13,6 @@ struct General_message_Message : public Euroradio_Message
     uint8_t  M_ACK             ;  // # 1
     uint32_t  NID_LRBG         ;  // # 24
 
-
-    Packet_Header packetID;
     PacketSequence  optional_packets;
 
     General_message_Message() : Euroradio_Message(24) {}

@@ -6,7 +6,7 @@
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
 
-#include "Bitwalker_Peek_Normal.h"
+#include "Bitwalker_Read.h"
 #include <iostream>
 #include <cassert>
 
@@ -20,6 +20,8 @@ bool MA_with_Shifted_Location_Reference_Message::decode(Bitstream& stream)
     NID_LRBG = Bitstream_Read(&stream, 24);
     Q_SCALE = Bitstream_Read(&stream, 2);
     D_REF = Bitstream_Read(&stream, 16);
+
+    Packet_Header packetID;
 
     Packet_Header_Decoder(&stream, &packetID);
     packet_15 = Decoder_Branch_TrackToTrain(stream, packetID);

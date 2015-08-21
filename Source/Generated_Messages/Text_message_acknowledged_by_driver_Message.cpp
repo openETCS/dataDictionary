@@ -6,7 +6,7 @@
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
 
-#include "Bitwalker_Peek_Normal.h"
+#include "Bitwalker_Read.h"
 #include <iostream>
 #include <cassert>
 
@@ -18,6 +18,8 @@ bool Text_message_acknowledged_by_driver_Message::decode(Bitstream& stream)
     T_TRAIN = Bitstream_Read(&stream, 32);
     NID_ENGINE = Bitstream_Read(&stream, 24);
     NID_TEXTMESSAGE = Bitstream_Read(&stream, 8);
+
+    Packet_Header packetID;
 
     Packet_Header_Decoder(&stream, &packetID);
     packet_0_1 = Decoder_Branch_TrainToTrack(stream, packetID);

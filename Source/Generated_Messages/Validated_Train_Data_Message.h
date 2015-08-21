@@ -12,9 +12,8 @@ struct Validated_Train_Data_Message : public Euroradio_Message
     uint32_t  T_TRAIN          ;  // # 32
     uint32_t  NID_ENGINE       ;  // # 24
 
-
-    Packet_Header packetID;
     BasePacketPtr  packet_0_1;
+    BasePacketPtr  packet_11;
 
     Validated_Train_Data_Message() : Euroradio_Message(129) {}
 
@@ -25,7 +24,8 @@ struct Validated_Train_Data_Message : public Euroradio_Message
                << +L_MESSAGE << ","
                << +T_TRAIN << ","
                << +NID_ENGINE << ","
-               << *(packet_0_1) << ")";
+               << *(packet_0_1) << ","
+               << *(packet_11) << ")";
     }
 
     bool equals(const Euroradio_Message& p) const override
@@ -39,6 +39,7 @@ struct Validated_Train_Data_Message : public Euroradio_Message
             status = status && (T_TRAIN == q->T_TRAIN);
             status = status && (NID_ENGINE == q->NID_ENGINE);
             status = status && (*packet_0_1 == *(q->packet_0_1));
+            status = status && (*packet_11 == *(q->packet_11));
 
             return status;
         }

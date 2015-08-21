@@ -15,8 +15,6 @@ struct SR_Authorisation_Message : public Euroradio_Message
     uint8_t  Q_SCALE           ;  // # 2
     uint16_t  D_SR             ;  // # 15
 
-
-    Packet_Header packetID;
     PacketSequence  optional_packets;
 
     SR_Authorisation_Message() : Euroradio_Message(2) {}

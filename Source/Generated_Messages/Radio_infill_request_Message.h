@@ -15,8 +15,6 @@ struct Radio_infill_request_Message : public Euroradio_Message
     uint16_t  NID_BG           ;  // # 14
     uint8_t  Q_INFILL          ;  // # 1
 
-
-    Packet_Header packetID;
     BasePacketPtr  packet_0_1;
 
     Radio_infill_request_Message() : Euroradio_Message(153) {}

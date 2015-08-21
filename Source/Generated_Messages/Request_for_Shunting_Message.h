@@ -12,8 +12,6 @@ struct Request_for_Shunting_Message : public Euroradio_Message
     uint32_t  T_TRAIN          ;  // # 32
     uint32_t  NID_ENGINE       ;  // # 24
 
-
-    Packet_Header packetID;
     BasePacketPtr  packet_0_1;
 
     Request_for_Shunting_Message() : Euroradio_Message(130) {}

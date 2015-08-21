@@ -13,8 +13,6 @@ struct Infill_MA_Message : public Euroradio_Message
     uint8_t  M_ACK             ;  // # 1
     uint32_t  NID_LRBG         ;  // # 24
 
-
-    Packet_Header packetID;
     BasePacketPtr  packet_136;
     BasePacketPtr  packet_12;
     PacketSequence  optional_packets;

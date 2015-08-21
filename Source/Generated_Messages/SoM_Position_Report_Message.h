@@ -13,8 +13,6 @@ struct SoM_Position_Report_Message : public Euroradio_Message
     uint32_t  NID_ENGINE       ;  // # 24
     uint8_t  Q_STATUS          ;  // # 2
 
-
-    Packet_Header packetID;
     BasePacketPtr  packet_0_1;
     PacketSequence  optional_packets;
 

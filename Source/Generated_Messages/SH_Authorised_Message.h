@@ -14,8 +14,6 @@ struct SH_Authorised_Message : public Euroradio_Message
     uint32_t  NID_LRBG         ;  // # 24
     uint32_t  T_TRAIN_1        ;  // # 32
 
-
-    Packet_Header packetID;
     PacketSequence  optional_packets;
 
     SH_Authorised_Message() : Euroradio_Message(28) {}

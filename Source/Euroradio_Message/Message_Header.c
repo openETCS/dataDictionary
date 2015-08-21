@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Read.h"
 #include "Bitstream_Write.h"
+#include "Bitstream_Normal.h"
 //#include <iostream>
 
 int Message_Header_UpperBitsNotSet(const Message_Header* p)
@@ -19,7 +20,7 @@ int Message_Header_UpperBitsNotSet(const Message_Header* p)
 
 int Message_Header_Decoder(Bitstream* stream, Message_Header* p)
 {
-    if (NormalBitstream(stream, MESSAGE_HEADER_BITSIZE))
+    if (Bitstream_Normal(stream, MESSAGE_HEADER_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 
@@ -40,7 +41,7 @@ int Message_Header_Decoder(Bitstream* stream, Message_Header* p)
 
 int Message_Header_Encoder(Bitstream* stream, const Message_Header* p)
 {
-    if (NormalBitstream(stream, MESSAGE_HEADER_BITSIZE))
+    if (Bitstream_Normal(stream, MESSAGE_HEADER_BITSIZE))
     {
         if (Message_Header_UpperBitsNotSet(p))
         {

@@ -6,7 +6,7 @@
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
 
-#include "Bitwalker_Peek_Normal.h"
+#include "Bitwalker_Read.h"
 #include <iostream>
 #include <cassert>
 
@@ -19,6 +19,8 @@ bool Acknowledgement_of_Emergency_Stop_Message::decode(Bitstream& stream)
     NID_ENGINE = Bitstream_Read(&stream, 24);
     NID_EM = Bitstream_Read(&stream, 4);
     Q_EMERGENCYSTOP = Bitstream_Read(&stream, 2);
+
+    Packet_Header packetID;
 
     Packet_Header_Decoder(&stream, &packetID);
     packet_0_1 = Decoder_Branch_TrainToTrack(stream, packetID);

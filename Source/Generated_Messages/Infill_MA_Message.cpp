@@ -6,7 +6,7 @@
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
 
-#include "Bitwalker_Peek_Normal.h"
+#include "Bitwalker_Read.h"
 #include <iostream>
 #include <cassert>
 
@@ -18,6 +18,8 @@ bool Infill_MA_Message::decode(Bitstream& stream)
     T_TRAIN = Bitstream_Read(&stream, 32);
     M_ACK = Bitstream_Read(&stream, 1);
     NID_LRBG = Bitstream_Read(&stream, 24);
+
+    Packet_Header packetID;
 
     Packet_Header_Decoder(&stream, &packetID);
     packet_136 = Decoder_Branch_TrackToTrain(stream, packetID);

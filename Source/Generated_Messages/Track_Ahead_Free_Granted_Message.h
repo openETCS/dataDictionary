@@ -12,8 +12,6 @@ struct Track_Ahead_Free_Granted_Message : public Euroradio_Message
     uint32_t  T_TRAIN          ;  // # 32
     uint32_t  NID_ENGINE       ;  // # 24
 
-
-    Packet_Header packetID;
     BasePacketPtr  packet_0_1;
 
     Track_Ahead_Free_Granted_Message() : Euroradio_Message(149) {}

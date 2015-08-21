@@ -6,7 +6,7 @@
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
 
-#include "Bitwalker_Peek_Normal.h"
+#include "Bitwalker_Read.h"
 #include <iostream>
 #include <cassert>
 
@@ -20,6 +20,8 @@ bool Radio_infill_request_Message::decode(Bitstream& stream)
     NID_C = Bitstream_Read(&stream, 10);
     NID_BG = Bitstream_Read(&stream, 14);
     Q_INFILL = Bitstream_Read(&stream, 1);
+
+    Packet_Header packetID;
 
     Packet_Header_Decoder(&stream, &packetID);
     packet_0_1 = Decoder_Branch_TrainToTrack(stream, packetID);

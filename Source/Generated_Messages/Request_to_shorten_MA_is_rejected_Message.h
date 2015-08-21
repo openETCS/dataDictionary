@@ -12,8 +12,6 @@ struct Request_to_shorten_MA_is_rejected_Message : public Euroradio_Message
     uint32_t  T_TRAIN          ;  // # 32
     uint32_t  NID_ENGINE       ;  // # 24
 
-
-    Packet_Header packetID;
     BasePacketPtr  packet_0_1;
 
     Request_to_shorten_MA_is_rejected_Message() : Euroradio_Message(138) {}

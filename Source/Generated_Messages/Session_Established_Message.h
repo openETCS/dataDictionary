@@ -12,8 +12,6 @@ struct Session_Established_Message : public Euroradio_Message
     uint32_t  T_TRAIN          ;  // # 32
     uint32_t  NID_ENGINE       ;  // # 24
 
-
-    Packet_Header packetID;
     PacketSequence  optional_packets;
 
     Session_Established_Message() : Euroradio_Message(159) {}
