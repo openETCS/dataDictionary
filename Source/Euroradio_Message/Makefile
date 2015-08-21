@@ -18,9 +18,6 @@ include $(TOPDIR)/Makefile.template
 #CXX = c++
 CPPFLAGS += -I.
 
-CPPFLAGS += -I$(GENERATED_PACKETS)
-LDFLAGS += -L$(GENERATED_PACKETS) -lgenerated_packets
-
 CPPFLAGS += -I$(GENERATED_MESSAGES)
 LDFLAGS += -L$(GENERATED_MESSAGES) -lgenerated_messages
 
@@ -29,6 +26,9 @@ LDFLAGS += -L$(PACKET_HEADER) -lpacket_header
 
 CPPFLAGS += -I$(TELEGRAM_HEADER)
 LDFLAGS += -L$(TELEGRAM_HEADER) -ltelegram_header
+
+CPPFLAGS += -I$(GENERATED_PACKETS)
+LDFLAGS += -L$(GENERATED_PACKETS) -lgenerated_packets
 
 CPPFLAGS += -I$(BITWALKER)
 LDFLAGS += -L$(BITWALKER) -lBitwalker

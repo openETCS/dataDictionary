@@ -33,7 +33,6 @@ lib: libgenerated_messages.a
 libgenerated_messages.a : $(OBJ)
 	ar cru  $@ $^
 	ranlib  $@
-	$(RM) $(OBJ)
 
 clean::
 	$(RM) libgenerated_messages.a
