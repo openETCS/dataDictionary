@@ -1,8 +1,8 @@
-#include "Bitwalker_Peek_Normal.h"
-#include "Bit8Array.h"
+#include "Bitwalker_Read.h"
+#include "Bit8.h"
 #include "Bit64.h"
 
-uint64_t Bitwalker_Peek_Normal(uint8_t* addr, uint32_t size, uint32_t bitpos, uint32_t length)
+uint64_t Bitwalker_Read(uint8_t* addr, uint32_t size, uint32_t bitpos, uint32_t length)
 {
     uint64_t value = 0;
 
@@ -16,8 +16,8 @@ uint64_t Bitwalker_Peek_Normal(uint8_t* addr, uint32_t size, uint32_t bitpos, ui
     */
     for (uint32_t i = bitpos; i < bitpos + length; ++i)
     {
-        int flag = PeekBit8Array(addr, size, i);
-        value = PokeBit64(value, (64u - length) + (i - bitpos), flag);
+        int flag = TestBit8Array(addr, size, i);
+        value = SetBit64(value, (i - bitpos) + (64u - length), flag);
     }
 
     return value;

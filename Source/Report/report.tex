@@ -14,7 +14,7 @@
 \usepackage[section]{placeins}
 
 \usepackage{verbatim}
-\usepackage[nomargin,inline,final]{fixme}
+\usepackage[nomargin,inline,draft]{fixme}
 
 \usepackage{comment}
 
@@ -88,42 +88,18 @@
 %\include{foreword}
 %\include{changes}
 
-%\listoffixmes
+\listoffixmes
 \tableofcontents
+\listoffigures
+\listof{listing}{List of Code Listings}
 %\listof{predfun}{List of Logic Specifications}
-%\listoffigures
 %\listoftables
 
 \chapter{Introduction}
 
 \part{Bit Manipulation}
 
-\chapter{The \inl{Bitstream} Layer}
-
-\section{The Type \inl{Bitstream}}
-\subsection{The Function \inl{Bitstream_Read}}
-\subsection{The Function \inl{Bitstream_Write}}
-\subsection{The Function \inl{NormalBitstream}}
-
-\section{Predicates}
-\subsection{\inl{Readable} and \inl{Writeable}}
-\subsection{\inl{Invariant} and \inl{Normal}}
-\subsection{\inl{EqualBits} and \inl{Unchanged}}
-\subsection{\inl{UpperBitsNotSet}}
-
-\section{Formal Specification}
-\subsection{The Function \inl{Bitstream_Read}}
-\subsection{The Function \inl{Bitstream_Write}}
-\subsection{The Function \inl{NormalBitstream}}
-
-\section{Implementation}
-\subsection{The Function \inl{Bitstream_Read}}
-\subsection{The Function \inl{Bitstream_Write}}
-\subsection{The Function \inl{NormalBitstream}}
-
-\section{Formal Verification}
-\subsection{\inl{Bitstream_ReadThenWrite}}
-\subsection{\inl{Bitstream_WriteThenRead}}
+\include{bitstream}
 
 \chapter{The \inl{Bitwalker} Layer}
 
@@ -146,7 +122,7 @@
 \chapter{Packets}
 
 \part{Telegram and Messages from Chapter 8}
-\chapter{Eurobalise Telegrams}
+\chapter{Eurobalise Telegram}
 \chapter{Radio Messages}
 
 \cleardoublepage

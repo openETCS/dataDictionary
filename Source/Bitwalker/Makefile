@@ -13,10 +13,8 @@ include $(TOPDIR)/Makefile.template
 
 
 SRC :=  UpperBitsNotSet.c\
-        Bitwalker.c\
-        Bitwalker_Peek_Normal.c Bitwalker_Poke_Normal.c\
-	Bitwalker_PeekThenPoke.c Bitwalker_PokeThenPeek.c\
-	Bitstream.c Bitstream_Init.c\
+        Bitwalker_Read.c Bitwalker_Write.c\
+	Bitstream_Init.c Bitstream_Normal.c\
 	Bitstream_Read.c Bitstream_Write.c\
 	Bitstream_ReadThenWrite.c Bitstream_WriteThenRead.c\
 
@@ -26,16 +24,11 @@ CHECK :=  $(SRC:.c=.check)
 
 it : $(OBJ)
 
-wp: coq-bitlemmas FORCE
-	@$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 1 -wp-out allbitwalker.out \
-		UpperBitsNotSet.c Bitwalker.c Bitwalker_Peek_Normal.c
-
 check: $(CHECK)
 
 clean::
 	@$(RM) $(OBJ)
 	@$(RM) libBitwalker.a
-	@$(RM) TestPeekThenPoke
 	
 
 format: FORCE
@@ -47,11 +40,6 @@ libBitwalker.a : $(OBJ)
 	ar cru	$@ $^
 	ranlib	$@
 
-TestPeekThenPoke: TestPeekThenPoke.o libBitwalker.a
-	$(CXX) -o $@ $^
-	./$@
-
-tests:	TestPeekThenPoke
 
 par:
 	@time $(MAKE) -j 3 -O $(REPORT)
