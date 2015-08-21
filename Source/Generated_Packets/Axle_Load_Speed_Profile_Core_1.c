@@ -8,8 +8,8 @@ int Axle_Load_Speed_Profile_Core_1_UpperBitsNotSet(const Axle_Load_Speed_Profile
 {
     bool status = true;
 
-    status = status && UpperBitsNotSet64(p->M_AXLELOADCAT_n,   7) ;
-    status = status && UpperBitsNotSet64(p->V_AXLELOAD_n,      7) ;
+    status = status && UpperBitsNotSet64(p->M_AXLELOADCAT,     7) ;
+    status = status && UpperBitsNotSet64(p->V_AXLELOAD,        7) ;
 
     if (status)
     {
@@ -29,12 +29,12 @@ int Axle_Load_Speed_Profile_Core_1_Encoder(Bitstream* stream, const Axle_Load_Sp
         {
             //@ ghost const uint32_t pos = stream->bitpos;
 
-            Bitstream_Write(stream, 7,  p->M_AXLELOADCAT_n);
-            Bitstream_Write(stream, 7,  p->V_AXLELOAD_n);
+            Bitstream_Write(stream, 7,  p->M_AXLELOADCAT);
+            Bitstream_Write(stream, 7,  p->V_AXLELOAD);
 
 
-            //@ assert M_AXLELOADCAT_n:   EqualBits(stream, pos,       pos + 7,   p->M_AXLELOADCAT_n);
-            //@ assert V_AXLELOAD_n:      EqualBits(stream, pos + 7,   pos + 14,  p->V_AXLELOAD_n);
+            //@ assert M_AXLELOADCAT:     EqualBits(stream, pos,       pos + 7,   p->M_AXLELOADCAT);
+            //@ assert V_AXLELOAD:        EqualBits(stream, pos + 7,   pos + 14,  p->V_AXLELOAD);
 
             return 1;
         }
@@ -56,30 +56,30 @@ int Axle_Load_Speed_Profile_Core_1_Decoder(Bitstream* stream, Axle_Load_Speed_Pr
         //@ ghost const uint32_t pos = stream->bitpos;
 
 	/*@
-	  requires M_AXLELOADCAT_n: stream->bitpos == pos + 0;
+	  requires M_AXLELOADCAT:  stream->bitpos == pos + 0;
 	  assigns        	   stream->bitpos;
-	  assigns		   p->M_AXLELOADCAT_n;
-	  ensures  M_AXLELOADCAT_n: stream->bitpos == pos + 7;
-	  ensures  M_AXLELOADCAT_n: EqualBits(stream, pos + 0, pos + 7, p->M_AXLELOADCAT_n);
-	  ensures  M_AXLELOADCAT_n: UpperBitsNotSet(p->M_AXLELOADCAT_n, 7);
+	  assigns		   p->M_AXLELOADCAT;
+	  ensures  M_AXLELOADCAT:  stream->bitpos == pos + 7;
+	  ensures  M_AXLELOADCAT:  EqualBits(stream, pos + 0, pos + 7, p->M_AXLELOADCAT);
+	  ensures  M_AXLELOADCAT:  UpperBitsNotSet(p->M_AXLELOADCAT, 7);
 	*/
-	{ p->M_AXLELOADCAT_n		= Bitstream_Read(stream, 7); }
+	{ p->M_AXLELOADCAT		= Bitstream_Read(stream, 7); }
 
 	/*@
-	  requires V_AXLELOAD_n:   stream->bitpos == pos + 7;
+	  requires V_AXLELOAD:     stream->bitpos == pos + 7;
 	  assigns        	   stream->bitpos;
-	  assigns		   p->V_AXLELOAD_n;
-	  ensures  V_AXLELOAD_n:   stream->bitpos == pos + 14;
-	  ensures  V_AXLELOAD_n:   EqualBits(stream, pos + 7, pos + 14, p->V_AXLELOAD_n);
-	  ensures  V_AXLELOAD_n:   UpperBitsNotSet(p->V_AXLELOAD_n, 7);
+	  assigns		   p->V_AXLELOAD;
+	  ensures  V_AXLELOAD:     stream->bitpos == pos + 14;
+	  ensures  V_AXLELOAD:     EqualBits(stream, pos + 7, pos + 14, p->V_AXLELOAD);
+	  ensures  V_AXLELOAD:     UpperBitsNotSet(p->V_AXLELOAD, 7);
 	*/
-	{ p->V_AXLELOAD_n		= Bitstream_Read(stream, 7); }
+	{ p->V_AXLELOAD		= Bitstream_Read(stream, 7); }
 
-        //@ assert M_AXLELOADCAT_n:   EqualBits(stream, pos,       pos + 7,   p->M_AXLELOADCAT_n);
-        //@ assert V_AXLELOAD_n:      EqualBits(stream, pos + 7,   pos + 14,  p->V_AXLELOAD_n);
+        //@ assert M_AXLELOADCAT:     EqualBits(stream, pos,       pos + 7,   p->M_AXLELOADCAT);
+        //@ assert V_AXLELOAD:        EqualBits(stream, pos + 7,   pos + 14,  p->V_AXLELOAD);
 
-        //@ assert M_AXLELOADCAT_n:   UpperBitsNotSet(p->M_AXLELOADCAT_n,   7);
-        //@ assert V_AXLELOAD_n:      UpperBitsNotSet(p->V_AXLELOAD_n,      7);
+        //@ assert M_AXLELOADCAT:     UpperBitsNotSet(p->M_AXLELOADCAT,     7);
+        //@ assert V_AXLELOAD:        UpperBitsNotSet(p->V_AXLELOAD,        7);
 
 	//@ assert final: EqualBits(stream, pos, p);
 

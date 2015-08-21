@@ -7,10 +7,10 @@
 struct Level_23_Movement_Authority_Core_1
 {
 
-    uint16_t  L_SECTION_k;      // # 15
-    uint8_t   Q_SECTIONTIMER_k; // # 1
-    uint16_t  T_SECTIONTIMER_k; // # 10
-    uint16_t  D_SECTIONTIMERSTOPLOC_k;// # 15
+    uint64_t  L_SECTION;        // # 15
+    uint64_t  Q_SECTIONTIMER;   // # 1
+    uint64_t  T_SECTIONTIMER;   // # 10
+    uint64_t  D_SECTIONTIMERSTOPLOC;// # 15
 };
 
 #ifdef __cplusplus
@@ -20,10 +20,10 @@ struct Level_23_Movement_Authority_Core_1
 inline std::ostream& operator<<(std::ostream& stream, const Level_23_Movement_Authority_Core_1& p)
 {
     stream 
-       << +p.L_SECTION_k << ','
-       << +p.Q_SECTIONTIMER_k << ','
-       << +p.T_SECTIONTIMER_k << ','
-       << +p.D_SECTIONTIMERSTOPLOC_k;
+       << +p.L_SECTION << ','
+       << +p.Q_SECTIONTIMER << ','
+       << +p.T_SECTIONTIMER << ','
+       << +p.D_SECTIONTIMERSTOPLOC;
 
     return stream;
 }
@@ -32,10 +32,10 @@ inline bool operator==(const Level_23_Movement_Authority_Core_1& a, const Level_
 {
     bool status = true;
     
-    status = status && (a.L_SECTION_k == b.L_SECTION_k);
-    status = status && (a.Q_SECTIONTIMER_k == b.Q_SECTIONTIMER_k);
-    status = status && (a.T_SECTIONTIMER_k == b.T_SECTIONTIMER_k);
-    status = status && (a.D_SECTIONTIMERSTOPLOC_k == b.D_SECTIONTIMERSTOPLOC_k);
+    status = status && (a.L_SECTION == b.L_SECTION);
+    status = status && (a.Q_SECTIONTIMER == b.Q_SECTIONTIMER);
+    status = status && (a.T_SECTIONTIMER == b.T_SECTIONTIMER);
+    status = status && (a.D_SECTIONTIMERSTOPLOC == b.D_SECTIONTIMERSTOPLOC);
 
     return status;
 }
@@ -61,28 +61,28 @@ typedef struct Level_23_Movement_Authority_Core_1 Level_23_Movement_Authority_Co
       \separated(stream->addr + (0..stream->size-1), p);
 
     predicate Invariant(Level_23_Movement_Authority_Core_1* p) =
-      Invariant(p->L_SECTION_k)       &&
-      Invariant(p->Q_SECTIONTIMER_k)  &&
-      Invariant(p->T_SECTIONTIMER_k)  &&
-      Invariant(p->D_SECTIONTIMERSTOPLOC_k);
+      Invariant(p->L_SECTION)         &&
+      Invariant(p->Q_SECTIONTIMER)    &&
+      Invariant(p->T_SECTIONTIMER)    &&
+      Invariant(p->D_SECTIONTIMERSTOPLOC);
 
     predicate ZeroInitialized(Level_23_Movement_Authority_Core_1* p) =
-      ZeroInitialized(p->L_SECTION_k)       &&
-      ZeroInitialized(p->Q_SECTIONTIMER_k)  &&
-      ZeroInitialized(p->T_SECTIONTIMER_k)  &&
-      ZeroInitialized(p->D_SECTIONTIMERSTOPLOC_k);
+      ZeroInitialized(p->L_SECTION)         &&
+      ZeroInitialized(p->Q_SECTIONTIMER)    &&
+      ZeroInitialized(p->T_SECTIONTIMER)    &&
+      ZeroInitialized(p->D_SECTIONTIMERSTOPLOC);
 
     predicate EqualBits(Bitstream* stream, integer pos, Level_23_Movement_Authority_Core_1* p) =
-      EqualBits(stream, pos,       pos + 15,  p->L_SECTION_k)       &&
-      EqualBits(stream, pos + 15,  pos + 16,  p->Q_SECTIONTIMER_k)  &&
-      EqualBits(stream, pos + 16,  pos + 26,  p->T_SECTIONTIMER_k)  &&
-      EqualBits(stream, pos + 26,  pos + 41,  p->D_SECTIONTIMERSTOPLOC_k);
+      EqualBits(stream, pos,       pos + 15,  p->L_SECTION)         &&
+      EqualBits(stream, pos + 15,  pos + 16,  p->Q_SECTIONTIMER)    &&
+      EqualBits(stream, pos + 16,  pos + 26,  p->T_SECTIONTIMER)    &&
+      EqualBits(stream, pos + 26,  pos + 41,  p->D_SECTIONTIMERSTOPLOC);
 
     predicate UpperBitsNotSet(Level_23_Movement_Authority_Core_1* p) =
-      UpperBitsNotSet(p->L_SECTION_k,      15)  &&
-      UpperBitsNotSet(p->Q_SECTIONTIMER_k, 1)   &&
-      UpperBitsNotSet(p->T_SECTIONTIMER_k, 10)  &&
-      UpperBitsNotSet(p->D_SECTIONTIMERSTOPLOC_k,15);
+      UpperBitsNotSet(p->L_SECTION,        15)  &&
+      UpperBitsNotSet(p->Q_SECTIONTIMER,   1)   &&
+      UpperBitsNotSet(p->T_SECTIONTIMER,   10)  &&
+      UpperBitsNotSet(p->D_SECTIONTIMERSTOPLOC,15);
 
 */
 

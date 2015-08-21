@@ -7,9 +7,9 @@
 struct Gradient_Profile_Core_1
 {
 
-    uint16_t  D_GRADIENT_k;     // # 15
-    uint8_t   Q_GDIR_k;         // # 1
-    uint8_t   G_A_k;            // # 8
+    uint64_t  D_GRADIENT;       // # 15
+    uint64_t  Q_GDIR;           // # 1
+    uint64_t   G_A;              // # 8
 };
 
 #ifdef __cplusplus
@@ -19,9 +19,9 @@ struct Gradient_Profile_Core_1
 inline std::ostream& operator<<(std::ostream& stream, const Gradient_Profile_Core_1& p)
 {
     stream 
-       << +p.D_GRADIENT_k << ','
-       << +p.Q_GDIR_k << ','
-       << +p.G_A_k;
+       << +p.D_GRADIENT << ','
+       << +p.Q_GDIR << ','
+       << +p.G_A;
 
     return stream;
 }
@@ -30,9 +30,9 @@ inline bool operator==(const Gradient_Profile_Core_1& a, const Gradient_Profile_
 {
     bool status = true;
     
-    status = status && (a.D_GRADIENT_k == b.D_GRADIENT_k);
-    status = status && (a.Q_GDIR_k == b.Q_GDIR_k);
-    status = status && (a.G_A_k == b.G_A_k);
+    status = status && (a.D_GRADIENT == b.D_GRADIENT);
+    status = status && (a.Q_GDIR == b.Q_GDIR);
+    status = status && (a.G_A == b.G_A);
 
     return status;
 }
@@ -58,24 +58,24 @@ typedef struct Gradient_Profile_Core_1 Gradient_Profile_Core_1;
       \separated(stream->addr + (0..stream->size-1), p);
 
     predicate Invariant(Gradient_Profile_Core_1* p) =
-      Invariant(p->D_GRADIENT_k)      &&
-      Invariant(p->Q_GDIR_k)          &&
-      Invariant(p->G_A_k);
+      Invariant(p->D_GRADIENT)        &&
+      Invariant(p->Q_GDIR)            &&
+      Invariant(p->G_A);
 
     predicate ZeroInitialized(Gradient_Profile_Core_1* p) =
-      ZeroInitialized(p->D_GRADIENT_k)      &&
-      ZeroInitialized(p->Q_GDIR_k)          &&
-      ZeroInitialized(p->G_A_k);
+      ZeroInitialized(p->D_GRADIENT)        &&
+      ZeroInitialized(p->Q_GDIR)            &&
+      ZeroInitialized(p->G_A);
 
     predicate EqualBits(Bitstream* stream, integer pos, Gradient_Profile_Core_1* p) =
-      EqualBits(stream, pos,       pos + 15,  p->D_GRADIENT_k)      &&
-      EqualBits(stream, pos + 15,  pos + 16,  p->Q_GDIR_k)          &&
-      EqualBits(stream, pos + 16,  pos + 24,  p->G_A_k);
+      EqualBits(stream, pos,       pos + 15,  p->D_GRADIENT)        &&
+      EqualBits(stream, pos + 15,  pos + 16,  p->Q_GDIR)            &&
+      EqualBits(stream, pos + 16,  pos + 24,  p->G_A);
 
     predicate UpperBitsNotSet(Gradient_Profile_Core_1* p) =
-      UpperBitsNotSet(p->D_GRADIENT_k,     15)  &&
-      UpperBitsNotSet(p->Q_GDIR_k,         1)   &&
-      UpperBitsNotSet(p->G_A_k,            8);
+      UpperBitsNotSet(p->D_GRADIENT,       15)  &&
+      UpperBitsNotSet(p->Q_GDIR,           1)   &&
+      UpperBitsNotSet(p->G_A,              8);
 
 */
 

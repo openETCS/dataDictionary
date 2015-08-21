@@ -8,12 +8,12 @@
 struct National_Values_Core_3
 {
 
-    uint8_t   Q_NVKVINTSET_k;   // # 2
-    uint8_t   A_NVP12_k;        // # 6
-    uint8_t   A_NVP23_k;        // # 6
-    uint8_t   V_NVKVINT_k;      // # 7
-    uint8_t   M_NVKVINT_k;      // # 7
-    uint8_t   N_ITER_3_1;       // # 5
+    uint64_t  Q_NVKVINTSET;     // # 2
+    uint64_t   A_NVP12;          // # 6
+    uint64_t   A_NVP23;          // # 6
+    uint64_t   V_NVKVINT;        // # 7
+    uint64_t   M_NVKVINT;        // # 7
+    uint64_t   N_ITER_3_1;       // # 5
     National_Values_Core_3_1   sub_3_1[31];
 };
 
@@ -24,11 +24,11 @@ struct National_Values_Core_3
 inline std::ostream& operator<<(std::ostream& stream, const National_Values_Core_3& p)
 {
     stream 
-       << +p.Q_NVKVINTSET_k << ','
-       << +p.A_NVP12_k << ','
-       << +p.A_NVP23_k << ','
-       << +p.V_NVKVINT_k << ','
-       << +p.M_NVKVINT_k << ','
+       << +p.Q_NVKVINTSET << ','
+       << +p.A_NVP12 << ','
+       << +p.A_NVP23 << ','
+       << +p.V_NVKVINT << ','
+       << +p.M_NVKVINT << ','
        << +p.N_ITER_3_1;
        for (uint32_t i = 0; i < p.N_ITER_3_1; ++i)
        {
@@ -43,14 +43,14 @@ inline bool operator==(const National_Values_Core_3& a, const National_Values_Co
 {
     bool status = true;
     
-    status = status && (a.Q_NVKVINTSET_k == b.Q_NVKVINTSET_k);
-    if (a.Q_NVKVINTSET_k == 1)
+    status = status && (a.Q_NVKVINTSET == b.Q_NVKVINTSET);
+    if (a.Q_NVKVINTSET == 1)
     {
-    status = status && (a.A_NVP12_k == b.A_NVP12_k);
-    status = status && (a.A_NVP23_k == b.A_NVP23_k);
+    status = status && (a.A_NVP12 == b.A_NVP12);
+    status = status && (a.A_NVP23 == b.A_NVP23);
     }
-    status = status && (a.V_NVKVINT_k == b.V_NVKVINT_k);
-    status = status && (a.M_NVKVINT_k == b.M_NVKVINT_k);
+    status = status && (a.V_NVKVINT == b.V_NVKVINT);
+    status = status && (a.M_NVKVINT == b.M_NVKVINT);
     status = status && (a.N_ITER_3_1 == b.N_ITER_3_1);
     if (a.N_ITER_3_1 == b.N_ITER_3_1)
     {
@@ -88,16 +88,16 @@ typedef struct National_Values_Core_3 National_Values_Core_3;
       \separated(stream->addr + (0..stream->size-1), p);
 
     predicate Invariant(National_Values_Core_3* p) =
-      Invariant(p->Q_NVKVINTSET_k);
+      Invariant(p->Q_NVKVINTSET);
 
     predicate ZeroInitialized(National_Values_Core_3* p) =
-      ZeroInitialized(p->Q_NVKVINTSET_k);
+      ZeroInitialized(p->Q_NVKVINTSET);
 
     predicate EqualBits(Bitstream* stream, integer pos, National_Values_Core_3* p) =
-      EqualBits(stream, pos,       pos + 2,   p->Q_NVKVINTSET_k);
+      EqualBits(stream, pos,       pos + 2,   p->Q_NVKVINTSET);
 
     predicate UpperBitsNotSet(National_Values_Core_3* p) =
-      UpperBitsNotSet(p->Q_NVKVINTSET_k,   2);
+      UpperBitsNotSet(p->Q_NVKVINTSET,     2);
 
 */
 

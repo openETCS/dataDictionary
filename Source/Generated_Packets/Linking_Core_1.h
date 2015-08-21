@@ -7,13 +7,13 @@
 struct Linking_Core_1
 {
 
-    uint16_t  D_LINK_k;         // # 15
-    uint8_t   Q_NEWCOUNTRY_k;   // # 1
-    uint16_t  NID_C_k;          // # 10
-    uint16_t  NID_BG_k;         // # 14
-    uint8_t   Q_LINKORIENTATION_k;// # 1
-    uint8_t   Q_LINKREACTION_k; // # 2
-    uint8_t   Q_LOCACC_k;       // # 6
+    uint64_t  D_LINK;           // # 15
+    uint64_t  Q_NEWCOUNTRY;     // # 1
+    uint64_t  NID_C;            // # 10
+    uint64_t  NID_BG;           // # 14
+    uint64_t  Q_LINKORIENTATION;// # 1
+    uint64_t  Q_LINKREACTION;   // # 2
+    uint64_t   Q_LOCACC;         // # 6
 };
 
 #ifdef __cplusplus
@@ -23,13 +23,13 @@ struct Linking_Core_1
 inline std::ostream& operator<<(std::ostream& stream, const Linking_Core_1& p)
 {
     stream 
-       << +p.D_LINK_k << ','
-       << +p.Q_NEWCOUNTRY_k << ','
-       << +p.NID_C_k << ','
-       << +p.NID_BG_k << ','
-       << +p.Q_LINKORIENTATION_k << ','
-       << +p.Q_LINKREACTION_k << ','
-       << +p.Q_LOCACC_k;
+       << +p.D_LINK << ','
+       << +p.Q_NEWCOUNTRY << ','
+       << +p.NID_C << ','
+       << +p.NID_BG << ','
+       << +p.Q_LINKORIENTATION << ','
+       << +p.Q_LINKREACTION << ','
+       << +p.Q_LOCACC;
 
     return stream;
 }
@@ -38,16 +38,16 @@ inline bool operator==(const Linking_Core_1& a, const Linking_Core_1& b)
 {
     bool status = true;
     
-    status = status && (a.D_LINK_k == b.D_LINK_k);
-    status = status && (a.Q_NEWCOUNTRY_k == b.Q_NEWCOUNTRY_k);
-    if (a.Q_NEWCOUNTRY_k == 1)
+    status = status && (a.D_LINK == b.D_LINK);
+    status = status && (a.Q_NEWCOUNTRY == b.Q_NEWCOUNTRY);
+    if (a.Q_NEWCOUNTRY == 1)
     {
-    status = status && (a.NID_C_k == b.NID_C_k);
+    status = status && (a.NID_C == b.NID_C);
     }
-    status = status && (a.NID_BG_k == b.NID_BG_k);
-    status = status && (a.Q_LINKORIENTATION_k == b.Q_LINKORIENTATION_k);
-    status = status && (a.Q_LINKREACTION_k == b.Q_LINKREACTION_k);
-    status = status && (a.Q_LOCACC_k == b.Q_LOCACC_k);
+    status = status && (a.NID_BG == b.NID_BG);
+    status = status && (a.Q_LINKORIENTATION == b.Q_LINKORIENTATION);
+    status = status && (a.Q_LINKREACTION == b.Q_LINKREACTION);
+    status = status && (a.Q_LOCACC == b.Q_LOCACC);
 
     return status;
 }
@@ -73,20 +73,20 @@ typedef struct Linking_Core_1 Linking_Core_1;
       \separated(stream->addr + (0..stream->size-1), p);
 
     predicate Invariant(Linking_Core_1* p) =
-      Invariant(p->D_LINK_k)          &&
-      Invariant(p->Q_NEWCOUNTRY_k);
+      Invariant(p->D_LINK)            &&
+      Invariant(p->Q_NEWCOUNTRY);
 
     predicate ZeroInitialized(Linking_Core_1* p) =
-      ZeroInitialized(p->D_LINK_k)          &&
-      ZeroInitialized(p->Q_NEWCOUNTRY_k);
+      ZeroInitialized(p->D_LINK)            &&
+      ZeroInitialized(p->Q_NEWCOUNTRY);
 
     predicate EqualBits(Bitstream* stream, integer pos, Linking_Core_1* p) =
-      EqualBits(stream, pos,       pos + 15,  p->D_LINK_k)          &&
-      EqualBits(stream, pos + 15,  pos + 16,  p->Q_NEWCOUNTRY_k);
+      EqualBits(stream, pos,       pos + 15,  p->D_LINK)            &&
+      EqualBits(stream, pos + 15,  pos + 16,  p->Q_NEWCOUNTRY);
 
     predicate UpperBitsNotSet(Linking_Core_1* p) =
-      UpperBitsNotSet(p->D_LINK_k,         15)  &&
-      UpperBitsNotSet(p->Q_NEWCOUNTRY_k,   1);
+      UpperBitsNotSet(p->D_LINK,           15)  &&
+      UpperBitsNotSet(p->Q_NEWCOUNTRY,     1);
 
 */
 

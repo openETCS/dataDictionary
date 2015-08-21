@@ -7,8 +7,8 @@
 struct Validated_train_data_Core_1
 {
 
-    uint8_t   M_VOLTAGE_k;      // # 4
-    uint16_t  NID_CTRACTION_k;  // # 10
+    uint64_t  M_VOLTAGE;        // # 4
+    uint64_t  NID_CTRACTION;    // # 10
 };
 
 #ifdef __cplusplus
@@ -18,8 +18,8 @@ struct Validated_train_data_Core_1
 inline std::ostream& operator<<(std::ostream& stream, const Validated_train_data_Core_1& p)
 {
     stream 
-       << +p.M_VOLTAGE_k << ','
-       << +p.NID_CTRACTION_k;
+       << +p.M_VOLTAGE << ','
+       << +p.NID_CTRACTION;
 
     return stream;
 }
@@ -28,10 +28,10 @@ inline bool operator==(const Validated_train_data_Core_1& a, const Validated_tra
 {
     bool status = true;
     
-    status = status && (a.M_VOLTAGE_k == b.M_VOLTAGE_k);
-    if ((a.M_VOLTAGE_k != 0) && (a.NID_CTRACTION_k != 0))
+    status = status && (a.M_VOLTAGE == b.M_VOLTAGE);
+    if ((a.M_VOLTAGE != 0) && (a.NID_CTRACTION != 0))
     {
-    status = status && (a.NID_CTRACTION_k == b.NID_CTRACTION_k);
+    status = status && (a.NID_CTRACTION == b.NID_CTRACTION);
     }
 
     return status;
@@ -58,16 +58,16 @@ typedef struct Validated_train_data_Core_1 Validated_train_data_Core_1;
       \separated(stream->addr + (0..stream->size-1), p);
 
     predicate Invariant(Validated_train_data_Core_1* p) =
-      Invariant(p->M_VOLTAGE_k);
+      Invariant(p->M_VOLTAGE);
 
     predicate ZeroInitialized(Validated_train_data_Core_1* p) =
-      ZeroInitialized(p->M_VOLTAGE_k);
+      ZeroInitialized(p->M_VOLTAGE);
 
     predicate EqualBits(Bitstream* stream, integer pos, Validated_train_data_Core_1* p) =
-      EqualBits(stream, pos,       pos + 4,   p->M_VOLTAGE_k);
+      EqualBits(stream, pos,       pos + 4,   p->M_VOLTAGE);
 
     predicate UpperBitsNotSet(Validated_train_data_Core_1* p) =
-      UpperBitsNotSet(p->M_VOLTAGE_k,      4);
+      UpperBitsNotSet(p->M_VOLTAGE,        4);
 
 */
 

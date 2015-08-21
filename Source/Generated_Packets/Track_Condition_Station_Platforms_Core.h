@@ -12,16 +12,16 @@ struct Track_Condition_Station_Platforms_Core
     // platforms for use by the train door control system  
     // Packet Number = 69
 
-    uint32_t  Q_DIR;            // # 2
-    uint16_t  L_PACKET;         // # 13
-    uint32_t  Q_SCALE;          // # 2
-    uint32_t  Q_TRACKINIT;      // # 1
-    uint16_t  D_TRACKINIT;      // # 15
-    uint16_t  D_TRACKCOND;      // # 15
-    uint16_t  L_TRACKCOND;      // # 15
-    uint32_t  M_PLATFORM;       // # 4
-    uint32_t  Q_PLATFORM;       // # 2
-    uint8_t   N_ITER_1;         // # 5
+    uint64_t  Q_DIR;            // # 2
+    uint64_t  L_PACKET;         // # 13
+    uint64_t  Q_SCALE;          // # 2
+    uint64_t  Q_TRACKINIT;      // # 1
+    uint64_t  D_TRACKINIT;      // # 15
+    uint64_t  D_TRACKCOND;      // # 15
+    uint64_t  L_TRACKCOND;      // # 15
+    uint64_t  M_PLATFORM;       // # 4
+    uint64_t  Q_PLATFORM;       // # 2
+    uint64_t   N_ITER_1;         // # 5
     Track_Condition_Station_Platforms_Core_1   sub_1[31];
 };
 

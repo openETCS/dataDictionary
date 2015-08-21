@@ -13,15 +13,15 @@ struct International_Static_Speed_Profile_Core
     // train category.         
     // Packet Number = 27
 
-    uint32_t  Q_DIR;            // # 2
-    uint16_t  L_PACKET;         // # 13
-    uint32_t  Q_SCALE;          // # 2
-    uint16_t  D_STATIC;         // # 15
-    uint8_t   V_STATIC;         // # 7
-    uint32_t  Q_FRONT;          // # 1
-    uint8_t   N_ITER_1;         // # 5
+    uint64_t  Q_DIR;            // # 2
+    uint64_t  L_PACKET;         // # 13
+    uint64_t  Q_SCALE;          // # 2
+    uint64_t  D_STATIC;         // # 15
+    uint64_t   V_STATIC;         // # 7
+    uint64_t  Q_FRONT;          // # 1
+    uint64_t   N_ITER_1;         // # 5
     International_Static_Speed_Profile_Core_1   sub_1[31];
-    uint8_t   N_ITER_2;         // # 5
+    uint64_t   N_ITER_2;         // # 5
     International_Static_Speed_Profile_Core_2   sub_2[31];
 };
 

@@ -7,7 +7,7 @@
 struct Validated_train_data_Core_2
 {
 
-    uint8_t   NID_NTC_n;        // # 8
+    uint64_t   NID_NTC;          // # 8
 };
 
 #ifdef __cplusplus
@@ -17,7 +17,7 @@ struct Validated_train_data_Core_2
 inline std::ostream& operator<<(std::ostream& stream, const Validated_train_data_Core_2& p)
 {
     stream 
-       << +p.NID_NTC_n;
+       << +p.NID_NTC;
 
     return stream;
 }
@@ -26,7 +26,7 @@ inline bool operator==(const Validated_train_data_Core_2& a, const Validated_tra
 {
     bool status = true;
     
-    status = status && (a.NID_NTC_n == b.NID_NTC_n);
+    status = status && (a.NID_NTC == b.NID_NTC);
 
     return status;
 }
@@ -52,16 +52,16 @@ typedef struct Validated_train_data_Core_2 Validated_train_data_Core_2;
       \separated(stream->addr + (0..stream->size-1), p);
 
     predicate Invariant(Validated_train_data_Core_2* p) =
-      Invariant(p->NID_NTC_n);
+      Invariant(p->NID_NTC);
 
     predicate ZeroInitialized(Validated_train_data_Core_2* p) =
-      ZeroInitialized(p->NID_NTC_n);
+      ZeroInitialized(p->NID_NTC);
 
     predicate EqualBits(Bitstream* stream, integer pos, Validated_train_data_Core_2* p) =
-      EqualBits(stream, pos,       pos + 8,   p->NID_NTC_n);
+      EqualBits(stream, pos,       pos + 8,   p->NID_NTC);
 
     predicate UpperBitsNotSet(Validated_train_data_Core_2* p) =
-      UpperBitsNotSet(p->NID_NTC_n,        8);
+      UpperBitsNotSet(p->NID_NTC,          8);
 
 */
 

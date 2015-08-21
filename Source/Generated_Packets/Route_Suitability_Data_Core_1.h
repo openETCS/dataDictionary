@@ -7,12 +7,12 @@
 struct Route_Suitability_Data_Core_1
 {
 
-    uint16_t  D_SUITABILITY_k;  // # 15
-    uint8_t   Q_SUITABILITY_k;  // # 2
-    uint8_t   M_LINEGAUGE_k;    // # 8
-    uint8_t   M_AXLELOADCAT_k;  // # 7
-    uint8_t   M_VOLTAGE_k;      // # 4
-    uint16_t  NID_CTRACTION_k;  // # 10
+    uint64_t  D_SUITABILITY;    // # 15
+    uint64_t  Q_SUITABILITY;    // # 2
+    uint64_t  M_LINEGAUGE;      // # 8
+    uint64_t  M_AXLELOADCAT;    // # 7
+    uint64_t  M_VOLTAGE;        // # 4
+    uint64_t  NID_CTRACTION;    // # 10
 };
 
 #ifdef __cplusplus
@@ -22,12 +22,12 @@ struct Route_Suitability_Data_Core_1
 inline std::ostream& operator<<(std::ostream& stream, const Route_Suitability_Data_Core_1& p)
 {
     stream 
-       << +p.D_SUITABILITY_k << ','
-       << +p.Q_SUITABILITY_k << ','
-       << +p.M_LINEGAUGE_k << ','
-       << +p.M_AXLELOADCAT_k << ','
-       << +p.M_VOLTAGE_k << ','
-       << +p.NID_CTRACTION_k;
+       << +p.D_SUITABILITY << ','
+       << +p.Q_SUITABILITY << ','
+       << +p.M_LINEGAUGE << ','
+       << +p.M_AXLELOADCAT << ','
+       << +p.M_VOLTAGE << ','
+       << +p.NID_CTRACTION;
 
     return stream;
 }
@@ -36,23 +36,23 @@ inline bool operator==(const Route_Suitability_Data_Core_1& a, const Route_Suita
 {
     bool status = true;
     
-    status = status && (a.D_SUITABILITY_k == b.D_SUITABILITY_k);
-    status = status && (a.Q_SUITABILITY_k == b.Q_SUITABILITY_k);
-    if (a.Q_SUITABILITY_k == 0)
+    status = status && (a.D_SUITABILITY == b.D_SUITABILITY);
+    status = status && (a.Q_SUITABILITY == b.Q_SUITABILITY);
+    if (a.Q_SUITABILITY == 0)
     {
-    status = status && (a.M_LINEGAUGE_k == b.M_LINEGAUGE_k);
+    status = status && (a.M_LINEGAUGE == b.M_LINEGAUGE);
     }
-    if (a.Q_SUITABILITY_k == 1)
+    if (a.Q_SUITABILITY == 1)
     {
-    status = status && (a.M_AXLELOADCAT_k == b.M_AXLELOADCAT_k);
+    status = status && (a.M_AXLELOADCAT == b.M_AXLELOADCAT);
     }
-    if (a.Q_SUITABILITY_k == 2)
+    if (a.Q_SUITABILITY == 2)
     {
-    status = status && (a.M_VOLTAGE_k == b.M_VOLTAGE_k);
+    status = status && (a.M_VOLTAGE == b.M_VOLTAGE);
     }
-    if ((a.Q_SUITABILITY_k == 2) && (a.M_VOLTAGE_k != 0))
+    if ((a.Q_SUITABILITY == 2) && (a.M_VOLTAGE != 0))
     {
-    status = status && (a.NID_CTRACTION_k == b.NID_CTRACTION_k);
+    status = status && (a.NID_CTRACTION == b.NID_CTRACTION);
     }
 
     return status;
@@ -79,20 +79,20 @@ typedef struct Route_Suitability_Data_Core_1 Route_Suitability_Data_Core_1;
       \separated(stream->addr + (0..stream->size-1), p);
 
     predicate Invariant(Route_Suitability_Data_Core_1* p) =
-      Invariant(p->D_SUITABILITY_k)   &&
-      Invariant(p->Q_SUITABILITY_k);
+      Invariant(p->D_SUITABILITY)     &&
+      Invariant(p->Q_SUITABILITY);
 
     predicate ZeroInitialized(Route_Suitability_Data_Core_1* p) =
-      ZeroInitialized(p->D_SUITABILITY_k)   &&
-      ZeroInitialized(p->Q_SUITABILITY_k);
+      ZeroInitialized(p->D_SUITABILITY)     &&
+      ZeroInitialized(p->Q_SUITABILITY);
 
     predicate EqualBits(Bitstream* stream, integer pos, Route_Suitability_Data_Core_1* p) =
-      EqualBits(stream, pos,       pos + 15,  p->D_SUITABILITY_k)   &&
-      EqualBits(stream, pos + 15,  pos + 17,  p->Q_SUITABILITY_k);
+      EqualBits(stream, pos,       pos + 15,  p->D_SUITABILITY)     &&
+      EqualBits(stream, pos + 15,  pos + 17,  p->Q_SUITABILITY);
 
     predicate UpperBitsNotSet(Route_Suitability_Data_Core_1* p) =
-      UpperBitsNotSet(p->D_SUITABILITY_k,  15)  &&
-      UpperBitsNotSet(p->Q_SUITABILITY_k,  2);
+      UpperBitsNotSet(p->D_SUITABILITY,    15)  &&
+      UpperBitsNotSet(p->Q_SUITABILITY,    2);
 
 */
 

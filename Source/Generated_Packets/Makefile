@@ -16,10 +16,8 @@ CPPFLAGS += -I.
 CPPFLAGS += -I$(BITWALKER)
 CPPFLAGS += -I$(TOPDIR)/Eurobalise_Telegram
 CPPFLAGS += -I$(TOPDIR)/Packet_Header
-CPPFLAGS += -I$(TOPDIR)/Euroradio_Messages
-CPPFLAGS += -T$(TOPDIR)/Generated_Packets
 
-LDFLAGS += -L$(BITWALKER) -lBitwalker -lgenerated_packets
+LDFLAGS += -L$(BITWALKER) -lBitwalker
 
 SRC :=  $(wildcard *.c)
 SRCXX :=  $(wildcard *.cpp)

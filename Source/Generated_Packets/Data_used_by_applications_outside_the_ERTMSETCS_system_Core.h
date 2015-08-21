@@ -11,11 +11,11 @@ struct Data_used_by_applications_outside_the_ERTMSETCS_system_Core
     // applications outside the ERTMS/ETCS system.      
     // Packet Number = 44
 
-    uint32_t  Q_DIR;            // # 2
-    uint16_t  L_PACKET;         // # 13
-    uint16_t  NID_XUSER;        // # 9
-    uint8_t   NID_NTC;          // # 8
-    uint8_t   Other_data_depending_on__NID_XUSER;// # 8
+    uint64_t  Q_DIR;            // # 2
+    uint64_t  L_PACKET;         // # 13
+    uint64_t  NID_XUSER;        // # 9
+    uint64_t   NID_NTC;          // # 8
+    uint64_t   Other_data_depending_on__NID_XUSER;// # 8
 };
 
 #ifdef __cplusplus

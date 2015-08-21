@@ -10,8 +10,8 @@ struct Train_running_number_Core
     // Train running number        
     // Packet Number = 5
 
-    uint16_t  L_PACKET;         // # 13
-    uint32_t  NID_OPERATIONAL;  // # 32
+    uint64_t  L_PACKET;         // # 13
+    uint64_t  NID_OPERATIONAL;  // # 32
 };
 
 #ifdef __cplusplus

@@ -7,7 +7,7 @@
 struct Onboard_telephone_numbers_Core_1
 {
 
-    uint64_t  NID_RADIO_k;      // # 64
+    uint64_t  NID_RADIO;        // # 64
 };
 
 #ifdef __cplusplus
@@ -17,7 +17,7 @@ struct Onboard_telephone_numbers_Core_1
 inline std::ostream& operator<<(std::ostream& stream, const Onboard_telephone_numbers_Core_1& p)
 {
     stream 
-       << +p.NID_RADIO_k;
+       << +p.NID_RADIO;
 
     return stream;
 }
@@ -26,7 +26,7 @@ inline bool operator==(const Onboard_telephone_numbers_Core_1& a, const Onboard_
 {
     bool status = true;
     
-    status = status && (a.NID_RADIO_k == b.NID_RADIO_k);
+    status = status && (a.NID_RADIO == b.NID_RADIO);
 
     return status;
 }
@@ -52,16 +52,16 @@ typedef struct Onboard_telephone_numbers_Core_1 Onboard_telephone_numbers_Core_1
       \separated(stream->addr + (0..stream->size-1), p);
 
     predicate Invariant(Onboard_telephone_numbers_Core_1* p) =
-      Invariant(p->NID_RADIO_k);
+      Invariant(p->NID_RADIO);
 
     predicate ZeroInitialized(Onboard_telephone_numbers_Core_1* p) =
-      ZeroInitialized(p->NID_RADIO_k);
+      ZeroInitialized(p->NID_RADIO);
 
     predicate EqualBits(Bitstream* stream, integer pos, Onboard_telephone_numbers_Core_1* p) =
-      EqualBits(stream, pos,       pos + 64,  p->NID_RADIO_k);
+      EqualBits(stream, pos,       pos + 64,  p->NID_RADIO);
 
     predicate UpperBitsNotSet(Onboard_telephone_numbers_Core_1* p) =
-      UpperBitsNotSet(p->NID_RADIO_k,      64);
+      UpperBitsNotSet(p->NID_RADIO,        64);
 
 */
 

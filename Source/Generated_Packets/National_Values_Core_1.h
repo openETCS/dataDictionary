@@ -7,7 +7,7 @@
 struct National_Values_Core_1
 {
 
-    uint16_t  NID_C_p;          // # 10
+    uint64_t  NID_C;            // # 10
 };
 
 #ifdef __cplusplus
@@ -17,7 +17,7 @@ struct National_Values_Core_1
 inline std::ostream& operator<<(std::ostream& stream, const National_Values_Core_1& p)
 {
     stream 
-       << +p.NID_C_p;
+       << +p.NID_C;
 
     return stream;
 }
@@ -26,7 +26,7 @@ inline bool operator==(const National_Values_Core_1& a, const National_Values_Co
 {
     bool status = true;
     
-    status = status && (a.NID_C_p == b.NID_C_p);
+    status = status && (a.NID_C == b.NID_C);
 
     return status;
 }
@@ -52,16 +52,16 @@ typedef struct National_Values_Core_1 National_Values_Core_1;
       \separated(stream->addr + (0..stream->size-1), p);
 
     predicate Invariant(National_Values_Core_1* p) =
-      Invariant(p->NID_C_p);
+      Invariant(p->NID_C);
 
     predicate ZeroInitialized(National_Values_Core_1* p) =
-      ZeroInitialized(p->NID_C_p);
+      ZeroInitialized(p->NID_C);
 
     predicate EqualBits(Bitstream* stream, integer pos, National_Values_Core_1* p) =
-      EqualBits(stream, pos,       pos + 10,  p->NID_C_p);
+      EqualBits(stream, pos,       pos + 10,  p->NID_C);
 
     predicate UpperBitsNotSet(National_Values_Core_1* p) =
-      UpperBitsNotSet(p->NID_C_p,          10);
+      UpperBitsNotSet(p->NID_C,            10);
 
 */
 

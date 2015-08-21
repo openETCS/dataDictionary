@@ -14,56 +14,56 @@ struct National_Values_Core
     // Downloads a set of National Values to the train  
     // Packet Number = 3
 
-    uint32_t  Q_DIR;            // # 2
-    uint16_t  L_PACKET;         // # 13
-    uint32_t  Q_SCALE;          // # 2
-    uint16_t  D_VALIDNV;        // # 15
-    uint16_t  NID_C;            // # 10
-    uint8_t   N_ITER_1;         // # 5
+    uint64_t  Q_DIR;            // # 2
+    uint64_t  L_PACKET;         // # 13
+    uint64_t  Q_SCALE;          // # 2
+    uint64_t  D_VALIDNV;        // # 15
+    uint64_t  NID_C;            // # 10
+    uint64_t   N_ITER_1;         // # 5
     National_Values_Core_1   sub_1[31];
-    uint8_t   V_NVSHUNT;        // # 7
-    uint8_t   V_NVSTFF;         // # 7
-    uint8_t   V_NVONSIGHT;      // # 7
-    uint8_t   V_NVLIMSUPERV;    // # 7
-    uint8_t   V_NVUNFIT;        // # 7
-    uint8_t   V_NVREL;          // # 7
-    uint16_t  D_NVROLL;         // # 15
-    uint32_t  Q_NVSBTSMPERM;    // # 1
-    uint32_t  Q_NVEMRRLS;       // # 1
-    uint32_t  Q_NVGUIPERM;      // # 1
-    uint32_t  Q_NVSBFBPERM;     // # 1
-    uint32_t  Q_NVINHSMICPERM;  // # 1
-    uint8_t   V_NVALLOWOVTRP;   // # 7
-    uint8_t   V_NVSUPOVTRP;     // # 7
-    uint16_t  D_NVOVTRP;        // # 15
-    uint8_t   T_NVOVTRP;        // # 8
-    uint16_t  D_NVPOTRP;        // # 15
-    uint32_t  M_NVCONTACT;      // # 2
-    uint8_t   T_NVCONTACT;      // # 8
-    uint32_t  M_NVDERUN;        // # 1
-    uint16_t  D_NVSTFF;         // # 15
-    uint32_t  Q_NVDRIVER_ADHES; // # 1
-    uint8_t   A_NVMAXREDADH1;   // # 6
-    uint8_t   A_NVMAXREDADH2;   // # 6
-    uint8_t   A_NVMAXREDADH3;   // # 6
-    uint8_t   Q_NVLOCACC;       // # 6
-    uint8_t   M_NVAVADH;        // # 5
-    uint32_t  M_NVEBCL;         // # 4
-    uint32_t  Q_NVKINT;         // # 1
-    uint32_t  Q_NVKVINTSET;     // # 2
-    uint8_t   A_NVP12;          // # 6
-    uint8_t   A_NVP23;          // # 6
-    uint8_t   V_NVKVINT;        // # 7
-    uint8_t   M_NVKVINT;        // # 7
-    uint8_t   N_ITER_2;         // # 5
+    uint64_t   V_NVSHUNT;        // # 7
+    uint64_t   V_NVSTFF;         // # 7
+    uint64_t   V_NVONSIGHT;      // # 7
+    uint64_t   V_NVLIMSUPERV;    // # 7
+    uint64_t   V_NVUNFIT;        // # 7
+    uint64_t   V_NVREL;          // # 7
+    uint64_t  D_NVROLL;         // # 15
+    uint64_t  Q_NVSBTSMPERM;    // # 1
+    uint64_t  Q_NVEMRRLS;       // # 1
+    uint64_t  Q_NVGUIPERM;      // # 1
+    uint64_t  Q_NVSBFBPERM;     // # 1
+    uint64_t  Q_NVINHSMICPERM;  // # 1
+    uint64_t   V_NVALLOWOVTRP;   // # 7
+    uint64_t   V_NVSUPOVTRP;     // # 7
+    uint64_t  D_NVOVTRP;        // # 15
+    uint64_t   T_NVOVTRP;        // # 8
+    uint64_t  D_NVPOTRP;        // # 15
+    uint64_t  M_NVCONTACT;      // # 2
+    uint64_t   T_NVCONTACT;      // # 8
+    uint64_t  M_NVDERUN;        // # 1
+    uint64_t  D_NVSTFF;         // # 15
+    uint64_t  Q_NVDRIVER_ADHES; // # 1
+    uint64_t   A_NVMAXREDADH1;   // # 6
+    uint64_t   A_NVMAXREDADH2;   // # 6
+    uint64_t   A_NVMAXREDADH3;   // # 6
+    uint64_t   Q_NVLOCACC;       // # 6
+    uint64_t   M_NVAVADH;        // # 5
+    uint64_t  M_NVEBCL;         // # 4
+    uint64_t  Q_NVKINT;         // # 1
+    uint64_t  Q_NVKVINTSET;     // # 2
+    uint64_t   A_NVP12;          // # 6
+    uint64_t   A_NVP23;          // # 6
+    uint64_t   V_NVKVINT;        // # 7
+    uint64_t   M_NVKVINT;        // # 7
+    uint64_t   N_ITER_2;         // # 5
     National_Values_Core_2   sub_2[31];
-    uint8_t   N_ITER_3;         // # 5
+    uint64_t   N_ITER_3;         // # 5
     National_Values_Core_3   sub_3[31];
-    uint32_t  L_NVKRINT;        // # 5
-    uint8_t   M_NVKRINT;        // # 5
-    uint8_t   N_ITER_4;         // # 5
+    uint64_t  L_NVKRINT;        // # 5
+    uint64_t   M_NVKRINT;        // # 5
+    uint64_t   N_ITER_4;         // # 5
     National_Values_Core_4   sub_4[31];
-    uint8_t   M_NVKTINT;        // # 5
+    uint64_t   M_NVKTINT;        // # 5
 };
 
 #ifdef __cplusplus
