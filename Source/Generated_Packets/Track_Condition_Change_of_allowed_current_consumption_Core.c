@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Track_Condition_Change_of_allowed_current_consumption_UpperBitsNotSet(const Track_Condition_Change_of_allowed_current_consumption_Core* p)
 {
@@ -26,7 +27,7 @@ int Track_Condition_Change_of_allowed_current_consumption_UpperBitsNotSet(const 
 
 int Track_Condition_Change_of_allowed_current_consumption_Encoder(Bitstream* stream, const Track_Condition_Change_of_allowed_current_consumption_Core* p)
 {
-    if (NormalBitstream(stream, TRACK_CONDITION_CHANGE_OF_ALLOWED_CURRENT_CONSUMPTION_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, TRACK_CONDITION_CHANGE_OF_ALLOWED_CURRENT_CONSUMPTION_CORE_BITSIZE))
     {
         if (Track_Condition_Change_of_allowed_current_consumption_UpperBitsNotSet(p))
         {
@@ -60,7 +61,7 @@ int Track_Condition_Change_of_allowed_current_consumption_Encoder(Bitstream* str
 
 int Track_Condition_Change_of_allowed_current_consumption_Decoder(Bitstream* stream, Track_Condition_Change_of_allowed_current_consumption_Core* p)
 {
-    if (NormalBitstream(stream, TRACK_CONDITION_CHANGE_OF_ALLOWED_CURRENT_CONSUMPTION_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, TRACK_CONDITION_CHANGE_OF_ALLOWED_CURRENT_CONSUMPTION_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

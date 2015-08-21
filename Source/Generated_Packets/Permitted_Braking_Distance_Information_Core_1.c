@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Permitted_Braking_Distance_Information_Core_1_UpperBitsNotSet(const Permitted_Braking_Distance_Information_Core_1* p)
 {
@@ -27,7 +28,7 @@ int Permitted_Braking_Distance_Information_Core_1_UpperBitsNotSet(const Permitte
 
 int Permitted_Braking_Distance_Information_Core_1_Encoder(Bitstream* stream, const Permitted_Braking_Distance_Information_Core_1* p)
 {
-    if (NormalBitstream(stream, PERMITTED_BRAKING_DISTANCE_INFORMATION_CORE_1_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, PERMITTED_BRAKING_DISTANCE_INFORMATION_CORE_1_CORE_BITSIZE))
     {
         if (Permitted_Braking_Distance_Information_Core_1_UpperBitsNotSet(p))
         {
@@ -63,7 +64,7 @@ int Permitted_Braking_Distance_Information_Core_1_Encoder(Bitstream* stream, con
 
 int Permitted_Braking_Distance_Information_Core_1_Decoder(Bitstream* stream, Permitted_Braking_Distance_Information_Core_1* p)
 {
-    if (NormalBitstream(stream, PERMITTED_BRAKING_DISTANCE_INFORMATION_CORE_1_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, PERMITTED_BRAKING_DISTANCE_INFORMATION_CORE_1_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Geographical_Position_Information_Core_1_UpperBitsNotSet(const Geographical_Position_Information_Core_1* p)
 {
@@ -30,7 +31,7 @@ int Geographical_Position_Information_Core_1_UpperBitsNotSet(const Geographical_
 
 int Geographical_Position_Information_Core_1_Encoder(Bitstream* stream, const Geographical_Position_Information_Core_1* p)
 {
-    if (NormalBitstream(stream, GEOGRAPHICAL_POSITION_INFORMATION_CORE_1_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, GEOGRAPHICAL_POSITION_INFORMATION_CORE_1_CORE_BITSIZE))
     {
         if (Geographical_Position_Information_Core_1_UpperBitsNotSet(p))
         {
@@ -65,7 +66,7 @@ int Geographical_Position_Information_Core_1_Encoder(Bitstream* stream, const Ge
 
 int Geographical_Position_Information_Core_1_Decoder(Bitstream* stream, Geographical_Position_Information_Core_1* p)
 {
-    if (NormalBitstream(stream, GEOGRAPHICAL_POSITION_INFORMATION_CORE_1_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, GEOGRAPHICAL_POSITION_INFORMATION_CORE_1_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

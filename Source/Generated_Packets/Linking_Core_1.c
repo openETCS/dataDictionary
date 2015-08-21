@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Linking_Core_1_UpperBitsNotSet(const Linking_Core_1* p)
 {
@@ -31,7 +32,7 @@ int Linking_Core_1_UpperBitsNotSet(const Linking_Core_1* p)
 
 int Linking_Core_1_Encoder(Bitstream* stream, const Linking_Core_1* p)
 {
-    if (NormalBitstream(stream, LINKING_CORE_1_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, LINKING_CORE_1_CORE_BITSIZE))
     {
         if (Linking_Core_1_UpperBitsNotSet(p))
         {
@@ -68,7 +69,7 @@ int Linking_Core_1_Encoder(Bitstream* stream, const Linking_Core_1* p)
 
 int Linking_Core_1_Decoder(Bitstream* stream, Linking_Core_1* p)
 {
-    if (NormalBitstream(stream, LINKING_CORE_1_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, LINKING_CORE_1_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

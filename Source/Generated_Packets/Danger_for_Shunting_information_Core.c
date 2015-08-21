@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Danger_for_Shunting_information_UpperBitsNotSet(const Danger_for_Shunting_information_Core* p)
 {
@@ -24,7 +25,7 @@ int Danger_for_Shunting_information_UpperBitsNotSet(const Danger_for_Shunting_in
 
 int Danger_for_Shunting_information_Encoder(Bitstream* stream, const Danger_for_Shunting_information_Core* p)
 {
-    if (NormalBitstream(stream, DANGER_FOR_SHUNTING_INFORMATION_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, DANGER_FOR_SHUNTING_INFORMATION_CORE_BITSIZE))
     {
         if (Danger_for_Shunting_information_UpperBitsNotSet(p))
         {
@@ -54,7 +55,7 @@ int Danger_for_Shunting_information_Encoder(Bitstream* stream, const Danger_for_
 
 int Danger_for_Shunting_information_Decoder(Bitstream* stream, Danger_for_Shunting_information_Core* p)
 {
-    if (NormalBitstream(stream, DANGER_FOR_SHUNTING_INFORMATION_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, DANGER_FOR_SHUNTING_INFORMATION_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

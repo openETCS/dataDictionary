@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Error_Reporting_UpperBitsNotSet(const Error_Reporting_Core* p)
 {
@@ -23,7 +24,7 @@ int Error_Reporting_UpperBitsNotSet(const Error_Reporting_Core* p)
 
 int Error_Reporting_Encoder(Bitstream* stream, const Error_Reporting_Core* p)
 {
-    if (NormalBitstream(stream, ERROR_REPORTING_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, ERROR_REPORTING_CORE_BITSIZE))
     {
         if (Error_Reporting_UpperBitsNotSet(p))
         {
@@ -51,7 +52,7 @@ int Error_Reporting_Encoder(Bitstream* stream, const Error_Reporting_Core* p)
 
 int Error_Reporting_Decoder(Bitstream* stream, Error_Reporting_Core* p)
 {
-    if (NormalBitstream(stream, ERROR_REPORTING_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, ERROR_REPORTING_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

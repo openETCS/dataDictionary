@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int List_of_balises_for_SH_Area_UpperBitsNotSet(const List_of_balises_for_SH_Area_Core* p)
 {
@@ -28,7 +29,7 @@ int List_of_balises_for_SH_Area_UpperBitsNotSet(const List_of_balises_for_SH_Are
 
 int List_of_balises_for_SH_Area_Encoder(Bitstream* stream, const List_of_balises_for_SH_Area_Core* p)
 {
-    if (NormalBitstream(stream, LIST_OF_BALISES_FOR_SH_AREA_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, LIST_OF_BALISES_FOR_SH_AREA_CORE_BITSIZE))
     {
         if (List_of_balises_for_SH_Area_UpperBitsNotSet(p))
         {
@@ -61,7 +62,7 @@ int List_of_balises_for_SH_Area_Encoder(Bitstream* stream, const List_of_balises
 
 int List_of_balises_for_SH_Area_Decoder(Bitstream* stream, List_of_balises_for_SH_Area_Core* p)
 {
-    if (NormalBitstream(stream, LIST_OF_BALISES_FOR_SH_AREA_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, LIST_OF_BALISES_FOR_SH_AREA_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Gradient_Profile_Core_1_UpperBitsNotSet(const Gradient_Profile_Core_1* p)
 {
@@ -24,7 +25,7 @@ int Gradient_Profile_Core_1_UpperBitsNotSet(const Gradient_Profile_Core_1* p)
 
 int Gradient_Profile_Core_1_Encoder(Bitstream* stream, const Gradient_Profile_Core_1* p)
 {
-    if (NormalBitstream(stream, GRADIENT_PROFILE_CORE_1_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, GRADIENT_PROFILE_CORE_1_CORE_BITSIZE))
     {
         if (Gradient_Profile_Core_1_UpperBitsNotSet(p))
         {
@@ -54,7 +55,7 @@ int Gradient_Profile_Core_1_Encoder(Bitstream* stream, const Gradient_Profile_Co
 
 int Gradient_Profile_Core_1_Decoder(Bitstream* stream, Gradient_Profile_Core_1* p)
 {
-    if (NormalBitstream(stream, GRADIENT_PROFILE_CORE_1_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, GRADIENT_PROFILE_CORE_1_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

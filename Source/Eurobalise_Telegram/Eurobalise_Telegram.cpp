@@ -5,9 +5,6 @@
 #include "Packet_Header.h"
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
-#include "Bitwalker_Peek_Normal.h"
-
-#include "Bitwalker_Peek_Normal.h"
 #include <iostream>
 #include <cassert>
 

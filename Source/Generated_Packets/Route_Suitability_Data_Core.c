@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Route_Suitability_Data_UpperBitsNotSet(const Route_Suitability_Data_Core* p)
 {
@@ -55,7 +56,7 @@ int Route_Suitability_Data_UpperBitsNotSet(const Route_Suitability_Data_Core* p)
 
 int Route_Suitability_Data_Encoder(Bitstream* stream, const Route_Suitability_Data_Core* p)
 {
-    if (NormalBitstream(stream, ROUTE_SUITABILITY_DATA_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, ROUTE_SUITABILITY_DATA_CORE_BITSIZE))
     {
         if (Route_Suitability_Data_UpperBitsNotSet(p))
         {
@@ -123,7 +124,7 @@ int Route_Suitability_Data_Encoder(Bitstream* stream, const Route_Suitability_Da
 
 int Route_Suitability_Data_Decoder(Bitstream* stream, Route_Suitability_Data_Core* p)
 {
-    if (NormalBitstream(stream, ROUTE_SUITABILITY_DATA_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, ROUTE_SUITABILITY_DATA_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

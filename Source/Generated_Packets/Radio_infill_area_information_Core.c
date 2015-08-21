@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Radio_infill_area_information_UpperBitsNotSet(const Radio_infill_area_information_Core* p)
 {
@@ -30,7 +31,7 @@ int Radio_infill_area_information_UpperBitsNotSet(const Radio_infill_area_inform
 
 int Radio_infill_area_information_Encoder(Bitstream* stream, const Radio_infill_area_information_Core* p)
 {
-    if (NormalBitstream(stream, RADIO_INFILL_AREA_INFORMATION_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, RADIO_INFILL_AREA_INFORMATION_CORE_BITSIZE))
     {
         if (Radio_infill_area_information_UpperBitsNotSet(p))
         {
@@ -72,7 +73,7 @@ int Radio_infill_area_information_Encoder(Bitstream* stream, const Radio_infill_
 
 int Radio_infill_area_information_Decoder(Bitstream* stream, Radio_infill_area_information_Core* p)
 {
-    if (NormalBitstream(stream, RADIO_INFILL_AREA_INFORMATION_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, RADIO_INFILL_AREA_INFORMATION_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

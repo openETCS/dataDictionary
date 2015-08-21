@@ -2,10 +2,11 @@
 #include "Telegram_Header_Encoder.h"
 #include "Telegram_Header_UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
+#include "Bitstream_Normal.h"
 
 int Telegram_Header_Encoder(Bitstream* stream, const Telegram_Header* p)
 {
-    if (NormalBitstream(stream, TELEGRAM_HEADER_BITSIZE))
+    if (Bitstream_Normal(stream, TELEGRAM_HEADER_BITSIZE))
     {
         if (Telegram_Header_UpperBitsNotSet(p))
         {

@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int System_Version_order_UpperBitsNotSet(const System_Version_order_Core* p)
 {
@@ -24,7 +25,7 @@ int System_Version_order_UpperBitsNotSet(const System_Version_order_Core* p)
 
 int System_Version_order_Encoder(Bitstream* stream, const System_Version_order_Core* p)
 {
-    if (NormalBitstream(stream, SYSTEM_VERSION_ORDER_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, SYSTEM_VERSION_ORDER_CORE_BITSIZE))
     {
         if (System_Version_order_UpperBitsNotSet(p))
         {
@@ -54,7 +55,7 @@ int System_Version_order_Encoder(Bitstream* stream, const System_Version_order_C
 
 int System_Version_order_Decoder(Bitstream* stream, System_Version_order_Core* p)
 {
-    if (NormalBitstream(stream, SYSTEM_VERSION_ORDER_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, SYSTEM_VERSION_ORDER_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

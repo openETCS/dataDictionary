@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Mode_profile_Core_1_UpperBitsNotSet(const Mode_profile_Core_1* p)
 {
@@ -27,7 +28,7 @@ int Mode_profile_Core_1_UpperBitsNotSet(const Mode_profile_Core_1* p)
 
 int Mode_profile_Core_1_Encoder(Bitstream* stream, const Mode_profile_Core_1* p)
 {
-    if (NormalBitstream(stream, MODE_PROFILE_CORE_1_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, MODE_PROFILE_CORE_1_CORE_BITSIZE))
     {
         if (Mode_profile_Core_1_UpperBitsNotSet(p))
         {
@@ -63,7 +64,7 @@ int Mode_profile_Core_1_Encoder(Bitstream* stream, const Mode_profile_Core_1* p)
 
 int Mode_profile_Core_1_Decoder(Bitstream* stream, Mode_profile_Core_1* p)
 {
-    if (NormalBitstream(stream, MODE_PROFILE_CORE_1_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, MODE_PROFILE_CORE_1_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

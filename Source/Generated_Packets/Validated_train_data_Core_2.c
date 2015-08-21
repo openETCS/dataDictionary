@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Validated_train_data_Core_2_UpperBitsNotSet(const Validated_train_data_Core_2* p)
 {
@@ -22,7 +23,7 @@ int Validated_train_data_Core_2_UpperBitsNotSet(const Validated_train_data_Core_
 
 int Validated_train_data_Core_2_Encoder(Bitstream* stream, const Validated_train_data_Core_2* p)
 {
-    if (NormalBitstream(stream, VALIDATED_TRAIN_DATA_CORE_2_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, VALIDATED_TRAIN_DATA_CORE_2_CORE_BITSIZE))
     {
         if (Validated_train_data_Core_2_UpperBitsNotSet(p))
         {
@@ -48,7 +49,7 @@ int Validated_train_data_Core_2_Encoder(Bitstream* stream, const Validated_train
 
 int Validated_train_data_Core_2_Decoder(Bitstream* stream, Validated_train_data_Core_2* p)
 {
-    if (NormalBitstream(stream, VALIDATED_TRAIN_DATA_CORE_2_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, VALIDATED_TRAIN_DATA_CORE_2_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

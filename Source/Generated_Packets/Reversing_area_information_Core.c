@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Reversing_area_information_UpperBitsNotSet(const Reversing_area_information_Core* p)
 {
@@ -26,7 +27,7 @@ int Reversing_area_information_UpperBitsNotSet(const Reversing_area_information_
 
 int Reversing_area_information_Encoder(Bitstream* stream, const Reversing_area_information_Core* p)
 {
-    if (NormalBitstream(stream, REVERSING_AREA_INFORMATION_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, REVERSING_AREA_INFORMATION_CORE_BITSIZE))
     {
         if (Reversing_area_information_UpperBitsNotSet(p))
         {
@@ -60,7 +61,7 @@ int Reversing_area_information_Encoder(Bitstream* stream, const Reversing_area_i
 
 int Reversing_area_information_Decoder(Bitstream* stream, Reversing_area_information_Core* p)
 {
-    if (NormalBitstream(stream, REVERSING_AREA_INFORMATION_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, REVERSING_AREA_INFORMATION_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

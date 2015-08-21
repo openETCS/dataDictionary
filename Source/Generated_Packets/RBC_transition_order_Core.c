@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int RBC_transition_order_UpperBitsNotSet(const RBC_transition_order_Core* p)
 {
@@ -29,7 +30,7 @@ int RBC_transition_order_UpperBitsNotSet(const RBC_transition_order_Core* p)
 
 int RBC_transition_order_Encoder(Bitstream* stream, const RBC_transition_order_Core* p)
 {
-    if (NormalBitstream(stream, RBC_TRANSITION_ORDER_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, RBC_TRANSITION_ORDER_CORE_BITSIZE))
     {
         if (RBC_transition_order_UpperBitsNotSet(p))
         {
@@ -69,7 +70,7 @@ int RBC_transition_order_Encoder(Bitstream* stream, const RBC_transition_order_C
 
 int RBC_transition_order_Decoder(Bitstream* stream, RBC_transition_order_Core* p)
 {
-    if (NormalBitstream(stream, RBC_TRANSITION_ORDER_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, RBC_TRANSITION_ORDER_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

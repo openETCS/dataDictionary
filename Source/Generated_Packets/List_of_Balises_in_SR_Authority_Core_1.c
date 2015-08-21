@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int List_of_Balises_in_SR_Authority_Core_1_UpperBitsNotSet(const List_of_Balises_in_SR_Authority_Core_1* p)
 {
@@ -27,7 +28,7 @@ int List_of_Balises_in_SR_Authority_Core_1_UpperBitsNotSet(const List_of_Balises
 
 int List_of_Balises_in_SR_Authority_Core_1_Encoder(Bitstream* stream, const List_of_Balises_in_SR_Authority_Core_1* p)
 {
-    if (NormalBitstream(stream, LIST_OF_BALISES_IN_SR_AUTHORITY_CORE_1_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, LIST_OF_BALISES_IN_SR_AUTHORITY_CORE_1_CORE_BITSIZE))
     {
         if (List_of_Balises_in_SR_Authority_Core_1_UpperBitsNotSet(p))
         {
@@ -59,7 +60,7 @@ int List_of_Balises_in_SR_Authority_Core_1_Encoder(Bitstream* stream, const List
 
 int List_of_Balises_in_SR_Authority_Core_1_Decoder(Bitstream* stream, List_of_Balises_in_SR_Authority_Core_1* p)
 {
-    if (NormalBitstream(stream, LIST_OF_BALISES_IN_SR_AUTHORITY_CORE_1_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, LIST_OF_BALISES_IN_SR_AUTHORITY_CORE_1_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

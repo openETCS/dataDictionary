@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Adhesion_Factor_UpperBitsNotSet(const Adhesion_Factor_Core* p)
 {
@@ -27,7 +28,7 @@ int Adhesion_Factor_UpperBitsNotSet(const Adhesion_Factor_Core* p)
 
 int Adhesion_Factor_Encoder(Bitstream* stream, const Adhesion_Factor_Core* p)
 {
-    if (NormalBitstream(stream, ADHESION_FACTOR_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, ADHESION_FACTOR_CORE_BITSIZE))
     {
         if (Adhesion_Factor_UpperBitsNotSet(p))
         {
@@ -63,7 +64,7 @@ int Adhesion_Factor_Encoder(Bitstream* stream, const Adhesion_Factor_Core* p)
 
 int Adhesion_Factor_Decoder(Bitstream* stream, Adhesion_Factor_Core* p)
 {
-    if (NormalBitstream(stream, ADHESION_FACTOR_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, ADHESION_FACTOR_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

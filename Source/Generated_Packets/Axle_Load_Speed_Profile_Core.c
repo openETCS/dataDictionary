@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Axle_Load_Speed_Profile_UpperBitsNotSet(const Axle_Load_Speed_Profile_Core* p)
 {
@@ -45,7 +46,7 @@ int Axle_Load_Speed_Profile_UpperBitsNotSet(const Axle_Load_Speed_Profile_Core* 
 
 int Axle_Load_Speed_Profile_Encoder(Bitstream* stream, const Axle_Load_Speed_Profile_Core* p)
 {
-    if (NormalBitstream(stream, AXLE_LOAD_SPEED_PROFILE_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, AXLE_LOAD_SPEED_PROFILE_CORE_BITSIZE))
     {
         if (Axle_Load_Speed_Profile_UpperBitsNotSet(p))
         {
@@ -99,7 +100,7 @@ int Axle_Load_Speed_Profile_Encoder(Bitstream* stream, const Axle_Load_Speed_Pro
 
 int Axle_Load_Speed_Profile_Decoder(Bitstream* stream, Axle_Load_Speed_Profile_Core* p)
 {
-    if (NormalBitstream(stream, AXLE_LOAD_SPEED_PROFILE_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, AXLE_LOAD_SPEED_PROFILE_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

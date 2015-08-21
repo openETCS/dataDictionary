@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Train_running_number_from_RBC_UpperBitsNotSet(const Train_running_number_from_RBC_Core* p)
 {
@@ -24,7 +25,7 @@ int Train_running_number_from_RBC_UpperBitsNotSet(const Train_running_number_fro
 
 int Train_running_number_from_RBC_Encoder(Bitstream* stream, const Train_running_number_from_RBC_Core* p)
 {
-    if (NormalBitstream(stream, TRAIN_RUNNING_NUMBER_FROM_RBC_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, TRAIN_RUNNING_NUMBER_FROM_RBC_CORE_BITSIZE))
     {
         if (Train_running_number_from_RBC_UpperBitsNotSet(p))
         {
@@ -54,7 +55,7 @@ int Train_running_number_from_RBC_Encoder(Bitstream* stream, const Train_running
 
 int Train_running_number_from_RBC_Decoder(Bitstream* stream, Train_running_number_from_RBC_Core* p)
 {
-    if (NormalBitstream(stream, TRAIN_RUNNING_NUMBER_FROM_RBC_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, TRAIN_RUNNING_NUMBER_FROM_RBC_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

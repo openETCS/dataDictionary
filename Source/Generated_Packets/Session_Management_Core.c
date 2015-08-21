@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Session_Management_UpperBitsNotSet(const Session_Management_Core* p)
 {
@@ -28,7 +29,7 @@ int Session_Management_UpperBitsNotSet(const Session_Management_Core* p)
 
 int Session_Management_Encoder(Bitstream* stream, const Session_Management_Core* p)
 {
-    if (NormalBitstream(stream, SESSION_MANAGEMENT_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, SESSION_MANAGEMENT_CORE_BITSIZE))
     {
         if (Session_Management_UpperBitsNotSet(p))
         {
@@ -66,7 +67,7 @@ int Session_Management_Encoder(Bitstream* stream, const Session_Management_Core*
 
 int Session_Management_Decoder(Bitstream* stream, Session_Management_Core* p)
 {
-    if (NormalBitstream(stream, SESSION_MANAGEMENT_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, SESSION_MANAGEMENT_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

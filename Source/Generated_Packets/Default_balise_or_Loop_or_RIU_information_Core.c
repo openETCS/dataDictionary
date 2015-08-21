@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Default_balise_or_Loop_or_RIU_information_UpperBitsNotSet(const Default_balise_or_Loop_or_RIU_information_Core* p)
 {
@@ -23,7 +24,7 @@ int Default_balise_or_Loop_or_RIU_information_UpperBitsNotSet(const Default_bali
 
 int Default_balise_or_Loop_or_RIU_information_Encoder(Bitstream* stream, const Default_balise_or_Loop_or_RIU_information_Core* p)
 {
-    if (NormalBitstream(stream, DEFAULT_BALISE_OR_LOOP_OR_RIU_INFORMATION_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, DEFAULT_BALISE_OR_LOOP_OR_RIU_INFORMATION_CORE_BITSIZE))
     {
         if (Default_balise_or_Loop_or_RIU_information_UpperBitsNotSet(p))
         {
@@ -51,7 +52,7 @@ int Default_balise_or_Loop_or_RIU_information_Encoder(Bitstream* stream, const D
 
 int Default_balise_or_Loop_or_RIU_information_Decoder(Bitstream* stream, Default_balise_or_Loop_or_RIU_information_Core* p)
 {
-    if (NormalBitstream(stream, DEFAULT_BALISE_OR_LOOP_OR_RIU_INFORMATION_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, DEFAULT_BALISE_OR_LOOP_OR_RIU_INFORMATION_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

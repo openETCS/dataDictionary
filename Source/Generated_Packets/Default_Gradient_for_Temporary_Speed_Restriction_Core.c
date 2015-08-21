@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Default_Gradient_for_Temporary_Speed_Restriction_UpperBitsNotSet(const Default_Gradient_for_Temporary_Speed_Restriction_Core* p)
 {
@@ -25,7 +26,7 @@ int Default_Gradient_for_Temporary_Speed_Restriction_UpperBitsNotSet(const Defau
 
 int Default_Gradient_for_Temporary_Speed_Restriction_Encoder(Bitstream* stream, const Default_Gradient_for_Temporary_Speed_Restriction_Core* p)
 {
-    if (NormalBitstream(stream, DEFAULT_GRADIENT_FOR_TEMPORARY_SPEED_RESTRICTION_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, DEFAULT_GRADIENT_FOR_TEMPORARY_SPEED_RESTRICTION_CORE_BITSIZE))
     {
         if (Default_Gradient_for_Temporary_Speed_Restriction_UpperBitsNotSet(p))
         {
@@ -57,7 +58,7 @@ int Default_Gradient_for_Temporary_Speed_Restriction_Encoder(Bitstream* stream, 
 
 int Default_Gradient_for_Temporary_Speed_Restriction_Decoder(Bitstream* stream, Default_Gradient_for_Temporary_Speed_Restriction_Core* p)
 {
-    if (NormalBitstream(stream, DEFAULT_GRADIENT_FOR_TEMPORARY_SPEED_RESTRICTION_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, DEFAULT_GRADIENT_FOR_TEMPORARY_SPEED_RESTRICTION_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

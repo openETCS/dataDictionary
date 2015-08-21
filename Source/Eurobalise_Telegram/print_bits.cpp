@@ -1,6 +1,6 @@
 
 #include "print_bits.h"
-#include "Bit8Array.h"
+#include "Bit8.h"
 
 void print(const Bitstream& stream, uint32_t from, uint32_t to)
 {
@@ -11,7 +11,7 @@ void print(const Bitstream& stream, uint32_t from, uint32_t to)
             std::cout << ' ';
         }
 
-        std::cout << PeekBit8Array(stream.addr, stream.size, i);
+        std::cout << TestBit8Array(stream.addr, stream.size, i);
     }
 }
 

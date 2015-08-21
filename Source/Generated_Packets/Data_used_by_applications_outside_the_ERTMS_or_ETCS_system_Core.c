@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_UpperBitsNotSet(const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p)
 {
@@ -24,7 +25,7 @@ int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_UpperBitsNotSet(c
 
 int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Encoder(Bitstream* stream, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p)
 {
-    if (NormalBitstream(stream, DATA_USED_BY_APPLICATIONS_OUTSIDE_THE_ERTMS_OR_ETCS_SYSTEM_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, DATA_USED_BY_APPLICATIONS_OUTSIDE_THE_ERTMS_OR_ETCS_SYSTEM_CORE_BITSIZE))
     {
         if (Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_UpperBitsNotSet(p))
         {
@@ -54,7 +55,7 @@ int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Encoder(Bitstream
 
 int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Decoder(Bitstream* stream, Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p)
 {
-    if (NormalBitstream(stream, DATA_USED_BY_APPLICATIONS_OUTSIDE_THE_ERTMS_OR_ETCS_SYSTEM_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, DATA_USED_BY_APPLICATIONS_OUTSIDE_THE_ERTMS_OR_ETCS_SYSTEM_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

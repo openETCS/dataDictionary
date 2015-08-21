@@ -1,10 +1,11 @@
 
 #include "Telegram_Header_Decoder.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Telegram_Header_Decoder(Bitstream* stream, Telegram_Header* p)
 {
-    if (NormalBitstream(stream, TELEGRAM_HEADER_BITSIZE))
+    if (Bitstream_Normal(stream, TELEGRAM_HEADER_BITSIZE))
     {
 	//@ ghost const uint32_t pos = stream->bitpos;
 

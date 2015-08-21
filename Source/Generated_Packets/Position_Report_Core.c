@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Position_Report_UpperBitsNotSet(const Position_Report_Core* p)
 {
@@ -42,7 +43,7 @@ int Position_Report_UpperBitsNotSet(const Position_Report_Core* p)
 
 int Position_Report_Encoder(Bitstream* stream, const Position_Report_Core* p)
 {
-    if (NormalBitstream(stream, POSITION_REPORT_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, POSITION_REPORT_CORE_BITSIZE))
     {
         if (Position_Report_UpperBitsNotSet(p))
         {
@@ -98,7 +99,7 @@ int Position_Report_Encoder(Bitstream* stream, const Position_Report_Core* p)
 
 int Position_Report_Decoder(Bitstream* stream, Position_Report_Core* p)
 {
-    if (NormalBitstream(stream, POSITION_REPORT_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, POSITION_REPORT_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

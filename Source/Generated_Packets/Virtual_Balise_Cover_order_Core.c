@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Virtual_Balise_Cover_order_UpperBitsNotSet(const Virtual_Balise_Cover_order_Core* p)
 {
@@ -30,7 +31,7 @@ int Virtual_Balise_Cover_order_UpperBitsNotSet(const Virtual_Balise_Cover_order_
 
 int Virtual_Balise_Cover_order_Encoder(Bitstream* stream, const Virtual_Balise_Cover_order_Core* p)
 {
-    if (NormalBitstream(stream, VIRTUAL_BALISE_COVER_ORDER_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, VIRTUAL_BALISE_COVER_ORDER_CORE_BITSIZE))
     {
         if (Virtual_Balise_Cover_order_UpperBitsNotSet(p))
         {
@@ -69,7 +70,7 @@ int Virtual_Balise_Cover_order_Encoder(Bitstream* stream, const Virtual_Balise_C
 
 int Virtual_Balise_Cover_order_Decoder(Bitstream* stream, Virtual_Balise_Cover_order_Core* p)
 {
-    if (NormalBitstream(stream, VIRTUAL_BALISE_COVER_ORDER_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, VIRTUAL_BALISE_COVER_ORDER_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

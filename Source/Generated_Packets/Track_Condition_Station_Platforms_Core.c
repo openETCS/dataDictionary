@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Track_Condition_Station_Platforms_UpperBitsNotSet(const Track_Condition_Station_Platforms_Core* p)
 {
@@ -41,7 +42,7 @@ int Track_Condition_Station_Platforms_UpperBitsNotSet(const Track_Condition_Stat
 
 int Track_Condition_Station_Platforms_Encoder(Bitstream* stream, const Track_Condition_Station_Platforms_Core* p)
 {
-    if (NormalBitstream(stream, TRACK_CONDITION_STATION_PLATFORMS_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, TRACK_CONDITION_STATION_PLATFORMS_CORE_BITSIZE))
     {
         if (Track_Condition_Station_Platforms_UpperBitsNotSet(p))
         {
@@ -91,7 +92,7 @@ int Track_Condition_Station_Platforms_Encoder(Bitstream* stream, const Track_Con
 
 int Track_Condition_Station_Platforms_Decoder(Bitstream* stream, Track_Condition_Station_Platforms_Core* p)
 {
-    if (NormalBitstream(stream, TRACK_CONDITION_STATION_PLATFORMS_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, TRACK_CONDITION_STATION_PLATFORMS_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

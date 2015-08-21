@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Infill_location_reference_UpperBitsNotSet(const Infill_location_reference_Core* p)
 {
@@ -29,7 +30,7 @@ int Infill_location_reference_UpperBitsNotSet(const Infill_location_reference_Co
 
 int Infill_location_reference_Encoder(Bitstream* stream, const Infill_location_reference_Core* p)
 {
-    if (NormalBitstream(stream, INFILL_LOCATION_REFERENCE_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, INFILL_LOCATION_REFERENCE_CORE_BITSIZE))
     {
         if (Infill_location_reference_UpperBitsNotSet(p))
         {
@@ -65,7 +66,7 @@ int Infill_location_reference_Encoder(Bitstream* stream, const Infill_location_r
 
 int Infill_location_reference_Decoder(Bitstream* stream, Infill_location_reference_Core* p)
 {
-    if (NormalBitstream(stream, INFILL_LOCATION_REFERENCE_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, INFILL_LOCATION_REFERENCE_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 
