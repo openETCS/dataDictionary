@@ -30,5 +30,7 @@ log:
 clean: 
 	(cd Coq             && $(MAKE) clean)
 	(cd Bitwalker       && $(MAKE) clean)
-	(cd Package_Foo     && $(MAKE) clean)
-	(cd Adhesion_Factor && $(MAKE) clean)
+	(cd Generated_Packets && $(MAKE) clean)
+	(cd Generated_Messages && $(MAKE) clean)
+	(cd Eurobalise_Telegram && $(MAKE) clean)
+	(cd Euroradio_Message && $(MAKE) clean)
