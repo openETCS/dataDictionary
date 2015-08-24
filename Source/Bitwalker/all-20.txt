@@ -1,0 +1,411 @@
+[kernel] Parsing FRAMAC_SHARE/libc/__fc_builtin_for_normalization.i (no preprocessing)
+[kernel:pp] preprocessing with "gcc -C -E -I/usr/local/opt/gettext/include -I/Users/jens/.opam/system/share/frama-c/libc  -dD -nostdinc -D__FC_MACHDEP_X86_32 -I/Users/jens/.opam/system/share/frama-c/libc all.c"
+[kernel] Parsing all.c (with preprocessing)
+[wp] Running WP plugin...
+[wp] Loading driver '../BitTest.driver'
+[wp] Collecting axiomatic usage
+[rte] annotating function Bitstream_Init
+[rte] annotating function Bitstream_Normal
+[rte] annotating function Bitstream_Read
+[rte] annotating function Bitstream_ReadThenWrite
+[rte] annotating function Bitstream_Write
+[rte] annotating function Bitstream_WriteThenRead
+[rte] annotating function Bitwalker_Read
+[rte] annotating function Bitwalker_Write
+[rte] annotating function SetBit64
+[rte] annotating function SetBit8
+[rte] annotating function SetBit8Array
+[rte] annotating function TestBit64
+[rte] annotating function TestBit8
+[rte] annotating function TestBit8Array
+[rte] annotating function UpperBitsNotSet64
+[wp] Collecting variable usage
+[wp] Computing [100 goals...]
+[wp] Computing [200 goals...]
+[wp] 260 goals scheduled
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_Init_post_addr : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_Init_post_size : Valid (1ms)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_Init_post_bitpos : Valid
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Init_post_invariant : Valid (Qed:3ms) (579ms) (433)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Init_assert_rte_mem_access : Valid (Qed:1ms) (57ms) (57)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Init_assert_rte_mem_access_2 : Valid (Qed:1ms) (254ms) (406)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Init_assert_rte_mem_access_3 : Valid (305ms) (419)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_Init_assign_part1 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_Init_assign_part2 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_Init_assign_part3 : Valid
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Normal_post_result : Valid (Qed:1ms) (42ms) (48)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Normal_assert_rte_mem_access : Valid (Qed:1ms) (169ms) (197)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Normal_assert_rte_mem_access_2 : Valid (181ms) (195)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Normal_assert_rte_unsigned_overflow : Valid (Qed:1ms) (42ms) (42)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Normal_assert_rte_unsigned_overflow_2 : Valid (32ms) (27)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Normal_assert_rte_unsigned_overflow_3 : Valid (47ms) (39)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Normal_assert_rte_unsigned_overflow_4 : Valid (38ms) (26)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_Normal_assign : Valid (1ms)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_Read_post_pos : Valid (1ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Read_post_changed : Step limit (Qed:1ms) (7.4s) (1000)
+[wp] [cvc4] Goal typed_ref_BitTest_Bitstream_Read_post_changed : Valid (Qed:1ms) (130ms)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_Read_post_upper : Valid (1ms)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_Read_post_size : Valid (1ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Read_post_unchanged : Step limit (Qed:2ms) (8.1s) (1000)
+[wp] [cvc4] Goal typed_ref_BitTest_Bitstream_Read_post_unchanged : Valid (Qed:2ms) (120ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Read_assert_rte_mem_access : Valid (40ms) (57)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Read_assert_rte_mem_access_2 : Valid (211ms) (223)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Read_assert_rte_mem_access_3 : Valid (217ms) (225)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Read_assert_rte_mem_access_4 : Valid (Qed:1ms) (2.4s) (565)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_Read_assert_rte_mem_access_5 : Valid
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Read_assert_rte_unsigned_overflow : Valid (43ms) (67)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Read_assert_rte_unsigned_overflow_2 : Valid (Qed:1ms) (47ms) (46)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_Read_assign_exit : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_Read_assign_normal_part1 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_Read_assign_normal_part2 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_Read_assign_normal_part3 : Valid
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Read_call_Bitwalker_Read_pre_valid : Valid (26ms) (35)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Read_call_Bitwalker_Read_pre_invariant : Valid (Qed:1ms) (35ms) (31)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Read_call_Bitwalker_Read_pre_normal : Valid (40ms) (29)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_post_unchanged : Timeout (Qed:4ms)
+[wp] [cvc4] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_post_unchanged : Valid (Qed:4ms) (100ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_assert_rte_mem_access : Valid (Qed:1ms) (204ms) (257)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_assert_equal : Valid (1ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_assert_rte_mem_access_2 : Valid (Qed:1ms) (402ms) (261)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_assert_rte_mem_access_3 : Valid (1ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_assert_rte_unsigned_overflow : Valid (Qed:1ms) (73ms) (66)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_assert_rte_unsigned_overflow_2 : Valid (Qed:1ms) (83ms) (66)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_assert : Valid
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_assert_unchanged : Valid (Qed:2ms) (2.1s) (244)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_assign_exit_part1 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_assign_exit_part2 : Valid (1ms)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_assign_exit_part3 : Valid (1ms)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_assign_exit_part4 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_assign_exit_part5 : Valid (1ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_assign_exit_part6 : Valid (Qed:1ms) (74ms) (68)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_assign_normal_part1 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_assign_normal_part2 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_assign_normal_part3 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_assign_normal_part4 : Valid (1ms)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_assign_normal_part5 : Valid (1ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_assign_normal_part6 : Valid (Qed:1ms) (83ms) (72)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_call_Bitstream_Read_pre_valid : Valid (38ms) (40)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_call_Bitstream_Read_pre_invariant : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_call_Bitstream_Read_pre_normal : Valid
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_call_Bitstream_Write_pre_valid : Valid (Qed:1ms) (52ms) (48)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_call_Bitstream_Write_pre_invariant : Valid (Qed:1ms) (89ms) (52)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_call_Bitstream_Write_pre_normal : Valid (Qed:1ms) (66ms) (40)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_ReadThenWrite_call_Bitstream_Write_pre_upper : Valid
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Write_post_pos : Step limit (Qed:3ms) (4.3s) (1000)
+[wp] [cvc4] Goal typed_ref_BitTest_Bitstream_Write_post_pos : Valid (Qed:3ms) (110ms)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_Write_post_changed : Valid (1ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Write_post_unchanged : Timeout (Qed:4ms)
+[wp] [cvc4] Goal typed_ref_BitTest_Bitstream_Write_post_unchanged : Valid (Qed:4ms) (140ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Write_post_unchanged_2 : Timeout (Qed:1ms)
+[wp] [cvc4] Goal typed_ref_BitTest_Bitstream_Write_post_unchanged_2 : Valid (Qed:1ms) (150ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Write_post_size : Valid (Qed:1ms) (10s) (865)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Write_assert_rte_mem_access : Valid (56ms) (59)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Write_assert_rte_mem_access_2 : Valid (252ms) (239)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Write_assert_rte_mem_access_3 : Valid (258ms) (241)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Write_assert : Valid (Qed:1ms) (5.4s) (913)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Write_assert_rte_mem_access_4 : Step limit (Qed:1ms) (6.5s) (1000)
+[wp] [cvc4] Goal typed_ref_BitTest_Bitstream_Write_assert_rte_mem_access_4 : Valid (Qed:1ms) (110ms)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_Write_assert_rte_mem_access_5 : Valid
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Write_assert_rte_unsigned_overflow : Valid (Qed:1ms) (60ms) (77)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Write_assert_rte_unsigned_overflow_2 : Valid (Qed:1ms) (4.9s) (808)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Write_assert_2 : Step limit (Qed:1ms) (13.3s) (1000)
+[wp] [cvc4] Goal typed_ref_BitTest_Bitstream_Write_assert_2 : Valid (Qed:1ms) (140ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Write_assign_exit : Valid (Qed:1ms) (34ms) (60)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Write_assign_normal_part1 : Valid (Qed:1ms) (39ms) (65)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_Write_assign_normal_part2 : Valid (1ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Write_call_Bitwalker_Write_pre_valid : Valid (39ms) (37)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Write_call_Bitwalker_Write_pre_invariant : Valid (36ms) (33)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_Write_call_Bitwalker_Write_pre_normal : Valid (Qed:1ms) (31ms) (31)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_Write_call_Bitwalker_Write_pre_upper : Valid
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_WriteThenRead_post_compare : Valid (Qed:3ms) (258ms) (144)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assert_rte_mem_access : Valid (Qed:2ms) (272ms) (271)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assert_equal : Valid (1ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assert_rte_mem_access_2 : Valid (Qed:1ms) (477ms) (275)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assert_rte_mem_access_3 : Valid
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assert_rte_unsigned_overflow : Valid (Qed:1ms) (72ms) (67)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assert_rte_unsigned_overflow_2 : Valid (Qed:1ms) (84ms) (67)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assert : Valid (1ms)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assert_equal_result : Valid (1ms)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assert_equal_value : Valid (2ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assert_left : Step limit (Qed:1ms) (10.4s) (1000)
+[wp] [cvc4] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assert_left : Timeout (Qed:1ms)
+[wp] [z3] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assert_left : Timeout (Qed:1ms)
+[wp] [Coq] Compiling 'Compound.v'.
+[wp] [Coq] Compiling 'Axiomatic1.v'.
+[wp] [Coq] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assert_left : Saved script
+[wp] [Coq] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assert_left : Default tactic
+[wp] [Coq] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assert_left : Unknown (Qed:1ms)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assign_exit_part1 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assign_exit_part2 : Valid (1ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assign_exit_part3 : Valid (Qed:2ms) (38ms) (53)
+[wp] [Coq] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assign_exit_part3 : Default tactic
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assign_exit_part4 : Valid (1ms)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assign_exit_part5 : Valid (2ms)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assign_normal_part1 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assign_normal_part2 : Valid
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assign_normal_part3 : Valid (Qed:1ms) (41ms) (58)
+[wp] [Coq] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assign_normal_part3 : Default tactic
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assign_normal_part4 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assign_normal_part5 : Valid (2ms)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_WriteThenRead_assign_normal_part6 : Valid (1ms)
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_WriteThenRead_call_Bitstream_Write_pre_valid : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_WriteThenRead_call_Bitstream_Write_pre_invariant : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_WriteThenRead_call_Bitstream_Write_pre_normal : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitstream_WriteThenRead_call_Bitstream_Write_pre_upper : Valid
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_WriteThenRead_call_Bitstream_Read_pre_valid : Valid (Qed:1ms) (68ms) (55)
+[wp] [Coq] Goal typed_ref_BitTest_Bitstream_WriteThenRead_call_Bitstream_Read_pre_valid : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_WriteThenRead_call_Bitstream_Read_pre_invariant : Valid (Qed:1ms) (114ms) (55)
+[wp] [Coq] Goal typed_ref_BitTest_Bitstream_WriteThenRead_call_Bitstream_Read_pre_invariant : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitstream_WriteThenRead_call_Bitstream_Read_pre_normal : Valid (Qed:1ms) (81ms) (44)
+[wp] [Coq] Goal typed_ref_BitTest_Bitstream_WriteThenRead_call_Bitstream_Read_pre_normal : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Read_post_equal : Valid (Qed:3ms) (400ms) (70)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Read_post_equal : Default tactic
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Read_post_upper : Valid (3ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Read_loop_inv_bound_preserved_part1 : Valid (Qed:3ms) (62ms) (47)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Read_loop_inv_bound_preserved_part1 : Default tactic
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Read_loop_inv_bound_preserved_part2 : Valid (1ms)
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Read_loop_inv_bound_established_part1 : Valid
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Read_loop_inv_bound_established_part2 : Valid (54ms) (29)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Read_loop_inv_bound_established_part2 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Read_loop_inv_equal_preserved : Valid (Qed:3ms) (14.4s) (355)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Read_loop_inv_equal_preserved : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Read_loop_inv_equal_established : Valid (Qed:1ms) (44ms) (20)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Read_loop_inv_equal_established : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Read_loop_inv_upper_preserved : Valid (Qed:2ms) (83ms) (51)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Read_loop_inv_upper_preserved : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Read_loop_inv_upper_established : Step limit (3.8s) (1000)
+[wp] [cvc4] Goal typed_ref_BitTest_Bitwalker_Read_loop_inv_upper_established : Valid (270ms)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Read_loop_inv_upper_established : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Read_assert_rte_unsigned_overflow : Valid (Qed:1ms) (58ms) (36)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Read_assert_rte_unsigned_overflow : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Read_assert_rte_unsigned_overflow_2 : Valid (Qed:1ms) (48ms) (29)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Read_assert_rte_unsigned_overflow_2 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Read_assert_rte_unsigned_overflow_3 : Valid (Qed:1ms) (65ms) (40)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Read_assert_rte_unsigned_overflow_3 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Read_assert_rte_unsigned_overflow_4 : Valid (Qed:2ms) (63ms) (40)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Read_assert_rte_unsigned_overflow_4 : Default tactic
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Read_assert_rte_unsigned_overflow_5 : Valid (1ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Read_assert_rte_unsigned_overflow_6 : Valid (Qed:1ms) (50ms) (36)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Read_assert_rte_unsigned_overflow_6 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Read_assert_rte_unsigned_overflow_7 : Valid (Qed:1ms) (51ms) (36)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Read_assert_rte_unsigned_overflow_7 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Read_assert_rte_unsigned_overflow_8 : Valid (Qed:3ms) (64ms) (44)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Read_assert_rte_unsigned_overflow_8 : Default tactic
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Read_loop_assign_part1 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Read_loop_assign_part2 : Valid (2ms)
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Read_assign_exit_part1 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Read_assign_exit_part2 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Read_assign_exit_part3 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Read_assign_exit_part4 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Read_assign_exit_part5 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Read_assign_exit_part6 : Valid (1ms)
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Read_assign_normal_part1 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Read_assign_normal_part2 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Read_assign_normal_part3 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Read_assign_normal_part4 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Read_loop_term_decrease : Valid (1ms)
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Read_loop_term_positive : Valid (2ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Read_call_TestBit8Array_pre_valid : Valid (Qed:1ms) (47ms) (29)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Read_call_TestBit8Array_pre_valid : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Read_call_TestBit8Array_pre_size : Valid (Qed:1ms) (48ms) (31)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Read_call_TestBit8Array_pre_size : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Read_call_TestBit8Array_pre_pos : Valid (Qed:2ms) (46ms) (29)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Read_call_TestBit8Array_pre_pos : Default tactic
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Read_call_SetBit64_pre_pre : Valid (1ms)
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Write_post_left : Valid (1ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Write_post_middle : Valid (Qed:6ms) (480ms) (87)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Write_post_middle : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Write_post_right : Valid (Qed:6ms) (50ms) (32)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Write_post_right : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Write_loop_inv_bound_preserved_part1 : Valid (Qed:3ms) (60ms) (49)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Write_loop_inv_bound_preserved_part1 : Default tactic
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Write_loop_inv_bound_preserved_part2 : Valid (1ms)
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Write_loop_inv_bound_established_part1 : Valid
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Write_loop_inv_bound_established_part2 : Valid (53ms) (31)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Write_loop_inv_bound_established_part2 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Write_loop_inv_left_preserved : Valid (Qed:2ms) (488ms) (70)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Write_loop_inv_left_preserved : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Write_loop_inv_left_established : Valid (Qed:1ms) (48ms) (23)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Write_loop_inv_left_established : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Write_loop_inv_middle_preserved : Timeout (Qed:3ms)
+[wp] [cvc4] Goal typed_ref_BitTest_Bitwalker_Write_loop_inv_middle_preserved : Timeout (Qed:3ms)
+[wp] [z3] Goal typed_ref_BitTest_Bitwalker_Write_loop_inv_middle_preserved : Valid (Qed:3ms) (680ms)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Write_loop_inv_middle_preserved : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Write_loop_inv_middle_established : Valid (Qed:1ms) (25ms) (22)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Write_loop_inv_middle_established : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Write_loop_inv_right_preserved : Valid (Qed:3ms) (366ms) (65)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Write_loop_inv_right_preserved : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Write_loop_inv_right_established : Valid (Qed:1ms) (42ms) (23)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Write_loop_inv_right_established : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Write_assert_rte_unsigned_overflow : Valid (Qed:1ms) (59ms) (41)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Write_assert_rte_unsigned_overflow : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Write_assert_rte_unsigned_overflow_2 : Valid (Qed:1ms) (46ms) (32)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Write_assert_rte_unsigned_overflow_2 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Write_assert_rte_unsigned_overflow_3 : Valid (Qed:1ms) (54ms) (38)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Write_assert_rte_unsigned_overflow_3 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Write_assert_rte_unsigned_overflow_4 : Valid (Qed:1ms) (56ms) (38)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Write_assert_rte_unsigned_overflow_4 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Write_assert_rte_unsigned_overflow_5 : Valid (Qed:1ms) (46ms) (34)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Write_assert_rte_unsigned_overflow_5 : Default tactic
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Write_assert_rte_unsigned_overflow_6 : Valid (1ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Write_assert_rte_unsigned_overflow_7 : Valid (Qed:1ms) (92ms) (34)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Write_assert_rte_unsigned_overflow_7 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Write_assert_rte_unsigned_overflow_8 : Valid (Qed:2ms) (57ms) (46)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Write_assert_rte_unsigned_overflow_8 : Default tactic
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Write_loop_assign_part1 : Valid
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Write_loop_assign_part2 : Valid (Qed:3ms) (72ms) (57)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Write_loop_assign_part2 : Default tactic
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Write_loop_assign_part3 : Valid (1ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Write_loop_assign_part4 : Valid (Qed:2ms) (75ms) (57)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Write_loop_assign_part4 : Default tactic
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Write_assign_exit_part1 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Write_assign_exit_part2 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Write_assign_exit_part3 : Valid (1ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Write_assign_exit_part4 : Valid (Qed:1ms) (47ms) (33)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Write_assign_exit_part4 : Default tactic
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Write_assign_exit_part5 : Valid (1ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Write_assign_exit_part6 : Valid (Qed:2ms) (67ms) (53)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Write_assign_exit_part6 : Default tactic
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Write_assign_normal_part1 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Write_assign_normal_part2 : Valid
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Write_assign_normal_part3 : Valid (Qed:1ms) (47ms) (33)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Write_assign_normal_part3 : Default tactic
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Write_loop_term_decrease : Valid (1ms)
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Write_loop_term_positive : Valid (1ms)
+[wp] [Qed] Goal typed_ref_BitTest_Bitwalker_Write_call_TestBit64_pre_pre : Valid (1ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Write_call_SetBit8Array_pre_valid : Valid (Qed:1ms) (52ms) (39)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Write_call_SetBit8Array_pre_valid : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Write_call_SetBit8Array_pre_size : Valid (Qed:1ms) (53ms) (40)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Write_call_SetBit8Array_pre_size : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_Bitwalker_Write_call_SetBit8Array_pre_pos : Valid (Qed:2ms) (54ms) (39)
+[wp] [Coq] Goal typed_ref_BitTest_Bitwalker_Write_call_SetBit8Array_pre_pos : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_SetBit64_post_left_part1 : Step limit (Qed:3ms) (5.7s) (1000)
+[wp] [cvc4] Goal typed_ref_BitTest_SetBit64_post_left_part1 : Valid (Qed:3ms) (190ms)
+[wp] [Coq] Goal typed_ref_BitTest_SetBit64_post_left_part1 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_SetBit64_post_left_part2 : Step limit (Qed:1ms) (1.4s) (1000)
+[wp] [cvc4] Goal typed_ref_BitTest_SetBit64_post_left_part2 : Valid (Qed:1ms) (100ms)
+[wp] [Coq] Goal typed_ref_BitTest_SetBit64_post_left_part2 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_SetBit64_post_set_bit_part1 : Step limit (Qed:1ms) (810ms) (1000)
+[wp] [cvc4] Goal typed_ref_BitTest_SetBit64_post_set_bit_part1 : Valid (Qed:1ms) (70ms)
+[wp] [Coq] Goal typed_ref_BitTest_SetBit64_post_set_bit_part1 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_SetBit64_post_set_bit_part2 : Step limit (Qed:1ms) (810ms) (1000)
+[wp] [cvc4] Goal typed_ref_BitTest_SetBit64_post_set_bit_part2 : Valid (Qed:1ms) (70ms)
+[wp] [Coq] Goal typed_ref_BitTest_SetBit64_post_set_bit_part2 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_SetBit64_post_right_part1 : Step limit (Qed:1ms) (809ms) (1000)
+[wp] [cvc4] Goal typed_ref_BitTest_SetBit64_post_right_part1 : Valid (Qed:1ms) (100ms)
+[wp] [Coq] Goal typed_ref_BitTest_SetBit64_post_right_part1 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_SetBit64_post_right_part2 : Step limit (Qed:1ms) (923ms) (1000)
+[wp] [cvc4] Goal typed_ref_BitTest_SetBit64_post_right_part2 : Valid (Qed:1ms) (120ms)
+[wp] [Coq] Goal typed_ref_BitTest_SetBit64_post_right_part2 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_SetBit64_post_upper_part1 : Valid (Qed:1ms) (44ms) (27)
+[wp] [Coq] Goal typed_ref_BitTest_SetBit64_post_upper_part1 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_SetBit64_post_upper_part2 : Step limit (Qed:1ms) (1.6s) (1000)
+[wp] [cvc4] Goal typed_ref_BitTest_SetBit64_post_upper_part2 : Valid (Qed:1ms) (100ms)
+[wp] [Coq] Goal typed_ref_BitTest_SetBit64_post_upper_part2 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_SetBit64_assert_rte_shift : Valid (22ms) (12)
+[wp] [Coq] Goal typed_ref_BitTest_SetBit64_assert_rte_shift : Default tactic
+[wp] [Qed] Goal typed_ref_BitTest_SetBit64_assert_rte_unsigned_overflow : Valid
+[wp] [Qed] Goal typed_ref_BitTest_SetBit64_assign_part1 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_SetBit64_assign_part2 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_SetBit64_assign_part3 : Valid
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_SetBit8_post_left_part1 : Step limit (Qed:1ms) (1.5s) (1000)
+[wp] [cvc4] Goal typed_ref_BitTest_SetBit8_post_left_part1 : Valid (Qed:1ms) (100ms)
+[wp] [Coq] Goal typed_ref_BitTest_SetBit8_post_left_part1 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_SetBit8_post_left_part2 : Step limit (Qed:1ms) (1.5s) (1000)
+[wp] [cvc4] Goal typed_ref_BitTest_SetBit8_post_left_part2 : Valid (Qed:1ms) (100ms)
+[wp] [Coq] Goal typed_ref_BitTest_SetBit8_post_left_part2 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_SetBit8_post_pos_part1 : Step limit (Qed:1ms) (1.4s) (1000)
+[wp] [cvc4] Goal typed_ref_BitTest_SetBit8_post_pos_part1 : Valid (Qed:1ms) (60ms)
+[wp] [Coq] Goal typed_ref_BitTest_SetBit8_post_pos_part1 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_SetBit8_post_pos_part2 : Step limit (Qed:1ms) (1.2s) (1000)
+[wp] [cvc4] Goal typed_ref_BitTest_SetBit8_post_pos_part2 : Valid (Qed:1ms) (60ms)
+[wp] [Coq] Goal typed_ref_BitTest_SetBit8_post_pos_part2 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_SetBit8_post_right_part1 : Step limit (Qed:1ms) (961ms) (1000)
+[wp] [cvc4] Goal typed_ref_BitTest_SetBit8_post_right_part1 : Valid (Qed:1ms) (100ms)
+[wp] [Coq] Goal typed_ref_BitTest_SetBit8_post_right_part1 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_SetBit8_post_right_part2 : Step limit (1s) (1000)
+[wp] [cvc4] Goal typed_ref_BitTest_SetBit8_post_right_part2 : Valid (100ms)
+[wp] [Coq] Goal typed_ref_BitTest_SetBit8_post_right_part2 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_SetBit8_assert_rte_shift : Valid (23ms) (12)
+[wp] [Coq] Goal typed_ref_BitTest_SetBit8_assert_rte_shift : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_SetBit8_assert_rte_signed_overflow : Valid (40ms) (34)
+[wp] [Coq] Goal typed_ref_BitTest_SetBit8_assert_rte_signed_overflow : Default tactic
+[wp] [Qed] Goal typed_ref_BitTest_SetBit8_assert_rte_unsigned_overflow : Valid
+[wp] [Qed] Goal typed_ref_BitTest_SetBit8_assign_part1 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_SetBit8_assign_part2 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_SetBit8_assign_part3 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_SetBit8_assign_part4 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_SetBit8_assign_part5 : Valid
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_SetBit8Array_post_left : Valid (Qed:3ms) (1.6s) (143)
+[wp] [Coq] Goal typed_ref_BitTest_SetBit8Array_post_left : Saved script
+[wp] [Qed] Goal typed_ref_BitTest_SetBit8Array_post_middle : Valid (1ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_SetBit8Array_post_right : Valid (Qed:2ms) (3.5s) (272)
+[wp] [Coq] Goal typed_ref_BitTest_SetBit8Array_post_right : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_SetBit8Array_assert_rte_mem_access : Valid (Qed:1ms) (353ms) (129)
+[wp] [Coq] Goal typed_ref_BitTest_SetBit8Array_assert_rte_mem_access : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_SetBit8Array_assert_rte_mem_access_2 : Valid (212ms) (89)
+[wp] [Coq] Goal typed_ref_BitTest_SetBit8Array_assert_rte_mem_access_2 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_SetBit8Array_assert_bits_in_byte : Valid (Qed:2ms) (70ms) (49)
+[wp] [Coq] Goal typed_ref_BitTest_SetBit8Array_assert_bits_in_byte : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_SetBit8Array_assert_other_bytes : Step limit (Qed:2ms) (10.2s) (1000)
+[wp] [cvc4] Goal typed_ref_BitTest_SetBit8Array_assert_other_bytes : Valid (Qed:2ms) (120ms)
+[wp] [Coq] Goal typed_ref_BitTest_SetBit8Array_assert_other_bytes : Default tactic
+[wp] [Qed] Goal typed_ref_BitTest_SetBit8Array_assign_exit_part1 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_SetBit8Array_assign_exit_part2 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_SetBit8Array_assign_exit_part3 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_SetBit8Array_assign_normal_part1 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_SetBit8Array_assign_normal_part2 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_SetBit8Array_assign_normal_part3 : Valid
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_SetBit8Array_assign_normal_part4 : Valid (Qed:1ms) (2.0s) (353)
+[wp] [Coq] Goal typed_ref_BitTest_SetBit8Array_assign_normal_part4 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_SetBit8Array_call_SetBit8_pre_pre : Valid (Qed:1ms) (116ms) (50)
+[wp] [Coq] Goal typed_ref_BitTest_SetBit8Array_call_SetBit8_pre_pre : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_TestBit64_post_set_bit : Step limit (Qed:3ms) (1.3s) (1000)
+[wp] [cvc4] Goal typed_ref_BitTest_TestBit64_post_set_bit : Valid (Qed:3ms) (80ms)
+[wp] [Coq] Goal typed_ref_BitTest_TestBit64_post_set_bit : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_TestBit64_assert_rte_shift : Valid (22ms) (12)
+[wp] [Coq] Goal typed_ref_BitTest_TestBit64_assert_rte_shift : Default tactic
+[wp] [Qed] Goal typed_ref_BitTest_TestBit64_assert_rte_unsigned_overflow : Valid
+[wp] [Qed] Goal typed_ref_BitTest_TestBit64_assign_part1 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_TestBit64_assign_part2 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_TestBit64_assign_part3 : Valid
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_TestBit8_post_pos : Valid (Qed:1ms) (293ms) (267)
+[wp] [Coq] Goal typed_ref_BitTest_TestBit8_post_pos : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_TestBit8_assert_rte_shift : Valid (23ms) (12)
+[wp] [Coq] Goal typed_ref_BitTest_TestBit8_assert_rte_shift : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_TestBit8_assert_rte_signed_overflow : Valid (42ms) (34)
+[wp] [Coq] Goal typed_ref_BitTest_TestBit8_assert_rte_signed_overflow : Default tactic
+[wp] [Qed] Goal typed_ref_BitTest_TestBit8_assert_rte_unsigned_overflow : Valid
+[wp] [Qed] Goal typed_ref_BitTest_TestBit8_assign_part1 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_TestBit8_assign_part2 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_TestBit8_assign_part3 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_TestBit8Array_post_result : Valid (1ms)
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_TestBit8Array_assert_rte_mem_access : Valid (Qed:1ms) (464ms) (191)
+[wp] [Coq] Goal typed_ref_BitTest_TestBit8Array_assert_rte_mem_access : Default tactic
+[wp] [Qed] Goal typed_ref_BitTest_TestBit8Array_assign_exit : Valid
+[wp] [Qed] Goal typed_ref_BitTest_TestBit8Array_assign_normal_part1 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_TestBit8Array_assign_normal_part2 : Valid
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_TestBit8Array_call_TestBit8_pre_pre : Valid (Qed:1ms) (97ms) (25)
+[wp] [Coq] Goal typed_ref_BitTest_TestBit8Array_call_TestBit8_pre_pre : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_UpperBitsNotSet64_post_not_set_part1 : Valid (Qed:2ms) (45ms) (13)
+[wp] [Coq] Goal typed_ref_BitTest_UpperBitsNotSet64_post_not_set_part1 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_UpperBitsNotSet64_post_not_set_part2 : Valid (Qed:1ms) (53ms) (24)
+[wp] [Coq] Goal typed_ref_BitTest_UpperBitsNotSet64_post_not_set_part2 : Saved script
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_UpperBitsNotSet64_assert_rte_shift_part1 : Valid (23ms) (8)
+[wp] [Coq] Goal typed_ref_BitTest_UpperBitsNotSet64_assert_rte_shift_part1 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_UpperBitsNotSet64_assert_rte_shift_part2 : Valid (21ms) (5)
+[wp] [Coq] Goal typed_ref_BitTest_UpperBitsNotSet64_assert_rte_shift_part2 : Default tactic
+[wp] [Alt-Ergo] Goal typed_ref_BitTest_UpperBitsNotSet64_assert_equiv : Step limit (2s) (1000)
+[wp] [cvc4] Goal typed_ref_BitTest_UpperBitsNotSet64_assert_equiv : Timeout
+[wp] [z3] Goal typed_ref_BitTest_UpperBitsNotSet64_assert_equiv : Timeout
+[wp] [Coq] Goal typed_ref_BitTest_UpperBitsNotSet64_assert_equiv : Saved script
+[wp] [Coq] Goal typed_ref_BitTest_UpperBitsNotSet64_assert_equiv : Valid
+[wp] [Qed] Goal typed_ref_BitTest_UpperBitsNotSet64_assign_part1 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_UpperBitsNotSet64_assign_part2 : Valid
+[wp] [Qed] Goal typed_ref_BitTest_UpperBitsNotSet64_assign_part3 : Valid
+[wp] Proved goals:  259 / 260
+     Qed:           119  (0ms-6ms)
+     Alt-Ergo:      114  (21ms-14.4s) (913) (interrupted: 27)
+     Coq:             1  (unknown: 1)
+     cvc4:           24  (60ms-270ms) (interrupted: 3)
+     z3:              1  (680ms-680ms) (interrupted: 2)
