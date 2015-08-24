@@ -106,6 +106,7 @@ clean::
 	@$(RM) test_issue31_1
 	@$(RM) test_issue31_2
 	@$(RM) test_issue31_3
+	@$(RM) test_messages
 	@$(RM) dynamic_decoder_test
 	@$(RM) dynamic_encoder_test
 	@(cd $(BITWALKER) && $(MAKE) clean)
