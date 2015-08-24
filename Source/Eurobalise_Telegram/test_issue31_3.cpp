@@ -1,11 +1,9 @@
 
-#include "Eurobalise_Telegram.h"
-#include "Telegram_Header_Encoder.h"
-#include "Packet_Header.h"
+#include "Validated_Train_Data_Message.h"
 #include "Bitstream_Init.h"
 #include "subsets.h"
-#include "create.h"
 #include <cassert>
+#include "UpperBitsNotSet.h"
 #include <iostream>
 
 template<typename Packet>
@@ -18,7 +16,7 @@ void assert_equal(const Packet& packet, BasePacketPtr ptr)
 
 int main ()
 {
-    std::cout << "\n--- Testing the decode function with issue31 part 2\n";
+    std::cout << "\n--- Testing the decode function with issue31 part 3\n";
 
     std::vector<uint8_t> raw_stream(1000);
     Bitstream stream;
@@ -26,121 +24,65 @@ int main ()
 
     uint32_t init_pos = stream.bitpos;
 
-    Telegram_Header header;
+    Position_Report a;
     {
-        header.Q_UPDOWN  = 1;
-        header.M_VERSION = 32;
-        header.Q_MEDIA	 = 0;
-        header.N_PIG	 = 0;
-        header.N_TOTAL	 = 1;
-        header.M_DUP	 = 0;
-        header.M_MCOUNT	 = 0;
-        header.NID_C	 = 64;
-        header.NID_BG	 = 3;
-        header.Q_LINK	 = 1;
+        // NID_PACKET = 0;
+        a.core.L_PACKET = 114;
+	a.core.Q_SCALE = 1;
+	a.core.NID_LRBG = 0;
+	a.core.D_LRBG = 0;
+	a.core.Q_DIRLRBG = 1;
+	a.core.Q_DLRBG = 1;
+	a.core.L_DOUBTOVER = 0;
+        a.core.L_DOUBTUNDER = 0;
+	a.core.Q_LENGTH = 0;
+	a.core.V_TRAIN = 0;
+	a.core.Q_DIRTRAIN = 1;
+	a.core.M_MODE = 6;
+	a.core.M_LEVEL = 0;
     }
 
-    std::cout << " Encoding Telegram Header: " << header << std::endl;
-    Telegram_Header_Encoder(&stream, &header);
-
-    Session_Management a;
+    Validated_train_data b;
     {
-        // NID_PACKET = 42;
-        a.core.Q_DIR =	1;
-        a.core.L_PACKET = 113;
-        a.core.Q_RBC	= 1;
-        a.core.NID_C	= 352;
-        a.core.NID_RBC	= 1515;
-        a.core.NID_RADIO = 14185023402016767;
-        a.core.Q_SLEEPSESSION	= 0;
-
-        Packet_Header h {a.id};
-        Packet_Header_Encoder(&stream, &h);
-        std::cout << "    Encoding packet " << a << std::endl;
-        Session_Management_Encoder(&stream, &a.core);
-    }
-
-    National_Values b;
-    {
-        // NID_PACKET = 3;
-        b.core.Q_DIR = 1;
-        b.core.L_PACKET = 230;
-        b.core.Q_SCALE = 1;
-        b.core.D_VALIDNV = 0;
-        b.core.NID_C = 0;
+        // NID_PACKET = 11;
+        b.core.L_PACKET = 96;
+        b.core.NC_CDTRAIN = 0;
+        b.core.NC_TRAIN = 0;
+        b.core.L_TRAIN = 0;
+        b.core.V_MAXTRAIN = 0;
+        b.core.M_LOADINGGAUGE = 1;
+        b.core.M_AXLELOADCAT = 0;
+        b.core.M_AIRTIGHT = 0;
+        b.core.N_AXLE = 0;
         b.core.N_ITER_1 = 0;
-        b.core.V_NVSHUNT = 6;
-        b.core.V_NVSTFF = 8;
-        b.core.V_NVONSIGHT = 6;
-        b.core.V_NVLIMSUPERV = 20;
-        b.core.V_NVUNFIT = 20;
-        b.core.V_NVREL = 8;
-        b.core.D_NVROLL = 2;
-        b.core.Q_NVSBTSMPERM = 1;
-        b.core.Q_NVEMRRLS = 0;
-        b.core.Q_NVGUIPERM = 0;
-        b.core.Q_NVSBFBPERM = 0;
-        b.core.Q_NVINHSMICPERM = 0;
-        b.core.V_NVALLOWOVTRP = 0;
-        b.core.V_NVSUPOVTRP = 6;
-        b.core.D_NVOVTRP = 200;
-        b.core.T_NVOVTRP = 60;
-        b.core.D_NVPOTRP = 200;
-        b.core.M_NVCONTACT = 10;
-        b.core.T_NVCONTACT = 255;
-        b.core.M_NVDERUN = 1;
-        b.core.D_NVSTFF = 32767;
-        b.core.Q_NVDRIVER_ADHES = 0;
-        b.core.A_NVMAXREDADH1 = 20;
-        b.core.A_NVMAXREDADH2 = 14;
-        b.core.A_NVMAXREDADH3 = 14;
-        b.core.Q_NVLOCACC = 12;
-        b.core.M_NVAVADH = 1;
-        b.core.M_NVEBCL = 1;
-        b.core.Q_NVKINT = 0;
-
-        Packet_Header h {b.id};
-        Packet_Header_Encoder(&stream, &h);
-        std::cout << "    Encoding packet " << b << std::endl;
-        National_Values_Encoder(&stream, &b.core);
+        b.core.N_ITER_2 = 0;
     }
 
-    Level_Transition_Order c;
+    Validated_Train_Data_Message message;
     {
-        // NID_PACKET = 41;
-        c.core.Q_DIR = 1;
-        c.core.L_PACKET = 63;
-        c.core.Q_SCALE = 1;
-        c.core.D_LEVELTR = 300;
-        c.core.M_LEVELTR = 3;
-        c.core.L_ACKLEVELTR = 100;
-        c.core.N_ITER_1 = 0;
-
-        Packet_Header h {c.id};
-        Packet_Header_Encoder(&stream, &h);
-        std::cout << "    Encoding packet " << c << std::endl;
-        Level_Transition_Order_Encoder(&stream, &c.core);
+        // NID_MESSAGE = 129;
+	message.L_MESSAGE = 36;
+	message.T_TRAIN = 0;
+	message.NID_ENGINE = 0;
+	message.packet_0_1 = std::make_shared<Position_Report>(a);
+	message.packet_11 = std::make_shared<Validated_train_data>(b);
     }
 
+    std::cout << " Encoder Input:  " << message << std::endl;
 
-    End_of_Information f;
-    {
-        Packet_Header h {f.id};
-        Packet_Header_Encoder(&stream, &h);
-        std::cout << "    Encoding packet " << f << std::endl;
-        End_of_Information_Encoder(&stream, &f.core);
-    }
+    std::cout << " Encoding Valid_Train_Data message." << std::endl;
+    message.encode(stream);
 
     stream.bitpos = init_pos;
 
-    Eurobalise_Telegram telegram;
+    Validated_Train_Data_Message new_message;
 
-    std::cout << " Decoding Eurobalise Telegram." << std::endl;
-    telegram.decode(stream);
+    std::cout << " Decoding Valid_Train_Data message." << std::endl;
+    new_message.decode(stream);
 
-    std::cout << " Decoder Output: " << telegram << std::endl;
+    std::cout << " Decoder Output: " << new_message << std::endl;
 
-    assert(telegram.header == header);
+    assert(message == new_message);
 
     std::cout << " Test successful." << std::endl;
     std::cout << std::endl;
