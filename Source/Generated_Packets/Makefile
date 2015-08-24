@@ -15,7 +15,6 @@ CPPFLAGS += -I.
 
 CPPFLAGS += -I$(BITWALKER)
 CPPFLAGS += -I$(TOPDIR)/Eurobalise_Telegram
-CPPFLAGS += -I$(TOPDIR)/Packet_Header
 
 LDFLAGS += -L$(BITWALKER) -lBitwalker
 
