@@ -14,7 +14,7 @@ export BITWALKER=$(TOPDIR)/Bitwalker
 CPPFLAGS += -I.
 
 CPPFLAGS += -I$(BITWALKER)
-CPPFLAGS += -I$(TOPDIR)/Eurobalise_Telegram
+CPPFLAGS += -I$(TOPDIR)/Message_Telegram
 
 LDFLAGS += -L$(BITWALKER) -lBitwalker
 

@@ -22,4 +22,4 @@ clean:
 	(cd Bitwalker       && $(MAKE) clean)
 	(cd Generated_Packets && $(MAKE) clean)
 	(cd Generated_Messages && $(MAKE) clean)
-	(cd Eurobalise_Telegram && $(MAKE) clean)
+	(cd Message_Telegram && $(MAKE) clean)

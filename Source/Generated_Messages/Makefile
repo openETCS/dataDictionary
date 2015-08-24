@@ -15,9 +15,7 @@ export GENERATED_PACKETS=$(TOPDIR)/Generated_Packets
 CPPFLAGS += -I.
 
 CPPFLAGS += -I$(BITWALKER)
-CPPFLAGS += -I$(TOPDIR)/Eurobalise_Telegram
-CPPFLAGS += -I$(TOPDIR)/Packet_Header
-CPPFLAGS += -I$(TOPDIR)/Euroradio_Message
+CPPFLAGS += -I$(TOPDIR)/Message_Telegram
 CPPFLAGS += -I$(GENERATED_PACKETS)
 
 LDFLAGS += -L$(BITWALKER) -lBitwalker
