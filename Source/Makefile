@@ -4,9 +4,9 @@
 it: lib test
 
 lib:
-	@(cd Bitwalker       && $(MAKE) lib)
-	@(cd Generated_Packets && $(MAKE) lib)
-	@(cd Generated_Messages && $(MAKE) lib)
+	@(cd Bitwalker       && $(MAKE) -j 4 lib)
+	@(cd Generated_Packets && $(MAKE) -j 4 lib)
+	@(cd Generated_Messages && $(MAKE) -j 4 lib)
 
 test:
 	@(cd Message_Telegram && $(MAKE))
