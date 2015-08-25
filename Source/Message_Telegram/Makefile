@@ -7,17 +7,12 @@ export GENERATED_PACKETS=$(TOPDIR)/Generated_Packets
 export GENERATED_MESSAGES=$(TOPDIR)/Generated_Messages
 
 
-it:	lib\
-	decoder_test encoder_test\
-	conditional_encoder_test conditional_decoder_test\
-	test_issue31_1 test_issue31_2\
-	test_issue31_3 test_messages
+it: test issue31
 
 include $(TOPDIR)/Makefile.template
 
 #CXX = c++
 CPPFLAGS += -I.
-
 CXXFLAGS += -std=c++11
 
 CPPFLAGS += -I$(GENERATED_MESSAGES)
@@ -29,25 +24,19 @@ LDFLAGS += -L$(GENERATED_PACKETS) -lgenerated_packets
 CPPFLAGS += -I$(BITWALKER)
 LDFLAGS += -L$(BITWALKER) -lBitwalker
 
-test: it issue31
+test:	decoder_test encoder_test\
+	conditional_encoder_test conditional_decoder_test\
+	test_messages
 	./encoder_test
 	./decoder_test
 	./conditional_encoder_test
 	./conditional_decoder_test
 	./test_messages
 
-issue31: lib test_issue31_1 test_issue31_2 test_issue31_3
+issue31: test_issue31_1 test_issue31_2 test_issue31_3
 	./test_issue31_1
 	./test_issue31_2
 	./test_issue31_3
-	./test_messages
-
-
-lib:
-	@(cd $(BITWALKER) && $(MAKE) lib)
-	@(cd $(GENERATED_PACKETS) && $(MAKE) lib)
-	@(cd $(GENERATED_MESSAGES) && $(MAKE) lib)
-
 
 SRC= print_bits.cpp Eurobalise_Telegram.cpp create.cpp\
      Euroradio_Message.cpp Message_Header.cpp
@@ -103,13 +92,10 @@ clean::
 	@$(RM) encoder_test
 	@$(RM) conditional_decoder_test
 	@$(RM) conditional_encoder_test
+	@$(RM) dynamic_decoder_test
+	@$(RM) dynamic_encoder_test
 	@$(RM) test_issue31_1
 	@$(RM) test_issue31_2
 	@$(RM) test_issue31_3
 	@$(RM) test_messages
-	@$(RM) dynamic_decoder_test
-	@$(RM) dynamic_encoder_test
-	@(cd $(BITWALKER) && $(MAKE) clean)
-	@(cd $(GENERATED_PACKETS) && $(MAKE) clean)
-	@(cd $(GENERATED_MESSAGES) && $(MAKE) clean)
 

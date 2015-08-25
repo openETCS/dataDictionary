@@ -1,9 +1,22 @@
 
-MAKEFLAGS += --silent --no-print-directory
+#MAKEFLAGS += --silent --no-print-directory
 
-it: 
-	(cd Coq             && $(MAKE) it)
-	(cd Bitwalker       && $(MAKE) it)
+it: lib test
+
+lib:
+	@(cd Bitwalker       && $(MAKE) lib)
+	@(cd Generated_Packets && $(MAKE) lib)
+	@(cd Generated_Messages && $(MAKE) lib)
+
+test:
+	@(cd Message_Telegram && $(MAKE))
+
+clean: 
+	@(cd Coq             && $(MAKE) clean)
+	@(cd Bitwalker       && $(MAKE) clean)
+	@(cd Generated_Packets && $(MAKE) clean)
+	@(cd Generated_Messages && $(MAKE) clean)
+	@(cd Message_Telegram && $(MAKE) clean)
 
 format: 
 	(cd Bitwalker       && $(MAKE) format)
@@ -16,10 +29,3 @@ par:
 
 log: 
 	(cd Bitwalker       && $(MAKE) log)
-
-clean: 
-	(cd Coq             && $(MAKE) clean)
-	(cd Bitwalker       && $(MAKE) clean)
-	(cd Generated_Packets && $(MAKE) clean)
-	(cd Generated_Messages && $(MAKE) clean)
-	(cd Message_Telegram && $(MAKE) clean)
