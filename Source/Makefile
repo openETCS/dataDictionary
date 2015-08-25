@@ -1,5 +1,5 @@
 
-#MAKEFLAGS += --silent --no-print-directory
+MAKEFLAGS += --silent --no-print-directory
 
 it: lib test
 
