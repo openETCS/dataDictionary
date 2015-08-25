@@ -28,18 +28,18 @@ int main ()
     {
         // NID_PACKET = 0;
         a.core.L_PACKET = 114;
-	a.core.Q_SCALE = 1;
-	a.core.NID_LRBG = 0;
-	a.core.D_LRBG = 0;
-	a.core.Q_DIRLRBG = 1;
-	a.core.Q_DLRBG = 1;
-	a.core.L_DOUBTOVER = 0;
+        a.core.Q_SCALE = 1;
+        a.core.NID_LRBG = 0;
+        a.core.D_LRBG = 0;
+        a.core.Q_DIRLRBG = 1;
+        a.core.Q_DLRBG = 1;
+        a.core.L_DOUBTOVER = 0;
         a.core.L_DOUBTUNDER = 0;
-	a.core.Q_LENGTH = 0;
-	a.core.V_TRAIN = 0;
-	a.core.Q_DIRTRAIN = 1;
-	a.core.M_MODE = 6;
-	a.core.M_LEVEL = 0;
+        a.core.Q_LENGTH = 0;
+        a.core.V_TRAIN = 0;
+        a.core.Q_DIRTRAIN = 1;
+        a.core.M_MODE = 6;
+        a.core.M_LEVEL = 0;
     }
 
     Validated_train_data b;
@@ -61,11 +61,11 @@ int main ()
     Validated_Train_Data_Message message;
     {
         // NID_MESSAGE = 129;
-	message.L_MESSAGE = 36;
-	message.T_TRAIN = 0;
-	message.NID_ENGINE = 0;
-	message.packet_0_1 = std::make_shared<Position_Report>(a);
-	message.packet_11 = std::make_shared<Validated_train_data>(b);
+        message.L_MESSAGE = 36;
+        message.T_TRAIN = 0;
+        message.NID_ENGINE = 0;
+        message.packet_0_1 = std::make_shared<Position_Report>(a);
+        message.packet_11 = std::make_shared<Validated_train_data>(b);
     }
 
     std::cout << " Encoder Input:  " << message << std::endl;

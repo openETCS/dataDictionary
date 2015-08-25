@@ -49,7 +49,7 @@ Error_Reporting create_Error_Reporting()
     Error_Reporting a;
     {
         a.core.L_PACKET = 29;
-	a.core.M_ERROR = 18;
+        a.core.M_ERROR = 18;
     }
 
     return a;
@@ -105,10 +105,10 @@ Infill_location_reference create_Infill_location_reference(int i)
     Infill_location_reference a;
     {
         a.core.Q_DIR = 1;
-	a.core.L_PACKET = 38+(10*i);
-	a.core.Q_NEWCOUNTRY = i;
-	a.core.NID_C = 123;
-	a.core.NID_BG = 258;
+        a.core.L_PACKET = 38 + (10 * i);
+        a.core.Q_NEWCOUNTRY = i;
+        a.core.NID_C = 123;
+        a.core.NID_BG = 258;
     }
 
     return a;

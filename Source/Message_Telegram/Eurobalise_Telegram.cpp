@@ -70,13 +70,13 @@ bool Eurobalise_Telegram::decode(Bitstream& stream)
 
     while (stream.bitpos <= 1023 + old_pos)
     {
-	if (current_pos != stream.bitpos)
-	{
-	    std::cout << stream.bitpos << " != " << current_pos << std::endl;
-	    return false;
-	}
+        if (current_pos != stream.bitpos)
+        {
+            std::cout << stream.bitpos << " != " << current_pos << std::endl;
+            return false;
+        }
 
-	Packet_Header packet_header;
+        Packet_Header packet_header;
         Packet_Header_Decoder(&stream, &packet_header);
 
         BasePacketPtr ptr;
@@ -105,9 +105,10 @@ bool Eurobalise_Telegram::decode(Bitstream& stream)
             return false;
         }
 
-	current_pos += (*ptr).length();
+        current_pos += (*ptr).length();
     }
-return true;
+
+    return true;
 }
 
 bool Eurobalise_Telegram::encode(Bitstream& stream) const

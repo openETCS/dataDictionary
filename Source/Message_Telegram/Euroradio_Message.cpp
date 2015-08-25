@@ -11,7 +11,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
     Message_Header messageID;
     Message_Header_Decoder(&stream, &messageID);
 
-    switch(messageID.NID_MESSAGE)
+    switch (messageID.NID_MESSAGE)
     {
         case 129 :
         {
@@ -545,12 +545,12 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
         }
 
-	default :
-	{
-	    std::cout << "NID_MESSAGE " << +messageID.NID_MESSAGE << std::endl;
-	    std::cerr << "Error, unrecognized Euroradio Message in " << __FILE__ << std::endl;
-	    return Euroradio_MessagePtr();
-	}
+        default :
+        {
+            std::cout << "NID_MESSAGE " << +messageID.NID_MESSAGE << std::endl;
+            std::cerr << "Error, unrecognized Euroradio Message in " << __FILE__ << std::endl;
+            return Euroradio_MessagePtr();
+        }
     }
 
     return Euroradio_MessagePtr();
@@ -560,7 +560,7 @@ bool Euroradio_Message_Encoder(Bitstream& stream, Euroradio_MessagePtr p)
 {
     Message_Header_Encoder(&stream, &(p->header));
 
-    switch(p->header.NID_MESSAGE)
+    switch (p->header.NID_MESSAGE)
     {
         case 129 :
         {
@@ -867,12 +867,12 @@ bool Euroradio_Message_Encoder(Bitstream& stream, Euroradio_MessagePtr p)
         }
 
 
-	default :
-	{
-	    std::cout << "NID_MESSAGE " << +p->header.NID_MESSAGE << std::endl;
-	    std::cerr << "Error, unrecognized Euroradio Message in " << __FILE__ << std::endl;
-	    return false;
-	}
+        default :
+        {
+            std::cout << "NID_MESSAGE " << +p->header.NID_MESSAGE << std::endl;
+            std::cerr << "Error, unrecognized Euroradio Message in " << __FILE__ << std::endl;
+            return false;
+        }
     }
 
     return false;

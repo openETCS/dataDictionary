@@ -30,18 +30,18 @@ int main ()
     {
         // NID_PACKET = 0;
         a.core.L_PACKET = 114;
-	a.core.Q_SCALE = 1;
-	a.core.NID_LRBG = 0;
-	a.core.D_LRBG = 0;
-	a.core.Q_DIRLRBG = 1;
-	a.core.Q_DLRBG = 1;
-	a.core.L_DOUBTOVER = 0;
+        a.core.Q_SCALE = 1;
+        a.core.NID_LRBG = 0;
+        a.core.D_LRBG = 0;
+        a.core.Q_DIRLRBG = 1;
+        a.core.Q_DLRBG = 1;
+        a.core.L_DOUBTOVER = 0;
         a.core.L_DOUBTUNDER = 0;
-	a.core.Q_LENGTH = 0;
-	a.core.V_TRAIN = 0;
-	a.core.Q_DIRTRAIN = 1;
-	a.core.M_MODE = 6;
-	a.core.M_LEVEL = 0;
+        a.core.Q_LENGTH = 0;
+        a.core.V_TRAIN = 0;
+        a.core.Q_DIRTRAIN = 1;
+        a.core.M_MODE = 6;
+        a.core.M_LEVEL = 0;
     }
 
     Validated_train_data b;
@@ -63,39 +63,39 @@ int main ()
     Validated_Train_Data_Message message;
     {
         // NID_MESSAGE = 129;
-	message.L_MESSAGE = 36;
-	message.T_TRAIN = 0;
-	message.NID_ENGINE = 0;
-	message.packet_0_1 = std::make_shared<Position_Report>(a);
-	message.packet_11 = std::make_shared<Validated_train_data>(b);
+        message.L_MESSAGE = 36;
+        message.T_TRAIN = 0;
+        message.NID_ENGINE = 0;
+        message.packet_0_1 = std::make_shared<Position_Report>(a);
+        message.packet_11 = std::make_shared<Validated_train_data>(b);
     }
 
     MA_Request_Message message2;
     {
         // NID_MESSAGE = 132;
-	message2.L_MESSAGE = 25; // (50 + 29 + 114 + 7) / 8
-	message2.T_TRAIN = 1;
-	message2.NID_ENGINE = 923;
-	message2.Q_MARQSTREASON = 23;
-	message2.packet_0_1 = std::make_shared<Position_Report>(a);
+        message2.L_MESSAGE = 25; // (50 + 29 + 114 + 7) / 8
+        message2.T_TRAIN = 1;
+        message2.NID_ENGINE = 923;
+        message2.Q_MARQSTREASON = 23;
+        message2.packet_0_1 = std::make_shared<Position_Report>(a);
     }
-    
+
     Level_23_transition_information c;
     {
-	// NID_PACKET = 9;
+        // NID_PACKET = 9;
         c.core.L_PACKET = 45;
-	c.core.NID_LTRBG = 23983;
+        c.core.NID_LTRBG = 23983;
     }
 
     MA_Request_Message message3;
     {
         // NID_MESSAGE = 132;
-	message3.L_MESSAGE = 30; // (50 + 29 + 114 + 45 + 7) / 8
-	message3.T_TRAIN = 0;
-	message3.NID_ENGINE = 0;
-	message3.Q_MARQSTREASON = 23;
-	message3.packet_0_1 = std::make_shared<Position_Report>(a);
-	message3.optional_packets.push_back(std::make_shared<Level_23_transition_information>(c));
+        message3.L_MESSAGE = 30; // (50 + 29 + 114 + 45 + 7) / 8
+        message3.T_TRAIN = 0;
+        message3.NID_ENGINE = 0;
+        message3.Q_MARQSTREASON = 23;
+        message3.packet_0_1 = std::make_shared<Position_Report>(a);
+        message3.optional_packets.push_back(std::make_shared<Level_23_transition_information>(c));
     }
 
     std::cout << " Encoder Input:  " << message << std::endl;
@@ -114,7 +114,7 @@ int main ()
     stream.bitpos = init_pos;
     std::cout << " Decoding MA_Request message." << std::endl;
     Euroradio_MessagePtr new_message2 = Euroradio_Message_Decoder(stream);
-    std::cout << " Decoder Output: " << (*new_message2) << "\n" <<std::endl;
+    std::cout << " Decoder Output: " << (*new_message2) << "\n" << std::endl;
     assert(message2 == *new_message2);
 
     init_pos = stream.bitpos;
