@@ -7,8 +7,8 @@
 struct National_Values_Core_4
 {
 
-    uint8_t   L_NVKRINT_l;      // # 5
-    uint8_t   M_NVKRINT_l;      // # 5
+    uint64_t  L_NVKRINT;        // # 5
+    uint64_t   M_NVKRINT;        // # 5
 };
 
 #ifdef __cplusplus
@@ -18,8 +18,8 @@ struct National_Values_Core_4
 inline std::ostream& operator<<(std::ostream& stream, const National_Values_Core_4& p)
 {
     stream 
-       << +p.L_NVKRINT_l << ','
-       << +p.M_NVKRINT_l;
+       << +p.L_NVKRINT << ','
+       << +p.M_NVKRINT;
 
     return stream;
 }
@@ -28,8 +28,8 @@ inline bool operator==(const National_Values_Core_4& a, const National_Values_Co
 {
     bool status = true;
     
-    status = status && (a.L_NVKRINT_l == b.L_NVKRINT_l);
-    status = status && (a.M_NVKRINT_l == b.M_NVKRINT_l);
+    status = status && (a.L_NVKRINT == b.L_NVKRINT);
+    status = status && (a.M_NVKRINT == b.M_NVKRINT);
 
     return status;
 }
@@ -55,20 +55,20 @@ typedef struct National_Values_Core_4 National_Values_Core_4;
       \separated(stream->addr + (0..stream->size-1), p);
 
     predicate Invariant(National_Values_Core_4* p) =
-      Invariant(p->L_NVKRINT_l)       &&
-      Invariant(p->M_NVKRINT_l);
+      Invariant(p->L_NVKRINT)         &&
+      Invariant(p->M_NVKRINT);
 
     predicate ZeroInitialized(National_Values_Core_4* p) =
-      ZeroInitialized(p->L_NVKRINT_l)       &&
-      ZeroInitialized(p->M_NVKRINT_l);
+      ZeroInitialized(p->L_NVKRINT)         &&
+      ZeroInitialized(p->M_NVKRINT);
 
     predicate EqualBits(Bitstream* stream, integer pos, National_Values_Core_4* p) =
-      EqualBits(stream, pos,       pos + 5,   p->L_NVKRINT_l)       &&
-      EqualBits(stream, pos + 5,   pos + 10,  p->M_NVKRINT_l);
+      EqualBits(stream, pos,       pos + 5,   p->L_NVKRINT)         &&
+      EqualBits(stream, pos + 5,   pos + 10,  p->M_NVKRINT);
 
     predicate UpperBitsNotSet(National_Values_Core_4* p) =
-      UpperBitsNotSet(p->L_NVKRINT_l,      5)   &&
-      UpperBitsNotSet(p->M_NVKRINT_l,      5);
+      UpperBitsNotSet(p->L_NVKRINT,        5)   &&
+      UpperBitsNotSet(p->M_NVKRINT,        5);
 
 */
 

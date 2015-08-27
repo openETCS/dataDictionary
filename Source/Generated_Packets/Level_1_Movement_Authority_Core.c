@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Level_1_Movement_Authority_UpperBitsNotSet(const Level_1_Movement_Authority_Core* p)
 {
@@ -47,7 +48,7 @@ int Level_1_Movement_Authority_UpperBitsNotSet(const Level_1_Movement_Authority_
 
 int Level_1_Movement_Authority_Encoder(Bitstream* stream, const Level_1_Movement_Authority_Core* p)
 {
-    if (NormalBitstream(stream, LEVEL_1_MOVEMENT_AUTHORITY_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, LEVEL_1_MOVEMENT_AUTHORITY_CORE_BITSIZE))
     {
         if (Level_1_Movement_Authority_UpperBitsNotSet(p))
         {
@@ -103,7 +104,7 @@ int Level_1_Movement_Authority_Encoder(Bitstream* stream, const Level_1_Movement
 
 int Level_1_Movement_Authority_Decoder(Bitstream* stream, Level_1_Movement_Authority_Core* p)
 {
-    if (NormalBitstream(stream, LEVEL_1_MOVEMENT_AUTHORITY_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, LEVEL_1_MOVEMENT_AUTHORITY_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

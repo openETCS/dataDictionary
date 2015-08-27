@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Onboard_telephone_numbers_UpperBitsNotSet(const Onboard_telephone_numbers_Core* p)
 {
@@ -27,7 +28,7 @@ int Onboard_telephone_numbers_UpperBitsNotSet(const Onboard_telephone_numbers_Co
 
 int Onboard_telephone_numbers_Encoder(Bitstream* stream, const Onboard_telephone_numbers_Core* p)
 {
-    if (NormalBitstream(stream, ONBOARD_TELEPHONE_NUMBERS_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, ONBOARD_TELEPHONE_NUMBERS_CORE_BITSIZE))
     {
         if (Onboard_telephone_numbers_UpperBitsNotSet(p))
         {
@@ -58,7 +59,7 @@ int Onboard_telephone_numbers_Encoder(Bitstream* stream, const Onboard_telephone
 
 int Onboard_telephone_numbers_Decoder(Bitstream* stream, Onboard_telephone_numbers_Core* p)
 {
-    if (NormalBitstream(stream, ONBOARD_TELEPHONE_NUMBERS_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, ONBOARD_TELEPHONE_NUMBERS_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

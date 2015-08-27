@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Staff_Responsible_distance_Information_from_loop_UpperBitsNotSet(const Staff_Responsible_distance_Information_from_loop_Core* p)
 {
@@ -42,7 +43,7 @@ int Staff_Responsible_distance_Information_from_loop_UpperBitsNotSet(const Staff
 
 int Staff_Responsible_distance_Information_from_loop_Encoder(Bitstream* stream, const Staff_Responsible_distance_Information_from_loop_Core* p)
 {
-    if (NormalBitstream(stream, STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_BITSIZE))
     {
         if (Staff_Responsible_distance_Information_from_loop_UpperBitsNotSet(p))
         {
@@ -93,7 +94,7 @@ int Staff_Responsible_distance_Information_from_loop_Encoder(Bitstream* stream, 
 
 int Staff_Responsible_distance_Information_from_loop_Decoder(Bitstream* stream, Staff_Responsible_distance_Information_from_loop_Core* p)
 {
-    if (NormalBitstream(stream, STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

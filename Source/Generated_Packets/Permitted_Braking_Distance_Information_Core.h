@@ -13,18 +13,18 @@ struct Permitted_Braking_Distance_Information_Core
     // SB, intervention         
     // Packet Number = 52
 
-    uint32_t  Q_DIR;            // # 2
-    uint16_t  L_PACKET;         // # 13
-    uint32_t  Q_SCALE;          // # 2
-    uint32_t  Q_TRACKINIT;      // # 1
-    uint16_t  D_TRACKINIT;      // # 15
-    uint16_t  D_PBD;            // # 15
-    uint32_t  Q_GDIR;           // # 1
-    uint8_t   G_PBDSR;          // # 8
-    uint32_t  Q_PBDSR;          // # 1
-    uint16_t  D_PBDSR;          // # 15
-    uint16_t  L_PBDSR;          // # 15
-    uint8_t   N_ITER_1;         // # 5
+    uint64_t  Q_DIR;            // # 2
+    uint64_t  L_PACKET;         // # 13
+    uint64_t  Q_SCALE;          // # 2
+    uint64_t  Q_TRACKINIT;      // # 1
+    uint64_t  D_TRACKINIT;      // # 15
+    uint64_t  D_PBD;            // # 15
+    uint64_t  Q_GDIR;           // # 1
+    uint64_t   G_PBDSR;          // # 8
+    uint64_t  Q_PBDSR;          // # 1
+    uint64_t  D_PBDSR;          // # 15
+    uint64_t  L_PBDSR;          // # 15
+    uint64_t   N_ITER_1;         // # 5
     Permitted_Braking_Distance_Information_Core_1   sub_1[31];
 };
 

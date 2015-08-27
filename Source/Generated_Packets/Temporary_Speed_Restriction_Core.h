@@ -10,14 +10,14 @@ struct Temporary_Speed_Restriction_Core
     // Transmission of temporary speed restriction.      
     // Packet Number = 65
 
-    uint32_t  Q_DIR;            // # 2
-    uint16_t  L_PACKET;         // # 13
-    uint32_t  Q_SCALE;          // # 2
-    uint8_t   NID_TSR;          // # 8
-    uint16_t  D_TSR;            // # 15
-    uint16_t  L_TSR;            // # 15
-    uint32_t  Q_FRONT;          // # 1
-    uint8_t   V_TSR;            // # 7
+    uint64_t  Q_DIR;            // # 2
+    uint64_t  L_PACKET;         // # 13
+    uint64_t  Q_SCALE;          // # 2
+    uint64_t   NID_TSR;          // # 8
+    uint64_t  D_TSR;            // # 15
+    uint64_t  L_TSR;            // # 15
+    uint64_t  Q_FRONT;          // # 1
+    uint64_t   V_TSR;            // # 7
 };
 
 #ifdef __cplusplus

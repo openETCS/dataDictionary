@@ -8,10 +8,10 @@
 struct International_Static_Speed_Profile_Core_2
 {
 
-    uint16_t  D_STATIC_k;       // # 15
-    uint8_t   V_STATIC_k;       // # 7
-    uint8_t   Q_FRONT_k;        // # 1
-    uint8_t   N_ITER_2_1;       // # 5
+    uint64_t  D_STATIC;         // # 15
+    uint64_t   V_STATIC;         // # 7
+    uint64_t  Q_FRONT;          // # 1
+    uint64_t   N_ITER_2_1;       // # 5
     International_Static_Speed_Profile_Core_2_1   sub_2_1[31];
 };
 
@@ -22,9 +22,9 @@ struct International_Static_Speed_Profile_Core_2
 inline std::ostream& operator<<(std::ostream& stream, const International_Static_Speed_Profile_Core_2& p)
 {
     stream 
-       << +p.D_STATIC_k << ','
-       << +p.V_STATIC_k << ','
-       << +p.Q_FRONT_k << ','
+       << +p.D_STATIC << ','
+       << +p.V_STATIC << ','
+       << +p.Q_FRONT << ','
        << +p.N_ITER_2_1;
        for (uint32_t i = 0; i < p.N_ITER_2_1; ++i)
        {
@@ -39,9 +39,9 @@ inline bool operator==(const International_Static_Speed_Profile_Core_2& a, const
 {
     bool status = true;
     
-    status = status && (a.D_STATIC_k == b.D_STATIC_k);
-    status = status && (a.V_STATIC_k == b.V_STATIC_k);
-    status = status && (a.Q_FRONT_k == b.Q_FRONT_k);
+    status = status && (a.D_STATIC == b.D_STATIC);
+    status = status && (a.V_STATIC == b.V_STATIC);
+    status = status && (a.Q_FRONT == b.Q_FRONT);
     status = status && (a.N_ITER_2_1 == b.N_ITER_2_1);
     if (a.N_ITER_2_1 == b.N_ITER_2_1)
     {
@@ -79,24 +79,24 @@ typedef struct International_Static_Speed_Profile_Core_2 International_Static_Sp
       \separated(stream->addr + (0..stream->size-1), p);
 
     predicate Invariant(International_Static_Speed_Profile_Core_2* p) =
-      Invariant(p->D_STATIC_k)        &&
-      Invariant(p->V_STATIC_k)        &&
-      Invariant(p->Q_FRONT_k);
+      Invariant(p->D_STATIC)          &&
+      Invariant(p->V_STATIC)          &&
+      Invariant(p->Q_FRONT);
 
     predicate ZeroInitialized(International_Static_Speed_Profile_Core_2* p) =
-      ZeroInitialized(p->D_STATIC_k)        &&
-      ZeroInitialized(p->V_STATIC_k)        &&
-      ZeroInitialized(p->Q_FRONT_k);
+      ZeroInitialized(p->D_STATIC)          &&
+      ZeroInitialized(p->V_STATIC)          &&
+      ZeroInitialized(p->Q_FRONT);
 
     predicate EqualBits(Bitstream* stream, integer pos, International_Static_Speed_Profile_Core_2* p) =
-      EqualBits(stream, pos,       pos + 15,  p->D_STATIC_k)        &&
-      EqualBits(stream, pos + 15,  pos + 22,  p->V_STATIC_k)        &&
-      EqualBits(stream, pos + 22,  pos + 23,  p->Q_FRONT_k);
+      EqualBits(stream, pos,       pos + 15,  p->D_STATIC)          &&
+      EqualBits(stream, pos + 15,  pos + 22,  p->V_STATIC)          &&
+      EqualBits(stream, pos + 22,  pos + 23,  p->Q_FRONT);
 
     predicate UpperBitsNotSet(International_Static_Speed_Profile_Core_2* p) =
-      UpperBitsNotSet(p->D_STATIC_k,       15)  &&
-      UpperBitsNotSet(p->V_STATIC_k,       7)   &&
-      UpperBitsNotSet(p->Q_FRONT_k,        1);
+      UpperBitsNotSet(p->D_STATIC,         15)  &&
+      UpperBitsNotSet(p->V_STATIC,         7)   &&
+      UpperBitsNotSet(p->Q_FRONT,          1);
 
 */
 

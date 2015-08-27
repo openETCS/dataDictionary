@@ -7,10 +7,10 @@
 struct Staff_Responsible_distance_Information_from_loop_Core_1
 {
 
-    uint8_t   Q_NEWCOUNTRY_k;   // # 1
-    uint16_t  NID_C_k;          // # 10
-    uint16_t  NID_BG_k;         // # 14
-    uint16_t  D_SR_k;           // # 15
+    uint64_t  Q_NEWCOUNTRY;     // # 1
+    uint64_t  NID_C;            // # 10
+    uint64_t  NID_BG;           // # 14
+    uint64_t  D_SR;             // # 15
 };
 
 #ifdef __cplusplus
@@ -20,10 +20,10 @@ struct Staff_Responsible_distance_Information_from_loop_Core_1
 inline std::ostream& operator<<(std::ostream& stream, const Staff_Responsible_distance_Information_from_loop_Core_1& p)
 {
     stream 
-       << +p.Q_NEWCOUNTRY_k << ','
-       << +p.NID_C_k << ','
-       << +p.NID_BG_k << ','
-       << +p.D_SR_k;
+       << +p.Q_NEWCOUNTRY << ','
+       << +p.NID_C << ','
+       << +p.NID_BG << ','
+       << +p.D_SR;
 
     return stream;
 }
@@ -32,13 +32,13 @@ inline bool operator==(const Staff_Responsible_distance_Information_from_loop_Co
 {
     bool status = true;
     
-    status = status && (a.Q_NEWCOUNTRY_k == b.Q_NEWCOUNTRY_k);
-    if (a.Q_NEWCOUNTRY_k == 1)
+    status = status && (a.Q_NEWCOUNTRY == b.Q_NEWCOUNTRY);
+    if (a.Q_NEWCOUNTRY == 1)
     {
-    status = status && (a.NID_C_k == b.NID_C_k);
+    status = status && (a.NID_C == b.NID_C);
     }
-    status = status && (a.NID_BG_k == b.NID_BG_k);
-    status = status && (a.D_SR_k == b.D_SR_k);
+    status = status && (a.NID_BG == b.NID_BG);
+    status = status && (a.D_SR == b.D_SR);
 
     return status;
 }
@@ -64,16 +64,16 @@ typedef struct Staff_Responsible_distance_Information_from_loop_Core_1 Staff_Res
       \separated(stream->addr + (0..stream->size-1), p);
 
     predicate Invariant(Staff_Responsible_distance_Information_from_loop_Core_1* p) =
-      Invariant(p->Q_NEWCOUNTRY_k);
+      Invariant(p->Q_NEWCOUNTRY);
 
     predicate ZeroInitialized(Staff_Responsible_distance_Information_from_loop_Core_1* p) =
-      ZeroInitialized(p->Q_NEWCOUNTRY_k);
+      ZeroInitialized(p->Q_NEWCOUNTRY);
 
     predicate EqualBits(Bitstream* stream, integer pos, Staff_Responsible_distance_Information_from_loop_Core_1* p) =
-      EqualBits(stream, pos,       pos + 1,   p->Q_NEWCOUNTRY_k);
+      EqualBits(stream, pos,       pos + 1,   p->Q_NEWCOUNTRY);
 
     predicate UpperBitsNotSet(Staff_Responsible_distance_Information_from_loop_Core_1* p) =
-      UpperBitsNotSet(p->Q_NEWCOUNTRY_k,   1);
+      UpperBitsNotSet(p->Q_NEWCOUNTRY,     1);
 
 */
 

@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Track_Condition_Big_Metal_Masses_UpperBitsNotSet(const Track_Condition_Big_Metal_Masses_Core* p)
 {
@@ -31,7 +32,7 @@ int Track_Condition_Big_Metal_Masses_UpperBitsNotSet(const Track_Condition_Big_M
 
 int Track_Condition_Big_Metal_Masses_Encoder(Bitstream* stream, const Track_Condition_Big_Metal_Masses_Core* p)
 {
-    if (NormalBitstream(stream, TRACK_CONDITION_BIG_METAL_MASSES_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, TRACK_CONDITION_BIG_METAL_MASSES_CORE_BITSIZE))
     {
         if (Track_Condition_Big_Metal_Masses_UpperBitsNotSet(p))
         {
@@ -70,7 +71,7 @@ int Track_Condition_Big_Metal_Masses_Encoder(Bitstream* stream, const Track_Cond
 
 int Track_Condition_Big_Metal_Masses_Decoder(Bitstream* stream, Track_Condition_Big_Metal_Masses_Core* p)
 {
-    if (NormalBitstream(stream, TRACK_CONDITION_BIG_METAL_MASSES_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, TRACK_CONDITION_BIG_METAL_MASSES_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

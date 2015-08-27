@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Level_Crossing_information_UpperBitsNotSet(const Level_Crossing_information_Core* p)
 {
@@ -37,7 +38,7 @@ int Level_Crossing_information_UpperBitsNotSet(const Level_Crossing_information_
 
 int Level_Crossing_information_Encoder(Bitstream* stream, const Level_Crossing_information_Core* p)
 {
-    if (NormalBitstream(stream, LEVEL_CROSSING_INFORMATION_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, LEVEL_CROSSING_INFORMATION_CORE_BITSIZE))
     {
         if (Level_Crossing_information_UpperBitsNotSet(p))
         {
@@ -86,7 +87,7 @@ int Level_Crossing_information_Encoder(Bitstream* stream, const Level_Crossing_i
 
 int Level_Crossing_information_Decoder(Bitstream* stream, Level_Crossing_information_Core* p)
 {
-    if (NormalBitstream(stream, LEVEL_CROSSING_INFORMATION_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, LEVEL_CROSSING_INFORMATION_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

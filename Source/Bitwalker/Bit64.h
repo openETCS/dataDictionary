@@ -9,9 +9,9 @@
 
    assigns \nothing;
 
-   ensures set_bit: \result != 0 <==> LeftBit64(value, pos);
+   ensures set_bit: \result != 0 <==> Bit64(value, pos);
 */
-static inline int PeekBit64(uint64_t value, uint32_t pos)
+static inline int TestBit64(uint64_t value, uint32_t pos)
 {
     uint64_t mask = ((uint64_t) 1) << (63u - pos);
     uint64_t flag = value & mask;
@@ -25,13 +25,13 @@ static inline int PeekBit64(uint64_t value, uint32_t pos)
 
     assigns \nothing;
 
-    ensures left:     LeftEqualBits64(\result, value, 0,  pos);
-    ensures set_bit:  flag != 0  <==>  LeftBit64(\result, pos);
-    ensures right:    LeftEqualBits64(\result, value, pos + 1,  64);
+    ensures left:     EqualBits64(\result, value, 0,  pos);
+    ensures set_bit:  flag != 0  <==>  Bit64(\result, pos);
+    ensures right:    EqualBits64(\result, value, pos + 1,  64);
     ensures upper:    \forall integer i; i >= 64 - pos ==>
                          (UpperBitsNotSet(value, i) ==> UpperBitsNotSet(\result, i));
 */
-static inline uint64_t PokeBit64(uint64_t value, uint32_t pos, int flag)
+static inline uint64_t SetBit64(uint64_t value, uint32_t pos, int flag)
 {
     uint64_t mask = ((uint64_t) 1u) << (63 - pos);
 

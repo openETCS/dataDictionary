@@ -7,9 +7,9 @@
 struct List_of_Balises_in_SR_Authority_Core_1
 {
 
-    uint8_t   Q_NEWCOUNTRY_k;   // # 1
-    uint16_t  NID_C_k;          // # 10
-    uint16_t  NID_BG_k;         // # 14
+    uint64_t  Q_NEWCOUNTRY;     // # 1
+    uint64_t  NID_C;            // # 10
+    uint64_t  NID_BG;           // # 14
 };
 
 #ifdef __cplusplus
@@ -19,9 +19,9 @@ struct List_of_Balises_in_SR_Authority_Core_1
 inline std::ostream& operator<<(std::ostream& stream, const List_of_Balises_in_SR_Authority_Core_1& p)
 {
     stream 
-       << +p.Q_NEWCOUNTRY_k << ','
-       << +p.NID_C_k << ','
-       << +p.NID_BG_k;
+       << +p.Q_NEWCOUNTRY << ','
+       << +p.NID_C << ','
+       << +p.NID_BG;
 
     return stream;
 }
@@ -30,12 +30,12 @@ inline bool operator==(const List_of_Balises_in_SR_Authority_Core_1& a, const Li
 {
     bool status = true;
     
-    status = status && (a.Q_NEWCOUNTRY_k == b.Q_NEWCOUNTRY_k);
-    if (a.Q_NEWCOUNTRY_k == 1)
+    status = status && (a.Q_NEWCOUNTRY == b.Q_NEWCOUNTRY);
+    if (a.Q_NEWCOUNTRY == 1)
     {
-    status = status && (a.NID_C_k == b.NID_C_k);
+    status = status && (a.NID_C == b.NID_C);
     }
-    status = status && (a.NID_BG_k == b.NID_BG_k);
+    status = status && (a.NID_BG == b.NID_BG);
 
     return status;
 }
@@ -61,16 +61,16 @@ typedef struct List_of_Balises_in_SR_Authority_Core_1 List_of_Balises_in_SR_Auth
       \separated(stream->addr + (0..stream->size-1), p);
 
     predicate Invariant(List_of_Balises_in_SR_Authority_Core_1* p) =
-      Invariant(p->Q_NEWCOUNTRY_k);
+      Invariant(p->Q_NEWCOUNTRY);
 
     predicate ZeroInitialized(List_of_Balises_in_SR_Authority_Core_1* p) =
-      ZeroInitialized(p->Q_NEWCOUNTRY_k);
+      ZeroInitialized(p->Q_NEWCOUNTRY);
 
     predicate EqualBits(Bitstream* stream, integer pos, List_of_Balises_in_SR_Authority_Core_1* p) =
-      EqualBits(stream, pos,       pos + 1,   p->Q_NEWCOUNTRY_k);
+      EqualBits(stream, pos,       pos + 1,   p->Q_NEWCOUNTRY);
 
     predicate UpperBitsNotSet(List_of_Balises_in_SR_Authority_Core_1* p) =
-      UpperBitsNotSet(p->Q_NEWCOUNTRY_k,   1);
+      UpperBitsNotSet(p->Q_NEWCOUNTRY,     1);
 
 */
 

@@ -3,12 +3,13 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int National_Values_Core_1_UpperBitsNotSet(const National_Values_Core_1* p)
 {
     bool status = true;
 
-    status = status && UpperBitsNotSet64(p->NID_C_p,           10);
+    status = status && UpperBitsNotSet64(p->NID_C,             10);
 
     if (status)
     {
@@ -22,16 +23,16 @@ int National_Values_Core_1_UpperBitsNotSet(const National_Values_Core_1* p)
 
 int National_Values_Core_1_Encoder(Bitstream* stream, const National_Values_Core_1* p)
 {
-    if (NormalBitstream(stream, NATIONAL_VALUES_CORE_1_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, NATIONAL_VALUES_CORE_1_CORE_BITSIZE))
     {
         if (National_Values_Core_1_UpperBitsNotSet(p))
         {
             //@ ghost const uint32_t pos = stream->bitpos;
 
-            Bitstream_Write(stream, 10, p->NID_C_p);
+            Bitstream_Write(stream, 10, p->NID_C);
 
 
-            //@ assert NID_C_p:           EqualBits(stream, pos,       pos + 10,  p->NID_C_p);
+            //@ assert NID_C:             EqualBits(stream, pos,       pos + 10,  p->NID_C);
 
             return 1;
         }
@@ -48,23 +49,23 @@ int National_Values_Core_1_Encoder(Bitstream* stream, const National_Values_Core
 
 int National_Values_Core_1_Decoder(Bitstream* stream, National_Values_Core_1* p)
 {
-    if (NormalBitstream(stream, NATIONAL_VALUES_CORE_1_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, NATIONAL_VALUES_CORE_1_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 
 	/*@
-	  requires NID_C_p:        stream->bitpos == pos + 0;
+	  requires NID_C:          stream->bitpos == pos + 0;
 	  assigns        	   stream->bitpos;
-	  assigns		   p->NID_C_p;
-	  ensures  NID_C_p:        stream->bitpos == pos + 10;
-	  ensures  NID_C_p:        EqualBits(stream, pos + 0, pos + 10, p->NID_C_p);
-	  ensures  NID_C_p:        UpperBitsNotSet(p->NID_C_p, 10);
+	  assigns		   p->NID_C;
+	  ensures  NID_C:          stream->bitpos == pos + 10;
+	  ensures  NID_C:          EqualBits(stream, pos + 0, pos + 10, p->NID_C);
+	  ensures  NID_C:          UpperBitsNotSet(p->NID_C, 10);
 	*/
-	{ p->NID_C_p		= Bitstream_Read(stream, 10); }
+	{ p->NID_C		= Bitstream_Read(stream, 10); }
 
-        //@ assert NID_C_p:           EqualBits(stream, pos,       pos + 10,  p->NID_C_p);
+        //@ assert NID_C:             EqualBits(stream, pos,       pos + 10,  p->NID_C);
 
-        //@ assert NID_C_p:           UpperBitsNotSet(p->NID_C_p,           10);
+        //@ assert NID_C:             UpperBitsNotSet(p->NID_C,             10);
 
 	//@ assert final: EqualBits(stream, pos, p);
 

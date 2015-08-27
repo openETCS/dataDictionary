@@ -11,11 +11,11 @@ struct Reversing_supervision_information_Core
     // area to the on-board       
     // Packet Number = 139
 
-    uint32_t  Q_DIR;            // # 2
-    uint16_t  L_PACKET;         // # 13
-    uint32_t  Q_SCALE;          // # 2
-    uint16_t  D_REVERSE;        // # 15
-    uint8_t   V_REVERSE;        // # 7
+    uint64_t  Q_DIR;            // # 2
+    uint64_t  L_PACKET;         // # 13
+    uint64_t  Q_SCALE;          // # 2
+    uint64_t  D_REVERSE;        // # 15
+    uint64_t   V_REVERSE;        // # 7
 };
 
 #ifdef __cplusplus

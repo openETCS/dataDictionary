@@ -8,10 +8,10 @@
 struct Axle_Load_Speed_Profile_Core_2
 {
 
-    uint16_t  D_AXLELOAD_k;     // # 15
-    uint16_t  L_AXLELOAD_k;     // # 15
-    uint8_t   Q_FRONT_k;        // # 1
-    uint8_t   N_ITER_2_1;       // # 5
+    uint64_t  D_AXLELOAD;       // # 15
+    uint64_t  L_AXLELOAD;       // # 15
+    uint64_t  Q_FRONT;          // # 1
+    uint64_t   N_ITER_2_1;       // # 5
     Axle_Load_Speed_Profile_Core_2_1   sub_2_1[31];
 };
 
@@ -22,9 +22,9 @@ struct Axle_Load_Speed_Profile_Core_2
 inline std::ostream& operator<<(std::ostream& stream, const Axle_Load_Speed_Profile_Core_2& p)
 {
     stream 
-       << +p.D_AXLELOAD_k << ','
-       << +p.L_AXLELOAD_k << ','
-       << +p.Q_FRONT_k << ','
+       << +p.D_AXLELOAD << ','
+       << +p.L_AXLELOAD << ','
+       << +p.Q_FRONT << ','
        << +p.N_ITER_2_1;
        for (uint32_t i = 0; i < p.N_ITER_2_1; ++i)
        {
@@ -39,9 +39,9 @@ inline bool operator==(const Axle_Load_Speed_Profile_Core_2& a, const Axle_Load_
 {
     bool status = true;
     
-    status = status && (a.D_AXLELOAD_k == b.D_AXLELOAD_k);
-    status = status && (a.L_AXLELOAD_k == b.L_AXLELOAD_k);
-    status = status && (a.Q_FRONT_k == b.Q_FRONT_k);
+    status = status && (a.D_AXLELOAD == b.D_AXLELOAD);
+    status = status && (a.L_AXLELOAD == b.L_AXLELOAD);
+    status = status && (a.Q_FRONT == b.Q_FRONT);
     status = status && (a.N_ITER_2_1 == b.N_ITER_2_1);
     if (a.N_ITER_2_1 == b.N_ITER_2_1)
     {
@@ -79,24 +79,24 @@ typedef struct Axle_Load_Speed_Profile_Core_2 Axle_Load_Speed_Profile_Core_2;
       \separated(stream->addr + (0..stream->size-1), p);
 
     predicate Invariant(Axle_Load_Speed_Profile_Core_2* p) =
-      Invariant(p->D_AXLELOAD_k)      &&
-      Invariant(p->L_AXLELOAD_k)      &&
-      Invariant(p->Q_FRONT_k);
+      Invariant(p->D_AXLELOAD)        &&
+      Invariant(p->L_AXLELOAD)        &&
+      Invariant(p->Q_FRONT);
 
     predicate ZeroInitialized(Axle_Load_Speed_Profile_Core_2* p) =
-      ZeroInitialized(p->D_AXLELOAD_k)      &&
-      ZeroInitialized(p->L_AXLELOAD_k)      &&
-      ZeroInitialized(p->Q_FRONT_k);
+      ZeroInitialized(p->D_AXLELOAD)        &&
+      ZeroInitialized(p->L_AXLELOAD)        &&
+      ZeroInitialized(p->Q_FRONT);
 
     predicate EqualBits(Bitstream* stream, integer pos, Axle_Load_Speed_Profile_Core_2* p) =
-      EqualBits(stream, pos,       pos + 15,  p->D_AXLELOAD_k)      &&
-      EqualBits(stream, pos + 15,  pos + 30,  p->L_AXLELOAD_k)      &&
-      EqualBits(stream, pos + 30,  pos + 31,  p->Q_FRONT_k);
+      EqualBits(stream, pos,       pos + 15,  p->D_AXLELOAD)        &&
+      EqualBits(stream, pos + 15,  pos + 30,  p->L_AXLELOAD)        &&
+      EqualBits(stream, pos + 30,  pos + 31,  p->Q_FRONT);
 
     predicate UpperBitsNotSet(Axle_Load_Speed_Profile_Core_2* p) =
-      UpperBitsNotSet(p->D_AXLELOAD_k,     15)  &&
-      UpperBitsNotSet(p->L_AXLELOAD_k,     15)  &&
-      UpperBitsNotSet(p->Q_FRONT_k,        1);
+      UpperBitsNotSet(p->D_AXLELOAD,       15)  &&
+      UpperBitsNotSet(p->L_AXLELOAD,       15)  &&
+      UpperBitsNotSet(p->Q_FRONT,          1);
 
 */
 

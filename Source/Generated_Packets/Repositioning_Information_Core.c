@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Repositioning_Information_UpperBitsNotSet(const Repositioning_Information_Core* p)
 {
@@ -25,7 +26,7 @@ int Repositioning_Information_UpperBitsNotSet(const Repositioning_Information_Co
 
 int Repositioning_Information_Encoder(Bitstream* stream, const Repositioning_Information_Core* p)
 {
-    if (NormalBitstream(stream, REPOSITIONING_INFORMATION_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, REPOSITIONING_INFORMATION_CORE_BITSIZE))
     {
         if (Repositioning_Information_UpperBitsNotSet(p))
         {
@@ -57,7 +58,7 @@ int Repositioning_Information_Encoder(Bitstream* stream, const Repositioning_Inf
 
 int Repositioning_Information_Decoder(Bitstream* stream, Repositioning_Information_Core* p)
 {
-    if (NormalBitstream(stream, REPOSITIONING_INFORMATION_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, REPOSITIONING_INFORMATION_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

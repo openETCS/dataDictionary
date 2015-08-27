@@ -15,22 +15,22 @@ struct Position_Report_based_on_two_balise_groups_Core
     // in the position report.       
     // Packet Number = 1
 
-    uint16_t  L_PACKET;         // # 13
-    uint32_t  Q_SCALE;          // # 2
-    uint32_t  NID_LRBG;         // # 24
-    uint32_t  NID_PRVLRBG;      // # 24
-    uint16_t  D_LRBG;           // # 15
-    uint32_t  Q_DIRLRBG;        // # 2
-    uint32_t  Q_DLRBG;          // # 2
-    uint16_t  L_DOUBTOVER;      // # 15
-    uint16_t  L_DOUBTUNDER;     // # 15
-    uint32_t  Q_LENGTH;         // # 2
-    uint16_t  L_TRAININT;       // # 15
-    uint8_t   V_TRAIN;          // # 7
-    uint32_t  Q_DIRTRAIN;       // # 2
-    uint32_t  M_MODE;           // # 4
-    uint32_t  M_LEVEL;          // # 3
-    uint8_t   NID_NTC;          // # 8
+    uint64_t  L_PACKET;         // # 13
+    uint64_t  Q_SCALE;          // # 2
+    uint64_t  NID_LRBG;         // # 24
+    uint64_t  NID_PRVLRBG;      // # 24
+    uint64_t  D_LRBG;           // # 15
+    uint64_t  Q_DIRLRBG;        // # 2
+    uint64_t  Q_DLRBG;          // # 2
+    uint64_t  L_DOUBTOVER;      // # 15
+    uint64_t  L_DOUBTUNDER;     // # 15
+    uint64_t  Q_LENGTH;         // # 2
+    uint64_t  L_TRAININT;       // # 15
+    uint64_t   V_TRAIN;          // # 7
+    uint64_t  Q_DIRTRAIN;       // # 2
+    uint64_t  M_MODE;           // # 4
+    uint64_t  M_LEVEL;          // # 3
+    uint64_t   NID_NTC;          // # 8
 };
 
 #ifdef __cplusplus

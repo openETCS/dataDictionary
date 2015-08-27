@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Stop_Shunting_on_desk_opening_UpperBitsNotSet(const Stop_Shunting_on_desk_opening_Core* p)
 {
@@ -23,7 +24,7 @@ int Stop_Shunting_on_desk_opening_UpperBitsNotSet(const Stop_Shunting_on_desk_op
 
 int Stop_Shunting_on_desk_opening_Encoder(Bitstream* stream, const Stop_Shunting_on_desk_opening_Core* p)
 {
-    if (NormalBitstream(stream, STOP_SHUNTING_ON_DESK_OPENING_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, STOP_SHUNTING_ON_DESK_OPENING_CORE_BITSIZE))
     {
         if (Stop_Shunting_on_desk_opening_UpperBitsNotSet(p))
         {
@@ -51,7 +52,7 @@ int Stop_Shunting_on_desk_opening_Encoder(Bitstream* stream, const Stop_Shunting
 
 int Stop_Shunting_on_desk_opening_Decoder(Bitstream* stream, Stop_Shunting_on_desk_opening_Core* p)
 {
-    if (NormalBitstream(stream, STOP_SHUNTING_ON_DESK_OPENING_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, STOP_SHUNTING_ON_DESK_OPENING_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

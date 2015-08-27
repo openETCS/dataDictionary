@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Radio_Network_registration_UpperBitsNotSet(const Radio_Network_registration_Core* p)
 {
@@ -24,7 +25,7 @@ int Radio_Network_registration_UpperBitsNotSet(const Radio_Network_registration_
 
 int Radio_Network_registration_Encoder(Bitstream* stream, const Radio_Network_registration_Core* p)
 {
-    if (NormalBitstream(stream, RADIO_NETWORK_REGISTRATION_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, RADIO_NETWORK_REGISTRATION_CORE_BITSIZE))
     {
         if (Radio_Network_registration_UpperBitsNotSet(p))
         {
@@ -54,7 +55,7 @@ int Radio_Network_registration_Encoder(Bitstream* stream, const Radio_Network_re
 
 int Radio_Network_registration_Decoder(Bitstream* stream, Radio_Network_registration_Core* p)
 {
-    if (NormalBitstream(stream, RADIO_NETWORK_REGISTRATION_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, RADIO_NETWORK_REGISTRATION_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

@@ -7,8 +7,8 @@
 struct Axle_Load_Speed_Profile_Core_2_1
 {
 
-    uint8_t   M_AXLELOADCAT_k_m;// # 7
-    uint8_t   V_AXLELOAD_k_m;   // # 7
+    uint64_t  M_AXLELOADCAT;    // # 7
+    uint64_t   V_AXLELOAD;       // # 7
 };
 
 #ifdef __cplusplus
@@ -18,8 +18,8 @@ struct Axle_Load_Speed_Profile_Core_2_1
 inline std::ostream& operator<<(std::ostream& stream, const Axle_Load_Speed_Profile_Core_2_1& p)
 {
     stream 
-       << +p.M_AXLELOADCAT_k_m << ','
-       << +p.V_AXLELOAD_k_m;
+       << +p.M_AXLELOADCAT << ','
+       << +p.V_AXLELOAD;
 
     return stream;
 }
@@ -28,8 +28,8 @@ inline bool operator==(const Axle_Load_Speed_Profile_Core_2_1& a, const Axle_Loa
 {
     bool status = true;
     
-    status = status && (a.M_AXLELOADCAT_k_m == b.M_AXLELOADCAT_k_m);
-    status = status && (a.V_AXLELOAD_k_m == b.V_AXLELOAD_k_m);
+    status = status && (a.M_AXLELOADCAT == b.M_AXLELOADCAT);
+    status = status && (a.V_AXLELOAD == b.V_AXLELOAD);
 
     return status;
 }
@@ -55,20 +55,20 @@ typedef struct Axle_Load_Speed_Profile_Core_2_1 Axle_Load_Speed_Profile_Core_2_1
       \separated(stream->addr + (0..stream->size-1), p);
 
     predicate Invariant(Axle_Load_Speed_Profile_Core_2_1* p) =
-      Invariant(p->M_AXLELOADCAT_k_m) &&
-      Invariant(p->V_AXLELOAD_k_m);
+      Invariant(p->M_AXLELOADCAT)     &&
+      Invariant(p->V_AXLELOAD);
 
     predicate ZeroInitialized(Axle_Load_Speed_Profile_Core_2_1* p) =
-      ZeroInitialized(p->M_AXLELOADCAT_k_m) &&
-      ZeroInitialized(p->V_AXLELOAD_k_m);
+      ZeroInitialized(p->M_AXLELOADCAT)     &&
+      ZeroInitialized(p->V_AXLELOAD);
 
     predicate EqualBits(Bitstream* stream, integer pos, Axle_Load_Speed_Profile_Core_2_1* p) =
-      EqualBits(stream, pos,       pos + 7,   p->M_AXLELOADCAT_k_m) &&
-      EqualBits(stream, pos + 7,   pos + 14,  p->V_AXLELOAD_k_m);
+      EqualBits(stream, pos,       pos + 7,   p->M_AXLELOADCAT)     &&
+      EqualBits(stream, pos + 7,   pos + 14,  p->V_AXLELOAD);
 
     predicate UpperBitsNotSet(Axle_Load_Speed_Profile_Core_2_1* p) =
-      UpperBitsNotSet(p->M_AXLELOADCAT_k_m,7)   &&
-      UpperBitsNotSet(p->V_AXLELOAD_k_m,   7);
+      UpperBitsNotSet(p->M_AXLELOADCAT,    7)   &&
+      UpperBitsNotSet(p->V_AXLELOAD,       7);
 
 */
 

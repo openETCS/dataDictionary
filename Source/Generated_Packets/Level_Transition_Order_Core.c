@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Level_Transition_Order_UpperBitsNotSet(const Level_Transition_Order_Core* p)
 {
@@ -36,7 +37,7 @@ int Level_Transition_Order_UpperBitsNotSet(const Level_Transition_Order_Core* p)
 
 int Level_Transition_Order_Encoder(Bitstream* stream, const Level_Transition_Order_Core* p)
 {
-    if (NormalBitstream(stream, LEVEL_TRANSITION_ORDER_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, LEVEL_TRANSITION_ORDER_CORE_BITSIZE))
     {
         if (Level_Transition_Order_UpperBitsNotSet(p))
         {
@@ -81,7 +82,7 @@ int Level_Transition_Order_Encoder(Bitstream* stream, const Level_Transition_Ord
 
 int Level_Transition_Order_Decoder(Bitstream* stream, Level_Transition_Order_Core* p)
 {
-    if (NormalBitstream(stream, LEVEL_TRANSITION_ORDER_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, LEVEL_TRANSITION_ORDER_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

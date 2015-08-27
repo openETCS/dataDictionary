@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int EOLM_Packet_UpperBitsNotSet(const EOLM_Packet_Core* p)
 {
@@ -29,7 +30,7 @@ int EOLM_Packet_UpperBitsNotSet(const EOLM_Packet_Core* p)
 
 int EOLM_Packet_Encoder(Bitstream* stream, const EOLM_Packet_Core* p)
 {
-    if (NormalBitstream(stream, EOLM_PACKET_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, EOLM_PACKET_CORE_BITSIZE))
     {
         if (EOLM_Packet_UpperBitsNotSet(p))
         {
@@ -69,7 +70,7 @@ int EOLM_Packet_Encoder(Bitstream* stream, const EOLM_Packet_Core* p)
 
 int EOLM_Packet_Decoder(Bitstream* stream, EOLM_Packet_Core* p)
 {
-    if (NormalBitstream(stream, EOLM_PACKET_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, EOLM_PACKET_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

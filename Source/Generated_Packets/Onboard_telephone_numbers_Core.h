@@ -11,8 +11,8 @@ struct Onboard_telephone_numbers_Core
     // Telephone numbers associated to the onboard equipment    
     // Packet Number = 3
 
-    uint16_t  L_PACKET;         // # 13
-    uint8_t   N_ITER_1;         // # 5
+    uint64_t  L_PACKET;         // # 13
+    uint64_t   N_ITER_1;         // # 5
     Onboard_telephone_numbers_Core_1   sub_1[31];
 };
 

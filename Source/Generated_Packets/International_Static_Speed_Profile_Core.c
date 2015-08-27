@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int International_Static_Speed_Profile_UpperBitsNotSet(const International_Static_Speed_Profile_Core* p)
 {
@@ -37,7 +38,7 @@ int International_Static_Speed_Profile_UpperBitsNotSet(const International_Stati
 
 int International_Static_Speed_Profile_Encoder(Bitstream* stream, const International_Static_Speed_Profile_Core* p)
 {
-    if (NormalBitstream(stream, INTERNATIONAL_STATIC_SPEED_PROFILE_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, INTERNATIONAL_STATIC_SPEED_PROFILE_CORE_BITSIZE))
     {
         if (International_Static_Speed_Profile_UpperBitsNotSet(p))
         {
@@ -83,7 +84,7 @@ int International_Static_Speed_Profile_Encoder(Bitstream* stream, const Internat
 
 int International_Static_Speed_Profile_Decoder(Bitstream* stream, International_Static_Speed_Profile_Core* p)
 {
-    if (NormalBitstream(stream, INTERNATIONAL_STATIC_SPEED_PROFILE_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, INTERNATIONAL_STATIC_SPEED_PROFILE_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

@@ -10,8 +10,8 @@ struct Level_23_transition_information_Core
     // Identity of the level 2/3 transition balise group   
     // Packet Number = 9
 
-    uint16_t  L_PACKET;         // # 13
-    uint32_t  NID_LTRBG;        // # 24
+    uint64_t  L_PACKET;         // # 13
+    uint64_t  NID_LTRBG;        // # 24
 };
 
 #ifdef __cplusplus

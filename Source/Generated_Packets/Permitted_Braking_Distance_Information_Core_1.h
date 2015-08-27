@@ -7,12 +7,12 @@
 struct Permitted_Braking_Distance_Information_Core_1
 {
 
-    uint16_t  D_PBD_k;          // # 15
-    uint8_t   Q_GDIR_k;         // # 1
-    uint8_t   G_PBDSR_k;        // # 8
-    uint8_t   Q_PBDSR_k;        // # 1
-    uint16_t  D_PBDSR_k;        // # 15
-    uint16_t  L_PBDSR_k;        // # 15
+    uint64_t  D_PBD;            // # 15
+    uint64_t  Q_GDIR;           // # 1
+    uint64_t   G_PBDSR;          // # 8
+    uint64_t  Q_PBDSR;          // # 1
+    uint64_t  D_PBDSR;          // # 15
+    uint64_t  L_PBDSR;          // # 15
 };
 
 #ifdef __cplusplus
@@ -22,12 +22,12 @@ struct Permitted_Braking_Distance_Information_Core_1
 inline std::ostream& operator<<(std::ostream& stream, const Permitted_Braking_Distance_Information_Core_1& p)
 {
     stream 
-       << +p.D_PBD_k << ','
-       << +p.Q_GDIR_k << ','
-       << +p.G_PBDSR_k << ','
-       << +p.Q_PBDSR_k << ','
-       << +p.D_PBDSR_k << ','
-       << +p.L_PBDSR_k;
+       << +p.D_PBD << ','
+       << +p.Q_GDIR << ','
+       << +p.G_PBDSR << ','
+       << +p.Q_PBDSR << ','
+       << +p.D_PBDSR << ','
+       << +p.L_PBDSR;
 
     return stream;
 }
@@ -36,12 +36,12 @@ inline bool operator==(const Permitted_Braking_Distance_Information_Core_1& a, c
 {
     bool status = true;
     
-    status = status && (a.D_PBD_k == b.D_PBD_k);
-    status = status && (a.Q_GDIR_k == b.Q_GDIR_k);
-    status = status && (a.G_PBDSR_k == b.G_PBDSR_k);
-    status = status && (a.Q_PBDSR_k == b.Q_PBDSR_k);
-    status = status && (a.D_PBDSR_k == b.D_PBDSR_k);
-    status = status && (a.L_PBDSR_k == b.L_PBDSR_k);
+    status = status && (a.D_PBD == b.D_PBD);
+    status = status && (a.Q_GDIR == b.Q_GDIR);
+    status = status && (a.G_PBDSR == b.G_PBDSR);
+    status = status && (a.Q_PBDSR == b.Q_PBDSR);
+    status = status && (a.D_PBDSR == b.D_PBDSR);
+    status = status && (a.L_PBDSR == b.L_PBDSR);
 
     return status;
 }
@@ -67,36 +67,36 @@ typedef struct Permitted_Braking_Distance_Information_Core_1 Permitted_Braking_D
       \separated(stream->addr + (0..stream->size-1), p);
 
     predicate Invariant(Permitted_Braking_Distance_Information_Core_1* p) =
-      Invariant(p->D_PBD_k)           &&
-      Invariant(p->Q_GDIR_k)          &&
-      Invariant(p->G_PBDSR_k)         &&
-      Invariant(p->Q_PBDSR_k)         &&
-      Invariant(p->D_PBDSR_k)         &&
-      Invariant(p->L_PBDSR_k);
+      Invariant(p->D_PBD)             &&
+      Invariant(p->Q_GDIR)            &&
+      Invariant(p->G_PBDSR)           &&
+      Invariant(p->Q_PBDSR)           &&
+      Invariant(p->D_PBDSR)           &&
+      Invariant(p->L_PBDSR);
 
     predicate ZeroInitialized(Permitted_Braking_Distance_Information_Core_1* p) =
-      ZeroInitialized(p->D_PBD_k)           &&
-      ZeroInitialized(p->Q_GDIR_k)          &&
-      ZeroInitialized(p->G_PBDSR_k)         &&
-      ZeroInitialized(p->Q_PBDSR_k)         &&
-      ZeroInitialized(p->D_PBDSR_k)         &&
-      ZeroInitialized(p->L_PBDSR_k);
+      ZeroInitialized(p->D_PBD)             &&
+      ZeroInitialized(p->Q_GDIR)            &&
+      ZeroInitialized(p->G_PBDSR)           &&
+      ZeroInitialized(p->Q_PBDSR)           &&
+      ZeroInitialized(p->D_PBDSR)           &&
+      ZeroInitialized(p->L_PBDSR);
 
     predicate EqualBits(Bitstream* stream, integer pos, Permitted_Braking_Distance_Information_Core_1* p) =
-      EqualBits(stream, pos,       pos + 15,  p->D_PBD_k)           &&
-      EqualBits(stream, pos + 15,  pos + 16,  p->Q_GDIR_k)          &&
-      EqualBits(stream, pos + 16,  pos + 24,  p->G_PBDSR_k)         &&
-      EqualBits(stream, pos + 24,  pos + 25,  p->Q_PBDSR_k)         &&
-      EqualBits(stream, pos + 25,  pos + 40,  p->D_PBDSR_k)         &&
-      EqualBits(stream, pos + 40,  pos + 55,  p->L_PBDSR_k);
+      EqualBits(stream, pos,       pos + 15,  p->D_PBD)             &&
+      EqualBits(stream, pos + 15,  pos + 16,  p->Q_GDIR)            &&
+      EqualBits(stream, pos + 16,  pos + 24,  p->G_PBDSR)           &&
+      EqualBits(stream, pos + 24,  pos + 25,  p->Q_PBDSR)           &&
+      EqualBits(stream, pos + 25,  pos + 40,  p->D_PBDSR)           &&
+      EqualBits(stream, pos + 40,  pos + 55,  p->L_PBDSR);
 
     predicate UpperBitsNotSet(Permitted_Braking_Distance_Information_Core_1* p) =
-      UpperBitsNotSet(p->D_PBD_k,          15)  &&
-      UpperBitsNotSet(p->Q_GDIR_k,         1)   &&
-      UpperBitsNotSet(p->G_PBDSR_k,        8)   &&
-      UpperBitsNotSet(p->Q_PBDSR_k,        1)   &&
-      UpperBitsNotSet(p->D_PBDSR_k,        15)  &&
-      UpperBitsNotSet(p->L_PBDSR_k,        15);
+      UpperBitsNotSet(p->D_PBD,            15)  &&
+      UpperBitsNotSet(p->Q_GDIR,           1)   &&
+      UpperBitsNotSet(p->G_PBDSR,          8)   &&
+      UpperBitsNotSet(p->Q_PBDSR,          1)   &&
+      UpperBitsNotSet(p->D_PBDSR,          15)  &&
+      UpperBitsNotSet(p->L_PBDSR,          15);
 
 */
 

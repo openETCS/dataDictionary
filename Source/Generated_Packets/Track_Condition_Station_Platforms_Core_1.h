@@ -7,10 +7,10 @@
 struct Track_Condition_Station_Platforms_Core_1
 {
 
-    uint16_t  D_TRACKCOND_k;    // # 15
-    uint16_t  L_TRACKCOND_k;    // # 15
-    uint8_t   M_PLATFORM_k;     // # 4
-    uint8_t   Q_PLATFORM_k;     // # 2
+    uint64_t  D_TRACKCOND;      // # 15
+    uint64_t  L_TRACKCOND;      // # 15
+    uint64_t  M_PLATFORM;       // # 4
+    uint64_t  Q_PLATFORM;       // # 2
 };
 
 #ifdef __cplusplus
@@ -20,10 +20,10 @@ struct Track_Condition_Station_Platforms_Core_1
 inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Station_Platforms_Core_1& p)
 {
     stream 
-       << +p.D_TRACKCOND_k << ','
-       << +p.L_TRACKCOND_k << ','
-       << +p.M_PLATFORM_k << ','
-       << +p.Q_PLATFORM_k;
+       << +p.D_TRACKCOND << ','
+       << +p.L_TRACKCOND << ','
+       << +p.M_PLATFORM << ','
+       << +p.Q_PLATFORM;
 
     return stream;
 }
@@ -32,10 +32,10 @@ inline bool operator==(const Track_Condition_Station_Platforms_Core_1& a, const 
 {
     bool status = true;
     
-    status = status && (a.D_TRACKCOND_k == b.D_TRACKCOND_k);
-    status = status && (a.L_TRACKCOND_k == b.L_TRACKCOND_k);
-    status = status && (a.M_PLATFORM_k == b.M_PLATFORM_k);
-    status = status && (a.Q_PLATFORM_k == b.Q_PLATFORM_k);
+    status = status && (a.D_TRACKCOND == b.D_TRACKCOND);
+    status = status && (a.L_TRACKCOND == b.L_TRACKCOND);
+    status = status && (a.M_PLATFORM == b.M_PLATFORM);
+    status = status && (a.Q_PLATFORM == b.Q_PLATFORM);
 
     return status;
 }
@@ -61,28 +61,28 @@ typedef struct Track_Condition_Station_Platforms_Core_1 Track_Condition_Station_
       \separated(stream->addr + (0..stream->size-1), p);
 
     predicate Invariant(Track_Condition_Station_Platforms_Core_1* p) =
-      Invariant(p->D_TRACKCOND_k)     &&
-      Invariant(p->L_TRACKCOND_k)     &&
-      Invariant(p->M_PLATFORM_k)      &&
-      Invariant(p->Q_PLATFORM_k);
+      Invariant(p->D_TRACKCOND)       &&
+      Invariant(p->L_TRACKCOND)       &&
+      Invariant(p->M_PLATFORM)        &&
+      Invariant(p->Q_PLATFORM);
 
     predicate ZeroInitialized(Track_Condition_Station_Platforms_Core_1* p) =
-      ZeroInitialized(p->D_TRACKCOND_k)     &&
-      ZeroInitialized(p->L_TRACKCOND_k)     &&
-      ZeroInitialized(p->M_PLATFORM_k)      &&
-      ZeroInitialized(p->Q_PLATFORM_k);
+      ZeroInitialized(p->D_TRACKCOND)       &&
+      ZeroInitialized(p->L_TRACKCOND)       &&
+      ZeroInitialized(p->M_PLATFORM)        &&
+      ZeroInitialized(p->Q_PLATFORM);
 
     predicate EqualBits(Bitstream* stream, integer pos, Track_Condition_Station_Platforms_Core_1* p) =
-      EqualBits(stream, pos,       pos + 15,  p->D_TRACKCOND_k)     &&
-      EqualBits(stream, pos + 15,  pos + 30,  p->L_TRACKCOND_k)     &&
-      EqualBits(stream, pos + 30,  pos + 34,  p->M_PLATFORM_k)      &&
-      EqualBits(stream, pos + 34,  pos + 36,  p->Q_PLATFORM_k);
+      EqualBits(stream, pos,       pos + 15,  p->D_TRACKCOND)       &&
+      EqualBits(stream, pos + 15,  pos + 30,  p->L_TRACKCOND)       &&
+      EqualBits(stream, pos + 30,  pos + 34,  p->M_PLATFORM)        &&
+      EqualBits(stream, pos + 34,  pos + 36,  p->Q_PLATFORM);
 
     predicate UpperBitsNotSet(Track_Condition_Station_Platforms_Core_1* p) =
-      UpperBitsNotSet(p->D_TRACKCOND_k,    15)  &&
-      UpperBitsNotSet(p->L_TRACKCOND_k,    15)  &&
-      UpperBitsNotSet(p->M_PLATFORM_k,     4)   &&
-      UpperBitsNotSet(p->Q_PLATFORM_k,     2);
+      UpperBitsNotSet(p->D_TRACKCOND,      15)  &&
+      UpperBitsNotSet(p->L_TRACKCOND,      15)  &&
+      UpperBitsNotSet(p->M_PLATFORM,       4)   &&
+      UpperBitsNotSet(p->Q_PLATFORM,       2);
 
 */
 

@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Position_Report_based_on_two_balise_groups_UpperBitsNotSet(const Position_Report_based_on_two_balise_groups_Core* p)
 {
@@ -43,7 +44,7 @@ int Position_Report_based_on_two_balise_groups_UpperBitsNotSet(const Position_Re
 
 int Position_Report_based_on_two_balise_groups_Encoder(Bitstream* stream, const Position_Report_based_on_two_balise_groups_Core* p)
 {
-    if (NormalBitstream(stream, POSITION_REPORT_BASED_ON_TWO_BALISE_GROUPS_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, POSITION_REPORT_BASED_ON_TWO_BALISE_GROUPS_CORE_BITSIZE))
     {
         if (Position_Report_based_on_two_balise_groups_UpperBitsNotSet(p))
         {
@@ -101,7 +102,7 @@ int Position_Report_based_on_two_balise_groups_Encoder(Bitstream* stream, const 
 
 int Position_Report_based_on_two_balise_groups_Decoder(Bitstream* stream, Position_Report_based_on_two_balise_groups_Core* p)
 {
-    if (NormalBitstream(stream, POSITION_REPORT_BASED_ON_TWO_BALISE_GROUPS_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, POSITION_REPORT_BASED_ON_TWO_BALISE_GROUPS_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Packet_for_sending_plain_text_messages_UpperBitsNotSet(const Packet_for_sending_plain_text_messages_Core* p)
 {
@@ -55,7 +56,7 @@ int Packet_for_sending_plain_text_messages_UpperBitsNotSet(const Packet_for_send
 
 int Packet_for_sending_plain_text_messages_Encoder(Bitstream* stream, const Packet_for_sending_plain_text_messages_Core* p)
 {
-    if (NormalBitstream(stream, PACKET_FOR_SENDING_PLAIN_TEXT_MESSAGES_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, PACKET_FOR_SENDING_PLAIN_TEXT_MESSAGES_CORE_BITSIZE))
     {
         if (Packet_for_sending_plain_text_messages_UpperBitsNotSet(p))
         {
@@ -125,7 +126,7 @@ int Packet_for_sending_plain_text_messages_Encoder(Bitstream* stream, const Pack
 
 int Packet_for_sending_plain_text_messages_Decoder(Bitstream* stream, Packet_for_sending_plain_text_messages_Core* p)
 {
-    if (NormalBitstream(stream, PACKET_FOR_SENDING_PLAIN_TEXT_MESSAGES_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, PACKET_FOR_SENDING_PLAIN_TEXT_MESSAGES_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

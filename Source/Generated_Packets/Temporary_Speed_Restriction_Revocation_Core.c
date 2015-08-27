@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Temporary_Speed_Restriction_Revocation_UpperBitsNotSet(const Temporary_Speed_Restriction_Revocation_Core* p)
 {
@@ -24,7 +25,7 @@ int Temporary_Speed_Restriction_Revocation_UpperBitsNotSet(const Temporary_Speed
 
 int Temporary_Speed_Restriction_Revocation_Encoder(Bitstream* stream, const Temporary_Speed_Restriction_Revocation_Core* p)
 {
-    if (NormalBitstream(stream, TEMPORARY_SPEED_RESTRICTION_REVOCATION_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, TEMPORARY_SPEED_RESTRICTION_REVOCATION_CORE_BITSIZE))
     {
         if (Temporary_Speed_Restriction_Revocation_UpperBitsNotSet(p))
         {
@@ -54,7 +55,7 @@ int Temporary_Speed_Restriction_Revocation_Encoder(Bitstream* stream, const Temp
 
 int Temporary_Speed_Restriction_Revocation_Decoder(Bitstream* stream, Temporary_Speed_Restriction_Revocation_Core* p)
 {
-    if (NormalBitstream(stream, TEMPORARY_SPEED_RESTRICTION_REVOCATION_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, TEMPORARY_SPEED_RESTRICTION_REVOCATION_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

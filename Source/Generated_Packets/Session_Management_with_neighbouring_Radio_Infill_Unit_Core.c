@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Session_Management_with_neighbouring_Radio_Infill_Unit_UpperBitsNotSet(const Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p)
 {
@@ -27,7 +28,7 @@ int Session_Management_with_neighbouring_Radio_Infill_Unit_UpperBitsNotSet(const
 
 int Session_Management_with_neighbouring_Radio_Infill_Unit_Encoder(Bitstream* stream, const Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p)
 {
-    if (NormalBitstream(stream, SESSION_MANAGEMENT_WITH_NEIGHBOURING_RADIO_INFILL_UNIT_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, SESSION_MANAGEMENT_WITH_NEIGHBOURING_RADIO_INFILL_UNIT_CORE_BITSIZE))
     {
         if (Session_Management_with_neighbouring_Radio_Infill_Unit_UpperBitsNotSet(p))
         {
@@ -63,7 +64,7 @@ int Session_Management_with_neighbouring_Radio_Infill_Unit_Encoder(Bitstream* st
 
 int Session_Management_with_neighbouring_Radio_Infill_Unit_Decoder(Bitstream* stream, Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p)
 {
-    if (NormalBitstream(stream, SESSION_MANAGEMENT_WITH_NEIGHBOURING_RADIO_INFILL_UNIT_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, SESSION_MANAGEMENT_WITH_NEIGHBOURING_RADIO_INFILL_UNIT_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

@@ -7,8 +7,8 @@
 struct Position_Report_Parameters_Core_1
 {
 
-    uint16_t  D_LOC_k;          // # 15
-    uint8_t   Q_LGTLOC_k;       // # 1
+    uint64_t  D_LOC;            // # 15
+    uint64_t  Q_LGTLOC;         // # 1
 };
 
 #ifdef __cplusplus
@@ -18,8 +18,8 @@ struct Position_Report_Parameters_Core_1
 inline std::ostream& operator<<(std::ostream& stream, const Position_Report_Parameters_Core_1& p)
 {
     stream 
-       << +p.D_LOC_k << ','
-       << +p.Q_LGTLOC_k;
+       << +p.D_LOC << ','
+       << +p.Q_LGTLOC;
 
     return stream;
 }
@@ -28,8 +28,8 @@ inline bool operator==(const Position_Report_Parameters_Core_1& a, const Positio
 {
     bool status = true;
     
-    status = status && (a.D_LOC_k == b.D_LOC_k);
-    status = status && (a.Q_LGTLOC_k == b.Q_LGTLOC_k);
+    status = status && (a.D_LOC == b.D_LOC);
+    status = status && (a.Q_LGTLOC == b.Q_LGTLOC);
 
     return status;
 }
@@ -55,20 +55,20 @@ typedef struct Position_Report_Parameters_Core_1 Position_Report_Parameters_Core
       \separated(stream->addr + (0..stream->size-1), p);
 
     predicate Invariant(Position_Report_Parameters_Core_1* p) =
-      Invariant(p->D_LOC_k)           &&
-      Invariant(p->Q_LGTLOC_k);
+      Invariant(p->D_LOC)             &&
+      Invariant(p->Q_LGTLOC);
 
     predicate ZeroInitialized(Position_Report_Parameters_Core_1* p) =
-      ZeroInitialized(p->D_LOC_k)           &&
-      ZeroInitialized(p->Q_LGTLOC_k);
+      ZeroInitialized(p->D_LOC)             &&
+      ZeroInitialized(p->Q_LGTLOC);
 
     predicate EqualBits(Bitstream* stream, integer pos, Position_Report_Parameters_Core_1* p) =
-      EqualBits(stream, pos,       pos + 15,  p->D_LOC_k)           &&
-      EqualBits(stream, pos + 15,  pos + 16,  p->Q_LGTLOC_k);
+      EqualBits(stream, pos,       pos + 15,  p->D_LOC)             &&
+      EqualBits(stream, pos + 15,  pos + 16,  p->Q_LGTLOC);
 
     predicate UpperBitsNotSet(Position_Report_Parameters_Core_1* p) =
-      UpperBitsNotSet(p->D_LOC_k,          15)  &&
-      UpperBitsNotSet(p->Q_LGTLOC_k,       1);
+      UpperBitsNotSet(p->D_LOC,            15)  &&
+      UpperBitsNotSet(p->Q_LGTLOC,         1);
 
 */
 

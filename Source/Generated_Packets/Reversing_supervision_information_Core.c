@@ -3,6 +3,7 @@
 #include "UpperBitsNotSet.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
+#include "Bitstream_Normal.h"
 
 int Reversing_supervision_information_UpperBitsNotSet(const Reversing_supervision_information_Core* p)
 {
@@ -26,7 +27,7 @@ int Reversing_supervision_information_UpperBitsNotSet(const Reversing_supervisio
 
 int Reversing_supervision_information_Encoder(Bitstream* stream, const Reversing_supervision_information_Core* p)
 {
-    if (NormalBitstream(stream, REVERSING_SUPERVISION_INFORMATION_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, REVERSING_SUPERVISION_INFORMATION_CORE_BITSIZE))
     {
         if (Reversing_supervision_information_UpperBitsNotSet(p))
         {
@@ -60,7 +61,7 @@ int Reversing_supervision_information_Encoder(Bitstream* stream, const Reversing
 
 int Reversing_supervision_information_Decoder(Bitstream* stream, Reversing_supervision_information_Core* p)
 {
-    if (NormalBitstream(stream, REVERSING_SUPERVISION_INFORMATION_CORE_BITSIZE))
+    if (Bitstream_Normal(stream, REVERSING_SUPERVISION_INFORMATION_CORE_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 

@@ -7,9 +7,9 @@
 struct Track_Condition_Core_1
 {
 
-    uint16_t  D_TRACKCOND_k;    // # 15
-    uint16_t  L_TRACKCOND_k;    // # 15
-    uint8_t   M_TRACKCOND_k;    // # 4
+    uint64_t  D_TRACKCOND;      // # 15
+    uint64_t  L_TRACKCOND;      // # 15
+    uint64_t  M_TRACKCOND;      // # 4
 };
 
 #ifdef __cplusplus
@@ -19,9 +19,9 @@ struct Track_Condition_Core_1
 inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Core_1& p)
 {
     stream 
-       << +p.D_TRACKCOND_k << ','
-       << +p.L_TRACKCOND_k << ','
-       << +p.M_TRACKCOND_k;
+       << +p.D_TRACKCOND << ','
+       << +p.L_TRACKCOND << ','
+       << +p.M_TRACKCOND;
 
     return stream;
 }
@@ -30,9 +30,9 @@ inline bool operator==(const Track_Condition_Core_1& a, const Track_Condition_Co
 {
     bool status = true;
     
-    status = status && (a.D_TRACKCOND_k == b.D_TRACKCOND_k);
-    status = status && (a.L_TRACKCOND_k == b.L_TRACKCOND_k);
-    status = status && (a.M_TRACKCOND_k == b.M_TRACKCOND_k);
+    status = status && (a.D_TRACKCOND == b.D_TRACKCOND);
+    status = status && (a.L_TRACKCOND == b.L_TRACKCOND);
+    status = status && (a.M_TRACKCOND == b.M_TRACKCOND);
 
     return status;
 }
@@ -58,24 +58,24 @@ typedef struct Track_Condition_Core_1 Track_Condition_Core_1;
       \separated(stream->addr + (0..stream->size-1), p);
 
     predicate Invariant(Track_Condition_Core_1* p) =
-      Invariant(p->D_TRACKCOND_k)     &&
-      Invariant(p->L_TRACKCOND_k)     &&
-      Invariant(p->M_TRACKCOND_k);
+      Invariant(p->D_TRACKCOND)       &&
+      Invariant(p->L_TRACKCOND)       &&
+      Invariant(p->M_TRACKCOND);
 
     predicate ZeroInitialized(Track_Condition_Core_1* p) =
-      ZeroInitialized(p->D_TRACKCOND_k)     &&
-      ZeroInitialized(p->L_TRACKCOND_k)     &&
-      ZeroInitialized(p->M_TRACKCOND_k);
+      ZeroInitialized(p->D_TRACKCOND)       &&
+      ZeroInitialized(p->L_TRACKCOND)       &&
+      ZeroInitialized(p->M_TRACKCOND);
 
     predicate EqualBits(Bitstream* stream, integer pos, Track_Condition_Core_1* p) =
-      EqualBits(stream, pos,       pos + 15,  p->D_TRACKCOND_k)     &&
-      EqualBits(stream, pos + 15,  pos + 30,  p->L_TRACKCOND_k)     &&
-      EqualBits(stream, pos + 30,  pos + 34,  p->M_TRACKCOND_k);
+      EqualBits(stream, pos,       pos + 15,  p->D_TRACKCOND)       &&
+      EqualBits(stream, pos + 15,  pos + 30,  p->L_TRACKCOND)       &&
+      EqualBits(stream, pos + 30,  pos + 34,  p->M_TRACKCOND);
 
     predicate UpperBitsNotSet(Track_Condition_Core_1* p) =
-      UpperBitsNotSet(p->D_TRACKCOND_k,    15)  &&
-      UpperBitsNotSet(p->L_TRACKCOND_k,    15)  &&
-      UpperBitsNotSet(p->M_TRACKCOND_k,    4);
+      UpperBitsNotSet(p->D_TRACKCOND,      15)  &&
+      UpperBitsNotSet(p->L_TRACKCOND,      15)  &&
+      UpperBitsNotSet(p->M_TRACKCOND,      4);
 
 */
 

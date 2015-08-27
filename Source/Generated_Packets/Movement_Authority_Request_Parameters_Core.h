@@ -11,11 +11,11 @@ struct Movement_Authority_Request_Parameters_Core
     // often the train has to ask for a movement authority. 
     // Packet Number = 57
 
-    uint32_t  Q_DIR;            // # 2
-    uint16_t  L_PACKET;         // # 13
-    uint8_t   T_MAR;            // # 8
-    uint16_t  T_TIMEOUTRQST;    // # 10
-    uint8_t   T_CYCRQST;        // # 8
+    uint64_t  Q_DIR;            // # 2
+    uint64_t  L_PACKET;         // # 13
+    uint64_t   T_MAR;            // # 8
+    uint64_t  T_TIMEOUTRQST;    // # 10
+    uint64_t   T_CYCRQST;        // # 8
 };
 
 #ifdef __cplusplus
