@@ -105,7 +105,7 @@ bool Eurobalise_Telegram::decode(Bitstream& stream)
             return false;
         }
 
-        current_pos += (*ptr).length();
+        current_pos += ptr->length();
     }
 
     return true;
