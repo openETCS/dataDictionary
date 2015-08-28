@@ -6,7 +6,6 @@ export BITWALKER=$(TOPDIR)/Bitwalker
 export GENERATED_PACKETS=$(TOPDIR)/Generated_Packets
 export GENERATED_MESSAGES=$(TOPDIR)/Generated_Messages
 
-
 it: test issue31
 
 include $(TOPDIR)/Makefile.template
