@@ -28,7 +28,7 @@ void error(const char *msg)
 void  INThandler(int sig)
 {
     signal(sig, SIG_IGN);
-    printf("Do you really want to quit? [y/n] ");
+    std::cout << "Do you really want to quit? [y/n] ";
 
     char  c = getchar();
 
@@ -50,8 +50,6 @@ int main(int argc, char *argv[])
 
     unsigned char buffer[2048];
     unsigned char targetbuffer[2048];
-    struct sockaddr_in serv_addr, cli_addr;
-    int n;
 
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -60,27 +58,31 @@ int main(int argc, char *argv[])
         error("ERROR opening socket\n");
     }
 
-    bzero((char *) &serv_addr, sizeof(serv_addr));
+    struct sockaddr_in serv_addr;
+
+    bzero(&serv_addr, sizeof(serv_addr));
 
     const int portno = 15010;
+
     //portno = atoi(argv[1]);
     // setting fixed port number
 
     serv_addr.sin_family = AF_INET;
+
     serv_addr.sin_addr.s_addr = INADDR_ANY;
+
     serv_addr.sin_port = htons(portno);
 
-    if (bind(sockfd, (struct sockaddr *) &serv_addr,
-             sizeof(serv_addr)) < 0)
+    if (bind(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0)
     {
         error("ERROR on binding\n");
     }
 
     listen(sockfd, 5);
+
+    struct sockaddr_in cli_addr;
     socklen_t clilen = sizeof(cli_addr);
-    newsockfd = accept(sockfd,
-                       (struct sockaddr *) &cli_addr,
-                       &clilen);
+    newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);
 
     if (newsockfd < 0)
     {
@@ -89,39 +91,33 @@ int main(int argc, char *argv[])
 
     bzero(buffer, 256);
 
-    Bitstream stream;
-    Bitstream_Init(&stream, targetbuffer, 2048, 0);
-
-    printf("BTM Server listening to port %d started.\n", portno);
+    std::cout << "BTM Server listening to port " << portno << " started.\n";
 
     while (1)
     {
-        stream.bitpos = 0;
-        n = read(newsockfd, buffer, 2048);
+        int n = read(newsockfd, buffer, 2048);
 
         if (n < 0)
         {
             error("ERROR reading from socket");
         }
 
-        printf("Here is the message: %s\n", buffer);
+        std::cout << "Here is the message: " << buffer << std::endl;
         //unsigned char *pos = targetbuffer;
-        printf ("Target buffer: Länge: %i ", n);
+        std::cout << "Target buffer: length: " << n;
 
         for (int i = 1; i <= n / 2 - 1; i++)
         {
-            printf(" (%i %i) ", buffer[2 * i - 1], buffer[2 * i]);
+            std::cout << " (" <<  buffer[2 * i - 1] << "," <<  buffer[2 * i] << ")";
 
-            int tmp = buffer[2 * i - 1];
-            tmp -= 48;
+            int tmp = buffer[2 * i - 1] - 48;
 
             if (tmp > 9)
             {
                 tmp -= 7;
             }
 
-            int tmp2 = buffer[2 * i];
-            tmp2 -= 48;
+            int tmp2 = buffer[2 * i] - 48;
 
             if (tmp2 > 9)
             {
@@ -130,24 +126,26 @@ int main(int argc, char *argv[])
 
             targetbuffer[i - 1] = tmp * 16 + tmp2;
 
-            printf("  %i ", targetbuffer[i - 1]);
+            std::cout << "  " << targetbuffer[i - 1] << " ";
 
             //sscanf(pos, "%2hhx", &buffer[i]);
             //pos += 2* sizeof(char);
             //targetbuffer[i] << std::hex << buffer[i];
         }
 
-        printf("\n");
+        std::cout << std::endl;
         int m = (n - 2) * 4;
 
         std::cout << m << std::endl;
 
+        Bitstream stream;
+        Bitstream_Init(&stream, targetbuffer, 2048, 0);
         print(stream, 0, m);
         std::cout << std::endl;
 
-        Eurobalise_Telegram telegram;
-
         std::cout << " Decoding Eurobalise Telegram." << std::endl;
+
+        Eurobalise_Telegram telegram;
         telegram.decode(stream);
 
         std::cout << " Decoder Output: " << telegram << std::endl;
@@ -164,10 +162,11 @@ int main(int argc, char *argv[])
             error("ERROR writing to socket");
         }
 
-
     }
 
     close(newsockfd);
     close(sockfd);
-    return 0;
+
+    return EXIT_SUCCESS;
 }
+
