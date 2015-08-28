@@ -1,5 +1,6 @@
 /* A simple server in the internet domain using TCP
    The port number is passed as an argument */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -16,7 +17,6 @@
 #include "UpperBitsNotSet.h"
 #include "print_bits.h"
 
-
 int sockfd, newsockfd;
 
 void error(const char *msg)
@@ -27,11 +27,10 @@ void error(const char *msg)
 
 void  INThandler(int sig)
 {
-    char  c;
     signal(sig, SIG_IGN);
     printf("Do you really want to quit? [y/n] ");
 
-    c = getchar();
+    char  c = getchar();
 
     if (c == 'y' || c == 'Y')
     {
@@ -49,8 +48,6 @@ int main(int argc, char *argv[])
 {
     signal(SIGINT, INThandler);
 
-    int portno;
-    socklen_t clilen;
     unsigned char buffer[2048];
     unsigned char targetbuffer[2048];
     struct sockaddr_in serv_addr, cli_addr;
@@ -64,9 +61,11 @@ int main(int argc, char *argv[])
     }
 
     bzero((char *) &serv_addr, sizeof(serv_addr));
+
+    const int portno = 15010;
     //portno = atoi(argv[1]);
     // setting fixed port number
-    portno = 15010;
+
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_addr.s_addr = INADDR_ANY;
     serv_addr.sin_port = htons(portno);
@@ -78,7 +77,7 @@ int main(int argc, char *argv[])
     }
 
     listen(sockfd, 5);
-    clilen = sizeof(cli_addr);
+    socklen_t clilen = sizeof(cli_addr);
     newsockfd = accept(sockfd,
                        (struct sockaddr *) &cli_addr,
                        &clilen);
