@@ -1,11 +1,17 @@
 
+MAKEFLAGS += --no-print-directory --silent
+
+TOPDIR=..
+export BITWALKER=$(TOPDIR)/Bitwalker
+export GENERATED_PACKETS=$(TOPDIR)/Generated_Packets
+export TELEGRAM=$(TOPDIR)/Message_Telegram
+
+it: server_BTM
+
+include ../Makefile.template
+
 CPPFLAGS = -I../Source/Bitwalker
 CXXFLAGS = -Wall -std=c++11
-
-export BITWALKER=../Source/Bitwalker
-export TELEGRAM=../Source/Message_Telegram
-export GENERATED_PACKETS=../Source/Generated_Packets
-
 
 VPATH=$(TELEGRAM)
 
@@ -24,7 +30,7 @@ server_BTM: server_BTM.o Eurobalise_Telegram.o Telegram_Header_Encoder.o Telegra
 
 
 
-clean:
+clean::
 	$(RM) server_BTM
 	$(RM) *.o
 
