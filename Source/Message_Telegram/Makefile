@@ -10,6 +10,10 @@ it: test issue31
 
 include $(TOPDIR)/Makefile.template
 
+lib:	$(GENERATED_MESSAGES)/libgenerated_messages.a\
+	$(GENERATED_PACKETS)/libgenerated_packets.a\
+	$(BITWALKER)/libBitwalker.a
+
 #CXX = c++
 CPPFLAGS += -I.
 CXXFLAGS += -std=c++11
@@ -23,7 +27,8 @@ LDFLAGS += -L$(GENERATED_PACKETS) -lgenerated_packets
 CPPFLAGS += -I$(BITWALKER)
 LDFLAGS += -L$(BITWALKER) -lBitwalker
 
-test:	decoder_test encoder_test\
+test:	lib\
+	decoder_test encoder_test\
 	conditional_encoder_test conditional_decoder_test\
 	test_messages
 	./encoder_test
@@ -32,7 +37,7 @@ test:	decoder_test encoder_test\
 	./conditional_decoder_test
 	./test_messages
 
-issue31: test_issue31_1 test_issue31_2 test_issue31_3
+issue31: lib test_issue31_1 test_issue31_2 test_issue31_3
 	./test_issue31_1
 	./test_issue31_2
 	./test_issue31_3
