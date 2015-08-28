@@ -29,6 +29,8 @@ server_BTM: server_BTM.o Eurobalise_Telegram.o Telegram_Header_Encoder.o Telegra
 	$(CXX) -o $@ $+ $(LDFLAGS)
 
 
+format:
+	$(ASTYLE) *.cpp *.c
 
 clean::
 	$(RM) server_BTM
