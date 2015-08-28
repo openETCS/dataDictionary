@@ -4,30 +4,33 @@ MAKEFLAGS += --no-print-directory --silent
 TOPDIR=..
 export BITWALKER=$(TOPDIR)/Bitwalker
 export GENERATED_PACKETS=$(TOPDIR)/Generated_Packets
-export TELEGRAM=$(TOPDIR)/Message_Telegram
+export MESSAGE_TELEGRAM=$(TOPDIR)/Message_Telegram
 
-it: server_BTM
+
+it: lib server_BTM
+
+lib:    $(MESSAGE_TELEGRAM)/libmessage_telegram.a\
+        $(GENERATED_PACKETS)/libgenerated_packets.a\
+        $(BITWALKER)/libBitwalker.a
 
 include ../Makefile.template
 
 CPPFLAGS = -I../Source/Bitwalker
 CXXFLAGS = -Wall -std=c++11
 
-VPATH=$(TELEGRAM)
-
-CPPFLAGS += -I$(TELEGRAM)
+CPPFLAGS += -I$(MESSAGE_TELEGRAM)
+LDFLAGS += -L$(MESSAGE_TELEGRAM) -lmessage_telegram
 
 CPPFLAGS += -I$(GENERATED_PACKETS)
 LDFLAGS += -L$(GENERATED_PACKETS) -lgenerated_packets
-
 
 CPPFLAGS += -I$(BITWALKER)
 LDFLAGS += -L$(BITWALKER) -lBitwalker
 
 
-server_BTM: server_BTM.o Eurobalise_Telegram.o Telegram_Header_Encoder.o Telegram_Header_Decoder.o Packet_Header.o Telegram_Header_UpperBitsNotSet.o print_bits.o
+server_BTM: server_BTM.o
 	$(CXX) -o $@ $+ $(LDFLAGS)
-
+	$(RM) $<
 
 format:
 	$(ASTYLE) *.cpp *.c
