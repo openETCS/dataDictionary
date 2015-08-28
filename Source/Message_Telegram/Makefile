@@ -10,7 +10,8 @@ it: test issue31
 
 include $(TOPDIR)/Makefile.template
 
-lib:	$(GENERATED_MESSAGES)/libgenerated_messages.a\
+lib:	libmessage_telegram.a\
+	$(GENERATED_MESSAGES)/libgenerated_messages.a\
 	$(GENERATED_PACKETS)/libgenerated_packets.a\
 	$(BITWALKER)/libBitwalker.a
 
@@ -53,12 +54,16 @@ OBJ += Packet_Header.o\
 	Telegram_Header_UpperBitsNotSet.o\
 	Telegram_Header_Encoder.o
 
+libmessage_telegram.a : $(OBJ)
+	ar cru  $@ $^
+	ranlib  $@
+
+
 print_bits: print_bits.o
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $+
 
 bits: print_bits
 	./print_bits
-	
 
 decoder_test: decoder_test.o $(OBJ)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $+ $(LDFLAGS)
@@ -91,6 +96,8 @@ format: FORCE
 	$(ASTYLE) $(FORMAT)
 
 clean::
+	@$(RM) *.o
+	@$(RM) *.a
 	@$(RM) print_bits
 	@$(RM) decoder_test
 	@$(RM) encoder_test
