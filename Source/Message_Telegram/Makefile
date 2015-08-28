@@ -16,8 +16,10 @@ lib:	libmessage_telegram.a\
 	$(BITWALKER)/libBitwalker.a
 
 #CXX = c++
-CPPFLAGS += -I.
 CXXFLAGS += -std=c++11
+
+CPPFLAGS += -I.
+LDFLAGS += -L. -lmessage_telegram
 
 CPPFLAGS += -I$(GENERATED_MESSAGES)
 LDFLAGS += -L$(GENERATED_MESSAGES) -lgenerated_messages
@@ -54,40 +56,50 @@ OBJ += Packet_Header.o\
 	Telegram_Header_UpperBitsNotSet.o\
 	Telegram_Header_Encoder.o
 
+
 libmessage_telegram.a : $(OBJ)
 	ar cru  $@ $^
 	ranlib  $@
-
+	$(RM) $(OBJ)
 
 print_bits: print_bits.o
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $+
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $<
+	$(RM) $<
 
 bits: print_bits
 	./print_bits
 
-decoder_test: decoder_test.o $(OBJ)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $+ $(LDFLAGS)
+decoder_test: decoder_test.o
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $< $(LDFLAGS)
+	$(RM) $<
 
-encoder_test: encoder_test.o $(OBJ)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $+ $(LDFLAGS)
+encoder_test: encoder_test.o
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $< $(LDFLAGS)
+	$(RM) $<
 
-conditional_decoder_test: conditional_decoder_test.o $(OBJ)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $+ $(LDFLAGS)
+conditional_decoder_test: conditional_decoder_test.o
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $< $(LDFLAGS)
+	$(RM) $<
 
-conditional_encoder_test: conditional_encoder_test.o $(OBJ)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $+ $(LDFLAGS)
+conditional_encoder_test: conditional_encoder_test.o
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $< $(LDFLAGS)
+	$(RM) $<
 
-test_issue31_1: test_issue31_1.o $(OBJ) 
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $+ $(LDFLAGS)
+test_issue31_1: test_issue31_1.o
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $< $(LDFLAGS)
+	$(RM) $<
 
-test_issue31_2: test_issue31_2.o $(OBJ) 
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $+ $(LDFLAGS)
+test_issue31_2: test_issue31_2.o
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $< $(LDFLAGS)
+	$(RM) $<
 
-test_issue31_3: test_issue31_3.o $(OBJ)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $+ $(LDFLAGS)
+test_issue31_3: test_issue31_3.o
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $< $(LDFLAGS)
+	$(RM) $<
 
-test_messages: test_messages.o $(OBJ)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $+ $(LDFLAGS)
+test_messages: test_messages.o
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $< $(LDFLAGS)
+	$(RM) $<
 
 
 FORMAT := $(wildcard *.h) $(wildcard *.cpp) $(wildcard *.c)
