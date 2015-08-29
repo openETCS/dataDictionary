@@ -56,7 +56,7 @@ WP_BASE_FLAGS += -wp-model Typed+ref
 WP_BASE_FLAGS += -wp-driver $(TOPDIR)/BitTest.driver
 
 WP_PROVER_FLAGS += -wp-timeout $(WP_TIMEOUT)
-WP_PROVER_FLAGS += -wp-steps $(WP_ALT_ERGO_STEPS)
+#WP_PROVER_FLAGS += -wp-steps $(WP_ALT_ERGO_STEPS)
 WP_PROVER_FLAGS += -wp-script $(SCRIPT)
 WP_PROVER_FLAGS += -wp-coq-timeout $(WP_COQ_TIMEOUT)
 
