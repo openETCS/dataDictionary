@@ -91,9 +91,9 @@ export WPREPORT=$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS)
 %.gen:%.c FORCE
 	@$(WP) $(WP_FLAGS)  -wp-gen -wp-out $(patsubst %.c,%.wp, $<)  $< 
 
+
 %.why3:%.c FORCE
-	@$(WP) $(WP_FLAGS)  -wp-prover no_such_prover -wp-out $(patsubst %.c,%.wp, $<)  $< > /dev/null 2>&1
-	@ find $(patsubst %.c,%.wp, $<) -name "*.err" -exec rm {} \;
+	@($(WP) $(WP_FLAGS)  -wp-prover why3 -wp-gen  -wp-out $(patsubst %.c,%.wp, $<)  $<)
 
 %.why3ide:%.c FORCE
 	@($(WP) $(WP_FLAGS)  -wp-prover why3ide -wp-out $(patsubst %.c,%.wp, $<)  $< &)
