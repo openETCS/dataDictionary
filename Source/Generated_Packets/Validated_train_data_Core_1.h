@@ -7,7 +7,7 @@
 struct Validated_train_data_Core_1
 {
 
-    uint64_t  M_VOLTAGE;        // # 4
+    uint64_t   M_VOLTAGE;        // # 4
     uint64_t  NID_CTRACTION;    // # 10
 };
 

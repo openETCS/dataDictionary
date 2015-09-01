@@ -8,7 +8,7 @@ struct Gradient_Profile_Core_1
 {
 
     uint64_t  D_GRADIENT;       // # 15
-    uint64_t  Q_GDIR;           // # 1
+    uint64_t   Q_GDIR;           // # 1
     uint64_t   G_A;              // # 8
 };
 

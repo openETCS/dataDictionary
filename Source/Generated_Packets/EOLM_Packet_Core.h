@@ -10,13 +10,13 @@ struct EOLM_Packet_Core
     // This packet announces a loop.      
     // Packet Number = 134
 
-    uint64_t  Q_DIR;            // # 2
+    uint64_t   Q_DIR;            // # 2
     uint64_t  L_PACKET;         // # 13
-    uint64_t  Q_SCALE;          // # 2
+    uint64_t   Q_SCALE;          // # 2
     uint64_t  NID_LOOP;         // # 14
     uint64_t  D_LOOP;           // # 15
     uint64_t  L_LOOP;           // # 15
-    uint64_t  Q_LOOPDIR;        // # 1
+    uint64_t   Q_LOOPDIR;        // # 1
     uint64_t   Q_SSCODE;         // # 4
 };
 

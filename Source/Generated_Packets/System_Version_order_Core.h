@@ -11,9 +11,9 @@ struct System_Version_order_Core
     // operated system version        
     // Packet Number = 2
 
-    uint64_t  Q_DIR;            // # 2
+    uint64_t   Q_DIR;            // # 2
     uint64_t  L_PACKET;         // # 13
-    uint64_t  M_VERSION;        // # 7
+    uint64_t   M_VERSION;        // # 7
 };
 
 #ifdef __cplusplus

@@ -10,7 +10,7 @@ struct International_Static_Speed_Profile_Core_2
 
     uint64_t  D_STATIC;         // # 15
     uint64_t   V_STATIC;         // # 7
-    uint64_t  Q_FRONT;          // # 1
+    uint64_t   Q_FRONT;          // # 1
     uint64_t   N_ITER_2_1;       // # 5
     International_Static_Speed_Profile_Core_2_1   sub_2_1[31];
 };

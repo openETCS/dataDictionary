@@ -11,9 +11,9 @@ struct Staff_Responsible_distance_Information_from_loop_Core
     // Information for trains in staff responsible mode    
     // Packet Number = 13
 
-    uint64_t  Q_DIR;            // # 2
+    uint64_t   Q_DIR;            // # 2
     uint64_t  L_PACKET;         // # 13
-    uint64_t  Q_SCALE;          // # 2
+    uint64_t   Q_SCALE;          // # 2
     uint64_t   Q_NEWCOUNTRY_0;   // # 1
     uint64_t  NID_C_0;          // # 10
     uint64_t  NID_BG_0;         // # 14

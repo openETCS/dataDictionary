@@ -10,9 +10,9 @@ struct Danger_for_Shunting_information_Core
     // Transmission of the aspect of a shunting signal   
     // Packet Number = 132
 
-    uint64_t  Q_DIR;            // # 2
+    uint64_t   Q_DIR;            // # 2
     uint64_t  L_PACKET;         // # 13
-    uint64_t  Q_ASPECT;         // # 1
+    uint64_t   Q_ASPECT;         // # 1
 };
 
 #ifdef __cplusplus

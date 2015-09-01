@@ -12,9 +12,9 @@ struct Conditional_Level_Transition_Order_Core
     // the highest priority level to the lowest one.   
     // Packet Number = 46
 
-    uint64_t  Q_DIR;            // # 2
+    uint64_t   Q_DIR;            // # 2
     uint64_t  L_PACKET;         // # 13
-    uint64_t  M_LEVELTR;        // # 3
+    uint64_t   M_LEVELTR;        // # 3
     uint64_t   NID_NTC;          // # 8
     uint64_t   N_ITER_1;         // # 5
     Conditional_Level_Transition_Order_Core_1   sub_1[31];

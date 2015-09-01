@@ -10,9 +10,9 @@ struct Repositioning_Information_Core
     // Transmission of the update of the current distance   
     // Packet Number = 16
 
-    uint64_t  Q_DIR;            // # 2
+    uint64_t   Q_DIR;            // # 2
     uint64_t  L_PACKET;         // # 13
-    uint64_t  Q_SCALE;          // # 2
+    uint64_t   Q_SCALE;          // # 2
     uint64_t  L_SECTION;        // # 15
 };
 

@@ -7,7 +7,7 @@
 struct Level_Transition_Order_Core_1
 {
 
-    uint64_t  M_LEVELTR;        // # 3
+    uint64_t   M_LEVELTR;        // # 3
     uint64_t   NID_NTC;          // # 8
     uint64_t  L_ACKLEVELTR;     // # 15
 };

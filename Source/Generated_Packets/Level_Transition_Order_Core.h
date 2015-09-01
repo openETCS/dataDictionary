@@ -13,11 +13,11 @@ struct Level_Transition_Order_Core
     // priority level to the lowest one.     
     // Packet Number = 41
 
-    uint64_t  Q_DIR;            // # 2
+    uint64_t   Q_DIR;            // # 2
     uint64_t  L_PACKET;         // # 13
-    uint64_t  Q_SCALE;          // # 2
+    uint64_t   Q_SCALE;          // # 2
     uint64_t  D_LEVELTR;        // # 15
-    uint64_t  M_LEVELTR;        // # 3
+    uint64_t   M_LEVELTR;        // # 3
     uint64_t   NID_NTC;          // # 8
     uint64_t  L_ACKLEVELTR;     // # 15
     uint64_t   N_ITER_1;         // # 5

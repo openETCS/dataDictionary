@@ -8,11 +8,11 @@ struct Linking_Core_1
 {
 
     uint64_t  D_LINK;           // # 15
-    uint64_t  Q_NEWCOUNTRY;     // # 1
+    uint64_t   Q_NEWCOUNTRY;     // # 1
     uint64_t  NID_C;            // # 10
     uint64_t  NID_BG;           // # 14
-    uint64_t  Q_LINKORIENTATION;// # 1
-    uint64_t  Q_LINKREACTION;   // # 2
+    uint64_t   Q_LINKORIENTATION;// # 1
+    uint64_t   Q_LINKREACTION;   // # 2
     uint64_t   Q_LOCACC;         // # 6
 };
 

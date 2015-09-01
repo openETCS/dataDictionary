@@ -12,12 +12,12 @@ struct Position_Report_Parameters_Core
     // often the position has to be reported.    
     // Packet Number = 58
 
-    uint64_t  Q_DIR;            // # 2
+    uint64_t   Q_DIR;            // # 2
     uint64_t  L_PACKET;         // # 13
-    uint64_t  Q_SCALE;          // # 2
+    uint64_t   Q_SCALE;          // # 2
     uint64_t   T_CYCLOC;         // # 8
     uint64_t  D_CYCLOC;         // # 15
-    uint64_t  M_LOC;            // # 3
+    uint64_t   M_LOC;            // # 3
     uint64_t   N_ITER_1;         // # 5
     Position_Report_Parameters_Core_1   sub_1[31];
 };

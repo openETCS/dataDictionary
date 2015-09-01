@@ -10,15 +10,15 @@ struct Level_Crossing_information_Core
     // Level Crossing information        
     // Packet Number = 88
 
-    uint64_t  Q_DIR;            // # 2
+    uint64_t   Q_DIR;            // # 2
     uint64_t  L_PACKET;         // # 13
-    uint64_t  Q_SCALE;          // # 2
+    uint64_t   Q_SCALE;          // # 2
     uint64_t   NID_LX;           // # 8
     uint64_t  D_LX;             // # 15
     uint64_t  L_LX;             // # 15
-    uint64_t  Q_LXSTATUS;       // # 1
+    uint64_t   Q_LXSTATUS;       // # 1
     uint64_t   V_LX;             // # 7
-    uint64_t  Q_STOPLX;         // # 1
+    uint64_t   Q_STOPLX;         // # 1
     uint64_t  L_STOPLX;         // # 15
 };
 

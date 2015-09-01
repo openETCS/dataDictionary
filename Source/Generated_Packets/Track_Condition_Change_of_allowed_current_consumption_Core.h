@@ -10,9 +10,9 @@ struct Track_Condition_Change_of_allowed_current_consumption_Core
     // The packet gives information about change of the allowed current consumption.
     // Packet Number = 40
 
-    uint64_t  Q_DIR;            // # 2
+    uint64_t   Q_DIR;            // # 2
     uint64_t  L_PACKET;         // # 13
-    uint64_t  Q_SCALE;          // # 2
+    uint64_t   Q_SCALE;          // # 2
     uint64_t  D_CURRENT;        // # 15
     uint64_t  M_CURRENT;        // # 10
 };

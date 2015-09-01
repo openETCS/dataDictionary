@@ -8,9 +8,9 @@ struct Permitted_Braking_Distance_Information_Core_1
 {
 
     uint64_t  D_PBD;            // # 15
-    uint64_t  Q_GDIR;           // # 1
+    uint64_t   Q_GDIR;           // # 1
     uint64_t   G_PBDSR;          // # 8
-    uint64_t  Q_PBDSR;          // # 1
+    uint64_t   Q_PBDSR;          // # 1
     uint64_t  D_PBDSR;          // # 15
     uint64_t  L_PBDSR;          // # 15
 };

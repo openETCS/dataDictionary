@@ -13,13 +13,13 @@ struct Validated_train_data_Core
     // Packet Number = 11
 
     uint64_t  L_PACKET;         // # 13
-    uint64_t  NC_CDTRAIN;       // # 4
+    uint64_t   NC_CDTRAIN;       // # 4
     uint64_t  NC_TRAIN;         // # 15
     uint64_t  L_TRAIN;          // # 12
     uint64_t   V_MAXTRAIN;       // # 7
-    uint64_t  M_LOADINGGAUGE;   // # 8
-    uint64_t  M_AXLELOADCAT;    // # 7
-    uint64_t  M_AIRTIGHT;       // # 2
+    uint64_t   M_LOADINGGAUGE;   // # 8
+    uint64_t   M_AXLELOADCAT;    // # 7
+    uint64_t   M_AIRTIGHT;       // # 2
     uint64_t  N_AXLE;           // # 10
     uint64_t   N_ITER_1;         // # 5
     Validated_train_data_Core_1   sub_1[31];

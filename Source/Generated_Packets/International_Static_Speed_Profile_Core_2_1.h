@@ -7,8 +7,8 @@
 struct International_Static_Speed_Profile_Core_2_1
 {
 
-    uint64_t  Q_DIFF;           // # 2
-    uint64_t  NC_CDDIFF;        // # 4
+    uint64_t   Q_DIFF;           // # 2
+    uint64_t   NC_CDDIFF;        // # 4
     uint64_t   NC_DIFF;          // # 4
     uint64_t   V_DIFF;           // # 7
 };

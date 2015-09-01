@@ -10,9 +10,9 @@ struct Stop_if_in_Staff_Responsible_Core
     // Information to stop a train in staff responsible.   
     // Packet Number = 137
 
-    uint64_t  Q_DIR;            // # 2
+    uint64_t   Q_DIR;            // # 2
     uint64_t  L_PACKET;         // # 13
-    uint64_t  Q_SRSTOP;         // # 1
+    uint64_t   Q_SRSTOP;         // # 1
 };
 
 #ifdef __cplusplus

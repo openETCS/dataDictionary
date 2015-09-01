@@ -10,7 +10,7 @@ struct Train_running_number_from_RBC_Core
     // Train running number from RBC      
     // Packet Number = 140
 
-    uint64_t  Q_DIR;            // # 2
+    uint64_t   Q_DIR;            // # 2
     uint64_t  L_PACKET;         // # 13
     uint64_t  NID_OPERATIONAL;  // # 32
 };

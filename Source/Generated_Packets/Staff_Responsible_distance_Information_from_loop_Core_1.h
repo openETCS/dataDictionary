@@ -7,7 +7,7 @@
 struct Staff_Responsible_distance_Information_from_loop_Core_1
 {
 
-    uint64_t  Q_NEWCOUNTRY;     // # 1
+    uint64_t   Q_NEWCOUNTRY;     // # 1
     uint64_t  NID_C;            // # 10
     uint64_t  NID_BG;           // # 14
     uint64_t  D_SR;             // # 15

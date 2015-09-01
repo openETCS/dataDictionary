@@ -11,9 +11,9 @@ struct Infill_location_reference_Core
     // message or balise/loop telegram respectively, following this packet.   
     // Packet Number = 136
 
-    uint64_t  Q_DIR;            // # 2
+    uint64_t   Q_DIR;            // # 2
     uint64_t  L_PACKET;         // # 13
-    uint64_t  Q_NEWCOUNTRY;     // # 1
+    uint64_t   Q_NEWCOUNTRY;     // # 1
     uint64_t  NID_C;            // # 10
     uint64_t  NID_BG;           // # 14
 };

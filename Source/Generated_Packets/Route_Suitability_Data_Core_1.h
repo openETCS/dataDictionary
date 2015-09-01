@@ -8,10 +8,10 @@ struct Route_Suitability_Data_Core_1
 {
 
     uint64_t  D_SUITABILITY;    // # 15
-    uint64_t  Q_SUITABILITY;    // # 2
-    uint64_t  M_LINEGAUGE;      // # 8
-    uint64_t  M_AXLELOADCAT;    // # 7
-    uint64_t  M_VOLTAGE;        // # 4
+    uint64_t   Q_SUITABILITY;    // # 2
+    uint64_t   M_LINEGAUGE;      // # 8
+    uint64_t   M_AXLELOADCAT;    // # 7
+    uint64_t   M_VOLTAGE;        // # 4
     uint64_t  NID_CTRACTION;    // # 10
 };
 

@@ -7,11 +7,11 @@
 struct Geographical_Position_Information_Core_1
 {
 
-    uint64_t  Q_NEWCOUNTRY;     // # 1
+    uint64_t   Q_NEWCOUNTRY;     // # 1
     uint64_t  NID_C;            // # 10
     uint64_t  NID_BG;           // # 14
     uint64_t  D_POSOFF;         // # 15
-    uint64_t  Q_MPOSITION;      // # 1
+    uint64_t   Q_MPOSITION;      // # 1
     uint64_t  M_POSITION;       // # 24
 };
 

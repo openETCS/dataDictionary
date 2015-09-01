@@ -1,6 +1,6 @@
 
-#ifndef SUBSETS_H_INCLUDED
-#define SUBSETS_H_INCLUDED
+#ifndef PACKETS_H_INCLUDED
+#define PACKETS_H_INCLUDED
 
 #include "Adhesion_Factor.h"
 #include "Danger_for_Shunting_information.h"
@@ -73,5 +73,5 @@
 #include "Track_Condition_Station_Platforms.h"
 #include "Validated_train_data.h"
 
-#endif // SUBSETS_H_INCLUDED
+#endif // PACKETS_H_INCLUDED
 
