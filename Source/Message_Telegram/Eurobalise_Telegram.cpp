@@ -1,13 +1,11 @@
 
 #include "Eurobalise_Telegram.h"
-#include "Telegram_Header_Decoder.h"
-#include "Telegram_Header_Encoder.h"
+#include "Telegram_Header.h"
 #include "Packet_Header.h"
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
 #include <iostream>
 #include <cassert>
-
 
 std::ostream& operator<< (std::ostream& stream, const Eurobalise_Telegram& p)
 {
