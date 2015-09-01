@@ -11,7 +11,7 @@ struct Radio_Network_registration_Core
     // a registration shall be enforced.      
     // Packet Number = 45
 
-    uint64_t  Q_DIR;            // # 2
+    uint64_t   Q_DIR;            // # 2
     uint64_t  L_PACKET;         // # 13
     uint64_t  NID_MN;           // # 24
 };

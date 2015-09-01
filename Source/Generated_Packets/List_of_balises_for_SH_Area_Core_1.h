@@ -7,7 +7,7 @@
 struct List_of_balises_for_SH_Area_Core_1
 {
 
-    uint64_t  Q_NEWCOUNTRY;     // # 1
+    uint64_t   Q_NEWCOUNTRY;     // # 1
     uint64_t  NID_C;            // # 10
     uint64_t  NID_BG;           // # 14
 };

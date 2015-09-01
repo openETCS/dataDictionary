@@ -11,9 +11,9 @@ struct Default_Gradient_for_Temporary_Speed_Restriction_Core
     // when no gradient profile (packet 21) is available   
     // Packet Number = 141
 
-    uint64_t  Q_DIR;            // # 2
+    uint64_t   Q_DIR;            // # 2
     uint64_t  L_PACKET;         // # 13
-    uint64_t  Q_GDIR;           // # 1
+    uint64_t   Q_GDIR;           // # 1
     uint64_t   G_TSR;            // # 8
 };
 

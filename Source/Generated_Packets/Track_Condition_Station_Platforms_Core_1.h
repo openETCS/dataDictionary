@@ -9,8 +9,8 @@ struct Track_Condition_Station_Platforms_Core_1
 
     uint64_t  D_TRACKCOND;      // # 15
     uint64_t  L_TRACKCOND;      // # 15
-    uint64_t  M_PLATFORM;       // # 4
-    uint64_t  Q_PLATFORM;       // # 2
+    uint64_t   M_PLATFORM;       // # 4
+    uint64_t   Q_PLATFORM;       // # 2
 };
 
 #ifdef __cplusplus

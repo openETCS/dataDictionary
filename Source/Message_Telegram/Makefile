@@ -6,7 +6,7 @@ export BITWALKER=$(TOPDIR)/Bitwalker
 export GENERATED_PACKETS=$(TOPDIR)/Generated_Packets
 export GENERATED_MESSAGES=$(TOPDIR)/Generated_Messages
 
-it: test issue31
+it: libmessage_telegram.a
 
 include $(TOPDIR)/Makefile.template
 
@@ -30,31 +30,15 @@ LDFLAGS += -L$(GENERATED_PACKETS) -lgenerated_packets
 CPPFLAGS += -I$(BITWALKER)
 LDFLAGS += -L$(BITWALKER) -lBitwalker
 
-test:	lib\
-	decoder_test encoder_test\
-	conditional_encoder_test conditional_decoder_test\
-	test_messages
-	./encoder_test
-	./decoder_test
-	./conditional_encoder_test
-	./conditional_decoder_test
-	./test_messages
+LDFLAGS += -L. -lmessage_telegram
 
-issue31: lib test_issue31_1 test_issue31_2 test_issue31_3
-	./test_issue31_1
-	./test_issue31_2
-	./test_issue31_3
-
-SRC= print_bits.cpp Eurobalise_Telegram.cpp create.cpp\
+SRC= print_bits.cpp Eurobalise_Telegram.cpp\
      Euroradio_Message.cpp Message_Header.cpp
 
 
 OBJ := $(SRC:.cpp=.o)
 
-OBJ += Packet_Header.o\
-	Telegram_Header_Decoder.o\
-	Telegram_Header_UpperBitsNotSet.o\
-	Telegram_Header_Encoder.o
+OBJ += Packet_Header.o Telegram_Header.o
 
 
 libmessage_telegram.a : $(OBJ)
@@ -68,38 +52,6 @@ print_bits: print_bits.o
 
 bits: print_bits
 	./print_bits
-
-decoder_test: decoder_test.o
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $< $(LDFLAGS)
-	$(RM) $<
-
-encoder_test: encoder_test.o
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $< $(LDFLAGS)
-	$(RM) $<
-
-conditional_decoder_test: conditional_decoder_test.o
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $< $(LDFLAGS)
-	$(RM) $<
-
-conditional_encoder_test: conditional_encoder_test.o
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $< $(LDFLAGS)
-	$(RM) $<
-
-test_issue31_1: test_issue31_1.o
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $< $(LDFLAGS)
-	$(RM) $<
-
-test_issue31_2: test_issue31_2.o
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $< $(LDFLAGS)
-	$(RM) $<
-
-test_issue31_3: test_issue31_3.o
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $< $(LDFLAGS)
-	$(RM) $<
-
-test_messages: test_messages.o
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $< $(LDFLAGS)
-	$(RM) $<
 
 
 FORMAT := $(wildcard *.h) $(wildcard *.cpp) $(wildcard *.c)

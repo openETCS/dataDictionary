@@ -11,9 +11,9 @@ struct Track_Ahead_Free_up_to_level_23_transition_location_Core
     // group transmitting this information up to the level 2/3 transition location
     // Packet Number = 90
 
-    uint64_t  Q_DIR;            // # 2
+    uint64_t   Q_DIR;            // # 2
     uint64_t  L_PACKET;         // # 13
-    uint64_t  Q_NEWCOUNTRY;     // # 1
+    uint64_t   Q_NEWCOUNTRY;     // # 1
     uint64_t  NID_C;            // # 10
     uint64_t  NID_BG;           // # 14
 };

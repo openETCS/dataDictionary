@@ -9,11 +9,11 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <signal.h>
+#include <cassert>
+
 #include "Eurobalise_Telegram.h"
-#include "Telegram_Header_Encoder.h"
 #include "Packet_Header.h"
 #include "Bitstream_Init.h"
-#include <cassert>
 #include "UpperBitsNotSet.h"
 #include "print_bits.h"
 

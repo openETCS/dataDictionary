@@ -10,7 +10,7 @@ struct Temporary_Speed_Restriction_Revocation_Core
     // Transmission of temporary speed restriction revocation.     
     // Packet Number = 66
 
-    uint64_t  Q_DIR;            // # 2
+    uint64_t   Q_DIR;            // # 2
     uint64_t  L_PACKET;         // # 13
     uint64_t   NID_TSR;          // # 8
 };

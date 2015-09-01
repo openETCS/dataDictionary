@@ -12,14 +12,14 @@ struct Geographical_Position_Information_Core
     // to the train.        
     // Packet Number = 79
 
-    uint64_t  Q_DIR;            // # 2
+    uint64_t   Q_DIR;            // # 2
     uint64_t  L_PACKET;         // # 13
-    uint64_t  Q_SCALE;          // # 2
-    uint64_t  Q_NEWCOUNTRY;     // # 1
+    uint64_t   Q_SCALE;          // # 2
+    uint64_t   Q_NEWCOUNTRY;     // # 1
     uint64_t  NID_C;            // # 10
     uint64_t  NID_BG;           // # 14
     uint64_t  D_POSOFF;         // # 15
-    uint64_t  Q_MPOSITION;      // # 1
+    uint64_t   Q_MPOSITION;      // # 1
     uint64_t  M_POSITION;       // # 24
     uint64_t   N_ITER_1;         // # 5
     Geographical_Position_Information_Core_1   sub_1[31];

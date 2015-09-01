@@ -10,7 +10,7 @@ struct Stop_Shunting_on_desk_opening_Core
     // Packet to stop Shunting on desk opening.    
     // Packet Number = 135
 
-    uint64_t  Q_DIR;            // # 2
+    uint64_t   Q_DIR;            // # 2
     uint64_t  L_PACKET;         // # 13
 };
 

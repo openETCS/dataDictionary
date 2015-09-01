@@ -12,7 +12,7 @@ struct List_of_Balises_in_SR_Authority_Core
     // in SR mode        
     // Packet Number = 63
 
-    uint64_t  Q_DIR;            // # 2
+    uint64_t   Q_DIR;            // # 2
     uint64_t  L_PACKET;         // # 13
     uint64_t   N_ITER_1;         // # 5
     List_of_Balises_in_SR_Authority_Core_1   sub_1[31];

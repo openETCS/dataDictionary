@@ -8,7 +8,7 @@
 struct National_Values_Core_3
 {
 
-    uint64_t  Q_NVKVINTSET;     // # 2
+    uint64_t   Q_NVKVINTSET;     // # 2
     uint64_t   A_NVP12;          // # 6
     uint64_t   A_NVP23;          // # 6
     uint64_t   V_NVKVINT;        // # 7

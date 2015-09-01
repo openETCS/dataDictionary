@@ -9,7 +9,7 @@ struct Track_Condition_Core_1
 
     uint64_t  D_TRACKCOND;      // # 15
     uint64_t  L_TRACKCOND;      // # 15
-    uint64_t  M_TRACKCOND;      // # 4
+    uint64_t   M_TRACKCOND;      // # 4
 };
 
 #ifdef __cplusplus

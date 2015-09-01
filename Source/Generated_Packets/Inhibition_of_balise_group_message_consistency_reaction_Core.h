@@ -13,7 +13,7 @@ struct Inhibition_of_balise_group_message_consistency_reaction_Core
     // missed or is/are detected but not decoded.    
     // Packet Number = 145
 
-    uint64_t  Q_DIR;            // # 2
+    uint64_t   Q_DIR;            // # 2
     uint64_t  L_PACKET;         // # 13
 };
 

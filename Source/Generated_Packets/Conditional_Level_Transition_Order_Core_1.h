@@ -7,7 +7,7 @@
 struct Conditional_Level_Transition_Order_Core_1
 {
 
-    uint64_t  M_LEVELTR;        // # 3
+    uint64_t   M_LEVELTR;        // # 3
     uint64_t   NID_NTC;          // # 8
 };
 

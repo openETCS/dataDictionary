@@ -8,11 +8,11 @@ struct Mode_profile_Core_1
 {
 
     uint64_t  D_MAMODE;         // # 15
-    uint64_t  M_MAMODE;         // # 2
+    uint64_t   M_MAMODE;         // # 2
     uint64_t   V_MAMODE;         // # 7
     uint64_t  L_MAMODE;         // # 15
     uint64_t  L_ACKMAMODE;      // # 15
-    uint64_t  Q_MAMODE;         // # 1
+    uint64_t   Q_MAMODE;         // # 1
 };
 
 #ifdef __cplusplus

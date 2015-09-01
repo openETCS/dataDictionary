@@ -11,7 +11,7 @@ struct Inhibition_of_revocable_TSRs_from_balises_in_L23_Core
     // level 2 or 3.       
     // Packet Number = 64
 
-    uint64_t  Q_DIR;            // # 2
+    uint64_t   Q_DIR;            // # 2
     uint64_t  L_PACKET;         // # 13
 };
 

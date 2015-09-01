@@ -1,32 +1,27 @@
 
 #include "Eurobalise_Telegram.h"
-#include "Telegram_Header_Encoder.h"
 #include "Packet_Header.h"
 #include "Bitstream_Init.h"
-#include "subsets.h"
 #include "create.h"
 #include <cassert>
 #include <iostream>
 
 int main ()
 {
-    std::cout << "--- Testing the encode and decode functions of Eurobalise Telegram consecutively with conditional packets." << std::endl;
+    std::cout << "--- Testing the encode and decode functions of Eurobalise Telegram consecutively." << std::endl;
     // declare a telegram
     Eurobalise_Telegram telegram;
 
     // declare and initialize a telegram header
-    // telegram.header = create_Telegram_Header_TrainToTrack();
-    telegram.header = create_Telegram_Header_TrackToTrain();
-
+    telegram.header = create_Telegram_Header_TrainToTrack();
+    // telegram.header = create_Telegram_Header_TrackToTrain();
     // create a pointer to a data packet including core data packet 1
     // and push this pointer into the telegam packet vector
-    // telegram.add(std::make_shared<Train_running_number>(create_Train_running_number()));
-    // telegram.add(std::make_shared<Error_Reporting>(create_Error_Reporting()));
+    telegram.add(std::make_shared<Train_running_number>(create_Train_running_number()));
+    telegram.add(std::make_shared<Error_Reporting>(create_Error_Reporting()));
 
-    telegram.add(std::make_shared<Temporary_Speed_Restriction>(create_Temporary_Speed_Restriction()));
-    telegram.add(std::make_shared<Adhesion_Factor>(create_Adhesion_Factor()));
-    telegram.add(std::make_shared<Infill_location_reference>(create_Infill_location_reference(1)));
-    telegram.add(std::make_shared<Infill_location_reference>(create_Infill_location_reference(0)));
+    // telegram.add(std::make_shared<Temporary_Speed_Restriction>(create_Temporary_Speed_Restriction()));
+    // telegram.add(std::make_shared<Adhesion_Factor>(create_Adhesion_Factor()));
 
     // add end of information package to packet sequence
     telegram.add(std::make_shared<End_of_Information>());
@@ -55,7 +50,7 @@ int main ()
     std::cout << " Decoding Eurobalise Telegram." << std::endl;
     telegram_new.decode(stream);
 
-    std::cout << " Decoder Ouput: " << telegram_new << std::endl;
+    std::cout << " Decoder Output: " << telegram_new << std::endl;
     assert(telegram_new == telegram);
 
     std::cout << " Test successfull.\n" << std::endl;

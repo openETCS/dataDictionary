@@ -7,7 +7,7 @@
 struct National_Values_Core_4
 {
 
-    uint64_t  L_NVKRINT;        // # 5
+    uint64_t   L_NVKRINT;        // # 5
     uint64_t   M_NVKRINT;        // # 5
 };
 
