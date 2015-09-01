@@ -8,6 +8,7 @@ it: lib
 include $(TOPDIR)/Makefile.template
 export BITWALKER=$(TOPDIR)/Bitwalker
 export GENERATED_PACKETS=$(TOPDIR)/Generated_Packets
+export MESSAGE_TELEGRAM=$(TOPDIR)/Message_Telegram
 
 #VPATH = $(TOPDIR)/Bitwalker
 
@@ -15,7 +16,7 @@ export GENERATED_PACKETS=$(TOPDIR)/Generated_Packets
 CPPFLAGS += -I.
 
 CPPFLAGS += -I$(BITWALKER)
-CPPFLAGS += -I$(TOPDIR)/Message_Telegram
+CPPFLAGS += -I$(MESSAGE_TELEGRAM)
 CPPFLAGS += -I$(GENERATED_PACKETS)
 
 LDFLAGS += -L$(BITWALKER) -lBitwalker
