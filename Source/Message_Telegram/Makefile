@@ -30,6 +30,8 @@ LDFLAGS += -L$(GENERATED_PACKETS) -lgenerated_packets
 CPPFLAGS += -I$(BITWALKER)
 LDFLAGS += -L$(BITWALKER) -lBitwalker
 
+LDFLAGS += -L. -lmessage_telegram
+
 test:	lib\
 	decoder_test encoder_test\
 	conditional_encoder_test conditional_decoder_test\
