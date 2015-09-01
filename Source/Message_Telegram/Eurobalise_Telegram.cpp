@@ -70,7 +70,7 @@ bool Eurobalise_Telegram::decode(Bitstream& stream)
     {
         if (current_pos != stream.bitpos)
         {
-            std::cout << stream.bitpos << " != " << current_pos << std::endl;
+            std::cerr << stream.bitpos << " != " << current_pos << std::endl;
             return false;
         }
 
