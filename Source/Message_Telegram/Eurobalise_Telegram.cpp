@@ -1,13 +1,11 @@
 
 #include "Eurobalise_Telegram.h"
-#include "Telegram_Header_Decoder.h"
-#include "Telegram_Header_Encoder.h"
+#include "Telegram_Header.h"
 #include "Packet_Header.h"
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
 #include <iostream>
 #include <cassert>
-
 
 std::ostream& operator<< (std::ostream& stream, const Eurobalise_Telegram& p)
 {
@@ -72,7 +70,7 @@ bool Eurobalise_Telegram::decode(Bitstream& stream)
     {
         if (current_pos != stream.bitpos)
         {
-            std::cout << stream.bitpos << " != " << current_pos << std::endl;
+            std::cerr << stream.bitpos << " != " << current_pos << std::endl;
             return false;
         }
 

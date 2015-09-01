@@ -51,10 +51,7 @@ SRC= print_bits.cpp Eurobalise_Telegram.cpp create.cpp\
 
 OBJ := $(SRC:.cpp=.o)
 
-OBJ += Packet_Header.o\
-	Telegram_Header_Decoder.o\
-	Telegram_Header_UpperBitsNotSet.o\
-	Telegram_Header_Encoder.o
+OBJ += Packet_Header.o Telegram_Header.o
 
 
 libmessage_telegram.a : $(OBJ)
