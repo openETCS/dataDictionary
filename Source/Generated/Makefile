@@ -5,8 +5,8 @@ MAKEFLAGS += --no-print-directory
 it: lib
 
 lib:
-	(cd Packets    && $(MAKE) -j 4 lib)
-	(cd Messages   && $(MAKE) -j 4 lib)
+	(cd Packets    && $(MAKE) lib)
+	(cd Messages   && $(MAKE) lib)
 
 clean: 
 	(cd Packets    && $(MAKE) clean)

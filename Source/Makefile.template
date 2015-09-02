@@ -2,10 +2,12 @@
 SHELL=/bin/bash
 
 export SCRIPT_DIR=$(TOPDIR)/Scripts
+export COQ=$(TOPDIR)/Foundation/Coq
+
 #setup compiler flags
 INCLUDES=$(CPPFLAGS) -I$(FRAMAC_SHARE)/libc
 
-VPATH = $(TOPDIR)/Coq
+VPATH = $(COQ)
 
 SHARED_FLAGS=-Wall -pedantic -O3
 #SHARED_FLAGS+=-Wconversion
@@ -22,7 +24,7 @@ WP_PROCESSES ?= 1
 #setup coq
 SCRIPT?='wp0.script' # default script
 coq-bitlemmas: FORCE
-	@(cd $(TOPDIR)/Coq && $(MAKE) compile)
+	@(cd $(COQ) && $(MAKE) compile)
 
 # We differentiate between two types of WP options:
 # 1) in WP_FLAGS we collect the general options
@@ -143,7 +145,6 @@ export ASTYLE=astyle $(ASTYLEOPTIONS)
 
 
 clean:: FORCE
-	@(cd $(TOPDIR)/Coq && $(MAKE) clean)
 	@$(RM) *.o
 	@$(RM) *.i
 	@$(RM) *.back

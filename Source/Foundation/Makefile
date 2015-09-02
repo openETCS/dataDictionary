@@ -5,8 +5,8 @@ MAKEFLAGS += --no-print-directory
 it: lib 
 
 lib:
-	(cd Bits     && $(MAKE) -j 4 lib)
-	(cd Packets  && $(MAKE) -j 4 lib)
+	(cd Bits     && $(MAKE) lib)
+	(cd Packets  && $(MAKE) lib)
 
 clean: 
 	(cd Coq      && $(MAKE) clean)

@@ -2,20 +2,22 @@
 MAKEFLAGS += --no-print-directory --silent
 
 TOPDIR=..
-export BITWALKER=$(TOPDIR)/Bitwalker
-export GENERATED_PACKETS=$(TOPDIR)/Generated_Packets
+export BITS=$(TOPDIR)/Foundation/Bits
+export BASE_PACKETS=$(TOPDIR)/Foundation/Packets
+export GENERATED_PACKETS=$(TOPDIR)/Generated/Packets
 export MESSAGE_TELEGRAM=$(TOPDIR)/Message_Telegram
 
 
 it: lib server_BTM
 
-lib:    $(MESSAGE_TELEGRAM)/libmessage_telegram.a\
+lib:	$(BITS)/libbits.a\
+        $(BASE_PACKETS)/libbase_packets.a\
         $(GENERATED_PACKETS)/libgenerated_packets.a\
-        $(BITWALKER)/libBitwalker.a
+	$(MESSAGE_TELEGRAM)/libmessage_telegram.a\
 
-include ../Makefile.template
 
-CPPFLAGS = -I../Source/Bitwalker
+include $(TOPDIR)/Makefile.template
+
 CXXFLAGS = -Wall -std=c++11
 
 CPPFLAGS += -I$(MESSAGE_TELEGRAM)
@@ -24,8 +26,11 @@ LDFLAGS += -L$(MESSAGE_TELEGRAM) -lmessage_telegram
 CPPFLAGS += -I$(GENERATED_PACKETS)
 LDFLAGS += -L$(GENERATED_PACKETS) -lgenerated_packets
 
-CPPFLAGS += -I$(BITWALKER)
-LDFLAGS += -L$(BITWALKER) -lBitwalker
+CPPFLAGS += -I$(BASE_PACKETS)
+LDFLAGS += -L$(BASE_PACKETS) -lbase_packets
+
+CPPFLAGS += -I$(BITS)
+LDFLAGS += -L$(BITS) -lbits
 
 
 server_BTM: server_BTM.o

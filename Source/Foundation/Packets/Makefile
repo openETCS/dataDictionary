@@ -4,11 +4,11 @@ MAKEFLAGS += --no-print-directory --silent
 TOPDIR=../..
 export BITWALKER=$(TOPDIR)/Foundation/Bits
 
-it: libbase.a
+it: libbase_packets.a
 
 include $(TOPDIR)/Makefile.template
 
-lib:	libbase.a\
+lib:	libbase_packets.a\
 
 #CXX = c++
 CXXFLAGS += -std=c++11
@@ -21,7 +21,7 @@ SRC= Packet_Header.cpp
 OBJ := $(SRC:.cpp=.o)
 
 
-libbase.a : $(OBJ)
+libbase_packets.a : $(OBJ)
 	ar cru  $@ $^
 	ranlib  $@
 	$(RM) $(OBJ)
