@@ -1,0 +1,38 @@
+
+MAKEFLAGS += --no-print-directory --silent
+
+TOPDIR=..
+export BITWALKER=$(TOPDIR)/Bitwalker
+
+it: libbase.a
+
+include $(TOPDIR)/Makefile.template
+
+lib:	libbase.a\
+
+#CXX = c++
+CXXFLAGS += -std=c++11
+
+CPPFLAGS += -I$(BITWALKER)
+
+SRC= Packet_Header.cpp
+
+
+OBJ := $(SRC:.cpp=.o)
+
+
+libbase.a : $(OBJ)
+	ar cru  $@ $^
+	ranlib  $@
+	$(RM) $(OBJ)
+
+
+FORMAT := $(wildcard *.h) $(wildcard *.cpp) $(wildcard *.c)
+
+format: FORCE
+	$(ASTYLE) $(FORMAT)
+
+clean::
+	@$(RM) *.o
+	@$(RM) *.a
+
