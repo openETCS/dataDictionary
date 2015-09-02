@@ -3,14 +3,13 @@
 
 MAKEFLAGS += --no-print-directory --silent
 
-TOPDIR=..
+TOPDIR=../..
 
 include $(TOPDIR)/Makefile.template
 
 #WP_FLAGS += -wp-prop=-rte
 #WP_FLAGS += -wp-prop=-@lemma
 #WP_FLAGS += -wp-prop=cea
-
 
 SRC :=  UpperBitsNotSet.c\
         Bitwalker_Read.c Bitwalker_Write.c\
@@ -28,15 +27,15 @@ check: $(CHECK)
 
 clean::
 	@$(RM) $(OBJ)
-	@$(RM) libBitwalker.a
+	@$(RM) libbits.a
 	
 
 format: FORCE
 	@$(ASTYLE) *.c *.h
 
-lib: libBitwalker.a
+lib: libbits.a
 
-libBitwalker.a : $(OBJ)
+libbits.a : $(OBJ)
 	ar cru	$@ $^
 	ranlib	$@
 

@@ -1,8 +1,8 @@
 
 MAKEFLAGS += --no-print-directory --silent
 
-TOPDIR=..
-export BITWALKER=$(TOPDIR)/Bitwalker
+TOPDIR=../..
+export BITWALKER=$(TOPDIR)/Foundation/Bits
 
 it: libbase.a
 
