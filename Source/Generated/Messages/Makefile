@@ -6,6 +6,7 @@ TOPDIR=../..
 it: lib
 
 include $(TOPDIR)/Makefile.template
+
 export BITS=$(TOPDIR)/Foundation/Bits
 export BASE_PACKETS=$(TOPDIR)/Foundation/Packets
 export GENERATED_PACKETS=$(TOPDIR)/Generated/Packets
