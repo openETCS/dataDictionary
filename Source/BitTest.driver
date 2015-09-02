@@ -1,5 +1,5 @@
 
-coq.file += "Coq/BitLemmas.v";
+coq.file += "Foundation/Coq/BitLemmas.v";
 
 library b4fc_bit : cbits;
 
