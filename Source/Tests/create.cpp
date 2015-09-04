@@ -4,9 +4,9 @@
 
 // Telegram header
 
-Telegram_Header create_Telegram_Header_TrackToTrain()
+TelegramHeader create_TelegramHeader_TrackToTrain()
 {
-    Telegram_Header a;
+    TelegramHeader a;
     {
         a.Q_UPDOWN = 1;
         a.M_VERSION = 3;
@@ -23,9 +23,9 @@ Telegram_Header create_Telegram_Header_TrackToTrain()
     return a;
 }
 
-Telegram_Header create_Telegram_Header_TrainToTrack()
+TelegramHeader create_TelegramHeader_TrainToTrack()
 {
-    Telegram_Header a;
+    TelegramHeader a;
     {
         a.Q_UPDOWN = 0;
         a.M_VERSION = 3;

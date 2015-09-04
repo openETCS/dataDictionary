@@ -2,7 +2,7 @@
 #ifndef EUROBALISETELEGRAM_H_INCLUDED
 #define EUROBALISETELEGRAM_H_INCLUDED
 
-#include "Telegram_Header.h"
+#include "TelegramHeader.h"
 #include "BasePacket.h"
 #include <iostream>
 #include <vector>
@@ -11,7 +11,7 @@ typedef std::vector<BasePacketPtr> PacketSequence;
 
 class EurobaliseTelegram
 {
-        Telegram_Header m_header;
+        TelegramHeader m_header;
 
         PacketSequence  m_packets;
 
@@ -22,12 +22,12 @@ class EurobaliseTelegram
             m_packets.reserve(32);
         }
 
-        EurobaliseTelegram(const Telegram_Header& h) : m_header(h), m_packets()
+        EurobaliseTelegram(const TelegramHeader& h) : m_header(h), m_packets()
         {
             m_packets.reserve(32);
         }
 
-        const Telegram_Header& header() const
+        const TelegramHeader& header() const
         {
             return m_header;
         }

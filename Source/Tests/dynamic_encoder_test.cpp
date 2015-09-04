@@ -1,6 +1,6 @@
 
 #include "EurobaliseTelegram.h"
-#include "Telegram_Header.h"
+#include "TelegramHeader.h"
 #include "Packet_Header.h"
 #include "Bitstream_Init.h"
 #include "create.h"
@@ -14,8 +14,8 @@ int main ()
     EurobaliseTelegram telegram;
 
     // declare and initialize a telegram header
-    // telegram.header = create_Telegram_Header_TrainToTrack();
-    telegram.header = create_Telegram_Header_TrackToTrain();
+    // telegram.header = create_TelegramHeader_TrainToTrack();
+    telegram.header = create_TelegramHeader_TrackToTrain();
 
     // create a pointer to a data packet including core data packet 1
     // and push this pointer into the telegam packet vector

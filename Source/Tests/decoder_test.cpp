@@ -23,10 +23,10 @@ int main ()
 
     uint32_t init_pos = stream.bitpos;
 
-    Telegram_Header header = create_Telegram_Header_TrainToTrack();
-    // Telegram_Header header = create_Telegram_Header_TrackToTrain();
+    TelegramHeader header = create_TelegramHeader_TrainToTrack();
+    // TelegramHeader header = create_TelegramHeader_TrackToTrain();
     std::cout << " Encoding Telegram Header: " << header << std::endl;
-    Telegram_Header_Encoder(&stream, &header);
+    TelegramHeader_Encoder(&stream, &header);
 
     std::cout << " Encoding data packets:" << std::endl;
     Train_running_number a = create_Train_running_number();

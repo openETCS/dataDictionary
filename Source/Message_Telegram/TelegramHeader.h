@@ -1,10 +1,10 @@
 
-#ifndef TELEGRAM_HEADER_H_INCLUDED
-#define TELEGRAM_HEADER_H_INCLUDED
+#ifndef TELEGRAMHEADER_H_INCLUDED
+#define TELEGRAMHEADER_H_INCLUDED
 
 #include "Bitstream.h"
 
-struct Telegram_Header
+struct TelegramHeader
 {
 
     uint32_t  Q_UPDOWN;         // # 1
@@ -23,7 +23,7 @@ struct Telegram_Header
 
 #include <iostream>
 
-inline std::ostream& operator<< (std::ostream& stream, const Telegram_Header& p)
+inline std::ostream& operator<< (std::ostream& stream, const TelegramHeader& p)
 {
     stream << '('
            << uint64_t(p.Q_UPDOWN) << ','
@@ -40,7 +40,7 @@ inline std::ostream& operator<< (std::ostream& stream, const Telegram_Header& p)
     return stream;
 }
 
-inline bool operator==(const Telegram_Header& a, const Telegram_Header& b)
+inline bool operator==(const TelegramHeader& a, const TelegramHeader& b)
 {
     return (a.Q_UPDOWN == b.Q_UPDOWN) &&
            (a.M_VERSION == b.M_VERSION) &&
@@ -54,27 +54,27 @@ inline bool operator==(const Telegram_Header& a, const Telegram_Header& b)
            (a.Q_LINK == b.Q_LINK);
 }
 
-inline bool operator!=(const Telegram_Header& a, const Telegram_Header& b)
+inline bool operator!=(const TelegramHeader& a, const TelegramHeader& b)
 {
     return !(a == b);
 }
 
 #endif // __cplusplus
 
-typedef struct Telegram_Header Telegram_Header;
+typedef struct TelegramHeader TelegramHeader;
 
 #define TELEGRAM_HEADER_BITSIZE 50
 
 /*@
-    logic integer BitSize{L}(Telegram_Header* p) = TELEGRAM_HEADER_BITSIZE;
+    logic integer BitSize{L}(TelegramHeader* p) = TELEGRAM_HEADER_BITSIZE;
 
-    logic integer MaxBitSize{L}(Telegram_Header* p) = BitSize(p);
+    logic integer MaxBitSize{L}(TelegramHeader* p) = BitSize(p);
 
-    predicate Separated(Bitstream* stream, Telegram_Header* p) =
+    predicate Separated(Bitstream* stream, TelegramHeader* p) =
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Telegram_Header* p) =
+    predicate Invariant(TelegramHeader* p) =
       Invariant(p->Q_UPDOWN)       &&
       Invariant(p->M_VERSION)      &&
       Invariant(p->Q_MEDIA)        &&
@@ -86,7 +86,7 @@ typedef struct Telegram_Header Telegram_Header;
       Invariant(p->NID_BG)         &&
       Invariant(p->Q_LINK);
 
-    predicate ZeroInitialized(Telegram_Header* p) =
+    predicate ZeroInitialized(TelegramHeader* p) =
       ZeroInitialized(p->Q_UPDOWN)       &&
       ZeroInitialized(p->M_VERSION)      &&
       ZeroInitialized(p->Q_MEDIA)        &&
@@ -98,7 +98,7 @@ typedef struct Telegram_Header Telegram_Header;
       ZeroInitialized(p->NID_BG)         &&
       ZeroInitialized(p->Q_LINK);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Telegram_Header* p) =
+    predicate EqualBits(Bitstream* stream, integer pos, TelegramHeader* p) =
       EqualBits(stream, pos,      pos + 1,  p->Q_UPDOWN)  &&
       EqualBits(stream, pos + 1,  pos + 8,  p->M_VERSION) &&
       EqualBits(stream, pos + 8,  pos + 9,  p->Q_MEDIA)   &&
@@ -110,7 +110,7 @@ typedef struct Telegram_Header Telegram_Header;
       EqualBits(stream, pos + 35, pos + 49, p->NID_BG)    &&
       EqualBits(stream, pos + 49, pos + 50, p->Q_LINK);
 
-    predicate UpperBitsNotSet(Telegram_Header* p) =
+    predicate UpperBitsNotSet(TelegramHeader* p) =
       UpperBitsNotSet(p->Q_UPDOWN,  1)      &&
       UpperBitsNotSet(p->M_VERSION, 7)      &&
       UpperBitsNotSet(p->Q_MEDIA,   1)      &&
@@ -133,7 +133,7 @@ typedef struct Telegram_Header Telegram_Header;
 
     ensures result:  \result <==> UpperBitsNotSet(p);
 */
-int Telegram_Header_UpperBitsNotSet(const Telegram_Header* p);
+int TelegramHeader_UpperBitsNotSet(const TelegramHeader* p);
 
 
 
@@ -176,7 +176,7 @@ int Telegram_Header_UpperBitsNotSet(const Telegram_Header* p);
     complete behaviors;
     disjoint behaviors;
 */
-int Telegram_Header_Encoder(Bitstream* stream, const Telegram_Header* p);
+int TelegramHeader_Encoder(Bitstream* stream, const TelegramHeader* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -211,7 +211,7 @@ int Telegram_Header_Encoder(Bitstream* stream, const Telegram_Header* p);
     complete behaviors;
     disjoint behaviors;
 */
-int Telegram_Header_Decoder(Bitstream* stream, Telegram_Header* p);
+int TelegramHeader_Decoder(Bitstream* stream, TelegramHeader* p);
 
 
-#endif // TELEGRAM_HEADER_H_INCLUDED
+#endif // TELEGRAMHEADER_H_INCLUDED

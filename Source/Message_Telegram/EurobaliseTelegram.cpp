@@ -1,6 +1,6 @@
 
 #include "EurobaliseTelegram.h"
-#include "Telegram_Header.h"
+#include "TelegramHeader.h"
 #include "Packet_Header.h"
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
@@ -56,7 +56,7 @@ bool operator!=(const EurobaliseTelegram& a, const EurobaliseTelegram& b)
 
 bool EurobaliseTelegram::decode(Bitstream& stream)
 {
-    if (Telegram_Header_Decoder(&stream, &m_header) != 1)
+    if (TelegramHeader_Decoder(&stream, &m_header) != 1)
     {
         return false;
     }
@@ -111,7 +111,7 @@ bool EurobaliseTelegram::decode(Bitstream& stream)
 
 bool EurobaliseTelegram::encode(Bitstream& stream) const
 {
-    if (Telegram_Header_Encoder(&stream, &header()) != 1)
+    if (TelegramHeader_Encoder(&stream, &header()) != 1)
     {
         return false;
     }

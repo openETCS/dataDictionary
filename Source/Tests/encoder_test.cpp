@@ -11,8 +11,8 @@ int main ()
     std::cout << "--- Testing the encode and decode functions of Eurobalise Telegram consecutively." << std::endl;
 
     // declare and initialize a telegram header
-    EurobaliseTelegram telegram(create_Telegram_Header_TrainToTrack());
-    // telegram.header = create_Telegram_Header_TrackToTrain();
+    EurobaliseTelegram telegram(create_TelegramHeader_TrainToTrack());
+    // telegram.header = create_TelegramHeader_TrackToTrain();
     // create a pointer to a data packet including core data packet 1
     // and push this pointer into the telegam packet vector
     telegram.add(std::make_shared<Train_running_number>(create_Train_running_number()));

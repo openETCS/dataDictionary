@@ -1,11 +1,11 @@
 
-#include "Telegram_Header.h"
+#include "TelegramHeader.h"
 #include "Bitstream_Normal.h"
 #include "Bitstream_Read.h"
 #include "Bitstream_Write.h"
 #include "UpperBitsNotSet.h"
 
-int Telegram_Header_Decoder(Bitstream* stream, Telegram_Header* p)
+int TelegramHeader_Decoder(Bitstream* stream, TelegramHeader* p)
 {
     if (Bitstream_Normal(stream, TELEGRAM_HEADER_BITSIZE))
     {
@@ -173,11 +173,11 @@ int Telegram_Header_Decoder(Bitstream* stream, Telegram_Header* p)
     }
 }
 
-int Telegram_Header_Encoder(Bitstream* stream, const Telegram_Header* p)
+int TelegramHeader_Encoder(Bitstream* stream, const TelegramHeader* p)
 {
     if (Bitstream_Normal(stream, TELEGRAM_HEADER_BITSIZE))
     {
-        if (Telegram_Header_UpperBitsNotSet(p))
+        if (TelegramHeader_UpperBitsNotSet(p))
         {
             //@ ghost const uint32_t pos = stream->bitpos;
 
@@ -217,7 +217,7 @@ int Telegram_Header_Encoder(Bitstream* stream, const Telegram_Header* p)
 }
 
 
-int Telegram_Header_UpperBitsNotSet(const Telegram_Header* p)
+int TelegramHeader_UpperBitsNotSet(const TelegramHeader* p)
 {
     if (UpperBitsNotSet64(p->Q_UPDOWN,      1)  &&
         UpperBitsNotSet64(p->M_VERSION,     7)  &&

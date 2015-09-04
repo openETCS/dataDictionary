@@ -1,6 +1,5 @@
 
 #include "EurobaliseTelegram.h"
-#include "Telegram_Header.h"
 #include "Packet_Header.h"
 #include "Bitstream_Init.h"
 #include "Packets.h"
@@ -26,7 +25,7 @@ int main ()
 
     uint32_t init_pos = stream.bitpos;
 
-    Telegram_Header header;
+    TelegramHeader header;
     {
         header.Q_UPDOWN  = 1;
         header.M_VERSION = 32;
