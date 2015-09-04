@@ -3,7 +3,7 @@
 #define PACKET_COUNTER_H_INCLUDED
 
 /*
-    The counter instance is filled with information in the Eurobalise_Telegram_Decoder
+    The counter instance is filled with information in the EurobaliseTelegram_Decoder
     and contains the count for all packet types transmitted in the telegram. 
 */
 struct Packet_Counter

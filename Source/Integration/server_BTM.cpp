@@ -11,7 +11,7 @@
 #include <signal.h>
 #include <cassert>
 
-#include "Eurobalise_Telegram.h"
+#include "EurobaliseTelegram.h"
 #include "Packet_Header.h"
 #include "Bitstream_Init.h"
 #include "UpperBitsNotSet.h"
@@ -145,7 +145,7 @@ int main(int argc, char *argv[])
 
         std::cout << " Decoding Eurobalise Telegram." << std::endl;
 
-        Eurobalise_Telegram telegram;
+        EurobaliseTelegram telegram;
         telegram.decode(stream);
 
         std::cout << " Decoder Output: " << telegram << std::endl;

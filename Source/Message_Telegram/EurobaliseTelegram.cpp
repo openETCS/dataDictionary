@@ -1,5 +1,5 @@
 
-#include "Eurobalise_Telegram.h"
+#include "EurobaliseTelegram.h"
 #include "Telegram_Header.h"
 #include "Packet_Header.h"
 #include "Decoder_Branch.h"
@@ -7,7 +7,7 @@
 #include <iostream>
 #include <cassert>
 
-std::ostream& operator<< (std::ostream& stream, const Eurobalise_Telegram& telegram)
+std::ostream& operator<< (std::ostream& stream, const EurobaliseTelegram& telegram)
 {
     stream << '(' << telegram.header() << ",";
 
@@ -29,7 +29,7 @@ std::ostream& operator<< (std::ostream& stream, const Eurobalise_Telegram& teleg
     return stream;
 }
 
-bool operator==(const Eurobalise_Telegram& a, const Eurobalise_Telegram& b)
+bool operator==(const EurobaliseTelegram& a, const EurobaliseTelegram& b)
 {
     if (a.header() == b.header())
     {
@@ -49,12 +49,12 @@ bool operator==(const Eurobalise_Telegram& a, const Eurobalise_Telegram& b)
     return false;
 }
 
-bool operator!=(const Eurobalise_Telegram& a, const Eurobalise_Telegram& b)
+bool operator!=(const EurobaliseTelegram& a, const EurobaliseTelegram& b)
 {
     return !(a == b);
 }
 
-bool Eurobalise_Telegram::decode(Bitstream& stream)
+bool EurobaliseTelegram::decode(Bitstream& stream)
 {
     if (Telegram_Header_Decoder(&stream, &m_header) != 1)
     {
@@ -109,7 +109,7 @@ bool Eurobalise_Telegram::decode(Bitstream& stream)
     return true;
 }
 
-bool Eurobalise_Telegram::encode(Bitstream& stream) const
+bool EurobaliseTelegram::encode(Bitstream& stream) const
 {
     if (Telegram_Header_Encoder(&stream, &header()) != 1)
     {

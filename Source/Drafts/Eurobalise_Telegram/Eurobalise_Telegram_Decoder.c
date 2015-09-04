@@ -7,7 +7,7 @@
     The function starts with reading a Eurobalise_Header and finished 
     after reading an End_of_information packet (NID_PACKET = 255).
 */
-void Eurobalise_Telegram_Decoder(Bitstream* stream, Packet_Counter* counter)
+void EurobaliseTelegram_Decoder(Bitstream* stream, Packet_Counter* counter)
 {
     Packet_Counter_Init(counter);
 

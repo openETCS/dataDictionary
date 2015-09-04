@@ -1,6 +1,6 @@
 
-#ifndef EUROBALISE_TELEGRAM_H_INCLUDED
-#define EUROBALISE_TELEGRAM_H_INCLUDED
+#ifndef EUROBALISETELEGRAM_H_INCLUDED
+#define EUROBALISETELEGRAM_H_INCLUDED
 
 #include "Telegram_Header.h"
 #include "BasePacket.h"
@@ -9,7 +9,7 @@
 
 typedef std::vector<BasePacketPtr> PacketSequence;
 
-class Eurobalise_Telegram
+class EurobaliseTelegram
 {
         Telegram_Header m_header;
 
@@ -17,12 +17,12 @@ class Eurobalise_Telegram
 
     public:
 
-        Eurobalise_Telegram() : m_header(), m_packets()
+        EurobaliseTelegram() : m_header(), m_packets()
         {
             m_packets.reserve(32);
         }
 
-        Eurobalise_Telegram(const Telegram_Header& h) : m_header(h), m_packets()
+        EurobaliseTelegram(const Telegram_Header& h) : m_header(h), m_packets()
         {
             m_packets.reserve(32);
         }
@@ -52,11 +52,11 @@ class Eurobalise_Telegram
         bool encode(Bitstream& stream) const;
 };
 
-std::ostream& operator<<(std::ostream& stream, const Eurobalise_Telegram& p);
+std::ostream& operator<<(std::ostream& stream, const EurobaliseTelegram& p);
 
-bool operator==(const Eurobalise_Telegram& a, const Eurobalise_Telegram& b);
+bool operator==(const EurobaliseTelegram& a, const EurobaliseTelegram& b);
 
-bool operator!=(const Eurobalise_Telegram& a, const Eurobalise_Telegram& b);
+bool operator!=(const EurobaliseTelegram& a, const EurobaliseTelegram& b);
 
-#endif // EUROBALISE_TELEGRAM_H_INCLUDED
+#endif // EUROBALISETELEGRAM_H_INCLUDED
 

@@ -1,5 +1,5 @@
 
-#include "Eurobalise_Telegram.h"
+#include "EurobaliseTelegram.h"
 #include "Packet_Header.h"
 #include "Bitstream_Init.h"
 #include "create.h"
@@ -70,7 +70,7 @@ int main ()
 
     stream.bitpos = init_pos;
 
-    Eurobalise_Telegram telegram;
+    EurobaliseTelegram telegram;
 
     std::cout << " Decoding Eurobalise Telegram." << std::endl;
     telegram.decode(stream);

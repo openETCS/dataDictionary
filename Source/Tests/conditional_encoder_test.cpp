@@ -1,5 +1,5 @@
 
-#include "Eurobalise_Telegram.h"
+#include "EurobaliseTelegram.h"
 #include "Telegram_Header.h"
 #include "Packet_Header.h"
 #include "Bitstream_Init.h"
@@ -13,7 +13,7 @@ int main ()
 
     // construct telegram from header
     // telegram.header = create_Telegram_Header_TrainToTrack();
-    Eurobalise_Telegram telegram(create_Telegram_Header_TrackToTrain());
+    EurobaliseTelegram telegram(create_Telegram_Header_TrackToTrain());
 
     // create a pointer to a data packet including core data packet 1
     // and push this pointer into the telegam packet vector
@@ -46,7 +46,7 @@ int main ()
     stream.bitpos = init_pos;
 
     // declare a new telegram
-    Eurobalise_Telegram telegram_new;
+    EurobaliseTelegram telegram_new;
 
     // *** decode from the stream to the new telegram ***
     std::cout << " Decoding Eurobalise Telegram." << std::endl;

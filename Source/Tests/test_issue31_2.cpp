@@ -1,5 +1,5 @@
 
-#include "Eurobalise_Telegram.h"
+#include "EurobaliseTelegram.h"
 #include "Telegram_Header.h"
 #include "Packet_Header.h"
 #include "Bitstream_Init.h"
@@ -40,7 +40,7 @@ int main ()
         header.Q_LINK	 = 1;
     }
 
-    Eurobalise_Telegram telegram(header);
+    EurobaliseTelegram telegram(header);
 
     Session_Management a;
     {
@@ -123,7 +123,7 @@ int main ()
 
     stream.bitpos = init_pos;
 
-    Eurobalise_Telegram new_telegram;
+    EurobaliseTelegram new_telegram;
 
     std::cout << " Decoding Eurobalise Telegram." << std::endl;
     new_telegram.decode(stream);
