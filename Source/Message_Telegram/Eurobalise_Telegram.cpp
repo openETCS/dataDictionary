@@ -7,15 +7,15 @@
 #include <iostream>
 #include <cassert>
 
-std::ostream& operator<< (std::ostream& stream, const Eurobalise_Telegram& p)
+std::ostream& operator<< (std::ostream& stream, const Eurobalise_Telegram& telegram)
 {
-    stream << '(' << p.header << ",";
+    stream << '(' << telegram.header << ",";
 
-    for (auto i = p.packets.begin(); i != p.packets.end(); ++i)
+    for (size_t i = 0; i != telegram.numberPackets(); ++i)
     {
-        stream << *(*i);
+        stream << *telegram.packet(i);
 
-        if (i + 1 != p.packets.end())
+        if (i + 1 != telegram.numberPackets())
         {
             stream << ',';
         }
@@ -33,13 +33,13 @@ bool operator==(const Eurobalise_Telegram& a, const Eurobalise_Telegram& b)
 {
     if (a.header == b.header)
     {
-        if (a.packets.size() == b.packets.size())
+        if (a.numberPackets() == b.numberPackets())
         {
             bool result = true;
 
-            for (size_t i = 0; i < a.packets.size(); ++i)
+            for (size_t i = 0; i < a.numberPackets(); ++i)
             {
-                result = result && (*(a.packets[i]) == *(b.packets[i]));
+                result = result && (*(a.packet(i)) == *(b.packet(i)));
             }
 
             return result;
