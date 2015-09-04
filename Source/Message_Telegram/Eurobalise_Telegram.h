@@ -11,36 +11,45 @@ typedef std::vector<BasePacketPtr> PacketSequence;
 
 class Eurobalise_Telegram
 {
-    Telegram_Header m_header;
+        Telegram_Header m_header;
 
-    PacketSequence  m_packets;
+        PacketSequence  m_packets;
 
-public:
+    public:
 
-    Eurobalise_Telegram() : m_header(), m_packets()
-    {
-        m_packets.reserve(32);
-    }
+        Eurobalise_Telegram() : m_header(), m_packets()
+        {
+            m_packets.reserve(32);
+        }
 
-    Eurobalise_Telegram(const Telegram_Header& h) : m_header(h), m_packets()
-    {
-        m_packets.reserve(32);
-    }
+        Eurobalise_Telegram(const Telegram_Header& h) : m_header(h), m_packets()
+        {
+            m_packets.reserve(32);
+        }
 
-    const Telegram_Header& header() const { return m_header; }
+        const Telegram_Header& header() const
+        {
+            return m_header;
+        }
 
-    size_t  numberPackets() const { return m_packets.size(); }
+        size_t  numberPackets() const
+        {
+            return m_packets.size();
+        }
 
-    BasePacketPtr packet(size_t i) const { return m_packets[i]; }
+        BasePacketPtr packet(size_t i) const
+        {
+            return m_packets[i];
+        }
 
-    void add(BasePacketPtr p)
-    {
-        m_packets.push_back(p);
-    }
+        void add(BasePacketPtr p)
+        {
+            m_packets.push_back(p);
+        }
 
-    bool decode(Bitstream& stream);
+        bool decode(Bitstream& stream);
 
-    bool encode(Bitstream& stream) const;
+        bool encode(Bitstream& stream) const;
 };
 
 std::ostream& operator<<(std::ostream& stream, const Eurobalise_Telegram& p);
