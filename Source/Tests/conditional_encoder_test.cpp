@@ -10,12 +10,10 @@
 int main ()
 {
     std::cout << "--- Testing the encode and decode functions of Eurobalise Telegram consecutively with conditional packets." << std::endl;
-    // declare a telegram
-    Eurobalise_Telegram telegram;
 
-    // declare and initialize a telegram header
+    // construct telegram from header
     // telegram.header = create_Telegram_Header_TrainToTrack();
-    telegram.header = create_Telegram_Header_TrackToTrain();
+    Eurobalise_Telegram telegram(create_Telegram_Header_TrackToTrain());
 
     // create a pointer to a data packet including core data packet 1
     // and push this pointer into the telegam packet vector

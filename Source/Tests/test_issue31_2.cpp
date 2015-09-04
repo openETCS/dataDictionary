@@ -26,8 +26,6 @@ int main ()
 
     uint32_t init_pos = stream.bitpos;
 
-    Eurobalise_Telegram telegram;
-
     Telegram_Header header;
     {
         header.Q_UPDOWN  = 1;
@@ -42,7 +40,7 @@ int main ()
         header.Q_LINK	 = 1;
     }
 
-    telegram.header = header;
+    Eurobalise_Telegram telegram(header);
 
     Session_Management a;
     {
@@ -132,11 +130,11 @@ int main ()
 
     std::cout << " Decoder Output: " << new_telegram << std::endl;
 
-    assert(telegram.header == new_telegram.header);
-    assert(telegram.packets[0]->header.NID_PACKET == new_telegram.packets[0]->header.NID_PACKET);
-    assert(telegram.packets[1]->header.NID_PACKET == new_telegram.packets[1]->header.NID_PACKET);
-    assert(telegram.packets[2]->header.NID_PACKET == new_telegram.packets[2]->header.NID_PACKET);
-    assert(telegram.packets[3]->header.NID_PACKET == new_telegram.packets[3]->header.NID_PACKET);
+    assert(telegram.header() == new_telegram.header());
+    assert(telegram.packet(0)->header.NID_PACKET == new_telegram.packet(0)->header.NID_PACKET);
+    assert(telegram.packet(1)->header.NID_PACKET == new_telegram.packet(1)->header.NID_PACKET);
+    assert(telegram.packet(2)->header.NID_PACKET == new_telegram.packet(2)->header.NID_PACKET);
+    assert(telegram.packet(3)->header.NID_PACKET == new_telegram.packet(3)->header.NID_PACKET);
     assert(telegram == new_telegram);
 
     std::cout << " Test successful." << std::endl;

@@ -26,8 +26,6 @@ int main ()
 
     uint32_t init_pos = stream.bitpos;
 
-    Eurobalise_Telegram telegram;
-
     Telegram_Header header;
     {
         header.Q_UPDOWN  = 1;
@@ -42,7 +40,7 @@ int main ()
         header.Q_LINK	 = 1;
     }
 
-    telegram.header = header;
+    Eurobalise_Telegram telegram(header);
 
     End_of_Information f;
 

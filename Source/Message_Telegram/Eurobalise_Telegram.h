@@ -9,28 +9,33 @@
 
 typedef std::vector<BasePacketPtr> PacketSequence;
 
-struct Eurobalise_Telegram
+class Eurobalise_Telegram
 {
-    Telegram_Header header;
+    Telegram_Header m_header;
 
-private:
-
-    PacketSequence packets;
+    PacketSequence  m_packets;
 
 public:
 
-    Eurobalise_Telegram() : header(), packets()
+    Eurobalise_Telegram() : m_header(), m_packets()
     {
-        packets.reserve(32);
+        m_packets.reserve(32);
     }
 
-    size_t  numberPackets() const { return packets.size(); }
+    Eurobalise_Telegram(const Telegram_Header& h) : m_header(h), m_packets()
+    {
+        m_packets.reserve(32);
+    }
 
-    BasePacketPtr packet(size_t i) const { return packets[i]; }
+    const Telegram_Header& header() const { return m_header; }
+
+    size_t  numberPackets() const { return m_packets.size(); }
+
+    BasePacketPtr packet(size_t i) const { return m_packets[i]; }
 
     void add(BasePacketPtr p)
     {
-        packets.push_back(p);
+        m_packets.push_back(p);
     }
 
     bool decode(Bitstream& stream);

@@ -77,7 +77,7 @@ int main ()
 
     std::cout << " Decoder Output: " << telegram << std::endl;
 
-    assert(telegram.header == header);
+    assert(telegram.header() == header);
 
     assert_equal(a, telegram.packet(0));
     assert_equal(b, telegram.packet(1));
