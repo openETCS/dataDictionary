@@ -12,7 +12,6 @@
 #include <cassert>
 
 #include "EurobaliseTelegram.h"
-#include "Packet_Header.h"
 #include "Bitstream_Init.h"
 #include "UpperBitsNotSet.h"
 #include "print_bits.h"

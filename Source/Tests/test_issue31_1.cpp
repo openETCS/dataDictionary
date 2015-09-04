@@ -1,7 +1,5 @@
 
 #include "EurobaliseTelegram.h"
-#include "TelegramHeader.h"
-#include "Packet_Header.h"
 #include "Bitstream_Init.h"
 #include "Packets.h"
 #include "print_bits.h"
