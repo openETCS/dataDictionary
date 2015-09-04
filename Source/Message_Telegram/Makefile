@@ -34,13 +34,6 @@ libmessage_telegram.a : $(OBJ)
 	ranlib  $@
 	$(RM) $(OBJ)
 
-print_bits: print_bits.o
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $<
-	$(RM) $<
-
-bits: print_bits
-	./print_bits
-
 
 FORMAT := $(wildcard *.h) $(wildcard *.cpp) $(wildcard *.c)
 
