@@ -40,20 +40,10 @@ Proof.
 
   replace i0 with (newpos - 1 - (newpos - 1 - i0)) by omega.
 
-  assert(X: forall k : int,
-      k < newpos ->
-      oldpos <= k ->
-      (bit_test value (newpos - 1 - k) <-> bit_test result (newpos - 1 -k))).
-  {
-     intros.
-     rewrite H19; auto with zarith.
-  }
+  unfold P_Bit8Array in *.
+  unfold P_Bit8 in *.
 
-  rewrite X; auto with zarith.
-
-  replace (newpos - 1 - (newpos - 1 - i0)) with i0 by omega.
-
-  intuition.
+  rewrite <- H19; auto with zarith.
 
 Qed.
 
