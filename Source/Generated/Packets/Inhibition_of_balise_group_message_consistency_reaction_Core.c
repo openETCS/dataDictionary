@@ -1,6 +1,6 @@
 
 #include "Inhibition_of_balise_group_message_consistency_reaction_Core.h"
-#include "UpperBitsNotSet.h"
+#include "Bit64.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
 #include "Bitstream_Normal.h"

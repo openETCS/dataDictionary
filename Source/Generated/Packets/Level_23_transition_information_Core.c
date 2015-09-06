@@ -1,6 +1,6 @@
 
 #include "Level_23_transition_information_Core.h"
-#include "UpperBitsNotSet.h"
+#include "Bit64.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
 #include "Bitstream_Normal.h"

@@ -1,6 +1,6 @@
 
 #include "International_Static_Speed_Profile_Core_2.h"
-#include "UpperBitsNotSet.h"
+#include "Bit64.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
 #include "Bitstream_Normal.h"

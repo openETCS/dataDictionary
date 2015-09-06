@@ -1,6 +1,6 @@
 
 #include "Track_Condition_Change_of_allowed_current_consumption_Core.h"
-#include "UpperBitsNotSet.h"
+#include "Bit64.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
 #include "Bitstream_Normal.h"
