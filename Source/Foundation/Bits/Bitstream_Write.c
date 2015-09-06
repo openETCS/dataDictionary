@@ -1,6 +1,5 @@
 
 #include "Bitstream_Write.h"
-#include "Bitwalker_Write.h"
 
 void Bitstream_Write(Bitstream* stream, uint32_t length, uint64_t value)
 {

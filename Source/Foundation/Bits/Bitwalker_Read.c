@@ -1,4 +1,5 @@
-#include "Bitwalker_Read.h"
+
+#include "Bitwalker.h"
 #include "Bit8.h"
 #include "Bit64.h"
 

@@ -1,6 +1,5 @@
 
 #include "Bitstream_Read.h"
-#include "Bitwalker_Read.h"
 
 uint64_t Bitstream_Read(Bitstream* s, uint32_t length)
 {
