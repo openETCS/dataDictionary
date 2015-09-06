@@ -15,9 +15,11 @@
 
 #define Bit8(Value,Pos)  (BitTest(Value,(7 - (Pos))))
 #define Bit8Array(Stream,Pos) (Bit8(Stream[((Pos)/8)],((Pos)%8)))
-#define Bit64(Value,Pos)  (BitTest(Value,(63 - (Pos))))
+//#define Bit64(Value,Pos)  (BitTest(Value,(63 - (Pos))))
 
 /*@
+   predicate Bit64{A}(integer v, integer n) = BitTest(v, 63 - n);
+  
    predicate Invariant{A}(uint64_t x) = \true;
 
    predicate ZeroInitialized{A}(uint64_t x) = x == 0;
