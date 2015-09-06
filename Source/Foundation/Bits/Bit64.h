@@ -38,5 +38,29 @@ static inline uint64_t SetBit64(uint64_t value, uint32_t pos, int flag)
     return (flag == 0) ? (value & ~mask) : (value | mask);
 }
 
+
+/*@
+    requires pre: length <= 64;
+
+    assigns \nothing;
+
+    ensures  not_set: \result <==> UpperBitsNotSet(value, length);
+*/
+static inline int UpperBitsNotSet64(uint64_t value, uint32_t length)
+{
+    if (length == 64)
+    {
+        return 1;
+    }
+    else
+    {
+        const uint64_t MaxValue = ((uint64_t) 1) << length;
+        //@ assert equiv: UpperBitsNotSet(value, length) <==> value < MaxValue;
+
+        return value < MaxValue;
+    }
+}
+
+
 #endif  // BIT64_H_INCLUDED
 
