@@ -1,10 +1,10 @@
 
+#include <cassert>
+#include <iostream>
+
 #include "Validated_Train_Data_Message.h"
 #include "Bitstream_Init.h"
 #include "Packets.h"
-#include <cassert>
-#include "UpperBitsNotSet.h"
-#include <iostream>
 
 template<typename Packet>
 void assert_equal(const Packet& packet, BasePacketPtr ptr)

@@ -3,7 +3,6 @@
 #include "Bitstream_Init.h"
 #include "Packets.h"
 #include <cassert>
-#include "UpperBitsNotSet.h"
 #include <iostream>
 
 template<typename Packet>
