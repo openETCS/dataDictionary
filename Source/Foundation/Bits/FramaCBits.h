@@ -13,9 +13,8 @@
   @ }
 */
 
-#define BytePos(Pos) ((Pos)/8)
 #define Bit8(Value,Pos)  (BitTest(Value,(7 - (Pos))))
-#define Bit8Array(Stream,Pos) (Bit8(Stream[BytePos(Pos)],((Pos)%8)))
+#define Bit8Array(Stream,Pos) (Bit8(Stream[((Pos)/8)],((Pos)%8)))
 #define Bit32(Value,Pos)  (BitTest(Value,(31 - (Pos))))
 #define Bit64(Value,Pos)  (BitTest(Value,(63 - (Pos))))
 
