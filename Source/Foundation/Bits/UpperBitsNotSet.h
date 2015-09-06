@@ -2,7 +2,7 @@
 #ifndef UPPERBITSNOTSET_H_INCLUDED
 #define UPPERBITSNOTSET_H_INCLUDED
 
-#include "FramaCBits.h"
+#include "BitPredicates.h"
 
 // not an inline function because it cannot be verified automatically right now
 

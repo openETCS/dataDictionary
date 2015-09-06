@@ -2,7 +2,7 @@
 #ifndef BIT64_H_INCLUDED
 #define BIT64_H_INCLUDED
 
-#include "FramaCBits.h"
+#include "BitPredicates.h"
 
 /*@
    requires pre: pos < 64;

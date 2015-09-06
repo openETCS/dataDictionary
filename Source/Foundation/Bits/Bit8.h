@@ -2,7 +2,7 @@
 #ifndef BIT8_H_INCLUDED
 #define BIT8_H_INCLUDED
 
-#include "FramaCBits.h"
+#include "BitPredicates.h"
 
 /*@
     requires pre:  pos < 8;

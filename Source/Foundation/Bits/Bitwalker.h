@@ -2,7 +2,7 @@
 #ifndef BITWALKER_H_INCLUDED
 #define BITWALKER_H_INCLUDED
 
-#include "FramaCBits.h"
+#include "BitPredicates.h"
 
 /*@
    predicate Readable{L}(uint8_t* addr, integer size) = \valid_read(addr + (0..size-1));

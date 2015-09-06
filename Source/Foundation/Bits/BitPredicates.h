@@ -1,6 +1,6 @@
 
-#ifndef FRAMACBITS_H_INCLUDED
-#define FRAMACBITS_H_INCLUDED
+#ifndef BITPREDICATES_H_INCLUDED
+#define BITPREDICATES_H_INCLUDED
 
 #include <stdint.h>
 #include <limits.h>
@@ -51,5 +51,5 @@
        \forall integer i; length <= i ==> !BitTest(value, i);
 */
 
-#endif  // FRAMACBITS_H_INCLUDED
+#endif  // BITPREDICATES_H_INCLUDED
 
