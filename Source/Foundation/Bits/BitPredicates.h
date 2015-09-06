@@ -14,9 +14,9 @@
 */
 
 /*@
-   predicate Bit8{A}(integer v, integer n)  = BitTest(v, 7 - n);
+   predicate Bit8{A}(uint8_t v, integer n)  = BitTest(v, 7 - n);
 
-   predicate Bit64{A}(integer v, integer n) = BitTest(v, 63 - n);
+   predicate Bit64{A}(uint64_t v, integer n) = BitTest(v, 63 - n);
 
    predicate Bit8Array{A}(uint8_t* a, integer n) = Bit8(a[n / 8],n % 8);
 */
