@@ -14,7 +14,7 @@ include $(TOPDIR)/Makefile.template
 SRC :=  Bitwalker.c\
 	Bitstream_Init.c Bitstream_Normal.c\
 	Bitstream_Read.c Bitstream_Write.c\
-	Bitstream_ReadThenWrite.c Bitstream_WriteThenRead.c\
+	Bitstream_Inverse.c
 
 OBJ := $(SRC:.c=.o)
 REPORT := $(SRC:.c=.report)

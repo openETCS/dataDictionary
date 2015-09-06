@@ -5,6 +5,5 @@
 #include "Bitstream_Read.c"
 #include "Bitstream_Write.c"
 
-#include "Bitstream_WriteThenRead.c"
-#include "Bitstream_ReadThenWrite.c"
+#include "Bitstream_Inverse.c"
 

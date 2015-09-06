@@ -20,7 +20,7 @@
 
    predicate Bit8Array{A}(uint8_t* a, integer n) = Bit8(a[n / 8],n % 8);
 */
-  
+
 
 /*@
    predicate Invariant{A}(uint64_t x) = \true;
