@@ -1,9 +1,9 @@
 
 #include "TelegramHeader.h"
+#include "Bit64.h"
 #include "Bitstream_Normal.h"
 #include "Bitstream_Read.h"
 #include "Bitstream_Write.h"
-#include "UpperBitsNotSet.h"
 
 int TelegramHeader_Decoder(Bitstream* stream, TelegramHeader* p)
 {
