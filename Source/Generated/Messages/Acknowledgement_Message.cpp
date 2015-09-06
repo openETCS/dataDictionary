@@ -6,7 +6,7 @@
 #include "Bitstream_Write.h"
 #include "Bitstream_Read.h"
 
-#include "Bitwalker_Read.h"
+
 #include <iostream>
 #include <cassert>
 

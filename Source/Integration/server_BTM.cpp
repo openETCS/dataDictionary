@@ -13,7 +13,6 @@
 
 #include "EurobaliseTelegram.h"
 #include "Bitstream_Init.h"
-#include "UpperBitsNotSet.h"
 #include "print_bits.h"
 
 int sockfd, newsockfd;
