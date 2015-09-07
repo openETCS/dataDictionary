@@ -1,8 +1,5 @@
 
-#include "Bitstream_Init.h"
-#include "Bitstream_Normal.h"
-#include "Bitstream_Read.h"
-#include "Bitstream_Write.h"
+#include "Bitstream.h"
 
 void
 Bitstream_Init(Bitstream* stream, uint8_t* addr, uint32_t size, uint32_t bitpos)

@@ -44,5 +44,66 @@ typedef struct Bitstream Bitstream;
 */
 
 
+/*@
+  requires valid:     Writeable(stream);
+  requires bit_size:  8 * size <= UINT32_MAX;
+  requires valid_pos: bitpos <= 8 * size;
+  requires separated: \separated(addr + (0..size-1), stream);
+
+  assigns  stream->addr, stream->size, stream->bitpos;
+
+  ensures  addr:      stream->addr == addr;
+  ensures  size:      stream->size == size;
+  ensures  bitpos:    stream->bitpos == bitpos;
+  ensures  invariant: Invariant(stream, 0);
+*/
+void Bitstream_Init(Bitstream* stream, uint8_t* addr, uint32_t size, uint32_t bitpos);
+
+
+/*@
+  requires valid:     Readable(stream);
+  requires invariant: Invariant(stream, length);
+
+  assigns \nothing;
+
+  ensures  result:    \result <==> Normal(stream, length);
+*/
+int Bitstream_Normal(const Bitstream* stream, uint32_t length);
+
+
+/*@
+  requires  valid:      Readable(stream);
+  requires  invariant:  Invariant(stream, length);
+  requires  normal:     Normal(stream, length);
+
+  assigns   stream->bitpos;
+
+  ensures   pos:        stream->bitpos == \old(stream->bitpos) + length;
+  ensures   changed:    EqualBits(stream, \old(stream->bitpos), stream->bitpos, \result);
+  ensures   upper:      UpperBitsNotSet(\result, length);
+  ensures   size:       stream->size == \old(stream->size);
+  ensures   unchanged:  Unchanged{Here,Old}(stream, 0, 8 * stream->size);
+*/
+uint64_t Bitstream_Read(Bitstream* stream, uint32_t length);
+
+
+/*@
+  requires valid:      Writeable(stream);
+  requires invariant:  Invariant(stream, length);
+  requires normal:     Normal(stream, length);
+  requires upper:      UpperBitsNotSet(value, length);
+
+  assigns stream->addr[0..stream->size - 1];
+  assigns stream->bitpos;
+
+  ensures  pos:        stream->bitpos == \old(stream->bitpos) + length;
+  ensures  changed:    EqualBits(stream, \old(stream->bitpos), stream->bitpos, value);
+  ensures  unchanged:  Unchanged{Here,Old}(stream, 0, \old(stream->bitpos));
+  ensures  unchanged:  Unchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
+  ensures  size:       stream->size == \old(stream->size);
+*/
+void Bitstream_Write(Bitstream* stream, uint32_t length, uint64_t value);
+
+
 #endif // BITSTREAM_H_INCLUDED
 

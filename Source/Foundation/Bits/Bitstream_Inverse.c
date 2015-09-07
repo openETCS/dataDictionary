@@ -1,6 +1,5 @@
 
-#include "Bitstream_Read.h"
-#include "Bitstream_Write.h"
+#include "Bitstream.h"
 
 /*@
     requires valid:      Writeable(stream);
