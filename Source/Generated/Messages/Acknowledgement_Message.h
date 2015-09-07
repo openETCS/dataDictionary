@@ -2,18 +2,18 @@
 #ifndef ACKNOWLEDGEMENT_Message_H_INCLUDED
 #define ACKNOWLEDGEMENT_Message_H_INCLUDED
 
-#include "Euroradio_Message.h"
+#include "EuroradioMessage.h"
 #include "Bitstream.h"
 #include <iostream>
 
-struct Acknowledgement_Message : public Euroradio_Message
+struct Acknowledgement_Message : public EuroradioMessage
 {
     uint16_t  L_MESSAGE        ;  // # 10
     uint32_t  T_TRAIN          ;  // # 32
     uint32_t  NID_ENGINE       ;  // # 24
 
 
-    Acknowledgement_Message() : Euroradio_Message(146) {}
+    Acknowledgement_Message() : EuroradioMessage(146) {}
 
     void print(std::ostream& stream) const override
     {
@@ -24,7 +24,7 @@ struct Acknowledgement_Message : public Euroradio_Message
                << +NID_ENGINE << ")";
     }
 
-    bool equals(const Euroradio_Message& p) const override
+    bool equals(const EuroradioMessage& p) const override
     {
         if (auto q = dynamic_cast<const Acknowledgement_Message*>(&p))
         {

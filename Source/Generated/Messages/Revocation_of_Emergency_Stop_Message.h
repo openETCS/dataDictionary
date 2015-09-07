@@ -2,11 +2,11 @@
 #ifndef REVOCATION_OF_EMERGENCY_STOP_Message_H_INCLUDED
 #define REVOCATION_OF_EMERGENCY_STOP_Message_H_INCLUDED
 
-#include "Euroradio_Message.h"
+#include "EuroradioMessage.h"
 #include "Bitstream.h"
 #include <iostream>
 
-struct Revocation_of_Emergency_Stop_Message : public Euroradio_Message
+struct Revocation_of_Emergency_Stop_Message : public EuroradioMessage
 {
     uint16_t  L_MESSAGE        ;  // # 10
     uint32_t  T_TRAIN          ;  // # 32
@@ -15,7 +15,7 @@ struct Revocation_of_Emergency_Stop_Message : public Euroradio_Message
     uint8_t  NID_EM            ;  // # 4
 
 
-    Revocation_of_Emergency_Stop_Message() : Euroradio_Message(18) {}
+    Revocation_of_Emergency_Stop_Message() : EuroradioMessage(18) {}
 
     void print(std::ostream& stream) const override
     {
@@ -28,7 +28,7 @@ struct Revocation_of_Emergency_Stop_Message : public Euroradio_Message
                << +NID_EM << ")";
     }
 
-    bool equals(const Euroradio_Message& p) const override
+    bool equals(const EuroradioMessage& p) const override
     {
         if (auto q = dynamic_cast<const Revocation_of_Emergency_Stop_Message*>(&p))
         {

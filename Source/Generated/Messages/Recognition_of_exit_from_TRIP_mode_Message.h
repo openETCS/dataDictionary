@@ -2,11 +2,11 @@
 #ifndef RECOGNITION_OF_EXIT_FROM_TRIP_MODE_Message_H_INCLUDED
 #define RECOGNITION_OF_EXIT_FROM_TRIP_MODE_Message_H_INCLUDED
 
-#include "Euroradio_Message.h"
+#include "EuroradioMessage.h"
 #include "Bitstream.h"
 #include <iostream>
 
-struct Recognition_of_exit_from_TRIP_mode_Message : public Euroradio_Message
+struct Recognition_of_exit_from_TRIP_mode_Message : public EuroradioMessage
 {
     uint16_t  L_MESSAGE        ;  // # 10
     uint32_t  T_TRAIN          ;  // # 32
@@ -14,7 +14,7 @@ struct Recognition_of_exit_from_TRIP_mode_Message : public Euroradio_Message
     uint32_t  NID_LRBG         ;  // # 24
 
 
-    Recognition_of_exit_from_TRIP_mode_Message() : Euroradio_Message(6) {}
+    Recognition_of_exit_from_TRIP_mode_Message() : EuroradioMessage(6) {}
 
     void print(std::ostream& stream) const override
     {
@@ -26,7 +26,7 @@ struct Recognition_of_exit_from_TRIP_mode_Message : public Euroradio_Message
                << +NID_LRBG << ")";
     }
 
-    bool equals(const Euroradio_Message& p) const override
+    bool equals(const EuroradioMessage& p) const override
     {
         if (auto q = dynamic_cast<const Recognition_of_exit_from_TRIP_mode_Message*>(&p))
         {

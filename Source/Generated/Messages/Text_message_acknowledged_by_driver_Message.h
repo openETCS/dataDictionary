@@ -2,11 +2,11 @@
 #ifndef TEXT_MESSAGE_ACKNOWLEDGED_BY_DRIVER_Message_H_INCLUDED
 #define TEXT_MESSAGE_ACKNOWLEDGED_BY_DRIVER_Message_H_INCLUDED
 
-#include "Euroradio_Message.h"
+#include "EuroradioMessage.h"
 #include "Bitstream.h"
 #include <iostream>
 
-struct Text_message_acknowledged_by_driver_Message : public Euroradio_Message
+struct Text_message_acknowledged_by_driver_Message : public EuroradioMessage
 {
     uint16_t  L_MESSAGE        ;  // # 10
     uint32_t  T_TRAIN          ;  // # 32
@@ -15,7 +15,7 @@ struct Text_message_acknowledged_by_driver_Message : public Euroradio_Message
 
     BasePacketPtr  packet_0_1;
 
-    Text_message_acknowledged_by_driver_Message() : Euroradio_Message(158) {}
+    Text_message_acknowledged_by_driver_Message() : EuroradioMessage(158) {}
 
     void print(std::ostream& stream) const override
     {
@@ -28,7 +28,7 @@ struct Text_message_acknowledged_by_driver_Message : public Euroradio_Message
                << *(packet_0_1) << ")";
     }
 
-    bool equals(const Euroradio_Message& p) const override
+    bool equals(const EuroradioMessage& p) const override
     {
         if (auto q = dynamic_cast<const Text_message_acknowledged_by_driver_Message*>(&p))
         {

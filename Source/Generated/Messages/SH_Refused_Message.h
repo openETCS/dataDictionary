@@ -2,11 +2,11 @@
 #ifndef SH_REFUSED_Message_H_INCLUDED
 #define SH_REFUSED_Message_H_INCLUDED
 
-#include "Euroradio_Message.h"
+#include "EuroradioMessage.h"
 #include "Bitstream.h"
 #include <iostream>
 
-struct SH_Refused_Message : public Euroradio_Message
+struct SH_Refused_Message : public EuroradioMessage
 {
     uint16_t  L_MESSAGE        ;  // # 10
     uint32_t  T_TRAIN_0        ;  // # 32
@@ -15,7 +15,7 @@ struct SH_Refused_Message : public Euroradio_Message
     uint32_t  T_TRAIN_1        ;  // # 32
 
 
-    SH_Refused_Message() : Euroradio_Message(27) {}
+    SH_Refused_Message() : EuroradioMessage(27) {}
 
     void print(std::ostream& stream) const override
     {
@@ -28,7 +28,7 @@ struct SH_Refused_Message : public Euroradio_Message
                << +T_TRAIN_1 << ")";
     }
 
-    bool equals(const Euroradio_Message& p) const override
+    bool equals(const EuroradioMessage& p) const override
     {
         if (auto q = dynamic_cast<const SH_Refused_Message*>(&p))
         {

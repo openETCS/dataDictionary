@@ -2,18 +2,18 @@
 #ifndef NO_COMPATIBLE_VERSION_SUPPORTED_Message_H_INCLUDED
 #define NO_COMPATIBLE_VERSION_SUPPORTED_Message_H_INCLUDED
 
-#include "Euroradio_Message.h"
+#include "EuroradioMessage.h"
 #include "Bitstream.h"
 #include <iostream>
 
-struct No_compatible_version_supported_Message : public Euroradio_Message
+struct No_compatible_version_supported_Message : public EuroradioMessage
 {
     uint16_t  L_MESSAGE        ;  // # 10
     uint32_t  T_TRAIN          ;  // # 32
     uint32_t  NID_ENGINE       ;  // # 24
 
 
-    No_compatible_version_supported_Message() : Euroradio_Message(154) {}
+    No_compatible_version_supported_Message() : EuroradioMessage(154) {}
 
     void print(std::ostream& stream) const override
     {
@@ -24,7 +24,7 @@ struct No_compatible_version_supported_Message : public Euroradio_Message
                << +NID_ENGINE << ")";
     }
 
-    bool equals(const Euroradio_Message& p) const override
+    bool equals(const EuroradioMessage& p) const override
     {
         if (auto q = dynamic_cast<const No_compatible_version_supported_Message*>(&p))
         {

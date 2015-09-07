@@ -2,18 +2,18 @@
 #ifndef TERMINATION_OF_A_COMMUNICATION_SESSION_Message_H_INCLUDED
 #define TERMINATION_OF_A_COMMUNICATION_SESSION_Message_H_INCLUDED
 
-#include "Euroradio_Message.h"
+#include "EuroradioMessage.h"
 #include "Bitstream.h"
 #include <iostream>
 
-struct Termination_of_a_communication_session_Message : public Euroradio_Message
+struct Termination_of_a_communication_session_Message : public EuroradioMessage
 {
     uint16_t  L_MESSAGE        ;  // # 10
     uint32_t  T_TRAIN          ;  // # 32
     uint32_t  NID_ENGINE       ;  // # 24
 
 
-    Termination_of_a_communication_session_Message() : Euroradio_Message(156) {}
+    Termination_of_a_communication_session_Message() : EuroradioMessage(156) {}
 
     void print(std::ostream& stream) const override
     {
@@ -24,7 +24,7 @@ struct Termination_of_a_communication_session_Message : public Euroradio_Message
                << +NID_ENGINE << ")";
     }
 
-    bool equals(const Euroradio_Message& p) const override
+    bool equals(const EuroradioMessage& p) const override
     {
         if (auto q = dynamic_cast<const Termination_of_a_communication_session_Message*>(&p))
         {

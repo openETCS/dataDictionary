@@ -2,11 +2,11 @@
 #ifndef TRACK_AHEAD_FREE_REQUEST_Message_H_INCLUDED
 #define TRACK_AHEAD_FREE_REQUEST_Message_H_INCLUDED
 
-#include "Euroradio_Message.h"
+#include "EuroradioMessage.h"
 #include "Bitstream.h"
 #include <iostream>
 
-struct Track_Ahead_Free_Request_Message : public Euroradio_Message
+struct Track_Ahead_Free_Request_Message : public EuroradioMessage
 {
     uint16_t  L_MESSAGE        ;  // # 10
     uint32_t  T_TRAIN          ;  // # 32
@@ -19,7 +19,7 @@ struct Track_Ahead_Free_Request_Message : public Euroradio_Message
     uint16_t  L_TAFDISPLAY     ;  // # 15
 
 
-    Track_Ahead_Free_Request_Message() : Euroradio_Message(34) {}
+    Track_Ahead_Free_Request_Message() : EuroradioMessage(34) {}
 
     void print(std::ostream& stream) const override
     {
@@ -36,7 +36,7 @@ struct Track_Ahead_Free_Request_Message : public Euroradio_Message
                << +L_TAFDISPLAY << ")";
     }
 
-    bool equals(const Euroradio_Message& p) const override
+    bool equals(const EuroradioMessage& p) const override
     {
         if (auto q = dynamic_cast<const Track_Ahead_Free_Request_Message*>(&p))
         {

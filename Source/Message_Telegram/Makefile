@@ -21,12 +21,11 @@ CPPFLAGS += -I$(BASE_PACKETS)
 CPPFLAGS += -I$(GENERATED_PACKETS)
 CPPFLAGS += -I$(GENERATED_MESSAGES)
 
-SRC= print_bits.cpp EurobaliseTelegram.cpp\
-     Euroradio_Message.cpp MessageHeader.cpp
+SRC= print_bits.cpp EurobaliseTelegram.cpp EuroradioMessage.cpp
 
-OBJ := $(SRC:.cpp=.o)
+OBJ := $(SRC:.cpp=.o) 
 
-OBJ += TelegramHeader.o
+OBJ += TelegramHeader.o MessageHeader.o
 
 
 libmessage_telegram.a : $(OBJ)

@@ -2,11 +2,11 @@
 #ifndef GENERAL_MESSAGE_Message_H_INCLUDED
 #define GENERAL_MESSAGE_Message_H_INCLUDED
 
-#include "Euroradio_Message.h"
+#include "EuroradioMessage.h"
 #include "Bitstream.h"
 #include <iostream>
 
-struct General_message_Message : public Euroradio_Message
+struct General_message_Message : public EuroradioMessage
 {
     uint16_t  L_MESSAGE        ;  // # 10
     uint32_t  T_TRAIN          ;  // # 32
@@ -15,7 +15,7 @@ struct General_message_Message : public Euroradio_Message
 
     PacketSequence  optional_packets;
 
-    General_message_Message() : Euroradio_Message(24) {}
+    General_message_Message() : EuroradioMessage(24) {}
 
     void print(std::ostream& stream) const override
     {
@@ -39,7 +39,7 @@ struct General_message_Message : public Euroradio_Message
         stream << ")";
     }
 
-    bool equals(const Euroradio_Message& p) const override
+    bool equals(const EuroradioMessage& p) const override
     {
         if (auto q = dynamic_cast<const General_message_Message*>(&p))
         {

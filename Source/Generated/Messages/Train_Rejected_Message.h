@@ -2,11 +2,11 @@
 #ifndef TRAIN_REJECTED_Message_H_INCLUDED
 #define TRAIN_REJECTED_Message_H_INCLUDED
 
-#include "Euroradio_Message.h"
+#include "EuroradioMessage.h"
 #include "Bitstream.h"
 #include <iostream>
 
-struct Train_Rejected_Message : public Euroradio_Message
+struct Train_Rejected_Message : public EuroradioMessage
 {
     uint16_t  L_MESSAGE        ;  // # 10
     uint32_t  T_TRAIN          ;  // # 32
@@ -14,7 +14,7 @@ struct Train_Rejected_Message : public Euroradio_Message
     uint32_t  NID_LRBG         ;  // # 24
 
 
-    Train_Rejected_Message() : Euroradio_Message(40) {}
+    Train_Rejected_Message() : EuroradioMessage(40) {}
 
     void print(std::ostream& stream) const override
     {
@@ -26,7 +26,7 @@ struct Train_Rejected_Message : public Euroradio_Message
                << +NID_LRBG << ")";
     }
 
-    bool equals(const Euroradio_Message& p) const override
+    bool equals(const EuroradioMessage& p) const override
     {
         if (auto q = dynamic_cast<const Train_Rejected_Message*>(&p))
         {

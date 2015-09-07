@@ -2,11 +2,11 @@
 #ifndef UNCONDITIONAL_EMERGENCY_STOP_Message_H_INCLUDED
 #define UNCONDITIONAL_EMERGENCY_STOP_Message_H_INCLUDED
 
-#include "Euroradio_Message.h"
+#include "EuroradioMessage.h"
 #include "Bitstream.h"
 #include <iostream>
 
-struct Unconditional_Emergency_Stop_Message : public Euroradio_Message
+struct Unconditional_Emergency_Stop_Message : public EuroradioMessage
 {
     uint16_t  L_MESSAGE        ;  // # 10
     uint32_t  T_TRAIN          ;  // # 32
@@ -15,7 +15,7 @@ struct Unconditional_Emergency_Stop_Message : public Euroradio_Message
     uint8_t  NID_EM            ;  // # 4
 
 
-    Unconditional_Emergency_Stop_Message() : Euroradio_Message(16) {}
+    Unconditional_Emergency_Stop_Message() : EuroradioMessage(16) {}
 
     void print(std::ostream& stream) const override
     {
@@ -28,7 +28,7 @@ struct Unconditional_Emergency_Stop_Message : public Euroradio_Message
                << +NID_EM << ")";
     }
 
-    bool equals(const Euroradio_Message& p) const override
+    bool equals(const EuroradioMessage& p) const override
     {
         if (auto q = dynamic_cast<const Unconditional_Emergency_Stop_Message*>(&p))
         {

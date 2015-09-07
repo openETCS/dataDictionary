@@ -1,10 +1,10 @@
 
 #include <iostream>
 #include <cassert>
-#include "Euroradio_Message.h"
-#include "Euroradio_Message_List.h"
+#include "EuroradioMessage.h"
+#include "Messages.h"
 
-Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
+EuroradioMessagePtr EuroradioMessage_Decoder(Bitstream& stream)
 {
     MessageHeader messageID;
     MessageHeader_Decoder(&stream, &messageID);
@@ -21,7 +21,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -35,7 +35,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -49,7 +49,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -63,7 +63,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -77,7 +77,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -91,7 +91,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -105,7 +105,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -119,7 +119,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -133,7 +133,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -147,7 +147,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -161,7 +161,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -175,7 +175,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -189,7 +189,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -203,7 +203,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -217,7 +217,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -231,7 +231,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -245,7 +245,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -259,7 +259,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -273,7 +273,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -287,7 +287,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -301,7 +301,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -315,7 +315,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -329,7 +329,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -343,7 +343,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -357,7 +357,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -371,7 +371,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -385,7 +385,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -399,7 +399,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -413,7 +413,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -427,7 +427,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -441,7 +441,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -455,7 +455,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -469,7 +469,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -483,7 +483,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -497,7 +497,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -511,7 +511,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -525,7 +525,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -539,7 +539,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
             }
             else
             {
-                return Euroradio_MessagePtr();
+                return EuroradioMessagePtr();
             }
         }
 
@@ -547,14 +547,14 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
         {
             std::cout << "NID_MESSAGE " << +messageID.NID_MESSAGE << std::endl;
             std::cerr << "Error, unrecognized Euroradio Message in " << __FILE__ << std::endl;
-            return Euroradio_MessagePtr();
+            return EuroradioMessagePtr();
         }
     }
 
-    return Euroradio_MessagePtr();
+    return EuroradioMessagePtr();
 }
 
-bool Euroradio_Message_Encoder(Bitstream& stream, Euroradio_MessagePtr p)
+bool EuroradioMessage_Encoder(Bitstream& stream, EuroradioMessagePtr p)
 {
     MessageHeader_Encoder(&stream, &(p->header));
 

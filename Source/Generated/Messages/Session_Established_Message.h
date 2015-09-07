@@ -2,11 +2,11 @@
 #ifndef SESSION_ESTABLISHED_Message_H_INCLUDED
 #define SESSION_ESTABLISHED_Message_H_INCLUDED
 
-#include "Euroradio_Message.h"
+#include "EuroradioMessage.h"
 #include "Bitstream.h"
 #include <iostream>
 
-struct Session_Established_Message : public Euroradio_Message
+struct Session_Established_Message : public EuroradioMessage
 {
     uint16_t  L_MESSAGE        ;  // # 10
     uint32_t  T_TRAIN          ;  // # 32
@@ -14,7 +14,7 @@ struct Session_Established_Message : public Euroradio_Message
 
     PacketSequence  optional_packets;
 
-    Session_Established_Message() : Euroradio_Message(159) {}
+    Session_Established_Message() : EuroradioMessage(159) {}
 
     void print(std::ostream& stream) const override
     {
@@ -37,7 +37,7 @@ struct Session_Established_Message : public Euroradio_Message
         stream << ")";
     }
 
-    bool equals(const Euroradio_Message& p) const override
+    bool equals(const EuroradioMessage& p) const override
     {
         if (auto q = dynamic_cast<const Session_Established_Message*>(&p))
         {

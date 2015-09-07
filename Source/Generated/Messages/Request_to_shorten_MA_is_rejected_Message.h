@@ -2,11 +2,11 @@
 #ifndef REQUEST_TO_SHORTEN_MA_IS_REJECTED_Message_H_INCLUDED
 #define REQUEST_TO_SHORTEN_MA_IS_REJECTED_Message_H_INCLUDED
 
-#include "Euroradio_Message.h"
+#include "EuroradioMessage.h"
 #include "Bitstream.h"
 #include <iostream>
 
-struct Request_to_shorten_MA_is_rejected_Message : public Euroradio_Message
+struct Request_to_shorten_MA_is_rejected_Message : public EuroradioMessage
 {
     uint16_t  L_MESSAGE        ;  // # 10
     uint32_t  T_TRAIN          ;  // # 32
@@ -14,7 +14,7 @@ struct Request_to_shorten_MA_is_rejected_Message : public Euroradio_Message
 
     BasePacketPtr  packet_0_1;
 
-    Request_to_shorten_MA_is_rejected_Message() : Euroradio_Message(138) {}
+    Request_to_shorten_MA_is_rejected_Message() : EuroradioMessage(138) {}
 
     void print(std::ostream& stream) const override
     {
@@ -26,7 +26,7 @@ struct Request_to_shorten_MA_is_rejected_Message : public Euroradio_Message
                << *(packet_0_1) << ")";
     }
 
-    bool equals(const Euroradio_Message& p) const override
+    bool equals(const EuroradioMessage& p) const override
     {
         if (auto q = dynamic_cast<const Request_to_shorten_MA_is_rejected_Message*>(&p))
         {

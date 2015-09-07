@@ -2,11 +2,11 @@
 #ifndef ACKNOWLEDGEMENT_OF_TERMINATION_OF_A_COMMUNICATION_SESSION_Message_H_INCLUDED
 #define ACKNOWLEDGEMENT_OF_TERMINATION_OF_A_COMMUNICATION_SESSION_Message_H_INCLUDED
 
-#include "Euroradio_Message.h"
+#include "EuroradioMessage.h"
 #include "Bitstream.h"
 #include <iostream>
 
-struct Acknowledgement_of_termination_of_a_communication_session_Message : public Euroradio_Message
+struct Acknowledgement_of_termination_of_a_communication_session_Message : public EuroradioMessage
 {
     uint16_t  L_MESSAGE        ;  // # 10
     uint32_t  T_TRAIN          ;  // # 32
@@ -14,7 +14,7 @@ struct Acknowledgement_of_termination_of_a_communication_session_Message : publi
     uint32_t  NID_LRBG         ;  // # 24
 
 
-    Acknowledgement_of_termination_of_a_communication_session_Message() : Euroradio_Message(39) {}
+    Acknowledgement_of_termination_of_a_communication_session_Message() : EuroradioMessage(39) {}
 
     void print(std::ostream& stream) const override
     {
@@ -26,7 +26,7 @@ struct Acknowledgement_of_termination_of_a_communication_session_Message : publi
                << +NID_LRBG << ")";
     }
 
-    bool equals(const Euroradio_Message& p) const override
+    bool equals(const EuroradioMessage& p) const override
     {
         if (auto q = dynamic_cast<const Acknowledgement_of_termination_of_a_communication_session_Message*>(&p))
         {

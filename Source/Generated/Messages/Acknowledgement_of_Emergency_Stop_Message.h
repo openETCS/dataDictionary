@@ -2,11 +2,11 @@
 #ifndef ACKNOWLEDGEMENT_OF_EMERGENCY_STOP_Message_H_INCLUDED
 #define ACKNOWLEDGEMENT_OF_EMERGENCY_STOP_Message_H_INCLUDED
 
-#include "Euroradio_Message.h"
+#include "EuroradioMessage.h"
 #include "Bitstream.h"
 #include <iostream>
 
-struct Acknowledgement_of_Emergency_Stop_Message : public Euroradio_Message
+struct Acknowledgement_of_Emergency_Stop_Message : public EuroradioMessage
 {
     uint16_t  L_MESSAGE        ;  // # 10
     uint32_t  T_TRAIN          ;  // # 32
@@ -16,7 +16,7 @@ struct Acknowledgement_of_Emergency_Stop_Message : public Euroradio_Message
 
     BasePacketPtr  packet_0_1;
 
-    Acknowledgement_of_Emergency_Stop_Message() : Euroradio_Message(147) {}
+    Acknowledgement_of_Emergency_Stop_Message() : EuroradioMessage(147) {}
 
     void print(std::ostream& stream) const override
     {
@@ -30,7 +30,7 @@ struct Acknowledgement_of_Emergency_Stop_Message : public Euroradio_Message
                << *(packet_0_1) << ")";
     }
 
-    bool equals(const Euroradio_Message& p) const override
+    bool equals(const EuroradioMessage& p) const override
     {
         if (auto q = dynamic_cast<const Acknowledgement_of_Emergency_Stop_Message*>(&p))
         {

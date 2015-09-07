@@ -2,11 +2,11 @@
 #ifndef INFILL_MA_Message_H_INCLUDED
 #define INFILL_MA_Message_H_INCLUDED
 
-#include "Euroradio_Message.h"
+#include "EuroradioMessage.h"
 #include "Bitstream.h"
 #include <iostream>
 
-struct Infill_MA_Message : public Euroradio_Message
+struct Infill_MA_Message : public EuroradioMessage
 {
     uint16_t  L_MESSAGE        ;  // # 10
     uint32_t  T_TRAIN          ;  // # 32
@@ -17,7 +17,7 @@ struct Infill_MA_Message : public Euroradio_Message
     BasePacketPtr  packet_12;
     PacketSequence  optional_packets;
 
-    Infill_MA_Message() : Euroradio_Message(37) {}
+    Infill_MA_Message() : EuroradioMessage(37) {}
 
     void print(std::ostream& stream) const override
     {
@@ -43,7 +43,7 @@ struct Infill_MA_Message : public Euroradio_Message
         stream << ")";
     }
 
-    bool equals(const Euroradio_Message& p) const override
+    bool equals(const EuroradioMessage& p) const override
     {
         if (auto q = dynamic_cast<const Infill_MA_Message*>(&p))
         {

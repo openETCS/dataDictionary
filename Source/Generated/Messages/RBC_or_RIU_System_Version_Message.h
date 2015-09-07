@@ -2,11 +2,11 @@
 #ifndef RBC_OR_RIU_SYSTEM_VERSION_Message_H_INCLUDED
 #define RBC_OR_RIU_SYSTEM_VERSION_Message_H_INCLUDED
 
-#include "Euroradio_Message.h"
+#include "EuroradioMessage.h"
 #include "Bitstream.h"
 #include <iostream>
 
-struct RBC_or_RIU_System_Version_Message : public Euroradio_Message
+struct RBC_or_RIU_System_Version_Message : public EuroradioMessage
 {
     uint16_t  L_MESSAGE        ;  // # 10
     uint32_t  T_TRAIN          ;  // # 32
@@ -15,7 +15,7 @@ struct RBC_or_RIU_System_Version_Message : public Euroradio_Message
     uint8_t  M_VERSION         ;  // # 7
 
 
-    RBC_or_RIU_System_Version_Message() : Euroradio_Message(32) {}
+    RBC_or_RIU_System_Version_Message() : EuroradioMessage(32) {}
 
     void print(std::ostream& stream) const override
     {
@@ -28,7 +28,7 @@ struct RBC_or_RIU_System_Version_Message : public Euroradio_Message
                << +M_VERSION << ")";
     }
 
-    bool equals(const Euroradio_Message& p) const override
+    bool equals(const EuroradioMessage& p) const override
     {
         if (auto q = dynamic_cast<const RBC_or_RIU_System_Version_Message*>(&p))
         {

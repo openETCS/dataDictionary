@@ -2,11 +2,11 @@
 #ifndef TRAIN_POSITION_REPORT_Message_H_INCLUDED
 #define TRAIN_POSITION_REPORT_Message_H_INCLUDED
 
-#include "Euroradio_Message.h"
+#include "EuroradioMessage.h"
 #include "Bitstream.h"
 #include <iostream>
 
-struct Train_Position_Report_Message : public Euroradio_Message
+struct Train_Position_Report_Message : public EuroradioMessage
 {
     uint16_t  L_MESSAGE        ;  // # 10
     uint32_t  T_TRAIN          ;  // # 32
@@ -15,7 +15,7 @@ struct Train_Position_Report_Message : public Euroradio_Message
     BasePacketPtr  packet_0_1;
     PacketSequence  optional_packets;
 
-    Train_Position_Report_Message() : Euroradio_Message(136) {}
+    Train_Position_Report_Message() : EuroradioMessage(136) {}
 
     void print(std::ostream& stream) const override
     {
@@ -39,7 +39,7 @@ struct Train_Position_Report_Message : public Euroradio_Message
         stream << ")";
     }
 
-    bool equals(const Euroradio_Message& p) const override
+    bool equals(const EuroradioMessage& p) const override
     {
         if (auto q = dynamic_cast<const Train_Position_Report_Message*>(&p))
         {

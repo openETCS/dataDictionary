@@ -2,11 +2,11 @@
 #ifndef MOVEMENT_AUTHORITY_Message_H_INCLUDED
 #define MOVEMENT_AUTHORITY_Message_H_INCLUDED
 
-#include "Euroradio_Message.h"
+#include "EuroradioMessage.h"
 #include "Bitstream.h"
 #include <iostream>
 
-struct Movement_Authority_Message : public Euroradio_Message
+struct Movement_Authority_Message : public EuroradioMessage
 {
     uint16_t  L_MESSAGE        ;  // # 10
     uint32_t  T_TRAIN          ;  // # 32
@@ -16,7 +16,7 @@ struct Movement_Authority_Message : public Euroradio_Message
     BasePacketPtr  packet_15;
     PacketSequence  optional_packets;
 
-    Movement_Authority_Message() : Euroradio_Message(3) {}
+    Movement_Authority_Message() : EuroradioMessage(3) {}
 
     void print(std::ostream& stream) const override
     {
@@ -41,7 +41,7 @@ struct Movement_Authority_Message : public Euroradio_Message
         stream << ")";
     }
 
-    bool equals(const Euroradio_Message& p) const override
+    bool equals(const EuroradioMessage& p) const override
     {
         if (auto q = dynamic_cast<const Movement_Authority_Message*>(&p))
         {

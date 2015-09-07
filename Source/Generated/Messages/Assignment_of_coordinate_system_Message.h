@@ -2,11 +2,11 @@
 #ifndef ASSIGNMENT_OF_COORDINATE_SYSTEM_Message_H_INCLUDED
 #define ASSIGNMENT_OF_COORDINATE_SYSTEM_Message_H_INCLUDED
 
-#include "Euroradio_Message.h"
+#include "EuroradioMessage.h"
 #include "Bitstream.h"
 #include <iostream>
 
-struct Assignment_of_coordinate_system_Message : public Euroradio_Message
+struct Assignment_of_coordinate_system_Message : public EuroradioMessage
 {
     uint16_t  L_MESSAGE        ;  // # 10
     uint32_t  T_TRAIN          ;  // # 32
@@ -15,7 +15,7 @@ struct Assignment_of_coordinate_system_Message : public Euroradio_Message
     uint8_t  Q_ORIENTATION     ;  // # 1
 
 
-    Assignment_of_coordinate_system_Message() : Euroradio_Message(45) {}
+    Assignment_of_coordinate_system_Message() : EuroradioMessage(45) {}
 
     void print(std::ostream& stream) const override
     {
@@ -28,7 +28,7 @@ struct Assignment_of_coordinate_system_Message : public Euroradio_Message
                << +Q_ORIENTATION << ")";
     }
 
-    bool equals(const Euroradio_Message& p) const override
+    bool equals(const EuroradioMessage& p) const override
     {
         if (auto q = dynamic_cast<const Assignment_of_coordinate_system_Message*>(&p))
         {
