@@ -1,6 +1,5 @@
 
 #include "EurobaliseTelegram.h"
-#include "Bitstream_Init.h"
 #include "Packets.h"
 #include "print_bits.h"
 #include <cassert>

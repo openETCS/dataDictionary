@@ -1,9 +1,6 @@
 
 #include "Message_Header.h"
 #include "Bit64.h"
-#include "Bitstream_Read.h"
-#include "Bitstream_Write.h"
-#include "Bitstream_Normal.h"
 
 int Message_Header_UpperBitsNotSet(const Message_Header* p)
 {

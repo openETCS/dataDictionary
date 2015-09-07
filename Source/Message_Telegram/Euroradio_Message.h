@@ -2,10 +2,11 @@
 #ifndef EURORADIO_MESSAGE_H_INCLUDED
 #define EURORADIO_MESSAGE_H_INCLUDED
 
+#include <iostream>
 #include "BasePacket.h"
 #include "Message_Header.h"
 #include "Bitstream.h"
-#include <iostream>
+
 
 struct Euroradio_Message
 {

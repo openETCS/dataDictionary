@@ -1,10 +1,8 @@
 
-#include "Euroradio_Message.h"
-#include "Message_Header.h"
-#include "Bitstream_Read.h"
-#include "Euroradio_Message_List.h"
 #include <iostream>
 #include <cassert>
+#include "Euroradio_Message.h"
+#include "Euroradio_Message_List.h"
 
 Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
 {
