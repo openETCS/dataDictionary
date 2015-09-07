@@ -2,8 +2,6 @@
 #include "Recognition_of_exit_from_TRIP_mode_Message.h"
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
-#include "Bitstream_Write.h"
-#include "Bitstream_Read.h"
 
 
 #include <iostream>

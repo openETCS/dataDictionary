@@ -2,8 +2,6 @@
 #include "RBC_or_RIU_System_Version_Message.h"
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
-#include "Bitstream_Write.h"
-#include "Bitstream_Read.h"
 
 
 #include <iostream>

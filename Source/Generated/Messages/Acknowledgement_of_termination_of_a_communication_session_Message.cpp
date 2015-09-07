@@ -2,8 +2,6 @@
 #include "Acknowledgement_of_termination_of_a_communication_session_Message.h"
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
-#include "Bitstream_Write.h"
-#include "Bitstream_Read.h"
 
 
 #include <iostream>
