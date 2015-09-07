@@ -7,9 +7,9 @@ TOPDIR=../..
 
 include $(TOPDIR)/Makefile.template
 
-#WP_FLAGS += -wp-prop=-rte
+#WP_FLAGS += -wp-prop=rte
 #WP_FLAGS += -wp-prop=-@lemma
-#WP_FLAGS += -wp-prop=cea
+#WP_FLAGS += -wp-prop=bound
 
 SRC :=  Bitwalker.c Bitstream.c Bitstream_Inverse.c
 
