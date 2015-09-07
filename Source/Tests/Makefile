@@ -13,7 +13,6 @@ test: general issue31
 include $(TOPDIR)/Makefile.template
 
 lib:	$(GENERATED_MESSAGES)/libgenerated_messages.a\
-	$(GENERATED_PACKETS)/libgenerated_packets.a\
 	$(MESSAGE_TELEGRAM)/libmessage_telegram.a\
 	$(BITS)/libbits.a
 
@@ -31,7 +30,6 @@ CPPFLAGS += -I$(GENERATED_PACKETS)
 LDFLAGS += -L$(GENERATED_PACKETS) -lgenerated_packets
 
 CPPFLAGS += -I$(BASE_PACKETS)
-LDFLAGS += -L$(BASE_PACKETS) -lbase_packets
 
 CPPFLAGS += -I$(BITS)
 LDFLAGS += -L$(BITS) -lbits

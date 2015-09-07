@@ -11,7 +11,6 @@ export MESSAGE_TELEGRAM=$(TOPDIR)/Message_Telegram
 it: lib server_BTM
 
 lib:	$(BITS)/libbits.a\
-        $(BASE_PACKETS)/libbase_packets.a\
         $(GENERATED_PACKETS)/libgenerated_packets.a\
 	$(MESSAGE_TELEGRAM)/libmessage_telegram.a\
 
@@ -27,7 +26,6 @@ CPPFLAGS += -I$(GENERATED_PACKETS)
 LDFLAGS += -L$(GENERATED_PACKETS) -lgenerated_packets
 
 CPPFLAGS += -I$(BASE_PACKETS)
-LDFLAGS += -L$(BASE_PACKETS) -lbase_packets
 
 CPPFLAGS += -I$(BITS)
 LDFLAGS += -L$(BITS) -lbits

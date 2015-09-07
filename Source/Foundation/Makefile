@@ -6,7 +6,6 @@ it: lib
 
 lib:
 	(cd Bits     && $(MAKE) lib)
-	(cd Packets  && $(MAKE) lib)
 
 clean: 
 	(cd Coq      && $(MAKE) clean)
