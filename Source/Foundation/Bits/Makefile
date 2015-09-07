@@ -11,7 +11,7 @@ include $(TOPDIR)/Makefile.template
 #WP_FLAGS += -wp-prop=-@lemma
 #WP_FLAGS += -wp-prop=bound
 
-SRC :=  Bitwalker.c Bitstream.c Bitstream_Inverse.c
+SRC :=  Bit64.c Bitwalker.c Bitstream.c Bitstream_Inverse.c
 
 OBJ := $(SRC:.c=.o)
 REPORT := $(SRC:.c=.report)
