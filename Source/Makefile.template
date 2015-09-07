@@ -147,6 +147,7 @@ clean:: FORCE
 	@$(RM) *.o
 	@$(RM) *.i
 	@$(RM) *.back
+	@$(RM) *.bak
 	@$(RM) *.orig
 	@$(RM) *.exe
 	@$(RM) -rf  *.debug
