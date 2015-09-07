@@ -25,6 +25,7 @@ bool General_message_Message::decode(Bitstream& stream)
         PacketHeader_Decoder(&stream, &packetID);
 
         packet = Decoder_Branch_TrackToTrain(stream, packetID);
+
         if (packet)
         {
             if (packet->header.NID_PACKET != 21 &&
@@ -61,6 +62,7 @@ bool General_message_Message::decode(Bitstream& stream)
             {
                 return false;
             }
+
             optional_packets.push_back(packet);
         }
         else
@@ -111,4 +113,4 @@ bool General_message_Message::encode(Bitstream& stream) const
     stream.bitpos = old_pos + (8 * L_MESSAGE);
 
     return true;
-} 
+}

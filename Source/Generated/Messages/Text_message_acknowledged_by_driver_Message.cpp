@@ -20,6 +20,7 @@ bool Text_message_acknowledged_by_driver_Message::decode(Bitstream& stream)
 
     PacketHeader_Decoder(&stream, &packetID);
     packet_0_1 = Decoder_Branch_TrainToTrack(stream, packetID);
+
     if (!packet_0_1)
     {
         return false;
@@ -48,6 +49,7 @@ bool Text_message_acknowledged_by_driver_Message::encode(Bitstream& stream) cons
     {
         return false;
     }
+
     if (Encoder_Branch_TrainToTrack(stream, packet_0_1) != 1)
     {
         return false;
@@ -61,4 +63,4 @@ bool Text_message_acknowledged_by_driver_Message::encode(Bitstream& stream) cons
     stream.bitpos = old_pos + (8 * L_MESSAGE);
 
     return true;
-} 
+}

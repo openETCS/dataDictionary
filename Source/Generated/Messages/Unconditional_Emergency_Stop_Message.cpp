@@ -45,4 +45,4 @@ bool Unconditional_Emergency_Stop_Message::encode(Bitstream& stream) const
     stream.bitpos = old_pos + (8 * L_MESSAGE);
 
     return true;
-} 
+}

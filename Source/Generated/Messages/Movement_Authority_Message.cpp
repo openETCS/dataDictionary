@@ -20,6 +20,7 @@ bool Movement_Authority_Message::decode(Bitstream& stream)
 
     PacketHeader_Decoder(&stream, &packetID);
     packet_15 = Decoder_Branch_TrackToTrain(stream, packetID);
+
     if (!packet_15)
     {
         return false;
@@ -32,6 +33,7 @@ bool Movement_Authority_Message::decode(Bitstream& stream)
         PacketHeader_Decoder(&stream, &packetID);
 
         packet = Decoder_Branch_TrackToTrain(stream, packetID);
+
         if (packet)
         {
             if (packet->header.NID_PACKET != 21 &&
@@ -68,6 +70,7 @@ bool Movement_Authority_Message::decode(Bitstream& stream)
             {
                 return false;
             }
+
             optional_packets.push_back(packet);
         }
         else
@@ -99,6 +102,7 @@ bool Movement_Authority_Message::encode(Bitstream& stream) const
     {
         return false;
     }
+
     if (Encoder_Branch_TrackToTrain(stream, packet_15) != 1)
     {
         return false;
@@ -127,4 +131,4 @@ bool Movement_Authority_Message::encode(Bitstream& stream) const
     stream.bitpos = old_pos + (8 * L_MESSAGE);
 
     return true;
-} 
+}

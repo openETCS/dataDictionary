@@ -45,4 +45,4 @@ bool Acknowledgement_of_Train_Data_Message::encode(Bitstream& stream) const
     stream.bitpos = old_pos + (8 * L_MESSAGE);
 
     return true;
-} 
+}

@@ -30,10 +30,10 @@ struct Text_message_acknowledged_by_driver_Message : public Euroradio_Message
 
     bool equals(const Euroradio_Message& p) const override
     {
-	if (auto q = dynamic_cast<const Text_message_acknowledged_by_driver_Message*>(&p))
-	{
+        if (auto q = dynamic_cast<const Text_message_acknowledged_by_driver_Message*>(&p))
+        {
             bool status = true;
-    
+
             status = status && (header.NID_MESSAGE == q->header.NID_MESSAGE);
             status = status && (L_MESSAGE == q->L_MESSAGE);
             status = status && (T_TRAIN == q->T_TRAIN);
@@ -43,7 +43,8 @@ struct Text_message_acknowledged_by_driver_Message : public Euroradio_Message
 
             return status;
         }
-	return false;
+
+        return false;
     }
 
     bool decode(Bitstream& stream);

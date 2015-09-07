@@ -45,4 +45,4 @@ bool Assignment_of_coordinate_system_Message::encode(Bitstream& stream) const
     stream.bitpos = old_pos + (8 * L_MESSAGE);
 
     return true;
-} 
+}

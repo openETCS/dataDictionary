@@ -43,4 +43,4 @@ bool Acknowledgement_of_termination_of_a_communication_session_Message::encode(B
     stream.bitpos = old_pos + (8 * L_MESSAGE);
 
     return true;
-} 
+}

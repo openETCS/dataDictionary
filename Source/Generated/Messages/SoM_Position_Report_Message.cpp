@@ -20,6 +20,7 @@ bool SoM_Position_Report_Message::decode(Bitstream& stream)
 
     PacketHeader_Decoder(&stream, &packetID);
     packet_0_1 = Decoder_Branch_TrainToTrack(stream, packetID);
+
     if (!packet_0_1)
     {
         return false;
@@ -32,6 +33,7 @@ bool SoM_Position_Report_Message::decode(Bitstream& stream)
         PacketHeader_Decoder(&stream, &packetID);
 
         packet = Decoder_Branch_TrainToTrack(stream, packetID);
+
         if (packet)
         {
             if (packet->header.NID_PACKET != 4 &&
@@ -40,6 +42,7 @@ bool SoM_Position_Report_Message::decode(Bitstream& stream)
             {
                 return false;
             }
+
             optional_packets.push_back(packet);
         }
         else
@@ -71,6 +74,7 @@ bool SoM_Position_Report_Message::encode(Bitstream& stream) const
     {
         return false;
     }
+
     if (Encoder_Branch_TrainToTrack(stream, packet_0_1) != 1)
     {
         return false;
@@ -99,4 +103,4 @@ bool SoM_Position_Report_Message::encode(Bitstream& stream) const
     stream.bitpos = old_pos + (8 * L_MESSAGE);
 
     return true;
-} 
+}

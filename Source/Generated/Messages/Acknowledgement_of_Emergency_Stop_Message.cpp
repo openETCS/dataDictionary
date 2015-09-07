@@ -21,6 +21,7 @@ bool Acknowledgement_of_Emergency_Stop_Message::decode(Bitstream& stream)
 
     PacketHeader_Decoder(&stream, &packetID);
     packet_0_1 = Decoder_Branch_TrainToTrack(stream, packetID);
+
     if (!packet_0_1)
     {
         return false;
@@ -50,6 +51,7 @@ bool Acknowledgement_of_Emergency_Stop_Message::encode(Bitstream& stream) const
     {
         return false;
     }
+
     if (Encoder_Branch_TrainToTrack(stream, packet_0_1) != 1)
     {
         return false;
@@ -63,4 +65,4 @@ bool Acknowledgement_of_Emergency_Stop_Message::encode(Bitstream& stream) const
     stream.bitpos = old_pos + (8 * L_MESSAGE);
 
     return true;
-} 
+}

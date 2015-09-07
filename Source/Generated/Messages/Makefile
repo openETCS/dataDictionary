@@ -34,3 +34,7 @@ clean::
 	$(RM) libgenerated_messages.a
 	$(RM) *.o
 
+
+format: FORCE
+	@$(ASTYLE) *.cpp *.h
+

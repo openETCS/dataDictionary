@@ -24,12 +24,14 @@ bool Session_Established_Message::decode(Bitstream& stream)
         PacketHeader_Decoder(&stream, &packetID);
 
         packet = Decoder_Branch_TrainToTrack(stream, packetID);
+
         if (packet)
         {
             if (packet->header.NID_PACKET != 3)
             {
                 return false;
             }
+
             optional_packets.push_back(packet);
         }
         else
@@ -79,4 +81,4 @@ bool Session_Established_Message::encode(Bitstream& stream) const
     stream.bitpos = old_pos + (8 * L_MESSAGE);
 
     return true;
-} 
+}

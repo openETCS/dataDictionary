@@ -20,6 +20,7 @@ bool Request_to_Shorten_MA_Message::decode(Bitstream& stream)
 
     PacketHeader_Decoder(&stream, &packetID);
     packet_15 = Decoder_Branch_TrackToTrain(stream, packetID);
+
     if (!packet_15)
     {
         return false;
@@ -27,6 +28,7 @@ bool Request_to_Shorten_MA_Message::decode(Bitstream& stream)
 
     PacketHeader_Decoder(&stream, &packetID);
     packet_80 = Decoder_Branch_TrackToTrain(stream, packetID);
+
     if (!packet_80)
     {
         return false;
@@ -55,6 +57,7 @@ bool Request_to_Shorten_MA_Message::encode(Bitstream& stream) const
     {
         return false;
     }
+
     if (Encoder_Branch_TrackToTrain(stream, packet_15) != 1)
     {
         return false;
@@ -64,6 +67,7 @@ bool Request_to_Shorten_MA_Message::encode(Bitstream& stream) const
     {
         return false;
     }
+
     if (Encoder_Branch_TrackToTrain(stream, packet_80) != 1)
     {
         return false;
@@ -77,4 +81,4 @@ bool Request_to_Shorten_MA_Message::encode(Bitstream& stream) const
     stream.bitpos = old_pos + (8 * L_MESSAGE);
 
     return true;
-} 
+}

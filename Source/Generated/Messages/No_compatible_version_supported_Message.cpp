@@ -41,4 +41,4 @@ bool No_compatible_version_supported_Message::encode(Bitstream& stream) const
     stream.bitpos = old_pos + (8 * L_MESSAGE);
 
     return true;
-} 
+}

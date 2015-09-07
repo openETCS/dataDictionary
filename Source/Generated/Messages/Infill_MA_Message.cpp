@@ -20,6 +20,7 @@ bool Infill_MA_Message::decode(Bitstream& stream)
 
     PacketHeader_Decoder(&stream, &packetID);
     packet_136 = Decoder_Branch_TrackToTrain(stream, packetID);
+
     if (!packet_136)
     {
         return false;
@@ -27,6 +28,7 @@ bool Infill_MA_Message::decode(Bitstream& stream)
 
     PacketHeader_Decoder(&stream, &packetID);
     packet_12 = Decoder_Branch_TrackToTrain(stream, packetID);
+
     if (!packet_12)
     {
         return false;
@@ -39,6 +41,7 @@ bool Infill_MA_Message::decode(Bitstream& stream)
         PacketHeader_Decoder(&stream, &packetID);
 
         packet = Decoder_Branch_TrackToTrain(stream, packetID);
+
         if (packet)
         {
             if (packet->header.NID_PACKET != 5 &&
@@ -63,6 +66,7 @@ bool Infill_MA_Message::decode(Bitstream& stream)
             {
                 return false;
             }
+
             optional_packets.push_back(packet);
         }
         else
@@ -94,6 +98,7 @@ bool Infill_MA_Message::encode(Bitstream& stream) const
     {
         return false;
     }
+
     if (Encoder_Branch_TrackToTrain(stream, packet_136) != 1)
     {
         return false;
@@ -103,6 +108,7 @@ bool Infill_MA_Message::encode(Bitstream& stream) const
     {
         return false;
     }
+
     if (Encoder_Branch_TrackToTrain(stream, packet_12) != 1)
     {
         return false;
@@ -131,4 +137,4 @@ bool Infill_MA_Message::encode(Bitstream& stream) const
     stream.bitpos = old_pos + (8 * L_MESSAGE);
 
     return true;
-} 
+}

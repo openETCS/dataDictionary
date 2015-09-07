@@ -41,4 +41,4 @@ bool Termination_of_a_communication_session_Message::encode(Bitstream& stream) c
     stream.bitpos = old_pos + (8 * L_MESSAGE);
 
     return true;
-} 
+}
