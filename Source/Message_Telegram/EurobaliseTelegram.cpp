@@ -1,7 +1,6 @@
 
 #include "EurobaliseTelegram.h"
 #include "TelegramHeader.h"
-#include "Packet_Header.h"
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
 #include <iostream>
@@ -74,8 +73,8 @@ bool EurobaliseTelegram::decode(Bitstream& stream)
             return false;
         }
 
-        Packet_Header packet_header;
-        Packet_Header_Decoder(&stream, &packet_header);
+        PacketHeader packet_header;
+        PacketHeader_Decoder(&stream, &packet_header);
 
         BasePacketPtr ptr;
 
@@ -128,7 +127,7 @@ bool EurobaliseTelegram::encode(Bitstream& stream) const
             return false;
         }
 
-        if (Packet_Header_Encoder(&stream, &((*p)->header)) != 1)
+        if (PacketHeader_Encoder(&stream, &((*p)->header)) != 1)
         {
             return false;
         }

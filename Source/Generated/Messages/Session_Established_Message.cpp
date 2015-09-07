@@ -1,6 +1,5 @@
 
 #include "Session_Established_Message.h"
-#include "Packet_Header.h"
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
 #include "Bitstream_Write.h"
@@ -18,13 +17,13 @@ bool Session_Established_Message::decode(Bitstream& stream)
     T_TRAIN = Bitstream_Read(&stream, 32);
     NID_ENGINE = Bitstream_Read(&stream, 24);
 
-    Packet_Header packetID;
+    PacketHeader packetID;
 
     while (old_pos + (8 * L_MESSAGE) > stream.bitpos + 8 + 7)
     {
         BasePacketPtr packet;
 
-        Packet_Header_Decoder(&stream, &packetID);
+        PacketHeader_Decoder(&stream, &packetID);
 
         packet = Decoder_Branch_TrainToTrack(stream, packetID);
         if (packet)
@@ -63,7 +62,7 @@ bool Session_Established_Message::encode(Bitstream& stream) const
     for (auto p = optional_packets.begin(); p != optional_packets.end(); ++p)
     {
 
-        if (Packet_Header_Encoder(&stream, &((*p)->header)) != 1)
+        if (PacketHeader_Encoder(&stream, &((*p)->header)) != 1)
         {
             return false;
         }

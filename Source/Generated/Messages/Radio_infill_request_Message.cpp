@@ -1,6 +1,5 @@
 
 #include "Radio_infill_request_Message.h"
-#include "Packet_Header.h"
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
 #include "Bitstream_Write.h"
@@ -21,9 +20,9 @@ bool Radio_infill_request_Message::decode(Bitstream& stream)
     NID_BG = Bitstream_Read(&stream, 14);
     Q_INFILL = Bitstream_Read(&stream, 1);
 
-    Packet_Header packetID;
+    PacketHeader packetID;
 
-    Packet_Header_Decoder(&stream, &packetID);
+    PacketHeader_Decoder(&stream, &packetID);
     packet_0_1 = Decoder_Branch_TrainToTrack(stream, packetID);
     if (!packet_0_1)
     {
@@ -51,7 +50,7 @@ bool Radio_infill_request_Message::encode(Bitstream& stream) const
     Bitstream_Write(&stream, 14, NID_BG);
     Bitstream_Write(&stream, 1, Q_INFILL);
 
-    if (Packet_Header_Encoder(&stream, &(packet_0_1->header)) != 1)
+    if (PacketHeader_Encoder(&stream, &(packet_0_1->header)) != 1)
     {
         return false;
     }

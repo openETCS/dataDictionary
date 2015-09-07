@@ -1,6 +1,5 @@
 
 #include "SoM_position_report_confirmed_by_RBC_Message.h"
-#include "Packet_Header.h"
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
 #include "Bitstream_Write.h"

@@ -1,6 +1,5 @@
 
 #include "Assignment_of_coordinate_system_Message.h"
-#include "Packet_Header.h"
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
 #include "Bitstream_Write.h"

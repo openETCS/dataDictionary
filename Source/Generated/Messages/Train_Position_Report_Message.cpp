@@ -1,6 +1,5 @@
 
 #include "Train_Position_Report_Message.h"
-#include "Packet_Header.h"
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
 #include "Bitstream_Write.h"
@@ -18,9 +17,9 @@ bool Train_Position_Report_Message::decode(Bitstream& stream)
     T_TRAIN = Bitstream_Read(&stream, 32);
     NID_ENGINE = Bitstream_Read(&stream, 24);
 
-    Packet_Header packetID;
+    PacketHeader packetID;
 
-    Packet_Header_Decoder(&stream, &packetID);
+    PacketHeader_Decoder(&stream, &packetID);
     packet_0_1 = Decoder_Branch_TrainToTrack(stream, packetID);
     if (!packet_0_1)
     {
@@ -31,7 +30,7 @@ bool Train_Position_Report_Message::decode(Bitstream& stream)
     {
         BasePacketPtr packet;
 
-        Packet_Header_Decoder(&stream, &packetID);
+        PacketHeader_Decoder(&stream, &packetID);
 
         packet = Decoder_Branch_TrainToTrack(stream, packetID);
         if (packet)
@@ -68,7 +67,7 @@ bool Train_Position_Report_Message::encode(Bitstream& stream) const
     Bitstream_Write(&stream, 32, T_TRAIN);
     Bitstream_Write(&stream, 24, NID_ENGINE);
 
-    if (Packet_Header_Encoder(&stream, &(packet_0_1->header)) != 1)
+    if (PacketHeader_Encoder(&stream, &(packet_0_1->header)) != 1)
     {
         return false;
     }
@@ -81,7 +80,7 @@ bool Train_Position_Report_Message::encode(Bitstream& stream) const
     for (auto p = optional_packets.begin(); p != optional_packets.end(); ++p)
     {
 
-        if (Packet_Header_Encoder(&stream, &((*p)->header)) != 1)
+        if (PacketHeader_Encoder(&stream, &((*p)->header)) != 1)
         {
             return false;
         }

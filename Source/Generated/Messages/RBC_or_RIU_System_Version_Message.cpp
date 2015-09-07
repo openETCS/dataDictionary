@@ -1,6 +1,5 @@
 
 #include "RBC_or_RIU_System_Version_Message.h"
-#include "Packet_Header.h"
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
 #include "Bitstream_Write.h"

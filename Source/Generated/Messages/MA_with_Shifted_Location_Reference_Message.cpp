@@ -1,6 +1,5 @@
 
 #include "MA_with_Shifted_Location_Reference_Message.h"
-#include "Packet_Header.h"
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
 #include "Bitstream_Write.h"
@@ -21,9 +20,9 @@ bool MA_with_Shifted_Location_Reference_Message::decode(Bitstream& stream)
     Q_SCALE = Bitstream_Read(&stream, 2);
     D_REF = Bitstream_Read(&stream, 16);
 
-    Packet_Header packetID;
+    PacketHeader packetID;
 
-    Packet_Header_Decoder(&stream, &packetID);
+    PacketHeader_Decoder(&stream, &packetID);
     packet_15 = Decoder_Branch_TrackToTrain(stream, packetID);
     if (!packet_15)
     {
@@ -34,7 +33,7 @@ bool MA_with_Shifted_Location_Reference_Message::decode(Bitstream& stream)
     {
         BasePacketPtr packet;
 
-        Packet_Header_Decoder(&stream, &packetID);
+        PacketHeader_Decoder(&stream, &packetID);
 
         packet = Decoder_Branch_TrackToTrain(stream, packetID);
         if (packet)
@@ -102,7 +101,7 @@ bool MA_with_Shifted_Location_Reference_Message::encode(Bitstream& stream) const
     Bitstream_Write(&stream, 2, Q_SCALE);
     Bitstream_Write(&stream, 16, D_REF);
 
-    if (Packet_Header_Encoder(&stream, &(packet_15->header)) != 1)
+    if (PacketHeader_Encoder(&stream, &(packet_15->header)) != 1)
     {
         return false;
     }
@@ -115,7 +114,7 @@ bool MA_with_Shifted_Location_Reference_Message::encode(Bitstream& stream) const
     for (auto p = optional_packets.begin(); p != optional_packets.end(); ++p)
     {
 
-        if (Packet_Header_Encoder(&stream, &((*p)->header)) != 1)
+        if (PacketHeader_Encoder(&stream, &((*p)->header)) != 1)
         {
             return false;
         }

@@ -2,16 +2,17 @@
 #ifndef BASEPACKET_H_INCLUDED
 #define BASEPACKET_H_INCLUDED
 
-#include "Packet_Header.h"
 #include <cstdlib>
 #include <cstdint>
 #include <memory>
 #include <vector>
 #include <iostream>
 
+#include "PacketHeader.h"
+
 struct BasePacket
 {
-    Packet_Header header;
+    PacketHeader header;
 
     BasePacket(uint8_t nid)
     {

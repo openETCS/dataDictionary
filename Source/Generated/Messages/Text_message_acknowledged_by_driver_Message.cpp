@@ -1,6 +1,5 @@
 
 #include "Text_message_acknowledged_by_driver_Message.h"
-#include "Packet_Header.h"
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
 #include "Bitstream_Write.h"
@@ -19,9 +18,9 @@ bool Text_message_acknowledged_by_driver_Message::decode(Bitstream& stream)
     NID_ENGINE = Bitstream_Read(&stream, 24);
     NID_TEXTMESSAGE = Bitstream_Read(&stream, 8);
 
-    Packet_Header packetID;
+    PacketHeader packetID;
 
-    Packet_Header_Decoder(&stream, &packetID);
+    PacketHeader_Decoder(&stream, &packetID);
     packet_0_1 = Decoder_Branch_TrainToTrack(stream, packetID);
     if (!packet_0_1)
     {
@@ -47,7 +46,7 @@ bool Text_message_acknowledged_by_driver_Message::encode(Bitstream& stream) cons
     Bitstream_Write(&stream, 24, NID_ENGINE);
     Bitstream_Write(&stream, 8, NID_TEXTMESSAGE);
 
-    if (Packet_Header_Encoder(&stream, &(packet_0_1->header)) != 1)
+    if (PacketHeader_Encoder(&stream, &(packet_0_1->header)) != 1)
     {
         return false;
     }

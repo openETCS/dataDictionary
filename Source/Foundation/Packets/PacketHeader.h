@@ -1,41 +1,41 @@
 
-#ifndef PACKET_HEADER_H_INCLUDED
-#define PACKET_HEADER_H_INCLUDED
+#ifndef PACKETHEADER_H_INCLUDED
+#define PACKETHEADER_H_INCLUDED
 
 #include "Bit64.h"
 #include "Bitstream_Read.h"
 #include "Bitstream_Write.h"
 #include "Bitstream_Normal.h"
 
-struct Packet_Header
+struct PacketHeader
 {
     uint8_t  NID_PACKET;         // # 8
 };
 
-typedef struct Packet_Header Packet_Header;
+typedef struct PacketHeader PacketHeader;
 
-#define PACKET_HEADER_BITSIZE 8
+#define PACKETHEADER_BITSIZE 8
 
 /*@
-    logic integer BitSize{L}(Packet_Header* p) = PACKET_HEADER_BITSIZE;
+    logic integer BitSize{L}(PacketHeader* p) = PACKETHEADER_BITSIZE;
 
-    logic integer MaxBitSize{L}(Packet_Header* p) = BitSize(p);
+    logic integer MaxBitSize{L}(PacketHeader* p) = BitSize(p);
 
-    predicate Separated(Bitstream* stream, Packet_Header* p) =
+    predicate Separated(Bitstream* stream, PacketHeader* p) =
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Packet_Header* p) =
+    predicate Invariant(PacketHeader* p) =
       Invariant(p->NID_PACKET);
 
-    predicate ZeroInitialized(Packet_Header* p) =
+    predicate ZeroInitialized(PacketHeader* p) =
       ZeroInitialized(p->NID_PACKET);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Packet_Header* p) =
+    predicate EqualBits(Bitstream* stream, integer pos, PacketHeader* p) =
       EqualBits(stream, pos,       pos + 8,   p->NID_PACKET);
 
 
-    predicate UpperBitsNotSet(Packet_Header* p) =
+    predicate UpperBitsNotSet(PacketHeader* p) =
       UpperBitsNotSet(p->NID_PACKET,  8);
 
 */
@@ -49,7 +49,7 @@ typedef struct Packet_Header Packet_Header;
     ensures result:  \result <==> UpperBitsNotSet(p);
 */
 static inline
-int Packet_Header_UpperBitsNotSet(const Packet_Header* p)
+int PacketHeader_UpperBitsNotSet(const PacketHeader* p)
 {
     if (UpperBitsNotSet64(p->NID_PACKET,             8))
     {
@@ -102,11 +102,11 @@ int Packet_Header_UpperBitsNotSet(const Packet_Header* p)
     disjoint behaviors;
 */
 static inline
-int Packet_Header_Encoder(Bitstream* stream, const Packet_Header* p)
+int PacketHeader_Encoder(Bitstream* stream, const PacketHeader* p)
 {
-    if (Bitstream_Normal(stream, PACKET_HEADER_BITSIZE))
+    if (Bitstream_Normal(stream, PACKETHEADER_BITSIZE))
     {
-        if (Packet_Header_UpperBitsNotSet(p))
+        if (PacketHeader_UpperBitsNotSet(p))
         {
             //@ ghost const uint32_t pos = stream->bitpos;
 
@@ -161,9 +161,9 @@ int Packet_Header_Encoder(Bitstream* stream, const Packet_Header* p)
     disjoint behaviors;
 */
 static inline
-int Packet_Header_Decoder(Bitstream* stream, Packet_Header* p)
+int PacketHeader_Decoder(Bitstream* stream, PacketHeader* p)
 {
-    if (Bitstream_Normal(stream, PACKET_HEADER_BITSIZE))
+    if (Bitstream_Normal(stream, PACKETHEADER_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 
@@ -183,5 +183,5 @@ int Packet_Header_Decoder(Bitstream* stream, Packet_Header* p)
 }
 
 
-#endif // PACKET_HEADER_H_INCLUDED
+#endif // PACKETHEADER_H_INCLUDED
 

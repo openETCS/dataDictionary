@@ -1,6 +1,5 @@
 
 #include "Infill_MA_Message.h"
-#include "Packet_Header.h"
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
 #include "Bitstream_Write.h"
@@ -19,16 +18,16 @@ bool Infill_MA_Message::decode(Bitstream& stream)
     M_ACK = Bitstream_Read(&stream, 1);
     NID_LRBG = Bitstream_Read(&stream, 24);
 
-    Packet_Header packetID;
+    PacketHeader packetID;
 
-    Packet_Header_Decoder(&stream, &packetID);
+    PacketHeader_Decoder(&stream, &packetID);
     packet_136 = Decoder_Branch_TrackToTrain(stream, packetID);
     if (!packet_136)
     {
         return false;
     }
 
-    Packet_Header_Decoder(&stream, &packetID);
+    PacketHeader_Decoder(&stream, &packetID);
     packet_12 = Decoder_Branch_TrackToTrain(stream, packetID);
     if (!packet_12)
     {
@@ -39,7 +38,7 @@ bool Infill_MA_Message::decode(Bitstream& stream)
     {
         BasePacketPtr packet;
 
-        Packet_Header_Decoder(&stream, &packetID);
+        PacketHeader_Decoder(&stream, &packetID);
 
         packet = Decoder_Branch_TrackToTrain(stream, packetID);
         if (packet)
@@ -93,7 +92,7 @@ bool Infill_MA_Message::encode(Bitstream& stream) const
     Bitstream_Write(&stream, 1, M_ACK);
     Bitstream_Write(&stream, 24, NID_LRBG);
 
-    if (Packet_Header_Encoder(&stream, &(packet_136->header)) != 1)
+    if (PacketHeader_Encoder(&stream, &(packet_136->header)) != 1)
     {
         return false;
     }
@@ -102,7 +101,7 @@ bool Infill_MA_Message::encode(Bitstream& stream) const
         return false;
     }
 
-    if (Packet_Header_Encoder(&stream, &(packet_12->header)) != 1)
+    if (PacketHeader_Encoder(&stream, &(packet_12->header)) != 1)
     {
         return false;
     }
@@ -115,7 +114,7 @@ bool Infill_MA_Message::encode(Bitstream& stream) const
     for (auto p = optional_packets.begin(); p != optional_packets.end(); ++p)
     {
 
-        if (Packet_Header_Encoder(&stream, &((*p)->header)) != 1)
+        if (PacketHeader_Encoder(&stream, &((*p)->header)) != 1)
         {
             return false;
         }

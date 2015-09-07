@@ -1,6 +1,5 @@
 
 #include "Request_to_Shorten_MA_Message.h"
-#include "Packet_Header.h"
 #include "Decoder_Branch.h"
 #include "Encoder_Branch.h"
 #include "Bitstream_Write.h"
@@ -19,16 +18,16 @@ bool Request_to_Shorten_MA_Message::decode(Bitstream& stream)
     M_ACK = Bitstream_Read(&stream, 1);
     NID_LRBG = Bitstream_Read(&stream, 24);
 
-    Packet_Header packetID;
+    PacketHeader packetID;
 
-    Packet_Header_Decoder(&stream, &packetID);
+    PacketHeader_Decoder(&stream, &packetID);
     packet_15 = Decoder_Branch_TrackToTrain(stream, packetID);
     if (!packet_15)
     {
         return false;
     }
 
-    Packet_Header_Decoder(&stream, &packetID);
+    PacketHeader_Decoder(&stream, &packetID);
     packet_80 = Decoder_Branch_TrackToTrain(stream, packetID);
     if (!packet_80)
     {
@@ -54,7 +53,7 @@ bool Request_to_Shorten_MA_Message::encode(Bitstream& stream) const
     Bitstream_Write(&stream, 1, M_ACK);
     Bitstream_Write(&stream, 24, NID_LRBG);
 
-    if (Packet_Header_Encoder(&stream, &(packet_15->header)) != 1)
+    if (PacketHeader_Encoder(&stream, &(packet_15->header)) != 1)
     {
         return false;
     }
@@ -63,7 +62,7 @@ bool Request_to_Shorten_MA_Message::encode(Bitstream& stream) const
         return false;
     }
 
-    if (Packet_Header_Encoder(&stream, &(packet_80->header)) != 1)
+    if (PacketHeader_Encoder(&stream, &(packet_80->header)) != 1)
     {
         return false;
     }
