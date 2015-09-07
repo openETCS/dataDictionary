@@ -1,9 +1,6 @@
 
 #include "System_Version_order_Core.h"
 #include "Bit64.h"
-#include "Bitstream_Write.h"
-#include "Bitstream_Read.h"
-#include "Bitstream_Normal.h"
 
 int System_Version_order_UpperBitsNotSet(const System_Version_order_Core* p)
 {

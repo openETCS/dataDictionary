@@ -1,9 +1,6 @@
 
 #include "Error_Reporting_Core.h"
 #include "Bit64.h"
-#include "Bitstream_Write.h"
-#include "Bitstream_Read.h"
-#include "Bitstream_Normal.h"
 
 int Error_Reporting_UpperBitsNotSet(const Error_Reporting_Core* p)
 {

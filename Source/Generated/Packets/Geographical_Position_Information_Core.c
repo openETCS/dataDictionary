@@ -1,9 +1,6 @@
 
 #include "Geographical_Position_Information_Core.h"
 #include "Bit64.h"
-#include "Bitstream_Write.h"
-#include "Bitstream_Read.h"
-#include "Bitstream_Normal.h"
 
 int Geographical_Position_Information_UpperBitsNotSet(const Geographical_Position_Information_Core* p)
 {

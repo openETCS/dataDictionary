@@ -1,9 +1,6 @@
 
 #include "Packet_for_sending_fixed_text_messages_Core.h"
 #include "Bit64.h"
-#include "Bitstream_Write.h"
-#include "Bitstream_Read.h"
-#include "Bitstream_Normal.h"
 
 int Packet_for_sending_fixed_text_messages_UpperBitsNotSet(const Packet_for_sending_fixed_text_messages_Core* p)
 {

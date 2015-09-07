@@ -1,9 +1,6 @@
 
 #include "National_Values_Core_2.h"
 #include "Bit64.h"
-#include "Bitstream_Write.h"
-#include "Bitstream_Read.h"
-#include "Bitstream_Normal.h"
 
 int National_Values_Core_2_UpperBitsNotSet(const National_Values_Core_2* p)
 {

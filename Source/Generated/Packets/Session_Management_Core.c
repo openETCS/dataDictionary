@@ -1,9 +1,6 @@
 
 #include "Session_Management_Core.h"
 #include "Bit64.h"
-#include "Bitstream_Write.h"
-#include "Bitstream_Read.h"
-#include "Bitstream_Normal.h"
 
 int Session_Management_UpperBitsNotSet(const Session_Management_Core* p)
 {

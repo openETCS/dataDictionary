@@ -1,9 +1,6 @@
 
 #include "Radio_Network_registration_Core.h"
 #include "Bit64.h"
-#include "Bitstream_Write.h"
-#include "Bitstream_Read.h"
-#include "Bitstream_Normal.h"
 
 int Radio_Network_registration_UpperBitsNotSet(const Radio_Network_registration_Core* p)
 {

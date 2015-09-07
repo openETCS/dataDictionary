@@ -1,9 +1,6 @@
 
 #include "Repositioning_Information_Core.h"
 #include "Bit64.h"
-#include "Bitstream_Write.h"
-#include "Bitstream_Read.h"
-#include "Bitstream_Normal.h"
 
 int Repositioning_Information_UpperBitsNotSet(const Repositioning_Information_Core* p)
 {

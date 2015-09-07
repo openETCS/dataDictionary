@@ -1,9 +1,6 @@
 
 #include "EOLM_Packet_Core.h"
 #include "Bit64.h"
-#include "Bitstream_Write.h"
-#include "Bitstream_Read.h"
-#include "Bitstream_Normal.h"
 
 int EOLM_Packet_UpperBitsNotSet(const EOLM_Packet_Core* p)
 {

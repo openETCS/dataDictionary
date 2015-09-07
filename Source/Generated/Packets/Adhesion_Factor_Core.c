@@ -1,9 +1,6 @@
 
 #include "Adhesion_Factor_Core.h"
 #include "Bit64.h"
-#include "Bitstream_Write.h"
-#include "Bitstream_Read.h"
-#include "Bitstream_Normal.h"
 
 int Adhesion_Factor_UpperBitsNotSet(const Adhesion_Factor_Core* p)
 {

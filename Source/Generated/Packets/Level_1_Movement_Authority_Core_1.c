@@ -1,9 +1,6 @@
 
 #include "Level_1_Movement_Authority_Core_1.h"
 #include "Bit64.h"
-#include "Bitstream_Write.h"
-#include "Bitstream_Read.h"
-#include "Bitstream_Normal.h"
 
 int Level_1_Movement_Authority_Core_1_UpperBitsNotSet(const Level_1_Movement_Authority_Core_1* p)
 {

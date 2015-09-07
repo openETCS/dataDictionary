@@ -1,9 +1,6 @@
 
 #include "Position_Report_Parameters_Core.h"
 #include "Bit64.h"
-#include "Bitstream_Write.h"
-#include "Bitstream_Read.h"
-#include "Bitstream_Normal.h"
 
 int Position_Report_Parameters_UpperBitsNotSet(const Position_Report_Parameters_Core* p)
 {

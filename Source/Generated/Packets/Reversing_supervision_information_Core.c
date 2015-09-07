@@ -1,9 +1,6 @@
 
 #include "Reversing_supervision_information_Core.h"
 #include "Bit64.h"
-#include "Bitstream_Write.h"
-#include "Bitstream_Read.h"
-#include "Bitstream_Normal.h"
 
 int Reversing_supervision_information_UpperBitsNotSet(const Reversing_supervision_information_Core* p)
 {

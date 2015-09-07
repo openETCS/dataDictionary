@@ -1,9 +1,6 @@
 
 #include "Level_Transition_Order_Core.h"
 #include "Bit64.h"
-#include "Bitstream_Write.h"
-#include "Bitstream_Read.h"
-#include "Bitstream_Normal.h"
 
 int Level_Transition_Order_UpperBitsNotSet(const Level_Transition_Order_Core* p)
 {

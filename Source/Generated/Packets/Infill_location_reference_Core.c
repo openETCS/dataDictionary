@@ -1,9 +1,6 @@
 
 #include "Infill_location_reference_Core.h"
 #include "Bit64.h"
-#include "Bitstream_Write.h"
-#include "Bitstream_Read.h"
-#include "Bitstream_Normal.h"
 
 int Infill_location_reference_UpperBitsNotSet(const Infill_location_reference_Core* p)
 {

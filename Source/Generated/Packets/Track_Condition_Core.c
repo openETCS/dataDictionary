@@ -1,9 +1,6 @@
 
 #include "Track_Condition_Core.h"
 #include "Bit64.h"
-#include "Bitstream_Write.h"
-#include "Bitstream_Read.h"
-#include "Bitstream_Normal.h"
 
 int Track_Condition_UpperBitsNotSet(const Track_Condition_Core* p)
 {

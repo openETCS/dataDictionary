@@ -3,9 +3,7 @@
 #define PACKETHEADER_H_INCLUDED
 
 #include "Bit64.h"
-#include "Bitstream_Read.h"
-#include "Bitstream_Write.h"
-#include "Bitstream_Normal.h"
+#include "Bitstream.h"
 
 struct PacketHeader
 {
