@@ -10,7 +10,7 @@ struct Gradient_Profile_Core
     // TransmissionMedia=Any
     // Transmission of the gradient.D_GRADIENT gives the distance to the next change
     // of the gradient value. The gradient value is the minimum gradient
-    // for the given distance.       
+    // for the given distance.
     // Packet Number = 21
 
     uint64_t   Q_DIR;            // # 2
@@ -29,19 +29,20 @@ struct Gradient_Profile_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Gradient_Profile_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.Q_SCALE << ','
-       << +p.D_GRADIENT << ','
-       << +p.Q_GDIR << ','
-       << +p.G_A << ','
-       << +p.N_ITER_1;
-       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-       {
-           stream << ',' << p.sub_1[i];
-       }
-   
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.D_GRADIENT << ','
+            << +p.Q_GDIR << ','
+            << +p.G_A << ','
+            << +p.N_ITER_1;
+
+    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+    {
+        stream << ',' << p.sub_1[i];
+    }
+
 
     return stream;
 }
@@ -49,7 +50,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Gradient_Profile_Cor
 inline bool operator==(const Gradient_Profile_Core& a, const Gradient_Profile_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.Q_SCALE == b.Q_SCALE);
@@ -57,6 +58,7 @@ inline bool operator==(const Gradient_Profile_Core& a, const Gradient_Profile_Co
     status = status && (a.Q_GDIR == b.Q_GDIR);
     status = status && (a.G_A == b.G_A);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
+
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)
@@ -195,7 +197,7 @@ int Gradient_Profile_Encoder(Bitstream* stream, const Gradient_Profile_Core* p);
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

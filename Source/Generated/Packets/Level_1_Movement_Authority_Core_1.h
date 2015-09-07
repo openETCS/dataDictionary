@@ -19,11 +19,11 @@ struct Level_1_Movement_Authority_Core_1
 
 inline std::ostream& operator<<(std::ostream& stream, const Level_1_Movement_Authority_Core_1& p)
 {
-    stream 
-       << +p.L_SECTION << ','
-       << +p.Q_SECTIONTIMER << ','
-       << +p.T_SECTIONTIMER << ','
-       << +p.D_SECTIONTIMERSTOPLOC;
+    stream
+            << +p.L_SECTION << ','
+            << +p.Q_SECTIONTIMER << ','
+            << +p.T_SECTIONTIMER << ','
+            << +p.D_SECTIONTIMERSTOPLOC;
 
     return stream;
 }
@@ -31,7 +31,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Level_1_Movement_Aut
 inline bool operator==(const Level_1_Movement_Authority_Core_1& a, const Level_1_Movement_Authority_Core_1& b)
 {
     bool status = true;
-    
+
     status = status && (a.L_SECTION == b.L_SECTION);
     status = status && (a.Q_SECTIONTIMER == b.Q_SECTIONTIMER);
     status = status && (a.T_SECTIONTIMER == b.T_SECTIONTIMER);
@@ -155,7 +155,7 @@ int Level_1_Movement_Authority_Core_1_Encoder(Bitstream* stream, const Level_1_M
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

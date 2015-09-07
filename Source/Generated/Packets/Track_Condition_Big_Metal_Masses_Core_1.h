@@ -17,9 +17,9 @@ struct Track_Condition_Big_Metal_Masses_Core_1
 
 inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Big_Metal_Masses_Core_1& p)
 {
-    stream 
-       << +p.D_TRACKCOND << ','
-       << +p.L_TRACKCOND;
+    stream
+            << +p.D_TRACKCOND << ','
+            << +p.L_TRACKCOND;
 
     return stream;
 }
@@ -27,7 +27,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Big_
 inline bool operator==(const Track_Condition_Big_Metal_Masses_Core_1& a, const Track_Condition_Big_Metal_Masses_Core_1& b)
 {
     bool status = true;
-    
+
     status = status && (a.D_TRACKCOND == b.D_TRACKCOND);
     status = status && (a.L_TRACKCOND == b.L_TRACKCOND);
 
@@ -141,7 +141,7 @@ int Track_Condition_Big_Metal_Masses_Core_1_Encoder(Bitstream* stream, const Tra
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

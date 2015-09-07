@@ -19,11 +19,11 @@ struct International_Static_Speed_Profile_Core_1
 
 inline std::ostream& operator<<(std::ostream& stream, const International_Static_Speed_Profile_Core_1& p)
 {
-    stream 
-       << +p.Q_DIFF << ','
-       << +p.NC_CDDIFF << ','
-       << +p.NC_DIFF << ','
-       << +p.V_DIFF;
+    stream
+            << +p.Q_DIFF << ','
+            << +p.NC_CDDIFF << ','
+            << +p.NC_DIFF << ','
+            << +p.V_DIFF;
 
     return stream;
 }
@@ -31,16 +31,19 @@ inline std::ostream& operator<<(std::ostream& stream, const International_Static
 inline bool operator==(const International_Static_Speed_Profile_Core_1& a, const International_Static_Speed_Profile_Core_1& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIFF == b.Q_DIFF);
+
     if (a.Q_DIFF == 0)
     {
-    status = status && (a.NC_CDDIFF == b.NC_CDDIFF);
+        status = status && (a.NC_CDDIFF == b.NC_CDDIFF);
     }
+
     if ((a.Q_DIFF == 1) || (a.Q_DIFF == 2))
     {
-    status = status && (a.NC_DIFF == b.NC_DIFF);
+        status = status && (a.NC_DIFF == b.NC_DIFF);
     }
+
     status = status && (a.V_DIFF == b.V_DIFF);
 
     return status;
@@ -149,7 +152,7 @@ int International_Static_Speed_Profile_Core_1_Encoder(Bitstream* stream, const I
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

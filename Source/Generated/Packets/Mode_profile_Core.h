@@ -8,7 +8,7 @@
 struct Mode_profile_Core
 {
     // TransmissionMedia=Any
-    // Mode profile associated to an MA     
+    // Mode profile associated to an MA
     // Packet Number = 80
 
     uint64_t   Q_DIR;            // # 2
@@ -30,22 +30,23 @@ struct Mode_profile_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Mode_profile_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.Q_SCALE << ','
-       << +p.D_MAMODE << ','
-       << +p.M_MAMODE << ','
-       << +p.V_MAMODE << ','
-       << +p.L_MAMODE << ','
-       << +p.L_ACKMAMODE << ','
-       << +p.Q_MAMODE << ','
-       << +p.N_ITER_1;
-       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-       {
-           stream << ',' << p.sub_1[i];
-       }
-   
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.D_MAMODE << ','
+            << +p.M_MAMODE << ','
+            << +p.V_MAMODE << ','
+            << +p.L_MAMODE << ','
+            << +p.L_ACKMAMODE << ','
+            << +p.Q_MAMODE << ','
+            << +p.N_ITER_1;
+
+    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+    {
+        stream << ',' << p.sub_1[i];
+    }
+
 
     return stream;
 }
@@ -53,7 +54,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Mode_profile_Core& p
 inline bool operator==(const Mode_profile_Core& a, const Mode_profile_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.Q_SCALE == b.Q_SCALE);
@@ -64,6 +65,7 @@ inline bool operator==(const Mode_profile_Core& a, const Mode_profile_Core& b)
     status = status && (a.L_ACKMAMODE == b.L_ACKMAMODE);
     status = status && (a.Q_MAMODE == b.Q_MAMODE);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
+
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)
@@ -214,7 +216,7 @@ int Mode_profile_Encoder(Bitstream* stream, const Mode_profile_Core* p);
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

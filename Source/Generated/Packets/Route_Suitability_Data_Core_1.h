@@ -21,13 +21,13 @@ struct Route_Suitability_Data_Core_1
 
 inline std::ostream& operator<<(std::ostream& stream, const Route_Suitability_Data_Core_1& p)
 {
-    stream 
-       << +p.D_SUITABILITY << ','
-       << +p.Q_SUITABILITY << ','
-       << +p.M_LINEGAUGE << ','
-       << +p.M_AXLELOADCAT << ','
-       << +p.M_VOLTAGE << ','
-       << +p.NID_CTRACTION;
+    stream
+            << +p.D_SUITABILITY << ','
+            << +p.Q_SUITABILITY << ','
+            << +p.M_LINEGAUGE << ','
+            << +p.M_AXLELOADCAT << ','
+            << +p.M_VOLTAGE << ','
+            << +p.NID_CTRACTION;
 
     return stream;
 }
@@ -35,24 +35,28 @@ inline std::ostream& operator<<(std::ostream& stream, const Route_Suitability_Da
 inline bool operator==(const Route_Suitability_Data_Core_1& a, const Route_Suitability_Data_Core_1& b)
 {
     bool status = true;
-    
+
     status = status && (a.D_SUITABILITY == b.D_SUITABILITY);
     status = status && (a.Q_SUITABILITY == b.Q_SUITABILITY);
+
     if (a.Q_SUITABILITY == 0)
     {
-    status = status && (a.M_LINEGAUGE == b.M_LINEGAUGE);
+        status = status && (a.M_LINEGAUGE == b.M_LINEGAUGE);
     }
+
     if (a.Q_SUITABILITY == 1)
     {
-    status = status && (a.M_AXLELOADCAT == b.M_AXLELOADCAT);
+        status = status && (a.M_AXLELOADCAT == b.M_AXLELOADCAT);
     }
+
     if (a.Q_SUITABILITY == 2)
     {
-    status = status && (a.M_VOLTAGE == b.M_VOLTAGE);
+        status = status && (a.M_VOLTAGE == b.M_VOLTAGE);
     }
+
     if ((a.Q_SUITABILITY == 2) && (a.M_VOLTAGE != 0))
     {
-    status = status && (a.NID_CTRACTION == b.NID_CTRACTION);
+        status = status && (a.NID_CTRACTION == b.NID_CTRACTION);
     }
 
     return status;
@@ -165,7 +169,7 @@ int Route_Suitability_Data_Core_1_Encoder(Bitstream* stream, const Route_Suitabi
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

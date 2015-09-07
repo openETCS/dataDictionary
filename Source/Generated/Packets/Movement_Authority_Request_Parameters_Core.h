@@ -8,7 +8,7 @@ struct Movement_Authority_Request_Parameters_Core
 {
     // TransmissionMedia=RBC
     // This packet is intended to give parameters telling when and how
-    // often the train has to ask for a movement authority. 
+    // often the train has to ask for a movement authority.
     // Packet Number = 57
 
     uint64_t   Q_DIR;            // # 2
@@ -24,12 +24,12 @@ struct Movement_Authority_Request_Parameters_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Movement_Authority_Request_Parameters_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.T_MAR << ','
-       << +p.T_TIMEOUTRQST << ','
-       << +p.T_CYCRQST;
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.T_MAR << ','
+            << +p.T_TIMEOUTRQST << ','
+            << +p.T_CYCRQST;
 
     return stream;
 }
@@ -37,7 +37,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Movement_Authority_R
 inline bool operator==(const Movement_Authority_Request_Parameters_Core& a, const Movement_Authority_Request_Parameters_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.T_MAR == b.T_MAR);
@@ -166,7 +166,7 @@ int Movement_Authority_Request_Parameters_Encoder(Bitstream* stream, const Movem
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

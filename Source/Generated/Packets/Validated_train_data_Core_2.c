@@ -50,21 +50,23 @@ int Validated_train_data_Core_2_Decoder(Bitstream* stream, Validated_train_data_
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 
-	/*@
-	  requires NID_NTC:        stream->bitpos == pos + 0;
-	  assigns        	   stream->bitpos;
-	  assigns		   p->NID_NTC;
-	  ensures  NID_NTC:        stream->bitpos == pos + 8;
-	  ensures  NID_NTC:        EqualBits(stream, pos + 0, pos + 8, p->NID_NTC);
-	  ensures  NID_NTC:        UpperBitsNotSet(p->NID_NTC, 8);
-	*/
-	{ p->NID_NTC		= Bitstream_Read(stream, 8); }
+        /*@
+          requires NID_NTC:        stream->bitpos == pos + 0;
+          assigns        	   stream->bitpos;
+          assigns		   p->NID_NTC;
+          ensures  NID_NTC:        stream->bitpos == pos + 8;
+          ensures  NID_NTC:        EqualBits(stream, pos + 0, pos + 8, p->NID_NTC);
+          ensures  NID_NTC:        UpperBitsNotSet(p->NID_NTC, 8);
+        */
+        {
+            p->NID_NTC		= Bitstream_Read(stream, 8);
+        }
 
         //@ assert NID_NTC:           EqualBits(stream, pos,       pos + 8,   p->NID_NTC);
 
         //@ assert NID_NTC:           UpperBitsNotSet(p->NID_NTC,           8);
 
-	//@ assert final: EqualBits(stream, pos, p);
+        //@ assert final: EqualBits(stream, pos, p);
 
         return 1;
     }

@@ -8,7 +8,7 @@
 struct Level_23_Movement_Authority_Core
 {
     // TransmissionMedia=RBC
-    // Transmission of a movement authority for levels 2/3.   
+    // Transmission of a movement authority for levels 2/3.
     // Packet Number = 15
 
     uint64_t   Q_DIR;            // # 2
@@ -41,33 +41,35 @@ struct Level_23_Movement_Authority_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Level_23_Movement_Authority_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.Q_SCALE << ','
-       << +p.V_LOA << ','
-       << +p.T_LOA << ','
-       << +p.N_ITER_1;
-       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-       {
-           stream << ',' << p.sub_1[i];
-       }
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.V_LOA << ','
+            << +p.T_LOA << ','
+            << +p.N_ITER_1;
+
+    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+    {
+        stream << ',' << p.sub_1[i];
+    }
+
     stream << ','
-       << +p.L_ENDSECTION << ','
-       << +p.Q_SECTIONTIMER << ','
-       << +p.T_SECTIONTIMER << ','
-       << +p.D_SECTIONTIMERSTOPLOC << ','
-       << +p.Q_ENDTIMER << ','
-       << +p.T_ENDTIMER << ','
-       << +p.D_ENDTIMERSTARTLOC << ','
-       << +p.Q_DANGERPOINT << ','
-       << +p.D_DP << ','
-       << +p.V_RELEASEDP << ','
-       << +p.Q_OVERLAP << ','
-       << +p.D_STARTOL << ','
-       << +p.T_OL << ','
-       << +p.D_OL << ','
-       << +p.V_RELEASEOL;
+           << +p.L_ENDSECTION << ','
+           << +p.Q_SECTIONTIMER << ','
+           << +p.T_SECTIONTIMER << ','
+           << +p.D_SECTIONTIMERSTOPLOC << ','
+           << +p.Q_ENDTIMER << ','
+           << +p.T_ENDTIMER << ','
+           << +p.D_ENDTIMERSTARTLOC << ','
+           << +p.Q_DANGERPOINT << ','
+           << +p.D_DP << ','
+           << +p.V_RELEASEDP << ','
+           << +p.Q_OVERLAP << ','
+           << +p.D_STARTOL << ','
+           << +p.T_OL << ','
+           << +p.D_OL << ','
+           << +p.V_RELEASEOL;
 
     return stream;
 }
@@ -75,13 +77,14 @@ inline std::ostream& operator<<(std::ostream& stream, const Level_23_Movement_Au
 inline bool operator==(const Level_23_Movement_Authority_Core& a, const Level_23_Movement_Authority_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.Q_SCALE == b.Q_SCALE);
     status = status && (a.V_LOA == b.V_LOA);
     status = status && (a.T_LOA == b.T_LOA);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
+
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)
@@ -93,6 +96,7 @@ inline bool operator==(const Level_23_Movement_Authority_Core& a, const Level_23
     {
         status = false;
     }
+
     status = status && (a.L_ENDSECTION == b.L_ENDSECTION);
     status = status && (a.Q_SECTIONTIMER == b.Q_SECTIONTIMER);
     status = status && (a.T_SECTIONTIMER == b.T_SECTIONTIMER);
@@ -231,7 +235,7 @@ int Level_23_Movement_Authority_Encoder(Bitstream* stream, const Level_23_Moveme
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

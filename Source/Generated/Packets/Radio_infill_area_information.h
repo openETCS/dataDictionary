@@ -19,18 +19,19 @@ struct Radio_infill_area_information : public BasePacket
 
     bool equals(const BasePacket& p) const override
     {
-	if(auto q = dynamic_cast<const Radio_infill_area_information*>(&p))
-	{
-	    bool status = true;
+        if (auto q = dynamic_cast<const Radio_infill_area_information*>(&p))
+        {
+            bool status = true;
 
-	    status = status && (header.NID_PACKET == q->header.NID_PACKET);
-	    status = status && (core == q->core);
+            status = status && (header.NID_PACKET == q->header.NID_PACKET);
+            status = status && (core == q->core);
 
-	    return status;
-	}
-	return false;
+            return status;
+        }
+
+        return false;
     }
-    
+
     uint16_t length() const override
     {
         return  core.L_PACKET;

@@ -17,9 +17,9 @@ struct Axle_Load_Speed_Profile_Core_2_1
 
 inline std::ostream& operator<<(std::ostream& stream, const Axle_Load_Speed_Profile_Core_2_1& p)
 {
-    stream 
-       << +p.M_AXLELOADCAT << ','
-       << +p.V_AXLELOAD;
+    stream
+            << +p.M_AXLELOADCAT << ','
+            << +p.V_AXLELOAD;
 
     return stream;
 }
@@ -27,7 +27,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Axle_Load_Speed_Prof
 inline bool operator==(const Axle_Load_Speed_Profile_Core_2_1& a, const Axle_Load_Speed_Profile_Core_2_1& b)
 {
     bool status = true;
-    
+
     status = status && (a.M_AXLELOADCAT == b.M_AXLELOADCAT);
     status = status && (a.V_AXLELOAD == b.V_AXLELOAD);
 
@@ -141,7 +141,7 @@ int Axle_Load_Speed_Profile_Core_2_1_Encoder(Bitstream* stream, const Axle_Load_
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

@@ -10,7 +10,7 @@ struct End_of_Information_Core
     // This packet consists only of NID_PACKET containing 8 bit 1sIt acts
     // as a finish flag; the receiver will stop reading the remaining
     // part of the message/telegram when receiving eight bits set to one
-    // in the NID_PACKET field.       
+    // in the NID_PACKET field.
     // Packet Number = 255
 
 };
@@ -21,7 +21,7 @@ struct End_of_Information_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const End_of_Information_Core& p)
 {
-    
+
 
     return stream;
 }
@@ -29,7 +29,7 @@ inline std::ostream& operator<<(std::ostream& stream, const End_of_Information_C
 inline bool operator==(const End_of_Information_Core& a, const End_of_Information_Core& b)
 {
     bool status = true;
-    
+
 
     return status;
 }
@@ -133,7 +133,7 @@ int End_of_Information_Encoder(Bitstream* stream, const End_of_Information_Core*
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

@@ -19,11 +19,11 @@ struct Track_Condition_Station_Platforms_Core_1
 
 inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Station_Platforms_Core_1& p)
 {
-    stream 
-       << +p.D_TRACKCOND << ','
-       << +p.L_TRACKCOND << ','
-       << +p.M_PLATFORM << ','
-       << +p.Q_PLATFORM;
+    stream
+            << +p.D_TRACKCOND << ','
+            << +p.L_TRACKCOND << ','
+            << +p.M_PLATFORM << ','
+            << +p.Q_PLATFORM;
 
     return stream;
 }
@@ -31,7 +31,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Stat
 inline bool operator==(const Track_Condition_Station_Platforms_Core_1& a, const Track_Condition_Station_Platforms_Core_1& b)
 {
     bool status = true;
-    
+
     status = status && (a.D_TRACKCOND == b.D_TRACKCOND);
     status = status && (a.L_TRACKCOND == b.L_TRACKCOND);
     status = status && (a.M_PLATFORM == b.M_PLATFORM);
@@ -155,7 +155,7 @@ int Track_Condition_Station_Platforms_Core_1_Encoder(Bitstream* stream, const Tr
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

@@ -17,9 +17,9 @@ struct Validated_train_data_Core_1
 
 inline std::ostream& operator<<(std::ostream& stream, const Validated_train_data_Core_1& p)
 {
-    stream 
-       << +p.M_VOLTAGE << ','
-       << +p.NID_CTRACTION;
+    stream
+            << +p.M_VOLTAGE << ','
+            << +p.NID_CTRACTION;
 
     return stream;
 }
@@ -27,11 +27,12 @@ inline std::ostream& operator<<(std::ostream& stream, const Validated_train_data
 inline bool operator==(const Validated_train_data_Core_1& a, const Validated_train_data_Core_1& b)
 {
     bool status = true;
-    
+
     status = status && (a.M_VOLTAGE == b.M_VOLTAGE);
+
     if ((a.M_VOLTAGE != 0) && (a.NID_CTRACTION != 0))
     {
-    status = status && (a.NID_CTRACTION == b.NID_CTRACTION);
+        status = status && (a.NID_CTRACTION == b.NID_CTRACTION);
     }
 
     return status;
@@ -140,7 +141,7 @@ int Validated_train_data_Core_1_Encoder(Bitstream* stream, const Validated_train
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

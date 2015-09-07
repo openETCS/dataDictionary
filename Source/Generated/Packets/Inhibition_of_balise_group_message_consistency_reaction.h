@@ -19,18 +19,19 @@ struct Inhibition_of_balise_group_message_consistency_reaction : public BasePack
 
     bool equals(const BasePacket& p) const override
     {
-	if(auto q = dynamic_cast<const Inhibition_of_balise_group_message_consistency_reaction*>(&p))
-	{
-	    bool status = true;
+        if (auto q = dynamic_cast<const Inhibition_of_balise_group_message_consistency_reaction*>(&p))
+        {
+            bool status = true;
 
-	    status = status && (header.NID_PACKET == q->header.NID_PACKET);
-	    status = status && (core == q->core);
+            status = status && (header.NID_PACKET == q->header.NID_PACKET);
+            status = status && (core == q->core);
 
-	    return status;
-	}
-	return false;
+            return status;
+        }
+
+        return false;
     }
-    
+
     uint16_t length() const override
     {
         return  core.L_PACKET;

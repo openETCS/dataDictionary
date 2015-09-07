@@ -22,14 +22,14 @@ struct Linking_Core_1
 
 inline std::ostream& operator<<(std::ostream& stream, const Linking_Core_1& p)
 {
-    stream 
-       << +p.D_LINK << ','
-       << +p.Q_NEWCOUNTRY << ','
-       << +p.NID_C << ','
-       << +p.NID_BG << ','
-       << +p.Q_LINKORIENTATION << ','
-       << +p.Q_LINKREACTION << ','
-       << +p.Q_LOCACC;
+    stream
+            << +p.D_LINK << ','
+            << +p.Q_NEWCOUNTRY << ','
+            << +p.NID_C << ','
+            << +p.NID_BG << ','
+            << +p.Q_LINKORIENTATION << ','
+            << +p.Q_LINKREACTION << ','
+            << +p.Q_LOCACC;
 
     return stream;
 }
@@ -37,13 +37,15 @@ inline std::ostream& operator<<(std::ostream& stream, const Linking_Core_1& p)
 inline bool operator==(const Linking_Core_1& a, const Linking_Core_1& b)
 {
     bool status = true;
-    
+
     status = status && (a.D_LINK == b.D_LINK);
     status = status && (a.Q_NEWCOUNTRY == b.Q_NEWCOUNTRY);
+
     if (a.Q_NEWCOUNTRY == 1)
     {
-    status = status && (a.NID_C == b.NID_C);
+        status = status && (a.NID_C == b.NID_C);
     }
+
     status = status && (a.NID_BG == b.NID_BG);
     status = status && (a.Q_LINKORIENTATION == b.Q_LINKORIENTATION);
     status = status && (a.Q_LINKREACTION == b.Q_LINKREACTION);
@@ -159,7 +161,7 @@ int Linking_Core_1_Encoder(Bitstream* stream, const Linking_Core_1* p);
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

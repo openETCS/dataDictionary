@@ -21,16 +21,17 @@ struct International_Static_Speed_Profile_Core_2
 
 inline std::ostream& operator<<(std::ostream& stream, const International_Static_Speed_Profile_Core_2& p)
 {
-    stream 
-       << +p.D_STATIC << ','
-       << +p.V_STATIC << ','
-       << +p.Q_FRONT << ','
-       << +p.N_ITER_2_1;
-       for (uint32_t i = 0; i < p.N_ITER_2_1; ++i)
-       {
-           stream << ',' << p.sub_2_1[i];
-       }
-   
+    stream
+            << +p.D_STATIC << ','
+            << +p.V_STATIC << ','
+            << +p.Q_FRONT << ','
+            << +p.N_ITER_2_1;
+
+    for (uint32_t i = 0; i < p.N_ITER_2_1; ++i)
+    {
+        stream << ',' << p.sub_2_1[i];
+    }
+
 
     return stream;
 }
@@ -38,11 +39,12 @@ inline std::ostream& operator<<(std::ostream& stream, const International_Static
 inline bool operator==(const International_Static_Speed_Profile_Core_2& a, const International_Static_Speed_Profile_Core_2& b)
 {
     bool status = true;
-    
+
     status = status && (a.D_STATIC == b.D_STATIC);
     status = status && (a.V_STATIC == b.V_STATIC);
     status = status && (a.Q_FRONT == b.Q_FRONT);
     status = status && (a.N_ITER_2_1 == b.N_ITER_2_1);
+
     if (a.N_ITER_2_1 == b.N_ITER_2_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_2_1; ++i)
@@ -169,7 +171,7 @@ int International_Static_Speed_Profile_Core_2_Encoder(Bitstream* stream, const I
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

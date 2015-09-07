@@ -8,7 +8,7 @@ struct Reversing_area_information_Core
 {
     // TransmissionMedia=Any
     // Used to send start and length of reversing area to the
-    // on-board          
+    // on-board
     // Packet Number = 138
 
     uint64_t   Q_DIR;            // # 2
@@ -24,12 +24,12 @@ struct Reversing_area_information_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Reversing_area_information_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.Q_SCALE << ','
-       << +p.D_STARTREVERSE << ','
-       << +p.L_REVERSEAREA;
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.D_STARTREVERSE << ','
+            << +p.L_REVERSEAREA;
 
     return stream;
 }
@@ -37,7 +37,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Reversing_area_infor
 inline bool operator==(const Reversing_area_information_Core& a, const Reversing_area_information_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.Q_SCALE == b.Q_SCALE);
@@ -166,7 +166,7 @@ int Reversing_area_information_Encoder(Bitstream* stream, const Reversing_area_i
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

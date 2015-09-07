@@ -7,7 +7,7 @@
 struct Stop_if_in_Staff_Responsible_Core
 {
     // TransmissionMedia=Balise
-    // Information to stop a train in staff responsible.   
+    // Information to stop a train in staff responsible.
     // Packet Number = 137
 
     uint64_t   Q_DIR;            // # 2
@@ -21,10 +21,10 @@ struct Stop_if_in_Staff_Responsible_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Stop_if_in_Staff_Responsible_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.Q_SRSTOP;
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SRSTOP;
 
     return stream;
 }
@@ -32,7 +32,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Stop_if_in_Staff_Res
 inline bool operator==(const Stop_if_in_Staff_Responsible_Core& a, const Stop_if_in_Staff_Responsible_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.Q_SRSTOP == b.Q_SRSTOP);
@@ -151,7 +151,7 @@ int Stop_if_in_Staff_Responsible_Encoder(Bitstream* stream, const Stop_if_in_Sta
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

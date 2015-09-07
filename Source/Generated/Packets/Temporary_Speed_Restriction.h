@@ -19,18 +19,19 @@ struct Temporary_Speed_Restriction : public BasePacket
 
     bool equals(const BasePacket& p) const override
     {
-	if(auto q = dynamic_cast<const Temporary_Speed_Restriction*>(&p))
-	{
-	    bool status = true;
+        if (auto q = dynamic_cast<const Temporary_Speed_Restriction*>(&p))
+        {
+            bool status = true;
 
-	    status = status && (header.NID_PACKET == q->header.NID_PACKET);
-	    status = status && (core == q->core);
+            status = status && (header.NID_PACKET == q->header.NID_PACKET);
+            status = status && (core == q->core);
 
-	    return status;
-	}
-	return false;
+            return status;
+        }
+
+        return false;
     }
-    
+
     uint16_t length() const override
     {
         return  core.L_PACKET;

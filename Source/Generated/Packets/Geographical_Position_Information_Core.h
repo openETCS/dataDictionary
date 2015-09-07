@@ -9,7 +9,7 @@ struct Geographical_Position_Information_Core
 {
     // TransmissionMedia=Balise, RBC
     // This packet gives geographical location information for one or multiple references
-    // to the train.        
+    // to the train.
     // Packet Number = 79
 
     uint64_t   Q_DIR;            // # 2
@@ -31,22 +31,23 @@ struct Geographical_Position_Information_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Geographical_Position_Information_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.Q_SCALE << ','
-       << +p.Q_NEWCOUNTRY << ','
-       << +p.NID_C << ','
-       << +p.NID_BG << ','
-       << +p.D_POSOFF << ','
-       << +p.Q_MPOSITION << ','
-       << +p.M_POSITION << ','
-       << +p.N_ITER_1;
-       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-       {
-           stream << ',' << p.sub_1[i];
-       }
-   
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.Q_NEWCOUNTRY << ','
+            << +p.NID_C << ','
+            << +p.NID_BG << ','
+            << +p.D_POSOFF << ','
+            << +p.Q_MPOSITION << ','
+            << +p.M_POSITION << ','
+            << +p.N_ITER_1;
+
+    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+    {
+        stream << ',' << p.sub_1[i];
+    }
+
 
     return stream;
 }
@@ -54,20 +55,23 @@ inline std::ostream& operator<<(std::ostream& stream, const Geographical_Positio
 inline bool operator==(const Geographical_Position_Information_Core& a, const Geographical_Position_Information_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.Q_SCALE == b.Q_SCALE);
     status = status && (a.Q_NEWCOUNTRY == b.Q_NEWCOUNTRY);
+
     if (a.Q_NEWCOUNTRY == 1)
     {
-    status = status && (a.NID_C == b.NID_C);
+        status = status && (a.NID_C == b.NID_C);
     }
+
     status = status && (a.NID_BG == b.NID_BG);
     status = status && (a.D_POSOFF == b.D_POSOFF);
     status = status && (a.Q_MPOSITION == b.Q_MPOSITION);
     status = status && (a.M_POSITION == b.M_POSITION);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
+
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)
@@ -198,7 +202,7 @@ int Geographical_Position_Information_Encoder(Bitstream* stream, const Geographi
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

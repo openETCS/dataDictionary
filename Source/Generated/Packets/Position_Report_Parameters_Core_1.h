@@ -17,9 +17,9 @@ struct Position_Report_Parameters_Core_1
 
 inline std::ostream& operator<<(std::ostream& stream, const Position_Report_Parameters_Core_1& p)
 {
-    stream 
-       << +p.D_LOC << ','
-       << +p.Q_LGTLOC;
+    stream
+            << +p.D_LOC << ','
+            << +p.Q_LGTLOC;
 
     return stream;
 }
@@ -27,7 +27,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Position_Report_Para
 inline bool operator==(const Position_Report_Parameters_Core_1& a, const Position_Report_Parameters_Core_1& b)
 {
     bool status = true;
-    
+
     status = status && (a.D_LOC == b.D_LOC);
     status = status && (a.Q_LGTLOC == b.Q_LGTLOC);
 
@@ -141,7 +141,7 @@ int Position_Report_Parameters_Core_1_Encoder(Bitstream* stream, const Position_
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

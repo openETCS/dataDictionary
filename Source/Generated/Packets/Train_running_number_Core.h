@@ -7,7 +7,7 @@
 struct Train_running_number_Core
 {
     // TransmissionMedia=RBC
-    // Train running number        
+    // Train running number
     // Packet Number = 5
 
     uint64_t  L_PACKET;         // # 13
@@ -20,9 +20,9 @@ struct Train_running_number_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Train_running_number_Core& p)
 {
-    stream 
-       << +p.L_PACKET << ','
-       << +p.NID_OPERATIONAL;
+    stream
+            << +p.L_PACKET << ','
+            << +p.NID_OPERATIONAL;
 
     return stream;
 }
@@ -30,7 +30,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Train_running_number
 inline bool operator==(const Train_running_number_Core& a, const Train_running_number_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.NID_OPERATIONAL == b.NID_OPERATIONAL);
 
@@ -144,7 +144,7 @@ int Train_running_number_Encoder(Bitstream* stream, const Train_running_number_C
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

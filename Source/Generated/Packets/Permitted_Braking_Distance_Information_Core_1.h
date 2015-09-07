@@ -21,13 +21,13 @@ struct Permitted_Braking_Distance_Information_Core_1
 
 inline std::ostream& operator<<(std::ostream& stream, const Permitted_Braking_Distance_Information_Core_1& p)
 {
-    stream 
-       << +p.D_PBD << ','
-       << +p.Q_GDIR << ','
-       << +p.G_PBDSR << ','
-       << +p.Q_PBDSR << ','
-       << +p.D_PBDSR << ','
-       << +p.L_PBDSR;
+    stream
+            << +p.D_PBD << ','
+            << +p.Q_GDIR << ','
+            << +p.G_PBDSR << ','
+            << +p.Q_PBDSR << ','
+            << +p.D_PBDSR << ','
+            << +p.L_PBDSR;
 
     return stream;
 }
@@ -35,7 +35,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Permitted_Braking_Di
 inline bool operator==(const Permitted_Braking_Distance_Information_Core_1& a, const Permitted_Braking_Distance_Information_Core_1& b)
 {
     bool status = true;
-    
+
     status = status && (a.D_PBD == b.D_PBD);
     status = status && (a.Q_GDIR == b.Q_GDIR);
     status = status && (a.G_PBDSR == b.G_PBDSR);
@@ -169,7 +169,7 @@ int Permitted_Braking_Distance_Information_Core_1_Encoder(Bitstream* stream, con
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

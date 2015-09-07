@@ -7,7 +7,7 @@
 struct Error_Reporting_Core
 {
     // TransmissionMedia=RBC
-    // Error reporting to the RBC      
+    // Error reporting to the RBC
     // Packet Number = 4
 
     uint64_t  L_PACKET;         // # 13
@@ -20,9 +20,9 @@ struct Error_Reporting_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Error_Reporting_Core& p)
 {
-    stream 
-       << +p.L_PACKET << ','
-       << +p.M_ERROR;
+    stream
+            << +p.L_PACKET << ','
+            << +p.M_ERROR;
 
     return stream;
 }
@@ -30,7 +30,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Error_Reporting_Core
 inline bool operator==(const Error_Reporting_Core& a, const Error_Reporting_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.M_ERROR == b.M_ERROR);
 
@@ -144,7 +144,7 @@ int Error_Reporting_Encoder(Bitstream* stream, const Error_Reporting_Core* p);
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

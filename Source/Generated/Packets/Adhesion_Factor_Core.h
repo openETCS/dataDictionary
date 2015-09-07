@@ -8,7 +8,7 @@ struct Adhesion_Factor_Core
 {
     // TransmissionMedia=Any
     // This packet is used when the trackside requests a change of
-    // the adhesion factor to be used in the brake model. 
+    // the adhesion factor to be used in the brake model.
     // Packet Number = 71
 
     uint64_t   Q_DIR;            // # 2
@@ -25,13 +25,13 @@ struct Adhesion_Factor_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Adhesion_Factor_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.Q_SCALE << ','
-       << +p.D_ADHESION << ','
-       << +p.L_ADHESION << ','
-       << +p.M_ADHESION;
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.D_ADHESION << ','
+            << +p.L_ADHESION << ','
+            << +p.M_ADHESION;
 
     return stream;
 }
@@ -39,7 +39,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Adhesion_Factor_Core
 inline bool operator==(const Adhesion_Factor_Core& a, const Adhesion_Factor_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.Q_SCALE == b.Q_SCALE);
@@ -173,7 +173,7 @@ int Adhesion_Factor_Encoder(Bitstream* stream, const Adhesion_Factor_Core* p);
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

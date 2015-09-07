@@ -9,7 +9,7 @@ struct Position_Report_Parameters_Core
 {
     // TransmissionMedia=RBC
     // This packet is intended to give parameters telling when and how
-    // often the position has to be reported.    
+    // often the position has to be reported.
     // Packet Number = 58
 
     uint64_t   Q_DIR;            // # 2
@@ -28,19 +28,20 @@ struct Position_Report_Parameters_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Position_Report_Parameters_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.Q_SCALE << ','
-       << +p.T_CYCLOC << ','
-       << +p.D_CYCLOC << ','
-       << +p.M_LOC << ','
-       << +p.N_ITER_1;
-       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-       {
-           stream << ',' << p.sub_1[i];
-       }
-   
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.T_CYCLOC << ','
+            << +p.D_CYCLOC << ','
+            << +p.M_LOC << ','
+            << +p.N_ITER_1;
+
+    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+    {
+        stream << ',' << p.sub_1[i];
+    }
+
 
     return stream;
 }
@@ -48,7 +49,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Position_Report_Para
 inline bool operator==(const Position_Report_Parameters_Core& a, const Position_Report_Parameters_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.Q_SCALE == b.Q_SCALE);
@@ -56,6 +57,7 @@ inline bool operator==(const Position_Report_Parameters_Core& a, const Position_
     status = status && (a.D_CYCLOC == b.D_CYCLOC);
     status = status && (a.M_LOC == b.M_LOC);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
+
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)
@@ -194,7 +196,7 @@ int Position_Report_Parameters_Encoder(Bitstream* stream, const Position_Report_
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

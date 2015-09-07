@@ -10,7 +10,7 @@ struct Level_Transition_Order_Core
     // TransmissionMedia=Any
     // Packet to identify where a level transition shall take place. In
     // case of mixed levels, the successive M_LEVELTR go from the highest
-    // priority level to the lowest one.     
+    // priority level to the lowest one.
     // Packet Number = 41
 
     uint64_t   Q_DIR;            // # 2
@@ -30,20 +30,21 @@ struct Level_Transition_Order_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Level_Transition_Order_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.Q_SCALE << ','
-       << +p.D_LEVELTR << ','
-       << +p.M_LEVELTR << ','
-       << +p.NID_NTC << ','
-       << +p.L_ACKLEVELTR << ','
-       << +p.N_ITER_1;
-       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-       {
-           stream << ',' << p.sub_1[i];
-       }
-   
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.D_LEVELTR << ','
+            << +p.M_LEVELTR << ','
+            << +p.NID_NTC << ','
+            << +p.L_ACKLEVELTR << ','
+            << +p.N_ITER_1;
+
+    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+    {
+        stream << ',' << p.sub_1[i];
+    }
+
 
     return stream;
 }
@@ -51,18 +52,21 @@ inline std::ostream& operator<<(std::ostream& stream, const Level_Transition_Ord
 inline bool operator==(const Level_Transition_Order_Core& a, const Level_Transition_Order_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.Q_SCALE == b.Q_SCALE);
     status = status && (a.D_LEVELTR == b.D_LEVELTR);
     status = status && (a.M_LEVELTR == b.M_LEVELTR);
+
     if (a.M_LEVELTR == 1)
     {
-    status = status && (a.NID_NTC == b.NID_NTC);
+        status = status && (a.NID_NTC == b.NID_NTC);
     }
+
     status = status && (a.L_ACKLEVELTR == b.L_ACKLEVELTR);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
+
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)
@@ -197,7 +201,7 @@ int Level_Transition_Order_Encoder(Bitstream* stream, const Level_Transition_Ord
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

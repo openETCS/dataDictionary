@@ -8,7 +8,7 @@
 struct Onboard_telephone_numbers_Core
 {
     // TransmissionMedia=RBC, RIU
-    // Telephone numbers associated to the onboard equipment    
+    // Telephone numbers associated to the onboard equipment
     // Packet Number = 3
 
     uint64_t  L_PACKET;         // # 13
@@ -22,14 +22,15 @@ struct Onboard_telephone_numbers_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Onboard_telephone_numbers_Core& p)
 {
-    stream 
-       << +p.L_PACKET << ','
-       << +p.N_ITER_1;
-       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-       {
-           stream << ',' << p.sub_1[i];
-       }
-   
+    stream
+            << +p.L_PACKET << ','
+            << +p.N_ITER_1;
+
+    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+    {
+        stream << ',' << p.sub_1[i];
+    }
+
 
     return stream;
 }
@@ -37,9 +38,10 @@ inline std::ostream& operator<<(std::ostream& stream, const Onboard_telephone_nu
 inline bool operator==(const Onboard_telephone_numbers_Core& a, const Onboard_telephone_numbers_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
+
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)
@@ -158,7 +160,7 @@ int Onboard_telephone_numbers_Encoder(Bitstream* stream, const Onboard_telephone
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

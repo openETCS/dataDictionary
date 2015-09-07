@@ -53,25 +53,29 @@ int National_Values_Core_3_1_Decoder(Bitstream* stream, National_Values_Core_3_1
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 
-	/*@
-	  requires V_NVKVINT:      stream->bitpos == pos + 0;
-	  assigns        	   stream->bitpos;
-	  assigns		   p->V_NVKVINT;
-	  ensures  V_NVKVINT:      stream->bitpos == pos + 7;
-	  ensures  V_NVKVINT:      EqualBits(stream, pos + 0, pos + 7, p->V_NVKVINT);
-	  ensures  V_NVKVINT:      UpperBitsNotSet(p->V_NVKVINT, 7);
-	*/
-	{ p->V_NVKVINT		= Bitstream_Read(stream, 7); }
+        /*@
+          requires V_NVKVINT:      stream->bitpos == pos + 0;
+          assigns        	   stream->bitpos;
+          assigns		   p->V_NVKVINT;
+          ensures  V_NVKVINT:      stream->bitpos == pos + 7;
+          ensures  V_NVKVINT:      EqualBits(stream, pos + 0, pos + 7, p->V_NVKVINT);
+          ensures  V_NVKVINT:      UpperBitsNotSet(p->V_NVKVINT, 7);
+        */
+        {
+            p->V_NVKVINT		= Bitstream_Read(stream, 7);
+        }
 
-	/*@
-	  requires M_NVKVINT:      stream->bitpos == pos + 7;
-	  assigns        	   stream->bitpos;
-	  assigns		   p->M_NVKVINT;
-	  ensures  M_NVKVINT:      stream->bitpos == pos + 14;
-	  ensures  M_NVKVINT:      EqualBits(stream, pos + 7, pos + 14, p->M_NVKVINT);
-	  ensures  M_NVKVINT:      UpperBitsNotSet(p->M_NVKVINT, 7);
-	*/
-	{ p->M_NVKVINT		= Bitstream_Read(stream, 7); }
+        /*@
+          requires M_NVKVINT:      stream->bitpos == pos + 7;
+          assigns        	   stream->bitpos;
+          assigns		   p->M_NVKVINT;
+          ensures  M_NVKVINT:      stream->bitpos == pos + 14;
+          ensures  M_NVKVINT:      EqualBits(stream, pos + 7, pos + 14, p->M_NVKVINT);
+          ensures  M_NVKVINT:      UpperBitsNotSet(p->M_NVKVINT, 7);
+        */
+        {
+            p->M_NVKVINT		= Bitstream_Read(stream, 7);
+        }
 
         //@ assert V_NVKVINT:         EqualBits(stream, pos,       pos + 7,   p->V_NVKVINT);
         //@ assert M_NVKVINT:         EqualBits(stream, pos + 7,   pos + 14,  p->M_NVKVINT);
@@ -79,7 +83,7 @@ int National_Values_Core_3_1_Decoder(Bitstream* stream, National_Values_Core_3_1
         //@ assert V_NVKVINT:         UpperBitsNotSet(p->V_NVKVINT,         7);
         //@ assert M_NVKVINT:         UpperBitsNotSet(p->M_NVKVINT,         7);
 
-	//@ assert final: EqualBits(stream, pos, p);
+        //@ assert final: EqualBits(stream, pos, p);
 
         return 1;
     }

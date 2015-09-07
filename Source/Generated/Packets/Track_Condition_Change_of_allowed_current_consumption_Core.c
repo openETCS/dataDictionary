@@ -62,55 +62,65 @@ int Track_Condition_Change_of_allowed_current_consumption_Decoder(Bitstream* str
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 
-	/*@
-	  requires Q_DIR:          stream->bitpos == pos + 0;
-	  assigns        	   stream->bitpos;
-	  assigns		   p->Q_DIR;
-	  ensures  Q_DIR:          stream->bitpos == pos + 2;
-	  ensures  Q_DIR:          EqualBits(stream, pos + 0, pos + 2, p->Q_DIR);
-	  ensures  Q_DIR:          UpperBitsNotSet(p->Q_DIR, 2);
-	*/
-	{ p->Q_DIR		= Bitstream_Read(stream, 2); }
+        /*@
+          requires Q_DIR:          stream->bitpos == pos + 0;
+          assigns        	   stream->bitpos;
+          assigns		   p->Q_DIR;
+          ensures  Q_DIR:          stream->bitpos == pos + 2;
+          ensures  Q_DIR:          EqualBits(stream, pos + 0, pos + 2, p->Q_DIR);
+          ensures  Q_DIR:          UpperBitsNotSet(p->Q_DIR, 2);
+        */
+        {
+            p->Q_DIR		= Bitstream_Read(stream, 2);
+        }
 
-	/*@
-	  requires L_PACKET:       stream->bitpos == pos + 2;
-	  assigns        	   stream->bitpos;
-	  assigns		   p->L_PACKET;
-	  ensures  L_PACKET:       stream->bitpos == pos + 15;
-	  ensures  L_PACKET:       EqualBits(stream, pos + 2, pos + 15, p->L_PACKET);
-	  ensures  L_PACKET:       UpperBitsNotSet(p->L_PACKET, 13);
-	*/
-	{ p->L_PACKET		= Bitstream_Read(stream, 13); }
+        /*@
+          requires L_PACKET:       stream->bitpos == pos + 2;
+          assigns        	   stream->bitpos;
+          assigns		   p->L_PACKET;
+          ensures  L_PACKET:       stream->bitpos == pos + 15;
+          ensures  L_PACKET:       EqualBits(stream, pos + 2, pos + 15, p->L_PACKET);
+          ensures  L_PACKET:       UpperBitsNotSet(p->L_PACKET, 13);
+        */
+        {
+            p->L_PACKET		= Bitstream_Read(stream, 13);
+        }
 
-	/*@
-	  requires Q_SCALE:        stream->bitpos == pos + 15;
-	  assigns        	   stream->bitpos;
-	  assigns		   p->Q_SCALE;
-	  ensures  Q_SCALE:        stream->bitpos == pos + 17;
-	  ensures  Q_SCALE:        EqualBits(stream, pos + 15, pos + 17, p->Q_SCALE);
-	  ensures  Q_SCALE:        UpperBitsNotSet(p->Q_SCALE, 2);
-	*/
-	{ p->Q_SCALE		= Bitstream_Read(stream, 2); }
+        /*@
+          requires Q_SCALE:        stream->bitpos == pos + 15;
+          assigns        	   stream->bitpos;
+          assigns		   p->Q_SCALE;
+          ensures  Q_SCALE:        stream->bitpos == pos + 17;
+          ensures  Q_SCALE:        EqualBits(stream, pos + 15, pos + 17, p->Q_SCALE);
+          ensures  Q_SCALE:        UpperBitsNotSet(p->Q_SCALE, 2);
+        */
+        {
+            p->Q_SCALE		= Bitstream_Read(stream, 2);
+        }
 
-	/*@
-	  requires D_CURRENT:      stream->bitpos == pos + 17;
-	  assigns        	   stream->bitpos;
-	  assigns		   p->D_CURRENT;
-	  ensures  D_CURRENT:      stream->bitpos == pos + 32;
-	  ensures  D_CURRENT:      EqualBits(stream, pos + 17, pos + 32, p->D_CURRENT);
-	  ensures  D_CURRENT:      UpperBitsNotSet(p->D_CURRENT, 15);
-	*/
-	{ p->D_CURRENT		= Bitstream_Read(stream, 15); }
+        /*@
+          requires D_CURRENT:      stream->bitpos == pos + 17;
+          assigns        	   stream->bitpos;
+          assigns		   p->D_CURRENT;
+          ensures  D_CURRENT:      stream->bitpos == pos + 32;
+          ensures  D_CURRENT:      EqualBits(stream, pos + 17, pos + 32, p->D_CURRENT);
+          ensures  D_CURRENT:      UpperBitsNotSet(p->D_CURRENT, 15);
+        */
+        {
+            p->D_CURRENT		= Bitstream_Read(stream, 15);
+        }
 
-	/*@
-	  requires M_CURRENT:      stream->bitpos == pos + 32;
-	  assigns        	   stream->bitpos;
-	  assigns		   p->M_CURRENT;
-	  ensures  M_CURRENT:      stream->bitpos == pos + 42;
-	  ensures  M_CURRENT:      EqualBits(stream, pos + 32, pos + 42, p->M_CURRENT);
-	  ensures  M_CURRENT:      UpperBitsNotSet(p->M_CURRENT, 10);
-	*/
-	{ p->M_CURRENT		= Bitstream_Read(stream, 10); }
+        /*@
+          requires M_CURRENT:      stream->bitpos == pos + 32;
+          assigns        	   stream->bitpos;
+          assigns		   p->M_CURRENT;
+          ensures  M_CURRENT:      stream->bitpos == pos + 42;
+          ensures  M_CURRENT:      EqualBits(stream, pos + 32, pos + 42, p->M_CURRENT);
+          ensures  M_CURRENT:      UpperBitsNotSet(p->M_CURRENT, 10);
+        */
+        {
+            p->M_CURRENT		= Bitstream_Read(stream, 10);
+        }
 
         //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
         //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
@@ -124,7 +134,7 @@ int Track_Condition_Change_of_allowed_current_consumption_Decoder(Bitstream* str
         //@ assert D_CURRENT:         UpperBitsNotSet(p->D_CURRENT,         15);
         //@ assert M_CURRENT:         UpperBitsNotSet(p->M_CURRENT,         10);
 
-	//@ assert final: EqualBits(stream, pos, p);
+        //@ assert final: EqualBits(stream, pos, p);
 
         return 1;
     }

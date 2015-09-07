@@ -31,3 +31,5 @@ clean::
 	$(RM) libgenerated_packets.a
 	$(RM) *.o
 
+format: FORCE
+	@$(ASTYLE) *.c *.cpp *.h

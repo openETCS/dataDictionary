@@ -7,7 +7,7 @@
 struct Train_running_number_from_RBC_Core
 {
     // TransmissionMedia=RBC
-    // Train running number from RBC      
+    // Train running number from RBC
     // Packet Number = 140
 
     uint64_t   Q_DIR;            // # 2
@@ -21,10 +21,10 @@ struct Train_running_number_from_RBC_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Train_running_number_from_RBC_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.NID_OPERATIONAL;
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.NID_OPERATIONAL;
 
     return stream;
 }
@@ -32,7 +32,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Train_running_number
 inline bool operator==(const Train_running_number_from_RBC_Core& a, const Train_running_number_from_RBC_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.NID_OPERATIONAL == b.NID_OPERATIONAL);
@@ -151,7 +151,7 @@ int Train_running_number_from_RBC_Encoder(Bitstream* stream, const Train_running
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

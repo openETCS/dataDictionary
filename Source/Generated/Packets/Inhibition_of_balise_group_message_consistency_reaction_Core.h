@@ -10,7 +10,7 @@ struct Inhibition_of_balise_group_message_consistency_reaction_Core
     // Indication to on-board that the balise group message consistency reaction (service
     // brake command) can be inhibited for this balise group message only,
     // in case one or more balise telegram(s) of the group is/are
-    // missed or is/are detected but not decoded.    
+    // missed or is/are detected but not decoded.
     // Packet Number = 145
 
     uint64_t   Q_DIR;            // # 2
@@ -23,9 +23,9 @@ struct Inhibition_of_balise_group_message_consistency_reaction_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Inhibition_of_balise_group_message_consistency_reaction_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET;
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET;
 
     return stream;
 }
@@ -33,7 +33,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Inhibition_of_balise
 inline bool operator==(const Inhibition_of_balise_group_message_consistency_reaction_Core& a, const Inhibition_of_balise_group_message_consistency_reaction_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
 
@@ -147,7 +147,7 @@ int Inhibition_of_balise_group_message_consistency_reaction_Encoder(Bitstream* s
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

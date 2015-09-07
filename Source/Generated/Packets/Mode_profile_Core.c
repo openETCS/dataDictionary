@@ -16,6 +16,7 @@ int Mode_profile_UpperBitsNotSet(const Mode_profile_Core* p)
     status = status && UpperBitsNotSet64(p->L_ACKMAMODE,       15);
     status = status && UpperBitsNotSet64(p->Q_MAMODE,          1) ;
     status = status && UpperBitsNotSet64(p->N_ITER_1,          5) ;
+
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
         status = status && Mode_profile_Core_1_UpperBitsNotSet(&(p->sub_1[i]));
@@ -49,6 +50,7 @@ int Mode_profile_Encoder(Bitstream* stream, const Mode_profile_Core* p)
             Bitstream_Write(stream, 15, p->L_ACKMAMODE);
             Bitstream_Write(stream, 1,  p->Q_MAMODE);
             Bitstream_Write(stream, 5,  p->N_ITER_1);
+
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
                 Mode_profile_Core_1_Encoder(stream, &(p->sub_1[i]));
@@ -84,102 +86,123 @@ int Mode_profile_Decoder(Bitstream* stream, Mode_profile_Core* p)
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 
-	/*@
-	  requires Q_DIR:          stream->bitpos == pos + 0;
-	  assigns        	   stream->bitpos;
-	  assigns		   p->Q_DIR;
-	  ensures  Q_DIR:          stream->bitpos == pos + 2;
-	  ensures  Q_DIR:          EqualBits(stream, pos + 0, pos + 2, p->Q_DIR);
-	  ensures  Q_DIR:          UpperBitsNotSet(p->Q_DIR, 2);
-	*/
-	{ p->Q_DIR		= Bitstream_Read(stream, 2); }
+        /*@
+          requires Q_DIR:          stream->bitpos == pos + 0;
+          assigns        	   stream->bitpos;
+          assigns		   p->Q_DIR;
+          ensures  Q_DIR:          stream->bitpos == pos + 2;
+          ensures  Q_DIR:          EqualBits(stream, pos + 0, pos + 2, p->Q_DIR);
+          ensures  Q_DIR:          UpperBitsNotSet(p->Q_DIR, 2);
+        */
+        {
+            p->Q_DIR		= Bitstream_Read(stream, 2);
+        }
 
-	/*@
-	  requires L_PACKET:       stream->bitpos == pos + 2;
-	  assigns        	   stream->bitpos;
-	  assigns		   p->L_PACKET;
-	  ensures  L_PACKET:       stream->bitpos == pos + 15;
-	  ensures  L_PACKET:       EqualBits(stream, pos + 2, pos + 15, p->L_PACKET);
-	  ensures  L_PACKET:       UpperBitsNotSet(p->L_PACKET, 13);
-	*/
-	{ p->L_PACKET		= Bitstream_Read(stream, 13); }
+        /*@
+          requires L_PACKET:       stream->bitpos == pos + 2;
+          assigns        	   stream->bitpos;
+          assigns		   p->L_PACKET;
+          ensures  L_PACKET:       stream->bitpos == pos + 15;
+          ensures  L_PACKET:       EqualBits(stream, pos + 2, pos + 15, p->L_PACKET);
+          ensures  L_PACKET:       UpperBitsNotSet(p->L_PACKET, 13);
+        */
+        {
+            p->L_PACKET		= Bitstream_Read(stream, 13);
+        }
 
-	/*@
-	  requires Q_SCALE:        stream->bitpos == pos + 15;
-	  assigns        	   stream->bitpos;
-	  assigns		   p->Q_SCALE;
-	  ensures  Q_SCALE:        stream->bitpos == pos + 17;
-	  ensures  Q_SCALE:        EqualBits(stream, pos + 15, pos + 17, p->Q_SCALE);
-	  ensures  Q_SCALE:        UpperBitsNotSet(p->Q_SCALE, 2);
-	*/
-	{ p->Q_SCALE		= Bitstream_Read(stream, 2); }
+        /*@
+          requires Q_SCALE:        stream->bitpos == pos + 15;
+          assigns        	   stream->bitpos;
+          assigns		   p->Q_SCALE;
+          ensures  Q_SCALE:        stream->bitpos == pos + 17;
+          ensures  Q_SCALE:        EqualBits(stream, pos + 15, pos + 17, p->Q_SCALE);
+          ensures  Q_SCALE:        UpperBitsNotSet(p->Q_SCALE, 2);
+        */
+        {
+            p->Q_SCALE		= Bitstream_Read(stream, 2);
+        }
 
-	/*@
-	  requires D_MAMODE:       stream->bitpos == pos + 17;
-	  assigns        	   stream->bitpos;
-	  assigns		   p->D_MAMODE;
-	  ensures  D_MAMODE:       stream->bitpos == pos + 32;
-	  ensures  D_MAMODE:       EqualBits(stream, pos + 17, pos + 32, p->D_MAMODE);
-	  ensures  D_MAMODE:       UpperBitsNotSet(p->D_MAMODE, 15);
-	*/
-	{ p->D_MAMODE		= Bitstream_Read(stream, 15); }
+        /*@
+          requires D_MAMODE:       stream->bitpos == pos + 17;
+          assigns        	   stream->bitpos;
+          assigns		   p->D_MAMODE;
+          ensures  D_MAMODE:       stream->bitpos == pos + 32;
+          ensures  D_MAMODE:       EqualBits(stream, pos + 17, pos + 32, p->D_MAMODE);
+          ensures  D_MAMODE:       UpperBitsNotSet(p->D_MAMODE, 15);
+        */
+        {
+            p->D_MAMODE		= Bitstream_Read(stream, 15);
+        }
 
-	/*@
-	  requires M_MAMODE:       stream->bitpos == pos + 32;
-	  assigns        	   stream->bitpos;
-	  assigns		   p->M_MAMODE;
-	  ensures  M_MAMODE:       stream->bitpos == pos + 34;
-	  ensures  M_MAMODE:       EqualBits(stream, pos + 32, pos + 34, p->M_MAMODE);
-	  ensures  M_MAMODE:       UpperBitsNotSet(p->M_MAMODE, 2);
-	*/
-	{ p->M_MAMODE		= Bitstream_Read(stream, 2); }
+        /*@
+          requires M_MAMODE:       stream->bitpos == pos + 32;
+          assigns        	   stream->bitpos;
+          assigns		   p->M_MAMODE;
+          ensures  M_MAMODE:       stream->bitpos == pos + 34;
+          ensures  M_MAMODE:       EqualBits(stream, pos + 32, pos + 34, p->M_MAMODE);
+          ensures  M_MAMODE:       UpperBitsNotSet(p->M_MAMODE, 2);
+        */
+        {
+            p->M_MAMODE		= Bitstream_Read(stream, 2);
+        }
 
-	/*@
-	  requires V_MAMODE:       stream->bitpos == pos + 34;
-	  assigns        	   stream->bitpos;
-	  assigns		   p->V_MAMODE;
-	  ensures  V_MAMODE:       stream->bitpos == pos + 41;
-	  ensures  V_MAMODE:       EqualBits(stream, pos + 34, pos + 41, p->V_MAMODE);
-	  ensures  V_MAMODE:       UpperBitsNotSet(p->V_MAMODE, 7);
-	*/
-	{ p->V_MAMODE		= Bitstream_Read(stream, 7); }
+        /*@
+          requires V_MAMODE:       stream->bitpos == pos + 34;
+          assigns        	   stream->bitpos;
+          assigns		   p->V_MAMODE;
+          ensures  V_MAMODE:       stream->bitpos == pos + 41;
+          ensures  V_MAMODE:       EqualBits(stream, pos + 34, pos + 41, p->V_MAMODE);
+          ensures  V_MAMODE:       UpperBitsNotSet(p->V_MAMODE, 7);
+        */
+        {
+            p->V_MAMODE		= Bitstream_Read(stream, 7);
+        }
 
-	/*@
-	  requires L_MAMODE:       stream->bitpos == pos + 41;
-	  assigns        	   stream->bitpos;
-	  assigns		   p->L_MAMODE;
-	  ensures  L_MAMODE:       stream->bitpos == pos + 56;
-	  ensures  L_MAMODE:       EqualBits(stream, pos + 41, pos + 56, p->L_MAMODE);
-	  ensures  L_MAMODE:       UpperBitsNotSet(p->L_MAMODE, 15);
-	*/
-	{ p->L_MAMODE		= Bitstream_Read(stream, 15); }
+        /*@
+          requires L_MAMODE:       stream->bitpos == pos + 41;
+          assigns        	   stream->bitpos;
+          assigns		   p->L_MAMODE;
+          ensures  L_MAMODE:       stream->bitpos == pos + 56;
+          ensures  L_MAMODE:       EqualBits(stream, pos + 41, pos + 56, p->L_MAMODE);
+          ensures  L_MAMODE:       UpperBitsNotSet(p->L_MAMODE, 15);
+        */
+        {
+            p->L_MAMODE		= Bitstream_Read(stream, 15);
+        }
 
-	/*@
-	  requires L_ACKMAMODE:    stream->bitpos == pos + 56;
-	  assigns        	   stream->bitpos;
-	  assigns		   p->L_ACKMAMODE;
-	  ensures  L_ACKMAMODE:    stream->bitpos == pos + 71;
-	  ensures  L_ACKMAMODE:    EqualBits(stream, pos + 56, pos + 71, p->L_ACKMAMODE);
-	  ensures  L_ACKMAMODE:    UpperBitsNotSet(p->L_ACKMAMODE, 15);
-	*/
-	{ p->L_ACKMAMODE		= Bitstream_Read(stream, 15); }
+        /*@
+          requires L_ACKMAMODE:    stream->bitpos == pos + 56;
+          assigns        	   stream->bitpos;
+          assigns		   p->L_ACKMAMODE;
+          ensures  L_ACKMAMODE:    stream->bitpos == pos + 71;
+          ensures  L_ACKMAMODE:    EqualBits(stream, pos + 56, pos + 71, p->L_ACKMAMODE);
+          ensures  L_ACKMAMODE:    UpperBitsNotSet(p->L_ACKMAMODE, 15);
+        */
+        {
+            p->L_ACKMAMODE		= Bitstream_Read(stream, 15);
+        }
 
-	/*@
-	  requires Q_MAMODE:       stream->bitpos == pos + 71;
-	  assigns        	   stream->bitpos;
-	  assigns		   p->Q_MAMODE;
-	  ensures  Q_MAMODE:       stream->bitpos == pos + 72;
-	  ensures  Q_MAMODE:       EqualBits(stream, pos + 71, pos + 72, p->Q_MAMODE);
-	  ensures  Q_MAMODE:       UpperBitsNotSet(p->Q_MAMODE, 1);
-	*/
-	{ p->Q_MAMODE		= Bitstream_Read(stream, 1); }
+        /*@
+          requires Q_MAMODE:       stream->bitpos == pos + 71;
+          assigns        	   stream->bitpos;
+          assigns		   p->Q_MAMODE;
+          ensures  Q_MAMODE:       stream->bitpos == pos + 72;
+          ensures  Q_MAMODE:       EqualBits(stream, pos + 71, pos + 72, p->Q_MAMODE);
+          ensures  Q_MAMODE:       UpperBitsNotSet(p->Q_MAMODE, 1);
+        */
+        {
+            p->Q_MAMODE		= Bitstream_Read(stream, 1);
+        }
 
-	{ p->N_ITER_1		= Bitstream_Read(stream, 5); }
+        {
+            p->N_ITER_1		= Bitstream_Read(stream, 5);
+        }
 
         for (uint32_t i = 0; i < p->N_ITER_1; ++i)
         {
             Mode_profile_Core_1_Decoder(stream, &(p->sub_1[i]));
         }
+
         //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
         //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
         //@ assert Q_SCALE:           EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE);
@@ -200,7 +223,7 @@ int Mode_profile_Decoder(Bitstream* stream, Mode_profile_Core* p)
         //@ assert L_ACKMAMODE:       UpperBitsNotSet(p->L_ACKMAMODE,       15);
         //@ assert Q_MAMODE:          UpperBitsNotSet(p->Q_MAMODE,          1);
 
-	//@ assert final: EqualBits(stream, pos, p);
+        //@ assert final: EqualBits(stream, pos, p);
 
         return 1;
     }

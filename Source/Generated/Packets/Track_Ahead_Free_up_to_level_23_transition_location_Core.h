@@ -24,12 +24,12 @@ struct Track_Ahead_Free_up_to_level_23_transition_location_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Track_Ahead_Free_up_to_level_23_transition_location_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.Q_NEWCOUNTRY << ','
-       << +p.NID_C << ','
-       << +p.NID_BG;
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_NEWCOUNTRY << ','
+            << +p.NID_C << ','
+            << +p.NID_BG;
 
     return stream;
 }
@@ -37,14 +37,16 @@ inline std::ostream& operator<<(std::ostream& stream, const Track_Ahead_Free_up_
 inline bool operator==(const Track_Ahead_Free_up_to_level_23_transition_location_Core& a, const Track_Ahead_Free_up_to_level_23_transition_location_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.Q_NEWCOUNTRY == b.Q_NEWCOUNTRY);
+
     if (a.Q_NEWCOUNTRY == 1)
     {
-    status = status && (a.NID_C == b.NID_C);
+        status = status && (a.NID_C == b.NID_C);
     }
+
     status = status && (a.NID_BG == b.NID_BG);
 
     return status;
@@ -161,7 +163,7 @@ int Track_Ahead_Free_up_to_level_23_transition_location_Encoder(Bitstream* strea
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

@@ -9,7 +9,7 @@ struct Conditional_Level_Transition_Order_Core
 {
     // TransmissionMedia=Balise
     // Packet for a conditional level transition. The successive M_LEVELTR go from
-    // the highest priority level to the lowest one.   
+    // the highest priority level to the lowest one.
     // Packet Number = 46
 
     uint64_t   Q_DIR;            // # 2
@@ -26,17 +26,18 @@ struct Conditional_Level_Transition_Order_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Conditional_Level_Transition_Order_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.M_LEVELTR << ','
-       << +p.NID_NTC << ','
-       << +p.N_ITER_1;
-       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-       {
-           stream << ',' << p.sub_1[i];
-       }
-   
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.M_LEVELTR << ','
+            << +p.NID_NTC << ','
+            << +p.N_ITER_1;
+
+    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+    {
+        stream << ',' << p.sub_1[i];
+    }
+
 
     return stream;
 }
@@ -44,15 +45,18 @@ inline std::ostream& operator<<(std::ostream& stream, const Conditional_Level_Tr
 inline bool operator==(const Conditional_Level_Transition_Order_Core& a, const Conditional_Level_Transition_Order_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.M_LEVELTR == b.M_LEVELTR);
+
     if (a.M_LEVELTR == 1)
     {
-    status = status && (a.NID_NTC == b.NID_NTC);
+        status = status && (a.NID_NTC == b.NID_NTC);
     }
+
     status = status && (a.N_ITER_1 == b.N_ITER_1);
+
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)
@@ -179,7 +183,7 @@ int Conditional_Level_Transition_Order_Encoder(Bitstream* stream, const Conditio
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

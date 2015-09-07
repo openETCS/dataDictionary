@@ -21,16 +21,17 @@ struct Axle_Load_Speed_Profile_Core_2
 
 inline std::ostream& operator<<(std::ostream& stream, const Axle_Load_Speed_Profile_Core_2& p)
 {
-    stream 
-       << +p.D_AXLELOAD << ','
-       << +p.L_AXLELOAD << ','
-       << +p.Q_FRONT << ','
-       << +p.N_ITER_2_1;
-       for (uint32_t i = 0; i < p.N_ITER_2_1; ++i)
-       {
-           stream << ',' << p.sub_2_1[i];
-       }
-   
+    stream
+            << +p.D_AXLELOAD << ','
+            << +p.L_AXLELOAD << ','
+            << +p.Q_FRONT << ','
+            << +p.N_ITER_2_1;
+
+    for (uint32_t i = 0; i < p.N_ITER_2_1; ++i)
+    {
+        stream << ',' << p.sub_2_1[i];
+    }
+
 
     return stream;
 }
@@ -38,11 +39,12 @@ inline std::ostream& operator<<(std::ostream& stream, const Axle_Load_Speed_Prof
 inline bool operator==(const Axle_Load_Speed_Profile_Core_2& a, const Axle_Load_Speed_Profile_Core_2& b)
 {
     bool status = true;
-    
+
     status = status && (a.D_AXLELOAD == b.D_AXLELOAD);
     status = status && (a.L_AXLELOAD == b.L_AXLELOAD);
     status = status && (a.Q_FRONT == b.Q_FRONT);
     status = status && (a.N_ITER_2_1 == b.N_ITER_2_1);
+
     if (a.N_ITER_2_1 == b.N_ITER_2_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_2_1; ++i)
@@ -169,7 +171,7 @@ int Axle_Load_Speed_Profile_Core_2_Encoder(Bitstream* stream, const Axle_Load_Sp
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

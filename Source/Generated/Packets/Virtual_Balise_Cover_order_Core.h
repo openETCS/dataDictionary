@@ -7,7 +7,7 @@
 struct Virtual_Balise_Cover_order_Core
 {
     // TransmissionMedia=Balise
-    // The packet sets/removes a Virtual Balise Cover.    
+    // The packet sets/removes a Virtual Balise Cover.
     // Packet Number = 6
 
     uint64_t   Q_DIR;            // # 2
@@ -24,13 +24,13 @@ struct Virtual_Balise_Cover_order_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Virtual_Balise_Cover_order_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.Q_VBCO << ','
-       << +p.NID_VBCMK << ','
-       << +p.NID_C << ','
-       << +p.T_VBC;
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_VBCO << ','
+            << +p.NID_VBCMK << ','
+            << +p.NID_C << ','
+            << +p.T_VBC;
 
     return stream;
 }
@@ -38,15 +38,16 @@ inline std::ostream& operator<<(std::ostream& stream, const Virtual_Balise_Cover
 inline bool operator==(const Virtual_Balise_Cover_order_Core& a, const Virtual_Balise_Cover_order_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.Q_VBCO == b.Q_VBCO);
     status = status && (a.NID_VBCMK == b.NID_VBCMK);
     status = status && (a.NID_C == b.NID_C);
+
     if (a.Q_VBCO == 1)
     {
-    status = status && (a.T_VBC == b.T_VBC);
+        status = status && (a.T_VBC == b.T_VBC);
     }
 
     return status;
@@ -171,7 +172,7 @@ int Virtual_Balise_Cover_order_Encoder(Bitstream* stream, const Virtual_Balise_C
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

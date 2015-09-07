@@ -9,7 +9,7 @@
 struct Validated_train_data_Core
 {
     // TransmissionMedia=RBC
-    // Validated train data.        
+    // Validated train data.
     // Packet Number = 11
 
     uint64_t  L_PACKET;         // # 13
@@ -33,28 +33,31 @@ struct Validated_train_data_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Validated_train_data_Core& p)
 {
-    stream 
-       << +p.L_PACKET << ','
-       << +p.NC_CDTRAIN << ','
-       << +p.NC_TRAIN << ','
-       << +p.L_TRAIN << ','
-       << +p.V_MAXTRAIN << ','
-       << +p.M_LOADINGGAUGE << ','
-       << +p.M_AXLELOADCAT << ','
-       << +p.M_AIRTIGHT << ','
-       << +p.N_AXLE << ','
-       << +p.N_ITER_1;
-       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-       {
-           stream << ',' << p.sub_1[i];
-       }
+    stream
+            << +p.L_PACKET << ','
+            << +p.NC_CDTRAIN << ','
+            << +p.NC_TRAIN << ','
+            << +p.L_TRAIN << ','
+            << +p.V_MAXTRAIN << ','
+            << +p.M_LOADINGGAUGE << ','
+            << +p.M_AXLELOADCAT << ','
+            << +p.M_AIRTIGHT << ','
+            << +p.N_AXLE << ','
+            << +p.N_ITER_1;
+
+    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+    {
+        stream << ',' << p.sub_1[i];
+    }
+
     stream << ','
-       << +p.N_ITER_2;
-       for (uint32_t i = 0; i < p.N_ITER_2; ++i)
-       {
-           stream << ',' << p.sub_2[i];
-       }
-   
+           << +p.N_ITER_2;
+
+    for (uint32_t i = 0; i < p.N_ITER_2; ++i)
+    {
+        stream << ',' << p.sub_2[i];
+    }
+
 
     return stream;
 }
@@ -62,7 +65,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Validated_train_data
 inline bool operator==(const Validated_train_data_Core& a, const Validated_train_data_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.NC_CDTRAIN == b.NC_CDTRAIN);
     status = status && (a.NC_TRAIN == b.NC_TRAIN);
@@ -73,6 +76,7 @@ inline bool operator==(const Validated_train_data_Core& a, const Validated_train
     status = status && (a.M_AIRTIGHT == b.M_AIRTIGHT);
     status = status && (a.N_AXLE == b.N_AXLE);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
+
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)
@@ -84,7 +88,9 @@ inline bool operator==(const Validated_train_data_Core& a, const Validated_train
     {
         status = false;
     }
+
     status = status && (a.N_ITER_2 == b.N_ITER_2);
+
     if (a.N_ITER_2 == b.N_ITER_2)
     {
         for (uint32_t i = 0; i < a.N_ITER_2; ++i)
@@ -235,7 +241,7 @@ int Validated_train_data_Encoder(Bitstream* stream, const Validated_train_data_C
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

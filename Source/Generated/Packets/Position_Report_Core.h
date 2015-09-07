@@ -8,7 +8,7 @@ struct Position_Report_Core
 {
     // TransmissionMedia=RBC, RIU
     // This packet is used to report the train position and speed
-    // as well as some additional information (e.g. mode, level, etc.) 
+    // as well as some additional information (e.g. mode, level, etc.)
     // Packet Number = 0
 
     uint64_t  L_PACKET;         // # 13
@@ -34,22 +34,22 @@ struct Position_Report_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Position_Report_Core& p)
 {
-    stream 
-       << +p.L_PACKET << ','
-       << +p.Q_SCALE << ','
-       << +p.NID_LRBG << ','
-       << +p.D_LRBG << ','
-       << +p.Q_DIRLRBG << ','
-       << +p.Q_DLRBG << ','
-       << +p.L_DOUBTOVER << ','
-       << +p.L_DOUBTUNDER << ','
-       << +p.Q_LENGTH << ','
-       << +p.L_TRAININT << ','
-       << +p.V_TRAIN << ','
-       << +p.Q_DIRTRAIN << ','
-       << +p.M_MODE << ','
-       << +p.M_LEVEL << ','
-       << +p.NID_NTC;
+    stream
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.NID_LRBG << ','
+            << +p.D_LRBG << ','
+            << +p.Q_DIRLRBG << ','
+            << +p.Q_DLRBG << ','
+            << +p.L_DOUBTOVER << ','
+            << +p.L_DOUBTUNDER << ','
+            << +p.Q_LENGTH << ','
+            << +p.L_TRAININT << ','
+            << +p.V_TRAIN << ','
+            << +p.Q_DIRTRAIN << ','
+            << +p.M_MODE << ','
+            << +p.M_LEVEL << ','
+            << +p.NID_NTC;
 
     return stream;
 }
@@ -57,7 +57,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Position_Report_Core
 inline bool operator==(const Position_Report_Core& a, const Position_Report_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.Q_SCALE == b.Q_SCALE);
     status = status && (a.NID_LRBG == b.NID_LRBG);
@@ -67,17 +67,20 @@ inline bool operator==(const Position_Report_Core& a, const Position_Report_Core
     status = status && (a.L_DOUBTOVER == b.L_DOUBTOVER);
     status = status && (a.L_DOUBTUNDER == b.L_DOUBTUNDER);
     status = status && (a.Q_LENGTH == b.Q_LENGTH);
+
     if ((a.Q_LENGTH == 1) || (a.Q_LENGTH == 2))
     {
-    status = status && (a.L_TRAININT == b.L_TRAININT);
+        status = status && (a.L_TRAININT == b.L_TRAININT);
     }
+
     status = status && (a.V_TRAIN == b.V_TRAIN);
     status = status && (a.Q_DIRTRAIN == b.Q_DIRTRAIN);
     status = status && (a.M_MODE == b.M_MODE);
     status = status && (a.M_LEVEL == b.M_LEVEL);
+
     if (a.M_LEVEL == 1)
     {
-    status = status && (a.NID_NTC == b.NID_NTC);
+        status = status && (a.NID_NTC == b.NID_NTC);
     }
 
     return status;
@@ -218,7 +221,7 @@ int Position_Report_Encoder(Bitstream* stream, const Position_Report_Core* p);
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

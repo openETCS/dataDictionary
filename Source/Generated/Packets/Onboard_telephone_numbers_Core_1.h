@@ -16,8 +16,8 @@ struct Onboard_telephone_numbers_Core_1
 
 inline std::ostream& operator<<(std::ostream& stream, const Onboard_telephone_numbers_Core_1& p)
 {
-    stream 
-       << +p.NID_RADIO;
+    stream
+            << +p.NID_RADIO;
 
     return stream;
 }
@@ -25,7 +25,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Onboard_telephone_nu
 inline bool operator==(const Onboard_telephone_numbers_Core_1& a, const Onboard_telephone_numbers_Core_1& b)
 {
     bool status = true;
-    
+
     status = status && (a.NID_RADIO == b.NID_RADIO);
 
     return status;
@@ -134,7 +134,7 @@ int Onboard_telephone_numbers_Core_1_Encoder(Bitstream* stream, const Onboard_te
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

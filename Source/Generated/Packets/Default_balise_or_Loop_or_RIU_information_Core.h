@@ -21,9 +21,9 @@ struct Default_balise_or_Loop_or_RIU_information_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Default_balise_or_Loop_or_RIU_information_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET;
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET;
 
     return stream;
 }
@@ -31,7 +31,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Default_balise_or_Lo
 inline bool operator==(const Default_balise_or_Loop_or_RIU_information_Core& a, const Default_balise_or_Loop_or_RIU_information_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
 
@@ -145,7 +145,7 @@ int Default_balise_or_Loop_or_RIU_information_Encoder(Bitstream* stream, const D
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

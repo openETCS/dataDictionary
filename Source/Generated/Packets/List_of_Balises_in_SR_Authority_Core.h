@@ -9,7 +9,7 @@ struct List_of_Balises_in_SR_Authority_Core
 {
     // TransmissionMedia=RBC
     // Used to list balise group(s) which the train can pass over
-    // in SR mode        
+    // in SR mode
     // Packet Number = 63
 
     uint64_t   Q_DIR;            // # 2
@@ -24,15 +24,16 @@ struct List_of_Balises_in_SR_Authority_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const List_of_Balises_in_SR_Authority_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.N_ITER_1;
-       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-       {
-           stream << ',' << p.sub_1[i];
-       }
-   
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.N_ITER_1;
+
+    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+    {
+        stream << ',' << p.sub_1[i];
+    }
+
 
     return stream;
 }
@@ -40,10 +41,11 @@ inline std::ostream& operator<<(std::ostream& stream, const List_of_Balises_in_S
 inline bool operator==(const List_of_Balises_in_SR_Authority_Core& a, const List_of_Balises_in_SR_Authority_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
+
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)
@@ -166,7 +168,7 @@ int List_of_Balises_in_SR_Authority_Encoder(Bitstream* stream, const List_of_Bal
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

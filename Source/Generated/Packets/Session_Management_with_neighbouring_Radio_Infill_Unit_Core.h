@@ -9,7 +9,7 @@ struct Session_Management_with_neighbouring_Radio_Infill_Unit_Core
     // TransmissionMedia=RIU
     // Packet to give the identity and telephone number of the neighbouring
     // Radio Infill Unit with which a session shall be established or
-    // terminated.          
+    // terminated.
     // Packet Number = 143
 
     uint64_t   Q_DIR;            // # 2
@@ -26,13 +26,13 @@ struct Session_Management_with_neighbouring_Radio_Infill_Unit_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Session_Management_with_neighbouring_Radio_Infill_Unit_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.Q_RIU << ','
-       << +p.NID_C << ','
-       << +p.NID_RIU << ','
-       << +p.NID_RADIO;
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_RIU << ','
+            << +p.NID_C << ','
+            << +p.NID_RIU << ','
+            << +p.NID_RADIO;
 
     return stream;
 }
@@ -40,7 +40,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Session_Management_w
 inline bool operator==(const Session_Management_with_neighbouring_Radio_Infill_Unit_Core& a, const Session_Management_with_neighbouring_Radio_Infill_Unit_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.Q_RIU == b.Q_RIU);
@@ -174,7 +174,7 @@ int Session_Management_with_neighbouring_Radio_Infill_Unit_Encoder(Bitstream* st
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

@@ -8,7 +8,7 @@ struct System_Version_order_Core
 {
     // TransmissionMedia=Balise
     // This packet is used to tell the on-board which is the
-    // operated system version        
+    // operated system version
     // Packet Number = 2
 
     uint64_t   Q_DIR;            // # 2
@@ -22,10 +22,10 @@ struct System_Version_order_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const System_Version_order_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.M_VERSION;
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.M_VERSION;
 
     return stream;
 }
@@ -33,7 +33,7 @@ inline std::ostream& operator<<(std::ostream& stream, const System_Version_order
 inline bool operator==(const System_Version_order_Core& a, const System_Version_order_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.M_VERSION == b.M_VERSION);
@@ -152,7 +152,7 @@ int System_Version_order_Encoder(Bitstream* stream, const System_Version_order_C
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

@@ -13,6 +13,7 @@ int Position_Report_Parameters_UpperBitsNotSet(const Position_Report_Parameters_
     status = status && UpperBitsNotSet64(p->D_CYCLOC,          15);
     status = status && UpperBitsNotSet64(p->M_LOC,             3) ;
     status = status && UpperBitsNotSet64(p->N_ITER_1,          5) ;
+
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
         status = status && Position_Report_Parameters_Core_1_UpperBitsNotSet(&(p->sub_1[i]));
@@ -43,6 +44,7 @@ int Position_Report_Parameters_Encoder(Bitstream* stream, const Position_Report_
             Bitstream_Write(stream, 15, p->D_CYCLOC);
             Bitstream_Write(stream, 3,  p->M_LOC);
             Bitstream_Write(stream, 5,  p->N_ITER_1);
+
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
                 Position_Report_Parameters_Core_1_Encoder(stream, &(p->sub_1[i]));
@@ -75,72 +77,87 @@ int Position_Report_Parameters_Decoder(Bitstream* stream, Position_Report_Parame
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 
-	/*@
-	  requires Q_DIR:          stream->bitpos == pos + 0;
-	  assigns        	   stream->bitpos;
-	  assigns		   p->Q_DIR;
-	  ensures  Q_DIR:          stream->bitpos == pos + 2;
-	  ensures  Q_DIR:          EqualBits(stream, pos + 0, pos + 2, p->Q_DIR);
-	  ensures  Q_DIR:          UpperBitsNotSet(p->Q_DIR, 2);
-	*/
-	{ p->Q_DIR		= Bitstream_Read(stream, 2); }
+        /*@
+          requires Q_DIR:          stream->bitpos == pos + 0;
+          assigns        	   stream->bitpos;
+          assigns		   p->Q_DIR;
+          ensures  Q_DIR:          stream->bitpos == pos + 2;
+          ensures  Q_DIR:          EqualBits(stream, pos + 0, pos + 2, p->Q_DIR);
+          ensures  Q_DIR:          UpperBitsNotSet(p->Q_DIR, 2);
+        */
+        {
+            p->Q_DIR		= Bitstream_Read(stream, 2);
+        }
 
-	/*@
-	  requires L_PACKET:       stream->bitpos == pos + 2;
-	  assigns        	   stream->bitpos;
-	  assigns		   p->L_PACKET;
-	  ensures  L_PACKET:       stream->bitpos == pos + 15;
-	  ensures  L_PACKET:       EqualBits(stream, pos + 2, pos + 15, p->L_PACKET);
-	  ensures  L_PACKET:       UpperBitsNotSet(p->L_PACKET, 13);
-	*/
-	{ p->L_PACKET		= Bitstream_Read(stream, 13); }
+        /*@
+          requires L_PACKET:       stream->bitpos == pos + 2;
+          assigns        	   stream->bitpos;
+          assigns		   p->L_PACKET;
+          ensures  L_PACKET:       stream->bitpos == pos + 15;
+          ensures  L_PACKET:       EqualBits(stream, pos + 2, pos + 15, p->L_PACKET);
+          ensures  L_PACKET:       UpperBitsNotSet(p->L_PACKET, 13);
+        */
+        {
+            p->L_PACKET		= Bitstream_Read(stream, 13);
+        }
 
-	/*@
-	  requires Q_SCALE:        stream->bitpos == pos + 15;
-	  assigns        	   stream->bitpos;
-	  assigns		   p->Q_SCALE;
-	  ensures  Q_SCALE:        stream->bitpos == pos + 17;
-	  ensures  Q_SCALE:        EqualBits(stream, pos + 15, pos + 17, p->Q_SCALE);
-	  ensures  Q_SCALE:        UpperBitsNotSet(p->Q_SCALE, 2);
-	*/
-	{ p->Q_SCALE		= Bitstream_Read(stream, 2); }
+        /*@
+          requires Q_SCALE:        stream->bitpos == pos + 15;
+          assigns        	   stream->bitpos;
+          assigns		   p->Q_SCALE;
+          ensures  Q_SCALE:        stream->bitpos == pos + 17;
+          ensures  Q_SCALE:        EqualBits(stream, pos + 15, pos + 17, p->Q_SCALE);
+          ensures  Q_SCALE:        UpperBitsNotSet(p->Q_SCALE, 2);
+        */
+        {
+            p->Q_SCALE		= Bitstream_Read(stream, 2);
+        }
 
-	/*@
-	  requires T_CYCLOC:       stream->bitpos == pos + 17;
-	  assigns        	   stream->bitpos;
-	  assigns		   p->T_CYCLOC;
-	  ensures  T_CYCLOC:       stream->bitpos == pos + 25;
-	  ensures  T_CYCLOC:       EqualBits(stream, pos + 17, pos + 25, p->T_CYCLOC);
-	  ensures  T_CYCLOC:       UpperBitsNotSet(p->T_CYCLOC, 8);
-	*/
-	{ p->T_CYCLOC		= Bitstream_Read(stream, 8); }
+        /*@
+          requires T_CYCLOC:       stream->bitpos == pos + 17;
+          assigns        	   stream->bitpos;
+          assigns		   p->T_CYCLOC;
+          ensures  T_CYCLOC:       stream->bitpos == pos + 25;
+          ensures  T_CYCLOC:       EqualBits(stream, pos + 17, pos + 25, p->T_CYCLOC);
+          ensures  T_CYCLOC:       UpperBitsNotSet(p->T_CYCLOC, 8);
+        */
+        {
+            p->T_CYCLOC		= Bitstream_Read(stream, 8);
+        }
 
-	/*@
-	  requires D_CYCLOC:       stream->bitpos == pos + 25;
-	  assigns        	   stream->bitpos;
-	  assigns		   p->D_CYCLOC;
-	  ensures  D_CYCLOC:       stream->bitpos == pos + 40;
-	  ensures  D_CYCLOC:       EqualBits(stream, pos + 25, pos + 40, p->D_CYCLOC);
-	  ensures  D_CYCLOC:       UpperBitsNotSet(p->D_CYCLOC, 15);
-	*/
-	{ p->D_CYCLOC		= Bitstream_Read(stream, 15); }
+        /*@
+          requires D_CYCLOC:       stream->bitpos == pos + 25;
+          assigns        	   stream->bitpos;
+          assigns		   p->D_CYCLOC;
+          ensures  D_CYCLOC:       stream->bitpos == pos + 40;
+          ensures  D_CYCLOC:       EqualBits(stream, pos + 25, pos + 40, p->D_CYCLOC);
+          ensures  D_CYCLOC:       UpperBitsNotSet(p->D_CYCLOC, 15);
+        */
+        {
+            p->D_CYCLOC		= Bitstream_Read(stream, 15);
+        }
 
-	/*@
-	  requires M_LOC:          stream->bitpos == pos + 40;
-	  assigns        	   stream->bitpos;
-	  assigns		   p->M_LOC;
-	  ensures  M_LOC:          stream->bitpos == pos + 43;
-	  ensures  M_LOC:          EqualBits(stream, pos + 40, pos + 43, p->M_LOC);
-	  ensures  M_LOC:          UpperBitsNotSet(p->M_LOC, 3);
-	*/
-	{ p->M_LOC		= Bitstream_Read(stream, 3); }
+        /*@
+          requires M_LOC:          stream->bitpos == pos + 40;
+          assigns        	   stream->bitpos;
+          assigns		   p->M_LOC;
+          ensures  M_LOC:          stream->bitpos == pos + 43;
+          ensures  M_LOC:          EqualBits(stream, pos + 40, pos + 43, p->M_LOC);
+          ensures  M_LOC:          UpperBitsNotSet(p->M_LOC, 3);
+        */
+        {
+            p->M_LOC		= Bitstream_Read(stream, 3);
+        }
 
-	{ p->N_ITER_1		= Bitstream_Read(stream, 5); }
+        {
+            p->N_ITER_1		= Bitstream_Read(stream, 5);
+        }
 
         for (uint32_t i = 0; i < p->N_ITER_1; ++i)
         {
             Position_Report_Parameters_Core_1_Decoder(stream, &(p->sub_1[i]));
         }
+
         //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
         //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
         //@ assert Q_SCALE:           EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE);
@@ -155,7 +172,7 @@ int Position_Report_Parameters_Decoder(Bitstream* stream, Position_Report_Parame
         //@ assert D_CYCLOC:          UpperBitsNotSet(p->D_CYCLOC,          15);
         //@ assert M_LOC:             UpperBitsNotSet(p->M_LOC,             3);
 
-	//@ assert final: EqualBits(stream, pos, p);
+        //@ assert final: EqualBits(stream, pos, p);
 
         return 1;
     }

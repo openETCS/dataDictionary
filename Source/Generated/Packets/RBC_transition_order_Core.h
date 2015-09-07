@@ -7,7 +7,7 @@
 struct RBC_transition_order_Core
 {
     // TransmissionMedia=Balise, RBC
-    // Packet to order an RBC transition     
+    // Packet to order an RBC transition
     // Packet Number = 131
 
     uint64_t   Q_DIR;            // # 2
@@ -26,15 +26,15 @@ struct RBC_transition_order_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const RBC_transition_order_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.Q_SCALE << ','
-       << +p.D_RBCTR << ','
-       << +p.NID_C << ','
-       << +p.NID_RBC << ','
-       << +p.NID_RADIO << ','
-       << +p.Q_SLEEPSESSION;
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.D_RBCTR << ','
+            << +p.NID_C << ','
+            << +p.NID_RBC << ','
+            << +p.NID_RADIO << ','
+            << +p.Q_SLEEPSESSION;
 
     return stream;
 }
@@ -42,7 +42,7 @@ inline std::ostream& operator<<(std::ostream& stream, const RBC_transition_order
 inline bool operator==(const RBC_transition_order_Core& a, const RBC_transition_order_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.Q_SCALE == b.Q_SCALE);
@@ -186,7 +186,7 @@ int RBC_transition_order_Encoder(Bitstream* stream, const RBC_transition_order_C
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

@@ -11,7 +11,7 @@ struct Axle_Load_Speed_Profile_Core
     // TransmissionMedia=Any
     // This packet gives the speed restrictions for trains with axle load
     // category higher than or equal to the specified value for the
-    // speed restriction         
+    // speed restriction
     // Packet Number = 51
 
     uint64_t   Q_DIR;            // # 2
@@ -34,27 +34,30 @@ struct Axle_Load_Speed_Profile_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Axle_Load_Speed_Profile_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.Q_SCALE << ','
-       << +p.Q_TRACKINIT << ','
-       << +p.D_TRACKINIT << ','
-       << +p.D_AXLELOAD << ','
-       << +p.L_AXLELOAD << ','
-       << +p.Q_FRONT << ','
-       << +p.N_ITER_1;
-       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-       {
-           stream << ',' << p.sub_1[i];
-       }
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.Q_TRACKINIT << ','
+            << +p.D_TRACKINIT << ','
+            << +p.D_AXLELOAD << ','
+            << +p.L_AXLELOAD << ','
+            << +p.Q_FRONT << ','
+            << +p.N_ITER_1;
+
+    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+    {
+        stream << ',' << p.sub_1[i];
+    }
+
     stream << ','
-       << +p.N_ITER_2;
-       for (uint32_t i = 0; i < p.N_ITER_2; ++i)
-       {
-           stream << ',' << p.sub_2[i];
-       }
-   
+           << +p.N_ITER_2;
+
+    for (uint32_t i = 0; i < p.N_ITER_2; ++i)
+    {
+        stream << ',' << p.sub_2[i];
+    }
+
 
     return stream;
 }
@@ -62,44 +65,49 @@ inline std::ostream& operator<<(std::ostream& stream, const Axle_Load_Speed_Prof
 inline bool operator==(const Axle_Load_Speed_Profile_Core& a, const Axle_Load_Speed_Profile_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.Q_SCALE == b.Q_SCALE);
     status = status && (a.Q_TRACKINIT == b.Q_TRACKINIT);
+
     if (a.Q_TRACKINIT == 1)
     {
-    status = status && (a.D_TRACKINIT == b.D_TRACKINIT);
+        status = status && (a.D_TRACKINIT == b.D_TRACKINIT);
     }
+
     if (a.Q_TRACKINIT == 0)
     {
-    status = status && (a.D_AXLELOAD == b.D_AXLELOAD);
-    status = status && (a.L_AXLELOAD == b.L_AXLELOAD);
-    status = status && (a.Q_FRONT == b.Q_FRONT);
-    status = status && (a.N_ITER_1 == b.N_ITER_1);
-    if (a.N_ITER_1 == b.N_ITER_1)
-    {
-        for (uint32_t i = 0; i < a.N_ITER_1; ++i)
+        status = status && (a.D_AXLELOAD == b.D_AXLELOAD);
+        status = status && (a.L_AXLELOAD == b.L_AXLELOAD);
+        status = status && (a.Q_FRONT == b.Q_FRONT);
+        status = status && (a.N_ITER_1 == b.N_ITER_1);
+
+        if (a.N_ITER_1 == b.N_ITER_1)
         {
-            status = status && (a.sub_1[i] == b.sub_1[i]);
+            for (uint32_t i = 0; i < a.N_ITER_1; ++i)
+            {
+                status = status && (a.sub_1[i] == b.sub_1[i]);
+            }
         }
-    }
-    else
-    {
-        status = false;
-    }
-    status = status && (a.N_ITER_2 == b.N_ITER_2);
-    if (a.N_ITER_2 == b.N_ITER_2)
-    {
-        for (uint32_t i = 0; i < a.N_ITER_2; ++i)
+        else
         {
-            status = status && (a.sub_2[i] == b.sub_2[i]);
+            status = false;
         }
-    }
-    else
-    {
-        status = false;
-    }
+
+        status = status && (a.N_ITER_2 == b.N_ITER_2);
+
+        if (a.N_ITER_2 == b.N_ITER_2)
+        {
+            for (uint32_t i = 0; i < a.N_ITER_2; ++i)
+            {
+                status = status && (a.sub_2[i] == b.sub_2[i]);
+            }
+        }
+        else
+        {
+            status = false;
+        }
     }
 
     return status;
@@ -220,7 +228,7 @@ int Axle_Load_Speed_Profile_Encoder(Bitstream* stream, const Axle_Load_Speed_Pro
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

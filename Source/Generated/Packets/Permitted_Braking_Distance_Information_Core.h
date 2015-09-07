@@ -10,7 +10,7 @@ struct Permitted_Braking_Distance_Information_Core
     // TransmissionMedia=Any
     // This packet requests the on-board calculation of speed restrictions which ensure
     // a given permitted brake distance in case of an EB, or
-    // SB, intervention         
+    // SB, intervention
     // Packet Number = 52
 
     uint64_t   Q_DIR;            // # 2
@@ -34,24 +34,25 @@ struct Permitted_Braking_Distance_Information_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Permitted_Braking_Distance_Information_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.Q_SCALE << ','
-       << +p.Q_TRACKINIT << ','
-       << +p.D_TRACKINIT << ','
-       << +p.D_PBD << ','
-       << +p.Q_GDIR << ','
-       << +p.G_PBDSR << ','
-       << +p.Q_PBDSR << ','
-       << +p.D_PBDSR << ','
-       << +p.L_PBDSR << ','
-       << +p.N_ITER_1;
-       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-       {
-           stream << ',' << p.sub_1[i];
-       }
-   
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.Q_TRACKINIT << ','
+            << +p.D_TRACKINIT << ','
+            << +p.D_PBD << ','
+            << +p.Q_GDIR << ','
+            << +p.G_PBDSR << ','
+            << +p.Q_PBDSR << ','
+            << +p.D_PBDSR << ','
+            << +p.L_PBDSR << ','
+            << +p.N_ITER_1;
+
+    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+    {
+        stream << ',' << p.sub_1[i];
+    }
+
 
     return stream;
 }
@@ -59,35 +60,38 @@ inline std::ostream& operator<<(std::ostream& stream, const Permitted_Braking_Di
 inline bool operator==(const Permitted_Braking_Distance_Information_Core& a, const Permitted_Braking_Distance_Information_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.Q_SCALE == b.Q_SCALE);
     status = status && (a.Q_TRACKINIT == b.Q_TRACKINIT);
+
     if (a.Q_TRACKINIT == 1)
     {
-    status = status && (a.D_TRACKINIT == b.D_TRACKINIT);
+        status = status && (a.D_TRACKINIT == b.D_TRACKINIT);
     }
+
     if (a.Q_TRACKINIT == 0)
     {
-    status = status && (a.D_PBD == b.D_PBD);
-    status = status && (a.Q_GDIR == b.Q_GDIR);
-    status = status && (a.G_PBDSR == b.G_PBDSR);
-    status = status && (a.Q_PBDSR == b.Q_PBDSR);
-    status = status && (a.D_PBDSR == b.D_PBDSR);
-    status = status && (a.L_PBDSR == b.L_PBDSR);
-    status = status && (a.N_ITER_1 == b.N_ITER_1);
-    if (a.N_ITER_1 == b.N_ITER_1)
-    {
-        for (uint32_t i = 0; i < a.N_ITER_1; ++i)
+        status = status && (a.D_PBD == b.D_PBD);
+        status = status && (a.Q_GDIR == b.Q_GDIR);
+        status = status && (a.G_PBDSR == b.G_PBDSR);
+        status = status && (a.Q_PBDSR == b.Q_PBDSR);
+        status = status && (a.D_PBDSR == b.D_PBDSR);
+        status = status && (a.L_PBDSR == b.L_PBDSR);
+        status = status && (a.N_ITER_1 == b.N_ITER_1);
+
+        if (a.N_ITER_1 == b.N_ITER_1)
         {
-            status = status && (a.sub_1[i] == b.sub_1[i]);
+            for (uint32_t i = 0; i < a.N_ITER_1; ++i)
+            {
+                status = status && (a.sub_1[i] == b.sub_1[i]);
+            }
         }
-    }
-    else
-    {
-        status = false;
-    }
+        else
+        {
+            status = false;
+        }
     }
 
     return status;
@@ -208,7 +212,7 @@ int Permitted_Braking_Distance_Information_Encoder(Bitstream* stream, const Perm
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

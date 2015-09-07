@@ -8,7 +8,7 @@ struct Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core
 {
     // TransmissionMedia=RBC, RIU
     // Messages between on-board and trackside devices, which contain information used by
-    // applications outside the ERTMS or ETCS system.    
+    // applications outside the ERTMS or ETCS system.
     // Packet Number = 44
 
     uint64_t  L_PACKET;         // # 13
@@ -22,10 +22,10 @@ struct Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& p)
 {
-    stream 
-       << +p.L_PACKET << ','
-       << +p.NID_XUSER << ','
-       << +p.Other_data_depending_on__NID_XUSER;
+    stream
+            << +p.L_PACKET << ','
+            << +p.NID_XUSER << ','
+            << +p.Other_data_depending_on__NID_XUSER;
 
     return stream;
 }
@@ -33,7 +33,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Data_used_by_applica
 inline bool operator==(const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& a, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.NID_XUSER == b.NID_XUSER);
     status = status && (a.Other_data_depending_on__NID_XUSER == b.Other_data_depending_on__NID_XUSER);
@@ -152,7 +152,7 @@ int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Encoder(Bitstream
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

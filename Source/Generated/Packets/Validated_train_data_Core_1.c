@@ -7,9 +7,10 @@ int Validated_train_data_Core_1_UpperBitsNotSet(const Validated_train_data_Core_
     bool status = true;
 
     status = status && UpperBitsNotSet64(p->M_VOLTAGE,         4) ;
+
     if ((p->M_VOLTAGE != 0) && (p->NID_CTRACTION != 0))
     {
-    status = status && UpperBitsNotSet64(p->NID_CTRACTION,     10);
+        status = status && UpperBitsNotSet64(p->NID_CTRACTION,     10);
     }
 
     if (status)
@@ -31,9 +32,10 @@ int Validated_train_data_Core_1_Encoder(Bitstream* stream, const Validated_train
             //@ ghost const uint32_t pos = stream->bitpos;
 
             Bitstream_Write(stream, 4,  p->M_VOLTAGE);
+
             if ((p->M_VOLTAGE != 0) && (p->NID_CTRACTION != 0))
             {
-            Bitstream_Write(stream, 10, p->NID_CTRACTION);
+                Bitstream_Write(stream, 10, p->NID_CTRACTION);
             }
 
 
@@ -59,26 +61,30 @@ int Validated_train_data_Core_1_Decoder(Bitstream* stream, Validated_train_data_
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 
-	/*@
-	  requires M_VOLTAGE:      stream->bitpos == pos + 0;
-	  assigns        	   stream->bitpos;
-	  assigns		   p->M_VOLTAGE;
-	  ensures  M_VOLTAGE:      stream->bitpos == pos + 4;
-	  ensures  M_VOLTAGE:      EqualBits(stream, pos + 0, pos + 4, p->M_VOLTAGE);
-	  ensures  M_VOLTAGE:      UpperBitsNotSet(p->M_VOLTAGE, 4);
-	*/
-	{ p->M_VOLTAGE		= Bitstream_Read(stream, 4); }
+        /*@
+          requires M_VOLTAGE:      stream->bitpos == pos + 0;
+          assigns        	   stream->bitpos;
+          assigns		   p->M_VOLTAGE;
+          ensures  M_VOLTAGE:      stream->bitpos == pos + 4;
+          ensures  M_VOLTAGE:      EqualBits(stream, pos + 0, pos + 4, p->M_VOLTAGE);
+          ensures  M_VOLTAGE:      UpperBitsNotSet(p->M_VOLTAGE, 4);
+        */
+        {
+            p->M_VOLTAGE		= Bitstream_Read(stream, 4);
+        }
 
         if ((p->M_VOLTAGE != 0) && (p->NID_CTRACTION != 0))
         {
-	{ p->NID_CTRACTION		= Bitstream_Read(stream, 10); }
+            {
+                p->NID_CTRACTION		= Bitstream_Read(stream, 10);
+            }
         }
 
         //@ assert M_VOLTAGE:         EqualBits(stream, pos,       pos + 4,   p->M_VOLTAGE);
 
         //@ assert M_VOLTAGE:         UpperBitsNotSet(p->M_VOLTAGE,         4);
 
-	//@ assert final: EqualBits(stream, pos, p);
+        //@ assert final: EqualBits(stream, pos, p);
 
         return 1;
     }

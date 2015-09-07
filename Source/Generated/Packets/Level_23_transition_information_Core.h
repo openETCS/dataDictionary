@@ -7,7 +7,7 @@
 struct Level_23_transition_information_Core
 {
     // TransmissionMedia=RBC
-    // Identity of the level 2/3 transition balise group   
+    // Identity of the level 2/3 transition balise group
     // Packet Number = 9
 
     uint64_t  L_PACKET;         // # 13
@@ -20,9 +20,9 @@ struct Level_23_transition_information_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Level_23_transition_information_Core& p)
 {
-    stream 
-       << +p.L_PACKET << ','
-       << +p.NID_LTRBG;
+    stream
+            << +p.L_PACKET << ','
+            << +p.NID_LTRBG;
 
     return stream;
 }
@@ -30,7 +30,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Level_23_transition_
 inline bool operator==(const Level_23_transition_information_Core& a, const Level_23_transition_information_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.NID_LTRBG == b.NID_LTRBG);
 
@@ -144,7 +144,7 @@ int Level_23_transition_information_Encoder(Bitstream* stream, const Level_23_tr
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

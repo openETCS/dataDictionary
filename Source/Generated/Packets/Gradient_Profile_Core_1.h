@@ -18,10 +18,10 @@ struct Gradient_Profile_Core_1
 
 inline std::ostream& operator<<(std::ostream& stream, const Gradient_Profile_Core_1& p)
 {
-    stream 
-       << +p.D_GRADIENT << ','
-       << +p.Q_GDIR << ','
-       << +p.G_A;
+    stream
+            << +p.D_GRADIENT << ','
+            << +p.Q_GDIR << ','
+            << +p.G_A;
 
     return stream;
 }
@@ -29,7 +29,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Gradient_Profile_Cor
 inline bool operator==(const Gradient_Profile_Core_1& a, const Gradient_Profile_Core_1& b)
 {
     bool status = true;
-    
+
     status = status && (a.D_GRADIENT == b.D_GRADIENT);
     status = status && (a.Q_GDIR == b.Q_GDIR);
     status = status && (a.G_A == b.G_A);
@@ -148,7 +148,7 @@ int Gradient_Profile_Core_1_Encoder(Bitstream* stream, const Gradient_Profile_Co
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

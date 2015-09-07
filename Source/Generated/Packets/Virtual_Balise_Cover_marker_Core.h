@@ -8,7 +8,7 @@ struct Virtual_Balise_Cover_marker_Core
 {
     // TransmissionMedia=Balise
     // Indication to on-board that the telegram can be ignored according to
-    // a VBC         
+    // a VBC
     // Packet Number = 0
 
     uint64_t   NID_VBCMK;        // # 6
@@ -20,8 +20,8 @@ struct Virtual_Balise_Cover_marker_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Virtual_Balise_Cover_marker_Core& p)
 {
-    stream 
-       << +p.NID_VBCMK;
+    stream
+            << +p.NID_VBCMK;
 
     return stream;
 }
@@ -29,7 +29,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Virtual_Balise_Cover
 inline bool operator==(const Virtual_Balise_Cover_marker_Core& a, const Virtual_Balise_Cover_marker_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.NID_VBCMK == b.NID_VBCMK);
 
     return status;
@@ -138,7 +138,7 @@ int Virtual_Balise_Cover_marker_Encoder(Bitstream* stream, const Virtual_Balise_
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

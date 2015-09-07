@@ -18,10 +18,10 @@ struct List_of_balises_for_SH_Area_Core_1
 
 inline std::ostream& operator<<(std::ostream& stream, const List_of_balises_for_SH_Area_Core_1& p)
 {
-    stream 
-       << +p.Q_NEWCOUNTRY << ','
-       << +p.NID_C << ','
-       << +p.NID_BG;
+    stream
+            << +p.Q_NEWCOUNTRY << ','
+            << +p.NID_C << ','
+            << +p.NID_BG;
 
     return stream;
 }
@@ -29,12 +29,14 @@ inline std::ostream& operator<<(std::ostream& stream, const List_of_balises_for_
 inline bool operator==(const List_of_balises_for_SH_Area_Core_1& a, const List_of_balises_for_SH_Area_Core_1& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_NEWCOUNTRY == b.Q_NEWCOUNTRY);
+
     if (a.Q_NEWCOUNTRY == 1)
     {
-    status = status && (a.NID_C == b.NID_C);
+        status = status && (a.NID_C == b.NID_C);
     }
+
     status = status && (a.NID_BG == b.NID_BG);
 
     return status;
@@ -143,7 +145,7 @@ int List_of_balises_for_SH_Area_Core_1_Encoder(Bitstream* stream, const List_of_
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

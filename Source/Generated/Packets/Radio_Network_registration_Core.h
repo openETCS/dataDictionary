@@ -8,7 +8,7 @@ struct Radio_Network_registration_Core
 {
     // TransmissionMedia=Balise, RBC, RIU
     // Packet to give the identity of the Radio Network to which
-    // a registration shall be enforced.      
+    // a registration shall be enforced.
     // Packet Number = 45
 
     uint64_t   Q_DIR;            // # 2
@@ -22,10 +22,10 @@ struct Radio_Network_registration_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Radio_Network_registration_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.NID_MN;
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.NID_MN;
 
     return stream;
 }
@@ -33,7 +33,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Radio_Network_regist
 inline bool operator==(const Radio_Network_registration_Core& a, const Radio_Network_registration_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.NID_MN == b.NID_MN);
@@ -152,7 +152,7 @@ int Radio_Network_registration_Encoder(Bitstream* stream, const Radio_Network_re
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

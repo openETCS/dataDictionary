@@ -21,13 +21,13 @@ struct Mode_profile_Core_1
 
 inline std::ostream& operator<<(std::ostream& stream, const Mode_profile_Core_1& p)
 {
-    stream 
-       << +p.D_MAMODE << ','
-       << +p.M_MAMODE << ','
-       << +p.V_MAMODE << ','
-       << +p.L_MAMODE << ','
-       << +p.L_ACKMAMODE << ','
-       << +p.Q_MAMODE;
+    stream
+            << +p.D_MAMODE << ','
+            << +p.M_MAMODE << ','
+            << +p.V_MAMODE << ','
+            << +p.L_MAMODE << ','
+            << +p.L_ACKMAMODE << ','
+            << +p.Q_MAMODE;
 
     return stream;
 }
@@ -35,7 +35,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Mode_profile_Core_1&
 inline bool operator==(const Mode_profile_Core_1& a, const Mode_profile_Core_1& b)
 {
     bool status = true;
-    
+
     status = status && (a.D_MAMODE == b.D_MAMODE);
     status = status && (a.M_MAMODE == b.M_MAMODE);
     status = status && (a.V_MAMODE == b.V_MAMODE);
@@ -169,7 +169,7 @@ int Mode_profile_Core_1_Encoder(Bitstream* stream, const Mode_profile_Core_1* p)
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

@@ -18,10 +18,10 @@ struct Level_Transition_Order_Core_1
 
 inline std::ostream& operator<<(std::ostream& stream, const Level_Transition_Order_Core_1& p)
 {
-    stream 
-       << +p.M_LEVELTR << ','
-       << +p.NID_NTC << ','
-       << +p.L_ACKLEVELTR;
+    stream
+            << +p.M_LEVELTR << ','
+            << +p.NID_NTC << ','
+            << +p.L_ACKLEVELTR;
 
     return stream;
 }
@@ -29,12 +29,14 @@ inline std::ostream& operator<<(std::ostream& stream, const Level_Transition_Ord
 inline bool operator==(const Level_Transition_Order_Core_1& a, const Level_Transition_Order_Core_1& b)
 {
     bool status = true;
-    
+
     status = status && (a.M_LEVELTR == b.M_LEVELTR);
+
     if (a.M_LEVELTR == 1)
     {
-    status = status && (a.NID_NTC == b.NID_NTC);
+        status = status && (a.NID_NTC == b.NID_NTC);
     }
+
     status = status && (a.L_ACKLEVELTR == b.L_ACKLEVELTR);
 
     return status;
@@ -143,7 +145,7 @@ int Level_Transition_Order_Core_1_Encoder(Bitstream* stream, const Level_Transit
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

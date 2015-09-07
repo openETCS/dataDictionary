@@ -50,21 +50,23 @@ int Onboard_telephone_numbers_Core_1_Decoder(Bitstream* stream, Onboard_telephon
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 
-	/*@
-	  requires NID_RADIO:      stream->bitpos == pos + 0;
-	  assigns        	   stream->bitpos;
-	  assigns		   p->NID_RADIO;
-	  ensures  NID_RADIO:      stream->bitpos == pos + 64;
-	  ensures  NID_RADIO:      EqualBits(stream, pos + 0, pos + 64, p->NID_RADIO);
-	  ensures  NID_RADIO:      UpperBitsNotSet(p->NID_RADIO, 64);
-	*/
-	{ p->NID_RADIO		= Bitstream_Read(stream, 64); }
+        /*@
+          requires NID_RADIO:      stream->bitpos == pos + 0;
+          assigns        	   stream->bitpos;
+          assigns		   p->NID_RADIO;
+          ensures  NID_RADIO:      stream->bitpos == pos + 64;
+          ensures  NID_RADIO:      EqualBits(stream, pos + 0, pos + 64, p->NID_RADIO);
+          ensures  NID_RADIO:      UpperBitsNotSet(p->NID_RADIO, 64);
+        */
+        {
+            p->NID_RADIO		= Bitstream_Read(stream, 64);
+        }
 
         //@ assert NID_RADIO:         EqualBits(stream, pos,       pos + 64,  p->NID_RADIO);
 
         //@ assert NID_RADIO:         UpperBitsNotSet(p->NID_RADIO,         64);
 
-	//@ assert final: EqualBits(stream, pos, p);
+        //@ assert final: EqualBits(stream, pos, p);
 
         return 1;
     }

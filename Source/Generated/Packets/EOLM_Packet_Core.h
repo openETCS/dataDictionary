@@ -7,7 +7,7 @@
 struct EOLM_Packet_Core
 {
     // TransmissionMedia=Balise
-    // This packet announces a loop.      
+    // This packet announces a loop.
     // Packet Number = 134
 
     uint64_t   Q_DIR;            // # 2
@@ -26,15 +26,15 @@ struct EOLM_Packet_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const EOLM_Packet_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.Q_SCALE << ','
-       << +p.NID_LOOP << ','
-       << +p.D_LOOP << ','
-       << +p.L_LOOP << ','
-       << +p.Q_LOOPDIR << ','
-       << +p.Q_SSCODE;
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.NID_LOOP << ','
+            << +p.D_LOOP << ','
+            << +p.L_LOOP << ','
+            << +p.Q_LOOPDIR << ','
+            << +p.Q_SSCODE;
 
     return stream;
 }
@@ -42,7 +42,7 @@ inline std::ostream& operator<<(std::ostream& stream, const EOLM_Packet_Core& p)
 inline bool operator==(const EOLM_Packet_Core& a, const EOLM_Packet_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.Q_SCALE == b.Q_SCALE);
@@ -186,7 +186,7 @@ int EOLM_Packet_Encoder(Bitstream* stream, const EOLM_Packet_Core* p);
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

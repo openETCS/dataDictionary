@@ -8,7 +8,7 @@
 struct Linking_Core
 {
     // TransmissionMedia=Any
-    // Linking Information.         
+    // Linking Information.
     // Packet Number = 5
 
     uint64_t   Q_DIR;            // # 2
@@ -31,23 +31,24 @@ struct Linking_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Linking_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.Q_SCALE << ','
-       << +p.D_LINK << ','
-       << +p.Q_NEWCOUNTRY << ','
-       << +p.NID_C << ','
-       << +p.NID_BG << ','
-       << +p.Q_LINKORIENTATION << ','
-       << +p.Q_LINKREACTION << ','
-       << +p.Q_LOCACC << ','
-       << +p.N_ITER_1;
-       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-       {
-           stream << ',' << p.sub_1[i];
-       }
-   
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.D_LINK << ','
+            << +p.Q_NEWCOUNTRY << ','
+            << +p.NID_C << ','
+            << +p.NID_BG << ','
+            << +p.Q_LINKORIENTATION << ','
+            << +p.Q_LINKREACTION << ','
+            << +p.Q_LOCACC << ','
+            << +p.N_ITER_1;
+
+    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+    {
+        stream << ',' << p.sub_1[i];
+    }
+
 
     return stream;
 }
@@ -55,21 +56,24 @@ inline std::ostream& operator<<(std::ostream& stream, const Linking_Core& p)
 inline bool operator==(const Linking_Core& a, const Linking_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.Q_SCALE == b.Q_SCALE);
     status = status && (a.D_LINK == b.D_LINK);
     status = status && (a.Q_NEWCOUNTRY == b.Q_NEWCOUNTRY);
+
     if (a.Q_NEWCOUNTRY == 1)
     {
-    status = status && (a.NID_C == b.NID_C);
+        status = status && (a.NID_C == b.NID_C);
     }
+
     status = status && (a.NID_BG == b.NID_BG);
     status = status && (a.Q_LINKORIENTATION == b.Q_LINKORIENTATION);
     status = status && (a.Q_LINKREACTION == b.Q_LINKREACTION);
     status = status && (a.Q_LOCACC == b.Q_LOCACC);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
+
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)
@@ -204,7 +208,7 @@ int Linking_Encoder(Bitstream* stream, const Linking_Core* p);
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

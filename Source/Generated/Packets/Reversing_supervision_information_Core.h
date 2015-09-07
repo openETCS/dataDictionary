@@ -8,7 +8,7 @@ struct Reversing_supervision_information_Core
 {
     // TransmissionMedia=Any
     // Used to send supervision parameters (distance to run, speed) of reversing
-    // area to the on-board       
+    // area to the on-board
     // Packet Number = 139
 
     uint64_t   Q_DIR;            // # 2
@@ -24,12 +24,12 @@ struct Reversing_supervision_information_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Reversing_supervision_information_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.Q_SCALE << ','
-       << +p.D_REVERSE << ','
-       << +p.V_REVERSE;
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.D_REVERSE << ','
+            << +p.V_REVERSE;
 
     return stream;
 }
@@ -37,7 +37,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Reversing_supervisio
 inline bool operator==(const Reversing_supervision_information_Core& a, const Reversing_supervision_information_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.Q_SCALE == b.Q_SCALE);
@@ -166,7 +166,7 @@ int Reversing_supervision_information_Encoder(Bitstream* stream, const Reversing
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

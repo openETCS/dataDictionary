@@ -88,11 +88,11 @@ bool Encoder_Branch_TrainToTrack(Bitstream& stream, BasePacketPtr packet)
 
         }
 
-    default :
-    {
-        std::cerr << "Error, unrecognized Packet in " << __FILE__ << std::endl;
-        return false;
-    }
+        default :
+        {
+            std::cerr << "Error, unrecognized Packet in " << __FILE__ << std::endl;
+            return false;
+        }
 
     };
 
@@ -580,11 +580,11 @@ bool Encoder_Branch_TrackToTrain(Bitstream& stream, BasePacketPtr packet)
 
         }
 
-    default :
-    {
-        std::cerr << "Error, unrecognized Packet in " << __FILE__ << std::endl;
-        return false;
-    }
+        default :
+        {
+            std::cerr << "Error, unrecognized Packet in " << __FILE__ << std::endl;
+            return false;
+        }
 
     };
 

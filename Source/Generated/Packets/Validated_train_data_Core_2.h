@@ -16,8 +16,8 @@ struct Validated_train_data_Core_2
 
 inline std::ostream& operator<<(std::ostream& stream, const Validated_train_data_Core_2& p)
 {
-    stream 
-       << +p.NID_NTC;
+    stream
+            << +p.NID_NTC;
 
     return stream;
 }
@@ -25,7 +25,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Validated_train_data
 inline bool operator==(const Validated_train_data_Core_2& a, const Validated_train_data_Core_2& b)
 {
     bool status = true;
-    
+
     status = status && (a.NID_NTC == b.NID_NTC);
 
     return status;
@@ -134,7 +134,7 @@ int Validated_train_data_Core_2_Encoder(Bitstream* stream, const Validated_train
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

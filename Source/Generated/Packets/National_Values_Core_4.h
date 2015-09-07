@@ -17,9 +17,9 @@ struct National_Values_Core_4
 
 inline std::ostream& operator<<(std::ostream& stream, const National_Values_Core_4& p)
 {
-    stream 
-       << +p.L_NVKRINT << ','
-       << +p.M_NVKRINT;
+    stream
+            << +p.L_NVKRINT << ','
+            << +p.M_NVKRINT;
 
     return stream;
 }
@@ -27,7 +27,7 @@ inline std::ostream& operator<<(std::ostream& stream, const National_Values_Core
 inline bool operator==(const National_Values_Core_4& a, const National_Values_Core_4& b)
 {
     bool status = true;
-    
+
     status = status && (a.L_NVKRINT == b.L_NVKRINT);
     status = status && (a.M_NVKRINT == b.M_NVKRINT);
 
@@ -141,7 +141,7 @@ int National_Values_Core_4_Encoder(Bitstream* stream, const National_Values_Core
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

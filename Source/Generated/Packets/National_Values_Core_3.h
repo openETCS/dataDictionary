@@ -23,18 +23,19 @@ struct National_Values_Core_3
 
 inline std::ostream& operator<<(std::ostream& stream, const National_Values_Core_3& p)
 {
-    stream 
-       << +p.Q_NVKVINTSET << ','
-       << +p.A_NVP12 << ','
-       << +p.A_NVP23 << ','
-       << +p.V_NVKVINT << ','
-       << +p.M_NVKVINT << ','
-       << +p.N_ITER_3_1;
-       for (uint32_t i = 0; i < p.N_ITER_3_1; ++i)
-       {
-           stream << ',' << p.sub_3_1[i];
-       }
-   
+    stream
+            << +p.Q_NVKVINTSET << ','
+            << +p.A_NVP12 << ','
+            << +p.A_NVP23 << ','
+            << +p.V_NVKVINT << ','
+            << +p.M_NVKVINT << ','
+            << +p.N_ITER_3_1;
+
+    for (uint32_t i = 0; i < p.N_ITER_3_1; ++i)
+    {
+        stream << ',' << p.sub_3_1[i];
+    }
+
 
     return stream;
 }
@@ -42,16 +43,19 @@ inline std::ostream& operator<<(std::ostream& stream, const National_Values_Core
 inline bool operator==(const National_Values_Core_3& a, const National_Values_Core_3& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_NVKVINTSET == b.Q_NVKVINTSET);
+
     if (a.Q_NVKVINTSET == 1)
     {
-    status = status && (a.A_NVP12 == b.A_NVP12);
-    status = status && (a.A_NVP23 == b.A_NVP23);
+        status = status && (a.A_NVP12 == b.A_NVP12);
+        status = status && (a.A_NVP23 == b.A_NVP23);
     }
+
     status = status && (a.V_NVKVINT == b.V_NVKVINT);
     status = status && (a.M_NVKVINT == b.M_NVKVINT);
     status = status && (a.N_ITER_3_1 == b.N_ITER_3_1);
+
     if (a.N_ITER_3_1 == b.N_ITER_3_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_3_1; ++i)
@@ -170,7 +174,7 @@ int National_Values_Core_3_Encoder(Bitstream* stream, const National_Values_Core
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

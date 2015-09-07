@@ -49,7 +49,7 @@ int End_of_Information_Decoder(Bitstream* stream, End_of_Information_Core* p)
 
 
 
-	//@ assert final: EqualBits(stream, pos, p);
+        //@ assert final: EqualBits(stream, pos, p);
 
         return 1;
     }

@@ -7,7 +7,7 @@
 struct Track_Condition_Change_of_traction_system_Core
 {
     // TransmissionMedia=Any
-    // The packet gives information about change of the traction system. 
+    // The packet gives information about change of the traction system.
     // Packet Number = 39
 
     uint64_t   Q_DIR;            // # 2
@@ -24,13 +24,13 @@ struct Track_Condition_Change_of_traction_system_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Change_of_traction_system_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.Q_SCALE << ','
-       << +p.D_TRACTION << ','
-       << +p.M_VOLTAGE << ','
-       << +p.NID_CTRACTION;
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.D_TRACTION << ','
+            << +p.M_VOLTAGE << ','
+            << +p.NID_CTRACTION;
 
     return stream;
 }
@@ -38,15 +38,16 @@ inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Chan
 inline bool operator==(const Track_Condition_Change_of_traction_system_Core& a, const Track_Condition_Change_of_traction_system_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.Q_SCALE == b.Q_SCALE);
     status = status && (a.D_TRACTION == b.D_TRACTION);
     status = status && (a.M_VOLTAGE == b.M_VOLTAGE);
+
     if (a.M_VOLTAGE != 0)
     {
-    status = status && (a.NID_CTRACTION == b.NID_CTRACTION);
+        status = status && (a.NID_CTRACTION == b.NID_CTRACTION);
     }
 
     return status;
@@ -171,7 +172,7 @@ int Track_Condition_Change_of_traction_system_Encoder(Bitstream* stream, const T
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

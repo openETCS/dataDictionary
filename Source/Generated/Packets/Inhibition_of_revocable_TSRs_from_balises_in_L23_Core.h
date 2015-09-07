@@ -8,7 +8,7 @@ struct Inhibition_of_revocable_TSRs_from_balises_in_L23_Core
 {
     // TransmissionMedia=RBC
     // This packet is used to inhibit revocable TSRs from balises in
-    // level 2 or 3.       
+    // level 2 or 3.
     // Packet Number = 64
 
     uint64_t   Q_DIR;            // # 2
@@ -21,9 +21,9 @@ struct Inhibition_of_revocable_TSRs_from_balises_in_L23_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Inhibition_of_revocable_TSRs_from_balises_in_L23_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET;
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET;
 
     return stream;
 }
@@ -31,7 +31,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Inhibition_of_revoca
 inline bool operator==(const Inhibition_of_revocable_TSRs_from_balises_in_L23_Core& a, const Inhibition_of_revocable_TSRs_from_balises_in_L23_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
 
@@ -145,7 +145,7 @@ int Inhibition_of_revocable_TSRs_from_balises_in_L23_Encoder(Bitstream* stream, 
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

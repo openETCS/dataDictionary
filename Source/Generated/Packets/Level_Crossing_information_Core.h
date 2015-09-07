@@ -7,7 +7,7 @@
 struct Level_Crossing_information_Core
 {
     // TransmissionMedia=Any
-    // Level Crossing information        
+    // Level Crossing information
     // Packet Number = 88
 
     uint64_t   Q_DIR;            // # 2
@@ -28,17 +28,17 @@ struct Level_Crossing_information_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Level_Crossing_information_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.Q_SCALE << ','
-       << +p.NID_LX << ','
-       << +p.D_LX << ','
-       << +p.L_LX << ','
-       << +p.Q_LXSTATUS << ','
-       << +p.V_LX << ','
-       << +p.Q_STOPLX << ','
-       << +p.L_STOPLX;
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.NID_LX << ','
+            << +p.D_LX << ','
+            << +p.L_LX << ','
+            << +p.Q_LXSTATUS << ','
+            << +p.V_LX << ','
+            << +p.Q_STOPLX << ','
+            << +p.L_STOPLX;
 
     return stream;
 }
@@ -46,7 +46,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Level_Crossing_infor
 inline bool operator==(const Level_Crossing_information_Core& a, const Level_Crossing_information_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.Q_SCALE == b.Q_SCALE);
@@ -54,14 +54,16 @@ inline bool operator==(const Level_Crossing_information_Core& a, const Level_Cro
     status = status && (a.D_LX == b.D_LX);
     status = status && (a.L_LX == b.L_LX);
     status = status && (a.Q_LXSTATUS == b.Q_LXSTATUS);
+
     if (a.Q_LXSTATUS == 1)
     {
-    status = status && (a.V_LX == b.V_LX);
-    status = status && (a.Q_STOPLX == b.Q_STOPLX);
+        status = status && (a.V_LX == b.V_LX);
+        status = status && (a.Q_STOPLX == b.Q_STOPLX);
     }
+
     if (a.Q_STOPLX == 1)
     {
-    status = status && (a.L_STOPLX == b.L_STOPLX);
+        status = status && (a.L_STOPLX == b.L_STOPLX);
     }
 
     return status;
@@ -194,7 +196,7 @@ int Level_Crossing_information_Encoder(Bitstream* stream, const Level_Crossing_i
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);

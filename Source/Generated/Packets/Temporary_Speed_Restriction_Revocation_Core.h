@@ -7,7 +7,7 @@
 struct Temporary_Speed_Restriction_Revocation_Core
 {
     // TransmissionMedia=Any
-    // Transmission of temporary speed restriction revocation.     
+    // Transmission of temporary speed restriction revocation.
     // Packet Number = 66
 
     uint64_t   Q_DIR;            // # 2
@@ -21,10 +21,10 @@ struct Temporary_Speed_Restriction_Revocation_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const Temporary_Speed_Restriction_Revocation_Core& p)
 {
-    stream 
-       << +p.Q_DIR << ','
-       << +p.L_PACKET << ','
-       << +p.NID_TSR;
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.NID_TSR;
 
     return stream;
 }
@@ -32,7 +32,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Temporary_Speed_Rest
 inline bool operator==(const Temporary_Speed_Restriction_Revocation_Core& a, const Temporary_Speed_Restriction_Revocation_Core& b)
 {
     bool status = true;
-    
+
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.NID_TSR == b.NID_TSR);
@@ -151,7 +151,7 @@ int Temporary_Speed_Restriction_Revocation_Encoder(Bitstream* stream, const Temp
       assigns *p;
 
       ensures invariant:  Invariant(p);
-      ensures result:     \result == 1; 
+      ensures result:     \result == 1;
       ensures increment:  stream->bitpos == \old(stream->bitpos) + BitSize(p);
       ensures equal:      EqualBits(stream, \old(stream->bitpos), p);
       ensures upper:      UpperBitsNotSet(p);
