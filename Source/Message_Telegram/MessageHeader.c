@@ -1,8 +1,8 @@
 
-#include "Message_Header.h"
+#include "MessageHeader.h"
 #include "Bit64.h"
 
-int Message_Header_UpperBitsNotSet(const Message_Header* p)
+int MessageHeader_UpperBitsNotSet(const MessageHeader* p)
 {
     if (UpperBitsNotSet64(p->NID_MESSAGE,             8))
     {
@@ -14,7 +14,7 @@ int Message_Header_UpperBitsNotSet(const Message_Header* p)
     }
 }
 
-int Message_Header_Decoder(Bitstream* stream, Message_Header* p)
+int MessageHeader_Decoder(Bitstream* stream, MessageHeader* p)
 {
     if (Bitstream_Normal(stream, MESSAGE_HEADER_BITSIZE))
     {
@@ -35,11 +35,11 @@ int Message_Header_Decoder(Bitstream* stream, Message_Header* p)
     }
 }
 
-int Message_Header_Encoder(Bitstream* stream, const Message_Header* p)
+int MessageHeader_Encoder(Bitstream* stream, const MessageHeader* p)
 {
     if (Bitstream_Normal(stream, MESSAGE_HEADER_BITSIZE))
     {
-        if (Message_Header_UpperBitsNotSet(p))
+        if (MessageHeader_UpperBitsNotSet(p))
         {
             //@ ghost const uint32_t pos = stream->bitpos;
 

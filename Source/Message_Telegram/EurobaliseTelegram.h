@@ -4,10 +4,6 @@
 
 #include "TelegramHeader.h"
 #include "BasePacket.h"
-#include <iostream>
-#include <vector>
-
-typedef std::vector<BasePacketPtr> PacketSequence;
 
 class EurobaliseTelegram
 {

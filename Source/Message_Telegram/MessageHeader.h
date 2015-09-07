@@ -4,35 +4,35 @@
 
 #include "Bitstream.h"
 
-struct Message_Header
+struct MessageHeader
 {
     uint8_t  NID_MESSAGE;         // # 8
 };
 
-typedef struct Message_Header Message_Header;
+typedef struct MessageHeader MessageHeader;
 
 #define MESSAGE_HEADER_BITSIZE 8
 
 /*@
-    logic integer BitSize{L}(Message_Header* p) = MESSAGE_HEADER_BITSIZE;
+    logic integer BitSize{L}(MessageHeader* p) = MESSAGE_HEADER_BITSIZE;
 
-    logic integer MaxBitSize{L}(Message_Header* p) = BitSize(p);
+    logic integer MaxBitSize{L}(MessageHeader* p) = BitSize(p);
 
-    predicate Separated(Bitstream* stream, Message_Header* p) =
+    predicate Separated(Bitstream* stream, MessageHeader* p) =
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Message_Header* p) =
+    predicate Invariant(MessageHeader* p) =
       Invariant(p->NID_MESSAGE);
 
-    predicate ZeroInitialized(Message_Header* p) =
+    predicate ZeroInitialized(MessageHeader* p) =
       ZeroInitialized(p->NID_MESSAGE);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Message_Header* p) =
+    predicate EqualBits(Bitstream* stream, integer pos, MessageHeader* p) =
       EqualBits(stream, pos,       pos + 8,   p->NID_MESSAGE);
 
 
-    predicate UpperBitsNotSet(Message_Header* p) =
+    predicate UpperBitsNotSet(MessageHeader* p) =
       UpperBitsNotSet(p->NID_MESSAGE,  8);
 
 */
@@ -45,7 +45,7 @@ typedef struct Message_Header Message_Header;
 
     ensures result:  \result <==> UpperBitsNotSet(p);
 */
-int Message_Header_UpperBitsNotSet(const Message_Header* p);
+int MessageHeader_UpperBitsNotSet(const MessageHeader* p);
 
 /*@
     requires valid_stream:      Writeable(stream);
@@ -86,7 +86,7 @@ int Message_Header_UpperBitsNotSet(const Message_Header* p);
     complete behaviors;
     disjoint behaviors;
 */
-int Message_Header_Encoder(Bitstream* stream, const Message_Header* p);
+int MessageHeader_Encoder(Bitstream* stream, const MessageHeader* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -121,7 +121,7 @@ int Message_Header_Encoder(Bitstream* stream, const Message_Header* p);
     complete behaviors;
     disjoint behaviors;
 */
-int Message_Header_Decoder(Bitstream* stream, Message_Header* p);
+int MessageHeader_Decoder(Bitstream* stream, MessageHeader* p);
 
 #endif // MESSAGE_HEADER_H_INCLUDED
 

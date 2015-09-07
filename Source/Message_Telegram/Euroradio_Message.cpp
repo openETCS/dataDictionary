@@ -6,8 +6,8 @@
 
 Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
 {
-    Message_Header messageID;
-    Message_Header_Decoder(&stream, &messageID);
+    MessageHeader messageID;
+    MessageHeader_Decoder(&stream, &messageID);
 
     switch (messageID.NID_MESSAGE)
     {
@@ -556,7 +556,7 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream)
 
 bool Euroradio_Message_Encoder(Bitstream& stream, Euroradio_MessagePtr p)
 {
-    Message_Header_Encoder(&stream, &(p->header));
+    MessageHeader_Encoder(&stream, &(p->header));
 
     switch (p->header.NID_MESSAGE)
     {

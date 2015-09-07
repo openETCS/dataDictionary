@@ -4,13 +4,12 @@
 
 #include <iostream>
 #include "BasePacket.h"
-#include "Message_Header.h"
-#include "Bitstream.h"
+#include "MessageHeader.h"
 
 
 struct Euroradio_Message
 {
-    Message_Header header;
+    MessageHeader header;
 
     Euroradio_Message(uint8_t nid)
     {
@@ -44,7 +43,6 @@ Euroradio_MessagePtr Euroradio_Message_Decoder(Bitstream& stream);
 
 bool Euroradio_Message_Encoder(Bitstream& stream, Euroradio_MessagePtr p);
 
-typedef std::vector<BasePacketPtr> PacketSequence;
 
 #endif // EURORADIO_MESSAGE_H_INCLUDED
 

@@ -44,5 +44,7 @@ inline std::ostream& operator<< (std::ostream& stream, const BasePacket& p)
 
 typedef std::shared_ptr<BasePacket> BasePacketPtr;
 
+typedef std::vector<BasePacketPtr> PacketSequence;
+
 #endif // BASEPACKET_H_INCLUDED
 
