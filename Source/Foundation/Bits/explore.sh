@@ -107,7 +107,7 @@ shift $((OPTIND-1))
 
 [ -z "$*" ] && usage
 
-provers="Alt-Ergo Z3 CVC4"
+provers="CVC4 Z3 Alt-Ergo"
 theories=`mktemp theories.XXXXXX`
 enumerate_theories "$@" >$theories
 thcount=`wc -l <$theories`
