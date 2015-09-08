@@ -25,7 +25,7 @@ SRC= print_bits.cpp EurobaliseTelegram.cpp EuroradioMessage.cpp
 
 OBJ := $(SRC:.cpp=.o) 
 
-OBJ += TelegramHeader.o MessageHeader.o
+OBJ += MessageHeader.o
 
 
 libmessage_telegram.a : $(OBJ)
