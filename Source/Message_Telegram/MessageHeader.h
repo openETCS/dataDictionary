@@ -1,7 +1,8 @@
 
-#ifndef MESSAGE_HEADER_H_INCLUDED
-#define MESSAGE_HEADER_H_INCLUDED
+#ifndef MESSAGEHEADER_H_INCLUDED
+#define MESSAGEHEADER_H_INCLUDED
 
+#include "Bit64.h"
 #include "Bitstream.h"
 
 struct MessageHeader
@@ -11,10 +12,10 @@ struct MessageHeader
 
 typedef struct MessageHeader MessageHeader;
 
-#define MESSAGE_HEADER_BITSIZE 8
+#define MESSAGEHEADER_BITSIZE 8
 
 /*@
-    logic integer BitSize{L}(MessageHeader* p) = MESSAGE_HEADER_BITSIZE;
+    logic integer BitSize{L}(MessageHeader* p) = MESSAGEHEADER_BITSIZE;
 
     logic integer MaxBitSize{L}(MessageHeader* p) = BitSize(p);
 
@@ -45,7 +46,18 @@ typedef struct MessageHeader MessageHeader;
 
     ensures result:  \result <==> UpperBitsNotSet(p);
 */
-int MessageHeader_UpperBitsNotSet(const MessageHeader* p);
+static inline
+int MessageHeader_UpperBitsNotSet(const MessageHeader* p)
+{
+    if (UpperBitsNotSet64(p->NID_MESSAGE,             8))
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
 
 /*@
     requires valid_stream:      Writeable(stream);
@@ -86,7 +98,30 @@ int MessageHeader_UpperBitsNotSet(const MessageHeader* p);
     complete behaviors;
     disjoint behaviors;
 */
-int MessageHeader_Encoder(Bitstream* stream, const MessageHeader* p);
+static inline
+int MessageHeader_Encoder(Bitstream* stream, const MessageHeader* p)
+{
+    if (Bitstream_Normal(stream, MESSAGEHEADER_BITSIZE))
+    {
+        if (MessageHeader_UpperBitsNotSet(p))
+        {
+            //@ ghost const uint32_t pos = stream->bitpos;
+
+            Bitstream_Write(stream, 8, p->NID_MESSAGE);
+            //@ assert NID_MESSAGE: EqualBits(stream, pos, pos+8, p->NID_MESSAGE);
+
+            return 1;
+        }
+        else
+        {
+            return -2;
+        }
+    }
+    else
+    {
+        return -1;
+    }
+}
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -121,7 +156,26 @@ int MessageHeader_Encoder(Bitstream* stream, const MessageHeader* p);
     complete behaviors;
     disjoint behaviors;
 */
-int MessageHeader_Decoder(Bitstream* stream, MessageHeader* p);
+static inline
+int MessageHeader_Decoder(Bitstream* stream, MessageHeader* p)
+{
+    if (Bitstream_Normal(stream, MESSAGEHEADER_BITSIZE))
+    {
+        //@ ghost const uint32_t pos = stream->bitpos;
 
-#endif // MESSAGE_HEADER_H_INCLUDED
+        p->NID_MESSAGE = Bitstream_Read(stream, 8);
+
+        //@ assert NID_MESSAGE:  EqualBits(stream, pos, pos + 8, p->NID_MESSAGE);
+        //@ assert NID_MESSAGE:  UpperBitsNotSet(p->NID_MESSAGE, 8);
+
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+
+#endif // MESSAGEHEADER_H_INCLUDED
 
