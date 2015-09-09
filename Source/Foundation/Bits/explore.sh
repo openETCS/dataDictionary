@@ -5,35 +5,29 @@
 # timeouts.
 
 usage() {
-	echo Usage: $0 [ -t maxtimeout ] files...
+	echo Usage: $0 [ -t maxtimeout ] [ -p prover_order ] [ -v ] files...
+	echo Option -v causes $0 to display valid theories, too.
 	exit 1
 }
 
 # verify a single theory. Output:
 # * if succesful to fd 3,
-# * if timeout to fd 1
-# * if $5 true to fd 2
-# * if $5 is false to fd 1
+# * if timeout or unknown to fd 2
+# * else to fd 1
 single_theory() {
-	local output=`why3 prove $1 -L . -L $FRAMAC_SHARE/wp/why3/ -T $2 --prover $3 -t $4 2>/dev/null`
+	local output=$(why3 prove $1 -L "$(dirname $1)" -L $FRAMAC_SHARE/wp/why3/ -T $2 --prover $3 -t $4 2>/dev/null)
 
 	case "$output" in
 	*Valid*)
-		echo $1,$2 >&3 ;;
-	*Timeout*)
-		echo $1,$2 >&1 ;;
-	'')
 		# ignore when nothing has been proven
+		echo "VALID  " $2 from $1 "($output)" >&3 ;;
+
+	*Timeout*|*Unknown*)
+		echo $1,$2 >&2 ;;
+	'')
 		;;
 	*)
-		# everything else is a failure
-		if $5
-		then
-			echo FAILED\  $2 from $1 "($output)" >&2
-		else
-			echo $1,$2 >&1
-		fi
-		;;
+		echo "FAILED "  $2 from $1 "($output)"  ;;
 	esac
 }
 
@@ -70,7 +64,7 @@ single_pass() {
 			islastprover=false
 		fi
 
-		do_theories $prover $timeout $islastprover <$theories 2>&1 >$remaining 3>/dev/null
+		do_theories $prover $timeout $islastprover <$theories 2>$remaining 3>$validsto
 
 		[ "$theories" != /dev/fd/0 ] && rm -f $theories
 		theories=$remaining
@@ -80,7 +74,7 @@ single_pass() {
 		[ "$thcount" = 0 ] && break
 	done
 
-	cat $theories
+	cat $theories >&3
 	rm -f $theories
 }
 
@@ -92,12 +86,18 @@ show_timeouts() {
 }
 
 maxtimeout=32
+provers="CVC4 Z3 Alt-Ergo"
+validsto=/dev/null
 
-while getopts "t:" option
+while getopts "t:p:v" option
 do
 	case "$option" in
 	t)
 		maxtimeout=$OPTARG ;;
+	p)
+		provers=$(tr ',' ' ' <<<"$OPTARG") ;;
+	v)
+		validsto=/dev/fd/1 ;;
 	*)
 		usage ;;
 	esac
@@ -107,7 +107,6 @@ shift $((OPTIND-1))
 
 [ -z "$*" ] && usage
 
-provers="CVC4 Z3 Alt-Ergo"
 theories=`mktemp theories.XXXXXX`
 enumerate_theories "$@" >$theories
 thcount=`wc -l <$theories`
@@ -118,7 +117,7 @@ while [ $timeout -le $maxtimeout ]
 do
 	echo Using a timeout of $timeout seconds >&2
 	remaining=`mktemp remaining.XXXXXX`
-	single_pass $timeout <$theories >$remaining
+	single_pass $timeout <$theories 3>$remaining
 
 	rm -f $theories
 	theories=$remaining
