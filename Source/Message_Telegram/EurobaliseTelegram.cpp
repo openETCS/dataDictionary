@@ -110,7 +110,7 @@ bool EurobaliseTelegram::decode(Bitstream& stream)
 
 bool EurobaliseTelegram::encode(Bitstream& stream) const
 {
-    if (TelegramHeader_Encoder(&stream, &header()) != 1)
+    if (::encode(stream, header()) != 1)
     {
         return false;
     }
