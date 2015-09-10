@@ -10,16 +10,8 @@ int main ()
 
     // declare and initialize a telegram header
     EurobaliseTelegram telegram(create_TelegramHeader_TrainToTrack());
-    // telegram.header = create_TelegramHeader_TrackToTrain();
-    // create a pointer to a data packet including core data packet 1
-    // and push this pointer into the telegam packet vector
     telegram.add(std::make_shared<Train_running_number>(create_Train_running_number()));
     telegram.add(std::make_shared<Error_Reporting>(create_Error_Reporting()));
-
-    // telegram.add(std::make_shared<Temporary_Speed_Restriction>(create_Temporary_Speed_Restriction()));
-    // telegram.add(std::make_shared<Adhesion_Factor>(create_Adhesion_Factor()));
-
-    // add end of information package to packet sequence
     telegram.add(std::make_shared<End_of_Information>());
 
     std::cout << " Encoder Input: " << telegram << std::endl;

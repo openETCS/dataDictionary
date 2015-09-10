@@ -24,29 +24,29 @@ int main ()
     TelegramHeader header = create_TelegramHeader_TrainToTrack();
     // TelegramHeader header = create_TelegramHeader_TrackToTrain();
     std::cout << " Encoding Telegram Header: " << header << std::endl;
-    TelegramHeader_Encoder(&stream, &header);
+    encode(stream, header);
 
     std::cout << " Encoding data packets:" << std::endl;
     Train_running_number a = create_Train_running_number();
     {
-        PacketHeader_Encoder(&stream, &(a.header));
         std::cout << "    Encoding packet " << a << std::endl;
-        Train_running_number_Encoder(&stream, &a.core);
+        encode(stream, a.header);
+        encode(stream, a.core);
     }
 
     Error_Reporting b = create_Error_Reporting();
     {
-        PacketHeader_Encoder(&stream, &(b.header));
         std::cout << "    Encoding packet " << b << std::endl;
-        Error_Reporting_Encoder(&stream, &b.core);
+        encode(stream, b.header);
+        encode(stream, b.core);
     }
 
 
     End_of_Information c;
     {
-        PacketHeader_Encoder(&stream, &(c.header));
         std::cout << "    Encoding packet " << c << std::endl;
-        End_of_Information_Encoder(&stream, &c.core);
+        encode(stream, c.header);
+        encode(stream, c.core);
     }
 
     stream.bitpos = init_pos;

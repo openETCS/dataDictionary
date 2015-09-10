@@ -22,50 +22,50 @@ int main ()
     uint32_t init_pos = stream.bitpos;
 
     // TelegramHeader header = create_TelegramHeader_TrainToTrack();
-    TelegramHeader header = create_TelegramHeader_TrackToTrain();
     std::cout << " Encoding Telegram Header: " << header << std::endl;
-    TelegramHeader_Encoder(&stream, &header);
+    TelegramHeader header = create_TelegramHeader_TrackToTrain();
+    encode(stream, header);
 
     Temporary_Speed_Restriction a = create_Temporary_Speed_Restriction();
     {
-        PacketHeader_Encoder(&stream, &(a.header));
         std::cout << "    Encoding packet " << a << std::endl;
-        Temporary_Speed_Restriction_Encoder(&stream, &a.core);
+        encode(stream, a.header);
+        encode(stream, a.core);
     }
 
     Adhesion_Factor b = create_Adhesion_Factor();
     {
-        PacketHeader_Encoder(&stream, &(b.header));
         std::cout << "    Encoding packet " << b << std::endl;
-        Adhesion_Factor_Encoder(&stream, &b.core);
+        encode(stream, b.header);
+        encode(stream, b.core);
     }
 
     Infill_location_reference c = create_Infill_location_reference(1);
     {
-        PacketHeader_Encoder(&stream, &(c.header));
         std::cout << "    Encoding packet " << c << std::endl;
-        Infill_location_reference_Encoder(&stream, &c.core);
+        encode(stream, c.header);
+        encode(stream, c.core);
     }
 
     Infill_location_reference d = create_Infill_location_reference(0);
     {
-        PacketHeader_Encoder(&stream, &(d.header));
         std::cout << "    Encoding packet " << d << std::endl;
-        Infill_location_reference_Encoder(&stream, &d.core);
+        encode(stream, d.header);
+        encode(stream, d.core);
     }
 
     Gradient_Profile e = create_Gradient_Profile();
     {
-        PacketHeader_Encoder(&stream, &(e.header));
         std::cout << "    Encoding packet " << e << std::endl;
-        Gradient_Profile_Encoder(&stream, &e.core);
+        encode(stream, e.header);
+        encode(stream, e.core);
     }
 
     End_of_Information f;
     {
-        PacketHeader_Encoder(&stream, &(f.header));
         std::cout << "    Encoding packet " << f << std::endl;
-        End_of_Information_Encoder(&stream, &f.core);
+        encode(stream, f.header);
+        encode(stream, f.core);
     }
 
     stream.bitpos = init_pos;
