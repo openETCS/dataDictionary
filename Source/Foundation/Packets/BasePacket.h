@@ -27,6 +27,8 @@ struct BasePacket
 
     virtual int encode(Bitstream&) const = 0;
 
+    virtual int decode(Bitstream&) { return 1; }
+
 };
 
 inline bool operator== (const BasePacket& a, const BasePacket& b)

@@ -74,9 +74,11 @@ bool EurobaliseTelegram::decode(Bitstream& stream)
         }
 
         PacketHeader packet_header;
-        PacketHeader_Decoder(&stream, &packet_header);
+        ::encode(stream, packet_header);
 
         BasePacketPtr ptr;
+
+        //ptr->decode(stream);
 
         if (header().Q_UPDOWN == 1)
         {
