@@ -20,47 +20,6 @@ struct TelegramHeader
     uint32_t  Q_LINK;           // # 1
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<< (std::ostream& stream, const TelegramHeader& p)
-{
-    stream << '('
-           << uint64_t(p.Q_UPDOWN) << ','
-           << uint64_t(p.M_VERSION) << ','
-           << uint64_t(p.Q_MEDIA) << ','
-           << uint64_t(p.N_PIG) << ','
-           << uint64_t(p.N_TOTAL) << ','
-           << uint64_t(p.M_DUP) << ','
-           << uint64_t(p.M_MCOUNT) << ','
-           << uint64_t(p.NID_C) << ','
-           << uint64_t(p.NID_BG) << ','
-           << uint64_t(p.Q_LINK) << ')';
-
-    return stream;
-}
-
-inline bool operator==(const TelegramHeader& a, const TelegramHeader& b)
-{
-    return (a.Q_UPDOWN == b.Q_UPDOWN) &&
-           (a.M_VERSION == b.M_VERSION) &&
-           (a.Q_MEDIA == b.Q_MEDIA) &&
-           (a.N_PIG == b.N_PIG) &&
-           (a.N_TOTAL == b.N_TOTAL) &&
-           (a.M_DUP == b.M_DUP) &&
-           (a.M_MCOUNT == b.M_MCOUNT) &&
-           (a.NID_C == b.NID_C) &&
-           (a.NID_BG == b.NID_BG) &&
-           (a.Q_LINK == b.Q_LINK);
-}
-
-inline bool operator!=(const TelegramHeader& a, const TelegramHeader& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
 
 typedef struct TelegramHeader TelegramHeader;
 
@@ -442,5 +401,52 @@ int TelegramHeader_Decoder(Bitstream* stream, TelegramHeader* p)
     }
 }
 
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<< (std::ostream& stream, const TelegramHeader& p)
+{
+    stream << '('
+           << uint64_t(p.Q_UPDOWN) << ','
+           << uint64_t(p.M_VERSION) << ','
+           << uint64_t(p.Q_MEDIA) << ','
+           << uint64_t(p.N_PIG) << ','
+           << uint64_t(p.N_TOTAL) << ','
+           << uint64_t(p.M_DUP) << ','
+           << uint64_t(p.M_MCOUNT) << ','
+           << uint64_t(p.NID_C) << ','
+           << uint64_t(p.NID_BG) << ','
+           << uint64_t(p.Q_LINK) << ')';
+
+    return stream;
+}
+
+inline bool operator==(const TelegramHeader& a, const TelegramHeader& b)
+{
+    return (a.Q_UPDOWN == b.Q_UPDOWN) &&
+           (a.M_VERSION == b.M_VERSION) &&
+           (a.Q_MEDIA == b.Q_MEDIA) &&
+           (a.N_PIG == b.N_PIG) &&
+           (a.N_TOTAL == b.N_TOTAL) &&
+           (a.M_DUP == b.M_DUP) &&
+           (a.M_MCOUNT == b.M_MCOUNT) &&
+           (a.NID_C == b.NID_C) &&
+           (a.NID_BG == b.NID_BG) &&
+           (a.Q_LINK == b.Q_LINK);
+}
+
+inline bool operator!=(const TelegramHeader& a, const TelegramHeader& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const TelegramHeader& p)
+{
+    return TelegramHeader_Encoder(&stream, &p);
+}
+
+
+#endif // __cplusplus
 
 #endif // TELEGRAMHEADER_H_INCLUDED
