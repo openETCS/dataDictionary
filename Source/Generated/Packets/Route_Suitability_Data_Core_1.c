@@ -8,22 +8,18 @@ int Route_Suitability_Data_Core_1_UpperBitsNotSet(const Route_Suitability_Data_C
 
     status = status && UpperBitsNotSet64(p->D_SUITABILITY,     15);
     status = status && UpperBitsNotSet64(p->Q_SUITABILITY,     2) ;
-
     if (p->Q_SUITABILITY == 0)
     {
         status = status && UpperBitsNotSet64(p->M_LINEGAUGE,       8) ;
     }
-
     if (p->Q_SUITABILITY == 1)
     {
         status = status && UpperBitsNotSet64(p->M_AXLELOADCAT,     7) ;
     }
-
     if (p->Q_SUITABILITY == 2)
     {
         status = status && UpperBitsNotSet64(p->M_VOLTAGE,         4) ;
     }
-
     if ((p->Q_SUITABILITY == 2) && (p->M_VOLTAGE != 0))
     {
         status = status && UpperBitsNotSet64(p->NID_CTRACTION,     10);
@@ -49,7 +45,6 @@ int Route_Suitability_Data_Core_1_Encoder(Bitstream* stream, const Route_Suitabi
 
             Bitstream_Write(stream, 15, p->D_SUITABILITY);
             Bitstream_Write(stream, 2,  p->Q_SUITABILITY);
-
             if (p->Q_SUITABILITY == 0)
             {
                 Bitstream_Write(stream, 8,  p->M_LINEGAUGE);
@@ -96,54 +91,58 @@ int Route_Suitability_Data_Core_1_Decoder(Bitstream* stream, Route_Suitability_D
 
         /*@
           requires D_SUITABILITY:  stream->bitpos == pos + 0;
-          assigns        	   stream->bitpos;
-          assigns		   p->D_SUITABILITY;
+          assigns                  stream->bitpos;
+          assigns                  p->D_SUITABILITY;
           ensures  D_SUITABILITY:  stream->bitpos == pos + 15;
           ensures  D_SUITABILITY:  EqualBits(stream, pos + 0, pos + 15, p->D_SUITABILITY);
           ensures  D_SUITABILITY:  UpperBitsNotSet(p->D_SUITABILITY, 15);
         */
         {
-            p->D_SUITABILITY		= Bitstream_Read(stream, 15);
+            p->D_SUITABILITY        = Bitstream_Read(stream, 15);
         }
 
         /*@
           requires Q_SUITABILITY:  stream->bitpos == pos + 15;
-          assigns        	   stream->bitpos;
-          assigns		   p->Q_SUITABILITY;
+          assigns                  stream->bitpos;
+          assigns                  p->Q_SUITABILITY;
           ensures  Q_SUITABILITY:  stream->bitpos == pos + 17;
           ensures  Q_SUITABILITY:  EqualBits(stream, pos + 15, pos + 17, p->Q_SUITABILITY);
           ensures  Q_SUITABILITY:  UpperBitsNotSet(p->Q_SUITABILITY, 2);
         */
         {
-            p->Q_SUITABILITY		= Bitstream_Read(stream, 2);
+            p->Q_SUITABILITY        = Bitstream_Read(stream, 2);
         }
 
         if (p->Q_SUITABILITY == 0)
         {
             {
-                p->M_LINEGAUGE		= Bitstream_Read(stream, 8);
+                p->M_LINEGAUGE        = Bitstream_Read(stream, 8);
             }
+
         }
 
         if (p->Q_SUITABILITY == 1)
         {
             {
-                p->M_AXLELOADCAT		= Bitstream_Read(stream, 7);
+                p->M_AXLELOADCAT        = Bitstream_Read(stream, 7);
             }
+
         }
 
         if (p->Q_SUITABILITY == 2)
         {
             {
-                p->M_VOLTAGE		= Bitstream_Read(stream, 4);
+                p->M_VOLTAGE        = Bitstream_Read(stream, 4);
             }
+
         }
 
         if ((p->Q_SUITABILITY == 2) && (p->M_VOLTAGE != 0))
         {
             {
-                p->NID_CTRACTION		= Bitstream_Read(stream, 10);
+                p->NID_CTRACTION        = Bitstream_Read(stream, 10);
             }
+
         }
 
         //@ assert D_SUITABILITY:     EqualBits(stream, pos,       pos + 15,  p->D_SUITABILITY);

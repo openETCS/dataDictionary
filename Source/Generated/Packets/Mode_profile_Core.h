@@ -40,13 +40,12 @@ inline std::ostream& operator<<(std::ostream& stream, const Mode_profile_Core& p
             << +p.L_MAMODE << ','
             << +p.L_ACKMAMODE << ','
             << +p.Q_MAMODE << ','
-            << +p.N_ITER_1;
-
-    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-    {
-        stream << ',' << p.sub_1[i];
-    }
-
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
+   
 
     return stream;
 }
@@ -65,7 +64,6 @@ inline bool operator==(const Mode_profile_Core& a, const Mode_profile_Core& b)
     status = status && (a.L_ACKMAMODE == b.L_ACKMAMODE);
     status = status && (a.Q_MAMODE == b.Q_MAMODE);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
-
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)

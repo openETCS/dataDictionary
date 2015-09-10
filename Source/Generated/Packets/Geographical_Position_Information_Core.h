@@ -41,13 +41,12 @@ inline std::ostream& operator<<(std::ostream& stream, const Geographical_Positio
             << +p.D_POSOFF << ','
             << +p.Q_MPOSITION << ','
             << +p.M_POSITION << ','
-            << +p.N_ITER_1;
-
-    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-    {
-        stream << ',' << p.sub_1[i];
-    }
-
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
+   
 
     return stream;
 }
@@ -65,13 +64,11 @@ inline bool operator==(const Geographical_Position_Information_Core& a, const Ge
     {
         status = status && (a.NID_C == b.NID_C);
     }
-
     status = status && (a.NID_BG == b.NID_BG);
     status = status && (a.D_POSOFF == b.D_POSOFF);
     status = status && (a.Q_MPOSITION == b.Q_MPOSITION);
     status = status && (a.M_POSITION == b.M_POSITION);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
-
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)

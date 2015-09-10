@@ -35,13 +35,12 @@ inline std::ostream& operator<<(std::ostream& stream, const Position_Report_Para
             << +p.T_CYCLOC << ','
             << +p.D_CYCLOC << ','
             << +p.M_LOC << ','
-            << +p.N_ITER_1;
-
-    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-    {
-        stream << ',' << p.sub_1[i];
-    }
-
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
+   
 
     return stream;
 }
@@ -57,7 +56,6 @@ inline bool operator==(const Position_Report_Parameters_Core& a, const Position_
     status = status && (a.D_CYCLOC == b.D_CYCLOC);
     status = status && (a.M_LOC == b.M_LOC);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
-
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)

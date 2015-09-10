@@ -21,7 +21,7 @@ struct End_of_Information_Core
 
 inline std::ostream& operator<<(std::ostream& stream, const End_of_Information_Core& p)
 {
-
+    
 
     return stream;
 }

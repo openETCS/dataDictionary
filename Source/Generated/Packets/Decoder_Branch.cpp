@@ -131,11 +131,11 @@ BasePacketPtr Decoder_Branch_TrainToTrack(Bitstream& stream, PacketHeader header
             }
         }
 
-        default :
-        {
-            std::cerr << "Error, unrecognized Packet " << header.NID_PACKET << " in " << __FILE__ << std::endl;
-            return BasePacketPtr();
-        }
+    default :
+    {
+        std::cerr << "Error, unrecognized Packet " << header.NID_PACKET << " in " << __FILE__ << std::endl;
+        return BasePacketPtr();
+    }
     };
 }
 
@@ -885,11 +885,11 @@ BasePacketPtr Decoder_Branch_TrackToTrain(Bitstream& stream, PacketHeader header
             }
         }
 
-        default :
-        {
-            std::cerr << "Error, unrecognized Packet " << header.NID_PACKET << " in " << __FILE__ << std::endl;
-            return BasePacketPtr();
-        }
+    default :
+    {
+        std::cerr << "Error, unrecognized Packet " << header.NID_PACKET << " in " << __FILE__ << std::endl;
+        return BasePacketPtr();
+    }
     };
 }
 

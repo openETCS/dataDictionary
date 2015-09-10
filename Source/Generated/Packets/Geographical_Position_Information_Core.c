@@ -10,18 +10,15 @@ int Geographical_Position_Information_UpperBitsNotSet(const Geographical_Positio
     status = status && UpperBitsNotSet64(p->L_PACKET,          13);
     status = status && UpperBitsNotSet64(p->Q_SCALE,           2) ;
     status = status && UpperBitsNotSet64(p->Q_NEWCOUNTRY,      1) ;
-
     if (p->Q_NEWCOUNTRY == 1)
     {
         status = status && UpperBitsNotSet64(p->NID_C,             10);
     }
-
     status = status && UpperBitsNotSet64(p->NID_BG,            14);
     status = status && UpperBitsNotSet64(p->D_POSOFF,          15);
     status = status && UpperBitsNotSet64(p->Q_MPOSITION,       1) ;
     status = status && UpperBitsNotSet64(p->M_POSITION,        24);
     status = status && UpperBitsNotSet64(p->N_ITER_1,          5) ;
-
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
         status = status && Geographical_Position_Information_Core_1_UpperBitsNotSet(&(p->sub_1[i]));
@@ -49,7 +46,6 @@ int Geographical_Position_Information_Encoder(Bitstream* stream, const Geographi
             Bitstream_Write(stream, 13, p->L_PACKET);
             Bitstream_Write(stream, 2,  p->Q_SCALE);
             Bitstream_Write(stream, 1,  p->Q_NEWCOUNTRY);
-
             if (p->Q_NEWCOUNTRY == 1)
             {
                 Bitstream_Write(stream, 10, p->NID_C);
@@ -60,7 +56,6 @@ int Geographical_Position_Information_Encoder(Bitstream* stream, const Geographi
             Bitstream_Write(stream, 1,  p->Q_MPOSITION);
             Bitstream_Write(stream, 24, p->M_POSITION);
             Bitstream_Write(stream, 5,  p->N_ITER_1);
-
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
                 Geographical_Position_Information_Core_1_Encoder(stream, &(p->sub_1[i]));
@@ -93,84 +88,84 @@ int Geographical_Position_Information_Decoder(Bitstream* stream, Geographical_Po
 
         /*@
           requires Q_DIR:          stream->bitpos == pos + 0;
-          assigns        	   stream->bitpos;
-          assigns		   p->Q_DIR;
+          assigns                  stream->bitpos;
+          assigns                  p->Q_DIR;
           ensures  Q_DIR:          stream->bitpos == pos + 2;
           ensures  Q_DIR:          EqualBits(stream, pos + 0, pos + 2, p->Q_DIR);
           ensures  Q_DIR:          UpperBitsNotSet(p->Q_DIR, 2);
         */
         {
-            p->Q_DIR		= Bitstream_Read(stream, 2);
+            p->Q_DIR        = Bitstream_Read(stream, 2);
         }
 
         /*@
           requires L_PACKET:       stream->bitpos == pos + 2;
-          assigns        	   stream->bitpos;
-          assigns		   p->L_PACKET;
+          assigns                  stream->bitpos;
+          assigns                  p->L_PACKET;
           ensures  L_PACKET:       stream->bitpos == pos + 15;
           ensures  L_PACKET:       EqualBits(stream, pos + 2, pos + 15, p->L_PACKET);
           ensures  L_PACKET:       UpperBitsNotSet(p->L_PACKET, 13);
         */
         {
-            p->L_PACKET		= Bitstream_Read(stream, 13);
+            p->L_PACKET        = Bitstream_Read(stream, 13);
         }
 
         /*@
           requires Q_SCALE:        stream->bitpos == pos + 15;
-          assigns        	   stream->bitpos;
-          assigns		   p->Q_SCALE;
+          assigns                  stream->bitpos;
+          assigns                  p->Q_SCALE;
           ensures  Q_SCALE:        stream->bitpos == pos + 17;
           ensures  Q_SCALE:        EqualBits(stream, pos + 15, pos + 17, p->Q_SCALE);
           ensures  Q_SCALE:        UpperBitsNotSet(p->Q_SCALE, 2);
         */
         {
-            p->Q_SCALE		= Bitstream_Read(stream, 2);
+            p->Q_SCALE        = Bitstream_Read(stream, 2);
         }
 
         /*@
           requires Q_NEWCOUNTRY:   stream->bitpos == pos + 17;
-          assigns        	   stream->bitpos;
-          assigns		   p->Q_NEWCOUNTRY;
+          assigns                  stream->bitpos;
+          assigns                  p->Q_NEWCOUNTRY;
           ensures  Q_NEWCOUNTRY:   stream->bitpos == pos + 18;
           ensures  Q_NEWCOUNTRY:   EqualBits(stream, pos + 17, pos + 18, p->Q_NEWCOUNTRY);
           ensures  Q_NEWCOUNTRY:   UpperBitsNotSet(p->Q_NEWCOUNTRY, 1);
         */
         {
-            p->Q_NEWCOUNTRY		= Bitstream_Read(stream, 1);
+            p->Q_NEWCOUNTRY        = Bitstream_Read(stream, 1);
         }
 
         if (p->Q_NEWCOUNTRY == 1)
         {
             {
-                p->NID_C		= Bitstream_Read(stream, 10);
+                p->NID_C        = Bitstream_Read(stream, 10);
             }
+
         }
 
         {
-            p->NID_BG		= Bitstream_Read(stream, 14);
+            p->NID_BG        = Bitstream_Read(stream, 14);
         }
 
         {
-            p->D_POSOFF		= Bitstream_Read(stream, 15);
+            p->D_POSOFF        = Bitstream_Read(stream, 15);
         }
 
         {
-            p->Q_MPOSITION		= Bitstream_Read(stream, 1);
+            p->Q_MPOSITION        = Bitstream_Read(stream, 1);
         }
 
         {
-            p->M_POSITION		= Bitstream_Read(stream, 24);
+            p->M_POSITION        = Bitstream_Read(stream, 24);
         }
 
-        {
-            p->N_ITER_1		= Bitstream_Read(stream, 5);
+    {
+            p->N_ITER_1        = Bitstream_Read(stream, 5);
         }
 
         for (uint32_t i = 0; i < p->N_ITER_1; ++i)
         {
             Geographical_Position_Information_Core_1_Decoder(stream, &(p->sub_1[i]));
         }
-
         //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
         //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
         //@ assert Q_SCALE:           EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE);

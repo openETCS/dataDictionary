@@ -39,13 +39,12 @@ inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Core
             << +p.D_TRACKCOND << ','
             << +p.L_TRACKCOND << ','
             << +p.M_TRACKCOND << ','
-            << +p.N_ITER_1;
-
-    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-    {
-        stream << ',' << p.sub_1[i];
-    }
-
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
+   
 
     return stream;
 }
@@ -69,19 +68,18 @@ inline bool operator==(const Track_Condition_Core& a, const Track_Condition_Core
         status = status && (a.D_TRACKCOND == b.D_TRACKCOND);
         status = status && (a.L_TRACKCOND == b.L_TRACKCOND);
         status = status && (a.M_TRACKCOND == b.M_TRACKCOND);
-        status = status && (a.N_ITER_1 == b.N_ITER_1);
-
-        if (a.N_ITER_1 == b.N_ITER_1)
+    status = status && (a.N_ITER_1 == b.N_ITER_1);
+    if (a.N_ITER_1 == b.N_ITER_1)
+    {
+        for (uint32_t i = 0; i < a.N_ITER_1; ++i)
         {
-            for (uint32_t i = 0; i < a.N_ITER_1; ++i)
-            {
-                status = status && (a.sub_1[i] == b.sub_1[i]);
-            }
+            status = status && (a.sub_1[i] == b.sub_1[i]);
         }
-        else
-        {
-            status = false;
-        }
+    }
+    else
+    {
+        status = false;
+    }
     }
 
     return status;

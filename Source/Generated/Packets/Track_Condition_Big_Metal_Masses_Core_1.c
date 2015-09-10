@@ -55,26 +55,26 @@ int Track_Condition_Big_Metal_Masses_Core_1_Decoder(Bitstream* stream, Track_Con
 
         /*@
           requires D_TRACKCOND:    stream->bitpos == pos + 0;
-          assigns        	   stream->bitpos;
-          assigns		   p->D_TRACKCOND;
+          assigns                  stream->bitpos;
+          assigns                  p->D_TRACKCOND;
           ensures  D_TRACKCOND:    stream->bitpos == pos + 15;
           ensures  D_TRACKCOND:    EqualBits(stream, pos + 0, pos + 15, p->D_TRACKCOND);
           ensures  D_TRACKCOND:    UpperBitsNotSet(p->D_TRACKCOND, 15);
         */
         {
-            p->D_TRACKCOND		= Bitstream_Read(stream, 15);
+            p->D_TRACKCOND        = Bitstream_Read(stream, 15);
         }
 
         /*@
           requires L_TRACKCOND:    stream->bitpos == pos + 15;
-          assigns        	   stream->bitpos;
-          assigns		   p->L_TRACKCOND;
+          assigns                  stream->bitpos;
+          assigns                  p->L_TRACKCOND;
           ensures  L_TRACKCOND:    stream->bitpos == pos + 30;
           ensures  L_TRACKCOND:    EqualBits(stream, pos + 15, pos + 30, p->L_TRACKCOND);
           ensures  L_TRACKCOND:    UpperBitsNotSet(p->L_TRACKCOND, 15);
         */
         {
-            p->L_TRACKCOND		= Bitstream_Read(stream, 15);
+            p->L_TRACKCOND        = Bitstream_Read(stream, 15);
         }
 
         //@ assert D_TRACKCOND:       EqualBits(stream, pos,       pos + 15,  p->D_TRACKCOND);

@@ -38,7 +38,6 @@ inline bool operator==(const Staff_Responsible_distance_Information_from_loop_Co
     {
         status = status && (a.NID_C == b.NID_C);
     }
-
     status = status && (a.NID_BG == b.NID_BG);
     status = status && (a.D_SR == b.D_SR);
 

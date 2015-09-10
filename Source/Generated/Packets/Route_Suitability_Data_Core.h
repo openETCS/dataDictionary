@@ -44,13 +44,12 @@ inline std::ostream& operator<<(std::ostream& stream, const Route_Suitability_Da
             << +p.M_AXLELOADCAT << ','
             << +p.M_VOLTAGE << ','
             << +p.NID_CTRACTION << ','
-            << +p.N_ITER_1;
-
-    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-    {
-        stream << ',' << p.sub_1[i];
-    }
-
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
+   
 
     return stream;
 }
@@ -74,39 +73,37 @@ inline bool operator==(const Route_Suitability_Data_Core& a, const Route_Suitabi
         status = status && (a.D_SUITABILITY == b.D_SUITABILITY);
         status = status && (a.Q_SUITABILITY == b.Q_SUITABILITY);
 
-        if (a.Q_SUITABILITY == 0)
-        {
-            status = status && (a.M_LINEGAUGE == b.M_LINEGAUGE);
-        }
+    if (a.Q_SUITABILITY == 0)
+    {
+        status = status && (a.M_LINEGAUGE == b.M_LINEGAUGE);
+    }
 
-        if (a.Q_SUITABILITY == 1)
-        {
-            status = status && (a.M_AXLELOADCAT == b.M_AXLELOADCAT);
-        }
+    if (a.Q_SUITABILITY == 1)
+    {
+        status = status && (a.M_AXLELOADCAT == b.M_AXLELOADCAT);
+    }
 
-        if (a.Q_SUITABILITY == 2)
-        {
-            status = status && (a.M_VOLTAGE == b.M_VOLTAGE);
-        }
+    if (a.Q_SUITABILITY == 2)
+    {
+        status = status && (a.M_VOLTAGE == b.M_VOLTAGE);
+    }
 
-        if ((a.Q_SUITABILITY == 2) && (a.M_VOLTAGE != 0))
+    if ((a.Q_SUITABILITY == 2) && (a.M_VOLTAGE != 0))
+    {
+        status = status && (a.NID_CTRACTION == b.NID_CTRACTION);
+    }
+    status = status && (a.N_ITER_1 == b.N_ITER_1);
+    if (a.N_ITER_1 == b.N_ITER_1)
+    {
+        for (uint32_t i = 0; i < a.N_ITER_1; ++i)
         {
-            status = status && (a.NID_CTRACTION == b.NID_CTRACTION);
+            status = status && (a.sub_1[i] == b.sub_1[i]);
         }
-
-        status = status && (a.N_ITER_1 == b.N_ITER_1);
-
-        if (a.N_ITER_1 == b.N_ITER_1)
-        {
-            for (uint32_t i = 0; i < a.N_ITER_1; ++i)
-            {
-                status = status && (a.sub_1[i] == b.sub_1[i]);
-            }
-        }
-        else
-        {
-            status = false;
-        }
+    }
+    else
+    {
+        status = false;
+    }
     }
 
     return status;

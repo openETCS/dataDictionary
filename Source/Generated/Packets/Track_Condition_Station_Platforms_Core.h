@@ -41,13 +41,12 @@ inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Stat
             << +p.L_TRACKCOND << ','
             << +p.M_PLATFORM << ','
             << +p.Q_PLATFORM << ','
-            << +p.N_ITER_1;
-
-    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-    {
-        stream << ',' << p.sub_1[i];
-    }
-
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
+   
 
     return stream;
 }
@@ -72,19 +71,18 @@ inline bool operator==(const Track_Condition_Station_Platforms_Core& a, const Tr
         status = status && (a.L_TRACKCOND == b.L_TRACKCOND);
         status = status && (a.M_PLATFORM == b.M_PLATFORM);
         status = status && (a.Q_PLATFORM == b.Q_PLATFORM);
-        status = status && (a.N_ITER_1 == b.N_ITER_1);
-
-        if (a.N_ITER_1 == b.N_ITER_1)
+    status = status && (a.N_ITER_1 == b.N_ITER_1);
+    if (a.N_ITER_1 == b.N_ITER_1)
+    {
+        for (uint32_t i = 0; i < a.N_ITER_1; ++i)
         {
-            for (uint32_t i = 0; i < a.N_ITER_1; ++i)
-            {
-                status = status && (a.sub_1[i] == b.sub_1[i]);
-            }
+            status = status && (a.sub_1[i] == b.sub_1[i]);
         }
-        else
-        {
-            status = false;
-        }
+    }
+    else
+    {
+        status = false;
+    }
     }
 
     return status;

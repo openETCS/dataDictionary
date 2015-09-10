@@ -36,7 +36,6 @@ inline bool operator==(const List_of_Balises_in_SR_Authority_Core_1& a, const Li
     {
         status = status && (a.NID_C == b.NID_C);
     }
-
     status = status && (a.NID_BG == b.NID_BG);
 
     return status;

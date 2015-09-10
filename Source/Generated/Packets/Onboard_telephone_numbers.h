@@ -14,19 +14,14 @@ struct Onboard_telephone_numbers : public BasePacket
 
     void print(std::ostream& stream) const override
     {
-        stream << '(' << +header.NID_PACKET << ',' << core << ')';
+        stream << '(' << header << ',' << core << ')';
     }
 
     bool equals(const BasePacket& p) const override
     {
         if (auto q = dynamic_cast<const Onboard_telephone_numbers*>(&p))
         {
-            bool status = true;
-
-            status = status && (header.NID_PACKET == q->header.NID_PACKET);
-            status = status && (core == q->core);
-
-            return status;
+            return header == q->header && core == q->core;
         }
 
         return false;

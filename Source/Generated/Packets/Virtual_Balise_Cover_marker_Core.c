@@ -52,14 +52,14 @@ int Virtual_Balise_Cover_marker_Decoder(Bitstream* stream, Virtual_Balise_Cover_
 
         /*@
           requires NID_VBCMK:      stream->bitpos == pos + 0;
-          assigns        	   stream->bitpos;
-          assigns		   p->NID_VBCMK;
+          assigns                  stream->bitpos;
+          assigns                  p->NID_VBCMK;
           ensures  NID_VBCMK:      stream->bitpos == pos + 6;
           ensures  NID_VBCMK:      EqualBits(stream, pos + 0, pos + 6, p->NID_VBCMK);
           ensures  NID_VBCMK:      UpperBitsNotSet(p->NID_VBCMK, 6);
         */
         {
-            p->NID_VBCMK		= Bitstream_Read(stream, 6);
+            p->NID_VBCMK        = Bitstream_Read(stream, 6);
         }
 
         //@ assert NID_VBCMK:         EqualBits(stream, pos,       pos + 6,   p->NID_VBCMK);

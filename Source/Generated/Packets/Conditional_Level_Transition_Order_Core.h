@@ -31,13 +31,12 @@ inline std::ostream& operator<<(std::ostream& stream, const Conditional_Level_Tr
             << +p.L_PACKET << ','
             << +p.M_LEVELTR << ','
             << +p.NID_NTC << ','
-            << +p.N_ITER_1;
-
-    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-    {
-        stream << ',' << p.sub_1[i];
-    }
-
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
+   
 
     return stream;
 }
@@ -54,9 +53,7 @@ inline bool operator==(const Conditional_Level_Transition_Order_Core& a, const C
     {
         status = status && (a.NID_NTC == b.NID_NTC);
     }
-
     status = status && (a.N_ITER_1 == b.N_ITER_1);
-
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)

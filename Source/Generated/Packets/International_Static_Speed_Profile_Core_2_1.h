@@ -43,7 +43,6 @@ inline bool operator==(const International_Static_Speed_Profile_Core_2_1& a, con
     {
         status = status && (a.NC_DIFF == b.NC_DIFF);
     }
-
     status = status && (a.V_DIFF == b.V_DIFF);
 
     return status;

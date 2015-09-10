@@ -58,38 +58,38 @@ int Gradient_Profile_Core_1_Decoder(Bitstream* stream, Gradient_Profile_Core_1* 
 
         /*@
           requires D_GRADIENT:     stream->bitpos == pos + 0;
-          assigns        	   stream->bitpos;
-          assigns		   p->D_GRADIENT;
+          assigns                  stream->bitpos;
+          assigns                  p->D_GRADIENT;
           ensures  D_GRADIENT:     stream->bitpos == pos + 15;
           ensures  D_GRADIENT:     EqualBits(stream, pos + 0, pos + 15, p->D_GRADIENT);
           ensures  D_GRADIENT:     UpperBitsNotSet(p->D_GRADIENT, 15);
         */
         {
-            p->D_GRADIENT		= Bitstream_Read(stream, 15);
+            p->D_GRADIENT        = Bitstream_Read(stream, 15);
         }
 
         /*@
           requires Q_GDIR:         stream->bitpos == pos + 15;
-          assigns        	   stream->bitpos;
-          assigns		   p->Q_GDIR;
+          assigns                  stream->bitpos;
+          assigns                  p->Q_GDIR;
           ensures  Q_GDIR:         stream->bitpos == pos + 16;
           ensures  Q_GDIR:         EqualBits(stream, pos + 15, pos + 16, p->Q_GDIR);
           ensures  Q_GDIR:         UpperBitsNotSet(p->Q_GDIR, 1);
         */
         {
-            p->Q_GDIR		= Bitstream_Read(stream, 1);
+            p->Q_GDIR        = Bitstream_Read(stream, 1);
         }
 
         /*@
           requires G_A:            stream->bitpos == pos + 16;
-          assigns        	   stream->bitpos;
-          assigns		   p->G_A;
+          assigns                  stream->bitpos;
+          assigns                  p->G_A;
           ensures  G_A:            stream->bitpos == pos + 24;
           ensures  G_A:            EqualBits(stream, pos + 16, pos + 24, p->G_A);
           ensures  G_A:            UpperBitsNotSet(p->G_A, 8);
         */
         {
-            p->G_A		= Bitstream_Read(stream, 8);
+            p->G_A        = Bitstream_Read(stream, 8);
         }
 
         //@ assert D_GRADIENT:        EqualBits(stream, pos,       pos + 15,  p->D_GRADIENT);

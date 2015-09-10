@@ -43,21 +43,18 @@ inline std::ostream& operator<<(std::ostream& stream, const Validated_train_data
             << +p.M_AXLELOADCAT << ','
             << +p.M_AIRTIGHT << ','
             << +p.N_AXLE << ','
-            << +p.N_ITER_1;
-
-    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-    {
-        stream << ',' << p.sub_1[i];
-    }
-
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
     stream << ','
-           << +p.N_ITER_2;
-
-    for (uint32_t i = 0; i < p.N_ITER_2; ++i)
-    {
-        stream << ',' << p.sub_2[i];
-    }
-
+       << +p.N_ITER_2;
+       for (uint32_t i = 0; i < p.N_ITER_2; ++i)
+       {
+           stream << ',' << p.sub_2[i];
+       }
+   
 
     return stream;
 }
@@ -76,7 +73,6 @@ inline bool operator==(const Validated_train_data_Core& a, const Validated_train
     status = status && (a.M_AIRTIGHT == b.M_AIRTIGHT);
     status = status && (a.N_AXLE == b.N_AXLE);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
-
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)
@@ -88,9 +84,7 @@ inline bool operator==(const Validated_train_data_Core& a, const Validated_train
     {
         status = false;
     }
-
     status = status && (a.N_ITER_2 == b.N_ITER_2);
-
     if (a.N_ITER_2 == b.N_ITER_2)
     {
         for (uint32_t i = 0; i < a.N_ITER_2; ++i)

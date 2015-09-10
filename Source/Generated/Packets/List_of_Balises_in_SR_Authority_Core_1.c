@@ -7,12 +7,10 @@ int List_of_Balises_in_SR_Authority_Core_1_UpperBitsNotSet(const List_of_Balises
     bool status = true;
 
     status = status && UpperBitsNotSet64(p->Q_NEWCOUNTRY,      1) ;
-
     if (p->Q_NEWCOUNTRY == 1)
     {
         status = status && UpperBitsNotSet64(p->NID_C,             10);
     }
-
     status = status && UpperBitsNotSet64(p->NID_BG,            14);
 
     if (status)
@@ -34,7 +32,6 @@ int List_of_Balises_in_SR_Authority_Core_1_Encoder(Bitstream* stream, const List
             //@ ghost const uint32_t pos = stream->bitpos;
 
             Bitstream_Write(stream, 1,  p->Q_NEWCOUNTRY);
-
             if (p->Q_NEWCOUNTRY == 1)
             {
                 Bitstream_Write(stream, 10, p->NID_C);
@@ -66,25 +63,26 @@ int List_of_Balises_in_SR_Authority_Core_1_Decoder(Bitstream* stream, List_of_Ba
 
         /*@
           requires Q_NEWCOUNTRY:   stream->bitpos == pos + 0;
-          assigns        	   stream->bitpos;
-          assigns		   p->Q_NEWCOUNTRY;
+          assigns                  stream->bitpos;
+          assigns                  p->Q_NEWCOUNTRY;
           ensures  Q_NEWCOUNTRY:   stream->bitpos == pos + 1;
           ensures  Q_NEWCOUNTRY:   EqualBits(stream, pos + 0, pos + 1, p->Q_NEWCOUNTRY);
           ensures  Q_NEWCOUNTRY:   UpperBitsNotSet(p->Q_NEWCOUNTRY, 1);
         */
         {
-            p->Q_NEWCOUNTRY		= Bitstream_Read(stream, 1);
+            p->Q_NEWCOUNTRY        = Bitstream_Read(stream, 1);
         }
 
         if (p->Q_NEWCOUNTRY == 1)
         {
             {
-                p->NID_C		= Bitstream_Read(stream, 10);
+                p->NID_C        = Bitstream_Read(stream, 10);
             }
+
         }
 
         {
-            p->NID_BG		= Bitstream_Read(stream, 14);
+            p->NID_BG        = Bitstream_Read(stream, 14);
         }
 
         //@ assert Q_NEWCOUNTRY:      EqualBits(stream, pos,       pos + 1,   p->Q_NEWCOUNTRY);

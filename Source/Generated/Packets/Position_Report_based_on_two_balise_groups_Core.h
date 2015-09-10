@@ -79,7 +79,6 @@ inline bool operator==(const Position_Report_based_on_two_balise_groups_Core& a,
     {
         status = status && (a.L_TRAININT == b.L_TRAININT);
     }
-
     status = status && (a.V_TRAIN == b.V_TRAIN);
     status = status && (a.Q_DIRTRAIN == b.Q_DIRTRAIN);
     status = status && (a.M_MODE == b.M_MODE);

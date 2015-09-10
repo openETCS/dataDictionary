@@ -55,26 +55,26 @@ int National_Values_Core_2_Decoder(Bitstream* stream, National_Values_Core_2* p)
 
         /*@
           requires V_NVKVINT:      stream->bitpos == pos + 0;
-          assigns        	   stream->bitpos;
-          assigns		   p->V_NVKVINT;
+          assigns                  stream->bitpos;
+          assigns                  p->V_NVKVINT;
           ensures  V_NVKVINT:      stream->bitpos == pos + 7;
           ensures  V_NVKVINT:      EqualBits(stream, pos + 0, pos + 7, p->V_NVKVINT);
           ensures  V_NVKVINT:      UpperBitsNotSet(p->V_NVKVINT, 7);
         */
         {
-            p->V_NVKVINT		= Bitstream_Read(stream, 7);
+            p->V_NVKVINT        = Bitstream_Read(stream, 7);
         }
 
         /*@
           requires M_NVKVINT:      stream->bitpos == pos + 7;
-          assigns        	   stream->bitpos;
-          assigns		   p->M_NVKVINT;
+          assigns                  stream->bitpos;
+          assigns                  p->M_NVKVINT;
           ensures  M_NVKVINT:      stream->bitpos == pos + 14;
           ensures  M_NVKVINT:      EqualBits(stream, pos + 7, pos + 14, p->M_NVKVINT);
           ensures  M_NVKVINT:      UpperBitsNotSet(p->M_NVKVINT, 7);
         */
         {
-            p->M_NVKVINT		= Bitstream_Read(stream, 7);
+            p->M_NVKVINT        = Bitstream_Read(stream, 7);
         }
 
         //@ assert V_NVKVINT:         EqualBits(stream, pos,       pos + 7,   p->V_NVKVINT);

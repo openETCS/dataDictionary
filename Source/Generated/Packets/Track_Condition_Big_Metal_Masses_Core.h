@@ -33,13 +33,12 @@ inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Big_
             << +p.Q_SCALE << ','
             << +p.D_TRACKCOND << ','
             << +p.L_TRACKCOND << ','
-            << +p.N_ITER_1;
-
-    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-    {
-        stream << ',' << p.sub_1[i];
-    }
-
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
+   
 
     return stream;
 }
@@ -54,7 +53,6 @@ inline bool operator==(const Track_Condition_Big_Metal_Masses_Core& a, const Tra
     status = status && (a.D_TRACKCOND == b.D_TRACKCOND);
     status = status && (a.L_TRACKCOND == b.L_TRACKCOND);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
-
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)

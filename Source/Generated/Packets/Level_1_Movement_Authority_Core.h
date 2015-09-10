@@ -49,29 +49,27 @@ inline std::ostream& operator<<(std::ostream& stream, const Level_1_Movement_Aut
             << +p.V_MAIN << ','
             << +p.V_LOA << ','
             << +p.T_LOA << ','
-            << +p.N_ITER_1;
-
-    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-    {
-        stream << ',' << p.sub_1[i];
-    }
-
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
     stream << ','
-           << +p.L_ENDSECTION << ','
-           << +p.Q_SECTIONTIMER << ','
-           << +p.T_SECTIONTIMER << ','
-           << +p.D_SECTIONTIMERSTOPLOC << ','
-           << +p.Q_ENDTIMER << ','
-           << +p.T_ENDTIMER << ','
-           << +p.D_ENDTIMERSTARTLOC << ','
-           << +p.Q_DANGERPOINT << ','
-           << +p.D_DP << ','
-           << +p.V_RELEASEDP << ','
-           << +p.Q_OVERLAP << ','
-           << +p.D_STARTOL << ','
-           << +p.T_OL << ','
-           << +p.D_OL << ','
-           << +p.V_RELEASEOL;
+            << +p.L_ENDSECTION << ','
+            << +p.Q_SECTIONTIMER << ','
+            << +p.T_SECTIONTIMER << ','
+            << +p.D_SECTIONTIMERSTOPLOC << ','
+            << +p.Q_ENDTIMER << ','
+            << +p.T_ENDTIMER << ','
+            << +p.D_ENDTIMERSTARTLOC << ','
+            << +p.Q_DANGERPOINT << ','
+            << +p.D_DP << ','
+            << +p.V_RELEASEDP << ','
+            << +p.Q_OVERLAP << ','
+            << +p.D_STARTOL << ','
+            << +p.T_OL << ','
+            << +p.D_OL << ','
+            << +p.V_RELEASEOL;
 
     return stream;
 }
@@ -87,7 +85,6 @@ inline bool operator==(const Level_1_Movement_Authority_Core& a, const Level_1_M
     status = status && (a.V_LOA == b.V_LOA);
     status = status && (a.T_LOA == b.T_LOA);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
-
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)
@@ -99,7 +96,6 @@ inline bool operator==(const Level_1_Movement_Authority_Core& a, const Level_1_M
     {
         status = false;
     }
-
     status = status && (a.L_ENDSECTION == b.L_ENDSECTION);
     status = status && (a.Q_SECTIONTIMER == b.Q_SECTIONTIMER);
     status = status && (a.T_SECTIONTIMER == b.T_SECTIONTIMER);

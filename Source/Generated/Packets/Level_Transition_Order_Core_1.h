@@ -36,7 +36,6 @@ inline bool operator==(const Level_Transition_Order_Core_1& a, const Level_Trans
     {
         status = status && (a.NID_NTC == b.NID_NTC);
     }
-
     status = status && (a.L_ACKLEVELTR == b.L_ACKLEVELTR);
 
     return status;

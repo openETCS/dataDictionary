@@ -12,12 +12,10 @@ int Level_23_Movement_Authority_UpperBitsNotSet(const Level_23_Movement_Authorit
     status = status && UpperBitsNotSet64(p->V_LOA,             7) ;
     status = status && UpperBitsNotSet64(p->T_LOA,             10);
     status = status && UpperBitsNotSet64(p->N_ITER_1,          5) ;
-
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
         status = status && Level_23_Movement_Authority_Core_1_UpperBitsNotSet(&(p->sub_1[i]));
     }
-
     status = status && UpperBitsNotSet64(p->L_ENDSECTION,      15);
     status = status && UpperBitsNotSet64(p->Q_SECTIONTIMER,    1) ;
     status = status && UpperBitsNotSet64(p->T_SECTIONTIMER,    10);
@@ -58,12 +56,10 @@ int Level_23_Movement_Authority_Encoder(Bitstream* stream, const Level_23_Moveme
             Bitstream_Write(stream, 7,  p->V_LOA);
             Bitstream_Write(stream, 10, p->T_LOA);
             Bitstream_Write(stream, 5,  p->N_ITER_1);
-
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
                 Level_23_Movement_Authority_Core_1_Encoder(stream, &(p->sub_1[i]));
             }
-
             Bitstream_Write(stream, 15, p->L_ENDSECTION);
             Bitstream_Write(stream, 1,  p->Q_SECTIONTIMER);
             Bitstream_Write(stream, 10, p->T_SECTIONTIMER);
@@ -108,131 +104,130 @@ int Level_23_Movement_Authority_Decoder(Bitstream* stream, Level_23_Movement_Aut
 
         /*@
           requires Q_DIR:          stream->bitpos == pos + 0;
-          assigns        	   stream->bitpos;
-          assigns		   p->Q_DIR;
+          assigns                  stream->bitpos;
+          assigns                  p->Q_DIR;
           ensures  Q_DIR:          stream->bitpos == pos + 2;
           ensures  Q_DIR:          EqualBits(stream, pos + 0, pos + 2, p->Q_DIR);
           ensures  Q_DIR:          UpperBitsNotSet(p->Q_DIR, 2);
         */
         {
-            p->Q_DIR		= Bitstream_Read(stream, 2);
+            p->Q_DIR        = Bitstream_Read(stream, 2);
         }
 
         /*@
           requires L_PACKET:       stream->bitpos == pos + 2;
-          assigns        	   stream->bitpos;
-          assigns		   p->L_PACKET;
+          assigns                  stream->bitpos;
+          assigns                  p->L_PACKET;
           ensures  L_PACKET:       stream->bitpos == pos + 15;
           ensures  L_PACKET:       EqualBits(stream, pos + 2, pos + 15, p->L_PACKET);
           ensures  L_PACKET:       UpperBitsNotSet(p->L_PACKET, 13);
         */
         {
-            p->L_PACKET		= Bitstream_Read(stream, 13);
+            p->L_PACKET        = Bitstream_Read(stream, 13);
         }
 
         /*@
           requires Q_SCALE:        stream->bitpos == pos + 15;
-          assigns        	   stream->bitpos;
-          assigns		   p->Q_SCALE;
+          assigns                  stream->bitpos;
+          assigns                  p->Q_SCALE;
           ensures  Q_SCALE:        stream->bitpos == pos + 17;
           ensures  Q_SCALE:        EqualBits(stream, pos + 15, pos + 17, p->Q_SCALE);
           ensures  Q_SCALE:        UpperBitsNotSet(p->Q_SCALE, 2);
         */
         {
-            p->Q_SCALE		= Bitstream_Read(stream, 2);
+            p->Q_SCALE        = Bitstream_Read(stream, 2);
         }
 
         /*@
           requires V_LOA:          stream->bitpos == pos + 17;
-          assigns        	   stream->bitpos;
-          assigns		   p->V_LOA;
+          assigns                  stream->bitpos;
+          assigns                  p->V_LOA;
           ensures  V_LOA:          stream->bitpos == pos + 24;
           ensures  V_LOA:          EqualBits(stream, pos + 17, pos + 24, p->V_LOA);
           ensures  V_LOA:          UpperBitsNotSet(p->V_LOA, 7);
         */
         {
-            p->V_LOA		= Bitstream_Read(stream, 7);
+            p->V_LOA        = Bitstream_Read(stream, 7);
         }
 
         /*@
           requires T_LOA:          stream->bitpos == pos + 24;
-          assigns        	   stream->bitpos;
-          assigns		   p->T_LOA;
+          assigns                  stream->bitpos;
+          assigns                  p->T_LOA;
           ensures  T_LOA:          stream->bitpos == pos + 34;
           ensures  T_LOA:          EqualBits(stream, pos + 24, pos + 34, p->T_LOA);
           ensures  T_LOA:          UpperBitsNotSet(p->T_LOA, 10);
         */
         {
-            p->T_LOA		= Bitstream_Read(stream, 10);
+            p->T_LOA        = Bitstream_Read(stream, 10);
         }
 
-        {
-            p->N_ITER_1		= Bitstream_Read(stream, 5);
+    {
+            p->N_ITER_1        = Bitstream_Read(stream, 5);
         }
 
         for (uint32_t i = 0; i < p->N_ITER_1; ++i)
         {
             Level_23_Movement_Authority_Core_1_Decoder(stream, &(p->sub_1[i]));
         }
-
         {
-            p->L_ENDSECTION		= Bitstream_Read(stream, 15);
+            p->L_ENDSECTION        = Bitstream_Read(stream, 15);
         }
 
         {
-            p->Q_SECTIONTIMER		= Bitstream_Read(stream, 1);
+            p->Q_SECTIONTIMER        = Bitstream_Read(stream, 1);
         }
 
         {
-            p->T_SECTIONTIMER		= Bitstream_Read(stream, 10);
+            p->T_SECTIONTIMER        = Bitstream_Read(stream, 10);
         }
 
         {
-            p->D_SECTIONTIMERSTOPLOC		= Bitstream_Read(stream, 15);
+            p->D_SECTIONTIMERSTOPLOC        = Bitstream_Read(stream, 15);
         }
 
         {
-            p->Q_ENDTIMER		= Bitstream_Read(stream, 1);
+            p->Q_ENDTIMER        = Bitstream_Read(stream, 1);
         }
 
         {
-            p->T_ENDTIMER		= Bitstream_Read(stream, 10);
+            p->T_ENDTIMER        = Bitstream_Read(stream, 10);
         }
 
         {
-            p->D_ENDTIMERSTARTLOC		= Bitstream_Read(stream, 15);
+            p->D_ENDTIMERSTARTLOC        = Bitstream_Read(stream, 15);
         }
 
         {
-            p->Q_DANGERPOINT		= Bitstream_Read(stream, 1);
+            p->Q_DANGERPOINT        = Bitstream_Read(stream, 1);
         }
 
         {
-            p->D_DP		= Bitstream_Read(stream, 15);
+            p->D_DP        = Bitstream_Read(stream, 15);
         }
 
         {
-            p->V_RELEASEDP		= Bitstream_Read(stream, 7);
+            p->V_RELEASEDP        = Bitstream_Read(stream, 7);
         }
 
         {
-            p->Q_OVERLAP		= Bitstream_Read(stream, 1);
+            p->Q_OVERLAP        = Bitstream_Read(stream, 1);
         }
 
         {
-            p->D_STARTOL		= Bitstream_Read(stream, 15);
+            p->D_STARTOL        = Bitstream_Read(stream, 15);
         }
 
         {
-            p->T_OL		= Bitstream_Read(stream, 10);
+            p->T_OL        = Bitstream_Read(stream, 10);
         }
 
         {
-            p->D_OL		= Bitstream_Read(stream, 15);
+            p->D_OL        = Bitstream_Read(stream, 15);
         }
 
         {
-            p->V_RELEASEOL		= Bitstream_Read(stream, 7);
+            p->V_RELEASEOL        = Bitstream_Read(stream, 7);
         }
 
         //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);

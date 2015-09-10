@@ -16,17 +16,14 @@ int Position_Report_based_on_two_balise_groups_UpperBitsNotSet(const Position_Re
     status = status && UpperBitsNotSet64(p->L_DOUBTOVER,       15);
     status = status && UpperBitsNotSet64(p->L_DOUBTUNDER,      15);
     status = status && UpperBitsNotSet64(p->Q_LENGTH,          2) ;
-
     if ((p->Q_LENGTH == 1) || (p->Q_LENGTH == 2))
     {
         status = status && UpperBitsNotSet64(p->L_TRAININT,        15);
     }
-
     status = status && UpperBitsNotSet64(p->V_TRAIN,           7) ;
     status = status && UpperBitsNotSet64(p->Q_DIRTRAIN,        2) ;
     status = status && UpperBitsNotSet64(p->M_MODE,            4) ;
     status = status && UpperBitsNotSet64(p->M_LEVEL,           3) ;
-
     if (p->M_LEVEL == 1)
     {
         status = status && UpperBitsNotSet64(p->NID_NTC,           8) ;
@@ -60,7 +57,6 @@ int Position_Report_based_on_two_balise_groups_Encoder(Bitstream* stream, const 
             Bitstream_Write(stream, 15, p->L_DOUBTOVER);
             Bitstream_Write(stream, 15, p->L_DOUBTUNDER);
             Bitstream_Write(stream, 2,  p->Q_LENGTH);
-
             if ((p->Q_LENGTH == 1) || (p->Q_LENGTH == 2))
             {
                 Bitstream_Write(stream, 15, p->L_TRAININT);
@@ -70,7 +66,6 @@ int Position_Report_based_on_two_balise_groups_Encoder(Bitstream* stream, const 
             Bitstream_Write(stream, 2,  p->Q_DIRTRAIN);
             Bitstream_Write(stream, 4,  p->M_MODE);
             Bitstream_Write(stream, 3,  p->M_LEVEL);
-
             if (p->M_LEVEL == 1)
             {
                 Bitstream_Write(stream, 8,  p->NID_NTC);
@@ -110,152 +105,154 @@ int Position_Report_based_on_two_balise_groups_Decoder(Bitstream* stream, Positi
 
         /*@
           requires L_PACKET:       stream->bitpos == pos + 0;
-          assigns        	   stream->bitpos;
-          assigns		   p->L_PACKET;
+          assigns                  stream->bitpos;
+          assigns                  p->L_PACKET;
           ensures  L_PACKET:       stream->bitpos == pos + 13;
           ensures  L_PACKET:       EqualBits(stream, pos + 0, pos + 13, p->L_PACKET);
           ensures  L_PACKET:       UpperBitsNotSet(p->L_PACKET, 13);
         */
         {
-            p->L_PACKET		= Bitstream_Read(stream, 13);
+            p->L_PACKET        = Bitstream_Read(stream, 13);
         }
 
         /*@
           requires Q_SCALE:        stream->bitpos == pos + 13;
-          assigns        	   stream->bitpos;
-          assigns		   p->Q_SCALE;
+          assigns                  stream->bitpos;
+          assigns                  p->Q_SCALE;
           ensures  Q_SCALE:        stream->bitpos == pos + 15;
           ensures  Q_SCALE:        EqualBits(stream, pos + 13, pos + 15, p->Q_SCALE);
           ensures  Q_SCALE:        UpperBitsNotSet(p->Q_SCALE, 2);
         */
         {
-            p->Q_SCALE		= Bitstream_Read(stream, 2);
+            p->Q_SCALE        = Bitstream_Read(stream, 2);
         }
 
         /*@
           requires NID_LRBG:       stream->bitpos == pos + 15;
-          assigns        	   stream->bitpos;
-          assigns		   p->NID_LRBG;
+          assigns                  stream->bitpos;
+          assigns                  p->NID_LRBG;
           ensures  NID_LRBG:       stream->bitpos == pos + 39;
           ensures  NID_LRBG:       EqualBits(stream, pos + 15, pos + 39, p->NID_LRBG);
           ensures  NID_LRBG:       UpperBitsNotSet(p->NID_LRBG, 24);
         */
         {
-            p->NID_LRBG		= Bitstream_Read(stream, 24);
+            p->NID_LRBG        = Bitstream_Read(stream, 24);
         }
 
         /*@
           requires NID_PRVLRBG:    stream->bitpos == pos + 39;
-          assigns        	   stream->bitpos;
-          assigns		   p->NID_PRVLRBG;
+          assigns                  stream->bitpos;
+          assigns                  p->NID_PRVLRBG;
           ensures  NID_PRVLRBG:    stream->bitpos == pos + 63;
           ensures  NID_PRVLRBG:    EqualBits(stream, pos + 39, pos + 63, p->NID_PRVLRBG);
           ensures  NID_PRVLRBG:    UpperBitsNotSet(p->NID_PRVLRBG, 24);
         */
         {
-            p->NID_PRVLRBG		= Bitstream_Read(stream, 24);
+            p->NID_PRVLRBG        = Bitstream_Read(stream, 24);
         }
 
         /*@
           requires D_LRBG:         stream->bitpos == pos + 63;
-          assigns        	   stream->bitpos;
-          assigns		   p->D_LRBG;
+          assigns                  stream->bitpos;
+          assigns                  p->D_LRBG;
           ensures  D_LRBG:         stream->bitpos == pos + 78;
           ensures  D_LRBG:         EqualBits(stream, pos + 63, pos + 78, p->D_LRBG);
           ensures  D_LRBG:         UpperBitsNotSet(p->D_LRBG, 15);
         */
         {
-            p->D_LRBG		= Bitstream_Read(stream, 15);
+            p->D_LRBG        = Bitstream_Read(stream, 15);
         }
 
         /*@
           requires Q_DIRLRBG:      stream->bitpos == pos + 78;
-          assigns        	   stream->bitpos;
-          assigns		   p->Q_DIRLRBG;
+          assigns                  stream->bitpos;
+          assigns                  p->Q_DIRLRBG;
           ensures  Q_DIRLRBG:      stream->bitpos == pos + 80;
           ensures  Q_DIRLRBG:      EqualBits(stream, pos + 78, pos + 80, p->Q_DIRLRBG);
           ensures  Q_DIRLRBG:      UpperBitsNotSet(p->Q_DIRLRBG, 2);
         */
         {
-            p->Q_DIRLRBG		= Bitstream_Read(stream, 2);
+            p->Q_DIRLRBG        = Bitstream_Read(stream, 2);
         }
 
         /*@
           requires Q_DLRBG:        stream->bitpos == pos + 80;
-          assigns        	   stream->bitpos;
-          assigns		   p->Q_DLRBG;
+          assigns                  stream->bitpos;
+          assigns                  p->Q_DLRBG;
           ensures  Q_DLRBG:        stream->bitpos == pos + 82;
           ensures  Q_DLRBG:        EqualBits(stream, pos + 80, pos + 82, p->Q_DLRBG);
           ensures  Q_DLRBG:        UpperBitsNotSet(p->Q_DLRBG, 2);
         */
         {
-            p->Q_DLRBG		= Bitstream_Read(stream, 2);
+            p->Q_DLRBG        = Bitstream_Read(stream, 2);
         }
 
         /*@
           requires L_DOUBTOVER:    stream->bitpos == pos + 82;
-          assigns        	   stream->bitpos;
-          assigns		   p->L_DOUBTOVER;
+          assigns                  stream->bitpos;
+          assigns                  p->L_DOUBTOVER;
           ensures  L_DOUBTOVER:    stream->bitpos == pos + 97;
           ensures  L_DOUBTOVER:    EqualBits(stream, pos + 82, pos + 97, p->L_DOUBTOVER);
           ensures  L_DOUBTOVER:    UpperBitsNotSet(p->L_DOUBTOVER, 15);
         */
         {
-            p->L_DOUBTOVER		= Bitstream_Read(stream, 15);
+            p->L_DOUBTOVER        = Bitstream_Read(stream, 15);
         }
 
         /*@
           requires L_DOUBTUNDER:   stream->bitpos == pos + 97;
-          assigns        	   stream->bitpos;
-          assigns		   p->L_DOUBTUNDER;
+          assigns                  stream->bitpos;
+          assigns                  p->L_DOUBTUNDER;
           ensures  L_DOUBTUNDER:   stream->bitpos == pos + 112;
           ensures  L_DOUBTUNDER:   EqualBits(stream, pos + 97, pos + 112, p->L_DOUBTUNDER);
           ensures  L_DOUBTUNDER:   UpperBitsNotSet(p->L_DOUBTUNDER, 15);
         */
         {
-            p->L_DOUBTUNDER		= Bitstream_Read(stream, 15);
+            p->L_DOUBTUNDER        = Bitstream_Read(stream, 15);
         }
 
         /*@
           requires Q_LENGTH:       stream->bitpos == pos + 112;
-          assigns        	   stream->bitpos;
-          assigns		   p->Q_LENGTH;
+          assigns                  stream->bitpos;
+          assigns                  p->Q_LENGTH;
           ensures  Q_LENGTH:       stream->bitpos == pos + 114;
           ensures  Q_LENGTH:       EqualBits(stream, pos + 112, pos + 114, p->Q_LENGTH);
           ensures  Q_LENGTH:       UpperBitsNotSet(p->Q_LENGTH, 2);
         */
         {
-            p->Q_LENGTH		= Bitstream_Read(stream, 2);
+            p->Q_LENGTH        = Bitstream_Read(stream, 2);
         }
 
         if ((p->Q_LENGTH == 1) || (p->Q_LENGTH == 2))
         {
             {
-                p->L_TRAININT		= Bitstream_Read(stream, 15);
+                p->L_TRAININT        = Bitstream_Read(stream, 15);
             }
+
         }
 
         {
-            p->V_TRAIN		= Bitstream_Read(stream, 7);
+            p->V_TRAIN        = Bitstream_Read(stream, 7);
         }
 
         {
-            p->Q_DIRTRAIN		= Bitstream_Read(stream, 2);
+            p->Q_DIRTRAIN        = Bitstream_Read(stream, 2);
         }
 
         {
-            p->M_MODE		= Bitstream_Read(stream, 4);
+            p->M_MODE        = Bitstream_Read(stream, 4);
         }
 
         {
-            p->M_LEVEL		= Bitstream_Read(stream, 3);
+            p->M_LEVEL        = Bitstream_Read(stream, 3);
         }
 
         if (p->M_LEVEL == 1)
         {
             {
-                p->NID_NTC		= Bitstream_Read(stream, 8);
+                p->NID_NTC        = Bitstream_Read(stream, 8);
             }
+
         }
 
         //@ assert L_PACKET:          EqualBits(stream, pos,       pos + 13,  p->L_PACKET);

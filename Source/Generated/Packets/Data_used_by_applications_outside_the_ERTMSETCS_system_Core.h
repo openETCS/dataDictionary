@@ -46,7 +46,6 @@ inline bool operator==(const Data_used_by_applications_outside_the_ERTMSETCS_sys
     {
         status = status && (a.NID_NTC == b.NID_NTC);
     }
-
     status = status && (a.Other_data_depending_on__NID_XUSER == b.Other_data_depending_on__NID_XUSER);
 
     return status;

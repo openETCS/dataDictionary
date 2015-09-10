@@ -61,50 +61,50 @@ int Level_1_Movement_Authority_Core_1_Decoder(Bitstream* stream, Level_1_Movemen
 
         /*@
           requires L_SECTION:      stream->bitpos == pos + 0;
-          assigns        	   stream->bitpos;
-          assigns		   p->L_SECTION;
+          assigns                  stream->bitpos;
+          assigns                  p->L_SECTION;
           ensures  L_SECTION:      stream->bitpos == pos + 15;
           ensures  L_SECTION:      EqualBits(stream, pos + 0, pos + 15, p->L_SECTION);
           ensures  L_SECTION:      UpperBitsNotSet(p->L_SECTION, 15);
         */
         {
-            p->L_SECTION		= Bitstream_Read(stream, 15);
+            p->L_SECTION        = Bitstream_Read(stream, 15);
         }
 
         /*@
           requires Q_SECTIONTIMER: stream->bitpos == pos + 15;
-          assigns        	   stream->bitpos;
-          assigns		   p->Q_SECTIONTIMER;
+          assigns                  stream->bitpos;
+          assigns                  p->Q_SECTIONTIMER;
           ensures  Q_SECTIONTIMER: stream->bitpos == pos + 16;
           ensures  Q_SECTIONTIMER: EqualBits(stream, pos + 15, pos + 16, p->Q_SECTIONTIMER);
           ensures  Q_SECTIONTIMER: UpperBitsNotSet(p->Q_SECTIONTIMER, 1);
         */
         {
-            p->Q_SECTIONTIMER		= Bitstream_Read(stream, 1);
+            p->Q_SECTIONTIMER        = Bitstream_Read(stream, 1);
         }
 
         /*@
           requires T_SECTIONTIMER: stream->bitpos == pos + 16;
-          assigns        	   stream->bitpos;
-          assigns		   p->T_SECTIONTIMER;
+          assigns                  stream->bitpos;
+          assigns                  p->T_SECTIONTIMER;
           ensures  T_SECTIONTIMER: stream->bitpos == pos + 26;
           ensures  T_SECTIONTIMER: EqualBits(stream, pos + 16, pos + 26, p->T_SECTIONTIMER);
           ensures  T_SECTIONTIMER: UpperBitsNotSet(p->T_SECTIONTIMER, 10);
         */
         {
-            p->T_SECTIONTIMER		= Bitstream_Read(stream, 10);
+            p->T_SECTIONTIMER        = Bitstream_Read(stream, 10);
         }
 
         /*@
           requires D_SECTIONTIMERSTOPLOC: stream->bitpos == pos + 26;
-          assigns        	   stream->bitpos;
-          assigns		   p->D_SECTIONTIMERSTOPLOC;
+          assigns                  stream->bitpos;
+          assigns                  p->D_SECTIONTIMERSTOPLOC;
           ensures  D_SECTIONTIMERSTOPLOC: stream->bitpos == pos + 41;
           ensures  D_SECTIONTIMERSTOPLOC: EqualBits(stream, pos + 26, pos + 41, p->D_SECTIONTIMERSTOPLOC);
           ensures  D_SECTIONTIMERSTOPLOC: UpperBitsNotSet(p->D_SECTIONTIMERSTOPLOC, 15);
         */
         {
-            p->D_SECTIONTIMERSTOPLOC		= Bitstream_Read(stream, 15);
+            p->D_SECTIONTIMERSTOPLOC        = Bitstream_Read(stream, 15);
         }
 
         //@ assert L_SECTION:         EqualBits(stream, pos,       pos + 15,  p->L_SECTION);
