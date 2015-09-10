@@ -31,6 +31,12 @@ struct Default_balise_or_Loop_or_RIU_information : public BasePacket
     {
         return  core.L_PACKET;
     }
+
+    int encode(Bitstream& stream) const override
+    {
+        return ::encode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Default_balise_or_Loop_or_RIU_information> Default_balise_or_Loop_or_RIU_informationPtr;

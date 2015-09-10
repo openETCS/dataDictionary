@@ -25,10 +25,7 @@ struct BasePacket
 
     virtual uint16_t length() const = 0;
 
-    virtual int encode(Bitstream&) const
-    {
-        return 1;
-    }
+    virtual int encode(Bitstream&) const = 0;
 
 };
 

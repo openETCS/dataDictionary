@@ -12,38 +12,6 @@ struct Gradient_Profile_Core_1
     uint64_t   G_A;              // # 8
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Gradient_Profile_Core_1& p)
-{
-    stream
-            << +p.D_GRADIENT << ','
-            << +p.Q_GDIR << ','
-            << +p.G_A;
-
-    return stream;
-}
-
-inline bool operator==(const Gradient_Profile_Core_1& a, const Gradient_Profile_Core_1& b)
-{
-    bool status = true;
-
-    status = status && (a.D_GRADIENT == b.D_GRADIENT);
-    status = status && (a.Q_GDIR == b.Q_GDIR);
-    status = status && (a.G_A == b.G_A);
-
-    return status;
-}
-
-inline bool operator!=(const Gradient_Profile_Core_1& a, const Gradient_Profile_Core_1& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Gradient_Profile_Core_1 Gradient_Profile_Core_1;
 
 #define GRADIENT_PROFILE_CORE_1_CORE_BITSIZE 24
@@ -164,6 +132,43 @@ int Gradient_Profile_Core_1_Encoder(Bitstream* stream, const Gradient_Profile_Co
     disjoint behaviors;
 */
 int Gradient_Profile_Core_1_Decoder(Bitstream* stream, Gradient_Profile_Core_1* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Gradient_Profile_Core_1& p)
+{
+    stream
+            << +p.D_GRADIENT << ','
+            << +p.Q_GDIR << ','
+            << +p.G_A;
+
+    return stream;
+}
+
+inline bool operator==(const Gradient_Profile_Core_1& a, const Gradient_Profile_Core_1& b)
+{
+    bool status = true;
+
+    status = status && (a.D_GRADIENT == b.D_GRADIENT);
+    status = status && (a.Q_GDIR == b.Q_GDIR);
+    status = status && (a.G_A == b.G_A);
+
+    return status;
+}
+
+inline bool operator!=(const Gradient_Profile_Core_1& a, const Gradient_Profile_Core_1& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Gradient_Profile_Core_1& p)
+{
+    return Gradient_Profile_Core_1_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // GRADIENT_PROFILE_CORE_1_CORE_H_INCLUDED
 

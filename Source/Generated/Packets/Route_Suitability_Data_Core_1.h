@@ -15,60 +15,6 @@ struct Route_Suitability_Data_Core_1
     uint64_t  NID_CTRACTION;    // # 10
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Route_Suitability_Data_Core_1& p)
-{
-    stream
-            << +p.D_SUITABILITY << ','
-            << +p.Q_SUITABILITY << ','
-            << +p.M_LINEGAUGE << ','
-            << +p.M_AXLELOADCAT << ','
-            << +p.M_VOLTAGE << ','
-            << +p.NID_CTRACTION;
-
-    return stream;
-}
-
-inline bool operator==(const Route_Suitability_Data_Core_1& a, const Route_Suitability_Data_Core_1& b)
-{
-    bool status = true;
-
-    status = status && (a.D_SUITABILITY == b.D_SUITABILITY);
-    status = status && (a.Q_SUITABILITY == b.Q_SUITABILITY);
-
-    if (a.Q_SUITABILITY == 0)
-    {
-        status = status && (a.M_LINEGAUGE == b.M_LINEGAUGE);
-    }
-
-    if (a.Q_SUITABILITY == 1)
-    {
-        status = status && (a.M_AXLELOADCAT == b.M_AXLELOADCAT);
-    }
-
-    if (a.Q_SUITABILITY == 2)
-    {
-        status = status && (a.M_VOLTAGE == b.M_VOLTAGE);
-    }
-
-    if ((a.Q_SUITABILITY == 2) && (a.M_VOLTAGE != 0))
-    {
-        status = status && (a.NID_CTRACTION == b.NID_CTRACTION);
-    }
-
-    return status;
-}
-
-inline bool operator!=(const Route_Suitability_Data_Core_1& a, const Route_Suitability_Data_Core_1& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Route_Suitability_Data_Core_1 Route_Suitability_Data_Core_1;
 
 #define ROUTE_SUITABILITY_DATA_CORE_1_CORE_BITSIZE 17
@@ -185,6 +131,65 @@ int Route_Suitability_Data_Core_1_Encoder(Bitstream* stream, const Route_Suitabi
     disjoint behaviors;
 */
 int Route_Suitability_Data_Core_1_Decoder(Bitstream* stream, Route_Suitability_Data_Core_1* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Route_Suitability_Data_Core_1& p)
+{
+    stream
+            << +p.D_SUITABILITY << ','
+            << +p.Q_SUITABILITY << ','
+            << +p.M_LINEGAUGE << ','
+            << +p.M_AXLELOADCAT << ','
+            << +p.M_VOLTAGE << ','
+            << +p.NID_CTRACTION;
+
+    return stream;
+}
+
+inline bool operator==(const Route_Suitability_Data_Core_1& a, const Route_Suitability_Data_Core_1& b)
+{
+    bool status = true;
+
+    status = status && (a.D_SUITABILITY == b.D_SUITABILITY);
+    status = status && (a.Q_SUITABILITY == b.Q_SUITABILITY);
+
+    if (a.Q_SUITABILITY == 0)
+    {
+        status = status && (a.M_LINEGAUGE == b.M_LINEGAUGE);
+    }
+
+    if (a.Q_SUITABILITY == 1)
+    {
+        status = status && (a.M_AXLELOADCAT == b.M_AXLELOADCAT);
+    }
+
+    if (a.Q_SUITABILITY == 2)
+    {
+        status = status && (a.M_VOLTAGE == b.M_VOLTAGE);
+    }
+
+    if ((a.Q_SUITABILITY == 2) && (a.M_VOLTAGE != 0))
+    {
+        status = status && (a.NID_CTRACTION == b.NID_CTRACTION);
+    }
+
+    return status;
+}
+
+inline bool operator!=(const Route_Suitability_Data_Core_1& a, const Route_Suitability_Data_Core_1& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Route_Suitability_Data_Core_1& p)
+{
+    return Route_Suitability_Data_Core_1_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // ROUTE_SUITABILITY_DATA_CORE_1_CORE_H_INCLUDED
 

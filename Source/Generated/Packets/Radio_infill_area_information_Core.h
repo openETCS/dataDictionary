@@ -20,50 +20,6 @@ struct Radio_infill_area_information_Core
     uint64_t  NID_BG;           // # 14
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Radio_infill_area_information_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-            << +p.Q_SCALE << ','
-            << +p.Q_RIU << ','
-            << +p.NID_C << ','
-            << +p.NID_RIU << ','
-            << +p.NID_RADIO << ','
-            << +p.D_INFILL << ','
-            << +p.NID_BG;
-
-    return stream;
-}
-
-inline bool operator==(const Radio_infill_area_information_Core& a, const Radio_infill_area_information_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.Q_SCALE == b.Q_SCALE);
-    status = status && (a.Q_RIU == b.Q_RIU);
-    status = status && (a.NID_C == b.NID_C);
-    status = status && (a.NID_RIU == b.NID_RIU);
-    status = status && (a.NID_RADIO == b.NID_RADIO);
-    status = status && (a.D_INFILL == b.D_INFILL);
-    status = status && (a.NID_BG == b.NID_BG);
-
-    return status;
-}
-
-inline bool operator!=(const Radio_infill_area_information_Core& a, const Radio_infill_area_information_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Radio_infill_area_information_Core Radio_infill_area_information_Core;
 
 #define RADIO_INFILL_AREA_INFORMATION_CORE_BITSIZE 135
@@ -208,6 +164,55 @@ int Radio_infill_area_information_Encoder(Bitstream* stream, const Radio_infill_
     disjoint behaviors;
 */
 int Radio_infill_area_information_Decoder(Bitstream* stream, Radio_infill_area_information_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Radio_infill_area_information_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.Q_RIU << ','
+            << +p.NID_C << ','
+            << +p.NID_RIU << ','
+            << +p.NID_RADIO << ','
+            << +p.D_INFILL << ','
+            << +p.NID_BG;
+
+    return stream;
+}
+
+inline bool operator==(const Radio_infill_area_information_Core& a, const Radio_infill_area_information_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SCALE == b.Q_SCALE);
+    status = status && (a.Q_RIU == b.Q_RIU);
+    status = status && (a.NID_C == b.NID_C);
+    status = status && (a.NID_RIU == b.NID_RIU);
+    status = status && (a.NID_RADIO == b.NID_RADIO);
+    status = status && (a.D_INFILL == b.D_INFILL);
+    status = status && (a.NID_BG == b.NID_BG);
+
+    return status;
+}
+
+inline bool operator!=(const Radio_infill_area_information_Core& a, const Radio_infill_area_information_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Radio_infill_area_information_Core& p)
+{
+    return Radio_infill_area_information_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // RADIO_INFILL_AREA_INFORMATION_CORE_H_INCLUDED
 

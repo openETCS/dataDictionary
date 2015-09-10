@@ -31,6 +31,12 @@ struct Inhibition_of_balise_group_message_consistency_reaction : public BasePack
     {
         return  core.L_PACKET;
     }
+
+    int encode(Bitstream& stream) const override
+    {
+        return ::encode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Inhibition_of_balise_group_message_consistency_reaction> Inhibition_of_balise_group_message_consistency_reactionPtr;

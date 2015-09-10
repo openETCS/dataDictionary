@@ -12,42 +12,6 @@ struct List_of_Balises_in_SR_Authority_Core_1
     uint64_t  NID_BG;           // # 14
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const List_of_Balises_in_SR_Authority_Core_1& p)
-{
-    stream
-            << +p.Q_NEWCOUNTRY << ','
-            << +p.NID_C << ','
-            << +p.NID_BG;
-
-    return stream;
-}
-
-inline bool operator==(const List_of_Balises_in_SR_Authority_Core_1& a, const List_of_Balises_in_SR_Authority_Core_1& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_NEWCOUNTRY == b.Q_NEWCOUNTRY);
-
-    if (a.Q_NEWCOUNTRY == 1)
-    {
-        status = status && (a.NID_C == b.NID_C);
-    }
-    status = status && (a.NID_BG == b.NID_BG);
-
-    return status;
-}
-
-inline bool operator!=(const List_of_Balises_in_SR_Authority_Core_1& a, const List_of_Balises_in_SR_Authority_Core_1& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct List_of_Balises_in_SR_Authority_Core_1 List_of_Balises_in_SR_Authority_Core_1;
 
 #define LIST_OF_BALISES_IN_SR_AUTHORITY_CORE_1_CORE_BITSIZE 15
@@ -160,6 +124,47 @@ int List_of_Balises_in_SR_Authority_Core_1_Encoder(Bitstream* stream, const List
     disjoint behaviors;
 */
 int List_of_Balises_in_SR_Authority_Core_1_Decoder(Bitstream* stream, List_of_Balises_in_SR_Authority_Core_1* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const List_of_Balises_in_SR_Authority_Core_1& p)
+{
+    stream
+            << +p.Q_NEWCOUNTRY << ','
+            << +p.NID_C << ','
+            << +p.NID_BG;
+
+    return stream;
+}
+
+inline bool operator==(const List_of_Balises_in_SR_Authority_Core_1& a, const List_of_Balises_in_SR_Authority_Core_1& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_NEWCOUNTRY == b.Q_NEWCOUNTRY);
+
+    if (a.Q_NEWCOUNTRY == 1)
+    {
+        status = status && (a.NID_C == b.NID_C);
+    }
+    status = status && (a.NID_BG == b.NID_BG);
+
+    return status;
+}
+
+inline bool operator!=(const List_of_Balises_in_SR_Authority_Core_1& a, const List_of_Balises_in_SR_Authority_Core_1& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const List_of_Balises_in_SR_Authority_Core_1& p)
+{
+    return List_of_Balises_in_SR_Authority_Core_1_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // LIST_OF_BALISES_IN_SR_AUTHORITY_CORE_1_CORE_H_INCLUDED
 

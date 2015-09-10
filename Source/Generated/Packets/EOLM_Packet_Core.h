@@ -20,48 +20,6 @@ struct EOLM_Packet_Core
     uint64_t   Q_SSCODE;         // # 4
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const EOLM_Packet_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-            << +p.Q_SCALE << ','
-            << +p.NID_LOOP << ','
-            << +p.D_LOOP << ','
-            << +p.L_LOOP << ','
-            << +p.Q_LOOPDIR << ','
-            << +p.Q_SSCODE;
-
-    return stream;
-}
-
-inline bool operator==(const EOLM_Packet_Core& a, const EOLM_Packet_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.Q_SCALE == b.Q_SCALE);
-    status = status && (a.NID_LOOP == b.NID_LOOP);
-    status = status && (a.D_LOOP == b.D_LOOP);
-    status = status && (a.L_LOOP == b.L_LOOP);
-    status = status && (a.Q_LOOPDIR == b.Q_LOOPDIR);
-    status = status && (a.Q_SSCODE == b.Q_SSCODE);
-
-    return status;
-}
-
-inline bool operator!=(const EOLM_Packet_Core& a, const EOLM_Packet_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct EOLM_Packet_Core EOLM_Packet_Core;
 
 #define EOLM_PACKET_CORE_BITSIZE 66
@@ -202,6 +160,53 @@ int EOLM_Packet_Encoder(Bitstream* stream, const EOLM_Packet_Core* p);
     disjoint behaviors;
 */
 int EOLM_Packet_Decoder(Bitstream* stream, EOLM_Packet_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const EOLM_Packet_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.NID_LOOP << ','
+            << +p.D_LOOP << ','
+            << +p.L_LOOP << ','
+            << +p.Q_LOOPDIR << ','
+            << +p.Q_SSCODE;
+
+    return stream;
+}
+
+inline bool operator==(const EOLM_Packet_Core& a, const EOLM_Packet_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SCALE == b.Q_SCALE);
+    status = status && (a.NID_LOOP == b.NID_LOOP);
+    status = status && (a.D_LOOP == b.D_LOOP);
+    status = status && (a.L_LOOP == b.L_LOOP);
+    status = status && (a.Q_LOOPDIR == b.Q_LOOPDIR);
+    status = status && (a.Q_SSCODE == b.Q_SSCODE);
+
+    return status;
+}
+
+inline bool operator!=(const EOLM_Packet_Core& a, const EOLM_Packet_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const EOLM_Packet_Core& p)
+{
+    return EOLM_Packet_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // EOLM_PACKET_CORE_H_INCLUDED
 

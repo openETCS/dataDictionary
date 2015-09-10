@@ -35,90 +35,6 @@ struct Level_23_Movement_Authority_Core
     uint64_t   V_RELEASEOL;      // # 7
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Level_23_Movement_Authority_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-            << +p.Q_SCALE << ','
-            << +p.V_LOA << ','
-            << +p.T_LOA << ','
-       << +p.N_ITER_1;
-       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-       {
-           stream << ',' << p.sub_1[i];
-       }
-    stream << ','
-            << +p.L_ENDSECTION << ','
-            << +p.Q_SECTIONTIMER << ','
-            << +p.T_SECTIONTIMER << ','
-            << +p.D_SECTIONTIMERSTOPLOC << ','
-            << +p.Q_ENDTIMER << ','
-            << +p.T_ENDTIMER << ','
-            << +p.D_ENDTIMERSTARTLOC << ','
-            << +p.Q_DANGERPOINT << ','
-            << +p.D_DP << ','
-            << +p.V_RELEASEDP << ','
-            << +p.Q_OVERLAP << ','
-            << +p.D_STARTOL << ','
-            << +p.T_OL << ','
-            << +p.D_OL << ','
-            << +p.V_RELEASEOL;
-
-    return stream;
-}
-
-inline bool operator==(const Level_23_Movement_Authority_Core& a, const Level_23_Movement_Authority_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.Q_SCALE == b.Q_SCALE);
-    status = status && (a.V_LOA == b.V_LOA);
-    status = status && (a.T_LOA == b.T_LOA);
-    status = status && (a.N_ITER_1 == b.N_ITER_1);
-    if (a.N_ITER_1 == b.N_ITER_1)
-    {
-        for (uint32_t i = 0; i < a.N_ITER_1; ++i)
-        {
-            status = status && (a.sub_1[i] == b.sub_1[i]);
-        }
-    }
-    else
-    {
-        status = false;
-    }
-    status = status && (a.L_ENDSECTION == b.L_ENDSECTION);
-    status = status && (a.Q_SECTIONTIMER == b.Q_SECTIONTIMER);
-    status = status && (a.T_SECTIONTIMER == b.T_SECTIONTIMER);
-    status = status && (a.D_SECTIONTIMERSTOPLOC == b.D_SECTIONTIMERSTOPLOC);
-    status = status && (a.Q_ENDTIMER == b.Q_ENDTIMER);
-    status = status && (a.T_ENDTIMER == b.T_ENDTIMER);
-    status = status && (a.D_ENDTIMERSTARTLOC == b.D_ENDTIMERSTARTLOC);
-    status = status && (a.Q_DANGERPOINT == b.Q_DANGERPOINT);
-    status = status && (a.D_DP == b.D_DP);
-    status = status && (a.V_RELEASEDP == b.V_RELEASEDP);
-    status = status && (a.Q_OVERLAP == b.Q_OVERLAP);
-    status = status && (a.D_STARTOL == b.D_STARTOL);
-    status = status && (a.T_OL == b.T_OL);
-    status = status && (a.D_OL == b.D_OL);
-    status = status && (a.V_RELEASEOL == b.V_RELEASEOL);
-
-    return status;
-}
-
-inline bool operator!=(const Level_23_Movement_Authority_Core& a, const Level_23_Movement_Authority_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Level_23_Movement_Authority_Core Level_23_Movement_Authority_Core;
 
 #define LEVEL_23_MOVEMENT_AUTHORITY_CORE_BITSIZE 177
@@ -247,6 +163,95 @@ int Level_23_Movement_Authority_Encoder(Bitstream* stream, const Level_23_Moveme
     disjoint behaviors;
 */
 int Level_23_Movement_Authority_Decoder(Bitstream* stream, Level_23_Movement_Authority_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Level_23_Movement_Authority_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.V_LOA << ','
+            << +p.T_LOA << ','
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
+    stream << ','
+            << +p.L_ENDSECTION << ','
+            << +p.Q_SECTIONTIMER << ','
+            << +p.T_SECTIONTIMER << ','
+            << +p.D_SECTIONTIMERSTOPLOC << ','
+            << +p.Q_ENDTIMER << ','
+            << +p.T_ENDTIMER << ','
+            << +p.D_ENDTIMERSTARTLOC << ','
+            << +p.Q_DANGERPOINT << ','
+            << +p.D_DP << ','
+            << +p.V_RELEASEDP << ','
+            << +p.Q_OVERLAP << ','
+            << +p.D_STARTOL << ','
+            << +p.T_OL << ','
+            << +p.D_OL << ','
+            << +p.V_RELEASEOL;
+
+    return stream;
+}
+
+inline bool operator==(const Level_23_Movement_Authority_Core& a, const Level_23_Movement_Authority_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SCALE == b.Q_SCALE);
+    status = status && (a.V_LOA == b.V_LOA);
+    status = status && (a.T_LOA == b.T_LOA);
+    status = status && (a.N_ITER_1 == b.N_ITER_1);
+    if (a.N_ITER_1 == b.N_ITER_1)
+    {
+        for (uint32_t i = 0; i < a.N_ITER_1; ++i)
+        {
+            status = status && (a.sub_1[i] == b.sub_1[i]);
+        }
+    }
+    else
+    {
+        status = false;
+    }
+    status = status && (a.L_ENDSECTION == b.L_ENDSECTION);
+    status = status && (a.Q_SECTIONTIMER == b.Q_SECTIONTIMER);
+    status = status && (a.T_SECTIONTIMER == b.T_SECTIONTIMER);
+    status = status && (a.D_SECTIONTIMERSTOPLOC == b.D_SECTIONTIMERSTOPLOC);
+    status = status && (a.Q_ENDTIMER == b.Q_ENDTIMER);
+    status = status && (a.T_ENDTIMER == b.T_ENDTIMER);
+    status = status && (a.D_ENDTIMERSTARTLOC == b.D_ENDTIMERSTARTLOC);
+    status = status && (a.Q_DANGERPOINT == b.Q_DANGERPOINT);
+    status = status && (a.D_DP == b.D_DP);
+    status = status && (a.V_RELEASEDP == b.V_RELEASEDP);
+    status = status && (a.Q_OVERLAP == b.Q_OVERLAP);
+    status = status && (a.D_STARTOL == b.D_STARTOL);
+    status = status && (a.T_OL == b.T_OL);
+    status = status && (a.D_OL == b.D_OL);
+    status = status && (a.V_RELEASEOL == b.V_RELEASEOL);
+
+    return status;
+}
+
+inline bool operator!=(const Level_23_Movement_Authority_Core& a, const Level_23_Movement_Authority_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Level_23_Movement_Authority_Core& p)
+{
+    return Level_23_Movement_Authority_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // LEVEL_23_MOVEMENT_AUTHORITY_CORE_H_INCLUDED
 

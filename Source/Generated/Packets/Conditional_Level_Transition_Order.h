@@ -31,6 +31,12 @@ struct Conditional_Level_Transition_Order : public BasePacket
     {
         return  core.L_PACKET;
     }
+
+    int encode(Bitstream& stream) const override
+    {
+        return ::encode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Conditional_Level_Transition_Order> Conditional_Level_Transition_OrderPtr;

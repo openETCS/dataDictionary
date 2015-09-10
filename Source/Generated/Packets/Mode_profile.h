@@ -31,6 +31,12 @@ struct Mode_profile : public BasePacket
     {
         return  core.L_PACKET;
     }
+
+    int encode(Bitstream& stream) const override
+    {
+        return ::encode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Mode_profile> Mode_profilePtr;

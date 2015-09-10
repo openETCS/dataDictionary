@@ -22,62 +22,6 @@ struct Position_Report_Parameters_Core
     Position_Report_Parameters_Core_1   sub_1[31];
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Position_Report_Parameters_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-            << +p.Q_SCALE << ','
-            << +p.T_CYCLOC << ','
-            << +p.D_CYCLOC << ','
-            << +p.M_LOC << ','
-       << +p.N_ITER_1;
-       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-       {
-           stream << ',' << p.sub_1[i];
-       }
-   
-
-    return stream;
-}
-
-inline bool operator==(const Position_Report_Parameters_Core& a, const Position_Report_Parameters_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.Q_SCALE == b.Q_SCALE);
-    status = status && (a.T_CYCLOC == b.T_CYCLOC);
-    status = status && (a.D_CYCLOC == b.D_CYCLOC);
-    status = status && (a.M_LOC == b.M_LOC);
-    status = status && (a.N_ITER_1 == b.N_ITER_1);
-    if (a.N_ITER_1 == b.N_ITER_1)
-    {
-        for (uint32_t i = 0; i < a.N_ITER_1; ++i)
-        {
-            status = status && (a.sub_1[i] == b.sub_1[i]);
-        }
-    }
-    else
-    {
-        status = false;
-    }
-
-    return status;
-}
-
-inline bool operator!=(const Position_Report_Parameters_Core& a, const Position_Report_Parameters_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Position_Report_Parameters_Core Position_Report_Parameters_Core;
 
 #define POSITION_REPORT_PARAMETERS_CORE_BITSIZE 48
@@ -210,6 +154,67 @@ int Position_Report_Parameters_Encoder(Bitstream* stream, const Position_Report_
     disjoint behaviors;
 */
 int Position_Report_Parameters_Decoder(Bitstream* stream, Position_Report_Parameters_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Position_Report_Parameters_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.T_CYCLOC << ','
+            << +p.D_CYCLOC << ','
+            << +p.M_LOC << ','
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
+   
+
+    return stream;
+}
+
+inline bool operator==(const Position_Report_Parameters_Core& a, const Position_Report_Parameters_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SCALE == b.Q_SCALE);
+    status = status && (a.T_CYCLOC == b.T_CYCLOC);
+    status = status && (a.D_CYCLOC == b.D_CYCLOC);
+    status = status && (a.M_LOC == b.M_LOC);
+    status = status && (a.N_ITER_1 == b.N_ITER_1);
+    if (a.N_ITER_1 == b.N_ITER_1)
+    {
+        for (uint32_t i = 0; i < a.N_ITER_1; ++i)
+        {
+            status = status && (a.sub_1[i] == b.sub_1[i]);
+        }
+    }
+    else
+    {
+        status = false;
+    }
+
+    return status;
+}
+
+inline bool operator!=(const Position_Report_Parameters_Core& a, const Position_Report_Parameters_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Position_Report_Parameters_Core& p)
+{
+    return Position_Report_Parameters_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // POSITION_REPORT_PARAMETERS_CORE_H_INCLUDED
 

@@ -16,40 +16,6 @@ struct Repositioning_Information_Core
     uint64_t  L_SECTION;        // # 15
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Repositioning_Information_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-            << +p.Q_SCALE << ','
-            << +p.L_SECTION;
-
-    return stream;
-}
-
-inline bool operator==(const Repositioning_Information_Core& a, const Repositioning_Information_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.Q_SCALE == b.Q_SCALE);
-    status = status && (a.L_SECTION == b.L_SECTION);
-
-    return status;
-}
-
-inline bool operator!=(const Repositioning_Information_Core& a, const Repositioning_Information_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Repositioning_Information_Core Repositioning_Information_Core;
 
 #define REPOSITIONING_INFORMATION_CORE_BITSIZE 32
@@ -174,6 +140,45 @@ int Repositioning_Information_Encoder(Bitstream* stream, const Repositioning_Inf
     disjoint behaviors;
 */
 int Repositioning_Information_Decoder(Bitstream* stream, Repositioning_Information_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Repositioning_Information_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.L_SECTION;
+
+    return stream;
+}
+
+inline bool operator==(const Repositioning_Information_Core& a, const Repositioning_Information_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SCALE == b.Q_SCALE);
+    status = status && (a.L_SECTION == b.L_SECTION);
+
+    return status;
+}
+
+inline bool operator!=(const Repositioning_Information_Core& a, const Repositioning_Information_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Repositioning_Information_Core& p)
+{
+    return Repositioning_Information_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // REPOSITIONING_INFORMATION_CORE_H_INCLUDED
 

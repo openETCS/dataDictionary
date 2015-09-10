@@ -13,48 +13,6 @@ struct International_Static_Speed_Profile_Core_2_1
     uint64_t   V_DIFF;           // # 7
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const International_Static_Speed_Profile_Core_2_1& p)
-{
-    stream
-            << +p.Q_DIFF << ','
-            << +p.NC_CDDIFF << ','
-            << +p.NC_DIFF << ','
-            << +p.V_DIFF;
-
-    return stream;
-}
-
-inline bool operator==(const International_Static_Speed_Profile_Core_2_1& a, const International_Static_Speed_Profile_Core_2_1& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIFF == b.Q_DIFF);
-
-    if (a.Q_DIFF == 0)
-    {
-        status = status && (a.NC_CDDIFF == b.NC_CDDIFF);
-    }
-
-    if ((a.Q_DIFF == 1) || (a.Q_DIFF == 2))
-    {
-        status = status && (a.NC_DIFF == b.NC_DIFF);
-    }
-    status = status && (a.V_DIFF == b.V_DIFF);
-
-    return status;
-}
-
-inline bool operator!=(const International_Static_Speed_Profile_Core_2_1& a, const International_Static_Speed_Profile_Core_2_1& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct International_Static_Speed_Profile_Core_2_1 International_Static_Speed_Profile_Core_2_1;
 
 #define INTERNATIONAL_STATIC_SPEED_PROFILE_CORE_2_1_CORE_BITSIZE 9
@@ -167,6 +125,53 @@ int International_Static_Speed_Profile_Core_2_1_Encoder(Bitstream* stream, const
     disjoint behaviors;
 */
 int International_Static_Speed_Profile_Core_2_1_Decoder(Bitstream* stream, International_Static_Speed_Profile_Core_2_1* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const International_Static_Speed_Profile_Core_2_1& p)
+{
+    stream
+            << +p.Q_DIFF << ','
+            << +p.NC_CDDIFF << ','
+            << +p.NC_DIFF << ','
+            << +p.V_DIFF;
+
+    return stream;
+}
+
+inline bool operator==(const International_Static_Speed_Profile_Core_2_1& a, const International_Static_Speed_Profile_Core_2_1& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIFF == b.Q_DIFF);
+
+    if (a.Q_DIFF == 0)
+    {
+        status = status && (a.NC_CDDIFF == b.NC_CDDIFF);
+    }
+
+    if ((a.Q_DIFF == 1) || (a.Q_DIFF == 2))
+    {
+        status = status && (a.NC_DIFF == b.NC_DIFF);
+    }
+    status = status && (a.V_DIFF == b.V_DIFF);
+
+    return status;
+}
+
+inline bool operator!=(const International_Static_Speed_Profile_Core_2_1& a, const International_Static_Speed_Profile_Core_2_1& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const International_Static_Speed_Profile_Core_2_1& p)
+{
+    return International_Static_Speed_Profile_Core_2_1_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // INTERNATIONAL_STATIC_SPEED_PROFILE_CORE_2_1_CORE_H_INCLUDED
 

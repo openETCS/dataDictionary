@@ -18,46 +18,6 @@ struct Track_Ahead_Free_up_to_level_23_transition_location_Core
     uint64_t  NID_BG;           // # 14
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Track_Ahead_Free_up_to_level_23_transition_location_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-            << +p.Q_NEWCOUNTRY << ','
-            << +p.NID_C << ','
-            << +p.NID_BG;
-
-    return stream;
-}
-
-inline bool operator==(const Track_Ahead_Free_up_to_level_23_transition_location_Core& a, const Track_Ahead_Free_up_to_level_23_transition_location_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.Q_NEWCOUNTRY == b.Q_NEWCOUNTRY);
-
-    if (a.Q_NEWCOUNTRY == 1)
-    {
-        status = status && (a.NID_C == b.NID_C);
-    }
-    status = status && (a.NID_BG == b.NID_BG);
-
-    return status;
-}
-
-inline bool operator!=(const Track_Ahead_Free_up_to_level_23_transition_location_Core& a, const Track_Ahead_Free_up_to_level_23_transition_location_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Track_Ahead_Free_up_to_level_23_transition_location_Core Track_Ahead_Free_up_to_level_23_transition_location_Core;
 
 #define TRACK_AHEAD_FREE_UP_TO_LEVEL_23_TRANSITION_LOCATION_CORE_BITSIZE 30
@@ -178,6 +138,51 @@ int Track_Ahead_Free_up_to_level_23_transition_location_Encoder(Bitstream* strea
     disjoint behaviors;
 */
 int Track_Ahead_Free_up_to_level_23_transition_location_Decoder(Bitstream* stream, Track_Ahead_Free_up_to_level_23_transition_location_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Track_Ahead_Free_up_to_level_23_transition_location_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_NEWCOUNTRY << ','
+            << +p.NID_C << ','
+            << +p.NID_BG;
+
+    return stream;
+}
+
+inline bool operator==(const Track_Ahead_Free_up_to_level_23_transition_location_Core& a, const Track_Ahead_Free_up_to_level_23_transition_location_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_NEWCOUNTRY == b.Q_NEWCOUNTRY);
+
+    if (a.Q_NEWCOUNTRY == 1)
+    {
+        status = status && (a.NID_C == b.NID_C);
+    }
+    status = status && (a.NID_BG == b.NID_BG);
+
+    return status;
+}
+
+inline bool operator!=(const Track_Ahead_Free_up_to_level_23_transition_location_Core& a, const Track_Ahead_Free_up_to_level_23_transition_location_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Track_Ahead_Free_up_to_level_23_transition_location_Core& p)
+{
+    return Track_Ahead_Free_up_to_level_23_transition_location_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // TRACK_AHEAD_FREE_UP_TO_LEVEL_23_TRANSITION_LOCATION_CORE_H_INCLUDED
 

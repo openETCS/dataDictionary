@@ -31,6 +31,12 @@ struct Radio_Network_registration : public BasePacket
     {
         return  core.L_PACKET;
     }
+
+    int encode(Bitstream& stream) const override
+    {
+        return ::encode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Radio_Network_registration> Radio_Network_registrationPtr;

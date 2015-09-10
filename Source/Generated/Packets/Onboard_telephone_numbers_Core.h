@@ -16,52 +16,6 @@ struct Onboard_telephone_numbers_Core
     Onboard_telephone_numbers_Core_1   sub_1[31];
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Onboard_telephone_numbers_Core& p)
-{
-    stream
-            << +p.L_PACKET << ','
-       << +p.N_ITER_1;
-       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-       {
-           stream << ',' << p.sub_1[i];
-       }
-   
-
-    return stream;
-}
-
-inline bool operator==(const Onboard_telephone_numbers_Core& a, const Onboard_telephone_numbers_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.N_ITER_1 == b.N_ITER_1);
-    if (a.N_ITER_1 == b.N_ITER_1)
-    {
-        for (uint32_t i = 0; i < a.N_ITER_1; ++i)
-        {
-            status = status && (a.sub_1[i] == b.sub_1[i]);
-        }
-    }
-    else
-    {
-        status = false;
-    }
-
-    return status;
-}
-
-inline bool operator!=(const Onboard_telephone_numbers_Core& a, const Onboard_telephone_numbers_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Onboard_telephone_numbers_Core Onboard_telephone_numbers_Core;
 
 #define ONBOARD_TELEPHONE_NUMBERS_CORE_BITSIZE 18
@@ -174,6 +128,57 @@ int Onboard_telephone_numbers_Encoder(Bitstream* stream, const Onboard_telephone
     disjoint behaviors;
 */
 int Onboard_telephone_numbers_Decoder(Bitstream* stream, Onboard_telephone_numbers_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Onboard_telephone_numbers_Core& p)
+{
+    stream
+            << +p.L_PACKET << ','
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
+   
+
+    return stream;
+}
+
+inline bool operator==(const Onboard_telephone_numbers_Core& a, const Onboard_telephone_numbers_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.N_ITER_1 == b.N_ITER_1);
+    if (a.N_ITER_1 == b.N_ITER_1)
+    {
+        for (uint32_t i = 0; i < a.N_ITER_1; ++i)
+        {
+            status = status && (a.sub_1[i] == b.sub_1[i]);
+        }
+    }
+    else
+    {
+        status = false;
+    }
+
+    return status;
+}
+
+inline bool operator!=(const Onboard_telephone_numbers_Core& a, const Onboard_telephone_numbers_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Onboard_telephone_numbers_Core& p)
+{
+    return Onboard_telephone_numbers_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // ONBOARD_TELEPHONE_NUMBERS_CORE_H_INCLUDED
 

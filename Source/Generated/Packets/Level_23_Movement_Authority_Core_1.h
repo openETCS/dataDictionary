@@ -13,40 +13,6 @@ struct Level_23_Movement_Authority_Core_1
     uint64_t  D_SECTIONTIMERSTOPLOC;// # 15
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Level_23_Movement_Authority_Core_1& p)
-{
-    stream
-            << +p.L_SECTION << ','
-            << +p.Q_SECTIONTIMER << ','
-            << +p.T_SECTIONTIMER << ','
-            << +p.D_SECTIONTIMERSTOPLOC;
-
-    return stream;
-}
-
-inline bool operator==(const Level_23_Movement_Authority_Core_1& a, const Level_23_Movement_Authority_Core_1& b)
-{
-    bool status = true;
-
-    status = status && (a.L_SECTION == b.L_SECTION);
-    status = status && (a.Q_SECTIONTIMER == b.Q_SECTIONTIMER);
-    status = status && (a.T_SECTIONTIMER == b.T_SECTIONTIMER);
-    status = status && (a.D_SECTIONTIMERSTOPLOC == b.D_SECTIONTIMERSTOPLOC);
-
-    return status;
-}
-
-inline bool operator!=(const Level_23_Movement_Authority_Core_1& a, const Level_23_Movement_Authority_Core_1& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Level_23_Movement_Authority_Core_1 Level_23_Movement_Authority_Core_1;
 
 #define LEVEL_23_MOVEMENT_AUTHORITY_CORE_1_CORE_BITSIZE 41
@@ -171,6 +137,45 @@ int Level_23_Movement_Authority_Core_1_Encoder(Bitstream* stream, const Level_23
     disjoint behaviors;
 */
 int Level_23_Movement_Authority_Core_1_Decoder(Bitstream* stream, Level_23_Movement_Authority_Core_1* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Level_23_Movement_Authority_Core_1& p)
+{
+    stream
+            << +p.L_SECTION << ','
+            << +p.Q_SECTIONTIMER << ','
+            << +p.T_SECTIONTIMER << ','
+            << +p.D_SECTIONTIMERSTOPLOC;
+
+    return stream;
+}
+
+inline bool operator==(const Level_23_Movement_Authority_Core_1& a, const Level_23_Movement_Authority_Core_1& b)
+{
+    bool status = true;
+
+    status = status && (a.L_SECTION == b.L_SECTION);
+    status = status && (a.Q_SECTIONTIMER == b.Q_SECTIONTIMER);
+    status = status && (a.T_SECTIONTIMER == b.T_SECTIONTIMER);
+    status = status && (a.D_SECTIONTIMERSTOPLOC == b.D_SECTIONTIMERSTOPLOC);
+
+    return status;
+}
+
+inline bool operator!=(const Level_23_Movement_Authority_Core_1& a, const Level_23_Movement_Authority_Core_1& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Level_23_Movement_Authority_Core_1& p)
+{
+    return Level_23_Movement_Authority_Core_1_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // LEVEL_23_MOVEMENT_AUTHORITY_CORE_1_CORE_H_INCLUDED
 

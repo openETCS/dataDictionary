@@ -15,32 +15,6 @@ struct End_of_Information_Core
 
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const End_of_Information_Core& p)
-{
-    
-
-    return stream;
-}
-
-inline bool operator==(const End_of_Information_Core& a, const End_of_Information_Core& b)
-{
-    bool status = true;
-
-
-    return status;
-}
-
-inline bool operator!=(const End_of_Information_Core& a, const End_of_Information_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct End_of_Information_Core End_of_Information_Core;
 
 #define END_OF_INFORMATION_CORE_BITSIZE 0
@@ -149,6 +123,37 @@ int End_of_Information_Encoder(Bitstream* stream, const End_of_Information_Core*
     disjoint behaviors;
 */
 int End_of_Information_Decoder(Bitstream* stream, End_of_Information_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const End_of_Information_Core& p)
+{
+    
+
+    return stream;
+}
+
+inline bool operator==(const End_of_Information_Core& a, const End_of_Information_Core& b)
+{
+    bool status = true;
+
+
+    return status;
+}
+
+inline bool operator!=(const End_of_Information_Core& a, const End_of_Information_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const End_of_Information_Core& p)
+{
+    return End_of_Information_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // END_OF_INFORMATION_CORE_H_INCLUDED
 

@@ -25,78 +25,6 @@ struct Staff_Responsible_distance_Information_from_loop_Core
     Staff_Responsible_distance_Information_from_loop_Core_1   sub_1[31];
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Staff_Responsible_distance_Information_from_loop_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-            << +p.Q_SCALE << ','
-            << +p.Q_NEWCOUNTRY_0 << ','
-            << +p.NID_C_0 << ','
-            << +p.NID_BG_0 << ','
-            << +p.Q_NEWCOUNTRY_1 << ','
-            << +p.NID_C_1 << ','
-            << +p.NID_BG_1 << ','
-            << +p.D_SR << ','
-       << +p.N_ITER_1;
-       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-       {
-           stream << ',' << p.sub_1[i];
-       }
-   
-
-    return stream;
-}
-
-inline bool operator==(const Staff_Responsible_distance_Information_from_loop_Core& a, const Staff_Responsible_distance_Information_from_loop_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.Q_SCALE == b.Q_SCALE);
-    status = status && (a.Q_NEWCOUNTRY_0 == b.Q_NEWCOUNTRY_0);
-
-    if (a.Q_NEWCOUNTRY_0 == 1)
-    {
-        status = status && (a.NID_C_0 == b.NID_C_0);
-    }
-    status = status && (a.NID_BG_0 == b.NID_BG_0);
-    status = status && (a.Q_NEWCOUNTRY_1 == b.Q_NEWCOUNTRY_1);
-
-    if (a.Q_NEWCOUNTRY_1 == 1)
-    {
-        status = status && (a.NID_C_1 == b.NID_C_1);
-    }
-    status = status && (a.NID_BG_1 == b.NID_BG_1);
-    status = status && (a.D_SR == b.D_SR);
-    status = status && (a.N_ITER_1 == b.N_ITER_1);
-    if (a.N_ITER_1 == b.N_ITER_1)
-    {
-        for (uint32_t i = 0; i < a.N_ITER_1; ++i)
-        {
-            status = status && (a.sub_1[i] == b.sub_1[i]);
-        }
-    }
-    else
-    {
-        status = false;
-    }
-
-    return status;
-}
-
-inline bool operator!=(const Staff_Responsible_distance_Information_from_loop_Core& a, const Staff_Responsible_distance_Information_from_loop_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Staff_Responsible_distance_Information_from_loop_Core Staff_Responsible_distance_Information_from_loop_Core;
 
 #define STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_BITSIZE 67
@@ -221,6 +149,83 @@ int Staff_Responsible_distance_Information_from_loop_Encoder(Bitstream* stream, 
     disjoint behaviors;
 */
 int Staff_Responsible_distance_Information_from_loop_Decoder(Bitstream* stream, Staff_Responsible_distance_Information_from_loop_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Staff_Responsible_distance_Information_from_loop_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.Q_NEWCOUNTRY_0 << ','
+            << +p.NID_C_0 << ','
+            << +p.NID_BG_0 << ','
+            << +p.Q_NEWCOUNTRY_1 << ','
+            << +p.NID_C_1 << ','
+            << +p.NID_BG_1 << ','
+            << +p.D_SR << ','
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
+   
+
+    return stream;
+}
+
+inline bool operator==(const Staff_Responsible_distance_Information_from_loop_Core& a, const Staff_Responsible_distance_Information_from_loop_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SCALE == b.Q_SCALE);
+    status = status && (a.Q_NEWCOUNTRY_0 == b.Q_NEWCOUNTRY_0);
+
+    if (a.Q_NEWCOUNTRY_0 == 1)
+    {
+        status = status && (a.NID_C_0 == b.NID_C_0);
+    }
+    status = status && (a.NID_BG_0 == b.NID_BG_0);
+    status = status && (a.Q_NEWCOUNTRY_1 == b.Q_NEWCOUNTRY_1);
+
+    if (a.Q_NEWCOUNTRY_1 == 1)
+    {
+        status = status && (a.NID_C_1 == b.NID_C_1);
+    }
+    status = status && (a.NID_BG_1 == b.NID_BG_1);
+    status = status && (a.D_SR == b.D_SR);
+    status = status && (a.N_ITER_1 == b.N_ITER_1);
+    if (a.N_ITER_1 == b.N_ITER_1)
+    {
+        for (uint32_t i = 0; i < a.N_ITER_1; ++i)
+        {
+            status = status && (a.sub_1[i] == b.sub_1[i]);
+        }
+    }
+    else
+    {
+        status = false;
+    }
+
+    return status;
+}
+
+inline bool operator!=(const Staff_Responsible_distance_Information_from_loop_Core& a, const Staff_Responsible_distance_Information_from_loop_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Staff_Responsible_distance_Information_from_loop_Core& p)
+{
+    return Staff_Responsible_distance_Information_from_loop_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_H_INCLUDED
 

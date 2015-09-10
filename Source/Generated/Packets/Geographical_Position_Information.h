@@ -31,6 +31,12 @@ struct Geographical_Position_Information : public BasePacket
     {
         return  core.L_PACKET;
     }
+
+    int encode(Bitstream& stream) const override
+    {
+        return ::encode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Geographical_Position_Information> Geographical_Position_InformationPtr;

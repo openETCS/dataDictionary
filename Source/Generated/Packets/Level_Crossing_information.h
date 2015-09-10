@@ -31,6 +31,12 @@ struct Level_Crossing_information : public BasePacket
     {
         return  core.L_PACKET;
     }
+
+    int encode(Bitstream& stream) const override
+    {
+        return ::encode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Level_Crossing_information> Level_Crossing_informationPtr;

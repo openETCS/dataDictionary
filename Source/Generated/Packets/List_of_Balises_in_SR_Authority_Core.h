@@ -18,54 +18,6 @@ struct List_of_Balises_in_SR_Authority_Core
     List_of_Balises_in_SR_Authority_Core_1   sub_1[31];
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const List_of_Balises_in_SR_Authority_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-       << +p.N_ITER_1;
-       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-       {
-           stream << ',' << p.sub_1[i];
-       }
-   
-
-    return stream;
-}
-
-inline bool operator==(const List_of_Balises_in_SR_Authority_Core& a, const List_of_Balises_in_SR_Authority_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.N_ITER_1 == b.N_ITER_1);
-    if (a.N_ITER_1 == b.N_ITER_1)
-    {
-        for (uint32_t i = 0; i < a.N_ITER_1; ++i)
-        {
-            status = status && (a.sub_1[i] == b.sub_1[i]);
-        }
-    }
-    else
-    {
-        status = false;
-    }
-
-    return status;
-}
-
-inline bool operator!=(const List_of_Balises_in_SR_Authority_Core& a, const List_of_Balises_in_SR_Authority_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct List_of_Balises_in_SR_Authority_Core List_of_Balises_in_SR_Authority_Core;
 
 #define LIST_OF_BALISES_IN_SR_AUTHORITY_CORE_BITSIZE 20
@@ -182,6 +134,59 @@ int List_of_Balises_in_SR_Authority_Encoder(Bitstream* stream, const List_of_Bal
     disjoint behaviors;
 */
 int List_of_Balises_in_SR_Authority_Decoder(Bitstream* stream, List_of_Balises_in_SR_Authority_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const List_of_Balises_in_SR_Authority_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
+   
+
+    return stream;
+}
+
+inline bool operator==(const List_of_Balises_in_SR_Authority_Core& a, const List_of_Balises_in_SR_Authority_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.N_ITER_1 == b.N_ITER_1);
+    if (a.N_ITER_1 == b.N_ITER_1)
+    {
+        for (uint32_t i = 0; i < a.N_ITER_1; ++i)
+        {
+            status = status && (a.sub_1[i] == b.sub_1[i]);
+        }
+    }
+    else
+    {
+        status = false;
+    }
+
+    return status;
+}
+
+inline bool operator!=(const List_of_Balises_in_SR_Authority_Core& a, const List_of_Balises_in_SR_Authority_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const List_of_Balises_in_SR_Authority_Core& p)
+{
+    return List_of_Balises_in_SR_Authority_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // LIST_OF_BALISES_IN_SR_AUTHORITY_CORE_H_INCLUDED
 

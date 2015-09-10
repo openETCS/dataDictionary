@@ -31,6 +31,12 @@ struct Radio_infill_area_information : public BasePacket
     {
         return  core.L_PACKET;
     }
+
+    int encode(Bitstream& stream) const override
+    {
+        return ::encode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Radio_infill_area_information> Radio_infill_area_informationPtr;

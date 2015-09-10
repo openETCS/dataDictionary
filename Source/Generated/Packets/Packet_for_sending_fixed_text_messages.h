@@ -31,6 +31,12 @@ struct Packet_for_sending_fixed_text_messages : public BasePacket
     {
         return  core.L_PACKET;
     }
+
+    int encode(Bitstream& stream) const override
+    {
+        return ::encode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Packet_for_sending_fixed_text_messages> Packet_for_sending_fixed_text_messagesPtr;

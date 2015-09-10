@@ -15,38 +15,6 @@ struct Danger_for_Shunting_information_Core
     uint64_t   Q_ASPECT;         // # 1
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Danger_for_Shunting_information_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-            << +p.Q_ASPECT;
-
-    return stream;
-}
-
-inline bool operator==(const Danger_for_Shunting_information_Core& a, const Danger_for_Shunting_information_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.Q_ASPECT == b.Q_ASPECT);
-
-    return status;
-}
-
-inline bool operator!=(const Danger_for_Shunting_information_Core& a, const Danger_for_Shunting_information_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Danger_for_Shunting_information_Core Danger_for_Shunting_information_Core;
 
 #define DANGER_FOR_SHUNTING_INFORMATION_CORE_BITSIZE 16
@@ -167,6 +135,43 @@ int Danger_for_Shunting_information_Encoder(Bitstream* stream, const Danger_for_
     disjoint behaviors;
 */
 int Danger_for_Shunting_information_Decoder(Bitstream* stream, Danger_for_Shunting_information_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Danger_for_Shunting_information_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_ASPECT;
+
+    return stream;
+}
+
+inline bool operator==(const Danger_for_Shunting_information_Core& a, const Danger_for_Shunting_information_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_ASPECT == b.Q_ASPECT);
+
+    return status;
+}
+
+inline bool operator!=(const Danger_for_Shunting_information_Core& a, const Danger_for_Shunting_information_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Danger_for_Shunting_information_Core& p)
+{
+    return Danger_for_Shunting_information_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // DANGER_FOR_SHUNTING_INFORMATION_CORE_H_INCLUDED
 

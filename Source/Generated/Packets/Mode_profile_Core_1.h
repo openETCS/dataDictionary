@@ -15,44 +15,6 @@ struct Mode_profile_Core_1
     uint64_t   Q_MAMODE;         // # 1
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Mode_profile_Core_1& p)
-{
-    stream
-            << +p.D_MAMODE << ','
-            << +p.M_MAMODE << ','
-            << +p.V_MAMODE << ','
-            << +p.L_MAMODE << ','
-            << +p.L_ACKMAMODE << ','
-            << +p.Q_MAMODE;
-
-    return stream;
-}
-
-inline bool operator==(const Mode_profile_Core_1& a, const Mode_profile_Core_1& b)
-{
-    bool status = true;
-
-    status = status && (a.D_MAMODE == b.D_MAMODE);
-    status = status && (a.M_MAMODE == b.M_MAMODE);
-    status = status && (a.V_MAMODE == b.V_MAMODE);
-    status = status && (a.L_MAMODE == b.L_MAMODE);
-    status = status && (a.L_ACKMAMODE == b.L_ACKMAMODE);
-    status = status && (a.Q_MAMODE == b.Q_MAMODE);
-
-    return status;
-}
-
-inline bool operator!=(const Mode_profile_Core_1& a, const Mode_profile_Core_1& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Mode_profile_Core_1 Mode_profile_Core_1;
 
 #define MODE_PROFILE_CORE_1_CORE_BITSIZE 55
@@ -185,6 +147,49 @@ int Mode_profile_Core_1_Encoder(Bitstream* stream, const Mode_profile_Core_1* p)
     disjoint behaviors;
 */
 int Mode_profile_Core_1_Decoder(Bitstream* stream, Mode_profile_Core_1* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Mode_profile_Core_1& p)
+{
+    stream
+            << +p.D_MAMODE << ','
+            << +p.M_MAMODE << ','
+            << +p.V_MAMODE << ','
+            << +p.L_MAMODE << ','
+            << +p.L_ACKMAMODE << ','
+            << +p.Q_MAMODE;
+
+    return stream;
+}
+
+inline bool operator==(const Mode_profile_Core_1& a, const Mode_profile_Core_1& b)
+{
+    bool status = true;
+
+    status = status && (a.D_MAMODE == b.D_MAMODE);
+    status = status && (a.M_MAMODE == b.M_MAMODE);
+    status = status && (a.V_MAMODE == b.V_MAMODE);
+    status = status && (a.L_MAMODE == b.L_MAMODE);
+    status = status && (a.L_ACKMAMODE == b.L_ACKMAMODE);
+    status = status && (a.Q_MAMODE == b.Q_MAMODE);
+
+    return status;
+}
+
+inline bool operator!=(const Mode_profile_Core_1& a, const Mode_profile_Core_1& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Mode_profile_Core_1& p)
+{
+    return Mode_profile_Core_1_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // MODE_PROFILE_CORE_1_CORE_H_INCLUDED
 

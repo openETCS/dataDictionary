@@ -11,36 +11,6 @@ struct Position_Report_Parameters_Core_1
     uint64_t   Q_LGTLOC;         // # 1
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Position_Report_Parameters_Core_1& p)
-{
-    stream
-            << +p.D_LOC << ','
-            << +p.Q_LGTLOC;
-
-    return stream;
-}
-
-inline bool operator==(const Position_Report_Parameters_Core_1& a, const Position_Report_Parameters_Core_1& b)
-{
-    bool status = true;
-
-    status = status && (a.D_LOC == b.D_LOC);
-    status = status && (a.Q_LGTLOC == b.Q_LGTLOC);
-
-    return status;
-}
-
-inline bool operator!=(const Position_Report_Parameters_Core_1& a, const Position_Report_Parameters_Core_1& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Position_Report_Parameters_Core_1 Position_Report_Parameters_Core_1;
 
 #define POSITION_REPORT_PARAMETERS_CORE_1_CORE_BITSIZE 16
@@ -157,6 +127,41 @@ int Position_Report_Parameters_Core_1_Encoder(Bitstream* stream, const Position_
     disjoint behaviors;
 */
 int Position_Report_Parameters_Core_1_Decoder(Bitstream* stream, Position_Report_Parameters_Core_1* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Position_Report_Parameters_Core_1& p)
+{
+    stream
+            << +p.D_LOC << ','
+            << +p.Q_LGTLOC;
+
+    return stream;
+}
+
+inline bool operator==(const Position_Report_Parameters_Core_1& a, const Position_Report_Parameters_Core_1& b)
+{
+    bool status = true;
+
+    status = status && (a.D_LOC == b.D_LOC);
+    status = status && (a.Q_LGTLOC == b.Q_LGTLOC);
+
+    return status;
+}
+
+inline bool operator!=(const Position_Report_Parameters_Core_1& a, const Position_Report_Parameters_Core_1& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Position_Report_Parameters_Core_1& p)
+{
+    return Position_Report_Parameters_Core_1_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // POSITION_REPORT_PARAMETERS_CORE_1_CORE_H_INCLUDED
 

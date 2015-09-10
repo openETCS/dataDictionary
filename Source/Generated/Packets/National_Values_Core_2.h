@@ -11,36 +11,6 @@ struct National_Values_Core_2
     uint64_t   M_NVKVINT;        // # 7
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const National_Values_Core_2& p)
-{
-    stream
-            << +p.V_NVKVINT << ','
-            << +p.M_NVKVINT;
-
-    return stream;
-}
-
-inline bool operator==(const National_Values_Core_2& a, const National_Values_Core_2& b)
-{
-    bool status = true;
-
-    status = status && (a.V_NVKVINT == b.V_NVKVINT);
-    status = status && (a.M_NVKVINT == b.M_NVKVINT);
-
-    return status;
-}
-
-inline bool operator!=(const National_Values_Core_2& a, const National_Values_Core_2& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct National_Values_Core_2 National_Values_Core_2;
 
 #define NATIONAL_VALUES_CORE_2_CORE_BITSIZE 14
@@ -157,6 +127,41 @@ int National_Values_Core_2_Encoder(Bitstream* stream, const National_Values_Core
     disjoint behaviors;
 */
 int National_Values_Core_2_Decoder(Bitstream* stream, National_Values_Core_2* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const National_Values_Core_2& p)
+{
+    stream
+            << +p.V_NVKVINT << ','
+            << +p.M_NVKVINT;
+
+    return stream;
+}
+
+inline bool operator==(const National_Values_Core_2& a, const National_Values_Core_2& b)
+{
+    bool status = true;
+
+    status = status && (a.V_NVKVINT == b.V_NVKVINT);
+    status = status && (a.M_NVKVINT == b.M_NVKVINT);
+
+    return status;
+}
+
+inline bool operator!=(const National_Values_Core_2& a, const National_Values_Core_2& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const National_Values_Core_2& p)
+{
+    return National_Values_Core_2_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // NATIONAL_VALUES_CORE_2_CORE_H_INCLUDED
 

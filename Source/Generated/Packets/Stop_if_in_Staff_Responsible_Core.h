@@ -15,38 +15,6 @@ struct Stop_if_in_Staff_Responsible_Core
     uint64_t   Q_SRSTOP;         // # 1
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Stop_if_in_Staff_Responsible_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-            << +p.Q_SRSTOP;
-
-    return stream;
-}
-
-inline bool operator==(const Stop_if_in_Staff_Responsible_Core& a, const Stop_if_in_Staff_Responsible_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.Q_SRSTOP == b.Q_SRSTOP);
-
-    return status;
-}
-
-inline bool operator!=(const Stop_if_in_Staff_Responsible_Core& a, const Stop_if_in_Staff_Responsible_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Stop_if_in_Staff_Responsible_Core Stop_if_in_Staff_Responsible_Core;
 
 #define STOP_IF_IN_STAFF_RESPONSIBLE_CORE_BITSIZE 16
@@ -167,6 +135,43 @@ int Stop_if_in_Staff_Responsible_Encoder(Bitstream* stream, const Stop_if_in_Sta
     disjoint behaviors;
 */
 int Stop_if_in_Staff_Responsible_Decoder(Bitstream* stream, Stop_if_in_Staff_Responsible_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Stop_if_in_Staff_Responsible_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SRSTOP;
+
+    return stream;
+}
+
+inline bool operator==(const Stop_if_in_Staff_Responsible_Core& a, const Stop_if_in_Staff_Responsible_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SRSTOP == b.Q_SRSTOP);
+
+    return status;
+}
+
+inline bool operator!=(const Stop_if_in_Staff_Responsible_Core& a, const Stop_if_in_Staff_Responsible_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Stop_if_in_Staff_Responsible_Core& p)
+{
+    return Stop_if_in_Staff_Responsible_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // STOP_IF_IN_STAFF_RESPONSIBLE_CORE_H_INCLUDED
 

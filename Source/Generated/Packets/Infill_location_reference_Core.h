@@ -18,46 +18,6 @@ struct Infill_location_reference_Core
     uint64_t  NID_BG;           // # 14
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Infill_location_reference_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-            << +p.Q_NEWCOUNTRY << ','
-            << +p.NID_C << ','
-            << +p.NID_BG;
-
-    return stream;
-}
-
-inline bool operator==(const Infill_location_reference_Core& a, const Infill_location_reference_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.Q_NEWCOUNTRY == b.Q_NEWCOUNTRY);
-
-    if (a.Q_NEWCOUNTRY == 1)
-    {
-        status = status && (a.NID_C == b.NID_C);
-    }
-    status = status && (a.NID_BG == b.NID_BG);
-
-    return status;
-}
-
-inline bool operator!=(const Infill_location_reference_Core& a, const Infill_location_reference_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Infill_location_reference_Core Infill_location_reference_Core;
 
 #define INFILL_LOCATION_REFERENCE_CORE_BITSIZE 30
@@ -178,6 +138,51 @@ int Infill_location_reference_Encoder(Bitstream* stream, const Infill_location_r
     disjoint behaviors;
 */
 int Infill_location_reference_Decoder(Bitstream* stream, Infill_location_reference_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Infill_location_reference_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_NEWCOUNTRY << ','
+            << +p.NID_C << ','
+            << +p.NID_BG;
+
+    return stream;
+}
+
+inline bool operator==(const Infill_location_reference_Core& a, const Infill_location_reference_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_NEWCOUNTRY == b.Q_NEWCOUNTRY);
+
+    if (a.Q_NEWCOUNTRY == 1)
+    {
+        status = status && (a.NID_C == b.NID_C);
+    }
+    status = status && (a.NID_BG == b.NID_BG);
+
+    return status;
+}
+
+inline bool operator!=(const Infill_location_reference_Core& a, const Infill_location_reference_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Infill_location_reference_Core& p)
+{
+    return Infill_location_reference_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // INFILL_LOCATION_REFERENCE_CORE_H_INCLUDED
 

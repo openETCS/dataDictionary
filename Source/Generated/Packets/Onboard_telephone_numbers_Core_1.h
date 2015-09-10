@@ -10,34 +10,6 @@ struct Onboard_telephone_numbers_Core_1
     uint64_t  NID_RADIO;        // # 64
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Onboard_telephone_numbers_Core_1& p)
-{
-    stream
-            << +p.NID_RADIO;
-
-    return stream;
-}
-
-inline bool operator==(const Onboard_telephone_numbers_Core_1& a, const Onboard_telephone_numbers_Core_1& b)
-{
-    bool status = true;
-
-    status = status && (a.NID_RADIO == b.NID_RADIO);
-
-    return status;
-}
-
-inline bool operator!=(const Onboard_telephone_numbers_Core_1& a, const Onboard_telephone_numbers_Core_1& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Onboard_telephone_numbers_Core_1 Onboard_telephone_numbers_Core_1;
 
 #define ONBOARD_TELEPHONE_NUMBERS_CORE_1_CORE_BITSIZE 64
@@ -150,6 +122,39 @@ int Onboard_telephone_numbers_Core_1_Encoder(Bitstream* stream, const Onboard_te
     disjoint behaviors;
 */
 int Onboard_telephone_numbers_Core_1_Decoder(Bitstream* stream, Onboard_telephone_numbers_Core_1* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Onboard_telephone_numbers_Core_1& p)
+{
+    stream
+            << +p.NID_RADIO;
+
+    return stream;
+}
+
+inline bool operator==(const Onboard_telephone_numbers_Core_1& a, const Onboard_telephone_numbers_Core_1& b)
+{
+    bool status = true;
+
+    status = status && (a.NID_RADIO == b.NID_RADIO);
+
+    return status;
+}
+
+inline bool operator!=(const Onboard_telephone_numbers_Core_1& a, const Onboard_telephone_numbers_Core_1& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Onboard_telephone_numbers_Core_1& p)
+{
+    return Onboard_telephone_numbers_Core_1_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // ONBOARD_TELEPHONE_NUMBERS_CORE_1_CORE_H_INCLUDED
 

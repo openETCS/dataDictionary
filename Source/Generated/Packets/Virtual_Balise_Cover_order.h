@@ -31,6 +31,12 @@ struct Virtual_Balise_Cover_order : public BasePacket
     {
         return  core.L_PACKET;
     }
+
+    int encode(Bitstream& stream) const override
+    {
+        return ::encode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Virtual_Balise_Cover_order> Virtual_Balise_Cover_orderPtr;

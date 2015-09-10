@@ -11,40 +11,6 @@ struct Validated_train_data_Core_1
     uint64_t  NID_CTRACTION;    // # 10
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Validated_train_data_Core_1& p)
-{
-    stream
-            << +p.M_VOLTAGE << ','
-            << +p.NID_CTRACTION;
-
-    return stream;
-}
-
-inline bool operator==(const Validated_train_data_Core_1& a, const Validated_train_data_Core_1& b)
-{
-    bool status = true;
-
-    status = status && (a.M_VOLTAGE == b.M_VOLTAGE);
-
-    if ((a.M_VOLTAGE != 0) && (a.NID_CTRACTION != 0))
-    {
-        status = status && (a.NID_CTRACTION == b.NID_CTRACTION);
-    }
-
-    return status;
-}
-
-inline bool operator!=(const Validated_train_data_Core_1& a, const Validated_train_data_Core_1& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Validated_train_data_Core_1 Validated_train_data_Core_1;
 
 #define VALIDATED_TRAIN_DATA_CORE_1_CORE_BITSIZE 4
@@ -157,6 +123,45 @@ int Validated_train_data_Core_1_Encoder(Bitstream* stream, const Validated_train
     disjoint behaviors;
 */
 int Validated_train_data_Core_1_Decoder(Bitstream* stream, Validated_train_data_Core_1* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Validated_train_data_Core_1& p)
+{
+    stream
+            << +p.M_VOLTAGE << ','
+            << +p.NID_CTRACTION;
+
+    return stream;
+}
+
+inline bool operator==(const Validated_train_data_Core_1& a, const Validated_train_data_Core_1& b)
+{
+    bool status = true;
+
+    status = status && (a.M_VOLTAGE == b.M_VOLTAGE);
+
+    if ((a.M_VOLTAGE != 0) && (a.NID_CTRACTION != 0))
+    {
+        status = status && (a.NID_CTRACTION == b.NID_CTRACTION);
+    }
+
+    return status;
+}
+
+inline bool operator!=(const Validated_train_data_Core_1& a, const Validated_train_data_Core_1& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Validated_train_data_Core_1& p)
+{
+    return Validated_train_data_Core_1_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // VALIDATED_TRAIN_DATA_CORE_1_CORE_H_INCLUDED
 

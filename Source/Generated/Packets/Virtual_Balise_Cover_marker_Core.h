@@ -14,34 +14,6 @@ struct Virtual_Balise_Cover_marker_Core
     uint64_t   NID_VBCMK;        // # 6
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Virtual_Balise_Cover_marker_Core& p)
-{
-    stream
-            << +p.NID_VBCMK;
-
-    return stream;
-}
-
-inline bool operator==(const Virtual_Balise_Cover_marker_Core& a, const Virtual_Balise_Cover_marker_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.NID_VBCMK == b.NID_VBCMK);
-
-    return status;
-}
-
-inline bool operator!=(const Virtual_Balise_Cover_marker_Core& a, const Virtual_Balise_Cover_marker_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Virtual_Balise_Cover_marker_Core Virtual_Balise_Cover_marker_Core;
 
 #define VIRTUAL_BALISE_COVER_MARKER_CORE_BITSIZE 6
@@ -154,6 +126,39 @@ int Virtual_Balise_Cover_marker_Encoder(Bitstream* stream, const Virtual_Balise_
     disjoint behaviors;
 */
 int Virtual_Balise_Cover_marker_Decoder(Bitstream* stream, Virtual_Balise_Cover_marker_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Virtual_Balise_Cover_marker_Core& p)
+{
+    stream
+            << +p.NID_VBCMK;
+
+    return stream;
+}
+
+inline bool operator==(const Virtual_Balise_Cover_marker_Core& a, const Virtual_Balise_Cover_marker_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.NID_VBCMK == b.NID_VBCMK);
+
+    return status;
+}
+
+inline bool operator!=(const Virtual_Balise_Cover_marker_Core& a, const Virtual_Balise_Cover_marker_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Virtual_Balise_Cover_marker_Core& p)
+{
+    return Virtual_Balise_Cover_marker_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // VIRTUAL_BALISE_COVER_MARKER_CORE_H_INCLUDED
 

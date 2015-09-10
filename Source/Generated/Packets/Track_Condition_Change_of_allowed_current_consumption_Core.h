@@ -17,42 +17,6 @@ struct Track_Condition_Change_of_allowed_current_consumption_Core
     uint64_t  M_CURRENT;        // # 10
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Change_of_allowed_current_consumption_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-            << +p.Q_SCALE << ','
-            << +p.D_CURRENT << ','
-            << +p.M_CURRENT;
-
-    return stream;
-}
-
-inline bool operator==(const Track_Condition_Change_of_allowed_current_consumption_Core& a, const Track_Condition_Change_of_allowed_current_consumption_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.Q_SCALE == b.Q_SCALE);
-    status = status && (a.D_CURRENT == b.D_CURRENT);
-    status = status && (a.M_CURRENT == b.M_CURRENT);
-
-    return status;
-}
-
-inline bool operator!=(const Track_Condition_Change_of_allowed_current_consumption_Core& a, const Track_Condition_Change_of_allowed_current_consumption_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Track_Condition_Change_of_allowed_current_consumption_Core Track_Condition_Change_of_allowed_current_consumption_Core;
 
 #define TRACK_CONDITION_CHANGE_OF_ALLOWED_CURRENT_CONSUMPTION_CORE_BITSIZE 42
@@ -181,6 +145,47 @@ int Track_Condition_Change_of_allowed_current_consumption_Encoder(Bitstream* str
     disjoint behaviors;
 */
 int Track_Condition_Change_of_allowed_current_consumption_Decoder(Bitstream* stream, Track_Condition_Change_of_allowed_current_consumption_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Change_of_allowed_current_consumption_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.D_CURRENT << ','
+            << +p.M_CURRENT;
+
+    return stream;
+}
+
+inline bool operator==(const Track_Condition_Change_of_allowed_current_consumption_Core& a, const Track_Condition_Change_of_allowed_current_consumption_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SCALE == b.Q_SCALE);
+    status = status && (a.D_CURRENT == b.D_CURRENT);
+    status = status && (a.M_CURRENT == b.M_CURRENT);
+
+    return status;
+}
+
+inline bool operator!=(const Track_Condition_Change_of_allowed_current_consumption_Core& a, const Track_Condition_Change_of_allowed_current_consumption_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Track_Condition_Change_of_allowed_current_consumption_Core& p)
+{
+    return Track_Condition_Change_of_allowed_current_consumption_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // TRACK_CONDITION_CHANGE_OF_ALLOWED_CURRENT_CONSUMPTION_CORE_H_INCLUDED
 

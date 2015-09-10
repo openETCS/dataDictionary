@@ -14,36 +14,6 @@ struct Stop_Shunting_on_desk_opening_Core
     uint64_t  L_PACKET;         // # 13
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Stop_Shunting_on_desk_opening_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET;
-
-    return stream;
-}
-
-inline bool operator==(const Stop_Shunting_on_desk_opening_Core& a, const Stop_Shunting_on_desk_opening_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-
-    return status;
-}
-
-inline bool operator!=(const Stop_Shunting_on_desk_opening_Core& a, const Stop_Shunting_on_desk_opening_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Stop_Shunting_on_desk_opening_Core Stop_Shunting_on_desk_opening_Core;
 
 #define STOP_SHUNTING_ON_DESK_OPENING_CORE_BITSIZE 15
@@ -160,6 +130,41 @@ int Stop_Shunting_on_desk_opening_Encoder(Bitstream* stream, const Stop_Shunting
     disjoint behaviors;
 */
 int Stop_Shunting_on_desk_opening_Decoder(Bitstream* stream, Stop_Shunting_on_desk_opening_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Stop_Shunting_on_desk_opening_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET;
+
+    return stream;
+}
+
+inline bool operator==(const Stop_Shunting_on_desk_opening_Core& a, const Stop_Shunting_on_desk_opening_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+
+    return status;
+}
+
+inline bool operator!=(const Stop_Shunting_on_desk_opening_Core& a, const Stop_Shunting_on_desk_opening_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Stop_Shunting_on_desk_opening_Core& p)
+{
+    return Stop_Shunting_on_desk_opening_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // STOP_SHUNTING_ON_DESK_OPENING_CORE_H_INCLUDED
 

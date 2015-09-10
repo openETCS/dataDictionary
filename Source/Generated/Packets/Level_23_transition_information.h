@@ -31,6 +31,12 @@ struct Level_23_transition_information : public BasePacket
     {
         return  core.L_PACKET;
     }
+
+    int encode(Bitstream& stream) const override
+    {
+        return ::encode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Level_23_transition_information> Level_23_transition_informationPtr;

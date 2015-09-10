@@ -15,38 +15,6 @@ struct Train_running_number_from_RBC_Core
     uint64_t  NID_OPERATIONAL;  // # 32
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Train_running_number_from_RBC_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-            << +p.NID_OPERATIONAL;
-
-    return stream;
-}
-
-inline bool operator==(const Train_running_number_from_RBC_Core& a, const Train_running_number_from_RBC_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.NID_OPERATIONAL == b.NID_OPERATIONAL);
-
-    return status;
-}
-
-inline bool operator!=(const Train_running_number_from_RBC_Core& a, const Train_running_number_from_RBC_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Train_running_number_from_RBC_Core Train_running_number_from_RBC_Core;
 
 #define TRAIN_RUNNING_NUMBER_FROM_RBC_CORE_BITSIZE 47
@@ -167,6 +135,43 @@ int Train_running_number_from_RBC_Encoder(Bitstream* stream, const Train_running
     disjoint behaviors;
 */
 int Train_running_number_from_RBC_Decoder(Bitstream* stream, Train_running_number_from_RBC_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Train_running_number_from_RBC_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.NID_OPERATIONAL;
+
+    return stream;
+}
+
+inline bool operator==(const Train_running_number_from_RBC_Core& a, const Train_running_number_from_RBC_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.NID_OPERATIONAL == b.NID_OPERATIONAL);
+
+    return status;
+}
+
+inline bool operator!=(const Train_running_number_from_RBC_Core& a, const Train_running_number_from_RBC_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Train_running_number_from_RBC_Core& p)
+{
+    return Train_running_number_from_RBC_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // TRAIN_RUNNING_NUMBER_FROM_RBC_CORE_H_INCLUDED
 

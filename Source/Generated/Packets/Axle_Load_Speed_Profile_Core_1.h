@@ -11,36 +11,6 @@ struct Axle_Load_Speed_Profile_Core_1
     uint64_t   V_AXLELOAD;       // # 7
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Axle_Load_Speed_Profile_Core_1& p)
-{
-    stream
-            << +p.M_AXLELOADCAT << ','
-            << +p.V_AXLELOAD;
-
-    return stream;
-}
-
-inline bool operator==(const Axle_Load_Speed_Profile_Core_1& a, const Axle_Load_Speed_Profile_Core_1& b)
-{
-    bool status = true;
-
-    status = status && (a.M_AXLELOADCAT == b.M_AXLELOADCAT);
-    status = status && (a.V_AXLELOAD == b.V_AXLELOAD);
-
-    return status;
-}
-
-inline bool operator!=(const Axle_Load_Speed_Profile_Core_1& a, const Axle_Load_Speed_Profile_Core_1& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Axle_Load_Speed_Profile_Core_1 Axle_Load_Speed_Profile_Core_1;
 
 #define AXLE_LOAD_SPEED_PROFILE_CORE_1_CORE_BITSIZE 14
@@ -157,6 +127,41 @@ int Axle_Load_Speed_Profile_Core_1_Encoder(Bitstream* stream, const Axle_Load_Sp
     disjoint behaviors;
 */
 int Axle_Load_Speed_Profile_Core_1_Decoder(Bitstream* stream, Axle_Load_Speed_Profile_Core_1* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Axle_Load_Speed_Profile_Core_1& p)
+{
+    stream
+            << +p.M_AXLELOADCAT << ','
+            << +p.V_AXLELOAD;
+
+    return stream;
+}
+
+inline bool operator==(const Axle_Load_Speed_Profile_Core_1& a, const Axle_Load_Speed_Profile_Core_1& b)
+{
+    bool status = true;
+
+    status = status && (a.M_AXLELOADCAT == b.M_AXLELOADCAT);
+    status = status && (a.V_AXLELOAD == b.V_AXLELOAD);
+
+    return status;
+}
+
+inline bool operator!=(const Axle_Load_Speed_Profile_Core_1& a, const Axle_Load_Speed_Profile_Core_1& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Axle_Load_Speed_Profile_Core_1& p)
+{
+    return Axle_Load_Speed_Profile_Core_1_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // AXLE_LOAD_SPEED_PROFILE_CORE_1_CORE_H_INCLUDED
 

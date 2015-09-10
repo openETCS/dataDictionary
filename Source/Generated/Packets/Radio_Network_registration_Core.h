@@ -16,38 +16,6 @@ struct Radio_Network_registration_Core
     uint64_t  NID_MN;           // # 24
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Radio_Network_registration_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-            << +p.NID_MN;
-
-    return stream;
-}
-
-inline bool operator==(const Radio_Network_registration_Core& a, const Radio_Network_registration_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.NID_MN == b.NID_MN);
-
-    return status;
-}
-
-inline bool operator!=(const Radio_Network_registration_Core& a, const Radio_Network_registration_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Radio_Network_registration_Core Radio_Network_registration_Core;
 
 #define RADIO_NETWORK_REGISTRATION_CORE_BITSIZE 39
@@ -168,6 +136,43 @@ int Radio_Network_registration_Encoder(Bitstream* stream, const Radio_Network_re
     disjoint behaviors;
 */
 int Radio_Network_registration_Decoder(Bitstream* stream, Radio_Network_registration_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Radio_Network_registration_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.NID_MN;
+
+    return stream;
+}
+
+inline bool operator==(const Radio_Network_registration_Core& a, const Radio_Network_registration_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.NID_MN == b.NID_MN);
+
+    return status;
+}
+
+inline bool operator!=(const Radio_Network_registration_Core& a, const Radio_Network_registration_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Radio_Network_registration_Core& p)
+{
+    return Radio_Network_registration_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // RADIO_NETWORK_REGISTRATION_CORE_H_INCLUDED
 

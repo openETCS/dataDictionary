@@ -31,6 +31,12 @@ struct Level_1_Movement_Authority : public BasePacket
     {
         return  core.L_PACKET;
     }
+
+    int encode(Bitstream& stream) const override
+    {
+        return ::encode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Level_1_Movement_Authority> Level_1_Movement_AuthorityPtr;

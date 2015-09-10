@@ -18,42 +18,6 @@ struct Reversing_area_information_Core
     uint64_t  L_REVERSEAREA;    // # 15
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Reversing_area_information_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-            << +p.Q_SCALE << ','
-            << +p.D_STARTREVERSE << ','
-            << +p.L_REVERSEAREA;
-
-    return stream;
-}
-
-inline bool operator==(const Reversing_area_information_Core& a, const Reversing_area_information_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.Q_SCALE == b.Q_SCALE);
-    status = status && (a.D_STARTREVERSE == b.D_STARTREVERSE);
-    status = status && (a.L_REVERSEAREA == b.L_REVERSEAREA);
-
-    return status;
-}
-
-inline bool operator!=(const Reversing_area_information_Core& a, const Reversing_area_information_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Reversing_area_information_Core Reversing_area_information_Core;
 
 #define REVERSING_AREA_INFORMATION_CORE_BITSIZE 47
@@ -182,6 +146,47 @@ int Reversing_area_information_Encoder(Bitstream* stream, const Reversing_area_i
     disjoint behaviors;
 */
 int Reversing_area_information_Decoder(Bitstream* stream, Reversing_area_information_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Reversing_area_information_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.D_STARTREVERSE << ','
+            << +p.L_REVERSEAREA;
+
+    return stream;
+}
+
+inline bool operator==(const Reversing_area_information_Core& a, const Reversing_area_information_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SCALE == b.Q_SCALE);
+    status = status && (a.D_STARTREVERSE == b.D_STARTREVERSE);
+    status = status && (a.L_REVERSEAREA == b.L_REVERSEAREA);
+
+    return status;
+}
+
+inline bool operator!=(const Reversing_area_information_Core& a, const Reversing_area_information_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Reversing_area_information_Core& p)
+{
+    return Reversing_area_information_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // REVERSING_AREA_INFORMATION_CORE_H_INCLUDED
 

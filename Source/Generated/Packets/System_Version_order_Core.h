@@ -16,38 +16,6 @@ struct System_Version_order_Core
     uint64_t   M_VERSION;        // # 7
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const System_Version_order_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-            << +p.M_VERSION;
-
-    return stream;
-}
-
-inline bool operator==(const System_Version_order_Core& a, const System_Version_order_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.M_VERSION == b.M_VERSION);
-
-    return status;
-}
-
-inline bool operator!=(const System_Version_order_Core& a, const System_Version_order_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct System_Version_order_Core System_Version_order_Core;
 
 #define SYSTEM_VERSION_ORDER_CORE_BITSIZE 22
@@ -168,6 +136,43 @@ int System_Version_order_Encoder(Bitstream* stream, const System_Version_order_C
     disjoint behaviors;
 */
 int System_Version_order_Decoder(Bitstream* stream, System_Version_order_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const System_Version_order_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.M_VERSION;
+
+    return stream;
+}
+
+inline bool operator==(const System_Version_order_Core& a, const System_Version_order_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.M_VERSION == b.M_VERSION);
+
+    return status;
+}
+
+inline bool operator!=(const System_Version_order_Core& a, const System_Version_order_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const System_Version_order_Core& p)
+{
+    return System_Version_order_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // SYSTEM_VERSION_ORDER_CORE_H_INCLUDED
 

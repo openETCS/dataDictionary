@@ -31,6 +31,12 @@ struct Session_Management_with_neighbouring_Radio_Infill_Unit : public BasePacke
     {
         return  core.L_PACKET;
     }
+
+    int encode(Bitstream& stream) const override
+    {
+        return ::encode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Session_Management_with_neighbouring_Radio_Infill_Unit> Session_Management_with_neighbouring_Radio_Infill_UnitPtr;

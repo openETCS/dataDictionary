@@ -12,42 +12,6 @@ struct Level_Transition_Order_Core_1
     uint64_t  L_ACKLEVELTR;     // # 15
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Level_Transition_Order_Core_1& p)
-{
-    stream
-            << +p.M_LEVELTR << ','
-            << +p.NID_NTC << ','
-            << +p.L_ACKLEVELTR;
-
-    return stream;
-}
-
-inline bool operator==(const Level_Transition_Order_Core_1& a, const Level_Transition_Order_Core_1& b)
-{
-    bool status = true;
-
-    status = status && (a.M_LEVELTR == b.M_LEVELTR);
-
-    if (a.M_LEVELTR == 1)
-    {
-        status = status && (a.NID_NTC == b.NID_NTC);
-    }
-    status = status && (a.L_ACKLEVELTR == b.L_ACKLEVELTR);
-
-    return status;
-}
-
-inline bool operator!=(const Level_Transition_Order_Core_1& a, const Level_Transition_Order_Core_1& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Level_Transition_Order_Core_1 Level_Transition_Order_Core_1;
 
 #define LEVEL_TRANSITION_ORDER_CORE_1_CORE_BITSIZE 18
@@ -160,6 +124,47 @@ int Level_Transition_Order_Core_1_Encoder(Bitstream* stream, const Level_Transit
     disjoint behaviors;
 */
 int Level_Transition_Order_Core_1_Decoder(Bitstream* stream, Level_Transition_Order_Core_1* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Level_Transition_Order_Core_1& p)
+{
+    stream
+            << +p.M_LEVELTR << ','
+            << +p.NID_NTC << ','
+            << +p.L_ACKLEVELTR;
+
+    return stream;
+}
+
+inline bool operator==(const Level_Transition_Order_Core_1& a, const Level_Transition_Order_Core_1& b)
+{
+    bool status = true;
+
+    status = status && (a.M_LEVELTR == b.M_LEVELTR);
+
+    if (a.M_LEVELTR == 1)
+    {
+        status = status && (a.NID_NTC == b.NID_NTC);
+    }
+    status = status && (a.L_ACKLEVELTR == b.L_ACKLEVELTR);
+
+    return status;
+}
+
+inline bool operator!=(const Level_Transition_Order_Core_1& a, const Level_Transition_Order_Core_1& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Level_Transition_Order_Core_1& p)
+{
+    return Level_Transition_Order_Core_1_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // LEVEL_TRANSITION_ORDER_CORE_1_CORE_H_INCLUDED
 

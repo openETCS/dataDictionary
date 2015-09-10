@@ -16,38 +16,6 @@ struct Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core
     uint64_t   Other_data_depending_on__NID_XUSER;// # 8
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& p)
-{
-    stream
-            << +p.L_PACKET << ','
-            << +p.NID_XUSER << ','
-            << +p.Other_data_depending_on__NID_XUSER;
-
-    return stream;
-}
-
-inline bool operator==(const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& a, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.NID_XUSER == b.NID_XUSER);
-    status = status && (a.Other_data_depending_on__NID_XUSER == b.Other_data_depending_on__NID_XUSER);
-
-    return status;
-}
-
-inline bool operator!=(const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& a, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core;
 
 #define DATA_USED_BY_APPLICATIONS_OUTSIDE_THE_ERTMS_OR_ETCS_SYSTEM_CORE_BITSIZE 30
@@ -168,6 +136,43 @@ int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Encoder(Bitstream
     disjoint behaviors;
 */
 int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Decoder(Bitstream* stream, Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& p)
+{
+    stream
+            << +p.L_PACKET << ','
+            << +p.NID_XUSER << ','
+            << +p.Other_data_depending_on__NID_XUSER;
+
+    return stream;
+}
+
+inline bool operator==(const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& a, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.NID_XUSER == b.NID_XUSER);
+    status = status && (a.Other_data_depending_on__NID_XUSER == b.Other_data_depending_on__NID_XUSER);
+
+    return status;
+}
+
+inline bool operator!=(const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& a, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& p)
+{
+    return Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // DATA_USED_BY_APPLICATIONS_OUTSIDE_THE_ERTMS_OR_ETCS_SYSTEM_CORE_H_INCLUDED
 

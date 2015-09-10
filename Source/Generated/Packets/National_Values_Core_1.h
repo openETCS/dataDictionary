@@ -10,34 +10,6 @@ struct National_Values_Core_1
     uint64_t  NID_C;            // # 10
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const National_Values_Core_1& p)
-{
-    stream
-            << +p.NID_C;
-
-    return stream;
-}
-
-inline bool operator==(const National_Values_Core_1& a, const National_Values_Core_1& b)
-{
-    bool status = true;
-
-    status = status && (a.NID_C == b.NID_C);
-
-    return status;
-}
-
-inline bool operator!=(const National_Values_Core_1& a, const National_Values_Core_1& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct National_Values_Core_1 National_Values_Core_1;
 
 #define NATIONAL_VALUES_CORE_1_CORE_BITSIZE 10
@@ -150,6 +122,39 @@ int National_Values_Core_1_Encoder(Bitstream* stream, const National_Values_Core
     disjoint behaviors;
 */
 int National_Values_Core_1_Decoder(Bitstream* stream, National_Values_Core_1* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const National_Values_Core_1& p)
+{
+    stream
+            << +p.NID_C;
+
+    return stream;
+}
+
+inline bool operator==(const National_Values_Core_1& a, const National_Values_Core_1& b)
+{
+    bool status = true;
+
+    status = status && (a.NID_C == b.NID_C);
+
+    return status;
+}
+
+inline bool operator!=(const National_Values_Core_1& a, const National_Values_Core_1& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const National_Values_Core_1& p)
+{
+    return National_Values_Core_1_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // NATIONAL_VALUES_CORE_1_CORE_H_INCLUDED
 

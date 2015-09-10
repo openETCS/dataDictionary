@@ -31,6 +31,12 @@ struct Stop_Shunting_on_desk_opening : public BasePacket
     {
         return  core.L_PACKET;
     }
+
+    int encode(Bitstream& stream) const override
+    {
+        return ::encode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Stop_Shunting_on_desk_opening> Stop_Shunting_on_desk_openingPtr;

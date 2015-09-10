@@ -28,80 +28,6 @@ struct Permitted_Braking_Distance_Information_Core
     Permitted_Braking_Distance_Information_Core_1   sub_1[31];
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Permitted_Braking_Distance_Information_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-            << +p.Q_SCALE << ','
-            << +p.Q_TRACKINIT << ','
-            << +p.D_TRACKINIT << ','
-            << +p.D_PBD << ','
-            << +p.Q_GDIR << ','
-            << +p.G_PBDSR << ','
-            << +p.Q_PBDSR << ','
-            << +p.D_PBDSR << ','
-            << +p.L_PBDSR << ','
-       << +p.N_ITER_1;
-       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-       {
-           stream << ',' << p.sub_1[i];
-       }
-   
-
-    return stream;
-}
-
-inline bool operator==(const Permitted_Braking_Distance_Information_Core& a, const Permitted_Braking_Distance_Information_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.Q_SCALE == b.Q_SCALE);
-    status = status && (a.Q_TRACKINIT == b.Q_TRACKINIT);
-
-    if (a.Q_TRACKINIT == 1)
-    {
-        status = status && (a.D_TRACKINIT == b.D_TRACKINIT);
-    }
-
-    if (a.Q_TRACKINIT == 0)
-    {
-        status = status && (a.D_PBD == b.D_PBD);
-        status = status && (a.Q_GDIR == b.Q_GDIR);
-        status = status && (a.G_PBDSR == b.G_PBDSR);
-        status = status && (a.Q_PBDSR == b.Q_PBDSR);
-        status = status && (a.D_PBDSR == b.D_PBDSR);
-        status = status && (a.L_PBDSR == b.L_PBDSR);
-    status = status && (a.N_ITER_1 == b.N_ITER_1);
-    if (a.N_ITER_1 == b.N_ITER_1)
-    {
-        for (uint32_t i = 0; i < a.N_ITER_1; ++i)
-        {
-            status = status && (a.sub_1[i] == b.sub_1[i]);
-        }
-    }
-    else
-    {
-        status = false;
-    }
-    }
-
-    return status;
-}
-
-inline bool operator!=(const Permitted_Braking_Distance_Information_Core& a, const Permitted_Braking_Distance_Information_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Permitted_Braking_Distance_Information_Core Permitted_Braking_Distance_Information_Core;
 
 #define PERMITTED_BRAKING_DISTANCE_INFORMATION_CORE_BITSIZE 18
@@ -226,6 +152,85 @@ int Permitted_Braking_Distance_Information_Encoder(Bitstream* stream, const Perm
     disjoint behaviors;
 */
 int Permitted_Braking_Distance_Information_Decoder(Bitstream* stream, Permitted_Braking_Distance_Information_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Permitted_Braking_Distance_Information_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.Q_TRACKINIT << ','
+            << +p.D_TRACKINIT << ','
+            << +p.D_PBD << ','
+            << +p.Q_GDIR << ','
+            << +p.G_PBDSR << ','
+            << +p.Q_PBDSR << ','
+            << +p.D_PBDSR << ','
+            << +p.L_PBDSR << ','
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
+   
+
+    return stream;
+}
+
+inline bool operator==(const Permitted_Braking_Distance_Information_Core& a, const Permitted_Braking_Distance_Information_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SCALE == b.Q_SCALE);
+    status = status && (a.Q_TRACKINIT == b.Q_TRACKINIT);
+
+    if (a.Q_TRACKINIT == 1)
+    {
+        status = status && (a.D_TRACKINIT == b.D_TRACKINIT);
+    }
+
+    if (a.Q_TRACKINIT == 0)
+    {
+        status = status && (a.D_PBD == b.D_PBD);
+        status = status && (a.Q_GDIR == b.Q_GDIR);
+        status = status && (a.G_PBDSR == b.G_PBDSR);
+        status = status && (a.Q_PBDSR == b.Q_PBDSR);
+        status = status && (a.D_PBDSR == b.D_PBDSR);
+        status = status && (a.L_PBDSR == b.L_PBDSR);
+    status = status && (a.N_ITER_1 == b.N_ITER_1);
+    if (a.N_ITER_1 == b.N_ITER_1)
+    {
+        for (uint32_t i = 0; i < a.N_ITER_1; ++i)
+        {
+            status = status && (a.sub_1[i] == b.sub_1[i]);
+        }
+    }
+    else
+    {
+        status = false;
+    }
+    }
+
+    return status;
+}
+
+inline bool operator!=(const Permitted_Braking_Distance_Information_Core& a, const Permitted_Braking_Distance_Information_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Permitted_Braking_Distance_Information_Core& p)
+{
+    return Permitted_Braking_Distance_Information_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // PERMITTED_BRAKING_DISTANCE_INFORMATION_CORE_H_INCLUDED
 

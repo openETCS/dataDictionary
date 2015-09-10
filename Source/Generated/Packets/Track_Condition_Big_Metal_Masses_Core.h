@@ -21,60 +21,6 @@ struct Track_Condition_Big_Metal_Masses_Core
     Track_Condition_Big_Metal_Masses_Core_1   sub_1[31];
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Big_Metal_Masses_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-            << +p.Q_SCALE << ','
-            << +p.D_TRACKCOND << ','
-            << +p.L_TRACKCOND << ','
-       << +p.N_ITER_1;
-       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-       {
-           stream << ',' << p.sub_1[i];
-       }
-   
-
-    return stream;
-}
-
-inline bool operator==(const Track_Condition_Big_Metal_Masses_Core& a, const Track_Condition_Big_Metal_Masses_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.Q_SCALE == b.Q_SCALE);
-    status = status && (a.D_TRACKCOND == b.D_TRACKCOND);
-    status = status && (a.L_TRACKCOND == b.L_TRACKCOND);
-    status = status && (a.N_ITER_1 == b.N_ITER_1);
-    if (a.N_ITER_1 == b.N_ITER_1)
-    {
-        for (uint32_t i = 0; i < a.N_ITER_1; ++i)
-        {
-            status = status && (a.sub_1[i] == b.sub_1[i]);
-        }
-    }
-    else
-    {
-        status = false;
-    }
-
-    return status;
-}
-
-inline bool operator!=(const Track_Condition_Big_Metal_Masses_Core& a, const Track_Condition_Big_Metal_Masses_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Track_Condition_Big_Metal_Masses_Core Track_Condition_Big_Metal_Masses_Core;
 
 #define TRACK_CONDITION_BIG_METAL_MASSES_CORE_BITSIZE 52
@@ -203,6 +149,65 @@ int Track_Condition_Big_Metal_Masses_Encoder(Bitstream* stream, const Track_Cond
     disjoint behaviors;
 */
 int Track_Condition_Big_Metal_Masses_Decoder(Bitstream* stream, Track_Condition_Big_Metal_Masses_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Big_Metal_Masses_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.D_TRACKCOND << ','
+            << +p.L_TRACKCOND << ','
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
+   
+
+    return stream;
+}
+
+inline bool operator==(const Track_Condition_Big_Metal_Masses_Core& a, const Track_Condition_Big_Metal_Masses_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SCALE == b.Q_SCALE);
+    status = status && (a.D_TRACKCOND == b.D_TRACKCOND);
+    status = status && (a.L_TRACKCOND == b.L_TRACKCOND);
+    status = status && (a.N_ITER_1 == b.N_ITER_1);
+    if (a.N_ITER_1 == b.N_ITER_1)
+    {
+        for (uint32_t i = 0; i < a.N_ITER_1; ++i)
+        {
+            status = status && (a.sub_1[i] == b.sub_1[i]);
+        }
+    }
+    else
+    {
+        status = false;
+    }
+
+    return status;
+}
+
+inline bool operator!=(const Track_Condition_Big_Metal_Masses_Core& a, const Track_Condition_Big_Metal_Masses_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Track_Condition_Big_Metal_Masses_Core& p)
+{
+    return Track_Condition_Big_Metal_Masses_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // TRACK_CONDITION_BIG_METAL_MASSES_CORE_H_INCLUDED
 

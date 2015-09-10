@@ -20,46 +20,6 @@ struct Session_Management_Core
     uint64_t   Q_SLEEPSESSION;   // # 1
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Session_Management_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-            << +p.Q_RBC << ','
-            << +p.NID_C << ','
-            << +p.NID_RBC << ','
-            << +p.NID_RADIO << ','
-            << +p.Q_SLEEPSESSION;
-
-    return stream;
-}
-
-inline bool operator==(const Session_Management_Core& a, const Session_Management_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.Q_RBC == b.Q_RBC);
-    status = status && (a.NID_C == b.NID_C);
-    status = status && (a.NID_RBC == b.NID_RBC);
-    status = status && (a.NID_RADIO == b.NID_RADIO);
-    status = status && (a.Q_SLEEPSESSION == b.Q_SLEEPSESSION);
-
-    return status;
-}
-
-inline bool operator!=(const Session_Management_Core& a, const Session_Management_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Session_Management_Core Session_Management_Core;
 
 #define SESSION_MANAGEMENT_CORE_BITSIZE 105
@@ -196,6 +156,51 @@ int Session_Management_Encoder(Bitstream* stream, const Session_Management_Core*
     disjoint behaviors;
 */
 int Session_Management_Decoder(Bitstream* stream, Session_Management_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Session_Management_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_RBC << ','
+            << +p.NID_C << ','
+            << +p.NID_RBC << ','
+            << +p.NID_RADIO << ','
+            << +p.Q_SLEEPSESSION;
+
+    return stream;
+}
+
+inline bool operator==(const Session_Management_Core& a, const Session_Management_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_RBC == b.Q_RBC);
+    status = status && (a.NID_C == b.NID_C);
+    status = status && (a.NID_RBC == b.NID_RBC);
+    status = status && (a.NID_RADIO == b.NID_RADIO);
+    status = status && (a.Q_SLEEPSESSION == b.Q_SLEEPSESSION);
+
+    return status;
+}
+
+inline bool operator!=(const Session_Management_Core& a, const Session_Management_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Session_Management_Core& p)
+{
+    return Session_Management_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // SESSION_MANAGEMENT_CORE_H_INCLUDED
 

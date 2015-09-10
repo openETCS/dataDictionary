@@ -15,56 +15,6 @@ struct Axle_Load_Speed_Profile_Core_2
     Axle_Load_Speed_Profile_Core_2_1   sub_2_1[31];
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Axle_Load_Speed_Profile_Core_2& p)
-{
-    stream
-            << +p.D_AXLELOAD << ','
-            << +p.L_AXLELOAD << ','
-            << +p.Q_FRONT << ','
-       << +p.N_ITER_2_1;
-       for (uint32_t i = 0; i < p.N_ITER_2_1; ++i)
-       {
-           stream << ',' << p.sub_2_1[i];
-       }
-   
-
-    return stream;
-}
-
-inline bool operator==(const Axle_Load_Speed_Profile_Core_2& a, const Axle_Load_Speed_Profile_Core_2& b)
-{
-    bool status = true;
-
-    status = status && (a.D_AXLELOAD == b.D_AXLELOAD);
-    status = status && (a.L_AXLELOAD == b.L_AXLELOAD);
-    status = status && (a.Q_FRONT == b.Q_FRONT);
-    status = status && (a.N_ITER_2_1 == b.N_ITER_2_1);
-    if (a.N_ITER_2_1 == b.N_ITER_2_1)
-    {
-        for (uint32_t i = 0; i < a.N_ITER_2_1; ++i)
-        {
-            status = status && (a.sub_2_1[i] == b.sub_2_1[i]);
-        }
-    }
-    else
-    {
-        status = false;
-    }
-
-    return status;
-}
-
-inline bool operator!=(const Axle_Load_Speed_Profile_Core_2& a, const Axle_Load_Speed_Profile_Core_2& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Axle_Load_Speed_Profile_Core_2 Axle_Load_Speed_Profile_Core_2;
 
 #define AXLE_LOAD_SPEED_PROFILE_CORE_2_CORE_BITSIZE 36
@@ -185,6 +135,61 @@ int Axle_Load_Speed_Profile_Core_2_Encoder(Bitstream* stream, const Axle_Load_Sp
     disjoint behaviors;
 */
 int Axle_Load_Speed_Profile_Core_2_Decoder(Bitstream* stream, Axle_Load_Speed_Profile_Core_2* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Axle_Load_Speed_Profile_Core_2& p)
+{
+    stream
+            << +p.D_AXLELOAD << ','
+            << +p.L_AXLELOAD << ','
+            << +p.Q_FRONT << ','
+       << +p.N_ITER_2_1;
+       for (uint32_t i = 0; i < p.N_ITER_2_1; ++i)
+       {
+           stream << ',' << p.sub_2_1[i];
+       }
+   
+
+    return stream;
+}
+
+inline bool operator==(const Axle_Load_Speed_Profile_Core_2& a, const Axle_Load_Speed_Profile_Core_2& b)
+{
+    bool status = true;
+
+    status = status && (a.D_AXLELOAD == b.D_AXLELOAD);
+    status = status && (a.L_AXLELOAD == b.L_AXLELOAD);
+    status = status && (a.Q_FRONT == b.Q_FRONT);
+    status = status && (a.N_ITER_2_1 == b.N_ITER_2_1);
+    if (a.N_ITER_2_1 == b.N_ITER_2_1)
+    {
+        for (uint32_t i = 0; i < a.N_ITER_2_1; ++i)
+        {
+            status = status && (a.sub_2_1[i] == b.sub_2_1[i]);
+        }
+    }
+    else
+    {
+        status = false;
+    }
+
+    return status;
+}
+
+inline bool operator!=(const Axle_Load_Speed_Profile_Core_2& a, const Axle_Load_Speed_Profile_Core_2& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Axle_Load_Speed_Profile_Core_2& p)
+{
+    return Axle_Load_Speed_Profile_Core_2_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // AXLE_LOAD_SPEED_PROFILE_CORE_2_CORE_H_INCLUDED
 

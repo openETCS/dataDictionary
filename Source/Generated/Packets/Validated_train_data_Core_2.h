@@ -10,34 +10,6 @@ struct Validated_train_data_Core_2
     uint64_t   NID_NTC;          // # 8
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Validated_train_data_Core_2& p)
-{
-    stream
-            << +p.NID_NTC;
-
-    return stream;
-}
-
-inline bool operator==(const Validated_train_data_Core_2& a, const Validated_train_data_Core_2& b)
-{
-    bool status = true;
-
-    status = status && (a.NID_NTC == b.NID_NTC);
-
-    return status;
-}
-
-inline bool operator!=(const Validated_train_data_Core_2& a, const Validated_train_data_Core_2& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Validated_train_data_Core_2 Validated_train_data_Core_2;
 
 #define VALIDATED_TRAIN_DATA_CORE_2_CORE_BITSIZE 8
@@ -150,6 +122,39 @@ int Validated_train_data_Core_2_Encoder(Bitstream* stream, const Validated_train
     disjoint behaviors;
 */
 int Validated_train_data_Core_2_Decoder(Bitstream* stream, Validated_train_data_Core_2* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Validated_train_data_Core_2& p)
+{
+    stream
+            << +p.NID_NTC;
+
+    return stream;
+}
+
+inline bool operator==(const Validated_train_data_Core_2& a, const Validated_train_data_Core_2& b)
+{
+    bool status = true;
+
+    status = status && (a.NID_NTC == b.NID_NTC);
+
+    return status;
+}
+
+inline bool operator!=(const Validated_train_data_Core_2& a, const Validated_train_data_Core_2& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Validated_train_data_Core_2& p)
+{
+    return Validated_train_data_Core_2_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // VALIDATED_TRAIN_DATA_CORE_2_CORE_H_INCLUDED
 

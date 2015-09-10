@@ -15,48 +15,6 @@ struct Geographical_Position_Information_Core_1
     uint64_t  M_POSITION;       // # 24
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Geographical_Position_Information_Core_1& p)
-{
-    stream
-            << +p.Q_NEWCOUNTRY << ','
-            << +p.NID_C << ','
-            << +p.NID_BG << ','
-            << +p.D_POSOFF << ','
-            << +p.Q_MPOSITION << ','
-            << +p.M_POSITION;
-
-    return stream;
-}
-
-inline bool operator==(const Geographical_Position_Information_Core_1& a, const Geographical_Position_Information_Core_1& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_NEWCOUNTRY == b.Q_NEWCOUNTRY);
-
-    if (a.Q_NEWCOUNTRY == 1)
-    {
-        status = status && (a.NID_C == b.NID_C);
-    }
-    status = status && (a.NID_BG == b.NID_BG);
-    status = status && (a.D_POSOFF == b.D_POSOFF);
-    status = status && (a.Q_MPOSITION == b.Q_MPOSITION);
-    status = status && (a.M_POSITION == b.M_POSITION);
-
-    return status;
-}
-
-inline bool operator!=(const Geographical_Position_Information_Core_1& a, const Geographical_Position_Information_Core_1& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Geographical_Position_Information_Core_1 Geographical_Position_Information_Core_1;
 
 #define GEOGRAPHICAL_POSITION_INFORMATION_CORE_1_CORE_BITSIZE 55
@@ -169,6 +127,53 @@ int Geographical_Position_Information_Core_1_Encoder(Bitstream* stream, const Ge
     disjoint behaviors;
 */
 int Geographical_Position_Information_Core_1_Decoder(Bitstream* stream, Geographical_Position_Information_Core_1* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Geographical_Position_Information_Core_1& p)
+{
+    stream
+            << +p.Q_NEWCOUNTRY << ','
+            << +p.NID_C << ','
+            << +p.NID_BG << ','
+            << +p.D_POSOFF << ','
+            << +p.Q_MPOSITION << ','
+            << +p.M_POSITION;
+
+    return stream;
+}
+
+inline bool operator==(const Geographical_Position_Information_Core_1& a, const Geographical_Position_Information_Core_1& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_NEWCOUNTRY == b.Q_NEWCOUNTRY);
+
+    if (a.Q_NEWCOUNTRY == 1)
+    {
+        status = status && (a.NID_C == b.NID_C);
+    }
+    status = status && (a.NID_BG == b.NID_BG);
+    status = status && (a.D_POSOFF == b.D_POSOFF);
+    status = status && (a.Q_MPOSITION == b.Q_MPOSITION);
+    status = status && (a.M_POSITION == b.M_POSITION);
+
+    return status;
+}
+
+inline bool operator!=(const Geographical_Position_Information_Core_1& a, const Geographical_Position_Information_Core_1& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Geographical_Position_Information_Core_1& p)
+{
+    return Geographical_Position_Information_Core_1_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // GEOGRAPHICAL_POSITION_INFORMATION_CORE_1_CORE_H_INCLUDED
 

@@ -18,48 +18,6 @@ struct Track_Condition_Change_of_traction_system_Core
     uint64_t  NID_CTRACTION;    // # 10
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Change_of_traction_system_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-            << +p.Q_SCALE << ','
-            << +p.D_TRACTION << ','
-            << +p.M_VOLTAGE << ','
-            << +p.NID_CTRACTION;
-
-    return stream;
-}
-
-inline bool operator==(const Track_Condition_Change_of_traction_system_Core& a, const Track_Condition_Change_of_traction_system_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.Q_SCALE == b.Q_SCALE);
-    status = status && (a.D_TRACTION == b.D_TRACTION);
-    status = status && (a.M_VOLTAGE == b.M_VOLTAGE);
-
-    if (a.M_VOLTAGE != 0)
-    {
-        status = status && (a.NID_CTRACTION == b.NID_CTRACTION);
-    }
-
-    return status;
-}
-
-inline bool operator!=(const Track_Condition_Change_of_traction_system_Core& a, const Track_Condition_Change_of_traction_system_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Track_Condition_Change_of_traction_system_Core Track_Condition_Change_of_traction_system_Core;
 
 #define TRACK_CONDITION_CHANGE_OF_TRACTION_SYSTEM_CORE_BITSIZE 36
@@ -188,6 +146,53 @@ int Track_Condition_Change_of_traction_system_Encoder(Bitstream* stream, const T
     disjoint behaviors;
 */
 int Track_Condition_Change_of_traction_system_Decoder(Bitstream* stream, Track_Condition_Change_of_traction_system_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Change_of_traction_system_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.D_TRACTION << ','
+            << +p.M_VOLTAGE << ','
+            << +p.NID_CTRACTION;
+
+    return stream;
+}
+
+inline bool operator==(const Track_Condition_Change_of_traction_system_Core& a, const Track_Condition_Change_of_traction_system_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SCALE == b.Q_SCALE);
+    status = status && (a.D_TRACTION == b.D_TRACTION);
+    status = status && (a.M_VOLTAGE == b.M_VOLTAGE);
+
+    if (a.M_VOLTAGE != 0)
+    {
+        status = status && (a.NID_CTRACTION == b.NID_CTRACTION);
+    }
+
+    return status;
+}
+
+inline bool operator!=(const Track_Condition_Change_of_traction_system_Core& a, const Track_Condition_Change_of_traction_system_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Track_Condition_Change_of_traction_system_Core& p)
+{
+    return Track_Condition_Change_of_traction_system_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // TRACK_CONDITION_CHANGE_OF_TRACTION_SYSTEM_CORE_H_INCLUDED
 

@@ -17,64 +17,6 @@ struct National_Values_Core_3
     National_Values_Core_3_1   sub_3_1[31];
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const National_Values_Core_3& p)
-{
-    stream
-            << +p.Q_NVKVINTSET << ','
-            << +p.A_NVP12 << ','
-            << +p.A_NVP23 << ','
-            << +p.V_NVKVINT << ','
-            << +p.M_NVKVINT << ','
-       << +p.N_ITER_3_1;
-       for (uint32_t i = 0; i < p.N_ITER_3_1; ++i)
-       {
-           stream << ',' << p.sub_3_1[i];
-       }
-   
-
-    return stream;
-}
-
-inline bool operator==(const National_Values_Core_3& a, const National_Values_Core_3& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_NVKVINTSET == b.Q_NVKVINTSET);
-
-    if (a.Q_NVKVINTSET == 1)
-    {
-        status = status && (a.A_NVP12 == b.A_NVP12);
-        status = status && (a.A_NVP23 == b.A_NVP23);
-    }
-    status = status && (a.V_NVKVINT == b.V_NVKVINT);
-    status = status && (a.M_NVKVINT == b.M_NVKVINT);
-    status = status && (a.N_ITER_3_1 == b.N_ITER_3_1);
-    if (a.N_ITER_3_1 == b.N_ITER_3_1)
-    {
-        for (uint32_t i = 0; i < a.N_ITER_3_1; ++i)
-        {
-            status = status && (a.sub_3_1[i] == b.sub_3_1[i]);
-        }
-    }
-    else
-    {
-        status = false;
-    }
-
-    return status;
-}
-
-inline bool operator!=(const National_Values_Core_3& a, const National_Values_Core_3& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct National_Values_Core_3 National_Values_Core_3;
 
 #define NATIONAL_VALUES_CORE_3_CORE_BITSIZE 21
@@ -187,6 +129,69 @@ int National_Values_Core_3_Encoder(Bitstream* stream, const National_Values_Core
     disjoint behaviors;
 */
 int National_Values_Core_3_Decoder(Bitstream* stream, National_Values_Core_3* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const National_Values_Core_3& p)
+{
+    stream
+            << +p.Q_NVKVINTSET << ','
+            << +p.A_NVP12 << ','
+            << +p.A_NVP23 << ','
+            << +p.V_NVKVINT << ','
+            << +p.M_NVKVINT << ','
+       << +p.N_ITER_3_1;
+       for (uint32_t i = 0; i < p.N_ITER_3_1; ++i)
+       {
+           stream << ',' << p.sub_3_1[i];
+       }
+   
+
+    return stream;
+}
+
+inline bool operator==(const National_Values_Core_3& a, const National_Values_Core_3& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_NVKVINTSET == b.Q_NVKVINTSET);
+
+    if (a.Q_NVKVINTSET == 1)
+    {
+        status = status && (a.A_NVP12 == b.A_NVP12);
+        status = status && (a.A_NVP23 == b.A_NVP23);
+    }
+    status = status && (a.V_NVKVINT == b.V_NVKVINT);
+    status = status && (a.M_NVKVINT == b.M_NVKVINT);
+    status = status && (a.N_ITER_3_1 == b.N_ITER_3_1);
+    if (a.N_ITER_3_1 == b.N_ITER_3_1)
+    {
+        for (uint32_t i = 0; i < a.N_ITER_3_1; ++i)
+        {
+            status = status && (a.sub_3_1[i] == b.sub_3_1[i]);
+        }
+    }
+    else
+    {
+        status = false;
+    }
+
+    return status;
+}
+
+inline bool operator!=(const National_Values_Core_3& a, const National_Values_Core_3& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const National_Values_Core_3& p)
+{
+    return National_Values_Core_3_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // NATIONAL_VALUES_CORE_3_CORE_H_INCLUDED
 

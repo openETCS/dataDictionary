@@ -18,42 +18,6 @@ struct Movement_Authority_Request_Parameters_Core
     uint64_t   T_CYCRQST;        // # 8
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Movement_Authority_Request_Parameters_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-            << +p.T_MAR << ','
-            << +p.T_TIMEOUTRQST << ','
-            << +p.T_CYCRQST;
-
-    return stream;
-}
-
-inline bool operator==(const Movement_Authority_Request_Parameters_Core& a, const Movement_Authority_Request_Parameters_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.T_MAR == b.T_MAR);
-    status = status && (a.T_TIMEOUTRQST == b.T_TIMEOUTRQST);
-    status = status && (a.T_CYCRQST == b.T_CYCRQST);
-
-    return status;
-}
-
-inline bool operator!=(const Movement_Authority_Request_Parameters_Core& a, const Movement_Authority_Request_Parameters_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Movement_Authority_Request_Parameters_Core Movement_Authority_Request_Parameters_Core;
 
 #define MOVEMENT_AUTHORITY_REQUEST_PARAMETERS_CORE_BITSIZE 41
@@ -182,6 +146,47 @@ int Movement_Authority_Request_Parameters_Encoder(Bitstream* stream, const Movem
     disjoint behaviors;
 */
 int Movement_Authority_Request_Parameters_Decoder(Bitstream* stream, Movement_Authority_Request_Parameters_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Movement_Authority_Request_Parameters_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.T_MAR << ','
+            << +p.T_TIMEOUTRQST << ','
+            << +p.T_CYCRQST;
+
+    return stream;
+}
+
+inline bool operator==(const Movement_Authority_Request_Parameters_Core& a, const Movement_Authority_Request_Parameters_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.T_MAR == b.T_MAR);
+    status = status && (a.T_TIMEOUTRQST == b.T_TIMEOUTRQST);
+    status = status && (a.T_CYCRQST == b.T_CYCRQST);
+
+    return status;
+}
+
+inline bool operator!=(const Movement_Authority_Request_Parameters_Core& a, const Movement_Authority_Request_Parameters_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Movement_Authority_Request_Parameters_Core& p)
+{
+    return Movement_Authority_Request_Parameters_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // MOVEMENT_AUTHORITY_REQUEST_PARAMETERS_CORE_H_INCLUDED
 

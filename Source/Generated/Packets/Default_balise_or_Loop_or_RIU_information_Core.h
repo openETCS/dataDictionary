@@ -15,36 +15,6 @@ struct Default_balise_or_Loop_or_RIU_information_Core
     uint64_t  L_PACKET;         // # 13
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Default_balise_or_Loop_or_RIU_information_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET;
-
-    return stream;
-}
-
-inline bool operator==(const Default_balise_or_Loop_or_RIU_information_Core& a, const Default_balise_or_Loop_or_RIU_information_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-
-    return status;
-}
-
-inline bool operator!=(const Default_balise_or_Loop_or_RIU_information_Core& a, const Default_balise_or_Loop_or_RIU_information_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Default_balise_or_Loop_or_RIU_information_Core Default_balise_or_Loop_or_RIU_information_Core;
 
 #define DEFAULT_BALISE_OR_LOOP_OR_RIU_INFORMATION_CORE_BITSIZE 15
@@ -161,6 +131,41 @@ int Default_balise_or_Loop_or_RIU_information_Encoder(Bitstream* stream, const D
     disjoint behaviors;
 */
 int Default_balise_or_Loop_or_RIU_information_Decoder(Bitstream* stream, Default_balise_or_Loop_or_RIU_information_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Default_balise_or_Loop_or_RIU_information_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET;
+
+    return stream;
+}
+
+inline bool operator==(const Default_balise_or_Loop_or_RIU_information_Core& a, const Default_balise_or_Loop_or_RIU_information_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+
+    return status;
+}
+
+inline bool operator!=(const Default_balise_or_Loop_or_RIU_information_Core& a, const Default_balise_or_Loop_or_RIU_information_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Default_balise_or_Loop_or_RIU_information_Core& p)
+{
+    return Default_balise_or_Loop_or_RIU_information_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // DEFAULT_BALISE_OR_LOOP_OR_RIU_INFORMATION_CORE_H_INCLUDED
 

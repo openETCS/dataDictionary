@@ -18,46 +18,6 @@ struct Data_used_by_applications_outside_the_ERTMSETCS_system_Core
     uint64_t   Other_data_depending_on__NID_XUSER;// # 8
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Data_used_by_applications_outside_the_ERTMSETCS_system_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-            << +p.NID_XUSER << ','
-            << +p.NID_NTC << ','
-            << +p.Other_data_depending_on__NID_XUSER;
-
-    return stream;
-}
-
-inline bool operator==(const Data_used_by_applications_outside_the_ERTMSETCS_system_Core& a, const Data_used_by_applications_outside_the_ERTMSETCS_system_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.NID_XUSER == b.NID_XUSER);
-
-    if (a.NID_XUSER == 102)
-    {
-        status = status && (a.NID_NTC == b.NID_NTC);
-    }
-    status = status && (a.Other_data_depending_on__NID_XUSER == b.Other_data_depending_on__NID_XUSER);
-
-    return status;
-}
-
-inline bool operator!=(const Data_used_by_applications_outside_the_ERTMSETCS_system_Core& a, const Data_used_by_applications_outside_the_ERTMSETCS_system_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Data_used_by_applications_outside_the_ERTMSETCS_system_Core Data_used_by_applications_outside_the_ERTMSETCS_system_Core;
 
 #define DATA_USED_BY_APPLICATIONS_OUTSIDE_THE_ERTMSETCS_SYSTEM_CORE_BITSIZE 32
@@ -178,6 +138,51 @@ int Data_used_by_applications_outside_the_ERTMSETCS_system_Encoder(Bitstream* st
     disjoint behaviors;
 */
 int Data_used_by_applications_outside_the_ERTMSETCS_system_Decoder(Bitstream* stream, Data_used_by_applications_outside_the_ERTMSETCS_system_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Data_used_by_applications_outside_the_ERTMSETCS_system_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.NID_XUSER << ','
+            << +p.NID_NTC << ','
+            << +p.Other_data_depending_on__NID_XUSER;
+
+    return stream;
+}
+
+inline bool operator==(const Data_used_by_applications_outside_the_ERTMSETCS_system_Core& a, const Data_used_by_applications_outside_the_ERTMSETCS_system_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.NID_XUSER == b.NID_XUSER);
+
+    if (a.NID_XUSER == 102)
+    {
+        status = status && (a.NID_NTC == b.NID_NTC);
+    }
+    status = status && (a.Other_data_depending_on__NID_XUSER == b.Other_data_depending_on__NID_XUSER);
+
+    return status;
+}
+
+inline bool operator!=(const Data_used_by_applications_outside_the_ERTMSETCS_system_Core& a, const Data_used_by_applications_outside_the_ERTMSETCS_system_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Data_used_by_applications_outside_the_ERTMSETCS_system_Core& p)
+{
+    return Data_used_by_applications_outside_the_ERTMSETCS_system_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // DATA_USED_BY_APPLICATIONS_OUTSIDE_THE_ERTMSETCS_SYSTEM_CORE_H_INCLUDED
 

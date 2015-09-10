@@ -31,6 +31,12 @@ struct Virtual_Balise_Cover_marker : public BasePacket
     {
         return  14;
     }
+
+    int encode(Bitstream& stream) const override
+    {
+        return ::encode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Virtual_Balise_Cover_marker> Virtual_Balise_Cover_markerPtr;

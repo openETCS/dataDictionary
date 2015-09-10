@@ -13,40 +13,6 @@ struct Track_Condition_Station_Platforms_Core_1
     uint64_t   Q_PLATFORM;       // # 2
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Station_Platforms_Core_1& p)
-{
-    stream
-            << +p.D_TRACKCOND << ','
-            << +p.L_TRACKCOND << ','
-            << +p.M_PLATFORM << ','
-            << +p.Q_PLATFORM;
-
-    return stream;
-}
-
-inline bool operator==(const Track_Condition_Station_Platforms_Core_1& a, const Track_Condition_Station_Platforms_Core_1& b)
-{
-    bool status = true;
-
-    status = status && (a.D_TRACKCOND == b.D_TRACKCOND);
-    status = status && (a.L_TRACKCOND == b.L_TRACKCOND);
-    status = status && (a.M_PLATFORM == b.M_PLATFORM);
-    status = status && (a.Q_PLATFORM == b.Q_PLATFORM);
-
-    return status;
-}
-
-inline bool operator!=(const Track_Condition_Station_Platforms_Core_1& a, const Track_Condition_Station_Platforms_Core_1& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Track_Condition_Station_Platforms_Core_1 Track_Condition_Station_Platforms_Core_1;
 
 #define TRACK_CONDITION_STATION_PLATFORMS_CORE_1_CORE_BITSIZE 36
@@ -171,6 +137,45 @@ int Track_Condition_Station_Platforms_Core_1_Encoder(Bitstream* stream, const Tr
     disjoint behaviors;
 */
 int Track_Condition_Station_Platforms_Core_1_Decoder(Bitstream* stream, Track_Condition_Station_Platforms_Core_1* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Track_Condition_Station_Platforms_Core_1& p)
+{
+    stream
+            << +p.D_TRACKCOND << ','
+            << +p.L_TRACKCOND << ','
+            << +p.M_PLATFORM << ','
+            << +p.Q_PLATFORM;
+
+    return stream;
+}
+
+inline bool operator==(const Track_Condition_Station_Platforms_Core_1& a, const Track_Condition_Station_Platforms_Core_1& b)
+{
+    bool status = true;
+
+    status = status && (a.D_TRACKCOND == b.D_TRACKCOND);
+    status = status && (a.L_TRACKCOND == b.L_TRACKCOND);
+    status = status && (a.M_PLATFORM == b.M_PLATFORM);
+    status = status && (a.Q_PLATFORM == b.Q_PLATFORM);
+
+    return status;
+}
+
+inline bool operator!=(const Track_Condition_Station_Platforms_Core_1& a, const Track_Condition_Station_Platforms_Core_1& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Track_Condition_Station_Platforms_Core_1& p)
+{
+    return Track_Condition_Station_Platforms_Core_1_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // TRACK_CONDITION_STATION_PLATFORMS_CORE_1_CORE_H_INCLUDED
 

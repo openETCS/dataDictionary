@@ -26,96 +26,6 @@ struct Route_Suitability_Data_Core
     Route_Suitability_Data_Core_1   sub_1[31];
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Route_Suitability_Data_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-            << +p.Q_SCALE << ','
-            << +p.Q_TRACKINIT << ','
-            << +p.D_TRACKINIT << ','
-            << +p.D_SUITABILITY << ','
-            << +p.Q_SUITABILITY << ','
-            << +p.M_LINEGAUGE << ','
-            << +p.M_AXLELOADCAT << ','
-            << +p.M_VOLTAGE << ','
-            << +p.NID_CTRACTION << ','
-       << +p.N_ITER_1;
-       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-       {
-           stream << ',' << p.sub_1[i];
-       }
-   
-
-    return stream;
-}
-
-inline bool operator==(const Route_Suitability_Data_Core& a, const Route_Suitability_Data_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.Q_SCALE == b.Q_SCALE);
-    status = status && (a.Q_TRACKINIT == b.Q_TRACKINIT);
-
-    if (a.Q_TRACKINIT == 1)
-    {
-        status = status && (a.D_TRACKINIT == b.D_TRACKINIT);
-    }
-
-    if (a.Q_TRACKINIT == 0)
-    {
-        status = status && (a.D_SUITABILITY == b.D_SUITABILITY);
-        status = status && (a.Q_SUITABILITY == b.Q_SUITABILITY);
-
-    if (a.Q_SUITABILITY == 0)
-    {
-        status = status && (a.M_LINEGAUGE == b.M_LINEGAUGE);
-    }
-
-    if (a.Q_SUITABILITY == 1)
-    {
-        status = status && (a.M_AXLELOADCAT == b.M_AXLELOADCAT);
-    }
-
-    if (a.Q_SUITABILITY == 2)
-    {
-        status = status && (a.M_VOLTAGE == b.M_VOLTAGE);
-    }
-
-    if ((a.Q_SUITABILITY == 2) && (a.M_VOLTAGE != 0))
-    {
-        status = status && (a.NID_CTRACTION == b.NID_CTRACTION);
-    }
-    status = status && (a.N_ITER_1 == b.N_ITER_1);
-    if (a.N_ITER_1 == b.N_ITER_1)
-    {
-        for (uint32_t i = 0; i < a.N_ITER_1; ++i)
-        {
-            status = status && (a.sub_1[i] == b.sub_1[i]);
-        }
-    }
-    else
-    {
-        status = false;
-    }
-    }
-
-    return status;
-}
-
-inline bool operator!=(const Route_Suitability_Data_Core& a, const Route_Suitability_Data_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Route_Suitability_Data_Core Route_Suitability_Data_Core;
 
 #define ROUTE_SUITABILITY_DATA_CORE_BITSIZE 18
@@ -240,6 +150,101 @@ int Route_Suitability_Data_Encoder(Bitstream* stream, const Route_Suitability_Da
     disjoint behaviors;
 */
 int Route_Suitability_Data_Decoder(Bitstream* stream, Route_Suitability_Data_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Route_Suitability_Data_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.Q_TRACKINIT << ','
+            << +p.D_TRACKINIT << ','
+            << +p.D_SUITABILITY << ','
+            << +p.Q_SUITABILITY << ','
+            << +p.M_LINEGAUGE << ','
+            << +p.M_AXLELOADCAT << ','
+            << +p.M_VOLTAGE << ','
+            << +p.NID_CTRACTION << ','
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
+   
+
+    return stream;
+}
+
+inline bool operator==(const Route_Suitability_Data_Core& a, const Route_Suitability_Data_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SCALE == b.Q_SCALE);
+    status = status && (a.Q_TRACKINIT == b.Q_TRACKINIT);
+
+    if (a.Q_TRACKINIT == 1)
+    {
+        status = status && (a.D_TRACKINIT == b.D_TRACKINIT);
+    }
+
+    if (a.Q_TRACKINIT == 0)
+    {
+        status = status && (a.D_SUITABILITY == b.D_SUITABILITY);
+        status = status && (a.Q_SUITABILITY == b.Q_SUITABILITY);
+
+    if (a.Q_SUITABILITY == 0)
+    {
+        status = status && (a.M_LINEGAUGE == b.M_LINEGAUGE);
+    }
+
+    if (a.Q_SUITABILITY == 1)
+    {
+        status = status && (a.M_AXLELOADCAT == b.M_AXLELOADCAT);
+    }
+
+    if (a.Q_SUITABILITY == 2)
+    {
+        status = status && (a.M_VOLTAGE == b.M_VOLTAGE);
+    }
+
+    if ((a.Q_SUITABILITY == 2) && (a.M_VOLTAGE != 0))
+    {
+        status = status && (a.NID_CTRACTION == b.NID_CTRACTION);
+    }
+    status = status && (a.N_ITER_1 == b.N_ITER_1);
+    if (a.N_ITER_1 == b.N_ITER_1)
+    {
+        for (uint32_t i = 0; i < a.N_ITER_1; ++i)
+        {
+            status = status && (a.sub_1[i] == b.sub_1[i]);
+        }
+    }
+    else
+    {
+        status = false;
+    }
+    }
+
+    return status;
+}
+
+inline bool operator!=(const Route_Suitability_Data_Core& a, const Route_Suitability_Data_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Route_Suitability_Data_Core& p)
+{
+    return Route_Suitability_Data_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // ROUTE_SUITABILITY_DATA_CORE_H_INCLUDED
 

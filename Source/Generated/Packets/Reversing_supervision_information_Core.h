@@ -18,42 +18,6 @@ struct Reversing_supervision_information_Core
     uint64_t   V_REVERSE;        // # 7
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Reversing_supervision_information_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-            << +p.Q_SCALE << ','
-            << +p.D_REVERSE << ','
-            << +p.V_REVERSE;
-
-    return stream;
-}
-
-inline bool operator==(const Reversing_supervision_information_Core& a, const Reversing_supervision_information_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.Q_SCALE == b.Q_SCALE);
-    status = status && (a.D_REVERSE == b.D_REVERSE);
-    status = status && (a.V_REVERSE == b.V_REVERSE);
-
-    return status;
-}
-
-inline bool operator!=(const Reversing_supervision_information_Core& a, const Reversing_supervision_information_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Reversing_supervision_information_Core Reversing_supervision_information_Core;
 
 #define REVERSING_SUPERVISION_INFORMATION_CORE_BITSIZE 39
@@ -182,6 +146,47 @@ int Reversing_supervision_information_Encoder(Bitstream* stream, const Reversing
     disjoint behaviors;
 */
 int Reversing_supervision_information_Decoder(Bitstream* stream, Reversing_supervision_information_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Reversing_supervision_information_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.Q_SCALE << ','
+            << +p.D_REVERSE << ','
+            << +p.V_REVERSE;
+
+    return stream;
+}
+
+inline bool operator==(const Reversing_supervision_information_Core& a, const Reversing_supervision_information_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.Q_SCALE == b.Q_SCALE);
+    status = status && (a.D_REVERSE == b.D_REVERSE);
+    status = status && (a.V_REVERSE == b.V_REVERSE);
+
+    return status;
+}
+
+inline bool operator!=(const Reversing_supervision_information_Core& a, const Reversing_supervision_information_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Reversing_supervision_information_Core& p)
+{
+    return Reversing_supervision_information_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // REVERSING_SUPERVISION_INFORMATION_CORE_H_INCLUDED
 

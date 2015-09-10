@@ -20,62 +20,6 @@ struct Conditional_Level_Transition_Order_Core
     Conditional_Level_Transition_Order_Core_1   sub_1[31];
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Conditional_Level_Transition_Order_Core& p)
-{
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-            << +p.M_LEVELTR << ','
-            << +p.NID_NTC << ','
-       << +p.N_ITER_1;
-       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-       {
-           stream << ',' << p.sub_1[i];
-       }
-   
-
-    return stream;
-}
-
-inline bool operator==(const Conditional_Level_Transition_Order_Core& a, const Conditional_Level_Transition_Order_Core& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.M_LEVELTR == b.M_LEVELTR);
-
-    if (a.M_LEVELTR == 1)
-    {
-        status = status && (a.NID_NTC == b.NID_NTC);
-    }
-    status = status && (a.N_ITER_1 == b.N_ITER_1);
-    if (a.N_ITER_1 == b.N_ITER_1)
-    {
-        for (uint32_t i = 0; i < a.N_ITER_1; ++i)
-        {
-            status = status && (a.sub_1[i] == b.sub_1[i]);
-        }
-    }
-    else
-    {
-        status = false;
-    }
-
-    return status;
-}
-
-inline bool operator!=(const Conditional_Level_Transition_Order_Core& a, const Conditional_Level_Transition_Order_Core& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Conditional_Level_Transition_Order_Core Conditional_Level_Transition_Order_Core;
 
 #define CONDITIONAL_LEVEL_TRANSITION_ORDER_CORE_BITSIZE 23
@@ -196,6 +140,67 @@ int Conditional_Level_Transition_Order_Encoder(Bitstream* stream, const Conditio
     disjoint behaviors;
 */
 int Conditional_Level_Transition_Order_Decoder(Bitstream* stream, Conditional_Level_Transition_Order_Core* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Conditional_Level_Transition_Order_Core& p)
+{
+    stream
+            << +p.Q_DIR << ','
+            << +p.L_PACKET << ','
+            << +p.M_LEVELTR << ','
+            << +p.NID_NTC << ','
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
+   
+
+    return stream;
+}
+
+inline bool operator==(const Conditional_Level_Transition_Order_Core& a, const Conditional_Level_Transition_Order_Core& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_DIR == b.Q_DIR);
+    status = status && (a.L_PACKET == b.L_PACKET);
+    status = status && (a.M_LEVELTR == b.M_LEVELTR);
+
+    if (a.M_LEVELTR == 1)
+    {
+        status = status && (a.NID_NTC == b.NID_NTC);
+    }
+    status = status && (a.N_ITER_1 == b.N_ITER_1);
+    if (a.N_ITER_1 == b.N_ITER_1)
+    {
+        for (uint32_t i = 0; i < a.N_ITER_1; ++i)
+        {
+            status = status && (a.sub_1[i] == b.sub_1[i]);
+        }
+    }
+    else
+    {
+        status = false;
+    }
+
+    return status;
+}
+
+inline bool operator!=(const Conditional_Level_Transition_Order_Core& a, const Conditional_Level_Transition_Order_Core& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Conditional_Level_Transition_Order_Core& p)
+{
+    return Conditional_Level_Transition_Order_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // CONDITIONAL_LEVEL_TRANSITION_ORDER_CORE_H_INCLUDED
 

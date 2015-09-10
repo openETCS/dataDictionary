@@ -13,44 +13,6 @@ struct Staff_Responsible_distance_Information_from_loop_Core_1
     uint64_t  D_SR;             // # 15
 };
 
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Staff_Responsible_distance_Information_from_loop_Core_1& p)
-{
-    stream
-            << +p.Q_NEWCOUNTRY << ','
-            << +p.NID_C << ','
-            << +p.NID_BG << ','
-            << +p.D_SR;
-
-    return stream;
-}
-
-inline bool operator==(const Staff_Responsible_distance_Information_from_loop_Core_1& a, const Staff_Responsible_distance_Information_from_loop_Core_1& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_NEWCOUNTRY == b.Q_NEWCOUNTRY);
-
-    if (a.Q_NEWCOUNTRY == 1)
-    {
-        status = status && (a.NID_C == b.NID_C);
-    }
-    status = status && (a.NID_BG == b.NID_BG);
-    status = status && (a.D_SR == b.D_SR);
-
-    return status;
-}
-
-inline bool operator!=(const Staff_Responsible_distance_Information_from_loop_Core_1& a, const Staff_Responsible_distance_Information_from_loop_Core_1& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
-
 typedef struct Staff_Responsible_distance_Information_from_loop_Core_1 Staff_Responsible_distance_Information_from_loop_Core_1;
 
 #define STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_1_CORE_BITSIZE 30
@@ -163,6 +125,49 @@ int Staff_Responsible_distance_Information_from_loop_Core_1_Encoder(Bitstream* s
     disjoint behaviors;
 */
 int Staff_Responsible_distance_Information_from_loop_Core_1_Decoder(Bitstream* stream, Staff_Responsible_distance_Information_from_loop_Core_1* p);
+
+#ifdef __cplusplus
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const Staff_Responsible_distance_Information_from_loop_Core_1& p)
+{
+    stream
+            << +p.Q_NEWCOUNTRY << ','
+            << +p.NID_C << ','
+            << +p.NID_BG << ','
+            << +p.D_SR;
+
+    return stream;
+}
+
+inline bool operator==(const Staff_Responsible_distance_Information_from_loop_Core_1& a, const Staff_Responsible_distance_Information_from_loop_Core_1& b)
+{
+    bool status = true;
+
+    status = status && (a.Q_NEWCOUNTRY == b.Q_NEWCOUNTRY);
+
+    if (a.Q_NEWCOUNTRY == 1)
+    {
+        status = status && (a.NID_C == b.NID_C);
+    }
+    status = status && (a.NID_BG == b.NID_BG);
+    status = status && (a.D_SR == b.D_SR);
+
+    return status;
+}
+
+inline bool operator!=(const Staff_Responsible_distance_Information_from_loop_Core_1& a, const Staff_Responsible_distance_Information_from_loop_Core_1& b)
+{
+    return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Staff_Responsible_distance_Information_from_loop_Core_1& p)
+{
+    return Staff_Responsible_distance_Information_from_loop_Core_1_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
 
 #endif // STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_1_CORE_H_INCLUDED
 
