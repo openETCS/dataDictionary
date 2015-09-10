@@ -29,14 +29,14 @@ int main ()
     std::cout << " Encoding data packets:" << std::endl;
     Train_running_number a = create_Train_running_number();
     {
-        PacketHeader_Encoder(&stream, &(a.header));
+        encode(stream, a.header);
         std::cout << "    Encoding packet " << a << std::endl;
         Train_running_number_Encoder(&stream, &a.core);
     }
 
     Error_Reporting b = create_Error_Reporting();
     {
-        PacketHeader_Encoder(&stream, &(b.header));
+        encode(stream, b.header);
         std::cout << "    Encoding packet " << b << std::endl;
         Error_Reporting_Encoder(&stream, &b.core);
     }
@@ -44,7 +44,7 @@ int main ()
 
     End_of_Information c;
     {
-        PacketHeader_Encoder(&stream, &(c.header));
+        encode(stream, c.header);
         std::cout << "    Encoding packet " << c << std::endl;
         End_of_Information_Encoder(&stream, &c.core);
     }

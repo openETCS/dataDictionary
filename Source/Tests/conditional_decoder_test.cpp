@@ -30,35 +30,35 @@ int main ()
 
     Temporary_Speed_Restriction a = create_Temporary_Speed_Restriction();
     {
-        PacketHeader_Encoder(&stream, &(a.header));
+        encode(stream, a.header);
         std::cout << "    Encoding packet " << a << std::endl;
         Temporary_Speed_Restriction_Encoder(&stream, &a.core);
     }
 
     Adhesion_Factor b = create_Adhesion_Factor();
     {
-        PacketHeader_Encoder(&stream, &(b.header));
+        encode(stream, b.header);
         std::cout << "    Encoding packet " << b << std::endl;
         Adhesion_Factor_Encoder(&stream, &b.core);
     }
 
     Infill_location_reference c = create_Infill_location_reference(1);
     {
-        PacketHeader_Encoder(&stream, &(c.header));
+        encode(stream, c.header);
         std::cout << "    Encoding packet " << c << std::endl;
         Infill_location_reference_Encoder(&stream, &c.core);
     }
 
     Infill_location_reference d = create_Infill_location_reference(0);
     {
-        PacketHeader_Encoder(&stream, &(d.header));
+        encode(stream, d.header);
         std::cout << "    Encoding packet " << d << std::endl;
         Infill_location_reference_Encoder(&stream, &d.core);
     }
 
     End_of_Information e;
     {
-        PacketHeader_Encoder(&stream, &(e.header));
+        encode(stream, e.header);
         std::cout << "    Encoding packet " << e << std::endl;
         End_of_Information_Encoder(&stream, &e.core);
     }
