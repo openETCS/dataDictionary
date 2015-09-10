@@ -167,8 +167,6 @@ int PacketHeader_Decoder(Bitstream* stream, PacketHeader* p)
 
         p->NID_PACKET = Bitstream_Read(stream, 8);
 
-        //std::cout << "writing " << int(p->NID_PACKET) << " into the packet header" << std::endl;
-
         //@ assert NID_PACKET:        EqualBits(stream, pos,       pos + 8,   p->NID_PACKET);
         //@ assert NID_PACKET:        UpperBitsNotSet(p->NID_PACKET,        8);
 
@@ -180,6 +178,29 @@ int PacketHeader_Decoder(Bitstream* stream, PacketHeader* p)
     }
 }
 
+#ifdef __cplusplus
+
+
+#include <iostream>
+
+inline std::ostream& operator<<(std::ostream& stream, const PacketHeader& p)
+{
+    stream << +p.NID_PACKET;
+
+    return stream;
+}
+
+inline bool operator==(const PacketHeader& a, const PacketHeader& b)
+{
+    return a.NID_PACKET == b.NID_PACKET;
+}
+
+inline bool operator!=(const PacketHeader& a, const PacketHeader& b)
+{
+    return !(a == b);
+}
+
+#endif // __cplusplus
 
 #endif // PACKETHEADER_H_INCLUDED
 

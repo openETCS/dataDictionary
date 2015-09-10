@@ -6,35 +6,35 @@
 #include "BasePacket.h"
 
 template<typename T>
-class GenericPacket : public BasePacket 
+class GenericPacket : public BasePacket
 {
 
-    T core;
+        T core;
 
-public:
+    public:
 
-    GenericPacket() : BasePacket(packet_id(&core)), core() {}
+        GenericPacket() : BasePacket(packet_id(&core)), core() {}
 
-    void print(std::ostream& stream) const override
-    {
-        stream << '(' << header << ',' << core << ')';
-    }
-
-
-    bool equals(const BasePacket& p) const override
-    {
-        if (auto q = dynamic_cast<const GenericPacket<T>*>(&p))
+        void print(std::ostream& stream) const override
         {
-            return (header == q->header) && (core == q->core);
+            stream << '(' << header << ',' << core << ')';
         }
 
-        return false;
-    }
 
-    uint16_t length() const override
-    {
-        return  core.L_PACKET;
-    }
+        bool equals(const BasePacket& p) const override
+        {
+            if (auto q = dynamic_cast<const GenericPacket<T>*>(&p))
+            {
+                return (header == q->header) && (core == q->core);
+            }
+
+            return false;
+        }
+
+        uint16_t length() const override
+        {
+            return  core.L_PACKET;
+        }
 
 
 };
