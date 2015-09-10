@@ -193,6 +193,11 @@ inline int encode(Bitstream& stream, const Adhesion_Factor_Core& p)
     return Adhesion_Factor_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Adhesion_Factor_Core& p)
+{
+    return Adhesion_Factor_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // ADHESION_FACTOR_CORE_H_INCLUDED

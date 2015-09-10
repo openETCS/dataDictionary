@@ -234,6 +234,11 @@ inline int encode(Bitstream& stream, const Mode_profile_Core& p)
     return Mode_profile_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Mode_profile_Core& p)
+{
+    return Mode_profile_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // MODE_PROFILE_CORE_H_INCLUDED

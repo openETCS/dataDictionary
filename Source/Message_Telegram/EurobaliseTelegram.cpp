@@ -1,8 +1,7 @@
 
 #include "EurobaliseTelegram.h"
 #include "TelegramHeader.h"
-#include "Decoder_Branch.h"
-#include "Encoder_Branch.h"
+#include "PacketFactory.cpp"
 #include <iostream>
 #include <cassert>
 
@@ -74,31 +73,34 @@ bool EurobaliseTelegram::decode(Bitstream& stream)
         }
 
         PacketHeader packet_header;
-        ::encode(stream, packet_header);
-
-        BasePacketPtr ptr;
-
-        //ptr->decode(stream);
+        ::decode(stream, packet_header);
+	
+	BasePacketPtr ptr;
 
         if (header().Q_UPDOWN == 1)
-        {
-            ptr = Decoder_Branch_TrackToTrain(stream, packet_header);
-        }
-        else
-        {
-            assert(header().Q_UPDOWN == 0);
-            ptr = Decoder_Branch_TrainToTrack(stream, packet_header);
+	{
+            ptr = PacketFactory_TrackToTrain(stream, packet_header);
+	}
+	else
+	{
+	    assert(header().Q_UPDOWN == 0);
+            ptr = PacketFactory_TrainToTrack(stream, packet_header);
         }
 
         if (ptr)
-        {
-            m_packets.push_back(ptr);
+	{
+            if (ptr->decode(stream) != 1)
+	    {
+	        return false;
+	    }
+	    
+	    m_packets.push_back(ptr);
 
             if (ptr->header.NID_PACKET == 255)
             {
                 break;
             }
-        }
+	}
         else
         {
             return false;

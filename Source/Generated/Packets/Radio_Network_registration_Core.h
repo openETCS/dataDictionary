@@ -172,6 +172,11 @@ inline int encode(Bitstream& stream, const Radio_Network_registration_Core& p)
     return Radio_Network_registration_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Radio_Network_registration_Core& p)
+{
+    return Radio_Network_registration_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // RADIO_NETWORK_REGISTRATION_CORE_H_INCLUDED

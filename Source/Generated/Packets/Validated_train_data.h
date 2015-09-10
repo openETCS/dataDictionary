@@ -37,6 +37,11 @@ struct Validated_train_data : public BasePacket
         return ::encode(stream, core);
     }
 
+    int decode(Bitstream& stream) override
+    {
+        return ::decode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Validated_train_data> Validated_train_dataPtr;

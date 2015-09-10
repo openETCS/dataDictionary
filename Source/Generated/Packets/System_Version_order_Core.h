@@ -172,6 +172,11 @@ inline int encode(Bitstream& stream, const System_Version_order_Core& p)
     return System_Version_order_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, System_Version_order_Core& p)
+{
+    return System_Version_order_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // SYSTEM_VERSION_ORDER_CORE_H_INCLUDED

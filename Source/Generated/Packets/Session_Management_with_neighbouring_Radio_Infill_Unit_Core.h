@@ -194,6 +194,11 @@ inline int encode(Bitstream& stream, const Session_Management_with_neighbouring_
     return Session_Management_with_neighbouring_Radio_Infill_Unit_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Session_Management_with_neighbouring_Radio_Infill_Unit_Core& p)
+{
+    return Session_Management_with_neighbouring_Radio_Infill_Unit_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // SESSION_MANAGEMENT_WITH_NEIGHBOURING_RADIO_INFILL_UNIT_CORE_H_INCLUDED

@@ -168,6 +168,11 @@ inline int encode(Bitstream& stream, const Track_Condition_Core_1& p)
     return Track_Condition_Core_1_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Track_Condition_Core_1& p)
+{
+    return Track_Condition_Core_1_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // TRACK_CONDITION_CORE_1_CORE_H_INCLUDED

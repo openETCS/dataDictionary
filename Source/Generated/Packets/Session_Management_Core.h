@@ -200,6 +200,11 @@ inline int encode(Bitstream& stream, const Session_Management_Core& p)
     return Session_Management_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Session_Management_Core& p)
+{
+    return Session_Management_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // SESSION_MANAGEMENT_CORE_H_INCLUDED

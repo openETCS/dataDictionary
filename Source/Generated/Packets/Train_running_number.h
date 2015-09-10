@@ -37,6 +37,11 @@ struct Train_running_number : public BasePacket
         return ::encode(stream, core);
     }
 
+    int decode(Bitstream& stream) override
+    {
+        return ::decode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Train_running_number> Train_running_numberPtr;

@@ -158,6 +158,11 @@ inline int encode(Bitstream& stream, const Virtual_Balise_Cover_marker_Core& p)
     return Virtual_Balise_Cover_marker_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Virtual_Balise_Cover_marker_Core& p)
+{
+    return Virtual_Balise_Cover_marker_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // VIRTUAL_BALISE_COVER_MARKER_CORE_H_INCLUDED

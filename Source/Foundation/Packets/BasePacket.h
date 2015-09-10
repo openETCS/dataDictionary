@@ -27,7 +27,7 @@ struct BasePacket
 
     virtual int encode(Bitstream&) const = 0;
 
-    virtual int decode(Bitstream&) { return 1; }
+    virtual int decode(Bitstream&) = 0;
 
 };
 

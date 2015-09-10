@@ -161,6 +161,11 @@ inline int encode(Bitstream& stream, const National_Values_Core_4& p)
     return National_Values_Core_4_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, National_Values_Core_4& p)
+{
+    return National_Values_Core_4_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // NATIONAL_VALUES_CORE_4_CORE_H_INCLUDED

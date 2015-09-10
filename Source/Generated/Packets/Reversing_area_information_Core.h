@@ -186,6 +186,11 @@ inline int encode(Bitstream& stream, const Reversing_area_information_Core& p)
     return Reversing_area_information_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Reversing_area_information_Core& p)
+{
+    return Reversing_area_information_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // REVERSING_AREA_INFORMATION_CORE_H_INCLUDED

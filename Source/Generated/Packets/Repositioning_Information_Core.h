@@ -178,6 +178,11 @@ inline int encode(Bitstream& stream, const Repositioning_Information_Core& p)
     return Repositioning_Information_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Repositioning_Information_Core& p)
+{
+    return Repositioning_Information_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // REPOSITIONING_INFORMATION_CORE_H_INCLUDED

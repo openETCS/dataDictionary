@@ -37,6 +37,11 @@ struct List_of_Balises_in_SR_Authority : public BasePacket
         return ::encode(stream, core);
     }
 
+    int decode(Bitstream& stream) override
+    {
+        return ::decode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<List_of_Balises_in_SR_Authority> List_of_Balises_in_SR_AuthorityPtr;

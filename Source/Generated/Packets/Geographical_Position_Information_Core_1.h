@@ -173,6 +173,11 @@ inline int encode(Bitstream& stream, const Geographical_Position_Information_Cor
     return Geographical_Position_Information_Core_1_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Geographical_Position_Information_Core_1& p)
+{
+    return Geographical_Position_Information_Core_1_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // GEOGRAPHICAL_POSITION_INFORMATION_CORE_1_CORE_H_INCLUDED

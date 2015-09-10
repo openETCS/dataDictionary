@@ -37,6 +37,11 @@ struct International_Static_Speed_Profile : public BasePacket
         return ::encode(stream, core);
     }
 
+    int decode(Bitstream& stream) override
+    {
+        return ::decode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<International_Static_Speed_Profile> International_Static_Speed_ProfilePtr;

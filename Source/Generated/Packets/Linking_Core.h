@@ -225,6 +225,11 @@ inline int encode(Bitstream& stream, const Linking_Core& p)
     return Linking_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Linking_Core& p)
+{
+    return Linking_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // LINKING_CORE_H_INCLUDED

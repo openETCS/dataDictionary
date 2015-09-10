@@ -225,6 +225,11 @@ inline int encode(Bitstream& stream, const Staff_Responsible_distance_Informatio
     return Staff_Responsible_distance_Information_from_loop_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Staff_Responsible_distance_Information_from_loop_Core& p)
+{
+    return Staff_Responsible_distance_Information_from_loop_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_H_INCLUDED

@@ -165,6 +165,11 @@ inline int encode(Bitstream& stream, const Inhibition_of_revocable_TSRs_from_bal
     return Inhibition_of_revocable_TSRs_from_balises_in_L23_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Inhibition_of_revocable_TSRs_from_balises_in_L23_Core& p)
+{
+    return Inhibition_of_revocable_TSRs_from_balises_in_L23_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // INHIBITION_OF_REVOCABLE_TSRS_FROM_BALISES_IN_L23_CORE_H_INCLUDED

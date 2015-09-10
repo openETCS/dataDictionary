@@ -214,6 +214,11 @@ inline int encode(Bitstream& stream, const Position_Report_Parameters_Core& p)
     return Position_Report_Parameters_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Position_Report_Parameters_Core& p)
+{
+    return Position_Report_Parameters_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // POSITION_REPORT_PARAMETERS_CORE_H_INCLUDED

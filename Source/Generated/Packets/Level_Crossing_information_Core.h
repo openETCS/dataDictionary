@@ -216,6 +216,11 @@ inline int encode(Bitstream& stream, const Level_Crossing_information_Core& p)
     return Level_Crossing_information_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Level_Crossing_information_Core& p)
+{
+    return Level_Crossing_information_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // LEVEL_CROSSING_INFORMATION_CORE_H_INCLUDED

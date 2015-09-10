@@ -182,6 +182,11 @@ inline int encode(Bitstream& stream, const Infill_location_reference_Core& p)
     return Infill_location_reference_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Infill_location_reference_Core& p)
+{
+    return Infill_location_reference_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // INFILL_LOCATION_REFERENCE_CORE_H_INCLUDED

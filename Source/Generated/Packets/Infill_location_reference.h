@@ -37,6 +37,11 @@ struct Infill_location_reference : public BasePacket
         return ::encode(stream, core);
     }
 
+    int decode(Bitstream& stream) override
+    {
+        return ::decode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Infill_location_reference> Infill_location_referencePtr;

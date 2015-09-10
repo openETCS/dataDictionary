@@ -154,6 +154,11 @@ inline int encode(Bitstream& stream, const Onboard_telephone_numbers_Core_1& p)
     return Onboard_telephone_numbers_Core_1_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Onboard_telephone_numbers_Core_1& p)
+{
+    return Onboard_telephone_numbers_Core_1_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // ONBOARD_TELEPHONE_NUMBERS_CORE_1_CORE_H_INCLUDED

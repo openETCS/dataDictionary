@@ -206,6 +206,11 @@ inline int encode(Bitstream& stream, const Temporary_Speed_Restriction_Core& p)
     return Temporary_Speed_Restriction_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Temporary_Speed_Restriction_Core& p)
+{
+    return Temporary_Speed_Restriction_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // TEMPORARY_SPEED_RESTRICTION_CORE_H_INCLUDED

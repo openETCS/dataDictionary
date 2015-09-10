@@ -192,6 +192,11 @@ inline int encode(Bitstream& stream, const Track_Condition_Change_of_traction_sy
     return Track_Condition_Change_of_traction_system_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Track_Condition_Change_of_traction_system_Core& p)
+{
+    return Track_Condition_Change_of_traction_system_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // TRACK_CONDITION_CHANGE_OF_TRACTION_SYSTEM_CORE_H_INCLUDED

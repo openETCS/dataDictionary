@@ -1,7 +1,7 @@
 
-#include "Decoder_Branch.h"
+#include "PacketFactory.h"
 
-BasePacketPtr PacketFactory_TrainToTrack(Bitstream& stream, Packet_Header header)
+BasePacketPtr PacketFactory_TrainToTrack(Bitstream& stream, PacketHeader header)
 {
     switch (header.NID_PACKET)
     {
@@ -59,7 +59,7 @@ BasePacketPtr PacketFactory_TrainToTrack(Bitstream& stream, Packet_Header header
     };
 }
 
-BasePacketPtr PacketFactory_TrackToTrain(Bitstream& stream, Packet_Header header)
+BasePacketPtr PacketFactory_TrackToTrain(Bitstream& stream, PacketHeader header)
 {
     switch (header.NID_PACKET)
     {

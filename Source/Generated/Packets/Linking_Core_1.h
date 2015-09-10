@@ -180,6 +180,11 @@ inline int encode(Bitstream& stream, const Linking_Core_1& p)
     return Linking_Core_1_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Linking_Core_1& p)
+{
+    return Linking_Core_1_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // LINKING_CORE_1_CORE_H_INCLUDED

@@ -37,6 +37,11 @@ struct Permitted_Braking_Distance_Information : public BasePacket
         return ::encode(stream, core);
     }
 
+    int decode(Bitstream& stream) override
+    {
+        return ::decode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Permitted_Braking_Distance_Information> Permitted_Braking_Distance_InformationPtr;

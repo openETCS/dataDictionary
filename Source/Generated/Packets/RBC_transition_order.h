@@ -37,6 +37,11 @@ struct RBC_transition_order : public BasePacket
         return ::encode(stream, core);
     }
 
+    int decode(Bitstream& stream) override
+    {
+        return ::decode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<RBC_transition_order> RBC_transition_orderPtr;

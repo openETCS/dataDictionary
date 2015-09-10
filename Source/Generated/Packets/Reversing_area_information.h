@@ -37,6 +37,11 @@ struct Reversing_area_information : public BasePacket
         return ::encode(stream, core);
     }
 
+    int decode(Bitstream& stream) override
+    {
+        return ::decode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Reversing_area_information> Reversing_area_informationPtr;

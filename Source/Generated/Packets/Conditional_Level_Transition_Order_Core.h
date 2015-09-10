@@ -200,6 +200,11 @@ inline int encode(Bitstream& stream, const Conditional_Level_Transition_Order_Co
     return Conditional_Level_Transition_Order_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Conditional_Level_Transition_Order_Core& p)
+{
+    return Conditional_Level_Transition_Order_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // CONDITIONAL_LEVEL_TRANSITION_ORDER_CORE_H_INCLUDED

@@ -37,6 +37,11 @@ struct Error_Reporting : public BasePacket
         return ::encode(stream, core);
     }
 
+    int decode(Bitstream& stream) override
+    {
+        return ::decode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Error_Reporting> Error_ReportingPtr;

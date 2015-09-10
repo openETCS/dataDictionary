@@ -220,6 +220,11 @@ inline int encode(Bitstream& stream, const Track_Condition_Core& p)
     return Track_Condition_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Track_Condition_Core& p)
+{
+    return Track_Condition_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // TRACK_CONDITION_CORE_H_INCLUDED

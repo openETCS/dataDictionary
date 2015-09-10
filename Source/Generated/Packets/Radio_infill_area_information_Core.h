@@ -212,6 +212,11 @@ inline int encode(Bitstream& stream, const Radio_infill_area_information_Core& p
     return Radio_infill_area_information_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Radio_infill_area_information_Core& p)
+{
+    return Radio_infill_area_information_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // RADIO_INFILL_AREA_INFORMATION_CORE_H_INCLUDED

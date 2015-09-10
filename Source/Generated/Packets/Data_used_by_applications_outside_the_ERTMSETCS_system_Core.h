@@ -182,6 +182,11 @@ inline int encode(Bitstream& stream, const Data_used_by_applications_outside_the
     return Data_used_by_applications_outside_the_ERTMSETCS_system_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Data_used_by_applications_outside_the_ERTMSETCS_system_Core& p)
+{
+    return Data_used_by_applications_outside_the_ERTMSETCS_system_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // DATA_USED_BY_APPLICATIONS_OUTSIDE_THE_ERTMSETCS_SYSTEM_CORE_H_INCLUDED

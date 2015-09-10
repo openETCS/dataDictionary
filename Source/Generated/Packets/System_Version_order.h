@@ -37,6 +37,11 @@ struct System_Version_order : public BasePacket
         return ::encode(stream, core);
     }
 
+    int decode(Bitstream& stream) override
+    {
+        return ::decode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<System_Version_order> System_Version_orderPtr;

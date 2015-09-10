@@ -167,6 +167,11 @@ inline int encode(Bitstream& stream, const Inhibition_of_balise_group_message_co
     return Inhibition_of_balise_group_message_consistency_reaction_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Inhibition_of_balise_group_message_consistency_reaction_Core& p)
+{
+    return Inhibition_of_balise_group_message_consistency_reaction_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // INHIBITION_OF_BALISE_GROUP_MESSAGE_CONSISTENCY_REACTION_CORE_H_INCLUDED

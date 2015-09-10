@@ -153,6 +153,11 @@ inline int encode(Bitstream& stream, const End_of_Information_Core& p)
     return End_of_Information_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, End_of_Information_Core& p)
+{
+    return End_of_Information_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // END_OF_INFORMATION_CORE_H_INCLUDED

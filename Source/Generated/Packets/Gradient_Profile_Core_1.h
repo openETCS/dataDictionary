@@ -168,6 +168,11 @@ inline int encode(Bitstream& stream, const Gradient_Profile_Core_1& p)
     return Gradient_Profile_Core_1_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Gradient_Profile_Core_1& p)
+{
+    return Gradient_Profile_Core_1_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // GRADIENT_PROFILE_CORE_1_CORE_H_INCLUDED

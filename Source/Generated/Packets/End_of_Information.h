@@ -37,6 +37,11 @@ struct End_of_Information : public BasePacket
         return ::encode(stream, core);
     }
 
+    int decode(Bitstream& stream) override
+    {
+        return ::decode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<End_of_Information> End_of_InformationPtr;

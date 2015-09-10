@@ -171,6 +171,11 @@ inline int encode(Bitstream& stream, const Stop_if_in_Staff_Responsible_Core& p)
     return Stop_if_in_Staff_Responsible_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Stop_if_in_Staff_Responsible_Core& p)
+{
+    return Stop_if_in_Staff_Responsible_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // STOP_IF_IN_STAFF_RESPONSIBLE_CORE_H_INCLUDED

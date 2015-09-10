@@ -242,6 +242,11 @@ inline int encode(Bitstream& stream, const Axle_Load_Speed_Profile_Core& p)
     return Axle_Load_Speed_Profile_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Axle_Load_Speed_Profile_Core& p)
+{
+    return Axle_Load_Speed_Profile_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // AXLE_LOAD_SPEED_PROFILE_CORE_H_INCLUDED

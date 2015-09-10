@@ -37,6 +37,11 @@ struct Danger_for_Shunting_information : public BasePacket
         return ::encode(stream, core);
     }
 
+    int decode(Bitstream& stream) override
+    {
+        return ::decode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Danger_for_Shunting_information> Danger_for_Shunting_informationPtr;

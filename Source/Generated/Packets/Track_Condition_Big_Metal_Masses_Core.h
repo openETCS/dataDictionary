@@ -207,6 +207,11 @@ inline int encode(Bitstream& stream, const Track_Condition_Big_Metal_Masses_Core
     return Track_Condition_Big_Metal_Masses_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Track_Condition_Big_Metal_Masses_Core& p)
+{
+    return Track_Condition_Big_Metal_Masses_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // TRACK_CONDITION_BIG_METAL_MASSES_CORE_H_INCLUDED

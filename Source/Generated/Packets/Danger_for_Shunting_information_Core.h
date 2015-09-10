@@ -171,6 +171,11 @@ inline int encode(Bitstream& stream, const Danger_for_Shunting_information_Core&
     return Danger_for_Shunting_information_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Danger_for_Shunting_information_Core& p)
+{
+    return Danger_for_Shunting_information_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // DANGER_FOR_SHUNTING_INFORMATION_CORE_H_INCLUDED

@@ -205,6 +205,11 @@ inline int encode(Bitstream& stream, const PacketHeader& p)
     return PacketHeader_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, PacketHeader& p)
+{
+    return PacketHeader_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // PACKETHEADER_H_INCLUDED

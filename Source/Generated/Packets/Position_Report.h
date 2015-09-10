@@ -37,6 +37,11 @@ struct Position_Report : public BasePacket
         return ::encode(stream, core);
     }
 
+    int decode(Bitstream& stream) override
+    {
+        return ::decode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Position_Report> Position_ReportPtr;

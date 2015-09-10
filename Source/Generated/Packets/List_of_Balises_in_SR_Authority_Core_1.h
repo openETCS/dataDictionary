@@ -164,6 +164,11 @@ inline int encode(Bitstream& stream, const List_of_Balises_in_SR_Authority_Core_
     return List_of_Balises_in_SR_Authority_Core_1_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, List_of_Balises_in_SR_Authority_Core_1& p)
+{
+    return List_of_Balises_in_SR_Authority_Core_1_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // LIST_OF_BALISES_IN_SR_AUTHORITY_CORE_1_CORE_H_INCLUDED

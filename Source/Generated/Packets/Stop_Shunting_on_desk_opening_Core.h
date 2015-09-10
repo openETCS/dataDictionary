@@ -164,6 +164,11 @@ inline int encode(Bitstream& stream, const Stop_Shunting_on_desk_opening_Core& p
     return Stop_Shunting_on_desk_opening_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Stop_Shunting_on_desk_opening_Core& p)
+{
+    return Stop_Shunting_on_desk_opening_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // STOP_SHUNTING_ON_DESK_OPENING_CORE_H_INCLUDED

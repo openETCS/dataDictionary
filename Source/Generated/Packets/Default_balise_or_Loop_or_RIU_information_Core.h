@@ -165,6 +165,11 @@ inline int encode(Bitstream& stream, const Default_balise_or_Loop_or_RIU_informa
     return Default_balise_or_Loop_or_RIU_information_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Default_balise_or_Loop_or_RIU_information_Core& p)
+{
+    return Default_balise_or_Loop_or_RIU_information_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // DEFAULT_BALISE_OR_LOOP_OR_RIU_INFORMATION_CORE_H_INCLUDED

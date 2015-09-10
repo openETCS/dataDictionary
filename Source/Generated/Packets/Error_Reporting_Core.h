@@ -164,6 +164,11 @@ inline int encode(Bitstream& stream, const Error_Reporting_Core& p)
     return Error_Reporting_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Error_Reporting_Core& p)
+{
+    return Error_Reporting_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // ERROR_REPORTING_CORE_H_INCLUDED

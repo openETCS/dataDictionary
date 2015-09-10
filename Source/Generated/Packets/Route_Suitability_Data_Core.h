@@ -244,6 +244,11 @@ inline int encode(Bitstream& stream, const Route_Suitability_Data_Core& p)
     return Route_Suitability_Data_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Route_Suitability_Data_Core& p)
+{
+    return Route_Suitability_Data_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // ROUTE_SUITABILITY_DATA_CORE_H_INCLUDED

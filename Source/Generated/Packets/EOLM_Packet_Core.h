@@ -206,6 +206,11 @@ inline int encode(Bitstream& stream, const EOLM_Packet_Core& p)
     return EOLM_Packet_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, EOLM_Packet_Core& p)
+{
+    return EOLM_Packet_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // EOLM_PACKET_CORE_H_INCLUDED

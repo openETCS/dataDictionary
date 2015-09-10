@@ -186,6 +186,11 @@ inline int encode(Bitstream& stream, const Movement_Authority_Request_Parameters
     return Movement_Authority_Request_Parameters_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Movement_Authority_Request_Parameters_Core& p)
+{
+    return Movement_Authority_Request_Parameters_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // MOVEMENT_AUTHORITY_REQUEST_PARAMETERS_CORE_H_INCLUDED

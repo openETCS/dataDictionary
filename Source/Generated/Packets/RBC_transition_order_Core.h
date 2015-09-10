@@ -206,6 +206,11 @@ inline int encode(Bitstream& stream, const RBC_transition_order_Core& p)
     return RBC_transition_order_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, RBC_transition_order_Core& p)
+{
+    return RBC_transition_order_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // RBC_TRANSITION_ORDER_CORE_H_INCLUDED

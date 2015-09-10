@@ -192,6 +192,11 @@ inline int encode(Bitstream& stream, const Virtual_Balise_Cover_order_Core& p)
     return Virtual_Balise_Cover_order_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Virtual_Balise_Cover_order_Core& p)
+{
+    return Virtual_Balise_Cover_order_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // VIRTUAL_BALISE_COVER_ORDER_CORE_H_INCLUDED

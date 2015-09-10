@@ -164,6 +164,11 @@ inline int encode(Bitstream& stream, const Level_23_transition_information_Core&
     return Level_23_transition_information_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Level_23_transition_information_Core& p)
+{
+    return Level_23_transition_information_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // LEVEL_23_TRANSITION_INFORMATION_CORE_H_INCLUDED

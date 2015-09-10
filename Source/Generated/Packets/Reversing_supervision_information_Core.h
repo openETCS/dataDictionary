@@ -186,6 +186,11 @@ inline int encode(Bitstream& stream, const Reversing_supervision_information_Cor
     return Reversing_supervision_information_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Reversing_supervision_information_Core& p)
+{
+    return Reversing_supervision_information_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // REVERSING_SUPERVISION_INFORMATION_CORE_H_INCLUDED

@@ -164,6 +164,11 @@ inline int encode(Bitstream& stream, const Train_running_number_Core& p)
     return Train_running_number_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Train_running_number_Core& p)
+{
+    return Train_running_number_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // TRAIN_RUNNING_NUMBER_CORE_H_INCLUDED

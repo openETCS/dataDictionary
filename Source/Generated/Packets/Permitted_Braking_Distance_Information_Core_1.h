@@ -189,6 +189,11 @@ inline int encode(Bitstream& stream, const Permitted_Braking_Distance_Informatio
     return Permitted_Braking_Distance_Information_Core_1_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Permitted_Braking_Distance_Information_Core_1& p)
+{
+    return Permitted_Braking_Distance_Information_Core_1_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // PERMITTED_BRAKING_DISTANCE_INFORMATION_CORE_1_CORE_H_INCLUDED

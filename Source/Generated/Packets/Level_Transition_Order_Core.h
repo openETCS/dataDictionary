@@ -218,6 +218,11 @@ inline int encode(Bitstream& stream, const Level_Transition_Order_Core& p)
     return Level_Transition_Order_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Level_Transition_Order_Core& p)
+{
+    return Level_Transition_Order_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // LEVEL_TRANSITION_ORDER_CORE_H_INCLUDED

@@ -154,6 +154,11 @@ inline int encode(Bitstream& stream, const Validated_train_data_Core_2& p)
     return Validated_train_data_Core_2_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Validated_train_data_Core_2& p)
+{
+    return Validated_train_data_Core_2_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // VALIDATED_TRAIN_DATA_CORE_2_CORE_H_INCLUDED

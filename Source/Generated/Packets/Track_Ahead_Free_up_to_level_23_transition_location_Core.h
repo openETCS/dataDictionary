@@ -182,6 +182,11 @@ inline int encode(Bitstream& stream, const Track_Ahead_Free_up_to_level_23_trans
     return Track_Ahead_Free_up_to_level_23_transition_location_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Track_Ahead_Free_up_to_level_23_transition_location_Core& p)
+{
+    return Track_Ahead_Free_up_to_level_23_transition_location_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // TRACK_AHEAD_FREE_UP_TO_LEVEL_23_TRANSITION_LOCATION_CORE_H_INCLUDED

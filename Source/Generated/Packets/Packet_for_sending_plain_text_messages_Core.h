@@ -263,6 +263,11 @@ inline int encode(Bitstream& stream, const Packet_for_sending_plain_text_message
     return Packet_for_sending_plain_text_messages_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Packet_for_sending_plain_text_messages_Core& p)
+{
+    return Packet_for_sending_plain_text_messages_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // PACKET_FOR_SENDING_PLAIN_TEXT_MESSAGES_CORE_H_INCLUDED

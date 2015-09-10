@@ -175,6 +175,11 @@ inline int encode(Bitstream& stream, const Level_1_Movement_Authority_Core_1& p)
     return Level_1_Movement_Authority_Core_1_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Level_1_Movement_Authority_Core_1& p)
+{
+    return Level_1_Movement_Authority_Core_1_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // LEVEL_1_MOVEMENT_AUTHORITY_CORE_1_CORE_H_INCLUDED

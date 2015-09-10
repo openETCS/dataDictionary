@@ -164,6 +164,11 @@ inline int encode(Bitstream& stream, const List_of_balises_for_SH_Area_Core_1& p
     return List_of_balises_for_SH_Area_Core_1_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, List_of_balises_for_SH_Area_Core_1& p)
+{
+    return List_of_balises_for_SH_Area_Core_1_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // LIST_OF_BALISES_FOR_SH_AREA_CORE_1_CORE_H_INCLUDED

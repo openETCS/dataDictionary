@@ -37,6 +37,11 @@ struct Onboard_telephone_numbers : public BasePacket
         return ::encode(stream, core);
     }
 
+    int decode(Bitstream& stream) override
+    {
+        return ::decode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Onboard_telephone_numbers> Onboard_telephone_numbersPtr;

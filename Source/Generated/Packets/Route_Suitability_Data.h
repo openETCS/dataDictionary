@@ -37,6 +37,11 @@ struct Route_Suitability_Data : public BasePacket
         return ::encode(stream, core);
     }
 
+    int decode(Bitstream& stream) override
+    {
+        return ::decode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Route_Suitability_Data> Route_Suitability_DataPtr;

@@ -171,6 +171,11 @@ inline int encode(Bitstream& stream, const International_Static_Speed_Profile_Co
     return International_Static_Speed_Profile_Core_2_1_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, International_Static_Speed_Profile_Core_2_1& p)
+{
+    return International_Static_Speed_Profile_Core_2_1_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // INTERNATIONAL_STATIC_SPEED_PROFILE_CORE_2_1_CORE_H_INCLUDED

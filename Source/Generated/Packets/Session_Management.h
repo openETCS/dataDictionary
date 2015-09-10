@@ -37,6 +37,11 @@ struct Session_Management : public BasePacket
         return ::encode(stream, core);
     }
 
+    int decode(Bitstream& stream) override
+    {
+        return ::decode(stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Session_Management> Session_ManagementPtr;

@@ -251,6 +251,11 @@ inline int encode(Bitstream& stream, const Position_Report_based_on_two_balise_g
     return Position_Report_based_on_two_balise_groups_Encoder(&stream, &p);
 }
 
+inline int decode(Bitstream& stream, Position_Report_based_on_two_balise_groups_Core& p)
+{
+    return Position_Report_based_on_two_balise_groups_Decoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // POSITION_REPORT_BASED_ON_TWO_BALISE_GROUPS_CORE_H_INCLUDED
