@@ -30,10 +30,10 @@ struct Unconditional_Emergency_Stop_Message : public EuroradioMessage
 
     bool equals(const EuroradioMessage& p) const override
     {
-        if (auto q = dynamic_cast<const Unconditional_Emergency_Stop_Message*>(&p))
-        {
+	if (auto q = dynamic_cast<const Unconditional_Emergency_Stop_Message*>(&p))
+	{
             bool status = true;
-
+    
             status = status && (header.NID_MESSAGE == q->header.NID_MESSAGE);
             status = status && (L_MESSAGE == q->L_MESSAGE);
             status = status && (T_TRAIN == q->T_TRAIN);
@@ -43,8 +43,7 @@ struct Unconditional_Emergency_Stop_Message : public EuroradioMessage
 
             return status;
         }
-
-        return false;
+	return false;
     }
 
     bool decode(Bitstream& stream);

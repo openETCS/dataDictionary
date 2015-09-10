@@ -1,9 +1,9 @@
 
 #include "Acknowledgement_of_Emergency_Stop_Message.h"
-#include "Decoder_Branch.h"
-#include "Encoder_Branch.h"
-
-
+#include "PacketHeader.h"
+#include "PacketFactory.h"
+#include "Bitstream.h"
+#include "Bitwalker.h"
 #include <iostream>
 #include <cassert>
 
@@ -19,9 +19,9 @@ bool Acknowledgement_of_Emergency_Stop_Message::decode(Bitstream& stream)
 
     PacketHeader packetID;
 
-    PacketHeader_Decoder(&stream, &packetID);
-    packet_0_1 = Decoder_Branch_TrainToTrack(stream, packetID);
-
+    ::decode(stream, packetID);
+    packet_0_1 = PacketFactory_TrainToTrack(stream, packetID);
+    packet_0_1->decode(stream);
     if (!packet_0_1)
     {
         return false;
@@ -47,12 +47,11 @@ bool Acknowledgement_of_Emergency_Stop_Message::encode(Bitstream& stream) const
     Bitstream_Write(&stream, 4, NID_EM);
     Bitstream_Write(&stream, 2, Q_EMERGENCYSTOP);
 
-    if (PacketHeader_Encoder(&stream, &(packet_0_1->header)) != 1)
+    if (::encode(stream, packet_0_1->header) != 1)
     {
         return false;
     }
-
-    if (Encoder_Branch_TrainToTrack(stream, packet_0_1) != 1)
+    if (packet_0_1->encode(stream) != 1)
     {
         return false;
     }
@@ -65,4 +64,4 @@ bool Acknowledgement_of_Emergency_Stop_Message::encode(Bitstream& stream) const
     stream.bitpos = old_pos + (8 * L_MESSAGE);
 
     return true;
-}
+} 

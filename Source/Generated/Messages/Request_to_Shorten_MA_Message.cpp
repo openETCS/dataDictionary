@@ -1,9 +1,9 @@
 
 #include "Request_to_Shorten_MA_Message.h"
-#include "Decoder_Branch.h"
-#include "Encoder_Branch.h"
-
-
+#include "PacketHeader.h"
+#include "PacketFactory.h"
+#include "Bitstream.h"
+#include "Bitwalker.h"
 #include <iostream>
 #include <cassert>
 
@@ -18,17 +18,17 @@ bool Request_to_Shorten_MA_Message::decode(Bitstream& stream)
 
     PacketHeader packetID;
 
-    PacketHeader_Decoder(&stream, &packetID);
-    packet_15 = Decoder_Branch_TrackToTrain(stream, packetID);
-
+    ::decode(stream, packetID);
+    packet_15 = PacketFactory_TrackToTrain(stream, packetID);
+    packet_15->decode(stream);
     if (!packet_15)
     {
         return false;
     }
 
-    PacketHeader_Decoder(&stream, &packetID);
-    packet_80 = Decoder_Branch_TrackToTrain(stream, packetID);
-
+    ::decode(stream, packetID);
+    packet_80 = PacketFactory_TrackToTrain(stream, packetID);
+    packet_80->decode(stream);
     if (!packet_80)
     {
         return false;
@@ -53,22 +53,20 @@ bool Request_to_Shorten_MA_Message::encode(Bitstream& stream) const
     Bitstream_Write(&stream, 1, M_ACK);
     Bitstream_Write(&stream, 24, NID_LRBG);
 
-    if (PacketHeader_Encoder(&stream, &(packet_15->header)) != 1)
+    if (::encode(stream, packet_15->header) != 1)
+    {
+        return false;
+    }
+    if (packet_15->encode(stream) != 1)
     {
         return false;
     }
 
-    if (Encoder_Branch_TrackToTrain(stream, packet_15) != 1)
+    if (::encode(stream, packet_80->header) != 1)
     {
         return false;
     }
-
-    if (PacketHeader_Encoder(&stream, &(packet_80->header)) != 1)
-    {
-        return false;
-    }
-
-    if (Encoder_Branch_TrackToTrain(stream, packet_80) != 1)
+    if (packet_80->encode(stream) != 1)
     {
         return false;
     }
@@ -81,4 +79,4 @@ bool Request_to_Shorten_MA_Message::encode(Bitstream& stream) const
     stream.bitpos = old_pos + (8 * L_MESSAGE);
 
     return true;
-}
+} 

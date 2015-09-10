@@ -1,9 +1,9 @@
 
 #include "Recognition_of_exit_from_TRIP_mode_Message.h"
-#include "Decoder_Branch.h"
-#include "Encoder_Branch.h"
-
-
+#include "PacketHeader.h"
+#include "PacketFactory.h"
+#include "Bitstream.h"
+#include "Bitwalker.h"
 #include <iostream>
 #include <cassert>
 
@@ -43,4 +43,4 @@ bool Recognition_of_exit_from_TRIP_mode_Message::encode(Bitstream& stream) const
     stream.bitpos = old_pos + (8 * L_MESSAGE);
 
     return true;
-}
+} 

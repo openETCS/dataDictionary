@@ -1,9 +1,9 @@
 
 #include "SoM_position_report_confirmed_by_RBC_Message.h"
-#include "Decoder_Branch.h"
-#include "Encoder_Branch.h"
-
-
+#include "PacketHeader.h"
+#include "PacketFactory.h"
+#include "Bitstream.h"
+#include "Bitwalker.h"
 #include <iostream>
 #include <cassert>
 
@@ -43,4 +43,4 @@ bool SoM_position_report_confirmed_by_RBC_Message::encode(Bitstream& stream) con
     stream.bitpos = old_pos + (8 * L_MESSAGE);
 
     return true;
-}
+} 

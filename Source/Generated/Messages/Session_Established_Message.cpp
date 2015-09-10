@@ -1,9 +1,9 @@
 
 #include "Session_Established_Message.h"
-#include "Decoder_Branch.h"
-#include "Encoder_Branch.h"
-
-
+#include "PacketHeader.h"
+#include "PacketFactory.h"
+#include "Bitstream.h"
+#include "Bitwalker.h"
 #include <iostream>
 #include <cassert>
 
@@ -21,17 +21,17 @@ bool Session_Established_Message::decode(Bitstream& stream)
     {
         BasePacketPtr packet;
 
-        PacketHeader_Decoder(&stream, &packetID);
+        ::decode(stream, packetID);
 
-        packet = Decoder_Branch_TrainToTrack(stream, packetID);
+        packet = PacketFactory_TrainToTrack(stream, packetID);
 
+        packet->decode(stream);
         if (packet)
         {
             if (packet->header.NID_PACKET != 3)
             {
                 return false;
             }
-
             optional_packets.push_back(packet);
         }
         else
@@ -62,12 +62,12 @@ bool Session_Established_Message::encode(Bitstream& stream) const
     for (auto p = optional_packets.begin(); p != optional_packets.end(); ++p)
     {
 
-        if (PacketHeader_Encoder(&stream, &((*p)->header)) != 1)
+        if (::encode(stream, (*p)->header) != 1)
         {
             return false;
         }
 
-        if (Encoder_Branch_TrainToTrack(stream, *p) != 1)
+        if ((*p)->encode(stream) != 1)
         {
             return false;
         }
@@ -81,4 +81,4 @@ bool Session_Established_Message::encode(Bitstream& stream) const
     stream.bitpos = old_pos + (8 * L_MESSAGE);
 
     return true;
-}
+} 

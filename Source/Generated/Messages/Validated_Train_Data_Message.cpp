@@ -1,9 +1,9 @@
 
 #include "Validated_Train_Data_Message.h"
-#include "Decoder_Branch.h"
-#include "Encoder_Branch.h"
-
-
+#include "PacketHeader.h"
+#include "PacketFactory.h"
+#include "Bitstream.h"
+#include "Bitwalker.h"
 #include <iostream>
 #include <cassert>
 
@@ -17,17 +17,17 @@ bool Validated_Train_Data_Message::decode(Bitstream& stream)
 
     PacketHeader packetID;
 
-    PacketHeader_Decoder(&stream, &packetID);
-    packet_0_1 = Decoder_Branch_TrainToTrack(stream, packetID);
-
+    ::decode(stream, packetID);
+    packet_0_1 = PacketFactory_TrainToTrack(stream, packetID);
+    packet_0_1->decode(stream);
     if (!packet_0_1)
     {
         return false;
     }
 
-    PacketHeader_Decoder(&stream, &packetID);
-    packet_11 = Decoder_Branch_TrainToTrack(stream, packetID);
-
+    ::decode(stream, packetID);
+    packet_11 = PacketFactory_TrainToTrack(stream, packetID);
+    packet_11->decode(stream);
     if (!packet_11)
     {
         return false;
@@ -51,22 +51,20 @@ bool Validated_Train_Data_Message::encode(Bitstream& stream) const
     Bitstream_Write(&stream, 32, T_TRAIN);
     Bitstream_Write(&stream, 24, NID_ENGINE);
 
-    if (PacketHeader_Encoder(&stream, &(packet_0_1->header)) != 1)
+    if (::encode(stream, packet_0_1->header) != 1)
+    {
+        return false;
+    }
+    if (packet_0_1->encode(stream) != 1)
     {
         return false;
     }
 
-    if (Encoder_Branch_TrainToTrack(stream, packet_0_1) != 1)
+    if (::encode(stream, packet_11->header) != 1)
     {
         return false;
     }
-
-    if (PacketHeader_Encoder(&stream, &(packet_11->header)) != 1)
-    {
-        return false;
-    }
-
-    if (Encoder_Branch_TrainToTrack(stream, packet_11) != 1)
+    if (packet_11->encode(stream) != 1)
     {
         return false;
     }
@@ -79,4 +77,4 @@ bool Validated_Train_Data_Message::encode(Bitstream& stream) const
     stream.bitpos = old_pos + (8 * L_MESSAGE);
 
     return true;
-}
+} 

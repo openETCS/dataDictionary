@@ -1,9 +1,9 @@
 
 #include "Acknowledgement_of_termination_of_a_communication_session_Message.h"
-#include "Decoder_Branch.h"
-#include "Encoder_Branch.h"
-
-
+#include "PacketHeader.h"
+#include "PacketFactory.h"
+#include "Bitstream.h"
+#include "Bitwalker.h"
 #include <iostream>
 #include <cassert>
 
@@ -43,4 +43,4 @@ bool Acknowledgement_of_termination_of_a_communication_session_Message::encode(B
     stream.bitpos = old_pos + (8 * L_MESSAGE);
 
     return true;
-}
+} 

@@ -1,9 +1,9 @@
 
 #include "MA_with_Shifted_Location_Reference_Message.h"
-#include "Decoder_Branch.h"
-#include "Encoder_Branch.h"
-
-
+#include "PacketHeader.h"
+#include "PacketFactory.h"
+#include "Bitstream.h"
+#include "Bitwalker.h"
 #include <iostream>
 #include <cassert>
 
@@ -20,9 +20,9 @@ bool MA_with_Shifted_Location_Reference_Message::decode(Bitstream& stream)
 
     PacketHeader packetID;
 
-    PacketHeader_Decoder(&stream, &packetID);
-    packet_15 = Decoder_Branch_TrackToTrain(stream, packetID);
-
+    ::decode(stream, packetID);
+    packet_15 = PacketFactory_TrackToTrain(stream, packetID);
+    packet_15->decode(stream);
     if (!packet_15)
     {
         return false;
@@ -32,10 +32,11 @@ bool MA_with_Shifted_Location_Reference_Message::decode(Bitstream& stream)
     {
         BasePacketPtr packet;
 
-        PacketHeader_Decoder(&stream, &packetID);
+        ::decode(stream, packetID);
 
-        packet = Decoder_Branch_TrackToTrain(stream, packetID);
+        packet = PacketFactory_TrackToTrain(stream, packetID);
 
+        packet->decode(stream);
         if (packet)
         {
             if (packet->header.NID_PACKET != 21 &&
@@ -72,7 +73,6 @@ bool MA_with_Shifted_Location_Reference_Message::decode(Bitstream& stream)
             {
                 return false;
             }
-
             optional_packets.push_back(packet);
         }
         else
@@ -102,12 +102,11 @@ bool MA_with_Shifted_Location_Reference_Message::encode(Bitstream& stream) const
     Bitstream_Write(&stream, 2, Q_SCALE);
     Bitstream_Write(&stream, 16, D_REF);
 
-    if (PacketHeader_Encoder(&stream, &(packet_15->header)) != 1)
+    if (::encode(stream, packet_15->header) != 1)
     {
         return false;
     }
-
-    if (Encoder_Branch_TrackToTrain(stream, packet_15) != 1)
+    if (packet_15->encode(stream) != 1)
     {
         return false;
     }
@@ -116,12 +115,12 @@ bool MA_with_Shifted_Location_Reference_Message::encode(Bitstream& stream) const
     for (auto p = optional_packets.begin(); p != optional_packets.end(); ++p)
     {
 
-        if (PacketHeader_Encoder(&stream, &((*p)->header)) != 1)
+        if (::encode(stream, (*p)->header) != 1)
         {
             return false;
         }
 
-        if (Encoder_Branch_TrackToTrain(stream, *p) != 1)
+        if ((*p)->encode(stream) != 1)
         {
             return false;
         }
@@ -135,4 +134,4 @@ bool MA_with_Shifted_Location_Reference_Message::encode(Bitstream& stream) const
     stream.bitpos = old_pos + (8 * L_MESSAGE);
 
     return true;
-}
+} 

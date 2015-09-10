@@ -28,10 +28,10 @@ struct Request_for_Shunting_Message : public EuroradioMessage
 
     bool equals(const EuroradioMessage& p) const override
     {
-        if (auto q = dynamic_cast<const Request_for_Shunting_Message*>(&p))
-        {
+	if (auto q = dynamic_cast<const Request_for_Shunting_Message*>(&p))
+	{
             bool status = true;
-
+    
             status = status && (header.NID_MESSAGE == q->header.NID_MESSAGE);
             status = status && (L_MESSAGE == q->L_MESSAGE);
             status = status && (T_TRAIN == q->T_TRAIN);
@@ -40,8 +40,7 @@ struct Request_for_Shunting_Message : public EuroradioMessage
 
             return status;
         }
-
-        return false;
+	return false;
     }
 
     bool decode(Bitstream& stream);

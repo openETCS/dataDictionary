@@ -38,7 +38,6 @@ struct MA_with_Shifted_Location_Reference_Message : public EuroradioMessage
             {
                 stream << ',';
             }
-
             stream << *(*i);
         }
 
@@ -47,10 +46,10 @@ struct MA_with_Shifted_Location_Reference_Message : public EuroradioMessage
 
     bool equals(const EuroradioMessage& p) const override
     {
-        if (auto q = dynamic_cast<const MA_with_Shifted_Location_Reference_Message*>(&p))
-        {
+	if (auto q = dynamic_cast<const MA_with_Shifted_Location_Reference_Message*>(&p))
+	{
             bool status = true;
-
+    
             status = status && (header.NID_MESSAGE == q->header.NID_MESSAGE);
             status = status && (L_MESSAGE == q->L_MESSAGE);
             status = status && (T_TRAIN == q->T_TRAIN);
@@ -74,8 +73,7 @@ struct MA_with_Shifted_Location_Reference_Message : public EuroradioMessage
 
             return status;
         }
-
-        return false;
+	return false;
     }
 
     bool decode(Bitstream& stream);
