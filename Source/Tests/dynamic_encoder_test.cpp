@@ -11,13 +11,7 @@ int main ()
     EurobaliseTelegram telegram;
 
     // declare and initialize a telegram header
-    // telegram.header = create_TelegramHeader_TrainToTrack();
     telegram.header = create_TelegramHeader_TrackToTrain();
-
-    // create a pointer to a data packet including core data packet 1
-    // and push this pointer into the telegam packet vector
-    // telegram.add(std::make_shared<Train_running_number>(create_Train_running_number()));
-    // telegram.add(std::make_shared<Error_Reporting>(create_Error_Reporting()));
 
     telegram.add(std::make_shared<Temporary_Speed_Restriction>(create_Temporary_Speed_Restriction()));
     telegram.add(std::make_shared<Adhesion_Factor>(create_Adhesion_Factor()));
@@ -38,7 +32,6 @@ int main ()
     // save the old bitpos
     uint32_t init_pos = stream.bitpos;
 
-    // *** encode the telegram to the stream ***
     std::cout << " Encoding Eurobalise Telegram." << std::endl;
     telegram.encode(stream);
 
@@ -48,7 +41,6 @@ int main ()
     // declare a new telegram
     EurobaliseTelegram telegram_new;
 
-    // *** decode from the stream to the new telegram ***
     std::cout << " Decoding Eurobalise Telegram." << std::endl;
     telegram_new.decode(stream);
 
