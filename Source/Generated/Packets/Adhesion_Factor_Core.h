@@ -190,5 +190,14 @@ int Adhesion_Factor_Encoder(Bitstream* stream, const Adhesion_Factor_Core* p);
 */
 int Adhesion_Factor_Decoder(Bitstream* stream, Adhesion_Factor_Core* p);
 
+#ifdef __cplusplus
+
+inline int encode(Bitstream& stream, const Adhesion_Factor_Core& p)
+{
+    return Adhesion_Factor_Encoder(&stream, &p);
+}
+
+#endif // __cplusplus
+
 #endif // ADHESION_FACTOR_CORE_H_INCLUDED
 

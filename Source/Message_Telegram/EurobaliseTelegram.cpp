@@ -127,10 +127,13 @@ bool EurobaliseTelegram::encode(Bitstream& stream) const
             return false;
         }
 
-        if (PacketHeader_Encoder(&stream, &((*p)->header)) != 1)
+        //if (PacketHeader_Encoder(&stream, &((*p)->header)) != 1)
+        if (::encode(stream, (*p)->header) != 1)
         {
             return false;
         }
+
+        // (*p)->encode(stream);
 
         if (header().Q_UPDOWN == 0)
         {

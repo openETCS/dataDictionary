@@ -24,6 +24,12 @@ struct BasePacket
     virtual bool equals(const BasePacket& p) const = 0;
 
     virtual uint16_t length() const = 0;
+
+    virtual int encode(Bitstream&) const
+    {
+        return 1;
+    }
+
 };
 
 inline bool operator== (const BasePacket& a, const BasePacket& b)

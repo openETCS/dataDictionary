@@ -200,6 +200,11 @@ inline bool operator!=(const PacketHeader& a, const PacketHeader& b)
     return !(a == b);
 }
 
+inline int encode(Bitstream& stream, const PacketHeader& p)
+{
+    return PacketHeader_Encoder(&stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // PACKETHEADER_H_INCLUDED
