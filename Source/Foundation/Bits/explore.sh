@@ -48,14 +48,37 @@ enumerate_theories() {
 	done
 }
 
+theory_count() {
+	wc -l <$1
+}
+
+goal_count() {
+	# cat `sed 's/,[^,]*$//' $1 | sort -u` | grep -c goal
+
+
+	(
+		declare -i count=0
+
+		while IFS=, read file theory
+		do
+			count+=`sed -n "/theory $theory\$/,/theory/p" $file | grep -c ^goal`
+		done
+
+		echo $count
+	) <$1
+}
+
 single_pass() {
 	local timeout=$1
 	local theories=/dev/fd/0
 
 	for prover in $provers
 	do
-		printf "Verifying %s theories with %s, timeout is %s... " $thcount $prover $timeout >&2
-		local remaining=`mktemp remaining.XXXXXXX`
+		thcount=`theory_count $theories`
+		[ "$thcount" = 0 ] && break
+
+		printf "Verifying %s goals in %s theories with %s, timeout is %s... " `goal_count $theories` $thcount $prover $timeout >&2
+		local remaining=`mktemp "${TEMPDIR:-/tmp}/remaining.XXXXXXX"`
 
 		if [ "$prover" = "${provers/* }" ]
 		then
@@ -64,14 +87,10 @@ single_pass() {
 			islastprover=false
 		fi
 
-		do_theories $prover $timeout $islastprover <$theories 2>$remaining 3>$validsto
+		time do_theories $prover $timeout $islastprover <$theories 2>$remaining 3>$validsto
 
 		[ "$theories" != /dev/fd/0 ] && rm -f $theories
 		theories=$remaining
-		local thcount=`wc -l <$theories`
-		echo $thcount theories remain >&2
-
-		[ "$thcount" = 0 ] && break
 	done
 
 	cat $theories >&3
@@ -107,10 +126,10 @@ shift $((OPTIND-1))
 
 [ -z "$*" ] && usage
 
-theories=`mktemp theories.XXXXXX`
+TIMEFORMAT=' (%Rs)'
+theories=`mktemp "${TEMPDIR:-/tmp}/theories.XXXXXX"`
 enumerate_theories "$@" >$theories
-thcount=`wc -l <$theories`
-echo Found $thcount theories >&2
+echo Found `goal_count $theories` goals in `theory_count $theories` theories >&2
 
 timeout=1
 while [ $timeout -le $maxtimeout ]
@@ -121,14 +140,14 @@ do
 
 	rm -f $theories
 	theories=$remaining
-	thcount=`wc -l <$theories`
-	[ "$thcount" = 0 ] && break
+	[ 0 = `theory_count $theories` ] && break
 	timeout=$((timeout*2))
 done
 
+thcount=`theory_count $theories`
 if [ "$thcount" != 0 ]
 then
-	echo $thcount theories could not be verified with this timeout >&2
+	echo `goal_count $theories` goals in $thcount theories could not be verified with this timeout >&2
 	show_timeouts <$theories
 fi
 
