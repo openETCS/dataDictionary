@@ -3,13 +3,10 @@
 
 /*@ lemma X: 
       \forall uint64_t x, y, integer pos, length;
-         (\forall integer k;
-           pos <= k < pos + length ==> 
-             (BitTest(x,  pos + length - 1 - k) <==> BitTest(y, pos + length - 1 - k)))
-         ==> 
-         (\forall integer k;
-           0 <= k < length ==> 
-             (BitTest(x,  length - 1 - k) <==> BitTest(y, length - 1 - k)));
+         (\forall integer k; pos <= k < pos + length ==> 
+             (BitTest(x,  pos + length - 1 - k) <==>
+              BitTest(y, pos + length - 1 - k)))
+         ==> EqualBits64(x, y, 64-length, 64);
 */
 
 /*@
@@ -62,21 +59,6 @@ uint64_t Bitstream_WriteThenRead(Bitstream* stream, uint32_t length, uint64_t va
     //@ assert equal_value:  EqualBits(stream, pos, pos+length, value);
     /*@ assert x1:   \forall integer k; pos <= k < pos + length ==> 
                         (BitTest(value,  pos + length - 1 - k) <==> BitTest(result, pos + length - 1 - k));
-    */
-    /*@ assert x2:   \forall integer k; pos <= k < pos + length ==> 
-                        (BitTest(value,  length - 1 - (k - pos)) <==> BitTest(result, length - 1 - (k - pos)));
-    */
-    /*@ assert x3:   \forall integer k; pos <= k < pos + length ==> 
-                       (\let j = k - pos;
-                        0 <= j < length ==>
-                        (BitTest(value,  length - 1 - j) <==> 
-                         BitTest(result, length - 1 - j)));
-    */
-    /*@ assert x4:   \forall integer k; 0 <= k < length ==> 
-                        (BitTest(value,  length - 1 - k) <==> BitTest(result, length - 1 - k));
-    */
-    /*@ assert y:    \forall integer k; 0 <= k < length ==> 
-                        (BitTest(value, k) <==> BitTest(result, k));
     */
     //@ assert left:         EqualBits64(value, result, 64-length, 64);
 
