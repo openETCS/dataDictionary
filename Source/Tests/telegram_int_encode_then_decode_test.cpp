@@ -56,13 +56,13 @@ int main ()
         std::cout << "An error occured during the encoding process of the telegram." << std::endl;
     }
 
-    std::cout << "The int stream contains this data: ";
-    std::cout << "0:" << container.PacketData[0];
+    //std::cout << "The int stream contains this data: ";
+    //std::cout << "0:" << container.PacketData[0];
 
-    for (unsigned int i = 1; i < 500; ++i)
-    {
-        std::cout << ", " << i << ":" << container.PacketData[i];
-    }
+    //for (unsigned int i = 1; i < 500; ++i)
+    //{
+        //std::cout << ", " << i << ":" << container.PacketData[i];
+    //}
 
     std::cout << std::endl;
 

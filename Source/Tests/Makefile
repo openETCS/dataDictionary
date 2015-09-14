@@ -8,7 +8,7 @@ export GENERATED_PACKETS=$(TOPDIR)/Generated/Packets
 export GENERATED_MESSAGES=$(TOPDIR)/Generated/Messages
 export MESSAGE_TELEGRAM=$(TOPDIR)/Message_Telegram
 
-test: general issue31
+test: issue31 general 
 
 include $(TOPDIR)/Makefile.template
 
