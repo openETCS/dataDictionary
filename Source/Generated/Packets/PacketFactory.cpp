@@ -1,9 +1,9 @@
 
 #include "PacketFactory.h"
 
-BasePacketPtr PacketFactory_TrainToTrack(Bitstream& stream, PacketHeader header)
+BasePacketPtr PacketFactory_TrainToTrack(uint8_t nid)
 {
-    switch (header.NID_PACKET)
+    switch (nid)
     {
         case 0 :
         {
@@ -52,16 +52,16 @@ BasePacketPtr PacketFactory_TrainToTrack(Bitstream& stream, PacketHeader header)
 
         default :
         {
-            std::cerr << "Error, unrecognized Packet " << header.NID_PACKET 
+            std::cerr << "Error, unrecognized Packet " << nid 
                       << " in " << __FILE__ << std::endl;
             return BasePacketPtr();
         }
     };
 }
 
-BasePacketPtr PacketFactory_TrackToTrain(Bitstream& stream, PacketHeader header)
+BasePacketPtr PacketFactory_TrackToTrain(uint8_t nid)
 {
-    switch (header.NID_PACKET)
+    switch (nid)
     {
         case 0 :
         {
@@ -330,7 +330,7 @@ BasePacketPtr PacketFactory_TrackToTrain(Bitstream& stream, PacketHeader header)
 
         default :
         {
-            std::cerr << "Error, unrecognized Packet " << header.NID_PACKET
+            std::cerr << "Error, unrecognized Packet " << nid
                       << " in " << __FILE__ << std::endl;
             return BasePacketPtr();
         }

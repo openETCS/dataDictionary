@@ -19,7 +19,7 @@ bool Movement_Authority_Message::decode(Bitstream& stream)
     PacketHeader packetID;
 
     ::decode(stream, packetID);
-    packet_15 = PacketFactory_TrackToTrain(stream, packetID);
+    packet_15 = PacketFactory_TrackToTrain(packetID.NID_PACKET);
     packet_15->decode(stream);
     if (!packet_15)
     {
@@ -32,7 +32,7 @@ bool Movement_Authority_Message::decode(Bitstream& stream)
 
         ::decode(stream, packetID);
 
-        packet = PacketFactory_TrackToTrain(stream, packetID);
+        packet = PacketFactory_TrackToTrain(packetID.NID_PACKET);
 
         packet->decode(stream);
         if (packet)

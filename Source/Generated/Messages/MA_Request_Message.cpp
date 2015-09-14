@@ -19,7 +19,7 @@ bool MA_Request_Message::decode(Bitstream& stream)
     PacketHeader packetID;
 
     ::decode(stream, packetID);
-    packet_0_1 = PacketFactory_TrainToTrack(stream, packetID);
+    packet_0_1 = PacketFactory_TrainToTrack(packetID.NID_PACKET);
     packet_0_1->decode(stream);
     if (!packet_0_1)
     {
@@ -32,7 +32,7 @@ bool MA_Request_Message::decode(Bitstream& stream)
 
         ::decode(stream, packetID);
 
-        packet = PacketFactory_TrainToTrack(stream, packetID);
+        packet = PacketFactory_TrainToTrack(packetID.NID_PACKET);
 
         packet->decode(stream);
         if (packet)

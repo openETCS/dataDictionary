@@ -26,7 +26,7 @@ bool SR_Authorisation_Message::decode(Bitstream& stream)
 
         ::decode(stream, packetID);
 
-        packet = PacketFactory_TrackToTrain(stream, packetID);
+        packet = PacketFactory_TrackToTrain(packetID.NID_PACKET);
 
         packet->decode(stream);
         if (packet)

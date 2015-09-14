@@ -5,9 +5,9 @@
 #include "BasePacket.h"
 #include "Packets.h"
 
-BasePacketPtr PacketFactory_TrainToTrack(Bitstream& stream, PacketHeader header);
+BasePacketPtr PacketFactory_TrainToTrack(uint8_t nid);
 
-BasePacketPtr PacketFactory_TrackToTrain(Bitstream& stream, PacketHeader header);
+BasePacketPtr PacketFactory_TrackToTrain(uint8_t nid);
 
 #endif // PACKETFACTORY_H_INCLUDED
 

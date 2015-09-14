@@ -19,7 +19,7 @@ bool Infill_MA_Message::decode(Bitstream& stream)
     PacketHeader packetID;
 
     ::decode(stream, packetID);
-    packet_136 = PacketFactory_TrackToTrain(stream, packetID);
+    packet_136 = PacketFactory_TrackToTrain(packetID.NID_PACKET);
     packet_136->decode(stream);
     if (!packet_136)
     {
@@ -27,7 +27,7 @@ bool Infill_MA_Message::decode(Bitstream& stream)
     }
 
     ::decode(stream, packetID);
-    packet_12 = PacketFactory_TrackToTrain(stream, packetID);
+    packet_12 = PacketFactory_TrackToTrain(packetID.NID_PACKET);
     packet_12->decode(stream);
     if (!packet_12)
     {
@@ -40,7 +40,7 @@ bool Infill_MA_Message::decode(Bitstream& stream)
 
         ::decode(stream, packetID);
 
-        packet = PacketFactory_TrackToTrain(stream, packetID);
+        packet = PacketFactory_TrackToTrain(packetID.NID_PACKET);
 
         packet->decode(stream);
         if (packet)

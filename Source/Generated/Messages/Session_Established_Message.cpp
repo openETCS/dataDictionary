@@ -23,7 +23,7 @@ bool Session_Established_Message::decode(Bitstream& stream)
 
         ::decode(stream, packetID);
 
-        packet = PacketFactory_TrainToTrack(stream, packetID);
+        packet = PacketFactory_TrainToTrack(packetID.NID_PACKET);
 
         packet->decode(stream);
         if (packet)

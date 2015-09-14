@@ -21,7 +21,7 @@ bool MA_with_Shifted_Location_Reference_Message::decode(Bitstream& stream)
     PacketHeader packetID;
 
     ::decode(stream, packetID);
-    packet_15 = PacketFactory_TrackToTrain(stream, packetID);
+    packet_15 = PacketFactory_TrackToTrain(packetID.NID_PACKET);
     packet_15->decode(stream);
     if (!packet_15)
     {
@@ -34,7 +34,7 @@ bool MA_with_Shifted_Location_Reference_Message::decode(Bitstream& stream)
 
         ::decode(stream, packetID);
 
-        packet = PacketFactory_TrackToTrain(stream, packetID);
+        packet = PacketFactory_TrackToTrain(packetID.NID_PACKET);
 
         packet->decode(stream);
         if (packet)
