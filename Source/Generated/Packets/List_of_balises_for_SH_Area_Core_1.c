@@ -101,13 +101,13 @@ int List_of_balises_for_SH_Area_Core_1_Decode_Bit(Bitstream* stream, List_of_bal
 
 int List_of_balises_for_SH_Area_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const List_of_balises_for_SH_Area_Core_1* p)
 {
-    std::cerr << "encode int function not implemented for packet " << 49 << " yet." << std::endl;
+    std::cerr << "encode int function not implemented for packet 49 yet." << std::endl;
     return 0;
 }
 
 int List_of_balises_for_SH_Area_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, List_of_balises_for_SH_Area_Core_1* p)
 {
-    std::cerr << "decode int function not implemented for packet " << 49 << " yet." << std::endl;
+    std::cerr << "decode int function not implemented for packet  49 yet." << std::endl;
     return 0;
 }
 

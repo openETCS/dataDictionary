@@ -255,13 +255,13 @@ int Route_Suitability_Data_Decode_Bit(Bitstream* stream, Route_Suitability_Data_
 
 int Route_Suitability_Data_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Route_Suitability_Data_Core* p)
 {
-    std::cerr << "encode int function not implemented for packet " << 70 << " yet." << std::endl;
+    std::cerr << "encode int function not implemented for packet 70 yet." << std::endl;
     return 0;
 }
 
 int Route_Suitability_Data_Decode_Int(const Packet_Info* data, const kcg_int* stream, Route_Suitability_Data_Core* p)
 {
-    std::cerr << "decode int function not implemented for packet " << 70 << " yet." << std::endl;
+    std::cerr << "decode int function not implemented for packet 70 yet." << std::endl;
     return 0;
 }
 

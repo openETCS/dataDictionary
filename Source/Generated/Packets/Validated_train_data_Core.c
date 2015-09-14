@@ -250,13 +250,13 @@ int Validated_train_data_Decode_Bit(Bitstream* stream, Validated_train_data_Core
 
 int Validated_train_data_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Validated_train_data_Core* p)
 {
-    std::cerr << "encode int function not implemented for packet " << 11 << " yet." << std::endl;
+    std::cerr << "encode int function not implemented for packet 11 yet." << std::endl;
     return 0;
 }
 
 int Validated_train_data_Decode_Int(const Packet_Info* data, const kcg_int* stream, Validated_train_data_Core* p)
 {
-    std::cerr << "decode int function not implemented for packet " << 11 << " yet." << std::endl;
+    std::cerr << "decode int function not implemented for packet 11 yet." << std::endl;
     return 0;
 }
 

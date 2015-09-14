@@ -188,13 +188,13 @@ int Geographical_Position_Information_Decode_Bit(Bitstream* stream, Geographical
 
 int Geographical_Position_Information_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Geographical_Position_Information_Core* p)
 {
-    std::cerr << "encode int function not implemented for packet " << 79 << " yet." << std::endl;
+    std::cerr << "encode int function not implemented for packet 79 yet." << std::endl;
     return 0;
 }
 
 int Geographical_Position_Information_Decode_Int(const Packet_Info* data, const kcg_int* stream, Geographical_Position_Information_Core* p)
 {
-    std::cerr << "decode int function not implemented for packet " << 79 << " yet." << std::endl;
+    std::cerr << "decode int function not implemented for packet 79 yet." << std::endl;
     return 0;
 }
 

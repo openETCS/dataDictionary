@@ -95,13 +95,13 @@ int Conditional_Level_Transition_Order_Core_1_Decode_Bit(Bitstream* stream, Cond
 
 int Conditional_Level_Transition_Order_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Conditional_Level_Transition_Order_Core_1* p)
 {
-    std::cerr << "encode int function not implemented for packet " << 46 << " yet." << std::endl;
+    std::cerr << "encode int function not implemented for packet 46 yet." << std::endl;
     return 0;
 }
 
 int Conditional_Level_Transition_Order_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, Conditional_Level_Transition_Order_Core_1* p)
 {
-    std::cerr << "decode int function not implemented for packet " << 46 << " yet." << std::endl;
+    std::cerr << "decode int function not implemented for packet  46 yet." << std::endl;
     return 0;
 }
 

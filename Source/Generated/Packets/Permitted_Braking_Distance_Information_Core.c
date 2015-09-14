@@ -211,13 +211,13 @@ int Permitted_Braking_Distance_Information_Decode_Bit(Bitstream* stream, Permitt
 
 int Permitted_Braking_Distance_Information_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Permitted_Braking_Distance_Information_Core* p)
 {
-    std::cerr << "encode int function not implemented for packet " << 52 << " yet." << std::endl;
+    std::cerr << "encode int function not implemented for packet 52 yet." << std::endl;
     return 0;
 }
 
 int Permitted_Braking_Distance_Information_Decode_Int(const Packet_Info* data, const kcg_int* stream, Permitted_Braking_Distance_Information_Core* p)
 {
-    std::cerr << "decode int function not implemented for packet " << 52 << " yet." << std::endl;
+    std::cerr << "decode int function not implemented for packet 52 yet." << std::endl;
     return 0;
 }
 
