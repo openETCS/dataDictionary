@@ -146,13 +146,32 @@ int Reversing_area_information_Decode_Bit(Bitstream* stream, Reversing_area_info
 
 int Reversing_area_information_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Reversing_area_information_Core* p)
 {
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->Q_SCALE;
+    stream[startAddress++] = p->D_STARTREVERSE;
+    stream[startAddress++] = p->L_REVERSEAREA;
 
-    return 0;
+    data->endAddress = startAddress-1;
+
+    return 1;
 }
 
 int Reversing_area_information_Decode_Int(const Packet_Info* data, const kcg_int* stream, Reversing_area_information_Core* p)
 {
+    kcg_int startAddress = data->startAddress+1;
 
-    return 0;
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->Q_SCALE = stream[startAddress++];
+    p->D_STARTREVERSE = stream[startAddress++];
+    p->L_REVERSEAREA = stream[startAddress++];
+
+    if(data->endAddress != startAddress-1)
+    {
+        return false;
+    }
+
+    return 1;
 }
 

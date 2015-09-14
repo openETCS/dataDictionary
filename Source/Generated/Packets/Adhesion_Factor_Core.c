@@ -163,13 +163,34 @@ int Adhesion_Factor_Decode_Bit(Bitstream* stream, Adhesion_Factor_Core* p)
 
 int Adhesion_Factor_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Adhesion_Factor_Core* p)
 {
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->Q_SCALE;
+    stream[startAddress++] = p->D_ADHESION;
+    stream[startAddress++] = p->L_ADHESION;
+    stream[startAddress++] = p->M_ADHESION;
 
-    return 0;
+    data->endAddress = startAddress-1;
+
+    return 1;
 }
 
 int Adhesion_Factor_Decode_Int(const Packet_Info* data, const kcg_int* stream, Adhesion_Factor_Core* p)
 {
+    kcg_int startAddress = data->startAddress+1;
 
-    return 0;
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->Q_SCALE = stream[startAddress++];
+    p->D_ADHESION = stream[startAddress++];
+    p->L_ADHESION = stream[startAddress++];
+    p->M_ADHESION = stream[startAddress++];
+
+    if(data->endAddress != startAddress-1)
+    {
+        return false;
+    }
+
+    return 1;
 }
 

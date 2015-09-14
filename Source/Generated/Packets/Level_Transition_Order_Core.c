@@ -187,13 +187,11 @@ int Level_Transition_Order_Decode_Bit(Bitstream* stream, Level_Transition_Order_
 
 int Level_Transition_Order_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Level_Transition_Order_Core* p)
 {
-
     return 0;
 }
 
 int Level_Transition_Order_Decode_Int(const Packet_Info* data, const kcg_int* stream, Level_Transition_Order_Core* p)
 {
-
     return 0;
 }
 

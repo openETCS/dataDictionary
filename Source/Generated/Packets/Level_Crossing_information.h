@@ -45,9 +45,11 @@ struct Level_Crossing_information : public BasePacket
     int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress) const override
     {
         data.nid_packet = 88;
-	data.q_dir = core.Q_DIR;
-	data.valid = core.VALID;
+        data.q_dir = core.Q_DIR;
+	data.valid = 1;
 	data.startAddress = startAddress;
+
+	stream[startAddress++] = header.NID_PACKET;
 
 	return ::encode(data, stream, startAddress, core);
     }
@@ -58,6 +60,8 @@ struct Level_Crossing_information : public BasePacket
 	{
 	    return 0;
 	}
+
+	header.NID_PACKET = stream[data.startAddress];
 
 	return ::decode(data, stream, core);
     }

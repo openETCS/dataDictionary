@@ -129,13 +129,30 @@ int Default_Gradient_for_Temporary_Speed_Restriction_Decode_Bit(Bitstream* strea
 
 int Default_Gradient_for_Temporary_Speed_Restriction_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Default_Gradient_for_Temporary_Speed_Restriction_Core* p)
 {
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->Q_GDIR;
+    stream[startAddress++] = p->G_TSR;
 
-    return 0;
+    data->endAddress = startAddress-1;
+
+    return 1;
 }
 
 int Default_Gradient_for_Temporary_Speed_Restriction_Decode_Int(const Packet_Info* data, const kcg_int* stream, Default_Gradient_for_Temporary_Speed_Restriction_Core* p)
 {
+    kcg_int startAddress = data->startAddress+1;
 
-    return 0;
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->Q_GDIR = stream[startAddress++];
+    p->G_TSR = stream[startAddress++];
+
+    if(data->endAddress != startAddress-1)
+    {
+        return false;
+    }
+
+    return 1;
 }
 

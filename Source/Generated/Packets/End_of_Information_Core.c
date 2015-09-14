@@ -62,12 +62,21 @@ int End_of_Information_Decode_Bit(Bitstream* stream, End_of_Information_Core* p)
 int End_of_Information_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const End_of_Information_Core* p)
 {
 
-    return 0;
+    data->endAddress = startAddress-1;
+
+    return 1;
 }
 
 int End_of_Information_Decode_Int(const Packet_Info* data, const kcg_int* stream, End_of_Information_Core* p)
 {
+    kcg_int startAddress = data->startAddress+1;
 
-    return 0;
+
+    if(data->endAddress != startAddress-1)
+    {
+        return false;
+    }
+
+    return 1;
 }
 

@@ -232,13 +232,11 @@ int Mode_profile_Decode_Bit(Bitstream* stream, Mode_profile_Core* p)
 
 int Mode_profile_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Mode_profile_Core* p)
 {
-
     return 0;
 }
 
 int Mode_profile_Decode_Int(const Packet_Info* data, const kcg_int* stream, Mode_profile_Core* p)
 {
-
     return 0;
 }
 

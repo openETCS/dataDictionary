@@ -95,13 +95,26 @@ int Train_running_number_Decode_Bit(Bitstream* stream, Train_running_number_Core
 
 int Train_running_number_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Train_running_number_Core* p)
 {
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->NID_OPERATIONAL;
 
-    return 0;
+    data->endAddress = startAddress-1;
+
+    return 1;
 }
 
 int Train_running_number_Decode_Int(const Packet_Info* data, const kcg_int* stream, Train_running_number_Core* p)
 {
+    kcg_int startAddress = data->startAddress+1;
 
-    return 0;
+    p->L_PACKET = stream[startAddress++];
+    p->NID_OPERATIONAL = stream[startAddress++];
+
+    if(data->endAddress != startAddress-1)
+    {
+        return false;
+    }
+
+    return 1;
 }
 

@@ -130,13 +130,11 @@ int International_Static_Speed_Profile_Core_2_Decode_Bit(Bitstream* stream, Inte
 
 int International_Static_Speed_Profile_Core_2_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const International_Static_Speed_Profile_Core_2* p)
 {
-
     return 0;
 }
 
 int International_Static_Speed_Profile_Core_2_Decode_Int(const Packet_Info* data, const kcg_int* stream, International_Static_Speed_Profile_Core_2* p)
 {
-
     return 0;
 }
 

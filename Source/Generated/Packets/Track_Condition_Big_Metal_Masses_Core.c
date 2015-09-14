@@ -164,13 +164,11 @@ int Track_Condition_Big_Metal_Masses_Decode_Bit(Bitstream* stream, Track_Conditi
 
 int Track_Condition_Big_Metal_Masses_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Track_Condition_Big_Metal_Masses_Core* p)
 {
-
     return 0;
 }
 
 int Track_Condition_Big_Metal_Masses_Decode_Int(const Packet_Info* data, const kcg_int* stream, Track_Condition_Big_Metal_Masses_Core* p)
 {
-
     return 0;
 }
 

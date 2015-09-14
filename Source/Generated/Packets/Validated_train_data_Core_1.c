@@ -95,13 +95,11 @@ int Validated_train_data_Core_1_Decode_Bit(Bitstream* stream, Validated_train_da
 
 int Validated_train_data_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Validated_train_data_Core_1* p)
 {
-
     return 0;
 }
 
 int Validated_train_data_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, Validated_train_data_Core_1* p)
 {
-
     return 0;
 }
 

@@ -45,9 +45,10 @@ struct Onboard_telephone_numbers : public BasePacket
     int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress) const override
     {
         data.nid_packet = 3;
-	
-	data.valid = core.VALID;
+	data.valid = 1;
 	data.startAddress = startAddress;
+
+	stream[startAddress++] = header.NID_PACKET;
 
 	return ::encode(data, stream, startAddress, core);
     }
@@ -58,6 +59,8 @@ struct Onboard_telephone_numbers : public BasePacket
 	{
 	    return 0;
 	}
+
+	header.NID_PACKET = stream[data.startAddress];
 
 	return ::decode(data, stream, core);
     }

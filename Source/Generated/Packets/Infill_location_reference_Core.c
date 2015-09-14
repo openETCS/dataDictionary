@@ -135,13 +135,11 @@ int Infill_location_reference_Decode_Bit(Bitstream* stream, Infill_location_refe
 
 int Infill_location_reference_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Infill_location_reference_Core* p)
 {
-
     return 0;
 }
 
 int Infill_location_reference_Decode_Int(const Packet_Info* data, const kcg_int* stream, Infill_location_reference_Core* p)
 {
-
     return 0;
 }
 

@@ -197,13 +197,38 @@ int Temporary_Speed_Restriction_Decode_Bit(Bitstream* stream, Temporary_Speed_Re
 
 int Temporary_Speed_Restriction_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Temporary_Speed_Restriction_Core* p)
 {
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->Q_SCALE;
+    stream[startAddress++] = p->NID_TSR;
+    stream[startAddress++] = p->D_TSR;
+    stream[startAddress++] = p->L_TSR;
+    stream[startAddress++] = p->Q_FRONT;
+    stream[startAddress++] = p->V_TSR;
 
-    return 0;
+    data->endAddress = startAddress-1;
+
+    return 1;
 }
 
 int Temporary_Speed_Restriction_Decode_Int(const Packet_Info* data, const kcg_int* stream, Temporary_Speed_Restriction_Core* p)
 {
+    kcg_int startAddress = data->startAddress+1;
 
-    return 0;
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->Q_SCALE = stream[startAddress++];
+    p->NID_TSR = stream[startAddress++];
+    p->D_TSR = stream[startAddress++];
+    p->L_TSR = stream[startAddress++];
+    p->Q_FRONT = stream[startAddress++];
+    p->V_TSR = stream[startAddress++];
+
+    if(data->endAddress != startAddress-1)
+    {
+        return false;
+    }
+
+    return 1;
 }
 

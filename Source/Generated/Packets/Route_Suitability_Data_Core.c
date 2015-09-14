@@ -255,13 +255,11 @@ int Route_Suitability_Data_Decode_Bit(Bitstream* stream, Route_Suitability_Data_
 
 int Route_Suitability_Data_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Route_Suitability_Data_Core* p)
 {
-
     return 0;
 }
 
 int Route_Suitability_Data_Decode_Int(const Packet_Info* data, const kcg_int* stream, Route_Suitability_Data_Core* p)
 {
-
     return 0;
 }
 

@@ -9,6 +9,7 @@
 #include <iostream>
 
 #include "PacketHeader.h"
+#include "Compressed_Packets.h"
 
 struct BasePacket
 {

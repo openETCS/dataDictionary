@@ -78,13 +78,24 @@ int Virtual_Balise_Cover_marker_Decode_Bit(Bitstream* stream, Virtual_Balise_Cov
 
 int Virtual_Balise_Cover_marker_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Virtual_Balise_Cover_marker_Core* p)
 {
+    stream[startAddress++] = p->NID_VBCMK;
 
-    return 0;
+    data->endAddress = startAddress-1;
+
+    return 1;
 }
 
 int Virtual_Balise_Cover_marker_Decode_Int(const Packet_Info* data, const kcg_int* stream, Virtual_Balise_Cover_marker_Core* p)
 {
+    kcg_int startAddress = data->startAddress+1;
 
-    return 0;
+    p->NID_VBCMK = stream[startAddress++];
+
+    if(data->endAddress != startAddress-1)
+    {
+        return false;
+    }
+
+    return 1;
 }
 

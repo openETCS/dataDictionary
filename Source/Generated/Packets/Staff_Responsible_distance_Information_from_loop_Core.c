@@ -205,13 +205,11 @@ int Staff_Responsible_distance_Information_from_loop_Decode_Bit(Bitstream* strea
 
 int Staff_Responsible_distance_Information_from_loop_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Staff_Responsible_distance_Information_from_loop_Core* p)
 {
-
     return 0;
 }
 
 int Staff_Responsible_distance_Information_from_loop_Decode_Int(const Packet_Info* data, const kcg_int* stream, Staff_Responsible_distance_Information_from_loop_Core* p)
 {
-
     return 0;
 }
 

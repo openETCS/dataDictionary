@@ -45,9 +45,10 @@ struct Data_used_by_applications_outside_the_ERTMS_or_ETCS_system : public BaseP
     int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress) const override
     {
         data.nid_packet = 44;
-	
-	data.valid = core.VALID;
+	data.valid = 1;
 	data.startAddress = startAddress;
+
+	stream[startAddress++] = header.NID_PACKET;
 
 	return ::encode(data, stream, startAddress, core);
     }
@@ -58,6 +59,8 @@ struct Data_used_by_applications_outside_the_ERTMS_or_ETCS_system : public BaseP
 	{
 	    return 0;
 	}
+
+	header.NID_PACKET = stream[data.startAddress];
 
 	return ::decode(data, stream, core);
     }

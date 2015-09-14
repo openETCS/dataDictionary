@@ -112,13 +112,28 @@ int Danger_for_Shunting_information_Decode_Bit(Bitstream* stream, Danger_for_Shu
 
 int Danger_for_Shunting_information_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Danger_for_Shunting_information_Core* p)
 {
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->Q_ASPECT;
 
-    return 0;
+    data->endAddress = startAddress-1;
+
+    return 1;
 }
 
 int Danger_for_Shunting_information_Decode_Int(const Packet_Info* data, const kcg_int* stream, Danger_for_Shunting_information_Core* p)
 {
+    kcg_int startAddress = data->startAddress+1;
 
-    return 0;
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->Q_ASPECT = stream[startAddress++];
+
+    if(data->endAddress != startAddress-1)
+    {
+        return false;
+    }
+
+    return 1;
 }
 

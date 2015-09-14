@@ -95,13 +95,26 @@ int Stop_Shunting_on_desk_opening_Decode_Bit(Bitstream* stream, Stop_Shunting_on
 
 int Stop_Shunting_on_desk_opening_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Stop_Shunting_on_desk_opening_Core* p)
 {
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
 
-    return 0;
+    data->endAddress = startAddress-1;
+
+    return 1;
 }
 
 int Stop_Shunting_on_desk_opening_Decode_Int(const Packet_Info* data, const kcg_int* stream, Stop_Shunting_on_desk_opening_Core* p)
 {
+    kcg_int startAddress = data->startAddress+1;
 
-    return 0;
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+
+    if(data->endAddress != startAddress-1)
+    {
+        return false;
+    }
+
+    return 1;
 }
 

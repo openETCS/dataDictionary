@@ -101,13 +101,11 @@ int Level_Transition_Order_Core_1_Decode_Bit(Bitstream* stream, Level_Transition
 
 int Level_Transition_Order_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Level_Transition_Order_Core_1* p)
 {
-
     return 0;
 }
 
 int Level_Transition_Order_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, Level_Transition_Order_Core_1* p)
 {
-
     return 0;
 }
 
