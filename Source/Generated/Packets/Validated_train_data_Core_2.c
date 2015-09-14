@@ -18,7 +18,7 @@ int Validated_train_data_Core_2_UpperBitsNotSet(const Validated_train_data_Core_
     }
 }
 
-int Validated_train_data_Core_2_Encoder(Bitstream* stream, const Validated_train_data_Core_2* p)
+int Validated_train_data_Core_2_Encode_Bit(Bitstream* stream, const Validated_train_data_Core_2* p)
 {
     if (Bitstream_Normal(stream, VALIDATED_TRAIN_DATA_CORE_2_CORE_BITSIZE))
     {
@@ -44,7 +44,7 @@ int Validated_train_data_Core_2_Encoder(Bitstream* stream, const Validated_train
     }
 }
 
-int Validated_train_data_Core_2_Decoder(Bitstream* stream, Validated_train_data_Core_2* p)
+int Validated_train_data_Core_2_Decode_Bit(Bitstream* stream, Validated_train_data_Core_2* p)
 {
     if (Bitstream_Normal(stream, VALIDATED_TRAIN_DATA_CORE_2_CORE_BITSIZE))
     {
@@ -74,5 +74,17 @@ int Validated_train_data_Core_2_Decoder(Bitstream* stream, Validated_train_data_
     {
         return 0;
     }
+}
+
+int Validated_train_data_Core_2_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Validated_train_data_Core_2* p)
+{
+
+    return 0;
+}
+
+int Validated_train_data_Core_2_Decode_Int(const Packet_Info* data, const kcg_int* stream, Validated_train_data_Core_2* p)
+{
+
+    return 0;
 }
 

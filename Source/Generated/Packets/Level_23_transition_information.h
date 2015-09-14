@@ -42,6 +42,26 @@ struct Level_23_transition_information : public BasePacket
         return ::decode(stream, core);
     }
 
+    int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress) const override
+    {
+        data.nid_packet = 9;
+	
+	data.valid = core.VALID;
+	data.startAddress = startAddress;
+
+	return ::encode(data, stream, startAddress, core);
+    }
+
+    int decode(const Packet_Info& data, const kcg_int* stream) override
+    {
+        if(data.nid_packet != 9)
+	{
+	    return 0;
+	}
+
+	return ::decode(data, stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Level_23_transition_information> Level_23_transition_informationPtr;

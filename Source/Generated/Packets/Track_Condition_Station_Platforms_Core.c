@@ -37,7 +37,7 @@ int Track_Condition_Station_Platforms_UpperBitsNotSet(const Track_Condition_Stat
     }
 }
 
-int Track_Condition_Station_Platforms_Encoder(Bitstream* stream, const Track_Condition_Station_Platforms_Core* p)
+int Track_Condition_Station_Platforms_Encode_Bit(Bitstream* stream, const Track_Condition_Station_Platforms_Core* p)
 {
     if (Bitstream_Normal(stream, TRACK_CONDITION_STATION_PLATFORMS_CORE_BITSIZE))
     {
@@ -63,7 +63,7 @@ int Track_Condition_Station_Platforms_Encoder(Bitstream* stream, const Track_Con
             Bitstream_Write(stream, 5,  p->N_ITER_1);
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
-                Track_Condition_Station_Platforms_Core_1_Encoder(stream, &(p->sub_1[i]));
+                Track_Condition_Station_Platforms_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
             }
             }
 
@@ -87,7 +87,7 @@ int Track_Condition_Station_Platforms_Encoder(Bitstream* stream, const Track_Con
     }
 }
 
-int Track_Condition_Station_Platforms_Decoder(Bitstream* stream, Track_Condition_Station_Platforms_Core* p)
+int Track_Condition_Station_Platforms_Decode_Bit(Bitstream* stream, Track_Condition_Station_Platforms_Core* p)
 {
     if (Bitstream_Normal(stream, TRACK_CONDITION_STATION_PLATFORMS_CORE_BITSIZE))
     {
@@ -173,7 +173,7 @@ int Track_Condition_Station_Platforms_Decoder(Bitstream* stream, Track_Condition
 
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
-                Track_Condition_Station_Platforms_Core_1_Decoder(stream, &(p->sub_1[i]));
+                Track_Condition_Station_Platforms_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
             }
         }
 
@@ -195,5 +195,17 @@ int Track_Condition_Station_Platforms_Decoder(Bitstream* stream, Track_Condition
     {
         return 0;
     }
+}
+
+int Track_Condition_Station_Platforms_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Track_Condition_Station_Platforms_Core* p)
+{
+
+    return 0;
+}
+
+int Track_Condition_Station_Platforms_Decode_Int(const Packet_Info* data, const kcg_int* stream, Track_Condition_Station_Platforms_Core* p)
+{
+
+    return 0;
 }
 

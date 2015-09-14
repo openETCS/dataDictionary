@@ -3,6 +3,7 @@
 #define POSITION_REPORT_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Position_Report_Core
 {
@@ -136,7 +137,7 @@ int Position_Report_UpperBitsNotSet(const Position_Report_Core* p);
     complete behaviors;
     disjoint behaviors;
 */
-int Position_Report_Encoder(Bitstream* stream, const Position_Report_Core* p);
+int Position_Report_Encode_Bit(Bitstream* stream, const Position_Report_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -171,7 +172,11 @@ int Position_Report_Encoder(Bitstream* stream, const Position_Report_Core* p);
     complete behaviors;
     disjoint behaviors;
 */
-int Position_Report_Decoder(Bitstream* stream, Position_Report_Core* p);
+int Position_Report_Decode_Bit(Bitstream* stream, Position_Report_Core* p);
+
+int Position_Report_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Position_Report_Core* p);
+
+int Position_Report_Decode_Int(const Packet_Info* data, const kcg_int* stream, Position_Report_Core* p);
 
 #ifdef __cplusplus
 
@@ -237,12 +242,22 @@ inline bool operator!=(const Position_Report_Core& a, const Position_Report_Core
 
 inline int encode(Bitstream& stream, const Position_Report_Core& p)
 {
-    return Position_Report_Encoder(&stream, &p);
+    return Position_Report_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Position_Report_Core& p)
 {
-    return Position_Report_Decoder(&stream, &p);
+    return Position_Report_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Position_Report_Core& p)
+{
+    return Position_Report_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Position_Report_Core& p)
+{
+    return Position_Report_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

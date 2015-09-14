@@ -20,7 +20,7 @@ int Temporary_Speed_Restriction_Revocation_UpperBitsNotSet(const Temporary_Speed
     }
 }
 
-int Temporary_Speed_Restriction_Revocation_Encoder(Bitstream* stream, const Temporary_Speed_Restriction_Revocation_Core* p)
+int Temporary_Speed_Restriction_Revocation_Encode_Bit(Bitstream* stream, const Temporary_Speed_Restriction_Revocation_Core* p)
 {
     if (Bitstream_Normal(stream, TEMPORARY_SPEED_RESTRICTION_REVOCATION_CORE_BITSIZE))
     {
@@ -50,7 +50,7 @@ int Temporary_Speed_Restriction_Revocation_Encoder(Bitstream* stream, const Temp
     }
 }
 
-int Temporary_Speed_Restriction_Revocation_Decoder(Bitstream* stream, Temporary_Speed_Restriction_Revocation_Core* p)
+int Temporary_Speed_Restriction_Revocation_Decode_Bit(Bitstream* stream, Temporary_Speed_Restriction_Revocation_Core* p)
 {
     if (Bitstream_Normal(stream, TEMPORARY_SPEED_RESTRICTION_REVOCATION_CORE_BITSIZE))
     {
@@ -108,5 +108,17 @@ int Temporary_Speed_Restriction_Revocation_Decoder(Bitstream* stream, Temporary_
     {
         return 0;
     }
+}
+
+int Temporary_Speed_Restriction_Revocation_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Temporary_Speed_Restriction_Revocation_Core* p)
+{
+
+    return 0;
+}
+
+int Temporary_Speed_Restriction_Revocation_Decode_Int(const Packet_Info* data, const kcg_int* stream, Temporary_Speed_Restriction_Revocation_Core* p)
+{
+
+    return 0;
 }
 

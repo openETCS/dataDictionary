@@ -42,6 +42,26 @@ struct Session_Management_with_neighbouring_Radio_Infill_Unit : public BasePacke
         return ::decode(stream, core);
     }
 
+    int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress) const override
+    {
+        data.nid_packet = 143;
+	data.q_dir = core.Q_DIR;
+	data.valid = core.VALID;
+	data.startAddress = startAddress;
+
+	return ::encode(data, stream, startAddress, core);
+    }
+
+    int decode(const Packet_Info& data, const kcg_int* stream) override
+    {
+        if(data.nid_packet != 143)
+	{
+	    return 0;
+	}
+
+	return ::decode(data, stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Session_Management_with_neighbouring_Radio_Infill_Unit> Session_Management_with_neighbouring_Radio_Infill_UnitPtr;

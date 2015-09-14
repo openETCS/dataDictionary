@@ -4,6 +4,7 @@
 
 #include "Bitstream.h"
 #include "Position_Report_Parameters_Core_1.h"
+#include "Compressed_Packets.h"
 
 struct Position_Report_Parameters_Core
 {
@@ -118,7 +119,7 @@ int Position_Report_Parameters_UpperBitsNotSet(const Position_Report_Parameters_
     complete behaviors;
     disjoint behaviors;
 */
-int Position_Report_Parameters_Encoder(Bitstream* stream, const Position_Report_Parameters_Core* p);
+int Position_Report_Parameters_Encode_Bit(Bitstream* stream, const Position_Report_Parameters_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -153,7 +154,11 @@ int Position_Report_Parameters_Encoder(Bitstream* stream, const Position_Report_
     complete behaviors;
     disjoint behaviors;
 */
-int Position_Report_Parameters_Decoder(Bitstream* stream, Position_Report_Parameters_Core* p);
+int Position_Report_Parameters_Decode_Bit(Bitstream* stream, Position_Report_Parameters_Core* p);
+
+int Position_Report_Parameters_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Position_Report_Parameters_Core* p);
+
+int Position_Report_Parameters_Decode_Int(const Packet_Info* data, const kcg_int* stream, Position_Report_Parameters_Core* p);
 
 #ifdef __cplusplus
 
@@ -211,12 +216,22 @@ inline bool operator!=(const Position_Report_Parameters_Core& a, const Position_
 
 inline int encode(Bitstream& stream, const Position_Report_Parameters_Core& p)
 {
-    return Position_Report_Parameters_Encoder(&stream, &p);
+    return Position_Report_Parameters_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Position_Report_Parameters_Core& p)
 {
-    return Position_Report_Parameters_Decoder(&stream, &p);
+    return Position_Report_Parameters_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Position_Report_Parameters_Core& p)
+{
+    return Position_Report_Parameters_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Position_Report_Parameters_Core& p)
+{
+    return Position_Report_Parameters_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

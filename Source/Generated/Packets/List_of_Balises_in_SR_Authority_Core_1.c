@@ -23,7 +23,7 @@ int List_of_Balises_in_SR_Authority_Core_1_UpperBitsNotSet(const List_of_Balises
     }
 }
 
-int List_of_Balises_in_SR_Authority_Core_1_Encoder(Bitstream* stream, const List_of_Balises_in_SR_Authority_Core_1* p)
+int List_of_Balises_in_SR_Authority_Core_1_Encode_Bit(Bitstream* stream, const List_of_Balises_in_SR_Authority_Core_1* p)
 {
     if (Bitstream_Normal(stream, LIST_OF_BALISES_IN_SR_AUTHORITY_CORE_1_CORE_BITSIZE))
     {
@@ -55,7 +55,7 @@ int List_of_Balises_in_SR_Authority_Core_1_Encoder(Bitstream* stream, const List
     }
 }
 
-int List_of_Balises_in_SR_Authority_Core_1_Decoder(Bitstream* stream, List_of_Balises_in_SR_Authority_Core_1* p)
+int List_of_Balises_in_SR_Authority_Core_1_Decode_Bit(Bitstream* stream, List_of_Balises_in_SR_Authority_Core_1* p)
 {
     if (Bitstream_Normal(stream, LIST_OF_BALISES_IN_SR_AUTHORITY_CORE_1_CORE_BITSIZE))
     {
@@ -97,5 +97,17 @@ int List_of_Balises_in_SR_Authority_Core_1_Decoder(Bitstream* stream, List_of_Ba
     {
         return 0;
     }
+}
+
+int List_of_Balises_in_SR_Authority_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const List_of_Balises_in_SR_Authority_Core_1* p)
+{
+
+    return 0;
+}
+
+int List_of_Balises_in_SR_Authority_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, List_of_Balises_in_SR_Authority_Core_1* p)
+{
+
+    return 0;
 }
 

@@ -26,7 +26,7 @@ int Virtual_Balise_Cover_order_UpperBitsNotSet(const Virtual_Balise_Cover_order_
     }
 }
 
-int Virtual_Balise_Cover_order_Encoder(Bitstream* stream, const Virtual_Balise_Cover_order_Core* p)
+int Virtual_Balise_Cover_order_Encode_Bit(Bitstream* stream, const Virtual_Balise_Cover_order_Core* p)
 {
     if (Bitstream_Normal(stream, VIRTUAL_BALISE_COVER_ORDER_CORE_BITSIZE))
     {
@@ -65,7 +65,7 @@ int Virtual_Balise_Cover_order_Encoder(Bitstream* stream, const Virtual_Balise_C
     }
 }
 
-int Virtual_Balise_Cover_order_Decoder(Bitstream* stream, Virtual_Balise_Cover_order_Core* p)
+int Virtual_Balise_Cover_order_Decode_Bit(Bitstream* stream, Virtual_Balise_Cover_order_Core* p)
 {
     if (Bitstream_Normal(stream, VIRTUAL_BALISE_COVER_ORDER_CORE_BITSIZE))
     {
@@ -159,5 +159,17 @@ int Virtual_Balise_Cover_order_Decoder(Bitstream* stream, Virtual_Balise_Cover_o
     {
         return 0;
     }
+}
+
+int Virtual_Balise_Cover_order_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Virtual_Balise_Cover_order_Core* p)
+{
+
+    return 0;
+}
+
+int Virtual_Balise_Cover_order_Decode_Int(const Packet_Info* data, const kcg_int* stream, Virtual_Balise_Cover_order_Core* p)
+{
+
+    return 0;
 }
 

@@ -22,7 +22,7 @@ int Reversing_supervision_information_UpperBitsNotSet(const Reversing_supervisio
     }
 }
 
-int Reversing_supervision_information_Encoder(Bitstream* stream, const Reversing_supervision_information_Core* p)
+int Reversing_supervision_information_Encode_Bit(Bitstream* stream, const Reversing_supervision_information_Core* p)
 {
     if (Bitstream_Normal(stream, REVERSING_SUPERVISION_INFORMATION_CORE_BITSIZE))
     {
@@ -56,7 +56,7 @@ int Reversing_supervision_information_Encoder(Bitstream* stream, const Reversing
     }
 }
 
-int Reversing_supervision_information_Decoder(Bitstream* stream, Reversing_supervision_information_Core* p)
+int Reversing_supervision_information_Decode_Bit(Bitstream* stream, Reversing_supervision_information_Core* p)
 {
     if (Bitstream_Normal(stream, REVERSING_SUPERVISION_INFORMATION_CORE_BITSIZE))
     {
@@ -142,5 +142,17 @@ int Reversing_supervision_information_Decoder(Bitstream* stream, Reversing_super
     {
         return 0;
     }
+}
+
+int Reversing_supervision_information_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Reversing_supervision_information_Core* p)
+{
+
+    return 0;
+}
+
+int Reversing_supervision_information_Decode_Int(const Packet_Info* data, const kcg_int* stream, Reversing_supervision_information_Core* p)
+{
+
+    return 0;
 }
 

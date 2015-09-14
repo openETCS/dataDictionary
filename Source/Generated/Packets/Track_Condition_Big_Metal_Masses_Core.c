@@ -27,7 +27,7 @@ int Track_Condition_Big_Metal_Masses_UpperBitsNotSet(const Track_Condition_Big_M
     }
 }
 
-int Track_Condition_Big_Metal_Masses_Encoder(Bitstream* stream, const Track_Condition_Big_Metal_Masses_Core* p)
+int Track_Condition_Big_Metal_Masses_Encode_Bit(Bitstream* stream, const Track_Condition_Big_Metal_Masses_Core* p)
 {
     if (Bitstream_Normal(stream, TRACK_CONDITION_BIG_METAL_MASSES_CORE_BITSIZE))
     {
@@ -43,7 +43,7 @@ int Track_Condition_Big_Metal_Masses_Encoder(Bitstream* stream, const Track_Cond
             Bitstream_Write(stream, 5,  p->N_ITER_1);
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
-                Track_Condition_Big_Metal_Masses_Core_1_Encoder(stream, &(p->sub_1[i]));
+                Track_Condition_Big_Metal_Masses_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
             }
 
 
@@ -66,7 +66,7 @@ int Track_Condition_Big_Metal_Masses_Encoder(Bitstream* stream, const Track_Cond
     }
 }
 
-int Track_Condition_Big_Metal_Masses_Decoder(Bitstream* stream, Track_Condition_Big_Metal_Masses_Core* p)
+int Track_Condition_Big_Metal_Masses_Decode_Bit(Bitstream* stream, Track_Condition_Big_Metal_Masses_Core* p)
 {
     if (Bitstream_Normal(stream, TRACK_CONDITION_BIG_METAL_MASSES_CORE_BITSIZE))
     {
@@ -138,7 +138,7 @@ int Track_Condition_Big_Metal_Masses_Decoder(Bitstream* stream, Track_Condition_
 
         for (uint32_t i = 0; i < p->N_ITER_1; ++i)
         {
-            Track_Condition_Big_Metal_Masses_Core_1_Decoder(stream, &(p->sub_1[i]));
+            Track_Condition_Big_Metal_Masses_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
         }
         //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
         //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
@@ -160,5 +160,17 @@ int Track_Condition_Big_Metal_Masses_Decoder(Bitstream* stream, Track_Condition_
     {
         return 0;
     }
+}
+
+int Track_Condition_Big_Metal_Masses_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Track_Condition_Big_Metal_Masses_Core* p)
+{
+
+    return 0;
+}
+
+int Track_Condition_Big_Metal_Masses_Decode_Int(const Packet_Info* data, const kcg_int* stream, Track_Condition_Big_Metal_Masses_Core* p)
+{
+
+    return 0;
 }
 

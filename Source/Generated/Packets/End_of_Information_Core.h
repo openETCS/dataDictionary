@@ -3,6 +3,7 @@
 #define END_OF_INFORMATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct End_of_Information_Core
 {
@@ -87,7 +88,7 @@ int End_of_Information_UpperBitsNotSet(const End_of_Information_Core* p);
     complete behaviors;
     disjoint behaviors;
 */
-int End_of_Information_Encoder(Bitstream* stream, const End_of_Information_Core* p);
+int End_of_Information_Encode_Bit(Bitstream* stream, const End_of_Information_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -122,7 +123,11 @@ int End_of_Information_Encoder(Bitstream* stream, const End_of_Information_Core*
     complete behaviors;
     disjoint behaviors;
 */
-int End_of_Information_Decoder(Bitstream* stream, End_of_Information_Core* p);
+int End_of_Information_Decode_Bit(Bitstream* stream, End_of_Information_Core* p);
+
+int End_of_Information_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const End_of_Information_Core* p);
+
+int End_of_Information_Decode_Int(const Packet_Info* data, const kcg_int* stream, End_of_Information_Core* p);
 
 #ifdef __cplusplus
 
@@ -150,12 +155,22 @@ inline bool operator!=(const End_of_Information_Core& a, const End_of_Informatio
 
 inline int encode(Bitstream& stream, const End_of_Information_Core& p)
 {
-    return End_of_Information_Encoder(&stream, &p);
+    return End_of_Information_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, End_of_Information_Core& p)
 {
-    return End_of_Information_Decoder(&stream, &p);
+    return End_of_Information_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const End_of_Information_Core& p)
+{
+    return End_of_Information_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, End_of_Information_Core& p)
+{
+    return End_of_Information_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

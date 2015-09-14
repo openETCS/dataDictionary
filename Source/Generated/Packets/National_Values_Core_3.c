@@ -30,7 +30,7 @@ int National_Values_Core_3_UpperBitsNotSet(const National_Values_Core_3* p)
     }
 }
 
-int National_Values_Core_3_Encoder(Bitstream* stream, const National_Values_Core_3* p)
+int National_Values_Core_3_Encode_Bit(Bitstream* stream, const National_Values_Core_3* p)
 {
     if (Bitstream_Normal(stream, NATIONAL_VALUES_CORE_3_CORE_BITSIZE))
     {
@@ -50,7 +50,7 @@ int National_Values_Core_3_Encoder(Bitstream* stream, const National_Values_Core
             Bitstream_Write(stream, 5,  p->N_ITER_3_1);
             for (uint32_t i = 0; i < p->N_ITER_3_1; ++i)
             {
-                National_Values_Core_3_1_Encoder(stream, &(p->sub_3_1[i]));
+                National_Values_Core_3_1_Encode_Bit(stream, &(p->sub_3_1[i]));
             }
 
 
@@ -69,7 +69,7 @@ int National_Values_Core_3_Encoder(Bitstream* stream, const National_Values_Core
     }
 }
 
-int National_Values_Core_3_Decoder(Bitstream* stream, National_Values_Core_3* p)
+int National_Values_Core_3_Decode_Bit(Bitstream* stream, National_Values_Core_3* p)
 {
     if (Bitstream_Normal(stream, NATIONAL_VALUES_CORE_3_CORE_BITSIZE))
     {
@@ -113,7 +113,7 @@ int National_Values_Core_3_Decoder(Bitstream* stream, National_Values_Core_3* p)
 
         for (uint32_t i = 0; i < p->N_ITER_3_1; ++i)
         {
-            National_Values_Core_3_1_Decoder(stream, &(p->sub_3_1[i]));
+            National_Values_Core_3_1_Decode_Bit(stream, &(p->sub_3_1[i]));
         }
         //@ assert Q_NVKVINTSET:      EqualBits(stream, pos,       pos + 2,   p->Q_NVKVINTSET);
 
@@ -127,5 +127,17 @@ int National_Values_Core_3_Decoder(Bitstream* stream, National_Values_Core_3* p)
     {
         return 0;
     }
+}
+
+int National_Values_Core_3_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const National_Values_Core_3* p)
+{
+
+    return 0;
+}
+
+int National_Values_Core_3_Decode_Int(const Packet_Info* data, const kcg_int* stream, National_Values_Core_3* p)
+{
+
+    return 0;
 }
 

@@ -23,7 +23,7 @@ int Session_Management_with_neighbouring_Radio_Infill_Unit_UpperBitsNotSet(const
     }
 }
 
-int Session_Management_with_neighbouring_Radio_Infill_Unit_Encoder(Bitstream* stream, const Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p)
+int Session_Management_with_neighbouring_Radio_Infill_Unit_Encode_Bit(Bitstream* stream, const Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p)
 {
     if (Bitstream_Normal(stream, SESSION_MANAGEMENT_WITH_NEIGHBOURING_RADIO_INFILL_UNIT_CORE_BITSIZE))
     {
@@ -59,7 +59,7 @@ int Session_Management_with_neighbouring_Radio_Infill_Unit_Encoder(Bitstream* st
     }
 }
 
-int Session_Management_with_neighbouring_Radio_Infill_Unit_Decoder(Bitstream* stream, Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p)
+int Session_Management_with_neighbouring_Radio_Infill_Unit_Decode_Bit(Bitstream* stream, Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p)
 {
     if (Bitstream_Normal(stream, SESSION_MANAGEMENT_WITH_NEIGHBOURING_RADIO_INFILL_UNIT_CORE_BITSIZE))
     {
@@ -159,5 +159,17 @@ int Session_Management_with_neighbouring_Radio_Infill_Unit_Decoder(Bitstream* st
     {
         return 0;
     }
+}
+
+int Session_Management_with_neighbouring_Radio_Infill_Unit_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p)
+{
+
+    return 0;
+}
+
+int Session_Management_with_neighbouring_Radio_Infill_Unit_Decode_Int(const Packet_Info* data, const kcg_int* stream, Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p)
+{
+
+    return 0;
 }
 

@@ -39,7 +39,7 @@ int Permitted_Braking_Distance_Information_UpperBitsNotSet(const Permitted_Braki
     }
 }
 
-int Permitted_Braking_Distance_Information_Encoder(Bitstream* stream, const Permitted_Braking_Distance_Information_Core* p)
+int Permitted_Braking_Distance_Information_Encode_Bit(Bitstream* stream, const Permitted_Braking_Distance_Information_Core* p)
 {
     if (Bitstream_Normal(stream, PERMITTED_BRAKING_DISTANCE_INFORMATION_CORE_BITSIZE))
     {
@@ -67,7 +67,7 @@ int Permitted_Braking_Distance_Information_Encoder(Bitstream* stream, const Perm
             Bitstream_Write(stream, 5,  p->N_ITER_1);
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
-                Permitted_Braking_Distance_Information_Core_1_Encoder(stream, &(p->sub_1[i]));
+                Permitted_Braking_Distance_Information_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
             }
             }
 
@@ -91,7 +91,7 @@ int Permitted_Braking_Distance_Information_Encoder(Bitstream* stream, const Perm
     }
 }
 
-int Permitted_Braking_Distance_Information_Decoder(Bitstream* stream, Permitted_Braking_Distance_Information_Core* p)
+int Permitted_Braking_Distance_Information_Decode_Bit(Bitstream* stream, Permitted_Braking_Distance_Information_Core* p)
 {
     if (Bitstream_Normal(stream, PERMITTED_BRAKING_DISTANCE_INFORMATION_CORE_BITSIZE))
     {
@@ -185,7 +185,7 @@ int Permitted_Braking_Distance_Information_Decoder(Bitstream* stream, Permitted_
 
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
-                Permitted_Braking_Distance_Information_Core_1_Decoder(stream, &(p->sub_1[i]));
+                Permitted_Braking_Distance_Information_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
             }
         }
 
@@ -207,5 +207,17 @@ int Permitted_Braking_Distance_Information_Decoder(Bitstream* stream, Permitted_
     {
         return 0;
     }
+}
+
+int Permitted_Braking_Distance_Information_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Permitted_Braking_Distance_Information_Core* p)
+{
+
+    return 0;
+}
+
+int Permitted_Braking_Distance_Information_Decode_Int(const Packet_Info* data, const kcg_int* stream, Permitted_Braking_Distance_Information_Core* p)
+{
+
+    return 0;
 }
 

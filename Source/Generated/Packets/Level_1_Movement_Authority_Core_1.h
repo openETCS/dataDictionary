@@ -3,6 +3,7 @@
 #define LEVEL_1_MOVEMENT_AUTHORITY_CORE_1_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Level_1_Movement_Authority_Core_1
 {
@@ -101,7 +102,7 @@ int Level_1_Movement_Authority_Core_1_UpperBitsNotSet(const Level_1_Movement_Aut
     complete behaviors;
     disjoint behaviors;
 */
-int Level_1_Movement_Authority_Core_1_Encoder(Bitstream* stream, const Level_1_Movement_Authority_Core_1* p);
+int Level_1_Movement_Authority_Core_1_Encode_Bit(Bitstream* stream, const Level_1_Movement_Authority_Core_1* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -136,7 +137,11 @@ int Level_1_Movement_Authority_Core_1_Encoder(Bitstream* stream, const Level_1_M
     complete behaviors;
     disjoint behaviors;
 */
-int Level_1_Movement_Authority_Core_1_Decoder(Bitstream* stream, Level_1_Movement_Authority_Core_1* p);
+int Level_1_Movement_Authority_Core_1_Decode_Bit(Bitstream* stream, Level_1_Movement_Authority_Core_1* p);
+
+int Level_1_Movement_Authority_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Level_1_Movement_Authority_Core_1* p);
+
+int Level_1_Movement_Authority_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, Level_1_Movement_Authority_Core_1* p);
 
 #ifdef __cplusplus
 
@@ -172,12 +177,22 @@ inline bool operator!=(const Level_1_Movement_Authority_Core_1& a, const Level_1
 
 inline int encode(Bitstream& stream, const Level_1_Movement_Authority_Core_1& p)
 {
-    return Level_1_Movement_Authority_Core_1_Encoder(&stream, &p);
+    return Level_1_Movement_Authority_Core_1_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Level_1_Movement_Authority_Core_1& p)
 {
-    return Level_1_Movement_Authority_Core_1_Decoder(&stream, &p);
+    return Level_1_Movement_Authority_Core_1_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Level_1_Movement_Authority_Core_1& p)
+{
+    return Level_1_Movement_Authority_Core_1_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Level_1_Movement_Authority_Core_1& p)
+{
+    return Level_1_Movement_Authority_Core_1_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

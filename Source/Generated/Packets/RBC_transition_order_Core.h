@@ -3,6 +3,7 @@
 #define RBC_TRANSITION_ORDER_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct RBC_transition_order_Core
 {
@@ -124,7 +125,7 @@ int RBC_transition_order_UpperBitsNotSet(const RBC_transition_order_Core* p);
     complete behaviors;
     disjoint behaviors;
 */
-int RBC_transition_order_Encoder(Bitstream* stream, const RBC_transition_order_Core* p);
+int RBC_transition_order_Encode_Bit(Bitstream* stream, const RBC_transition_order_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -159,7 +160,11 @@ int RBC_transition_order_Encoder(Bitstream* stream, const RBC_transition_order_C
     complete behaviors;
     disjoint behaviors;
 */
-int RBC_transition_order_Decoder(Bitstream* stream, RBC_transition_order_Core* p);
+int RBC_transition_order_Decode_Bit(Bitstream* stream, RBC_transition_order_Core* p);
+
+int RBC_transition_order_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const RBC_transition_order_Core* p);
+
+int RBC_transition_order_Decode_Int(const Packet_Info* data, const kcg_int* stream, RBC_transition_order_Core* p);
 
 #ifdef __cplusplus
 
@@ -203,12 +208,22 @@ inline bool operator!=(const RBC_transition_order_Core& a, const RBC_transition_
 
 inline int encode(Bitstream& stream, const RBC_transition_order_Core& p)
 {
-    return RBC_transition_order_Encoder(&stream, &p);
+    return RBC_transition_order_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, RBC_transition_order_Core& p)
 {
-    return RBC_transition_order_Decoder(&stream, &p);
+    return RBC_transition_order_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const RBC_transition_order_Core& p)
+{
+    return RBC_transition_order_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, RBC_transition_order_Core& p)
+{
+    return RBC_transition_order_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

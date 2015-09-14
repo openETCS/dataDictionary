@@ -20,7 +20,7 @@ int Track_Condition_Core_1_UpperBitsNotSet(const Track_Condition_Core_1* p)
     }
 }
 
-int Track_Condition_Core_1_Encoder(Bitstream* stream, const Track_Condition_Core_1* p)
+int Track_Condition_Core_1_Encode_Bit(Bitstream* stream, const Track_Condition_Core_1* p)
 {
     if (Bitstream_Normal(stream, TRACK_CONDITION_CORE_1_CORE_BITSIZE))
     {
@@ -50,7 +50,7 @@ int Track_Condition_Core_1_Encoder(Bitstream* stream, const Track_Condition_Core
     }
 }
 
-int Track_Condition_Core_1_Decoder(Bitstream* stream, Track_Condition_Core_1* p)
+int Track_Condition_Core_1_Decode_Bit(Bitstream* stream, Track_Condition_Core_1* p)
 {
     if (Bitstream_Normal(stream, TRACK_CONDITION_CORE_1_CORE_BITSIZE))
     {
@@ -108,5 +108,17 @@ int Track_Condition_Core_1_Decoder(Bitstream* stream, Track_Condition_Core_1* p)
     {
         return 0;
     }
+}
+
+int Track_Condition_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Track_Condition_Core_1* p)
+{
+
+    return 0;
+}
+
+int Track_Condition_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, Track_Condition_Core_1* p)
+{
+
+    return 0;
 }
 

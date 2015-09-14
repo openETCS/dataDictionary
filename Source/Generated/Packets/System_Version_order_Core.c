@@ -20,7 +20,7 @@ int System_Version_order_UpperBitsNotSet(const System_Version_order_Core* p)
     }
 }
 
-int System_Version_order_Encoder(Bitstream* stream, const System_Version_order_Core* p)
+int System_Version_order_Encode_Bit(Bitstream* stream, const System_Version_order_Core* p)
 {
     if (Bitstream_Normal(stream, SYSTEM_VERSION_ORDER_CORE_BITSIZE))
     {
@@ -50,7 +50,7 @@ int System_Version_order_Encoder(Bitstream* stream, const System_Version_order_C
     }
 }
 
-int System_Version_order_Decoder(Bitstream* stream, System_Version_order_Core* p)
+int System_Version_order_Decode_Bit(Bitstream* stream, System_Version_order_Core* p)
 {
     if (Bitstream_Normal(stream, SYSTEM_VERSION_ORDER_CORE_BITSIZE))
     {
@@ -108,5 +108,17 @@ int System_Version_order_Decoder(Bitstream* stream, System_Version_order_Core* p
     {
         return 0;
     }
+}
+
+int System_Version_order_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const System_Version_order_Core* p)
+{
+
+    return 0;
+}
+
+int System_Version_order_Decode_Int(const Packet_Info* data, const kcg_int* stream, System_Version_order_Core* p)
+{
+
+    return 0;
 }
 

@@ -4,6 +4,7 @@
 
 #include "Bitstream.h"
 #include "Level_Transition_Order_Core_1.h"
+#include "Compressed_Packets.h"
 
 struct Level_Transition_Order_Core
 {
@@ -116,7 +117,7 @@ int Level_Transition_Order_UpperBitsNotSet(const Level_Transition_Order_Core* p)
     complete behaviors;
     disjoint behaviors;
 */
-int Level_Transition_Order_Encoder(Bitstream* stream, const Level_Transition_Order_Core* p);
+int Level_Transition_Order_Encode_Bit(Bitstream* stream, const Level_Transition_Order_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -151,7 +152,11 @@ int Level_Transition_Order_Encoder(Bitstream* stream, const Level_Transition_Ord
     complete behaviors;
     disjoint behaviors;
 */
-int Level_Transition_Order_Decoder(Bitstream* stream, Level_Transition_Order_Core* p);
+int Level_Transition_Order_Decode_Bit(Bitstream* stream, Level_Transition_Order_Core* p);
+
+int Level_Transition_Order_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Level_Transition_Order_Core* p);
+
+int Level_Transition_Order_Decode_Int(const Packet_Info* data, const kcg_int* stream, Level_Transition_Order_Core* p);
 
 #ifdef __cplusplus
 
@@ -215,12 +220,22 @@ inline bool operator!=(const Level_Transition_Order_Core& a, const Level_Transit
 
 inline int encode(Bitstream& stream, const Level_Transition_Order_Core& p)
 {
-    return Level_Transition_Order_Encoder(&stream, &p);
+    return Level_Transition_Order_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Level_Transition_Order_Core& p)
 {
-    return Level_Transition_Order_Decoder(&stream, &p);
+    return Level_Transition_Order_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Level_Transition_Order_Core& p)
+{
+    return Level_Transition_Order_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Level_Transition_Order_Core& p)
+{
+    return Level_Transition_Order_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

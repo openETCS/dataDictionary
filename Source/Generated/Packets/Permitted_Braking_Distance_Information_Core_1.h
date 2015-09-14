@@ -3,6 +3,7 @@
 #define PERMITTED_BRAKING_DISTANCE_INFORMATION_CORE_1_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Permitted_Braking_Distance_Information_Core_1
 {
@@ -111,7 +112,7 @@ int Permitted_Braking_Distance_Information_Core_1_UpperBitsNotSet(const Permitte
     complete behaviors;
     disjoint behaviors;
 */
-int Permitted_Braking_Distance_Information_Core_1_Encoder(Bitstream* stream, const Permitted_Braking_Distance_Information_Core_1* p);
+int Permitted_Braking_Distance_Information_Core_1_Encode_Bit(Bitstream* stream, const Permitted_Braking_Distance_Information_Core_1* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -146,7 +147,11 @@ int Permitted_Braking_Distance_Information_Core_1_Encoder(Bitstream* stream, con
     complete behaviors;
     disjoint behaviors;
 */
-int Permitted_Braking_Distance_Information_Core_1_Decoder(Bitstream* stream, Permitted_Braking_Distance_Information_Core_1* p);
+int Permitted_Braking_Distance_Information_Core_1_Decode_Bit(Bitstream* stream, Permitted_Braking_Distance_Information_Core_1* p);
+
+int Permitted_Braking_Distance_Information_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Permitted_Braking_Distance_Information_Core_1* p);
+
+int Permitted_Braking_Distance_Information_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, Permitted_Braking_Distance_Information_Core_1* p);
 
 #ifdef __cplusplus
 
@@ -186,12 +191,22 @@ inline bool operator!=(const Permitted_Braking_Distance_Information_Core_1& a, c
 
 inline int encode(Bitstream& stream, const Permitted_Braking_Distance_Information_Core_1& p)
 {
-    return Permitted_Braking_Distance_Information_Core_1_Encoder(&stream, &p);
+    return Permitted_Braking_Distance_Information_Core_1_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Permitted_Braking_Distance_Information_Core_1& p)
 {
-    return Permitted_Braking_Distance_Information_Core_1_Decoder(&stream, &p);
+    return Permitted_Braking_Distance_Information_Core_1_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Permitted_Braking_Distance_Information_Core_1& p)
+{
+    return Permitted_Braking_Distance_Information_Core_1_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Permitted_Braking_Distance_Information_Core_1& p)
+{
+    return Permitted_Braking_Distance_Information_Core_1_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

@@ -3,6 +3,7 @@
 #define TRAIN_RUNNING_NUMBER_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Train_running_number_Core
 {
@@ -94,7 +95,7 @@ int Train_running_number_UpperBitsNotSet(const Train_running_number_Core* p);
     complete behaviors;
     disjoint behaviors;
 */
-int Train_running_number_Encoder(Bitstream* stream, const Train_running_number_Core* p);
+int Train_running_number_Encode_Bit(Bitstream* stream, const Train_running_number_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -129,7 +130,11 @@ int Train_running_number_Encoder(Bitstream* stream, const Train_running_number_C
     complete behaviors;
     disjoint behaviors;
 */
-int Train_running_number_Decoder(Bitstream* stream, Train_running_number_Core* p);
+int Train_running_number_Decode_Bit(Bitstream* stream, Train_running_number_Core* p);
+
+int Train_running_number_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Train_running_number_Core* p);
+
+int Train_running_number_Decode_Int(const Packet_Info* data, const kcg_int* stream, Train_running_number_Core* p);
 
 #ifdef __cplusplus
 
@@ -161,12 +166,22 @@ inline bool operator!=(const Train_running_number_Core& a, const Train_running_n
 
 inline int encode(Bitstream& stream, const Train_running_number_Core& p)
 {
-    return Train_running_number_Encoder(&stream, &p);
+    return Train_running_number_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Train_running_number_Core& p)
 {
-    return Train_running_number_Decoder(&stream, &p);
+    return Train_running_number_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Train_running_number_Core& p)
+{
+    return Train_running_number_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Train_running_number_Core& p)
+{
+    return Train_running_number_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

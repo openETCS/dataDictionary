@@ -27,7 +27,7 @@ int International_Static_Speed_Profile_Core_2_1_UpperBitsNotSet(const Internatio
     }
 }
 
-int International_Static_Speed_Profile_Core_2_1_Encoder(Bitstream* stream, const International_Static_Speed_Profile_Core_2_1* p)
+int International_Static_Speed_Profile_Core_2_1_Encode_Bit(Bitstream* stream, const International_Static_Speed_Profile_Core_2_1* p)
 {
     if (Bitstream_Normal(stream, INTERNATIONAL_STATIC_SPEED_PROFILE_CORE_2_1_CORE_BITSIZE))
     {
@@ -64,7 +64,7 @@ int International_Static_Speed_Profile_Core_2_1_Encoder(Bitstream* stream, const
     }
 }
 
-int International_Static_Speed_Profile_Core_2_1_Decoder(Bitstream* stream, International_Static_Speed_Profile_Core_2_1* p)
+int International_Static_Speed_Profile_Core_2_1_Decode_Bit(Bitstream* stream, International_Static_Speed_Profile_Core_2_1* p)
 {
     if (Bitstream_Normal(stream, INTERNATIONAL_STATIC_SPEED_PROFILE_CORE_2_1_CORE_BITSIZE))
     {
@@ -114,5 +114,17 @@ int International_Static_Speed_Profile_Core_2_1_Decoder(Bitstream* stream, Inter
     {
         return 0;
     }
+}
+
+int International_Static_Speed_Profile_Core_2_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const International_Static_Speed_Profile_Core_2_1* p)
+{
+
+    return 0;
+}
+
+int International_Static_Speed_Profile_Core_2_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, International_Static_Speed_Profile_Core_2_1* p)
+{
+
+    return 0;
 }
 

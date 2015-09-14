@@ -23,7 +23,7 @@ int Level_Transition_Order_Core_1_UpperBitsNotSet(const Level_Transition_Order_C
     }
 }
 
-int Level_Transition_Order_Core_1_Encoder(Bitstream* stream, const Level_Transition_Order_Core_1* p)
+int Level_Transition_Order_Core_1_Encode_Bit(Bitstream* stream, const Level_Transition_Order_Core_1* p)
 {
     if (Bitstream_Normal(stream, LEVEL_TRANSITION_ORDER_CORE_1_CORE_BITSIZE))
     {
@@ -55,7 +55,7 @@ int Level_Transition_Order_Core_1_Encoder(Bitstream* stream, const Level_Transit
     }
 }
 
-int Level_Transition_Order_Core_1_Decoder(Bitstream* stream, Level_Transition_Order_Core_1* p)
+int Level_Transition_Order_Core_1_Decode_Bit(Bitstream* stream, Level_Transition_Order_Core_1* p)
 {
     if (Bitstream_Normal(stream, LEVEL_TRANSITION_ORDER_CORE_1_CORE_BITSIZE))
     {
@@ -97,5 +97,17 @@ int Level_Transition_Order_Core_1_Decoder(Bitstream* stream, Level_Transition_Or
     {
         return 0;
     }
+}
+
+int Level_Transition_Order_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Level_Transition_Order_Core_1* p)
+{
+
+    return 0;
+}
+
+int Level_Transition_Order_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, Level_Transition_Order_Core_1* p)
+{
+
+    return 0;
 }
 

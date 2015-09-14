@@ -3,6 +3,7 @@
 #define SYSTEM_VERSION_ORDER_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct System_Version_order_Core
 {
@@ -100,7 +101,7 @@ int System_Version_order_UpperBitsNotSet(const System_Version_order_Core* p);
     complete behaviors;
     disjoint behaviors;
 */
-int System_Version_order_Encoder(Bitstream* stream, const System_Version_order_Core* p);
+int System_Version_order_Encode_Bit(Bitstream* stream, const System_Version_order_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -135,7 +136,11 @@ int System_Version_order_Encoder(Bitstream* stream, const System_Version_order_C
     complete behaviors;
     disjoint behaviors;
 */
-int System_Version_order_Decoder(Bitstream* stream, System_Version_order_Core* p);
+int System_Version_order_Decode_Bit(Bitstream* stream, System_Version_order_Core* p);
+
+int System_Version_order_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const System_Version_order_Core* p);
+
+int System_Version_order_Decode_Int(const Packet_Info* data, const kcg_int* stream, System_Version_order_Core* p);
 
 #ifdef __cplusplus
 
@@ -169,12 +174,22 @@ inline bool operator!=(const System_Version_order_Core& a, const System_Version_
 
 inline int encode(Bitstream& stream, const System_Version_order_Core& p)
 {
-    return System_Version_order_Encoder(&stream, &p);
+    return System_Version_order_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, System_Version_order_Core& p)
 {
-    return System_Version_order_Decoder(&stream, &p);
+    return System_Version_order_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const System_Version_order_Core& p)
+{
+    return System_Version_order_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, System_Version_order_Core& p)
+{
+    return System_Version_order_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

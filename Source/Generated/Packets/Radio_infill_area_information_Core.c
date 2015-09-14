@@ -26,7 +26,7 @@ int Radio_infill_area_information_UpperBitsNotSet(const Radio_infill_area_inform
     }
 }
 
-int Radio_infill_area_information_Encoder(Bitstream* stream, const Radio_infill_area_information_Core* p)
+int Radio_infill_area_information_Encode_Bit(Bitstream* stream, const Radio_infill_area_information_Core* p)
 {
     if (Bitstream_Normal(stream, RADIO_INFILL_AREA_INFORMATION_CORE_BITSIZE))
     {
@@ -68,7 +68,7 @@ int Radio_infill_area_information_Encoder(Bitstream* stream, const Radio_infill_
     }
 }
 
-int Radio_infill_area_information_Decoder(Bitstream* stream, Radio_infill_area_information_Core* p)
+int Radio_infill_area_information_Decode_Bit(Bitstream* stream, Radio_infill_area_information_Core* p)
 {
     if (Bitstream_Normal(stream, RADIO_INFILL_AREA_INFORMATION_CORE_BITSIZE))
     {
@@ -210,5 +210,17 @@ int Radio_infill_area_information_Decoder(Bitstream* stream, Radio_infill_area_i
     {
         return 0;
     }
+}
+
+int Radio_infill_area_information_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Radio_infill_area_information_Core* p)
+{
+
+    return 0;
+}
+
+int Radio_infill_area_information_Decode_Int(const Packet_Info* data, const kcg_int* stream, Radio_infill_area_information_Core* p)
+{
+
+    return 0;
 }
 

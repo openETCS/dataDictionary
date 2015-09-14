@@ -20,7 +20,7 @@ int Danger_for_Shunting_information_UpperBitsNotSet(const Danger_for_Shunting_in
     }
 }
 
-int Danger_for_Shunting_information_Encoder(Bitstream* stream, const Danger_for_Shunting_information_Core* p)
+int Danger_for_Shunting_information_Encode_Bit(Bitstream* stream, const Danger_for_Shunting_information_Core* p)
 {
     if (Bitstream_Normal(stream, DANGER_FOR_SHUNTING_INFORMATION_CORE_BITSIZE))
     {
@@ -50,7 +50,7 @@ int Danger_for_Shunting_information_Encoder(Bitstream* stream, const Danger_for_
     }
 }
 
-int Danger_for_Shunting_information_Decoder(Bitstream* stream, Danger_for_Shunting_information_Core* p)
+int Danger_for_Shunting_information_Decode_Bit(Bitstream* stream, Danger_for_Shunting_information_Core* p)
 {
     if (Bitstream_Normal(stream, DANGER_FOR_SHUNTING_INFORMATION_CORE_BITSIZE))
     {
@@ -108,5 +108,17 @@ int Danger_for_Shunting_information_Decoder(Bitstream* stream, Danger_for_Shunti
     {
         return 0;
     }
+}
+
+int Danger_for_Shunting_information_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Danger_for_Shunting_information_Core* p)
+{
+
+    return 0;
+}
+
+int Danger_for_Shunting_information_Decode_Int(const Packet_Info* data, const kcg_int* stream, Danger_for_Shunting_information_Core* p)
+{
+
+    return 0;
 }
 

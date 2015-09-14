@@ -4,6 +4,7 @@
 
 #include "Bitstream.h"
 #include "List_of_balises_for_SH_Area_Core_1.h"
+#include "Compressed_Packets.h"
 
 struct List_of_balises_for_SH_Area_Core
 {
@@ -98,7 +99,7 @@ int List_of_balises_for_SH_Area_UpperBitsNotSet(const List_of_balises_for_SH_Are
     complete behaviors;
     disjoint behaviors;
 */
-int List_of_balises_for_SH_Area_Encoder(Bitstream* stream, const List_of_balises_for_SH_Area_Core* p);
+int List_of_balises_for_SH_Area_Encode_Bit(Bitstream* stream, const List_of_balises_for_SH_Area_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -133,7 +134,11 @@ int List_of_balises_for_SH_Area_Encoder(Bitstream* stream, const List_of_balises
     complete behaviors;
     disjoint behaviors;
 */
-int List_of_balises_for_SH_Area_Decoder(Bitstream* stream, List_of_balises_for_SH_Area_Core* p);
+int List_of_balises_for_SH_Area_Decode_Bit(Bitstream* stream, List_of_balises_for_SH_Area_Core* p);
+
+int List_of_balises_for_SH_Area_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const List_of_balises_for_SH_Area_Core* p);
+
+int List_of_balises_for_SH_Area_Decode_Int(const Packet_Info* data, const kcg_int* stream, List_of_balises_for_SH_Area_Core* p);
 
 #ifdef __cplusplus
 
@@ -183,12 +188,22 @@ inline bool operator!=(const List_of_balises_for_SH_Area_Core& a, const List_of_
 
 inline int encode(Bitstream& stream, const List_of_balises_for_SH_Area_Core& p)
 {
-    return List_of_balises_for_SH_Area_Encoder(&stream, &p);
+    return List_of_balises_for_SH_Area_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, List_of_balises_for_SH_Area_Core& p)
 {
-    return List_of_balises_for_SH_Area_Decoder(&stream, &p);
+    return List_of_balises_for_SH_Area_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const List_of_balises_for_SH_Area_Core& p)
+{
+    return List_of_balises_for_SH_Area_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, List_of_balises_for_SH_Area_Core& p)
+{
+    return List_of_balises_for_SH_Area_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

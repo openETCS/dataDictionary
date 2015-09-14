@@ -20,7 +20,7 @@ int Train_running_number_from_RBC_UpperBitsNotSet(const Train_running_number_fro
     }
 }
 
-int Train_running_number_from_RBC_Encoder(Bitstream* stream, const Train_running_number_from_RBC_Core* p)
+int Train_running_number_from_RBC_Encode_Bit(Bitstream* stream, const Train_running_number_from_RBC_Core* p)
 {
     if (Bitstream_Normal(stream, TRAIN_RUNNING_NUMBER_FROM_RBC_CORE_BITSIZE))
     {
@@ -50,7 +50,7 @@ int Train_running_number_from_RBC_Encoder(Bitstream* stream, const Train_running
     }
 }
 
-int Train_running_number_from_RBC_Decoder(Bitstream* stream, Train_running_number_from_RBC_Core* p)
+int Train_running_number_from_RBC_Decode_Bit(Bitstream* stream, Train_running_number_from_RBC_Core* p)
 {
     if (Bitstream_Normal(stream, TRAIN_RUNNING_NUMBER_FROM_RBC_CORE_BITSIZE))
     {
@@ -108,5 +108,17 @@ int Train_running_number_from_RBC_Decoder(Bitstream* stream, Train_running_numbe
     {
         return 0;
     }
+}
+
+int Train_running_number_from_RBC_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Train_running_number_from_RBC_Core* p)
+{
+
+    return 0;
+}
+
+int Train_running_number_from_RBC_Decode_Int(const Packet_Info* data, const kcg_int* stream, Train_running_number_from_RBC_Core* p)
+{
+
+    return 0;
 }
 

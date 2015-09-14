@@ -19,7 +19,7 @@ int Error_Reporting_UpperBitsNotSet(const Error_Reporting_Core* p)
     }
 }
 
-int Error_Reporting_Encoder(Bitstream* stream, const Error_Reporting_Core* p)
+int Error_Reporting_Encode_Bit(Bitstream* stream, const Error_Reporting_Core* p)
 {
     if (Bitstream_Normal(stream, ERROR_REPORTING_CORE_BITSIZE))
     {
@@ -47,7 +47,7 @@ int Error_Reporting_Encoder(Bitstream* stream, const Error_Reporting_Core* p)
     }
 }
 
-int Error_Reporting_Decoder(Bitstream* stream, Error_Reporting_Core* p)
+int Error_Reporting_Decode_Bit(Bitstream* stream, Error_Reporting_Core* p)
 {
     if (Bitstream_Normal(stream, ERROR_REPORTING_CORE_BITSIZE))
     {
@@ -91,5 +91,17 @@ int Error_Reporting_Decoder(Bitstream* stream, Error_Reporting_Core* p)
     {
         return 0;
     }
+}
+
+int Error_Reporting_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Error_Reporting_Core* p)
+{
+
+    return 0;
+}
+
+int Error_Reporting_Decode_Int(const Packet_Info* data, const kcg_int* stream, Error_Reporting_Core* p)
+{
+
+    return 0;
 }
 

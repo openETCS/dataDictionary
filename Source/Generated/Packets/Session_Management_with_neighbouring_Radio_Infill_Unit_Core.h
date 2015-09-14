@@ -3,6 +3,7 @@
 #define SESSION_MANAGEMENT_WITH_NEIGHBOURING_RADIO_INFILL_UNIT_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Session_Management_with_neighbouring_Radio_Infill_Unit_Core
 {
@@ -116,7 +117,7 @@ int Session_Management_with_neighbouring_Radio_Infill_Unit_UpperBitsNotSet(const
     complete behaviors;
     disjoint behaviors;
 */
-int Session_Management_with_neighbouring_Radio_Infill_Unit_Encoder(Bitstream* stream, const Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p);
+int Session_Management_with_neighbouring_Radio_Infill_Unit_Encode_Bit(Bitstream* stream, const Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -151,7 +152,11 @@ int Session_Management_with_neighbouring_Radio_Infill_Unit_Encoder(Bitstream* st
     complete behaviors;
     disjoint behaviors;
 */
-int Session_Management_with_neighbouring_Radio_Infill_Unit_Decoder(Bitstream* stream, Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p);
+int Session_Management_with_neighbouring_Radio_Infill_Unit_Decode_Bit(Bitstream* stream, Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p);
+
+int Session_Management_with_neighbouring_Radio_Infill_Unit_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p);
+
+int Session_Management_with_neighbouring_Radio_Infill_Unit_Decode_Int(const Packet_Info* data, const kcg_int* stream, Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p);
 
 #ifdef __cplusplus
 
@@ -191,12 +196,22 @@ inline bool operator!=(const Session_Management_with_neighbouring_Radio_Infill_U
 
 inline int encode(Bitstream& stream, const Session_Management_with_neighbouring_Radio_Infill_Unit_Core& p)
 {
-    return Session_Management_with_neighbouring_Radio_Infill_Unit_Encoder(&stream, &p);
+    return Session_Management_with_neighbouring_Radio_Infill_Unit_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Session_Management_with_neighbouring_Radio_Infill_Unit_Core& p)
 {
-    return Session_Management_with_neighbouring_Radio_Infill_Unit_Decoder(&stream, &p);
+    return Session_Management_with_neighbouring_Radio_Infill_Unit_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Session_Management_with_neighbouring_Radio_Infill_Unit_Core& p)
+{
+    return Session_Management_with_neighbouring_Radio_Infill_Unit_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Session_Management_with_neighbouring_Radio_Infill_Unit_Core& p)
+{
+    return Session_Management_with_neighbouring_Radio_Infill_Unit_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

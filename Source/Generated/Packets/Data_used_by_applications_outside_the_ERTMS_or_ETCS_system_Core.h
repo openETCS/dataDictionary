@@ -3,6 +3,7 @@
 #define DATA_USED_BY_APPLICATIONS_OUTSIDE_THE_ERTMS_OR_ETCS_SYSTEM_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core
 {
@@ -100,7 +101,7 @@ int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_UpperBitsNotSet(c
     complete behaviors;
     disjoint behaviors;
 */
-int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Encoder(Bitstream* stream, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p);
+int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Encode_Bit(Bitstream* stream, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -135,7 +136,11 @@ int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Encoder(Bitstream
     complete behaviors;
     disjoint behaviors;
 */
-int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Decoder(Bitstream* stream, Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p);
+int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Decode_Bit(Bitstream* stream, Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p);
+
+int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p);
+
+int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Decode_Int(const Packet_Info* data, const kcg_int* stream, Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p);
 
 #ifdef __cplusplus
 
@@ -169,12 +174,22 @@ inline bool operator!=(const Data_used_by_applications_outside_the_ERTMS_or_ETCS
 
 inline int encode(Bitstream& stream, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& p)
 {
-    return Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Encoder(&stream, &p);
+    return Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& p)
 {
-    return Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Decoder(&stream, &p);
+    return Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& p)
+{
+    return Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& p)
+{
+    return Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

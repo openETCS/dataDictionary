@@ -21,7 +21,7 @@ int Default_Gradient_for_Temporary_Speed_Restriction_UpperBitsNotSet(const Defau
     }
 }
 
-int Default_Gradient_for_Temporary_Speed_Restriction_Encoder(Bitstream* stream, const Default_Gradient_for_Temporary_Speed_Restriction_Core* p)
+int Default_Gradient_for_Temporary_Speed_Restriction_Encode_Bit(Bitstream* stream, const Default_Gradient_for_Temporary_Speed_Restriction_Core* p)
 {
     if (Bitstream_Normal(stream, DEFAULT_GRADIENT_FOR_TEMPORARY_SPEED_RESTRICTION_CORE_BITSIZE))
     {
@@ -53,7 +53,7 @@ int Default_Gradient_for_Temporary_Speed_Restriction_Encoder(Bitstream* stream, 
     }
 }
 
-int Default_Gradient_for_Temporary_Speed_Restriction_Decoder(Bitstream* stream, Default_Gradient_for_Temporary_Speed_Restriction_Core* p)
+int Default_Gradient_for_Temporary_Speed_Restriction_Decode_Bit(Bitstream* stream, Default_Gradient_for_Temporary_Speed_Restriction_Core* p)
 {
     if (Bitstream_Normal(stream, DEFAULT_GRADIENT_FOR_TEMPORARY_SPEED_RESTRICTION_CORE_BITSIZE))
     {
@@ -125,5 +125,17 @@ int Default_Gradient_for_Temporary_Speed_Restriction_Decoder(Bitstream* stream, 
     {
         return 0;
     }
+}
+
+int Default_Gradient_for_Temporary_Speed_Restriction_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Default_Gradient_for_Temporary_Speed_Restriction_Core* p)
+{
+
+    return 0;
+}
+
+int Default_Gradient_for_Temporary_Speed_Restriction_Decode_Int(const Packet_Info* data, const kcg_int* stream, Default_Gradient_for_Temporary_Speed_Restriction_Core* p)
+{
+
+    return 0;
 }
 

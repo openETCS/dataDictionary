@@ -18,7 +18,7 @@ int Virtual_Balise_Cover_marker_UpperBitsNotSet(const Virtual_Balise_Cover_marke
     }
 }
 
-int Virtual_Balise_Cover_marker_Encoder(Bitstream* stream, const Virtual_Balise_Cover_marker_Core* p)
+int Virtual_Balise_Cover_marker_Encode_Bit(Bitstream* stream, const Virtual_Balise_Cover_marker_Core* p)
 {
     if (Bitstream_Normal(stream, VIRTUAL_BALISE_COVER_MARKER_CORE_BITSIZE))
     {
@@ -44,7 +44,7 @@ int Virtual_Balise_Cover_marker_Encoder(Bitstream* stream, const Virtual_Balise_
     }
 }
 
-int Virtual_Balise_Cover_marker_Decoder(Bitstream* stream, Virtual_Balise_Cover_marker_Core* p)
+int Virtual_Balise_Cover_marker_Decode_Bit(Bitstream* stream, Virtual_Balise_Cover_marker_Core* p)
 {
     if (Bitstream_Normal(stream, VIRTUAL_BALISE_COVER_MARKER_CORE_BITSIZE))
     {
@@ -74,5 +74,17 @@ int Virtual_Balise_Cover_marker_Decoder(Bitstream* stream, Virtual_Balise_Cover_
     {
         return 0;
     }
+}
+
+int Virtual_Balise_Cover_marker_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Virtual_Balise_Cover_marker_Core* p)
+{
+
+    return 0;
+}
+
+int Virtual_Balise_Cover_marker_Decode_Int(const Packet_Info* data, const kcg_int* stream, Virtual_Balise_Cover_marker_Core* p)
+{
+
+    return 0;
 }
 

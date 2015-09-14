@@ -3,6 +3,7 @@
 #define GRADIENT_PROFILE_CORE_1_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Gradient_Profile_Core_1
 {
@@ -96,7 +97,7 @@ int Gradient_Profile_Core_1_UpperBitsNotSet(const Gradient_Profile_Core_1* p);
     complete behaviors;
     disjoint behaviors;
 */
-int Gradient_Profile_Core_1_Encoder(Bitstream* stream, const Gradient_Profile_Core_1* p);
+int Gradient_Profile_Core_1_Encode_Bit(Bitstream* stream, const Gradient_Profile_Core_1* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -131,7 +132,11 @@ int Gradient_Profile_Core_1_Encoder(Bitstream* stream, const Gradient_Profile_Co
     complete behaviors;
     disjoint behaviors;
 */
-int Gradient_Profile_Core_1_Decoder(Bitstream* stream, Gradient_Profile_Core_1* p);
+int Gradient_Profile_Core_1_Decode_Bit(Bitstream* stream, Gradient_Profile_Core_1* p);
+
+int Gradient_Profile_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Gradient_Profile_Core_1* p);
+
+int Gradient_Profile_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, Gradient_Profile_Core_1* p);
 
 #ifdef __cplusplus
 
@@ -165,12 +170,22 @@ inline bool operator!=(const Gradient_Profile_Core_1& a, const Gradient_Profile_
 
 inline int encode(Bitstream& stream, const Gradient_Profile_Core_1& p)
 {
-    return Gradient_Profile_Core_1_Encoder(&stream, &p);
+    return Gradient_Profile_Core_1_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Gradient_Profile_Core_1& p)
 {
-    return Gradient_Profile_Core_1_Decoder(&stream, &p);
+    return Gradient_Profile_Core_1_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Gradient_Profile_Core_1& p)
+{
+    return Gradient_Profile_Core_1_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Gradient_Profile_Core_1& p)
+{
+    return Gradient_Profile_Core_1_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

@@ -36,7 +36,7 @@ int Track_Condition_UpperBitsNotSet(const Track_Condition_Core* p)
     }
 }
 
-int Track_Condition_Encoder(Bitstream* stream, const Track_Condition_Core* p)
+int Track_Condition_Encode_Bit(Bitstream* stream, const Track_Condition_Core* p)
 {
     if (Bitstream_Normal(stream, TRACK_CONDITION_CORE_BITSIZE))
     {
@@ -61,7 +61,7 @@ int Track_Condition_Encoder(Bitstream* stream, const Track_Condition_Core* p)
             Bitstream_Write(stream, 5,  p->N_ITER_1);
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
-                Track_Condition_Core_1_Encoder(stream, &(p->sub_1[i]));
+                Track_Condition_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
             }
             }
 
@@ -85,7 +85,7 @@ int Track_Condition_Encoder(Bitstream* stream, const Track_Condition_Core* p)
     }
 }
 
-int Track_Condition_Decoder(Bitstream* stream, Track_Condition_Core* p)
+int Track_Condition_Decode_Bit(Bitstream* stream, Track_Condition_Core* p)
 {
     if (Bitstream_Normal(stream, TRACK_CONDITION_CORE_BITSIZE))
     {
@@ -167,7 +167,7 @@ int Track_Condition_Decoder(Bitstream* stream, Track_Condition_Core* p)
 
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
-                Track_Condition_Core_1_Decoder(stream, &(p->sub_1[i]));
+                Track_Condition_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
             }
         }
 
@@ -189,5 +189,17 @@ int Track_Condition_Decoder(Bitstream* stream, Track_Condition_Core* p)
     {
         return 0;
     }
+}
+
+int Track_Condition_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Track_Condition_Core* p)
+{
+
+    return 0;
+}
+
+int Track_Condition_Decode_Int(const Packet_Info* data, const kcg_int* stream, Track_Condition_Core* p)
+{
+
+    return 0;
 }
 

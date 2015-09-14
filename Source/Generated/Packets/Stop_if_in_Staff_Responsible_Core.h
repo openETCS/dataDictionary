@@ -3,6 +3,7 @@
 #define STOP_IF_IN_STAFF_RESPONSIBLE_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Stop_if_in_Staff_Responsible_Core
 {
@@ -99,7 +100,7 @@ int Stop_if_in_Staff_Responsible_UpperBitsNotSet(const Stop_if_in_Staff_Responsi
     complete behaviors;
     disjoint behaviors;
 */
-int Stop_if_in_Staff_Responsible_Encoder(Bitstream* stream, const Stop_if_in_Staff_Responsible_Core* p);
+int Stop_if_in_Staff_Responsible_Encode_Bit(Bitstream* stream, const Stop_if_in_Staff_Responsible_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -134,7 +135,11 @@ int Stop_if_in_Staff_Responsible_Encoder(Bitstream* stream, const Stop_if_in_Sta
     complete behaviors;
     disjoint behaviors;
 */
-int Stop_if_in_Staff_Responsible_Decoder(Bitstream* stream, Stop_if_in_Staff_Responsible_Core* p);
+int Stop_if_in_Staff_Responsible_Decode_Bit(Bitstream* stream, Stop_if_in_Staff_Responsible_Core* p);
+
+int Stop_if_in_Staff_Responsible_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Stop_if_in_Staff_Responsible_Core* p);
+
+int Stop_if_in_Staff_Responsible_Decode_Int(const Packet_Info* data, const kcg_int* stream, Stop_if_in_Staff_Responsible_Core* p);
 
 #ifdef __cplusplus
 
@@ -168,12 +173,22 @@ inline bool operator!=(const Stop_if_in_Staff_Responsible_Core& a, const Stop_if
 
 inline int encode(Bitstream& stream, const Stop_if_in_Staff_Responsible_Core& p)
 {
-    return Stop_if_in_Staff_Responsible_Encoder(&stream, &p);
+    return Stop_if_in_Staff_Responsible_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Stop_if_in_Staff_Responsible_Core& p)
 {
-    return Stop_if_in_Staff_Responsible_Decoder(&stream, &p);
+    return Stop_if_in_Staff_Responsible_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Stop_if_in_Staff_Responsible_Core& p)
+{
+    return Stop_if_in_Staff_Responsible_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Stop_if_in_Staff_Responsible_Core& p)
+{
+    return Stop_if_in_Staff_Responsible_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

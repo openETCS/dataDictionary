@@ -3,6 +3,7 @@
 #define RADIO_NETWORK_REGISTRATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Radio_Network_registration_Core
 {
@@ -100,7 +101,7 @@ int Radio_Network_registration_UpperBitsNotSet(const Radio_Network_registration_
     complete behaviors;
     disjoint behaviors;
 */
-int Radio_Network_registration_Encoder(Bitstream* stream, const Radio_Network_registration_Core* p);
+int Radio_Network_registration_Encode_Bit(Bitstream* stream, const Radio_Network_registration_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -135,7 +136,11 @@ int Radio_Network_registration_Encoder(Bitstream* stream, const Radio_Network_re
     complete behaviors;
     disjoint behaviors;
 */
-int Radio_Network_registration_Decoder(Bitstream* stream, Radio_Network_registration_Core* p);
+int Radio_Network_registration_Decode_Bit(Bitstream* stream, Radio_Network_registration_Core* p);
+
+int Radio_Network_registration_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Radio_Network_registration_Core* p);
+
+int Radio_Network_registration_Decode_Int(const Packet_Info* data, const kcg_int* stream, Radio_Network_registration_Core* p);
 
 #ifdef __cplusplus
 
@@ -169,12 +174,22 @@ inline bool operator!=(const Radio_Network_registration_Core& a, const Radio_Net
 
 inline int encode(Bitstream& stream, const Radio_Network_registration_Core& p)
 {
-    return Radio_Network_registration_Encoder(&stream, &p);
+    return Radio_Network_registration_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Radio_Network_registration_Core& p)
 {
-    return Radio_Network_registration_Decoder(&stream, &p);
+    return Radio_Network_registration_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Radio_Network_registration_Core& p)
+{
+    return Radio_Network_registration_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Radio_Network_registration_Core& p)
+{
+    return Radio_Network_registration_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

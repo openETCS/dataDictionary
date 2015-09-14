@@ -4,6 +4,7 @@
 
 #include "Bitstream.h"
 #include "Track_Condition_Station_Platforms_Core_1.h"
+#include "Compressed_Packets.h"
 
 struct Track_Condition_Station_Platforms_Core
 {
@@ -113,7 +114,7 @@ int Track_Condition_Station_Platforms_UpperBitsNotSet(const Track_Condition_Stat
     complete behaviors;
     disjoint behaviors;
 */
-int Track_Condition_Station_Platforms_Encoder(Bitstream* stream, const Track_Condition_Station_Platforms_Core* p);
+int Track_Condition_Station_Platforms_Encode_Bit(Bitstream* stream, const Track_Condition_Station_Platforms_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -148,7 +149,11 @@ int Track_Condition_Station_Platforms_Encoder(Bitstream* stream, const Track_Con
     complete behaviors;
     disjoint behaviors;
 */
-int Track_Condition_Station_Platforms_Decoder(Bitstream* stream, Track_Condition_Station_Platforms_Core* p);
+int Track_Condition_Station_Platforms_Decode_Bit(Bitstream* stream, Track_Condition_Station_Platforms_Core* p);
+
+int Track_Condition_Station_Platforms_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Track_Condition_Station_Platforms_Core* p);
+
+int Track_Condition_Station_Platforms_Decode_Int(const Packet_Info* data, const kcg_int* stream, Track_Condition_Station_Platforms_Core* p);
 
 #ifdef __cplusplus
 
@@ -220,12 +225,22 @@ inline bool operator!=(const Track_Condition_Station_Platforms_Core& a, const Tr
 
 inline int encode(Bitstream& stream, const Track_Condition_Station_Platforms_Core& p)
 {
-    return Track_Condition_Station_Platforms_Encoder(&stream, &p);
+    return Track_Condition_Station_Platforms_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Track_Condition_Station_Platforms_Core& p)
 {
-    return Track_Condition_Station_Platforms_Decoder(&stream, &p);
+    return Track_Condition_Station_Platforms_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Track_Condition_Station_Platforms_Core& p)
+{
+    return Track_Condition_Station_Platforms_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Track_Condition_Station_Platforms_Core& p)
+{
+    return Track_Condition_Station_Platforms_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

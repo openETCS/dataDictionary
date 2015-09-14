@@ -19,7 +19,7 @@ int Stop_Shunting_on_desk_opening_UpperBitsNotSet(const Stop_Shunting_on_desk_op
     }
 }
 
-int Stop_Shunting_on_desk_opening_Encoder(Bitstream* stream, const Stop_Shunting_on_desk_opening_Core* p)
+int Stop_Shunting_on_desk_opening_Encode_Bit(Bitstream* stream, const Stop_Shunting_on_desk_opening_Core* p)
 {
     if (Bitstream_Normal(stream, STOP_SHUNTING_ON_DESK_OPENING_CORE_BITSIZE))
     {
@@ -47,7 +47,7 @@ int Stop_Shunting_on_desk_opening_Encoder(Bitstream* stream, const Stop_Shunting
     }
 }
 
-int Stop_Shunting_on_desk_opening_Decoder(Bitstream* stream, Stop_Shunting_on_desk_opening_Core* p)
+int Stop_Shunting_on_desk_opening_Decode_Bit(Bitstream* stream, Stop_Shunting_on_desk_opening_Core* p)
 {
     if (Bitstream_Normal(stream, STOP_SHUNTING_ON_DESK_OPENING_CORE_BITSIZE))
     {
@@ -91,5 +91,17 @@ int Stop_Shunting_on_desk_opening_Decoder(Bitstream* stream, Stop_Shunting_on_de
     {
         return 0;
     }
+}
+
+int Stop_Shunting_on_desk_opening_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Stop_Shunting_on_desk_opening_Core* p)
+{
+
+    return 0;
+}
+
+int Stop_Shunting_on_desk_opening_Decode_Int(const Packet_Info* data, const kcg_int* stream, Stop_Shunting_on_desk_opening_Core* p)
+{
+
+    return 0;
 }
 

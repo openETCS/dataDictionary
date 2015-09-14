@@ -19,7 +19,7 @@ int Position_Report_Parameters_Core_1_UpperBitsNotSet(const Position_Report_Para
     }
 }
 
-int Position_Report_Parameters_Core_1_Encoder(Bitstream* stream, const Position_Report_Parameters_Core_1* p)
+int Position_Report_Parameters_Core_1_Encode_Bit(Bitstream* stream, const Position_Report_Parameters_Core_1* p)
 {
     if (Bitstream_Normal(stream, POSITION_REPORT_PARAMETERS_CORE_1_CORE_BITSIZE))
     {
@@ -47,7 +47,7 @@ int Position_Report_Parameters_Core_1_Encoder(Bitstream* stream, const Position_
     }
 }
 
-int Position_Report_Parameters_Core_1_Decoder(Bitstream* stream, Position_Report_Parameters_Core_1* p)
+int Position_Report_Parameters_Core_1_Decode_Bit(Bitstream* stream, Position_Report_Parameters_Core_1* p)
 {
     if (Bitstream_Normal(stream, POSITION_REPORT_PARAMETERS_CORE_1_CORE_BITSIZE))
     {
@@ -91,5 +91,17 @@ int Position_Report_Parameters_Core_1_Decoder(Bitstream* stream, Position_Report
     {
         return 0;
     }
+}
+
+int Position_Report_Parameters_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Position_Report_Parameters_Core_1* p)
+{
+
+    return 0;
+}
+
+int Position_Report_Parameters_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, Position_Report_Parameters_Core_1* p)
+{
+
+    return 0;
 }
 

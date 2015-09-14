@@ -42,7 +42,7 @@ int Level_23_Movement_Authority_UpperBitsNotSet(const Level_23_Movement_Authorit
     }
 }
 
-int Level_23_Movement_Authority_Encoder(Bitstream* stream, const Level_23_Movement_Authority_Core* p)
+int Level_23_Movement_Authority_Encode_Bit(Bitstream* stream, const Level_23_Movement_Authority_Core* p)
 {
     if (Bitstream_Normal(stream, LEVEL_23_MOVEMENT_AUTHORITY_CORE_BITSIZE))
     {
@@ -58,7 +58,7 @@ int Level_23_Movement_Authority_Encoder(Bitstream* stream, const Level_23_Moveme
             Bitstream_Write(stream, 5,  p->N_ITER_1);
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
-                Level_23_Movement_Authority_Core_1_Encoder(stream, &(p->sub_1[i]));
+                Level_23_Movement_Authority_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
             }
             Bitstream_Write(stream, 15, p->L_ENDSECTION);
             Bitstream_Write(stream, 1,  p->Q_SECTIONTIMER);
@@ -96,7 +96,7 @@ int Level_23_Movement_Authority_Encoder(Bitstream* stream, const Level_23_Moveme
     }
 }
 
-int Level_23_Movement_Authority_Decoder(Bitstream* stream, Level_23_Movement_Authority_Core* p)
+int Level_23_Movement_Authority_Decode_Bit(Bitstream* stream, Level_23_Movement_Authority_Core* p)
 {
     if (Bitstream_Normal(stream, LEVEL_23_MOVEMENT_AUTHORITY_CORE_BITSIZE))
     {
@@ -168,7 +168,7 @@ int Level_23_Movement_Authority_Decoder(Bitstream* stream, Level_23_Movement_Aut
 
         for (uint32_t i = 0; i < p->N_ITER_1; ++i)
         {
-            Level_23_Movement_Authority_Core_1_Decoder(stream, &(p->sub_1[i]));
+            Level_23_Movement_Authority_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
         }
         {
             p->L_ENDSECTION        = Bitstream_Read(stream, 15);
@@ -250,5 +250,17 @@ int Level_23_Movement_Authority_Decoder(Bitstream* stream, Level_23_Movement_Aut
     {
         return 0;
     }
+}
+
+int Level_23_Movement_Authority_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Level_23_Movement_Authority_Core* p)
+{
+
+    return 0;
+}
+
+int Level_23_Movement_Authority_Decode_Int(const Packet_Info* data, const kcg_int* stream, Level_23_Movement_Authority_Core* p)
+{
+
+    return 0;
 }
 

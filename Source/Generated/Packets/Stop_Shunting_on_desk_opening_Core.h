@@ -3,6 +3,7 @@
 #define STOP_SHUNTING_ON_DESK_OPENING_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Stop_Shunting_on_desk_opening_Core
 {
@@ -94,7 +95,7 @@ int Stop_Shunting_on_desk_opening_UpperBitsNotSet(const Stop_Shunting_on_desk_op
     complete behaviors;
     disjoint behaviors;
 */
-int Stop_Shunting_on_desk_opening_Encoder(Bitstream* stream, const Stop_Shunting_on_desk_opening_Core* p);
+int Stop_Shunting_on_desk_opening_Encode_Bit(Bitstream* stream, const Stop_Shunting_on_desk_opening_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -129,7 +130,11 @@ int Stop_Shunting_on_desk_opening_Encoder(Bitstream* stream, const Stop_Shunting
     complete behaviors;
     disjoint behaviors;
 */
-int Stop_Shunting_on_desk_opening_Decoder(Bitstream* stream, Stop_Shunting_on_desk_opening_Core* p);
+int Stop_Shunting_on_desk_opening_Decode_Bit(Bitstream* stream, Stop_Shunting_on_desk_opening_Core* p);
+
+int Stop_Shunting_on_desk_opening_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Stop_Shunting_on_desk_opening_Core* p);
+
+int Stop_Shunting_on_desk_opening_Decode_Int(const Packet_Info* data, const kcg_int* stream, Stop_Shunting_on_desk_opening_Core* p);
 
 #ifdef __cplusplus
 
@@ -161,12 +166,22 @@ inline bool operator!=(const Stop_Shunting_on_desk_opening_Core& a, const Stop_S
 
 inline int encode(Bitstream& stream, const Stop_Shunting_on_desk_opening_Core& p)
 {
-    return Stop_Shunting_on_desk_opening_Encoder(&stream, &p);
+    return Stop_Shunting_on_desk_opening_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Stop_Shunting_on_desk_opening_Core& p)
 {
-    return Stop_Shunting_on_desk_opening_Decoder(&stream, &p);
+    return Stop_Shunting_on_desk_opening_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Stop_Shunting_on_desk_opening_Core& p)
+{
+    return Stop_Shunting_on_desk_opening_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Stop_Shunting_on_desk_opening_Core& p)
+{
+    return Stop_Shunting_on_desk_opening_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

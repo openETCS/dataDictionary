@@ -24,7 +24,7 @@ int Staff_Responsible_distance_Information_from_loop_Core_1_UpperBitsNotSet(cons
     }
 }
 
-int Staff_Responsible_distance_Information_from_loop_Core_1_Encoder(Bitstream* stream, const Staff_Responsible_distance_Information_from_loop_Core_1* p)
+int Staff_Responsible_distance_Information_from_loop_Core_1_Encode_Bit(Bitstream* stream, const Staff_Responsible_distance_Information_from_loop_Core_1* p)
 {
     if (Bitstream_Normal(stream, STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_1_CORE_BITSIZE))
     {
@@ -57,7 +57,7 @@ int Staff_Responsible_distance_Information_from_loop_Core_1_Encoder(Bitstream* s
     }
 }
 
-int Staff_Responsible_distance_Information_from_loop_Core_1_Decoder(Bitstream* stream, Staff_Responsible_distance_Information_from_loop_Core_1* p)
+int Staff_Responsible_distance_Information_from_loop_Core_1_Decode_Bit(Bitstream* stream, Staff_Responsible_distance_Information_from_loop_Core_1* p)
 {
     if (Bitstream_Normal(stream, STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_1_CORE_BITSIZE))
     {
@@ -103,5 +103,17 @@ int Staff_Responsible_distance_Information_from_loop_Core_1_Decoder(Bitstream* s
     {
         return 0;
     }
+}
+
+int Staff_Responsible_distance_Information_from_loop_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Staff_Responsible_distance_Information_from_loop_Core_1* p)
+{
+
+    return 0;
+}
+
+int Staff_Responsible_distance_Information_from_loop_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, Staff_Responsible_distance_Information_from_loop_Core_1* p)
+{
+
+    return 0;
 }
 

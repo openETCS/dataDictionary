@@ -25,7 +25,7 @@ int EOLM_Packet_UpperBitsNotSet(const EOLM_Packet_Core* p)
     }
 }
 
-int EOLM_Packet_Encoder(Bitstream* stream, const EOLM_Packet_Core* p)
+int EOLM_Packet_Encode_Bit(Bitstream* stream, const EOLM_Packet_Core* p)
 {
     if (Bitstream_Normal(stream, EOLM_PACKET_CORE_BITSIZE))
     {
@@ -65,7 +65,7 @@ int EOLM_Packet_Encoder(Bitstream* stream, const EOLM_Packet_Core* p)
     }
 }
 
-int EOLM_Packet_Decoder(Bitstream* stream, EOLM_Packet_Core* p)
+int EOLM_Packet_Decode_Bit(Bitstream* stream, EOLM_Packet_Core* p)
 {
     if (Bitstream_Normal(stream, EOLM_PACKET_CORE_BITSIZE))
     {
@@ -193,5 +193,17 @@ int EOLM_Packet_Decoder(Bitstream* stream, EOLM_Packet_Core* p)
     {
         return 0;
     }
+}
+
+int EOLM_Packet_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const EOLM_Packet_Core* p)
+{
+
+    return 0;
+}
+
+int EOLM_Packet_Decode_Int(const Packet_Info* data, const kcg_int* stream, EOLM_Packet_Core* p)
+{
+
+    return 0;
 }
 

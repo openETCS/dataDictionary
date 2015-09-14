@@ -20,7 +20,7 @@ int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_UpperBitsNotSet(c
     }
 }
 
-int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Encoder(Bitstream* stream, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p)
+int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Encode_Bit(Bitstream* stream, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p)
 {
     if (Bitstream_Normal(stream, DATA_USED_BY_APPLICATIONS_OUTSIDE_THE_ERTMS_OR_ETCS_SYSTEM_CORE_BITSIZE))
     {
@@ -50,7 +50,7 @@ int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Encoder(Bitstream
     }
 }
 
-int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Decoder(Bitstream* stream, Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p)
+int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Decode_Bit(Bitstream* stream, Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p)
 {
     if (Bitstream_Normal(stream, DATA_USED_BY_APPLICATIONS_OUTSIDE_THE_ERTMS_OR_ETCS_SYSTEM_CORE_BITSIZE))
     {
@@ -108,5 +108,17 @@ int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Decoder(Bitstream
     {
         return 0;
     }
+}
+
+int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p)
+{
+
+    return 0;
+}
+
+int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Decode_Int(const Packet_Info* data, const kcg_int* stream, Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p)
+{
+
+    return 0;
 }
 

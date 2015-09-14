@@ -19,7 +19,7 @@ int Level_23_transition_information_UpperBitsNotSet(const Level_23_transition_in
     }
 }
 
-int Level_23_transition_information_Encoder(Bitstream* stream, const Level_23_transition_information_Core* p)
+int Level_23_transition_information_Encode_Bit(Bitstream* stream, const Level_23_transition_information_Core* p)
 {
     if (Bitstream_Normal(stream, LEVEL_23_TRANSITION_INFORMATION_CORE_BITSIZE))
     {
@@ -47,7 +47,7 @@ int Level_23_transition_information_Encoder(Bitstream* stream, const Level_23_tr
     }
 }
 
-int Level_23_transition_information_Decoder(Bitstream* stream, Level_23_transition_information_Core* p)
+int Level_23_transition_information_Decode_Bit(Bitstream* stream, Level_23_transition_information_Core* p)
 {
     if (Bitstream_Normal(stream, LEVEL_23_TRANSITION_INFORMATION_CORE_BITSIZE))
     {
@@ -91,5 +91,17 @@ int Level_23_transition_information_Decoder(Bitstream* stream, Level_23_transiti
     {
         return 0;
     }
+}
+
+int Level_23_transition_information_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Level_23_transition_information_Core* p)
+{
+
+    return 0;
+}
+
+int Level_23_transition_information_Decode_Int(const Packet_Info* data, const kcg_int* stream, Level_23_transition_information_Core* p)
+{
+
+    return 0;
 }
 

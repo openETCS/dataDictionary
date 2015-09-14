@@ -3,6 +3,7 @@
 #define POSITION_REPORT_BASED_ON_TWO_BALISE_GROUPS_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Position_Report_based_on_two_balise_groups_Core
 {
@@ -145,7 +146,7 @@ int Position_Report_based_on_two_balise_groups_UpperBitsNotSet(const Position_Re
     complete behaviors;
     disjoint behaviors;
 */
-int Position_Report_based_on_two_balise_groups_Encoder(Bitstream* stream, const Position_Report_based_on_two_balise_groups_Core* p);
+int Position_Report_based_on_two_balise_groups_Encode_Bit(Bitstream* stream, const Position_Report_based_on_two_balise_groups_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -180,7 +181,11 @@ int Position_Report_based_on_two_balise_groups_Encoder(Bitstream* stream, const 
     complete behaviors;
     disjoint behaviors;
 */
-int Position_Report_based_on_two_balise_groups_Decoder(Bitstream* stream, Position_Report_based_on_two_balise_groups_Core* p);
+int Position_Report_based_on_two_balise_groups_Decode_Bit(Bitstream* stream, Position_Report_based_on_two_balise_groups_Core* p);
+
+int Position_Report_based_on_two_balise_groups_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Position_Report_based_on_two_balise_groups_Core* p);
+
+int Position_Report_based_on_two_balise_groups_Decode_Int(const Packet_Info* data, const kcg_int* stream, Position_Report_based_on_two_balise_groups_Core* p);
 
 #ifdef __cplusplus
 
@@ -248,12 +253,22 @@ inline bool operator!=(const Position_Report_based_on_two_balise_groups_Core& a,
 
 inline int encode(Bitstream& stream, const Position_Report_based_on_two_balise_groups_Core& p)
 {
-    return Position_Report_based_on_two_balise_groups_Encoder(&stream, &p);
+    return Position_Report_based_on_two_balise_groups_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Position_Report_based_on_two_balise_groups_Core& p)
 {
-    return Position_Report_based_on_two_balise_groups_Decoder(&stream, &p);
+    return Position_Report_based_on_two_balise_groups_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Position_Report_based_on_two_balise_groups_Core& p)
+{
+    return Position_Report_based_on_two_balise_groups_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Position_Report_based_on_two_balise_groups_Core& p)
+{
+    return Position_Report_based_on_two_balise_groups_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

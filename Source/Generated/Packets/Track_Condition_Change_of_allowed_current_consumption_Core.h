@@ -3,6 +3,7 @@
 #define TRACK_CONDITION_CHANGE_OF_ALLOWED_CURRENT_CONSUMPTION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Track_Condition_Change_of_allowed_current_consumption_Core
 {
@@ -109,7 +110,7 @@ int Track_Condition_Change_of_allowed_current_consumption_UpperBitsNotSet(const 
     complete behaviors;
     disjoint behaviors;
 */
-int Track_Condition_Change_of_allowed_current_consumption_Encoder(Bitstream* stream, const Track_Condition_Change_of_allowed_current_consumption_Core* p);
+int Track_Condition_Change_of_allowed_current_consumption_Encode_Bit(Bitstream* stream, const Track_Condition_Change_of_allowed_current_consumption_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -144,7 +145,11 @@ int Track_Condition_Change_of_allowed_current_consumption_Encoder(Bitstream* str
     complete behaviors;
     disjoint behaviors;
 */
-int Track_Condition_Change_of_allowed_current_consumption_Decoder(Bitstream* stream, Track_Condition_Change_of_allowed_current_consumption_Core* p);
+int Track_Condition_Change_of_allowed_current_consumption_Decode_Bit(Bitstream* stream, Track_Condition_Change_of_allowed_current_consumption_Core* p);
+
+int Track_Condition_Change_of_allowed_current_consumption_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Track_Condition_Change_of_allowed_current_consumption_Core* p);
+
+int Track_Condition_Change_of_allowed_current_consumption_Decode_Int(const Packet_Info* data, const kcg_int* stream, Track_Condition_Change_of_allowed_current_consumption_Core* p);
 
 #ifdef __cplusplus
 
@@ -182,12 +187,22 @@ inline bool operator!=(const Track_Condition_Change_of_allowed_current_consumpti
 
 inline int encode(Bitstream& stream, const Track_Condition_Change_of_allowed_current_consumption_Core& p)
 {
-    return Track_Condition_Change_of_allowed_current_consumption_Encoder(&stream, &p);
+    return Track_Condition_Change_of_allowed_current_consumption_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Track_Condition_Change_of_allowed_current_consumption_Core& p)
 {
-    return Track_Condition_Change_of_allowed_current_consumption_Decoder(&stream, &p);
+    return Track_Condition_Change_of_allowed_current_consumption_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Track_Condition_Change_of_allowed_current_consumption_Core& p)
+{
+    return Track_Condition_Change_of_allowed_current_consumption_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Track_Condition_Change_of_allowed_current_consumption_Core& p)
+{
+    return Track_Condition_Change_of_allowed_current_consumption_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

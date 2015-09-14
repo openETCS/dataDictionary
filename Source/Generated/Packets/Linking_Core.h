@@ -4,6 +4,7 @@
 
 #include "Bitstream.h"
 #include "Linking_Core_1.h"
+#include "Compressed_Packets.h"
 
 struct Linking_Core
 {
@@ -117,7 +118,7 @@ int Linking_UpperBitsNotSet(const Linking_Core* p);
     complete behaviors;
     disjoint behaviors;
 */
-int Linking_Encoder(Bitstream* stream, const Linking_Core* p);
+int Linking_Encode_Bit(Bitstream* stream, const Linking_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -152,7 +153,11 @@ int Linking_Encoder(Bitstream* stream, const Linking_Core* p);
     complete behaviors;
     disjoint behaviors;
 */
-int Linking_Decoder(Bitstream* stream, Linking_Core* p);
+int Linking_Decode_Bit(Bitstream* stream, Linking_Core* p);
+
+int Linking_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Linking_Core* p);
+
+int Linking_Decode_Int(const Packet_Info* data, const kcg_int* stream, Linking_Core* p);
 
 #ifdef __cplusplus
 
@@ -222,12 +227,22 @@ inline bool operator!=(const Linking_Core& a, const Linking_Core& b)
 
 inline int encode(Bitstream& stream, const Linking_Core& p)
 {
-    return Linking_Encoder(&stream, &p);
+    return Linking_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Linking_Core& p)
 {
-    return Linking_Decoder(&stream, &p);
+    return Linking_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Linking_Core& p)
+{
+    return Linking_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Linking_Core& p)
+{
+    return Linking_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

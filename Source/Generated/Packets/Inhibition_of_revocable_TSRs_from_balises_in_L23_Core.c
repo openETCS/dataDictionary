@@ -19,7 +19,7 @@ int Inhibition_of_revocable_TSRs_from_balises_in_L23_UpperBitsNotSet(const Inhib
     }
 }
 
-int Inhibition_of_revocable_TSRs_from_balises_in_L23_Encoder(Bitstream* stream, const Inhibition_of_revocable_TSRs_from_balises_in_L23_Core* p)
+int Inhibition_of_revocable_TSRs_from_balises_in_L23_Encode_Bit(Bitstream* stream, const Inhibition_of_revocable_TSRs_from_balises_in_L23_Core* p)
 {
     if (Bitstream_Normal(stream, INHIBITION_OF_REVOCABLE_TSRS_FROM_BALISES_IN_L23_CORE_BITSIZE))
     {
@@ -47,7 +47,7 @@ int Inhibition_of_revocable_TSRs_from_balises_in_L23_Encoder(Bitstream* stream, 
     }
 }
 
-int Inhibition_of_revocable_TSRs_from_balises_in_L23_Decoder(Bitstream* stream, Inhibition_of_revocable_TSRs_from_balises_in_L23_Core* p)
+int Inhibition_of_revocable_TSRs_from_balises_in_L23_Decode_Bit(Bitstream* stream, Inhibition_of_revocable_TSRs_from_balises_in_L23_Core* p)
 {
     if (Bitstream_Normal(stream, INHIBITION_OF_REVOCABLE_TSRS_FROM_BALISES_IN_L23_CORE_BITSIZE))
     {
@@ -91,5 +91,17 @@ int Inhibition_of_revocable_TSRs_from_balises_in_L23_Decoder(Bitstream* stream, 
     {
         return 0;
     }
+}
+
+int Inhibition_of_revocable_TSRs_from_balises_in_L23_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Inhibition_of_revocable_TSRs_from_balises_in_L23_Core* p)
+{
+
+    return 0;
+}
+
+int Inhibition_of_revocable_TSRs_from_balises_in_L23_Decode_Int(const Packet_Info* data, const kcg_int* stream, Inhibition_of_revocable_TSRs_from_balises_in_L23_Core* p)
+{
+
+    return 0;
 }
 

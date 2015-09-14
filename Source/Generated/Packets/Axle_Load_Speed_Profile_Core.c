@@ -41,7 +41,7 @@ int Axle_Load_Speed_Profile_UpperBitsNotSet(const Axle_Load_Speed_Profile_Core* 
     }
 }
 
-int Axle_Load_Speed_Profile_Encoder(Bitstream* stream, const Axle_Load_Speed_Profile_Core* p)
+int Axle_Load_Speed_Profile_Encode_Bit(Bitstream* stream, const Axle_Load_Speed_Profile_Core* p)
 {
     if (Bitstream_Normal(stream, AXLE_LOAD_SPEED_PROFILE_CORE_BITSIZE))
     {
@@ -66,12 +66,12 @@ int Axle_Load_Speed_Profile_Encoder(Bitstream* stream, const Axle_Load_Speed_Pro
             Bitstream_Write(stream, 5,  p->N_ITER_1);
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
-                Axle_Load_Speed_Profile_Core_1_Encoder(stream, &(p->sub_1[i]));
+                Axle_Load_Speed_Profile_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
             }
             Bitstream_Write(stream, 5,  p->N_ITER_2);
             for (uint32_t i = 0; i < p->N_ITER_2; ++i)
             {
-                Axle_Load_Speed_Profile_Core_2_Encoder(stream, &(p->sub_2[i]));
+                Axle_Load_Speed_Profile_Core_2_Encode_Bit(stream, &(p->sub_2[i]));
             }
             }
 
@@ -95,7 +95,7 @@ int Axle_Load_Speed_Profile_Encoder(Bitstream* stream, const Axle_Load_Speed_Pro
     }
 }
 
-int Axle_Load_Speed_Profile_Decoder(Bitstream* stream, Axle_Load_Speed_Profile_Core* p)
+int Axle_Load_Speed_Profile_Decode_Bit(Bitstream* stream, Axle_Load_Speed_Profile_Core* p)
 {
     if (Bitstream_Normal(stream, AXLE_LOAD_SPEED_PROFILE_CORE_BITSIZE))
     {
@@ -177,7 +177,7 @@ int Axle_Load_Speed_Profile_Decoder(Bitstream* stream, Axle_Load_Speed_Profile_C
 
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
-                Axle_Load_Speed_Profile_Core_1_Decoder(stream, &(p->sub_1[i]));
+                Axle_Load_Speed_Profile_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
             }
             {
                 p->N_ITER_2        = Bitstream_Read(stream, 5);
@@ -185,7 +185,7 @@ int Axle_Load_Speed_Profile_Decoder(Bitstream* stream, Axle_Load_Speed_Profile_C
 
             for (uint32_t i = 0; i < p->N_ITER_2; ++i)
             {
-                Axle_Load_Speed_Profile_Core_2_Decoder(stream, &(p->sub_2[i]));
+                Axle_Load_Speed_Profile_Core_2_Decode_Bit(stream, &(p->sub_2[i]));
             }
         }
 
@@ -207,5 +207,17 @@ int Axle_Load_Speed_Profile_Decoder(Bitstream* stream, Axle_Load_Speed_Profile_C
     {
         return 0;
     }
+}
+
+int Axle_Load_Speed_Profile_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Axle_Load_Speed_Profile_Core* p)
+{
+
+    return 0;
+}
+
+int Axle_Load_Speed_Profile_Decode_Int(const Packet_Info* data, const kcg_int* stream, Axle_Load_Speed_Profile_Core* p)
+{
+
+    return 0;
 }
 

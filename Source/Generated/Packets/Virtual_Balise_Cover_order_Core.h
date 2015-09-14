@@ -3,6 +3,7 @@
 #define VIRTUAL_BALISE_COVER_ORDER_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Virtual_Balise_Cover_order_Core
 {
@@ -110,7 +111,7 @@ int Virtual_Balise_Cover_order_UpperBitsNotSet(const Virtual_Balise_Cover_order_
     complete behaviors;
     disjoint behaviors;
 */
-int Virtual_Balise_Cover_order_Encoder(Bitstream* stream, const Virtual_Balise_Cover_order_Core* p);
+int Virtual_Balise_Cover_order_Encode_Bit(Bitstream* stream, const Virtual_Balise_Cover_order_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -145,7 +146,11 @@ int Virtual_Balise_Cover_order_Encoder(Bitstream* stream, const Virtual_Balise_C
     complete behaviors;
     disjoint behaviors;
 */
-int Virtual_Balise_Cover_order_Decoder(Bitstream* stream, Virtual_Balise_Cover_order_Core* p);
+int Virtual_Balise_Cover_order_Decode_Bit(Bitstream* stream, Virtual_Balise_Cover_order_Core* p);
+
+int Virtual_Balise_Cover_order_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Virtual_Balise_Cover_order_Core* p);
+
+int Virtual_Balise_Cover_order_Decode_Int(const Packet_Info* data, const kcg_int* stream, Virtual_Balise_Cover_order_Core* p);
 
 #ifdef __cplusplus
 
@@ -189,12 +194,22 @@ inline bool operator!=(const Virtual_Balise_Cover_order_Core& a, const Virtual_B
 
 inline int encode(Bitstream& stream, const Virtual_Balise_Cover_order_Core& p)
 {
-    return Virtual_Balise_Cover_order_Encoder(&stream, &p);
+    return Virtual_Balise_Cover_order_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Virtual_Balise_Cover_order_Core& p)
 {
-    return Virtual_Balise_Cover_order_Decoder(&stream, &p);
+    return Virtual_Balise_Cover_order_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Virtual_Balise_Cover_order_Core& p)
+{
+    return Virtual_Balise_Cover_order_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Virtual_Balise_Cover_order_Core& p)
+{
+    return Virtual_Balise_Cover_order_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

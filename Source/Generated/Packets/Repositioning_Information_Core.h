@@ -3,6 +3,7 @@
 #define REPOSITIONING_INFORMATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Repositioning_Information_Core
 {
@@ -104,7 +105,7 @@ int Repositioning_Information_UpperBitsNotSet(const Repositioning_Information_Co
     complete behaviors;
     disjoint behaviors;
 */
-int Repositioning_Information_Encoder(Bitstream* stream, const Repositioning_Information_Core* p);
+int Repositioning_Information_Encode_Bit(Bitstream* stream, const Repositioning_Information_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -139,7 +140,11 @@ int Repositioning_Information_Encoder(Bitstream* stream, const Repositioning_Inf
     complete behaviors;
     disjoint behaviors;
 */
-int Repositioning_Information_Decoder(Bitstream* stream, Repositioning_Information_Core* p);
+int Repositioning_Information_Decode_Bit(Bitstream* stream, Repositioning_Information_Core* p);
+
+int Repositioning_Information_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Repositioning_Information_Core* p);
+
+int Repositioning_Information_Decode_Int(const Packet_Info* data, const kcg_int* stream, Repositioning_Information_Core* p);
 
 #ifdef __cplusplus
 
@@ -175,12 +180,22 @@ inline bool operator!=(const Repositioning_Information_Core& a, const Reposition
 
 inline int encode(Bitstream& stream, const Repositioning_Information_Core& p)
 {
-    return Repositioning_Information_Encoder(&stream, &p);
+    return Repositioning_Information_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Repositioning_Information_Core& p)
 {
-    return Repositioning_Information_Decoder(&stream, &p);
+    return Repositioning_Information_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Repositioning_Information_Core& p)
+{
+    return Repositioning_Information_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Repositioning_Information_Core& p)
+{
+    return Repositioning_Information_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

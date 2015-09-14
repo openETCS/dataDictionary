@@ -42,6 +42,26 @@ struct Validated_train_data : public BasePacket
         return ::decode(stream, core);
     }
 
+    int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress) const override
+    {
+        data.nid_packet = 11;
+	
+	data.valid = core.VALID;
+	data.startAddress = startAddress;
+
+	return ::encode(data, stream, startAddress, core);
+    }
+
+    int decode(const Packet_Info& data, const kcg_int* stream) override
+    {
+        if(data.nid_packet != 11)
+	{
+	    return 0;
+	}
+
+	return ::decode(data, stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Validated_train_data> Validated_train_dataPtr;

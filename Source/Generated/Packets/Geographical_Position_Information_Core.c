@@ -34,7 +34,7 @@ int Geographical_Position_Information_UpperBitsNotSet(const Geographical_Positio
     }
 }
 
-int Geographical_Position_Information_Encoder(Bitstream* stream, const Geographical_Position_Information_Core* p)
+int Geographical_Position_Information_Encode_Bit(Bitstream* stream, const Geographical_Position_Information_Core* p)
 {
     if (Bitstream_Normal(stream, GEOGRAPHICAL_POSITION_INFORMATION_CORE_BITSIZE))
     {
@@ -58,7 +58,7 @@ int Geographical_Position_Information_Encoder(Bitstream* stream, const Geographi
             Bitstream_Write(stream, 5,  p->N_ITER_1);
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
-                Geographical_Position_Information_Core_1_Encoder(stream, &(p->sub_1[i]));
+                Geographical_Position_Information_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
             }
 
 
@@ -80,7 +80,7 @@ int Geographical_Position_Information_Encoder(Bitstream* stream, const Geographi
     }
 }
 
-int Geographical_Position_Information_Decoder(Bitstream* stream, Geographical_Position_Information_Core* p)
+int Geographical_Position_Information_Decode_Bit(Bitstream* stream, Geographical_Position_Information_Core* p)
 {
     if (Bitstream_Normal(stream, GEOGRAPHICAL_POSITION_INFORMATION_CORE_BITSIZE))
     {
@@ -164,7 +164,7 @@ int Geographical_Position_Information_Decoder(Bitstream* stream, Geographical_Po
 
         for (uint32_t i = 0; i < p->N_ITER_1; ++i)
         {
-            Geographical_Position_Information_Core_1_Decoder(stream, &(p->sub_1[i]));
+            Geographical_Position_Information_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
         }
         //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
         //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
@@ -184,5 +184,17 @@ int Geographical_Position_Information_Decoder(Bitstream* stream, Geographical_Po
     {
         return 0;
     }
+}
+
+int Geographical_Position_Information_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Geographical_Position_Information_Core* p)
+{
+
+    return 0;
+}
+
+int Geographical_Position_Information_Decode_Int(const Packet_Info* data, const kcg_int* stream, Geographical_Position_Information_Core* p)
+{
+
+    return 0;
 }
 

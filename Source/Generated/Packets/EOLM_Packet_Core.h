@@ -3,6 +3,7 @@
 #define EOLM_PACKET_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct EOLM_Packet_Core
 {
@@ -124,7 +125,7 @@ int EOLM_Packet_UpperBitsNotSet(const EOLM_Packet_Core* p);
     complete behaviors;
     disjoint behaviors;
 */
-int EOLM_Packet_Encoder(Bitstream* stream, const EOLM_Packet_Core* p);
+int EOLM_Packet_Encode_Bit(Bitstream* stream, const EOLM_Packet_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -159,7 +160,11 @@ int EOLM_Packet_Encoder(Bitstream* stream, const EOLM_Packet_Core* p);
     complete behaviors;
     disjoint behaviors;
 */
-int EOLM_Packet_Decoder(Bitstream* stream, EOLM_Packet_Core* p);
+int EOLM_Packet_Decode_Bit(Bitstream* stream, EOLM_Packet_Core* p);
+
+int EOLM_Packet_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const EOLM_Packet_Core* p);
+
+int EOLM_Packet_Decode_Int(const Packet_Info* data, const kcg_int* stream, EOLM_Packet_Core* p);
 
 #ifdef __cplusplus
 
@@ -203,12 +208,22 @@ inline bool operator!=(const EOLM_Packet_Core& a, const EOLM_Packet_Core& b)
 
 inline int encode(Bitstream& stream, const EOLM_Packet_Core& p)
 {
-    return EOLM_Packet_Encoder(&stream, &p);
+    return EOLM_Packet_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, EOLM_Packet_Core& p)
 {
-    return EOLM_Packet_Decoder(&stream, &p);
+    return EOLM_Packet_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const EOLM_Packet_Core& p)
+{
+    return EOLM_Packet_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, EOLM_Packet_Core& p)
+{
+    return EOLM_Packet_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

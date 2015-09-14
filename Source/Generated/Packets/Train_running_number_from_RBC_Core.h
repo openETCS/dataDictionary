@@ -3,6 +3,7 @@
 #define TRAIN_RUNNING_NUMBER_FROM_RBC_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Train_running_number_from_RBC_Core
 {
@@ -99,7 +100,7 @@ int Train_running_number_from_RBC_UpperBitsNotSet(const Train_running_number_fro
     complete behaviors;
     disjoint behaviors;
 */
-int Train_running_number_from_RBC_Encoder(Bitstream* stream, const Train_running_number_from_RBC_Core* p);
+int Train_running_number_from_RBC_Encode_Bit(Bitstream* stream, const Train_running_number_from_RBC_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -134,7 +135,11 @@ int Train_running_number_from_RBC_Encoder(Bitstream* stream, const Train_running
     complete behaviors;
     disjoint behaviors;
 */
-int Train_running_number_from_RBC_Decoder(Bitstream* stream, Train_running_number_from_RBC_Core* p);
+int Train_running_number_from_RBC_Decode_Bit(Bitstream* stream, Train_running_number_from_RBC_Core* p);
+
+int Train_running_number_from_RBC_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Train_running_number_from_RBC_Core* p);
+
+int Train_running_number_from_RBC_Decode_Int(const Packet_Info* data, const kcg_int* stream, Train_running_number_from_RBC_Core* p);
 
 #ifdef __cplusplus
 
@@ -168,12 +173,22 @@ inline bool operator!=(const Train_running_number_from_RBC_Core& a, const Train_
 
 inline int encode(Bitstream& stream, const Train_running_number_from_RBC_Core& p)
 {
-    return Train_running_number_from_RBC_Encoder(&stream, &p);
+    return Train_running_number_from_RBC_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Train_running_number_from_RBC_Core& p)
 {
-    return Train_running_number_from_RBC_Decoder(&stream, &p);
+    return Train_running_number_from_RBC_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Train_running_number_from_RBC_Core& p)
+{
+    return Train_running_number_from_RBC_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Train_running_number_from_RBC_Core& p)
+{
+    return Train_running_number_from_RBC_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

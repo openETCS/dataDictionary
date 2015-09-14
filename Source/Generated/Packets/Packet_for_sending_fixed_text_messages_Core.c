@@ -50,7 +50,7 @@ int Packet_for_sending_fixed_text_messages_UpperBitsNotSet(const Packet_for_send
     }
 }
 
-int Packet_for_sending_fixed_text_messages_Encoder(Bitstream* stream, const Packet_for_sending_fixed_text_messages_Core* p)
+int Packet_for_sending_fixed_text_messages_Encode_Bit(Bitstream* stream, const Packet_for_sending_fixed_text_messages_Core* p)
 {
     if (Bitstream_Normal(stream, PACKET_FOR_SENDING_FIXED_TEXT_MESSAGES_CORE_BITSIZE))
     {
@@ -119,7 +119,7 @@ int Packet_for_sending_fixed_text_messages_Encoder(Bitstream* stream, const Pack
     }
 }
 
-int Packet_for_sending_fixed_text_messages_Decoder(Bitstream* stream, Packet_for_sending_fixed_text_messages_Core* p)
+int Packet_for_sending_fixed_text_messages_Decode_Bit(Bitstream* stream, Packet_for_sending_fixed_text_messages_Core* p)
 {
     if (Bitstream_Normal(stream, PACKET_FOR_SENDING_FIXED_TEXT_MESSAGES_CORE_BITSIZE))
     {
@@ -315,5 +315,17 @@ int Packet_for_sending_fixed_text_messages_Decoder(Bitstream* stream, Packet_for
     {
         return 0;
     }
+}
+
+int Packet_for_sending_fixed_text_messages_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Packet_for_sending_fixed_text_messages_Core* p)
+{
+
+    return 0;
+}
+
+int Packet_for_sending_fixed_text_messages_Decode_Int(const Packet_Info* data, const kcg_int* stream, Packet_for_sending_fixed_text_messages_Core* p)
+{
+
+    return 0;
 }
 

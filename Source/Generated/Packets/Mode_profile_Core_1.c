@@ -23,7 +23,7 @@ int Mode_profile_Core_1_UpperBitsNotSet(const Mode_profile_Core_1* p)
     }
 }
 
-int Mode_profile_Core_1_Encoder(Bitstream* stream, const Mode_profile_Core_1* p)
+int Mode_profile_Core_1_Encode_Bit(Bitstream* stream, const Mode_profile_Core_1* p)
 {
     if (Bitstream_Normal(stream, MODE_PROFILE_CORE_1_CORE_BITSIZE))
     {
@@ -59,7 +59,7 @@ int Mode_profile_Core_1_Encoder(Bitstream* stream, const Mode_profile_Core_1* p)
     }
 }
 
-int Mode_profile_Core_1_Decoder(Bitstream* stream, Mode_profile_Core_1* p)
+int Mode_profile_Core_1_Decode_Bit(Bitstream* stream, Mode_profile_Core_1* p)
 {
     if (Bitstream_Normal(stream, MODE_PROFILE_CORE_1_CORE_BITSIZE))
     {
@@ -159,5 +159,17 @@ int Mode_profile_Core_1_Decoder(Bitstream* stream, Mode_profile_Core_1* p)
     {
         return 0;
     }
+}
+
+int Mode_profile_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Mode_profile_Core_1* p)
+{
+
+    return 0;
+}
+
+int Mode_profile_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, Mode_profile_Core_1* p)
+{
+
+    return 0;
 }
 

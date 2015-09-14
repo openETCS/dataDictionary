@@ -38,7 +38,7 @@ int Staff_Responsible_distance_Information_from_loop_UpperBitsNotSet(const Staff
     }
 }
 
-int Staff_Responsible_distance_Information_from_loop_Encoder(Bitstream* stream, const Staff_Responsible_distance_Information_from_loop_Core* p)
+int Staff_Responsible_distance_Information_from_loop_Encode_Bit(Bitstream* stream, const Staff_Responsible_distance_Information_from_loop_Core* p)
 {
     if (Bitstream_Normal(stream, STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_BITSIZE))
     {
@@ -67,7 +67,7 @@ int Staff_Responsible_distance_Information_from_loop_Encoder(Bitstream* stream, 
             Bitstream_Write(stream, 5,  p->N_ITER_1);
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
-                Staff_Responsible_distance_Information_from_loop_Core_1_Encoder(stream, &(p->sub_1[i]));
+                Staff_Responsible_distance_Information_from_loop_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
             }
 
 
@@ -89,7 +89,7 @@ int Staff_Responsible_distance_Information_from_loop_Encoder(Bitstream* stream, 
     }
 }
 
-int Staff_Responsible_distance_Information_from_loop_Decoder(Bitstream* stream, Staff_Responsible_distance_Information_from_loop_Core* p)
+int Staff_Responsible_distance_Information_from_loop_Decode_Bit(Bitstream* stream, Staff_Responsible_distance_Information_from_loop_Core* p)
 {
     if (Bitstream_Normal(stream, STAFF_RESPONSIBLE_DISTANCE_INFORMATION_FROM_LOOP_CORE_BITSIZE))
     {
@@ -181,7 +181,7 @@ int Staff_Responsible_distance_Information_from_loop_Decoder(Bitstream* stream, 
 
         for (uint32_t i = 0; i < p->N_ITER_1; ++i)
         {
-            Staff_Responsible_distance_Information_from_loop_Core_1_Decoder(stream, &(p->sub_1[i]));
+            Staff_Responsible_distance_Information_from_loop_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
         }
         //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
         //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
@@ -201,5 +201,17 @@ int Staff_Responsible_distance_Information_from_loop_Decoder(Bitstream* stream, 
     {
         return 0;
     }
+}
+
+int Staff_Responsible_distance_Information_from_loop_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Staff_Responsible_distance_Information_from_loop_Core* p)
+{
+
+    return 0;
+}
+
+int Staff_Responsible_distance_Information_from_loop_Decode_Int(const Packet_Info* data, const kcg_int* stream, Staff_Responsible_distance_Information_from_loop_Core* p)
+{
+
+    return 0;
 }
 

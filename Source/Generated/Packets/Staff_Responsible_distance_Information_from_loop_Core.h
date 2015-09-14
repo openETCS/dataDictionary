@@ -4,6 +4,7 @@
 
 #include "Bitstream.h"
 #include "Staff_Responsible_distance_Information_from_loop_Core_1.h"
+#include "Compressed_Packets.h"
 
 struct Staff_Responsible_distance_Information_from_loop_Core
 {
@@ -113,7 +114,7 @@ int Staff_Responsible_distance_Information_from_loop_UpperBitsNotSet(const Staff
     complete behaviors;
     disjoint behaviors;
 */
-int Staff_Responsible_distance_Information_from_loop_Encoder(Bitstream* stream, const Staff_Responsible_distance_Information_from_loop_Core* p);
+int Staff_Responsible_distance_Information_from_loop_Encode_Bit(Bitstream* stream, const Staff_Responsible_distance_Information_from_loop_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -148,7 +149,11 @@ int Staff_Responsible_distance_Information_from_loop_Encoder(Bitstream* stream, 
     complete behaviors;
     disjoint behaviors;
 */
-int Staff_Responsible_distance_Information_from_loop_Decoder(Bitstream* stream, Staff_Responsible_distance_Information_from_loop_Core* p);
+int Staff_Responsible_distance_Information_from_loop_Decode_Bit(Bitstream* stream, Staff_Responsible_distance_Information_from_loop_Core* p);
+
+int Staff_Responsible_distance_Information_from_loop_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Staff_Responsible_distance_Information_from_loop_Core* p);
+
+int Staff_Responsible_distance_Information_from_loop_Decode_Int(const Packet_Info* data, const kcg_int* stream, Staff_Responsible_distance_Information_from_loop_Core* p);
 
 #ifdef __cplusplus
 
@@ -222,12 +227,22 @@ inline bool operator!=(const Staff_Responsible_distance_Information_from_loop_Co
 
 inline int encode(Bitstream& stream, const Staff_Responsible_distance_Information_from_loop_Core& p)
 {
-    return Staff_Responsible_distance_Information_from_loop_Encoder(&stream, &p);
+    return Staff_Responsible_distance_Information_from_loop_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Staff_Responsible_distance_Information_from_loop_Core& p)
 {
-    return Staff_Responsible_distance_Information_from_loop_Decoder(&stream, &p);
+    return Staff_Responsible_distance_Information_from_loop_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Staff_Responsible_distance_Information_from_loop_Core& p)
+{
+    return Staff_Responsible_distance_Information_from_loop_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Staff_Responsible_distance_Information_from_loop_Core& p)
+{
+    return Staff_Responsible_distance_Information_from_loop_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

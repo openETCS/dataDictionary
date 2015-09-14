@@ -23,7 +23,7 @@ int Adhesion_Factor_UpperBitsNotSet(const Adhesion_Factor_Core* p)
     }
 }
 
-int Adhesion_Factor_Encoder(Bitstream* stream, const Adhesion_Factor_Core* p)
+int Adhesion_Factor_Encode_Bit(Bitstream* stream, const Adhesion_Factor_Core* p)
 {
     if (Bitstream_Normal(stream, ADHESION_FACTOR_CORE_BITSIZE))
     {
@@ -59,7 +59,7 @@ int Adhesion_Factor_Encoder(Bitstream* stream, const Adhesion_Factor_Core* p)
     }
 }
 
-int Adhesion_Factor_Decoder(Bitstream* stream, Adhesion_Factor_Core* p)
+int Adhesion_Factor_Decode_Bit(Bitstream* stream, Adhesion_Factor_Core* p)
 {
     if (Bitstream_Normal(stream, ADHESION_FACTOR_CORE_BITSIZE))
     {
@@ -159,5 +159,17 @@ int Adhesion_Factor_Decoder(Bitstream* stream, Adhesion_Factor_Core* p)
     {
         return 0;
     }
+}
+
+int Adhesion_Factor_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Adhesion_Factor_Core* p)
+{
+
+    return 0;
+}
+
+int Adhesion_Factor_Decode_Int(const Packet_Info* data, const kcg_int* stream, Adhesion_Factor_Core* p)
+{
+
+    return 0;
 }
 

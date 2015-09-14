@@ -24,7 +24,7 @@ int Session_Management_UpperBitsNotSet(const Session_Management_Core* p)
     }
 }
 
-int Session_Management_Encoder(Bitstream* stream, const Session_Management_Core* p)
+int Session_Management_Encode_Bit(Bitstream* stream, const Session_Management_Core* p)
 {
     if (Bitstream_Normal(stream, SESSION_MANAGEMENT_CORE_BITSIZE))
     {
@@ -62,7 +62,7 @@ int Session_Management_Encoder(Bitstream* stream, const Session_Management_Core*
     }
 }
 
-int Session_Management_Decoder(Bitstream* stream, Session_Management_Core* p)
+int Session_Management_Decode_Bit(Bitstream* stream, Session_Management_Core* p)
 {
     if (Bitstream_Normal(stream, SESSION_MANAGEMENT_CORE_BITSIZE))
     {
@@ -176,5 +176,17 @@ int Session_Management_Decoder(Bitstream* stream, Session_Management_Core* p)
     {
         return 0;
     }
+}
+
+int Session_Management_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Session_Management_Core* p)
+{
+
+    return 0;
+}
+
+int Session_Management_Decode_Int(const Packet_Info* data, const kcg_int* stream, Session_Management_Core* p)
+{
+
+    return 0;
 }
 

@@ -19,7 +19,7 @@ int Train_running_number_UpperBitsNotSet(const Train_running_number_Core* p)
     }
 }
 
-int Train_running_number_Encoder(Bitstream* stream, const Train_running_number_Core* p)
+int Train_running_number_Encode_Bit(Bitstream* stream, const Train_running_number_Core* p)
 {
     if (Bitstream_Normal(stream, TRAIN_RUNNING_NUMBER_CORE_BITSIZE))
     {
@@ -47,7 +47,7 @@ int Train_running_number_Encoder(Bitstream* stream, const Train_running_number_C
     }
 }
 
-int Train_running_number_Decoder(Bitstream* stream, Train_running_number_Core* p)
+int Train_running_number_Decode_Bit(Bitstream* stream, Train_running_number_Core* p)
 {
     if (Bitstream_Normal(stream, TRAIN_RUNNING_NUMBER_CORE_BITSIZE))
     {
@@ -91,5 +91,17 @@ int Train_running_number_Decoder(Bitstream* stream, Train_running_number_Core* p
     {
         return 0;
     }
+}
+
+int Train_running_number_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Train_running_number_Core* p)
+{
+
+    return 0;
+}
+
+int Train_running_number_Decode_Int(const Packet_Info* data, const kcg_int* stream, Train_running_number_Core* p)
+{
+
+    return 0;
 }
 

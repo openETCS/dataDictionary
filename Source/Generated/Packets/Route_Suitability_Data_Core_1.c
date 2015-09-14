@@ -35,7 +35,7 @@ int Route_Suitability_Data_Core_1_UpperBitsNotSet(const Route_Suitability_Data_C
     }
 }
 
-int Route_Suitability_Data_Core_1_Encoder(Bitstream* stream, const Route_Suitability_Data_Core_1* p)
+int Route_Suitability_Data_Core_1_Encode_Bit(Bitstream* stream, const Route_Suitability_Data_Core_1* p)
 {
     if (Bitstream_Normal(stream, ROUTE_SUITABILITY_DATA_CORE_1_CORE_BITSIZE))
     {
@@ -83,7 +83,7 @@ int Route_Suitability_Data_Core_1_Encoder(Bitstream* stream, const Route_Suitabi
     }
 }
 
-int Route_Suitability_Data_Core_1_Decoder(Bitstream* stream, Route_Suitability_Data_Core_1* p)
+int Route_Suitability_Data_Core_1_Decode_Bit(Bitstream* stream, Route_Suitability_Data_Core_1* p)
 {
     if (Bitstream_Normal(stream, ROUTE_SUITABILITY_DATA_CORE_1_CORE_BITSIZE))
     {
@@ -159,5 +159,17 @@ int Route_Suitability_Data_Core_1_Decoder(Bitstream* stream, Route_Suitability_D
     {
         return 0;
     }
+}
+
+int Route_Suitability_Data_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Route_Suitability_Data_Core_1* p)
+{
+
+    return 0;
+}
+
+int Route_Suitability_Data_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, Route_Suitability_Data_Core_1* p)
+{
+
+    return 0;
 }
 

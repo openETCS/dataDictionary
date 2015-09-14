@@ -4,6 +4,7 @@
 
 #include "Bitstream.h"
 #include "Mode_profile_Core_1.h"
+#include "Compressed_Packets.h"
 
 struct Mode_profile_Core
 {
@@ -132,7 +133,7 @@ int Mode_profile_UpperBitsNotSet(const Mode_profile_Core* p);
     complete behaviors;
     disjoint behaviors;
 */
-int Mode_profile_Encoder(Bitstream* stream, const Mode_profile_Core* p);
+int Mode_profile_Encode_Bit(Bitstream* stream, const Mode_profile_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -167,7 +168,11 @@ int Mode_profile_Encoder(Bitstream* stream, const Mode_profile_Core* p);
     complete behaviors;
     disjoint behaviors;
 */
-int Mode_profile_Decoder(Bitstream* stream, Mode_profile_Core* p);
+int Mode_profile_Decode_Bit(Bitstream* stream, Mode_profile_Core* p);
+
+int Mode_profile_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Mode_profile_Core* p);
+
+int Mode_profile_Decode_Int(const Packet_Info* data, const kcg_int* stream, Mode_profile_Core* p);
 
 #ifdef __cplusplus
 
@@ -231,12 +236,22 @@ inline bool operator!=(const Mode_profile_Core& a, const Mode_profile_Core& b)
 
 inline int encode(Bitstream& stream, const Mode_profile_Core& p)
 {
-    return Mode_profile_Encoder(&stream, &p);
+    return Mode_profile_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Mode_profile_Core& p)
 {
-    return Mode_profile_Decoder(&stream, &p);
+    return Mode_profile_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Mode_profile_Core& p)
+{
+    return Mode_profile_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Mode_profile_Core& p)
+{
+    return Mode_profile_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus
