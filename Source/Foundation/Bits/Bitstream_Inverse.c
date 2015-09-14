@@ -52,7 +52,7 @@ uint64_t Bitstream_WriteThenRead(Bitstream* stream, uint32_t length, uint64_t va
     //@ assert equal:  EqualBits(stream, pos, pos+length, value);
 
     stream->bitpos -= length;
-    //@ assert stream->bitpos == \at(stream->bitpos,Pre);
+    //@ assert reset: stream->bitpos == \at(stream->bitpos,Pre);
 
     uint64_t result = Bitstream_Read(stream, length);
     //@ assert equal_result: EqualBits(stream, pos, pos+length, result);
