@@ -135,11 +135,13 @@ int Data_used_by_applications_outside_the_ERTMSETCS_system_Decode_Bit(Bitstream*
 
 int Data_used_by_applications_outside_the_ERTMSETCS_system_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Data_used_by_applications_outside_the_ERTMSETCS_system_Core* p)
 {
+    std::cerr << "encode int function not implemented for packet " << 44 << " yet." << std::endl;
     return 0;
 }
 
 int Data_used_by_applications_outside_the_ERTMSETCS_system_Decode_Int(const Packet_Info* data, const kcg_int* stream, Data_used_by_applications_outside_the_ERTMSETCS_system_Core* p)
 {
+    std::cerr << "decode int function not implemented for packet " << 44 << " yet." << std::endl;
     return 0;
 }
 

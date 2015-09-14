@@ -136,11 +136,13 @@ int Linking_Core_1_Decode_Bit(Bitstream* stream, Linking_Core_1* p)
 
 int Linking_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Linking_Core_1* p)
 {
+    std::cerr << "encode int function not implemented for packet " << 5 << " yet." << std::endl;
     return 0;
 }
 
 int Linking_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, Linking_Core_1* p)
 {
+    std::cerr << "decode int function not implemented for packet " << 5 << " yet." << std::endl;
     return 0;
 }
 

@@ -183,7 +183,7 @@ bool EurobaliseTelegram::decode(Flat_Packets& packetStruct)
 	    }
 	    else
 	    {
-	        std::cout << "wrong w_updown" << std::endl;
+	        std::cout << "wrong q_updown" << std::endl;
 	        return false;
 	    }
 

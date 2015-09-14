@@ -181,11 +181,13 @@ int Gradient_Profile_Decode_Bit(Bitstream* stream, Gradient_Profile_Core* p)
 
 int Gradient_Profile_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Gradient_Profile_Core* p)
 {
+    std::cerr << "encode int function not implemented for packet " << 21 << " yet." << std::endl;
     return 0;
 }
 
 int Gradient_Profile_Decode_Int(const Packet_Info* data, const kcg_int* stream, Gradient_Profile_Core* p)
 {
+    std::cerr << "decode int function not implemented for packet " << 21 << " yet." << std::endl;
     return 0;
 }
 

@@ -105,4 +105,5 @@ clean::
 	@$(RM) test_issue31_3
 	@$(RM) test_messages
 	@$(RM) int_encode_then_decode_test
+	@$(RM) telegram_int_encode_then_decode_test
 

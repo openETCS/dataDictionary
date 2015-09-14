@@ -163,11 +163,13 @@ int Track_Condition_Change_of_traction_system_Decode_Bit(Bitstream* stream, Trac
 
 int Track_Condition_Change_of_traction_system_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Track_Condition_Change_of_traction_system_Core* p)
 {
+    std::cerr << "encode int function not implemented for packet " << 39 << " yet." << std::endl;
     return 0;
 }
 
 int Track_Condition_Change_of_traction_system_Decode_Int(const Packet_Info* data, const kcg_int* stream, Track_Condition_Change_of_traction_system_Core* p)
 {
+    std::cerr << "decode int function not implemented for packet " << 39 << " yet." << std::endl;
     return 0;
 }
 

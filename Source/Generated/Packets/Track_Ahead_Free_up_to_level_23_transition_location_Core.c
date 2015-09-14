@@ -135,11 +135,13 @@ int Track_Ahead_Free_up_to_level_23_transition_location_Decode_Bit(Bitstream* st
 
 int Track_Ahead_Free_up_to_level_23_transition_location_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Track_Ahead_Free_up_to_level_23_transition_location_Core* p)
 {
+    std::cerr << "encode int function not implemented for packet " << 90 << " yet." << std::endl;
     return 0;
 }
 
 int Track_Ahead_Free_up_to_level_23_transition_location_Decode_Int(const Packet_Info* data, const kcg_int* stream, Track_Ahead_Free_up_to_level_23_transition_location_Core* p)
 {
+    std::cerr << "decode int function not implemented for packet " << 90 << " yet." << std::endl;
     return 0;
 }
 
