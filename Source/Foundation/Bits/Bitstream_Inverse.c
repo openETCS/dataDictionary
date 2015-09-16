@@ -2,11 +2,10 @@
 #include "Bitstream.h"
 
 /*@ lemma X: 
-      \forall uint64_t x, y, integer old_pos, new_pos;
-         (\forall integer k; old_pos <= k < new_pos ==> 
-             (BitTest(x, new_pos - 1 - k) <==>
-              BitTest(y, new_pos - 1 - k)))
-         ==> EqualBits64(x, y, 64-(new_pos - old_pos), 64);
+      \forall uint64_t x, y, integer p, q;
+         (\forall integer k; p <= k < q ==>
+          \let j = q - 1 - k; (BitTest(x, j) <==> BitTest(y, j)))
+         ==> EqualBits64(x, y, 64-(q - p), 64);
 */
 
 /*@
@@ -62,8 +61,8 @@ uint64_t Bitstream_WriteThenRead(Bitstream* stream, uint32_t length, uint64_t va
     //@ assert equal_result: EqualBits(stream, old_pos, new_pos, result);
     //@ assert equal_value:  EqualBits(stream, old_pos, new_pos, value);
     /*@ assert aux:          \forall integer k; old_pos <= k < new_pos ==> 
-                               (BitTest(value,  new_pos - 1 - k) <==>
-                                BitTest(result, new_pos - 1 - k));
+                               \let j = new_pos - 1 - k;
+                               (BitTest(value,  j) <==> BitTest(result, j));
     */
     //@ assert left:   EqualBits64(result, value, 64-length, 64);
 
