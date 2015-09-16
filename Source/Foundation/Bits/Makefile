@@ -10,6 +10,7 @@ include $(TOPDIR)/Makefile.template
 #WP_FLAGS += -wp-prop=rte
 #WP_FLAGS += -wp-prop=-@lemma
 WP_FLAGS += -wp-prop=reset
+WP_FLAGS += -wp-prop=diff
 WP_FLAGS += -wp-prop=equal_result
 WP_FLAGS += -wp-prop=equal_value
 WP_FLAGS += -wp-prop=aux

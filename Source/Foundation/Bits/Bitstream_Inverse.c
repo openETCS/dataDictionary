@@ -2,11 +2,11 @@
 #include "Bitstream.h"
 
 /*@ lemma X: 
-      \forall uint64_t x, y, integer pos, length;
-         (\forall integer k; pos <= k < pos + length ==> 
-             (BitTest(x,  pos + length - 1 - k) <==>
-              BitTest(y, pos + length - 1 - k)))
-         ==> EqualBits64(x, y, 64-length, 64);
+      \forall uint64_t x, y, integer old_pos, new_pos;
+         (\forall integer k; old_pos <= k < new_pos ==> 
+             (BitTest(x, new_pos - 1 - k) <==>
+              BitTest(y, new_pos - 1 - k)))
+         ==> EqualBits64(x, y, 64-(new_pos - old_pos), 64);
 */
 
 /*@
@@ -21,15 +21,15 @@
 */
 void Bitstream_ReadThenWrite(Bitstream* stream, uint32_t length)
 {
-    //@ ghost uint32_t pos = stream->bitpos;
+    //@ ghost uint32_t old_pos = stream->bitpos;
     uint64_t value = Bitstream_Read(stream, length);
-    //@ assert equal:  EqualBits(stream, pos, pos+length, value);
+    //@ assert equal:  EqualBits(stream, old_pos, old_pos+length, value);
 
     stream->bitpos -= length;
-    //@ assert stream->bitpos == pos;
+    //@ assert stream->bitpos == old_pos;
 
     Bitstream_Write(stream, length, value);
-    //@ assert unchanged:  Unchanged{Here,Pre}(stream, pos, stream->bitpos);
+    //@ assert unchanged:  Unchanged{Here,Pre}(stream, old_pos, stream->bitpos);
 }
 
 
@@ -46,10 +46,10 @@ void Bitstream_ReadThenWrite(Bitstream* stream, uint32_t length)
 */
 uint64_t Bitstream_WriteThenRead(Bitstream* stream, uint32_t length, uint64_t value)
 {
-    //@ ghost uint32_t pos = stream->bitpos;
+    //@ ghost uint32_t old_pos = stream->bitpos;
 
     Bitstream_Write(stream, length, value);
-    //@ assert equal:  EqualBits(stream, pos, pos+length, value);
+    //@ assert equal:  EqualBits(stream, old_pos, old_pos+length, value);
 
     /*@
         assigns stream->bitpos;
@@ -58,11 +58,12 @@ uint64_t Bitstream_WriteThenRead(Bitstream* stream, uint32_t length, uint64_t va
     stream->bitpos -= length;
 
     uint64_t result = Bitstream_Read(stream, length);
-    //@ assert equal_result: EqualBits(stream, pos, pos+length, result);
-    //@ assert equal_value:  EqualBits(stream, pos, pos+length, value);
-    /*@ assert aux:          \forall integer k; pos <= k < pos + length ==> 
-                               (BitTest(value,  pos + length - 1 - k) <==>
-                                BitTest(result, pos + length - 1 - k));
+    //@ ghost uint32_t new_pos = stream->bitpos;
+    //@ assert equal_result: EqualBits(stream, old_pos, new_pos, result);
+    //@ assert equal_value:  EqualBits(stream, old_pos, new_pos, value);
+    /*@ assert aux:          \forall integer k; old_pos <= k < new_pos ==> 
+                               (BitTest(value,  new_pos - 1 - k) <==>
+                                BitTest(result, new_pos - 1 - k));
     */
     //@ assert left:   EqualBits64(result, value, 64-length, 64);
 
