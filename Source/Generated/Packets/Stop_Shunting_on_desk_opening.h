@@ -42,6 +42,30 @@ struct Stop_Shunting_on_desk_opening : public BasePacket
         return ::decode(stream, core);
     }
 
+    int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress) const override
+    {
+        data.nid_packet = 135;
+        data.q_dir = core.Q_DIR;
+	data.valid = 1;
+	data.startAddress = startAddress;
+
+	stream[startAddress++] = header.NID_PACKET;
+
+	return ::encode(data, stream, startAddress, core);
+    }
+
+    int decode(const Packet_Info& data, const kcg_int* stream) override
+    {
+        if(data.nid_packet != 135)
+	{
+	    return 0;
+	}
+
+	header.NID_PACKET = stream[data.startAddress];
+
+	return ::decode(data, stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Stop_Shunting_on_desk_opening> Stop_Shunting_on_desk_openingPtr;

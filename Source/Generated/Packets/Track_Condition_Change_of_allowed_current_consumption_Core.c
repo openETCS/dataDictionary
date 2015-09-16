@@ -22,7 +22,7 @@ int Track_Condition_Change_of_allowed_current_consumption_UpperBitsNotSet(const 
     }
 }
 
-int Track_Condition_Change_of_allowed_current_consumption_Encoder(Bitstream* stream, const Track_Condition_Change_of_allowed_current_consumption_Core* p)
+int Track_Condition_Change_of_allowed_current_consumption_Encode_Bit(Bitstream* stream, const Track_Condition_Change_of_allowed_current_consumption_Core* p)
 {
     if (Bitstream_Normal(stream, TRACK_CONDITION_CHANGE_OF_ALLOWED_CURRENT_CONSUMPTION_CORE_BITSIZE))
     {
@@ -56,7 +56,7 @@ int Track_Condition_Change_of_allowed_current_consumption_Encoder(Bitstream* str
     }
 }
 
-int Track_Condition_Change_of_allowed_current_consumption_Decoder(Bitstream* stream, Track_Condition_Change_of_allowed_current_consumption_Core* p)
+int Track_Condition_Change_of_allowed_current_consumption_Decode_Bit(Bitstream* stream, Track_Condition_Change_of_allowed_current_consumption_Core* p)
 {
     if (Bitstream_Normal(stream, TRACK_CONDITION_CHANGE_OF_ALLOWED_CURRENT_CONSUMPTION_CORE_BITSIZE))
     {
@@ -142,5 +142,36 @@ int Track_Condition_Change_of_allowed_current_consumption_Decoder(Bitstream* str
     {
         return 0;
     }
+}
+
+int Track_Condition_Change_of_allowed_current_consumption_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Track_Condition_Change_of_allowed_current_consumption_Core* p)
+{
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->Q_SCALE;
+    stream[startAddress++] = p->D_CURRENT;
+    stream[startAddress++] = p->M_CURRENT;
+
+    data->endAddress = startAddress-1;
+
+    return 1;
+}
+
+int Track_Condition_Change_of_allowed_current_consumption_Decode_Int(const Packet_Info* data, const kcg_int* stream, Track_Condition_Change_of_allowed_current_consumption_Core* p)
+{
+    kcg_int startAddress = data->startAddress+1;
+
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->Q_SCALE = stream[startAddress++];
+    p->D_CURRENT = stream[startAddress++];
+    p->M_CURRENT = stream[startAddress++];
+
+    if(data->endAddress != startAddress-1)
+    {
+        return false;
+    }
+
+    return 1;
 }
 

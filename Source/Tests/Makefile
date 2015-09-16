@@ -8,7 +8,7 @@ export GENERATED_PACKETS=$(TOPDIR)/Generated/Packets
 export GENERATED_MESSAGES=$(TOPDIR)/Generated/Messages
 export MESSAGE_TELEGRAM=$(TOPDIR)/Message_Telegram
 
-test: general issue31
+test: issue31 general 
 
 include $(TOPDIR)/Makefile.template
 
@@ -39,12 +39,15 @@ LDFLAGS += -L$(MESSAGE_TELEGRAM) -lmessage_telegram
 general:	lib\
 		decoder_test encoder_test\
 		conditional_encoder_test conditional_decoder_test\
-		test_messages
+		test_messages int_encode_then_decode_test\
+		telegram_int_encode_then_decode_test
 	./encoder_test
 	./decoder_test
 	./conditional_encoder_test
 	./conditional_decoder_test
 	./test_messages
+	./int_encode_then_decode_test
+	./telegram_int_encode_then_decode_test
 
 issue31: lib test_issue31_1 test_issue31_2 test_issue31_3
 	./test_issue31_1
@@ -76,6 +79,12 @@ test_issue31_3: test_issue31_3.o create.o
 test_messages: test_messages.o create.o
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $+ $(LDFLAGS)
 
+int_encode_then_decode_test: int_encode_then_decode_test.o
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $+ $(LDFLAGS)
+
+telegram_int_encode_then_decode_test: telegram_int_encode_then_decode_test.o
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $+ $(LDFLAGS)
+
 
 FORMAT := $(wildcard *.h) $(wildcard *.cpp) $(wildcard *.c)
 
@@ -95,4 +104,6 @@ clean::
 	@$(RM) test_issue31_2
 	@$(RM) test_issue31_3
 	@$(RM) test_messages
+	@$(RM) int_encode_then_decode_test
+	@$(RM) telegram_int_encode_then_decode_test
 

@@ -21,7 +21,7 @@ int Repositioning_Information_UpperBitsNotSet(const Repositioning_Information_Co
     }
 }
 
-int Repositioning_Information_Encoder(Bitstream* stream, const Repositioning_Information_Core* p)
+int Repositioning_Information_Encode_Bit(Bitstream* stream, const Repositioning_Information_Core* p)
 {
     if (Bitstream_Normal(stream, REPOSITIONING_INFORMATION_CORE_BITSIZE))
     {
@@ -53,7 +53,7 @@ int Repositioning_Information_Encoder(Bitstream* stream, const Repositioning_Inf
     }
 }
 
-int Repositioning_Information_Decoder(Bitstream* stream, Repositioning_Information_Core* p)
+int Repositioning_Information_Decode_Bit(Bitstream* stream, Repositioning_Information_Core* p)
 {
     if (Bitstream_Normal(stream, REPOSITIONING_INFORMATION_CORE_BITSIZE))
     {
@@ -125,5 +125,34 @@ int Repositioning_Information_Decoder(Bitstream* stream, Repositioning_Informati
     {
         return 0;
     }
+}
+
+int Repositioning_Information_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Repositioning_Information_Core* p)
+{
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->Q_SCALE;
+    stream[startAddress++] = p->L_SECTION;
+
+    data->endAddress = startAddress-1;
+
+    return 1;
+}
+
+int Repositioning_Information_Decode_Int(const Packet_Info* data, const kcg_int* stream, Repositioning_Information_Core* p)
+{
+    kcg_int startAddress = data->startAddress+1;
+
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->Q_SCALE = stream[startAddress++];
+    p->L_SECTION = stream[startAddress++];
+
+    if(data->endAddress != startAddress-1)
+    {
+        return false;
+    }
+
+    return 1;
 }
 

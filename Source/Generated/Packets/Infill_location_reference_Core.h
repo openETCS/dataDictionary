@@ -3,6 +3,7 @@
 #define INFILL_LOCATION_REFERENCE_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Infill_location_reference_Core
 {
@@ -102,7 +103,7 @@ int Infill_location_reference_UpperBitsNotSet(const Infill_location_reference_Co
     complete behaviors;
     disjoint behaviors;
 */
-int Infill_location_reference_Encoder(Bitstream* stream, const Infill_location_reference_Core* p);
+int Infill_location_reference_Encode_Bit(Bitstream* stream, const Infill_location_reference_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -137,7 +138,11 @@ int Infill_location_reference_Encoder(Bitstream* stream, const Infill_location_r
     complete behaviors;
     disjoint behaviors;
 */
-int Infill_location_reference_Decoder(Bitstream* stream, Infill_location_reference_Core* p);
+int Infill_location_reference_Decode_Bit(Bitstream* stream, Infill_location_reference_Core* p);
+
+int Infill_location_reference_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Infill_location_reference_Core* p);
+
+int Infill_location_reference_Decode_Int(const Packet_Info* data, const kcg_int* stream, Infill_location_reference_Core* p);
 
 #ifdef __cplusplus
 
@@ -179,12 +184,22 @@ inline bool operator!=(const Infill_location_reference_Core& a, const Infill_loc
 
 inline int encode(Bitstream& stream, const Infill_location_reference_Core& p)
 {
-    return Infill_location_reference_Encoder(&stream, &p);
+    return Infill_location_reference_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Infill_location_reference_Core& p)
 {
-    return Infill_location_reference_Decoder(&stream, &p);
+    return Infill_location_reference_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Infill_location_reference_Core& p)
+{
+    return Infill_location_reference_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Infill_location_reference_Core& p)
+{
+    return Infill_location_reference_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

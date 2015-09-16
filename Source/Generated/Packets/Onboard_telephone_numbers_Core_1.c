@@ -18,7 +18,7 @@ int Onboard_telephone_numbers_Core_1_UpperBitsNotSet(const Onboard_telephone_num
     }
 }
 
-int Onboard_telephone_numbers_Core_1_Encoder(Bitstream* stream, const Onboard_telephone_numbers_Core_1* p)
+int Onboard_telephone_numbers_Core_1_Encode_Bit(Bitstream* stream, const Onboard_telephone_numbers_Core_1* p)
 {
     if (Bitstream_Normal(stream, ONBOARD_TELEPHONE_NUMBERS_CORE_1_CORE_BITSIZE))
     {
@@ -44,7 +44,7 @@ int Onboard_telephone_numbers_Core_1_Encoder(Bitstream* stream, const Onboard_te
     }
 }
 
-int Onboard_telephone_numbers_Core_1_Decoder(Bitstream* stream, Onboard_telephone_numbers_Core_1* p)
+int Onboard_telephone_numbers_Core_1_Decode_Bit(Bitstream* stream, Onboard_telephone_numbers_Core_1* p)
 {
     if (Bitstream_Normal(stream, ONBOARD_TELEPHONE_NUMBERS_CORE_1_CORE_BITSIZE))
     {
@@ -74,5 +74,17 @@ int Onboard_telephone_numbers_Core_1_Decoder(Bitstream* stream, Onboard_telephon
     {
         return 0;
     }
+}
+
+int Onboard_telephone_numbers_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Onboard_telephone_numbers_Core_1* p)
+{
+    std::cerr << "encode int function not implemented for packet 3 yet." << std::endl;
+    return 0;
+}
+
+int Onboard_telephone_numbers_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, Onboard_telephone_numbers_Core_1* p)
+{
+    std::cerr << "decode int function not implemented for packet  3 yet." << std::endl;
+    return 0;
 }
 

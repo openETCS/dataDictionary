@@ -3,6 +3,7 @@
 #define ADHESION_FACTOR_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Adhesion_Factor_Core
 {
@@ -115,7 +116,7 @@ int Adhesion_Factor_UpperBitsNotSet(const Adhesion_Factor_Core* p);
     complete behaviors;
     disjoint behaviors;
 */
-int Adhesion_Factor_Encoder(Bitstream* stream, const Adhesion_Factor_Core* p);
+int Adhesion_Factor_Encode_Bit(Bitstream* stream, const Adhesion_Factor_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -150,7 +151,11 @@ int Adhesion_Factor_Encoder(Bitstream* stream, const Adhesion_Factor_Core* p);
     complete behaviors;
     disjoint behaviors;
 */
-int Adhesion_Factor_Decoder(Bitstream* stream, Adhesion_Factor_Core* p);
+int Adhesion_Factor_Decode_Bit(Bitstream* stream, Adhesion_Factor_Core* p);
+
+int Adhesion_Factor_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Adhesion_Factor_Core* p);
+
+int Adhesion_Factor_Decode_Int(const Packet_Info* data, const kcg_int* stream, Adhesion_Factor_Core* p);
 
 #ifdef __cplusplus
 
@@ -190,12 +195,22 @@ inline bool operator!=(const Adhesion_Factor_Core& a, const Adhesion_Factor_Core
 
 inline int encode(Bitstream& stream, const Adhesion_Factor_Core& p)
 {
-    return Adhesion_Factor_Encoder(&stream, &p);
+    return Adhesion_Factor_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Adhesion_Factor_Core& p)
 {
-    return Adhesion_Factor_Decoder(&stream, &p);
+    return Adhesion_Factor_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Adhesion_Factor_Core& p)
+{
+    return Adhesion_Factor_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Adhesion_Factor_Core& p)
+{
+    return Adhesion_Factor_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

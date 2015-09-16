@@ -4,6 +4,7 @@
 
 #include "Bitstream.h"
 #include "Conditional_Level_Transition_Order_Core_1.h"
+#include "Compressed_Packets.h"
 
 struct Conditional_Level_Transition_Order_Core
 {
@@ -104,7 +105,7 @@ int Conditional_Level_Transition_Order_UpperBitsNotSet(const Conditional_Level_T
     complete behaviors;
     disjoint behaviors;
 */
-int Conditional_Level_Transition_Order_Encoder(Bitstream* stream, const Conditional_Level_Transition_Order_Core* p);
+int Conditional_Level_Transition_Order_Encode_Bit(Bitstream* stream, const Conditional_Level_Transition_Order_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -139,7 +140,11 @@ int Conditional_Level_Transition_Order_Encoder(Bitstream* stream, const Conditio
     complete behaviors;
     disjoint behaviors;
 */
-int Conditional_Level_Transition_Order_Decoder(Bitstream* stream, Conditional_Level_Transition_Order_Core* p);
+int Conditional_Level_Transition_Order_Decode_Bit(Bitstream* stream, Conditional_Level_Transition_Order_Core* p);
+
+int Conditional_Level_Transition_Order_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Conditional_Level_Transition_Order_Core* p);
+
+int Conditional_Level_Transition_Order_Decode_Int(const Packet_Info* data, const kcg_int* stream, Conditional_Level_Transition_Order_Core* p);
 
 #ifdef __cplusplus
 
@@ -197,12 +202,22 @@ inline bool operator!=(const Conditional_Level_Transition_Order_Core& a, const C
 
 inline int encode(Bitstream& stream, const Conditional_Level_Transition_Order_Core& p)
 {
-    return Conditional_Level_Transition_Order_Encoder(&stream, &p);
+    return Conditional_Level_Transition_Order_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Conditional_Level_Transition_Order_Core& p)
 {
-    return Conditional_Level_Transition_Order_Decoder(&stream, &p);
+    return Conditional_Level_Transition_Order_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Conditional_Level_Transition_Order_Core& p)
+{
+    return Conditional_Level_Transition_Order_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Conditional_Level_Transition_Order_Core& p)
+{
+    return Conditional_Level_Transition_Order_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

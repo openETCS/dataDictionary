@@ -79,12 +79,12 @@ bool EurobaliseTelegram::decode(Bitstream& stream)
 
         if (header().Q_UPDOWN == 1)
 	{
-            ptr = PacketFactory_TrackToTrain(stream, packet_header);
+            ptr = PacketFactory_TrackToTrain(packet_header.NID_PACKET);
 	}
 	else
 	{
 	    assert(header().Q_UPDOWN == 0);
-            ptr = PacketFactory_TrainToTrack(stream, packet_header);
+            ptr = PacketFactory_TrainToTrack(packet_header.NID_PACKET);
         }
 
         if (ptr)
@@ -141,6 +141,68 @@ bool EurobaliseTelegram::encode(Bitstream& stream) const
 	    return false;
 	}
 
+    }
+
+    return true;
+}
+
+bool EurobaliseTelegram::encode(Flat_Packets& packetStruct) const
+{
+    kcg_int startAddress = 0;
+    unsigned int i;
+
+    for (i = 0; i < m_packets.size(); ++i)
+    {
+        m_packets[i]->encode(packetStruct.PacketHeaders[i], packetStruct.PacketData, startAddress);
+        startAddress = packetStruct.PacketHeaders[i].endAddress + 1;
+    }
+
+    if (packetStruct.PacketHeaders[i - 1].nid_packet != 255)
+    {
+        return false;
+    }
+
+    return true;
+}
+
+bool EurobaliseTelegram::decode(Flat_Packets& packetStruct)
+{
+    for (unsigned int i = 0; i < 50; ++i)
+    {
+        if (packetStruct.PacketHeaders[i].valid == 1)
+        {
+            BasePacketPtr ptr;
+
+            if (m_header.Q_UPDOWN == 0)
+            {
+                ptr = PacketFactory_TrainToTrack(packetStruct.PacketHeaders[i].nid_packet);
+	    }
+	    else if (m_header.Q_UPDOWN == 1)
+	    {
+	        ptr = PacketFactory_TrackToTrain(packetStruct.PacketHeaders[i].nid_packet);
+	    }
+	    else
+	    {
+	        std::cout << "wrong q_updown" << std::endl;
+	        return false;
+	    }
+
+            if (ptr)
+            {
+                ptr->decode(packetStruct.PacketHeaders[i], packetStruct.PacketData);
+    
+                m_packets.push_back(ptr);
+            }
+            else
+            {
+                return false;
+            }
+    
+            if (ptr->header.NID_PACKET == 255)
+            {
+                break;
+            }
+        }
     }
 
     return true;

@@ -3,6 +3,7 @@
 #define PACKET_FOR_SENDING_FIXED_TEXT_MESSAGES_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Packet_for_sending_fixed_text_messages_Core
 {
@@ -136,7 +137,7 @@ int Packet_for_sending_fixed_text_messages_UpperBitsNotSet(const Packet_for_send
     complete behaviors;
     disjoint behaviors;
 */
-int Packet_for_sending_fixed_text_messages_Encoder(Bitstream* stream, const Packet_for_sending_fixed_text_messages_Core* p);
+int Packet_for_sending_fixed_text_messages_Encode_Bit(Bitstream* stream, const Packet_for_sending_fixed_text_messages_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -171,7 +172,11 @@ int Packet_for_sending_fixed_text_messages_Encoder(Bitstream* stream, const Pack
     complete behaviors;
     disjoint behaviors;
 */
-int Packet_for_sending_fixed_text_messages_Decoder(Bitstream* stream, Packet_for_sending_fixed_text_messages_Core* p);
+int Packet_for_sending_fixed_text_messages_Decode_Bit(Bitstream* stream, Packet_for_sending_fixed_text_messages_Core* p);
+
+int Packet_for_sending_fixed_text_messages_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Packet_for_sending_fixed_text_messages_Core* p);
+
+int Packet_for_sending_fixed_text_messages_Decode_Int(const Packet_Info* data, const kcg_int* stream, Packet_for_sending_fixed_text_messages_Core* p);
 
 #ifdef __cplusplus
 
@@ -257,12 +262,22 @@ inline bool operator!=(const Packet_for_sending_fixed_text_messages_Core& a, con
 
 inline int encode(Bitstream& stream, const Packet_for_sending_fixed_text_messages_Core& p)
 {
-    return Packet_for_sending_fixed_text_messages_Encoder(&stream, &p);
+    return Packet_for_sending_fixed_text_messages_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Packet_for_sending_fixed_text_messages_Core& p)
 {
-    return Packet_for_sending_fixed_text_messages_Decoder(&stream, &p);
+    return Packet_for_sending_fixed_text_messages_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Packet_for_sending_fixed_text_messages_Core& p)
+{
+    return Packet_for_sending_fixed_text_messages_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Packet_for_sending_fixed_text_messages_Core& p)
+{
+    return Packet_for_sending_fixed_text_messages_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

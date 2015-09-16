@@ -3,6 +3,7 @@
 #define NATIONAL_VALUES_CORE_4_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct National_Values_Core_4
 {
@@ -91,7 +92,7 @@ int National_Values_Core_4_UpperBitsNotSet(const National_Values_Core_4* p);
     complete behaviors;
     disjoint behaviors;
 */
-int National_Values_Core_4_Encoder(Bitstream* stream, const National_Values_Core_4* p);
+int National_Values_Core_4_Encode_Bit(Bitstream* stream, const National_Values_Core_4* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -126,7 +127,11 @@ int National_Values_Core_4_Encoder(Bitstream* stream, const National_Values_Core
     complete behaviors;
     disjoint behaviors;
 */
-int National_Values_Core_4_Decoder(Bitstream* stream, National_Values_Core_4* p);
+int National_Values_Core_4_Decode_Bit(Bitstream* stream, National_Values_Core_4* p);
+
+int National_Values_Core_4_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const National_Values_Core_4* p);
+
+int National_Values_Core_4_Decode_Int(const Packet_Info* data, const kcg_int* stream, National_Values_Core_4* p);
 
 #ifdef __cplusplus
 
@@ -158,12 +163,22 @@ inline bool operator!=(const National_Values_Core_4& a, const National_Values_Co
 
 inline int encode(Bitstream& stream, const National_Values_Core_4& p)
 {
-    return National_Values_Core_4_Encoder(&stream, &p);
+    return National_Values_Core_4_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, National_Values_Core_4& p)
 {
-    return National_Values_Core_4_Decoder(&stream, &p);
+    return National_Values_Core_4_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const National_Values_Core_4& p)
+{
+    return National_Values_Core_4_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, National_Values_Core_4& p)
+{
+    return National_Values_Core_4_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

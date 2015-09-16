@@ -36,7 +36,7 @@ int Validated_train_data_UpperBitsNotSet(const Validated_train_data_Core* p)
     }
 }
 
-int Validated_train_data_Encoder(Bitstream* stream, const Validated_train_data_Core* p)
+int Validated_train_data_Encode_Bit(Bitstream* stream, const Validated_train_data_Core* p)
 {
     if (Bitstream_Normal(stream, VALIDATED_TRAIN_DATA_CORE_BITSIZE))
     {
@@ -56,12 +56,12 @@ int Validated_train_data_Encoder(Bitstream* stream, const Validated_train_data_C
             Bitstream_Write(stream, 5,  p->N_ITER_1);
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
-                Validated_train_data_Core_1_Encoder(stream, &(p->sub_1[i]));
+                Validated_train_data_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
             }
             Bitstream_Write(stream, 5,  p->N_ITER_2);
             for (uint32_t i = 0; i < p->N_ITER_2; ++i)
             {
-                Validated_train_data_Core_2_Encoder(stream, &(p->sub_2[i]));
+                Validated_train_data_Core_2_Encode_Bit(stream, &(p->sub_2[i]));
             }
 
 
@@ -88,7 +88,7 @@ int Validated_train_data_Encoder(Bitstream* stream, const Validated_train_data_C
     }
 }
 
-int Validated_train_data_Decoder(Bitstream* stream, Validated_train_data_Core* p)
+int Validated_train_data_Decode_Bit(Bitstream* stream, Validated_train_data_Core* p)
 {
     if (Bitstream_Normal(stream, VALIDATED_TRAIN_DATA_CORE_BITSIZE))
     {
@@ -208,7 +208,7 @@ int Validated_train_data_Decoder(Bitstream* stream, Validated_train_data_Core* p
 
         for (uint32_t i = 0; i < p->N_ITER_1; ++i)
         {
-            Validated_train_data_Core_1_Decoder(stream, &(p->sub_1[i]));
+            Validated_train_data_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
         }
     {
             p->N_ITER_2        = Bitstream_Read(stream, 5);
@@ -216,7 +216,7 @@ int Validated_train_data_Decoder(Bitstream* stream, Validated_train_data_Core* p
 
         for (uint32_t i = 0; i < p->N_ITER_2; ++i)
         {
-            Validated_train_data_Core_2_Decoder(stream, &(p->sub_2[i]));
+            Validated_train_data_Core_2_Decode_Bit(stream, &(p->sub_2[i]));
         }
         //@ assert L_PACKET:          EqualBits(stream, pos,       pos + 13,  p->L_PACKET);
         //@ assert NC_CDTRAIN:        EqualBits(stream, pos + 13,  pos + 17,  p->NC_CDTRAIN);
@@ -246,5 +246,17 @@ int Validated_train_data_Decoder(Bitstream* stream, Validated_train_data_Core* p
     {
         return 0;
     }
+}
+
+int Validated_train_data_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Validated_train_data_Core* p)
+{
+    std::cerr << "encode int function not implemented for packet 11 yet." << std::endl;
+    return 0;
+}
+
+int Validated_train_data_Decode_Int(const Packet_Info* data, const kcg_int* stream, Validated_train_data_Core* p)
+{
+    std::cerr << "decode int function not implemented for packet 11 yet." << std::endl;
+    return 0;
 }
 

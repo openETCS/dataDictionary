@@ -3,6 +3,7 @@
 #define RADIO_INFILL_AREA_INFORMATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Radio_infill_area_information_Core
 {
@@ -128,7 +129,7 @@ int Radio_infill_area_information_UpperBitsNotSet(const Radio_infill_area_inform
     complete behaviors;
     disjoint behaviors;
 */
-int Radio_infill_area_information_Encoder(Bitstream* stream, const Radio_infill_area_information_Core* p);
+int Radio_infill_area_information_Encode_Bit(Bitstream* stream, const Radio_infill_area_information_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -163,7 +164,11 @@ int Radio_infill_area_information_Encoder(Bitstream* stream, const Radio_infill_
     complete behaviors;
     disjoint behaviors;
 */
-int Radio_infill_area_information_Decoder(Bitstream* stream, Radio_infill_area_information_Core* p);
+int Radio_infill_area_information_Decode_Bit(Bitstream* stream, Radio_infill_area_information_Core* p);
+
+int Radio_infill_area_information_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Radio_infill_area_information_Core* p);
+
+int Radio_infill_area_information_Decode_Int(const Packet_Info* data, const kcg_int* stream, Radio_infill_area_information_Core* p);
 
 #ifdef __cplusplus
 
@@ -209,12 +214,22 @@ inline bool operator!=(const Radio_infill_area_information_Core& a, const Radio_
 
 inline int encode(Bitstream& stream, const Radio_infill_area_information_Core& p)
 {
-    return Radio_infill_area_information_Encoder(&stream, &p);
+    return Radio_infill_area_information_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Radio_infill_area_information_Core& p)
 {
-    return Radio_infill_area_information_Decoder(&stream, &p);
+    return Radio_infill_area_information_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Radio_infill_area_information_Core& p)
+{
+    return Radio_infill_area_information_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Radio_infill_area_information_Core& p)
+{
+    return Radio_infill_area_information_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

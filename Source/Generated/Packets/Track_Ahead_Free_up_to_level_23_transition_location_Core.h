@@ -3,6 +3,7 @@
 #define TRACK_AHEAD_FREE_UP_TO_LEVEL_23_TRANSITION_LOCATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Track_Ahead_Free_up_to_level_23_transition_location_Core
 {
@@ -102,7 +103,7 @@ int Track_Ahead_Free_up_to_level_23_transition_location_UpperBitsNotSet(const Tr
     complete behaviors;
     disjoint behaviors;
 */
-int Track_Ahead_Free_up_to_level_23_transition_location_Encoder(Bitstream* stream, const Track_Ahead_Free_up_to_level_23_transition_location_Core* p);
+int Track_Ahead_Free_up_to_level_23_transition_location_Encode_Bit(Bitstream* stream, const Track_Ahead_Free_up_to_level_23_transition_location_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -137,7 +138,11 @@ int Track_Ahead_Free_up_to_level_23_transition_location_Encoder(Bitstream* strea
     complete behaviors;
     disjoint behaviors;
 */
-int Track_Ahead_Free_up_to_level_23_transition_location_Decoder(Bitstream* stream, Track_Ahead_Free_up_to_level_23_transition_location_Core* p);
+int Track_Ahead_Free_up_to_level_23_transition_location_Decode_Bit(Bitstream* stream, Track_Ahead_Free_up_to_level_23_transition_location_Core* p);
+
+int Track_Ahead_Free_up_to_level_23_transition_location_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Track_Ahead_Free_up_to_level_23_transition_location_Core* p);
+
+int Track_Ahead_Free_up_to_level_23_transition_location_Decode_Int(const Packet_Info* data, const kcg_int* stream, Track_Ahead_Free_up_to_level_23_transition_location_Core* p);
 
 #ifdef __cplusplus
 
@@ -179,12 +184,22 @@ inline bool operator!=(const Track_Ahead_Free_up_to_level_23_transition_location
 
 inline int encode(Bitstream& stream, const Track_Ahead_Free_up_to_level_23_transition_location_Core& p)
 {
-    return Track_Ahead_Free_up_to_level_23_transition_location_Encoder(&stream, &p);
+    return Track_Ahead_Free_up_to_level_23_transition_location_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Track_Ahead_Free_up_to_level_23_transition_location_Core& p)
 {
-    return Track_Ahead_Free_up_to_level_23_transition_location_Decoder(&stream, &p);
+    return Track_Ahead_Free_up_to_level_23_transition_location_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Track_Ahead_Free_up_to_level_23_transition_location_Core& p)
+{
+    return Track_Ahead_Free_up_to_level_23_transition_location_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Track_Ahead_Free_up_to_level_23_transition_location_Core& p)
+{
+    return Track_Ahead_Free_up_to_level_23_transition_location_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

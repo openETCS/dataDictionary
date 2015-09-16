@@ -19,7 +19,7 @@ int Axle_Load_Speed_Profile_Core_1_UpperBitsNotSet(const Axle_Load_Speed_Profile
     }
 }
 
-int Axle_Load_Speed_Profile_Core_1_Encoder(Bitstream* stream, const Axle_Load_Speed_Profile_Core_1* p)
+int Axle_Load_Speed_Profile_Core_1_Encode_Bit(Bitstream* stream, const Axle_Load_Speed_Profile_Core_1* p)
 {
     if (Bitstream_Normal(stream, AXLE_LOAD_SPEED_PROFILE_CORE_1_CORE_BITSIZE))
     {
@@ -47,7 +47,7 @@ int Axle_Load_Speed_Profile_Core_1_Encoder(Bitstream* stream, const Axle_Load_Sp
     }
 }
 
-int Axle_Load_Speed_Profile_Core_1_Decoder(Bitstream* stream, Axle_Load_Speed_Profile_Core_1* p)
+int Axle_Load_Speed_Profile_Core_1_Decode_Bit(Bitstream* stream, Axle_Load_Speed_Profile_Core_1* p)
 {
     if (Bitstream_Normal(stream, AXLE_LOAD_SPEED_PROFILE_CORE_1_CORE_BITSIZE))
     {
@@ -91,5 +91,17 @@ int Axle_Load_Speed_Profile_Core_1_Decoder(Bitstream* stream, Axle_Load_Speed_Pr
     {
         return 0;
     }
+}
+
+int Axle_Load_Speed_Profile_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Axle_Load_Speed_Profile_Core_1* p)
+{
+    std::cerr << "encode int function not implemented for packet 51 yet." << std::endl;
+    return 0;
+}
+
+int Axle_Load_Speed_Profile_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, Axle_Load_Speed_Profile_Core_1* p)
+{
+    std::cerr << "decode int function not implemented for packet  51 yet." << std::endl;
+    return 0;
 }
 

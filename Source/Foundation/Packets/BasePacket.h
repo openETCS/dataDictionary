@@ -9,6 +9,7 @@
 #include <iostream>
 
 #include "PacketHeader.h"
+#include "Compressed_Packets.h"
 
 struct BasePacket
 {
@@ -28,6 +29,10 @@ struct BasePacket
     virtual int encode(Bitstream&) const = 0;
 
     virtual int decode(Bitstream&) = 0;
+
+    virtual int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress) const = 0;
+
+    virtual int decode(const Packet_Info& data, const kcg_int* stream) = 0;
 
 };
 

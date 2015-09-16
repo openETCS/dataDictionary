@@ -42,6 +42,30 @@ struct Packet_for_sending_plain_text_messages : public BasePacket
         return ::decode(stream, core);
     }
 
+    int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress) const override
+    {
+        data.nid_packet = 72;
+        data.q_dir = core.Q_DIR;
+	data.valid = 1;
+	data.startAddress = startAddress;
+
+	stream[startAddress++] = header.NID_PACKET;
+
+	return ::encode(data, stream, startAddress, core);
+    }
+
+    int decode(const Packet_Info& data, const kcg_int* stream) override
+    {
+        if(data.nid_packet != 72)
+	{
+	    return 0;
+	}
+
+	header.NID_PACKET = stream[data.startAddress];
+
+	return ::decode(data, stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Packet_for_sending_plain_text_messages> Packet_for_sending_plain_text_messagesPtr;

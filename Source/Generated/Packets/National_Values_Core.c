@@ -85,7 +85,7 @@ int National_Values_UpperBitsNotSet(const National_Values_Core* p)
     }
 }
 
-int National_Values_Encoder(Bitstream* stream, const National_Values_Core* p)
+int National_Values_Encode_Bit(Bitstream* stream, const National_Values_Core* p)
 {
     if (Bitstream_Normal(stream, NATIONAL_VALUES_CORE_BITSIZE))
     {
@@ -101,7 +101,7 @@ int National_Values_Encoder(Bitstream* stream, const National_Values_Core* p)
             Bitstream_Write(stream, 5,  p->N_ITER_1);
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
-                National_Values_Core_1_Encoder(stream, &(p->sub_1[i]));
+                National_Values_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
             }
             Bitstream_Write(stream, 7,  p->V_NVSHUNT);
             Bitstream_Write(stream, 7,  p->V_NVSTFF);
@@ -146,19 +146,19 @@ int National_Values_Encoder(Bitstream* stream, const National_Values_Core* p)
             Bitstream_Write(stream, 5,  p->N_ITER_2);
             for (uint32_t i = 0; i < p->N_ITER_2; ++i)
             {
-                National_Values_Core_2_Encoder(stream, &(p->sub_2[i]));
+                National_Values_Core_2_Encode_Bit(stream, &(p->sub_2[i]));
             }
             Bitstream_Write(stream, 5,  p->N_ITER_3);
             for (uint32_t i = 0; i < p->N_ITER_3; ++i)
             {
-                National_Values_Core_3_Encoder(stream, &(p->sub_3[i]));
+                National_Values_Core_3_Encode_Bit(stream, &(p->sub_3[i]));
             }
                 Bitstream_Write(stream, 5,  p->L_NVKRINT);
                 Bitstream_Write(stream, 5,  p->M_NVKRINT);
             Bitstream_Write(stream, 5,  p->N_ITER_4);
             for (uint32_t i = 0; i < p->N_ITER_4; ++i)
             {
-                National_Values_Core_4_Encoder(stream, &(p->sub_4[i]));
+                National_Values_Core_4_Encode_Bit(stream, &(p->sub_4[i]));
             }
                 Bitstream_Write(stream, 5,  p->M_NVKTINT);
             }
@@ -184,7 +184,7 @@ int National_Values_Encoder(Bitstream* stream, const National_Values_Core* p)
     }
 }
 
-int National_Values_Decoder(Bitstream* stream, National_Values_Core* p)
+int National_Values_Decode_Bit(Bitstream* stream, National_Values_Core* p)
 {
     if (Bitstream_Normal(stream, NATIONAL_VALUES_CORE_BITSIZE))
     {
@@ -256,7 +256,7 @@ int National_Values_Decoder(Bitstream* stream, National_Values_Core* p)
 
         for (uint32_t i = 0; i < p->N_ITER_1; ++i)
         {
-            National_Values_Core_1_Decoder(stream, &(p->sub_1[i]));
+            National_Values_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
         }
         {
             p->V_NVSHUNT        = Bitstream_Read(stream, 7);
@@ -406,7 +406,7 @@ int National_Values_Decoder(Bitstream* stream, National_Values_Core* p)
 
             for (uint32_t i = 0; i < p->N_ITER_2; ++i)
             {
-                National_Values_Core_2_Decoder(stream, &(p->sub_2[i]));
+                National_Values_Core_2_Decode_Bit(stream, &(p->sub_2[i]));
             }
             {
                 p->N_ITER_3        = Bitstream_Read(stream, 5);
@@ -414,7 +414,7 @@ int National_Values_Decoder(Bitstream* stream, National_Values_Core* p)
 
             for (uint32_t i = 0; i < p->N_ITER_3; ++i)
             {
-                National_Values_Core_3_Decoder(stream, &(p->sub_3[i]));
+                National_Values_Core_3_Decode_Bit(stream, &(p->sub_3[i]));
             }
             {
                 p->L_NVKRINT        = Bitstream_Read(stream, 5);
@@ -430,7 +430,7 @@ int National_Values_Decoder(Bitstream* stream, National_Values_Core* p)
 
             for (uint32_t i = 0; i < p->N_ITER_4; ++i)
             {
-                National_Values_Core_4_Decoder(stream, &(p->sub_4[i]));
+                National_Values_Core_4_Decode_Bit(stream, &(p->sub_4[i]));
             }
             {
                 p->M_NVKTINT        = Bitstream_Read(stream, 5);
@@ -458,5 +458,17 @@ int National_Values_Decoder(Bitstream* stream, National_Values_Core* p)
     {
         return 0;
     }
+}
+
+int National_Values_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const National_Values_Core* p)
+{
+    std::cerr << "encode int function not implemented for packet 3 yet." << std::endl;
+    return 0;
+}
+
+int National_Values_Decode_Int(const Packet_Info* data, const kcg_int* stream, National_Values_Core* p)
+{
+    std::cerr << "decode int function not implemented for packet 3 yet." << std::endl;
+    return 0;
 }
 

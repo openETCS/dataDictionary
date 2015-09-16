@@ -28,7 +28,7 @@ int Position_Report_Parameters_UpperBitsNotSet(const Position_Report_Parameters_
     }
 }
 
-int Position_Report_Parameters_Encoder(Bitstream* stream, const Position_Report_Parameters_Core* p)
+int Position_Report_Parameters_Encode_Bit(Bitstream* stream, const Position_Report_Parameters_Core* p)
 {
     if (Bitstream_Normal(stream, POSITION_REPORT_PARAMETERS_CORE_BITSIZE))
     {
@@ -45,7 +45,7 @@ int Position_Report_Parameters_Encoder(Bitstream* stream, const Position_Report_
             Bitstream_Write(stream, 5,  p->N_ITER_1);
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
-                Position_Report_Parameters_Core_1_Encoder(stream, &(p->sub_1[i]));
+                Position_Report_Parameters_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
             }
 
 
@@ -69,7 +69,7 @@ int Position_Report_Parameters_Encoder(Bitstream* stream, const Position_Report_
     }
 }
 
-int Position_Report_Parameters_Decoder(Bitstream* stream, Position_Report_Parameters_Core* p)
+int Position_Report_Parameters_Decode_Bit(Bitstream* stream, Position_Report_Parameters_Core* p)
 {
     if (Bitstream_Normal(stream, POSITION_REPORT_PARAMETERS_CORE_BITSIZE))
     {
@@ -153,7 +153,7 @@ int Position_Report_Parameters_Decoder(Bitstream* stream, Position_Report_Parame
 
         for (uint32_t i = 0; i < p->N_ITER_1; ++i)
         {
-            Position_Report_Parameters_Core_1_Decoder(stream, &(p->sub_1[i]));
+            Position_Report_Parameters_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
         }
         //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
         //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
@@ -177,5 +177,17 @@ int Position_Report_Parameters_Decoder(Bitstream* stream, Position_Report_Parame
     {
         return 0;
     }
+}
+
+int Position_Report_Parameters_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Position_Report_Parameters_Core* p)
+{
+    std::cerr << "encode int function not implemented for packet 58 yet." << std::endl;
+    return 0;
+}
+
+int Position_Report_Parameters_Decode_Int(const Packet_Info* data, const kcg_int* stream, Position_Report_Parameters_Core* p)
+{
+    std::cerr << "decode int function not implemented for packet 58 yet." << std::endl;
+    return 0;
 }
 

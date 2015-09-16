@@ -3,6 +3,7 @@
 #define MOVEMENT_AUTHORITY_REQUEST_PARAMETERS_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Movement_Authority_Request_Parameters_Core
 {
@@ -110,7 +111,7 @@ int Movement_Authority_Request_Parameters_UpperBitsNotSet(const Movement_Authori
     complete behaviors;
     disjoint behaviors;
 */
-int Movement_Authority_Request_Parameters_Encoder(Bitstream* stream, const Movement_Authority_Request_Parameters_Core* p);
+int Movement_Authority_Request_Parameters_Encode_Bit(Bitstream* stream, const Movement_Authority_Request_Parameters_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -145,7 +146,11 @@ int Movement_Authority_Request_Parameters_Encoder(Bitstream* stream, const Movem
     complete behaviors;
     disjoint behaviors;
 */
-int Movement_Authority_Request_Parameters_Decoder(Bitstream* stream, Movement_Authority_Request_Parameters_Core* p);
+int Movement_Authority_Request_Parameters_Decode_Bit(Bitstream* stream, Movement_Authority_Request_Parameters_Core* p);
+
+int Movement_Authority_Request_Parameters_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Movement_Authority_Request_Parameters_Core* p);
+
+int Movement_Authority_Request_Parameters_Decode_Int(const Packet_Info* data, const kcg_int* stream, Movement_Authority_Request_Parameters_Core* p);
 
 #ifdef __cplusplus
 
@@ -183,12 +188,22 @@ inline bool operator!=(const Movement_Authority_Request_Parameters_Core& a, cons
 
 inline int encode(Bitstream& stream, const Movement_Authority_Request_Parameters_Core& p)
 {
-    return Movement_Authority_Request_Parameters_Encoder(&stream, &p);
+    return Movement_Authority_Request_Parameters_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Movement_Authority_Request_Parameters_Core& p)
 {
-    return Movement_Authority_Request_Parameters_Decoder(&stream, &p);
+    return Movement_Authority_Request_Parameters_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Movement_Authority_Request_Parameters_Core& p)
+{
+    return Movement_Authority_Request_Parameters_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Movement_Authority_Request_Parameters_Core& p)
+{
+    return Movement_Authority_Request_Parameters_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

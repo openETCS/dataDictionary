@@ -31,7 +31,7 @@ int Mode_profile_UpperBitsNotSet(const Mode_profile_Core* p)
     }
 }
 
-int Mode_profile_Encoder(Bitstream* stream, const Mode_profile_Core* p)
+int Mode_profile_Encode_Bit(Bitstream* stream, const Mode_profile_Core* p)
 {
     if (Bitstream_Normal(stream, MODE_PROFILE_CORE_BITSIZE))
     {
@@ -51,7 +51,7 @@ int Mode_profile_Encoder(Bitstream* stream, const Mode_profile_Core* p)
             Bitstream_Write(stream, 5,  p->N_ITER_1);
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
-                Mode_profile_Core_1_Encoder(stream, &(p->sub_1[i]));
+                Mode_profile_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
             }
 
 
@@ -78,7 +78,7 @@ int Mode_profile_Encoder(Bitstream* stream, const Mode_profile_Core* p)
     }
 }
 
-int Mode_profile_Decoder(Bitstream* stream, Mode_profile_Core* p)
+int Mode_profile_Decode_Bit(Bitstream* stream, Mode_profile_Core* p)
 {
     if (Bitstream_Normal(stream, MODE_PROFILE_CORE_BITSIZE))
     {
@@ -198,7 +198,7 @@ int Mode_profile_Decoder(Bitstream* stream, Mode_profile_Core* p)
 
         for (uint32_t i = 0; i < p->N_ITER_1; ++i)
         {
-            Mode_profile_Core_1_Decoder(stream, &(p->sub_1[i]));
+            Mode_profile_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
         }
         //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
         //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
@@ -228,5 +228,17 @@ int Mode_profile_Decoder(Bitstream* stream, Mode_profile_Core* p)
     {
         return 0;
     }
+}
+
+int Mode_profile_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Mode_profile_Core* p)
+{
+    std::cerr << "encode int function not implemented for packet 80 yet." << std::endl;
+    return 0;
+}
+
+int Mode_profile_Decode_Int(const Packet_Info* data, const kcg_int* stream, Mode_profile_Core* p)
+{
+    std::cerr << "decode int function not implemented for packet 80 yet." << std::endl;
+    return 0;
 }
 

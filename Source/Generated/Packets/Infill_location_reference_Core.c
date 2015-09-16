@@ -25,7 +25,7 @@ int Infill_location_reference_UpperBitsNotSet(const Infill_location_reference_Co
     }
 }
 
-int Infill_location_reference_Encoder(Bitstream* stream, const Infill_location_reference_Core* p)
+int Infill_location_reference_Encode_Bit(Bitstream* stream, const Infill_location_reference_Core* p)
 {
     if (Bitstream_Normal(stream, INFILL_LOCATION_REFERENCE_CORE_BITSIZE))
     {
@@ -61,7 +61,7 @@ int Infill_location_reference_Encoder(Bitstream* stream, const Infill_location_r
     }
 }
 
-int Infill_location_reference_Decoder(Bitstream* stream, Infill_location_reference_Core* p)
+int Infill_location_reference_Decode_Bit(Bitstream* stream, Infill_location_reference_Core* p)
 {
     if (Bitstream_Normal(stream, INFILL_LOCATION_REFERENCE_CORE_BITSIZE))
     {
@@ -131,5 +131,17 @@ int Infill_location_reference_Decoder(Bitstream* stream, Infill_location_referen
     {
         return 0;
     }
+}
+
+int Infill_location_reference_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Infill_location_reference_Core* p)
+{
+    std::cerr << "encode int function not implemented for packet 136 yet." << std::endl;
+    return 0;
+}
+
+int Infill_location_reference_Decode_Int(const Packet_Info* data, const kcg_int* stream, Infill_location_reference_Core* p)
+{
+    std::cerr << "decode int function not implemented for packet 136 yet." << std::endl;
+    return 0;
 }
 

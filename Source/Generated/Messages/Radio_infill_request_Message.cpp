@@ -21,7 +21,7 @@ bool Radio_infill_request_Message::decode(Bitstream& stream)
     PacketHeader packetID;
 
     ::decode(stream, packetID);
-    packet_0_1 = PacketFactory_TrainToTrack(stream, packetID);
+    packet_0_1 = PacketFactory_TrainToTrack(packetID.NID_PACKET);
     packet_0_1->decode(stream);
     if (!packet_0_1)
     {

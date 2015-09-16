@@ -25,7 +25,7 @@ int Track_Ahead_Free_up_to_level_23_transition_location_UpperBitsNotSet(const Tr
     }
 }
 
-int Track_Ahead_Free_up_to_level_23_transition_location_Encoder(Bitstream* stream, const Track_Ahead_Free_up_to_level_23_transition_location_Core* p)
+int Track_Ahead_Free_up_to_level_23_transition_location_Encode_Bit(Bitstream* stream, const Track_Ahead_Free_up_to_level_23_transition_location_Core* p)
 {
     if (Bitstream_Normal(stream, TRACK_AHEAD_FREE_UP_TO_LEVEL_23_TRANSITION_LOCATION_CORE_BITSIZE))
     {
@@ -61,7 +61,7 @@ int Track_Ahead_Free_up_to_level_23_transition_location_Encoder(Bitstream* strea
     }
 }
 
-int Track_Ahead_Free_up_to_level_23_transition_location_Decoder(Bitstream* stream, Track_Ahead_Free_up_to_level_23_transition_location_Core* p)
+int Track_Ahead_Free_up_to_level_23_transition_location_Decode_Bit(Bitstream* stream, Track_Ahead_Free_up_to_level_23_transition_location_Core* p)
 {
     if (Bitstream_Normal(stream, TRACK_AHEAD_FREE_UP_TO_LEVEL_23_TRANSITION_LOCATION_CORE_BITSIZE))
     {
@@ -131,5 +131,17 @@ int Track_Ahead_Free_up_to_level_23_transition_location_Decoder(Bitstream* strea
     {
         return 0;
     }
+}
+
+int Track_Ahead_Free_up_to_level_23_transition_location_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Track_Ahead_Free_up_to_level_23_transition_location_Core* p)
+{
+    std::cerr << "encode int function not implemented for packet 90 yet." << std::endl;
+    return 0;
+}
+
+int Track_Ahead_Free_up_to_level_23_transition_location_Decode_Int(const Packet_Info* data, const kcg_int* stream, Track_Ahead_Free_up_to_level_23_transition_location_Core* p)
+{
+    std::cerr << "decode int function not implemented for packet 90 yet." << std::endl;
+    return 0;
 }
 

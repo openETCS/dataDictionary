@@ -4,6 +4,7 @@
 
 #include "Bitstream.h"
 #include "Route_Suitability_Data_Core_1.h"
+#include "Compressed_Packets.h"
 
 struct Route_Suitability_Data_Core
 {
@@ -114,7 +115,7 @@ int Route_Suitability_Data_UpperBitsNotSet(const Route_Suitability_Data_Core* p)
     complete behaviors;
     disjoint behaviors;
 */
-int Route_Suitability_Data_Encoder(Bitstream* stream, const Route_Suitability_Data_Core* p);
+int Route_Suitability_Data_Encode_Bit(Bitstream* stream, const Route_Suitability_Data_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -149,7 +150,11 @@ int Route_Suitability_Data_Encoder(Bitstream* stream, const Route_Suitability_Da
     complete behaviors;
     disjoint behaviors;
 */
-int Route_Suitability_Data_Decoder(Bitstream* stream, Route_Suitability_Data_Core* p);
+int Route_Suitability_Data_Decode_Bit(Bitstream* stream, Route_Suitability_Data_Core* p);
+
+int Route_Suitability_Data_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Route_Suitability_Data_Core* p);
+
+int Route_Suitability_Data_Decode_Int(const Packet_Info* data, const kcg_int* stream, Route_Suitability_Data_Core* p);
 
 #ifdef __cplusplus
 
@@ -241,12 +246,22 @@ inline bool operator!=(const Route_Suitability_Data_Core& a, const Route_Suitabi
 
 inline int encode(Bitstream& stream, const Route_Suitability_Data_Core& p)
 {
-    return Route_Suitability_Data_Encoder(&stream, &p);
+    return Route_Suitability_Data_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Route_Suitability_Data_Core& p)
 {
-    return Route_Suitability_Data_Decoder(&stream, &p);
+    return Route_Suitability_Data_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Route_Suitability_Data_Core& p)
+{
+    return Route_Suitability_Data_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Route_Suitability_Data_Core& p)
+{
+    return Route_Suitability_Data_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

@@ -19,7 +19,7 @@ bool Request_to_Shorten_MA_Message::decode(Bitstream& stream)
     PacketHeader packetID;
 
     ::decode(stream, packetID);
-    packet_15 = PacketFactory_TrackToTrain(stream, packetID);
+    packet_15 = PacketFactory_TrackToTrain(packetID.NID_PACKET);
     packet_15->decode(stream);
     if (!packet_15)
     {
@@ -27,7 +27,7 @@ bool Request_to_Shorten_MA_Message::decode(Bitstream& stream)
     }
 
     ::decode(stream, packetID);
-    packet_80 = PacketFactory_TrackToTrain(stream, packetID);
+    packet_80 = PacketFactory_TrackToTrain(packetID.NID_PACKET);
     packet_80->decode(stream);
     if (!packet_80)
     {

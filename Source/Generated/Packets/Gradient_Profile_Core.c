@@ -28,7 +28,7 @@ int Gradient_Profile_UpperBitsNotSet(const Gradient_Profile_Core* p)
     }
 }
 
-int Gradient_Profile_Encoder(Bitstream* stream, const Gradient_Profile_Core* p)
+int Gradient_Profile_Encode_Bit(Bitstream* stream, const Gradient_Profile_Core* p)
 {
     if (Bitstream_Normal(stream, GRADIENT_PROFILE_CORE_BITSIZE))
     {
@@ -45,7 +45,7 @@ int Gradient_Profile_Encoder(Bitstream* stream, const Gradient_Profile_Core* p)
             Bitstream_Write(stream, 5,  p->N_ITER_1);
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
-                Gradient_Profile_Core_1_Encoder(stream, &(p->sub_1[i]));
+                Gradient_Profile_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
             }
 
 
@@ -69,7 +69,7 @@ int Gradient_Profile_Encoder(Bitstream* stream, const Gradient_Profile_Core* p)
     }
 }
 
-int Gradient_Profile_Decoder(Bitstream* stream, Gradient_Profile_Core* p)
+int Gradient_Profile_Decode_Bit(Bitstream* stream, Gradient_Profile_Core* p)
 {
     if (Bitstream_Normal(stream, GRADIENT_PROFILE_CORE_BITSIZE))
     {
@@ -153,7 +153,7 @@ int Gradient_Profile_Decoder(Bitstream* stream, Gradient_Profile_Core* p)
 
         for (uint32_t i = 0; i < p->N_ITER_1; ++i)
         {
-            Gradient_Profile_Core_1_Decoder(stream, &(p->sub_1[i]));
+            Gradient_Profile_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
         }
         //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
         //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
@@ -177,5 +177,17 @@ int Gradient_Profile_Decoder(Bitstream* stream, Gradient_Profile_Core* p)
     {
         return 0;
     }
+}
+
+int Gradient_Profile_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Gradient_Profile_Core* p)
+{
+    std::cerr << "encode int function not implemented for packet 21 yet." << std::endl;
+    return 0;
+}
+
+int Gradient_Profile_Decode_Int(const Packet_Info* data, const kcg_int* stream, Gradient_Profile_Core* p)
+{
+    std::cerr << "decode int function not implemented for packet 21 yet." << std::endl;
+    return 0;
 }
 

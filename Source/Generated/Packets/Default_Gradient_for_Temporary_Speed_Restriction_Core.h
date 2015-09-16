@@ -3,6 +3,7 @@
 #define DEFAULT_GRADIENT_FOR_TEMPORARY_SPEED_RESTRICTION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Default_Gradient_for_Temporary_Speed_Restriction_Core
 {
@@ -105,7 +106,7 @@ int Default_Gradient_for_Temporary_Speed_Restriction_UpperBitsNotSet(const Defau
     complete behaviors;
     disjoint behaviors;
 */
-int Default_Gradient_for_Temporary_Speed_Restriction_Encoder(Bitstream* stream, const Default_Gradient_for_Temporary_Speed_Restriction_Core* p);
+int Default_Gradient_for_Temporary_Speed_Restriction_Encode_Bit(Bitstream* stream, const Default_Gradient_for_Temporary_Speed_Restriction_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -140,7 +141,11 @@ int Default_Gradient_for_Temporary_Speed_Restriction_Encoder(Bitstream* stream, 
     complete behaviors;
     disjoint behaviors;
 */
-int Default_Gradient_for_Temporary_Speed_Restriction_Decoder(Bitstream* stream, Default_Gradient_for_Temporary_Speed_Restriction_Core* p);
+int Default_Gradient_for_Temporary_Speed_Restriction_Decode_Bit(Bitstream* stream, Default_Gradient_for_Temporary_Speed_Restriction_Core* p);
+
+int Default_Gradient_for_Temporary_Speed_Restriction_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Default_Gradient_for_Temporary_Speed_Restriction_Core* p);
+
+int Default_Gradient_for_Temporary_Speed_Restriction_Decode_Int(const Packet_Info* data, const kcg_int* stream, Default_Gradient_for_Temporary_Speed_Restriction_Core* p);
 
 #ifdef __cplusplus
 
@@ -176,12 +181,22 @@ inline bool operator!=(const Default_Gradient_for_Temporary_Speed_Restriction_Co
 
 inline int encode(Bitstream& stream, const Default_Gradient_for_Temporary_Speed_Restriction_Core& p)
 {
-    return Default_Gradient_for_Temporary_Speed_Restriction_Encoder(&stream, &p);
+    return Default_Gradient_for_Temporary_Speed_Restriction_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Default_Gradient_for_Temporary_Speed_Restriction_Core& p)
 {
-    return Default_Gradient_for_Temporary_Speed_Restriction_Decoder(&stream, &p);
+    return Default_Gradient_for_Temporary_Speed_Restriction_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Default_Gradient_for_Temporary_Speed_Restriction_Core& p)
+{
+    return Default_Gradient_for_Temporary_Speed_Restriction_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Default_Gradient_for_Temporary_Speed_Restriction_Core& p)
+{
+    return Default_Gradient_for_Temporary_Speed_Restriction_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

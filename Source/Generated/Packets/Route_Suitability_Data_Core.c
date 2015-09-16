@@ -51,7 +51,7 @@ int Route_Suitability_Data_UpperBitsNotSet(const Route_Suitability_Data_Core* p)
     }
 }
 
-int Route_Suitability_Data_Encoder(Bitstream* stream, const Route_Suitability_Data_Core* p)
+int Route_Suitability_Data_Encode_Bit(Bitstream* stream, const Route_Suitability_Data_Core* p)
 {
     if (Bitstream_Normal(stream, ROUTE_SUITABILITY_DATA_CORE_BITSIZE))
     {
@@ -95,7 +95,7 @@ int Route_Suitability_Data_Encoder(Bitstream* stream, const Route_Suitability_Da
             Bitstream_Write(stream, 5,  p->N_ITER_1);
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
-                Route_Suitability_Data_Core_1_Encoder(stream, &(p->sub_1[i]));
+                Route_Suitability_Data_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
             }
             }
 
@@ -119,7 +119,7 @@ int Route_Suitability_Data_Encoder(Bitstream* stream, const Route_Suitability_Da
     }
 }
 
-int Route_Suitability_Data_Decoder(Bitstream* stream, Route_Suitability_Data_Core* p)
+int Route_Suitability_Data_Decode_Bit(Bitstream* stream, Route_Suitability_Data_Core* p)
 {
     if (Bitstream_Normal(stream, ROUTE_SUITABILITY_DATA_CORE_BITSIZE))
     {
@@ -229,7 +229,7 @@ int Route_Suitability_Data_Decoder(Bitstream* stream, Route_Suitability_Data_Cor
 
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
-                Route_Suitability_Data_Core_1_Decoder(stream, &(p->sub_1[i]));
+                Route_Suitability_Data_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
             }
         }
 
@@ -251,5 +251,17 @@ int Route_Suitability_Data_Decoder(Bitstream* stream, Route_Suitability_Data_Cor
     {
         return 0;
     }
+}
+
+int Route_Suitability_Data_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Route_Suitability_Data_Core* p)
+{
+    std::cerr << "encode int function not implemented for packet 70 yet." << std::endl;
+    return 0;
+}
+
+int Route_Suitability_Data_Decode_Int(const Packet_Info* data, const kcg_int* stream, Route_Suitability_Data_Core* p)
+{
+    std::cerr << "decode int function not implemented for packet 70 yet." << std::endl;
+    return 0;
 }
 

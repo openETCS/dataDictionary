@@ -4,6 +4,7 @@
 
 #include "Bitstream.h"
 #include "Onboard_telephone_numbers_Core_1.h"
+#include "Compressed_Packets.h"
 
 struct Onboard_telephone_numbers_Core
 {
@@ -92,7 +93,7 @@ int Onboard_telephone_numbers_UpperBitsNotSet(const Onboard_telephone_numbers_Co
     complete behaviors;
     disjoint behaviors;
 */
-int Onboard_telephone_numbers_Encoder(Bitstream* stream, const Onboard_telephone_numbers_Core* p);
+int Onboard_telephone_numbers_Encode_Bit(Bitstream* stream, const Onboard_telephone_numbers_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -127,7 +128,11 @@ int Onboard_telephone_numbers_Encoder(Bitstream* stream, const Onboard_telephone
     complete behaviors;
     disjoint behaviors;
 */
-int Onboard_telephone_numbers_Decoder(Bitstream* stream, Onboard_telephone_numbers_Core* p);
+int Onboard_telephone_numbers_Decode_Bit(Bitstream* stream, Onboard_telephone_numbers_Core* p);
+
+int Onboard_telephone_numbers_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Onboard_telephone_numbers_Core* p);
+
+int Onboard_telephone_numbers_Decode_Int(const Packet_Info* data, const kcg_int* stream, Onboard_telephone_numbers_Core* p);
 
 #ifdef __cplusplus
 
@@ -175,12 +180,22 @@ inline bool operator!=(const Onboard_telephone_numbers_Core& a, const Onboard_te
 
 inline int encode(Bitstream& stream, const Onboard_telephone_numbers_Core& p)
 {
-    return Onboard_telephone_numbers_Encoder(&stream, &p);
+    return Onboard_telephone_numbers_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Onboard_telephone_numbers_Core& p)
 {
-    return Onboard_telephone_numbers_Decoder(&stream, &p);
+    return Onboard_telephone_numbers_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Onboard_telephone_numbers_Core& p)
+{
+    return Onboard_telephone_numbers_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Onboard_telephone_numbers_Core& p)
+{
+    return Onboard_telephone_numbers_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

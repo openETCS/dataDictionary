@@ -3,6 +3,7 @@
 #define LEVEL_CROSSING_INFORMATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Level_Crossing_information_Core
 {
@@ -122,7 +123,7 @@ int Level_Crossing_information_UpperBitsNotSet(const Level_Crossing_information_
     complete behaviors;
     disjoint behaviors;
 */
-int Level_Crossing_information_Encoder(Bitstream* stream, const Level_Crossing_information_Core* p);
+int Level_Crossing_information_Encode_Bit(Bitstream* stream, const Level_Crossing_information_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -157,7 +158,11 @@ int Level_Crossing_information_Encoder(Bitstream* stream, const Level_Crossing_i
     complete behaviors;
     disjoint behaviors;
 */
-int Level_Crossing_information_Decoder(Bitstream* stream, Level_Crossing_information_Core* p);
+int Level_Crossing_information_Decode_Bit(Bitstream* stream, Level_Crossing_information_Core* p);
+
+int Level_Crossing_information_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Level_Crossing_information_Core* p);
+
+int Level_Crossing_information_Decode_Int(const Packet_Info* data, const kcg_int* stream, Level_Crossing_information_Core* p);
 
 #ifdef __cplusplus
 
@@ -213,12 +218,22 @@ inline bool operator!=(const Level_Crossing_information_Core& a, const Level_Cro
 
 inline int encode(Bitstream& stream, const Level_Crossing_information_Core& p)
 {
-    return Level_Crossing_information_Encoder(&stream, &p);
+    return Level_Crossing_information_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Level_Crossing_information_Core& p)
 {
-    return Level_Crossing_information_Decoder(&stream, &p);
+    return Level_Crossing_information_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Level_Crossing_information_Core& p)
+{
+    return Level_Crossing_information_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Level_Crossing_information_Core& p)
+{
+    return Level_Crossing_information_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

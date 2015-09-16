@@ -25,7 +25,7 @@ int EOLM_Packet_UpperBitsNotSet(const EOLM_Packet_Core* p)
     }
 }
 
-int EOLM_Packet_Encoder(Bitstream* stream, const EOLM_Packet_Core* p)
+int EOLM_Packet_Encode_Bit(Bitstream* stream, const EOLM_Packet_Core* p)
 {
     if (Bitstream_Normal(stream, EOLM_PACKET_CORE_BITSIZE))
     {
@@ -65,7 +65,7 @@ int EOLM_Packet_Encoder(Bitstream* stream, const EOLM_Packet_Core* p)
     }
 }
 
-int EOLM_Packet_Decoder(Bitstream* stream, EOLM_Packet_Core* p)
+int EOLM_Packet_Decode_Bit(Bitstream* stream, EOLM_Packet_Core* p)
 {
     if (Bitstream_Normal(stream, EOLM_PACKET_CORE_BITSIZE))
     {
@@ -193,5 +193,42 @@ int EOLM_Packet_Decoder(Bitstream* stream, EOLM_Packet_Core* p)
     {
         return 0;
     }
+}
+
+int EOLM_Packet_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const EOLM_Packet_Core* p)
+{
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->Q_SCALE;
+    stream[startAddress++] = p->NID_LOOP;
+    stream[startAddress++] = p->D_LOOP;
+    stream[startAddress++] = p->L_LOOP;
+    stream[startAddress++] = p->Q_LOOPDIR;
+    stream[startAddress++] = p->Q_SSCODE;
+
+    data->endAddress = startAddress-1;
+
+    return 1;
+}
+
+int EOLM_Packet_Decode_Int(const Packet_Info* data, const kcg_int* stream, EOLM_Packet_Core* p)
+{
+    kcg_int startAddress = data->startAddress+1;
+
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->Q_SCALE = stream[startAddress++];
+    p->NID_LOOP = stream[startAddress++];
+    p->D_LOOP = stream[startAddress++];
+    p->L_LOOP = stream[startAddress++];
+    p->Q_LOOPDIR = stream[startAddress++];
+    p->Q_SSCODE = stream[startAddress++];
+
+    if(data->endAddress != startAddress-1)
+    {
+        return false;
+    }
+
+    return 1;
 }
 

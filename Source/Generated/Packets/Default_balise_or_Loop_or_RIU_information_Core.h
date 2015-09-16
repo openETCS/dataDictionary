@@ -3,6 +3,7 @@
 #define DEFAULT_BALISE_OR_LOOP_OR_RIU_INFORMATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Default_balise_or_Loop_or_RIU_information_Core
 {
@@ -95,7 +96,7 @@ int Default_balise_or_Loop_or_RIU_information_UpperBitsNotSet(const Default_bali
     complete behaviors;
     disjoint behaviors;
 */
-int Default_balise_or_Loop_or_RIU_information_Encoder(Bitstream* stream, const Default_balise_or_Loop_or_RIU_information_Core* p);
+int Default_balise_or_Loop_or_RIU_information_Encode_Bit(Bitstream* stream, const Default_balise_or_Loop_or_RIU_information_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -130,7 +131,11 @@ int Default_balise_or_Loop_or_RIU_information_Encoder(Bitstream* stream, const D
     complete behaviors;
     disjoint behaviors;
 */
-int Default_balise_or_Loop_or_RIU_information_Decoder(Bitstream* stream, Default_balise_or_Loop_or_RIU_information_Core* p);
+int Default_balise_or_Loop_or_RIU_information_Decode_Bit(Bitstream* stream, Default_balise_or_Loop_or_RIU_information_Core* p);
+
+int Default_balise_or_Loop_or_RIU_information_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Default_balise_or_Loop_or_RIU_information_Core* p);
+
+int Default_balise_or_Loop_or_RIU_information_Decode_Int(const Packet_Info* data, const kcg_int* stream, Default_balise_or_Loop_or_RIU_information_Core* p);
 
 #ifdef __cplusplus
 
@@ -162,12 +167,22 @@ inline bool operator!=(const Default_balise_or_Loop_or_RIU_information_Core& a, 
 
 inline int encode(Bitstream& stream, const Default_balise_or_Loop_or_RIU_information_Core& p)
 {
-    return Default_balise_or_Loop_or_RIU_information_Encoder(&stream, &p);
+    return Default_balise_or_Loop_or_RIU_information_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Default_balise_or_Loop_or_RIU_information_Core& p)
 {
-    return Default_balise_or_Loop_or_RIU_information_Decoder(&stream, &p);
+    return Default_balise_or_Loop_or_RIU_information_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Default_balise_or_Loop_or_RIU_information_Core& p)
+{
+    return Default_balise_or_Loop_or_RIU_information_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Default_balise_or_Loop_or_RIU_information_Core& p)
+{
+    return Default_balise_or_Loop_or_RIU_information_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

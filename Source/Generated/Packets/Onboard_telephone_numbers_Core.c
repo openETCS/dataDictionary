@@ -23,7 +23,7 @@ int Onboard_telephone_numbers_UpperBitsNotSet(const Onboard_telephone_numbers_Co
     }
 }
 
-int Onboard_telephone_numbers_Encoder(Bitstream* stream, const Onboard_telephone_numbers_Core* p)
+int Onboard_telephone_numbers_Encode_Bit(Bitstream* stream, const Onboard_telephone_numbers_Core* p)
 {
     if (Bitstream_Normal(stream, ONBOARD_TELEPHONE_NUMBERS_CORE_BITSIZE))
     {
@@ -35,7 +35,7 @@ int Onboard_telephone_numbers_Encoder(Bitstream* stream, const Onboard_telephone
             Bitstream_Write(stream, 5,  p->N_ITER_1);
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
-                Onboard_telephone_numbers_Core_1_Encoder(stream, &(p->sub_1[i]));
+                Onboard_telephone_numbers_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
             }
 
 
@@ -54,7 +54,7 @@ int Onboard_telephone_numbers_Encoder(Bitstream* stream, const Onboard_telephone
     }
 }
 
-int Onboard_telephone_numbers_Decoder(Bitstream* stream, Onboard_telephone_numbers_Core* p)
+int Onboard_telephone_numbers_Decode_Bit(Bitstream* stream, Onboard_telephone_numbers_Core* p)
 {
     if (Bitstream_Normal(stream, ONBOARD_TELEPHONE_NUMBERS_CORE_BITSIZE))
     {
@@ -78,7 +78,7 @@ int Onboard_telephone_numbers_Decoder(Bitstream* stream, Onboard_telephone_numbe
 
         for (uint32_t i = 0; i < p->N_ITER_1; ++i)
         {
-            Onboard_telephone_numbers_Core_1_Decoder(stream, &(p->sub_1[i]));
+            Onboard_telephone_numbers_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
         }
         //@ assert L_PACKET:          EqualBits(stream, pos,       pos + 13,  p->L_PACKET);
 
@@ -92,5 +92,17 @@ int Onboard_telephone_numbers_Decoder(Bitstream* stream, Onboard_telephone_numbe
     {
         return 0;
     }
+}
+
+int Onboard_telephone_numbers_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Onboard_telephone_numbers_Core* p)
+{
+    std::cerr << "encode int function not implemented for packet 3 yet." << std::endl;
+    return 0;
+}
+
+int Onboard_telephone_numbers_Decode_Int(const Packet_Info* data, const kcg_int* stream, Onboard_telephone_numbers_Core* p)
+{
+    std::cerr << "decode int function not implemented for packet 3 yet." << std::endl;
+    return 0;
 }
 

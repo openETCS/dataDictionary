@@ -3,6 +3,7 @@
 #define POSITION_REPORT_PARAMETERS_CORE_1_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Position_Report_Parameters_Core_1
 {
@@ -91,7 +92,7 @@ int Position_Report_Parameters_Core_1_UpperBitsNotSet(const Position_Report_Para
     complete behaviors;
     disjoint behaviors;
 */
-int Position_Report_Parameters_Core_1_Encoder(Bitstream* stream, const Position_Report_Parameters_Core_1* p);
+int Position_Report_Parameters_Core_1_Encode_Bit(Bitstream* stream, const Position_Report_Parameters_Core_1* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -126,7 +127,11 @@ int Position_Report_Parameters_Core_1_Encoder(Bitstream* stream, const Position_
     complete behaviors;
     disjoint behaviors;
 */
-int Position_Report_Parameters_Core_1_Decoder(Bitstream* stream, Position_Report_Parameters_Core_1* p);
+int Position_Report_Parameters_Core_1_Decode_Bit(Bitstream* stream, Position_Report_Parameters_Core_1* p);
+
+int Position_Report_Parameters_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Position_Report_Parameters_Core_1* p);
+
+int Position_Report_Parameters_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, Position_Report_Parameters_Core_1* p);
 
 #ifdef __cplusplus
 
@@ -158,12 +163,22 @@ inline bool operator!=(const Position_Report_Parameters_Core_1& a, const Positio
 
 inline int encode(Bitstream& stream, const Position_Report_Parameters_Core_1& p)
 {
-    return Position_Report_Parameters_Core_1_Encoder(&stream, &p);
+    return Position_Report_Parameters_Core_1_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Position_Report_Parameters_Core_1& p)
 {
-    return Position_Report_Parameters_Core_1_Decoder(&stream, &p);
+    return Position_Report_Parameters_Core_1_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Position_Report_Parameters_Core_1& p)
+{
+    return Position_Report_Parameters_Core_1_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Position_Report_Parameters_Core_1& p)
+{
+    return Position_Report_Parameters_Core_1_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

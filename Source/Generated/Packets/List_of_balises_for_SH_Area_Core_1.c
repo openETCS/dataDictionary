@@ -23,7 +23,7 @@ int List_of_balises_for_SH_Area_Core_1_UpperBitsNotSet(const List_of_balises_for
     }
 }
 
-int List_of_balises_for_SH_Area_Core_1_Encoder(Bitstream* stream, const List_of_balises_for_SH_Area_Core_1* p)
+int List_of_balises_for_SH_Area_Core_1_Encode_Bit(Bitstream* stream, const List_of_balises_for_SH_Area_Core_1* p)
 {
     if (Bitstream_Normal(stream, LIST_OF_BALISES_FOR_SH_AREA_CORE_1_CORE_BITSIZE))
     {
@@ -55,7 +55,7 @@ int List_of_balises_for_SH_Area_Core_1_Encoder(Bitstream* stream, const List_of_
     }
 }
 
-int List_of_balises_for_SH_Area_Core_1_Decoder(Bitstream* stream, List_of_balises_for_SH_Area_Core_1* p)
+int List_of_balises_for_SH_Area_Core_1_Decode_Bit(Bitstream* stream, List_of_balises_for_SH_Area_Core_1* p)
 {
     if (Bitstream_Normal(stream, LIST_OF_BALISES_FOR_SH_AREA_CORE_1_CORE_BITSIZE))
     {
@@ -97,5 +97,17 @@ int List_of_balises_for_SH_Area_Core_1_Decoder(Bitstream* stream, List_of_balise
     {
         return 0;
     }
+}
+
+int List_of_balises_for_SH_Area_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const List_of_balises_for_SH_Area_Core_1* p)
+{
+    std::cerr << "encode int function not implemented for packet 49 yet." << std::endl;
+    return 0;
+}
+
+int List_of_balises_for_SH_Area_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, List_of_balises_for_SH_Area_Core_1* p)
+{
+    std::cerr << "decode int function not implemented for packet  49 yet." << std::endl;
+    return 0;
 }
 

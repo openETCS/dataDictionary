@@ -3,6 +3,7 @@
 #define ONBOARD_TELEPHONE_NUMBERS_CORE_1_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Onboard_telephone_numbers_Core_1
 {
@@ -86,7 +87,7 @@ int Onboard_telephone_numbers_Core_1_UpperBitsNotSet(const Onboard_telephone_num
     complete behaviors;
     disjoint behaviors;
 */
-int Onboard_telephone_numbers_Core_1_Encoder(Bitstream* stream, const Onboard_telephone_numbers_Core_1* p);
+int Onboard_telephone_numbers_Core_1_Encode_Bit(Bitstream* stream, const Onboard_telephone_numbers_Core_1* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -121,7 +122,11 @@ int Onboard_telephone_numbers_Core_1_Encoder(Bitstream* stream, const Onboard_te
     complete behaviors;
     disjoint behaviors;
 */
-int Onboard_telephone_numbers_Core_1_Decoder(Bitstream* stream, Onboard_telephone_numbers_Core_1* p);
+int Onboard_telephone_numbers_Core_1_Decode_Bit(Bitstream* stream, Onboard_telephone_numbers_Core_1* p);
+
+int Onboard_telephone_numbers_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Onboard_telephone_numbers_Core_1* p);
+
+int Onboard_telephone_numbers_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, Onboard_telephone_numbers_Core_1* p);
 
 #ifdef __cplusplus
 
@@ -151,12 +156,22 @@ inline bool operator!=(const Onboard_telephone_numbers_Core_1& a, const Onboard_
 
 inline int encode(Bitstream& stream, const Onboard_telephone_numbers_Core_1& p)
 {
-    return Onboard_telephone_numbers_Core_1_Encoder(&stream, &p);
+    return Onboard_telephone_numbers_Core_1_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Onboard_telephone_numbers_Core_1& p)
 {
-    return Onboard_telephone_numbers_Core_1_Decoder(&stream, &p);
+    return Onboard_telephone_numbers_Core_1_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Onboard_telephone_numbers_Core_1& p)
+{
+    return Onboard_telephone_numbers_Core_1_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Onboard_telephone_numbers_Core_1& p)
+{
+    return Onboard_telephone_numbers_Core_1_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

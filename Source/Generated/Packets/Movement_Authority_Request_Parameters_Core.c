@@ -22,7 +22,7 @@ int Movement_Authority_Request_Parameters_UpperBitsNotSet(const Movement_Authori
     }
 }
 
-int Movement_Authority_Request_Parameters_Encoder(Bitstream* stream, const Movement_Authority_Request_Parameters_Core* p)
+int Movement_Authority_Request_Parameters_Encode_Bit(Bitstream* stream, const Movement_Authority_Request_Parameters_Core* p)
 {
     if (Bitstream_Normal(stream, MOVEMENT_AUTHORITY_REQUEST_PARAMETERS_CORE_BITSIZE))
     {
@@ -56,7 +56,7 @@ int Movement_Authority_Request_Parameters_Encoder(Bitstream* stream, const Movem
     }
 }
 
-int Movement_Authority_Request_Parameters_Decoder(Bitstream* stream, Movement_Authority_Request_Parameters_Core* p)
+int Movement_Authority_Request_Parameters_Decode_Bit(Bitstream* stream, Movement_Authority_Request_Parameters_Core* p)
 {
     if (Bitstream_Normal(stream, MOVEMENT_AUTHORITY_REQUEST_PARAMETERS_CORE_BITSIZE))
     {
@@ -142,5 +142,36 @@ int Movement_Authority_Request_Parameters_Decoder(Bitstream* stream, Movement_Au
     {
         return 0;
     }
+}
+
+int Movement_Authority_Request_Parameters_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Movement_Authority_Request_Parameters_Core* p)
+{
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->T_MAR;
+    stream[startAddress++] = p->T_TIMEOUTRQST;
+    stream[startAddress++] = p->T_CYCRQST;
+
+    data->endAddress = startAddress-1;
+
+    return 1;
+}
+
+int Movement_Authority_Request_Parameters_Decode_Int(const Packet_Info* data, const kcg_int* stream, Movement_Authority_Request_Parameters_Core* p)
+{
+    kcg_int startAddress = data->startAddress+1;
+
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->T_MAR = stream[startAddress++];
+    p->T_TIMEOUTRQST = stream[startAddress++];
+    p->T_CYCRQST = stream[startAddress++];
+
+    if(data->endAddress != startAddress-1)
+    {
+        return false;
+    }
+
+    return 1;
 }
 

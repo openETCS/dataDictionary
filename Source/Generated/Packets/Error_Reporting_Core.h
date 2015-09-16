@@ -3,6 +3,7 @@
 #define ERROR_REPORTING_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Error_Reporting_Core
 {
@@ -94,7 +95,7 @@ int Error_Reporting_UpperBitsNotSet(const Error_Reporting_Core* p);
     complete behaviors;
     disjoint behaviors;
 */
-int Error_Reporting_Encoder(Bitstream* stream, const Error_Reporting_Core* p);
+int Error_Reporting_Encode_Bit(Bitstream* stream, const Error_Reporting_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -129,7 +130,11 @@ int Error_Reporting_Encoder(Bitstream* stream, const Error_Reporting_Core* p);
     complete behaviors;
     disjoint behaviors;
 */
-int Error_Reporting_Decoder(Bitstream* stream, Error_Reporting_Core* p);
+int Error_Reporting_Decode_Bit(Bitstream* stream, Error_Reporting_Core* p);
+
+int Error_Reporting_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Error_Reporting_Core* p);
+
+int Error_Reporting_Decode_Int(const Packet_Info* data, const kcg_int* stream, Error_Reporting_Core* p);
 
 #ifdef __cplusplus
 
@@ -161,12 +166,22 @@ inline bool operator!=(const Error_Reporting_Core& a, const Error_Reporting_Core
 
 inline int encode(Bitstream& stream, const Error_Reporting_Core& p)
 {
-    return Error_Reporting_Encoder(&stream, &p);
+    return Error_Reporting_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Error_Reporting_Core& p)
 {
-    return Error_Reporting_Decoder(&stream, &p);
+    return Error_Reporting_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Error_Reporting_Core& p)
+{
+    return Error_Reporting_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Error_Reporting_Core& p)
+{
+    return Error_Reporting_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

@@ -3,6 +3,7 @@
 #define INHIBITION_OF_BALISE_GROUP_MESSAGE_CONSISTENCY_REACTION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Inhibition_of_balise_group_message_consistency_reaction_Core
 {
@@ -97,7 +98,7 @@ int Inhibition_of_balise_group_message_consistency_reaction_UpperBitsNotSet(cons
     complete behaviors;
     disjoint behaviors;
 */
-int Inhibition_of_balise_group_message_consistency_reaction_Encoder(Bitstream* stream, const Inhibition_of_balise_group_message_consistency_reaction_Core* p);
+int Inhibition_of_balise_group_message_consistency_reaction_Encode_Bit(Bitstream* stream, const Inhibition_of_balise_group_message_consistency_reaction_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -132,7 +133,11 @@ int Inhibition_of_balise_group_message_consistency_reaction_Encoder(Bitstream* s
     complete behaviors;
     disjoint behaviors;
 */
-int Inhibition_of_balise_group_message_consistency_reaction_Decoder(Bitstream* stream, Inhibition_of_balise_group_message_consistency_reaction_Core* p);
+int Inhibition_of_balise_group_message_consistency_reaction_Decode_Bit(Bitstream* stream, Inhibition_of_balise_group_message_consistency_reaction_Core* p);
+
+int Inhibition_of_balise_group_message_consistency_reaction_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Inhibition_of_balise_group_message_consistency_reaction_Core* p);
+
+int Inhibition_of_balise_group_message_consistency_reaction_Decode_Int(const Packet_Info* data, const kcg_int* stream, Inhibition_of_balise_group_message_consistency_reaction_Core* p);
 
 #ifdef __cplusplus
 
@@ -164,12 +169,22 @@ inline bool operator!=(const Inhibition_of_balise_group_message_consistency_reac
 
 inline int encode(Bitstream& stream, const Inhibition_of_balise_group_message_consistency_reaction_Core& p)
 {
-    return Inhibition_of_balise_group_message_consistency_reaction_Encoder(&stream, &p);
+    return Inhibition_of_balise_group_message_consistency_reaction_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Inhibition_of_balise_group_message_consistency_reaction_Core& p)
 {
-    return Inhibition_of_balise_group_message_consistency_reaction_Decoder(&stream, &p);
+    return Inhibition_of_balise_group_message_consistency_reaction_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Inhibition_of_balise_group_message_consistency_reaction_Core& p)
+{
+    return Inhibition_of_balise_group_message_consistency_reaction_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Inhibition_of_balise_group_message_consistency_reaction_Core& p)
+{
+    return Inhibition_of_balise_group_message_consistency_reaction_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

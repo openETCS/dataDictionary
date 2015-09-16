@@ -19,7 +19,7 @@ int Error_Reporting_UpperBitsNotSet(const Error_Reporting_Core* p)
     }
 }
 
-int Error_Reporting_Encoder(Bitstream* stream, const Error_Reporting_Core* p)
+int Error_Reporting_Encode_Bit(Bitstream* stream, const Error_Reporting_Core* p)
 {
     if (Bitstream_Normal(stream, ERROR_REPORTING_CORE_BITSIZE))
     {
@@ -47,7 +47,7 @@ int Error_Reporting_Encoder(Bitstream* stream, const Error_Reporting_Core* p)
     }
 }
 
-int Error_Reporting_Decoder(Bitstream* stream, Error_Reporting_Core* p)
+int Error_Reporting_Decode_Bit(Bitstream* stream, Error_Reporting_Core* p)
 {
     if (Bitstream_Normal(stream, ERROR_REPORTING_CORE_BITSIZE))
     {
@@ -91,5 +91,30 @@ int Error_Reporting_Decoder(Bitstream* stream, Error_Reporting_Core* p)
     {
         return 0;
     }
+}
+
+int Error_Reporting_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Error_Reporting_Core* p)
+{
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->M_ERROR;
+
+    data->endAddress = startAddress-1;
+
+    return 1;
+}
+
+int Error_Reporting_Decode_Int(const Packet_Info* data, const kcg_int* stream, Error_Reporting_Core* p)
+{
+    kcg_int startAddress = data->startAddress+1;
+
+    p->L_PACKET = stream[startAddress++];
+    p->M_ERROR = stream[startAddress++];
+
+    if(data->endAddress != startAddress-1)
+    {
+        return false;
+    }
+
+    return 1;
 }
 

@@ -21,7 +21,7 @@ int Track_Condition_Station_Platforms_Core_1_UpperBitsNotSet(const Track_Conditi
     }
 }
 
-int Track_Condition_Station_Platforms_Core_1_Encoder(Bitstream* stream, const Track_Condition_Station_Platforms_Core_1* p)
+int Track_Condition_Station_Platforms_Core_1_Encode_Bit(Bitstream* stream, const Track_Condition_Station_Platforms_Core_1* p)
 {
     if (Bitstream_Normal(stream, TRACK_CONDITION_STATION_PLATFORMS_CORE_1_CORE_BITSIZE))
     {
@@ -53,7 +53,7 @@ int Track_Condition_Station_Platforms_Core_1_Encoder(Bitstream* stream, const Tr
     }
 }
 
-int Track_Condition_Station_Platforms_Core_1_Decoder(Bitstream* stream, Track_Condition_Station_Platforms_Core_1* p)
+int Track_Condition_Station_Platforms_Core_1_Decode_Bit(Bitstream* stream, Track_Condition_Station_Platforms_Core_1* p)
 {
     if (Bitstream_Normal(stream, TRACK_CONDITION_STATION_PLATFORMS_CORE_1_CORE_BITSIZE))
     {
@@ -125,5 +125,17 @@ int Track_Condition_Station_Platforms_Core_1_Decoder(Bitstream* stream, Track_Co
     {
         return 0;
     }
+}
+
+int Track_Condition_Station_Platforms_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Track_Condition_Station_Platforms_Core_1* p)
+{
+    std::cerr << "encode int function not implemented for packet 69 yet." << std::endl;
+    return 0;
+}
+
+int Track_Condition_Station_Platforms_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, Track_Condition_Station_Platforms_Core_1* p)
+{
+    std::cerr << "decode int function not implemented for packet  69 yet." << std::endl;
+    return 0;
 }
 

@@ -3,6 +3,7 @@
 #define TEMPORARY_SPEED_RESTRICTION_REVOCATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Temporary_Speed_Restriction_Revocation_Core
 {
@@ -99,7 +100,7 @@ int Temporary_Speed_Restriction_Revocation_UpperBitsNotSet(const Temporary_Speed
     complete behaviors;
     disjoint behaviors;
 */
-int Temporary_Speed_Restriction_Revocation_Encoder(Bitstream* stream, const Temporary_Speed_Restriction_Revocation_Core* p);
+int Temporary_Speed_Restriction_Revocation_Encode_Bit(Bitstream* stream, const Temporary_Speed_Restriction_Revocation_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -134,7 +135,11 @@ int Temporary_Speed_Restriction_Revocation_Encoder(Bitstream* stream, const Temp
     complete behaviors;
     disjoint behaviors;
 */
-int Temporary_Speed_Restriction_Revocation_Decoder(Bitstream* stream, Temporary_Speed_Restriction_Revocation_Core* p);
+int Temporary_Speed_Restriction_Revocation_Decode_Bit(Bitstream* stream, Temporary_Speed_Restriction_Revocation_Core* p);
+
+int Temporary_Speed_Restriction_Revocation_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Temporary_Speed_Restriction_Revocation_Core* p);
+
+int Temporary_Speed_Restriction_Revocation_Decode_Int(const Packet_Info* data, const kcg_int* stream, Temporary_Speed_Restriction_Revocation_Core* p);
 
 #ifdef __cplusplus
 
@@ -168,12 +173,22 @@ inline bool operator!=(const Temporary_Speed_Restriction_Revocation_Core& a, con
 
 inline int encode(Bitstream& stream, const Temporary_Speed_Restriction_Revocation_Core& p)
 {
-    return Temporary_Speed_Restriction_Revocation_Encoder(&stream, &p);
+    return Temporary_Speed_Restriction_Revocation_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Temporary_Speed_Restriction_Revocation_Core& p)
 {
-    return Temporary_Speed_Restriction_Revocation_Decoder(&stream, &p);
+    return Temporary_Speed_Restriction_Revocation_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Temporary_Speed_Restriction_Revocation_Core& p)
+{
+    return Temporary_Speed_Restriction_Revocation_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Temporary_Speed_Restriction_Revocation_Core& p)
+{
+    return Temporary_Speed_Restriction_Revocation_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

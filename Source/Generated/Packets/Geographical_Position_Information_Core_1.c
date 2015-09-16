@@ -26,7 +26,7 @@ int Geographical_Position_Information_Core_1_UpperBitsNotSet(const Geographical_
     }
 }
 
-int Geographical_Position_Information_Core_1_Encoder(Bitstream* stream, const Geographical_Position_Information_Core_1* p)
+int Geographical_Position_Information_Core_1_Encode_Bit(Bitstream* stream, const Geographical_Position_Information_Core_1* p)
 {
     if (Bitstream_Normal(stream, GEOGRAPHICAL_POSITION_INFORMATION_CORE_1_CORE_BITSIZE))
     {
@@ -61,7 +61,7 @@ int Geographical_Position_Information_Core_1_Encoder(Bitstream* stream, const Ge
     }
 }
 
-int Geographical_Position_Information_Core_1_Decoder(Bitstream* stream, Geographical_Position_Information_Core_1* p)
+int Geographical_Position_Information_Core_1_Decode_Bit(Bitstream* stream, Geographical_Position_Information_Core_1* p)
 {
     if (Bitstream_Normal(stream, GEOGRAPHICAL_POSITION_INFORMATION_CORE_1_CORE_BITSIZE))
     {
@@ -115,5 +115,17 @@ int Geographical_Position_Information_Core_1_Decoder(Bitstream* stream, Geograph
     {
         return 0;
     }
+}
+
+int Geographical_Position_Information_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Geographical_Position_Information_Core_1* p)
+{
+    std::cerr << "encode int function not implemented for packet 79 yet." << std::endl;
+    return 0;
+}
+
+int Geographical_Position_Information_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, Geographical_Position_Information_Core_1* p)
+{
+    std::cerr << "decode int function not implemented for packet  79 yet." << std::endl;
+    return 0;
 }
 

@@ -5,6 +5,7 @@
 #include "Bitstream.h"
 #include "Axle_Load_Speed_Profile_Core_1.h"
 #include "Axle_Load_Speed_Profile_Core_2.h"
+#include "Compressed_Packets.h"
 
 struct Axle_Load_Speed_Profile_Core
 {
@@ -116,7 +117,7 @@ int Axle_Load_Speed_Profile_UpperBitsNotSet(const Axle_Load_Speed_Profile_Core* 
     complete behaviors;
     disjoint behaviors;
 */
-int Axle_Load_Speed_Profile_Encoder(Bitstream* stream, const Axle_Load_Speed_Profile_Core* p);
+int Axle_Load_Speed_Profile_Encode_Bit(Bitstream* stream, const Axle_Load_Speed_Profile_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -151,7 +152,11 @@ int Axle_Load_Speed_Profile_Encoder(Bitstream* stream, const Axle_Load_Speed_Pro
     complete behaviors;
     disjoint behaviors;
 */
-int Axle_Load_Speed_Profile_Decoder(Bitstream* stream, Axle_Load_Speed_Profile_Core* p);
+int Axle_Load_Speed_Profile_Decode_Bit(Bitstream* stream, Axle_Load_Speed_Profile_Core* p);
+
+int Axle_Load_Speed_Profile_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Axle_Load_Speed_Profile_Core* p);
+
+int Axle_Load_Speed_Profile_Decode_Int(const Packet_Info* data, const kcg_int* stream, Axle_Load_Speed_Profile_Core* p);
 
 #ifdef __cplusplus
 
@@ -239,12 +244,22 @@ inline bool operator!=(const Axle_Load_Speed_Profile_Core& a, const Axle_Load_Sp
 
 inline int encode(Bitstream& stream, const Axle_Load_Speed_Profile_Core& p)
 {
-    return Axle_Load_Speed_Profile_Encoder(&stream, &p);
+    return Axle_Load_Speed_Profile_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Axle_Load_Speed_Profile_Core& p)
 {
-    return Axle_Load_Speed_Profile_Decoder(&stream, &p);
+    return Axle_Load_Speed_Profile_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Axle_Load_Speed_Profile_Core& p)
+{
+    return Axle_Load_Speed_Profile_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Axle_Load_Speed_Profile_Core& p)
+{
+    return Axle_Load_Speed_Profile_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

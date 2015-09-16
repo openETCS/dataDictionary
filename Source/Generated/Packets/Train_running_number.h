@@ -42,6 +42,29 @@ struct Train_running_number : public BasePacket
         return ::decode(stream, core);
     }
 
+    int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress) const override
+    {
+        data.nid_packet = 5;
+	data.valid = 1;
+	data.startAddress = startAddress;
+
+	stream[startAddress++] = header.NID_PACKET;
+
+	return ::encode(data, stream, startAddress, core);
+    }
+
+    int decode(const Packet_Info& data, const kcg_int* stream) override
+    {
+        if(data.nid_packet != 5)
+	{
+	    return 0;
+	}
+
+	header.NID_PACKET = stream[data.startAddress];
+
+	return ::decode(data, stream, core);
+    }
+
 };
 
 typedef std::shared_ptr<Train_running_number> Train_running_numberPtr;

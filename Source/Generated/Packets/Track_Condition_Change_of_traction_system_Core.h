@@ -3,6 +3,7 @@
 #define TRACK_CONDITION_CHANGE_OF_TRACTION_SYSTEM_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Track_Condition_Change_of_traction_system_Core
 {
@@ -110,7 +111,7 @@ int Track_Condition_Change_of_traction_system_UpperBitsNotSet(const Track_Condit
     complete behaviors;
     disjoint behaviors;
 */
-int Track_Condition_Change_of_traction_system_Encoder(Bitstream* stream, const Track_Condition_Change_of_traction_system_Core* p);
+int Track_Condition_Change_of_traction_system_Encode_Bit(Bitstream* stream, const Track_Condition_Change_of_traction_system_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -145,7 +146,11 @@ int Track_Condition_Change_of_traction_system_Encoder(Bitstream* stream, const T
     complete behaviors;
     disjoint behaviors;
 */
-int Track_Condition_Change_of_traction_system_Decoder(Bitstream* stream, Track_Condition_Change_of_traction_system_Core* p);
+int Track_Condition_Change_of_traction_system_Decode_Bit(Bitstream* stream, Track_Condition_Change_of_traction_system_Core* p);
+
+int Track_Condition_Change_of_traction_system_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Track_Condition_Change_of_traction_system_Core* p);
+
+int Track_Condition_Change_of_traction_system_Decode_Int(const Packet_Info* data, const kcg_int* stream, Track_Condition_Change_of_traction_system_Core* p);
 
 #ifdef __cplusplus
 
@@ -189,12 +194,22 @@ inline bool operator!=(const Track_Condition_Change_of_traction_system_Core& a, 
 
 inline int encode(Bitstream& stream, const Track_Condition_Change_of_traction_system_Core& p)
 {
-    return Track_Condition_Change_of_traction_system_Encoder(&stream, &p);
+    return Track_Condition_Change_of_traction_system_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Track_Condition_Change_of_traction_system_Core& p)
 {
-    return Track_Condition_Change_of_traction_system_Decoder(&stream, &p);
+    return Track_Condition_Change_of_traction_system_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Track_Condition_Change_of_traction_system_Core& p)
+{
+    return Track_Condition_Change_of_traction_system_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Track_Condition_Change_of_traction_system_Core& p)
+{
+    return Track_Condition_Change_of_traction_system_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

@@ -33,7 +33,7 @@ int International_Static_Speed_Profile_UpperBitsNotSet(const International_Stati
     }
 }
 
-int International_Static_Speed_Profile_Encoder(Bitstream* stream, const International_Static_Speed_Profile_Core* p)
+int International_Static_Speed_Profile_Encode_Bit(Bitstream* stream, const International_Static_Speed_Profile_Core* p)
 {
     if (Bitstream_Normal(stream, INTERNATIONAL_STATIC_SPEED_PROFILE_CORE_BITSIZE))
     {
@@ -50,12 +50,12 @@ int International_Static_Speed_Profile_Encoder(Bitstream* stream, const Internat
             Bitstream_Write(stream, 5,  p->N_ITER_1);
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
-                International_Static_Speed_Profile_Core_1_Encoder(stream, &(p->sub_1[i]));
+                International_Static_Speed_Profile_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
             }
             Bitstream_Write(stream, 5,  p->N_ITER_2);
             for (uint32_t i = 0; i < p->N_ITER_2; ++i)
             {
-                International_Static_Speed_Profile_Core_2_Encoder(stream, &(p->sub_2[i]));
+                International_Static_Speed_Profile_Core_2_Encode_Bit(stream, &(p->sub_2[i]));
             }
 
 
@@ -79,7 +79,7 @@ int International_Static_Speed_Profile_Encoder(Bitstream* stream, const Internat
     }
 }
 
-int International_Static_Speed_Profile_Decoder(Bitstream* stream, International_Static_Speed_Profile_Core* p)
+int International_Static_Speed_Profile_Decode_Bit(Bitstream* stream, International_Static_Speed_Profile_Core* p)
 {
     if (Bitstream_Normal(stream, INTERNATIONAL_STATIC_SPEED_PROFILE_CORE_BITSIZE))
     {
@@ -163,7 +163,7 @@ int International_Static_Speed_Profile_Decoder(Bitstream* stream, International_
 
         for (uint32_t i = 0; i < p->N_ITER_1; ++i)
         {
-            International_Static_Speed_Profile_Core_1_Decoder(stream, &(p->sub_1[i]));
+            International_Static_Speed_Profile_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
         }
     {
             p->N_ITER_2        = Bitstream_Read(stream, 5);
@@ -171,7 +171,7 @@ int International_Static_Speed_Profile_Decoder(Bitstream* stream, International_
 
         for (uint32_t i = 0; i < p->N_ITER_2; ++i)
         {
-            International_Static_Speed_Profile_Core_2_Decoder(stream, &(p->sub_2[i]));
+            International_Static_Speed_Profile_Core_2_Decode_Bit(stream, &(p->sub_2[i]));
         }
         //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
         //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
@@ -195,5 +195,17 @@ int International_Static_Speed_Profile_Decoder(Bitstream* stream, International_
     {
         return 0;
     }
+}
+
+int International_Static_Speed_Profile_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const International_Static_Speed_Profile_Core* p)
+{
+    std::cerr << "encode int function not implemented for packet 27 yet." << std::endl;
+    return 0;
+}
+
+int International_Static_Speed_Profile_Decode_Int(const Packet_Info* data, const kcg_int* stream, International_Static_Speed_Profile_Core* p)
+{
+    std::cerr << "decode int function not implemented for packet 27 yet." << std::endl;
+    return 0;
 }
 

@@ -20,7 +20,7 @@ int Stop_if_in_Staff_Responsible_UpperBitsNotSet(const Stop_if_in_Staff_Responsi
     }
 }
 
-int Stop_if_in_Staff_Responsible_Encoder(Bitstream* stream, const Stop_if_in_Staff_Responsible_Core* p)
+int Stop_if_in_Staff_Responsible_Encode_Bit(Bitstream* stream, const Stop_if_in_Staff_Responsible_Core* p)
 {
     if (Bitstream_Normal(stream, STOP_IF_IN_STAFF_RESPONSIBLE_CORE_BITSIZE))
     {
@@ -50,7 +50,7 @@ int Stop_if_in_Staff_Responsible_Encoder(Bitstream* stream, const Stop_if_in_Sta
     }
 }
 
-int Stop_if_in_Staff_Responsible_Decoder(Bitstream* stream, Stop_if_in_Staff_Responsible_Core* p)
+int Stop_if_in_Staff_Responsible_Decode_Bit(Bitstream* stream, Stop_if_in_Staff_Responsible_Core* p)
 {
     if (Bitstream_Normal(stream, STOP_IF_IN_STAFF_RESPONSIBLE_CORE_BITSIZE))
     {
@@ -108,5 +108,32 @@ int Stop_if_in_Staff_Responsible_Decoder(Bitstream* stream, Stop_if_in_Staff_Res
     {
         return 0;
     }
+}
+
+int Stop_if_in_Staff_Responsible_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Stop_if_in_Staff_Responsible_Core* p)
+{
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->Q_SRSTOP;
+
+    data->endAddress = startAddress-1;
+
+    return 1;
+}
+
+int Stop_if_in_Staff_Responsible_Decode_Int(const Packet_Info* data, const kcg_int* stream, Stop_if_in_Staff_Responsible_Core* p)
+{
+    kcg_int startAddress = data->startAddress+1;
+
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->Q_SRSTOP = stream[startAddress++];
+
+    if(data->endAddress != startAddress-1)
+    {
+        return false;
+    }
+
+    return 1;
 }
 

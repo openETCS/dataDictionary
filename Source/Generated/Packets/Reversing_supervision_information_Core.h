@@ -3,6 +3,7 @@
 #define REVERSING_SUPERVISION_INFORMATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Reversing_supervision_information_Core
 {
@@ -110,7 +111,7 @@ int Reversing_supervision_information_UpperBitsNotSet(const Reversing_supervisio
     complete behaviors;
     disjoint behaviors;
 */
-int Reversing_supervision_information_Encoder(Bitstream* stream, const Reversing_supervision_information_Core* p);
+int Reversing_supervision_information_Encode_Bit(Bitstream* stream, const Reversing_supervision_information_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -145,7 +146,11 @@ int Reversing_supervision_information_Encoder(Bitstream* stream, const Reversing
     complete behaviors;
     disjoint behaviors;
 */
-int Reversing_supervision_information_Decoder(Bitstream* stream, Reversing_supervision_information_Core* p);
+int Reversing_supervision_information_Decode_Bit(Bitstream* stream, Reversing_supervision_information_Core* p);
+
+int Reversing_supervision_information_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Reversing_supervision_information_Core* p);
+
+int Reversing_supervision_information_Decode_Int(const Packet_Info* data, const kcg_int* stream, Reversing_supervision_information_Core* p);
 
 #ifdef __cplusplus
 
@@ -183,12 +188,22 @@ inline bool operator!=(const Reversing_supervision_information_Core& a, const Re
 
 inline int encode(Bitstream& stream, const Reversing_supervision_information_Core& p)
 {
-    return Reversing_supervision_information_Encoder(&stream, &p);
+    return Reversing_supervision_information_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Reversing_supervision_information_Core& p)
 {
-    return Reversing_supervision_information_Decoder(&stream, &p);
+    return Reversing_supervision_information_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Reversing_supervision_information_Core& p)
+{
+    return Reversing_supervision_information_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Reversing_supervision_information_Core& p)
+{
+    return Reversing_supervision_information_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

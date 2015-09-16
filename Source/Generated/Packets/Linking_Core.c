@@ -35,7 +35,7 @@ int Linking_UpperBitsNotSet(const Linking_Core* p)
     }
 }
 
-int Linking_Encoder(Bitstream* stream, const Linking_Core* p)
+int Linking_Encode_Bit(Bitstream* stream, const Linking_Core* p)
 {
     if (Bitstream_Normal(stream, LINKING_CORE_BITSIZE))
     {
@@ -60,7 +60,7 @@ int Linking_Encoder(Bitstream* stream, const Linking_Core* p)
             Bitstream_Write(stream, 5,  p->N_ITER_1);
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
-                Linking_Core_1_Encoder(stream, &(p->sub_1[i]));
+                Linking_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
             }
 
 
@@ -83,7 +83,7 @@ int Linking_Encoder(Bitstream* stream, const Linking_Core* p)
     }
 }
 
-int Linking_Decoder(Bitstream* stream, Linking_Core* p)
+int Linking_Decode_Bit(Bitstream* stream, Linking_Core* p)
 {
     if (Bitstream_Normal(stream, LINKING_CORE_BITSIZE))
     {
@@ -179,7 +179,7 @@ int Linking_Decoder(Bitstream* stream, Linking_Core* p)
 
         for (uint32_t i = 0; i < p->N_ITER_1; ++i)
         {
-            Linking_Core_1_Decoder(stream, &(p->sub_1[i]));
+            Linking_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
         }
         //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
         //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
@@ -201,5 +201,17 @@ int Linking_Decoder(Bitstream* stream, Linking_Core* p)
     {
         return 0;
     }
+}
+
+int Linking_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Linking_Core* p)
+{
+    std::cerr << "encode int function not implemented for packet 5 yet." << std::endl;
+    return 0;
+}
+
+int Linking_Decode_Int(const Packet_Info* data, const kcg_int* stream, Linking_Core* p)
+{
+    std::cerr << "decode int function not implemented for packet 5 yet." << std::endl;
+    return 0;
 }
 

@@ -51,7 +51,7 @@ int Packet_for_sending_plain_text_messages_UpperBitsNotSet(const Packet_for_send
     }
 }
 
-int Packet_for_sending_plain_text_messages_Encoder(Bitstream* stream, const Packet_for_sending_plain_text_messages_Core* p)
+int Packet_for_sending_plain_text_messages_Encode_Bit(Bitstream* stream, const Packet_for_sending_plain_text_messages_Core* p)
 {
     if (Bitstream_Normal(stream, PACKET_FOR_SENDING_PLAIN_TEXT_MESSAGES_CORE_BITSIZE))
     {
@@ -121,7 +121,7 @@ int Packet_for_sending_plain_text_messages_Encoder(Bitstream* stream, const Pack
     }
 }
 
-int Packet_for_sending_plain_text_messages_Decoder(Bitstream* stream, Packet_for_sending_plain_text_messages_Core* p)
+int Packet_for_sending_plain_text_messages_Decode_Bit(Bitstream* stream, Packet_for_sending_plain_text_messages_Core* p)
 {
     if (Bitstream_Normal(stream, PACKET_FOR_SENDING_PLAIN_TEXT_MESSAGES_CORE_BITSIZE))
     {
@@ -321,5 +321,17 @@ int Packet_for_sending_plain_text_messages_Decoder(Bitstream* stream, Packet_for
     {
         return 0;
     }
+}
+
+int Packet_for_sending_plain_text_messages_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Packet_for_sending_plain_text_messages_Core* p)
+{
+    std::cerr << "encode int function not implemented for packet 72 yet." << std::endl;
+    return 0;
+}
+
+int Packet_for_sending_plain_text_messages_Decode_Int(const Packet_Info* data, const kcg_int* stream, Packet_for_sending_plain_text_messages_Core* p)
+{
+    std::cerr << "decode int function not implemented for packet 72 yet." << std::endl;
+    return 0;
 }
 

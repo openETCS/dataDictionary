@@ -4,6 +4,7 @@
 
 #include "Bitstream.h"
 #include "Gradient_Profile_Core_1.h"
+#include "Compressed_Packets.h"
 
 struct Gradient_Profile_Core
 {
@@ -119,7 +120,7 @@ int Gradient_Profile_UpperBitsNotSet(const Gradient_Profile_Core* p);
     complete behaviors;
     disjoint behaviors;
 */
-int Gradient_Profile_Encoder(Bitstream* stream, const Gradient_Profile_Core* p);
+int Gradient_Profile_Encode_Bit(Bitstream* stream, const Gradient_Profile_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -154,7 +155,11 @@ int Gradient_Profile_Encoder(Bitstream* stream, const Gradient_Profile_Core* p);
     complete behaviors;
     disjoint behaviors;
 */
-int Gradient_Profile_Decoder(Bitstream* stream, Gradient_Profile_Core* p);
+int Gradient_Profile_Decode_Bit(Bitstream* stream, Gradient_Profile_Core* p);
+
+int Gradient_Profile_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Gradient_Profile_Core* p);
+
+int Gradient_Profile_Decode_Int(const Packet_Info* data, const kcg_int* stream, Gradient_Profile_Core* p);
 
 #ifdef __cplusplus
 
@@ -212,12 +217,22 @@ inline bool operator!=(const Gradient_Profile_Core& a, const Gradient_Profile_Co
 
 inline int encode(Bitstream& stream, const Gradient_Profile_Core& p)
 {
-    return Gradient_Profile_Encoder(&stream, &p);
+    return Gradient_Profile_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Gradient_Profile_Core& p)
 {
-    return Gradient_Profile_Decoder(&stream, &p);
+    return Gradient_Profile_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Gradient_Profile_Core& p)
+{
+    return Gradient_Profile_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Gradient_Profile_Core& p)
+{
+    return Gradient_Profile_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

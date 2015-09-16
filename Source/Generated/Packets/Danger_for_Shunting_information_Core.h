@@ -3,6 +3,7 @@
 #define DANGER_FOR_SHUNTING_INFORMATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Danger_for_Shunting_information_Core
 {
@@ -99,7 +100,7 @@ int Danger_for_Shunting_information_UpperBitsNotSet(const Danger_for_Shunting_in
     complete behaviors;
     disjoint behaviors;
 */
-int Danger_for_Shunting_information_Encoder(Bitstream* stream, const Danger_for_Shunting_information_Core* p);
+int Danger_for_Shunting_information_Encode_Bit(Bitstream* stream, const Danger_for_Shunting_information_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -134,7 +135,11 @@ int Danger_for_Shunting_information_Encoder(Bitstream* stream, const Danger_for_
     complete behaviors;
     disjoint behaviors;
 */
-int Danger_for_Shunting_information_Decoder(Bitstream* stream, Danger_for_Shunting_information_Core* p);
+int Danger_for_Shunting_information_Decode_Bit(Bitstream* stream, Danger_for_Shunting_information_Core* p);
+
+int Danger_for_Shunting_information_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Danger_for_Shunting_information_Core* p);
+
+int Danger_for_Shunting_information_Decode_Int(const Packet_Info* data, const kcg_int* stream, Danger_for_Shunting_information_Core* p);
 
 #ifdef __cplusplus
 
@@ -168,12 +173,22 @@ inline bool operator!=(const Danger_for_Shunting_information_Core& a, const Dang
 
 inline int encode(Bitstream& stream, const Danger_for_Shunting_information_Core& p)
 {
-    return Danger_for_Shunting_information_Encoder(&stream, &p);
+    return Danger_for_Shunting_information_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Danger_for_Shunting_information_Core& p)
 {
-    return Danger_for_Shunting_information_Decoder(&stream, &p);
+    return Danger_for_Shunting_information_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Danger_for_Shunting_information_Core& p)
+{
+    return Danger_for_Shunting_information_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Danger_for_Shunting_information_Core& p)
+{
+    return Danger_for_Shunting_information_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

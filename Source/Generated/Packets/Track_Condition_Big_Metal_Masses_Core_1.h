@@ -3,6 +3,7 @@
 #define TRACK_CONDITION_BIG_METAL_MASSES_CORE_1_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Track_Condition_Big_Metal_Masses_Core_1
 {
@@ -91,7 +92,7 @@ int Track_Condition_Big_Metal_Masses_Core_1_UpperBitsNotSet(const Track_Conditio
     complete behaviors;
     disjoint behaviors;
 */
-int Track_Condition_Big_Metal_Masses_Core_1_Encoder(Bitstream* stream, const Track_Condition_Big_Metal_Masses_Core_1* p);
+int Track_Condition_Big_Metal_Masses_Core_1_Encode_Bit(Bitstream* stream, const Track_Condition_Big_Metal_Masses_Core_1* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -126,7 +127,11 @@ int Track_Condition_Big_Metal_Masses_Core_1_Encoder(Bitstream* stream, const Tra
     complete behaviors;
     disjoint behaviors;
 */
-int Track_Condition_Big_Metal_Masses_Core_1_Decoder(Bitstream* stream, Track_Condition_Big_Metal_Masses_Core_1* p);
+int Track_Condition_Big_Metal_Masses_Core_1_Decode_Bit(Bitstream* stream, Track_Condition_Big_Metal_Masses_Core_1* p);
+
+int Track_Condition_Big_Metal_Masses_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Track_Condition_Big_Metal_Masses_Core_1* p);
+
+int Track_Condition_Big_Metal_Masses_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, Track_Condition_Big_Metal_Masses_Core_1* p);
 
 #ifdef __cplusplus
 
@@ -158,12 +163,22 @@ inline bool operator!=(const Track_Condition_Big_Metal_Masses_Core_1& a, const T
 
 inline int encode(Bitstream& stream, const Track_Condition_Big_Metal_Masses_Core_1& p)
 {
-    return Track_Condition_Big_Metal_Masses_Core_1_Encoder(&stream, &p);
+    return Track_Condition_Big_Metal_Masses_Core_1_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Track_Condition_Big_Metal_Masses_Core_1& p)
 {
-    return Track_Condition_Big_Metal_Masses_Core_1_Decoder(&stream, &p);
+    return Track_Condition_Big_Metal_Masses_Core_1_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Track_Condition_Big_Metal_Masses_Core_1& p)
+{
+    return Track_Condition_Big_Metal_Masses_Core_1_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Track_Condition_Big_Metal_Masses_Core_1& p)
+{
+    return Track_Condition_Big_Metal_Masses_Core_1_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

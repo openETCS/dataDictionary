@@ -5,6 +5,7 @@
 #include "Bitstream.h"
 #include "Validated_train_data_Core_1.h"
 #include "Validated_train_data_Core_2.h"
+#include "Compressed_Packets.h"
 
 struct Validated_train_data_Core
 {
@@ -135,7 +136,7 @@ int Validated_train_data_UpperBitsNotSet(const Validated_train_data_Core* p);
     complete behaviors;
     disjoint behaviors;
 */
-int Validated_train_data_Encoder(Bitstream* stream, const Validated_train_data_Core* p);
+int Validated_train_data_Encode_Bit(Bitstream* stream, const Validated_train_data_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -170,7 +171,11 @@ int Validated_train_data_Encoder(Bitstream* stream, const Validated_train_data_C
     complete behaviors;
     disjoint behaviors;
 */
-int Validated_train_data_Decoder(Bitstream* stream, Validated_train_data_Core* p);
+int Validated_train_data_Decode_Bit(Bitstream* stream, Validated_train_data_Core* p);
+
+int Validated_train_data_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Validated_train_data_Core* p);
+
+int Validated_train_data_Decode_Int(const Packet_Info* data, const kcg_int* stream, Validated_train_data_Core* p);
 
 #ifdef __cplusplus
 
@@ -252,12 +257,22 @@ inline bool operator!=(const Validated_train_data_Core& a, const Validated_train
 
 inline int encode(Bitstream& stream, const Validated_train_data_Core& p)
 {
-    return Validated_train_data_Encoder(&stream, &p);
+    return Validated_train_data_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Validated_train_data_Core& p)
 {
-    return Validated_train_data_Decoder(&stream, &p);
+    return Validated_train_data_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Validated_train_data_Core& p)
+{
+    return Validated_train_data_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Validated_train_data_Core& p)
+{
+    return Validated_train_data_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

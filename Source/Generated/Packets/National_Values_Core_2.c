@@ -19,7 +19,7 @@ int National_Values_Core_2_UpperBitsNotSet(const National_Values_Core_2* p)
     }
 }
 
-int National_Values_Core_2_Encoder(Bitstream* stream, const National_Values_Core_2* p)
+int National_Values_Core_2_Encode_Bit(Bitstream* stream, const National_Values_Core_2* p)
 {
     if (Bitstream_Normal(stream, NATIONAL_VALUES_CORE_2_CORE_BITSIZE))
     {
@@ -47,7 +47,7 @@ int National_Values_Core_2_Encoder(Bitstream* stream, const National_Values_Core
     }
 }
 
-int National_Values_Core_2_Decoder(Bitstream* stream, National_Values_Core_2* p)
+int National_Values_Core_2_Decode_Bit(Bitstream* stream, National_Values_Core_2* p)
 {
     if (Bitstream_Normal(stream, NATIONAL_VALUES_CORE_2_CORE_BITSIZE))
     {
@@ -91,5 +91,17 @@ int National_Values_Core_2_Decoder(Bitstream* stream, National_Values_Core_2* p)
     {
         return 0;
     }
+}
+
+int National_Values_Core_2_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const National_Values_Core_2* p)
+{
+    std::cerr << "encode int function not implemented for packet 3 yet." << std::endl;
+    return 0;
+}
+
+int National_Values_Core_2_Decode_Int(const Packet_Info* data, const kcg_int* stream, National_Values_Core_2* p)
+{
+    std::cerr << "decode int function not implemented for packet  3 yet." << std::endl;
+    return 0;
 }
 

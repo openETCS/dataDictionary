@@ -20,7 +20,7 @@ int Radio_Network_registration_UpperBitsNotSet(const Radio_Network_registration_
     }
 }
 
-int Radio_Network_registration_Encoder(Bitstream* stream, const Radio_Network_registration_Core* p)
+int Radio_Network_registration_Encode_Bit(Bitstream* stream, const Radio_Network_registration_Core* p)
 {
     if (Bitstream_Normal(stream, RADIO_NETWORK_REGISTRATION_CORE_BITSIZE))
     {
@@ -50,7 +50,7 @@ int Radio_Network_registration_Encoder(Bitstream* stream, const Radio_Network_re
     }
 }
 
-int Radio_Network_registration_Decoder(Bitstream* stream, Radio_Network_registration_Core* p)
+int Radio_Network_registration_Decode_Bit(Bitstream* stream, Radio_Network_registration_Core* p)
 {
     if (Bitstream_Normal(stream, RADIO_NETWORK_REGISTRATION_CORE_BITSIZE))
     {
@@ -108,5 +108,32 @@ int Radio_Network_registration_Decoder(Bitstream* stream, Radio_Network_registra
     {
         return 0;
     }
+}
+
+int Radio_Network_registration_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Radio_Network_registration_Core* p)
+{
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->NID_MN;
+
+    data->endAddress = startAddress-1;
+
+    return 1;
+}
+
+int Radio_Network_registration_Decode_Int(const Packet_Info* data, const kcg_int* stream, Radio_Network_registration_Core* p)
+{
+    kcg_int startAddress = data->startAddress+1;
+
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->NID_MN = stream[startAddress++];
+
+    if(data->endAddress != startAddress-1)
+    {
+        return false;
+    }
+
+    return 1;
 }
 

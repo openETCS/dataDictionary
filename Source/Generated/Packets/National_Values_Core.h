@@ -7,6 +7,7 @@
 #include "National_Values_Core_2.h"
 #include "National_Values_Core_3.h"
 #include "National_Values_Core_4.h"
+#include "Compressed_Packets.h"
 
 struct National_Values_Core
 {
@@ -158,7 +159,7 @@ int National_Values_UpperBitsNotSet(const National_Values_Core* p);
     complete behaviors;
     disjoint behaviors;
 */
-int National_Values_Encoder(Bitstream* stream, const National_Values_Core* p);
+int National_Values_Encode_Bit(Bitstream* stream, const National_Values_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -193,7 +194,11 @@ int National_Values_Encoder(Bitstream* stream, const National_Values_Core* p);
     complete behaviors;
     disjoint behaviors;
 */
-int National_Values_Decoder(Bitstream* stream, National_Values_Core* p);
+int National_Values_Decode_Bit(Bitstream* stream, National_Values_Core* p);
+
+int National_Values_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const National_Values_Core* p);
+
+int National_Values_Decode_Int(const Packet_Info* data, const kcg_int* stream, National_Values_Core* p);
 
 #ifdef __cplusplus
 
@@ -385,12 +390,22 @@ inline bool operator!=(const National_Values_Core& a, const National_Values_Core
 
 inline int encode(Bitstream& stream, const National_Values_Core& p)
 {
-    return National_Values_Encoder(&stream, &p);
+    return National_Values_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, National_Values_Core& p)
 {
-    return National_Values_Decoder(&stream, &p);
+    return National_Values_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const National_Values_Core& p)
+{
+    return National_Values_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, National_Values_Core& p)
+{
+    return National_Values_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

@@ -3,6 +3,7 @@
 #define SESSION_MANAGEMENT_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Session_Management_Core
 {
@@ -120,7 +121,7 @@ int Session_Management_UpperBitsNotSet(const Session_Management_Core* p);
     complete behaviors;
     disjoint behaviors;
 */
-int Session_Management_Encoder(Bitstream* stream, const Session_Management_Core* p);
+int Session_Management_Encode_Bit(Bitstream* stream, const Session_Management_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -155,7 +156,11 @@ int Session_Management_Encoder(Bitstream* stream, const Session_Management_Core*
     complete behaviors;
     disjoint behaviors;
 */
-int Session_Management_Decoder(Bitstream* stream, Session_Management_Core* p);
+int Session_Management_Decode_Bit(Bitstream* stream, Session_Management_Core* p);
+
+int Session_Management_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Session_Management_Core* p);
+
+int Session_Management_Decode_Int(const Packet_Info* data, const kcg_int* stream, Session_Management_Core* p);
 
 #ifdef __cplusplus
 
@@ -197,12 +202,22 @@ inline bool operator!=(const Session_Management_Core& a, const Session_Managemen
 
 inline int encode(Bitstream& stream, const Session_Management_Core& p)
 {
-    return Session_Management_Encoder(&stream, &p);
+    return Session_Management_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Session_Management_Core& p)
 {
-    return Session_Management_Decoder(&stream, &p);
+    return Session_Management_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Session_Management_Core& p)
+{
+    return Session_Management_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Session_Management_Core& p)
+{
+    return Session_Management_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

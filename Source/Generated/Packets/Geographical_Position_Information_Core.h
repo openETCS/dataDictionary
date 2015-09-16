@@ -4,6 +4,7 @@
 
 #include "Bitstream.h"
 #include "Geographical_Position_Information_Core_1.h"
+#include "Compressed_Packets.h"
 
 struct Geographical_Position_Information_Core
 {
@@ -113,7 +114,7 @@ int Geographical_Position_Information_UpperBitsNotSet(const Geographical_Positio
     complete behaviors;
     disjoint behaviors;
 */
-int Geographical_Position_Information_Encoder(Bitstream* stream, const Geographical_Position_Information_Core* p);
+int Geographical_Position_Information_Encode_Bit(Bitstream* stream, const Geographical_Position_Information_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -148,7 +149,11 @@ int Geographical_Position_Information_Encoder(Bitstream* stream, const Geographi
     complete behaviors;
     disjoint behaviors;
 */
-int Geographical_Position_Information_Decoder(Bitstream* stream, Geographical_Position_Information_Core* p);
+int Geographical_Position_Information_Decode_Bit(Bitstream* stream, Geographical_Position_Information_Core* p);
+
+int Geographical_Position_Information_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Geographical_Position_Information_Core* p);
+
+int Geographical_Position_Information_Decode_Int(const Packet_Info* data, const kcg_int* stream, Geographical_Position_Information_Core* p);
 
 #ifdef __cplusplus
 
@@ -216,12 +221,22 @@ inline bool operator!=(const Geographical_Position_Information_Core& a, const Ge
 
 inline int encode(Bitstream& stream, const Geographical_Position_Information_Core& p)
 {
-    return Geographical_Position_Information_Encoder(&stream, &p);
+    return Geographical_Position_Information_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Geographical_Position_Information_Core& p)
 {
-    return Geographical_Position_Information_Decoder(&stream, &p);
+    return Geographical_Position_Information_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Geographical_Position_Information_Core& p)
+{
+    return Geographical_Position_Information_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Geographical_Position_Information_Core& p)
+{
+    return Geographical_Position_Information_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

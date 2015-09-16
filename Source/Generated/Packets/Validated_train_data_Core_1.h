@@ -3,6 +3,7 @@
 #define VALIDATED_TRAIN_DATA_CORE_1_CORE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "Compressed_Packets.h"
 
 struct Validated_train_data_Core_1
 {
@@ -87,7 +88,7 @@ int Validated_train_data_Core_1_UpperBitsNotSet(const Validated_train_data_Core_
     complete behaviors;
     disjoint behaviors;
 */
-int Validated_train_data_Core_1_Encoder(Bitstream* stream, const Validated_train_data_Core_1* p);
+int Validated_train_data_Core_1_Encode_Bit(Bitstream* stream, const Validated_train_data_Core_1* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -122,7 +123,11 @@ int Validated_train_data_Core_1_Encoder(Bitstream* stream, const Validated_train
     complete behaviors;
     disjoint behaviors;
 */
-int Validated_train_data_Core_1_Decoder(Bitstream* stream, Validated_train_data_Core_1* p);
+int Validated_train_data_Core_1_Decode_Bit(Bitstream* stream, Validated_train_data_Core_1* p);
+
+int Validated_train_data_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Validated_train_data_Core_1* p);
+
+int Validated_train_data_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, Validated_train_data_Core_1* p);
 
 #ifdef __cplusplus
 
@@ -158,12 +163,22 @@ inline bool operator!=(const Validated_train_data_Core_1& a, const Validated_tra
 
 inline int encode(Bitstream& stream, const Validated_train_data_Core_1& p)
 {
-    return Validated_train_data_Core_1_Encoder(&stream, &p);
+    return Validated_train_data_Core_1_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Validated_train_data_Core_1& p)
 {
-    return Validated_train_data_Core_1_Decoder(&stream, &p);
+    return Validated_train_data_Core_1_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Validated_train_data_Core_1& p)
+{
+    return Validated_train_data_Core_1_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Validated_train_data_Core_1& p)
+{
+    return Validated_train_data_Core_1_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

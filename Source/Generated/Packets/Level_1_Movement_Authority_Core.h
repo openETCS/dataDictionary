@@ -4,6 +4,7 @@
 
 #include "Bitstream.h"
 #include "Level_1_Movement_Authority_Core_1.h"
+#include "Compressed_Packets.h"
 
 struct Level_1_Movement_Authority_Core
 {
@@ -132,7 +133,7 @@ int Level_1_Movement_Authority_UpperBitsNotSet(const Level_1_Movement_Authority_
     complete behaviors;
     disjoint behaviors;
 */
-int Level_1_Movement_Authority_Encoder(Bitstream* stream, const Level_1_Movement_Authority_Core* p);
+int Level_1_Movement_Authority_Encode_Bit(Bitstream* stream, const Level_1_Movement_Authority_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -167,7 +168,11 @@ int Level_1_Movement_Authority_Encoder(Bitstream* stream, const Level_1_Movement
     complete behaviors;
     disjoint behaviors;
 */
-int Level_1_Movement_Authority_Decoder(Bitstream* stream, Level_1_Movement_Authority_Core* p);
+int Level_1_Movement_Authority_Decode_Bit(Bitstream* stream, Level_1_Movement_Authority_Core* p);
+
+int Level_1_Movement_Authority_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Level_1_Movement_Authority_Core* p);
+
+int Level_1_Movement_Authority_Decode_Int(const Packet_Info* data, const kcg_int* stream, Level_1_Movement_Authority_Core* p);
 
 #ifdef __cplusplus
 
@@ -255,12 +260,22 @@ inline bool operator!=(const Level_1_Movement_Authority_Core& a, const Level_1_M
 
 inline int encode(Bitstream& stream, const Level_1_Movement_Authority_Core& p)
 {
-    return Level_1_Movement_Authority_Encoder(&stream, &p);
+    return Level_1_Movement_Authority_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, Level_1_Movement_Authority_Core& p)
 {
-    return Level_1_Movement_Authority_Decoder(&stream, &p);
+    return Level_1_Movement_Authority_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Level_1_Movement_Authority_Core& p)
+{
+    return Level_1_Movement_Authority_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, Level_1_Movement_Authority_Core& p)
+{
+    return Level_1_Movement_Authority_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

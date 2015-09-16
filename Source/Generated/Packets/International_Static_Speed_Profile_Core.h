@@ -5,6 +5,7 @@
 #include "Bitstream.h"
 #include "International_Static_Speed_Profile_Core_1.h"
 #include "International_Static_Speed_Profile_Core_2.h"
+#include "Compressed_Packets.h"
 
 struct International_Static_Speed_Profile_Core
 {
@@ -121,7 +122,7 @@ int International_Static_Speed_Profile_UpperBitsNotSet(const International_Stati
     complete behaviors;
     disjoint behaviors;
 */
-int International_Static_Speed_Profile_Encoder(Bitstream* stream, const International_Static_Speed_Profile_Core* p);
+int International_Static_Speed_Profile_Encode_Bit(Bitstream* stream, const International_Static_Speed_Profile_Core* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -156,7 +157,11 @@ int International_Static_Speed_Profile_Encoder(Bitstream* stream, const Internat
     complete behaviors;
     disjoint behaviors;
 */
-int International_Static_Speed_Profile_Decoder(Bitstream* stream, International_Static_Speed_Profile_Core* p);
+int International_Static_Speed_Profile_Decode_Bit(Bitstream* stream, International_Static_Speed_Profile_Core* p);
+
+int International_Static_Speed_Profile_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const International_Static_Speed_Profile_Core* p);
+
+int International_Static_Speed_Profile_Decode_Int(const Packet_Info* data, const kcg_int* stream, International_Static_Speed_Profile_Core* p);
 
 #ifdef __cplusplus
 
@@ -232,12 +237,22 @@ inline bool operator!=(const International_Static_Speed_Profile_Core& a, const I
 
 inline int encode(Bitstream& stream, const International_Static_Speed_Profile_Core& p)
 {
-    return International_Static_Speed_Profile_Encoder(&stream, &p);
+    return International_Static_Speed_Profile_Encode_Bit(&stream, &p);
 }
 
 inline int decode(Bitstream& stream, International_Static_Speed_Profile_Core& p)
 {
-    return International_Static_Speed_Profile_Decoder(&stream, &p);
+    return International_Static_Speed_Profile_Decode_Bit(&stream, &p);
+}
+
+inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const International_Static_Speed_Profile_Core& p)
+{
+    return International_Static_Speed_Profile_Encode_Int(&data, stream, startAddress, &p);
+}
+
+inline int decode(const Packet_Info& data, const kcg_int* stream, International_Static_Speed_Profile_Core& p)
+{
+    return International_Static_Speed_Profile_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

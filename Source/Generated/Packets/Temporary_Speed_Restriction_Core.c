@@ -25,7 +25,7 @@ int Temporary_Speed_Restriction_UpperBitsNotSet(const Temporary_Speed_Restrictio
     }
 }
 
-int Temporary_Speed_Restriction_Encoder(Bitstream* stream, const Temporary_Speed_Restriction_Core* p)
+int Temporary_Speed_Restriction_Encode_Bit(Bitstream* stream, const Temporary_Speed_Restriction_Core* p)
 {
     if (Bitstream_Normal(stream, TEMPORARY_SPEED_RESTRICTION_CORE_BITSIZE))
     {
@@ -65,7 +65,7 @@ int Temporary_Speed_Restriction_Encoder(Bitstream* stream, const Temporary_Speed
     }
 }
 
-int Temporary_Speed_Restriction_Decoder(Bitstream* stream, Temporary_Speed_Restriction_Core* p)
+int Temporary_Speed_Restriction_Decode_Bit(Bitstream* stream, Temporary_Speed_Restriction_Core* p)
 {
     if (Bitstream_Normal(stream, TEMPORARY_SPEED_RESTRICTION_CORE_BITSIZE))
     {
@@ -193,5 +193,42 @@ int Temporary_Speed_Restriction_Decoder(Bitstream* stream, Temporary_Speed_Restr
     {
         return 0;
     }
+}
+
+int Temporary_Speed_Restriction_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Temporary_Speed_Restriction_Core* p)
+{
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->Q_SCALE;
+    stream[startAddress++] = p->NID_TSR;
+    stream[startAddress++] = p->D_TSR;
+    stream[startAddress++] = p->L_TSR;
+    stream[startAddress++] = p->Q_FRONT;
+    stream[startAddress++] = p->V_TSR;
+
+    data->endAddress = startAddress-1;
+
+    return 1;
+}
+
+int Temporary_Speed_Restriction_Decode_Int(const Packet_Info* data, const kcg_int* stream, Temporary_Speed_Restriction_Core* p)
+{
+    kcg_int startAddress = data->startAddress+1;
+
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->Q_SCALE = stream[startAddress++];
+    p->NID_TSR = stream[startAddress++];
+    p->D_TSR = stream[startAddress++];
+    p->L_TSR = stream[startAddress++];
+    p->Q_FRONT = stream[startAddress++];
+    p->V_TSR = stream[startAddress++];
+
+    if(data->endAddress != startAddress-1)
+    {
+        return false;
+    }
+
+    return 1;
 }
 
