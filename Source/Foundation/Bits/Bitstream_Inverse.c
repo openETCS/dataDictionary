@@ -1,13 +1,6 @@
 
 #include "Bitstream.h"
 
-/*@ lemma X: 
-      \forall uint64_t x, y, integer p, q;
-         (\forall integer k; p <= k < q ==>
-          \let j = q - 1 - k; (BitTest(x, j) <==> BitTest(y, j)))
-         ==> EqualBits64(x, y, 64-(q - p), 64);
-*/
-
 /*@
     requires valid:      Writeable(stream);
     requires invariant:  Invariant(stream, length);
