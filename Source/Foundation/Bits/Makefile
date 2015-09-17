@@ -15,7 +15,7 @@ include $(TOPDIR)/Makefile.template
 #WP_FLAGS += -wp-prop=aux
 #WP_FLAGS += -wp-prop=left
 
-SRC :=  Bit64.c Bitwalker.c Bitstream.c Bitstream_Inverse.c
+SRC :=  Bitwalker.c Bitstream.c Bitstream_Inverse.c
 
 OBJ := $(SRC:.c=.o)
 REPORT := $(SRC:.c=.report)
