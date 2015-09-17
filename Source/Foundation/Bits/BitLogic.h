@@ -1,6 +1,6 @@
 
-#ifndef BITPREDICATES_H_INCLUDED
-#define BITPREDICATES_H_INCLUDED
+#ifndef BITLOGIC_INCLUDED
+#define BITLOGIC_INCLUDED
 
 #include <stdint.h>
 #include <limits.h>
@@ -71,5 +71,5 @@
    }
 */
 
-#endif  // BITPREDICATES_H_INCLUDED
+#endif  // BITLOGIC_INCLUDED
 
