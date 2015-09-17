@@ -56,10 +56,14 @@
 
    axiomatic BitProperties
    {
-     axiom axiom_equal_bits64_1:
+     axiom equal_bits64_1:
        \forall uint64_t x, y, integer p, q;
          (\forall integer k; p <= k < q ==> \let j = q-1-k; (BitTest(x, j) <==> BitTest(y, j)))
          ==> EqualBits64(x, y, 64-(q-p), 64);
+
+      axiom upper_bits_less_than:
+        \forall integer x, n; x >= 0 ==> n >= 0 ==> 
+           (UpperBitsNotSet(x, n) <==> x < (1 << n));
    }
 */
 
