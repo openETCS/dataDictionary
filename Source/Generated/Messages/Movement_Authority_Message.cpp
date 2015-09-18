@@ -16,7 +16,7 @@ bool Movement_Authority_Message::decode(Bitstream& stream)
     M_ACK = Bitstream_Read(&stream, 1);
     NID_LRBG = Bitstream_Read(&stream, 24);
 
-    PacketHeader packetID;
+    PacketHeader packetID{0};
 
     ::decode(stream, packetID);
     packet_15 = PacketFactory_TrackToTrain(packetID.NID_PACKET);

@@ -16,7 +16,7 @@ bool SoM_Position_Report_Message::decode(Bitstream& stream)
     NID_ENGINE = Bitstream_Read(&stream, 24);
     Q_STATUS = Bitstream_Read(&stream, 2);
 
-    PacketHeader packetID;
+    PacketHeader packetID{0};
 
     ::decode(stream, packetID);
     packet_0_1 = PacketFactory_TrainToTrack(packetID.NID_PACKET);

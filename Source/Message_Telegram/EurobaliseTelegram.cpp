@@ -72,7 +72,7 @@ bool EurobaliseTelegram::decode(Bitstream& stream)
             return false;
         }
 
-        PacketHeader packet_header;
+        PacketHeader packet_header{0};
         ::decode(stream, packet_header);
 	
 	BasePacketPtr ptr;

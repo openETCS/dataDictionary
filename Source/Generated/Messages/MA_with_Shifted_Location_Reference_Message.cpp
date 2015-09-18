@@ -18,7 +18,7 @@ bool MA_with_Shifted_Location_Reference_Message::decode(Bitstream& stream)
     Q_SCALE = Bitstream_Read(&stream, 2);
     D_REF = Bitstream_Read(&stream, 16);
 
-    PacketHeader packetID;
+    PacketHeader packetID{0};
 
     ::decode(stream, packetID);
     packet_15 = PacketFactory_TrackToTrain(packetID.NID_PACKET);

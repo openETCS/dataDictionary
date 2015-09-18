@@ -16,7 +16,7 @@ bool Text_message_acknowledged_by_driver_Message::decode(Bitstream& stream)
     NID_ENGINE = Bitstream_Read(&stream, 24);
     NID_TEXTMESSAGE = Bitstream_Read(&stream, 8);
 
-    PacketHeader packetID;
+    PacketHeader packetID{0};
 
     ::decode(stream, packetID);
     packet_0_1 = PacketFactory_TrainToTrack(packetID.NID_PACKET);

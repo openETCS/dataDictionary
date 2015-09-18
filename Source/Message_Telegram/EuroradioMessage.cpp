@@ -6,7 +6,7 @@
 
 EuroradioMessagePtr EuroradioMessage_Decoder(Bitstream& stream)
 {
-    MessageHeader messageID;
+    MessageHeader messageID{0};
     MessageHeader_Decoder(&stream, &messageID);
 
     switch (messageID.NID_MESSAGE)

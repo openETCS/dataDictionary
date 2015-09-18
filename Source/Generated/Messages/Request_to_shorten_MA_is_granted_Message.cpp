@@ -15,7 +15,7 @@ bool Request_to_shorten_MA_is_granted_Message::decode(Bitstream& stream)
     T_TRAIN = Bitstream_Read(&stream, 32);
     NID_ENGINE = Bitstream_Read(&stream, 24);
 
-    PacketHeader packetID;
+    PacketHeader packetID{0};
 
     ::decode(stream, packetID);
     packet_0_1 = PacketFactory_TrainToTrack(packetID.NID_PACKET);

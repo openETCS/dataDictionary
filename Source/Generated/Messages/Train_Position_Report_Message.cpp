@@ -15,7 +15,7 @@ bool Train_Position_Report_Message::decode(Bitstream& stream)
     T_TRAIN = Bitstream_Read(&stream, 32);
     NID_ENGINE = Bitstream_Read(&stream, 24);
 
-    PacketHeader packetID;
+    PacketHeader packetID{0};
 
     ::decode(stream, packetID);
     packet_0_1 = PacketFactory_TrainToTrack(packetID.NID_PACKET);

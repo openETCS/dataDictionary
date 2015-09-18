@@ -18,7 +18,7 @@ bool SR_Authorisation_Message::decode(Bitstream& stream)
     Q_SCALE = Bitstream_Read(&stream, 2);
     D_SR = Bitstream_Read(&stream, 15);
 
-    PacketHeader packetID;
+    PacketHeader packetID{0};
 
     while (old_pos + (8 * L_MESSAGE) > stream.bitpos + 8 + 7)
     {

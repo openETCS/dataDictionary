@@ -16,7 +16,7 @@ bool General_message_Message::decode(Bitstream& stream)
     M_ACK = Bitstream_Read(&stream, 1);
     NID_LRBG = Bitstream_Read(&stream, 24);
 
-    PacketHeader packetID;
+    PacketHeader packetID{0};
 
     while (old_pos + (8 * L_MESSAGE) > stream.bitpos + 8 + 7)
     {

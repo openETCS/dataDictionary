@@ -17,7 +17,7 @@ bool Acknowledgement_of_Emergency_Stop_Message::decode(Bitstream& stream)
     NID_EM = Bitstream_Read(&stream, 4);
     Q_EMERGENCYSTOP = Bitstream_Read(&stream, 2);
 
-    PacketHeader packetID;
+    PacketHeader packetID{0};
 
     ::decode(stream, packetID);
     packet_0_1 = PacketFactory_TrainToTrack(packetID.NID_PACKET);

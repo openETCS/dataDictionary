@@ -18,7 +18,7 @@ bool Radio_infill_request_Message::decode(Bitstream& stream)
     NID_BG = Bitstream_Read(&stream, 14);
     Q_INFILL = Bitstream_Read(&stream, 1);
 
-    PacketHeader packetID;
+    PacketHeader packetID{0};
 
     ::decode(stream, packetID);
     packet_0_1 = PacketFactory_TrainToTrack(packetID.NID_PACKET);
