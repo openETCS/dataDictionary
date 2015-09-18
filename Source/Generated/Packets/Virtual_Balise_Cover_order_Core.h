@@ -204,11 +204,15 @@ inline int decode(Bitstream& stream, Virtual_Balise_Cover_order_Core& p)
 
 inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Virtual_Balise_Cover_order_Core& p)
 {
+    std::cerr << "encode int function not implemented for packet 6 yet." << std::endl;
+
     return Virtual_Balise_Cover_order_Encode_Int(&data, stream, startAddress, &p);
 }
 
 inline int decode(const Packet_Info& data, const kcg_int* stream, Virtual_Balise_Cover_order_Core& p)
 {
+    std::cerr << "decode int function not implemented for packet 6 yet." << std::endl;
+
     return Virtual_Balise_Cover_order_Decode_Int(&data, stream, &p);
 }
 

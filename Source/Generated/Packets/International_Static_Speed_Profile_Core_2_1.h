@@ -183,11 +183,15 @@ inline int decode(Bitstream& stream, International_Static_Speed_Profile_Core_2_1
 
 inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const International_Static_Speed_Profile_Core_2_1& p)
 {
+    std::cerr << "encode int function not implemented for packet 27 yet." << std::endl;
+
     return International_Static_Speed_Profile_Core_2_1_Encode_Int(&data, stream, startAddress, &p);
 }
 
 inline int decode(const Packet_Info& data, const kcg_int* stream, International_Static_Speed_Profile_Core_2_1& p)
 {
+    std::cerr << "decode int function not implemented for packet 27 yet." << std::endl;
+
     return International_Static_Speed_Profile_Core_2_1_Decode_Int(&data, stream, &p);
 }
 

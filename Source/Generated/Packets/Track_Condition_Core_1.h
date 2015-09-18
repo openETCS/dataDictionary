@@ -180,11 +180,15 @@ inline int decode(Bitstream& stream, Track_Condition_Core_1& p)
 
 inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Track_Condition_Core_1& p)
 {
+    std::cerr << "encode int function not implemented for packet 68 yet." << std::endl;
+
     return Track_Condition_Core_1_Encode_Int(&data, stream, startAddress, &p);
 }
 
 inline int decode(const Packet_Info& data, const kcg_int* stream, Track_Condition_Core_1& p)
 {
+    std::cerr << "decode int function not implemented for packet 68 yet." << std::endl;
+
     return Track_Condition_Core_1_Decode_Int(&data, stream, &p);
 }
 

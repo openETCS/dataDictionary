@@ -246,11 +246,15 @@ inline int decode(Bitstream& stream, Mode_profile_Core& p)
 
 inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Mode_profile_Core& p)
 {
+    std::cerr << "encode int function not implemented for packet 80 yet." << std::endl;
+
     return Mode_profile_Encode_Int(&data, stream, startAddress, &p);
 }
 
 inline int decode(const Packet_Info& data, const kcg_int* stream, Mode_profile_Core& p)
 {
+    std::cerr << "decode int function not implemented for packet 80 yet." << std::endl;
+
     return Mode_profile_Decode_Int(&data, stream, &p);
 }
 

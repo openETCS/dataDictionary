@@ -163,13 +163,11 @@ int Mode_profile_Core_1_Decode_Bit(Bitstream* stream, Mode_profile_Core_1* p)
 
 int Mode_profile_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Mode_profile_Core_1* p)
 {
-    std::cerr << "encode int function not implemented for packet 80 yet." << std::endl;
     return 0;
 }
 
 int Mode_profile_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, Mode_profile_Core_1* p)
 {
-    std::cerr << "decode int function not implemented for packet  80 yet." << std::endl;
     return 0;
 }
 

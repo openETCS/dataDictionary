@@ -185,11 +185,15 @@ inline int decode(Bitstream& stream, Geographical_Position_Information_Core_1& p
 
 inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Geographical_Position_Information_Core_1& p)
 {
+    std::cerr << "encode int function not implemented for packet 79 yet." << std::endl;
+
     return Geographical_Position_Information_Core_1_Encode_Int(&data, stream, startAddress, &p);
 }
 
 inline int decode(const Packet_Info& data, const kcg_int* stream, Geographical_Position_Information_Core_1& p)
 {
+    std::cerr << "decode int function not implemented for packet 79 yet." << std::endl;
+
     return Geographical_Position_Information_Core_1_Decode_Int(&data, stream, &p);
 }
 

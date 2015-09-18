@@ -194,11 +194,15 @@ inline int decode(Bitstream& stream, Track_Ahead_Free_up_to_level_23_transition_
 
 inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Track_Ahead_Free_up_to_level_23_transition_location_Core& p)
 {
+    std::cerr << "encode int function not implemented for packet 90 yet." << std::endl;
+
     return Track_Ahead_Free_up_to_level_23_transition_location_Encode_Int(&data, stream, startAddress, &p);
 }
 
 inline int decode(const Packet_Info& data, const kcg_int* stream, Track_Ahead_Free_up_to_level_23_transition_location_Core& p)
 {
+    std::cerr << "decode int function not implemented for packet 90 yet." << std::endl;
+
     return Track_Ahead_Free_up_to_level_23_transition_location_Decode_Int(&data, stream, &p);
 }
 

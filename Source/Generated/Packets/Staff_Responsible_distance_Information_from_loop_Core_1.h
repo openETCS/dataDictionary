@@ -179,11 +179,15 @@ inline int decode(Bitstream& stream, Staff_Responsible_distance_Information_from
 
 inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Staff_Responsible_distance_Information_from_loop_Core_1& p)
 {
+    std::cerr << "encode int function not implemented for packet 13 yet." << std::endl;
+
     return Staff_Responsible_distance_Information_from_loop_Core_1_Encode_Int(&data, stream, startAddress, &p);
 }
 
 inline int decode(const Packet_Info& data, const kcg_int* stream, Staff_Responsible_distance_Information_from_loop_Core_1& p)
 {
+    std::cerr << "decode int function not implemented for packet 13 yet." << std::endl;
+
     return Staff_Responsible_distance_Information_from_loop_Core_1_Decode_Int(&data, stream, &p);
 }
 

@@ -199,13 +199,11 @@ int International_Static_Speed_Profile_Decode_Bit(Bitstream* stream, Internation
 
 int International_Static_Speed_Profile_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const International_Static_Speed_Profile_Core* p)
 {
-    std::cerr << "encode int function not implemented for packet 27 yet." << std::endl;
     return 0;
 }
 
 int International_Static_Speed_Profile_Decode_Int(const Packet_Info* data, const kcg_int* stream, International_Static_Speed_Profile_Core* p)
 {
-    std::cerr << "decode int function not implemented for packet 27 yet." << std::endl;
     return 0;
 }
 
