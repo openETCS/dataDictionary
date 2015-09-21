@@ -127,31 +127,22 @@ int Repositioning_Information_Decode_Bit(Bitstream* stream, Repositioning_Inform
     }
 }
 
-int Repositioning_Information_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Repositioning_Information_Core* p)
+int Repositioning_Information_Encode_Int(Packet_Info* data, kcg_int* stream, const Repositioning_Information_Core* p)
 {
-    stream[startAddress++] = p->Q_DIR;
-    stream[startAddress++] = p->L_PACKET;
-    stream[startAddress++] = p->Q_SCALE;
-    stream[startAddress++] = p->L_SECTION;
-
-    data->endAddress = startAddress-1;
+    stream[data->startAddress++] = p->Q_DIR;
+    stream[data->startAddress++] = p->L_PACKET;
+    stream[data->startAddress++] = p->Q_SCALE;
+    stream[data->startAddress++] = p->L_SECTION;
 
     return 1;
 }
 
-int Repositioning_Information_Decode_Int(const Packet_Info* data, const kcg_int* stream, Repositioning_Information_Core* p)
+int Repositioning_Information_Decode_Int(Packet_Info* data, const kcg_int* stream, Repositioning_Information_Core* p)
 {
-    kcg_int startAddress = data->startAddress+1;
-
-    p->Q_DIR = stream[startAddress++];
-    p->L_PACKET = stream[startAddress++];
-    p->Q_SCALE = stream[startAddress++];
-    p->L_SECTION = stream[startAddress++];
-
-    if(data->endAddress != startAddress-1)
-    {
-        return false;
-    }
+    p->Q_DIR = stream[data->startAddress++];
+    p->L_PACKET = stream[data->startAddress++];
+    p->Q_SCALE = stream[data->startAddress++];
+    p->L_SECTION = stream[data->startAddress++];
 
     return 1;
 }

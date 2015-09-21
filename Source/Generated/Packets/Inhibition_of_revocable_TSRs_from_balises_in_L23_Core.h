@@ -133,9 +133,9 @@ int Inhibition_of_revocable_TSRs_from_balises_in_L23_Encode_Bit(Bitstream* strea
 */
 int Inhibition_of_revocable_TSRs_from_balises_in_L23_Decode_Bit(Bitstream* stream, Inhibition_of_revocable_TSRs_from_balises_in_L23_Core* p);
 
-int Inhibition_of_revocable_TSRs_from_balises_in_L23_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Inhibition_of_revocable_TSRs_from_balises_in_L23_Core* p);
+int Inhibition_of_revocable_TSRs_from_balises_in_L23_Encode_Int(Packet_Info* data, kcg_int* stream, const Inhibition_of_revocable_TSRs_from_balises_in_L23_Core* p);
 
-int Inhibition_of_revocable_TSRs_from_balises_in_L23_Decode_Int(const Packet_Info* data, const kcg_int* stream, Inhibition_of_revocable_TSRs_from_balises_in_L23_Core* p);
+int Inhibition_of_revocable_TSRs_from_balises_in_L23_Decode_Int(Packet_Info* data, const kcg_int* stream, Inhibition_of_revocable_TSRs_from_balises_in_L23_Core* p);
 
 #ifdef __cplusplus
 
@@ -175,12 +175,12 @@ inline int decode(Bitstream& stream, Inhibition_of_revocable_TSRs_from_balises_i
     return Inhibition_of_revocable_TSRs_from_balises_in_L23_Decode_Bit(&stream, &p);
 }
 
-inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Inhibition_of_revocable_TSRs_from_balises_in_L23_Core& p)
+inline int encode(Packet_Info& data, kcg_int* stream, const Inhibition_of_revocable_TSRs_from_balises_in_L23_Core& p)
 {
-    return Inhibition_of_revocable_TSRs_from_balises_in_L23_Encode_Int(&data, stream, startAddress, &p);
+    return Inhibition_of_revocable_TSRs_from_balises_in_L23_Encode_Int(&data, stream, &p);
 }
 
-inline int decode(const Packet_Info& data, const kcg_int* stream, Inhibition_of_revocable_TSRs_from_balises_in_L23_Core& p)
+inline int decode(Packet_Info& data, const kcg_int* stream, Inhibition_of_revocable_TSRs_from_balises_in_L23_Core& p)
 {
     return Inhibition_of_revocable_TSRs_from_balises_in_L23_Decode_Int(&data, stream, &p);
 }

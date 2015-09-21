@@ -140,9 +140,9 @@ int Infill_location_reference_Encode_Bit(Bitstream* stream, const Infill_locatio
 */
 int Infill_location_reference_Decode_Bit(Bitstream* stream, Infill_location_reference_Core* p);
 
-int Infill_location_reference_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Infill_location_reference_Core* p);
+int Infill_location_reference_Encode_Int(Packet_Info* data, kcg_int* stream, const Infill_location_reference_Core* p);
 
-int Infill_location_reference_Decode_Int(const Packet_Info* data, const kcg_int* stream, Infill_location_reference_Core* p);
+int Infill_location_reference_Decode_Int(Packet_Info* data, const kcg_int* stream, Infill_location_reference_Core* p);
 
 #ifdef __cplusplus
 
@@ -192,14 +192,14 @@ inline int decode(Bitstream& stream, Infill_location_reference_Core& p)
     return Infill_location_reference_Decode_Bit(&stream, &p);
 }
 
-inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Infill_location_reference_Core& p)
+inline int encode(Packet_Info& data, kcg_int* stream, const Infill_location_reference_Core& p)
 {
     std::cerr << "encode int function not implemented for packet 136 yet." << std::endl;
 
-    return Infill_location_reference_Encode_Int(&data, stream, startAddress, &p);
+    return Infill_location_reference_Encode_Int(&data, stream, &p);
 }
 
-inline int decode(const Packet_Info& data, const kcg_int* stream, Infill_location_reference_Core& p)
+inline int decode(Packet_Info& data, const kcg_int* stream, Infill_location_reference_Core& p)
 {
     std::cerr << "decode int function not implemented for packet 136 yet." << std::endl;
 

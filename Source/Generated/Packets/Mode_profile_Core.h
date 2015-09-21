@@ -170,9 +170,9 @@ int Mode_profile_Encode_Bit(Bitstream* stream, const Mode_profile_Core* p);
 */
 int Mode_profile_Decode_Bit(Bitstream* stream, Mode_profile_Core* p);
 
-int Mode_profile_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Mode_profile_Core* p);
+int Mode_profile_Encode_Int(Packet_Info* data, kcg_int* stream, const Mode_profile_Core* p);
 
-int Mode_profile_Decode_Int(const Packet_Info* data, const kcg_int* stream, Mode_profile_Core* p);
+int Mode_profile_Decode_Int(Packet_Info* data, const kcg_int* stream, Mode_profile_Core* p);
 
 #ifdef __cplusplus
 
@@ -244,14 +244,14 @@ inline int decode(Bitstream& stream, Mode_profile_Core& p)
     return Mode_profile_Decode_Bit(&stream, &p);
 }
 
-inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Mode_profile_Core& p)
+inline int encode(Packet_Info& data, kcg_int* stream, const Mode_profile_Core& p)
 {
     std::cerr << "encode int function not implemented for packet 80 yet." << std::endl;
 
-    return Mode_profile_Encode_Int(&data, stream, startAddress, &p);
+    return Mode_profile_Encode_Int(&data, stream, &p);
 }
 
-inline int decode(const Packet_Info& data, const kcg_int* stream, Mode_profile_Core& p)
+inline int decode(Packet_Info& data, const kcg_int* stream, Mode_profile_Core& p)
 {
     std::cerr << "decode int function not implemented for packet 80 yet." << std::endl;
 

@@ -144,33 +144,24 @@ int Movement_Authority_Request_Parameters_Decode_Bit(Bitstream* stream, Movement
     }
 }
 
-int Movement_Authority_Request_Parameters_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Movement_Authority_Request_Parameters_Core* p)
+int Movement_Authority_Request_Parameters_Encode_Int(Packet_Info* data, kcg_int* stream, const Movement_Authority_Request_Parameters_Core* p)
 {
-    stream[startAddress++] = p->Q_DIR;
-    stream[startAddress++] = p->L_PACKET;
-    stream[startAddress++] = p->T_MAR;
-    stream[startAddress++] = p->T_TIMEOUTRQST;
-    stream[startAddress++] = p->T_CYCRQST;
-
-    data->endAddress = startAddress-1;
+    stream[data->startAddress++] = p->Q_DIR;
+    stream[data->startAddress++] = p->L_PACKET;
+    stream[data->startAddress++] = p->T_MAR;
+    stream[data->startAddress++] = p->T_TIMEOUTRQST;
+    stream[data->startAddress++] = p->T_CYCRQST;
 
     return 1;
 }
 
-int Movement_Authority_Request_Parameters_Decode_Int(const Packet_Info* data, const kcg_int* stream, Movement_Authority_Request_Parameters_Core* p)
+int Movement_Authority_Request_Parameters_Decode_Int(Packet_Info* data, const kcg_int* stream, Movement_Authority_Request_Parameters_Core* p)
 {
-    kcg_int startAddress = data->startAddress+1;
-
-    p->Q_DIR = stream[startAddress++];
-    p->L_PACKET = stream[startAddress++];
-    p->T_MAR = stream[startAddress++];
-    p->T_TIMEOUTRQST = stream[startAddress++];
-    p->T_CYCRQST = stream[startAddress++];
-
-    if(data->endAddress != startAddress-1)
-    {
-        return false;
-    }
+    p->Q_DIR = stream[data->startAddress++];
+    p->L_PACKET = stream[data->startAddress++];
+    p->T_MAR = stream[data->startAddress++];
+    p->T_TIMEOUTRQST = stream[data->startAddress++];
+    p->T_CYCRQST = stream[data->startAddress++];
 
     return 1;
 }

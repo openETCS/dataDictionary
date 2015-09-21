@@ -111,12 +111,12 @@ int List_of_Balises_in_SR_Authority_Decode_Bit(Bitstream* stream, List_of_Balise
     }
 }
 
-int List_of_Balises_in_SR_Authority_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const List_of_Balises_in_SR_Authority_Core* p)
+int List_of_Balises_in_SR_Authority_Encode_Int(Packet_Info* data, kcg_int* stream, const List_of_Balises_in_SR_Authority_Core* p)
 {
     return 0;
 }
 
-int List_of_Balises_in_SR_Authority_Decode_Int(const Packet_Info* data, const kcg_int* stream, List_of_Balises_in_SR_Authority_Core* p)
+int List_of_Balises_in_SR_Authority_Decode_Int(Packet_Info* data, const kcg_int* stream, List_of_Balises_in_SR_Authority_Core* p)
 {
     return 0;
 }

@@ -125,9 +125,9 @@ int Conditional_Level_Transition_Order_Core_1_Encode_Bit(Bitstream* stream, cons
 */
 int Conditional_Level_Transition_Order_Core_1_Decode_Bit(Bitstream* stream, Conditional_Level_Transition_Order_Core_1* p);
 
-int Conditional_Level_Transition_Order_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Conditional_Level_Transition_Order_Core_1* p);
+int Conditional_Level_Transition_Order_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, const Conditional_Level_Transition_Order_Core_1* p);
 
-int Conditional_Level_Transition_Order_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, Conditional_Level_Transition_Order_Core_1* p);
+int Conditional_Level_Transition_Order_Core_1_Decode_Int(Packet_Info* data, const kcg_int* stream, Conditional_Level_Transition_Order_Core_1* p);
 
 #ifdef __cplusplus
 
@@ -171,14 +171,14 @@ inline int decode(Bitstream& stream, Conditional_Level_Transition_Order_Core_1& 
     return Conditional_Level_Transition_Order_Core_1_Decode_Bit(&stream, &p);
 }
 
-inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Conditional_Level_Transition_Order_Core_1& p)
+inline int encode(Packet_Info& data, kcg_int* stream, const Conditional_Level_Transition_Order_Core_1& p)
 {
     std::cerr << "encode int function not implemented for packet 46 yet." << std::endl;
 
-    return Conditional_Level_Transition_Order_Core_1_Encode_Int(&data, stream, startAddress, &p);
+    return Conditional_Level_Transition_Order_Core_1_Encode_Int(&data, stream, &p);
 }
 
-inline int decode(const Packet_Info& data, const kcg_int* stream, Conditional_Level_Transition_Order_Core_1& p)
+inline int decode(Packet_Info& data, const kcg_int* stream, Conditional_Level_Transition_Order_Core_1& p)
 {
     std::cerr << "decode int function not implemented for packet 46 yet." << std::endl;
 

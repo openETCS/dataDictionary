@@ -42,16 +42,21 @@ struct Session_Management_with_neighbouring_Radio_Infill_Unit : public BasePacke
         return ::decode(stream, core);
     }
 
-    int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress) const override
+    int encode(Packet_Info& data, kcg_int* stream) const override
     {
         data.nid_packet = 143;
         data.q_dir = core.Q_DIR;
 	data.valid = 1;
-	data.startAddress = startAddress;
 
-	stream[startAddress++] = header.NID_PACKET;
+        Packet_Info q = data;
 
-	return ::encode(data, stream, startAddress, core);
+	stream[q.startAddress++] = header.NID_PACKET;
+
+	int ret = ::encode(q, stream, core);
+
+	data.endAddress = q.startAddress-1;
+
+	return ret;
     }
 
     int decode(const Packet_Info& data, const kcg_int* stream) override
@@ -61,9 +66,18 @@ struct Session_Management_with_neighbouring_Radio_Infill_Unit : public BasePacke
 	    return 0;
 	}
 
-	header.NID_PACKET = stream[data.startAddress];
+	Packet_Info q = data;
 
-	return ::decode(data, stream, core);
+	header.NID_PACKET = stream[q.startAddress++];
+
+	int ret = ::decode(q, stream, core);
+
+        if (q.startAddress-1 != data.endAddress)
+        {
+            return 0;
+        }
+
+	return ret;
     }
 
 };

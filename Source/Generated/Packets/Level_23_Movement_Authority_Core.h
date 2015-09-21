@@ -165,9 +165,9 @@ int Level_23_Movement_Authority_Encode_Bit(Bitstream* stream, const Level_23_Mov
 */
 int Level_23_Movement_Authority_Decode_Bit(Bitstream* stream, Level_23_Movement_Authority_Core* p);
 
-int Level_23_Movement_Authority_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Level_23_Movement_Authority_Core* p);
+int Level_23_Movement_Authority_Encode_Int(Packet_Info* data, kcg_int* stream, const Level_23_Movement_Authority_Core* p);
 
-int Level_23_Movement_Authority_Decode_Int(const Packet_Info* data, const kcg_int* stream, Level_23_Movement_Authority_Core* p);
+int Level_23_Movement_Authority_Decode_Int(Packet_Info* data, const kcg_int* stream, Level_23_Movement_Authority_Core* p);
 
 #ifdef __cplusplus
 
@@ -261,14 +261,14 @@ inline int decode(Bitstream& stream, Level_23_Movement_Authority_Core& p)
     return Level_23_Movement_Authority_Decode_Bit(&stream, &p);
 }
 
-inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Level_23_Movement_Authority_Core& p)
+inline int encode(Packet_Info& data, kcg_int* stream, const Level_23_Movement_Authority_Core& p)
 {
     std::cerr << "encode int function not implemented for packet 15 yet." << std::endl;
 
-    return Level_23_Movement_Authority_Encode_Int(&data, stream, startAddress, &p);
+    return Level_23_Movement_Authority_Encode_Int(&data, stream, &p);
 }
 
-inline int decode(const Packet_Info& data, const kcg_int* stream, Level_23_Movement_Authority_Core& p)
+inline int decode(Packet_Info& data, const kcg_int* stream, Level_23_Movement_Authority_Core& p)
 {
     std::cerr << "decode int function not implemented for packet 15 yet." << std::endl;
 

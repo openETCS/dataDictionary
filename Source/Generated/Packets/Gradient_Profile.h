@@ -42,21 +42,20 @@ struct Gradient_Profile : public BasePacket
         return ::decode(stream, core);
     }
 
-    int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress) const override
+    int encode(Packet_Info& data, kcg_int* stream) const override
     {
         data.nid_packet = 21;
         data.q_dir = core.Q_DIR;
 	data.valid = 1;
-	data.startAddress = startAddress;
 
-	Packet_Info q = data;
+        Packet_Info q = data;
 
 	stream[q.startAddress++] = header.NID_PACKET;
 
 	int ret = ::encode(q, stream, core);
 
 	data.endAddress = q.startAddress-1;
-	
+
 	return ret;
     }
 
@@ -73,10 +72,10 @@ struct Gradient_Profile : public BasePacket
 
 	int ret = ::decode(q, stream, core);
 
-	if (q.startAddress-1 != data.endAddress)
-	{
+        if (q.startAddress-1 != data.endAddress)
+        {
             return 0;
-	}
+        }
 
 	return ret;
     }

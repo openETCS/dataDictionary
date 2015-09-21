@@ -111,12 +111,12 @@ int List_of_balises_for_SH_Area_Decode_Bit(Bitstream* stream, List_of_balises_fo
     }
 }
 
-int List_of_balises_for_SH_Area_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const List_of_balises_for_SH_Area_Core* p)
+int List_of_balises_for_SH_Area_Encode_Int(Packet_Info* data, kcg_int* stream, const List_of_balises_for_SH_Area_Core* p)
 {
     return 0;
 }
 
-int List_of_balises_for_SH_Area_Decode_Int(const Packet_Info* data, const kcg_int* stream, List_of_balises_for_SH_Area_Core* p)
+int List_of_balises_for_SH_Area_Decode_Int(Packet_Info* data, const kcg_int* stream, List_of_balises_for_SH_Area_Core* p)
 {
     return 0;
 }

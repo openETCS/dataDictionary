@@ -30,7 +30,7 @@ struct BasePacket
 
     virtual int decode(Bitstream&) = 0;
 
-    virtual int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress) const = 0;
+    virtual int encode(Packet_Info& data, kcg_int* stream) const = 0;
 
     virtual int decode(const Packet_Info& data, const kcg_int* stream) = 0;
 

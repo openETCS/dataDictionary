@@ -269,12 +269,12 @@ int Level_1_Movement_Authority_Decode_Bit(Bitstream* stream, Level_1_Movement_Au
     }
 }
 
-int Level_1_Movement_Authority_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Level_1_Movement_Authority_Core* p)
+int Level_1_Movement_Authority_Encode_Int(Packet_Info* data, kcg_int* stream, const Level_1_Movement_Authority_Core* p)
 {
     return 0;
 }
 
-int Level_1_Movement_Authority_Decode_Int(const Packet_Info* data, const kcg_int* stream, Level_1_Movement_Authority_Core* p)
+int Level_1_Movement_Authority_Decode_Int(Packet_Info* data, const kcg_int* stream, Level_1_Movement_Authority_Core* p)
 {
     return 0;
 }
