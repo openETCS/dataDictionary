@@ -184,7 +184,7 @@ int Gradient_Profile_Encode_Int(Packet_Info* data, kcg_int* stream, const Gradie
     stream[data->startAddress++] = p->Q_DIR;
     stream[data->startAddress++] = p->L_PACKET;
     stream[data->startAddress++] = p->Q_SCALE;
-    stream[data->startAddress++] = p->N_ITER_1;
+    stream[data->startAddress++] = p->N_ITER_1+1;
     stream[data->startAddress++] = p->D_GRADIENT;
     stream[data->startAddress++] = p->Q_GDIR;
     stream[data->startAddress++] = p->G_A;
@@ -202,7 +202,7 @@ int Gradient_Profile_Decode_Int(Packet_Info* data, const kcg_int* stream, Gradie
     p->Q_DIR = stream[data->startAddress++];
     p->L_PACKET = stream[data->startAddress++];
     p->Q_SCALE = stream[data->startAddress++];
-    p->N_ITER_1 = stream[data->startAddress++];
+    p->N_ITER_1 = stream[data->startAddress++]-1;
     p->D_GRADIENT = stream[data->startAddress++];
     p->Q_GDIR = stream[data->startAddress++];
     p->G_A = stream[data->startAddress++];
