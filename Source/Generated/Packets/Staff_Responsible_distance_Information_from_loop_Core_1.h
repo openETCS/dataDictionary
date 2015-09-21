@@ -127,9 +127,9 @@ int Staff_Responsible_distance_Information_from_loop_Core_1_Encode_Bit(Bitstream
 */
 int Staff_Responsible_distance_Information_from_loop_Core_1_Decode_Bit(Bitstream* stream, Staff_Responsible_distance_Information_from_loop_Core_1* p);
 
-int Staff_Responsible_distance_Information_from_loop_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Staff_Responsible_distance_Information_from_loop_Core_1* p);
+int Staff_Responsible_distance_Information_from_loop_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, const Staff_Responsible_distance_Information_from_loop_Core_1* p);
 
-int Staff_Responsible_distance_Information_from_loop_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, Staff_Responsible_distance_Information_from_loop_Core_1* p);
+int Staff_Responsible_distance_Information_from_loop_Core_1_Decode_Int(Packet_Info* data, const kcg_int* stream, Staff_Responsible_distance_Information_from_loop_Core_1* p);
 
 #ifdef __cplusplus
 
@@ -177,14 +177,14 @@ inline int decode(Bitstream& stream, Staff_Responsible_distance_Information_from
     return Staff_Responsible_distance_Information_from_loop_Core_1_Decode_Bit(&stream, &p);
 }
 
-inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Staff_Responsible_distance_Information_from_loop_Core_1& p)
+inline int encode(Packet_Info& data, kcg_int* stream, const Staff_Responsible_distance_Information_from_loop_Core_1& p)
 {
     std::cerr << "encode int function not implemented for packet 13 yet." << std::endl;
 
-    return Staff_Responsible_distance_Information_from_loop_Core_1_Encode_Int(&data, stream, startAddress, &p);
+    return Staff_Responsible_distance_Information_from_loop_Core_1_Encode_Int(&data, stream, &p);
 }
 
-inline int decode(const Packet_Info& data, const kcg_int* stream, Staff_Responsible_distance_Information_from_loop_Core_1& p)
+inline int decode(Packet_Info& data, const kcg_int* stream, Staff_Responsible_distance_Information_from_loop_Core_1& p)
 {
     std::cerr << "decode int function not implemented for packet 13 yet." << std::endl;
 

@@ -132,9 +132,9 @@ int Train_running_number_Encode_Bit(Bitstream* stream, const Train_running_numbe
 */
 int Train_running_number_Decode_Bit(Bitstream* stream, Train_running_number_Core* p);
 
-int Train_running_number_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Train_running_number_Core* p);
+int Train_running_number_Encode_Int(Packet_Info* data, kcg_int* stream, const Train_running_number_Core* p);
 
-int Train_running_number_Decode_Int(const Packet_Info* data, const kcg_int* stream, Train_running_number_Core* p);
+int Train_running_number_Decode_Int(Packet_Info* data, const kcg_int* stream, Train_running_number_Core* p);
 
 #ifdef __cplusplus
 
@@ -174,12 +174,12 @@ inline int decode(Bitstream& stream, Train_running_number_Core& p)
     return Train_running_number_Decode_Bit(&stream, &p);
 }
 
-inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Train_running_number_Core& p)
+inline int encode(Packet_Info& data, kcg_int* stream, const Train_running_number_Core& p)
 {
-    return Train_running_number_Encode_Int(&data, stream, startAddress, &p);
+    return Train_running_number_Encode_Int(&data, stream, &p);
 }
 
-inline int decode(const Packet_Info& data, const kcg_int* stream, Train_running_number_Core& p)
+inline int decode(Packet_Info& data, const kcg_int* stream, Train_running_number_Core& p)
 {
     return Train_running_number_Decode_Int(&data, stream, &p);
 }

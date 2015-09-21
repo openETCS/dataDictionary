@@ -127,31 +127,22 @@ int Default_Gradient_for_Temporary_Speed_Restriction_Decode_Bit(Bitstream* strea
     }
 }
 
-int Default_Gradient_for_Temporary_Speed_Restriction_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Default_Gradient_for_Temporary_Speed_Restriction_Core* p)
+int Default_Gradient_for_Temporary_Speed_Restriction_Encode_Int(Packet_Info* data, kcg_int* stream, const Default_Gradient_for_Temporary_Speed_Restriction_Core* p)
 {
-    stream[startAddress++] = p->Q_DIR;
-    stream[startAddress++] = p->L_PACKET;
-    stream[startAddress++] = p->Q_GDIR;
-    stream[startAddress++] = p->G_TSR;
-
-    data->endAddress = startAddress-1;
+    stream[data->startAddress++] = p->Q_DIR;
+    stream[data->startAddress++] = p->L_PACKET;
+    stream[data->startAddress++] = p->Q_GDIR;
+    stream[data->startAddress++] = p->G_TSR;
 
     return 1;
 }
 
-int Default_Gradient_for_Temporary_Speed_Restriction_Decode_Int(const Packet_Info* data, const kcg_int* stream, Default_Gradient_for_Temporary_Speed_Restriction_Core* p)
+int Default_Gradient_for_Temporary_Speed_Restriction_Decode_Int(Packet_Info* data, const kcg_int* stream, Default_Gradient_for_Temporary_Speed_Restriction_Core* p)
 {
-    kcg_int startAddress = data->startAddress+1;
-
-    p->Q_DIR = stream[startAddress++];
-    p->L_PACKET = stream[startAddress++];
-    p->Q_GDIR = stream[startAddress++];
-    p->G_TSR = stream[startAddress++];
-
-    if(data->endAddress != startAddress-1)
-    {
-        return false;
-    }
+    p->Q_DIR = stream[data->startAddress++];
+    p->L_PACKET = stream[data->startAddress++];
+    p->Q_GDIR = stream[data->startAddress++];
+    p->G_TSR = stream[data->startAddress++];
 
     return 1;
 }

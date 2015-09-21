@@ -148,9 +148,9 @@ int Reversing_area_information_Encode_Bit(Bitstream* stream, const Reversing_are
 */
 int Reversing_area_information_Decode_Bit(Bitstream* stream, Reversing_area_information_Core* p);
 
-int Reversing_area_information_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Reversing_area_information_Core* p);
+int Reversing_area_information_Encode_Int(Packet_Info* data, kcg_int* stream, const Reversing_area_information_Core* p);
 
-int Reversing_area_information_Decode_Int(const Packet_Info* data, const kcg_int* stream, Reversing_area_information_Core* p);
+int Reversing_area_information_Decode_Int(Packet_Info* data, const kcg_int* stream, Reversing_area_information_Core* p);
 
 #ifdef __cplusplus
 
@@ -196,12 +196,12 @@ inline int decode(Bitstream& stream, Reversing_area_information_Core& p)
     return Reversing_area_information_Decode_Bit(&stream, &p);
 }
 
-inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Reversing_area_information_Core& p)
+inline int encode(Packet_Info& data, kcg_int* stream, const Reversing_area_information_Core& p)
 {
-    return Reversing_area_information_Encode_Int(&data, stream, startAddress, &p);
+    return Reversing_area_information_Encode_Int(&data, stream, &p);
 }
 
-inline int decode(const Packet_Info& data, const kcg_int* stream, Reversing_area_information_Core& p)
+inline int decode(Packet_Info& data, const kcg_int* stream, Reversing_area_information_Core& p)
 {
     return Reversing_area_information_Decode_Int(&data, stream, &p);
 }

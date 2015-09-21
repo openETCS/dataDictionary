@@ -153,7 +153,8 @@ bool EurobaliseTelegram::encode(Flat_Packets& packetStruct) const
 
     for (i = 0; i < m_packets.size(); ++i)
     {
-        m_packets[i]->encode(packetStruct.PacketHeaders[i], packetStruct.PacketData, startAddress);
+        packetStruct.PacketHeaders[i].startAddress = startAddress;
+        m_packets[i]->encode(packetStruct.PacketHeaders[i], packetStruct.PacketData);
         startAddress = packetStruct.PacketHeaders[i].endAddress + 1;
     }
 

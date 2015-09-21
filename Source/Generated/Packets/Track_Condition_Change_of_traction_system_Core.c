@@ -161,12 +161,12 @@ int Track_Condition_Change_of_traction_system_Decode_Bit(Bitstream* stream, Trac
     }
 }
 
-int Track_Condition_Change_of_traction_system_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Track_Condition_Change_of_traction_system_Core* p)
+int Track_Condition_Change_of_traction_system_Encode_Int(Packet_Info* data, kcg_int* stream, const Track_Condition_Change_of_traction_system_Core* p)
 {
     return 0;
 }
 
-int Track_Condition_Change_of_traction_system_Decode_Int(const Packet_Info* data, const kcg_int* stream, Track_Condition_Change_of_traction_system_Core* p)
+int Track_Condition_Change_of_traction_system_Decode_Int(Packet_Info* data, const kcg_int* stream, Track_Condition_Change_of_traction_system_Core* p)
 {
     return 0;
 }

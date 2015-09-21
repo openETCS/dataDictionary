@@ -93,27 +93,18 @@ int Error_Reporting_Decode_Bit(Bitstream* stream, Error_Reporting_Core* p)
     }
 }
 
-int Error_Reporting_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Error_Reporting_Core* p)
+int Error_Reporting_Encode_Int(Packet_Info* data, kcg_int* stream, const Error_Reporting_Core* p)
 {
-    stream[startAddress++] = p->L_PACKET;
-    stream[startAddress++] = p->M_ERROR;
-
-    data->endAddress = startAddress-1;
+    stream[data->startAddress++] = p->L_PACKET;
+    stream[data->startAddress++] = p->M_ERROR;
 
     return 1;
 }
 
-int Error_Reporting_Decode_Int(const Packet_Info* data, const kcg_int* stream, Error_Reporting_Core* p)
+int Error_Reporting_Decode_Int(Packet_Info* data, const kcg_int* stream, Error_Reporting_Core* p)
 {
-    kcg_int startAddress = data->startAddress+1;
-
-    p->L_PACKET = stream[startAddress++];
-    p->M_ERROR = stream[startAddress++];
-
-    if(data->endAddress != startAddress-1)
-    {
-        return false;
-    }
+    p->L_PACKET = stream[data->startAddress++];
+    p->M_ERROR = stream[data->startAddress++];
 
     return 1;
 }

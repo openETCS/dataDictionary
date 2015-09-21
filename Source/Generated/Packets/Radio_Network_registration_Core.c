@@ -110,29 +110,20 @@ int Radio_Network_registration_Decode_Bit(Bitstream* stream, Radio_Network_regis
     }
 }
 
-int Radio_Network_registration_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Radio_Network_registration_Core* p)
+int Radio_Network_registration_Encode_Int(Packet_Info* data, kcg_int* stream, const Radio_Network_registration_Core* p)
 {
-    stream[startAddress++] = p->Q_DIR;
-    stream[startAddress++] = p->L_PACKET;
-    stream[startAddress++] = p->NID_MN;
-
-    data->endAddress = startAddress-1;
+    stream[data->startAddress++] = p->Q_DIR;
+    stream[data->startAddress++] = p->L_PACKET;
+    stream[data->startAddress++] = p->NID_MN;
 
     return 1;
 }
 
-int Radio_Network_registration_Decode_Int(const Packet_Info* data, const kcg_int* stream, Radio_Network_registration_Core* p)
+int Radio_Network_registration_Decode_Int(Packet_Info* data, const kcg_int* stream, Radio_Network_registration_Core* p)
 {
-    kcg_int startAddress = data->startAddress+1;
-
-    p->Q_DIR = stream[startAddress++];
-    p->L_PACKET = stream[startAddress++];
-    p->NID_MN = stream[startAddress++];
-
-    if(data->endAddress != startAddress-1)
-    {
-        return false;
-    }
+    p->Q_DIR = stream[data->startAddress++];
+    p->L_PACKET = stream[data->startAddress++];
+    p->NID_MN = stream[data->startAddress++];
 
     return 1;
 }

@@ -110,29 +110,20 @@ int System_Version_order_Decode_Bit(Bitstream* stream, System_Version_order_Core
     }
 }
 
-int System_Version_order_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const System_Version_order_Core* p)
+int System_Version_order_Encode_Int(Packet_Info* data, kcg_int* stream, const System_Version_order_Core* p)
 {
-    stream[startAddress++] = p->Q_DIR;
-    stream[startAddress++] = p->L_PACKET;
-    stream[startAddress++] = p->M_VERSION;
-
-    data->endAddress = startAddress-1;
+    stream[data->startAddress++] = p->Q_DIR;
+    stream[data->startAddress++] = p->L_PACKET;
+    stream[data->startAddress++] = p->M_VERSION;
 
     return 1;
 }
 
-int System_Version_order_Decode_Int(const Packet_Info* data, const kcg_int* stream, System_Version_order_Core* p)
+int System_Version_order_Decode_Int(Packet_Info* data, const kcg_int* stream, System_Version_order_Core* p)
 {
-    kcg_int startAddress = data->startAddress+1;
-
-    p->Q_DIR = stream[startAddress++];
-    p->L_PACKET = stream[startAddress++];
-    p->M_VERSION = stream[startAddress++];
-
-    if(data->endAddress != startAddress-1)
-    {
-        return false;
-    }
+    p->Q_DIR = stream[data->startAddress++];
+    p->L_PACKET = stream[data->startAddress++];
+    p->M_VERSION = stream[data->startAddress++];
 
     return 1;
 }

@@ -152,9 +152,9 @@ int Route_Suitability_Data_Encode_Bit(Bitstream* stream, const Route_Suitability
 */
 int Route_Suitability_Data_Decode_Bit(Bitstream* stream, Route_Suitability_Data_Core* p);
 
-int Route_Suitability_Data_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Route_Suitability_Data_Core* p);
+int Route_Suitability_Data_Encode_Int(Packet_Info* data, kcg_int* stream, const Route_Suitability_Data_Core* p);
 
-int Route_Suitability_Data_Decode_Int(const Packet_Info* data, const kcg_int* stream, Route_Suitability_Data_Core* p);
+int Route_Suitability_Data_Decode_Int(Packet_Info* data, const kcg_int* stream, Route_Suitability_Data_Core* p);
 
 #ifdef __cplusplus
 
@@ -254,14 +254,14 @@ inline int decode(Bitstream& stream, Route_Suitability_Data_Core& p)
     return Route_Suitability_Data_Decode_Bit(&stream, &p);
 }
 
-inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Route_Suitability_Data_Core& p)
+inline int encode(Packet_Info& data, kcg_int* stream, const Route_Suitability_Data_Core& p)
 {
     std::cerr << "encode int function not implemented for packet 70 yet." << std::endl;
 
-    return Route_Suitability_Data_Encode_Int(&data, stream, startAddress, &p);
+    return Route_Suitability_Data_Encode_Int(&data, stream, &p);
 }
 
-inline int decode(const Packet_Info& data, const kcg_int* stream, Route_Suitability_Data_Core& p)
+inline int decode(Packet_Info& data, const kcg_int* stream, Route_Suitability_Data_Core& p)
 {
     std::cerr << "decode int function not implemented for packet 70 yet." << std::endl;
 

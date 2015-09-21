@@ -126,9 +126,9 @@ int List_of_balises_for_SH_Area_Core_1_Encode_Bit(Bitstream* stream, const List_
 */
 int List_of_balises_for_SH_Area_Core_1_Decode_Bit(Bitstream* stream, List_of_balises_for_SH_Area_Core_1* p);
 
-int List_of_balises_for_SH_Area_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const List_of_balises_for_SH_Area_Core_1* p);
+int List_of_balises_for_SH_Area_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, const List_of_balises_for_SH_Area_Core_1* p);
 
-int List_of_balises_for_SH_Area_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, List_of_balises_for_SH_Area_Core_1* p);
+int List_of_balises_for_SH_Area_Core_1_Decode_Int(Packet_Info* data, const kcg_int* stream, List_of_balises_for_SH_Area_Core_1* p);
 
 #ifdef __cplusplus
 
@@ -174,14 +174,14 @@ inline int decode(Bitstream& stream, List_of_balises_for_SH_Area_Core_1& p)
     return List_of_balises_for_SH_Area_Core_1_Decode_Bit(&stream, &p);
 }
 
-inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const List_of_balises_for_SH_Area_Core_1& p)
+inline int encode(Packet_Info& data, kcg_int* stream, const List_of_balises_for_SH_Area_Core_1& p)
 {
     std::cerr << "encode int function not implemented for packet 49 yet." << std::endl;
 
-    return List_of_balises_for_SH_Area_Core_1_Encode_Int(&data, stream, startAddress, &p);
+    return List_of_balises_for_SH_Area_Core_1_Encode_Int(&data, stream, &p);
 }
 
-inline int decode(const Packet_Info& data, const kcg_int* stream, List_of_balises_for_SH_Area_Core_1& p)
+inline int decode(Packet_Info& data, const kcg_int* stream, List_of_balises_for_SH_Area_Core_1& p)
 {
     std::cerr << "decode int function not implemented for packet 49 yet." << std::endl;
 

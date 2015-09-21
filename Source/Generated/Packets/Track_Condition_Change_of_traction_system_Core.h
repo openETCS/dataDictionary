@@ -148,9 +148,9 @@ int Track_Condition_Change_of_traction_system_Encode_Bit(Bitstream* stream, cons
 */
 int Track_Condition_Change_of_traction_system_Decode_Bit(Bitstream* stream, Track_Condition_Change_of_traction_system_Core* p);
 
-int Track_Condition_Change_of_traction_system_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Track_Condition_Change_of_traction_system_Core* p);
+int Track_Condition_Change_of_traction_system_Encode_Int(Packet_Info* data, kcg_int* stream, const Track_Condition_Change_of_traction_system_Core* p);
 
-int Track_Condition_Change_of_traction_system_Decode_Int(const Packet_Info* data, const kcg_int* stream, Track_Condition_Change_of_traction_system_Core* p);
+int Track_Condition_Change_of_traction_system_Decode_Int(Packet_Info* data, const kcg_int* stream, Track_Condition_Change_of_traction_system_Core* p);
 
 #ifdef __cplusplus
 
@@ -202,14 +202,14 @@ inline int decode(Bitstream& stream, Track_Condition_Change_of_traction_system_C
     return Track_Condition_Change_of_traction_system_Decode_Bit(&stream, &p);
 }
 
-inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Track_Condition_Change_of_traction_system_Core& p)
+inline int encode(Packet_Info& data, kcg_int* stream, const Track_Condition_Change_of_traction_system_Core& p)
 {
     std::cerr << "encode int function not implemented for packet 39 yet." << std::endl;
 
-    return Track_Condition_Change_of_traction_system_Encode_Int(&data, stream, startAddress, &p);
+    return Track_Condition_Change_of_traction_system_Encode_Int(&data, stream, &p);
 }
 
-inline int decode(const Packet_Info& data, const kcg_int* stream, Track_Condition_Change_of_traction_system_Core& p)
+inline int decode(Packet_Info& data, const kcg_int* stream, Track_Condition_Change_of_traction_system_Core& p)
 {
     std::cerr << "decode int function not implemented for packet 39 yet." << std::endl;
 

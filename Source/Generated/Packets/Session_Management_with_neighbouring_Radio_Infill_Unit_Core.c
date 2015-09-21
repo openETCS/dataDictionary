@@ -161,35 +161,26 @@ int Session_Management_with_neighbouring_Radio_Infill_Unit_Decode_Bit(Bitstream*
     }
 }
 
-int Session_Management_with_neighbouring_Radio_Infill_Unit_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p)
+int Session_Management_with_neighbouring_Radio_Infill_Unit_Encode_Int(Packet_Info* data, kcg_int* stream, const Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p)
 {
-    stream[startAddress++] = p->Q_DIR;
-    stream[startAddress++] = p->L_PACKET;
-    stream[startAddress++] = p->Q_RIU;
-    stream[startAddress++] = p->NID_C;
-    stream[startAddress++] = p->NID_RIU;
-    stream[startAddress++] = p->NID_RADIO;
-
-    data->endAddress = startAddress-1;
+    stream[data->startAddress++] = p->Q_DIR;
+    stream[data->startAddress++] = p->L_PACKET;
+    stream[data->startAddress++] = p->Q_RIU;
+    stream[data->startAddress++] = p->NID_C;
+    stream[data->startAddress++] = p->NID_RIU;
+    stream[data->startAddress++] = p->NID_RADIO;
 
     return 1;
 }
 
-int Session_Management_with_neighbouring_Radio_Infill_Unit_Decode_Int(const Packet_Info* data, const kcg_int* stream, Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p)
+int Session_Management_with_neighbouring_Radio_Infill_Unit_Decode_Int(Packet_Info* data, const kcg_int* stream, Session_Management_with_neighbouring_Radio_Infill_Unit_Core* p)
 {
-    kcg_int startAddress = data->startAddress+1;
-
-    p->Q_DIR = stream[startAddress++];
-    p->L_PACKET = stream[startAddress++];
-    p->Q_RIU = stream[startAddress++];
-    p->NID_C = stream[startAddress++];
-    p->NID_RIU = stream[startAddress++];
-    p->NID_RADIO = stream[startAddress++];
-
-    if(data->endAddress != startAddress-1)
-    {
-        return false;
-    }
+    p->Q_DIR = stream[data->startAddress++];
+    p->L_PACKET = stream[data->startAddress++];
+    p->Q_RIU = stream[data->startAddress++];
+    p->NID_C = stream[data->startAddress++];
+    p->NID_RIU = stream[data->startAddress++];
+    p->NID_RADIO = stream[data->startAddress++];
 
     return 1;
 }

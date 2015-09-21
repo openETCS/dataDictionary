@@ -143,9 +143,9 @@ int Default_Gradient_for_Temporary_Speed_Restriction_Encode_Bit(Bitstream* strea
 */
 int Default_Gradient_for_Temporary_Speed_Restriction_Decode_Bit(Bitstream* stream, Default_Gradient_for_Temporary_Speed_Restriction_Core* p);
 
-int Default_Gradient_for_Temporary_Speed_Restriction_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Default_Gradient_for_Temporary_Speed_Restriction_Core* p);
+int Default_Gradient_for_Temporary_Speed_Restriction_Encode_Int(Packet_Info* data, kcg_int* stream, const Default_Gradient_for_Temporary_Speed_Restriction_Core* p);
 
-int Default_Gradient_for_Temporary_Speed_Restriction_Decode_Int(const Packet_Info* data, const kcg_int* stream, Default_Gradient_for_Temporary_Speed_Restriction_Core* p);
+int Default_Gradient_for_Temporary_Speed_Restriction_Decode_Int(Packet_Info* data, const kcg_int* stream, Default_Gradient_for_Temporary_Speed_Restriction_Core* p);
 
 #ifdef __cplusplus
 
@@ -189,12 +189,12 @@ inline int decode(Bitstream& stream, Default_Gradient_for_Temporary_Speed_Restri
     return Default_Gradient_for_Temporary_Speed_Restriction_Decode_Bit(&stream, &p);
 }
 
-inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Default_Gradient_for_Temporary_Speed_Restriction_Core& p)
+inline int encode(Packet_Info& data, kcg_int* stream, const Default_Gradient_for_Temporary_Speed_Restriction_Core& p)
 {
-    return Default_Gradient_for_Temporary_Speed_Restriction_Encode_Int(&data, stream, startAddress, &p);
+    return Default_Gradient_for_Temporary_Speed_Restriction_Encode_Int(&data, stream, &p);
 }
 
-inline int decode(const Packet_Info& data, const kcg_int* stream, Default_Gradient_for_Temporary_Speed_Restriction_Core& p)
+inline int decode(Packet_Info& data, const kcg_int* stream, Default_Gradient_for_Temporary_Speed_Restriction_Core& p)
 {
     return Default_Gradient_for_Temporary_Speed_Restriction_Decode_Int(&data, stream, &p);
 }

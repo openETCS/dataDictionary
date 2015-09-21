@@ -154,9 +154,9 @@ int Axle_Load_Speed_Profile_Encode_Bit(Bitstream* stream, const Axle_Load_Speed_
 */
 int Axle_Load_Speed_Profile_Decode_Bit(Bitstream* stream, Axle_Load_Speed_Profile_Core* p);
 
-int Axle_Load_Speed_Profile_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Axle_Load_Speed_Profile_Core* p);
+int Axle_Load_Speed_Profile_Encode_Int(Packet_Info* data, kcg_int* stream, const Axle_Load_Speed_Profile_Core* p);
 
-int Axle_Load_Speed_Profile_Decode_Int(const Packet_Info* data, const kcg_int* stream, Axle_Load_Speed_Profile_Core* p);
+int Axle_Load_Speed_Profile_Decode_Int(Packet_Info* data, const kcg_int* stream, Axle_Load_Speed_Profile_Core* p);
 
 #ifdef __cplusplus
 
@@ -252,14 +252,14 @@ inline int decode(Bitstream& stream, Axle_Load_Speed_Profile_Core& p)
     return Axle_Load_Speed_Profile_Decode_Bit(&stream, &p);
 }
 
-inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Axle_Load_Speed_Profile_Core& p)
+inline int encode(Packet_Info& data, kcg_int* stream, const Axle_Load_Speed_Profile_Core& p)
 {
     std::cerr << "encode int function not implemented for packet 51 yet." << std::endl;
 
-    return Axle_Load_Speed_Profile_Encode_Int(&data, stream, startAddress, &p);
+    return Axle_Load_Speed_Profile_Encode_Int(&data, stream, &p);
 }
 
-inline int decode(const Packet_Info& data, const kcg_int* stream, Axle_Load_Speed_Profile_Core& p)
+inline int decode(Packet_Info& data, const kcg_int* stream, Axle_Load_Speed_Profile_Core& p)
 {
     std::cerr << "decode int function not implemented for packet 51 yet." << std::endl;
 

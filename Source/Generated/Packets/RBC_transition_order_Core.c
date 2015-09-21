@@ -195,39 +195,30 @@ int RBC_transition_order_Decode_Bit(Bitstream* stream, RBC_transition_order_Core
     }
 }
 
-int RBC_transition_order_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const RBC_transition_order_Core* p)
+int RBC_transition_order_Encode_Int(Packet_Info* data, kcg_int* stream, const RBC_transition_order_Core* p)
 {
-    stream[startAddress++] = p->Q_DIR;
-    stream[startAddress++] = p->L_PACKET;
-    stream[startAddress++] = p->Q_SCALE;
-    stream[startAddress++] = p->D_RBCTR;
-    stream[startAddress++] = p->NID_C;
-    stream[startAddress++] = p->NID_RBC;
-    stream[startAddress++] = p->NID_RADIO;
-    stream[startAddress++] = p->Q_SLEEPSESSION;
-
-    data->endAddress = startAddress-1;
+    stream[data->startAddress++] = p->Q_DIR;
+    stream[data->startAddress++] = p->L_PACKET;
+    stream[data->startAddress++] = p->Q_SCALE;
+    stream[data->startAddress++] = p->D_RBCTR;
+    stream[data->startAddress++] = p->NID_C;
+    stream[data->startAddress++] = p->NID_RBC;
+    stream[data->startAddress++] = p->NID_RADIO;
+    stream[data->startAddress++] = p->Q_SLEEPSESSION;
 
     return 1;
 }
 
-int RBC_transition_order_Decode_Int(const Packet_Info* data, const kcg_int* stream, RBC_transition_order_Core* p)
+int RBC_transition_order_Decode_Int(Packet_Info* data, const kcg_int* stream, RBC_transition_order_Core* p)
 {
-    kcg_int startAddress = data->startAddress+1;
-
-    p->Q_DIR = stream[startAddress++];
-    p->L_PACKET = stream[startAddress++];
-    p->Q_SCALE = stream[startAddress++];
-    p->D_RBCTR = stream[startAddress++];
-    p->NID_C = stream[startAddress++];
-    p->NID_RBC = stream[startAddress++];
-    p->NID_RADIO = stream[startAddress++];
-    p->Q_SLEEPSESSION = stream[startAddress++];
-
-    if(data->endAddress != startAddress-1)
-    {
-        return false;
-    }
+    p->Q_DIR = stream[data->startAddress++];
+    p->L_PACKET = stream[data->startAddress++];
+    p->Q_SCALE = stream[data->startAddress++];
+    p->D_RBCTR = stream[data->startAddress++];
+    p->NID_C = stream[data->startAddress++];
+    p->NID_RBC = stream[data->startAddress++];
+    p->NID_RADIO = stream[data->startAddress++];
+    p->Q_SLEEPSESSION = stream[data->startAddress++];
 
     return 1;
 }

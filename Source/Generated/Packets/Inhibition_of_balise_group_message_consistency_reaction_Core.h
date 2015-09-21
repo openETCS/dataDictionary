@@ -135,9 +135,9 @@ int Inhibition_of_balise_group_message_consistency_reaction_Encode_Bit(Bitstream
 */
 int Inhibition_of_balise_group_message_consistency_reaction_Decode_Bit(Bitstream* stream, Inhibition_of_balise_group_message_consistency_reaction_Core* p);
 
-int Inhibition_of_balise_group_message_consistency_reaction_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Inhibition_of_balise_group_message_consistency_reaction_Core* p);
+int Inhibition_of_balise_group_message_consistency_reaction_Encode_Int(Packet_Info* data, kcg_int* stream, const Inhibition_of_balise_group_message_consistency_reaction_Core* p);
 
-int Inhibition_of_balise_group_message_consistency_reaction_Decode_Int(const Packet_Info* data, const kcg_int* stream, Inhibition_of_balise_group_message_consistency_reaction_Core* p);
+int Inhibition_of_balise_group_message_consistency_reaction_Decode_Int(Packet_Info* data, const kcg_int* stream, Inhibition_of_balise_group_message_consistency_reaction_Core* p);
 
 #ifdef __cplusplus
 
@@ -177,12 +177,12 @@ inline int decode(Bitstream& stream, Inhibition_of_balise_group_message_consiste
     return Inhibition_of_balise_group_message_consistency_reaction_Decode_Bit(&stream, &p);
 }
 
-inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Inhibition_of_balise_group_message_consistency_reaction_Core& p)
+inline int encode(Packet_Info& data, kcg_int* stream, const Inhibition_of_balise_group_message_consistency_reaction_Core& p)
 {
-    return Inhibition_of_balise_group_message_consistency_reaction_Encode_Int(&data, stream, startAddress, &p);
+    return Inhibition_of_balise_group_message_consistency_reaction_Encode_Int(&data, stream, &p);
 }
 
-inline int decode(const Packet_Info& data, const kcg_int* stream, Inhibition_of_balise_group_message_consistency_reaction_Core& p)
+inline int decode(Packet_Info& data, const kcg_int* stream, Inhibition_of_balise_group_message_consistency_reaction_Core& p)
 {
     return Inhibition_of_balise_group_message_consistency_reaction_Decode_Int(&data, stream, &p);
 }

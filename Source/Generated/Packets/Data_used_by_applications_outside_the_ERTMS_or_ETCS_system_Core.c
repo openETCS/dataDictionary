@@ -110,29 +110,20 @@ int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Decode_Bit(Bitstr
     }
 }
 
-int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p)
+int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Encode_Int(Packet_Info* data, kcg_int* stream, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p)
 {
-    stream[startAddress++] = p->L_PACKET;
-    stream[startAddress++] = p->NID_XUSER;
-    stream[startAddress++] = p->Other_data_depending_on__NID_XUSER;
-
-    data->endAddress = startAddress-1;
+    stream[data->startAddress++] = p->L_PACKET;
+    stream[data->startAddress++] = p->NID_XUSER;
+    stream[data->startAddress++] = p->Other_data_depending_on__NID_XUSER;
 
     return 1;
 }
 
-int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Decode_Int(const Packet_Info* data, const kcg_int* stream, Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p)
+int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Decode_Int(Packet_Info* data, const kcg_int* stream, Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p)
 {
-    kcg_int startAddress = data->startAddress+1;
-
-    p->L_PACKET = stream[startAddress++];
-    p->NID_XUSER = stream[startAddress++];
-    p->Other_data_depending_on__NID_XUSER = stream[startAddress++];
-
-    if(data->endAddress != startAddress-1)
-    {
-        return false;
-    }
+    p->L_PACKET = stream[data->startAddress++];
+    p->NID_XUSER = stream[data->startAddress++];
+    p->Other_data_depending_on__NID_XUSER = stream[data->startAddress++];
 
     return 1;
 }

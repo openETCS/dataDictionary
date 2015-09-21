@@ -145,12 +145,12 @@ int Conditional_Level_Transition_Order_Decode_Bit(Bitstream* stream, Conditional
     }
 }
 
-int Conditional_Level_Transition_Order_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Conditional_Level_Transition_Order_Core* p)
+int Conditional_Level_Transition_Order_Encode_Int(Packet_Info* data, kcg_int* stream, const Conditional_Level_Transition_Order_Core* p)
 {
     return 0;
 }
 
-int Conditional_Level_Transition_Order_Decode_Int(const Packet_Info* data, const kcg_int* stream, Conditional_Level_Transition_Order_Core* p)
+int Conditional_Level_Transition_Order_Decode_Int(Packet_Info* data, const kcg_int* stream, Conditional_Level_Transition_Order_Core* p)
 {
     return 0;
 }

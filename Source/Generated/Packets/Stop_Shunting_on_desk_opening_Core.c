@@ -93,27 +93,18 @@ int Stop_Shunting_on_desk_opening_Decode_Bit(Bitstream* stream, Stop_Shunting_on
     }
 }
 
-int Stop_Shunting_on_desk_opening_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Stop_Shunting_on_desk_opening_Core* p)
+int Stop_Shunting_on_desk_opening_Encode_Int(Packet_Info* data, kcg_int* stream, const Stop_Shunting_on_desk_opening_Core* p)
 {
-    stream[startAddress++] = p->Q_DIR;
-    stream[startAddress++] = p->L_PACKET;
-
-    data->endAddress = startAddress-1;
+    stream[data->startAddress++] = p->Q_DIR;
+    stream[data->startAddress++] = p->L_PACKET;
 
     return 1;
 }
 
-int Stop_Shunting_on_desk_opening_Decode_Int(const Packet_Info* data, const kcg_int* stream, Stop_Shunting_on_desk_opening_Core* p)
+int Stop_Shunting_on_desk_opening_Decode_Int(Packet_Info* data, const kcg_int* stream, Stop_Shunting_on_desk_opening_Core* p)
 {
-    kcg_int startAddress = data->startAddress+1;
-
-    p->Q_DIR = stream[startAddress++];
-    p->L_PACKET = stream[startAddress++];
-
-    if(data->endAddress != startAddress-1)
-    {
-        return false;
-    }
+    p->Q_DIR = stream[data->startAddress++];
+    p->L_PACKET = stream[data->startAddress++];
 
     return 1;
 }

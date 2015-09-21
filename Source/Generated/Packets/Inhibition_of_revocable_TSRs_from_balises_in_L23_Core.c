@@ -93,27 +93,18 @@ int Inhibition_of_revocable_TSRs_from_balises_in_L23_Decode_Bit(Bitstream* strea
     }
 }
 
-int Inhibition_of_revocable_TSRs_from_balises_in_L23_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Inhibition_of_revocable_TSRs_from_balises_in_L23_Core* p)
+int Inhibition_of_revocable_TSRs_from_balises_in_L23_Encode_Int(Packet_Info* data, kcg_int* stream, const Inhibition_of_revocable_TSRs_from_balises_in_L23_Core* p)
 {
-    stream[startAddress++] = p->Q_DIR;
-    stream[startAddress++] = p->L_PACKET;
-
-    data->endAddress = startAddress-1;
+    stream[data->startAddress++] = p->Q_DIR;
+    stream[data->startAddress++] = p->L_PACKET;
 
     return 1;
 }
 
-int Inhibition_of_revocable_TSRs_from_balises_in_L23_Decode_Int(const Packet_Info* data, const kcg_int* stream, Inhibition_of_revocable_TSRs_from_balises_in_L23_Core* p)
+int Inhibition_of_revocable_TSRs_from_balises_in_L23_Decode_Int(Packet_Info* data, const kcg_int* stream, Inhibition_of_revocable_TSRs_from_balises_in_L23_Core* p)
 {
-    kcg_int startAddress = data->startAddress+1;
-
-    p->Q_DIR = stream[startAddress++];
-    p->L_PACKET = stream[startAddress++];
-
-    if(data->endAddress != startAddress-1)
-    {
-        return false;
-    }
+    p->Q_DIR = stream[data->startAddress++];
+    p->L_PACKET = stream[data->startAddress++];
 
     return 1;
 }

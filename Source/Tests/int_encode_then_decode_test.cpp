@@ -22,7 +22,9 @@ int main ()
 
     std::cout << "\n\nEncoding the Packet: " << a << std::endl;
 
-    if (a.encode(container.PacketHeaders[0], container.PacketData, 0))
+    container.PacketHeaders[0].startAddress = 0;
+
+    if (a.encode(container.PacketHeaders[0], container.PacketData))
     {
         std::cout << "The packet was encoded into the int stream." << std::endl;
     }

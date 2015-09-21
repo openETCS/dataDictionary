@@ -161,12 +161,12 @@ int Route_Suitability_Data_Core_1_Decode_Bit(Bitstream* stream, Route_Suitabilit
     }
 }
 
-int Route_Suitability_Data_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Route_Suitability_Data_Core_1* p)
+int Route_Suitability_Data_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, const Route_Suitability_Data_Core_1* p)
 {
     return 0;
 }
 
-int Route_Suitability_Data_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, Route_Suitability_Data_Core_1* p)
+int Route_Suitability_Data_Core_1_Decode_Int(Packet_Info* data, const kcg_int* stream, Route_Suitability_Data_Core_1* p)
 {
     return 0;
 }

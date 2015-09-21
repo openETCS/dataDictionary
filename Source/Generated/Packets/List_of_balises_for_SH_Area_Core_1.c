@@ -99,12 +99,12 @@ int List_of_balises_for_SH_Area_Core_1_Decode_Bit(Bitstream* stream, List_of_bal
     }
 }
 
-int List_of_balises_for_SH_Area_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const List_of_balises_for_SH_Area_Core_1* p)
+int List_of_balises_for_SH_Area_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, const List_of_balises_for_SH_Area_Core_1* p)
 {
     return 0;
 }
 
-int List_of_balises_for_SH_Area_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, List_of_balises_for_SH_Area_Core_1* p)
+int List_of_balises_for_SH_Area_Core_1_Decode_Int(Packet_Info* data, const kcg_int* stream, List_of_balises_for_SH_Area_Core_1* p)
 {
     return 0;
 }

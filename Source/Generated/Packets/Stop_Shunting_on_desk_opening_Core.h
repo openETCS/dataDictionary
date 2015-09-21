@@ -132,9 +132,9 @@ int Stop_Shunting_on_desk_opening_Encode_Bit(Bitstream* stream, const Stop_Shunt
 */
 int Stop_Shunting_on_desk_opening_Decode_Bit(Bitstream* stream, Stop_Shunting_on_desk_opening_Core* p);
 
-int Stop_Shunting_on_desk_opening_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Stop_Shunting_on_desk_opening_Core* p);
+int Stop_Shunting_on_desk_opening_Encode_Int(Packet_Info* data, kcg_int* stream, const Stop_Shunting_on_desk_opening_Core* p);
 
-int Stop_Shunting_on_desk_opening_Decode_Int(const Packet_Info* data, const kcg_int* stream, Stop_Shunting_on_desk_opening_Core* p);
+int Stop_Shunting_on_desk_opening_Decode_Int(Packet_Info* data, const kcg_int* stream, Stop_Shunting_on_desk_opening_Core* p);
 
 #ifdef __cplusplus
 
@@ -174,12 +174,12 @@ inline int decode(Bitstream& stream, Stop_Shunting_on_desk_opening_Core& p)
     return Stop_Shunting_on_desk_opening_Decode_Bit(&stream, &p);
 }
 
-inline int encode(Packet_Info& data, kcg_int* stream, kcg_int startAddress, const Stop_Shunting_on_desk_opening_Core& p)
+inline int encode(Packet_Info& data, kcg_int* stream, const Stop_Shunting_on_desk_opening_Core& p)
 {
-    return Stop_Shunting_on_desk_opening_Encode_Int(&data, stream, startAddress, &p);
+    return Stop_Shunting_on_desk_opening_Encode_Int(&data, stream, &p);
 }
 
-inline int decode(const Packet_Info& data, const kcg_int* stream, Stop_Shunting_on_desk_opening_Core& p)
+inline int decode(Packet_Info& data, const kcg_int* stream, Stop_Shunting_on_desk_opening_Core& p)
 {
     return Stop_Shunting_on_desk_opening_Decode_Int(&data, stream, &p);
 }

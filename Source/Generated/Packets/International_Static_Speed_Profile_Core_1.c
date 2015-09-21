@@ -116,12 +116,12 @@ int International_Static_Speed_Profile_Core_1_Decode_Bit(Bitstream* stream, Inte
     }
 }
 
-int International_Static_Speed_Profile_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const International_Static_Speed_Profile_Core_1* p)
+int International_Static_Speed_Profile_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, const International_Static_Speed_Profile_Core_1* p)
 {
     return 0;
 }
 
-int International_Static_Speed_Profile_Core_1_Decode_Int(const Packet_Info* data, const kcg_int* stream, International_Static_Speed_Profile_Core_1* p)
+int International_Static_Speed_Profile_Core_1_Decode_Int(Packet_Info* data, const kcg_int* stream, International_Static_Speed_Profile_Core_1* p)
 {
     return 0;
 }

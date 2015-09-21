@@ -317,12 +317,12 @@ int Packet_for_sending_fixed_text_messages_Decode_Bit(Bitstream* stream, Packet_
     }
 }
 
-int Packet_for_sending_fixed_text_messages_Encode_Int(Packet_Info* data, kcg_int* stream, kcg_int startAddress, const Packet_for_sending_fixed_text_messages_Core* p)
+int Packet_for_sending_fixed_text_messages_Encode_Int(Packet_Info* data, kcg_int* stream, const Packet_for_sending_fixed_text_messages_Core* p)
 {
     return 0;
 }
 
-int Packet_for_sending_fixed_text_messages_Decode_Int(const Packet_Info* data, const kcg_int* stream, Packet_for_sending_fixed_text_messages_Core* p)
+int Packet_for_sending_fixed_text_messages_Decode_Int(Packet_Info* data, const kcg_int* stream, Packet_for_sending_fixed_text_messages_Core* p)
 {
     return 0;
 }
