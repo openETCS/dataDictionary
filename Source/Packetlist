@@ -1,0 +1,74 @@
+Alle * sind CH6 relevant.
+
+## Packet 1 (Position Report based on two balise groups [conditional][N])
+## Packet 49 (List of balises for SH Area [dynamisch][N])
+## Packet 80 (Mode profile [dynamisch][N])
+
+Chapter 7 Packets:
+
+##  3* (National Values [dynamisch][N], Onboard Telephone Numbers [dynamisch][N])
+##  27* (International Static Speed Profile [dynamisch])
+##  (72*) (Packet for sending plain text messages [conditional N])
+//  0 (Virtual Balise Cover marker [statisch][Y], Position Report [conditional][Y])
+//  11 (Validated train data [dynamisch][Y])
+//  15 (Level 2/3 Movement Authority [dynamisch Y])
+//  21 (Gradient Profile [dynamisch Y])
+//  41 (Level Transition Order [dynamisch Y])
+//  42 (Session Management [statisch Y])
+//  137 (Stop if in Staff Responsible [statisch Y])
+//  255 (End of Information [statisch Y])
+ 
+Common Optional Packets for Messages*:
+
+##  3 National Values [dynamisch][N], Onboard Telephone Numbers [dynamisch][N]
+##  5 Linking [dynamisch][N]
+##  39 Track Condition Change of traction system [conditional][N]
+##  51 Acle Load Speed Profile [dynamisch][N]
+##  41 Level Transition Order [dynamisch][Y]
+##  44 Data used by applications outside the ERTMS/ETCS system [conditional][N]
+##  52 Permitted Braking Distance Information [dynamisch][N]
+##  58 Position Report Parameters [dynamisch][N]
+##  68 Track Condition [dynamisch][N]
+##  69 Track Condition Station Platforms [dynamisch][N]
+##  70 Track Condition [dynamisch][N]
+##  72 Packet for sending plain text messages [conditional][N]
+##  76 Packet for sending fixed text messages [conditional][N]
+##  79 Geographical Position Information [dynamisch][N]
+##  88 Level Crossing information [conditional][N]
+//  42 Session Management [statisch][Y]
+//  40 Track Condition Change of allowed current consumption [statisch][Y]
+//  45 Radio Network registration [statisch][Y]
+//  57 Movement Authority Request Parameters [statisch][Y]
+//  64 Inhibition of revocable TSRs from balises in L2/3 [statisch][Y]
+//  65 Temporary Speed Restriction [statisch][Y]
+//  66 Temporary Speed Restriction Revocation [statisch][Y]
+//  71 Adhesion Factor [statisch][Y]
+//  131 RBC transition order [statisch][Y]
+//  138 Reversing area information [statisch][Y]
+//  139 Reversing supervision information [statisch][Y]
+//  140 Train running number from RBC [statisch][Y]
+
+Chapter 8 Messages:
+  
+//  3: Packet 15 (s.o.), Optional Packets (21 (s.o.), 27 (s.o.), 49 (s.o.), 80 (s.o.) 
+      + Common)
+//  24: Optional Packets (21 (s.o.), 27 (s.o.), 45 (s.o.), 143 [statisch][Y], 254 [statisch][Y]
+      + Common)
+//  129: Packet 0 (s.o), 1 (s.o.), 11 (s.o.)
+//  132: Packet 0 (s.o), 1 (s.o), Optional Packets
+//      The train to track message 132 (MA request)
+//      may optionally include the following packet:
+//          a) Packet 9 (Level 2/3 transition information [statisch][Y])
+//  136: Packet 0 (s.o.), 1 (s.o.), Optional Packets
+//      The train to track message 136 (Train Position Report)
+//      and 157 (SoM Position Report) may optionally include
+//      the following packets:
+//          a) Packet 4 (Error Reporting [statisch][Y]),
+//          b) Packet 5 (Train running number [statisch][Y]),
+//          c) Packet 44 (Data used by applications outside the ERTMS/ETCS system [statisch][Y]).
+//  147: Packet 0 (s.o.), 1 (s.o.)
+//  159: Optional Packets
+//      The train to track message 159 (Session Established)
+//      may optionally include the following packets:
+//          a) Packet 3 (s.o.)
+
