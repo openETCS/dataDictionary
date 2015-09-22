@@ -2,13 +2,13 @@
 CH 7 Packets
 
 Alle * sind CH6 relevant
-  0 (Virtual Balise Cover marker, Position Report)
+  0 (Virtual Balise Cover marker [statisch Y], Position Report [conditional Y])
   3* (National Values)
-  11 (Validated train data)
-  15 (Level 2/3 Movement Authority)
-  21 (Gradient Profile)
+  11 (Validated train data [dynamisch Y])
+  15 (Level 2/3 Movement Authority [dynamisch Y])
+  21 (Gradient Profile [dynamisch Y])
   27* (International Static Speed Profile)
-  41 (Level Transition Order)
+  41 (Level Transition Order [dynamisch Y])
   42 (Session Management)
   (72*) (Packet for sending plain text messages)
   137 (Stop if in Staff Responsible)
