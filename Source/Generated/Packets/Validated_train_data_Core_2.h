@@ -154,30 +154,6 @@ inline bool operator!=(const Validated_train_data_Core_2& a, const Validated_tra
     return !(a == b);
 }
 
-inline int encode(Bitstream& stream, const Validated_train_data_Core_2& p)
-{
-    return Validated_train_data_Core_2_Encode_Bit(&stream, &p);
-}
-
-inline int decode(Bitstream& stream, Validated_train_data_Core_2& p)
-{
-    return Validated_train_data_Core_2_Decode_Bit(&stream, &p);
-}
-
-inline int encode(PacketInfo& data, kcg_int* stream, const Validated_train_data_Core_2& p)
-{
-    std::cerr << "encode int function not implemented for packet 11 yet." << std::endl;
-
-    return Validated_train_data_Core_2_Encode_Int(&data, stream, &p);
-}
-
-inline int decode(PacketInfo& data, const kcg_int* stream, Validated_train_data_Core_2& p)
-{
-    std::cerr << "decode int function not implemented for packet 11 yet." << std::endl;
-
-    return Validated_train_data_Core_2_Decode_Int(&data, stream, &p);
-}
-
 #endif // __cplusplus
 
 #endif // VALIDATED_TRAIN_DATA_CORE_2_CORE_H_INCLUDED

@@ -95,11 +95,17 @@ int Validated_train_data_Core_1_Decode_Bit(Bitstream* stream, Validated_train_da
 
 int Validated_train_data_Core_1_Encode_Int(PacketInfo* data, kcg_int* stream, const Validated_train_data_Core_1* p)
 {
-    return 0;
+    stream[data->startAddress++] = p->M_VOLTAGE;
+    stream[data->startAddress++] = p->NID_CTRACTION;
+
+    return 1;
 }
 
 int Validated_train_data_Core_1_Decode_Int(PacketInfo* data, const kcg_int* stream, Validated_train_data_Core_1* p)
 {
-    return 0;
+    p->M_VOLTAGE = stream[data->startAddress++];
+    p->NID_CTRACTION = stream[data->startAddress++];
+
+    return 1;
 }
 

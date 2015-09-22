@@ -272,11 +272,43 @@ int Position_Report_Decode_Bit(Bitstream* stream, Position_Report_Core* p)
 
 int Position_Report_Encode_Int(PacketInfo* data, kcg_int* stream, const Position_Report_Core* p)
 {
-    return 0;
+    stream[data->startAddress++] = p->L_PACKET;
+    stream[data->startAddress++] = p->Q_SCALE;
+    stream[data->startAddress++] = p->NID_LRBG;
+    stream[data->startAddress++] = p->D_LRBG;
+    stream[data->startAddress++] = p->Q_DIRLRBG;
+    stream[data->startAddress++] = p->Q_DLRBG;
+    stream[data->startAddress++] = p->L_DOUBTOVER;
+    stream[data->startAddress++] = p->L_DOUBTUNDER;
+    stream[data->startAddress++] = p->Q_LENGTH;
+    stream[data->startAddress++] = p->L_TRAININT;
+    stream[data->startAddress++] = p->V_TRAIN;
+    stream[data->startAddress++] = p->Q_DIRTRAIN;
+    stream[data->startAddress++] = p->M_MODE;
+    stream[data->startAddress++] = p->M_LEVEL;
+    stream[data->startAddress++] = p->NID_NTC;
+
+    return 1;
 }
 
 int Position_Report_Decode_Int(PacketInfo* data, const kcg_int* stream, Position_Report_Core* p)
 {
-    return 0;
+    p->L_PACKET = stream[data->startAddress++];
+    p->Q_SCALE = stream[data->startAddress++];
+    p->NID_LRBG = stream[data->startAddress++];
+    p->D_LRBG = stream[data->startAddress++];
+    p->Q_DIRLRBG = stream[data->startAddress++];
+    p->Q_DLRBG = stream[data->startAddress++];
+    p->L_DOUBTOVER = stream[data->startAddress++];
+    p->L_DOUBTUNDER = stream[data->startAddress++];
+    p->Q_LENGTH = stream[data->startAddress++];
+    p->L_TRAININT = stream[data->startAddress++];
+    p->V_TRAIN = stream[data->startAddress++];
+    p->Q_DIRTRAIN = stream[data->startAddress++];
+    p->M_MODE = stream[data->startAddress++];
+    p->M_LEVEL = stream[data->startAddress++];
+    p->NID_NTC = stream[data->startAddress++];
+
+    return 1;
 }
 

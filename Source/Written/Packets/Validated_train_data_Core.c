@@ -291,14 +291,14 @@ int Validated_train_data_Decode_Int(PacketInfo* data, const kcg_int* stream, Val
 
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
-        Validated_train_data_Core_1_Encode_Int(data, stream &(p->sub_1[i]));
+        Validated_train_data_Core_1_Decode_Int(data, stream, &(p->sub_1[i]));
     }
 
     p->N_ITER_2 = stream[data->startAddress++];
 
     for (uint32_t i = 0; i < p->N_ITER_2; ++i)
     {
-        Validated_train_data_Core_2_Encode_Int(data, stream &(p->sub_2[i]));
+        Validated_train_data_Core_2_Decode_Int(data, stream, &(p->sub_2[i]));
     }
 
     return 1;

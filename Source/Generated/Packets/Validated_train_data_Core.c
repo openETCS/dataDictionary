@@ -250,11 +250,57 @@ int Validated_train_data_Decode_Bit(Bitstream* stream, Validated_train_data_Core
 
 int Validated_train_data_Encode_Int(PacketInfo* data, kcg_int* stream, const Validated_train_data_Core* p)
 {
-    return 0;
+    stream[data->startAddress++] = p->L_PACKET;
+    stream[data->startAddress++] = p->NC_CDTRAIN;
+    stream[data->startAddress++] = p->NC_TRAIN;
+    stream[data->startAddress++] = p->L_TRAIN;
+    stream[data->startAddress++] = p->V_MAXTRAIN;
+    stream[data->startAddress++] = p->M_LOADINGGAUGE;
+    stream[data->startAddress++] = p->M_AXLELOADCAT;
+    stream[data->startAddress++] = p->M_AIRTIGHT;
+    stream[data->startAddress++] = p->N_AXLE;
+    stream[data->startAddress++] = p->N_ITER_1;
+
+    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+    {
+        Validated_train_data_Core_1_Encode_Int(data, stream, &(p->sub_1[i]));
+    }
+
+    stream[data->startAddress++] = p->N_ITER_2;
+
+    for (uint32_t i = 0; i < p->N_ITER_2; ++i)
+    {
+        Validated_train_data_Core_2_Encode_Int(data, stream, &(p->sub_2[i]));
+    }
+
+    return 1;
 }
 
 int Validated_train_data_Decode_Int(PacketInfo* data, const kcg_int* stream, Validated_train_data_Core* p)
 {
-    return 0;
+    p->L_PACKET = stream[data->startAddress++];
+    p->NC_CDTRAIN = stream[data->startAddress++];
+    p->NC_TRAIN = stream[data->startAddress++];
+    p->L_TRAIN = stream[data->startAddress++];
+    p->V_MAXTRAIN = stream[data->startAddress++];
+    p->M_LOADINGGAUGE = stream[data->startAddress++];
+    p->M_AXLELOADCAT = stream[data->startAddress++];
+    p->M_AIRTIGHT = stream[data->startAddress++];
+    p->N_AXLE = stream[data->startAddress++];
+    p->N_ITER_1 = stream[data->startAddress++];
+
+    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+    {
+        Validated_train_data_Core_1_Decode_Int(data, stream, &(p->sub_1[i]));
+    }
+
+    p->N_ITER_2 = stream[data->startAddress++];
+
+    for (uint32_t i = 0; i < p->N_ITER_2; ++i)
+    {
+        Validated_train_data_Core_2_Decode_Int(data, stream, &(p->sub_2[i]));
+    }
+
+    return 1;
 }
 

@@ -293,13 +293,13 @@ int Position_Report_Encode_Int(PacketInfo* data, kcg_int* stream, const Position
 
 int Position_Report_Decode_Int(PacketInfo* data, const kcg_int* stream, Position_Report_Core* p)
 {
-    p->L_PACKET; stream[data->startAddress++] = 
-    p->Q_SCALE;stream[data->startAddress++]
-    p->NID_LRBG;stream[data->startAddress++]
-    p->D_LRBGstream[data->startAddress++]
-    p->Q_DIRLRBG;stream[data->startAddress++]
-    p->Q_DLRBG;stream[data->startAddress++]
-    p->L_DOUBTOVER;stream[data->startAddress++]
+    p->L_PACKET = stream[data->startAddress++];
+    p->Q_SCALE = stream[data->startAddress++];
+    p->NID_LRBG = stream[data->startAddress++];
+    p->D_LRBG = stream[data->startAddress++];
+    p->Q_DIRLRBG = stream[data->startAddress++];
+    p->Q_DLRBG = stream[data->startAddress++];
+    p->L_DOUBTOVER = stream[data->startAddress++];
     p->L_DOUBTUNDER = stream[data->startAddress++];
     p->Q_LENGTH = stream[data->startAddress++];
     p->L_TRAININT = stream[data->startAddress++];
