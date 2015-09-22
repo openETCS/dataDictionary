@@ -1,0 +1,26 @@
+
+CH 7 Packets
+
+Alle * sind CH6 relevant
+  0 (Virtual Balise Cover marker, Position Report)
+  3* (National Values)
+  11 (Validated train data)
+  15 (Level 2/3 Movement Authority)
+  21 (Gradient Profile)
+  27* (International Static Speed Profile)
+  41 (Level Transition Order)
+  42 (Session Management)
+  (72*) (Packet for sending plain text messages)
+  137 (Stop if in Staff Responsible)
+  255 (End of Information)
+ 
+Optional Packets*
+  
+  3 (National Values)
+  24 (Nicht in Chapter 7 Definiert)
+  129 (Nicht in Chapter 7 Definiert)
+  132 (Danger for Shunting information)
+  136 (Infill location reference)
+  147 (Nicht in Chapter 7 Definiert)
+  159 (Nicht in Chapter 7 Definiert)
+
