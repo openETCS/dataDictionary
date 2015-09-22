@@ -110,7 +110,7 @@ int Train_running_number_from_RBC_Decode_Bit(Bitstream* stream, Train_running_nu
     }
 }
 
-int Train_running_number_from_RBC_Encode_Int(Packet_Info* data, kcg_int* stream, const Train_running_number_from_RBC_Core* p)
+int Train_running_number_from_RBC_Encode_Int(PacketInfo* data, kcg_int* stream, const Train_running_number_from_RBC_Core* p)
 {
     stream[data->startAddress++] = p->Q_DIR;
     stream[data->startAddress++] = p->L_PACKET;
@@ -119,7 +119,7 @@ int Train_running_number_from_RBC_Encode_Int(Packet_Info* data, kcg_int* stream,
     return 1;
 }
 
-int Train_running_number_from_RBC_Decode_Int(Packet_Info* data, const kcg_int* stream, Train_running_number_from_RBC_Core* p)
+int Train_running_number_from_RBC_Decode_Int(PacketInfo* data, const kcg_int* stream, Train_running_number_from_RBC_Core* p)
 {
     p->Q_DIR = stream[data->startAddress++];
     p->L_PACKET = stream[data->startAddress++];

@@ -47,9 +47,9 @@ class EurobaliseTelegram
 
         bool encode(Bitstream& stream) const;
 
-        bool encode(Flat_Packets& packetStruct) const;
+        bool encode(FlatPackets& packetStruct) const;
 
-        bool decode(Flat_Packets& packetStruct);
+        bool decode(FlatPackets& packetStruct);
 };
 
 std::ostream& operator<<(std::ostream& stream, const EurobaliseTelegram& p);

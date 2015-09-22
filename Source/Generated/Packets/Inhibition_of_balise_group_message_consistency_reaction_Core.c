@@ -93,7 +93,7 @@ int Inhibition_of_balise_group_message_consistency_reaction_Decode_Bit(Bitstream
     }
 }
 
-int Inhibition_of_balise_group_message_consistency_reaction_Encode_Int(Packet_Info* data, kcg_int* stream, const Inhibition_of_balise_group_message_consistency_reaction_Core* p)
+int Inhibition_of_balise_group_message_consistency_reaction_Encode_Int(PacketInfo* data, kcg_int* stream, const Inhibition_of_balise_group_message_consistency_reaction_Core* p)
 {
     stream[data->startAddress++] = p->Q_DIR;
     stream[data->startAddress++] = p->L_PACKET;
@@ -101,7 +101,7 @@ int Inhibition_of_balise_group_message_consistency_reaction_Encode_Int(Packet_In
     return 1;
 }
 
-int Inhibition_of_balise_group_message_consistency_reaction_Decode_Int(Packet_Info* data, const kcg_int* stream, Inhibition_of_balise_group_message_consistency_reaction_Core* p)
+int Inhibition_of_balise_group_message_consistency_reaction_Decode_Int(PacketInfo* data, const kcg_int* stream, Inhibition_of_balise_group_message_consistency_reaction_Core* p)
 {
     p->Q_DIR = stream[data->startAddress++];
     p->L_PACKET = stream[data->startAddress++];

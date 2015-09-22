@@ -3,7 +3,7 @@
 #define TRAIN_RUNNING_NUMBER_FROM_RBC_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include "Compressed_Packets.h"
+#include "CompressedPackets.h"
 
 struct Train_running_number_from_RBC_Core
 {
@@ -137,9 +137,9 @@ int Train_running_number_from_RBC_Encode_Bit(Bitstream* stream, const Train_runn
 */
 int Train_running_number_from_RBC_Decode_Bit(Bitstream* stream, Train_running_number_from_RBC_Core* p);
 
-int Train_running_number_from_RBC_Encode_Int(Packet_Info* data, kcg_int* stream, const Train_running_number_from_RBC_Core* p);
+int Train_running_number_from_RBC_Encode_Int(PacketInfo* data, kcg_int* stream, const Train_running_number_from_RBC_Core* p);
 
-int Train_running_number_from_RBC_Decode_Int(Packet_Info* data, const kcg_int* stream, Train_running_number_from_RBC_Core* p);
+int Train_running_number_from_RBC_Decode_Int(PacketInfo* data, const kcg_int* stream, Train_running_number_from_RBC_Core* p);
 
 #ifdef __cplusplus
 
@@ -181,12 +181,12 @@ inline int decode(Bitstream& stream, Train_running_number_from_RBC_Core& p)
     return Train_running_number_from_RBC_Decode_Bit(&stream, &p);
 }
 
-inline int encode(Packet_Info& data, kcg_int* stream, const Train_running_number_from_RBC_Core& p)
+inline int encode(PacketInfo& data, kcg_int* stream, const Train_running_number_from_RBC_Core& p)
 {
     return Train_running_number_from_RBC_Encode_Int(&data, stream, &p);
 }
 
-inline int decode(Packet_Info& data, const kcg_int* stream, Train_running_number_from_RBC_Core& p)
+inline int decode(PacketInfo& data, const kcg_int* stream, Train_running_number_from_RBC_Core& p)
 {
     return Train_running_number_from_RBC_Decode_Int(&data, stream, &p);
 }

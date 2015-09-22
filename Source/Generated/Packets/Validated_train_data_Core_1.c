@@ -93,12 +93,12 @@ int Validated_train_data_Core_1_Decode_Bit(Bitstream* stream, Validated_train_da
     }
 }
 
-int Validated_train_data_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, const Validated_train_data_Core_1* p)
+int Validated_train_data_Core_1_Encode_Int(PacketInfo* data, kcg_int* stream, const Validated_train_data_Core_1* p)
 {
     return 0;
 }
 
-int Validated_train_data_Core_1_Decode_Int(Packet_Info* data, const kcg_int* stream, Validated_train_data_Core_1* p)
+int Validated_train_data_Core_1_Decode_Int(PacketInfo* data, const kcg_int* stream, Validated_train_data_Core_1* p)
 {
     return 0;
 }

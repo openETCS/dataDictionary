@@ -42,13 +42,13 @@ struct Track_Condition_Change_of_allowed_current_consumption : public BasePacket
         return ::decode(stream, core);
     }
 
-    int encode(Packet_Info& data, kcg_int* stream) const override
+    int encode(PacketInfo& data, kcg_int* stream) const override
     {
         data.nid_packet = 40;
         data.q_dir = core.Q_DIR;
 	data.valid = 1;
 
-        Packet_Info q = data;
+        PacketInfo q = data;
 
 	stream[q.startAddress++] = header.NID_PACKET;
 
@@ -59,14 +59,14 @@ struct Track_Condition_Change_of_allowed_current_consumption : public BasePacket
 	return ret;
     }
 
-    int decode(const Packet_Info& data, const kcg_int* stream) override
+    int decode(const PacketInfo& data, const kcg_int* stream) override
     {
         if(data.nid_packet != 40)
 	{
 	    return 0;
 	}
 
-	Packet_Info q = data;
+	PacketInfo q = data;
 
 	header.NID_PACKET = stream[q.startAddress++];
 

@@ -144,7 +144,7 @@ int Track_Condition_Change_of_allowed_current_consumption_Decode_Bit(Bitstream* 
     }
 }
 
-int Track_Condition_Change_of_allowed_current_consumption_Encode_Int(Packet_Info* data, kcg_int* stream, const Track_Condition_Change_of_allowed_current_consumption_Core* p)
+int Track_Condition_Change_of_allowed_current_consumption_Encode_Int(PacketInfo* data, kcg_int* stream, const Track_Condition_Change_of_allowed_current_consumption_Core* p)
 {
     stream[data->startAddress++] = p->Q_DIR;
     stream[data->startAddress++] = p->L_PACKET;
@@ -155,7 +155,7 @@ int Track_Condition_Change_of_allowed_current_consumption_Encode_Int(Packet_Info
     return 1;
 }
 
-int Track_Condition_Change_of_allowed_current_consumption_Decode_Int(Packet_Info* data, const kcg_int* stream, Track_Condition_Change_of_allowed_current_consumption_Core* p)
+int Track_Condition_Change_of_allowed_current_consumption_Decode_Int(PacketInfo* data, const kcg_int* stream, Track_Condition_Change_of_allowed_current_consumption_Core* p)
 {
     p->Q_DIR = stream[data->startAddress++];
     p->L_PACKET = stream[data->startAddress++];

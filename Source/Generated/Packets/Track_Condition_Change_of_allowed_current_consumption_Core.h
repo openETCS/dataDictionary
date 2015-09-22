@@ -3,7 +3,7 @@
 #define TRACK_CONDITION_CHANGE_OF_ALLOWED_CURRENT_CONSUMPTION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include "Compressed_Packets.h"
+#include "CompressedPackets.h"
 
 struct Track_Condition_Change_of_allowed_current_consumption_Core
 {
@@ -147,9 +147,9 @@ int Track_Condition_Change_of_allowed_current_consumption_Encode_Bit(Bitstream* 
 */
 int Track_Condition_Change_of_allowed_current_consumption_Decode_Bit(Bitstream* stream, Track_Condition_Change_of_allowed_current_consumption_Core* p);
 
-int Track_Condition_Change_of_allowed_current_consumption_Encode_Int(Packet_Info* data, kcg_int* stream, const Track_Condition_Change_of_allowed_current_consumption_Core* p);
+int Track_Condition_Change_of_allowed_current_consumption_Encode_Int(PacketInfo* data, kcg_int* stream, const Track_Condition_Change_of_allowed_current_consumption_Core* p);
 
-int Track_Condition_Change_of_allowed_current_consumption_Decode_Int(Packet_Info* data, const kcg_int* stream, Track_Condition_Change_of_allowed_current_consumption_Core* p);
+int Track_Condition_Change_of_allowed_current_consumption_Decode_Int(PacketInfo* data, const kcg_int* stream, Track_Condition_Change_of_allowed_current_consumption_Core* p);
 
 #ifdef __cplusplus
 
@@ -195,12 +195,12 @@ inline int decode(Bitstream& stream, Track_Condition_Change_of_allowed_current_c
     return Track_Condition_Change_of_allowed_current_consumption_Decode_Bit(&stream, &p);
 }
 
-inline int encode(Packet_Info& data, kcg_int* stream, const Track_Condition_Change_of_allowed_current_consumption_Core& p)
+inline int encode(PacketInfo& data, kcg_int* stream, const Track_Condition_Change_of_allowed_current_consumption_Core& p)
 {
     return Track_Condition_Change_of_allowed_current_consumption_Encode_Int(&data, stream, &p);
 }
 
-inline int decode(Packet_Info& data, const kcg_int* stream, Track_Condition_Change_of_allowed_current_consumption_Core& p)
+inline int decode(PacketInfo& data, const kcg_int* stream, Track_Condition_Change_of_allowed_current_consumption_Core& p)
 {
     return Track_Condition_Change_of_allowed_current_consumption_Decode_Int(&data, stream, &p);
 }

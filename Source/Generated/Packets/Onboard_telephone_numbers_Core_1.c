@@ -76,12 +76,12 @@ int Onboard_telephone_numbers_Core_1_Decode_Bit(Bitstream* stream, Onboard_telep
     }
 }
 
-int Onboard_telephone_numbers_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, const Onboard_telephone_numbers_Core_1* p)
+int Onboard_telephone_numbers_Core_1_Encode_Int(PacketInfo* data, kcg_int* stream, const Onboard_telephone_numbers_Core_1* p)
 {
     return 0;
 }
 
-int Onboard_telephone_numbers_Core_1_Decode_Int(Packet_Info* data, const kcg_int* stream, Onboard_telephone_numbers_Core_1* p)
+int Onboard_telephone_numbers_Core_1_Decode_Int(PacketInfo* data, const kcg_int* stream, Onboard_telephone_numbers_Core_1* p)
 {
     return 0;
 }

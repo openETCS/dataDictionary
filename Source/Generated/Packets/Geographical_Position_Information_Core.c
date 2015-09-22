@@ -186,12 +186,12 @@ int Geographical_Position_Information_Decode_Bit(Bitstream* stream, Geographical
     }
 }
 
-int Geographical_Position_Information_Encode_Int(Packet_Info* data, kcg_int* stream, const Geographical_Position_Information_Core* p)
+int Geographical_Position_Information_Encode_Int(PacketInfo* data, kcg_int* stream, const Geographical_Position_Information_Core* p)
 {
     return 0;
 }
 
-int Geographical_Position_Information_Decode_Int(Packet_Info* data, const kcg_int* stream, Geographical_Position_Information_Core* p)
+int Geographical_Position_Information_Decode_Int(PacketInfo* data, const kcg_int* stream, Geographical_Position_Information_Core* p)
 {
     return 0;
 }

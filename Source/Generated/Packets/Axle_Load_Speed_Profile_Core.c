@@ -209,12 +209,12 @@ int Axle_Load_Speed_Profile_Decode_Bit(Bitstream* stream, Axle_Load_Speed_Profil
     }
 }
 
-int Axle_Load_Speed_Profile_Encode_Int(Packet_Info* data, kcg_int* stream, const Axle_Load_Speed_Profile_Core* p)
+int Axle_Load_Speed_Profile_Encode_Int(PacketInfo* data, kcg_int* stream, const Axle_Load_Speed_Profile_Core* p)
 {
     return 0;
 }
 
-int Axle_Load_Speed_Profile_Decode_Int(Packet_Info* data, const kcg_int* stream, Axle_Load_Speed_Profile_Core* p)
+int Axle_Load_Speed_Profile_Decode_Int(PacketInfo* data, const kcg_int* stream, Axle_Load_Speed_Profile_Core* p)
 {
     return 0;
 }

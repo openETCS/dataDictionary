@@ -1,6 +1,6 @@
 
 #include "Adhesion_Factor.h"
-#include "Compressed_Packets.h"
+#include "CompressedPackets.h"
 #include "PacketHeader.h"
 #include <cassert>
 #include <iostream>
@@ -18,7 +18,7 @@ int main ()
         a.core.M_ADHESION = 0;
     }
 
-    Flat_Packets container;
+    FlatPackets container;
 
     std::cout << "\n\nEncoding the Packet: " << a << std::endl;
 

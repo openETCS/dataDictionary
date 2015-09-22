@@ -179,12 +179,12 @@ int Position_Report_Parameters_Decode_Bit(Bitstream* stream, Position_Report_Par
     }
 }
 
-int Position_Report_Parameters_Encode_Int(Packet_Info* data, kcg_int* stream, const Position_Report_Parameters_Core* p)
+int Position_Report_Parameters_Encode_Int(PacketInfo* data, kcg_int* stream, const Position_Report_Parameters_Core* p)
 {
     return 0;
 }
 
-int Position_Report_Parameters_Decode_Int(Packet_Info* data, const kcg_int* stream, Position_Report_Parameters_Core* p)
+int Position_Report_Parameters_Decode_Int(PacketInfo* data, const kcg_int* stream, Position_Report_Parameters_Core* p)
 {
     return 0;
 }

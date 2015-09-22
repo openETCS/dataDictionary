@@ -161,12 +161,12 @@ int Mode_profile_Core_1_Decode_Bit(Bitstream* stream, Mode_profile_Core_1* p)
     }
 }
 
-int Mode_profile_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, const Mode_profile_Core_1* p)
+int Mode_profile_Core_1_Encode_Int(PacketInfo* data, kcg_int* stream, const Mode_profile_Core_1* p)
 {
     return 0;
 }
 
-int Mode_profile_Core_1_Decode_Int(Packet_Info* data, const kcg_int* stream, Mode_profile_Core_1* p)
+int Mode_profile_Core_1_Decode_Int(PacketInfo* data, const kcg_int* stream, Mode_profile_Core_1* p)
 {
     return 0;
 }

@@ -127,7 +127,7 @@ int Repositioning_Information_Decode_Bit(Bitstream* stream, Repositioning_Inform
     }
 }
 
-int Repositioning_Information_Encode_Int(Packet_Info* data, kcg_int* stream, const Repositioning_Information_Core* p)
+int Repositioning_Information_Encode_Int(PacketInfo* data, kcg_int* stream, const Repositioning_Information_Core* p)
 {
     stream[data->startAddress++] = p->Q_DIR;
     stream[data->startAddress++] = p->L_PACKET;
@@ -137,7 +137,7 @@ int Repositioning_Information_Encode_Int(Packet_Info* data, kcg_int* stream, con
     return 1;
 }
 
-int Repositioning_Information_Decode_Int(Packet_Info* data, const kcg_int* stream, Repositioning_Information_Core* p)
+int Repositioning_Information_Decode_Int(PacketInfo* data, const kcg_int* stream, Repositioning_Information_Core* p)
 {
     p->Q_DIR = stream[data->startAddress++];
     p->L_PACKET = stream[data->startAddress++];

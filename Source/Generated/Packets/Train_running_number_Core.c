@@ -93,7 +93,7 @@ int Train_running_number_Decode_Bit(Bitstream* stream, Train_running_number_Core
     }
 }
 
-int Train_running_number_Encode_Int(Packet_Info* data, kcg_int* stream, const Train_running_number_Core* p)
+int Train_running_number_Encode_Int(PacketInfo* data, kcg_int* stream, const Train_running_number_Core* p)
 {
     stream[data->startAddress++] = p->L_PACKET;
     stream[data->startAddress++] = p->NID_OPERATIONAL;
@@ -101,7 +101,7 @@ int Train_running_number_Encode_Int(Packet_Info* data, kcg_int* stream, const Tr
     return 1;
 }
 
-int Train_running_number_Decode_Int(Packet_Info* data, const kcg_int* stream, Train_running_number_Core* p)
+int Train_running_number_Decode_Int(PacketInfo* data, const kcg_int* stream, Train_running_number_Core* p)
 {
     p->L_PACKET = stream[data->startAddress++];
     p->NID_OPERATIONAL = stream[data->startAddress++];

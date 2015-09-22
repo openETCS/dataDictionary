@@ -93,12 +93,12 @@ int National_Values_Core_4_Decode_Bit(Bitstream* stream, National_Values_Core_4*
     }
 }
 
-int National_Values_Core_4_Encode_Int(Packet_Info* data, kcg_int* stream, const National_Values_Core_4* p)
+int National_Values_Core_4_Encode_Int(PacketInfo* data, kcg_int* stream, const National_Values_Core_4* p)
 {
     return 0;
 }
 
-int National_Values_Core_4_Decode_Int(Packet_Info* data, const kcg_int* stream, National_Values_Core_4* p)
+int National_Values_Core_4_Decode_Int(PacketInfo* data, const kcg_int* stream, National_Values_Core_4* p)
 {
     return 0;
 }

@@ -2,7 +2,7 @@
 #include "Adhesion_Factor.h"
 #include "End_of_Information.h"
 #include "EurobaliseTelegram.h"
-#include "Compressed_Packets.h"
+#include "CompressedPackets.h"
 #include <cassert>
 #include <iostream>
 
@@ -43,7 +43,7 @@ int main ()
     telegram.add(std::make_shared<Adhesion_Factor>(a));
     telegram.add(std::make_shared<End_of_Information>(b));
 
-    Flat_Packets container;
+    FlatPackets container;
 
     std::cout << "\n\nEncoding the telegram: " << telegram << std::endl;
 

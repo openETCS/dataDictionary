@@ -3,7 +3,7 @@
 #define ADHESION_FACTOR_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include "Compressed_Packets.h"
+#include "CompressedPackets.h"
 
 struct Adhesion_Factor_Core
 {
@@ -153,9 +153,9 @@ int Adhesion_Factor_Encode_Bit(Bitstream* stream, const Adhesion_Factor_Core* p)
 */
 int Adhesion_Factor_Decode_Bit(Bitstream* stream, Adhesion_Factor_Core* p);
 
-int Adhesion_Factor_Encode_Int(Packet_Info* data, kcg_int* stream, const Adhesion_Factor_Core* p);
+int Adhesion_Factor_Encode_Int(PacketInfo* data, kcg_int* stream, const Adhesion_Factor_Core* p);
 
-int Adhesion_Factor_Decode_Int(Packet_Info* data, const kcg_int* stream, Adhesion_Factor_Core* p);
+int Adhesion_Factor_Decode_Int(PacketInfo* data, const kcg_int* stream, Adhesion_Factor_Core* p);
 
 #ifdef __cplusplus
 
@@ -203,12 +203,12 @@ inline int decode(Bitstream& stream, Adhesion_Factor_Core& p)
     return Adhesion_Factor_Decode_Bit(&stream, &p);
 }
 
-inline int encode(Packet_Info& data, kcg_int* stream, const Adhesion_Factor_Core& p)
+inline int encode(PacketInfo& data, kcg_int* stream, const Adhesion_Factor_Core& p)
 {
     return Adhesion_Factor_Encode_Int(&data, stream, &p);
 }
 
-inline int decode(Packet_Info& data, const kcg_int* stream, Adhesion_Factor_Core& p)
+inline int decode(PacketInfo& data, const kcg_int* stream, Adhesion_Factor_Core& p)
 {
     return Adhesion_Factor_Decode_Int(&data, stream, &p);
 }

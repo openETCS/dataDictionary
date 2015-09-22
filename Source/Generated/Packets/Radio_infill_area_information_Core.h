@@ -3,7 +3,7 @@
 #define RADIO_INFILL_AREA_INFORMATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include "Compressed_Packets.h"
+#include "CompressedPackets.h"
 
 struct Radio_infill_area_information_Core
 {
@@ -166,9 +166,9 @@ int Radio_infill_area_information_Encode_Bit(Bitstream* stream, const Radio_infi
 */
 int Radio_infill_area_information_Decode_Bit(Bitstream* stream, Radio_infill_area_information_Core* p);
 
-int Radio_infill_area_information_Encode_Int(Packet_Info* data, kcg_int* stream, const Radio_infill_area_information_Core* p);
+int Radio_infill_area_information_Encode_Int(PacketInfo* data, kcg_int* stream, const Radio_infill_area_information_Core* p);
 
-int Radio_infill_area_information_Decode_Int(Packet_Info* data, const kcg_int* stream, Radio_infill_area_information_Core* p);
+int Radio_infill_area_information_Decode_Int(PacketInfo* data, const kcg_int* stream, Radio_infill_area_information_Core* p);
 
 #ifdef __cplusplus
 
@@ -222,12 +222,12 @@ inline int decode(Bitstream& stream, Radio_infill_area_information_Core& p)
     return Radio_infill_area_information_Decode_Bit(&stream, &p);
 }
 
-inline int encode(Packet_Info& data, kcg_int* stream, const Radio_infill_area_information_Core& p)
+inline int encode(PacketInfo& data, kcg_int* stream, const Radio_infill_area_information_Core& p)
 {
     return Radio_infill_area_information_Encode_Int(&data, stream, &p);
 }
 
-inline int decode(Packet_Info& data, const kcg_int* stream, Radio_infill_area_information_Core& p)
+inline int decode(PacketInfo& data, const kcg_int* stream, Radio_infill_area_information_Core& p)
 {
     return Radio_infill_area_information_Decode_Int(&data, stream, &p);
 }

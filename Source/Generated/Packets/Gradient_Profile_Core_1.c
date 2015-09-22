@@ -110,7 +110,7 @@ int Gradient_Profile_Core_1_Decode_Bit(Bitstream* stream, Gradient_Profile_Core_
     }
 }
 
-int Gradient_Profile_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, const Gradient_Profile_Core_1* p)
+int Gradient_Profile_Core_1_Encode_Int(PacketInfo* data, kcg_int* stream, const Gradient_Profile_Core_1* p)
 {
     stream[data->startAddress++] = p->D_GRADIENT;
     stream[data->startAddress++] = p->Q_GDIR;
@@ -119,7 +119,7 @@ int Gradient_Profile_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, const
     return 1;
 }
 
-int Gradient_Profile_Core_1_Decode_Int(Packet_Info* data, const kcg_int* stream, Gradient_Profile_Core_1* p)
+int Gradient_Profile_Core_1_Decode_Int(PacketInfo* data, const kcg_int* stream, Gradient_Profile_Core_1* p)
 {
     p->D_GRADIENT = stream[data->startAddress++];
     p->Q_GDIR = stream[data->startAddress++];

@@ -3,7 +3,7 @@
 #define DATA_USED_BY_APPLICATIONS_OUTSIDE_THE_ERTMS_OR_ETCS_SYSTEM_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include "Compressed_Packets.h"
+#include "CompressedPackets.h"
 
 struct Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core
 {
@@ -138,9 +138,9 @@ int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Encode_Bit(Bitstr
 */
 int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Decode_Bit(Bitstream* stream, Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p);
 
-int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Encode_Int(Packet_Info* data, kcg_int* stream, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p);
+int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Encode_Int(PacketInfo* data, kcg_int* stream, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p);
 
-int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Decode_Int(Packet_Info* data, const kcg_int* stream, Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p);
+int Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Decode_Int(PacketInfo* data, const kcg_int* stream, Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p);
 
 #ifdef __cplusplus
 
@@ -182,12 +182,12 @@ inline int decode(Bitstream& stream, Data_used_by_applications_outside_the_ERTMS
     return Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Decode_Bit(&stream, &p);
 }
 
-inline int encode(Packet_Info& data, kcg_int* stream, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& p)
+inline int encode(PacketInfo& data, kcg_int* stream, const Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& p)
 {
     return Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Encode_Int(&data, stream, &p);
 }
 
-inline int decode(Packet_Info& data, const kcg_int* stream, Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& p)
+inline int decode(PacketInfo& data, const kcg_int* stream, Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core& p)
 {
     return Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Decode_Int(&data, stream, &p);
 }

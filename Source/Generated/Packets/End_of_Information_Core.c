@@ -59,13 +59,13 @@ int End_of_Information_Decode_Bit(Bitstream* stream, End_of_Information_Core* p)
     }
 }
 
-int End_of_Information_Encode_Int(Packet_Info* data, kcg_int* stream, const End_of_Information_Core* p)
+int End_of_Information_Encode_Int(PacketInfo* data, kcg_int* stream, const End_of_Information_Core* p)
 {
 
     return 1;
 }
 
-int End_of_Information_Decode_Int(Packet_Info* data, const kcg_int* stream, End_of_Information_Core* p)
+int End_of_Information_Decode_Int(PacketInfo* data, const kcg_int* stream, End_of_Information_Core* p)
 {
 
     return 1;

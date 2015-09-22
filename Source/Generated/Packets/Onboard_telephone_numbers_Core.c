@@ -94,12 +94,12 @@ int Onboard_telephone_numbers_Decode_Bit(Bitstream* stream, Onboard_telephone_nu
     }
 }
 
-int Onboard_telephone_numbers_Encode_Int(Packet_Info* data, kcg_int* stream, const Onboard_telephone_numbers_Core* p)
+int Onboard_telephone_numbers_Encode_Int(PacketInfo* data, kcg_int* stream, const Onboard_telephone_numbers_Core* p)
 {
     return 0;
 }
 
-int Onboard_telephone_numbers_Decode_Int(Packet_Info* data, const kcg_int* stream, Onboard_telephone_numbers_Core* p)
+int Onboard_telephone_numbers_Decode_Int(PacketInfo* data, const kcg_int* stream, Onboard_telephone_numbers_Core* p)
 {
     return 0;
 }

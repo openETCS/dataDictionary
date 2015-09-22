@@ -133,12 +133,12 @@ int Data_used_by_applications_outside_the_ERTMSETCS_system_Decode_Bit(Bitstream*
     }
 }
 
-int Data_used_by_applications_outside_the_ERTMSETCS_system_Encode_Int(Packet_Info* data, kcg_int* stream, const Data_used_by_applications_outside_the_ERTMSETCS_system_Core* p)
+int Data_used_by_applications_outside_the_ERTMSETCS_system_Encode_Int(PacketInfo* data, kcg_int* stream, const Data_used_by_applications_outside_the_ERTMSETCS_system_Core* p)
 {
     return 0;
 }
 
-int Data_used_by_applications_outside_the_ERTMSETCS_system_Decode_Int(Packet_Info* data, const kcg_int* stream, Data_used_by_applications_outside_the_ERTMSETCS_system_Core* p)
+int Data_used_by_applications_outside_the_ERTMSETCS_system_Decode_Int(PacketInfo* data, const kcg_int* stream, Data_used_by_applications_outside_the_ERTMSETCS_system_Core* p)
 {
     return 0;
 }

@@ -3,7 +3,7 @@
 #define GRADIENT_PROFILE_CORE_1_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include "Compressed_Packets.h"
+#include "CompressedPackets.h"
 
 struct Gradient_Profile_Core_1
 {
@@ -134,9 +134,9 @@ int Gradient_Profile_Core_1_Encode_Bit(Bitstream* stream, const Gradient_Profile
 */
 int Gradient_Profile_Core_1_Decode_Bit(Bitstream* stream, Gradient_Profile_Core_1* p);
 
-int Gradient_Profile_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, const Gradient_Profile_Core_1* p);
+int Gradient_Profile_Core_1_Encode_Int(PacketInfo* data, kcg_int* stream, const Gradient_Profile_Core_1* p);
 
-int Gradient_Profile_Core_1_Decode_Int(Packet_Info* data, const kcg_int* stream, Gradient_Profile_Core_1* p);
+int Gradient_Profile_Core_1_Decode_Int(PacketInfo* data, const kcg_int* stream, Gradient_Profile_Core_1* p);
 
 #ifdef __cplusplus
 

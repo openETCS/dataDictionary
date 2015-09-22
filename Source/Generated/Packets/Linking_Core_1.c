@@ -134,12 +134,12 @@ int Linking_Core_1_Decode_Bit(Bitstream* stream, Linking_Core_1* p)
     }
 }
 
-int Linking_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, const Linking_Core_1* p)
+int Linking_Core_1_Encode_Int(PacketInfo* data, kcg_int* stream, const Linking_Core_1* p)
 {
     return 0;
 }
 
-int Linking_Core_1_Decode_Int(Packet_Info* data, const kcg_int* stream, Linking_Core_1* p)
+int Linking_Core_1_Decode_Int(PacketInfo* data, const kcg_int* stream, Linking_Core_1* p)
 {
     return 0;
 }

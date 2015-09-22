@@ -218,12 +218,12 @@ int Level_Crossing_information_Decode_Bit(Bitstream* stream, Level_Crossing_info
     }
 }
 
-int Level_Crossing_information_Encode_Int(Packet_Info* data, kcg_int* stream, const Level_Crossing_information_Core* p)
+int Level_Crossing_information_Encode_Int(PacketInfo* data, kcg_int* stream, const Level_Crossing_information_Core* p)
 {
     return 0;
 }
 
-int Level_Crossing_information_Decode_Int(Packet_Info* data, const kcg_int* stream, Level_Crossing_information_Core* p)
+int Level_Crossing_information_Decode_Int(PacketInfo* data, const kcg_int* stream, Level_Crossing_information_Core* p)
 {
     return 0;
 }

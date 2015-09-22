@@ -3,7 +3,7 @@
 #define RBC_TRANSITION_ORDER_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include "Compressed_Packets.h"
+#include "CompressedPackets.h"
 
 struct RBC_transition_order_Core
 {
@@ -162,9 +162,9 @@ int RBC_transition_order_Encode_Bit(Bitstream* stream, const RBC_transition_orde
 */
 int RBC_transition_order_Decode_Bit(Bitstream* stream, RBC_transition_order_Core* p);
 
-int RBC_transition_order_Encode_Int(Packet_Info* data, kcg_int* stream, const RBC_transition_order_Core* p);
+int RBC_transition_order_Encode_Int(PacketInfo* data, kcg_int* stream, const RBC_transition_order_Core* p);
 
-int RBC_transition_order_Decode_Int(Packet_Info* data, const kcg_int* stream, RBC_transition_order_Core* p);
+int RBC_transition_order_Decode_Int(PacketInfo* data, const kcg_int* stream, RBC_transition_order_Core* p);
 
 #ifdef __cplusplus
 
@@ -216,12 +216,12 @@ inline int decode(Bitstream& stream, RBC_transition_order_Core& p)
     return RBC_transition_order_Decode_Bit(&stream, &p);
 }
 
-inline int encode(Packet_Info& data, kcg_int* stream, const RBC_transition_order_Core& p)
+inline int encode(PacketInfo& data, kcg_int* stream, const RBC_transition_order_Core& p)
 {
     return RBC_transition_order_Encode_Int(&data, stream, &p);
 }
 
-inline int decode(Packet_Info& data, const kcg_int* stream, RBC_transition_order_Core& p)
+inline int decode(PacketInfo& data, const kcg_int* stream, RBC_transition_order_Core& p)
 {
     return RBC_transition_order_Decode_Int(&data, stream, &p);
 }

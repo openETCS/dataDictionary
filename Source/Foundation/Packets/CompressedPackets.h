@@ -1,5 +1,5 @@
-#ifndef COMPRESSED_PACKETS_H_INCLUDED
-#define COMPRESSED_PACKETS_H_INCLUDED
+#ifndef COMPRESSEDPACKETS_H_INCLUDED
+#define COMPRESSEDPACKETS_H_INCLUDED
 
 #ifndef kcg_int
 #define kcg_int kcg_int
@@ -29,25 +29,25 @@ typedef struct
     kcg_int endAddress;
 } MetadataElement_T_Common_Types_Pkg;
 
-typedef MetadataElement_T_Common_Types_Pkg Packet_Info;
+typedef MetadataElement_T_Common_Types_Pkg PacketInfo;
 
 // packet sequence struct
 typedef struct
 {
-    Packet_Info PacketHeaders[30];
+    PacketInfo PacketHeaders[30];
     kcg_int  PacketData[500];
 } CompressedPackets_T_Common_Types_Pkg;
 
-typedef CompressedPackets_T_Common_Types_Pkg Flat_Packets;
+typedef CompressedPackets_T_Common_Types_Pkg FlatPackets;
 
 
 inline static
-void Flat_Packet_Write(Packet_Info* info, kcg_int* data, kcg_int v)
+void FlatPacket_Write(PacketInfo* info, kcg_int* data, kcg_int v)
 {
     ++info->endAddress;
     data[info->endAddress] = v;
 }
  
 
-#endif // COMPRESSED_PACKETS_H_INCLUDED
+#endif // COMPRESSEDPACKETS_H_INCLUDED
 

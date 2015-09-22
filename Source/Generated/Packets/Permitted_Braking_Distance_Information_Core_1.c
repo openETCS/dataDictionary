@@ -161,12 +161,12 @@ int Permitted_Braking_Distance_Information_Core_1_Decode_Bit(Bitstream* stream, 
     }
 }
 
-int Permitted_Braking_Distance_Information_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, const Permitted_Braking_Distance_Information_Core_1* p)
+int Permitted_Braking_Distance_Information_Core_1_Encode_Int(PacketInfo* data, kcg_int* stream, const Permitted_Braking_Distance_Information_Core_1* p)
 {
     return 0;
 }
 
-int Permitted_Braking_Distance_Information_Core_1_Decode_Int(Packet_Info* data, const kcg_int* stream, Permitted_Braking_Distance_Information_Core_1* p)
+int Permitted_Braking_Distance_Information_Core_1_Decode_Int(PacketInfo* data, const kcg_int* stream, Permitted_Braking_Distance_Information_Core_1* p)
 {
     return 0;
 }

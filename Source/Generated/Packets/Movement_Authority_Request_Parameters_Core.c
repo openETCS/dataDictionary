@@ -144,7 +144,7 @@ int Movement_Authority_Request_Parameters_Decode_Bit(Bitstream* stream, Movement
     }
 }
 
-int Movement_Authority_Request_Parameters_Encode_Int(Packet_Info* data, kcg_int* stream, const Movement_Authority_Request_Parameters_Core* p)
+int Movement_Authority_Request_Parameters_Encode_Int(PacketInfo* data, kcg_int* stream, const Movement_Authority_Request_Parameters_Core* p)
 {
     stream[data->startAddress++] = p->Q_DIR;
     stream[data->startAddress++] = p->L_PACKET;
@@ -155,7 +155,7 @@ int Movement_Authority_Request_Parameters_Encode_Int(Packet_Info* data, kcg_int*
     return 1;
 }
 
-int Movement_Authority_Request_Parameters_Decode_Int(Packet_Info* data, const kcg_int* stream, Movement_Authority_Request_Parameters_Core* p)
+int Movement_Authority_Request_Parameters_Decode_Int(PacketInfo* data, const kcg_int* stream, Movement_Authority_Request_Parameters_Core* p)
 {
     p->Q_DIR = stream[data->startAddress++];
     p->L_PACKET = stream[data->startAddress++];

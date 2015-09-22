@@ -3,7 +3,7 @@
 #define DANGER_FOR_SHUNTING_INFORMATION_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include "Compressed_Packets.h"
+#include "CompressedPackets.h"
 
 struct Danger_for_Shunting_information_Core
 {
@@ -137,9 +137,9 @@ int Danger_for_Shunting_information_Encode_Bit(Bitstream* stream, const Danger_f
 */
 int Danger_for_Shunting_information_Decode_Bit(Bitstream* stream, Danger_for_Shunting_information_Core* p);
 
-int Danger_for_Shunting_information_Encode_Int(Packet_Info* data, kcg_int* stream, const Danger_for_Shunting_information_Core* p);
+int Danger_for_Shunting_information_Encode_Int(PacketInfo* data, kcg_int* stream, const Danger_for_Shunting_information_Core* p);
 
-int Danger_for_Shunting_information_Decode_Int(Packet_Info* data, const kcg_int* stream, Danger_for_Shunting_information_Core* p);
+int Danger_for_Shunting_information_Decode_Int(PacketInfo* data, const kcg_int* stream, Danger_for_Shunting_information_Core* p);
 
 #ifdef __cplusplus
 
@@ -181,12 +181,12 @@ inline int decode(Bitstream& stream, Danger_for_Shunting_information_Core& p)
     return Danger_for_Shunting_information_Decode_Bit(&stream, &p);
 }
 
-inline int encode(Packet_Info& data, kcg_int* stream, const Danger_for_Shunting_information_Core& p)
+inline int encode(PacketInfo& data, kcg_int* stream, const Danger_for_Shunting_information_Core& p)
 {
     return Danger_for_Shunting_information_Encode_Int(&data, stream, &p);
 }
 
-inline int decode(Packet_Info& data, const kcg_int* stream, Danger_for_Shunting_information_Core& p)
+inline int decode(PacketInfo& data, const kcg_int* stream, Danger_for_Shunting_information_Core& p)
 {
     return Danger_for_Shunting_information_Decode_Int(&data, stream, &p);
 }

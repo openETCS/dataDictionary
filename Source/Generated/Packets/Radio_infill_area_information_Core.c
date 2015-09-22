@@ -212,7 +212,7 @@ int Radio_infill_area_information_Decode_Bit(Bitstream* stream, Radio_infill_are
     }
 }
 
-int Radio_infill_area_information_Encode_Int(Packet_Info* data, kcg_int* stream, const Radio_infill_area_information_Core* p)
+int Radio_infill_area_information_Encode_Int(PacketInfo* data, kcg_int* stream, const Radio_infill_area_information_Core* p)
 {
     stream[data->startAddress++] = p->Q_DIR;
     stream[data->startAddress++] = p->L_PACKET;
@@ -227,7 +227,7 @@ int Radio_infill_area_information_Encode_Int(Packet_Info* data, kcg_int* stream,
     return 1;
 }
 
-int Radio_infill_area_information_Decode_Int(Packet_Info* data, const kcg_int* stream, Radio_infill_area_information_Core* p)
+int Radio_infill_area_information_Decode_Int(PacketInfo* data, const kcg_int* stream, Radio_infill_area_information_Core* p)
 {
     p->Q_DIR = stream[data->startAddress++];
     p->L_PACKET = stream[data->startAddress++];

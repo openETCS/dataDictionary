@@ -42,13 +42,13 @@ struct Inhibition_of_balise_group_message_consistency_reaction : public BasePack
         return ::decode(stream, core);
     }
 
-    int encode(Packet_Info& data, kcg_int* stream) const override
+    int encode(PacketInfo& data, kcg_int* stream) const override
     {
         data.nid_packet = 145;
         data.q_dir = core.Q_DIR;
 	data.valid = 1;
 
-        Packet_Info q = data;
+        PacketInfo q = data;
 
 	stream[q.startAddress++] = header.NID_PACKET;
 
@@ -59,14 +59,14 @@ struct Inhibition_of_balise_group_message_consistency_reaction : public BasePack
 	return ret;
     }
 
-    int decode(const Packet_Info& data, const kcg_int* stream) override
+    int decode(const PacketInfo& data, const kcg_int* stream) override
     {
         if(data.nid_packet != 145)
 	{
 	    return 0;
 	}
 
-	Packet_Info q = data;
+	PacketInfo q = data;
 
 	header.NID_PACKET = stream[q.startAddress++];
 

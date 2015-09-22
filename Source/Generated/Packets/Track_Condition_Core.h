@@ -4,7 +4,7 @@
 
 #include "Bitstream.h"
 #include "Track_Condition_Core_1.h"
-#include "Compressed_Packets.h"
+#include "CompressedPackets.h"
 
 struct Track_Condition_Core
 {
@@ -150,9 +150,9 @@ int Track_Condition_Encode_Bit(Bitstream* stream, const Track_Condition_Core* p)
 */
 int Track_Condition_Decode_Bit(Bitstream* stream, Track_Condition_Core* p);
 
-int Track_Condition_Encode_Int(Packet_Info* data, kcg_int* stream, const Track_Condition_Core* p);
+int Track_Condition_Encode_Int(PacketInfo* data, kcg_int* stream, const Track_Condition_Core* p);
 
-int Track_Condition_Decode_Int(Packet_Info* data, const kcg_int* stream, Track_Condition_Core* p);
+int Track_Condition_Decode_Int(PacketInfo* data, const kcg_int* stream, Track_Condition_Core* p);
 
 #ifdef __cplusplus
 
@@ -230,14 +230,14 @@ inline int decode(Bitstream& stream, Track_Condition_Core& p)
     return Track_Condition_Decode_Bit(&stream, &p);
 }
 
-inline int encode(Packet_Info& data, kcg_int* stream, const Track_Condition_Core& p)
+inline int encode(PacketInfo& data, kcg_int* stream, const Track_Condition_Core& p)
 {
     std::cerr << "encode int function not implemented for packet 68 yet." << std::endl;
 
     return Track_Condition_Encode_Int(&data, stream, &p);
 }
 
-inline int decode(Packet_Info& data, const kcg_int* stream, Track_Condition_Core& p)
+inline int decode(PacketInfo& data, const kcg_int* stream, Track_Condition_Core& p)
 {
     std::cerr << "decode int function not implemented for packet 68 yet." << std::endl;
 

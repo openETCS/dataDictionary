@@ -146,7 +146,7 @@ bool EurobaliseTelegram::encode(Bitstream& stream) const
     return true;
 }
 
-bool EurobaliseTelegram::encode(Flat_Packets& packetStruct) const
+bool EurobaliseTelegram::encode(FlatPackets& packetStruct) const
 {
     kcg_int startAddress = 0;
     unsigned int i;
@@ -166,7 +166,7 @@ bool EurobaliseTelegram::encode(Flat_Packets& packetStruct) const
     return true;
 }
 
-bool EurobaliseTelegram::decode(Flat_Packets& packetStruct)
+bool EurobaliseTelegram::decode(FlatPackets& packetStruct)
 {
     for (unsigned int i = 0; i < 50; ++i)
     {

@@ -127,12 +127,12 @@ int Track_Condition_Station_Platforms_Core_1_Decode_Bit(Bitstream* stream, Track
     }
 }
 
-int Track_Condition_Station_Platforms_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, const Track_Condition_Station_Platforms_Core_1* p)
+int Track_Condition_Station_Platforms_Core_1_Encode_Int(PacketInfo* data, kcg_int* stream, const Track_Condition_Station_Platforms_Core_1* p)
 {
     return 0;
 }
 
-int Track_Condition_Station_Platforms_Core_1_Decode_Int(Packet_Info* data, const kcg_int* stream, Track_Condition_Station_Platforms_Core_1* p)
+int Track_Condition_Station_Platforms_Core_1_Decode_Int(PacketInfo* data, const kcg_int* stream, Track_Condition_Station_Platforms_Core_1* p)
 {
     return 0;
 }

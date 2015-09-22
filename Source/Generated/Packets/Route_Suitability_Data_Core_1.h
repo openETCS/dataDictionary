@@ -3,7 +3,7 @@
 #define ROUTE_SUITABILITY_DATA_CORE_1_CORE_H_INCLUDED
 
 #include "Bitstream.h"
-#include "Compressed_Packets.h"
+#include "CompressedPackets.h"
 
 struct Route_Suitability_Data_Core_1
 {
@@ -133,9 +133,9 @@ int Route_Suitability_Data_Core_1_Encode_Bit(Bitstream* stream, const Route_Suit
 */
 int Route_Suitability_Data_Core_1_Decode_Bit(Bitstream* stream, Route_Suitability_Data_Core_1* p);
 
-int Route_Suitability_Data_Core_1_Encode_Int(Packet_Info* data, kcg_int* stream, const Route_Suitability_Data_Core_1* p);
+int Route_Suitability_Data_Core_1_Encode_Int(PacketInfo* data, kcg_int* stream, const Route_Suitability_Data_Core_1* p);
 
-int Route_Suitability_Data_Core_1_Decode_Int(Packet_Info* data, const kcg_int* stream, Route_Suitability_Data_Core_1* p);
+int Route_Suitability_Data_Core_1_Decode_Int(PacketInfo* data, const kcg_int* stream, Route_Suitability_Data_Core_1* p);
 
 #ifdef __cplusplus
 
@@ -199,14 +199,14 @@ inline int decode(Bitstream& stream, Route_Suitability_Data_Core_1& p)
     return Route_Suitability_Data_Core_1_Decode_Bit(&stream, &p);
 }
 
-inline int encode(Packet_Info& data, kcg_int* stream, const Route_Suitability_Data_Core_1& p)
+inline int encode(PacketInfo& data, kcg_int* stream, const Route_Suitability_Data_Core_1& p)
 {
     std::cerr << "encode int function not implemented for packet 70 yet." << std::endl;
 
     return Route_Suitability_Data_Core_1_Encode_Int(&data, stream, &p);
 }
 
-inline int decode(Packet_Info& data, const kcg_int* stream, Route_Suitability_Data_Core_1& p)
+inline int decode(PacketInfo& data, const kcg_int* stream, Route_Suitability_Data_Core_1& p)
 {
     std::cerr << "decode int function not implemented for packet 70 yet." << std::endl;
 

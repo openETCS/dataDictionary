@@ -93,7 +93,7 @@ int Default_balise_or_Loop_or_RIU_information_Decode_Bit(Bitstream* stream, Defa
     }
 }
 
-int Default_balise_or_Loop_or_RIU_information_Encode_Int(Packet_Info* data, kcg_int* stream, const Default_balise_or_Loop_or_RIU_information_Core* p)
+int Default_balise_or_Loop_or_RIU_information_Encode_Int(PacketInfo* data, kcg_int* stream, const Default_balise_or_Loop_or_RIU_information_Core* p)
 {
     stream[data->startAddress++] = p->Q_DIR;
     stream[data->startAddress++] = p->L_PACKET;
@@ -101,7 +101,7 @@ int Default_balise_or_Loop_or_RIU_information_Encode_Int(Packet_Info* data, kcg_
     return 1;
 }
 
-int Default_balise_or_Loop_or_RIU_information_Decode_Int(Packet_Info* data, const kcg_int* stream, Default_balise_or_Loop_or_RIU_information_Core* p)
+int Default_balise_or_Loop_or_RIU_information_Decode_Int(PacketInfo* data, const kcg_int* stream, Default_balise_or_Loop_or_RIU_information_Core* p)
 {
     p->Q_DIR = stream[data->startAddress++];
     p->L_PACKET = stream[data->startAddress++];

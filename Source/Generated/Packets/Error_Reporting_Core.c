@@ -93,7 +93,7 @@ int Error_Reporting_Decode_Bit(Bitstream* stream, Error_Reporting_Core* p)
     }
 }
 
-int Error_Reporting_Encode_Int(Packet_Info* data, kcg_int* stream, const Error_Reporting_Core* p)
+int Error_Reporting_Encode_Int(PacketInfo* data, kcg_int* stream, const Error_Reporting_Core* p)
 {
     stream[data->startAddress++] = p->L_PACKET;
     stream[data->startAddress++] = p->M_ERROR;
@@ -101,7 +101,7 @@ int Error_Reporting_Encode_Int(Packet_Info* data, kcg_int* stream, const Error_R
     return 1;
 }
 
-int Error_Reporting_Decode_Int(Packet_Info* data, const kcg_int* stream, Error_Reporting_Core* p)
+int Error_Reporting_Decode_Int(PacketInfo* data, const kcg_int* stream, Error_Reporting_Core* p)
 {
     p->L_PACKET = stream[data->startAddress++];
     p->M_ERROR = stream[data->startAddress++];

@@ -4,7 +4,7 @@
 
 #include "Bitstream.h"
 #include "International_Static_Speed_Profile_Core_2_1.h"
-#include "Compressed_Packets.h"
+#include "CompressedPackets.h"
 
 struct International_Static_Speed_Profile_Core_2
 {
@@ -137,9 +137,9 @@ int International_Static_Speed_Profile_Core_2_Encode_Bit(Bitstream* stream, cons
 */
 int International_Static_Speed_Profile_Core_2_Decode_Bit(Bitstream* stream, International_Static_Speed_Profile_Core_2* p);
 
-int International_Static_Speed_Profile_Core_2_Encode_Int(Packet_Info* data, kcg_int* stream, const International_Static_Speed_Profile_Core_2* p);
+int International_Static_Speed_Profile_Core_2_Encode_Int(PacketInfo* data, kcg_int* stream, const International_Static_Speed_Profile_Core_2* p);
 
-int International_Static_Speed_Profile_Core_2_Decode_Int(Packet_Info* data, const kcg_int* stream, International_Static_Speed_Profile_Core_2* p);
+int International_Static_Speed_Profile_Core_2_Decode_Int(PacketInfo* data, const kcg_int* stream, International_Static_Speed_Profile_Core_2* p);
 
 #ifdef __cplusplus
 
@@ -199,14 +199,14 @@ inline int decode(Bitstream& stream, International_Static_Speed_Profile_Core_2& 
     return International_Static_Speed_Profile_Core_2_Decode_Bit(&stream, &p);
 }
 
-inline int encode(Packet_Info& data, kcg_int* stream, const International_Static_Speed_Profile_Core_2& p)
+inline int encode(PacketInfo& data, kcg_int* stream, const International_Static_Speed_Profile_Core_2& p)
 {
     std::cerr << "encode int function not implemented for packet 27 yet." << std::endl;
 
     return International_Static_Speed_Profile_Core_2_Encode_Int(&data, stream, &p);
 }
 
-inline int decode(Packet_Info& data, const kcg_int* stream, International_Static_Speed_Profile_Core_2& p)
+inline int decode(PacketInfo& data, const kcg_int* stream, International_Static_Speed_Profile_Core_2& p)
 {
     std::cerr << "decode int function not implemented for packet 27 yet." << std::endl;
 

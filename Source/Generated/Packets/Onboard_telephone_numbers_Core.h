@@ -4,7 +4,7 @@
 
 #include "Bitstream.h"
 #include "Onboard_telephone_numbers_Core_1.h"
-#include "Compressed_Packets.h"
+#include "CompressedPackets.h"
 
 struct Onboard_telephone_numbers_Core
 {
@@ -130,9 +130,9 @@ int Onboard_telephone_numbers_Encode_Bit(Bitstream* stream, const Onboard_teleph
 */
 int Onboard_telephone_numbers_Decode_Bit(Bitstream* stream, Onboard_telephone_numbers_Core* p);
 
-int Onboard_telephone_numbers_Encode_Int(Packet_Info* data, kcg_int* stream, const Onboard_telephone_numbers_Core* p);
+int Onboard_telephone_numbers_Encode_Int(PacketInfo* data, kcg_int* stream, const Onboard_telephone_numbers_Core* p);
 
-int Onboard_telephone_numbers_Decode_Int(Packet_Info* data, const kcg_int* stream, Onboard_telephone_numbers_Core* p);
+int Onboard_telephone_numbers_Decode_Int(PacketInfo* data, const kcg_int* stream, Onboard_telephone_numbers_Core* p);
 
 #ifdef __cplusplus
 
@@ -188,14 +188,14 @@ inline int decode(Bitstream& stream, Onboard_telephone_numbers_Core& p)
     return Onboard_telephone_numbers_Decode_Bit(&stream, &p);
 }
 
-inline int encode(Packet_Info& data, kcg_int* stream, const Onboard_telephone_numbers_Core& p)
+inline int encode(PacketInfo& data, kcg_int* stream, const Onboard_telephone_numbers_Core& p)
 {
     std::cerr << "encode int function not implemented for packet 3 yet." << std::endl;
 
     return Onboard_telephone_numbers_Encode_Int(&data, stream, &p);
 }
 
-inline int decode(Packet_Info& data, const kcg_int* stream, Onboard_telephone_numbers_Core& p)
+inline int decode(PacketInfo& data, const kcg_int* stream, Onboard_telephone_numbers_Core& p)
 {
     std::cerr << "decode int function not implemented for packet 3 yet." << std::endl;
 
