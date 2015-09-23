@@ -3,6 +3,7 @@
 #include "Gradient_Profile.h"
 #include "End_of_Information.h"
 #include "Level_23_Movement_Authority.h"
+#include "Level_Transition_Order.h"
 #include "EurobaliseTelegram.h"
 #include "CompressedPackets.h"
 #include <cassert>
@@ -88,6 +89,22 @@ int main ()
 	c.core.V_RELEASEOL = 45;
     }
 
+    Level_Transition_Order d;
+    {
+        d.core.Q_DIR = 1;
+	d.core.L_PACKET = 73; 
+	d.core.Q_SCALE = 1;
+	d.core.D_LEVELTR = 389;
+	d.core.M_LEVELTR = 2;
+	d.core.NID_NTC = 234;
+	d.core.L_ACKLEVELTR = 873;
+	d.core.N_ITER_1 = 1;
+
+	d.core.sub_1[0].M_LEVELTR = 3;
+	d.core.sub_1[0].NID_NTC = 200;
+	d.core.sub_1[0].L_ACKLEVELTR = 9210;
+    }
+
     End_of_Information z;
     {
         // NID_PACKET = 255;
@@ -96,6 +113,7 @@ int main ()
     telegram.add(std::make_shared<Adhesion_Factor>(a));
     telegram.add(std::make_shared<Gradient_Profile>(b));
     telegram.add(std::make_shared<Level_23_Movement_Authority>(c));
+    telegram.add(std::make_shared<Level_Transition_Order>(d));
     telegram.add(std::make_shared<End_of_Information>(z));
 
     FlatPackets container;
