@@ -2,7 +2,7 @@ Alle * sind CH6 relevant.
 
 // Packet 1 (Position Report based on two balise groups [conditional][N])
 // Packet 49 (List of balises for SH Area [dynamisch][N])
-## Packet 80 (Mode profile [dynamisch][N])
+// Packet 80 (Mode profile [dynamisch][N])
 
 Chapter 7 Packets:
 
@@ -20,18 +20,18 @@ Chapter 7 Packets:
  
 Common Optional Packets for Messages*:
 
-##  3 National Values [dynamisch][N], Onboard Telephone Numbers [dynamisch][N]
+//  3 National Values (s.o.), Onboard Telephone Numbers (s.o.)
 ##  5 Linking [dynamisch][N]
 ##  39 Track Condition Change of traction system [conditional][N]
 ##  51 Acle Load Speed Profile [dynamisch][N]
-##  41 Level Transition Order [dynamisch][Y]
+//  41 Level Transition Order (s.o.)
 ##  44 Data used by applications outside the ERTMS/ETCS system [conditional][N]
 ##  52 Permitted Braking Distance Information [dynamisch][N]
 ##  58 Position Report Parameters [dynamisch][N]
 ##  68 Track Condition [dynamisch][N]
 ##  69 Track Condition Station Platforms [dynamisch][N]
 ##  70 Track Condition [dynamisch][N]
-##  72 Packet for sending plain text messages [conditional][N]
+//  72 Packet for sending plain text messages (s.o.)
 ##  76 Packet for sending fixed text messages [conditional][N]
 ##  79 Geographical Position Information [dynamisch][N]
 ##  88 Level Crossing information [conditional][N]

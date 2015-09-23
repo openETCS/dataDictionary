@@ -5,6 +5,7 @@
 #include "Level_23_Movement_Authority.h"
 #include "Level_Transition_Order.h"
 #include "List_of_balises_for_SH_Area.h"
+#include "Mode_profile.h"
 #include "EurobaliseTelegram.h"
 #include "CompressedPackets.h"
 #include <cassert>
@@ -122,6 +123,27 @@ int main ()
 	e.core.sub_1[1].NID_BG = 3000;
     }
 
+    Mode_profile f;
+    {
+        f.core.Q_DIR = 1;
+        f.core.L_PACKET = 132;
+        f.core.Q_SCALE = 0;
+        f.core.D_MAMODE = 600;
+        f.core.M_MAMODE = 0;
+        f.core.V_MAMODE = 2;
+        f.core.L_MAMODE = 23;
+        f.core.L_ACKMAMODE = 23;
+        f.core.Q_MAMODE = 1;
+        f.core.N_ITER_1 = 1;
+
+        f.core.sub_1[0].D_MAMODE = 400;
+        f.core.sub_1[0].M_MAMODE = 2;
+        f.core.sub_1[0].V_MAMODE = 2;
+        f.core.sub_1[0].L_MAMODE = 399;
+        f.core.sub_1[0].L_ACKMAMODE = 1000;
+        f.core.sub_1[0].Q_MAMODE = 0;
+    }
+
     End_of_Information z;
     {
         // NID_PACKET = 255;
@@ -132,6 +154,7 @@ int main ()
     telegram.add(std::make_shared<Level_23_Movement_Authority>(c));
     telegram.add(std::make_shared<Level_Transition_Order>(d));
     telegram.add(std::make_shared<List_of_balises_for_SH_Area>(e));
+    telegram.add(std::make_shared<Mode_profile>(f));
     telegram.add(std::make_shared<End_of_Information>(z));
 
     FlatPackets container;
