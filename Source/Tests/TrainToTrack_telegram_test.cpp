@@ -2,6 +2,7 @@
 #include "End_of_Information.h"
 #include "Validated_train_data.h"
 #include "Position_Report.h"
+#include "Position_Report_based_on_two_balise_groups.h"
 #include "EurobaliseTelegram.h"
 #include "CompressedPackets.h"
 #include <cassert>
@@ -67,6 +68,27 @@ int main ()
 	b.core.NID_NTC = 92;
     }
 
+    Position_Report_based_on_two_balise_groups c;
+    {
+        // NID_PACKET = 0;
+	c.core.L_PACKET = 145; 
+	c.core.Q_SCALE =  0;
+	c.core.NID_LRBG = 3990;
+        c.core.NID_PRVLRBG = 33928;
+	c.core.D_LRBG = 100;
+	c.core.Q_DIRLRBG = 0;
+	c.core.Q_DLRBG = 1;
+	c.core.L_DOUBTOVER = 400;
+	c.core.L_DOUBTUNDER = 920;
+	c.core.Q_LENGTH = 1;
+	c.core.L_TRAININT = 3;
+	c.core.V_TRAIN = 99;
+	c.core.Q_DIRTRAIN = 1;
+	c.core.M_MODE = 4;
+	c.core.M_LEVEL = 2;
+	c.core.NID_NTC = 92;
+    }
+
     End_of_Information z;
     {
         // NID_PACKET = 255;
@@ -74,6 +96,7 @@ int main ()
 
     telegram.add(std::make_shared<Validated_train_data>(a));
     telegram.add(std::make_shared<Position_Report>(b));
+    telegram.add(std::make_shared<Position_Report_based_on_two_balise_groups>(c));
     telegram.add(std::make_shared<End_of_Information>(z));
 
     FlatPackets container;
