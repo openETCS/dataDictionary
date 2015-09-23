@@ -40,7 +40,7 @@ general:	lib\
 		decoder_test encoder_test\
 		conditional_encoder_test conditional_decoder_test\
 		test_messages int_encode_then_decode_test\
-		telegram_int_encode_then_decode_test
+		telegram_int_encode_then_decode_test expanded_telegram_test
 	./encoder_test
 	./decoder_test
 	./conditional_encoder_test
@@ -48,6 +48,7 @@ general:	lib\
 	./test_messages
 	./int_encode_then_decode_test
 	./telegram_int_encode_then_decode_test
+	./expanded_telegram_test
 
 issue31: lib test_issue31_1 test_issue31_2 test_issue31_3
 	./test_issue31_1
@@ -85,6 +86,9 @@ int_encode_then_decode_test: int_encode_then_decode_test.o
 telegram_int_encode_then_decode_test: telegram_int_encode_then_decode_test.o
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $+ $(LDFLAGS)
 
+expanded_telegram_test: expanded_telegram_test.o
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $+ $(LDFLAGS)
+
 
 FORMAT := $(wildcard *.h) $(wildcard *.cpp) $(wildcard *.c)
 
@@ -106,4 +110,5 @@ clean::
 	@$(RM) test_messages
 	@$(RM) int_encode_then_decode_test
 	@$(RM) telegram_int_encode_then_decode_test
+	@$(RM) expanded_telegram_test
 

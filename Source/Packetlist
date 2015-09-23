@@ -11,12 +11,12 @@ Chapter 7 Packets:
 ##  (72*) (Packet for sending plain text messages [conditional N])
 //  0 (Virtual Balise Cover marker [statisch][Y], Position Report [conditional][Y])
 //  11 (Validated train data [dynamisch][Y])
-//  15 (Level 2/3 Movement Authority [dynamisch Y])
-//  21 (Gradient Profile [dynamisch Y])
-//  41 (Level Transition Order [dynamisch Y])
-//  42 (Session Management [statisch Y])
-//  137 (Stop if in Staff Responsible [statisch Y])
-//  255 (End of Information [statisch Y])
+//  15 (Level 2/3 Movement Authority [dynamisch][Y T])
+//  21 (Gradient Profile [dynamisch][Y T])
+//  41 (Level Transition Order [dynamisch][Y])
+//  42 (Session Management [statisch][Y])
+//  137 (Stop if in Staff Responsible [statisch][Y])
+//  255 (End of Information [statisch][Y])
  
 Common Optional Packets for Messages*:
 
