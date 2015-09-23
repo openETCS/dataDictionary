@@ -32,7 +32,7 @@ Common Optional Packets for Messages*:
 ##  69 Track Condition Station Platforms [dynamisch][N]
 ##  70 Track Condition [dynamisch][N]
 //  72 Packet for sending plain text messages (s.o.)
-##  76 Packet for sending fixed text messages [conditional][N]
+//  76 Packet for sending fixed text messages [conditional][N]
 ##  79 Geographical Position Information [dynamisch][N]
 ##  88 Level Crossing information [conditional][N]
 //  42 Session Management [statisch][Y]

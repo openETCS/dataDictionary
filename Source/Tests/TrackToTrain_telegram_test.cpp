@@ -6,6 +6,7 @@
 #include "Level_Transition_Order.h"
 #include "List_of_balises_for_SH_Area.h"
 #include "Mode_profile.h"
+#include "Packet_for_sending_plain_text_messages.h"
 #include "EurobaliseTelegram.h"
 #include "CompressedPackets.h"
 #include <cassert>
@@ -144,6 +145,32 @@ int main ()
         f.core.sub_1[0].Q_MAMODE = 0;
     }
 
+    Packet_for_sending_plain_text_messages g;
+    {
+        g.core.Q_DIR = 1;
+        g.core.L_PACKET = 142;
+        g.core.Q_SCALE = 1;
+        g.core.Q_TEXTCLASS = 0;
+        g.core.Q_TEXTDISPLAY = 0;
+        g.core.D_TEXTDISPLAY = 400;
+        g.core.M_MODETEXTDISPLAY_0 = 3;
+        g.core.M_LEVELTEXTDISPLAY_0 = 1;
+        g.core.NID_NTC_0 = 200;
+        g.core.L_TEXTDISPLAY = 700;
+        g.core.T_TEXTDISPLAY = 80;
+        g.core.M_MODETEXTDISPLAY_1 = 3;
+        g.core.M_LEVELTEXTDISPLAY_1 = 1;
+        g.core.NID_NTC_1 = 23;
+        g.core.Q_TEXTCONFIRM = 1;
+        g.core.Q_CONFTEXTDISPLAY = 0;
+        g.core.Q_TEXTREPORT = 1;
+        g.core.NID_TEXTMESSAGE = 100;
+        g.core.NID_C = 333;
+        g.core.NID_RBC = 1200;
+        g.core.L_TEXT = 2;
+        g.core.X_TEXT = 30;
+    }
+
     End_of_Information z;
     {
         // NID_PACKET = 255;
@@ -155,6 +182,7 @@ int main ()
     telegram.add(std::make_shared<Level_Transition_Order>(d));
     telegram.add(std::make_shared<List_of_balises_for_SH_Area>(e));
     telegram.add(std::make_shared<Mode_profile>(f));
+    telegram.add(std::make_shared<Packet_for_sending_plain_text_messages>(g));
     telegram.add(std::make_shared<End_of_Information>(z));
 
     FlatPackets container;
