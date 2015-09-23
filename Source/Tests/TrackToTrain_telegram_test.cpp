@@ -91,6 +91,7 @@ int main ()
 
     Level_Transition_Order d;
     {
+        // NID_PACKET = 41;
         d.core.Q_DIR = 1;
 	d.core.L_PACKET = 73; 
 	d.core.Q_SCALE = 1;
@@ -118,7 +119,7 @@ int main ()
 
     FlatPackets container;
 
-    std::cout << "Expanded Telegram Test" << std::endl;
+    std::cout << "Expanded Telegram Test: TrackToTrain" << std::endl;
 
     std::cout << "\n\nEncoding the telegram: " << telegram << std::endl;
 
