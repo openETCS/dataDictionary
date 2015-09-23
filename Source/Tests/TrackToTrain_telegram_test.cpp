@@ -7,6 +7,7 @@
 #include "List_of_balises_for_SH_Area.h"
 #include "Mode_profile.h"
 #include "Packet_for_sending_plain_text_messages.h"
+#include "Level_Crossing_information.h"
 #include "EurobaliseTelegram.h"
 #include "CompressedPackets.h"
 #include <cassert>
@@ -171,6 +172,20 @@ int main ()
         g.core.X_TEXT = 30;
     }
 
+    Level_Crossing_information h;
+    {
+        h.core.Q_DIR = 1;
+	h.core.L_PACKET = 64;
+	h.core.Q_SCALE = 0;
+	h.core.NID_LX = 256;
+	h.core.D_LX = 100;
+	h.core.L_LX = 9;
+	h.core.Q_LXSTATUS = 1;
+	h.core.V_LX = 15;
+	h.core.Q_STOPLX = 0;
+	h.core.L_STOPLX = 99;
+    }
+
     End_of_Information z;
     {
         // NID_PACKET = 255;
@@ -183,6 +198,7 @@ int main ()
     telegram.add(std::make_shared<List_of_balises_for_SH_Area>(e));
     telegram.add(std::make_shared<Mode_profile>(f));
     telegram.add(std::make_shared<Packet_for_sending_plain_text_messages>(g));
+    telegram.add(std::make_shared<Level_Crossing_information>(h));
     telegram.add(std::make_shared<End_of_Information>(z));
 
     FlatPackets container;
