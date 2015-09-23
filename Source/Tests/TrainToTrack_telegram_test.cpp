@@ -1,6 +1,7 @@
 
 #include "End_of_Information.h"
 #include "Validated_train_data.h"
+#include "Position_Report.h"
 #include "EurobaliseTelegram.h"
 #include "CompressedPackets.h"
 #include <cassert>
@@ -46,12 +47,33 @@ int main ()
 	a.core.N_ITER_2 = 0;
     }
 
+    Position_Report b;
+    {
+        // NID_PACKET = 0;
+	b.core.L_PACKET = 121; 
+	b.core.Q_SCALE =  0;
+	b.core.NID_LRBG = 3990;
+	b.core.D_LRBG = 100;
+	b.core.Q_DIRLRBG = 0;
+	b.core.Q_DLRBG = 1;
+	b.core.L_DOUBTOVER = 400;
+	b.core.L_DOUBTUNDER = 920;
+	b.core.Q_LENGTH = 1;
+	b.core.L_TRAININT = 3;
+	b.core.V_TRAIN = 99;
+	b.core.Q_DIRTRAIN = 1;
+	b.core.M_MODE = 4;
+	b.core.M_LEVEL = 2;
+	b.core.NID_NTC = 92;
+    }
+
     End_of_Information z;
     {
         // NID_PACKET = 255;
     }
 
     telegram.add(std::make_shared<Validated_train_data>(a));
+    telegram.add(std::make_shared<Position_Report>(b));
     telegram.add(std::make_shared<End_of_Information>(z));
 
     FlatPackets container;
