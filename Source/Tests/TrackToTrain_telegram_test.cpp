@@ -4,6 +4,7 @@
 #include "End_of_Information.h"
 #include "Level_23_Movement_Authority.h"
 #include "Level_Transition_Order.h"
+#include "List_of_balises_for_SH_Area.h"
 #include "EurobaliseTelegram.h"
 #include "CompressedPackets.h"
 #include <cassert>
@@ -106,6 +107,21 @@ int main ()
 	d.core.sub_1[0].L_ACKLEVELTR = 9210;
     }
 
+    List_of_balises_for_SH_Area e;
+    {
+        // NID_PACKET = 49;
+	e.core.Q_DIR = 1;
+	e.core.L_PACKET = 50;
+	e.core.N_ITER_1 = 2;
+
+	e.core.sub_1[0].Q_NEWCOUNTRY = 0;
+	e.core.sub_1[0].NID_C = 399;
+	e.core.sub_1[0].NID_BG = 1000;
+	e.core.sub_1[1].Q_NEWCOUNTRY = 1;
+	e.core.sub_1[1].NID_C = 4;
+	e.core.sub_1[1].NID_BG = 3000;
+    }
+
     End_of_Information z;
     {
         // NID_PACKET = 255;
@@ -115,6 +131,7 @@ int main ()
     telegram.add(std::make_shared<Gradient_Profile>(b));
     telegram.add(std::make_shared<Level_23_Movement_Authority>(c));
     telegram.add(std::make_shared<Level_Transition_Order>(d));
+    telegram.add(std::make_shared<List_of_balises_for_SH_Area>(e));
     telegram.add(std::make_shared<End_of_Information>(z));
 
     FlatPackets container;
