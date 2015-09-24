@@ -11,6 +11,7 @@
 #include "Linking.h"
 #include "Data_used_by_applications_outside_the_ERTMSETCS_system.h"
 #include "Track_Condition_Change_of_traction_system.h"
+#include "Packet_for_sending_fixed_text_messages.h"
 #include "EurobaliseTelegram.h"
 #include "CompressedPackets.h"
 #include <cassert>
@@ -223,6 +224,31 @@ int main ()
         k.core.NID_CTRACTION = 761;
     }
 
+    Packet_for_sending_fixed_text_messages l;
+    {
+        l.core.Q_DIR = 2;
+        l.core.L_PACKET = 84;
+        l.core.Q_SCALE = 2;
+        l.core.Q_TEXTCLASS = 0;
+        l.core.Q_TEXTDISPLAY = 0;
+        l.core.D_TEXTDISPLAY = 100;
+        l.core.M_MODETEXTDISPLAY_0 = 0;
+        l.core.M_LEVELTEXTDISPLAY_0 = 0;
+        l.core.NID_NTC_0 = 142;
+        l.core.L_TEXTDISPLAY = 400;
+        l.core.T_TEXTDISPLAY = 300;
+        l.core.M_MODETEXTDISPLAY_1 = 0;
+        l.core.M_LEVELTEXTDISPLAY_1 = 0;
+        l.core.NID_NTC_1 = 38;
+        l.core.Q_TEXTCONFIRM = 0;
+        l.core.Q_CONFTEXTDISPLAY = 0;
+        l.core.Q_TEXTREPORT = 0;
+        l.core.NID_TEXTMESSAGE = 99;
+        l.core.NID_C = 100;
+        l.core.NID_RBC = 16;
+        l.core.Q_TEXT = 1;
+    }
+
     End_of_Information z;
     {
         // NID_PACKET = 255;
@@ -239,6 +265,7 @@ int main ()
     telegram.add(std::make_shared<Linking>(i));
     telegram.add(std::make_shared<Data_used_by_applications_outside_the_ERTMSETCS_system>(j));
     telegram.add(std::make_shared<Track_Condition_Change_of_traction_system>(k));
+    telegram.add(std::make_shared<Packet_for_sending_fixed_text_messages>(l));
     telegram.add(std::make_shared<End_of_Information>(z));
 
     FlatPackets container;
