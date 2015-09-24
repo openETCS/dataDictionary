@@ -10,6 +10,7 @@
 #include "Level_Crossing_information.h"
 #include "Linking.h"
 #include "Data_used_by_applications_outside_the_ERTMSETCS_system.h"
+#include "Track_Condition_Change_of_traction_system.h"
 #include "EurobaliseTelegram.h"
 #include "CompressedPackets.h"
 #include <cassert>
@@ -212,6 +213,16 @@ int main ()
 	j.core.Other_data_depending_on__NID_XUSER = 32928;
     }
 
+    Track_Condition_Change_of_traction_system k;
+    {
+        k.core.Q_DIR = 1;
+        k.core.L_PACKET = 46;
+        k.core.Q_SCALE = 2;
+        k.core.D_TRACTION = 100;
+        k.core.M_VOLTAGE = 5;
+        k.core.NID_CTRACTION = 761;
+    }
+
     End_of_Information z;
     {
         // NID_PACKET = 255;
@@ -227,6 +238,7 @@ int main ()
     telegram.add(std::make_shared<Level_Crossing_information>(h));
     telegram.add(std::make_shared<Linking>(i));
     telegram.add(std::make_shared<Data_used_by_applications_outside_the_ERTMSETCS_system>(j));
+    telegram.add(std::make_shared<Track_Condition_Change_of_traction_system>(k));
     telegram.add(std::make_shared<End_of_Information>(z));
 
     FlatPackets container;

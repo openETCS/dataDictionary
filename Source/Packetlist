@@ -22,7 +22,7 @@ Common Optional Packets for Messages*:
 
 //  3 National Values (s.o.), Onboard Telephone Numbers (s.o.)
 //  5 Linking [dynamisch][Y T]
-##  39 Track Condition Change of traction system [conditional][N]
+//  39 Track Condition Change of traction system [conditional][N]
 ##  51 Acle Load Speed Profile [dynamisch][N]
 //  41 Level Transition Order (s.o.)
 //  44 Data used by applications outside the ERTMS/ETCS system [conditional][N]
