@@ -14,12 +14,12 @@ struct Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core
 
     uint64_t  L_PACKET;         // # 13
     uint64_t  NID_XUSER;        // # 9
-    uint64_t   Other_data_depending_on__NID_XUSER;// # 8
+    uint64_t  Other_data_depending_on__NID_XUSER;// # 64
 };
 
 typedef struct Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core;
 
-#define DATA_USED_BY_APPLICATIONS_OUTSIDE_THE_ERTMS_OR_ETCS_SYSTEM_CORE_BITSIZE 30
+#define DATA_USED_BY_APPLICATIONS_OUTSIDE_THE_ERTMS_OR_ETCS_SYSTEM_CORE_BITSIZE 86
 
 /*@
     logic integer BitSize{L}(Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p) = DATA_USED_BY_APPLICATIONS_OUTSIDE_THE_ERTMS_OR_ETCS_SYSTEM_CORE_BITSIZE;
@@ -43,12 +43,12 @@ typedef struct Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core D
     predicate EqualBits(Bitstream* stream, integer pos, Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p) =
       EqualBits(stream, pos,       pos + 13,  p->L_PACKET)          &&
       EqualBits(stream, pos + 13,  pos + 22,  p->NID_XUSER)         &&
-      EqualBits(stream, pos + 22,  pos + 30,  p->Other_data_depending_on__NID_XUSER);
+      EqualBits(stream, pos + 22,  pos + 86,  p->Other_data_depending_on__NID_XUSER);
 
     predicate UpperBitsNotSet(Data_used_by_applications_outside_the_ERTMS_or_ETCS_system_Core* p) =
       UpperBitsNotSet(p->L_PACKET,         13)  &&
       UpperBitsNotSet(p->NID_XUSER,        9)   &&
-      UpperBitsNotSet(p->Other_data_depending_on__NID_XUSER,8);
+      UpperBitsNotSet(p->Other_data_depending_on__NID_XUSER,64);
 
 */
 

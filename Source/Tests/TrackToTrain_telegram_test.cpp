@@ -9,6 +9,7 @@
 #include "Packet_for_sending_plain_text_messages.h"
 #include "Level_Crossing_information.h"
 #include "Linking.h"
+#include "Data_used_by_applications_outside_the_ERTMSETCS_system.h"
 #include "EurobaliseTelegram.h"
 #include "CompressedPackets.h"
 #include <cassert>
@@ -202,6 +203,15 @@ int main ()
 	i.core.N_ITER_1 = 0;
     }
 
+    Data_used_by_applications_outside_the_ERTMSETCS_system j;
+    {
+        j.core.Q_DIR = 1;
+	j.core.L_PACKET = 96;
+	j.core.NID_XUSER = 102;
+	j.core.NID_NTC = 100;
+	j.core.Other_data_depending_on__NID_XUSER = 32928;
+    }
+
     End_of_Information z;
     {
         // NID_PACKET = 255;
@@ -216,6 +226,7 @@ int main ()
     telegram.add(std::make_shared<Packet_for_sending_plain_text_messages>(g));
     telegram.add(std::make_shared<Level_Crossing_information>(h));
     telegram.add(std::make_shared<Linking>(i));
+    telegram.add(std::make_shared<Data_used_by_applications_outside_the_ERTMSETCS_system>(j));
     telegram.add(std::make_shared<End_of_Information>(z));
 
     FlatPackets container;
