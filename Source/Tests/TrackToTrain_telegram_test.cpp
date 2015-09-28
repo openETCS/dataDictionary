@@ -17,6 +17,7 @@
 #include "Geographical_Position_Information.h"
 #include "Position_Report_Parameters.h"
 #include "Track_Condition.h"
+#include "Track_Condition_Station_Platforms.h"
 #include "EurobaliseTelegram.h"
 #include "CompressedPackets.h"
 #include <cassert>
@@ -352,6 +353,25 @@ int main ()
         q.core.sub_1[0].M_TRACKCOND = 3;
     }
 
+    Track_Condition_Station_Platforms r;
+    {
+        r.core.Q_DIR = 2;
+        r.core.L_PACKET = 95;
+        r.core.Q_SCALE = 0;
+        r.core.Q_TRACKINIT = 0;
+        r.core.D_TRACKINIT = 1000;
+        r.core.D_TRACKCOND = 1000;
+        r.core.L_TRACKCOND = 50; 
+        r.core.M_PLATFORM = 12;
+        r.core.Q_PLATFORM = 3;
+        r.core.N_ITER_1 = 1;
+
+	r.core.sub_1[0].D_TRACKCOND = 1000;
+	r.core.sub_1[0].L_TRACKCOND = 100;
+	r.core.sub_1[0].M_PLATFORM = 3;
+	r.core.sub_1[0].Q_PLATFORM = 0;
+    }
+
     End_of_Information z;
     {
         // NID_PACKET = 255;
@@ -374,6 +394,7 @@ int main ()
     telegram.add(std::make_shared<Geographical_Position_Information>(o));
     telegram.add(std::make_shared<Position_Report_Parameters>(p));
     telegram.add(std::make_shared<Track_Condition>(q));
+    telegram.add(std::make_shared<Track_Condition_Station_Platforms>(r));
     telegram.add(std::make_shared<End_of_Information>(z));
 
     FlatPackets container;
