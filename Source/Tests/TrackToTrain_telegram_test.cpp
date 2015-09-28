@@ -15,6 +15,7 @@
 #include "Axle_Load_Speed_Profile.h"
 #include "Permitted_Braking_Distance_Information.h"
 #include "Geographical_Position_Information.h"
+#include "Position_Report_Parameters.h"
 #include "EurobaliseTelegram.h"
 #include "CompressedPackets.h"
 #include <cassert>
@@ -320,6 +321,20 @@ int main ()
         o.core.sub_1[1].M_POSITION = 10000;
     }
 
+    Position_Report_Parameters p;
+    {
+        p.core.Q_DIR = 2;
+        p.core.L_PACKET = 64;
+        p.core.Q_SCALE = 2;
+        p.core.T_CYCLOC = 156;
+        p.core.D_CYCLOC = 233;
+        p.core.M_LOC = 3;
+        p.core.N_ITER_1 = 1;
+
+        p.core.sub_1[0].D_LOC = 569;
+        p.core.sub_1[0].Q_LGTLOC = 0;
+    }
+
     End_of_Information z;
     {
         // NID_PACKET = 255;
@@ -340,6 +355,7 @@ int main ()
     telegram.add(std::make_shared<Axle_Load_Speed_Profile>(m));
     telegram.add(std::make_shared<Permitted_Braking_Distance_Information>(n));
     telegram.add(std::make_shared<Geographical_Position_Information>(o));
+    telegram.add(std::make_shared<Position_Report_Parameters>(p));
     telegram.add(std::make_shared<End_of_Information>(z));
 
     FlatPackets container;
