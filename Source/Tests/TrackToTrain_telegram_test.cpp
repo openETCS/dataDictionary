@@ -14,6 +14,7 @@
 #include "Packet_for_sending_fixed_text_messages.h"
 #include "Axle_Load_Speed_Profile.h"
 #include "Permitted_Braking_Distance_Information.h"
+#include "Geographical_Position_Information.h"
 #include "EurobaliseTelegram.h"
 #include "CompressedPackets.h"
 #include <cassert>
@@ -291,6 +292,34 @@ int main ()
         n.core.N_ITER_1 = 0;
     }
 
+    Geographical_Position_Information o;
+    {
+        o.core.Q_DIR = 2;
+        o.core.L_PACKET = 187;
+        o.core.Q_SCALE = 1;
+        o.core.Q_NEWCOUNTRY = 0;
+        o.core.NID_C = 100;
+        o.core.NID_BG = 9;
+        o.core.D_POSOFF = 600;
+        o.core.Q_MPOSITION = 1;
+        o.core.M_POSITION = 1500;
+        o.core.N_ITER_1 = 2;
+	
+        o.core.sub_1[0].Q_NEWCOUNTRY = 0;
+        o.core.sub_1[0].NID_C = 10;
+        o.core.sub_1[0].NID_BG = 189;
+        o.core.sub_1[0].D_POSOFF = 6778;
+        o.core.sub_1[0].Q_MPOSITION = 0;
+        o.core.sub_1[0].M_POSITION = 70;
+
+        o.core.sub_1[1].Q_NEWCOUNTRY = 1;
+        o.core.sub_1[1].NID_C = 90;
+        o.core.sub_1[1].NID_BG = 0;
+        o.core.sub_1[1].D_POSOFF = 700;
+        o.core.sub_1[1].Q_MPOSITION = 1;
+        o.core.sub_1[1].M_POSITION = 10000;
+    }
+
     End_of_Information z;
     {
         // NID_PACKET = 255;
@@ -310,6 +339,7 @@ int main ()
     telegram.add(std::make_shared<Packet_for_sending_fixed_text_messages>(l));
     telegram.add(std::make_shared<Axle_Load_Speed_Profile>(m));
     telegram.add(std::make_shared<Permitted_Braking_Distance_Information>(n));
+    telegram.add(std::make_shared<Geographical_Position_Information>(o));
     telegram.add(std::make_shared<End_of_Information>(z));
 
     FlatPackets container;
