@@ -30,7 +30,7 @@ Common Optional Packets for Messages*:
 //  58 Position Report Parameters [dynamisch][Y T]
 //  68 Track Condition [dynamisch][Y T]
 //  69 Track Condition Station Platforms [dynamisch][Y T]
-##  70 Route Suitability Data [dynamisch][N]
+//  70 Route Suitability Data [dynamisch][Y T]
 //  72 Packet for sending plain text messages (s.o.)
 //  76 Packet for sending fixed text messages [conditional][Y T]
 //  79 Geographical Position Information [dynamisch][Y T]

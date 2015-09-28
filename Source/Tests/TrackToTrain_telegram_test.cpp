@@ -18,6 +18,7 @@
 #include "Position_Report_Parameters.h"
 #include "Track_Condition.h"
 #include "Track_Condition_Station_Platforms.h"
+#include "Route_Suitability_Data.h"
 #include "EurobaliseTelegram.h"
 #include "CompressedPackets.h"
 #include <cassert>
@@ -372,6 +373,29 @@ int main ()
 	r.core.sub_1[0].Q_PLATFORM = 0;
     }
 
+    Route_Suitability_Data s;
+    {
+        s.core.Q_DIR = 0;
+        s.core.L_PACKET = 33;
+        s.core.Q_SCALE = 2;
+        s.core.Q_TRACKINIT = 1;
+        s.core.D_TRACKINIT = 300;
+        s.core.D_SUITABILITY = 400;
+        s.core.Q_SUITABILITY = 1;
+        s.core.M_LINEGAUGE = 156;
+        s.core.M_AXLELOADCAT = 15;
+        s.core.M_VOLTAGE = 3;
+        s.core.NID_CTRACTION = 100;
+        s.core.N_ITER_1 = 1;
+
+        s.core.sub_1[0].D_SUITABILITY = 500;
+        s.core.sub_1[0].Q_SUITABILITY = 0;
+        s.core.sub_1[0].M_LINEGAUGE = 240;
+        s.core.sub_1[0].M_AXLELOADCAT = 15;
+        s.core.sub_1[0].M_VOLTAGE = 0;
+        s.core.sub_1[0].NID_CTRACTION = 1000;
+    }
+
     End_of_Information z;
     {
         // NID_PACKET = 255;
@@ -395,6 +419,7 @@ int main ()
     telegram.add(std::make_shared<Position_Report_Parameters>(p));
     telegram.add(std::make_shared<Track_Condition>(q));
     telegram.add(std::make_shared<Track_Condition_Station_Platforms>(r));
+    telegram.add(std::make_shared<Route_Suitability_Data>(s));
     telegram.add(std::make_shared<End_of_Information>(z));
 
     FlatPackets container;
