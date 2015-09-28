@@ -3,6 +3,7 @@
 #include "Validated_train_data.h"
 #include "Position_Report.h"
 #include "Position_Report_based_on_two_balise_groups.h"
+#include "Onboard_telephone_numbers.h"
 #include "EurobaliseTelegram.h"
 #include "CompressedPackets.h"
 #include <cassert>
@@ -89,6 +90,15 @@ int main ()
 	c.core.NID_NTC = 92;
     }
 
+    Onboard_telephone_numbers d;
+    {
+        // NID_PACKET = 3;
+	d.core.L_PACKET = 142;
+	d.core.N_ITER_1 = 2;
+	d.core.sub_1[0].NID_RADIO = 39820;
+	d.core.sub_1[1].NID_RADIO = 18310;
+    }
+
     End_of_Information z;
     {
         // NID_PACKET = 255;
@@ -97,6 +107,7 @@ int main ()
     telegram.add(std::make_shared<Validated_train_data>(a));
     telegram.add(std::make_shared<Position_Report>(b));
     telegram.add(std::make_shared<Position_Report_based_on_two_balise_groups>(c));
+    telegram.add(std::make_shared<Onboard_telephone_numbers>(d));
     telegram.add(std::make_shared<End_of_Information>(z));
 
     FlatPackets container;
