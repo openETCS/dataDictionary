@@ -64,9 +64,7 @@ int main ()
         b.core.V_NVSHUNT = 6;
         b.core.V_NVSTFF = 8;
         b.core.V_NVONSIGHT = 6;
-        b.core.V_NVLIMSUPERV = 20;
-        b.core.V_NVUNFIT = 20;
-        b.core.V_NVREL = 8;
+        b.core.V_NVLIMSUPERV = 20; b.core.V_NVUNFIT = 20; b.core.V_NVREL = 8;
         b.core.D_NVROLL = 2;
         b.core.Q_NVSBTSMPERM = 1;
         b.core.Q_NVEMRRLS = 0;

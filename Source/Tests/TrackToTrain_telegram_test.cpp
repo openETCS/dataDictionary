@@ -20,6 +20,7 @@
 #include "Track_Condition_Station_Platforms.h"
 #include "Route_Suitability_Data.h"
 #include "International_Static_Speed_Profile.h"
+#include "National_Values.h"
 #include "EurobaliseTelegram.h"
 #include "CompressedPackets.h"
 #include <cassert>
@@ -424,6 +425,46 @@ int main ()
 	t.core.sub_2[0].sub_2_1[0].V_DIFF = 18;
     }
 
+    National_Values u;
+    {
+        // NID_PACKET = 3;
+        u.core.Q_DIR = 1;
+        u.core.L_PACKET = 230;
+        u.core.Q_SCALE = 1;
+        u.core.D_VALIDNV = 0;
+        u.core.NID_C = 0;
+        u.core.N_ITER_1 = 0;
+        u.core.V_NVSHUNT = 6;
+        u.core.V_NVSTFF = 8;
+        u.core.V_NVONSIGHT = 6;
+        u.core.V_NVLIMSUPERV = 20;
+        u.core.V_NVUNFIT = 20;
+        u.core.V_NVREL = 8;
+        u.core.D_NVROLL = 2;
+        u.core.Q_NVSBTSMPERM = 1;
+        u.core.Q_NVEMRRLS = 0;
+        u.core.Q_NVGUIPERM = 0;
+        u.core.Q_NVSBFBPERM = 0;
+        u.core.Q_NVINHSMICPERM = 0;
+        u.core.V_NVALLOWOVTRP = 0;
+        u.core.V_NVSUPOVTRP = 6;
+        u.core.D_NVOVTRP = 200;
+        u.core.T_NVOVTRP = 60;
+        u.core.D_NVPOTRP = 200;
+        u.core.M_NVCONTACT = 1;
+        u.core.T_NVCONTACT = 255;
+        u.core.M_NVDERUN = 1;
+        u.core.D_NVSTFF = 32767;
+        u.core.Q_NVDRIVER_ADHES = 0;
+        u.core.A_NVMAXREDADH1 = 20;
+        u.core.A_NVMAXREDADH2 = 14;
+        u.core.A_NVMAXREDADH3 = 14;
+        u.core.Q_NVLOCACC = 12;
+        u.core.M_NVAVADH = 1;
+        u.core.M_NVEBCL = 1;
+        u.core.Q_NVKINT = 0;
+    }
+
     End_of_Information z;
     {
         // NID_PACKET = 255;
@@ -449,6 +490,7 @@ int main ()
     telegram.add(std::make_shared<Track_Condition_Station_Platforms>(r));
     telegram.add(std::make_shared<Route_Suitability_Data>(s));
     telegram.add(std::make_shared<International_Static_Speed_Profile>(t));
+    telegram.add(std::make_shared<National_Values>(u));
     telegram.add(std::make_shared<End_of_Information>(z));
 
     FlatPackets container;
