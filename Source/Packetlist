@@ -27,8 +27,8 @@ Common Optional Packets for Messages*:
 //  41 Level Transition Order (s.o.)
 //  44 Data used by applications outside the ERTMS/ETCS system [conditional][Y T]
 //  52 Permitted Braking Distance Information [dynamisch][Y T]
-//  58 Position Report Parameters [dynamisch][N]
-##  68 Track Condition [dynamisch][N]
+//  58 Position Report Parameters [dynamisch][Y T]
+//  68 Track Condition [dynamisch][Y T]
 ##  69 Track Condition Station Platforms [dynamisch][N]
 ##  70 Track Condition [dynamisch][N]
 //  72 Packet for sending plain text messages (s.o.)

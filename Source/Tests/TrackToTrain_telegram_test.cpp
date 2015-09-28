@@ -16,6 +16,7 @@
 #include "Permitted_Braking_Distance_Information.h"
 #include "Geographical_Position_Information.h"
 #include "Position_Report_Parameters.h"
+#include "Track_Condition.h"
 #include "EurobaliseTelegram.h"
 #include "CompressedPackets.h"
 #include <cassert>
@@ -335,6 +336,22 @@ int main ()
         p.core.sub_1[0].Q_LGTLOC = 0;
     }
 
+    Track_Condition q;
+    {
+        q.core.Q_DIR = 0;
+        q.core.L_PACKET = 33;
+        q.core.Q_SCALE = 0;
+        q.core.Q_TRACKINIT = 1;
+        q.core.D_TRACKINIT = 1000;
+        q.core.D_TRACKCOND = 500;
+        q.core.L_TRACKCOND = 10;
+        q.core.M_TRACKCOND = 5;
+        q.core.N_ITER_1 = 1;
+        q.core.sub_1[0].D_TRACKCOND = 100;
+        q.core.sub_1[0].L_TRACKCOND = 8;
+        q.core.sub_1[0].M_TRACKCOND = 3;
+    }
+
     End_of_Information z;
     {
         // NID_PACKET = 255;
@@ -356,6 +373,7 @@ int main ()
     telegram.add(std::make_shared<Permitted_Braking_Distance_Information>(n));
     telegram.add(std::make_shared<Geographical_Position_Information>(o));
     telegram.add(std::make_shared<Position_Report_Parameters>(p));
+    telegram.add(std::make_shared<Track_Condition>(q));
     telegram.add(std::make_shared<End_of_Information>(z));
 
     FlatPackets container;
