@@ -19,6 +19,7 @@
 #include "Track_Condition.h"
 #include "Track_Condition_Station_Platforms.h"
 #include "Route_Suitability_Data.h"
+#include "International_Static_Speed_Profile.h"
 #include "EurobaliseTelegram.h"
 #include "CompressedPackets.h"
 #include <cassert>
@@ -396,6 +397,33 @@ int main ()
         s.core.sub_1[0].NID_CTRACTION = 1000;
     }
 
+    International_Static_Speed_Profile t;
+    {
+        t.core.Q_DIR = 2;
+        t.core.L_PACKET = 104;
+        t.core.Q_SCALE = 2;
+        t.core.D_STATIC =  1000;
+        t.core.V_STATIC = 78;
+        t.core.Q_FRONT = 1;
+        t.core.N_ITER_1 = 1;
+        t.core.N_ITER_2 = 1;
+
+	t.core.sub_1[0].Q_DIFF = 0;
+	t.core.sub_1[0].NC_CDDIFF = 14;
+	t.core.sub_1[0].NC_DIFF = 0;
+	t.core.sub_1[0].V_DIFF = 120;
+
+	t.core.sub_2[0].D_STATIC = 400;
+	t.core.sub_2[0].V_STATIC = 70;
+	t.core.sub_2[0].Q_FRONT = 1;
+	t.core.sub_2[0].N_ITER_2_1 = 1;
+
+	t.core.sub_2[0].sub_2_1[0].Q_DIFF = 1;
+	t.core.sub_2[0].sub_2_1[0].NC_CDDIFF = 0;
+	t.core.sub_2[0].sub_2_1[0].NC_DIFF = 12;
+	t.core.sub_2[0].sub_2_1[0].V_DIFF = 18;
+    }
+
     End_of_Information z;
     {
         // NID_PACKET = 255;
@@ -420,6 +448,7 @@ int main ()
     telegram.add(std::make_shared<Track_Condition>(q));
     telegram.add(std::make_shared<Track_Condition_Station_Platforms>(r));
     telegram.add(std::make_shared<Route_Suitability_Data>(s));
+    telegram.add(std::make_shared<International_Static_Speed_Profile>(t));
     telegram.add(std::make_shared<End_of_Information>(z));
 
     FlatPackets container;
