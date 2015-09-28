@@ -12,6 +12,7 @@
 #include "Data_used_by_applications_outside_the_ERTMSETCS_system.h"
 #include "Track_Condition_Change_of_traction_system.h"
 #include "Packet_for_sending_fixed_text_messages.h"
+#include "Axle_Load_Speed_Profile.h"
 #include "EurobaliseTelegram.h"
 #include "CompressedPackets.h"
 #include <cassert>
@@ -249,6 +250,32 @@ int main ()
         l.core.Q_TEXT = 1;
     }
 
+    Axle_Load_Speed_Profile m;
+    {
+        m.core.Q_DIR = 1;
+        m.core.L_PACKET = 82;
+        m.core.Q_SCALE = 1;
+        m.core.Q_TRACKINIT = 0;
+        m.core.D_TRACKINIT = 100;
+        m.core.D_AXLELOAD = 77;
+        m.core.L_AXLELOAD = 10;
+        m.core.Q_FRONT = 0;
+        m.core.N_ITER_1 = 0;
+
+        m.core.N_ITER_2 = 1;
+
+	m.core.sub_2[0].D_AXLELOAD = 15;
+	m.core.sub_2[0].L_AXLELOAD = 12;
+	m.core.sub_2[0].Q_FRONT = 0;
+	m.core.sub_2[0].N_ITER_2_1 = 2;
+	m.core.sub_2[0].sub_2_1[0].M_AXLELOADCAT = 120;
+	m.core.sub_2[0].sub_2_1[0].V_AXLELOAD = 0;
+	m.core.sub_2[0].sub_2_1[1].M_AXLELOADCAT = 36;
+	m.core.sub_2[0].sub_2_1[1].V_AXLELOAD = 13;
+
+    Axle_Load_Speed_Profile_Core_2   sub_2[31];
+    }
+
     End_of_Information z;
     {
         // NID_PACKET = 255;
@@ -266,6 +293,7 @@ int main ()
     telegram.add(std::make_shared<Data_used_by_applications_outside_the_ERTMSETCS_system>(j));
     telegram.add(std::make_shared<Track_Condition_Change_of_traction_system>(k));
     telegram.add(std::make_shared<Packet_for_sending_fixed_text_messages>(l));
+    telegram.add(std::make_shared<Axle_Load_Speed_Profile>(m));
     telegram.add(std::make_shared<End_of_Information>(z));
 
     FlatPackets container;

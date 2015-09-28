@@ -137,7 +137,7 @@ int Axle_Load_Speed_Profile_Core_2_Encode_Int(PacketInfo* data, kcg_int* stream,
 
     for (uint32_t i = 0; i < p->N_ITER_2_1; ++i)
     {
-        Axle_Load_Speed_Profile_Core_2_1_Encode_Int(data, stream &(p->sub_2_1[i]));
+        Axle_Load_Speed_Profile_Core_2_1_Encode_Int(data, stream, &(p->sub_2_1[i]));
     }
 
     return 1;
@@ -152,7 +152,7 @@ int Axle_Load_Speed_Profile_Core_2_Decode_Int(PacketInfo* data, const kcg_int* s
 
     for (uint32_t i = 0; i < p->N_ITER_2_1; ++i)
     {
-        Axle_Load_Speed_Profile_Core_2_1_Decode_Int(data, stream &(p->sub_2_1[i]));
+        Axle_Load_Speed_Profile_Core_2_1_Decode_Int(data, stream, &(p->sub_2_1[i]));
     }
 
     return 1;

@@ -130,11 +130,31 @@ int Axle_Load_Speed_Profile_Core_2_Decode_Bit(Bitstream* stream, Axle_Load_Speed
 
 int Axle_Load_Speed_Profile_Core_2_Encode_Int(PacketInfo* data, kcg_int* stream, const Axle_Load_Speed_Profile_Core_2* p)
 {
-    return 0;
+    stream[data->startAddress++] = p->D_AXLELOAD;
+    stream[data->startAddress++] = p->L_AXLELOAD;
+    stream[data->startAddress++] = p->Q_FRONT;
+    stream[data->startAddress++] = p->N_ITER_2_1;
+
+    for (uint32_t i = 0; i < p->N_ITER_2_1; ++i)
+    {
+        Axle_Load_Speed_Profile_Core_2_1_Encode_Int(data, stream, &(p->sub_2_1[i]));
+    }
+
+    return 1;
 }
 
 int Axle_Load_Speed_Profile_Core_2_Decode_Int(PacketInfo* data, const kcg_int* stream, Axle_Load_Speed_Profile_Core_2* p)
 {
-    return 0;
+    p->D_AXLELOAD = stream[data->startAddress++];
+    p->L_AXLELOAD = stream[data->startAddress++];
+    p->Q_FRONT = stream[data->startAddress++];
+    p->N_ITER_2_1 = stream[data->startAddress++];
+
+    for (uint32_t i = 0; i < p->N_ITER_2_1; ++i)
+    {
+        Axle_Load_Speed_Profile_Core_2_1_Decode_Int(data, stream, &(p->sub_2_1[i]));
+    }
+
+    return 1;
 }
 

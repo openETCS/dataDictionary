@@ -95,11 +95,17 @@ int Axle_Load_Speed_Profile_Core_1_Decode_Bit(Bitstream* stream, Axle_Load_Speed
 
 int Axle_Load_Speed_Profile_Core_1_Encode_Int(PacketInfo* data, kcg_int* stream, const Axle_Load_Speed_Profile_Core_1* p)
 {
-    return 0;
+    stream[data->startAddress++] = p->M_AXLELOADCAT;
+    stream[data->startAddress++] = p->V_AXLELOAD;
+
+    return 1;
 }
 
 int Axle_Load_Speed_Profile_Core_1_Decode_Int(PacketInfo* data, const kcg_int* stream, Axle_Load_Speed_Profile_Core_1* p)
 {
-    return 0;
+    p->M_AXLELOADCAT = stream[data->startAddress++];
+    p->V_AXLELOAD = stream[data->startAddress++];
+
+    return 1;
 }
 
