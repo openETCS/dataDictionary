@@ -23,10 +23,10 @@ Common Optional Packets for Messages*:
 //  3 National Values (s.o.), Onboard Telephone Numbers (s.o.)
 //  5 Linking [dynamisch][Y T]
 //  39 Track Condition Change of traction system [conditional][Y T]
-/#  51 Axle Load Speed Profile [dynamisch][Y]
+//  51 Axle Load Speed Profile [dynamisch][Y]
 //  41 Level Transition Order (s.o.)
 //  44 Data used by applications outside the ERTMS/ETCS system [conditional][Y T]
-##  52 Permitted Braking Distance Information [dynamisch][N]
+//  52 Permitted Braking Distance Information [dynamisch][N]
 ##  58 Position Report Parameters [dynamisch][N]
 ##  68 Track Condition [dynamisch][N]
 ##  69 Track Condition Station Platforms [dynamisch][N]

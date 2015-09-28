@@ -13,6 +13,7 @@
 #include "Track_Condition_Change_of_traction_system.h"
 #include "Packet_for_sending_fixed_text_messages.h"
 #include "Axle_Load_Speed_Profile.h"
+#include "Permitted_Braking_Distance_Information.h"
 #include "EurobaliseTelegram.h"
 #include "CompressedPackets.h"
 #include <cassert>
@@ -272,8 +273,22 @@ int main ()
 	m.core.sub_2[0].sub_2_1[0].V_AXLELOAD = 0;
 	m.core.sub_2[0].sub_2_1[1].M_AXLELOADCAT = 36;
 	m.core.sub_2[0].sub_2_1[1].V_AXLELOAD = 13;
+    }
 
-    Axle_Load_Speed_Profile_Core_2   sub_2[31];
+    Permitted_Braking_Distance_Information n;
+    {
+        n.core.Q_DIR = 2;
+        n.core.L_PACKET = 33;
+        n.core.Q_SCALE = 1;
+        n.core.Q_TRACKINIT = 1;
+        n.core.D_TRACKINIT = 100;
+        n.core.D_PBD = 80;
+        n.core.Q_GDIR = 0;
+        n.core.G_PBDSR = 16;
+        n.core.Q_PBDSR = 1;
+        n.core.D_PBDSR = 70;
+        n.core.L_PBDSR = 4;
+        n.core.N_ITER_1 = 0;
     }
 
     End_of_Information z;
@@ -294,6 +309,7 @@ int main ()
     telegram.add(std::make_shared<Track_Condition_Change_of_traction_system>(k));
     telegram.add(std::make_shared<Packet_for_sending_fixed_text_messages>(l));
     telegram.add(std::make_shared<Axle_Load_Speed_Profile>(m));
+    telegram.add(std::make_shared<Permitted_Braking_Distance_Information>(n));
     telegram.add(std::make_shared<End_of_Information>(z));
 
     FlatPackets container;
