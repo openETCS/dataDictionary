@@ -6,7 +6,7 @@
 
 int main ()
 {
-    std::cout << "\n--- Testing the en-/decode functions of Eurobalise Telegram with conditional packets" << std::endl;
+    std::cout << "\n--- Testing the en-/decode bit functions of Eurobalise Telegram with conditional packets" << std::endl;
 
     // construct telegram from header
     // telegram.header = create_TelegramHeader_TrainToTrack();
