@@ -7,7 +7,9 @@
 #include "National_Values_Core_2.h"
 #include "National_Values_Core_3.h"
 #include "National_Values_Core_4.h"
-#include "CompressedPackets.h" struct National_Values_Core
+#include "CompressedPackets.h"
+
+struct National_Values_Core
 {
     // TransmissionMedia=Balise, RBC
     // Downloads a set of National Values to the train
