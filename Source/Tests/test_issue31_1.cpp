@@ -15,7 +15,7 @@ void assert_equal(const Packet& packet, BasePacketPtr ptr)
 
 int main ()
 {
-    std::cout << "\n--- Testing the decode function with issue31\n";
+    std::cout << "\n--- test issue31 part 1" << std::endl;
 
     std::vector<uint8_t> raw_stream(1000);
     Bitstream stream;
@@ -43,29 +43,29 @@ int main ()
 
     telegram.add(std::make_shared<End_of_Information>(f));
 
-    std::cout << " Encoder Input: " << telegram << std::endl;
+    //std::cout << " Encoder Input: " << telegram << std::endl;
 
-    std::cout << " Encoding Eurobalise Telegram." << std::endl;
+    //std::cout << " Encoding Eurobalise Telegram." << std::endl;
     telegram.encode(stream);
 
-    std::cout << " print from position " << init_pos << " to " << stream.bitpos <<  std::endl;
-    print(stream, init_pos, stream.bitpos);
-    std::cout << std::endl;
-    std::cout << std::endl;
+    //std::cout << " print from position " << init_pos << " to " << stream.bitpos <<  std::endl;
+    //print(stream, init_pos, stream.bitpos);
+    //std::cout << std::endl;
+    //std::cout << std::endl;
 
     stream.bitpos = init_pos;
 
     EurobaliseTelegram new_telegram;
 
-    std::cout << " Decoding Eurobalise Telegram." << std::endl;
+    //std::cout << " Decoding Eurobalise Telegram." << std::endl;
     new_telegram.decode(stream);
 
-    std::cout << " Decoder Output: " << telegram << std::endl;
+    //std::cout << " Decoder Output: " << telegram << std::endl;
 
     assert(telegram == new_telegram);
 
     std::cout << " Test successful." << std::endl;
-    std::cout << std::endl;
+    //std::cout << std::endl;
 
     return EXIT_SUCCESS;
 }

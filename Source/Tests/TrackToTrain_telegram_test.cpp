@@ -495,13 +495,13 @@ int main ()
 
     FlatPackets container;
 
-    std::cout << "Expanded Telegram Test: TrackToTrain" << std::endl;
+    std::cout << "\n--- Test of en-/decode int functions for TrackToTrain packets"<< std::endl;
 
-    std::cout << "\n\nEncoding the telegram: " << telegram << std::endl;
+    //std::cout << "\n\nEncoding the telegram: " << telegram << std::endl;
 
     if (telegram.encode(container))
     {
-        std::cout << "The telegram was encoded into the int stream." << std::endl;
+        //std::cout << "The telegram was encoded into the int stream." << std::endl;
     }
     else
     {
@@ -516,23 +516,23 @@ int main ()
         //std::cout << ", " << i << ":" << container.PacketData[i];
     //}
 
-    std::cout << std::endl;
+    //std::cout << std::endl;
 
     EurobaliseTelegram new_telegram = EurobaliseTelegram(header);
 
     if (new_telegram.decode(container))
     {
-        std::cout << "The telegram was decoded from the int stream." << std::endl;
+        //std::cout << "The telegram was decoded from the int stream." << std::endl;
     }
     else
     {
         std::cout << "An error occured during the decoding process of the telegram." << std::endl;
     }
 
-    std::cout << "Decoded the telegram: " << new_telegram << std::endl;
+    //std::cout << "Decoded the telegram: " << new_telegram << std::endl;
 
     assert(telegram == new_telegram);
 
-    std::cout << "Test successfull.\n" << std::endl;
+    std::cout << "Test successfull." << std::endl;
 }
 

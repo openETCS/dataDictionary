@@ -6,7 +6,7 @@
 
 int main ()
 {
-    std::cout << "--- Testing the encode and decode functions of Eurobalise Telegram consecutively with N_ITER packets." << std::endl;
+    std::cout << "\n--- Testing the encode and decode functions of Eurobalise Telegram consecutively with N_ITER packets." << std::endl;
     // declare a telegram
     EurobaliseTelegram telegram;
 
@@ -47,7 +47,7 @@ int main ()
     std::cout << " Decoder Output: " << telegram_new << std::endl;
     assert(telegram_new == telegram);
 
-    std::cout << " Test successful.\n" << std::endl;
+    std::cout << " Test successful." << std::endl;
 
     return EXIT_SUCCESS;
 }

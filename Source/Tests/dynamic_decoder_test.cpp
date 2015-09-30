@@ -14,7 +14,7 @@ void assert_equal(const Packet& packet, BasePacketPtr ptr)
 
 int main ()
 {
-    std::cout << "--- Testing the decode function of Eurobalise Telegram with N_ITER packets." << std::endl;
+    std::cout << "\n--- Testing the decode function of Eurobalise Telegram with N_ITER packets." << std::endl;
     std::vector<uint8_t> raw_stream(1000);
     Bitstream stream;
     Bitstream_Init(&stream, &(raw_stream[0]), raw_stream.size(), 73);

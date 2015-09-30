@@ -14,7 +14,7 @@ void assert_equal(const Packet& packet, BasePacketPtr ptr)
 
 int main ()
 {
-    std::cout << "\n--- Testing the decode function with issue31 part 2\n";
+    std::cout << "\n--- test issue31 part 2" << std::endl;
 
     std::vector<uint8_t> raw_stream(1000);
     Bitstream stream;
@@ -110,19 +110,19 @@ int main ()
 
     telegram.add(std::make_shared<End_of_Information>(d));
 
-    std::cout << " Encoder Input: " << telegram << std::endl;
+    //std::cout << " Encoder Input: " << telegram << std::endl;
 
-    std::cout << " Encoding Eurobalise Telegram." << std::endl;
+    //std::cout << " Encoding Eurobalise Telegram." << std::endl;
     telegram.encode(stream);
 
     stream.bitpos = init_pos;
 
     EurobaliseTelegram new_telegram;
 
-    std::cout << " Decoding Eurobalise Telegram." << std::endl;
+    //std::cout << " Decoding Eurobalise Telegram." << std::endl;
     new_telegram.decode(stream);
 
-    std::cout << " Decoder Output: " << new_telegram << std::endl;
+    //std::cout << " Decoder Output: " << new_telegram << std::endl;
 
     assert(telegram.header() == new_telegram.header());
     assert(telegram.packet(0)->header.NID_PACKET == new_telegram.packet(0)->header.NID_PACKET);
@@ -132,7 +132,7 @@ int main ()
     assert(telegram == new_telegram);
 
     std::cout << " Test successful." << std::endl;
-    std::cout << std::endl;
+    //std::cout << std::endl;
 
     return EXIT_SUCCESS;
 }

@@ -16,7 +16,7 @@ void assert_equal(const Packet& packet, BasePacketPtr ptr)
 
 int main ()
 {
-    std::cout << "\n--- Testing decode and encode functions with test_messages\n";
+    std::cout << "\n--- Testing en-/decode bit functions with for Euroradio Messages" << std::endl;
 
     std::vector<uint8_t> raw_stream(1000);
     Bitstream stream;
@@ -96,37 +96,36 @@ int main ()
         message3.optional_packets.push_back(std::make_shared<Level_23_transition_information>(c));
     }
 
-    std::cout << " Encoder Input:  " << message << std::endl;
-    std::cout << " Encoding Validated_Train_Data message." << std::endl;
+    //std::cout << " Encoder Input:  " << message << std::endl;
+    //std::cout << " Encoding Validated_Train_Data message." << std::endl;
     EuroradioMessage_Encoder(stream, std::make_shared<Validated_Train_Data_Message>(message));
     stream.bitpos = init_pos;
-    std::cout << " Decoding Validated_Train_Data message." << std::endl;
+    //std::cout << " Decoding Validated_Train_Data message." << std::endl;
     EuroradioMessagePtr new_message = EuroradioMessage_Decoder(stream);
-    std::cout << " Decoder Output: " << (*new_message) << "\n" << std::endl;
+    //std::cout << " Decoder Output: " << (*new_message) << "\n" << std::endl;
     assert(message == *new_message);
 
     init_pos = stream.bitpos;
-    std::cout << " Encoder Input:  " << message2 << std::endl;
-    std::cout << " Encoding MA_Request message." << std::endl;
+    //std::cout << " Encoder Input:  " << message2 << std::endl;
+    //std::cout << " Encoding MA_Request message." << std::endl;
     EuroradioMessage_Encoder(stream, std::make_shared<MA_Request_Message>(message2));
     stream.bitpos = init_pos;
-    std::cout << " Decoding MA_Request message." << std::endl;
+    //std::cout << " Decoding MA_Request message." << std::endl;
     EuroradioMessagePtr new_message2 = EuroradioMessage_Decoder(stream);
-    std::cout << " Decoder Output: " << (*new_message2) << "\n" << std::endl;
+    //std::cout << " Decoder Output: " << (*new_message2) << "\n" << std::endl;
     assert(message2 == *new_message2);
 
     init_pos = stream.bitpos;
-    std::cout << " Encoder Input:  " << message3 << std::endl;
-    std::cout << " Encoding MA_Request message." << std::endl;
+    //std::cout << " Encoder Input:  " << message3 << std::endl;
+    //std::cout << " Encoding MA_Request message." << std::endl;
     EuroradioMessage_Encoder(stream, std::make_shared<MA_Request_Message>(message3));
     stream.bitpos = init_pos;
-    std::cout << " Decoding MA_Request message." << std::endl;
+    //std::cout << " Decoding MA_Request message." << std::endl;
     EuroradioMessagePtr new_message3 = EuroradioMessage_Decoder(stream);
-    std::cout << " Decoder Output: " << (*new_message3) << "\n" << std::endl;
+    //std::cout << " Decoder Output: " << (*new_message3) << "\n" << std::endl;
     assert(message3 == *new_message3);
 
     std::cout << " Test successful." << std::endl;
-    std::cout << std::endl;
 
     return EXIT_SUCCESS;
 }

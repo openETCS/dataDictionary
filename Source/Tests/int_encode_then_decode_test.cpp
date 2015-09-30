@@ -7,6 +7,7 @@
 
 int main ()
 {
+    std::cout << "\n--- Testing the en-/decode int functions for a single packet" << std::endl;
     Adhesion_Factor a;
     {
         // NID_PACKET = 0;
@@ -20,25 +21,25 @@ int main ()
 
     FlatPackets container;
 
-    std::cout << "\n\nEncoding the Packet: " << a << std::endl;
+    //std::cout << "\n\nEncoding the Packet: " << a << std::endl;
 
     container.PacketHeaders[0].startAddress = 0;
 
     if (a.encode(container.PacketHeaders[0], container.PacketData))
     {
-        std::cout << "The packet was encoded into the int stream." << std::endl;
+        //std::cout << "The packet was encoded into the int stream." << std::endl;
     }
     else
     {
         std::cout << "An error occured during the encoding process of the packet." << std::endl;
     }
 
-    std::cout << "The Metadata Element contains this data: "
+    /*std::cout << "The Metadata Element contains this data: "
               << "nid_packet: " << container.PacketHeaders[0].nid_packet << ", "
               << "q_dir: " << container.PacketHeaders[0].q_dir << ", "
               << "valid: " << +container.PacketHeaders[0].valid << ", "
               << "startAddress: " << container.PacketHeaders[0].startAddress << ", "
-              << "endAddress: " << container.PacketHeaders[0].endAddress << std::endl;
+              << "endAddress: " << container.PacketHeaders[0].endAddress << std::endl;*/
 
     //std::cout << "The int stream contains this data: ";
     //std::cout << "0:" << container.PacketData[0];
@@ -48,23 +49,23 @@ int main ()
         //std::cout << ", " << i << ":" << container.PacketData[i];
     //}
 
-    std::cout << std::endl;
+    //std::cout << std::endl;
 
     Adhesion_Factor b;
 
     if (b.decode(container.PacketHeaders[0], container.PacketData))
     {
-        std::cout << "The packet was decoded from the int stream." << std::endl;
+        //std::cout << "The packet was decoded from the int stream." << std::endl;
     }
     else
     {
         std::cout << "An error occured during the decoding process of the packet." << std::endl;
     }
 
-    std::cout << "Decoded the packet: " << b << std::endl;
+    //std::cout << "Decoded the packet: " << b << std::endl;
 
     assert(a == b);
 
-    std::cout << "Test successfull.\n" << std::endl;
+    std::cout << "Test successfull." << std::endl;
 }
 

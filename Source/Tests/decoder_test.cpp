@@ -14,7 +14,7 @@ void assert_equal(const Packet& packet, BasePacketPtr ptr)
 
 int main ()
 {
-    std::cout << "--- Testing the decode function of Eurobalise Telegram." << std::endl;
+    std::cout << "\n--- Testing the decode function of Eurobalise Telegram" << std::endl;
     std::vector<uint8_t> raw_stream(1000);
     Bitstream stream;
     Bitstream_Init(&stream, &(raw_stream[0]), raw_stream.size(), 73);
@@ -23,20 +23,20 @@ int main ()
 
     TelegramHeader header = create_TelegramHeader_TrainToTrack();
     // TelegramHeader header = create_TelegramHeader_TrackToTrain();
-    std::cout << " Encoding Telegram Header: " << header << std::endl;
+    //std::cout << " Encoding Telegram Header: " << header << std::endl;
     encode(stream, header);
 
-    std::cout << " Encoding data packets:" << std::endl;
+    //std::cout << " Encoding data packets:" << std::endl;
     Train_running_number a = create_Train_running_number();
     {
-        std::cout << "    Encoding packet " << a << std::endl;
+        //std::cout << "    Encoding packet " << a << std::endl;
         encode(stream, a.header);
         encode(stream, a.core);
     }
 
     Error_Reporting b = create_Error_Reporting();
     {
-        std::cout << "    Encoding packet " << b << std::endl;
+        //std::cout << "    Encoding packet " << b << std::endl;
         encode(stream, b.header);
         encode(stream, b.core);
     }
@@ -44,7 +44,7 @@ int main ()
 
     End_of_Information c;
     {
-        std::cout << "    Encoding packet " << c << std::endl;
+        //std::cout << "    Encoding packet " << c << std::endl;
         encode(stream, c.header);
         encode(stream, c.core);
     }
@@ -53,10 +53,10 @@ int main ()
 
     EurobaliseTelegram telegram;
 
-    std::cout << " Decoding Eurobalise Telegram." << std::endl;
+    //std::cout << " Decoding Eurobalise Telegram." << std::endl;
     telegram.decode(stream);
 
-    std::cout << " Decoder Output: " << telegram << std::endl;
+    //std::cout << " Decoder Output: " << telegram << std::endl;
 
     assert(telegram.header() == header);
 
@@ -64,7 +64,7 @@ int main ()
     assert_equal(b, telegram.packet(1));
     assert_equal(c, telegram.packet(2));
 
-    std::cout << " Test successfull.\n" << std::endl;
+    std::cout << " Test successfull." << std::endl;
 
     return EXIT_SUCCESS;
 }

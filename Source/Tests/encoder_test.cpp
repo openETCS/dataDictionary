@@ -6,7 +6,7 @@
 
 int main ()
 {
-    std::cout << "--- Testing the encode and decode functions of Eurobalise Telegram consecutively." << std::endl;
+    std::cout << "\n--- Testing the en-/decode bit functions of Eurobalise Telegram" << std::endl;
 
     // declare and initialize a telegram header
     EurobaliseTelegram telegram(create_TelegramHeader_TrainToTrack());
@@ -14,7 +14,7 @@ int main ()
     telegram.add(std::make_shared<Error_Reporting>(create_Error_Reporting()));
     telegram.add(std::make_shared<End_of_Information>());
 
-    std::cout << " Encoder Input: " << telegram << std::endl;
+    //std::cout << " Encoder Input: " << telegram << std::endl;
 
     // declare and initialize the stream
     std::vector<uint8_t> raw_stream(1000);
@@ -25,7 +25,7 @@ int main ()
     uint32_t init_pos = stream.bitpos;
 
     // *** encode the telegram to the stream ***
-    std::cout << " Encoding Eurobalise Telegram." << std::endl;
+    //std::cout << " Encoding Eurobalise Telegram." << std::endl;
     telegram.encode(stream);
 
     // reset to the old bitpos
@@ -35,13 +35,13 @@ int main ()
     EurobaliseTelegram telegram_new;
 
     // *** decode from the stream to the new telegram ***
-    std::cout << " Decoding Eurobalise Telegram." << std::endl;
+    //std::cout << " Decoding Eurobalise Telegram." << std::endl;
     telegram_new.decode(stream);
 
-    std::cout << " Decoder Output: " << telegram_new << std::endl;
+    //std::cout << " Decoder Output: " << telegram_new << std::endl;
     assert(telegram_new == telegram);
 
-    std::cout << " Test successfull.\n" << std::endl;
+    std::cout << " Test successfull." << std::endl;
 
     return EXIT_SUCCESS;
 }

@@ -15,7 +15,7 @@ void assert_equal(const Packet& packet, BasePacketPtr ptr)
 
 int main ()
 {
-    std::cout << "\n--- Testing the decode function with issue31 part 3\n";
+    std::cout << "\n--- test issue31 part 3" << std::endl;
 
     std::vector<uint8_t> raw_stream(1000);
     Bitstream stream;
@@ -67,24 +67,24 @@ int main ()
         message.packet_11 = std::make_shared<Validated_train_data>(b);
     }
 
-    std::cout << " Encoder Input:  " << message << std::endl;
+    //std::cout << " Encoder Input:  " << message << std::endl;
 
-    std::cout << " Encoding Valid_Train_Data message." << std::endl;
+    //std::cout << " Encoding Valid_Train_Data message." << std::endl;
     message.encode(stream);
 
     stream.bitpos = init_pos;
 
     Validated_Train_Data_Message new_message;
 
-    std::cout << " Decoding Valid_Train_Data message." << std::endl;
+    //std::cout << " Decoding Valid_Train_Data message." << std::endl;
     new_message.decode(stream);
 
-    std::cout << " Decoder Output: " << new_message << std::endl;
+    //std::cout << " Decoder Output: " << new_message << std::endl;
 
     assert(message == new_message);
 
     std::cout << " Test successful." << std::endl;
-    std::cout << std::endl;
+    //std::cout << std::endl;
 
     return EXIT_SUCCESS;
 }
