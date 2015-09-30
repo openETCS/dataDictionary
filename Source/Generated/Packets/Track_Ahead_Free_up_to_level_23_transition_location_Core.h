@@ -172,6 +172,7 @@ inline bool operator==(const Track_Ahead_Free_up_to_level_23_transition_location
     {
         status = status && (a.NID_C == b.NID_C);
     }
+
     status = status && (a.NID_BG == b.NID_BG);
 
     return status;

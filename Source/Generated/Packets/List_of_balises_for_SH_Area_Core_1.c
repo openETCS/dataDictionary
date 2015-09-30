@@ -7,10 +7,12 @@ int List_of_balises_for_SH_Area_Core_1_UpperBitsNotSet(const List_of_balises_for
     bool status = true;
 
     status = status && UpperBitsNotSet64(p->Q_NEWCOUNTRY,      1) ;
+
     if (p->Q_NEWCOUNTRY == 1)
     {
         status = status && UpperBitsNotSet64(p->NID_C,             10);
     }
+
     status = status && UpperBitsNotSet64(p->NID_BG,            14);
 
     if (status)
@@ -32,6 +34,7 @@ int List_of_balises_for_SH_Area_Core_1_Encode_Bit(Bitstream* stream, const List_
             //@ ghost const uint32_t pos = stream->bitpos;
 
             Bitstream_Write(stream, 1,  p->Q_NEWCOUNTRY);
+
             if (p->Q_NEWCOUNTRY == 1)
             {
                 Bitstream_Write(stream, 10, p->NID_C);

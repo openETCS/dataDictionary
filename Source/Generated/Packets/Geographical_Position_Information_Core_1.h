@@ -160,6 +160,7 @@ inline bool operator==(const Geographical_Position_Information_Core_1& a, const 
     {
         status = status && (a.NID_C == b.NID_C);
     }
+
     status = status && (a.NID_BG == b.NID_BG);
     status = status && (a.D_POSOFF == b.D_POSOFF);
     status = status && (a.Q_MPOSITION == b.Q_MPOSITION);

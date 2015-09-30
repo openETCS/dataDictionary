@@ -10,19 +10,24 @@ int Staff_Responsible_distance_Information_from_loop_UpperBitsNotSet(const Staff
     status = status && UpperBitsNotSet64(p->L_PACKET,          13);
     status = status && UpperBitsNotSet64(p->Q_SCALE,           2) ;
     status = status && UpperBitsNotSet64(p->Q_NEWCOUNTRY_0,    1) ;
+
     if (p->Q_NEWCOUNTRY_0 == 1)
     {
         status = status && UpperBitsNotSet64(p->NID_C_0,           10);
     }
+
     status = status && UpperBitsNotSet64(p->NID_BG_0,          14);
     status = status && UpperBitsNotSet64(p->Q_NEWCOUNTRY_1,    1) ;
+
     if (p->Q_NEWCOUNTRY_1 == 1)
     {
         status = status && UpperBitsNotSet64(p->NID_C_1,           10);
     }
+
     status = status && UpperBitsNotSet64(p->NID_BG_1,          14);
     status = status && UpperBitsNotSet64(p->D_SR,              15);
     status = status && UpperBitsNotSet64(p->N_ITER_1,          5) ;
+
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
         status = status && Staff_Responsible_distance_Information_from_loop_Core_1_UpperBitsNotSet(&(p->sub_1[i]));
@@ -50,6 +55,7 @@ int Staff_Responsible_distance_Information_from_loop_Encode_Bit(Bitstream* strea
             Bitstream_Write(stream, 13, p->L_PACKET);
             Bitstream_Write(stream, 2,  p->Q_SCALE);
             Bitstream_Write(stream, 1,  p->Q_NEWCOUNTRY_0);
+
             if (p->Q_NEWCOUNTRY_0 == 1)
             {
                 Bitstream_Write(stream, 10, p->NID_C_0);
@@ -57,6 +63,7 @@ int Staff_Responsible_distance_Information_from_loop_Encode_Bit(Bitstream* strea
 
             Bitstream_Write(stream, 14, p->NID_BG_0);
             Bitstream_Write(stream, 1,  p->Q_NEWCOUNTRY_1);
+
             if (p->Q_NEWCOUNTRY_1 == 1)
             {
                 Bitstream_Write(stream, 10, p->NID_C_1);
@@ -65,6 +72,7 @@ int Staff_Responsible_distance_Information_from_loop_Encode_Bit(Bitstream* strea
             Bitstream_Write(stream, 14, p->NID_BG_1);
             Bitstream_Write(stream, 15, p->D_SR);
             Bitstream_Write(stream, 5,  p->N_ITER_1);
+
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
                 Staff_Responsible_distance_Information_from_loop_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
@@ -175,7 +183,7 @@ int Staff_Responsible_distance_Information_from_loop_Decode_Bit(Bitstream* strea
             p->D_SR        = Bitstream_Read(stream, 15);
         }
 
-    {
+        {
             p->N_ITER_1        = Bitstream_Read(stream, 5);
         }
 
@@ -183,6 +191,7 @@ int Staff_Responsible_distance_Information_from_loop_Decode_Bit(Bitstream* strea
         {
             Staff_Responsible_distance_Information_from_loop_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
         }
+
         //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
         //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
         //@ assert Q_SCALE:           EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE);

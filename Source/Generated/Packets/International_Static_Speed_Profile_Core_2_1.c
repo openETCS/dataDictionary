@@ -7,14 +7,17 @@ int International_Static_Speed_Profile_Core_2_1_UpperBitsNotSet(const Internatio
     bool status = true;
 
     status = status && UpperBitsNotSet64(p->Q_DIFF,            2) ;
+
     if (p->Q_DIFF == 0)
     {
         status = status && UpperBitsNotSet64(p->NC_CDDIFF,         4) ;
     }
+
     if ((p->Q_DIFF == 1) || (p->Q_DIFF == 2))
     {
         status = status && UpperBitsNotSet64(p->NC_DIFF,           4) ;
     }
+
     status = status && UpperBitsNotSet64(p->V_DIFF,            7) ;
 
     if (status)
@@ -36,6 +39,7 @@ int International_Static_Speed_Profile_Core_2_1_Encode_Bit(Bitstream* stream, co
             //@ ghost const uint32_t pos = stream->bitpos;
 
             Bitstream_Write(stream, 2,  p->Q_DIFF);
+
             if (p->Q_DIFF == 0)
             {
                 Bitstream_Write(stream, 4,  p->NC_CDDIFF);

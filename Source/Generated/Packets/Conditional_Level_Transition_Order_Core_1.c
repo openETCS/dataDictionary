@@ -7,6 +7,7 @@ int Conditional_Level_Transition_Order_Core_1_UpperBitsNotSet(const Conditional_
     bool status = true;
 
     status = status && UpperBitsNotSet64(p->M_LEVELTR,         3) ;
+
     if (p->M_LEVELTR == 1)
     {
         status = status && UpperBitsNotSet64(p->NID_NTC,           8) ;
@@ -31,6 +32,7 @@ int Conditional_Level_Transition_Order_Core_1_Encode_Bit(Bitstream* stream, cons
             //@ ghost const uint32_t pos = stream->bitpos;
 
             Bitstream_Write(stream, 3,  p->M_LEVELTR);
+
             if (p->M_LEVELTR == 1)
             {
                 Bitstream_Write(stream, 8,  p->NID_NTC);

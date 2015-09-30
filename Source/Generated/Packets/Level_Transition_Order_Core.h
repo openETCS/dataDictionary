@@ -172,12 +172,13 @@ inline std::ostream& operator<<(std::ostream& stream, const Level_Transition_Ord
             << +p.M_LEVELTR << ','
             << +p.NID_NTC << ','
             << +p.L_ACKLEVELTR << ','
-       << +p.N_ITER_1;
-       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-       {
-           stream << ',' << p.sub_1[i];
-       }
-   
+            << +p.N_ITER_1;
+
+    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+    {
+        stream << ',' << p.sub_1[i];
+    }
+
 
     return stream;
 }
@@ -196,8 +197,10 @@ inline bool operator==(const Level_Transition_Order_Core& a, const Level_Transit
     {
         status = status && (a.NID_NTC == b.NID_NTC);
     }
+
     status = status && (a.L_ACKLEVELTR == b.L_ACKLEVELTR);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
+
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)

@@ -15,14 +15,17 @@ int Position_Report_UpperBitsNotSet(const Position_Report_Core* p)
     status = status && UpperBitsNotSet64(p->L_DOUBTOVER,       15);
     status = status && UpperBitsNotSet64(p->L_DOUBTUNDER,      15);
     status = status && UpperBitsNotSet64(p->Q_LENGTH,          2) ;
+
     if ((p->Q_LENGTH == 1) || (p->Q_LENGTH == 2))
     {
         status = status && UpperBitsNotSet64(p->L_TRAININT,        15);
     }
+
     status = status && UpperBitsNotSet64(p->V_TRAIN,           7) ;
     status = status && UpperBitsNotSet64(p->Q_DIRTRAIN,        2) ;
     status = status && UpperBitsNotSet64(p->M_MODE,            4) ;
     status = status && UpperBitsNotSet64(p->M_LEVEL,           3) ;
+
     if (p->M_LEVEL == 1)
     {
         status = status && UpperBitsNotSet64(p->NID_NTC,           8) ;
@@ -55,6 +58,7 @@ int Position_Report_Encode_Bit(Bitstream* stream, const Position_Report_Core* p)
             Bitstream_Write(stream, 15, p->L_DOUBTOVER);
             Bitstream_Write(stream, 15, p->L_DOUBTUNDER);
             Bitstream_Write(stream, 2,  p->Q_LENGTH);
+
             if ((p->Q_LENGTH == 1) || (p->Q_LENGTH == 2))
             {
                 Bitstream_Write(stream, 15, p->L_TRAININT);
@@ -64,6 +68,7 @@ int Position_Report_Encode_Bit(Bitstream* stream, const Position_Report_Core* p)
             Bitstream_Write(stream, 2,  p->Q_DIRTRAIN);
             Bitstream_Write(stream, 4,  p->M_MODE);
             Bitstream_Write(stream, 3,  p->M_LEVEL);
+
             if (p->M_LEVEL == 1)
             {
                 Bitstream_Write(stream, 8,  p->NID_NTC);

@@ -7,10 +7,12 @@ int Level_Transition_Order_Core_1_UpperBitsNotSet(const Level_Transition_Order_C
     bool status = true;
 
     status = status && UpperBitsNotSet64(p->M_LEVELTR,         3) ;
+
     if (p->M_LEVELTR == 1)
     {
         status = status && UpperBitsNotSet64(p->NID_NTC,           8) ;
     }
+
     status = status && UpperBitsNotSet64(p->L_ACKLEVELTR,      15);
 
     if (status)
@@ -32,6 +34,7 @@ int Level_Transition_Order_Core_1_Encode_Bit(Bitstream* stream, const Level_Tran
             //@ ghost const uint32_t pos = stream->bitpos;
 
             Bitstream_Write(stream, 3,  p->M_LEVELTR);
+
             if (p->M_LEVELTR == 1)
             {
                 Bitstream_Write(stream, 8,  p->NID_NTC);

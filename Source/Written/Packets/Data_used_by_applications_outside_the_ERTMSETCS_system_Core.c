@@ -9,10 +9,12 @@ int Data_used_by_applications_outside_the_ERTMSETCS_system_UpperBitsNotSet(const
     status = status && UpperBitsNotSet64(p->Q_DIR,             2) ;
     status = status && UpperBitsNotSet64(p->L_PACKET,          13);
     status = status && UpperBitsNotSet64(p->NID_XUSER,         9) ;
+
     if (p->NID_XUSER == 102)
     {
         status = status && UpperBitsNotSet64(p->NID_NTC,           8) ;
     }
+
     status = status && UpperBitsNotSet64(p->Other_data_depending_on__NID_XUSER, 64) ;
 
     if (status)
@@ -36,6 +38,7 @@ int Data_used_by_applications_outside_the_ERTMSETCS_system_Encode_Bit(Bitstream*
             Bitstream_Write(stream, 2,  p->Q_DIR);
             Bitstream_Write(stream, 13, p->L_PACKET);
             Bitstream_Write(stream, 9,  p->NID_XUSER);
+
             if (p->NID_XUSER == 102)
             {
                 Bitstream_Write(stream, 8,  p->NID_NTC);

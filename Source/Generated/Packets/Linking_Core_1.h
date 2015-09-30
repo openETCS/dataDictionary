@@ -167,6 +167,7 @@ inline bool operator==(const Linking_Core_1& a, const Linking_Core_1& b)
     {
         status = status && (a.NID_C == b.NID_C);
     }
+
     status = status && (a.NID_BG == b.NID_BG);
     status = status && (a.Q_LINKORIENTATION == b.Q_LINKORIENTATION);
     status = status && (a.Q_LINKREACTION == b.Q_LINKREACTION);

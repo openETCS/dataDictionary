@@ -10,25 +10,30 @@ int Axle_Load_Speed_Profile_UpperBitsNotSet(const Axle_Load_Speed_Profile_Core* 
     status = status && UpperBitsNotSet64(p->L_PACKET,          13);
     status = status && UpperBitsNotSet64(p->Q_SCALE,           2) ;
     status = status && UpperBitsNotSet64(p->Q_TRACKINIT,       1) ;
+
     if (p->Q_TRACKINIT == 1)
     {
         status = status && UpperBitsNotSet64(p->D_TRACKINIT,       15);
     }
+
     if (p->Q_TRACKINIT == 0)
     {
         status = status && UpperBitsNotSet64(p->D_AXLELOAD,        15);
         status = status && UpperBitsNotSet64(p->L_AXLELOAD,        15);
         status = status && UpperBitsNotSet64(p->Q_FRONT,           1) ;
-    status = status && UpperBitsNotSet64(p->N_ITER_1,          5) ;
-    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
-    {
-        status = status && Axle_Load_Speed_Profile_Core_1_UpperBitsNotSet(&(p->sub_1[i]));
-    }
-    status = status && UpperBitsNotSet64(p->N_ITER_2,          5) ;
-    for (uint32_t i = 0; i < p->N_ITER_2; ++i)
-    {
-        status = status && Axle_Load_Speed_Profile_Core_2_UpperBitsNotSet(&(p->sub_2[i]));
-    }
+        status = status && UpperBitsNotSet64(p->N_ITER_1,          5) ;
+
+        for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+        {
+            status = status && Axle_Load_Speed_Profile_Core_1_UpperBitsNotSet(&(p->sub_1[i]));
+        }
+
+        status = status && UpperBitsNotSet64(p->N_ITER_2,          5) ;
+
+        for (uint32_t i = 0; i < p->N_ITER_2; ++i)
+        {
+            status = status && Axle_Load_Speed_Profile_Core_2_UpperBitsNotSet(&(p->sub_2[i]));
+        }
     }
 
     if (status)
@@ -53,6 +58,7 @@ int Axle_Load_Speed_Profile_Encode_Bit(Bitstream* stream, const Axle_Load_Speed_
             Bitstream_Write(stream, 13, p->L_PACKET);
             Bitstream_Write(stream, 2,  p->Q_SCALE);
             Bitstream_Write(stream, 1,  p->Q_TRACKINIT);
+
             if (p->Q_TRACKINIT == 1)
             {
                 Bitstream_Write(stream, 15, p->D_TRACKINIT);
@@ -63,16 +69,19 @@ int Axle_Load_Speed_Profile_Encode_Bit(Bitstream* stream, const Axle_Load_Speed_
                 Bitstream_Write(stream, 15, p->D_AXLELOAD);
                 Bitstream_Write(stream, 15, p->L_AXLELOAD);
                 Bitstream_Write(stream, 1,  p->Q_FRONT);
-            Bitstream_Write(stream, 5,  p->N_ITER_1);
-            for (uint32_t i = 0; i < p->N_ITER_1; ++i)
-            {
-                Axle_Load_Speed_Profile_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
-            }
-            Bitstream_Write(stream, 5,  p->N_ITER_2);
-            for (uint32_t i = 0; i < p->N_ITER_2; ++i)
-            {
-                Axle_Load_Speed_Profile_Core_2_Encode_Bit(stream, &(p->sub_2[i]));
-            }
+                Bitstream_Write(stream, 5,  p->N_ITER_1);
+
+                for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+                {
+                    Axle_Load_Speed_Profile_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
+                }
+
+                Bitstream_Write(stream, 5,  p->N_ITER_2);
+
+                for (uint32_t i = 0; i < p->N_ITER_2; ++i)
+                {
+                    Axle_Load_Speed_Profile_Core_2_Encode_Bit(stream, &(p->sub_2[i]));
+                }
             }
 
 
@@ -179,6 +188,7 @@ int Axle_Load_Speed_Profile_Decode_Bit(Bitstream* stream, Axle_Load_Speed_Profil
             {
                 Axle_Load_Speed_Profile_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
             }
+
             {
                 p->N_ITER_2        = Bitstream_Read(stream, 5);
             }

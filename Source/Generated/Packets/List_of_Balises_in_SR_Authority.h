@@ -46,38 +46,38 @@ struct List_of_Balises_in_SR_Authority : public BasePacket
     {
         data.nid_packet = 63;
         data.q_dir = core.Q_DIR;
-	data.valid = 1;
+        data.valid = 1;
 
         PacketInfo q = data;
 
-	stream[q.startAddress++] = header.NID_PACKET;
+        stream[q.startAddress++] = header.NID_PACKET;
 
-	int ret = ::encode(q, stream, core);
+        int ret = ::encode(q, stream, core);
 
-	data.endAddress = q.startAddress-1;
+        data.endAddress = q.startAddress - 1;
 
-	return ret;
+        return ret;
     }
 
     int decode(const PacketInfo& data, const kcg_int* stream) override
     {
-        if(data.nid_packet != 63)
-	{
-	    return 0;
-	}
-
-	PacketInfo q = data;
-
-	header.NID_PACKET = stream[q.startAddress++];
-
-	int ret = ::decode(q, stream, core);
-
-        if (q.startAddress-1 != data.endAddress)
+        if (data.nid_packet != 63)
         {
             return 0;
         }
 
-	return ret;
+        PacketInfo q = data;
+
+        header.NID_PACKET = stream[q.startAddress++];
+
+        int ret = ::decode(q, stream, core);
+
+        if (q.startAddress - 1 != data.endAddress)
+        {
+            return 0;
+        }
+
+        return ret;
     }
 
 };

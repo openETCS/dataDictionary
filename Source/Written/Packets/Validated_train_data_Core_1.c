@@ -7,6 +7,7 @@ int Validated_train_data_Core_1_UpperBitsNotSet(const Validated_train_data_Core_
     bool status = true;
 
     status = status && UpperBitsNotSet64(p->M_VOLTAGE,         4) ;
+
     if ((p->M_VOLTAGE != 0) && (p->NID_CTRACTION != 0))
     {
         status = status && UpperBitsNotSet64(p->NID_CTRACTION,     10);
@@ -31,6 +32,7 @@ int Validated_train_data_Core_1_Encode_Bit(Bitstream* stream, const Validated_tr
             //@ ghost const uint32_t pos = stream->bitpos;
 
             Bitstream_Write(stream, 4,  p->M_VOLTAGE);
+
             if ((p->M_VOLTAGE != 0) && (p->NID_CTRACTION != 0))
             {
                 Bitstream_Write(stream, 10, p->NID_CTRACTION);

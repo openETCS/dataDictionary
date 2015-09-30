@@ -11,12 +11,15 @@ int Level_Transition_Order_UpperBitsNotSet(const Level_Transition_Order_Core* p)
     status = status && UpperBitsNotSet64(p->Q_SCALE,           2) ;
     status = status && UpperBitsNotSet64(p->D_LEVELTR,         15);
     status = status && UpperBitsNotSet64(p->M_LEVELTR,         3) ;
+
     if (p->M_LEVELTR == 1)
     {
         status = status && UpperBitsNotSet64(p->NID_NTC,           8) ;
     }
+
     status = status && UpperBitsNotSet64(p->L_ACKLEVELTR,      15);
     status = status && UpperBitsNotSet64(p->N_ITER_1,          5) ;
+
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
         status = status && Level_Transition_Order_Core_1_UpperBitsNotSet(&(p->sub_1[i]));
@@ -45,6 +48,7 @@ int Level_Transition_Order_Encode_Bit(Bitstream* stream, const Level_Transition_
             Bitstream_Write(stream, 2,  p->Q_SCALE);
             Bitstream_Write(stream, 15, p->D_LEVELTR);
             Bitstream_Write(stream, 3,  p->M_LEVELTR);
+
             if (p->M_LEVELTR == 1)
             {
                 Bitstream_Write(stream, 8,  p->NID_NTC);
@@ -52,6 +56,7 @@ int Level_Transition_Order_Encode_Bit(Bitstream* stream, const Level_Transition_
 
             Bitstream_Write(stream, 15, p->L_ACKLEVELTR);
             Bitstream_Write(stream, 5,  p->N_ITER_1);
+
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
                 Level_Transition_Order_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
@@ -155,7 +160,7 @@ int Level_Transition_Order_Decode_Bit(Bitstream* stream, Level_Transition_Order_
             p->L_ACKLEVELTR        = Bitstream_Read(stream, 15);
         }
 
-    {
+        {
             p->N_ITER_1        = Bitstream_Read(stream, 5);
         }
 
@@ -163,6 +168,7 @@ int Level_Transition_Order_Decode_Bit(Bitstream* stream, Level_Transition_Order_
         {
             Level_Transition_Order_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
         }
+
         //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
         //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
         //@ assert Q_SCALE:           EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE);
@@ -191,7 +197,7 @@ int Level_Transition_Order_Encode_Int(PacketInfo* data, kcg_int* stream, const L
     stream[data->startAddress++] = p->L_PACKET;
     stream[data->startAddress++] = p->Q_SCALE;
     stream[data->startAddress++] = p->D_LEVELTR;
-    stream[data->startAddress++] = p->N_ITER_1+1;
+    stream[data->startAddress++] = p->N_ITER_1 + 1;
     stream[data->startAddress++] = p->M_LEVELTR;
     stream[data->startAddress++] = p->NID_NTC;
     stream[data->startAddress++] = p->L_ACKLEVELTR;
@@ -210,7 +216,7 @@ int Level_Transition_Order_Decode_Int(PacketInfo* data, const kcg_int* stream, L
     p->L_PACKET = stream[data->startAddress++];
     p->Q_SCALE = stream[data->startAddress++];
     p->D_LEVELTR = stream[data->startAddress++];
-    p->N_ITER_1 = stream[data->startAddress++]-1;
+    p->N_ITER_1 = stream[data->startAddress++] - 1;
     p->M_LEVELTR = stream[data->startAddress++];
     p->NID_NTC = stream[data->startAddress++];
     p->L_ACKLEVELTR = stream[data->startAddress++];

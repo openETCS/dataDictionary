@@ -115,7 +115,7 @@ int Gradient_Profile_Core_1_Encode_Int(PacketInfo* data, kcg_int* stream, const 
     stream[data->startAddress++] = p->D_GRADIENT;
     stream[data->startAddress++] = p->Q_GDIR;
     stream[data->startAddress++] = p->G_A;
-    
+
     return 1;
 }
 

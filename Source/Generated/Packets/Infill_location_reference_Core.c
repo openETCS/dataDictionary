@@ -9,10 +9,12 @@ int Infill_location_reference_UpperBitsNotSet(const Infill_location_reference_Co
     status = status && UpperBitsNotSet64(p->Q_DIR,             2) ;
     status = status && UpperBitsNotSet64(p->L_PACKET,          13);
     status = status && UpperBitsNotSet64(p->Q_NEWCOUNTRY,      1) ;
+
     if (p->Q_NEWCOUNTRY == 1)
     {
         status = status && UpperBitsNotSet64(p->NID_C,             10);
     }
+
     status = status && UpperBitsNotSet64(p->NID_BG,            14);
 
     if (status)
@@ -36,6 +38,7 @@ int Infill_location_reference_Encode_Bit(Bitstream* stream, const Infill_locatio
             Bitstream_Write(stream, 2,  p->Q_DIR);
             Bitstream_Write(stream, 13, p->L_PACKET);
             Bitstream_Write(stream, 1,  p->Q_NEWCOUNTRY);
+
             if (p->Q_NEWCOUNTRY == 1)
             {
                 Bitstream_Write(stream, 10, p->NID_C);

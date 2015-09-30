@@ -11,15 +11,18 @@ int Linking_UpperBitsNotSet(const Linking_Core* p)
     status = status && UpperBitsNotSet64(p->Q_SCALE,           2) ;
     status = status && UpperBitsNotSet64(p->D_LINK,            15);
     status = status && UpperBitsNotSet64(p->Q_NEWCOUNTRY,      1) ;
+
     if (p->Q_NEWCOUNTRY == 1)
     {
         status = status && UpperBitsNotSet64(p->NID_C,             10);
     }
+
     status = status && UpperBitsNotSet64(p->NID_BG,            14);
     status = status && UpperBitsNotSet64(p->Q_LINKORIENTATION, 1) ;
     status = status && UpperBitsNotSet64(p->Q_LINKREACTION,    2) ;
     status = status && UpperBitsNotSet64(p->Q_LOCACC,          6) ;
     status = status && UpperBitsNotSet64(p->N_ITER_1,          5) ;
+
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
         status = status && Linking_Core_1_UpperBitsNotSet(&(p->sub_1[i]));
@@ -48,6 +51,7 @@ int Linking_Encode_Bit(Bitstream* stream, const Linking_Core* p)
             Bitstream_Write(stream, 2,  p->Q_SCALE);
             Bitstream_Write(stream, 15, p->D_LINK);
             Bitstream_Write(stream, 1,  p->Q_NEWCOUNTRY);
+
             if (p->Q_NEWCOUNTRY == 1)
             {
                 Bitstream_Write(stream, 10, p->NID_C);
@@ -58,6 +62,7 @@ int Linking_Encode_Bit(Bitstream* stream, const Linking_Core* p)
             Bitstream_Write(stream, 2,  p->Q_LINKREACTION);
             Bitstream_Write(stream, 6,  p->Q_LOCACC);
             Bitstream_Write(stream, 5,  p->N_ITER_1);
+
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
                 Linking_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
@@ -173,7 +178,7 @@ int Linking_Decode_Bit(Bitstream* stream, Linking_Core* p)
             p->Q_LOCACC        = Bitstream_Read(stream, 6);
         }
 
-    {
+        {
             p->N_ITER_1        = Bitstream_Read(stream, 5);
         }
 
@@ -181,6 +186,7 @@ int Linking_Decode_Bit(Bitstream* stream, Linking_Core* p)
         {
             Linking_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
         }
+
         //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
         //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
         //@ assert Q_SCALE:           EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE);
@@ -208,7 +214,7 @@ int Linking_Encode_Int(PacketInfo* data, kcg_int* stream, const Linking_Core* p)
     stream[data->startAddress++] = p->Q_DIR;
     stream[data->startAddress++] = p->L_PACKET;
     stream[data->startAddress++] = p->Q_SCALE;
-    stream[data->startAddress++] = p->N_ITER_1+1;
+    stream[data->startAddress++] = p->N_ITER_1 + 1;
 
     stream[data->startAddress++] = p->D_LINK;
     stream[data->startAddress++] = p->Q_NEWCOUNTRY;
@@ -231,7 +237,7 @@ int Linking_Decode_Int(PacketInfo* data, const kcg_int* stream, Linking_Core* p)
     p->Q_DIR = stream[data->startAddress++];
     p->L_PACKET = stream[data->startAddress++];
     p->Q_SCALE = stream[data->startAddress++];
-    p->N_ITER_1 = stream[data->startAddress++]-1;
+    p->N_ITER_1 = stream[data->startAddress++] - 1;
 
     p->D_LINK = stream[data->startAddress++];
     p->Q_NEWCOUNTRY = stream[data->startAddress++];

@@ -8,10 +8,12 @@ int Linking_Core_1_UpperBitsNotSet(const Linking_Core_1* p)
 
     status = status && UpperBitsNotSet64(p->D_LINK,            15);
     status = status && UpperBitsNotSet64(p->Q_NEWCOUNTRY,      1) ;
+
     if (p->Q_NEWCOUNTRY == 1)
     {
         status = status && UpperBitsNotSet64(p->NID_C,             10);
     }
+
     status = status && UpperBitsNotSet64(p->NID_BG,            14);
     status = status && UpperBitsNotSet64(p->Q_LINKORIENTATION, 1) ;
     status = status && UpperBitsNotSet64(p->Q_LINKREACTION,    2) ;
@@ -37,6 +39,7 @@ int Linking_Core_1_Encode_Bit(Bitstream* stream, const Linking_Core_1* p)
 
             Bitstream_Write(stream, 15, p->D_LINK);
             Bitstream_Write(stream, 1,  p->Q_NEWCOUNTRY);
+
             if (p->Q_NEWCOUNTRY == 1)
             {
                 Bitstream_Write(stream, 10, p->NID_C);

@@ -8,6 +8,7 @@ int Onboard_telephone_numbers_UpperBitsNotSet(const Onboard_telephone_numbers_Co
 
     status = status && UpperBitsNotSet64(p->L_PACKET,          13);
     status = status && UpperBitsNotSet64(p->N_ITER_1,          5) ;
+
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
         status = status && Onboard_telephone_numbers_Core_1_UpperBitsNotSet(&(p->sub_1[i]));
@@ -33,6 +34,7 @@ int Onboard_telephone_numbers_Encode_Bit(Bitstream* stream, const Onboard_teleph
 
             Bitstream_Write(stream, 13, p->L_PACKET);
             Bitstream_Write(stream, 5,  p->N_ITER_1);
+
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
                 Onboard_telephone_numbers_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
@@ -72,7 +74,7 @@ int Onboard_telephone_numbers_Decode_Bit(Bitstream* stream, Onboard_telephone_nu
             p->L_PACKET        = Bitstream_Read(stream, 13);
         }
 
-    {
+        {
             p->N_ITER_1        = Bitstream_Read(stream, 5);
         }
 
@@ -80,6 +82,7 @@ int Onboard_telephone_numbers_Decode_Bit(Bitstream* stream, Onboard_telephone_nu
         {
             Onboard_telephone_numbers_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
         }
+
         //@ assert L_PACKET:          EqualBits(stream, pos,       pos + 13,  p->L_PACKET);
 
         //@ assert L_PACKET:          UpperBitsNotSet(p->L_PACKET,          13);

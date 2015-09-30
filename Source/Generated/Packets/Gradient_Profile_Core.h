@@ -174,12 +174,13 @@ inline std::ostream& operator<<(std::ostream& stream, const Gradient_Profile_Cor
             << +p.D_GRADIENT << ','
             << +p.Q_GDIR << ','
             << +p.G_A << ','
-       << +p.N_ITER_1;
-       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-       {
-           stream << ',' << p.sub_1[i];
-       }
-   
+            << +p.N_ITER_1;
+
+    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+    {
+        stream << ',' << p.sub_1[i];
+    }
+
 
     return stream;
 }
@@ -195,6 +196,7 @@ inline bool operator==(const Gradient_Profile_Core& a, const Gradient_Profile_Co
     status = status && (a.Q_GDIR == b.Q_GDIR);
     status = status && (a.G_A == b.G_A);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
+
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)

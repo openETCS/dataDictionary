@@ -16,11 +16,14 @@ int Validated_train_data_UpperBitsNotSet(const Validated_train_data_Core* p)
     status = status && UpperBitsNotSet64(p->M_AIRTIGHT,        2) ;
     status = status && UpperBitsNotSet64(p->N_AXLE,            10);
     status = status && UpperBitsNotSet64(p->N_ITER_1,          5) ;
+
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
         status = status && Validated_train_data_Core_1_UpperBitsNotSet(&(p->sub_1[i]));
     }
+
     status = status && UpperBitsNotSet64(p->N_ITER_2,          5) ;
+
     for (uint32_t i = 0; i < p->N_ITER_2; ++i)
     {
         status = status && Validated_train_data_Core_2_UpperBitsNotSet(&(p->sub_2[i]));
@@ -54,11 +57,14 @@ int Validated_train_data_Encode_Bit(Bitstream* stream, const Validated_train_dat
             Bitstream_Write(stream, 2,  p->M_AIRTIGHT);
             Bitstream_Write(stream, 10, p->N_AXLE);
             Bitstream_Write(stream, 5,  p->N_ITER_1);
+
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
                 Validated_train_data_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
             }
+
             Bitstream_Write(stream, 5,  p->N_ITER_2);
+
             for (uint32_t i = 0; i < p->N_ITER_2; ++i)
             {
                 Validated_train_data_Core_2_Encode_Bit(stream, &(p->sub_2[i]));
@@ -202,7 +208,7 @@ int Validated_train_data_Decode_Bit(Bitstream* stream, Validated_train_data_Core
             p->N_AXLE        = Bitstream_Read(stream, 10);
         }
 
-    {
+        {
             p->N_ITER_1        = Bitstream_Read(stream, 5);
         }
 
@@ -210,7 +216,8 @@ int Validated_train_data_Decode_Bit(Bitstream* stream, Validated_train_data_Core
         {
             Validated_train_data_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
         }
-    {
+
+        {
             p->N_ITER_2        = Bitstream_Read(stream, 5);
         }
 
@@ -218,6 +225,7 @@ int Validated_train_data_Decode_Bit(Bitstream* stream, Validated_train_data_Core
         {
             Validated_train_data_Core_2_Decode_Bit(stream, &(p->sub_2[i]));
         }
+
         //@ assert L_PACKET:          EqualBits(stream, pos,       pos + 13,  p->L_PACKET);
         //@ assert NC_CDTRAIN:        EqualBits(stream, pos + 13,  pos + 17,  p->NC_CDTRAIN);
         //@ assert NC_TRAIN:          EqualBits(stream, pos + 17,  pos + 32,  p->NC_TRAIN);

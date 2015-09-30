@@ -12,6 +12,7 @@ int Track_Condition_Big_Metal_Masses_UpperBitsNotSet(const Track_Condition_Big_M
     status = status && UpperBitsNotSet64(p->D_TRACKCOND,       15);
     status = status && UpperBitsNotSet64(p->L_TRACKCOND,       15);
     status = status && UpperBitsNotSet64(p->N_ITER_1,          5) ;
+
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
         status = status && Track_Condition_Big_Metal_Masses_Core_1_UpperBitsNotSet(&(p->sub_1[i]));
@@ -41,6 +42,7 @@ int Track_Condition_Big_Metal_Masses_Encode_Bit(Bitstream* stream, const Track_C
             Bitstream_Write(stream, 15, p->D_TRACKCOND);
             Bitstream_Write(stream, 15, p->L_TRACKCOND);
             Bitstream_Write(stream, 5,  p->N_ITER_1);
+
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
                 Track_Condition_Big_Metal_Masses_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
@@ -132,7 +134,7 @@ int Track_Condition_Big_Metal_Masses_Decode_Bit(Bitstream* stream, Track_Conditi
             p->L_TRACKCOND        = Bitstream_Read(stream, 15);
         }
 
-    {
+        {
             p->N_ITER_1        = Bitstream_Read(stream, 5);
         }
 
@@ -140,6 +142,7 @@ int Track_Condition_Big_Metal_Masses_Decode_Bit(Bitstream* stream, Track_Conditi
         {
             Track_Condition_Big_Metal_Masses_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
         }
+
         //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
         //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
         //@ assert Q_SCALE:           EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE);

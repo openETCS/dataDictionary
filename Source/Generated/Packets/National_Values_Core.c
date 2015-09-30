@@ -12,10 +12,12 @@ int National_Values_UpperBitsNotSet(const National_Values_Core* p)
     status = status && UpperBitsNotSet64(p->D_VALIDNV,         15);
     status = status && UpperBitsNotSet64(p->NID_C,             10);
     status = status && UpperBitsNotSet64(p->N_ITER_1,          5) ;
+
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
         status = status && National_Values_Core_1_UpperBitsNotSet(&(p->sub_1[i]));
     }
+
     status = status && UpperBitsNotSet64(p->V_NVSHUNT,         7) ;
     status = status && UpperBitsNotSet64(p->V_NVSTFF,          7) ;
     status = status && UpperBitsNotSet64(p->V_NVONSIGHT,       7) ;
@@ -45,33 +47,42 @@ int National_Values_UpperBitsNotSet(const National_Values_Core* p)
     status = status && UpperBitsNotSet64(p->M_NVAVADH,         5) ;
     status = status && UpperBitsNotSet64(p->M_NVEBCL,          4) ;
     status = status && UpperBitsNotSet64(p->Q_NVKINT,          1) ;
+
     if (p->Q_NVKINT == 1)
     {
         status = status && UpperBitsNotSet64(p->Q_NVKVINTSET,      2) ;
-    if (p->Q_NVKVINTSET == 1)
-    {
-        status = status && UpperBitsNotSet64(p->A_NVP12,           6) ;
-        status = status && UpperBitsNotSet64(p->A_NVP23,           6) ;
-    }
+
+        if (p->Q_NVKVINTSET == 1)
+        {
+            status = status && UpperBitsNotSet64(p->A_NVP12,           6) ;
+            status = status && UpperBitsNotSet64(p->A_NVP23,           6) ;
+        }
+
         status = status && UpperBitsNotSet64(p->V_NVKVINT,         7) ;
         status = status && UpperBitsNotSet64(p->M_NVKVINT,         7) ;
-    status = status && UpperBitsNotSet64(p->N_ITER_2,          5) ;
-    for (uint32_t i = 0; i < p->N_ITER_2; ++i)
-    {
-        status = status && National_Values_Core_2_UpperBitsNotSet(&(p->sub_2[i]));
-    }
-    status = status && UpperBitsNotSet64(p->N_ITER_3,          5) ;
-    for (uint32_t i = 0; i < p->N_ITER_3; ++i)
-    {
-        status = status && National_Values_Core_3_UpperBitsNotSet(&(p->sub_3[i]));
-    }
+        status = status && UpperBitsNotSet64(p->N_ITER_2,          5) ;
+
+        for (uint32_t i = 0; i < p->N_ITER_2; ++i)
+        {
+            status = status && National_Values_Core_2_UpperBitsNotSet(&(p->sub_2[i]));
+        }
+
+        status = status && UpperBitsNotSet64(p->N_ITER_3,          5) ;
+
+        for (uint32_t i = 0; i < p->N_ITER_3; ++i)
+        {
+            status = status && National_Values_Core_3_UpperBitsNotSet(&(p->sub_3[i]));
+        }
+
         status = status && UpperBitsNotSet64(p->L_NVKRINT,         5) ;
         status = status && UpperBitsNotSet64(p->M_NVKRINT,         5) ;
-    status = status && UpperBitsNotSet64(p->N_ITER_4,          5) ;
-    for (uint32_t i = 0; i < p->N_ITER_4; ++i)
-    {
-        status = status && National_Values_Core_4_UpperBitsNotSet(&(p->sub_4[i]));
-    }
+        status = status && UpperBitsNotSet64(p->N_ITER_4,          5) ;
+
+        for (uint32_t i = 0; i < p->N_ITER_4; ++i)
+        {
+            status = status && National_Values_Core_4_UpperBitsNotSet(&(p->sub_4[i]));
+        }
+
         status = status && UpperBitsNotSet64(p->M_NVKTINT,         5) ;
     }
 
@@ -99,10 +110,12 @@ int National_Values_Encode_Bit(Bitstream* stream, const National_Values_Core* p)
             Bitstream_Write(stream, 15, p->D_VALIDNV);
             Bitstream_Write(stream, 10, p->NID_C);
             Bitstream_Write(stream, 5,  p->N_ITER_1);
+
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
                 National_Values_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
             }
+
             Bitstream_Write(stream, 7,  p->V_NVSHUNT);
             Bitstream_Write(stream, 7,  p->V_NVSTFF);
             Bitstream_Write(stream, 7,  p->V_NVONSIGHT);
@@ -132,34 +145,42 @@ int National_Values_Encode_Bit(Bitstream* stream, const National_Values_Core* p)
             Bitstream_Write(stream, 5,  p->M_NVAVADH);
             Bitstream_Write(stream, 4,  p->M_NVEBCL);
             Bitstream_Write(stream, 1,  p->Q_NVKINT);
+
             if (p->Q_NVKINT == 1)
             {
                 Bitstream_Write(stream, 2,  p->Q_NVKVINTSET);
-            if (p->Q_NVKVINTSET == 1)
-            {
-                Bitstream_Write(stream, 6,  p->A_NVP12);
-                Bitstream_Write(stream, 6,  p->A_NVP23);
-            }
+
+                if (p->Q_NVKVINTSET == 1)
+                {
+                    Bitstream_Write(stream, 6,  p->A_NVP12);
+                    Bitstream_Write(stream, 6,  p->A_NVP23);
+                }
 
                 Bitstream_Write(stream, 7,  p->V_NVKVINT);
                 Bitstream_Write(stream, 7,  p->M_NVKVINT);
-            Bitstream_Write(stream, 5,  p->N_ITER_2);
-            for (uint32_t i = 0; i < p->N_ITER_2; ++i)
-            {
-                National_Values_Core_2_Encode_Bit(stream, &(p->sub_2[i]));
-            }
-            Bitstream_Write(stream, 5,  p->N_ITER_3);
-            for (uint32_t i = 0; i < p->N_ITER_3; ++i)
-            {
-                National_Values_Core_3_Encode_Bit(stream, &(p->sub_3[i]));
-            }
+                Bitstream_Write(stream, 5,  p->N_ITER_2);
+
+                for (uint32_t i = 0; i < p->N_ITER_2; ++i)
+                {
+                    National_Values_Core_2_Encode_Bit(stream, &(p->sub_2[i]));
+                }
+
+                Bitstream_Write(stream, 5,  p->N_ITER_3);
+
+                for (uint32_t i = 0; i < p->N_ITER_3; ++i)
+                {
+                    National_Values_Core_3_Encode_Bit(stream, &(p->sub_3[i]));
+                }
+
                 Bitstream_Write(stream, 5,  p->L_NVKRINT);
                 Bitstream_Write(stream, 5,  p->M_NVKRINT);
-            Bitstream_Write(stream, 5,  p->N_ITER_4);
-            for (uint32_t i = 0; i < p->N_ITER_4; ++i)
-            {
-                National_Values_Core_4_Encode_Bit(stream, &(p->sub_4[i]));
-            }
+                Bitstream_Write(stream, 5,  p->N_ITER_4);
+
+                for (uint32_t i = 0; i < p->N_ITER_4; ++i)
+                {
+                    National_Values_Core_4_Encode_Bit(stream, &(p->sub_4[i]));
+                }
+
                 Bitstream_Write(stream, 5,  p->M_NVKTINT);
             }
 
@@ -250,7 +271,7 @@ int National_Values_Decode_Bit(Bitstream* stream, National_Values_Core* p)
             p->NID_C        = Bitstream_Read(stream, 10);
         }
 
-    {
+        {
             p->N_ITER_1        = Bitstream_Read(stream, 5);
         }
 
@@ -258,6 +279,7 @@ int National_Values_Decode_Bit(Bitstream* stream, National_Values_Core* p)
         {
             National_Values_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
         }
+
         {
             p->V_NVSHUNT        = Bitstream_Read(stream, 7);
         }
@@ -380,17 +402,17 @@ int National_Values_Decode_Bit(Bitstream* stream, National_Values_Core* p)
                 p->Q_NVKVINTSET        = Bitstream_Read(stream, 2);
             }
 
-        if (p->Q_NVKVINTSET == 1)
-        {
+            if (p->Q_NVKVINTSET == 1)
             {
-                p->A_NVP12        = Bitstream_Read(stream, 6);
-            }
+                {
+                    p->A_NVP12        = Bitstream_Read(stream, 6);
+                }
 
-            {
-                p->A_NVP23        = Bitstream_Read(stream, 6);
-            }
+                {
+                    p->A_NVP23        = Bitstream_Read(stream, 6);
+                }
 
-        }
+            }
 
             {
                 p->V_NVKVINT        = Bitstream_Read(stream, 7);
@@ -408,6 +430,7 @@ int National_Values_Decode_Bit(Bitstream* stream, National_Values_Core* p)
             {
                 National_Values_Core_2_Decode_Bit(stream, &(p->sub_2[i]));
             }
+
             {
                 p->N_ITER_3        = Bitstream_Read(stream, 5);
             }
@@ -416,6 +439,7 @@ int National_Values_Decode_Bit(Bitstream* stream, National_Values_Core* p)
             {
                 National_Values_Core_3_Decode_Bit(stream, &(p->sub_3[i]));
             }
+
             {
                 p->L_NVKRINT        = Bitstream_Read(stream, 5);
             }
@@ -432,6 +456,7 @@ int National_Values_Decode_Bit(Bitstream* stream, National_Values_Core* p)
             {
                 National_Values_Core_4_Decode_Bit(stream, &(p->sub_4[i]));
             }
+
             {
                 p->M_NVKTINT        = Bitstream_Read(stream, 5);
             }
@@ -516,7 +541,7 @@ int National_Values_Encode_Int(PacketInfo* data, kcg_int* stream, const National
     }
 
     stream[data->startAddress++] = p->N_ITER_3;
-    
+
     for (uint32_t i = 0; i < p->N_ITER_3; ++i)
     {
         National_Values_Core_3_Encode_Int(data, stream, &(p->sub_3[i]));
@@ -592,7 +617,7 @@ int National_Values_Decode_Int(PacketInfo* data, const kcg_int* stream, National
     }
 
     p->N_ITER_3 = stream[data->startAddress++];
-    
+
     for (uint32_t i = 0; i < p->N_ITER_3; ++i)
     {
         National_Values_Core_3_Decode_Int(data, stream, &(p->sub_3[i]));

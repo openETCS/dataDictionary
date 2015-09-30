@@ -97,7 +97,7 @@ int National_Values_Core_2_Encode_Int(PacketInfo* data, kcg_int* stream, const N
 {
     stream[data->startAddress++] = p->V_NVKVINT;
     stream[data->startAddress++] = p->M_NVKVINT;
-    
+
     return 1;
 }
 
@@ -105,7 +105,7 @@ int National_Values_Core_2_Decode_Int(PacketInfo* data, const kcg_int* stream, N
 {
     p->V_NVKVINT = stream[data->startAddress++];
     p->M_NVKVINT = stream[data->startAddress++];
-    
+
     return 1;
 }
 

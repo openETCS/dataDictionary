@@ -8,18 +8,22 @@ int Route_Suitability_Data_Core_1_UpperBitsNotSet(const Route_Suitability_Data_C
 
     status = status && UpperBitsNotSet64(p->D_SUITABILITY,     15);
     status = status && UpperBitsNotSet64(p->Q_SUITABILITY,     2) ;
+
     if (p->Q_SUITABILITY == 0)
     {
         status = status && UpperBitsNotSet64(p->M_LINEGAUGE,       8) ;
     }
+
     if (p->Q_SUITABILITY == 1)
     {
         status = status && UpperBitsNotSet64(p->M_AXLELOADCAT,     7) ;
     }
+
     if (p->Q_SUITABILITY == 2)
     {
         status = status && UpperBitsNotSet64(p->M_VOLTAGE,         4) ;
     }
+
     if ((p->Q_SUITABILITY == 2) && (p->M_VOLTAGE != 0))
     {
         status = status && UpperBitsNotSet64(p->NID_CTRACTION,     10);
@@ -45,6 +49,7 @@ int Route_Suitability_Data_Core_1_Encode_Bit(Bitstream* stream, const Route_Suit
 
             Bitstream_Write(stream, 15, p->D_SUITABILITY);
             Bitstream_Write(stream, 2,  p->Q_SUITABILITY);
+
             if (p->Q_SUITABILITY == 0)
             {
                 Bitstream_Write(stream, 8,  p->M_LINEGAUGE);

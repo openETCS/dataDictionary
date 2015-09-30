@@ -7,10 +7,12 @@ int Staff_Responsible_distance_Information_from_loop_Core_1_UpperBitsNotSet(cons
     bool status = true;
 
     status = status && UpperBitsNotSet64(p->Q_NEWCOUNTRY,      1) ;
+
     if (p->Q_NEWCOUNTRY == 1)
     {
         status = status && UpperBitsNotSet64(p->NID_C,             10);
     }
+
     status = status && UpperBitsNotSet64(p->NID_BG,            14);
     status = status && UpperBitsNotSet64(p->D_SR,              15);
 
@@ -33,6 +35,7 @@ int Staff_Responsible_distance_Information_from_loop_Core_1_Encode_Bit(Bitstream
             //@ ghost const uint32_t pos = stream->bitpos;
 
             Bitstream_Write(stream, 1,  p->Q_NEWCOUNTRY);
+
             if (p->Q_NEWCOUNTRY == 1)
             {
                 Bitstream_Write(stream, 10, p->NID_C);

@@ -176,12 +176,13 @@ inline std::ostream& operator<<(std::ostream& stream, const Linking_Core& p)
             << +p.Q_LINKORIENTATION << ','
             << +p.Q_LINKREACTION << ','
             << +p.Q_LOCACC << ','
-       << +p.N_ITER_1;
-       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-       {
-           stream << ',' << p.sub_1[i];
-       }
-   
+            << +p.N_ITER_1;
+
+    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+    {
+        stream << ',' << p.sub_1[i];
+    }
+
 
     return stream;
 }
@@ -200,11 +201,13 @@ inline bool operator==(const Linking_Core& a, const Linking_Core& b)
     {
         status = status && (a.NID_C == b.NID_C);
     }
+
     status = status && (a.NID_BG == b.NID_BG);
     status = status && (a.Q_LINKORIENTATION == b.Q_LINKORIENTATION);
     status = status && (a.Q_LINKREACTION == b.Q_LINKREACTION);
     status = status && (a.Q_LOCACC == b.Q_LOCACC);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
+
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)

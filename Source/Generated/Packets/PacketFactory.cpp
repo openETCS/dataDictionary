@@ -52,7 +52,7 @@ BasePacketPtr PacketFactory_TrainToTrack(uint8_t nid)
 
         default :
         {
-            std::cerr << "Error, unrecognized Packet " << nid 
+            std::cerr << "Error, unrecognized Packet " << nid
                       << " in " << __FILE__ << std::endl;
             return BasePacketPtr();
         }

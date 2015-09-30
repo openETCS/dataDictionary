@@ -13,11 +13,13 @@ int Level_Crossing_information_UpperBitsNotSet(const Level_Crossing_information_
     status = status && UpperBitsNotSet64(p->D_LX,              15);
     status = status && UpperBitsNotSet64(p->L_LX,              15);
     status = status && UpperBitsNotSet64(p->Q_LXSTATUS,        1) ;
+
     if (p->Q_LXSTATUS == 1)
     {
         status = status && UpperBitsNotSet64(p->V_LX,              7) ;
         status = status && UpperBitsNotSet64(p->Q_STOPLX,          1) ;
     }
+
     if (p->Q_STOPLX == 1)
     {
         status = status && UpperBitsNotSet64(p->L_STOPLX,          15);
@@ -48,6 +50,7 @@ int Level_Crossing_information_Encode_Bit(Bitstream* stream, const Level_Crossin
             Bitstream_Write(stream, 15, p->D_LX);
             Bitstream_Write(stream, 15, p->L_LX);
             Bitstream_Write(stream, 1,  p->Q_LXSTATUS);
+
             if (p->Q_LXSTATUS == 1)
             {
                 Bitstream_Write(stream, 7,  p->V_LX);

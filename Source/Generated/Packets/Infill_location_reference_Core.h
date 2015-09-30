@@ -172,6 +172,7 @@ inline bool operator==(const Infill_location_reference_Core& a, const Infill_loc
     {
         status = status && (a.NID_C == b.NID_C);
     }
+
     status = status && (a.NID_BG == b.NID_BG);
 
     return status;

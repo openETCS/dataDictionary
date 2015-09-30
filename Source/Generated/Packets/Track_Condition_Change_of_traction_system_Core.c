@@ -11,6 +11,7 @@ int Track_Condition_Change_of_traction_system_UpperBitsNotSet(const Track_Condit
     status = status && UpperBitsNotSet64(p->Q_SCALE,           2) ;
     status = status && UpperBitsNotSet64(p->D_TRACTION,        15);
     status = status && UpperBitsNotSet64(p->M_VOLTAGE,         4) ;
+
     if (p->M_VOLTAGE != 0)
     {
         status = status && UpperBitsNotSet64(p->NID_CTRACTION,     10);
@@ -39,6 +40,7 @@ int Track_Condition_Change_of_traction_system_Encode_Bit(Bitstream* stream, cons
             Bitstream_Write(stream, 2,  p->Q_SCALE);
             Bitstream_Write(stream, 15, p->D_TRACTION);
             Bitstream_Write(stream, 4,  p->M_VOLTAGE);
+
             if (p->M_VOLTAGE != 0)
             {
                 Bitstream_Write(stream, 10, p->NID_CTRACTION);

@@ -10,21 +10,24 @@ int Track_Condition_Station_Platforms_UpperBitsNotSet(const Track_Condition_Stat
     status = status && UpperBitsNotSet64(p->L_PACKET,          13);
     status = status && UpperBitsNotSet64(p->Q_SCALE,           2) ;
     status = status && UpperBitsNotSet64(p->Q_TRACKINIT,       1) ;
+
     if (p->Q_TRACKINIT == 1)
     {
         status = status && UpperBitsNotSet64(p->D_TRACKINIT,       15);
     }
+
     if (p->Q_TRACKINIT == 0)
     {
         status = status && UpperBitsNotSet64(p->D_TRACKCOND,       15);
         status = status && UpperBitsNotSet64(p->L_TRACKCOND,       15);
         status = status && UpperBitsNotSet64(p->M_PLATFORM,        4) ;
         status = status && UpperBitsNotSet64(p->Q_PLATFORM,        2) ;
-    status = status && UpperBitsNotSet64(p->N_ITER_1,          5) ;
-    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
-    {
-        status = status && Track_Condition_Station_Platforms_Core_1_UpperBitsNotSet(&(p->sub_1[i]));
-    }
+        status = status && UpperBitsNotSet64(p->N_ITER_1,          5) ;
+
+        for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+        {
+            status = status && Track_Condition_Station_Platforms_Core_1_UpperBitsNotSet(&(p->sub_1[i]));
+        }
     }
 
     if (status)
@@ -49,6 +52,7 @@ int Track_Condition_Station_Platforms_Encode_Bit(Bitstream* stream, const Track_
             Bitstream_Write(stream, 13, p->L_PACKET);
             Bitstream_Write(stream, 2,  p->Q_SCALE);
             Bitstream_Write(stream, 1,  p->Q_TRACKINIT);
+
             if (p->Q_TRACKINIT == 1)
             {
                 Bitstream_Write(stream, 15, p->D_TRACKINIT);
@@ -60,11 +64,12 @@ int Track_Condition_Station_Platforms_Encode_Bit(Bitstream* stream, const Track_
                 Bitstream_Write(stream, 15, p->L_TRACKCOND);
                 Bitstream_Write(stream, 4,  p->M_PLATFORM);
                 Bitstream_Write(stream, 2,  p->Q_PLATFORM);
-            Bitstream_Write(stream, 5,  p->N_ITER_1);
-            for (uint32_t i = 0; i < p->N_ITER_1; ++i)
-            {
-                Track_Condition_Station_Platforms_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
-            }
+                Bitstream_Write(stream, 5,  p->N_ITER_1);
+
+                for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+                {
+                    Track_Condition_Station_Platforms_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
+                }
             }
 
 

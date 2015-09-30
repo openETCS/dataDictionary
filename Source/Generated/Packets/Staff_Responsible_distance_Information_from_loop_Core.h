@@ -172,12 +172,13 @@ inline std::ostream& operator<<(std::ostream& stream, const Staff_Responsible_di
             << +p.NID_C_1 << ','
             << +p.NID_BG_1 << ','
             << +p.D_SR << ','
-       << +p.N_ITER_1;
-       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-       {
-           stream << ',' << p.sub_1[i];
-       }
-   
+            << +p.N_ITER_1;
+
+    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+    {
+        stream << ',' << p.sub_1[i];
+    }
+
 
     return stream;
 }
@@ -195,6 +196,7 @@ inline bool operator==(const Staff_Responsible_distance_Information_from_loop_Co
     {
         status = status && (a.NID_C_0 == b.NID_C_0);
     }
+
     status = status && (a.NID_BG_0 == b.NID_BG_0);
     status = status && (a.Q_NEWCOUNTRY_1 == b.Q_NEWCOUNTRY_1);
 
@@ -202,9 +204,11 @@ inline bool operator==(const Staff_Responsible_distance_Information_from_loop_Co
     {
         status = status && (a.NID_C_1 == b.NID_C_1);
     }
+
     status = status && (a.NID_BG_1 == b.NID_BG_1);
     status = status && (a.D_SR == b.D_SR);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
+
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)

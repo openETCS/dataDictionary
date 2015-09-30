@@ -11,6 +11,7 @@ int Virtual_Balise_Cover_order_UpperBitsNotSet(const Virtual_Balise_Cover_order_
     status = status && UpperBitsNotSet64(p->Q_VBCO,            1) ;
     status = status && UpperBitsNotSet64(p->NID_VBCMK,         6) ;
     status = status && UpperBitsNotSet64(p->NID_C,             10);
+
     if (p->Q_VBCO == 1)
     {
         status = status && UpperBitsNotSet64(p->T_VBC,             8) ;
@@ -39,6 +40,7 @@ int Virtual_Balise_Cover_order_Encode_Bit(Bitstream* stream, const Virtual_Balis
             Bitstream_Write(stream, 1,  p->Q_VBCO);
             Bitstream_Write(stream, 6,  p->NID_VBCMK);
             Bitstream_Write(stream, 10, p->NID_C);
+
             if (p->Q_VBCO == 1)
             {
                 Bitstream_Write(stream, 8,  p->T_VBC);

@@ -227,6 +227,7 @@ inline bool operator==(const Packet_for_sending_fixed_text_messages_Core& a, con
     {
         status = status && (a.NID_NTC_0 == b.NID_NTC_0);
     }
+
     status = status && (a.L_TEXTDISPLAY == b.L_TEXTDISPLAY);
     status = status && (a.T_TEXTDISPLAY == b.T_TEXTDISPLAY);
     status = status && (a.M_MODETEXTDISPLAY_1 == b.M_MODETEXTDISPLAY_1);
@@ -236,6 +237,7 @@ inline bool operator==(const Packet_for_sending_fixed_text_messages_Core& a, con
     {
         status = status && (a.NID_NTC_1 == b.NID_NTC_1);
     }
+
     status = status && (a.Q_TEXTCONFIRM == b.Q_TEXTCONFIRM);
 
     if (a.Q_TEXTCONFIRM != 0)
@@ -250,6 +252,7 @@ inline bool operator==(const Packet_for_sending_fixed_text_messages_Core& a, con
         status = status && (a.NID_C == b.NID_C);
         status = status && (a.NID_RBC == b.NID_RBC);
     }
+
     status = status && (a.Q_TEXT == b.Q_TEXT);
 
     return status;
