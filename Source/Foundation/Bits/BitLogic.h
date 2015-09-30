@@ -1,6 +1,6 @@
 
-#ifndef BITPREDICATES_H_INCLUDED
-#define BITPREDICATES_H_INCLUDED
+#ifndef BITLOGIC_INCLUDED
+#define BITLOGIC_INCLUDED
 
 #include <stdint.h>
 #include <limits.h>
@@ -53,7 +53,23 @@
    predicate
      UpperBitsNotSet{A}(integer value, integer length) =
        \forall integer i; length <= i ==> !BitTest(value, i);
+
+   axiomatic BitProperties
+   {
+     axiom equal_bits64_0:
+       \forall uint64_t x, y;
+         EqualBits64(x, y, 0, 64) ==> x == y;
+
+     axiom equal_bits64_1:
+       \forall uint64_t x, y, integer p, q;
+         (\forall integer k; p <= k < q ==> \let j = q-1-k; (BitTest(x, j) <==> BitTest(y, j)))
+         ==> EqualBits64(x, y, 64-(q-p), 64);
+
+      axiom upper_bits_less_than:
+        \forall integer x, n; x >= 0 ==> n >= 0 ==>
+           (UpperBitsNotSet(x, n) <==> x < (1 << n));
+   }
 */
 
-#endif  // BITPREDICATES_H_INCLUDED
+#endif  // BITLOGIC_INCLUDED
 
