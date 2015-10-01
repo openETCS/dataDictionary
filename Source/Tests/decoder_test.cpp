@@ -27,7 +27,7 @@ int main ()
     encode(stream, header);
 
     //std::cout << " Encoding data packets:" << std::endl;
-    Train_running_number a = create_Train_running_number();
+    /*Train_running_number a = create_Train_running_number();
     {
         //std::cout << "    Encoding packet " << a << std::endl;
         encode(stream, a.header);
@@ -39,7 +39,7 @@ int main ()
         //std::cout << "    Encoding packet " << b << std::endl;
         encode(stream, b.header);
         encode(stream, b.core);
-    }
+    }*/
 
 
     End_of_Information c;

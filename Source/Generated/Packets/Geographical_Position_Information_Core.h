@@ -8,7 +8,7 @@
 
 struct Geographical_Position_Information_Core
 {
-    // TransmissionMedia=Balise, RBC
+    // TransmissionMedia=Any
     // This packet gives geographical location information for one or multiple references
     // to the train.
     // Packet Number = 79
@@ -21,14 +21,14 @@ struct Geographical_Position_Information_Core
     uint64_t  NID_BG;           // # 14
     uint64_t  D_POSOFF;         // # 15
     uint64_t   Q_MPOSITION;      // # 1
-    uint64_t  M_POSITION;       // # 24
+    uint64_t  M_POSITION;       // # 20
     uint64_t   N_ITER_1;         // # 5
     Geographical_Position_Information_Core_1   sub_1[31];
 };
 
 typedef struct Geographical_Position_Information_Core Geographical_Position_Information_Core;
 
-#define GEOGRAPHICAL_POSITION_INFORMATION_CORE_BITSIZE 77
+#define GEOGRAPHICAL_POSITION_INFORMATION_CORE_BITSIZE 73
 
 /*@
     logic integer BitSize{L}(Geographical_Position_Information_Core* p) = GEOGRAPHICAL_POSITION_INFORMATION_CORE_BITSIZE;
@@ -171,13 +171,12 @@ inline std::ostream& operator<<(std::ostream& stream, const Geographical_Positio
             << +p.D_POSOFF << ','
             << +p.Q_MPOSITION << ','
             << +p.M_POSITION << ','
-            << +p.N_ITER_1;
-
-    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-    {
-        stream << ',' << p.sub_1[i];
-    }
-
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
+   
 
     return stream;
 }
@@ -195,13 +194,11 @@ inline bool operator==(const Geographical_Position_Information_Core& a, const Ge
     {
         status = status && (a.NID_C == b.NID_C);
     }
-
     status = status && (a.NID_BG == b.NID_BG);
     status = status && (a.D_POSOFF == b.D_POSOFF);
     status = status && (a.Q_MPOSITION == b.Q_MPOSITION);
     status = status && (a.M_POSITION == b.M_POSITION);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
-
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)
@@ -234,11 +231,15 @@ inline int decode(Bitstream& stream, Geographical_Position_Information_Core& p)
 
 inline int encode(PacketInfo& data, kcg_int* stream, const Geographical_Position_Information_Core& p)
 {
+    std::cerr << "encode int function not implemented for packet 79 yet." << std::endl;
+
     return Geographical_Position_Information_Encode_Int(&data, stream, &p);
 }
 
 inline int decode(PacketInfo& data, const kcg_int* stream, Geographical_Position_Information_Core& p)
 {
+    std::cerr << "decode int function not implemented for packet 79 yet." << std::endl;
+
     return Geographical_Position_Information_Decode_Int(&data, stream, &p);
 }
 

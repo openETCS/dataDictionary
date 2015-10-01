@@ -149,13 +149,12 @@ inline std::ostream& operator<<(std::ostream& stream, const List_of_balises_for_
     stream
             << +p.Q_DIR << ','
             << +p.L_PACKET << ','
-            << +p.N_ITER_1;
-
-    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-    {
-        stream << ',' << p.sub_1[i];
-    }
-
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
+   
 
     return stream;
 }
@@ -167,7 +166,6 @@ inline bool operator==(const List_of_balises_for_SH_Area_Core& a, const List_of_
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
-
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)
@@ -200,11 +198,15 @@ inline int decode(Bitstream& stream, List_of_balises_for_SH_Area_Core& p)
 
 inline int encode(PacketInfo& data, kcg_int* stream, const List_of_balises_for_SH_Area_Core& p)
 {
+    std::cerr << "encode int function not implemented for packet 49 yet." << std::endl;
+
     return List_of_balises_for_SH_Area_Encode_Int(&data, stream, &p);
 }
 
 inline int decode(PacketInfo& data, const kcg_int* stream, List_of_balises_for_SH_Area_Core& p)
 {
+    std::cerr << "decode int function not implemented for packet 49 yet." << std::endl;
+
     return List_of_balises_for_SH_Area_Decode_Int(&data, stream, &p);
 }
 

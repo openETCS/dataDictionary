@@ -9,7 +9,7 @@ struct Level_Transition_Order_Core_1
 {
 
     uint64_t   M_LEVELTR;        // # 3
-    uint64_t   NID_NTC;          // # 8
+    uint64_t   NID_STM;          // # 8
     uint64_t  L_ACKLEVELTR;     // # 15
 };
 
@@ -138,7 +138,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Level_Transition_Ord
 {
     stream
             << +p.M_LEVELTR << ','
-            << +p.NID_NTC << ','
+            << +p.NID_STM << ','
             << +p.L_ACKLEVELTR;
 
     return stream;
@@ -152,9 +152,8 @@ inline bool operator==(const Level_Transition_Order_Core_1& a, const Level_Trans
 
     if (a.M_LEVELTR == 1)
     {
-        status = status && (a.NID_NTC == b.NID_NTC);
+        status = status && (a.NID_STM == b.NID_STM);
     }
-
     status = status && (a.L_ACKLEVELTR == b.L_ACKLEVELTR);
 
     return status;
@@ -163,6 +162,30 @@ inline bool operator==(const Level_Transition_Order_Core_1& a, const Level_Trans
 inline bool operator!=(const Level_Transition_Order_Core_1& a, const Level_Transition_Order_Core_1& b)
 {
     return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Level_Transition_Order_Core_1& p)
+{
+    return Level_Transition_Order_Core_1_Encode_Bit(&stream, &p);
+}
+
+inline int decode(Bitstream& stream, Level_Transition_Order_Core_1& p)
+{
+    return Level_Transition_Order_Core_1_Decode_Bit(&stream, &p);
+}
+
+inline int encode(PacketInfo& data, kcg_int* stream, const Level_Transition_Order_Core_1& p)
+{
+    std::cerr << "encode int function not implemented for packet 41 yet." << std::endl;
+
+    return Level_Transition_Order_Core_1_Encode_Int(&data, stream, &p);
+}
+
+inline int decode(PacketInfo& data, const kcg_int* stream, Level_Transition_Order_Core_1& p)
+{
+    std::cerr << "decode int function not implemented for packet 41 yet." << std::endl;
+
+    return Level_Transition_Order_Core_1_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

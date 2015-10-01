@@ -7,9 +7,10 @@
 
 struct Position_Report_Core
 {
-    // TransmissionMedia=RBC, RIU
-    // This packet is used to report the train position and speed
-    // as well as some additional information (e.g. mode, level, etc.)
+    // TransmissionMedia=Radio
+    // This packet is inserted in all train-to-track telegrams and is used
+    // to report the train position and speed as well as some
+    // additional information (e.g. mode, level, etc.)
     // Packet Number = 0
 
     uint64_t  L_PACKET;         // # 13
@@ -26,7 +27,7 @@ struct Position_Report_Core
     uint64_t   Q_DIRTRAIN;       // # 2
     uint64_t   M_MODE;           // # 4
     uint64_t   M_LEVEL;          // # 3
-    uint64_t   NID_NTC;          // # 8
+    uint64_t   NID_STM;          // # 8
 };
 
 typedef struct Position_Report_Core Position_Report_Core;
@@ -199,7 +200,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Position_Report_Core
             << +p.Q_DIRTRAIN << ','
             << +p.M_MODE << ','
             << +p.M_LEVEL << ','
-            << +p.NID_NTC;
+            << +p.NID_STM;
 
     return stream;
 }
@@ -218,19 +219,18 @@ inline bool operator==(const Position_Report_Core& a, const Position_Report_Core
     status = status && (a.L_DOUBTUNDER == b.L_DOUBTUNDER);
     status = status && (a.Q_LENGTH == b.Q_LENGTH);
 
-    if ((a.Q_LENGTH == 1) || (a.Q_LENGTH == 2))
+    if ((a. Q_LENGTH == 1 ) || (a.Q_LENGTH == 2))
     {
         status = status && (a.L_TRAININT == b.L_TRAININT);
     }
-
     status = status && (a.V_TRAIN == b.V_TRAIN);
     status = status && (a.Q_DIRTRAIN == b.Q_DIRTRAIN);
     status = status && (a.M_MODE == b.M_MODE);
     status = status && (a.M_LEVEL == b.M_LEVEL);
 
-    if (a.M_LEVEL == 1)
+    if (a. M_LEVEL == 1)
     {
-        status = status && (a.NID_NTC == b.NID_NTC);
+        status = status && (a.NID_STM == b.NID_STM);
     }
 
     return status;
@@ -253,11 +253,15 @@ inline int decode(Bitstream& stream, Position_Report_Core& p)
 
 inline int encode(PacketInfo& data, kcg_int* stream, const Position_Report_Core& p)
 {
+    std::cerr << "encode int function not implemented for packet 0 yet." << std::endl;
+
     return Position_Report_Encode_Int(&data, stream, &p);
 }
 
 inline int decode(PacketInfo& data, const kcg_int* stream, Position_Report_Core& p)
 {
+    std::cerr << "decode int function not implemented for packet 0 yet." << std::endl;
+
     return Position_Report_Decode_Int(&data, stream, &p);
 }
 

@@ -19,17 +19,16 @@ struct Route_Suitability_Data_Core
     uint64_t  D_TRACKINIT;      // # 15
     uint64_t  D_SUITABILITY;    // # 15
     uint64_t   Q_SUITABILITY;    // # 2
-    uint64_t   M_LINEGAUGE;      // # 8
-    uint64_t   M_AXLELOADCAT;    // # 7
-    uint64_t   M_VOLTAGE;        // # 4
-    uint64_t  NID_CTRACTION;    // # 10
+    uint64_t   M_LOADINGGAUGE;   // # 8
+    uint64_t   M_AXLELOAD;       // # 7
+    uint64_t   M_TRACTION;       // # 8
     uint64_t   N_ITER_1;         // # 5
     Route_Suitability_Data_Core_1   sub_1[31];
 };
 
 typedef struct Route_Suitability_Data_Core Route_Suitability_Data_Core;
 
-#define ROUTE_SUITABILITY_DATA_CORE_BITSIZE 18
+#define ROUTE_SUITABILITY_DATA_CORE_BITSIZE 25
 
 /*@
     logic integer BitSize{L}(Route_Suitability_Data_Core* p) = ROUTE_SUITABILITY_DATA_CORE_BITSIZE;
@@ -170,17 +169,15 @@ inline std::ostream& operator<<(std::ostream& stream, const Route_Suitability_Da
             << +p.D_TRACKINIT << ','
             << +p.D_SUITABILITY << ','
             << +p.Q_SUITABILITY << ','
-            << +p.M_LINEGAUGE << ','
-            << +p.M_AXLELOADCAT << ','
-            << +p.M_VOLTAGE << ','
-            << +p.NID_CTRACTION << ','
-            << +p.N_ITER_1;
-
-    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-    {
-        stream << ',' << p.sub_1[i];
-    }
-
+            << +p.M_LOADINGGAUGE << ','
+            << +p.M_AXLELOAD << ','
+            << +p.M_TRACTION << ','
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
+   
 
     return stream;
 }
@@ -202,41 +199,34 @@ inline bool operator==(const Route_Suitability_Data_Core& a, const Route_Suitabi
     if (a.Q_TRACKINIT == 0)
     {
         status = status && (a.D_SUITABILITY == b.D_SUITABILITY);
-        status = status && (a.Q_SUITABILITY == b.Q_SUITABILITY);
+    }
+    status = status && (a.Q_SUITABILITY == b.Q_SUITABILITY);
 
-        if (a.Q_SUITABILITY == 0)
-        {
-            status = status && (a.M_LINEGAUGE == b.M_LINEGAUGE);
-        }
+    if (a.Q_SUITABILITY == 0)
+    {
+        status = status && (a.M_LOADINGGAUGE == b.M_LOADINGGAUGE);
+    }
 
-        if (a.Q_SUITABILITY == 1)
-        {
-            status = status && (a.M_AXLELOADCAT == b.M_AXLELOADCAT);
-        }
+    if (a.Q_SUITABILITY == 1)
+    {
+        status = status && (a.M_AXLELOAD == b.M_AXLELOAD);
+    }
 
-        if (a.Q_SUITABILITY == 2)
+    if (a.Q_SUITABILITY == 2)
+    {
+        status = status && (a.M_TRACTION == b.M_TRACTION);
+    }
+    status = status && (a.N_ITER_1 == b.N_ITER_1);
+    if (a.N_ITER_1 == b.N_ITER_1)
+    {
+        for (uint32_t i = 0; i < a.N_ITER_1; ++i)
         {
-            status = status && (a.M_VOLTAGE == b.M_VOLTAGE);
+            status = status && (a.sub_1[i] == b.sub_1[i]);
         }
-
-        if ((a.Q_SUITABILITY == 2) && (a.M_VOLTAGE != 0))
-        {
-            status = status && (a.NID_CTRACTION == b.NID_CTRACTION);
-        }
-
-        status = status && (a.N_ITER_1 == b.N_ITER_1);
-
-        if (a.N_ITER_1 == b.N_ITER_1)
-        {
-            for (uint32_t i = 0; i < a.N_ITER_1; ++i)
-            {
-                status = status && (a.sub_1[i] == b.sub_1[i]);
-            }
-        }
-        else
-        {
-            status = false;
-        }
+    }
+    else
+    {
+        status = false;
     }
 
     return status;
@@ -259,11 +249,15 @@ inline int decode(Bitstream& stream, Route_Suitability_Data_Core& p)
 
 inline int encode(PacketInfo& data, kcg_int* stream, const Route_Suitability_Data_Core& p)
 {
+    std::cerr << "encode int function not implemented for packet 70 yet." << std::endl;
+
     return Route_Suitability_Data_Encode_Int(&data, stream, &p);
 }
 
 inline int decode(PacketInfo& data, const kcg_int* stream, Route_Suitability_Data_Core& p)
 {
+    std::cerr << "decode int function not implemented for packet 70 yet." << std::endl;
+
     return Route_Suitability_Data_Decode_Int(&data, stream, &p);
 }
 

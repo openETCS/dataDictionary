@@ -12,12 +12,10 @@ int Level_23_Movement_Authority_UpperBitsNotSet(const Level_23_Movement_Authorit
     status = status && UpperBitsNotSet64(p->V_LOA,             7) ;
     status = status && UpperBitsNotSet64(p->T_LOA,             10);
     status = status && UpperBitsNotSet64(p->N_ITER_1,          5) ;
-
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
         status = status && Level_23_Movement_Authority_Core_1_UpperBitsNotSet(&(p->sub_1[i]));
     }
-
     status = status && UpperBitsNotSet64(p->L_ENDSECTION,      15);
     status = status && UpperBitsNotSet64(p->Q_SECTIONTIMER,    1) ;
     status = status && UpperBitsNotSet64(p->T_SECTIONTIMER,    10);
@@ -58,12 +56,10 @@ int Level_23_Movement_Authority_Encode_Bit(Bitstream* stream, const Level_23_Mov
             Bitstream_Write(stream, 7,  p->V_LOA);
             Bitstream_Write(stream, 10, p->T_LOA);
             Bitstream_Write(stream, 5,  p->N_ITER_1);
-
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
                 Level_23_Movement_Authority_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
             }
-
             Bitstream_Write(stream, 15, p->L_ENDSECTION);
             Bitstream_Write(stream, 1,  p->Q_SECTIONTIMER);
             Bitstream_Write(stream, 10, p->T_SECTIONTIMER);
@@ -166,7 +162,7 @@ int Level_23_Movement_Authority_Decode_Bit(Bitstream* stream, Level_23_Movement_
             p->T_LOA        = Bitstream_Read(stream, 10);
         }
 
-        {
+    {
             p->N_ITER_1        = Bitstream_Read(stream, 5);
         }
 
@@ -174,7 +170,6 @@ int Level_23_Movement_Authority_Decode_Bit(Bitstream* stream, Level_23_Movement_
         {
             Level_23_Movement_Authority_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
         }
-
         {
             p->L_ENDSECTION        = Bitstream_Read(stream, 15);
         }
@@ -259,67 +254,11 @@ int Level_23_Movement_Authority_Decode_Bit(Bitstream* stream, Level_23_Movement_
 
 int Level_23_Movement_Authority_Encode_Int(PacketInfo* data, kcg_int* stream, const Level_23_Movement_Authority_Core* p)
 {
-    stream[data->startAddress++] = p->Q_DIR;
-    stream[data->startAddress++] = p->L_PACKET;
-    stream[data->startAddress++] = p->Q_SCALE;
-    stream[data->startAddress++] = p->V_LOA;
-    stream[data->startAddress++] = p->T_LOA;
-    stream[data->startAddress++] = p->N_ITER_1;
-
-    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
-    {
-        Level_23_Movement_Authority_Core_1_Encode_Int(data, stream, &(p->sub_1[i]));
-    }
-
-    stream[data->startAddress++] = p->L_ENDSECTION;
-    stream[data->startAddress++] = p->Q_SECTIONTIMER;
-    stream[data->startAddress++] = p->T_SECTIONTIMER;
-    stream[data->startAddress++] = p->D_SECTIONTIMERSTOPLOC;
-    stream[data->startAddress++] = p->Q_ENDTIMER;
-    stream[data->startAddress++] = p->T_ENDTIMER;
-    stream[data->startAddress++] = p->D_ENDTIMERSTARTLOC;
-    stream[data->startAddress++] = p->Q_DANGERPOINT;
-    stream[data->startAddress++] = p->D_DP;
-    stream[data->startAddress++] = p->V_RELEASEDP;
-    stream[data->startAddress++] = p->Q_OVERLAP;
-    stream[data->startAddress++] = p->D_STARTOL;
-    stream[data->startAddress++] = p->T_OL;
-    stream[data->startAddress++] = p->D_OL;
-    stream[data->startAddress++] = p->V_RELEASEOL;
-
-    return 1;
+    return 0;
 }
 
 int Level_23_Movement_Authority_Decode_Int(PacketInfo* data, const kcg_int* stream, Level_23_Movement_Authority_Core* p)
 {
-    p->Q_DIR = stream[data->startAddress++];
-    p->L_PACKET = stream[data->startAddress++];
-    p->Q_SCALE = stream[data->startAddress++];
-    p->V_LOA = stream[data->startAddress++];
-    p->T_LOA = stream[data->startAddress++];
-    p->N_ITER_1 = stream[data->startAddress++];
-
-    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
-    {
-        Level_23_Movement_Authority_Core_1_Decode_Int(data, stream, &(p->sub_1[i]));
-    }
-
-    p->L_ENDSECTION = stream[data->startAddress++];
-    p->Q_SECTIONTIMER = stream[data->startAddress++];
-    p->T_SECTIONTIMER = stream[data->startAddress++];
-    p->D_SECTIONTIMERSTOPLOC = stream[data->startAddress++];
-    p->Q_ENDTIMER = stream[data->startAddress++];
-    p->T_ENDTIMER = stream[data->startAddress++];
-    p->D_ENDTIMERSTARTLOC = stream[data->startAddress++];
-    p->Q_DANGERPOINT = stream[data->startAddress++];
-    p->D_DP = stream[data->startAddress++];
-    p->V_RELEASEDP = stream[data->startAddress++];
-    p->Q_OVERLAP = stream[data->startAddress++];
-    p->D_STARTOL = stream[data->startAddress++];
-    p->T_OL = stream[data->startAddress++];
-    p->D_OL = stream[data->startAddress++];
-    p->V_RELEASEOL = stream[data->startAddress++];
-
-    return 1;
+    return 0;
 }
 

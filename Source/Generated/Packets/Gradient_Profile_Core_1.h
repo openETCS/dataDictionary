@@ -168,6 +168,30 @@ inline bool operator!=(const Gradient_Profile_Core_1& a, const Gradient_Profile_
     return !(a == b);
 }
 
+inline int encode(Bitstream& stream, const Gradient_Profile_Core_1& p)
+{
+    return Gradient_Profile_Core_1_Encode_Bit(&stream, &p);
+}
+
+inline int decode(Bitstream& stream, Gradient_Profile_Core_1& p)
+{
+    return Gradient_Profile_Core_1_Decode_Bit(&stream, &p);
+}
+
+inline int encode(PacketInfo& data, kcg_int* stream, const Gradient_Profile_Core_1& p)
+{
+    std::cerr << "encode int function not implemented for packet 21 yet." << std::endl;
+
+    return Gradient_Profile_Core_1_Encode_Int(&data, stream, &p);
+}
+
+inline int decode(PacketInfo& data, const kcg_int* stream, Gradient_Profile_Core_1& p)
+{
+    std::cerr << "decode int function not implemented for packet 21 yet." << std::endl;
+
+    return Gradient_Profile_Core_1_Decode_Int(&data, stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // GRADIENT_PROFILE_CORE_1_CORE_H_INCLUDED

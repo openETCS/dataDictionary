@@ -11,7 +11,6 @@ int Mode_profile_Core_1_UpperBitsNotSet(const Mode_profile_Core_1* p)
     status = status && UpperBitsNotSet64(p->V_MAMODE,          7) ;
     status = status && UpperBitsNotSet64(p->L_MAMODE,          15);
     status = status && UpperBitsNotSet64(p->L_ACKMAMODE,       15);
-    status = status && UpperBitsNotSet64(p->Q_MAMODE,          1) ;
 
     if (status)
     {
@@ -36,7 +35,6 @@ int Mode_profile_Core_1_Encode_Bit(Bitstream* stream, const Mode_profile_Core_1*
             Bitstream_Write(stream, 7,  p->V_MAMODE);
             Bitstream_Write(stream, 15, p->L_MAMODE);
             Bitstream_Write(stream, 15, p->L_ACKMAMODE);
-            Bitstream_Write(stream, 1,  p->Q_MAMODE);
 
 
             //@ assert D_MAMODE:          EqualBits(stream, pos,       pos + 15,  p->D_MAMODE);
@@ -44,7 +42,6 @@ int Mode_profile_Core_1_Encode_Bit(Bitstream* stream, const Mode_profile_Core_1*
             //@ assert V_MAMODE:          EqualBits(stream, pos + 17,  pos + 24,  p->V_MAMODE);
             //@ assert L_MAMODE:          EqualBits(stream, pos + 24,  pos + 39,  p->L_MAMODE);
             //@ assert L_ACKMAMODE:       EqualBits(stream, pos + 39,  pos + 54,  p->L_ACKMAMODE);
-            //@ assert Q_MAMODE:          EqualBits(stream, pos + 54,  pos + 55,  p->Q_MAMODE);
 
             return 1;
         }
@@ -125,31 +122,17 @@ int Mode_profile_Core_1_Decode_Bit(Bitstream* stream, Mode_profile_Core_1* p)
             p->L_ACKMAMODE        = Bitstream_Read(stream, 15);
         }
 
-        /*@
-          requires Q_MAMODE:       stream->bitpos == pos + 54;
-          assigns                  stream->bitpos;
-          assigns                  p->Q_MAMODE;
-          ensures  Q_MAMODE:       stream->bitpos == pos + 55;
-          ensures  Q_MAMODE:       EqualBits(stream, pos + 54, pos + 55, p->Q_MAMODE);
-          ensures  Q_MAMODE:       UpperBitsNotSet(p->Q_MAMODE, 1);
-        */
-        {
-            p->Q_MAMODE        = Bitstream_Read(stream, 1);
-        }
-
         //@ assert D_MAMODE:          EqualBits(stream, pos,       pos + 15,  p->D_MAMODE);
         //@ assert M_MAMODE:          EqualBits(stream, pos + 15,  pos + 17,  p->M_MAMODE);
         //@ assert V_MAMODE:          EqualBits(stream, pos + 17,  pos + 24,  p->V_MAMODE);
         //@ assert L_MAMODE:          EqualBits(stream, pos + 24,  pos + 39,  p->L_MAMODE);
         //@ assert L_ACKMAMODE:       EqualBits(stream, pos + 39,  pos + 54,  p->L_ACKMAMODE);
-        //@ assert Q_MAMODE:          EqualBits(stream, pos + 54,  pos + 55,  p->Q_MAMODE);
 
         //@ assert D_MAMODE:          UpperBitsNotSet(p->D_MAMODE,          15);
         //@ assert M_MAMODE:          UpperBitsNotSet(p->M_MAMODE,          2);
         //@ assert V_MAMODE:          UpperBitsNotSet(p->V_MAMODE,          7);
         //@ assert L_MAMODE:          UpperBitsNotSet(p->L_MAMODE,          15);
         //@ assert L_ACKMAMODE:       UpperBitsNotSet(p->L_ACKMAMODE,       15);
-        //@ assert Q_MAMODE:          UpperBitsNotSet(p->Q_MAMODE,          1);
 
         //@ assert final: EqualBits(stream, pos, p);
 
@@ -163,25 +146,11 @@ int Mode_profile_Core_1_Decode_Bit(Bitstream* stream, Mode_profile_Core_1* p)
 
 int Mode_profile_Core_1_Encode_Int(PacketInfo* data, kcg_int* stream, const Mode_profile_Core_1* p)
 {
-    stream[data->startAddress++] = p->D_MAMODE;
-    stream[data->startAddress++] = p->M_MAMODE;
-    stream[data->startAddress++] = p->V_MAMODE;
-    stream[data->startAddress++] = p->L_MAMODE;
-    stream[data->startAddress++] = p->L_ACKMAMODE;
-    stream[data->startAddress++] = p->Q_MAMODE;
-
-    return 1;
+    return 0;
 }
 
 int Mode_profile_Core_1_Decode_Int(PacketInfo* data, const kcg_int* stream, Mode_profile_Core_1* p)
 {
-    p->D_MAMODE = stream[data->startAddress++];
-    p->M_MAMODE = stream[data->startAddress++];
-    p->V_MAMODE = stream[data->startAddress++];
-    p->L_MAMODE = stream[data->startAddress++];
-    p->L_ACKMAMODE = stream[data->startAddress++];
-    p->Q_MAMODE = stream[data->startAddress++];
-
-    return 1;
+    return 0;
 }
 

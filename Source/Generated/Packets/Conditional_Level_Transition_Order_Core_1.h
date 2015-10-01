@@ -9,7 +9,7 @@ struct Conditional_Level_Transition_Order_Core_1
 {
 
     uint64_t   M_LEVELTR;        // # 3
-    uint64_t   NID_NTC;          // # 8
+    uint64_t   NID_STM;          // # 8
 };
 
 typedef struct Conditional_Level_Transition_Order_Core_1 Conditional_Level_Transition_Order_Core_1;
@@ -137,7 +137,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Conditional_Level_Tr
 {
     stream
             << +p.M_LEVELTR << ','
-            << +p.NID_NTC;
+            << +p.NID_STM;
 
     return stream;
 }
@@ -150,7 +150,7 @@ inline bool operator==(const Conditional_Level_Transition_Order_Core_1& a, const
 
     if (a.M_LEVELTR == 1)
     {
-        status = status && (a.NID_NTC == b.NID_NTC);
+        status = status && (a.NID_STM == b.NID_STM);
     }
 
     return status;

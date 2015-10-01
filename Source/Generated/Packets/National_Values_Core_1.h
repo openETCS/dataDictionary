@@ -154,6 +154,30 @@ inline bool operator!=(const National_Values_Core_1& a, const National_Values_Co
     return !(a == b);
 }
 
+inline int encode(Bitstream& stream, const National_Values_Core_1& p)
+{
+    return National_Values_Core_1_Encode_Bit(&stream, &p);
+}
+
+inline int decode(Bitstream& stream, National_Values_Core_1& p)
+{
+    return National_Values_Core_1_Decode_Bit(&stream, &p);
+}
+
+inline int encode(PacketInfo& data, kcg_int* stream, const National_Values_Core_1& p)
+{
+    std::cerr << "encode int function not implemented for packet 3 yet." << std::endl;
+
+    return National_Values_Core_1_Encode_Int(&data, stream, &p);
+}
+
+inline int decode(PacketInfo& data, const kcg_int* stream, National_Values_Core_1& p)
+{
+    std::cerr << "decode int function not implemented for packet 3 yet." << std::endl;
+
+    return National_Values_Core_1_Decode_Int(&data, stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // NATIONAL_VALUES_CORE_1_CORE_H_INCLUDED

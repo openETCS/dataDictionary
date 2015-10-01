@@ -7,7 +7,7 @@
 
 struct RBC_transition_order_Core
 {
-    // TransmissionMedia=Balise, RBC
+    // TransmissionMedia=Any
     // Packet to order an RBC transition
     // Packet Number = 131
 

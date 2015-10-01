@@ -7,11 +7,11 @@
 
 struct End_of_Information_Core
 {
-    // TransmissionMedia=Balise, Loop
+    // TransmissionMedia=Any
     // This packet consists only of NID_PACKET containing 8 bit 1sIt acts
-    // as a finish flag; the receiver will stop reading the remaining
-    // part of the message/telegram when receiving eight bits set to one
-    // in the NID_PACKET field.
+    // as a finish flag ; the receiver will stop reading the
+    // remaining part of the message/telegram when receiving eight bits set to
+    // one in the NID_PACKET field.
     // Packet Number = 255
 
 };
@@ -135,7 +135,7 @@ int End_of_Information_Decode_Int(PacketInfo* data, const kcg_int* stream, End_o
 
 inline std::ostream& operator<<(std::ostream& stream, const End_of_Information_Core& p)
 {
-
+    
 
     return stream;
 }

@@ -13,12 +13,11 @@ struct Mode_profile_Core_1
     uint64_t   V_MAMODE;         // # 7
     uint64_t  L_MAMODE;         // # 15
     uint64_t  L_ACKMAMODE;      // # 15
-    uint64_t   Q_MAMODE;         // # 1
 };
 
 typedef struct Mode_profile_Core_1 Mode_profile_Core_1;
 
-#define MODE_PROFILE_CORE_1_CORE_BITSIZE 55
+#define MODE_PROFILE_CORE_1_CORE_BITSIZE 54
 
 /*@
     logic integer BitSize{L}(Mode_profile_Core_1* p) = MODE_PROFILE_CORE_1_CORE_BITSIZE;
@@ -34,32 +33,28 @@ typedef struct Mode_profile_Core_1 Mode_profile_Core_1;
       Invariant(p->M_MAMODE)          &&
       Invariant(p->V_MAMODE)          &&
       Invariant(p->L_MAMODE)          &&
-      Invariant(p->L_ACKMAMODE)       &&
-      Invariant(p->Q_MAMODE);
+      Invariant(p->L_ACKMAMODE);
 
     predicate ZeroInitialized(Mode_profile_Core_1* p) =
       ZeroInitialized(p->D_MAMODE)          &&
       ZeroInitialized(p->M_MAMODE)          &&
       ZeroInitialized(p->V_MAMODE)          &&
       ZeroInitialized(p->L_MAMODE)          &&
-      ZeroInitialized(p->L_ACKMAMODE)       &&
-      ZeroInitialized(p->Q_MAMODE);
+      ZeroInitialized(p->L_ACKMAMODE);
 
     predicate EqualBits(Bitstream* stream, integer pos, Mode_profile_Core_1* p) =
       EqualBits(stream, pos,       pos + 15,  p->D_MAMODE)          &&
       EqualBits(stream, pos + 15,  pos + 17,  p->M_MAMODE)          &&
       EqualBits(stream, pos + 17,  pos + 24,  p->V_MAMODE)          &&
       EqualBits(stream, pos + 24,  pos + 39,  p->L_MAMODE)          &&
-      EqualBits(stream, pos + 39,  pos + 54,  p->L_ACKMAMODE)       &&
-      EqualBits(stream, pos + 54,  pos + 55,  p->Q_MAMODE);
+      EqualBits(stream, pos + 39,  pos + 54,  p->L_ACKMAMODE);
 
     predicate UpperBitsNotSet(Mode_profile_Core_1* p) =
       UpperBitsNotSet(p->D_MAMODE,         15)  &&
       UpperBitsNotSet(p->M_MAMODE,         2)   &&
       UpperBitsNotSet(p->V_MAMODE,         7)   &&
       UpperBitsNotSet(p->L_MAMODE,         15)  &&
-      UpperBitsNotSet(p->L_ACKMAMODE,      15)  &&
-      UpperBitsNotSet(p->Q_MAMODE,         1);
+      UpperBitsNotSet(p->L_ACKMAMODE,      15);
 
 */
 
@@ -164,8 +159,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Mode_profile_Core_1&
             << +p.M_MAMODE << ','
             << +p.V_MAMODE << ','
             << +p.L_MAMODE << ','
-            << +p.L_ACKMAMODE << ','
-            << +p.Q_MAMODE;
+            << +p.L_ACKMAMODE;
 
     return stream;
 }
@@ -179,7 +173,6 @@ inline bool operator==(const Mode_profile_Core_1& a, const Mode_profile_Core_1& 
     status = status && (a.V_MAMODE == b.V_MAMODE);
     status = status && (a.L_MAMODE == b.L_MAMODE);
     status = status && (a.L_ACKMAMODE == b.L_ACKMAMODE);
-    status = status && (a.Q_MAMODE == b.Q_MAMODE);
 
     return status;
 }
@@ -187,6 +180,30 @@ inline bool operator==(const Mode_profile_Core_1& a, const Mode_profile_Core_1& 
 inline bool operator!=(const Mode_profile_Core_1& a, const Mode_profile_Core_1& b)
 {
     return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Mode_profile_Core_1& p)
+{
+    return Mode_profile_Core_1_Encode_Bit(&stream, &p);
+}
+
+inline int decode(Bitstream& stream, Mode_profile_Core_1& p)
+{
+    return Mode_profile_Core_1_Decode_Bit(&stream, &p);
+}
+
+inline int encode(PacketInfo& data, kcg_int* stream, const Mode_profile_Core_1& p)
+{
+    std::cerr << "encode int function not implemented for packet 80 yet." << std::endl;
+
+    return Mode_profile_Core_1_Encode_Int(&data, stream, &p);
+}
+
+inline int decode(PacketInfo& data, const kcg_int* stream, Mode_profile_Core_1& p)
+{
+    std::cerr << "decode int function not implemented for packet 80 yet." << std::endl;
+
+    return Mode_profile_Core_1_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

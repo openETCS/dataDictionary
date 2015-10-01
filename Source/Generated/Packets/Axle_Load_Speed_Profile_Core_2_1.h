@@ -8,7 +8,7 @@
 struct Axle_Load_Speed_Profile_Core_2_1
 {
 
-    uint64_t   M_AXLELOADCAT;    // # 7
+    uint64_t   M_AXLELOAD;       // # 7
     uint64_t   V_AXLELOAD;       // # 7
 };
 
@@ -26,19 +26,19 @@ typedef struct Axle_Load_Speed_Profile_Core_2_1 Axle_Load_Speed_Profile_Core_2_1
       \separated(stream->addr + (0..stream->size-1), p);
 
     predicate Invariant(Axle_Load_Speed_Profile_Core_2_1* p) =
-      Invariant(p->M_AXLELOADCAT)     &&
+      Invariant(p->M_AXLELOAD)        &&
       Invariant(p->V_AXLELOAD);
 
     predicate ZeroInitialized(Axle_Load_Speed_Profile_Core_2_1* p) =
-      ZeroInitialized(p->M_AXLELOADCAT)     &&
+      ZeroInitialized(p->M_AXLELOAD)        &&
       ZeroInitialized(p->V_AXLELOAD);
 
     predicate EqualBits(Bitstream* stream, integer pos, Axle_Load_Speed_Profile_Core_2_1* p) =
-      EqualBits(stream, pos,       pos + 7,   p->M_AXLELOADCAT)     &&
+      EqualBits(stream, pos,       pos + 7,   p->M_AXLELOAD)        &&
       EqualBits(stream, pos + 7,   pos + 14,  p->V_AXLELOAD);
 
     predicate UpperBitsNotSet(Axle_Load_Speed_Profile_Core_2_1* p) =
-      UpperBitsNotSet(p->M_AXLELOADCAT,    7)   &&
+      UpperBitsNotSet(p->M_AXLELOAD,       7)   &&
       UpperBitsNotSet(p->V_AXLELOAD,       7);
 
 */
@@ -140,7 +140,7 @@ int Axle_Load_Speed_Profile_Core_2_1_Decode_Int(PacketInfo* data, const kcg_int*
 inline std::ostream& operator<<(std::ostream& stream, const Axle_Load_Speed_Profile_Core_2_1& p)
 {
     stream
-            << +p.M_AXLELOADCAT << ','
+            << +p.M_AXLELOAD << ','
             << +p.V_AXLELOAD;
 
     return stream;
@@ -150,7 +150,7 @@ inline bool operator==(const Axle_Load_Speed_Profile_Core_2_1& a, const Axle_Loa
 {
     bool status = true;
 
-    status = status && (a.M_AXLELOADCAT == b.M_AXLELOADCAT);
+    status = status && (a.M_AXLELOAD == b.M_AXLELOAD);
     status = status && (a.V_AXLELOAD == b.V_AXLELOAD);
 
     return status;
@@ -159,6 +159,30 @@ inline bool operator==(const Axle_Load_Speed_Profile_Core_2_1& a, const Axle_Loa
 inline bool operator!=(const Axle_Load_Speed_Profile_Core_2_1& a, const Axle_Load_Speed_Profile_Core_2_1& b)
 {
     return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Axle_Load_Speed_Profile_Core_2_1& p)
+{
+    return Axle_Load_Speed_Profile_Core_2_1_Encode_Bit(&stream, &p);
+}
+
+inline int decode(Bitstream& stream, Axle_Load_Speed_Profile_Core_2_1& p)
+{
+    return Axle_Load_Speed_Profile_Core_2_1_Decode_Bit(&stream, &p);
+}
+
+inline int encode(PacketInfo& data, kcg_int* stream, const Axle_Load_Speed_Profile_Core_2_1& p)
+{
+    std::cerr << "encode int function not implemented for packet 51 yet." << std::endl;
+
+    return Axle_Load_Speed_Profile_Core_2_1_Encode_Int(&data, stream, &p);
+}
+
+inline int decode(PacketInfo& data, const kcg_int* stream, Axle_Load_Speed_Profile_Core_2_1& p)
+{
+    std::cerr << "decode int function not implemented for packet 51 yet." << std::endl;
+
+    return Axle_Load_Speed_Profile_Core_2_1_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

@@ -44,7 +44,7 @@ TelegramHeader create_TelegramHeader_TrainToTrack()
 
 // TrainToTrack Packets
 
-Error_Reporting create_Error_Reporting()
+/*Error_Reporting create_Error_Reporting()
 {
     Error_Reporting a;
     {
@@ -53,9 +53,9 @@ Error_Reporting create_Error_Reporting()
     }
 
     return a;
-}
+}*/
 
-Train_running_number create_Train_running_number()
+/*Train_running_number create_Train_running_number()
 {
     Train_running_number a;
     {
@@ -64,7 +64,7 @@ Train_running_number create_Train_running_number()
     }
 
     return a;
-}
+}*/
 
 // TrackToTrain Packets
 
@@ -85,9 +85,9 @@ Temporary_Speed_Restriction create_Temporary_Speed_Restriction()
     return a;
 }
 
-Adhesion_Factor create_Adhesion_Factor()
+Adhesion_factor create_Adhesion_Factor()
 {
-    Adhesion_Factor a;
+    Adhesion_factor a;
     {
         a.core.Q_DIR = 1;
         a.core.L_PACKET = 56;

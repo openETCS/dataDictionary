@@ -13,7 +13,6 @@ int Position_Report_Parameters_UpperBitsNotSet(const Position_Report_Parameters_
     status = status && UpperBitsNotSet64(p->D_CYCLOC,          15);
     status = status && UpperBitsNotSet64(p->M_LOC,             3) ;
     status = status && UpperBitsNotSet64(p->N_ITER_1,          5) ;
-
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
         status = status && Position_Report_Parameters_Core_1_UpperBitsNotSet(&(p->sub_1[i]));
@@ -44,7 +43,6 @@ int Position_Report_Parameters_Encode_Bit(Bitstream* stream, const Position_Repo
             Bitstream_Write(stream, 15, p->D_CYCLOC);
             Bitstream_Write(stream, 3,  p->M_LOC);
             Bitstream_Write(stream, 5,  p->N_ITER_1);
-
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
                 Position_Report_Parameters_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
@@ -149,7 +147,7 @@ int Position_Report_Parameters_Decode_Bit(Bitstream* stream, Position_Report_Par
             p->M_LOC        = Bitstream_Read(stream, 3);
         }
 
-        {
+    {
             p->N_ITER_1        = Bitstream_Read(stream, 5);
         }
 
@@ -157,7 +155,6 @@ int Position_Report_Parameters_Decode_Bit(Bitstream* stream, Position_Report_Par
         {
             Position_Report_Parameters_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
         }
-
         //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
         //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
         //@ assert Q_SCALE:           EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE);
@@ -184,37 +181,11 @@ int Position_Report_Parameters_Decode_Bit(Bitstream* stream, Position_Report_Par
 
 int Position_Report_Parameters_Encode_Int(PacketInfo* data, kcg_int* stream, const Position_Report_Parameters_Core* p)
 {
-    stream[data->startAddress++] = p->Q_DIR;
-    stream[data->startAddress++] = p->L_PACKET;
-    stream[data->startAddress++] = p->Q_SCALE;
-    stream[data->startAddress++] = p->T_CYCLOC;
-    stream[data->startAddress++] = p->D_CYCLOC;
-    stream[data->startAddress++] = p->M_LOC;
-    stream[data->startAddress++] = p->N_ITER_1;
-
-    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
-    {
-        Position_Report_Parameters_Core_1_Encode_Int(data, stream, &(p->sub_1[i]));
-    }
-
-    return 1;
+    return 0;
 }
 
 int Position_Report_Parameters_Decode_Int(PacketInfo* data, const kcg_int* stream, Position_Report_Parameters_Core* p)
 {
-    p->Q_DIR = stream[data->startAddress++];
-    p->L_PACKET = stream[data->startAddress++];
-    p->Q_SCALE = stream[data->startAddress++];
-    p->T_CYCLOC = stream[data->startAddress++];
-    p->D_CYCLOC = stream[data->startAddress++];
-    p->M_LOC = stream[data->startAddress++];
-    p->N_ITER_1 = stream[data->startAddress++];
-
-    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
-    {
-        Position_Report_Parameters_Core_1_Decode_Int(data, stream, &(p->sub_1[i]));
-    }
-
-    return 1;
+    return 0;
 }
 

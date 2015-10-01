@@ -8,7 +8,7 @@
 struct Validated_train_data_Core_2
 {
 
-    uint64_t   NID_NTC;          // # 8
+    uint64_t   NID_STM;          // # 8
 };
 
 typedef struct Validated_train_data_Core_2 Validated_train_data_Core_2;
@@ -25,16 +25,16 @@ typedef struct Validated_train_data_Core_2 Validated_train_data_Core_2;
       \separated(stream->addr + (0..stream->size-1), p);
 
     predicate Invariant(Validated_train_data_Core_2* p) =
-      Invariant(p->NID_NTC);
+      Invariant(p->NID_STM);
 
     predicate ZeroInitialized(Validated_train_data_Core_2* p) =
-      ZeroInitialized(p->NID_NTC);
+      ZeroInitialized(p->NID_STM);
 
     predicate EqualBits(Bitstream* stream, integer pos, Validated_train_data_Core_2* p) =
-      EqualBits(stream, pos,       pos + 8,   p->NID_NTC);
+      EqualBits(stream, pos,       pos + 8,   p->NID_STM);
 
     predicate UpperBitsNotSet(Validated_train_data_Core_2* p) =
-      UpperBitsNotSet(p->NID_NTC,          8);
+      UpperBitsNotSet(p->NID_STM,          8);
 
 */
 
@@ -135,7 +135,7 @@ int Validated_train_data_Core_2_Decode_Int(PacketInfo* data, const kcg_int* stre
 inline std::ostream& operator<<(std::ostream& stream, const Validated_train_data_Core_2& p)
 {
     stream
-            << +p.NID_NTC;
+            << +p.NID_STM;
 
     return stream;
 }
@@ -144,7 +144,7 @@ inline bool operator==(const Validated_train_data_Core_2& a, const Validated_tra
 {
     bool status = true;
 
-    status = status && (a.NID_NTC == b.NID_NTC);
+    status = status && (a.NID_STM == b.NID_STM);
 
     return status;
 }
@@ -152,6 +152,30 @@ inline bool operator==(const Validated_train_data_Core_2& a, const Validated_tra
 inline bool operator!=(const Validated_train_data_Core_2& a, const Validated_train_data_Core_2& b)
 {
     return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Validated_train_data_Core_2& p)
+{
+    return Validated_train_data_Core_2_Encode_Bit(&stream, &p);
+}
+
+inline int decode(Bitstream& stream, Validated_train_data_Core_2& p)
+{
+    return Validated_train_data_Core_2_Decode_Bit(&stream, &p);
+}
+
+inline int encode(PacketInfo& data, kcg_int* stream, const Validated_train_data_Core_2& p)
+{
+    std::cerr << "encode int function not implemented for packet 11 yet." << std::endl;
+
+    return Validated_train_data_Core_2_Encode_Int(&data, stream, &p);
+}
+
+inline int decode(PacketInfo& data, const kcg_int* stream, Validated_train_data_Core_2& p)
+{
+    std::cerr << "decode int function not implemented for packet 11 yet." << std::endl;
+
+    return Validated_train_data_Core_2_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

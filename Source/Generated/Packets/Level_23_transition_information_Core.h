@@ -7,7 +7,7 @@
 
 struct Level_23_transition_information_Core
 {
-    // TransmissionMedia=RBC
+    // TransmissionMedia=Radio
     // Identity of the level 2/3 transition balise group
     // Packet Number = 9
 

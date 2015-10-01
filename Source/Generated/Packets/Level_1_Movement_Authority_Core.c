@@ -13,12 +13,10 @@ int Level_1_Movement_Authority_UpperBitsNotSet(const Level_1_Movement_Authority_
     status = status && UpperBitsNotSet64(p->V_LOA,             7) ;
     status = status && UpperBitsNotSet64(p->T_LOA,             10);
     status = status && UpperBitsNotSet64(p->N_ITER_1,          5) ;
-
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
         status = status && Level_1_Movement_Authority_Core_1_UpperBitsNotSet(&(p->sub_1[i]));
     }
-
     status = status && UpperBitsNotSet64(p->L_ENDSECTION,      15);
     status = status && UpperBitsNotSet64(p->Q_SECTIONTIMER,    1) ;
     status = status && UpperBitsNotSet64(p->T_SECTIONTIMER,    10);
@@ -60,12 +58,10 @@ int Level_1_Movement_Authority_Encode_Bit(Bitstream* stream, const Level_1_Movem
             Bitstream_Write(stream, 7,  p->V_LOA);
             Bitstream_Write(stream, 10, p->T_LOA);
             Bitstream_Write(stream, 5,  p->N_ITER_1);
-
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
                 Level_1_Movement_Authority_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
             }
-
             Bitstream_Write(stream, 15, p->L_ENDSECTION);
             Bitstream_Write(stream, 1,  p->Q_SECTIONTIMER);
             Bitstream_Write(stream, 10, p->T_SECTIONTIMER);
@@ -181,7 +177,7 @@ int Level_1_Movement_Authority_Decode_Bit(Bitstream* stream, Level_1_Movement_Au
             p->T_LOA        = Bitstream_Read(stream, 10);
         }
 
-        {
+    {
             p->N_ITER_1        = Bitstream_Read(stream, 5);
         }
 
@@ -189,7 +185,6 @@ int Level_1_Movement_Authority_Decode_Bit(Bitstream* stream, Level_1_Movement_Au
         {
             Level_1_Movement_Authority_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
         }
-
         {
             p->L_ENDSECTION        = Bitstream_Read(stream, 15);
         }

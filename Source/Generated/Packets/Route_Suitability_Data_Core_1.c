@@ -8,25 +8,17 @@ int Route_Suitability_Data_Core_1_UpperBitsNotSet(const Route_Suitability_Data_C
 
     status = status && UpperBitsNotSet64(p->D_SUITABILITY,     15);
     status = status && UpperBitsNotSet64(p->Q_SUITABILITY,     2) ;
-
     if (p->Q_SUITABILITY == 0)
     {
-        status = status && UpperBitsNotSet64(p->M_LINEGAUGE,       8) ;
+        status = status && UpperBitsNotSet64(p->M_LOADINGGAUGE,    8) ;
     }
-
     if (p->Q_SUITABILITY == 1)
     {
-        status = status && UpperBitsNotSet64(p->M_AXLELOADCAT,     7) ;
+        status = status && UpperBitsNotSet64(p->M_AXLELOAD,        7) ;
     }
-
     if (p->Q_SUITABILITY == 2)
     {
-        status = status && UpperBitsNotSet64(p->M_VOLTAGE,         4) ;
-    }
-
-    if ((p->Q_SUITABILITY == 2) && (p->M_VOLTAGE != 0))
-    {
-        status = status && UpperBitsNotSet64(p->NID_CTRACTION,     10);
+        status = status && UpperBitsNotSet64(p->M_TRACTION,        8) ;
     }
 
     if (status)
@@ -49,25 +41,19 @@ int Route_Suitability_Data_Core_1_Encode_Bit(Bitstream* stream, const Route_Suit
 
             Bitstream_Write(stream, 15, p->D_SUITABILITY);
             Bitstream_Write(stream, 2,  p->Q_SUITABILITY);
-
             if (p->Q_SUITABILITY == 0)
             {
-                Bitstream_Write(stream, 8,  p->M_LINEGAUGE);
+                Bitstream_Write(stream, 8,  p->M_LOADINGGAUGE);
             }
 
             if (p->Q_SUITABILITY == 1)
             {
-                Bitstream_Write(stream, 7,  p->M_AXLELOADCAT);
+                Bitstream_Write(stream, 7,  p->M_AXLELOAD);
             }
 
             if (p->Q_SUITABILITY == 2)
             {
-                Bitstream_Write(stream, 4,  p->M_VOLTAGE);
-            }
-
-            if ((p->Q_SUITABILITY == 2) && (p->M_VOLTAGE != 0))
-            {
-                Bitstream_Write(stream, 10, p->NID_CTRACTION);
+                Bitstream_Write(stream, 8,  p->M_TRACTION);
             }
 
 
@@ -121,7 +107,7 @@ int Route_Suitability_Data_Core_1_Decode_Bit(Bitstream* stream, Route_Suitabilit
         if (p->Q_SUITABILITY == 0)
         {
             {
-                p->M_LINEGAUGE        = Bitstream_Read(stream, 8);
+                p->M_LOADINGGAUGE        = Bitstream_Read(stream, 8);
             }
 
         }
@@ -129,7 +115,7 @@ int Route_Suitability_Data_Core_1_Decode_Bit(Bitstream* stream, Route_Suitabilit
         if (p->Q_SUITABILITY == 1)
         {
             {
-                p->M_AXLELOADCAT        = Bitstream_Read(stream, 7);
+                p->M_AXLELOAD        = Bitstream_Read(stream, 7);
             }
 
         }
@@ -137,15 +123,7 @@ int Route_Suitability_Data_Core_1_Decode_Bit(Bitstream* stream, Route_Suitabilit
         if (p->Q_SUITABILITY == 2)
         {
             {
-                p->M_VOLTAGE        = Bitstream_Read(stream, 4);
-            }
-
-        }
-
-        if ((p->Q_SUITABILITY == 2) && (p->M_VOLTAGE != 0))
-        {
-            {
-                p->NID_CTRACTION        = Bitstream_Read(stream, 10);
+                p->M_TRACTION        = Bitstream_Read(stream, 8);
             }
 
         }
@@ -168,25 +146,11 @@ int Route_Suitability_Data_Core_1_Decode_Bit(Bitstream* stream, Route_Suitabilit
 
 int Route_Suitability_Data_Core_1_Encode_Int(PacketInfo* data, kcg_int* stream, const Route_Suitability_Data_Core_1* p)
 {
-    stream[data->startAddress++] = p->D_SUITABILITY;
-    stream[data->startAddress++] = p->Q_SUITABILITY;
-    stream[data->startAddress++] = p->M_LINEGAUGE;
-    stream[data->startAddress++] = p->M_AXLELOADCAT;
-    stream[data->startAddress++] = p->M_VOLTAGE;
-    stream[data->startAddress++] = p->NID_CTRACTION;
-
-    return 1;
+    return 0;
 }
 
 int Route_Suitability_Data_Core_1_Decode_Int(PacketInfo* data, const kcg_int* stream, Route_Suitability_Data_Core_1* p)
 {
-    p->D_SUITABILITY = stream[data->startAddress++];
-    p->Q_SUITABILITY = stream[data->startAddress++];
-    p->M_LINEGAUGE = stream[data->startAddress++];
-    p->M_AXLELOADCAT = stream[data->startAddress++];
-    p->M_VOLTAGE = stream[data->startAddress++];
-    p->NID_CTRACTION = stream[data->startAddress++];
-
-    return 1;
+    return 0;
 }
 

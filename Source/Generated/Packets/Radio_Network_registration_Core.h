@@ -7,7 +7,7 @@
 
 struct Radio_Network_registration_Core
 {
-    // TransmissionMedia=Balise, RBC, RIU
+    // TransmissionMedia=Any
     // Packet to give the identity of the Radio Network to which
     // a registration shall be enforced.
     // Packet Number = 45

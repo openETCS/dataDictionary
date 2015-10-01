@@ -13,7 +13,6 @@ int Gradient_Profile_UpperBitsNotSet(const Gradient_Profile_Core* p)
     status = status && UpperBitsNotSet64(p->Q_GDIR,            1) ;
     status = status && UpperBitsNotSet64(p->G_A,               8) ;
     status = status && UpperBitsNotSet64(p->N_ITER_1,          5) ;
-
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
         status = status && Gradient_Profile_Core_1_UpperBitsNotSet(&(p->sub_1[i]));
@@ -44,7 +43,6 @@ int Gradient_Profile_Encode_Bit(Bitstream* stream, const Gradient_Profile_Core* 
             Bitstream_Write(stream, 1,  p->Q_GDIR);
             Bitstream_Write(stream, 8,  p->G_A);
             Bitstream_Write(stream, 5,  p->N_ITER_1);
-
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
                 Gradient_Profile_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
@@ -149,7 +147,7 @@ int Gradient_Profile_Decode_Bit(Bitstream* stream, Gradient_Profile_Core* p)
             p->G_A        = Bitstream_Read(stream, 8);
         }
 
-        {
+    {
             p->N_ITER_1        = Bitstream_Read(stream, 5);
         }
 
@@ -157,7 +155,6 @@ int Gradient_Profile_Decode_Bit(Bitstream* stream, Gradient_Profile_Core* p)
         {
             Gradient_Profile_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
         }
-
         //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
         //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
         //@ assert Q_SCALE:           EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE);
@@ -184,37 +181,11 @@ int Gradient_Profile_Decode_Bit(Bitstream* stream, Gradient_Profile_Core* p)
 
 int Gradient_Profile_Encode_Int(PacketInfo* data, kcg_int* stream, const Gradient_Profile_Core* p)
 {
-    stream[data->startAddress++] = p->Q_DIR;
-    stream[data->startAddress++] = p->L_PACKET;
-    stream[data->startAddress++] = p->Q_SCALE;
-    stream[data->startAddress++] = p->N_ITER_1 + 1;
-    stream[data->startAddress++] = p->D_GRADIENT;
-    stream[data->startAddress++] = p->Q_GDIR;
-    stream[data->startAddress++] = p->G_A;
-
-    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
-    {
-        Gradient_Profile_Core_1_Encode_Int(data, stream, &(p->sub_1[i]));
-    }
-
-    return 1;
+    return 0;
 }
 
 int Gradient_Profile_Decode_Int(PacketInfo* data, const kcg_int* stream, Gradient_Profile_Core* p)
 {
-    p->Q_DIR = stream[data->startAddress++];
-    p->L_PACKET = stream[data->startAddress++];
-    p->Q_SCALE = stream[data->startAddress++];
-    p->N_ITER_1 = stream[data->startAddress++] - 1;
-    p->D_GRADIENT = stream[data->startAddress++];
-    p->Q_GDIR = stream[data->startAddress++];
-    p->G_A = stream[data->startAddress++];
-
-    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
-    {
-        Gradient_Profile_Core_1_Decode_Int(data, stream, &(p->sub_1[i]));
-    }
-
-    return 1;
+    return 0;
 }
 

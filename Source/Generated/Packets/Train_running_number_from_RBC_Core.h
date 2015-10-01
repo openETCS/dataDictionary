@@ -7,7 +7,7 @@
 
 struct Train_running_number_from_RBC_Core
 {
-    // TransmissionMedia=RBC
+    // TransmissionMedia=Radio
     // Train running number from RBC
     // Packet Number = 140
 

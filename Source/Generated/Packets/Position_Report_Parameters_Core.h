@@ -8,7 +8,7 @@
 
 struct Position_Report_Parameters_Core
 {
-    // TransmissionMedia=RBC
+    // TransmissionMedia=Radio
     // This packet is intended to give parameters telling when and how
     // often the position has to be reported.
     // Packet Number = 58
@@ -173,13 +173,12 @@ inline std::ostream& operator<<(std::ostream& stream, const Position_Report_Para
             << +p.T_CYCLOC << ','
             << +p.D_CYCLOC << ','
             << +p.M_LOC << ','
-            << +p.N_ITER_1;
-
-    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-    {
-        stream << ',' << p.sub_1[i];
-    }
-
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
+   
 
     return stream;
 }
@@ -195,7 +194,6 @@ inline bool operator==(const Position_Report_Parameters_Core& a, const Position_
     status = status && (a.D_CYCLOC == b.D_CYCLOC);
     status = status && (a.M_LOC == b.M_LOC);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
-
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)
@@ -228,11 +226,15 @@ inline int decode(Bitstream& stream, Position_Report_Parameters_Core& p)
 
 inline int encode(PacketInfo& data, kcg_int* stream, const Position_Report_Parameters_Core& p)
 {
+    std::cerr << "encode int function not implemented for packet 58 yet." << std::endl;
+
     return Position_Report_Parameters_Encode_Int(&data, stream, &p);
 }
 
 inline int decode(PacketInfo& data, const kcg_int* stream, Position_Report_Parameters_Core& p)
 {
+    std::cerr << "decode int function not implemented for packet 58 yet." << std::endl;
+
     return Position_Report_Parameters_Decode_Int(&data, stream, &p);
 }
 

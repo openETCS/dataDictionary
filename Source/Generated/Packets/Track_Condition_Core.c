@@ -10,23 +10,20 @@ int Track_Condition_UpperBitsNotSet(const Track_Condition_Core* p)
     status = status && UpperBitsNotSet64(p->L_PACKET,          13);
     status = status && UpperBitsNotSet64(p->Q_SCALE,           2) ;
     status = status && UpperBitsNotSet64(p->Q_TRACKINIT,       1) ;
-
     if (p->Q_TRACKINIT == 1)
     {
         status = status && UpperBitsNotSet64(p->D_TRACKINIT,       15);
     }
-
     if (p->Q_TRACKINIT == 0)
     {
         status = status && UpperBitsNotSet64(p->D_TRACKCOND,       15);
         status = status && UpperBitsNotSet64(p->L_TRACKCOND,       15);
         status = status && UpperBitsNotSet64(p->M_TRACKCOND,       4) ;
-        status = status && UpperBitsNotSet64(p->N_ITER_1,          5) ;
-
-        for (uint32_t i = 0; i < p->N_ITER_1; ++i)
-        {
-            status = status && Track_Condition_Core_1_UpperBitsNotSet(&(p->sub_1[i]));
-        }
+    }
+    status = status && UpperBitsNotSet64(p->N_ITER_1,          5) ;
+    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+    {
+        status = status && Track_Condition_Core_1_UpperBitsNotSet(&(p->sub_1[i]));
     }
 
     if (status)
@@ -51,7 +48,6 @@ int Track_Condition_Encode_Bit(Bitstream* stream, const Track_Condition_Core* p)
             Bitstream_Write(stream, 13, p->L_PACKET);
             Bitstream_Write(stream, 2,  p->Q_SCALE);
             Bitstream_Write(stream, 1,  p->Q_TRACKINIT);
-
             if (p->Q_TRACKINIT == 1)
             {
                 Bitstream_Write(stream, 15, p->D_TRACKINIT);
@@ -62,14 +58,13 @@ int Track_Condition_Encode_Bit(Bitstream* stream, const Track_Condition_Core* p)
                 Bitstream_Write(stream, 15, p->D_TRACKCOND);
                 Bitstream_Write(stream, 15, p->L_TRACKCOND);
                 Bitstream_Write(stream, 4,  p->M_TRACKCOND);
-                Bitstream_Write(stream, 5,  p->N_ITER_1);
-
-                for (uint32_t i = 0; i < p->N_ITER_1; ++i)
-                {
-                    Track_Condition_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
-                }
             }
 
+            Bitstream_Write(stream, 5,  p->N_ITER_1);
+            for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+            {
+                Track_Condition_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
+            }
 
 
             //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
@@ -166,16 +161,16 @@ int Track_Condition_Decode_Bit(Bitstream* stream, Track_Condition_Core* p)
                 p->M_TRACKCOND        = Bitstream_Read(stream, 4);
             }
 
-            {
-                p->N_ITER_1        = Bitstream_Read(stream, 5);
-            }
-
-            for (uint32_t i = 0; i < p->N_ITER_1; ++i)
-            {
-                Track_Condition_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
-            }
         }
 
+    {
+            p->N_ITER_1        = Bitstream_Read(stream, 5);
+        }
+
+        for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+        {
+            Track_Condition_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
+        }
         //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
         //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
         //@ assert Q_SCALE:           EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE);
@@ -198,41 +193,11 @@ int Track_Condition_Decode_Bit(Bitstream* stream, Track_Condition_Core* p)
 
 int Track_Condition_Encode_Int(PacketInfo* data, kcg_int* stream, const Track_Condition_Core* p)
 {
-    stream[data->startAddress++] = p->Q_DIR;
-    stream[data->startAddress++] = p->L_PACKET;
-    stream[data->startAddress++] = p->Q_SCALE;
-    stream[data->startAddress++] = p->Q_TRACKINIT;
-    stream[data->startAddress++] = p->D_TRACKINIT;
-    stream[data->startAddress++] = p->D_TRACKCOND;
-    stream[data->startAddress++] = p->L_TRACKCOND;
-    stream[data->startAddress++] = p->M_TRACKCOND;
-    stream[data->startAddress++] = p->N_ITER_1;
-
-    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
-    {
-        Track_Condition_Core_1_Encode_Int(data, stream, &(p->sub_1[i]));
-    }
-
-    return 1;
+    return 0;
 }
 
 int Track_Condition_Decode_Int(PacketInfo* data, const kcg_int* stream, Track_Condition_Core* p)
 {
-    p->Q_DIR = stream[data->startAddress++];
-    p->L_PACKET = stream[data->startAddress++];
-    p->Q_SCALE = stream[data->startAddress++];
-    p->Q_TRACKINIT = stream[data->startAddress++];
-    p->D_TRACKINIT = stream[data->startAddress++];
-    p->D_TRACKCOND = stream[data->startAddress++];
-    p->L_TRACKCOND = stream[data->startAddress++];
-    p->M_TRACKCOND = stream[data->startAddress++];
-    p->N_ITER_1 = stream[data->startAddress++];
-
-    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
-    {
-        Track_Condition_Core_1_Decode_Int(data, stream, &(p->sub_1[i]));
-    }
-
-    return 1;
+    return 0;
 }
 

@@ -7,12 +7,10 @@ int List_of_balises_for_SH_Area_Core_1_UpperBitsNotSet(const List_of_balises_for
     bool status = true;
 
     status = status && UpperBitsNotSet64(p->Q_NEWCOUNTRY,      1) ;
-
     if (p->Q_NEWCOUNTRY == 1)
     {
         status = status && UpperBitsNotSet64(p->NID_C,             10);
     }
-
     status = status && UpperBitsNotSet64(p->NID_BG,            14);
 
     if (status)
@@ -34,7 +32,6 @@ int List_of_balises_for_SH_Area_Core_1_Encode_Bit(Bitstream* stream, const List_
             //@ ghost const uint32_t pos = stream->bitpos;
 
             Bitstream_Write(stream, 1,  p->Q_NEWCOUNTRY);
-
             if (p->Q_NEWCOUNTRY == 1)
             {
                 Bitstream_Write(stream, 10, p->NID_C);
@@ -104,19 +101,11 @@ int List_of_balises_for_SH_Area_Core_1_Decode_Bit(Bitstream* stream, List_of_bal
 
 int List_of_balises_for_SH_Area_Core_1_Encode_Int(PacketInfo* data, kcg_int* stream, const List_of_balises_for_SH_Area_Core_1* p)
 {
-    stream[data->startAddress++] = p->Q_NEWCOUNTRY;
-    stream[data->startAddress++] = p->NID_C;
-    stream[data->startAddress++] = p->NID_BG;
-
-    return 1;
+    return 0;
 }
 
 int List_of_balises_for_SH_Area_Core_1_Decode_Int(PacketInfo* data, const kcg_int* stream, List_of_balises_for_SH_Area_Core_1* p)
 {
-    p->Q_NEWCOUNTRY = stream[data->startAddress++];
-    p->NID_C = stream[data->startAddress++];
-    p->NID_BG = stream[data->startAddress++];
-
-    return 1;
+    return 0;
 }
 

@@ -7,7 +7,7 @@
 
 struct Movement_Authority_Request_Parameters_Core
 {
-    // TransmissionMedia=RBC
+    // TransmissionMedia=Radio
     // This packet is intended to give parameters telling when and how
     // often the train has to ask for a movement authority.
     // Packet Number = 57

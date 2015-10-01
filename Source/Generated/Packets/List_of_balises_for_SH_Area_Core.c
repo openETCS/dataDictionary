@@ -9,7 +9,6 @@ int List_of_balises_for_SH_Area_UpperBitsNotSet(const List_of_balises_for_SH_Are
     status = status && UpperBitsNotSet64(p->Q_DIR,             2) ;
     status = status && UpperBitsNotSet64(p->L_PACKET,          13);
     status = status && UpperBitsNotSet64(p->N_ITER_1,          5) ;
-
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
         status = status && List_of_balises_for_SH_Area_Core_1_UpperBitsNotSet(&(p->sub_1[i]));
@@ -36,7 +35,6 @@ int List_of_balises_for_SH_Area_Encode_Bit(Bitstream* stream, const List_of_bali
             Bitstream_Write(stream, 2,  p->Q_DIR);
             Bitstream_Write(stream, 13, p->L_PACKET);
             Bitstream_Write(stream, 5,  p->N_ITER_1);
-
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
                 List_of_balises_for_SH_Area_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
@@ -89,7 +87,7 @@ int List_of_balises_for_SH_Area_Decode_Bit(Bitstream* stream, List_of_balises_fo
             p->L_PACKET        = Bitstream_Read(stream, 13);
         }
 
-        {
+    {
             p->N_ITER_1        = Bitstream_Read(stream, 5);
         }
 
@@ -97,7 +95,6 @@ int List_of_balises_for_SH_Area_Decode_Bit(Bitstream* stream, List_of_balises_fo
         {
             List_of_balises_for_SH_Area_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
         }
-
         //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
         //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
 
@@ -116,29 +113,11 @@ int List_of_balises_for_SH_Area_Decode_Bit(Bitstream* stream, List_of_balises_fo
 
 int List_of_balises_for_SH_Area_Encode_Int(PacketInfo* data, kcg_int* stream, const List_of_balises_for_SH_Area_Core* p)
 {
-    stream[data->startAddress++] = p->Q_DIR;
-    stream[data->startAddress++] = p->L_PACKET;
-    stream[data->startAddress++] = p->N_ITER_1;
-
-    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
-    {
-        List_of_balises_for_SH_Area_Core_1_Encode_Int(data, stream, &(p->sub_1[i]));
-    }
-
-    return 1;
+    return 0;
 }
 
 int List_of_balises_for_SH_Area_Decode_Int(PacketInfo* data, const kcg_int* stream, List_of_balises_for_SH_Area_Core* p)
 {
-    p->Q_DIR = stream[data->startAddress++];
-    p->L_PACKET = stream[data->startAddress++];
-    p->N_ITER_1 = stream[data->startAddress++];
-
-    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
-    {
-        List_of_balises_for_SH_Area_Core_1_Decode_Int(data, stream, &(p->sub_1[i]));
-    }
-
-    return 1;
+    return 0;
 }
 

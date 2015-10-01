@@ -4,14 +4,11 @@
 
 #include "Bitstream.h"
 #include "National_Values_Core_1.h"
-#include "National_Values_Core_2.h"
-#include "National_Values_Core_3.h"
-#include "National_Values_Core_4.h"
 #include "CompressedPackets.h"
 
 struct National_Values_Core
 {
-    // TransmissionMedia=Balise, RBC
+    // TransmissionMedia=Any
     // Downloads a set of National Values to the train
     // Packet Number = 3
 
@@ -19,21 +16,16 @@ struct National_Values_Core
     uint64_t  L_PACKET;         // # 13
     uint64_t   Q_SCALE;          // # 2
     uint64_t  D_VALIDNV;        // # 15
-    uint64_t  NID_C;            // # 10
     uint64_t   N_ITER_1;         // # 5
     National_Values_Core_1   sub_1[31];
     uint64_t   V_NVSHUNT;        // # 7
     uint64_t   V_NVSTFF;         // # 7
     uint64_t   V_NVONSIGHT;      // # 7
-    uint64_t   V_NVLIMSUPERV;    // # 7
     uint64_t   V_NVUNFIT;        // # 7
     uint64_t   V_NVREL;          // # 7
     uint64_t  D_NVROLL;         // # 15
-    uint64_t   Q_NVSBTSMPERM;    // # 1
+    uint64_t   Q_NVSRBKTRG;      // # 1
     uint64_t   Q_NVEMRRLS;       // # 1
-    uint64_t   Q_NVGUIPERM;      // # 1
-    uint64_t   Q_NVSBFBPERM;     // # 1
-    uint64_t   Q_NVINHSMICPERM;  // # 1
     uint64_t   V_NVALLOWOVTRP;   // # 7
     uint64_t   V_NVSUPOVTRP;     // # 7
     uint64_t  D_NVOVTRP;        // # 15
@@ -44,32 +36,11 @@ struct National_Values_Core
     uint64_t   M_NVDERUN;        // # 1
     uint64_t  D_NVSTFF;         // # 15
     uint64_t   Q_NVDRIVER_ADHES; // # 1
-    uint64_t   A_NVMAXREDADH1;   // # 6
-    uint64_t   A_NVMAXREDADH2;   // # 6
-    uint64_t   A_NVMAXREDADH3;   // # 6
-    uint64_t   Q_NVLOCACC;       // # 6
-    uint64_t   M_NVAVADH;        // # 5
-    uint64_t   M_NVEBCL;         // # 4
-    uint64_t   Q_NVKINT;         // # 1
-    uint64_t   Q_NVKVINTSET;     // # 2
-    uint64_t   A_NVP12;          // # 6
-    uint64_t   A_NVP23;          // # 6
-    uint64_t   V_NVKVINT;        // # 7
-    uint64_t   M_NVKVINT;        // # 7
-    uint64_t   N_ITER_2;         // # 5
-    National_Values_Core_2   sub_2[31];
-    uint64_t   N_ITER_3;         // # 5
-    National_Values_Core_3   sub_3[31];
-    uint64_t   L_NVKRINT;        // # 5
-    uint64_t   M_NVKRINT;        // # 5
-    uint64_t   N_ITER_4;         // # 5
-    National_Values_Core_4   sub_4[31];
-    uint64_t   M_NVKTINT;        // # 5
 };
 
 typedef struct National_Values_Core National_Values_Core;
 
-#define NATIONAL_VALUES_CORE_BITSIZE 222
+#define NATIONAL_VALUES_CORE_BITSIZE 168
 
 /*@
     logic integer BitSize{L}(National_Values_Core* p) = NATIONAL_VALUES_CORE_BITSIZE;
@@ -84,29 +55,25 @@ typedef struct National_Values_Core National_Values_Core;
       Invariant(p->Q_DIR)             &&
       Invariant(p->L_PACKET)          &&
       Invariant(p->Q_SCALE)           &&
-      Invariant(p->D_VALIDNV)         &&
-      Invariant(p->NID_C);
+      Invariant(p->D_VALIDNV);
 
     predicate ZeroInitialized(National_Values_Core* p) =
       ZeroInitialized(p->Q_DIR)             &&
       ZeroInitialized(p->L_PACKET)          &&
       ZeroInitialized(p->Q_SCALE)           &&
-      ZeroInitialized(p->D_VALIDNV)         &&
-      ZeroInitialized(p->NID_C);
+      ZeroInitialized(p->D_VALIDNV);
 
     predicate EqualBits(Bitstream* stream, integer pos, National_Values_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
       EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
       EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)           &&
-      EqualBits(stream, pos + 17,  pos + 32,  p->D_VALIDNV)         &&
-      EqualBits(stream, pos + 32,  pos + 42,  p->NID_C);
+      EqualBits(stream, pos + 17,  pos + 32,  p->D_VALIDNV);
 
     predicate UpperBitsNotSet(National_Values_Core* p) =
       UpperBitsNotSet(p->Q_DIR,            2)   &&
       UpperBitsNotSet(p->L_PACKET,         13)  &&
       UpperBitsNotSet(p->Q_SCALE,          2)   &&
-      UpperBitsNotSet(p->D_VALIDNV,        15)  &&
-      UpperBitsNotSet(p->NID_C,            10);
+      UpperBitsNotSet(p->D_VALIDNV,        15);
 
 */
 
@@ -211,76 +178,30 @@ inline std::ostream& operator<<(std::ostream& stream, const National_Values_Core
             << +p.L_PACKET << ','
             << +p.Q_SCALE << ','
             << +p.D_VALIDNV << ','
-            << +p.NID_C << ','
-            << +p.N_ITER_1;
-
-    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-    {
-        stream << ',' << p.sub_1[i];
-    }
-
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
     stream << ','
-           << +p.V_NVSHUNT << ','
-           << +p.V_NVSTFF << ','
-           << +p.V_NVONSIGHT << ','
-           << +p.V_NVLIMSUPERV << ','
-           << +p.V_NVUNFIT << ','
-           << +p.V_NVREL << ','
-           << +p.D_NVROLL << ','
-           << +p.Q_NVSBTSMPERM << ','
-           << +p.Q_NVEMRRLS << ','
-           << +p.Q_NVGUIPERM << ','
-           << +p.Q_NVSBFBPERM << ','
-           << +p.Q_NVINHSMICPERM << ','
-           << +p.V_NVALLOWOVTRP << ','
-           << +p.V_NVSUPOVTRP << ','
-           << +p.D_NVOVTRP << ','
-           << +p.T_NVOVTRP << ','
-           << +p.D_NVPOTRP << ','
-           << +p.M_NVCONTACT << ','
-           << +p.T_NVCONTACT << ','
-           << +p.M_NVDERUN << ','
-           << +p.D_NVSTFF << ','
-           << +p.Q_NVDRIVER_ADHES << ','
-           << +p.A_NVMAXREDADH1 << ','
-           << +p.A_NVMAXREDADH2 << ','
-           << +p.A_NVMAXREDADH3 << ','
-           << +p.Q_NVLOCACC << ','
-           << +p.M_NVAVADH << ','
-           << +p.M_NVEBCL << ','
-           << +p.Q_NVKINT << ','
-           << +p.Q_NVKVINTSET << ','
-           << +p.A_NVP12 << ','
-           << +p.A_NVP23 << ','
-           << +p.V_NVKVINT << ','
-           << +p.M_NVKVINT << ','
-           << +p.N_ITER_2;
-
-    for (uint32_t i = 0; i < p.N_ITER_2; ++i)
-    {
-        stream << ',' << p.sub_2[i];
-    }
-
-    stream << ','
-           << +p.N_ITER_3;
-
-    for (uint32_t i = 0; i < p.N_ITER_3; ++i)
-    {
-        stream << ',' << p.sub_3[i];
-    }
-
-    stream << ','
-           << +p.L_NVKRINT << ','
-           << +p.M_NVKRINT << ','
-           << +p.N_ITER_4;
-
-    for (uint32_t i = 0; i < p.N_ITER_4; ++i)
-    {
-        stream << ',' << p.sub_4[i];
-    }
-
-    stream << ','
-           << +p.M_NVKTINT;
+            << +p.V_NVSHUNT << ','
+            << +p.V_NVSTFF << ','
+            << +p.V_NVONSIGHT << ','
+            << +p.V_NVUNFIT << ','
+            << +p.V_NVREL << ','
+            << +p.D_NVROLL << ','
+            << +p.Q_NVSRBKTRG << ','
+            << +p.Q_NVEMRRLS << ','
+            << +p.V_NVALLOWOVTRP << ','
+            << +p.V_NVSUPOVTRP << ','
+            << +p.D_NVOVTRP << ','
+            << +p.T_NVOVTRP << ','
+            << +p.D_NVPOTRP << ','
+            << +p.M_NVCONTACT << ','
+            << +p.T_NVCONTACT << ','
+            << +p.M_NVDERUN << ','
+            << +p.D_NVSTFF << ','
+            << +p.Q_NVDRIVER_ADHES;
 
     return stream;
 }
@@ -293,9 +214,7 @@ inline bool operator==(const National_Values_Core& a, const National_Values_Core
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.Q_SCALE == b.Q_SCALE);
     status = status && (a.D_VALIDNV == b.D_VALIDNV);
-    status = status && (a.NID_C == b.NID_C);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
-
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)
@@ -307,19 +226,14 @@ inline bool operator==(const National_Values_Core& a, const National_Values_Core
     {
         status = false;
     }
-
     status = status && (a.V_NVSHUNT == b.V_NVSHUNT);
     status = status && (a.V_NVSTFF == b.V_NVSTFF);
     status = status && (a.V_NVONSIGHT == b.V_NVONSIGHT);
-    status = status && (a.V_NVLIMSUPERV == b.V_NVLIMSUPERV);
     status = status && (a.V_NVUNFIT == b.V_NVUNFIT);
     status = status && (a.V_NVREL == b.V_NVREL);
     status = status && (a.D_NVROLL == b.D_NVROLL);
-    status = status && (a.Q_NVSBTSMPERM == b.Q_NVSBTSMPERM);
+    status = status && (a.Q_NVSRBKTRG == b.Q_NVSRBKTRG);
     status = status && (a.Q_NVEMRRLS == b.Q_NVEMRRLS);
-    status = status && (a.Q_NVGUIPERM == b.Q_NVGUIPERM);
-    status = status && (a.Q_NVSBFBPERM == b.Q_NVSBFBPERM);
-    status = status && (a.Q_NVINHSMICPERM == b.Q_NVINHSMICPERM);
     status = status && (a.V_NVALLOWOVTRP == b.V_NVALLOWOVTRP);
     status = status && (a.V_NVSUPOVTRP == b.V_NVSUPOVTRP);
     status = status && (a.D_NVOVTRP == b.D_NVOVTRP);
@@ -330,72 +244,6 @@ inline bool operator==(const National_Values_Core& a, const National_Values_Core
     status = status && (a.M_NVDERUN == b.M_NVDERUN);
     status = status && (a.D_NVSTFF == b.D_NVSTFF);
     status = status && (a.Q_NVDRIVER_ADHES == b.Q_NVDRIVER_ADHES);
-    status = status && (a.A_NVMAXREDADH1 == b.A_NVMAXREDADH1);
-    status = status && (a.A_NVMAXREDADH2 == b.A_NVMAXREDADH2);
-    status = status && (a.A_NVMAXREDADH3 == b.A_NVMAXREDADH3);
-    status = status && (a.Q_NVLOCACC == b.Q_NVLOCACC);
-    status = status && (a.M_NVAVADH == b.M_NVAVADH);
-    status = status && (a.M_NVEBCL == b.M_NVEBCL);
-    status = status && (a.Q_NVKINT == b.Q_NVKINT);
-
-    if (a.Q_NVKINT == 1)
-    {
-        status = status && (a.Q_NVKVINTSET == b.Q_NVKVINTSET);
-
-        if (a.Q_NVKVINTSET == 1)
-        {
-            status = status && (a.A_NVP12 == b.A_NVP12);
-            status = status && (a.A_NVP23 == b.A_NVP23);
-        }
-
-        status = status && (a.V_NVKVINT == b.V_NVKVINT);
-        status = status && (a.M_NVKVINT == b.M_NVKVINT);
-        status = status && (a.N_ITER_2 == b.N_ITER_2);
-
-        if (a.N_ITER_2 == b.N_ITER_2)
-        {
-            for (uint32_t i = 0; i < a.N_ITER_2; ++i)
-            {
-                status = status && (a.sub_2[i] == b.sub_2[i]);
-            }
-        }
-        else
-        {
-            status = false;
-        }
-
-        status = status && (a.N_ITER_3 == b.N_ITER_3);
-
-        if (a.N_ITER_3 == b.N_ITER_3)
-        {
-            for (uint32_t i = 0; i < a.N_ITER_3; ++i)
-            {
-                status = status && (a.sub_3[i] == b.sub_3[i]);
-            }
-        }
-        else
-        {
-            status = false;
-        }
-
-        status = status && (a.L_NVKRINT == b.L_NVKRINT);
-        status = status && (a.M_NVKRINT == b.M_NVKRINT);
-        status = status && (a.N_ITER_4 == b.N_ITER_4);
-
-        if (a.N_ITER_4 == b.N_ITER_4)
-        {
-            for (uint32_t i = 0; i < a.N_ITER_4; ++i)
-            {
-                status = status && (a.sub_4[i] == b.sub_4[i]);
-            }
-        }
-        else
-        {
-            status = false;
-        }
-
-        status = status && (a.M_NVKTINT == b.M_NVKTINT);
-    }
 
     return status;
 }
@@ -417,11 +265,15 @@ inline int decode(Bitstream& stream, National_Values_Core& p)
 
 inline int encode(PacketInfo& data, kcg_int* stream, const National_Values_Core& p)
 {
+    std::cerr << "encode int function not implemented for packet 3 yet." << std::endl;
+
     return National_Values_Encode_Int(&data, stream, &p);
 }
 
 inline int decode(PacketInfo& data, const kcg_int* stream, National_Values_Core& p)
 {
+    std::cerr << "decode int function not implemented for packet 3 yet." << std::endl;
+
     return National_Values_Decode_Int(&data, stream, &p);
 }
 

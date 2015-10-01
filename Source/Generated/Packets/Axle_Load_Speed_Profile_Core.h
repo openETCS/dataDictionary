@@ -11,15 +11,14 @@ struct Axle_Load_Speed_Profile_Core
 {
     // TransmissionMedia=Any
     // This packet gives the speed restrictions for trains with axle load
-    // category higher than or equal to the specified value for the
-    // speed restriction
+    // higher than or equal to the specified value for the speed
+    // restriction
     // Packet Number = 51
 
     uint64_t   Q_DIR;            // # 2
     uint64_t  L_PACKET;         // # 13
     uint64_t   Q_SCALE;          // # 2
     uint64_t   Q_TRACKINIT;      // # 1
-    uint64_t  D_TRACKINIT;      // # 15
     uint64_t  D_AXLELOAD;       // # 15
     uint64_t  L_AXLELOAD;       // # 15
     uint64_t   Q_FRONT;          // # 1
@@ -31,7 +30,7 @@ struct Axle_Load_Speed_Profile_Core
 
 typedef struct Axle_Load_Speed_Profile_Core Axle_Load_Speed_Profile_Core;
 
-#define AXLE_LOAD_SPEED_PROFILE_CORE_BITSIZE 18
+#define AXLE_LOAD_SPEED_PROFILE_CORE_BITSIZE 59
 
 /*@
     logic integer BitSize{L}(Axle_Load_Speed_Profile_Core* p) = AXLE_LOAD_SPEED_PROFILE_CORE_BITSIZE;
@@ -46,25 +45,37 @@ typedef struct Axle_Load_Speed_Profile_Core Axle_Load_Speed_Profile_Core;
       Invariant(p->Q_DIR)             &&
       Invariant(p->L_PACKET)          &&
       Invariant(p->Q_SCALE)           &&
-      Invariant(p->Q_TRACKINIT);
+      Invariant(p->Q_TRACKINIT)       &&
+      Invariant(p->D_AXLELOAD)        &&
+      Invariant(p->L_AXLELOAD)        &&
+      Invariant(p->Q_FRONT);
 
     predicate ZeroInitialized(Axle_Load_Speed_Profile_Core* p) =
       ZeroInitialized(p->Q_DIR)             &&
       ZeroInitialized(p->L_PACKET)          &&
       ZeroInitialized(p->Q_SCALE)           &&
-      ZeroInitialized(p->Q_TRACKINIT);
+      ZeroInitialized(p->Q_TRACKINIT)       &&
+      ZeroInitialized(p->D_AXLELOAD)        &&
+      ZeroInitialized(p->L_AXLELOAD)        &&
+      ZeroInitialized(p->Q_FRONT);
 
     predicate EqualBits(Bitstream* stream, integer pos, Axle_Load_Speed_Profile_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
       EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
       EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)           &&
-      EqualBits(stream, pos + 17,  pos + 18,  p->Q_TRACKINIT);
+      EqualBits(stream, pos + 17,  pos + 18,  p->Q_TRACKINIT)       &&
+      EqualBits(stream, pos + 18,  pos + 33,  p->D_AXLELOAD)        &&
+      EqualBits(stream, pos + 33,  pos + 48,  p->L_AXLELOAD)        &&
+      EqualBits(stream, pos + 48,  pos + 49,  p->Q_FRONT);
 
     predicate UpperBitsNotSet(Axle_Load_Speed_Profile_Core* p) =
       UpperBitsNotSet(p->Q_DIR,            2)   &&
       UpperBitsNotSet(p->L_PACKET,         13)  &&
       UpperBitsNotSet(p->Q_SCALE,          2)   &&
-      UpperBitsNotSet(p->Q_TRACKINIT,      1);
+      UpperBitsNotSet(p->Q_TRACKINIT,      1)   &&
+      UpperBitsNotSet(p->D_AXLELOAD,       15)  &&
+      UpperBitsNotSet(p->L_AXLELOAD,       15)  &&
+      UpperBitsNotSet(p->Q_FRONT,          1);
 
 */
 
@@ -169,25 +180,21 @@ inline std::ostream& operator<<(std::ostream& stream, const Axle_Load_Speed_Prof
             << +p.L_PACKET << ','
             << +p.Q_SCALE << ','
             << +p.Q_TRACKINIT << ','
-            << +p.D_TRACKINIT << ','
             << +p.D_AXLELOAD << ','
             << +p.L_AXLELOAD << ','
             << +p.Q_FRONT << ','
-            << +p.N_ITER_1;
-
-    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-    {
-        stream << ',' << p.sub_1[i];
-    }
-
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
     stream << ','
-           << +p.N_ITER_2;
-
-    for (uint32_t i = 0; i < p.N_ITER_2; ++i)
-    {
-        stream << ',' << p.sub_2[i];
-    }
-
+       << +p.N_ITER_2;
+       for (uint32_t i = 0; i < p.N_ITER_2; ++i)
+       {
+           stream << ',' << p.sub_2[i];
+       }
+   
 
     return stream;
 }
@@ -200,44 +207,32 @@ inline bool operator==(const Axle_Load_Speed_Profile_Core& a, const Axle_Load_Sp
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.Q_SCALE == b.Q_SCALE);
     status = status && (a.Q_TRACKINIT == b.Q_TRACKINIT);
-
-    if (a.Q_TRACKINIT == 1)
+    status = status && (a.D_AXLELOAD == b.D_AXLELOAD);
+    status = status && (a.L_AXLELOAD == b.L_AXLELOAD);
+    status = status && (a.Q_FRONT == b.Q_FRONT);
+    status = status && (a.N_ITER_1 == b.N_ITER_1);
+    if (a.N_ITER_1 == b.N_ITER_1)
     {
-        status = status && (a.D_TRACKINIT == b.D_TRACKINIT);
+        for (uint32_t i = 0; i < a.N_ITER_1; ++i)
+        {
+            status = status && (a.sub_1[i] == b.sub_1[i]);
+        }
     }
-
-    if (a.Q_TRACKINIT == 0)
+    else
     {
-        status = status && (a.D_AXLELOAD == b.D_AXLELOAD);
-        status = status && (a.L_AXLELOAD == b.L_AXLELOAD);
-        status = status && (a.Q_FRONT == b.Q_FRONT);
-        status = status && (a.N_ITER_1 == b.N_ITER_1);
-
-        if (a.N_ITER_1 == b.N_ITER_1)
+        status = false;
+    }
+    status = status && (a.N_ITER_2 == b.N_ITER_2);
+    if (a.N_ITER_2 == b.N_ITER_2)
+    {
+        for (uint32_t i = 0; i < a.N_ITER_2; ++i)
         {
-            for (uint32_t i = 0; i < a.N_ITER_1; ++i)
-            {
-                status = status && (a.sub_1[i] == b.sub_1[i]);
-            }
+            status = status && (a.sub_2[i] == b.sub_2[i]);
         }
-        else
-        {
-            status = false;
-        }
-
-        status = status && (a.N_ITER_2 == b.N_ITER_2);
-
-        if (a.N_ITER_2 == b.N_ITER_2)
-        {
-            for (uint32_t i = 0; i < a.N_ITER_2; ++i)
-            {
-                status = status && (a.sub_2[i] == b.sub_2[i]);
-            }
-        }
-        else
-        {
-            status = false;
-        }
+    }
+    else
+    {
+        status = false;
     }
 
     return status;
@@ -260,11 +255,15 @@ inline int decode(Bitstream& stream, Axle_Load_Speed_Profile_Core& p)
 
 inline int encode(PacketInfo& data, kcg_int* stream, const Axle_Load_Speed_Profile_Core& p)
 {
+    std::cerr << "encode int function not implemented for packet 51 yet." << std::endl;
+
     return Axle_Load_Speed_Profile_Encode_Int(&data, stream, &p);
 }
 
 inline int decode(PacketInfo& data, const kcg_int* stream, Axle_Load_Speed_Profile_Core& p)
 {
+    std::cerr << "decode int function not implemented for packet 51 yet." << std::endl;
+
     return Axle_Load_Speed_Profile_Decode_Int(&data, stream, &p);
 }
 

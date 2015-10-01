@@ -13,12 +13,12 @@ struct Geographical_Position_Information_Core_1
     uint64_t  NID_BG;           // # 14
     uint64_t  D_POSOFF;         // # 15
     uint64_t   Q_MPOSITION;      // # 1
-    uint64_t  M_POSITION;       // # 24
+    uint64_t  M_POSITION;       // # 20
 };
 
 typedef struct Geographical_Position_Information_Core_1 Geographical_Position_Information_Core_1;
 
-#define GEOGRAPHICAL_POSITION_INFORMATION_CORE_1_CORE_BITSIZE 55
+#define GEOGRAPHICAL_POSITION_INFORMATION_CORE_1_CORE_BITSIZE 51
 
 /*@
     logic integer BitSize{L}(Geographical_Position_Information_Core_1* p) = GEOGRAPHICAL_POSITION_INFORMATION_CORE_1_CORE_BITSIZE;
@@ -160,7 +160,6 @@ inline bool operator==(const Geographical_Position_Information_Core_1& a, const 
     {
         status = status && (a.NID_C == b.NID_C);
     }
-
     status = status && (a.NID_BG == b.NID_BG);
     status = status && (a.D_POSOFF == b.D_POSOFF);
     status = status && (a.Q_MPOSITION == b.Q_MPOSITION);
@@ -172,6 +171,30 @@ inline bool operator==(const Geographical_Position_Information_Core_1& a, const 
 inline bool operator!=(const Geographical_Position_Information_Core_1& a, const Geographical_Position_Information_Core_1& b)
 {
     return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Geographical_Position_Information_Core_1& p)
+{
+    return Geographical_Position_Information_Core_1_Encode_Bit(&stream, &p);
+}
+
+inline int decode(Bitstream& stream, Geographical_Position_Information_Core_1& p)
+{
+    return Geographical_Position_Information_Core_1_Decode_Bit(&stream, &p);
+}
+
+inline int encode(PacketInfo& data, kcg_int* stream, const Geographical_Position_Information_Core_1& p)
+{
+    std::cerr << "encode int function not implemented for packet 79 yet." << std::endl;
+
+    return Geographical_Position_Information_Core_1_Encode_Int(&data, stream, &p);
+}
+
+inline int decode(PacketInfo& data, const kcg_int* stream, Geographical_Position_Information_Core_1& p)
+{
+    std::cerr << "decode int function not implemented for packet 79 yet." << std::endl;
+
+    return Geographical_Position_Information_Core_1_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

@@ -176,21 +176,18 @@ inline std::ostream& operator<<(std::ostream& stream, const International_Static
             << +p.D_STATIC << ','
             << +p.V_STATIC << ','
             << +p.Q_FRONT << ','
-            << +p.N_ITER_1;
-
-    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-    {
-        stream << ',' << p.sub_1[i];
-    }
-
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
     stream << ','
-           << +p.N_ITER_2;
-
-    for (uint32_t i = 0; i < p.N_ITER_2; ++i)
-    {
-        stream << ',' << p.sub_2[i];
-    }
-
+       << +p.N_ITER_2;
+       for (uint32_t i = 0; i < p.N_ITER_2; ++i)
+       {
+           stream << ',' << p.sub_2[i];
+       }
+   
 
     return stream;
 }
@@ -206,7 +203,6 @@ inline bool operator==(const International_Static_Speed_Profile_Core& a, const I
     status = status && (a.V_STATIC == b.V_STATIC);
     status = status && (a.Q_FRONT == b.Q_FRONT);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
-
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)
@@ -218,9 +214,7 @@ inline bool operator==(const International_Static_Speed_Profile_Core& a, const I
     {
         status = false;
     }
-
     status = status && (a.N_ITER_2 == b.N_ITER_2);
-
     if (a.N_ITER_2 == b.N_ITER_2)
     {
         for (uint32_t i = 0; i < a.N_ITER_2; ++i)
@@ -253,11 +247,15 @@ inline int decode(Bitstream& stream, International_Static_Speed_Profile_Core& p)
 
 inline int encode(PacketInfo& data, kcg_int* stream, const International_Static_Speed_Profile_Core& p)
 {
+    std::cerr << "encode int function not implemented for packet 27 yet." << std::endl;
+
     return International_Static_Speed_Profile_Encode_Int(&data, stream, &p);
 }
 
 inline int decode(PacketInfo& data, const kcg_int* stream, International_Static_Speed_Profile_Core& p)
 {
+    std::cerr << "decode int function not implemented for packet 27 yet." << std::endl;
+
     return International_Static_Speed_Profile_Decode_Int(&data, stream, &p);
 }
 

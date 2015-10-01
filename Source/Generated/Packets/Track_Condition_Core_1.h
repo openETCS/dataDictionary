@@ -168,6 +168,30 @@ inline bool operator!=(const Track_Condition_Core_1& a, const Track_Condition_Co
     return !(a == b);
 }
 
+inline int encode(Bitstream& stream, const Track_Condition_Core_1& p)
+{
+    return Track_Condition_Core_1_Encode_Bit(&stream, &p);
+}
+
+inline int decode(Bitstream& stream, Track_Condition_Core_1& p)
+{
+    return Track_Condition_Core_1_Decode_Bit(&stream, &p);
+}
+
+inline int encode(PacketInfo& data, kcg_int* stream, const Track_Condition_Core_1& p)
+{
+    std::cerr << "encode int function not implemented for packet 68 yet." << std::endl;
+
+    return Track_Condition_Core_1_Encode_Int(&data, stream, &p);
+}
+
+inline int decode(PacketInfo& data, const kcg_int* stream, Track_Condition_Core_1& p)
+{
+    std::cerr << "decode int function not implemented for packet 68 yet." << std::endl;
+
+    return Track_Condition_Core_1_Decode_Int(&data, stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // TRACK_CONDITION_CORE_1_CORE_H_INCLUDED

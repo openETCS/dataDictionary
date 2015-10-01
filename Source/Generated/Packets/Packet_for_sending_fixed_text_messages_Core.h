@@ -7,7 +7,7 @@
 
 struct Packet_for_sending_fixed_text_messages_Core
 {
-    // TransmissionMedia=Balise, RBC
+    // TransmissionMedia=Any
     // Packet Number = 76
 
     uint64_t   Q_DIR;            // # 2
@@ -18,18 +18,13 @@ struct Packet_for_sending_fixed_text_messages_Core
     uint64_t  D_TEXTDISPLAY;    // # 15
     uint64_t   M_MODETEXTDISPLAY_0;// # 4
     uint64_t   M_LEVELTEXTDISPLAY_0;// # 3
-    uint64_t   NID_NTC_0;        // # 8
+    uint64_t   NID_STM_0;        // # 8
     uint64_t  L_TEXTDISPLAY;    // # 15
     uint64_t  T_TEXTDISPLAY;    // # 10
     uint64_t   M_MODETEXTDISPLAY_1;// # 4
     uint64_t   M_LEVELTEXTDISPLAY_1;// # 3
-    uint64_t   NID_NTC_1;        // # 8
+    uint64_t   NID_STM_1;        // # 8
     uint64_t   Q_TEXTCONFIRM;    // # 2
-    uint64_t   Q_CONFTEXTDISPLAY;// # 1
-    uint64_t   Q_TEXTREPORT;     // # 1
-    uint64_t   NID_TEXTMESSAGE;  // # 8
-    uint64_t  NID_C;            // # 10
-    uint64_t  NID_RBC;          // # 14
     uint64_t   Q_TEXT;           // # 8
 };
 
@@ -193,18 +188,13 @@ inline std::ostream& operator<<(std::ostream& stream, const Packet_for_sending_f
             << +p.D_TEXTDISPLAY << ','
             << +p.M_MODETEXTDISPLAY_0 << ','
             << +p.M_LEVELTEXTDISPLAY_0 << ','
-            << +p.NID_NTC_0 << ','
+            << +p.NID_STM_0 << ','
             << +p.L_TEXTDISPLAY << ','
             << +p.T_TEXTDISPLAY << ','
             << +p.M_MODETEXTDISPLAY_1 << ','
             << +p.M_LEVELTEXTDISPLAY_1 << ','
-            << +p.NID_NTC_1 << ','
+            << +p.NID_STM_1 << ','
             << +p.Q_TEXTCONFIRM << ','
-            << +p.Q_CONFTEXTDISPLAY << ','
-            << +p.Q_TEXTREPORT << ','
-            << +p.NID_TEXTMESSAGE << ','
-            << +p.NID_C << ','
-            << +p.NID_RBC << ','
             << +p.Q_TEXT;
 
     return stream;
@@ -225,9 +215,8 @@ inline bool operator==(const Packet_for_sending_fixed_text_messages_Core& a, con
 
     if (a.M_LEVELTEXTDISPLAY_0 == 1)
     {
-        status = status && (a.NID_NTC_0 == b.NID_NTC_0);
+        status = status && (a.NID_STM_0 == b.NID_STM_0);
     }
-
     status = status && (a.L_TEXTDISPLAY == b.L_TEXTDISPLAY);
     status = status && (a.T_TEXTDISPLAY == b.T_TEXTDISPLAY);
     status = status && (a.M_MODETEXTDISPLAY_1 == b.M_MODETEXTDISPLAY_1);
@@ -235,24 +224,9 @@ inline bool operator==(const Packet_for_sending_fixed_text_messages_Core& a, con
 
     if (a.M_LEVELTEXTDISPLAY_1 == 1)
     {
-        status = status && (a.NID_NTC_1 == b.NID_NTC_1);
+        status = status && (a.NID_STM_1 == b.NID_STM_1);
     }
-
     status = status && (a.Q_TEXTCONFIRM == b.Q_TEXTCONFIRM);
-
-    if (a.Q_TEXTCONFIRM != 0)
-    {
-        status = status && (a.Q_CONFTEXTDISPLAY == b.Q_CONFTEXTDISPLAY);
-        status = status && (a.Q_TEXTREPORT == b.Q_TEXTREPORT);
-    }
-
-    if (a.Q_TEXTREPORT == 1)
-    {
-        status = status && (a.NID_TEXTMESSAGE == b.NID_TEXTMESSAGE);
-        status = status && (a.NID_C == b.NID_C);
-        status = status && (a.NID_RBC == b.NID_RBC);
-    }
-
     status = status && (a.Q_TEXT == b.Q_TEXT);
 
     return status;
@@ -275,11 +249,15 @@ inline int decode(Bitstream& stream, Packet_for_sending_fixed_text_messages_Core
 
 inline int encode(PacketInfo& data, kcg_int* stream, const Packet_for_sending_fixed_text_messages_Core& p)
 {
+    std::cerr << "encode int function not implemented for packet 76 yet." << std::endl;
+
     return Packet_for_sending_fixed_text_messages_Encode_Int(&data, stream, &p);
 }
 
 inline int decode(PacketInfo& data, const kcg_int* stream, Packet_for_sending_fixed_text_messages_Core& p)
 {
+    std::cerr << "decode int function not implemented for packet 76 yet." << std::endl;
+
     return Packet_for_sending_fixed_text_messages_Decode_Int(&data, stream, &p);
 }
 

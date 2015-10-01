@@ -8,13 +8,12 @@
 struct Validated_train_data_Core_1
 {
 
-    uint64_t   M_VOLTAGE;        // # 4
-    uint64_t  NID_CTRACTION;    // # 10
+    uint64_t   M_TRACTION;       // # 8
 };
 
 typedef struct Validated_train_data_Core_1 Validated_train_data_Core_1;
 
-#define VALIDATED_TRAIN_DATA_CORE_1_CORE_BITSIZE 4
+#define VALIDATED_TRAIN_DATA_CORE_1_CORE_BITSIZE 8
 
 /*@
     logic integer BitSize{L}(Validated_train_data_Core_1* p) = VALIDATED_TRAIN_DATA_CORE_1_CORE_BITSIZE;
@@ -26,16 +25,16 @@ typedef struct Validated_train_data_Core_1 Validated_train_data_Core_1;
       \separated(stream->addr + (0..stream->size-1), p);
 
     predicate Invariant(Validated_train_data_Core_1* p) =
-      Invariant(p->M_VOLTAGE);
+      Invariant(p->M_TRACTION);
 
     predicate ZeroInitialized(Validated_train_data_Core_1* p) =
-      ZeroInitialized(p->M_VOLTAGE);
+      ZeroInitialized(p->M_TRACTION);
 
     predicate EqualBits(Bitstream* stream, integer pos, Validated_train_data_Core_1* p) =
-      EqualBits(stream, pos,       pos + 4,   p->M_VOLTAGE);
+      EqualBits(stream, pos,       pos + 8,   p->M_TRACTION);
 
     predicate UpperBitsNotSet(Validated_train_data_Core_1* p) =
-      UpperBitsNotSet(p->M_VOLTAGE,        4);
+      UpperBitsNotSet(p->M_TRACTION,       8);
 
 */
 
@@ -136,8 +135,7 @@ int Validated_train_data_Core_1_Decode_Int(PacketInfo* data, const kcg_int* stre
 inline std::ostream& operator<<(std::ostream& stream, const Validated_train_data_Core_1& p)
 {
     stream
-            << +p.M_VOLTAGE << ','
-            << +p.NID_CTRACTION;
+            << +p.M_TRACTION;
 
     return stream;
 }
@@ -146,12 +144,7 @@ inline bool operator==(const Validated_train_data_Core_1& a, const Validated_tra
 {
     bool status = true;
 
-    status = status && (a.M_VOLTAGE == b.M_VOLTAGE);
-
-    if ((a.M_VOLTAGE != 0) && (a.NID_CTRACTION != 0))
-    {
-        status = status && (a.NID_CTRACTION == b.NID_CTRACTION);
-    }
+    status = status && (a.M_TRACTION == b.M_TRACTION);
 
     return status;
 }
@@ -159,6 +152,30 @@ inline bool operator==(const Validated_train_data_Core_1& a, const Validated_tra
 inline bool operator!=(const Validated_train_data_Core_1& a, const Validated_train_data_Core_1& b)
 {
     return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Validated_train_data_Core_1& p)
+{
+    return Validated_train_data_Core_1_Encode_Bit(&stream, &p);
+}
+
+inline int decode(Bitstream& stream, Validated_train_data_Core_1& p)
+{
+    return Validated_train_data_Core_1_Decode_Bit(&stream, &p);
+}
+
+inline int encode(PacketInfo& data, kcg_int* stream, const Validated_train_data_Core_1& p)
+{
+    std::cerr << "encode int function not implemented for packet 11 yet." << std::endl;
+
+    return Validated_train_data_Core_1_Encode_Int(&data, stream, &p);
+}
+
+inline int decode(PacketInfo& data, const kcg_int* stream, Validated_train_data_Core_1& p)
+{
+    std::cerr << "decode int function not implemented for packet 11 yet." << std::endl;
+
+    return Validated_train_data_Core_1_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

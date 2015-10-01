@@ -15,20 +15,17 @@ int Position_Report_UpperBitsNotSet(const Position_Report_Core* p)
     status = status && UpperBitsNotSet64(p->L_DOUBTOVER,       15);
     status = status && UpperBitsNotSet64(p->L_DOUBTUNDER,      15);
     status = status && UpperBitsNotSet64(p->Q_LENGTH,          2) ;
-
-    if ((p->Q_LENGTH == 1) || (p->Q_LENGTH == 2))
+    if ((p-> Q_LENGTH == 1 ) || (p->Q_LENGTH == 2))
     {
         status = status && UpperBitsNotSet64(p->L_TRAININT,        15);
     }
-
     status = status && UpperBitsNotSet64(p->V_TRAIN,           7) ;
     status = status && UpperBitsNotSet64(p->Q_DIRTRAIN,        2) ;
     status = status && UpperBitsNotSet64(p->M_MODE,            4) ;
     status = status && UpperBitsNotSet64(p->M_LEVEL,           3) ;
-
-    if (p->M_LEVEL == 1)
+    if (p-> M_LEVEL == 1)
     {
-        status = status && UpperBitsNotSet64(p->NID_NTC,           8) ;
+        status = status && UpperBitsNotSet64(p->NID_STM,           8) ;
     }
 
     if (status)
@@ -58,8 +55,7 @@ int Position_Report_Encode_Bit(Bitstream* stream, const Position_Report_Core* p)
             Bitstream_Write(stream, 15, p->L_DOUBTOVER);
             Bitstream_Write(stream, 15, p->L_DOUBTUNDER);
             Bitstream_Write(stream, 2,  p->Q_LENGTH);
-
-            if ((p->Q_LENGTH == 1) || (p->Q_LENGTH == 2))
+            if ((p-> Q_LENGTH == 1 ) || (p->Q_LENGTH == 2))
             {
                 Bitstream_Write(stream, 15, p->L_TRAININT);
             }
@@ -68,10 +64,9 @@ int Position_Report_Encode_Bit(Bitstream* stream, const Position_Report_Core* p)
             Bitstream_Write(stream, 2,  p->Q_DIRTRAIN);
             Bitstream_Write(stream, 4,  p->M_MODE);
             Bitstream_Write(stream, 3,  p->M_LEVEL);
-
-            if (p->M_LEVEL == 1)
+            if (p-> M_LEVEL == 1)
             {
-                Bitstream_Write(stream, 8,  p->NID_NTC);
+                Bitstream_Write(stream, 8,  p->NID_STM);
             }
 
 
@@ -213,7 +208,7 @@ int Position_Report_Decode_Bit(Bitstream* stream, Position_Report_Core* p)
             p->Q_LENGTH        = Bitstream_Read(stream, 2);
         }
 
-        if ((p->Q_LENGTH == 1) || (p->Q_LENGTH == 2))
+        if ((p-> Q_LENGTH == 1 ) || (p->Q_LENGTH == 2))
         {
             {
                 p->L_TRAININT        = Bitstream_Read(stream, 15);
@@ -237,10 +232,10 @@ int Position_Report_Decode_Bit(Bitstream* stream, Position_Report_Core* p)
             p->M_LEVEL        = Bitstream_Read(stream, 3);
         }
 
-        if (p->M_LEVEL == 1)
+        if (p-> M_LEVEL == 1)
         {
             {
-                p->NID_NTC        = Bitstream_Read(stream, 8);
+                p->NID_STM        = Bitstream_Read(stream, 8);
             }
 
         }
@@ -277,43 +272,11 @@ int Position_Report_Decode_Bit(Bitstream* stream, Position_Report_Core* p)
 
 int Position_Report_Encode_Int(PacketInfo* data, kcg_int* stream, const Position_Report_Core* p)
 {
-    stream[data->startAddress++] = p->L_PACKET;
-    stream[data->startAddress++] = p->Q_SCALE;
-    stream[data->startAddress++] = p->NID_LRBG;
-    stream[data->startAddress++] = p->D_LRBG;
-    stream[data->startAddress++] = p->Q_DIRLRBG;
-    stream[data->startAddress++] = p->Q_DLRBG;
-    stream[data->startAddress++] = p->L_DOUBTOVER;
-    stream[data->startAddress++] = p->L_DOUBTUNDER;
-    stream[data->startAddress++] = p->Q_LENGTH;
-    stream[data->startAddress++] = p->L_TRAININT;
-    stream[data->startAddress++] = p->V_TRAIN;
-    stream[data->startAddress++] = p->Q_DIRTRAIN;
-    stream[data->startAddress++] = p->M_MODE;
-    stream[data->startAddress++] = p->M_LEVEL;
-    stream[data->startAddress++] = p->NID_NTC;
-
-    return 1;
+    return 0;
 }
 
 int Position_Report_Decode_Int(PacketInfo* data, const kcg_int* stream, Position_Report_Core* p)
 {
-    p->L_PACKET = stream[data->startAddress++];
-    p->Q_SCALE = stream[data->startAddress++];
-    p->NID_LRBG = stream[data->startAddress++];
-    p->D_LRBG = stream[data->startAddress++];
-    p->Q_DIRLRBG = stream[data->startAddress++];
-    p->Q_DLRBG = stream[data->startAddress++];
-    p->L_DOUBTOVER = stream[data->startAddress++];
-    p->L_DOUBTUNDER = stream[data->startAddress++];
-    p->Q_LENGTH = stream[data->startAddress++];
-    p->L_TRAININT = stream[data->startAddress++];
-    p->V_TRAIN = stream[data->startAddress++];
-    p->Q_DIRTRAIN = stream[data->startAddress++];
-    p->M_MODE = stream[data->startAddress++];
-    p->M_LEVEL = stream[data->startAddress++];
-    p->NID_NTC = stream[data->startAddress++];
-
-    return 1;
+    return 0;
 }
 

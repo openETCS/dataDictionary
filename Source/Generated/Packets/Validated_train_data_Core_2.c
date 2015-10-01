@@ -6,7 +6,7 @@ int Validated_train_data_Core_2_UpperBitsNotSet(const Validated_train_data_Core_
 {
     bool status = true;
 
-    status = status && UpperBitsNotSet64(p->NID_NTC,           8) ;
+    status = status && UpperBitsNotSet64(p->NID_STM,           8) ;
 
     if (status)
     {
@@ -26,10 +26,10 @@ int Validated_train_data_Core_2_Encode_Bit(Bitstream* stream, const Validated_tr
         {
             //@ ghost const uint32_t pos = stream->bitpos;
 
-            Bitstream_Write(stream, 8,  p->NID_NTC);
+            Bitstream_Write(stream, 8,  p->NID_STM);
 
 
-            //@ assert NID_NTC:           EqualBits(stream, pos,       pos + 8,   p->NID_NTC);
+            //@ assert NID_STM:           EqualBits(stream, pos,       pos + 8,   p->NID_STM);
 
             return 1;
         }
@@ -51,20 +51,20 @@ int Validated_train_data_Core_2_Decode_Bit(Bitstream* stream, Validated_train_da
         //@ ghost const uint32_t pos = stream->bitpos;
 
         /*@
-          requires NID_NTC:        stream->bitpos == pos + 0;
+          requires NID_STM:        stream->bitpos == pos + 0;
           assigns                  stream->bitpos;
-          assigns                  p->NID_NTC;
-          ensures  NID_NTC:        stream->bitpos == pos + 8;
-          ensures  NID_NTC:        EqualBits(stream, pos + 0, pos + 8, p->NID_NTC);
-          ensures  NID_NTC:        UpperBitsNotSet(p->NID_NTC, 8);
+          assigns                  p->NID_STM;
+          ensures  NID_STM:        stream->bitpos == pos + 8;
+          ensures  NID_STM:        EqualBits(stream, pos + 0, pos + 8, p->NID_STM);
+          ensures  NID_STM:        UpperBitsNotSet(p->NID_STM, 8);
         */
         {
-            p->NID_NTC        = Bitstream_Read(stream, 8);
+            p->NID_STM        = Bitstream_Read(stream, 8);
         }
 
-        //@ assert NID_NTC:           EqualBits(stream, pos,       pos + 8,   p->NID_NTC);
+        //@ assert NID_STM:           EqualBits(stream, pos,       pos + 8,   p->NID_STM);
 
-        //@ assert NID_NTC:           UpperBitsNotSet(p->NID_NTC,           8);
+        //@ assert NID_STM:           UpperBitsNotSet(p->NID_STM,           8);
 
         //@ assert final: EqualBits(stream, pos, p);
 
@@ -78,15 +78,11 @@ int Validated_train_data_Core_2_Decode_Bit(Bitstream* stream, Validated_train_da
 
 int Validated_train_data_Core_2_Encode_Int(PacketInfo* data, kcg_int* stream, const Validated_train_data_Core_2* p)
 {
-    stream[data->startAddress++] = p->NID_NTC;
-
-    return 1;
+    return 0;
 }
 
 int Validated_train_data_Core_2_Decode_Int(PacketInfo* data, const kcg_int* stream, Validated_train_data_Core_2* p)
 {
-    p->NID_NTC = stream[data->startAddress++];
-
-    return 1;
+    return 0;
 }
 

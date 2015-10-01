@@ -10,7 +10,7 @@ struct Level_Transition_Order_Core
 {
     // TransmissionMedia=Any
     // Packet to identify where a level transition shall take place. In
-    // case of mixed levels, the successive M_LEVELTR go from the highest
+    // case of mixed levels, the successive M_LEVELTR’s go from the highest
     // priority level to the lowest one.
     // Packet Number = 41
 
@@ -19,7 +19,7 @@ struct Level_Transition_Order_Core
     uint64_t   Q_SCALE;          // # 2
     uint64_t  D_LEVELTR;        // # 15
     uint64_t   M_LEVELTR;        // # 3
-    uint64_t   NID_NTC;          // # 8
+    uint64_t   NID_STM;          // # 8
     uint64_t  L_ACKLEVELTR;     // # 15
     uint64_t   N_ITER_1;         // # 5
     Level_Transition_Order_Core_1   sub_1[31];
@@ -170,15 +170,14 @@ inline std::ostream& operator<<(std::ostream& stream, const Level_Transition_Ord
             << +p.Q_SCALE << ','
             << +p.D_LEVELTR << ','
             << +p.M_LEVELTR << ','
-            << +p.NID_NTC << ','
+            << +p.NID_STM << ','
             << +p.L_ACKLEVELTR << ','
-            << +p.N_ITER_1;
-
-    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-    {
-        stream << ',' << p.sub_1[i];
-    }
-
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
+   
 
     return stream;
 }
@@ -195,12 +194,10 @@ inline bool operator==(const Level_Transition_Order_Core& a, const Level_Transit
 
     if (a.M_LEVELTR == 1)
     {
-        status = status && (a.NID_NTC == b.NID_NTC);
+        status = status && (a.NID_STM == b.NID_STM);
     }
-
     status = status && (a.L_ACKLEVELTR == b.L_ACKLEVELTR);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
-
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)
@@ -233,11 +230,15 @@ inline int decode(Bitstream& stream, Level_Transition_Order_Core& p)
 
 inline int encode(PacketInfo& data, kcg_int* stream, const Level_Transition_Order_Core& p)
 {
+    std::cerr << "encode int function not implemented for packet 41 yet." << std::endl;
+
     return Level_Transition_Order_Encode_Int(&data, stream, &p);
 }
 
 inline int decode(PacketInfo& data, const kcg_int* stream, Level_Transition_Order_Core& p)
 {
+    std::cerr << "decode int function not implemented for packet 41 yet." << std::endl;
+
     return Level_Transition_Order_Decode_Int(&data, stream, &p);
 }
 

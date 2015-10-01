@@ -8,7 +8,7 @@
 
 struct Onboard_telephone_numbers_Core
 {
-    // TransmissionMedia=RBC, RIU
+    // TransmissionMedia=Radio
     // Telephone numbers associated to the onboard equipment
     // Packet Number = 3
 
@@ -142,13 +142,12 @@ inline std::ostream& operator<<(std::ostream& stream, const Onboard_telephone_nu
 {
     stream
             << +p.L_PACKET << ','
-            << +p.N_ITER_1;
-
-    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-    {
-        stream << ',' << p.sub_1[i];
-    }
-
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
+   
 
     return stream;
 }
@@ -159,7 +158,6 @@ inline bool operator==(const Onboard_telephone_numbers_Core& a, const Onboard_te
 
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
-
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)
@@ -192,11 +190,15 @@ inline int decode(Bitstream& stream, Onboard_telephone_numbers_Core& p)
 
 inline int encode(PacketInfo& data, kcg_int* stream, const Onboard_telephone_numbers_Core& p)
 {
+    std::cerr << "encode int function not implemented for packet 3 yet." << std::endl;
+
     return Onboard_telephone_numbers_Encode_Int(&data, stream, &p);
 }
 
 inline int decode(PacketInfo& data, const kcg_int* stream, Onboard_telephone_numbers_Core& p)
 {
+    std::cerr << "decode int function not implemented for packet 3 yet." << std::endl;
+
     return Onboard_telephone_numbers_Decode_Int(&data, stream, &p);
 }
 

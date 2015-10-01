@@ -10,43 +10,31 @@ int Route_Suitability_Data_UpperBitsNotSet(const Route_Suitability_Data_Core* p)
     status = status && UpperBitsNotSet64(p->L_PACKET,          13);
     status = status && UpperBitsNotSet64(p->Q_SCALE,           2) ;
     status = status && UpperBitsNotSet64(p->Q_TRACKINIT,       1) ;
-
     if (p->Q_TRACKINIT == 1)
     {
         status = status && UpperBitsNotSet64(p->D_TRACKINIT,       15);
     }
-
     if (p->Q_TRACKINIT == 0)
     {
         status = status && UpperBitsNotSet64(p->D_SUITABILITY,     15);
-        status = status && UpperBitsNotSet64(p->Q_SUITABILITY,     2) ;
-
-        if (p->Q_SUITABILITY == 0)
-        {
-            status = status && UpperBitsNotSet64(p->M_LINEGAUGE,       8) ;
-        }
-
-        if (p->Q_SUITABILITY == 1)
-        {
-            status = status && UpperBitsNotSet64(p->M_AXLELOADCAT,     7) ;
-        }
-
-        if (p->Q_SUITABILITY == 2)
-        {
-            status = status && UpperBitsNotSet64(p->M_VOLTAGE,         4) ;
-        }
-
-        if ((p->Q_SUITABILITY == 2) && (p->M_VOLTAGE != 0))
-        {
-            status = status && UpperBitsNotSet64(p->NID_CTRACTION,     10);
-        }
-
-        status = status && UpperBitsNotSet64(p->N_ITER_1,          5) ;
-
-        for (uint32_t i = 0; i < p->N_ITER_1; ++i)
-        {
-            status = status && Route_Suitability_Data_Core_1_UpperBitsNotSet(&(p->sub_1[i]));
-        }
+    }
+    status = status && UpperBitsNotSet64(p->Q_SUITABILITY,     2) ;
+    if (p->Q_SUITABILITY == 0)
+    {
+        status = status && UpperBitsNotSet64(p->M_LOADINGGAUGE,    8) ;
+    }
+    if (p->Q_SUITABILITY == 1)
+    {
+        status = status && UpperBitsNotSet64(p->M_AXLELOAD,        7) ;
+    }
+    if (p->Q_SUITABILITY == 2)
+    {
+        status = status && UpperBitsNotSet64(p->M_TRACTION,        8) ;
+    }
+    status = status && UpperBitsNotSet64(p->N_ITER_1,          5) ;
+    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+    {
+        status = status && Route_Suitability_Data_Core_1_UpperBitsNotSet(&(p->sub_1[i]));
     }
 
     if (status)
@@ -71,7 +59,6 @@ int Route_Suitability_Data_Encode_Bit(Bitstream* stream, const Route_Suitability
             Bitstream_Write(stream, 13, p->L_PACKET);
             Bitstream_Write(stream, 2,  p->Q_SCALE);
             Bitstream_Write(stream, 1,  p->Q_TRACKINIT);
-
             if (p->Q_TRACKINIT == 1)
             {
                 Bitstream_Write(stream, 15, p->D_TRACKINIT);
@@ -80,36 +67,29 @@ int Route_Suitability_Data_Encode_Bit(Bitstream* stream, const Route_Suitability
             if (p->Q_TRACKINIT == 0)
             {
                 Bitstream_Write(stream, 15, p->D_SUITABILITY);
-                Bitstream_Write(stream, 2,  p->Q_SUITABILITY);
-
-                if (p->Q_SUITABILITY == 0)
-                {
-                    Bitstream_Write(stream, 8,  p->M_LINEGAUGE);
-                }
-
-                if (p->Q_SUITABILITY == 1)
-                {
-                    Bitstream_Write(stream, 7,  p->M_AXLELOADCAT);
-                }
-
-                if (p->Q_SUITABILITY == 2)
-                {
-                    Bitstream_Write(stream, 4,  p->M_VOLTAGE);
-                }
-
-                if ((p->Q_SUITABILITY == 2) && (p->M_VOLTAGE != 0))
-                {
-                    Bitstream_Write(stream, 10, p->NID_CTRACTION);
-                }
-
-                Bitstream_Write(stream, 5,  p->N_ITER_1);
-
-                for (uint32_t i = 0; i < p->N_ITER_1; ++i)
-                {
-                    Route_Suitability_Data_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
-                }
             }
 
+            Bitstream_Write(stream, 2,  p->Q_SUITABILITY);
+            if (p->Q_SUITABILITY == 0)
+            {
+                Bitstream_Write(stream, 8,  p->M_LOADINGGAUGE);
+            }
+
+            if (p->Q_SUITABILITY == 1)
+            {
+                Bitstream_Write(stream, 7,  p->M_AXLELOAD);
+            }
+
+            if (p->Q_SUITABILITY == 2)
+            {
+                Bitstream_Write(stream, 8,  p->M_TRACTION);
+            }
+
+            Bitstream_Write(stream, 5,  p->N_ITER_1);
+            for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+            {
+                Route_Suitability_Data_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
+            }
 
 
             //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
@@ -198,52 +178,44 @@ int Route_Suitability_Data_Decode_Bit(Bitstream* stream, Route_Suitability_Data_
                 p->D_SUITABILITY        = Bitstream_Read(stream, 15);
             }
 
-            {
-                p->Q_SUITABILITY        = Bitstream_Read(stream, 2);
-            }
-
-            if (p->Q_SUITABILITY == 0)
-            {
-                {
-                    p->M_LINEGAUGE        = Bitstream_Read(stream, 8);
-                }
-
-            }
-
-            if (p->Q_SUITABILITY == 1)
-            {
-                {
-                    p->M_AXLELOADCAT        = Bitstream_Read(stream, 7);
-                }
-
-            }
-
-            if (p->Q_SUITABILITY == 2)
-            {
-                {
-                    p->M_VOLTAGE        = Bitstream_Read(stream, 4);
-                }
-
-            }
-
-            if ((p->Q_SUITABILITY == 2) && (p->M_VOLTAGE != 0))
-            {
-                {
-                    p->NID_CTRACTION        = Bitstream_Read(stream, 10);
-                }
-
-            }
-
-            {
-                p->N_ITER_1        = Bitstream_Read(stream, 5);
-            }
-
-            for (uint32_t i = 0; i < p->N_ITER_1; ++i)
-            {
-                Route_Suitability_Data_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
-            }
         }
 
+        {
+            p->Q_SUITABILITY        = Bitstream_Read(stream, 2);
+        }
+
+        if (p->Q_SUITABILITY == 0)
+        {
+            {
+                p->M_LOADINGGAUGE        = Bitstream_Read(stream, 8);
+            }
+
+        }
+
+        if (p->Q_SUITABILITY == 1)
+        {
+            {
+                p->M_AXLELOAD        = Bitstream_Read(stream, 7);
+            }
+
+        }
+
+        if (p->Q_SUITABILITY == 2)
+        {
+            {
+                p->M_TRACTION        = Bitstream_Read(stream, 8);
+            }
+
+        }
+
+    {
+            p->N_ITER_1        = Bitstream_Read(stream, 5);
+        }
+
+        for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+        {
+            Route_Suitability_Data_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
+        }
         //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
         //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
         //@ assert Q_SCALE:           EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE);
@@ -266,47 +238,11 @@ int Route_Suitability_Data_Decode_Bit(Bitstream* stream, Route_Suitability_Data_
 
 int Route_Suitability_Data_Encode_Int(PacketInfo* data, kcg_int* stream, const Route_Suitability_Data_Core* p)
 {
-    stream[data->startAddress++] = p->Q_DIR;
-    stream[data->startAddress++] = p->L_PACKET;
-    stream[data->startAddress++] = p->Q_SCALE;
-    stream[data->startAddress++] = p->Q_TRACKINIT;
-    stream[data->startAddress++] = p->D_TRACKINIT;
-    stream[data->startAddress++] = p->D_SUITABILITY;
-    stream[data->startAddress++] = p->Q_SUITABILITY;
-    stream[data->startAddress++] = p->M_LINEGAUGE;
-    stream[data->startAddress++] = p->M_AXLELOADCAT;
-    stream[data->startAddress++] = p->M_VOLTAGE;
-    stream[data->startAddress++] = p->NID_CTRACTION;
-    stream[data->startAddress++] = p->N_ITER_1;
-
-    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
-    {
-        Route_Suitability_Data_Core_1_Encode_Int(data, stream, &(p->sub_1[i]));
-    }
-
-    return 1;
+    return 0;
 }
 
 int Route_Suitability_Data_Decode_Int(PacketInfo* data, const kcg_int* stream, Route_Suitability_Data_Core* p)
 {
-    p->Q_DIR = stream[data->startAddress++];
-    p->L_PACKET = stream[data->startAddress++];
-    p->Q_SCALE = stream[data->startAddress++];
-    p->Q_TRACKINIT = stream[data->startAddress++];
-    p->D_TRACKINIT = stream[data->startAddress++];
-    p->D_SUITABILITY = stream[data->startAddress++];
-    p->Q_SUITABILITY = stream[data->startAddress++];
-    p->M_LINEGAUGE = stream[data->startAddress++];
-    p->M_AXLELOADCAT = stream[data->startAddress++];
-    p->M_VOLTAGE = stream[data->startAddress++];
-    p->NID_CTRACTION = stream[data->startAddress++];
-    p->N_ITER_1 = stream[data->startAddress++];
-
-    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
-    {
-        Route_Suitability_Data_Core_1_Decode_Int(data, stream, &(p->sub_1[i]));
-    }
-
-    return 1;
+    return 0;
 }
 

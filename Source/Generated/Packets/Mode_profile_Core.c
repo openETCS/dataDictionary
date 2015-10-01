@@ -14,9 +14,7 @@ int Mode_profile_UpperBitsNotSet(const Mode_profile_Core* p)
     status = status && UpperBitsNotSet64(p->V_MAMODE,          7) ;
     status = status && UpperBitsNotSet64(p->L_MAMODE,          15);
     status = status && UpperBitsNotSet64(p->L_ACKMAMODE,       15);
-    status = status && UpperBitsNotSet64(p->Q_MAMODE,          1) ;
     status = status && UpperBitsNotSet64(p->N_ITER_1,          5) ;
-
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
         status = status && Mode_profile_Core_1_UpperBitsNotSet(&(p->sub_1[i]));
@@ -48,9 +46,7 @@ int Mode_profile_Encode_Bit(Bitstream* stream, const Mode_profile_Core* p)
             Bitstream_Write(stream, 7,  p->V_MAMODE);
             Bitstream_Write(stream, 15, p->L_MAMODE);
             Bitstream_Write(stream, 15, p->L_ACKMAMODE);
-            Bitstream_Write(stream, 1,  p->Q_MAMODE);
             Bitstream_Write(stream, 5,  p->N_ITER_1);
-
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
                 Mode_profile_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
@@ -65,7 +61,6 @@ int Mode_profile_Encode_Bit(Bitstream* stream, const Mode_profile_Core* p)
             //@ assert V_MAMODE:          EqualBits(stream, pos + 34,  pos + 41,  p->V_MAMODE);
             //@ assert L_MAMODE:          EqualBits(stream, pos + 41,  pos + 56,  p->L_MAMODE);
             //@ assert L_ACKMAMODE:       EqualBits(stream, pos + 56,  pos + 71,  p->L_ACKMAMODE);
-            //@ assert Q_MAMODE:          EqualBits(stream, pos + 71,  pos + 72,  p->Q_MAMODE);
 
             return 1;
         }
@@ -182,19 +177,7 @@ int Mode_profile_Decode_Bit(Bitstream* stream, Mode_profile_Core* p)
             p->L_ACKMAMODE        = Bitstream_Read(stream, 15);
         }
 
-        /*@
-          requires Q_MAMODE:       stream->bitpos == pos + 71;
-          assigns                  stream->bitpos;
-          assigns                  p->Q_MAMODE;
-          ensures  Q_MAMODE:       stream->bitpos == pos + 72;
-          ensures  Q_MAMODE:       EqualBits(stream, pos + 71, pos + 72, p->Q_MAMODE);
-          ensures  Q_MAMODE:       UpperBitsNotSet(p->Q_MAMODE, 1);
-        */
-        {
-            p->Q_MAMODE        = Bitstream_Read(stream, 1);
-        }
-
-        {
+    {
             p->N_ITER_1        = Bitstream_Read(stream, 5);
         }
 
@@ -202,7 +185,6 @@ int Mode_profile_Decode_Bit(Bitstream* stream, Mode_profile_Core* p)
         {
             Mode_profile_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
         }
-
         //@ assert Q_DIR:             EqualBits(stream, pos,       pos + 2,   p->Q_DIR);
         //@ assert L_PACKET:          EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET);
         //@ assert Q_SCALE:           EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE);
@@ -211,7 +193,6 @@ int Mode_profile_Decode_Bit(Bitstream* stream, Mode_profile_Core* p)
         //@ assert V_MAMODE:          EqualBits(stream, pos + 34,  pos + 41,  p->V_MAMODE);
         //@ assert L_MAMODE:          EqualBits(stream, pos + 41,  pos + 56,  p->L_MAMODE);
         //@ assert L_ACKMAMODE:       EqualBits(stream, pos + 56,  pos + 71,  p->L_ACKMAMODE);
-        //@ assert Q_MAMODE:          EqualBits(stream, pos + 71,  pos + 72,  p->Q_MAMODE);
 
         //@ assert Q_DIR:             UpperBitsNotSet(p->Q_DIR,             2);
         //@ assert L_PACKET:          UpperBitsNotSet(p->L_PACKET,          13);
@@ -221,7 +202,6 @@ int Mode_profile_Decode_Bit(Bitstream* stream, Mode_profile_Core* p)
         //@ assert V_MAMODE:          UpperBitsNotSet(p->V_MAMODE,          7);
         //@ assert L_MAMODE:          UpperBitsNotSet(p->L_MAMODE,          15);
         //@ assert L_ACKMAMODE:       UpperBitsNotSet(p->L_ACKMAMODE,       15);
-        //@ assert Q_MAMODE:          UpperBitsNotSet(p->Q_MAMODE,          1);
 
         //@ assert final: EqualBits(stream, pos, p);
 
@@ -235,43 +215,11 @@ int Mode_profile_Decode_Bit(Bitstream* stream, Mode_profile_Core* p)
 
 int Mode_profile_Encode_Int(PacketInfo* data, kcg_int* stream, const Mode_profile_Core* p)
 {
-    stream[data->startAddress++] = p->Q_DIR;
-    stream[data->startAddress++] = p->L_PACKET;
-    stream[data->startAddress++] = p->Q_SCALE;
-    stream[data->startAddress++] = p->N_ITER_1 + 1;
-    stream[data->startAddress++] = p->D_MAMODE;
-    stream[data->startAddress++] = p->M_MAMODE;
-    stream[data->startAddress++] = p->V_MAMODE;
-    stream[data->startAddress++] = p->L_MAMODE;
-    stream[data->startAddress++] = p->L_ACKMAMODE;
-    stream[data->startAddress++] = p->Q_MAMODE;
-
-    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
-    {
-        Mode_profile_Core_1_Encode_Int(data, stream, &(p->sub_1[i]));
-    }
-
-    return 1;
+    return 0;
 }
 
 int Mode_profile_Decode_Int(PacketInfo* data, const kcg_int* stream, Mode_profile_Core* p)
 {
-    p->Q_DIR = stream[data->startAddress++];
-    p->L_PACKET = stream[data->startAddress++];
-    p->Q_SCALE = stream[data->startAddress++];
-    p->N_ITER_1 = stream[data->startAddress++] - 1;
-    p->D_MAMODE = stream[data->startAddress++];
-    p->M_MAMODE = stream[data->startAddress++];
-    p->V_MAMODE = stream[data->startAddress++];
-    p->L_MAMODE = stream[data->startAddress++];
-    p->L_ACKMAMODE = stream[data->startAddress++];
-    p->Q_MAMODE = stream[data->startAddress++];
-
-    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
-    {
-        Mode_profile_Core_1_Decode_Int(data, stream, &(p->sub_1[i]));
-    }
-
-    return 1;
+    return 0;
 }
 

@@ -7,7 +7,7 @@
 
 struct Session_Management_Core
 {
-    // TransmissionMedia=Balise, RBC
+    // TransmissionMedia=Any
     // Packet to give the identity and telephone number of the RBC
     // with which a session shall be established or terminated.
     // Packet Number = 42
@@ -23,7 +23,7 @@ struct Session_Management_Core
 
 typedef struct Session_Management_Core Session_Management_Core;
 
-#define SESSION_MANAGEMENT_CORE_BITSIZE 105
+#define SESSION_MANAGEMENT_CORE_BITSIZE 31
 
 /*@
     logic integer BitSize{L}(Session_Management_Core* p) = SESSION_MANAGEMENT_CORE_BITSIZE;
@@ -37,38 +37,22 @@ typedef struct Session_Management_Core Session_Management_Core;
     predicate Invariant(Session_Management_Core* p) =
       Invariant(p->Q_DIR)             &&
       Invariant(p->L_PACKET)          &&
-      Invariant(p->Q_RBC)             &&
-      Invariant(p->NID_C)             &&
-      Invariant(p->NID_RBC)           &&
-      Invariant(p->NID_RADIO)         &&
-      Invariant(p->Q_SLEEPSESSION);
+      Invariant(p->Q_RBC);
 
     predicate ZeroInitialized(Session_Management_Core* p) =
       ZeroInitialized(p->Q_DIR)             &&
       ZeroInitialized(p->L_PACKET)          &&
-      ZeroInitialized(p->Q_RBC)             &&
-      ZeroInitialized(p->NID_C)             &&
-      ZeroInitialized(p->NID_RBC)           &&
-      ZeroInitialized(p->NID_RADIO)         &&
-      ZeroInitialized(p->Q_SLEEPSESSION);
+      ZeroInitialized(p->Q_RBC);
 
     predicate EqualBits(Bitstream* stream, integer pos, Session_Management_Core* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
       EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
-      EqualBits(stream, pos + 15,  pos + 16,  p->Q_RBC)             &&
-      EqualBits(stream, pos + 16,  pos + 26,  p->NID_C)             &&
-      EqualBits(stream, pos + 26,  pos + 40,  p->NID_RBC)           &&
-      EqualBits(stream, pos + 40,  pos + 104, p->NID_RADIO)         &&
-      EqualBits(stream, pos + 104, pos + 105, p->Q_SLEEPSESSION);
+      EqualBits(stream, pos + 15,  pos + 16,  p->Q_RBC);
 
     predicate UpperBitsNotSet(Session_Management_Core* p) =
       UpperBitsNotSet(p->Q_DIR,            2)   &&
       UpperBitsNotSet(p->L_PACKET,         13)  &&
-      UpperBitsNotSet(p->Q_RBC,            1)   &&
-      UpperBitsNotSet(p->NID_C,            10)  &&
-      UpperBitsNotSet(p->NID_RBC,          14)  &&
-      UpperBitsNotSet(p->NID_RADIO,        64)  &&
-      UpperBitsNotSet(p->Q_SLEEPSESSION,   1);
+      UpperBitsNotSet(p->Q_RBC,            1);
 
 */
 
@@ -187,9 +171,17 @@ inline bool operator==(const Session_Management_Core& a, const Session_Managemen
     status = status && (a.Q_DIR == b.Q_DIR);
     status = status && (a.L_PACKET == b.L_PACKET);
     status = status && (a.Q_RBC == b.Q_RBC);
-    status = status && (a.NID_C == b.NID_C);
+
+    if (a.NID_RBC != 16383)
+    {
+        status = status && (a.NID_C == b.NID_C);
+    }
     status = status && (a.NID_RBC == b.NID_RBC);
-    status = status && (a.NID_RADIO == b.NID_RADIO);
+
+    if (a.NID_RBC != 16383)
+    {
+        status = status && (a.NID_RADIO == b.NID_RADIO);
+    }
     status = status && (a.Q_SLEEPSESSION == b.Q_SLEEPSESSION);
 
     return status;
@@ -212,11 +204,15 @@ inline int decode(Bitstream& stream, Session_Management_Core& p)
 
 inline int encode(PacketInfo& data, kcg_int* stream, const Session_Management_Core& p)
 {
+    std::cerr << "encode int function not implemented for packet 42 yet." << std::endl;
+
     return Session_Management_Encode_Int(&data, stream, &p);
 }
 
 inline int decode(PacketInfo& data, const kcg_int* stream, Session_Management_Core& p)
 {
+    std::cerr << "decode int function not implemented for packet 42 yet." << std::endl;
+
     return Session_Management_Decode_Int(&data, stream, &p);
 }
 

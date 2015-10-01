@@ -154,7 +154,6 @@ inline bool operator==(const List_of_balises_for_SH_Area_Core_1& a, const List_o
     {
         status = status && (a.NID_C == b.NID_C);
     }
-
     status = status && (a.NID_BG == b.NID_BG);
 
     return status;
@@ -163,6 +162,30 @@ inline bool operator==(const List_of_balises_for_SH_Area_Core_1& a, const List_o
 inline bool operator!=(const List_of_balises_for_SH_Area_Core_1& a, const List_of_balises_for_SH_Area_Core_1& b)
 {
     return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const List_of_balises_for_SH_Area_Core_1& p)
+{
+    return List_of_balises_for_SH_Area_Core_1_Encode_Bit(&stream, &p);
+}
+
+inline int decode(Bitstream& stream, List_of_balises_for_SH_Area_Core_1& p)
+{
+    return List_of_balises_for_SH_Area_Core_1_Decode_Bit(&stream, &p);
+}
+
+inline int encode(PacketInfo& data, kcg_int* stream, const List_of_balises_for_SH_Area_Core_1& p)
+{
+    std::cerr << "encode int function not implemented for packet 49 yet." << std::endl;
+
+    return List_of_balises_for_SH_Area_Core_1_Encode_Int(&data, stream, &p);
+}
+
+inline int decode(PacketInfo& data, const kcg_int* stream, List_of_balises_for_SH_Area_Core_1& p)
+{
+    std::cerr << "decode int function not implemented for packet 49 yet." << std::endl;
+
+    return List_of_balises_for_SH_Area_Core_1_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

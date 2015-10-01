@@ -7,7 +7,7 @@
 
 struct Infill_location_reference_Core
 {
-    // TransmissionMedia=Balise, Loop, RIU
+    // TransmissionMedia=Any
     // Defines location reference for all data contained in the same radio
     // message or balise/loop telegram respectively, following this packet.
     // Packet Number = 136
@@ -172,7 +172,6 @@ inline bool operator==(const Infill_location_reference_Core& a, const Infill_loc
     {
         status = status && (a.NID_C == b.NID_C);
     }
-
     status = status && (a.NID_BG == b.NID_BG);
 
     return status;

@@ -7,12 +7,10 @@ int Level_Transition_Order_Core_1_UpperBitsNotSet(const Level_Transition_Order_C
     bool status = true;
 
     status = status && UpperBitsNotSet64(p->M_LEVELTR,         3) ;
-
     if (p->M_LEVELTR == 1)
     {
-        status = status && UpperBitsNotSet64(p->NID_NTC,           8) ;
+        status = status && UpperBitsNotSet64(p->NID_STM,           8) ;
     }
-
     status = status && UpperBitsNotSet64(p->L_ACKLEVELTR,      15);
 
     if (status)
@@ -34,10 +32,9 @@ int Level_Transition_Order_Core_1_Encode_Bit(Bitstream* stream, const Level_Tran
             //@ ghost const uint32_t pos = stream->bitpos;
 
             Bitstream_Write(stream, 3,  p->M_LEVELTR);
-
             if (p->M_LEVELTR == 1)
             {
-                Bitstream_Write(stream, 8,  p->NID_NTC);
+                Bitstream_Write(stream, 8,  p->NID_STM);
             }
 
             Bitstream_Write(stream, 15, p->L_ACKLEVELTR);
@@ -79,7 +76,7 @@ int Level_Transition_Order_Core_1_Decode_Bit(Bitstream* stream, Level_Transition
         if (p->M_LEVELTR == 1)
         {
             {
-                p->NID_NTC        = Bitstream_Read(stream, 8);
+                p->NID_STM        = Bitstream_Read(stream, 8);
             }
 
         }
@@ -104,19 +101,11 @@ int Level_Transition_Order_Core_1_Decode_Bit(Bitstream* stream, Level_Transition
 
 int Level_Transition_Order_Core_1_Encode_Int(PacketInfo* data, kcg_int* stream, const Level_Transition_Order_Core_1* p)
 {
-    stream[data->startAddress++] = p->M_LEVELTR;
-    stream[data->startAddress++] = p->NID_NTC;
-    stream[data->startAddress++] = p->L_ACKLEVELTR;
-
-    return 1;
+    return 0;
 }
 
 int Level_Transition_Order_Core_1_Decode_Int(PacketInfo* data, const kcg_int* stream, Level_Transition_Order_Core_1* p)
 {
-    p->M_LEVELTR = stream[data->startAddress++];
-    p->NID_NTC = stream[data->startAddress++];
-    p->L_ACKLEVELTR = stream[data->startAddress++];
-
-    return 1;
+    return 0;
 }
 

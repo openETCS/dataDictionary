@@ -9,19 +9,19 @@
 
 struct Validated_train_data_Core
 {
-    // TransmissionMedia=RBC
-    // Validated train data.
+    // TransmissionMedia=Radio
+    // Validated train data. For some variables, if the engine does not
+    // know a data value, it may use the corresponding default value
     // Packet Number = 11
 
     uint64_t  L_PACKET;         // # 13
-    uint64_t   NC_CDTRAIN;       // # 4
+    uint64_t  NID_OPERATIONAL;  // # 32
     uint64_t  NC_TRAIN;         // # 15
     uint64_t  L_TRAIN;          // # 12
     uint64_t   V_MAXTRAIN;       // # 7
     uint64_t   M_LOADINGGAUGE;   // # 8
-    uint64_t   M_AXLELOADCAT;    // # 7
+    uint64_t   M_AXLELOAD;       // # 7
     uint64_t   M_AIRTIGHT;       // # 2
-    uint64_t  N_AXLE;           // # 10
     uint64_t   N_ITER_1;         // # 5
     Validated_train_data_Core_1   sub_1[31];
     uint64_t   N_ITER_2;         // # 5
@@ -30,7 +30,7 @@ struct Validated_train_data_Core
 
 typedef struct Validated_train_data_Core Validated_train_data_Core;
 
-#define VALIDATED_TRAIN_DATA_CORE_BITSIZE 88
+#define VALIDATED_TRAIN_DATA_CORE_BITSIZE 106
 
 /*@
     logic integer BitSize{L}(Validated_train_data_Core* p) = VALIDATED_TRAIN_DATA_CORE_BITSIZE;
@@ -43,47 +43,43 @@ typedef struct Validated_train_data_Core Validated_train_data_Core;
 
     predicate Invariant(Validated_train_data_Core* p) =
       Invariant(p->L_PACKET)          &&
-      Invariant(p->NC_CDTRAIN)        &&
+      Invariant(p->NID_OPERATIONAL)   &&
       Invariant(p->NC_TRAIN)          &&
       Invariant(p->L_TRAIN)           &&
       Invariant(p->V_MAXTRAIN)        &&
       Invariant(p->M_LOADINGGAUGE)    &&
-      Invariant(p->M_AXLELOADCAT)     &&
-      Invariant(p->M_AIRTIGHT)        &&
-      Invariant(p->N_AXLE);
+      Invariant(p->M_AXLELOAD)        &&
+      Invariant(p->M_AIRTIGHT);
 
     predicate ZeroInitialized(Validated_train_data_Core* p) =
       ZeroInitialized(p->L_PACKET)          &&
-      ZeroInitialized(p->NC_CDTRAIN)        &&
+      ZeroInitialized(p->NID_OPERATIONAL)   &&
       ZeroInitialized(p->NC_TRAIN)          &&
       ZeroInitialized(p->L_TRAIN)           &&
       ZeroInitialized(p->V_MAXTRAIN)        &&
       ZeroInitialized(p->M_LOADINGGAUGE)    &&
-      ZeroInitialized(p->M_AXLELOADCAT)     &&
-      ZeroInitialized(p->M_AIRTIGHT)        &&
-      ZeroInitialized(p->N_AXLE);
+      ZeroInitialized(p->M_AXLELOAD)        &&
+      ZeroInitialized(p->M_AIRTIGHT);
 
     predicate EqualBits(Bitstream* stream, integer pos, Validated_train_data_Core* p) =
       EqualBits(stream, pos,       pos + 13,  p->L_PACKET)          &&
-      EqualBits(stream, pos + 13,  pos + 17,  p->NC_CDTRAIN)        &&
-      EqualBits(stream, pos + 17,  pos + 32,  p->NC_TRAIN)          &&
-      EqualBits(stream, pos + 32,  pos + 44,  p->L_TRAIN)           &&
-      EqualBits(stream, pos + 44,  pos + 51,  p->V_MAXTRAIN)        &&
-      EqualBits(stream, pos + 51,  pos + 59,  p->M_LOADINGGAUGE)    &&
-      EqualBits(stream, pos + 59,  pos + 66,  p->M_AXLELOADCAT)     &&
-      EqualBits(stream, pos + 66,  pos + 68,  p->M_AIRTIGHT)        &&
-      EqualBits(stream, pos + 68,  pos + 78,  p->N_AXLE);
+      EqualBits(stream, pos + 13,  pos + 45,  p->NID_OPERATIONAL)   &&
+      EqualBits(stream, pos + 45,  pos + 60,  p->NC_TRAIN)          &&
+      EqualBits(stream, pos + 60,  pos + 72,  p->L_TRAIN)           &&
+      EqualBits(stream, pos + 72,  pos + 79,  p->V_MAXTRAIN)        &&
+      EqualBits(stream, pos + 79,  pos + 87,  p->M_LOADINGGAUGE)    &&
+      EqualBits(stream, pos + 87,  pos + 94,  p->M_AXLELOAD)        &&
+      EqualBits(stream, pos + 94,  pos + 96,  p->M_AIRTIGHT);
 
     predicate UpperBitsNotSet(Validated_train_data_Core* p) =
       UpperBitsNotSet(p->L_PACKET,         13)  &&
-      UpperBitsNotSet(p->NC_CDTRAIN,       4)   &&
+      UpperBitsNotSet(p->NID_OPERATIONAL,  32)  &&
       UpperBitsNotSet(p->NC_TRAIN,         15)  &&
       UpperBitsNotSet(p->L_TRAIN,          12)  &&
       UpperBitsNotSet(p->V_MAXTRAIN,       7)   &&
       UpperBitsNotSet(p->M_LOADINGGAUGE,   8)   &&
-      UpperBitsNotSet(p->M_AXLELOADCAT,    7)   &&
-      UpperBitsNotSet(p->M_AIRTIGHT,       2)   &&
-      UpperBitsNotSet(p->N_AXLE,           10);
+      UpperBitsNotSet(p->M_AXLELOAD,       7)   &&
+      UpperBitsNotSet(p->M_AIRTIGHT,       2);
 
 */
 
@@ -185,29 +181,25 @@ inline std::ostream& operator<<(std::ostream& stream, const Validated_train_data
 {
     stream
             << +p.L_PACKET << ','
-            << +p.NC_CDTRAIN << ','
+            << +p.NID_OPERATIONAL << ','
             << +p.NC_TRAIN << ','
             << +p.L_TRAIN << ','
             << +p.V_MAXTRAIN << ','
             << +p.M_LOADINGGAUGE << ','
-            << +p.M_AXLELOADCAT << ','
+            << +p.M_AXLELOAD << ','
             << +p.M_AIRTIGHT << ','
-            << +p.N_AXLE << ','
-            << +p.N_ITER_1;
-
-    for (uint32_t i = 0; i < p.N_ITER_1; ++i)
-    {
-        stream << ',' << p.sub_1[i];
-    }
-
+       << +p.N_ITER_1;
+       for (uint32_t i = 0; i < p.N_ITER_1; ++i)
+       {
+           stream << ',' << p.sub_1[i];
+       }
     stream << ','
-           << +p.N_ITER_2;
-
-    for (uint32_t i = 0; i < p.N_ITER_2; ++i)
-    {
-        stream << ',' << p.sub_2[i];
-    }
-
+       << +p.N_ITER_2;
+       for (uint32_t i = 0; i < p.N_ITER_2; ++i)
+       {
+           stream << ',' << p.sub_2[i];
+       }
+   
 
     return stream;
 }
@@ -217,16 +209,14 @@ inline bool operator==(const Validated_train_data_Core& a, const Validated_train
     bool status = true;
 
     status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.NC_CDTRAIN == b.NC_CDTRAIN);
+    status = status && (a.NID_OPERATIONAL == b.NID_OPERATIONAL);
     status = status && (a.NC_TRAIN == b.NC_TRAIN);
     status = status && (a.L_TRAIN == b.L_TRAIN);
     status = status && (a.V_MAXTRAIN == b.V_MAXTRAIN);
     status = status && (a.M_LOADINGGAUGE == b.M_LOADINGGAUGE);
-    status = status && (a.M_AXLELOADCAT == b.M_AXLELOADCAT);
+    status = status && (a.M_AXLELOAD == b.M_AXLELOAD);
     status = status && (a.M_AIRTIGHT == b.M_AIRTIGHT);
-    status = status && (a.N_AXLE == b.N_AXLE);
     status = status && (a.N_ITER_1 == b.N_ITER_1);
-
     if (a.N_ITER_1 == b.N_ITER_1)
     {
         for (uint32_t i = 0; i < a.N_ITER_1; ++i)
@@ -238,9 +228,7 @@ inline bool operator==(const Validated_train_data_Core& a, const Validated_train
     {
         status = false;
     }
-
     status = status && (a.N_ITER_2 == b.N_ITER_2);
-
     if (a.N_ITER_2 == b.N_ITER_2)
     {
         for (uint32_t i = 0; i < a.N_ITER_2; ++i)
@@ -273,11 +261,15 @@ inline int decode(Bitstream& stream, Validated_train_data_Core& p)
 
 inline int encode(PacketInfo& data, kcg_int* stream, const Validated_train_data_Core& p)
 {
+    std::cerr << "encode int function not implemented for packet 11 yet." << std::endl;
+
     return Validated_train_data_Encode_Int(&data, stream, &p);
 }
 
 inline int decode(PacketInfo& data, const kcg_int* stream, Validated_train_data_Core& p)
 {
+    std::cerr << "decode int function not implemented for packet 11 yet." << std::endl;
+
     return Validated_train_data_Decode_Int(&data, stream, &p);
 }
 

@@ -8,15 +8,13 @@
 struct International_Static_Speed_Profile_Core_2_1
 {
 
-    uint64_t   Q_DIFF;           // # 2
-    uint64_t   NC_CDDIFF;        // # 4
     uint64_t   NC_DIFF;          // # 4
     uint64_t   V_DIFF;           // # 7
 };
 
 typedef struct International_Static_Speed_Profile_Core_2_1 International_Static_Speed_Profile_Core_2_1;
 
-#define INTERNATIONAL_STATIC_SPEED_PROFILE_CORE_2_1_CORE_BITSIZE 9
+#define INTERNATIONAL_STATIC_SPEED_PROFILE_CORE_2_1_CORE_BITSIZE 11
 
 /*@
     logic integer BitSize{L}(International_Static_Speed_Profile_Core_2_1* p) = INTERNATIONAL_STATIC_SPEED_PROFILE_CORE_2_1_CORE_BITSIZE;
@@ -28,16 +26,20 @@ typedef struct International_Static_Speed_Profile_Core_2_1 International_Static_
       \separated(stream->addr + (0..stream->size-1), p);
 
     predicate Invariant(International_Static_Speed_Profile_Core_2_1* p) =
-      Invariant(p->Q_DIFF);
+      Invariant(p->NC_DIFF)           &&
+      Invariant(p->V_DIFF);
 
     predicate ZeroInitialized(International_Static_Speed_Profile_Core_2_1* p) =
-      ZeroInitialized(p->Q_DIFF);
+      ZeroInitialized(p->NC_DIFF)           &&
+      ZeroInitialized(p->V_DIFF);
 
     predicate EqualBits(Bitstream* stream, integer pos, International_Static_Speed_Profile_Core_2_1* p) =
-      EqualBits(stream, pos,       pos + 2,   p->Q_DIFF);
+      EqualBits(stream, pos,       pos + 4,   p->NC_DIFF)           &&
+      EqualBits(stream, pos + 4,   pos + 11,  p->V_DIFF);
 
     predicate UpperBitsNotSet(International_Static_Speed_Profile_Core_2_1* p) =
-      UpperBitsNotSet(p->Q_DIFF,           2);
+      UpperBitsNotSet(p->NC_DIFF,          4)   &&
+      UpperBitsNotSet(p->V_DIFF,           7);
 
 */
 
@@ -138,8 +140,6 @@ int International_Static_Speed_Profile_Core_2_1_Decode_Int(PacketInfo* data, con
 inline std::ostream& operator<<(std::ostream& stream, const International_Static_Speed_Profile_Core_2_1& p)
 {
     stream
-            << +p.Q_DIFF << ','
-            << +p.NC_CDDIFF << ','
             << +p.NC_DIFF << ','
             << +p.V_DIFF;
 
@@ -150,18 +150,7 @@ inline bool operator==(const International_Static_Speed_Profile_Core_2_1& a, con
 {
     bool status = true;
 
-    status = status && (a.Q_DIFF == b.Q_DIFF);
-
-    if (a.Q_DIFF == 0)
-    {
-        status = status && (a.NC_CDDIFF == b.NC_CDDIFF);
-    }
-
-    if ((a.Q_DIFF == 1) || (a.Q_DIFF == 2))
-    {
-        status = status && (a.NC_DIFF == b.NC_DIFF);
-    }
-
+    status = status && (a.NC_DIFF == b.NC_DIFF);
     status = status && (a.V_DIFF == b.V_DIFF);
 
     return status;
@@ -170,6 +159,30 @@ inline bool operator==(const International_Static_Speed_Profile_Core_2_1& a, con
 inline bool operator!=(const International_Static_Speed_Profile_Core_2_1& a, const International_Static_Speed_Profile_Core_2_1& b)
 {
     return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const International_Static_Speed_Profile_Core_2_1& p)
+{
+    return International_Static_Speed_Profile_Core_2_1_Encode_Bit(&stream, &p);
+}
+
+inline int decode(Bitstream& stream, International_Static_Speed_Profile_Core_2_1& p)
+{
+    return International_Static_Speed_Profile_Core_2_1_Decode_Bit(&stream, &p);
+}
+
+inline int encode(PacketInfo& data, kcg_int* stream, const International_Static_Speed_Profile_Core_2_1& p)
+{
+    std::cerr << "encode int function not implemented for packet 27 yet." << std::endl;
+
+    return International_Static_Speed_Profile_Core_2_1_Encode_Int(&data, stream, &p);
+}
+
+inline int decode(PacketInfo& data, const kcg_int* stream, International_Static_Speed_Profile_Core_2_1& p)
+{
+    std::cerr << "decode int function not implemented for packet 27 yet." << std::endl;
+
+    return International_Static_Speed_Profile_Core_2_1_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

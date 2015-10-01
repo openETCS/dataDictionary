@@ -175,6 +175,30 @@ inline bool operator!=(const Level_23_Movement_Authority_Core_1& a, const Level_
     return !(a == b);
 }
 
+inline int encode(Bitstream& stream, const Level_23_Movement_Authority_Core_1& p)
+{
+    return Level_23_Movement_Authority_Core_1_Encode_Bit(&stream, &p);
+}
+
+inline int decode(Bitstream& stream, Level_23_Movement_Authority_Core_1& p)
+{
+    return Level_23_Movement_Authority_Core_1_Decode_Bit(&stream, &p);
+}
+
+inline int encode(PacketInfo& data, kcg_int* stream, const Level_23_Movement_Authority_Core_1& p)
+{
+    std::cerr << "encode int function not implemented for packet 15 yet." << std::endl;
+
+    return Level_23_Movement_Authority_Core_1_Encode_Int(&data, stream, &p);
+}
+
+inline int decode(PacketInfo& data, const kcg_int* stream, Level_23_Movement_Authority_Core_1& p)
+{
+    std::cerr << "decode int function not implemented for packet 15 yet." << std::endl;
+
+    return Level_23_Movement_Authority_Core_1_Decode_Int(&data, stream, &p);
+}
+
 #endif // __cplusplus
 
 #endif // LEVEL_23_MOVEMENT_AUTHORITY_CORE_1_CORE_H_INCLUDED

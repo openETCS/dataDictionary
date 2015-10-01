@@ -95,17 +95,11 @@ int Position_Report_Parameters_Core_1_Decode_Bit(Bitstream* stream, Position_Rep
 
 int Position_Report_Parameters_Core_1_Encode_Int(PacketInfo* data, kcg_int* stream, const Position_Report_Parameters_Core_1* p)
 {
-    stream[data->startAddress++] = p->D_LOC;
-    stream[data->startAddress++] = p->Q_LGTLOC;
-
-    return 1;
+    return 0;
 }
 
 int Position_Report_Parameters_Core_1_Decode_Int(PacketInfo* data, const kcg_int* stream, Position_Report_Parameters_Core_1* p)
 {
-    p->D_LOC = stream[data->startAddress++];
-    p->Q_LGTLOC = stream[data->startAddress++];
-
-    return 1;
+    return 0;
 }
 

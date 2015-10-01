@@ -10,10 +10,9 @@ struct Route_Suitability_Data_Core_1
 
     uint64_t  D_SUITABILITY;    // # 15
     uint64_t   Q_SUITABILITY;    // # 2
-    uint64_t   M_LINEGAUGE;      // # 8
-    uint64_t   M_AXLELOADCAT;    // # 7
-    uint64_t   M_VOLTAGE;        // # 4
-    uint64_t  NID_CTRACTION;    // # 10
+    uint64_t   M_LOADINGGAUGE;   // # 8
+    uint64_t   M_AXLELOAD;       // # 7
+    uint64_t   M_TRACTION;       // # 8
 };
 
 typedef struct Route_Suitability_Data_Core_1 Route_Suitability_Data_Core_1;
@@ -146,10 +145,9 @@ inline std::ostream& operator<<(std::ostream& stream, const Route_Suitability_Da
     stream
             << +p.D_SUITABILITY << ','
             << +p.Q_SUITABILITY << ','
-            << +p.M_LINEGAUGE << ','
-            << +p.M_AXLELOADCAT << ','
-            << +p.M_VOLTAGE << ','
-            << +p.NID_CTRACTION;
+            << +p.M_LOADINGGAUGE << ','
+            << +p.M_AXLELOAD << ','
+            << +p.M_TRACTION;
 
     return stream;
 }
@@ -163,22 +161,17 @@ inline bool operator==(const Route_Suitability_Data_Core_1& a, const Route_Suita
 
     if (a.Q_SUITABILITY == 0)
     {
-        status = status && (a.M_LINEGAUGE == b.M_LINEGAUGE);
+        status = status && (a.M_LOADINGGAUGE == b.M_LOADINGGAUGE);
     }
 
     if (a.Q_SUITABILITY == 1)
     {
-        status = status && (a.M_AXLELOADCAT == b.M_AXLELOADCAT);
+        status = status && (a.M_AXLELOAD == b.M_AXLELOAD);
     }
 
     if (a.Q_SUITABILITY == 2)
     {
-        status = status && (a.M_VOLTAGE == b.M_VOLTAGE);
-    }
-
-    if ((a.Q_SUITABILITY == 2) && (a.M_VOLTAGE != 0))
-    {
-        status = status && (a.NID_CTRACTION == b.NID_CTRACTION);
+        status = status && (a.M_TRACTION == b.M_TRACTION);
     }
 
     return status;
@@ -187,6 +180,30 @@ inline bool operator==(const Route_Suitability_Data_Core_1& a, const Route_Suita
 inline bool operator!=(const Route_Suitability_Data_Core_1& a, const Route_Suitability_Data_Core_1& b)
 {
     return !(a == b);
+}
+
+inline int encode(Bitstream& stream, const Route_Suitability_Data_Core_1& p)
+{
+    return Route_Suitability_Data_Core_1_Encode_Bit(&stream, &p);
+}
+
+inline int decode(Bitstream& stream, Route_Suitability_Data_Core_1& p)
+{
+    return Route_Suitability_Data_Core_1_Decode_Bit(&stream, &p);
+}
+
+inline int encode(PacketInfo& data, kcg_int* stream, const Route_Suitability_Data_Core_1& p)
+{
+    std::cerr << "encode int function not implemented for packet 70 yet." << std::endl;
+
+    return Route_Suitability_Data_Core_1_Encode_Int(&data, stream, &p);
+}
+
+inline int decode(PacketInfo& data, const kcg_int* stream, Route_Suitability_Data_Core_1& p)
+{
+    std::cerr << "decode int function not implemented for packet 70 yet." << std::endl;
+
+    return Route_Suitability_Data_Core_1_Decode_Int(&data, stream, &p);
 }
 
 #endif // __cplusplus

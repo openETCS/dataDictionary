@@ -10,7 +10,6 @@ int International_Static_Speed_Profile_Core_2_UpperBitsNotSet(const Internationa
     status = status && UpperBitsNotSet64(p->V_STATIC,          7) ;
     status = status && UpperBitsNotSet64(p->Q_FRONT,           1) ;
     status = status && UpperBitsNotSet64(p->N_ITER_2_1,        5) ;
-
     for (uint32_t i = 0; i < p->N_ITER_2_1; ++i)
     {
         status = status && International_Static_Speed_Profile_Core_2_1_UpperBitsNotSet(&(p->sub_2_1[i]));
@@ -38,7 +37,6 @@ int International_Static_Speed_Profile_Core_2_Encode_Bit(Bitstream* stream, cons
             Bitstream_Write(stream, 7,  p->V_STATIC);
             Bitstream_Write(stream, 1,  p->Q_FRONT);
             Bitstream_Write(stream, 5,  p->N_ITER_2_1);
-
             for (uint32_t i = 0; i < p->N_ITER_2_1; ++i)
             {
                 International_Static_Speed_Profile_Core_2_1_Encode_Bit(stream, &(p->sub_2_1[i]));
@@ -104,7 +102,7 @@ int International_Static_Speed_Profile_Core_2_Decode_Bit(Bitstream* stream, Inte
             p->Q_FRONT        = Bitstream_Read(stream, 1);
         }
 
-        {
+    {
             p->N_ITER_2_1        = Bitstream_Read(stream, 5);
         }
 
@@ -112,7 +110,6 @@ int International_Static_Speed_Profile_Core_2_Decode_Bit(Bitstream* stream, Inte
         {
             International_Static_Speed_Profile_Core_2_1_Decode_Bit(stream, &(p->sub_2_1[i]));
         }
-
         //@ assert D_STATIC:          EqualBits(stream, pos,       pos + 15,  p->D_STATIC);
         //@ assert V_STATIC:          EqualBits(stream, pos + 15,  pos + 22,  p->V_STATIC);
         //@ assert Q_FRONT:           EqualBits(stream, pos + 22,  pos + 23,  p->Q_FRONT);
@@ -133,31 +130,11 @@ int International_Static_Speed_Profile_Core_2_Decode_Bit(Bitstream* stream, Inte
 
 int International_Static_Speed_Profile_Core_2_Encode_Int(PacketInfo* data, kcg_int* stream, const International_Static_Speed_Profile_Core_2* p)
 {
-    stream[data->startAddress++] = p->D_STATIC;
-    stream[data->startAddress++] = p->V_STATIC;
-    stream[data->startAddress++] = p->Q_FRONT;
-    stream[data->startAddress++] = p->N_ITER_2_1;
-
-    for (uint32_t i = 0; i < p->N_ITER_2_1; ++i)
-    {
-        International_Static_Speed_Profile_Core_2_1_Encode_Int(data, stream, &(p->sub_2_1[i]));
-    }
-
-    return 1;
+    return 0;
 }
 
 int International_Static_Speed_Profile_Core_2_Decode_Int(PacketInfo* data, const kcg_int* stream, International_Static_Speed_Profile_Core_2* p)
 {
-    p->D_STATIC = stream[data->startAddress++];
-    p->V_STATIC = stream[data->startAddress++];
-    p->Q_FRONT = stream[data->startAddress++];
-    p->N_ITER_2_1 = stream[data->startAddress++];
-
-    for (uint32_t i = 0; i < p->N_ITER_2_1; ++i)
-    {
-        International_Static_Speed_Profile_Core_2_1_Decode_Int(data, stream, &(p->sub_2_1[i]));
-    }
-
-    return 1;
+    return 0;
 }
 

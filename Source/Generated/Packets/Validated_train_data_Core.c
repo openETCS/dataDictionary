@@ -7,23 +7,19 @@ int Validated_train_data_UpperBitsNotSet(const Validated_train_data_Core* p)
     bool status = true;
 
     status = status && UpperBitsNotSet64(p->L_PACKET,          13);
-    status = status && UpperBitsNotSet64(p->NC_CDTRAIN,        4) ;
+    status = status && UpperBitsNotSet64(p->NID_OPERATIONAL,   32);
     status = status && UpperBitsNotSet64(p->NC_TRAIN,          15);
     status = status && UpperBitsNotSet64(p->L_TRAIN,           12);
     status = status && UpperBitsNotSet64(p->V_MAXTRAIN,        7) ;
     status = status && UpperBitsNotSet64(p->M_LOADINGGAUGE,    8) ;
-    status = status && UpperBitsNotSet64(p->M_AXLELOADCAT,     7) ;
+    status = status && UpperBitsNotSet64(p->M_AXLELOAD,        7) ;
     status = status && UpperBitsNotSet64(p->M_AIRTIGHT,        2) ;
-    status = status && UpperBitsNotSet64(p->N_AXLE,            10);
     status = status && UpperBitsNotSet64(p->N_ITER_1,          5) ;
-
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
         status = status && Validated_train_data_Core_1_UpperBitsNotSet(&(p->sub_1[i]));
     }
-
     status = status && UpperBitsNotSet64(p->N_ITER_2,          5) ;
-
     for (uint32_t i = 0; i < p->N_ITER_2; ++i)
     {
         status = status && Validated_train_data_Core_2_UpperBitsNotSet(&(p->sub_2[i]));
@@ -48,23 +44,19 @@ int Validated_train_data_Encode_Bit(Bitstream* stream, const Validated_train_dat
             //@ ghost const uint32_t pos = stream->bitpos;
 
             Bitstream_Write(stream, 13, p->L_PACKET);
-            Bitstream_Write(stream, 4,  p->NC_CDTRAIN);
+            Bitstream_Write(stream, 32, p->NID_OPERATIONAL);
             Bitstream_Write(stream, 15, p->NC_TRAIN);
             Bitstream_Write(stream, 12, p->L_TRAIN);
             Bitstream_Write(stream, 7,  p->V_MAXTRAIN);
             Bitstream_Write(stream, 8,  p->M_LOADINGGAUGE);
-            Bitstream_Write(stream, 7,  p->M_AXLELOADCAT);
+            Bitstream_Write(stream, 7,  p->M_AXLELOAD);
             Bitstream_Write(stream, 2,  p->M_AIRTIGHT);
-            Bitstream_Write(stream, 10, p->N_AXLE);
             Bitstream_Write(stream, 5,  p->N_ITER_1);
-
             for (uint32_t i = 0; i < p->N_ITER_1; ++i)
             {
                 Validated_train_data_Core_1_Encode_Bit(stream, &(p->sub_1[i]));
             }
-
             Bitstream_Write(stream, 5,  p->N_ITER_2);
-
             for (uint32_t i = 0; i < p->N_ITER_2; ++i)
             {
                 Validated_train_data_Core_2_Encode_Bit(stream, &(p->sub_2[i]));
@@ -72,14 +64,13 @@ int Validated_train_data_Encode_Bit(Bitstream* stream, const Validated_train_dat
 
 
             //@ assert L_PACKET:          EqualBits(stream, pos,       pos + 13,  p->L_PACKET);
-            //@ assert NC_CDTRAIN:        EqualBits(stream, pos + 13,  pos + 17,  p->NC_CDTRAIN);
-            //@ assert NC_TRAIN:          EqualBits(stream, pos + 17,  pos + 32,  p->NC_TRAIN);
-            //@ assert L_TRAIN:           EqualBits(stream, pos + 32,  pos + 44,  p->L_TRAIN);
-            //@ assert V_MAXTRAIN:        EqualBits(stream, pos + 44,  pos + 51,  p->V_MAXTRAIN);
-            //@ assert M_LOADINGGAUGE:    EqualBits(stream, pos + 51,  pos + 59,  p->M_LOADINGGAUGE);
-            //@ assert M_AXLELOADCAT:     EqualBits(stream, pos + 59,  pos + 66,  p->M_AXLELOADCAT);
-            //@ assert M_AIRTIGHT:        EqualBits(stream, pos + 66,  pos + 68,  p->M_AIRTIGHT);
-            //@ assert N_AXLE:            EqualBits(stream, pos + 68,  pos + 78,  p->N_AXLE);
+            //@ assert NID_OPERATIONAL:   EqualBits(stream, pos + 13,  pos + 45,  p->NID_OPERATIONAL);
+            //@ assert NC_TRAIN:          EqualBits(stream, pos + 45,  pos + 60,  p->NC_TRAIN);
+            //@ assert L_TRAIN:           EqualBits(stream, pos + 60,  pos + 72,  p->L_TRAIN);
+            //@ assert V_MAXTRAIN:        EqualBits(stream, pos + 72,  pos + 79,  p->V_MAXTRAIN);
+            //@ assert M_LOADINGGAUGE:    EqualBits(stream, pos + 79,  pos + 87,  p->M_LOADINGGAUGE);
+            //@ assert M_AXLELOAD:        EqualBits(stream, pos + 87,  pos + 94,  p->M_AXLELOAD);
+            //@ assert M_AIRTIGHT:        EqualBits(stream, pos + 94,  pos + 96,  p->M_AIRTIGHT);
 
             return 1;
         }
@@ -113,23 +104,23 @@ int Validated_train_data_Decode_Bit(Bitstream* stream, Validated_train_data_Core
         }
 
         /*@
-          requires NC_CDTRAIN:     stream->bitpos == pos + 13;
+          requires NID_OPERATIONAL: stream->bitpos == pos + 13;
           assigns                  stream->bitpos;
-          assigns                  p->NC_CDTRAIN;
-          ensures  NC_CDTRAIN:     stream->bitpos == pos + 17;
-          ensures  NC_CDTRAIN:     EqualBits(stream, pos + 13, pos + 17, p->NC_CDTRAIN);
-          ensures  NC_CDTRAIN:     UpperBitsNotSet(p->NC_CDTRAIN, 4);
+          assigns                  p->NID_OPERATIONAL;
+          ensures  NID_OPERATIONAL: stream->bitpos == pos + 45;
+          ensures  NID_OPERATIONAL: EqualBits(stream, pos + 13, pos + 45, p->NID_OPERATIONAL);
+          ensures  NID_OPERATIONAL: UpperBitsNotSet(p->NID_OPERATIONAL, 32);
         */
         {
-            p->NC_CDTRAIN        = Bitstream_Read(stream, 4);
+            p->NID_OPERATIONAL        = Bitstream_Read(stream, 32);
         }
 
         /*@
-          requires NC_TRAIN:       stream->bitpos == pos + 17;
+          requires NC_TRAIN:       stream->bitpos == pos + 45;
           assigns                  stream->bitpos;
           assigns                  p->NC_TRAIN;
-          ensures  NC_TRAIN:       stream->bitpos == pos + 32;
-          ensures  NC_TRAIN:       EqualBits(stream, pos + 17, pos + 32, p->NC_TRAIN);
+          ensures  NC_TRAIN:       stream->bitpos == pos + 60;
+          ensures  NC_TRAIN:       EqualBits(stream, pos + 45, pos + 60, p->NC_TRAIN);
           ensures  NC_TRAIN:       UpperBitsNotSet(p->NC_TRAIN, 15);
         */
         {
@@ -137,11 +128,11 @@ int Validated_train_data_Decode_Bit(Bitstream* stream, Validated_train_data_Core
         }
 
         /*@
-          requires L_TRAIN:        stream->bitpos == pos + 32;
+          requires L_TRAIN:        stream->bitpos == pos + 60;
           assigns                  stream->bitpos;
           assigns                  p->L_TRAIN;
-          ensures  L_TRAIN:        stream->bitpos == pos + 44;
-          ensures  L_TRAIN:        EqualBits(stream, pos + 32, pos + 44, p->L_TRAIN);
+          ensures  L_TRAIN:        stream->bitpos == pos + 72;
+          ensures  L_TRAIN:        EqualBits(stream, pos + 60, pos + 72, p->L_TRAIN);
           ensures  L_TRAIN:        UpperBitsNotSet(p->L_TRAIN, 12);
         */
         {
@@ -149,11 +140,11 @@ int Validated_train_data_Decode_Bit(Bitstream* stream, Validated_train_data_Core
         }
 
         /*@
-          requires V_MAXTRAIN:     stream->bitpos == pos + 44;
+          requires V_MAXTRAIN:     stream->bitpos == pos + 72;
           assigns                  stream->bitpos;
           assigns                  p->V_MAXTRAIN;
-          ensures  V_MAXTRAIN:     stream->bitpos == pos + 51;
-          ensures  V_MAXTRAIN:     EqualBits(stream, pos + 44, pos + 51, p->V_MAXTRAIN);
+          ensures  V_MAXTRAIN:     stream->bitpos == pos + 79;
+          ensures  V_MAXTRAIN:     EqualBits(stream, pos + 72, pos + 79, p->V_MAXTRAIN);
           ensures  V_MAXTRAIN:     UpperBitsNotSet(p->V_MAXTRAIN, 7);
         */
         {
@@ -161,11 +152,11 @@ int Validated_train_data_Decode_Bit(Bitstream* stream, Validated_train_data_Core
         }
 
         /*@
-          requires M_LOADINGGAUGE: stream->bitpos == pos + 51;
+          requires M_LOADINGGAUGE: stream->bitpos == pos + 79;
           assigns                  stream->bitpos;
           assigns                  p->M_LOADINGGAUGE;
-          ensures  M_LOADINGGAUGE: stream->bitpos == pos + 59;
-          ensures  M_LOADINGGAUGE: EqualBits(stream, pos + 51, pos + 59, p->M_LOADINGGAUGE);
+          ensures  M_LOADINGGAUGE: stream->bitpos == pos + 87;
+          ensures  M_LOADINGGAUGE: EqualBits(stream, pos + 79, pos + 87, p->M_LOADINGGAUGE);
           ensures  M_LOADINGGAUGE: UpperBitsNotSet(p->M_LOADINGGAUGE, 8);
         */
         {
@@ -173,42 +164,30 @@ int Validated_train_data_Decode_Bit(Bitstream* stream, Validated_train_data_Core
         }
 
         /*@
-          requires M_AXLELOADCAT:  stream->bitpos == pos + 59;
+          requires M_AXLELOAD:     stream->bitpos == pos + 87;
           assigns                  stream->bitpos;
-          assigns                  p->M_AXLELOADCAT;
-          ensures  M_AXLELOADCAT:  stream->bitpos == pos + 66;
-          ensures  M_AXLELOADCAT:  EqualBits(stream, pos + 59, pos + 66, p->M_AXLELOADCAT);
-          ensures  M_AXLELOADCAT:  UpperBitsNotSet(p->M_AXLELOADCAT, 7);
+          assigns                  p->M_AXLELOAD;
+          ensures  M_AXLELOAD:     stream->bitpos == pos + 94;
+          ensures  M_AXLELOAD:     EqualBits(stream, pos + 87, pos + 94, p->M_AXLELOAD);
+          ensures  M_AXLELOAD:     UpperBitsNotSet(p->M_AXLELOAD, 7);
         */
         {
-            p->M_AXLELOADCAT        = Bitstream_Read(stream, 7);
+            p->M_AXLELOAD        = Bitstream_Read(stream, 7);
         }
 
         /*@
-          requires M_AIRTIGHT:     stream->bitpos == pos + 66;
+          requires M_AIRTIGHT:     stream->bitpos == pos + 94;
           assigns                  stream->bitpos;
           assigns                  p->M_AIRTIGHT;
-          ensures  M_AIRTIGHT:     stream->bitpos == pos + 68;
-          ensures  M_AIRTIGHT:     EqualBits(stream, pos + 66, pos + 68, p->M_AIRTIGHT);
+          ensures  M_AIRTIGHT:     stream->bitpos == pos + 96;
+          ensures  M_AIRTIGHT:     EqualBits(stream, pos + 94, pos + 96, p->M_AIRTIGHT);
           ensures  M_AIRTIGHT:     UpperBitsNotSet(p->M_AIRTIGHT, 2);
         */
         {
             p->M_AIRTIGHT        = Bitstream_Read(stream, 2);
         }
 
-        /*@
-          requires N_AXLE:         stream->bitpos == pos + 68;
-          assigns                  stream->bitpos;
-          assigns                  p->N_AXLE;
-          ensures  N_AXLE:         stream->bitpos == pos + 78;
-          ensures  N_AXLE:         EqualBits(stream, pos + 68, pos + 78, p->N_AXLE);
-          ensures  N_AXLE:         UpperBitsNotSet(p->N_AXLE, 10);
-        */
-        {
-            p->N_AXLE        = Bitstream_Read(stream, 10);
-        }
-
-        {
+    {
             p->N_ITER_1        = Bitstream_Read(stream, 5);
         }
 
@@ -216,8 +195,7 @@ int Validated_train_data_Decode_Bit(Bitstream* stream, Validated_train_data_Core
         {
             Validated_train_data_Core_1_Decode_Bit(stream, &(p->sub_1[i]));
         }
-
-        {
+    {
             p->N_ITER_2        = Bitstream_Read(stream, 5);
         }
 
@@ -225,26 +203,23 @@ int Validated_train_data_Decode_Bit(Bitstream* stream, Validated_train_data_Core
         {
             Validated_train_data_Core_2_Decode_Bit(stream, &(p->sub_2[i]));
         }
-
         //@ assert L_PACKET:          EqualBits(stream, pos,       pos + 13,  p->L_PACKET);
-        //@ assert NC_CDTRAIN:        EqualBits(stream, pos + 13,  pos + 17,  p->NC_CDTRAIN);
-        //@ assert NC_TRAIN:          EqualBits(stream, pos + 17,  pos + 32,  p->NC_TRAIN);
-        //@ assert L_TRAIN:           EqualBits(stream, pos + 32,  pos + 44,  p->L_TRAIN);
-        //@ assert V_MAXTRAIN:        EqualBits(stream, pos + 44,  pos + 51,  p->V_MAXTRAIN);
-        //@ assert M_LOADINGGAUGE:    EqualBits(stream, pos + 51,  pos + 59,  p->M_LOADINGGAUGE);
-        //@ assert M_AXLELOADCAT:     EqualBits(stream, pos + 59,  pos + 66,  p->M_AXLELOADCAT);
-        //@ assert M_AIRTIGHT:        EqualBits(stream, pos + 66,  pos + 68,  p->M_AIRTIGHT);
-        //@ assert N_AXLE:            EqualBits(stream, pos + 68,  pos + 78,  p->N_AXLE);
+        //@ assert NID_OPERATIONAL:   EqualBits(stream, pos + 13,  pos + 45,  p->NID_OPERATIONAL);
+        //@ assert NC_TRAIN:          EqualBits(stream, pos + 45,  pos + 60,  p->NC_TRAIN);
+        //@ assert L_TRAIN:           EqualBits(stream, pos + 60,  pos + 72,  p->L_TRAIN);
+        //@ assert V_MAXTRAIN:        EqualBits(stream, pos + 72,  pos + 79,  p->V_MAXTRAIN);
+        //@ assert M_LOADINGGAUGE:    EqualBits(stream, pos + 79,  pos + 87,  p->M_LOADINGGAUGE);
+        //@ assert M_AXLELOAD:        EqualBits(stream, pos + 87,  pos + 94,  p->M_AXLELOAD);
+        //@ assert M_AIRTIGHT:        EqualBits(stream, pos + 94,  pos + 96,  p->M_AIRTIGHT);
 
         //@ assert L_PACKET:          UpperBitsNotSet(p->L_PACKET,          13);
-        //@ assert NC_CDTRAIN:        UpperBitsNotSet(p->NC_CDTRAIN,        4);
+        //@ assert NID_OPERATIONAL:   UpperBitsNotSet(p->NID_OPERATIONAL,   32);
         //@ assert NC_TRAIN:          UpperBitsNotSet(p->NC_TRAIN,          15);
         //@ assert L_TRAIN:           UpperBitsNotSet(p->L_TRAIN,           12);
         //@ assert V_MAXTRAIN:        UpperBitsNotSet(p->V_MAXTRAIN,        7);
         //@ assert M_LOADINGGAUGE:    UpperBitsNotSet(p->M_LOADINGGAUGE,    8);
-        //@ assert M_AXLELOADCAT:     UpperBitsNotSet(p->M_AXLELOADCAT,     7);
+        //@ assert M_AXLELOAD:        UpperBitsNotSet(p->M_AXLELOAD,        7);
         //@ assert M_AIRTIGHT:        UpperBitsNotSet(p->M_AIRTIGHT,        2);
-        //@ assert N_AXLE:            UpperBitsNotSet(p->N_AXLE,            10);
 
         //@ assert final: EqualBits(stream, pos, p);
 
@@ -258,57 +233,11 @@ int Validated_train_data_Decode_Bit(Bitstream* stream, Validated_train_data_Core
 
 int Validated_train_data_Encode_Int(PacketInfo* data, kcg_int* stream, const Validated_train_data_Core* p)
 {
-    stream[data->startAddress++] = p->L_PACKET;
-    stream[data->startAddress++] = p->NC_CDTRAIN;
-    stream[data->startAddress++] = p->NC_TRAIN;
-    stream[data->startAddress++] = p->L_TRAIN;
-    stream[data->startAddress++] = p->V_MAXTRAIN;
-    stream[data->startAddress++] = p->M_LOADINGGAUGE;
-    stream[data->startAddress++] = p->M_AXLELOADCAT;
-    stream[data->startAddress++] = p->M_AIRTIGHT;
-    stream[data->startAddress++] = p->N_AXLE;
-    stream[data->startAddress++] = p->N_ITER_1;
-
-    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
-    {
-        Validated_train_data_Core_1_Encode_Int(data, stream, &(p->sub_1[i]));
-    }
-
-    stream[data->startAddress++] = p->N_ITER_2;
-
-    for (uint32_t i = 0; i < p->N_ITER_2; ++i)
-    {
-        Validated_train_data_Core_2_Encode_Int(data, stream, &(p->sub_2[i]));
-    }
-
-    return 1;
+    return 0;
 }
 
 int Validated_train_data_Decode_Int(PacketInfo* data, const kcg_int* stream, Validated_train_data_Core* p)
 {
-    p->L_PACKET = stream[data->startAddress++];
-    p->NC_CDTRAIN = stream[data->startAddress++];
-    p->NC_TRAIN = stream[data->startAddress++];
-    p->L_TRAIN = stream[data->startAddress++];
-    p->V_MAXTRAIN = stream[data->startAddress++];
-    p->M_LOADINGGAUGE = stream[data->startAddress++];
-    p->M_AXLELOADCAT = stream[data->startAddress++];
-    p->M_AIRTIGHT = stream[data->startAddress++];
-    p->N_AXLE = stream[data->startAddress++];
-    p->N_ITER_1 = stream[data->startAddress++];
-
-    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
-    {
-        Validated_train_data_Core_1_Decode_Int(data, stream, &(p->sub_1[i]));
-    }
-
-    p->N_ITER_2 = stream[data->startAddress++];
-
-    for (uint32_t i = 0; i < p->N_ITER_2; ++i)
-    {
-        Validated_train_data_Core_2_Decode_Int(data, stream, &(p->sub_2[i]));
-    }
-
-    return 1;
+    return 0;
 }
 
