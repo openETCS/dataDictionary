@@ -7,17 +7,17 @@
 #include "List_of_balises_for_SH_Area.h"
 #include "Mode_profile.h"
 #include "Packet_for_sending_plain_text_messages.h"
-#include "Level_Crossing_information.h"
+//#include "Level_Crossing_information.h"
 #include "Linking.h"
 #include "Data_used_by_applications_outside_the_ERTMSETCS_system.h"
-#include "Track_Condition_Change_of_traction_system.h"
+//#include "Track_Condition_Change_of_traction_system.h"
 #include "Packet_for_sending_fixed_text_messages.h"
 #include "Axle_Load_Speed_Profile.h"
-#include "Permitted_Braking_Distance_Information.h"
+//#include "Permitted_Braking_Distance_Information.h"
 #include "Geographical_Position_Information.h"
 #include "Position_Report_Parameters.h"
 #include "Track_Condition.h"
-#include "Track_Condition_Station_Platforms.h"
+//#include "Track_Condition_Station_Platforms.h"
 #include "Route_Suitability_Data.h"
 #include "International_Static_Speed_Profile.h"
 #include "National_Values.h"
@@ -114,12 +114,12 @@ int main ()
 	d.core.Q_SCALE = 1;
 	d.core.D_LEVELTR = 389;
 	d.core.M_LEVELTR = 2;
-	d.core.NID_NTC = 234;
+	//d.core.NID_NTC = 234;
 	d.core.L_ACKLEVELTR = 873;
 	d.core.N_ITER_1 = 1;
 
 	d.core.sub_1[0].M_LEVELTR = 3;
-	d.core.sub_1[0].NID_NTC = 200;
+	//d.core.sub_1[0].NID_NTC = 200;
 	d.core.sub_1[0].L_ACKLEVELTR = 9210;
     }
 
@@ -148,7 +148,7 @@ int main ()
         f.core.V_MAMODE = 2;
         f.core.L_MAMODE = 23;
         f.core.L_ACKMAMODE = 23;
-        f.core.Q_MAMODE = 1;
+        //f.core.Q_MAMODE = 1;
         f.core.N_ITER_1 = 1;
 
         f.core.sub_1[0].D_MAMODE = 400;
@@ -156,7 +156,7 @@ int main ()
         f.core.sub_1[0].V_MAMODE = 2;
         f.core.sub_1[0].L_MAMODE = 399;
         f.core.sub_1[0].L_ACKMAMODE = 1000;
-        f.core.sub_1[0].Q_MAMODE = 0;
+        //f.core.sub_1[0].Q_MAMODE = 0;
     }
 
     Packet_for_sending_plain_text_messages g;
@@ -169,23 +169,23 @@ int main ()
         g.core.D_TEXTDISPLAY = 400;
         g.core.M_MODETEXTDISPLAY_0 = 3;
         g.core.M_LEVELTEXTDISPLAY_0 = 1;
-        g.core.NID_NTC_0 = 200;
+        //g.core.NID_NTC_0 = 200;
         g.core.L_TEXTDISPLAY = 700;
         g.core.T_TEXTDISPLAY = 80;
         g.core.M_MODETEXTDISPLAY_1 = 3;
         g.core.M_LEVELTEXTDISPLAY_1 = 1;
-        g.core.NID_NTC_1 = 23;
+        //g.core.NID_NTC_1 = 23;
         g.core.Q_TEXTCONFIRM = 1;
-        g.core.Q_CONFTEXTDISPLAY = 0;
-        g.core.Q_TEXTREPORT = 1;
-        g.core.NID_TEXTMESSAGE = 100;
-        g.core.NID_C = 333;
-        g.core.NID_RBC = 1200;
+        //g.core.Q_CONFTEXTDISPLAY = 0;
+        //g.core.Q_TEXTREPORT = 1;
+        //g.core.NID_TEXTMESSAGE = 100;
+        //g.core.NID_C = 333;
+        //g.core.NID_RBC = 1200;
         g.core.L_TEXT = 2;
         g.core.X_TEXT = 30;
     }
 
-    Level_Crossing_information h;
+    /*Level_Crossing_information h;
     {
         h.core.Q_DIR = 1;
 	h.core.L_PACKET = 64;
@@ -197,7 +197,7 @@ int main ()
 	h.core.V_LX = 15;
 	h.core.Q_STOPLX = 0;
 	h.core.L_STOPLX = 99;
-    }
+    }*/
 
     Linking i;
     {
@@ -216,14 +216,14 @@ int main ()
 
     Data_used_by_applications_outside_the_ERTMSETCS_system j;
     {
-        j.core.Q_DIR = 1;
+        //j.core.Q_DIR = 1;
 	j.core.L_PACKET = 96;
 	j.core.NID_XUSER = 102;
-	j.core.NID_NTC = 100;
+	//j.core.NID_NTC = 100;
 	j.core.Other_data_depending_on__NID_XUSER = 32928;
     }
 
-    Track_Condition_Change_of_traction_system k;
+    /*Track_Condition_Change_of_traction_system k;
     {
         k.core.Q_DIR = 1;
         k.core.L_PACKET = 46;
@@ -231,7 +231,7 @@ int main ()
         k.core.D_TRACTION = 100;
         k.core.M_VOLTAGE = 5;
         k.core.NID_CTRACTION = 761;
-    }
+    }*/
 
     Packet_for_sending_fixed_text_messages l;
     {
@@ -243,18 +243,18 @@ int main ()
         l.core.D_TEXTDISPLAY = 100;
         l.core.M_MODETEXTDISPLAY_0 = 0;
         l.core.M_LEVELTEXTDISPLAY_0 = 0;
-        l.core.NID_NTC_0 = 142;
+        //l.core.NID_NTC_0 = 142;
         l.core.L_TEXTDISPLAY = 400;
         l.core.T_TEXTDISPLAY = 300;
         l.core.M_MODETEXTDISPLAY_1 = 0;
         l.core.M_LEVELTEXTDISPLAY_1 = 0;
-        l.core.NID_NTC_1 = 38;
+        //l.core.NID_NTC_1 = 38;
         l.core.Q_TEXTCONFIRM = 0;
-        l.core.Q_CONFTEXTDISPLAY = 0;
-        l.core.Q_TEXTREPORT = 0;
-        l.core.NID_TEXTMESSAGE = 99;
-        l.core.NID_C = 100;
-        l.core.NID_RBC = 16;
+        //l.core.Q_CONFTEXTDISPLAY = 0;
+        //l.core.Q_TEXTREPORT = 0;
+        //l.core.NID_TEXTMESSAGE = 99;
+        //l.core.NID_C = 100;
+        //l.core.NID_RBC = 16;
         l.core.Q_TEXT = 1;
     }
 
@@ -264,7 +264,7 @@ int main ()
         m.core.L_PACKET = 82;
         m.core.Q_SCALE = 1;
         m.core.Q_TRACKINIT = 0;
-        m.core.D_TRACKINIT = 100;
+        //m.core.D_TRACKINIT = 100;
         m.core.D_AXLELOAD = 77;
         m.core.L_AXLELOAD = 10;
         m.core.Q_FRONT = 0;
@@ -276,13 +276,13 @@ int main ()
 	m.core.sub_2[0].L_AXLELOAD = 12;
 	m.core.sub_2[0].Q_FRONT = 0;
 	m.core.sub_2[0].N_ITER_2_1 = 2;
-	m.core.sub_2[0].sub_2_1[0].M_AXLELOADCAT = 120;
+	//m.core.sub_2[0].sub_2_1[0].M_AXLELOADCAT = 120;
 	m.core.sub_2[0].sub_2_1[0].V_AXLELOAD = 0;
-	m.core.sub_2[0].sub_2_1[1].M_AXLELOADCAT = 36;
+	//m.core.sub_2[0].sub_2_1[1].M_AXLELOADCAT = 36;
 	m.core.sub_2[0].sub_2_1[1].V_AXLELOAD = 13;
     }
 
-    Permitted_Braking_Distance_Information n;
+    /*Permitted_Braking_Distance_Information n;
     {
         n.core.Q_DIR = 2;
         n.core.L_PACKET = 33;
@@ -296,7 +296,7 @@ int main ()
         n.core.D_PBDSR = 70;
         n.core.L_PBDSR = 4;
         n.core.N_ITER_1 = 0;
-    }
+    }*/
 
     Geographical_Position_Information o;
     {
@@ -356,7 +356,7 @@ int main ()
         q.core.sub_1[0].M_TRACKCOND = 3;
     }
 
-    Track_Condition_Station_Platforms r;
+    /*Track_Condition_Station_Platforms r;
     {
         r.core.Q_DIR = 2;
         r.core.L_PACKET = 95;
@@ -373,7 +373,7 @@ int main ()
 	r.core.sub_1[0].L_TRACKCOND = 100;
 	r.core.sub_1[0].M_PLATFORM = 3;
 	r.core.sub_1[0].Q_PLATFORM = 0;
-    }
+    }*/
 
     Route_Suitability_Data s;
     {
@@ -384,18 +384,18 @@ int main ()
         s.core.D_TRACKINIT = 300;
         s.core.D_SUITABILITY = 400;
         s.core.Q_SUITABILITY = 1;
-        s.core.M_LINEGAUGE = 156;
-        s.core.M_AXLELOADCAT = 15;
-        s.core.M_VOLTAGE = 3;
-        s.core.NID_CTRACTION = 100;
+        //s.core.M_LINEGAUGE = 156;
+        //s.core.M_AXLELOADCAT = 15;
+        //s.core.M_VOLTAGE = 3;
+        //s.core.NID_CTRACTION = 100;
         s.core.N_ITER_1 = 1;
 
         s.core.sub_1[0].D_SUITABILITY = 500;
         s.core.sub_1[0].Q_SUITABILITY = 0;
-        s.core.sub_1[0].M_LINEGAUGE = 240;
-        s.core.sub_1[0].M_AXLELOADCAT = 15;
-        s.core.sub_1[0].M_VOLTAGE = 0;
-        s.core.sub_1[0].NID_CTRACTION = 1000;
+        //s.core.sub_1[0].M_LINEGAUGE = 240;
+        //s.core.sub_1[0].M_AXLELOADCAT = 15;
+        //s.core.sub_1[0].M_VOLTAGE = 0;
+        //s.core.sub_1[0].NID_CTRACTION = 1000;
     }
 
     International_Static_Speed_Profile t;
@@ -409,8 +409,8 @@ int main ()
         t.core.N_ITER_1 = 1;
         t.core.N_ITER_2 = 1;
 
-	t.core.sub_1[0].Q_DIFF = 0;
-	t.core.sub_1[0].NC_CDDIFF = 14;
+	//t.core.sub_1[0].Q_DIFF = 0;
+	//t.core.sub_1[0].NC_CDDIFF = 14;
 	t.core.sub_1[0].NC_DIFF = 0;
 	t.core.sub_1[0].V_DIFF = 120;
 
@@ -419,8 +419,8 @@ int main ()
 	t.core.sub_2[0].Q_FRONT = 1;
 	t.core.sub_2[0].N_ITER_2_1 = 1;
 
-	t.core.sub_2[0].sub_2_1[0].Q_DIFF = 1;
-	t.core.sub_2[0].sub_2_1[0].NC_CDDIFF = 0;
+	//t.core.sub_2[0].sub_2_1[0].Q_DIFF = 1;
+	//t.core.sub_2[0].sub_2_1[0].NC_CDDIFF = 0;
 	t.core.sub_2[0].sub_2_1[0].NC_DIFF = 12;
 	t.core.sub_2[0].sub_2_1[0].V_DIFF = 18;
     }
@@ -429,23 +429,24 @@ int main ()
     {
         // NID_PACKET = 3;
         u.core.Q_DIR = 1;
-        u.core.L_PACKET = 230;
+        u.core.L_PACKET = 176;
         u.core.Q_SCALE = 1;
         u.core.D_VALIDNV = 0;
-        u.core.NID_C = 0;
+        //u.core.NID_C = 0;
         u.core.N_ITER_1 = 0;
         u.core.V_NVSHUNT = 6;
         u.core.V_NVSTFF = 8;
         u.core.V_NVONSIGHT = 6;
-        u.core.V_NVLIMSUPERV = 20;
+        //u.core.V_NVLIMSUPERV = 20;
         u.core.V_NVUNFIT = 20;
         u.core.V_NVREL = 8;
         u.core.D_NVROLL = 2;
-        u.core.Q_NVSBTSMPERM = 1;
+        //u.core.Q_NVSBTSMPERM = 1;
+	u.core.Q_NVSRBKTRG = 0;
         u.core.Q_NVEMRRLS = 0;
-        u.core.Q_NVGUIPERM = 0;
-        u.core.Q_NVSBFBPERM = 0;
-        u.core.Q_NVINHSMICPERM = 0;
+        //u.core.Q_NVGUIPERM = 0;
+        //u.core.Q_NVSBFBPERM = 0;
+        //u.core.Q_NVINHSMICPERM = 0;
         u.core.V_NVALLOWOVTRP = 0;
         u.core.V_NVSUPOVTRP = 6;
         u.core.D_NVOVTRP = 200;
@@ -456,13 +457,13 @@ int main ()
         u.core.M_NVDERUN = 1;
         u.core.D_NVSTFF = 32767;
         u.core.Q_NVDRIVER_ADHES = 0;
-        u.core.A_NVMAXREDADH1 = 20;
-        u.core.A_NVMAXREDADH2 = 14;
-        u.core.A_NVMAXREDADH3 = 14;
-        u.core.Q_NVLOCACC = 12;
-        u.core.M_NVAVADH = 1;
-        u.core.M_NVEBCL = 1;
-        u.core.Q_NVKINT = 0;
+        //u.core.A_NVMAXREDADH1 = 20;
+        //u.core.A_NVMAXREDADH2 = 14;
+        //u.core.A_NVMAXREDADH3 = 14;
+        //u.core.Q_NVLOCACC = 12;
+        //u.core.M_NVAVADH = 1;
+        //u.core.M_NVEBCL = 1;
+        //u.core.Q_NVKINT = 0;
     }
 
     End_of_Information z;
@@ -477,17 +478,17 @@ int main ()
     telegram.add(std::make_shared<List_of_balises_for_SH_Area>(e));
     telegram.add(std::make_shared<Mode_profile>(f));
     telegram.add(std::make_shared<Packet_for_sending_plain_text_messages>(g));
-    telegram.add(std::make_shared<Level_Crossing_information>(h));
+    //telegram.add(std::make_shared<Level_Crossing_information>(h));
     telegram.add(std::make_shared<Linking>(i));
     telegram.add(std::make_shared<Data_used_by_applications_outside_the_ERTMSETCS_system>(j));
-    telegram.add(std::make_shared<Track_Condition_Change_of_traction_system>(k));
+    //telegram.add(std::make_shared<Track_Condition_Change_of_traction_system>(k));
     telegram.add(std::make_shared<Packet_for_sending_fixed_text_messages>(l));
     telegram.add(std::make_shared<Axle_Load_Speed_Profile>(m));
-    telegram.add(std::make_shared<Permitted_Braking_Distance_Information>(n));
+    //telegram.add(std::make_shared<Permitted_Braking_Distance_Information>(n));
     telegram.add(std::make_shared<Geographical_Position_Information>(o));
     telegram.add(std::make_shared<Position_Report_Parameters>(p));
     telegram.add(std::make_shared<Track_Condition>(q));
-    telegram.add(std::make_shared<Track_Condition_Station_Platforms>(r));
+    //telegram.add(std::make_shared<Track_Condition_Station_Platforms>(r));
     telegram.add(std::make_shared<Route_Suitability_Data>(s));
     telegram.add(std::make_shared<International_Static_Speed_Profile>(t));
     telegram.add(std::make_shared<National_Values>(u));

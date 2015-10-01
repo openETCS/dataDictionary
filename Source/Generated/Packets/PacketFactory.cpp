@@ -145,7 +145,7 @@ BasePacketPtr PacketFactory_TrackToTrain(uint8_t nid)
         }
         case 71 :
         {
-            return std::make_shared<Adhesion_factor>();
+            return std::make_shared<Adhesion_Factor>();
         }
         case 72 :
         {

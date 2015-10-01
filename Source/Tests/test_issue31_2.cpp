@@ -56,21 +56,24 @@ int main ()
     {
         // NID_PACKET = 3;
         b.core.Q_DIR = 1;
-        b.core.L_PACKET = 230;
+        b.core.L_PACKET = 176;
         b.core.Q_SCALE = 1;
         b.core.D_VALIDNV = 0;
-        b.core.NID_C = 0;
+        //b.core.NID_C = 0;
         b.core.N_ITER_1 = 0;
         b.core.V_NVSHUNT = 6;
         b.core.V_NVSTFF = 8;
         b.core.V_NVONSIGHT = 6;
-        b.core.V_NVLIMSUPERV = 20; b.core.V_NVUNFIT = 20; b.core.V_NVREL = 8;
+        //b.core.V_NVLIMSUPERV = 20;
+	b.core.V_NVUNFIT = 20;
+	b.core.V_NVREL = 8;
         b.core.D_NVROLL = 2;
-        b.core.Q_NVSBTSMPERM = 1;
+	b.core.Q_NVSRBKTRG = 0;
+        //b.core.Q_NVSBTSMPERM = 1;
         b.core.Q_NVEMRRLS = 0;
-        b.core.Q_NVGUIPERM = 0;
-        b.core.Q_NVSBFBPERM = 0;
-        b.core.Q_NVINHSMICPERM = 0;
+        //b.core.Q_NVGUIPERM = 0;
+        //b.core.Q_NVSBFBPERM = 0;
+        //b.core.Q_NVINHSMICPERM = 0;
         b.core.V_NVALLOWOVTRP = 0;
         b.core.V_NVSUPOVTRP = 6;
         b.core.D_NVOVTRP = 200;
@@ -81,13 +84,13 @@ int main ()
         b.core.M_NVDERUN = 1;
         b.core.D_NVSTFF = 32767;
         b.core.Q_NVDRIVER_ADHES = 0;
-        b.core.A_NVMAXREDADH1 = 20;
-        b.core.A_NVMAXREDADH2 = 14;
-        b.core.A_NVMAXREDADH3 = 14;
-        b.core.Q_NVLOCACC = 12;
-        b.core.M_NVAVADH = 1;
-        b.core.M_NVEBCL = 1;
-        b.core.Q_NVKINT = 0;
+        //b.core.A_NVMAXREDADH1 = 20;
+        //b.core.A_NVMAXREDADH2 = 14;
+        //b.core.A_NVMAXREDADH3 = 14;
+        //b.core.Q_NVLOCACC = 12;
+        //b.core.M_NVAVADH = 1;
+        //b.core.M_NVEBCL = 1;
+        //b.core.Q_NVKINT = 0;
     }
 
     telegram.add(std::make_shared<National_Values>(b));

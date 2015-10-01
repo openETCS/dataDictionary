@@ -31,20 +31,20 @@ int main ()
     {
         // NID_PACKET = 11;
         a.core.L_PACKET = 116;
-	a.core.NC_CDTRAIN = 5;
+	//a.core.NC_CDTRAIN = 5;
 	a.core.NC_TRAIN  = 310;
 	a.core.L_TRAIN = 98;
 	a.core.V_MAXTRAIN = 120;
 	a.core.M_LOADINGGAUGE = 1;
-	a.core.M_AXLELOADCAT = 0;
+	//a.core.M_AXLELOADCAT = 0;
         a.core.M_AIRTIGHT = 0;
-	a.core.N_AXLE = 31;
+	//a.core.N_AXLE = 31;
 	a.core.N_ITER_1 = 2;
 
-	a.core.sub_1[0].M_VOLTAGE = 4;
-	a.core.sub_1[0].NID_CTRACTION = 1000;
-	a.core.sub_1[1].M_VOLTAGE = 2;
-	a.core.sub_1[1].NID_CTRACTION = 32;
+	//a.core.sub_1[0].M_VOLTAGE = 4;
+	//a.core.sub_1[0].NID_CTRACTION = 1000;
+	//a.core.sub_1[1].M_VOLTAGE = 2;
+	//a.core.sub_1[1].NID_CTRACTION = 32;
 	
 	a.core.N_ITER_2 = 0;
     }
@@ -66,7 +66,7 @@ int main ()
 	b.core.Q_DIRTRAIN = 1;
 	b.core.M_MODE = 4;
 	b.core.M_LEVEL = 2;
-	b.core.NID_NTC = 92;
+	//b.core.NID_NTC = 92;
     }
 
     Position_Report_based_on_two_balise_groups c;
@@ -87,7 +87,7 @@ int main ()
 	c.core.Q_DIRTRAIN = 1;
 	c.core.M_MODE = 4;
 	c.core.M_LEVEL = 2;
-	c.core.NID_NTC = 92;
+	//c.core.NID_NTC = 92;
     }
 
     Onboard_telephone_numbers d;

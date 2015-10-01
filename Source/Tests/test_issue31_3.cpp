@@ -45,14 +45,14 @@ int main ()
     {
         // NID_PACKET = 11;
         b.core.L_PACKET = 96;
-        b.core.NC_CDTRAIN = 0;
+        //b.core.NC_CDTRAIN = 0;
         b.core.NC_TRAIN = 0;
         b.core.L_TRAIN = 0;
         b.core.V_MAXTRAIN = 0;
         b.core.M_LOADINGGAUGE = 1;
-        b.core.M_AXLELOADCAT = 0;
+        //b.core.M_AXLELOADCAT = 0;
         b.core.M_AIRTIGHT = 0;
-        b.core.N_AXLE = 0;
+        //b.core.N_AXLE = 0;
         b.core.N_ITER_1 = 0;
         b.core.N_ITER_2 = 0;
     }

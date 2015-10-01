@@ -25,7 +25,7 @@
 #include "Track_Condition_Big_Metal_Masses.h"
 #include "Track_Condition.h"
 #include "Route_Suitability_Data.h"
-#include "Adhesion_factor.h"
+#include "Adhesion_Factor.h"
 #include "Packet_for_sending_plain_text_messages.h"
 #include "Packet_for_sending_fixed_text_messages.h"
 #include "Geographical_Position_Information.h"

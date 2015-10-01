@@ -10,8 +10,8 @@ int main ()
 
     // declare and initialize a telegram header
     EurobaliseTelegram telegram(create_TelegramHeader_TrainToTrack());
-    telegram.add(std::make_shared<Train_running_number>(create_Train_running_number()));
-    telegram.add(std::make_shared<Error_Reporting>(create_Error_Reporting()));
+    //telegram.add(std::make_shared<Train_running_number>(create_Train_running_number()));
+    //telegram.add(std::make_shared<Error_Reporting>(create_Error_Reporting()));
     telegram.add(std::make_shared<End_of_Information>());
 
     //std::cout << " Encoder Input: " << telegram << std::endl;

@@ -85,9 +85,9 @@ Temporary_Speed_Restriction create_Temporary_Speed_Restriction()
     return a;
 }
 
-Adhesion_factor create_Adhesion_Factor()
+Adhesion_Factor create_Adhesion_Factor()
 {
-    Adhesion_factor a;
+    Adhesion_Factor a;
     {
         a.core.Q_DIR = 1;
         a.core.L_PACKET = 56;
