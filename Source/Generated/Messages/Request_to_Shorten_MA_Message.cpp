@@ -26,12 +26,27 @@ bool Request_to_Shorten_MA_Message::decode(Bitstream& stream)
         return false;
     }
 
-    ::decode(stream, packetID);
-    packet_80 = PacketFactory_TrackToTrain(packetID.NID_PACKET);
-    packet_80->decode(stream);
-    if (!packet_80)
+    while (old_pos + (8 * L_MESSAGE) > stream.bitpos + 8 + 7)
     {
-        return false;
+        BasePacketPtr packet;
+
+        ::decode(stream, packetID);
+
+        packet = PacketFactory_TrackToTrain(packetID.NID_PACKET);
+
+        packet->decode(stream);
+        if (packet)
+        {
+            if (packet->header.NID_PACKET != 80)
+            {
+                return false;
+            }
+            optional_packets.push_back(packet);
+        }
+        else
+        {
+            return false;
+        }
     }
 
     if (stream.bitpos > old_pos + (8 * L_MESSAGE))
@@ -62,13 +77,19 @@ bool Request_to_Shorten_MA_Message::encode(Bitstream& stream) const
         return false;
     }
 
-    if (::encode(stream, packet_80->header) != 1)
+
+    for (auto p = optional_packets.begin(); p != optional_packets.end(); ++p)
     {
-        return false;
-    }
-    if (packet_80->encode(stream) != 1)
-    {
-        return false;
+
+        if (::encode(stream, (*p)->header) != 1)
+        {
+            return false;
+        }
+
+        if ((*p)->encode(stream) != 1)
+        {
+            return false;
+        }
     }
 
     if (stream.bitpos > old_pos + (8 * L_MESSAGE))

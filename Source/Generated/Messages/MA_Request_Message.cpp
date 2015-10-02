@@ -14,7 +14,7 @@ bool MA_Request_Message::decode(Bitstream& stream)
     L_MESSAGE = Bitstream_Read(&stream, 10);
     T_TRAIN = Bitstream_Read(&stream, 32);
     NID_ENGINE = Bitstream_Read(&stream, 24);
-    Q_MARQSTREASON = Bitstream_Read(&stream, 5);
+    Q_TRACKDEL = Bitstream_Read(&stream, 1);
 
     PacketHeader packetID{0};
 
@@ -66,7 +66,7 @@ bool MA_Request_Message::encode(Bitstream& stream) const
     Bitstream_Write(&stream, 10, L_MESSAGE);
     Bitstream_Write(&stream, 32, T_TRAIN);
     Bitstream_Write(&stream, 24, NID_ENGINE);
-    Bitstream_Write(&stream, 5, Q_MARQSTREASON);
+    Bitstream_Write(&stream, 1, Q_TRACKDEL);
 
     if (::encode(stream, packet_0_1->header) != 1)
     {

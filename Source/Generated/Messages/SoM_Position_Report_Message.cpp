@@ -38,7 +38,6 @@ bool SoM_Position_Report_Message::decode(Bitstream& stream)
         if (packet)
         {
             if (packet->header.NID_PACKET != 4 &&
-                packet->header.NID_PACKET != 5 &&
                 packet->header.NID_PACKET != 44)
             {
                 return false;

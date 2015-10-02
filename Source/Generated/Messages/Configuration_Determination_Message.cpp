@@ -1,5 +1,5 @@
 
-#include "No_compatible_version_supported_Message.h"
+#include "Configuration_Determination_Message.h"
 #include "PacketHeader.h"
 #include "PacketFactory.h"
 #include "Bitstream.h"
@@ -7,13 +7,15 @@
 #include <iostream>
 #include <cassert>
 
-bool No_compatible_version_supported_Message::decode(Bitstream& stream)
+bool Configuration_Determination_Message::decode(Bitstream& stream)
 {
     uint32_t old_pos = stream.bitpos;
 
     L_MESSAGE = Bitstream_Read(&stream, 10);
     T_TRAIN = Bitstream_Read(&stream, 32);
-    NID_ENGINE = Bitstream_Read(&stream, 24);
+    M_ACK = Bitstream_Read(&stream, 1);
+    NID_LRBG = Bitstream_Read(&stream, 24);
+    M_VERSION = Bitstream_Read(&stream, 7);
 
     if (stream.bitpos > old_pos + (8 * L_MESSAGE))
     {
@@ -25,13 +27,15 @@ bool No_compatible_version_supported_Message::decode(Bitstream& stream)
     return true;
 }
 
-bool No_compatible_version_supported_Message::encode(Bitstream& stream) const
+bool Configuration_Determination_Message::encode(Bitstream& stream) const
 {
     uint32_t old_pos = stream.bitpos;
 
     Bitstream_Write(&stream, 10, L_MESSAGE);
     Bitstream_Write(&stream, 32, T_TRAIN);
-    Bitstream_Write(&stream, 24, NID_ENGINE);
+    Bitstream_Write(&stream, 1, M_ACK);
+    Bitstream_Write(&stream, 24, NID_LRBG);
+    Bitstream_Write(&stream, 7, M_VERSION);
 
     if (stream.bitpos > old_pos + (8 * L_MESSAGE))
     {

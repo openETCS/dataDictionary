@@ -14,7 +14,7 @@ struct Request_to_Shorten_MA_Message : public EuroradioMessage
     uint32_t  NID_LRBG         ;  // # 24
 
     BasePacketPtr  packet_15;
-    BasePacketPtr  packet_80;
+    PacketSequence  optional_packets;
 
     Request_to_Shorten_MA_Message() : EuroradioMessage(9) {}
 
@@ -26,8 +26,18 @@ struct Request_to_Shorten_MA_Message : public EuroradioMessage
                << +T_TRAIN << ","
                << +M_ACK << ","
                << +NID_LRBG << ","
-               << *(packet_15) << ","
-               << *(packet_80) << ")";
+               << *(packet_15);
+
+        for (auto i = optional_packets.begin(); i != optional_packets.end(); ++i)
+        {
+            if (i == optional_packets.begin())
+            {
+                stream << ',';
+            }
+            stream << *(*i);
+        }
+
+        stream << ")";
     }
 
     bool equals(const EuroradioMessage& p) const override
@@ -42,7 +52,18 @@ struct Request_to_Shorten_MA_Message : public EuroradioMessage
             status = status && (M_ACK == q->M_ACK);
             status = status && (NID_LRBG == q->NID_LRBG);
             status = status && (*packet_15 == *(q->packet_15));
-            status = status && (*packet_80 == *(q->packet_80));
+
+            if (optional_packets.size() == q->optional_packets.size())
+            {
+                for (size_t i = 0; i < optional_packets.size(); ++i)
+                {
+                    status = status && (*(optional_packets[i]) == *(q->optional_packets[i]));
+                }
+            }
+            else
+            {
+                return false;
+            }
 
             return status;
         }

@@ -12,10 +12,9 @@ bool SH_Authorised_Message::decode(Bitstream& stream)
     uint32_t old_pos = stream.bitpos;
 
     L_MESSAGE = Bitstream_Read(&stream, 10);
-    T_TRAIN_0 = Bitstream_Read(&stream, 32);
+    T_TRAIN = Bitstream_Read(&stream, 32);
     M_ACK = Bitstream_Read(&stream, 1);
     NID_LRBG = Bitstream_Read(&stream, 24);
-    T_TRAIN_1 = Bitstream_Read(&stream, 32);
 
     PacketHeader packetID{0};
 
@@ -30,9 +29,29 @@ bool SH_Authorised_Message::decode(Bitstream& stream)
         packet->decode(stream);
         if (packet)
         {
-            if (packet->header.NID_PACKET != 3 &&
+            if (packet->header.NID_PACKET != 49 &&
+                packet->header.NID_PACKET != 3 &&
+                packet->header.NID_PACKET != 5 &&
+                packet->header.NID_PACKET != 39 &&
+                packet->header.NID_PACKET != 51 &&
+                packet->header.NID_PACKET != 41 &&
+                packet->header.NID_PACKET != 42 &&
                 packet->header.NID_PACKET != 44 &&
-                packet->header.NID_PACKET != 49)
+                packet->header.NID_PACKET != 45 &&
+                packet->header.NID_PACKET != 57 &&
+                packet->header.NID_PACKET != 58 &&
+                packet->header.NID_PACKET != 65 &&
+                packet->header.NID_PACKET != 66 &&
+                packet->header.NID_PACKET != 68 &&
+                packet->header.NID_PACKET != 70 &&
+                packet->header.NID_PACKET != 71 &&
+                packet->header.NID_PACKET != 72 &&
+                packet->header.NID_PACKET != 76 &&
+                packet->header.NID_PACKET != 79 &&
+                packet->header.NID_PACKET != 131 &&
+                packet->header.NID_PACKET != 138 &&
+                packet->header.NID_PACKET != 139 &&
+                packet->header.NID_PACKET != 140)
             {
                 return false;
             }
@@ -59,10 +78,9 @@ bool SH_Authorised_Message::encode(Bitstream& stream) const
     uint32_t old_pos = stream.bitpos;
 
     Bitstream_Write(&stream, 10, L_MESSAGE);
-    Bitstream_Write(&stream, 32, T_TRAIN_0);
+    Bitstream_Write(&stream, 32, T_TRAIN);
     Bitstream_Write(&stream, 1, M_ACK);
     Bitstream_Write(&stream, 24, NID_LRBG);
-    Bitstream_Write(&stream, 32, T_TRAIN_1);
 
 
     for (auto p = optional_packets.begin(); p != optional_packets.end(); ++p)

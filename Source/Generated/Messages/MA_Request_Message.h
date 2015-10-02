@@ -11,7 +11,7 @@ struct MA_Request_Message : public EuroradioMessage
     uint16_t  L_MESSAGE        ;  // # 10
     uint32_t  T_TRAIN          ;  // # 32
     uint32_t  NID_ENGINE       ;  // # 24
-    uint8_t  Q_MARQSTREASON    ;  // # 5
+    uint8_t  Q_TRACKDEL        ;  // # 1
 
     BasePacketPtr  packet_0_1;
     PacketSequence  optional_packets;
@@ -25,7 +25,7 @@ struct MA_Request_Message : public EuroradioMessage
                << +L_MESSAGE << ","
                << +T_TRAIN << ","
                << +NID_ENGINE << ","
-               << +Q_MARQSTREASON << ","
+               << +Q_TRACKDEL << ","
                << *(packet_0_1);
 
         for (auto i = optional_packets.begin(); i != optional_packets.end(); ++i)
@@ -50,7 +50,7 @@ struct MA_Request_Message : public EuroradioMessage
             status = status && (L_MESSAGE == q->L_MESSAGE);
             status = status && (T_TRAIN == q->T_TRAIN);
             status = status && (NID_ENGINE == q->NID_ENGINE);
-            status = status && (Q_MARQSTREASON == q->Q_MARQSTREASON);
+            status = status && (Q_TRACKDEL == q->Q_TRACKDEL);
             status = status && (*packet_0_1 == *(q->packet_0_1));
 
             if (optional_packets.size() == q->optional_packets.size())

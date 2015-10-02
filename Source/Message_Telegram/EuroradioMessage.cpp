@@ -9,7 +9,7 @@ EuroradioMessagePtr EuroradioMessage_Decoder(Bitstream& stream)
     MessageHeader messageID{0};
     MessageHeader_Decoder(&stream, &messageID);
 
-    switch (messageID.NID_MESSAGE)
+    switch(messageID.NID_MESSAGE)
     {
         case 129 :
         {
@@ -137,37 +137,9 @@ EuroradioMessagePtr EuroradioMessage_Decoder(Bitstream& stream)
             }
         }
 
-        case 150 :
-        {
-            auto ret = std::make_shared<End_of_Mission_Message>();
-
-            if ((*ret).decode(stream) == 1)
-            {
-                return ret;
-            }
-            else
-            {
-                return EuroradioMessagePtr();
-            }
-        }
-
         case 153 :
         {
-            auto ret = std::make_shared<Radio_infill_request_Message>();
-
-            if ((*ret).decode(stream) == 1)
-            {
-                return ret;
-            }
-            else
-            {
-                return EuroradioMessagePtr();
-            }
-        }
-
-        case 154 :
-        {
-            auto ret = std::make_shared<No_compatible_version_supported_Message>();
+            auto ret = std::make_shared<Radio_in_fill_request_Message>();
 
             if ((*ret).decode(stream) == 1)
             {
@@ -221,20 +193,6 @@ EuroradioMessagePtr EuroradioMessage_Decoder(Bitstream& stream)
             }
         }
 
-        case 158 :
-        {
-            auto ret = std::make_shared<Text_message_acknowledged_by_driver_Message>();
-
-            if ((*ret).decode(stream) == 1)
-            {
-                return ret;
-            }
-            else
-            {
-                return EuroradioMessagePtr();
-            }
-        }
-
         case 159 :
         {
             auto ret = std::make_shared<Session_Established_Message>();
@@ -266,20 +224,6 @@ EuroradioMessagePtr EuroradioMessage_Decoder(Bitstream& stream)
         case 3 :
         {
             auto ret = std::make_shared<Movement_Authority_Message>();
-
-            if ((*ret).decode(stream) == 1)
-            {
-                return ret;
-            }
-            else
-            {
-                return EuroradioMessagePtr();
-            }
-        }
-
-        case 6 :
-        {
-            auto ret = std::make_shared<Recognition_of_exit_from_TRIP_mode_Message>();
 
             if ((*ret).decode(stream) == 1)
             {
@@ -333,20 +277,6 @@ EuroradioMessagePtr EuroradioMessage_Decoder(Bitstream& stream)
             }
         }
 
-        case 16 :
-        {
-            auto ret = std::make_shared<Unconditional_Emergency_Stop_Message>();
-
-            if ((*ret).decode(stream) == 1)
-            {
-                return ret;
-            }
-            else
-            {
-                return EuroradioMessagePtr();
-            }
-        }
-
         case 18 :
         {
             auto ret = std::make_shared<Revocation_of_Emergency_Stop_Message>();
@@ -375,20 +305,6 @@ EuroradioMessagePtr EuroradioMessage_Decoder(Bitstream& stream)
             }
         }
 
-        case 27 :
-        {
-            auto ret = std::make_shared<SH_Refused_Message>();
-
-            if ((*ret).decode(stream) == 1)
-            {
-                return ret;
-            }
-            else
-            {
-                return EuroradioMessagePtr();
-            }
-        }
-
         case 28 :
         {
             auto ret = std::make_shared<SH_Authorised_Message>();
@@ -405,7 +321,7 @@ EuroradioMessagePtr EuroradioMessage_Decoder(Bitstream& stream)
 
         case 32 :
         {
-            auto ret = std::make_shared<RBC_or_RIU_System_Version_Message>();
+            auto ret = std::make_shared<Configuration_Determination_Message>();
 
             if ((*ret).decode(stream) == 1)
             {
@@ -431,23 +347,9 @@ EuroradioMessagePtr EuroradioMessage_Decoder(Bitstream& stream)
             }
         }
 
-        case 34 :
-        {
-            auto ret = std::make_shared<Track_Ahead_Free_Request_Message>();
-
-            if ((*ret).decode(stream) == 1)
-            {
-                return ret;
-            }
-            else
-            {
-                return EuroradioMessagePtr();
-            }
-        }
-
         case 37 :
         {
-            auto ret = std::make_shared<Infill_MA_Message>();
+            auto ret = std::make_shared<In_fill_MA_Message>();
 
             if ((*ret).decode(stream) == 1)
             {
@@ -501,20 +403,6 @@ EuroradioMessagePtr EuroradioMessage_Decoder(Bitstream& stream)
             }
         }
 
-        case 41 :
-        {
-            auto ret = std::make_shared<Train_Accepted_Message>();
-
-            if ((*ret).decode(stream) == 1)
-            {
-                return ret;
-            }
-            else
-            {
-                return EuroradioMessagePtr();
-            }
-        }
-
         case 43 :
         {
             auto ret = std::make_shared<SoM_position_report_confirmed_by_RBC_Message>();
@@ -543,12 +431,12 @@ EuroradioMessagePtr EuroradioMessage_Decoder(Bitstream& stream)
             }
         }
 
-        default :
-        {
-            std::cout << "NID_MESSAGE " << +messageID.NID_MESSAGE << std::endl;
-            std::cerr << "Error, unrecognized Euroradio Message in " << __FILE__ << std::endl;
-            return EuroradioMessagePtr();
-        }
+	default :
+	{
+	    std::cout << "NID_MESSAGE " << +messageID.NID_MESSAGE << std::endl;
+	    std::cerr << "Error, unrecognized Euroradio Message in " << __FILE__ << std::endl;
+	    return EuroradioMessagePtr();
+	}
     }
 
     return EuroradioMessagePtr();
@@ -558,7 +446,7 @@ bool EuroradioMessage_Encoder(Bitstream& stream, EuroradioMessagePtr p)
 {
     MessageHeader_Encoder(&stream, &(p->header));
 
-    switch (p->header.NID_MESSAGE)
+    switch(p->header.NID_MESSAGE)
     {
         case 129 :
         {
@@ -632,25 +520,9 @@ bool EuroradioMessage_Encoder(Bitstream& stream, EuroradioMessagePtr p)
             return (*ptr).encode(stream) == 1;
         }
 
-        case 150 :
-        {
-            auto ptr = std::dynamic_pointer_cast<End_of_Mission_Message>(p);
-            assert(ptr);
-
-            return (*ptr).encode(stream) == 1;
-        }
-
         case 153 :
         {
-            auto ptr = std::dynamic_pointer_cast<Radio_infill_request_Message>(p);
-            assert(ptr);
-
-            return (*ptr).encode(stream) == 1;
-        }
-
-        case 154 :
-        {
-            auto ptr = std::dynamic_pointer_cast<No_compatible_version_supported_Message>(p);
+            auto ptr = std::dynamic_pointer_cast<Radio_in_fill_request_Message>(p);
             assert(ptr);
 
             return (*ptr).encode(stream) == 1;
@@ -680,14 +552,6 @@ bool EuroradioMessage_Encoder(Bitstream& stream, EuroradioMessagePtr p)
             return (*ptr).encode(stream) == 1;
         }
 
-        case 158 :
-        {
-            auto ptr = std::dynamic_pointer_cast<Text_message_acknowledged_by_driver_Message>(p);
-            assert(ptr);
-
-            return (*ptr).encode(stream) == 1;
-        }
-
         case 159 :
         {
             auto ptr = std::dynamic_pointer_cast<Session_Established_Message>(p);
@@ -707,14 +571,6 @@ bool EuroradioMessage_Encoder(Bitstream& stream, EuroradioMessagePtr p)
         case 3 :
         {
             auto ptr = std::dynamic_pointer_cast<Movement_Authority_Message>(p);
-            assert(ptr);
-
-            return (*ptr).encode(stream) == 1;
-        }
-
-        case 6 :
-        {
-            auto ptr = std::dynamic_pointer_cast<Recognition_of_exit_from_TRIP_mode_Message>(p);
             assert(ptr);
 
             return (*ptr).encode(stream) == 1;
@@ -744,14 +600,6 @@ bool EuroradioMessage_Encoder(Bitstream& stream, EuroradioMessagePtr p)
             return (*ptr).encode(stream) == 1;
         }
 
-        case 16 :
-        {
-            auto ptr = std::dynamic_pointer_cast<Unconditional_Emergency_Stop_Message>(p);
-            assert(ptr);
-
-            return (*ptr).encode(stream) == 1;
-        }
-
         case 18 :
         {
             auto ptr = std::dynamic_pointer_cast<Revocation_of_Emergency_Stop_Message>(p);
@@ -768,14 +616,6 @@ bool EuroradioMessage_Encoder(Bitstream& stream, EuroradioMessagePtr p)
             return (*ptr).encode(stream) == 1;
         }
 
-        case 27 :
-        {
-            auto ptr = std::dynamic_pointer_cast<SH_Refused_Message>(p);
-            assert(ptr);
-
-            return (*ptr).encode(stream) == 1;
-        }
-
         case 28 :
         {
             auto ptr = std::dynamic_pointer_cast<SH_Authorised_Message>(p);
@@ -786,7 +626,7 @@ bool EuroradioMessage_Encoder(Bitstream& stream, EuroradioMessagePtr p)
 
         case 32 :
         {
-            auto ptr = std::dynamic_pointer_cast<RBC_or_RIU_System_Version_Message>(p);
+            auto ptr = std::dynamic_pointer_cast<Configuration_Determination_Message>(p);
             assert(ptr);
 
             return (*ptr).encode(stream) == 1;
@@ -800,17 +640,9 @@ bool EuroradioMessage_Encoder(Bitstream& stream, EuroradioMessagePtr p)
             return (*ptr).encode(stream) == 1;
         }
 
-        case 34 :
-        {
-            auto ptr = std::dynamic_pointer_cast<Track_Ahead_Free_Request_Message>(p);
-            assert(ptr);
-
-            return (*ptr).encode(stream) == 1;
-        }
-
         case 37 :
         {
-            auto ptr = std::dynamic_pointer_cast<Infill_MA_Message>(p);
+            auto ptr = std::dynamic_pointer_cast<In_fill_MA_Message>(p);
             assert(ptr);
 
             return (*ptr).encode(stream) == 1;
@@ -840,14 +672,6 @@ bool EuroradioMessage_Encoder(Bitstream& stream, EuroradioMessagePtr p)
             return (*ptr).encode(stream) == 1;
         }
 
-        case 41 :
-        {
-            auto ptr = std::dynamic_pointer_cast<Train_Accepted_Message>(p);
-            assert(ptr);
-
-            return (*ptr).encode(stream) == 1;
-        }
-
         case 43 :
         {
             auto ptr = std::dynamic_pointer_cast<SoM_position_report_confirmed_by_RBC_Message>(p);
@@ -865,12 +689,12 @@ bool EuroradioMessage_Encoder(Bitstream& stream, EuroradioMessagePtr p)
         }
 
 
-        default :
-        {
-            std::cout << "NID_MESSAGE " << +p->header.NID_MESSAGE << std::endl;
-            std::cerr << "Error, unrecognized Euroradio Message in " << __FILE__ << std::endl;
-            return false;
-        }
+	default :
+	{
+	    std::cout << "NID_MESSAGE " << +p->header.NID_MESSAGE << std::endl;
+	    std::cerr << "Error, unrecognized Euroradio Message in " << __FILE__ << std::endl;
+	    return false;
+	}
     }
 
     return false;

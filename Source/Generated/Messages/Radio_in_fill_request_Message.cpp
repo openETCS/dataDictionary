@@ -1,5 +1,5 @@
 
-#include "End_of_Mission_Message.h"
+#include "Radio_in_fill_request_Message.h"
 #include "PacketHeader.h"
 #include "PacketFactory.h"
 #include "Bitstream.h"
@@ -7,13 +7,18 @@
 #include <iostream>
 #include <cassert>
 
-bool End_of_Mission_Message::decode(Bitstream& stream)
+bool Radio_in_fill_request_Message::decode(Bitstream& stream)
 {
     uint32_t old_pos = stream.bitpos;
 
+    NID_TELEGRAM = Bitstream_Read(&stream, 0);
     L_MESSAGE = Bitstream_Read(&stream, 10);
+    L_TELEGRAM = Bitstream_Read(&stream, 0);
     T_TRAIN = Bitstream_Read(&stream, 32);
     NID_ENGINE = Bitstream_Read(&stream, 24);
+    NID_C = Bitstream_Read(&stream, 10);
+    NID_BG = Bitstream_Read(&stream, 14);
+    Q_INFILL = Bitstream_Read(&stream, 1);
 
     PacketHeader packetID{0};
 
@@ -35,13 +40,18 @@ bool End_of_Mission_Message::decode(Bitstream& stream)
     return true;
 }
 
-bool End_of_Mission_Message::encode(Bitstream& stream) const
+bool Radio_in_fill_request_Message::encode(Bitstream& stream) const
 {
     uint32_t old_pos = stream.bitpos;
 
+    Bitstream_Write(&stream, 0, NID_TELEGRAM);
     Bitstream_Write(&stream, 10, L_MESSAGE);
+    Bitstream_Write(&stream, 0, L_TELEGRAM);
     Bitstream_Write(&stream, 32, T_TRAIN);
     Bitstream_Write(&stream, 24, NID_ENGINE);
+    Bitstream_Write(&stream, 10, NID_C);
+    Bitstream_Write(&stream, 14, NID_BG);
+    Bitstream_Write(&stream, 1, Q_INFILL);
 
     if (::encode(stream, packet_0_1->header) != 1)
     {

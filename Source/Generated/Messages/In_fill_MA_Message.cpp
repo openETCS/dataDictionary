@@ -1,5 +1,5 @@
 
-#include "Infill_MA_Message.h"
+#include "In_fill_MA_Message.h"
 #include "PacketHeader.h"
 #include "PacketFactory.h"
 #include "Bitstream.h"
@@ -7,7 +7,7 @@
 #include <iostream>
 #include <cassert>
 
-bool Infill_MA_Message::decode(Bitstream& stream)
+bool In_fill_MA_Message::decode(Bitstream& stream)
 {
     uint32_t old_pos = stream.bitpos;
 
@@ -45,25 +45,32 @@ bool Infill_MA_Message::decode(Bitstream& stream)
         packet->decode(stream);
         if (packet)
         {
-            if (packet->header.NID_PACKET != 5 &&
-                packet->header.NID_PACKET != 21 &&
+            if (packet->header.NID_PACKET != 21 &&
                 packet->header.NID_PACKET != 27 &&
-                packet->header.NID_PACKET != 39 &&
-                packet->header.NID_PACKET != 40 &&
-                packet->header.NID_PACKET != 41 &&
-                packet->header.NID_PACKET != 44 &&
                 packet->header.NID_PACKET != 49 &&
+                packet->header.NID_PACKET != 80 &&
+                packet->header.NID_PACKET != 3 &&
+                packet->header.NID_PACKET != 5 &&
+                packet->header.NID_PACKET != 39 &&
                 packet->header.NID_PACKET != 51 &&
+                packet->header.NID_PACKET != 41 &&
+                packet->header.NID_PACKET != 42 &&
+                packet->header.NID_PACKET != 44 &&
+                packet->header.NID_PACKET != 45 &&
+                packet->header.NID_PACKET != 57 &&
+                packet->header.NID_PACKET != 58 &&
                 packet->header.NID_PACKET != 65 &&
                 packet->header.NID_PACKET != 66 &&
                 packet->header.NID_PACKET != 68 &&
-                packet->header.NID_PACKET != 69 &&
                 packet->header.NID_PACKET != 70 &&
                 packet->header.NID_PACKET != 71 &&
-                packet->header.NID_PACKET != 80 &&
-                packet->header.NID_PACKET != 88 &&
+                packet->header.NID_PACKET != 72 &&
+                packet->header.NID_PACKET != 76 &&
+                packet->header.NID_PACKET != 79 &&
+                packet->header.NID_PACKET != 131 &&
                 packet->header.NID_PACKET != 138 &&
-                packet->header.NID_PACKET != 139)
+                packet->header.NID_PACKET != 139 &&
+                packet->header.NID_PACKET != 140)
             {
                 return false;
             }
@@ -85,7 +92,7 @@ bool Infill_MA_Message::decode(Bitstream& stream)
     return true;
 }
 
-bool Infill_MA_Message::encode(Bitstream& stream) const
+bool In_fill_MA_Message::encode(Bitstream& stream) const
 {
     uint32_t old_pos = stream.bitpos;
 
