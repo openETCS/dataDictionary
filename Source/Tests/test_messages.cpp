@@ -112,7 +112,7 @@ int main ()
     //std::cout << " Decoding MA_Request message." << std::endl;
     EuroradioMessagePtr new_message2 = EuroradioMessage_Decoder(stream);
     //std::cout << " Decoder Output: " << (*new_message2) << "\n" << std::endl;
-    //assert(message2 == *new_message2);
+    assert(message2 == *new_message2);
 
     init_pos = stream.bitpos;
     //std::cout << " Encoder Input:  " << message3 << std::endl;
