@@ -1,0 +1,159 @@
+
+SHELL=/bin/bash
+
+export SCRIPT_DIR=$(TOPDIR)/Scripts
+export COQ=$(TOPDIR)/Foundation/Coq
+
+#setup compiler flags
+INCLUDES=$(CPPFLAGS) -I$(FRAMAC_SHARE)/libc
+
+VPATH = $(COQ)
+
+SHARED_FLAGS=-Wall -pedantic -O3
+#SHARED_FLAGS+=-Wconversion
+CFLAGS= -x c++ -std=c++11 $(SHARED_FLAGS)
+CXXFLAGS=-std=c++11 $(SHARED_FLAGS)
+
+
+#setup wp
+WP_TIMEOUT ?= 10
+WP_COQ_TIMEOUT ?= 10
+WP_ALT_ERGO_STEPS ?= 10000
+WP_PROCESSES ?= 1
+
+#setup coq
+SCRIPT?='wp0.script' # default script
+coq-bitlemmas: FORCE
+	@(cd $(COQ) && $(MAKE) compile)
+
+# We differentiate between two types of WP options:
+# 1) in WP_FLAGS we collect the general options
+# 2) in WP_PROVER_FLAGS we collect the ones where we select the provers
+# This allows us, for example, to start the gui very quickly and then
+# run the prover(s) on select proof obligtions.
+
+
+WP_BASE_FLAGS += -cpp-gnu-like
+WP_BASE_FLAGS += -pp-annot -no-unicode
+WP_BASE_FLAGS += -wp
+WP_BASE_FLAGS += -wp-split
+
+# RTE options and more
+WP_BASE_FLAGS += -wp-rte
+WP_BASE_FLAGS += -warn-signed-downcast
+WP_BASE_FLAGS += -warn-signed-overflow
+#WP_BASE_FLAGS += -warn-unsigned-downcast
+WP_BASE_FLAGS += -warn-unsigned-overflow
+WP_BASE_FLAGS += -wp-split
+
+#Qed options
+#WP_BASE_FLAGS += -wp-no-simpl
+#WP_BASE_FLAGS += -wp-no-clean
+#WP_BASE_FLAGS += -wp-no-let
+#WP_BASE_FLAGS += -wp-no-pruning
+WP_BASE_FLAGS += -wp-no-bits
+
+WP_BASE_FLAGS += -kernel-msg-key pp
+WP_BASE_FLAGS += -wp-model Typed+ref
+WP_BASE_FLAGS += -wp-driver $(TOPDIR)/BitTest.driver
+
+WP_PROVER_FLAGS += -wp-timeout $(WP_TIMEOUT)
+#WP_PROVER_FLAGS += -wp-steps $(WP_ALT_ERGO_STEPS)
+WP_PROVER_FLAGS += -wp-script $(SCRIPT)
+WP_PROVER_FLAGS += -wp-coq-timeout $(WP_COQ_TIMEOUT)
+
+#WP_PROVER_FLAGS += -wp-prover none
+WP_PROVER_FLAGS += -wp-prover z3
+WP_PROVER_FLAGS += -wp-prover coq
+WP_PROVER_FLAGS += -wp-prover cvc4
+WP_PROVER_FLAGS += -wp-prover alt-ergo
+
+WP_FLAGS = $(WP_BASE_FLAGS)
+WP_FLAGS +=-cpp-command 'gcc -C -E $(INCLUDES)'
+
+# run WP on command line 
+export WP=frama-c 
+export WPGUI=frama-c-gui
+export WPREPORT=$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS)
+
+# start WP on command line and run provers
+%.wp:%.c coq-bitlemmas FORCE
+	@$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 1 -wp-out $(patsubst %.c,%.wp, $<)   $<
+
+%.wp:%.h coq-bitlemmas FORCE
+	@$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 1 -wp-out $(patsubst %.h,%.wp, $<)   $<
+
+
+# start WP on command line but do not run provers
+%.check:%.c FORCE 
+	@$(WP) $(WP_FLAGS) -wp-check -wp-out $(patsubst %.c,%.wp, $<)  $< 
+
+
+%.gen:%.c FORCE
+	@$(WP) $(WP_FLAGS)  -wp-gen -wp-out $(patsubst %.c,%.wp, $<)  $< 
+
+
+%.why3:%.c FORCE
+	@($(WP) $(WP_FLAGS)  -wp-prover why3 -wp-gen  -wp-out $(patsubst %.c,%.wp, $<)  $<)
+
+%.why3ide:%.c FORCE
+	@($(WP) $(WP_FLAGS)  -wp-prover why3ide -wp-out $(patsubst %.c,%.wp, $<)  $< &)
+
+
+# start WP GUI and run provers
+%.wpgui:%.c coq-bitlemmas FORCE
+	@($(WPGUI) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 4 -wp-out $(patsubst %.c,%.wp, $<)  $< &)
+
+
+# start WP GUI but do not run provers
+%.checkgui:%.c FORCE
+	@(frama-c-gui $(WP_FLAGS) -wp-prover none -wp-out $(patsubst %.c,%.wp, $<)  $< &)
+
+
+%.report-wp:%.c coq-bitlemmas FORCE 
+	@(. ${SCRIPT_DIR}/script_functions.sh; reportWp $(basename $<););
+
+%.report:%.c
+	@+$(MAKE) $(patsubst %.c,%.report-wp, $<)
+
+ASTYLEOPTIONS += -A1
+ASTYLEOPTIONS += --break-blocks
+ASTYLEOPTIONS += --pad-oper
+ASTYLEOPTIONS += --pad-header
+ASTYLEOPTIONS += --lineend=linux
+ASTYLEOPTIONS += --add-brackets
+ASTYLEOPTIONS += --indent=spaces=4
+ASTYLEOPTIONS += --indent-classes
+ASTYLEOPTIONS += --indent-switches
+ASTYLEOPTIONS += --indent-col1-comments
+ASTYLEOPTIONS += --min-conditional-indent=0
+
+export ASTYLE=astyle $(ASTYLEOPTIONS)
+
+%.format:%.c FORCE
+	@$(ASTYLE) $<
+
+%.format:%.cpp FORCE
+	@$(ASTYLE) $<
+
+%.format:%.h FORCE
+	@$(ASTYLE) $<
+
+%.format:%.hpp FORCE
+	@$(ASTYLE) $<
+
+
+clean:: FORCE
+	@$(RM) *.o
+	@$(RM) *.i
+	@$(RM) *.back
+	@$(RM) *.bak
+	@$(RM) *.orig
+	@$(RM) *.exe
+	@$(RM) -rf  *.debug
+	@$(RM) -rf  .frama-c
+	@$(RM) -rf  *.wp
+	@$(RM) -rf  *.ml
+
+FORCE:
+

@@ -1,0 +1,222 @@
+
+\documentclass[paper=a4,12pt,DIV16,BCOR8mm,fleqn,twoside]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[english]{babel}
+
+\usepackage[pdftex]{graphicx}
+\usepackage{xspace}
+\usepackage{textcomp}
+
+% needed for FloatBarrier
+\usepackage[section]{placeins}
+
+\usepackage{verbatim}
+\usepackage[nomargin,inline,draft]{fixme}
+
+\usepackage{comment}
+
+%\usepackage[firstpage]{draftwatermark}
+%\SetWatermarkScale{4}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{txfonts}
+
+
+\usepackage{booktabs}
+\usepackage{rotating}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{multicol}
+
+\newcommand{\sturz}[2]{\rotatebox{90}{\parbox{#2}{\center #1}}}
+
+\usepackage{listings}
+\input{listing}
+\input{newcommands}
+
+
+\usepackage{float}
+ 
+%\usepackage{chngcntr}
+%\counterwithout{footnote}{chapter}
+
+% need to appear as last \usepackage to avoid nonsensical warnings,
+% cf. http://mrunix.de/forums/showthread.php?t=38657#8
+\usepackage[pdftex]{hyperref}
+
+\floatstyle{plain}
+%\newfloat{listing}{thp}{lop1}[chapter]
+\floatname{listing}{Listing}
+
+%\newfloat{predfun}{thp}{lop2}[chapter]
+\floatname{predfun}{Listing}
+
+
+% share counters of all floats:
+\makeatletter
+\let\c@listing\c@figure
+\let\c@predfun\c@figure
+%\let\c@lemma\c@figure
+\let\c@table\c@figure
+\makeatother
+
+% suppress hyperref warnings
+\makeatletter
+\def\Hy@Warning#1{}
+\def\Hy@WarningNoLine#1{}
+\makeatother
+
+\renewcommand\floatpagefraction{.90}
+\renewcommand\topfraction{.90}
+\renewcommand\bottomfraction{.90}
+\renewcommand\textfraction{.1}
+\setlength{\unitlength}{1mm}
+
+\setlength\topsep{1.5\baselineskip}  % larger space around theorem-like environments
+
+\addtolength{\parskip}{0.5\baselineskip}
+\parindent=0cm
+
+\setcounter{tocdepth}{1}
+\setcounter{secnumdepth}{2}
+
+\begin{document}
+
+\title{Specification Concepts for Packages of Subset 026 (Chapter 7)}
+\author{Jens Gerlach}
+\maketitle
+
+\section{Predicates and Logic Functions of \inl{BitStream}}
+
+The type \inl{Bitstream} models a bit stream and is given
+by a byte array of \inl{size} elements that starts at \inl{addr}.
+A bit stream also holds a \emph{bit position} that marks
+the current position in the bit stream from where bits can be
+read or to which bits can be written.
+
+\begin{lstlisting}[style = acsl-block]
+struct Bitstream
+{
+    uint8_t*  addr;
+    uint32_t  size;
+    uint32_t  bitpos;
+};
+
+typedef struct Bitstream Bitstream;
+\end{lstlisting}
+
+\begin{itemize}
+\item
+\inl{predicate Readable{L}(Bitstream* stream)}
+
+This predicate is true if all bytes in the range
+\inl{[stream->addr[0..size-1]} are valid for reading.
+
+\item
+\inl{predicate Writeable{L}(Bitstream* stream)}
+
+This predicate is true if all bytes in the range
+\inl{[stream->addr[0..size-1]} are valid for reading \emph{and} writing.
+
+\item
+\inl{predicate Invariant{L}(Bitstream* stream, integer length)}
+
+This predicate is equivalent to the following condition
+
+\begin{lstlisting}[style = acsl-block]
+   8 * stream->size        <= UINT32_MAX   &&
+   stream->bitpos + length <= UINT32_MAX;
+\end{lstlisting}
+
+\item
+\inl{predicate Normal{L}(Bitstream* stream, integer length)}
+
+This predicate is true if \inl{stream->bitpos + length <= 8 * stream->},
+that is if at least \inl{length} bits can be read from or written to the
+bitstream.
+
+\end{itemize}
+
+\section{Predicates and Logic Functions of Packages}
+
+
+Let \inl{P} be the type of a package.
+
+\begin{lstlisting}[style = acsl-block]
+   struct P {
+      ...
+   };
+
+   typedef struct P P;
+\end{lstlisting}
+
+We will use follwing \acsl predicates and logic functions with the following signatures
+for the specification of decoder and encoder functions for \inl{P}.
+
+\begin{itemize}
+\item
+\inl{logic integer MaxBitSize{L}(P* p)}
+
+Returns the number of bits that might be read/written by \inl{P}.
+
+\item
+\inl{logic integer BitSize{L}(P* p)}
+
+Returns the number of bits that have been read/written by \inl{P}.
+This number is always less or equal than \inl{MaxBitSize}.
+
+\item
+\inl{predicate Invariant(P* p)}
+
+This predicate is true if all type invariants of \inl{P}
+are satisified.
+
+\item
+\inl{predicate ZeroInitialized(P* p)}
+
+This predicate is true is all relevant elements of \inl{p} are
+equal to zero.
+
+\item
+\inl{predicate EqualBits(Bitstream* stream, integer pos, P* p)}
+
+This predicate is true if starting from the bit position
+\inl{pos} in the bit stream \inl{stream} the following
+\inl{BitSize} number of bits are equal to the corresponding bits
+in the elements of \inl{p}.
+
+\inl{predicate UpperBitsNotSet(P* p)}
+
+This predicate is true if the appropriate upper (higher) bits
+in the elements of \inl{p} are \emph{not} set.
+
+\item
+\inl{Separated(Bitstream* stream, P* p)}
+
+This predicate is true if there is now aliasing between the elements of
+\inl{p} and those of \inl{Bitstream}.
+
+\end{itemize}
+
+%\listoffixmes
+%\tableofcontents
+%\listof{predfun}{List of Logic Specifications}
+%\listoffigures
+%\listoftables
+
+
+% jg:  the "phantomsection" is a hack to fix the wrong reference to bibliography
+% see also http://sumanta679.wordpress.com/2009/05/15/latex-list-of-table-list-of-figures-and-bibliography-in-toc/
+%\newpage
+%\phantomsection \label{listoffig}
+%\addcontentsline{toc}{chapter}{Bibliography}
+%\bibliographystyle{unsrt}
+%\bibliography{bibliography}
+
+\end{document}
+
