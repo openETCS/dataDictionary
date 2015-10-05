@@ -75,6 +75,7 @@ int main ()
         message2.L_MESSAGE = 23;
         message2.T_TRAIN = 1;
         message2.NID_ENGINE = 923;
+	message2.Q_TRACKDEL = 1;
         message2.packet_0_1 = std::make_shared<Position_Report>(a);
     }
 
@@ -91,6 +92,7 @@ int main ()
         message3.L_MESSAGE = 29;
         message3.T_TRAIN = 0;
         message3.NID_ENGINE = 0;
+	message3.Q_TRACKDEL = 0;
         message3.packet_0_1 = std::make_shared<Position_Report>(a);
         message3.optional_packets.push_back(std::make_shared<Level_23_transition_information>(c));
     }
