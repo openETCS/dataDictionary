@@ -1,7 +1,7 @@
 
 #include "EurobaliseTelegram.h"
 #include "TelegramHeader.h"
-#include "PacketFactory.cpp"
+#include "PacketFactory.h"
 #include <iostream>
 #include <cassert>
 
