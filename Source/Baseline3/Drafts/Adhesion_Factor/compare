@@ -1,0 +1,24 @@
+#!/bin/sh
+
+echo Adhesion_Factor.h
+diff Adhesion_Factor.h $DELIVERY/Subset_Structs/Adhesion_Factor/Adhesion_Factor.h
+echo Adhesion_Factor_Encoder.h
+diff Adhesion_Factor_Encoder.h $DELIVERY/Subset_Structs/Adhesion_Factor/Adhesion_Factor_Encoder.h
+echo Adhesion_Factor_Decoder.h
+diff Adhesion_Factor_Decoder.h $DELIVERY/Subset_Structs/Adhesion_Factor/Adhesion_Factor_Decoder.h
+echo Adhesion_Factor_Init.h
+diff Adhesion_Factor_Init.h $DELIVERY/Subset_Structs/Adhesion_Factor/Adhesion_Factor_Init.h
+echo Adhesion_Factor_UpperBitsNotSet.h
+diff Adhesion_Factor_UpperBitsNotSet.h $DELIVERY/Subset_Structs/Adhesion_Factor/Adhesion_Factor_UpperBitsNotSet.h
+echo Adhesion_Factor_Encoder.c
+diff Adhesion_Factor_Encoder.c $DELIVERY/Subset_Structs/Adhesion_Factor/Adhesion_Factor_Encoder.c
+echo Adhesion_Factor_Decoder.c
+diff Adhesion_Factor_Decoder.c $DELIVERY/Subset_Structs/Adhesion_Factor/Adhesion_Factor_Decoder.c
+echo Adhesion_Factor_Init.c
+diff Adhesion_Factor_Init.c $DELIVERY/Subset_Structs/Adhesion_Factor/Adhesion_Factor_Init.c
+echo Adhesion_Factor_UpperBitsNotSet.c
+diff Adhesion_Factor_UpperBitsNotSet.c $DELIVERY/Subset_Structs/Adhesion_Factor/Adhesion_Factor_UpperBitsNotSet.c
+echo Adhesion_Factor_EncoderThenDecoder.c
+diff Adhesion_Factor_EncoderThenDecoder.c $DELIVERY/Subset_Structs/Adhesion_Factor/Adhesion_Factor_EncoderThenDecoder.c
+echo Adhesion_Factor_DecoderThenEncoder.c
+diff Adhesion_Factor_DecoderThenEncoder.c $DELIVERY/Subset_Structs/Adhesion_Factor/Adhesion_Factor_DecoderThenEncoder.c

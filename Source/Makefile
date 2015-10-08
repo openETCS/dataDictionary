@@ -1,22 +1,19 @@
 
-MAKEFLAGS += --silent
-MAKEFLAGS += --no-print-directory
+#MAKEFLAGS += --silent
+#MAKEFLAGS += --no-print-directory
 
-it: lib test
+it: baseline2 baseline3
 
-lib:
-	(cd Foundation          && $(MAKE) -j 4 lib)
-	(cd Generated           && $(MAKE) -j 4 lib)
-	(cd Message_Telegram    && $(MAKE))
+baseline2: FORCE
+	(cd Baseline2          && $(MAKE) it)
 
-test:
-	(cd Tests       && $(MAKE))
-	(cd Integration && $(MAKE))
+baseline3: FORCE
+	(cd Baseline3          && $(MAKE) it)
 
-clean: 
-	(cd Foundation         && $(MAKE) clean)
-	(cd Generated          && $(MAKE) clean)
-	(cd Message_Telegram   && $(MAKE) clean)
-	(cd Tests              && $(MAKE) clean)
-	(cd Integration        && $(MAKE) clean)
+clean: FORCE
+	(cd Baseline2         && $(MAKE) clean)
+	(cd Baseline3         && $(MAKE) clean)
+
+
+FORCE:
 
