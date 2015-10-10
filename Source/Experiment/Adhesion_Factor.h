@@ -178,5 +178,19 @@ static inline void Adhesion_Factor_Print(FILE* stream, const Adhesion_Factor* p)
            p->M_ADHESION);
 }
 
+static inline int Adhesion_Factor_Equal(const Adhesion_Factor* a, const Adhesion_Factor* b)
+{
+     int status = a->header.NID_PACKET == b->header.NID_PACKET;
+     status = status && a->Q_DIR       == b->Q_DIR;
+     status = status && a->L_PACKET    == b->L_PACKET;
+     status = status && a->Q_SCALE     == b->Q_SCALE;
+     status = status && a->D_ADHESION  == b->D_ADHESION;
+     status = status && a->L_ADHESION  == b->L_ADHESION;
+     status = status && a->M_ADHESION  == b->M_ADHESION;
+
+     return status;
+}
+
+
 #endif // ADHESION_FACTOR_H_INCLUDED
 
