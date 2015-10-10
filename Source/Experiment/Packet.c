@@ -82,7 +82,6 @@ int TrainToTrack_Length(const PacketHeader* header)
 
         case 255 :
         {
-            End_of_Information* ptr = (End_of_Information*)(header);
             return 8;
         }
 
@@ -111,7 +110,6 @@ int TrackToTrain_Length(const PacketHeader* header)
 
         case 255 :
         {
-            End_of_Information* ptr = (End_of_Information*)(header);
             return 8;
         }
 

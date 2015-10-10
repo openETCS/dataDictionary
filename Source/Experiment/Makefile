@@ -1,5 +1,6 @@
 
-export CPPFLAGS=-I../Baseline2/Foundation/Bits
+CPPFLAGS+=-I../Baseline2/Foundation/Bits
+CFLAGS += -std=c99 -Wall -pedantic
 
 it: Adhesion_Factor.o Error_reporting.o End_of_Information.o Level_23_transition_information.o Temporary_Speed_Restriction.o Packet.o PacketFactory.o EurobaliseTelegram.c
 
