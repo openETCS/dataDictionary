@@ -1,11 +1,11 @@
 
-#ifndef END_OF_INFORMATION_H_INCLUDED
-#define END_OF_INFORMATION_H_INCLUDED
+#ifndef ENDOFINFORMATION_H_INCLUDED
+#define ENDOFINFORMATION_H_INCLUDED
 
 #include "Bitstream.h"
 #include "PacketHeader.h"
 
-struct End_of_Information
+struct EndOfInformation
 {
     // TransmissionMedia=Any
     // This packet consists only of NID_PACKET containing 8 bit 1sIt acts
@@ -17,26 +17,26 @@ struct End_of_Information
     PacketHeader header;
 };
 
-typedef struct End_of_Information End_of_Information;
+typedef struct EndOfInformation EndOfInformation;
 
-#define END_OF_INFORMATION_BITSIZE 0
+#define ENDOFINFORMATION_BITSIZE 0
 
 /*@
-    logic integer BitSize{L}(End_of_Information* p) = END_OF_INFORMATION_BITSIZE;
+    logic integer BitSize{L}(EndOfInformation* p) = ENDOFINFORMATION_BITSIZE;
 
-    logic integer MaxBitSize{L}(End_of_Information* p) = BitSize(p);
+    logic integer MaxBitSize{L}(EndOfInformation* p) = BitSize(p);
 
-    predicate Separated(Bitstream* stream, End_of_Information* p) =
+    predicate Separated(Bitstream* stream, EndOfInformation* p) =
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(End_of_Information* p) = \true;
+    predicate Invariant(EndOfInformation* p) = \true;
 
-    predicate ZeroInitialized(End_of_Information* p) = \true;
+    predicate ZeroInitialized(EndOfInformation* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, End_of_Information* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, EndOfInformation* p) = \true;
 
-    predicate UpperBitsNotSet(End_of_Information* p) = \true;
+    predicate UpperBitsNotSet(EndOfInformation* p) = \true;
 
 */
 
@@ -48,7 +48,7 @@ typedef struct End_of_Information End_of_Information;
 
     ensures result:  \result <==> UpperBitsNotSet(p);
 */
-int End_of_Information_UpperBitsNotSet(const End_of_Information* p);
+int EndOfInformation_UpperBitsNotSet(const EndOfInformation* p);
 
 /*@
     requires valid_stream:      Writeable(stream);
@@ -89,7 +89,7 @@ int End_of_Information_UpperBitsNotSet(const End_of_Information* p);
     complete behaviors;
     disjoint behaviors;
 */
-int End_of_Information_EncodeBit(Bitstream* stream, const End_of_Information* p);
+int EndOfInformation_EncodeBit(Bitstream* stream, const EndOfInformation* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -124,24 +124,24 @@ int End_of_Information_EncodeBit(Bitstream* stream, const End_of_Information* p)
     complete behaviors;
     disjoint behaviors;
 */
-int End_of_Information_DecodeBit(Bitstream* stream, End_of_Information* p);
+int EndOfInformation_DecodeBit(Bitstream* stream, EndOfInformation* p);
 /*
-int End_of_Information_EncodeInt(PacketInfo* data, kcg_int* stream, const End_of_Information* p);
+int EndOfInformation_EncodeInt(PacketInfo* data, kcg_int* stream, const EndOfInformation* p);
 
-int End_of_Information_DecodeInt(PacketInfo* data, const kcg_int* stream, End_of_Information* p);
+int EndOfInformation_DecodeInt(PacketInfo* data, const kcg_int* stream, EndOfInformation* p);
 */
 #ifdef __cplusplus
 
 #include <iostream>
 
-inline std::ostream& operator<<(std::ostream& stream, const End_of_Information& p)
+inline std::ostream& operator<<(std::ostream& stream, const EndOfInformation& p)
 {
 
 
     return stream;
 }
 
-inline bool operator==(const End_of_Information& a, const End_of_Information& b)
+inline bool operator==(const EndOfInformation& a, const EndOfInformation& b)
 {
     bool status = true;
 
@@ -149,12 +149,12 @@ inline bool operator==(const End_of_Information& a, const End_of_Information& b)
     return status;
 }
 
-inline bool operator!=(const End_of_Information& a, const End_of_Information& b)
+inline bool operator!=(const EndOfInformation& a, const EndOfInformation& b)
 {
     return !(a == b);
 }
 
 #endif // __cplusplus
 
-#endif // END_OF_INFORMATION_H_INCLUDED
+#endif // ENDOFINFORMATION_H_INCLUDED
 

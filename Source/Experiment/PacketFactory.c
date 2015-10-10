@@ -4,13 +4,13 @@
 #include "Level_23_transition_information.h"
 #include "TemporarySpeedRestriction.h"
 #include "AdhesionFactor.h"
-#include "End_of_Information.h"
+#include "EndOfInformation.h"
 
 struct TrackToTrain_PacketPool
 {
     TemporarySpeedRestriction p65;
     AdhesionFactor p71;
-    End_of_Information p255;
+    EndOfInformation p255;
 };
 
 typedef struct TrackToTrain_PacketPool TrackToTrain_PacketPool;
@@ -21,7 +21,7 @@ struct TrainToTrack_PacketPool
 {
     Error_reporting p4;
     Level_23_transition_information p9;
-    End_of_Information p255;
+    EndOfInformation p255;
 };
 
 typedef struct TrainToTrack_PacketPool TrainToTrack_PacketPool;

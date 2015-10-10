@@ -4,7 +4,7 @@
 #include "Level_23_transition_information.h"
 #include "TemporarySpeedRestriction.h"
 #include "AdhesionFactor.h"
-#include "End_of_Information.h"
+#include "EndOfInformation.h"
 
 int TrackToTrain_DecodeBit(PacketHeader* header, Bitstream* stream)
 {
@@ -24,8 +24,8 @@ int TrackToTrain_DecodeBit(PacketHeader* header, Bitstream* stream)
 
         case 255 :
         {
-            End_of_Information* ptr = (End_of_Information*)(header);
-            return End_of_Information_DecodeBit(stream, ptr);
+            EndOfInformation* ptr = (EndOfInformation*)(header);
+            return EndOfInformation_DecodeBit(stream, ptr);
         }
 
         default :
@@ -53,8 +53,8 @@ int TrainToTrack_DecodeBit(PacketHeader* header, Bitstream* stream)
 
         case 255 :
         {
-            End_of_Information* ptr = (End_of_Information*)(header);
-            return End_of_Information_DecodeBit(stream, ptr);
+            EndOfInformation* ptr = (EndOfInformation*)(header);
+            return EndOfInformation_DecodeBit(stream, ptr);
         }
 
         default :
