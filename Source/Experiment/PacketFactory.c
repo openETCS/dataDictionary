@@ -41,10 +41,10 @@ PacketHeader* PacketFactory_TrackToTrain(PacketHeader header)
         case 71 :
         {
             AdhesionFactor* ptr = AdhesionFactor_New();
-            printf("71::ptr = %p\n", (void*)ptr);
+            //printf("71::ptr = %p\n", (void*)ptr);
             PacketHeader*   p = &(ptr->header);
-            printf("71::p = %p\n", (void*)p);
-            printf("p->NID_PACKET = %u\n", p->NID_PACKET);
+            //printf("71::p = %p\n", (void*)p);
+            //printf("p->NID_PACKET = %u\n", p->NID_PACKET);
             return p;
         }
 

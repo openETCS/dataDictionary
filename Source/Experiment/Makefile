@@ -2,6 +2,7 @@
 CC=cc
 CPPFLAGS+=-I../Baseline2/Foundation/Bits
 CFLAGS += -std=c99 -Wall -pedantic
+CFLAGS += -W
 LDFLAGS += -L../Baseline2/Foundation/Bits -lbits
 
 it: test_packets
