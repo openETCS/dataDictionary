@@ -1,7 +1,7 @@
 
 #include "Packet.h"
 #include "ErrorReporting.h"
-#include "Level_23_transition_information.h"
+#include "Level23TransitionInformation.h"
 #include "TemporarySpeedRestriction.h"
 #include "AdhesionFactor.h"
 #include "EndOfInformation.h"
@@ -47,8 +47,8 @@ int TrainToTrack_DecodeBit(PacketHeader* header, Bitstream* stream)
 
         case 9 :
         {
-            Level_23_transition_information* ptr = (Level_23_transition_information*)(header);
-            return Level_23_transition_information_DecodeBit(stream, ptr);
+            Level23TransitionInformation* ptr = (Level23TransitionInformation*)(header);
+            return Level23TransitionInformation_DecodeBit(stream, ptr);
         }
 
         case 255 :
@@ -76,7 +76,7 @@ int TrainToTrack_Length(const PacketHeader* header)
 
         case 9 :
         {
-            Level_23_transition_information* ptr = (Level_23_transition_information*)(header);
+            Level23TransitionInformation* ptr = (Level23TransitionInformation*)(header);
             return ptr->L_PACKET;
         }
 

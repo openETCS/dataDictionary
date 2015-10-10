@@ -1,8 +1,8 @@
 
-#include "Level_23_transition_information.h"
+#include "Level23TransitionInformation.h"
 #include "Bit64.h"
 
-int Level_23_transition_information_UpperBitsNotSet(const Level_23_transition_information* p)
+int Level23TransitionInformation_UpperBitsNotSet(const Level23TransitionInformation* p)
 {
     int status = 1;
 
@@ -19,11 +19,11 @@ int Level_23_transition_information_UpperBitsNotSet(const Level_23_transition_in
     }
 }
 
-int Level_23_transition_information_EncodeBit(Bitstream* stream, const Level_23_transition_information* p)
+int Level23TransitionInformation_EncodeBit(Bitstream* stream, const Level23TransitionInformation* p)
 {
-    if (Bitstream_Normal(stream, LEVEL_23_TRANSITION_INFORMATION_BITSIZE))
+    if (Bitstream_Normal(stream, LEVEL23TRANSITIONINFORMATION_BITSIZE))
     {
-        if (Level_23_transition_information_UpperBitsNotSet(p))
+        if (Level23TransitionInformation_UpperBitsNotSet(p))
         {
             //@ ghost const uint32_t pos = stream->bitpos;
 
@@ -47,9 +47,9 @@ int Level_23_transition_information_EncodeBit(Bitstream* stream, const Level_23_
     }
 }
 
-int Level_23_transition_information_DecodeBit(Bitstream* stream, Level_23_transition_information* p)
+int Level23TransitionInformation_DecodeBit(Bitstream* stream, Level23TransitionInformation* p)
 {
-    if (Bitstream_Normal(stream, LEVEL_23_TRANSITION_INFORMATION_BITSIZE))
+    if (Bitstream_Normal(stream, LEVEL23TRANSITIONINFORMATION_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 
@@ -93,7 +93,7 @@ int Level_23_transition_information_DecodeBit(Bitstream* stream, Level_23_transi
     }
 }
 /*
-int Level_23_transition_information_EncodeInt(PacketInfo* data, kcg_int* stream, const Level_23_transition_information* p)
+int Level23TransitionInformation_EncodeInt(PacketInfo* data, kcg_int* stream, const Level23TransitionInformation* p)
 {
     stream[data->startAddress++] = p->L_PACKET;
     stream[data->startAddress++] = p->NID_LTRBG;
@@ -101,7 +101,7 @@ int Level_23_transition_information_EncodeInt(PacketInfo* data, kcg_int* stream,
     return 1;
 }
 
-int Level_23_transition_information_DecodeInt(PacketInfo* data, const kcg_int* stream, Level_23_transition_information* p)
+int Level23TransitionInformation_DecodeInt(PacketInfo* data, const kcg_int* stream, Level23TransitionInformation* p)
 {
     p->L_PACKET = stream[data->startAddress++];
     p->NID_LTRBG = stream[data->startAddress++];

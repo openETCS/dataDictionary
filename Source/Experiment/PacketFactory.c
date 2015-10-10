@@ -1,7 +1,7 @@
 
 #include "PacketFactory.h"
 #include "ErrorReporting.h"
-#include "Level_23_transition_information.h"
+#include "Level23TransitionInformation.h"
 #include "TemporarySpeedRestriction.h"
 #include "AdhesionFactor.h"
 #include "EndOfInformation.h"
@@ -20,7 +20,7 @@ static TrackToTrain_PacketPool tracktotrain_pool;
 struct TrainToTrack_PacketPool
 {
     ErrorReporting p4;
-    Level_23_transition_information p9;
+    Level23TransitionInformation p9;
     EndOfInformation p255;
 };
 

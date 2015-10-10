@@ -1,11 +1,11 @@
 
-#ifndef LEVEL_23_TRANSITION_INFORMATION_H_INCLUDED
-#define LEVEL_23_TRANSITION_INFORMATION_H_INCLUDED
+#ifndef LEVEL23TRANSITIONINFORMATION_H_INCLUDED
+#define LEVEL23TRANSITIONINFORMATION_H_INCLUDED
 
 #include "Bitstream.h"
 #include "PacketHeader.h"
 
-struct Level_23_transition_information
+struct Level23TransitionInformation
 {
     // TransmissionMedia=Radio
     // Identity of the level 2/3 transition balise group
@@ -16,32 +16,32 @@ struct Level_23_transition_information
     uint64_t  NID_LTRBG;        // # 24
 };
 
-typedef struct Level_23_transition_information Level_23_transition_information;
+typedef struct Level23TransitionInformation Level23TransitionInformation;
 
-#define LEVEL_23_TRANSITION_INFORMATION_BITSIZE 37
+#define LEVEL23TRANSITIONINFORMATION_BITSIZE 37
 
 /*@
-    logic integer BitSize{L}(Level_23_transition_information* p) = LEVEL_23_TRANSITION_INFORMATION_BITSIZE;
+    logic integer BitSize{L}(Level23TransitionInformation* p) = LEVEL23TRANSITIONINFORMATION_BITSIZE;
 
-    logic integer MaxBitSize{L}(Level_23_transition_information* p) = BitSize(p);
+    logic integer MaxBitSize{L}(Level23TransitionInformation* p) = BitSize(p);
 
-    predicate Separated(Bitstream* stream, Level_23_transition_information* p) =
+    predicate Separated(Bitstream* stream, Level23TransitionInformation* p) =
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Level_23_transition_information* p) =
+    predicate Invariant(Level23TransitionInformation* p) =
       Invariant(p->L_PACKET)          &&
       Invariant(p->NID_LTRBG);
 
-    predicate ZeroInitialized(Level_23_transition_information* p) =
+    predicate ZeroInitialized(Level23TransitionInformation* p) =
       ZeroInitialized(p->L_PACKET)          &&
       ZeroInitialized(p->NID_LTRBG);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Level_23_transition_information* p) =
+    predicate EqualBits(Bitstream* stream, integer pos, Level23TransitionInformation* p) =
       EqualBits(stream, pos,       pos + 13,  p->L_PACKET)          &&
       EqualBits(stream, pos + 13,  pos + 37,  p->NID_LTRBG);
 
-    predicate UpperBitsNotSet(Level_23_transition_information* p) =
+    predicate UpperBitsNotSet(Level23TransitionInformation* p) =
       UpperBitsNotSet(p->L_PACKET,         13)  &&
       UpperBitsNotSet(p->NID_LTRBG,        24);
 
@@ -55,7 +55,7 @@ typedef struct Level_23_transition_information Level_23_transition_information;
 
     ensures result:  \result <==> UpperBitsNotSet(p);
 */
-int Level_23_transition_information_UpperBitsNotSet(const Level_23_transition_information* p);
+int Level23TransitionInformation_UpperBitsNotSet(const Level23TransitionInformation* p);
 
 /*@
     requires valid_stream:      Writeable(stream);
@@ -96,7 +96,7 @@ int Level_23_transition_information_UpperBitsNotSet(const Level_23_transition_in
     complete behaviors;
     disjoint behaviors;
 */
-int Level_23_transition_information_EncodeBit(Bitstream* stream, const Level_23_transition_information* p);
+int Level23TransitionInformation_EncodeBit(Bitstream* stream, const Level23TransitionInformation* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -131,17 +131,17 @@ int Level_23_transition_information_EncodeBit(Bitstream* stream, const Level_23_
     complete behaviors;
     disjoint behaviors;
 */
-int Level_23_transition_information_DecodeBit(Bitstream* stream, Level_23_transition_information* p);
+int Level23TransitionInformation_DecodeBit(Bitstream* stream, Level23TransitionInformation* p);
 /*
-int Level_23_transition_information_EncodeInt(PacketInfo* data, kcg_int* stream, const Level_23_transition_information* p);
+int Level23TransitionInformation_EncodeInt(PacketInfo* data, kcg_int* stream, const Level23TransitionInformation* p);
 
-int Level_23_transition_information_DecodeInt(PacketInfo* data, const kcg_int* stream, Level_23_transition_information* p);
+int Level23TransitionInformation_DecodeInt(PacketInfo* data, const kcg_int* stream, Level23TransitionInformation* p);
 */
 #ifdef __cplusplus
 
 #include <iostream>
 
-inline std::ostream& operator<<(std::ostream& stream, const Level_23_transition_information& p)
+inline std::ostream& operator<<(std::ostream& stream, const Level23TransitionInformation& p)
 {
     stream
             << +p.L_PACKET << ','
@@ -150,7 +150,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Level_23_transition_
     return stream;
 }
 
-inline bool operator==(const Level_23_transition_information& a, const Level_23_transition_information& b)
+inline bool operator==(const Level23TransitionInformation& a, const Level23TransitionInformation& b)
 {
     bool status = true;
 
@@ -160,12 +160,12 @@ inline bool operator==(const Level_23_transition_information& a, const Level_23_
     return status;
 }
 
-inline bool operator!=(const Level_23_transition_information& a, const Level_23_transition_information& b)
+inline bool operator!=(const Level23TransitionInformation& a, const Level23TransitionInformation& b)
 {
     return !(a == b);
 }
 
 #endif // __cplusplus
 
-#endif // LEVEL_23_TRANSITION_INFORMATION_H_INCLUDED
+#endif // LEVEL23TRANSITIONINFORMATION_H_INCLUDED
 
