@@ -1,8 +1,8 @@
 
-#include "Error_reporting.h"
+#include "ErrorReporting.h"
 #include "Bit64.h"
 
-int Error_reporting_UpperBitsNotSet(const Error_reporting* p)
+int ErrorReporting_UpperBitsNotSet(const ErrorReporting* p)
 {
     int status = 1;
 
@@ -19,11 +19,11 @@ int Error_reporting_UpperBitsNotSet(const Error_reporting* p)
     }
 }
 
-int Error_reporting_EncodeBit(Bitstream* stream, const Error_reporting* p)
+int ErrorReporting_EncodeBit(Bitstream* stream, const ErrorReporting* p)
 {
-    if (Bitstream_Normal(stream, ERROR_REPORTING_BITSIZE))
+    if (Bitstream_Normal(stream, ERRORREPORTING_BITSIZE))
     {
-        if (Error_reporting_UpperBitsNotSet(p))
+        if (ErrorReporting_UpperBitsNotSet(p))
         {
             //@ ghost const uint32_t pos = stream->bitpos;
 
@@ -47,9 +47,9 @@ int Error_reporting_EncodeBit(Bitstream* stream, const Error_reporting* p)
     }
 }
 
-int Error_reporting_DecodeBit(Bitstream* stream, Error_reporting* p)
+int ErrorReporting_DecodeBit(Bitstream* stream, ErrorReporting* p)
 {
-    if (Bitstream_Normal(stream, ERROR_REPORTING_BITSIZE))
+    if (Bitstream_Normal(stream, ERRORREPORTING_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 
@@ -93,7 +93,7 @@ int Error_reporting_DecodeBit(Bitstream* stream, Error_reporting* p)
     }
 }
 /*
-int Error_reporting_EncodeInt(PacketInfo* data, kcg_int* stream, const Error_reporting* p)
+int ErrorReporting_EncodeInt(PacketInfo* data, kcg_int* stream, const ErrorReporting* p)
 {
     stream[data->startAddress++] = p->L_PACKET;
     stream[data->startAddress++] = p->M_ERROR;
@@ -101,7 +101,7 @@ int Error_reporting_EncodeInt(PacketInfo* data, kcg_int* stream, const Error_rep
     return 1;
 }
 
-int Error_reporting_DecodeInt(PacketInfo* data, const kcg_int* stream, Error_reporting* p)
+int ErrorReporting_DecodeInt(PacketInfo* data, const kcg_int* stream, ErrorReporting* p)
 {
     p->L_PACKET = stream[data->startAddress++];
     p->M_ERROR = stream[data->startAddress++];

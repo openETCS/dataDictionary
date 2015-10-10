@@ -1,6 +1,6 @@
 
 #include "Packet.h"
-#include "Error_reporting.h"
+#include "ErrorReporting.h"
 #include "Level_23_transition_information.h"
 #include "TemporarySpeedRestriction.h"
 #include "AdhesionFactor.h"
@@ -41,8 +41,8 @@ int TrainToTrack_DecodeBit(PacketHeader* header, Bitstream* stream)
     {
         case 4 :
         {
-            Error_reporting* ptr = (Error_reporting*)(header);
-            return Error_reporting_DecodeBit(stream, ptr);
+            ErrorReporting* ptr = (ErrorReporting*)(header);
+            return ErrorReporting_DecodeBit(stream, ptr);
         }
 
         case 9 :
@@ -70,7 +70,7 @@ int TrainToTrack_Length(const PacketHeader* header)
     {
         case 4 :
         {
-            Error_reporting* ptr = (Error_reporting*)(header);
+            ErrorReporting* ptr = (ErrorReporting*)(header);
             return ptr->L_PACKET;
         }
 

@@ -1,11 +1,11 @@
 
-#ifndef ERROR_REPORTING_H_INCLUDED
-#define ERROR_REPORTING_H_INCLUDED
+#ifndef ERRORREPORTING_H_INCLUDED
+#define ERRORREPORTING_H_INCLUDED
 
 #include "Bitstream.h"
 #include "PacketHeader.h"
 
-struct Error_reporting
+struct ErrorReporting
 {
     // TransmissionMedia=Radio
     // Error reporting to the RBC
@@ -16,32 +16,32 @@ struct Error_reporting
     uint64_t   M_ERROR;          // # 8
 };
 
-typedef struct Error_reporting Error_reporting;
+typedef struct ErrorReporting ErrorReporting;
 
-#define ERROR_REPORTING_BITSIZE 21
+#define ERRORREPORTING_BITSIZE 21
 
 /*@
-    logic integer BitSize{L}(Error_reporting* p) = ERROR_REPORTING_BITSIZE;
+    logic integer BitSize{L}(ErrorReporting* p) = ERRORREPORTING_BITSIZE;
 
-    logic integer MaxBitSize{L}(Error_reporting* p) = BitSize(p);
+    logic integer MaxBitSize{L}(ErrorReporting* p) = BitSize(p);
 
-    predicate Separated(Bitstream* stream, Error_reporting* p) =
+    predicate Separated(Bitstream* stream, ErrorReporting* p) =
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Error_reporting* p) =
+    predicate Invariant(ErrorReporting* p) =
       Invariant(p->L_PACKET)          &&
       Invariant(p->M_ERROR);
 
-    predicate ZeroInitialized(Error_reporting* p) =
+    predicate ZeroInitialized(ErrorReporting* p) =
       ZeroInitialized(p->L_PACKET)          &&
       ZeroInitialized(p->M_ERROR);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Error_reporting* p) =
+    predicate EqualBits(Bitstream* stream, integer pos, ErrorReporting* p) =
       EqualBits(stream, pos,       pos + 13,  p->L_PACKET)          &&
       EqualBits(stream, pos + 13,  pos + 21,  p->M_ERROR);
 
-    predicate UpperBitsNotSet(Error_reporting* p) =
+    predicate UpperBitsNotSet(ErrorReporting* p) =
       UpperBitsNotSet(p->L_PACKET,         13)  &&
       UpperBitsNotSet(p->M_ERROR,          8);
 
@@ -55,7 +55,7 @@ typedef struct Error_reporting Error_reporting;
 
     ensures result:  \result <==> UpperBitsNotSet(p);
 */
-int Error_reporting_UpperBitsNotSet(const Error_reporting* p);
+int ErrorReporting_UpperBitsNotSet(const ErrorReporting* p);
 
 /*@
     requires valid_stream:      Writeable(stream);
@@ -96,7 +96,7 @@ int Error_reporting_UpperBitsNotSet(const Error_reporting* p);
     complete behaviors;
     disjoint behaviors;
 */
-int Error_reporting_EncodeBit(Bitstream* stream, const Error_reporting* p);
+int ErrorReporting_EncodeBit(Bitstream* stream, const ErrorReporting* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -131,17 +131,17 @@ int Error_reporting_EncodeBit(Bitstream* stream, const Error_reporting* p);
     complete behaviors;
     disjoint behaviors;
 */
-int Error_reporting_DecodeBit(Bitstream* stream, Error_reporting* p);
+int ErrorReporting_DecodeBit(Bitstream* stream, ErrorReporting* p);
 /*
-int Error_reporting_EncodeInt(PacketInfo* data, kcg_int* stream, const Error_reporting* p);
+int ErrorReporting_EncodeInt(PacketInfo* data, kcg_int* stream, const ErrorReporting* p);
 
-int Error_reporting_DecodeInt(PacketInfo* data, const kcg_int* stream, Error_reporting* p);
+int ErrorReporting_DecodeInt(PacketInfo* data, const kcg_int* stream, ErrorReporting* p);
 */
 #ifdef __cplusplus
 
 #include <iostream>
 
-inline std::ostream& operator<<(std::ostream& stream, const Error_reporting& p)
+inline std::ostream& operator<<(std::ostream& stream, const ErrorReporting& p)
 {
     stream
             << +p.L_PACKET << ','
@@ -150,7 +150,7 @@ inline std::ostream& operator<<(std::ostream& stream, const Error_reporting& p)
     return stream;
 }
 
-inline bool operator==(const Error_reporting& a, const Error_reporting& b)
+inline bool operator==(const ErrorReporting& a, const ErrorReporting& b)
 {
     bool status = true;
 
@@ -160,12 +160,12 @@ inline bool operator==(const Error_reporting& a, const Error_reporting& b)
     return status;
 }
 
-inline bool operator!=(const Error_reporting& a, const Error_reporting& b)
+inline bool operator!=(const ErrorReporting& a, const ErrorReporting& b)
 {
     return !(a == b);
 }
 
 #endif // __cplusplus
 
-#endif // ERROR_REPORTING_H_INCLUDED
+#endif // ERRORREPORTING_H_INCLUDED
 
