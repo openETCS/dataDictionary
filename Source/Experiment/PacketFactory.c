@@ -1,15 +1,15 @@
 
 #include "PacketFactory.h"
+
+#include "AdhesionFactor.h"
+#include "EndOfInformation.h"
 #include "ErrorReporting.h"
 #include "Level23TransitionInformation.h"
 #include "TemporarySpeedRestriction.h"
-#include "AdhesionFactor.h"
-#include "EndOfInformation.h"
 
 struct TrackToTrain_PacketPool
 {
     TemporarySpeedRestriction p65;
-    AdhesionFactor p71;
     EndOfInformation p255;
 };
 
@@ -40,8 +40,12 @@ PacketHeader* PacketFactory_TrackToTrain(PacketHeader header)
 
         case 71 :
         {
-            tracktotrain_pool.p71.header = header;
-            return &tracktotrain_pool.p71.header;
+            AdhesionFactor* ptr = AdhesionFactor_New();
+            printf("71::ptr = %p\n", ptr);
+            PacketHeader*   p = &(ptr->header);
+            printf("71::p = %p\n", p);
+            printf("p->NID_PACKET = %u\n", p->NID_PACKET);
+            return p;
         }
 
         case 255 :
@@ -52,7 +56,7 @@ PacketHeader* PacketFactory_TrackToTrain(PacketHeader header)
 
         default :
         {
-            return 0;
+            return NULL;
         }
     };
 }
