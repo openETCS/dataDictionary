@@ -56,7 +56,7 @@ bool operator!=(const EurobaliseTelegram& a, const EurobaliseTelegram& b)
 
 int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
 {
-    if (TelegramHeader_Decoder(stream, &t->header) != 1)
+    if (TelegramHeader_DecodeBit(stream, &t->header) != 1)
     {
         return 0;
     }
@@ -82,11 +82,13 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
         if (t->header.Q_UPDOWN == 1)
         {
             ptr = PacketFactory_TrackToTrain(packet_header);
+            //assert(ptr);
 
             if (ptr)
             {
                 TrackToTrain_DecodeBit(ptr, stream);
                 EurobaliseTelegram_Add(t, ptr);
+                printf("EurobaliseTelegram_DecodeBit size after add = %d\n", EurobaliseTelegram_Size(t));
 
                 if (ptr->NID_PACKET == 255)
                 {
