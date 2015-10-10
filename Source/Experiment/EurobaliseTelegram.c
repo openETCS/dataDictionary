@@ -1,6 +1,7 @@
 
 #include "EurobaliseTelegram.h"
 #include "PacketFactory.h"
+#include "Packet.h"
 
 #ifdef __cplusplus
 
@@ -80,7 +81,7 @@ int EurobaliseTelegram_Decode_Bit(EurobaliseTelegram* t, Bitstream* stream)
 
         if (t->header.Q_UPDOWN == 1)
         {
-            ptr = PacketFactory_TrackToTrain(packet_header.NID_PACKET);
+            ptr = PacketFactory_TrackToTrain(packet_header);
 
             if (ptr)
             {
@@ -102,7 +103,7 @@ int EurobaliseTelegram_Decode_Bit(EurobaliseTelegram* t, Bitstream* stream)
         else
         {
             assert(t->header.Q_UPDOWN == 0);
-            ptr = PacketFactory_TrainToTrack(packet_header.NID_PACKET);
+            ptr = PacketFactory_TrainToTrack(packet_header);
 
             if (ptr)
             {
@@ -126,6 +127,8 @@ int EurobaliseTelegram_Decode_Bit(EurobaliseTelegram* t, Bitstream* stream)
 
     return 1;
 }
+
+/*
 
 bool EurobaliseTelegram::encode(Bitstream& stream) const
 {
@@ -224,3 +227,4 @@ bool EurobaliseTelegram::decode(FlatPackets& packetStruct)
     return true;
 }
 
+*/

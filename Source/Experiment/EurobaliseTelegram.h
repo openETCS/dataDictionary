@@ -17,15 +17,16 @@ struct EurobaliseTelegram
     */
 };
 
+typedef struct EurobaliseTelegram EurobaliseTelegram;
+
 static inline void EurobaliseTelegram_Init(EurobaliseTelegram* t)
 {
-    t->header.NID_PACKET = 0;
-    PacketSequence_Init(&packets);
+    PacketSequence_Init(&t->packets);
 }
 
 static inline uint32_t EurobaliseTelegram_Size(const EurobaliseTelegram* t)
 {
-    return packets.size;
+    return t->packets.size;
 }
 
 static inline const PacketHeader* EurobaliseTelegram_Get(const EurobaliseTelegram* t, uint32_t i)

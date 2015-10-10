@@ -2,6 +2,7 @@
 #ifndef PACKETSEQUENCE_H_INCLUDED
 #define PACKETSEQUENCE_H_INCLUDED
 
+#include <assert.h>
 #include "PacketHeader.h"
 
 struct PacketSequence

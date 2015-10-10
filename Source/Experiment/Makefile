@@ -1,11 +1,23 @@
 
+CC=cc
 CPPFLAGS+=-I../Baseline2/Foundation/Bits
 CFLAGS += -std=c99 -Wall -pedantic
+LDFLAGS += -L../Baseline2/Foundation/Bits -lbits
 
-it: Adhesion_Factor.o Error_reporting.o End_of_Information.o Level_23_transition_information.o Temporary_Speed_Restriction.o Packet.o PacketFactory.o EurobaliseTelegram.c
+it: test_packets
+
+SRC := Adhesion_Factor.o Error_reporting.o End_of_Information.o\
+       Level_23_transition_information.o Temporary_Speed_Restriction.o\
+       Packet.o PacketFactory.o EurobaliseTelegram.c
+
+OBJ := $(SRC:.c=.o)
+
+test_packets: test_packets.o Adhesion_Factor.o
+	$(CC) -o $@ $+ $(LDFLAGS)
 
 
 clean:
+	$(RM) test_packets
 	$(RM) *.o
 	$(RM) *.orig
 

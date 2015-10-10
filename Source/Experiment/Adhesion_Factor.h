@@ -25,6 +25,18 @@ typedef struct Adhesion_Factor Adhesion_Factor;
 
 #define ADHESION_FACTOR_BITSIZE 48
 
+
+static inline void Adhesion_Factor_Init(Adhesion_Factor* p)
+{
+    p->header.NID_PACKET = 71;
+    p->Q_DIR             = 0;
+    p->L_PACKET          = 0;
+    p->Q_SCALE           = 0;
+    p->D_ADHESION        = 0;
+    p->L_ADHESION        = 0;
+    p->M_ADHESION        = 0;
+}
+
 /*@
     logic integer BitSize{L}(Adhesion_Factor* p) = ADHESION_FACTOR_BITSIZE;
 
@@ -154,16 +166,17 @@ int Adhesion_Factor_Encode_Bit(Bitstream* stream, const Adhesion_Factor* p);
 */
 int Adhesion_Factor_Decode_Bit(Bitstream* stream, Adhesion_Factor* p);
 
-static inline void Adhesion_Factor_Print(FILE* stream, const Adhesion_Factor* p)
+static inline void Adhesion_Factor_Print(const Adhesion_Factor* p)
 {
-    fprintf(stream, "(%u,%llu,%llu,%llu,%llu,%llu,%llu)", 
-            p->header.NID_PACKET,
-            p->Q_DIR,
-            p->L_PACKET,
-            p->Q_SCALE,
-            p->D_ADHESION,
-            p->L_ADHESION,
-            p->M_ADHESION);
+    //printf("Adhesion_Factor_Print\n");
+    printf("(%u,%llu,%llu,%llu,%llu,%llu,%llu)",
+           p->header.NID_PACKET,
+           p->Q_DIR,
+           p->L_PACKET,
+           p->Q_SCALE,
+           p->D_ADHESION,
+           p->L_ADHESION,
+           p->M_ADHESION);
 }
 
 #endif // ADHESION_FACTOR_H_INCLUDED
