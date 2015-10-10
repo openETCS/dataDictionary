@@ -1,11 +1,11 @@
 
-#ifndef ADHESION_FACTOR_H_INCLUDED
-#define ADHESION_FACTOR_H_INCLUDED
+#ifndef ADHESIONFACTOR_H_INCLUDED
+#define ADHESIONFACTOR_H_INCLUDED
 
 #include "Bitstream.h"
 #include "PacketHeader.h"
 
-struct Adhesion_Factor
+struct AdhesionFactor
 {
     // TransmissionMedia=Any
     // This packet is used when the trackside requests a change of
@@ -21,12 +21,12 @@ struct Adhesion_Factor
     uint64_t   M_ADHESION;       // # 1
 };
 
-typedef struct Adhesion_Factor Adhesion_Factor;
+typedef struct AdhesionFactor AdhesionFactor;
 
-#define ADHESION_FACTOR_BITSIZE 48
+#define ADHESIONFACTOR_BITSIZE 48
 
 
-static inline void Adhesion_Factor_Init(Adhesion_Factor* p)
+static inline void AdhesionFactor_Init(AdhesionFactor* p)
 {
     p->header.NID_PACKET = 71;
     p->Q_DIR             = 0;
@@ -38,15 +38,15 @@ static inline void Adhesion_Factor_Init(Adhesion_Factor* p)
 }
 
 /*@
-    logic integer BitSize{L}(Adhesion_Factor* p) = ADHESION_FACTOR_BITSIZE;
+    logic integer BitSize{L}(AdhesionFactor* p) = ADHESIONFACTOR_BITSIZE;
 
-    logic integer MaxBitSize{L}(Adhesion_Factor* p) = BitSize(p);
+    logic integer MaxBitSize{L}(AdhesionFactor* p) = BitSize(p);
 
-    predicate Separated(Bitstream* stream, Adhesion_Factor* p) =
+    predicate Separated(Bitstream* stream, AdhesionFactor* p) =
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(Adhesion_Factor* p) =
+    predicate Invariant(AdhesionFactor* p) =
       Invariant(p->Q_DIR)             &&
       Invariant(p->L_PACKET)          &&
       Invariant(p->Q_SCALE)           &&
@@ -54,7 +54,7 @@ static inline void Adhesion_Factor_Init(Adhesion_Factor* p)
       Invariant(p->L_ADHESION)        &&
       Invariant(p->M_ADHESION);
 
-    predicate ZeroInitialized(Adhesion_Factor* p) =
+    predicate ZeroInitialized(AdhesionFactor* p) =
       ZeroInitialized(p->Q_DIR)             &&
       ZeroInitialized(p->L_PACKET)          &&
       ZeroInitialized(p->Q_SCALE)           &&
@@ -62,7 +62,7 @@ static inline void Adhesion_Factor_Init(Adhesion_Factor* p)
       ZeroInitialized(p->L_ADHESION)        &&
       ZeroInitialized(p->M_ADHESION);
 
-    predicate EqualBits(Bitstream* stream, integer pos, Adhesion_Factor* p) =
+    predicate EqualBits(Bitstream* stream, integer pos, AdhesionFactor* p) =
       EqualBits(stream, pos,       pos + 2,   p->Q_DIR)             &&
       EqualBits(stream, pos + 2,   pos + 15,  p->L_PACKET)          &&
       EqualBits(stream, pos + 15,  pos + 17,  p->Q_SCALE)           &&
@@ -70,7 +70,7 @@ static inline void Adhesion_Factor_Init(Adhesion_Factor* p)
       EqualBits(stream, pos + 32,  pos + 47,  p->L_ADHESION)        &&
       EqualBits(stream, pos + 47,  pos + 48,  p->M_ADHESION);
 
-    predicate UpperBitsNotSet(Adhesion_Factor* p) =
+    predicate UpperBitsNotSet(AdhesionFactor* p) =
       UpperBitsNotSet(p->Q_DIR,            2)   &&
       UpperBitsNotSet(p->L_PACKET,         13)  &&
       UpperBitsNotSet(p->Q_SCALE,          2)   &&
@@ -88,7 +88,7 @@ static inline void Adhesion_Factor_Init(Adhesion_Factor* p)
 
     ensures result:  \result <==> UpperBitsNotSet(p);
 */
-int Adhesion_Factor_UpperBitsNotSet(const Adhesion_Factor* p);
+int AdhesionFactor_UpperBitsNotSet(const AdhesionFactor* p);
 
 /*@
     requires valid_stream:      Writeable(stream);
@@ -129,7 +129,7 @@ int Adhesion_Factor_UpperBitsNotSet(const Adhesion_Factor* p);
     complete behaviors;
     disjoint behaviors;
 */
-int Adhesion_Factor_Encode_Bit(Bitstream* stream, const Adhesion_Factor* p);
+int AdhesionFactor_Encode_Bit(Bitstream* stream, const AdhesionFactor* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -164,9 +164,9 @@ int Adhesion_Factor_Encode_Bit(Bitstream* stream, const Adhesion_Factor* p);
     complete behaviors;
     disjoint behaviors;
 */
-int Adhesion_Factor_Decode_Bit(Bitstream* stream, Adhesion_Factor* p);
+int AdhesionFactor_Decode_Bit(Bitstream* stream, AdhesionFactor* p);
 
-static inline void Adhesion_Factor_Print(FILE* stream, const Adhesion_Factor* p)
+static inline void AdhesionFactor_Print(FILE* stream, const AdhesionFactor* p)
 {
     fprintf(stream, "(%u,%llu,%llu,%llu,%llu,%llu,%llu)",
            p->header.NID_PACKET,
@@ -178,7 +178,7 @@ static inline void Adhesion_Factor_Print(FILE* stream, const Adhesion_Factor* p)
            p->M_ADHESION);
 }
 
-static inline int Adhesion_Factor_Equal(const Adhesion_Factor* a, const Adhesion_Factor* b)
+static inline int AdhesionFactor_Equal(const AdhesionFactor* a, const AdhesionFactor* b)
 {
      int status = a->header.NID_PACKET == b->header.NID_PACKET;
      status = status && a->Q_DIR       == b->Q_DIR;
@@ -192,5 +192,5 @@ static inline int Adhesion_Factor_Equal(const Adhesion_Factor* a, const Adhesion
 }
 
 
-#endif // ADHESION_FACTOR_H_INCLUDED
+#endif // ADHESIONFACTOR_H_INCLUDED
 

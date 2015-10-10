@@ -1,8 +1,8 @@
 
-#include "Adhesion_Factor.h"
+#include "AdhesionFactor.h"
 #include "Bit64.h"
 
-int Adhesion_Factor_UpperBitsNotSet(const Adhesion_Factor* p)
+int AdhesionFactor_UpperBitsNotSet(const AdhesionFactor* p)
 {
     int status = 1;
 
@@ -23,11 +23,11 @@ int Adhesion_Factor_UpperBitsNotSet(const Adhesion_Factor* p)
     }
 }
 
-int Adhesion_Factor_Encode_Bit(Bitstream* stream, const Adhesion_Factor* p)
+int AdhesionFactor_Encode_Bit(Bitstream* stream, const AdhesionFactor* p)
 {
-    if (Bitstream_Normal(stream, ADHESION_FACTOR_BITSIZE))
+    if (Bitstream_Normal(stream, ADHESIONFACTOR_BITSIZE))
     {
-        if (Adhesion_Factor_UpperBitsNotSet(p))
+        if (AdhesionFactor_UpperBitsNotSet(p))
         {
             //@ ghost const uint32_t pos = stream->bitpos;
 
@@ -59,9 +59,9 @@ int Adhesion_Factor_Encode_Bit(Bitstream* stream, const Adhesion_Factor* p)
     }
 }
 
-int Adhesion_Factor_Decode_Bit(Bitstream* stream, Adhesion_Factor* p)
+int AdhesionFactor_Decode_Bit(Bitstream* stream, AdhesionFactor* p)
 {
-    if (Bitstream_Normal(stream, ADHESION_FACTOR_BITSIZE))
+    if (Bitstream_Normal(stream, ADHESIONFACTOR_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 
@@ -161,7 +161,7 @@ int Adhesion_Factor_Decode_Bit(Bitstream* stream, Adhesion_Factor* p)
     }
 }
 /*
-int Adhesion_Factor_Encode_Int(PacketInfo* data, kcg_int* stream, const Adhesion_Factor* p)
+int AdhesionFactor_Encode_Int(PacketInfo* data, kcg_int* stream, const AdhesionFactor* p)
 {
     stream[data->startAddress++] = p->Q_DIR;
     stream[data->startAddress++] = p->L_PACKET;
@@ -173,7 +173,7 @@ int Adhesion_Factor_Encode_Int(PacketInfo* data, kcg_int* stream, const Adhesion
     return 1;
 }
 
-int Adhesion_Factor_Decode_Int(PacketInfo* data, const kcg_int* stream, Adhesion_Factor* p)
+int AdhesionFactor_Decode_Int(PacketInfo* data, const kcg_int* stream, AdhesionFactor* p)
 {
     p->Q_DIR = stream[data->startAddress++];
     p->L_PACKET = stream[data->startAddress++];

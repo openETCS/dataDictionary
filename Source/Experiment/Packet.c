@@ -3,7 +3,7 @@
 #include "Error_reporting.h"
 #include "Level_23_transition_information.h"
 #include "Temporary_Speed_Restriction.h"
-#include "Adhesion_Factor.h"
+#include "AdhesionFactor.h"
 #include "End_of_Information.h"
 
 int TrackToTrain_DecodeBit(PacketHeader* header, Bitstream* stream)
@@ -18,8 +18,8 @@ int TrackToTrain_DecodeBit(PacketHeader* header, Bitstream* stream)
 
         case 71 :
         {
-            Adhesion_Factor* ptr = (Adhesion_Factor*)(header);
-            return Adhesion_Factor_Decode_Bit(stream, ptr);
+            AdhesionFactor* ptr = (AdhesionFactor*)(header);
+            return AdhesionFactor_Decode_Bit(stream, ptr);
         }
 
         case 255 :
@@ -104,7 +104,7 @@ int TrackToTrain_Length(const PacketHeader* header)
 
         case 71 :
         {
-            Adhesion_Factor* ptr = (Adhesion_Factor*)(header);
+            AdhesionFactor* ptr = (AdhesionFactor*)(header);
             return ptr->L_PACKET;
         }
 

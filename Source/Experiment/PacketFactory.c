@@ -3,13 +3,13 @@
 #include "Error_reporting.h"
 #include "Level_23_transition_information.h"
 #include "Temporary_Speed_Restriction.h"
-#include "Adhesion_Factor.h"
+#include "AdhesionFactor.h"
 #include "End_of_Information.h"
 
 struct TrackToTrain_PacketPool
 {
     Temporary_Speed_Restriction p65;
-    Adhesion_Factor p71;
+    AdhesionFactor p71;
     End_of_Information p255;
 };
 
