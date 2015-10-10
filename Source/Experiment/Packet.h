@@ -4,9 +4,9 @@
 
 #include "PacketHeader.h"
 
-int TrainToTrack_Decode_Bit(PacketHeader* header, Bitstream* stream);
+int TrainToTrack_DecodeBit(PacketHeader* header, Bitstream* stream);
 
-int TrackToTrain_Decode_Bit(PacketHeader* header, Bitstream* stream);
+int TrackToTrain_DecodeBit(PacketHeader* header, Bitstream* stream);
 
 int TrainToTrack_Length(const PacketHeader* header);
 

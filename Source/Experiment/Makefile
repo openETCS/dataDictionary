@@ -12,7 +12,7 @@ SRC := Adhesion_Factor.o Error_reporting.o End_of_Information.o\
 
 OBJ := $(SRC:.c=.o)
 
-test_packets: test_packets.o Adhesion_Factor.o
+test_packets: test_packets.o $(OBJ)
 	$(CC) -o $@ $+ $(LDFLAGS)
 
 

@@ -85,7 +85,7 @@ int EurobaliseTelegram_Decode_Bit(EurobaliseTelegram* t, Bitstream* stream)
 
             if (ptr)
             {
-                TrackToTrain_Decode_Bit(ptr, stream);
+                TrackToTrain_DecodeBit(ptr, stream);
                 EurobaliseTelegram_Add(t, ptr);
 
                 if (ptr->NID_PACKET == 255)
@@ -107,7 +107,7 @@ int EurobaliseTelegram_Decode_Bit(EurobaliseTelegram* t, Bitstream* stream)
 
             if (ptr)
             {
-                TrainToTrack_Decode_Bit(ptr, stream);
+                TrainToTrack_DecodeBit(ptr, stream);
                 EurobaliseTelegram_Add(t, ptr);
 
                 if (ptr->NID_PACKET == 255)

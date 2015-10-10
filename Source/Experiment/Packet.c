@@ -6,7 +6,7 @@
 #include "Adhesion_Factor.h"
 #include "End_of_Information.h"
 
-int TrackToTrain_Decode(PacketHeader* header, Bitstream* stream)
+int TrackToTrain_DecodeBit(PacketHeader* header, Bitstream* stream)
 {
     switch (header->NID_PACKET)
     {
@@ -35,7 +35,7 @@ int TrackToTrain_Decode(PacketHeader* header, Bitstream* stream)
     };
 }
 
-int TrainToTrack_Decode(PacketHeader* header, Bitstream* stream)
+int TrainToTrack_DecodeBit(PacketHeader* header, Bitstream* stream)
 {
     switch (header->NID_PACKET)
     {
