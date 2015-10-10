@@ -153,48 +153,18 @@ int Adhesion_Factor_Encode_Bit(Bitstream* stream, const Adhesion_Factor* p);
     disjoint behaviors;
 */
 int Adhesion_Factor_Decode_Bit(Bitstream* stream, Adhesion_Factor* p);
-/*
-int Adhesion_Factor_Encode_Int(PacketInfo* data, kcg_int* stream, const Adhesion_Factor* p);
 
-int Adhesion_Factor_Decode_Int(PacketInfo* data, const kcg_int* stream, Adhesion_Factor* p);
-*/
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Adhesion_Factor& p)
+static inline void Adhesion_Factor_Print(FILE* stream, const Adhesion_Factor* p)
 {
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-            << +p.Q_SCALE << ','
-            << +p.D_ADHESION << ','
-            << +p.L_ADHESION << ','
-            << +p.M_ADHESION;
-
-    return stream;
+    fprintf(stream, "(%u,%llu,%llu,%llu,%llu,%llu,%llu)", 
+            p->header.NID_PACKET,
+            p->Q_DIR,
+            p->L_PACKET,
+            p->Q_SCALE,
+            p->D_ADHESION,
+            p->L_ADHESION,
+            p->M_ADHESION);
 }
-
-inline bool operator==(const Adhesion_Factor& a, const Adhesion_Factor& b)
-{
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.Q_SCALE == b.Q_SCALE);
-    status = status && (a.D_ADHESION == b.D_ADHESION);
-    status = status && (a.L_ADHESION == b.L_ADHESION);
-    status = status && (a.M_ADHESION == b.M_ADHESION);
-
-    return status;
-}
-
-inline bool operator!=(const Adhesion_Factor& a, const Adhesion_Factor& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
 
 #endif // ADHESION_FACTOR_H_INCLUDED
 
