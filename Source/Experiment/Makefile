@@ -7,7 +7,7 @@ LDFLAGS += -L../Baseline2/Foundation/Bits -lbits
 it: test_packets
 
 SRC := AdhesionFactor.o Error_reporting.o End_of_Information.o\
-       Level_23_transition_information.o Temporary_Speed_Restriction.o\
+       Level_23_transition_information.o TemporarySpeedRestriction.o\
        Packet.o PacketFactory.o EurobaliseTelegram.c
 
 OBJ := $(SRC:.c=.o)

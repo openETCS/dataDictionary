@@ -54,7 +54,7 @@ bool operator!=(const EurobaliseTelegram& a, const EurobaliseTelegram& b)
 
 #endif
 
-int EurobaliseTelegram_Decode_Bit(EurobaliseTelegram* t, Bitstream* stream)
+int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
 {
     if (TelegramHeader_Decoder(stream, &t->header) != 1)
     {

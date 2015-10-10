@@ -2,7 +2,7 @@
 #include "Packet.h"
 #include "Error_reporting.h"
 #include "Level_23_transition_information.h"
-#include "Temporary_Speed_Restriction.h"
+#include "TemporarySpeedRestriction.h"
 #include "AdhesionFactor.h"
 #include "End_of_Information.h"
 
@@ -12,20 +12,20 @@ int TrackToTrain_DecodeBit(PacketHeader* header, Bitstream* stream)
     {
         case 65 :
         {
-            Temporary_Speed_Restriction* ptr = (Temporary_Speed_Restriction*)(header);
-            return Temporary_Speed_Restriction_Decode_Bit(stream, ptr);
+            TemporarySpeedRestriction* ptr = (TemporarySpeedRestriction*)(header);
+            return TemporarySpeedRestriction_DecodeBit(stream, ptr);
         }
 
         case 71 :
         {
             AdhesionFactor* ptr = (AdhesionFactor*)(header);
-            return AdhesionFactor_Decode_Bit(stream, ptr);
+            return AdhesionFactor_DecodeBit(stream, ptr);
         }
 
         case 255 :
         {
             End_of_Information* ptr = (End_of_Information*)(header);
-            return End_of_Information_Decode_Bit(stream, ptr);
+            return End_of_Information_DecodeBit(stream, ptr);
         }
 
         default :
@@ -42,19 +42,19 @@ int TrainToTrack_DecodeBit(PacketHeader* header, Bitstream* stream)
         case 4 :
         {
             Error_reporting* ptr = (Error_reporting*)(header);
-            return Error_reporting_Decode_Bit(stream, ptr);
+            return Error_reporting_DecodeBit(stream, ptr);
         }
 
         case 9 :
         {
             Level_23_transition_information* ptr = (Level_23_transition_information*)(header);
-            return Level_23_transition_information_Decode_Bit(stream, ptr);
+            return Level_23_transition_information_DecodeBit(stream, ptr);
         }
 
         case 255 :
         {
             End_of_Information* ptr = (End_of_Information*)(header);
-            return End_of_Information_Decode_Bit(stream, ptr);
+            return End_of_Information_DecodeBit(stream, ptr);
         }
 
         default :
@@ -98,7 +98,7 @@ int TrackToTrain_Length(const PacketHeader* header)
     {
         case 65 :
         {
-            Temporary_Speed_Restriction* ptr = (Temporary_Speed_Restriction*)(header);
+            TemporarySpeedRestriction* ptr = (TemporarySpeedRestriction*)(header);
             return ptr->L_PACKET;
         }
 

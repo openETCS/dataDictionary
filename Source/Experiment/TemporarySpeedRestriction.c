@@ -1,8 +1,8 @@
 
-#include "Temporary_Speed_Restriction.h"
+#include "TemporarySpeedRestriction.h"
 #include "Bit64.h"
 
-int Temporary_Speed_Restriction_UpperBitsNotSet(const Temporary_Speed_Restriction* p)
+int TemporarySpeedRestriction_UpperBitsNotSet(const TemporarySpeedRestriction* p)
 {
     int status = 1;
 
@@ -25,11 +25,11 @@ int Temporary_Speed_Restriction_UpperBitsNotSet(const Temporary_Speed_Restrictio
     }
 }
 
-int Temporary_Speed_Restriction_Encode_Bit(Bitstream* stream, const Temporary_Speed_Restriction* p)
+int TemporarySpeedRestriction_EncodeBit(Bitstream* stream, const TemporarySpeedRestriction* p)
 {
-    if (Bitstream_Normal(stream, TEMPORARY_SPEED_RESTRICTION_BITSIZE))
+    if (Bitstream_Normal(stream, TEMPORARYSPEEDRESTRICTION_BITSIZE))
     {
-        if (Temporary_Speed_Restriction_UpperBitsNotSet(p))
+        if (TemporarySpeedRestriction_UpperBitsNotSet(p))
         {
             //@ ghost const uint32_t pos = stream->bitpos;
 
@@ -65,9 +65,9 @@ int Temporary_Speed_Restriction_Encode_Bit(Bitstream* stream, const Temporary_Sp
     }
 }
 
-int Temporary_Speed_Restriction_Decode_Bit(Bitstream* stream, Temporary_Speed_Restriction* p)
+int TemporarySpeedRestriction_DecodeBit(Bitstream* stream, TemporarySpeedRestriction* p)
 {
-    if (Bitstream_Normal(stream, TEMPORARY_SPEED_RESTRICTION_BITSIZE))
+    if (Bitstream_Normal(stream, TEMPORARYSPEEDRESTRICTION_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 
@@ -195,7 +195,7 @@ int Temporary_Speed_Restriction_Decode_Bit(Bitstream* stream, Temporary_Speed_Re
     }
 }
 /*
-int Temporary_Speed_Restriction_Encode_Int(PacketInfo* data, kcg_int* stream, const Temporary_Speed_Restriction* p)
+int TemporarySpeedRestriction_EncodeInt(PacketInfo* data, kcg_int* stream, const TemporarySpeedRestriction* p)
 {
     stream[data->startAddress++] = p->Q_DIR;
     stream[data->startAddress++] = p->L_PACKET;
@@ -209,7 +209,7 @@ int Temporary_Speed_Restriction_Encode_Int(PacketInfo* data, kcg_int* stream, co
     return 1;
 }
 
-int Temporary_Speed_Restriction_Decode_Int(PacketInfo* data, const kcg_int* stream, Temporary_Speed_Restriction* p)
+int TemporarySpeedRestriction_DecodeInt(PacketInfo* data, const kcg_int* stream, TemporarySpeedRestriction* p)
 {
     p->Q_DIR = stream[data->startAddress++];
     p->L_PACKET = stream[data->startAddress++];

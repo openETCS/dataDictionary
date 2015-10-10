@@ -96,7 +96,7 @@ int Level_23_transition_information_UpperBitsNotSet(const Level_23_transition_in
     complete behaviors;
     disjoint behaviors;
 */
-int Level_23_transition_information_Encode_Bit(Bitstream* stream, const Level_23_transition_information* p);
+int Level_23_transition_information_EncodeBit(Bitstream* stream, const Level_23_transition_information* p);
 
 /*@
     requires valid_stream:      Readable(stream);
@@ -131,11 +131,11 @@ int Level_23_transition_information_Encode_Bit(Bitstream* stream, const Level_23
     complete behaviors;
     disjoint behaviors;
 */
-int Level_23_transition_information_Decode_Bit(Bitstream* stream, Level_23_transition_information* p);
+int Level_23_transition_information_DecodeBit(Bitstream* stream, Level_23_transition_information* p);
 /*
-int Level_23_transition_information_Encode_Int(PacketInfo* data, kcg_int* stream, const Level_23_transition_information* p);
+int Level_23_transition_information_EncodeInt(PacketInfo* data, kcg_int* stream, const Level_23_transition_information* p);
 
-int Level_23_transition_information_Decode_Int(PacketInfo* data, const kcg_int* stream, Level_23_transition_information* p);
+int Level_23_transition_information_DecodeInt(PacketInfo* data, const kcg_int* stream, Level_23_transition_information* p);
 */
 #ifdef __cplusplus
 

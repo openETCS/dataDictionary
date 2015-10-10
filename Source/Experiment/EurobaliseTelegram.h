@@ -39,9 +39,9 @@ static inline void EurobaliseTelegram_Add(EurobaliseTelegram* t, PacketHeader* p
     PacketSequence_Add(&t->packets, p);
 }
 
-int EurobaliseTelegram_Encode_Bit(const EurobaliseTelegram* t, Bitstream* stream);
+int EurobaliseTelegram_EncodeBit(const EurobaliseTelegram* t, Bitstream* stream);
 
-int EurobaliseTelegram_Decode_Bit(EurobaliseTelegram* t, Bitstream* stream);
+int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream);
 
 #ifdef __cplusplus
 
