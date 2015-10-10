@@ -4,6 +4,7 @@
 
 int EndOfInformation_UpperBitsNotSet(const EndOfInformation* p)
 {
+    p = 0; //-Wunused
     int status = 1;
 
 
@@ -25,9 +26,6 @@ int EndOfInformation_EncodeBit(Bitstream* stream, const EndOfInformation* p)
         {
             //@ ghost const uint32_t pos = stream->bitpos;
 
-
-
-
             return 1;
         }
         else
@@ -43,6 +41,8 @@ int EndOfInformation_EncodeBit(Bitstream* stream, const EndOfInformation* p)
 
 int EndOfInformation_DecodeBit(Bitstream* stream, EndOfInformation* p)
 {
+    p = 0; // -Wunused
+
     if (Bitstream_Normal(stream, ENDOFINFORMATION_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
