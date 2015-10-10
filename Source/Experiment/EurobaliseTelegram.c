@@ -73,46 +73,52 @@ int EurobaliseTelegram_Decode_Bit(EurobaliseTelegram* t, Bitstream* stream)
             return 0;
         }
 
-        PacketHeader packet_header={0};
+        PacketHeader packet_header = {0};
         PacketHeader_Decode(&packet_header, stream);
-	
-	PacketHeader* ptr;
+
+        PacketHeader* ptr;
 
         if (t->header.Q_UPDOWN == 1)
-	{
+        {
             ptr = PacketFactory_TrackToTrain(packet_header.NID_PACKET);
-	    if (ptr)
-	    {
-	        TrackToTrain_Decode_Bit(ptr, stream);
-	        EurobaliseTelegram_Add(t, ptr);
+
+            if (ptr)
+            {
+                TrackToTrain_Decode_Bit(ptr, stream);
+                EurobaliseTelegram_Add(t, ptr);
+
                 if (ptr->NID_PACKET == 255)
                 {
                     break;
                 }
+
                 current_pos += TrackToTrain_Length(ptr);
-	    }
-	    else
-	    {
-	        return 0;
             }
-	}
-	else
-	{
-	    assert(t->header.Q_UPDOWN == 0);
+            else
+            {
+                return 0;
+            }
+        }
+        else
+        {
+            assert(t->header.Q_UPDOWN == 0);
             ptr = PacketFactory_TrainToTrack(packet_header.NID_PACKET);
-	    if (ptr)
-	    {
-	        TrainToTrack_Decode_Bit(ptr, stream);
-	        EurobaliseTelegram_Add(t, ptr);
+
+            if (ptr)
+            {
+                TrainToTrack_Decode_Bit(ptr, stream);
+                EurobaliseTelegram_Add(t, ptr);
+
                 if (ptr->NID_PACKET == 255)
                 {
                     break;
                 }
+
                 current_pos += TrainToTrack_Length(ptr);
-	    }
-	    else
-	    {
-	        return 0;
+            }
+            else
+            {
+                return 0;
             }
         }
 
@@ -146,9 +152,9 @@ bool EurobaliseTelegram::encode(Bitstream& stream) const
         }
 
         if ((*p)->encode(stream) != 1)
-	{
-	    return false;
-	}
+        {
+            return false;
+        }
 
     }
 
@@ -186,28 +192,28 @@ bool EurobaliseTelegram::decode(FlatPackets& packetStruct)
             if (m_header.Q_UPDOWN == 0)
             {
                 ptr = PacketFactory_TrainToTrack(packetStruct.PacketHeaders[i].nid_packet);
-	    }
-	    else if (m_header.Q_UPDOWN == 1)
-	    {
-	        ptr = PacketFactory_TrackToTrain(packetStruct.PacketHeaders[i].nid_packet);
-	    }
-	    else
-	    {
-	        std::cout << "wrong q_updown" << std::endl;
-	        return false;
-	    }
+            }
+            else if (m_header.Q_UPDOWN == 1)
+            {
+                ptr = PacketFactory_TrackToTrain(packetStruct.PacketHeaders[i].nid_packet);
+            }
+            else
+            {
+                std::cout << "wrong q_updown" << std::endl;
+                return false;
+            }
 
             if (ptr)
             {
                 ptr->decode(packetStruct.PacketHeaders[i], packetStruct.PacketData);
-    
+
                 m_packets.push_back(ptr);
             }
             else
             {
                 return false;
             }
-    
+
             if (ptr->header.NID_PACKET == 255)
             {
                 break;

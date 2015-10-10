@@ -7,14 +7,14 @@
 
 struct EurobaliseTelegram
 {
-        TelegramHeader header;
+    TelegramHeader header;
 
-        PacketSequence  packets;
-/*
-        bool encode(FlatPackets& packetStruct) const;
+    PacketSequence  packets;
+    /*
+            bool encode(FlatPackets& packetStruct) const;
 
-        bool decode(FlatPackets& packetStruct);
-*/
+            bool decode(FlatPackets& packetStruct);
+    */
 };
 
 static inline void EurobaliseTelegram_Init(EurobaliseTelegram* t)

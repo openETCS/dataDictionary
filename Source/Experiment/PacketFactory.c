@@ -30,53 +30,59 @@ static TrainToTrack_PacketPool traintotrack_pool;
 
 PacketHeader* PacketFactory_TrackToTrain(PacketHeader header)
 {
-    switch(header.NID_PACKET)
+    switch (header.NID_PACKET)
     {
         case 65 :
         {
-	    tracktotrain_pool.p65.header = header;
+            tracktotrain_pool.p65.header = header;
             return &tracktotrain_pool.p65.header;
-	}
+        }
+
         case 71 :
         {
-	    tracktotrain_pool.p71.header = header;
+            tracktotrain_pool.p71.header = header;
             return &tracktotrain_pool.p71.header;
-	}
+        }
+
         case 255 :
-	{
+        {
             tracktotrain_pool.p255.header = header;
-	    return &tracktotrain_pool.p255.header;
-	}
-	default :
-	{
+            return &tracktotrain_pool.p255.header;
+        }
+
+        default :
+        {
             return 0;
-	}
+        }
     };
 }
 
 PacketHeader* PacketFactory_TrainToTrack(PacketHeader header)
 {
-    switch(header.NID_PACKET)
+    switch (header.NID_PACKET)
     {
         case 4 :
-        {	
-	    traintotrack_pool.p4.header = header;
+        {
+            traintotrack_pool.p4.header = header;
             return &traintotrack_pool.p4.header;
-	}
+        }
+
         case 9 :
-        {	
-	    traintotrack_pool.p9.header = header;
+        {
+            traintotrack_pool.p9.header = header;
             return &traintotrack_pool.p9.header;
-	}
+        }
+
         case 255 :
-	{
+        {
             traintotrack_pool.p255.header = header;
-	    return &traintotrack_pool.p255.header;
-	}
-	default :
-	{
+            return &traintotrack_pool.p255.header;
+        }
+
+        default :
+        {
             return 0;
-	}
+        }
     };
 }
 

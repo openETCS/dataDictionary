@@ -136,7 +136,7 @@ int End_of_Information_Decode_Int(PacketInfo* data, const kcg_int* stream, End_o
 
 inline std::ostream& operator<<(std::ostream& stream, const End_of_Information& p)
 {
-    
+
 
     return stream;
 }

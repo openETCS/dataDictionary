@@ -7,3 +7,31 @@ it: Adhesion_Factor.o Error_reporting.o End_of_Information.o Level_23_transition
 clean:
 	$(RM) *.o
 
+
+ASTYLEOPTIONS += -A1
+ASTYLEOPTIONS += --break-blocks
+ASTYLEOPTIONS += --pad-oper
+ASTYLEOPTIONS += --pad-header
+ASTYLEOPTIONS += --lineend=linux
+ASTYLEOPTIONS += --add-brackets
+ASTYLEOPTIONS += --indent=spaces=4
+ASTYLEOPTIONS += --indent-classes
+ASTYLEOPTIONS += --indent-switches
+ASTYLEOPTIONS += --indent-col1-comments
+ASTYLEOPTIONS += --min-conditional-indent=0
+
+export ASTYLE=astyle $(ASTYLEOPTIONS)
+
+%.format:%.c FORCE
+	@$(ASTYLE) $<
+
+%.format:%.h FORCE
+	@$(ASTYLE) $<
+
+
+format: FORCE
+	@$(ASTYLE) *.c *.h
+
+
+FORCE:
+
