@@ -6,6 +6,7 @@ it: Adhesion_Factor.o Error_reporting.o End_of_Information.o Level_23_transition
 
 clean:
 	$(RM) *.o
+	$(RM) *.orig
 
 
 ASTYLEOPTIONS += -A1
