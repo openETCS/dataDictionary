@@ -25,6 +25,9 @@ typedef struct AdhesionFactor AdhesionFactor;
 
 #define ADHESIONFACTOR_BITSIZE 48
 
+AdhesionFactor*  AdhesionFactor_New();
+
+void   AdhesionFactor_Delete(AdhesionFactor*);
 
 static inline void AdhesionFactor_Init(AdhesionFactor* p)
 {
@@ -169,26 +172,26 @@ int AdhesionFactor_DecodeBit(Bitstream* stream, AdhesionFactor* p);
 static inline void AdhesionFactor_Print(FILE* stream, const AdhesionFactor* p)
 {
     fprintf(stream, "(%u,%llu,%llu,%llu,%llu,%llu,%llu)",
-           p->header.NID_PACKET,
-           p->Q_DIR,
-           p->L_PACKET,
-           p->Q_SCALE,
-           p->D_ADHESION,
-           p->L_ADHESION,
-           p->M_ADHESION);
+            p->header.NID_PACKET,
+            p->Q_DIR,
+            p->L_PACKET,
+            p->Q_SCALE,
+            p->D_ADHESION,
+            p->L_ADHESION,
+            p->M_ADHESION);
 }
 
 static inline int AdhesionFactor_Equal(const AdhesionFactor* a, const AdhesionFactor* b)
 {
-     int status = a->header.NID_PACKET == b->header.NID_PACKET;
-     status = status && a->Q_DIR       == b->Q_DIR;
-     status = status && a->L_PACKET    == b->L_PACKET;
-     status = status && a->Q_SCALE     == b->Q_SCALE;
-     status = status && a->D_ADHESION  == b->D_ADHESION;
-     status = status && a->L_ADHESION  == b->L_ADHESION;
-     status = status && a->M_ADHESION  == b->M_ADHESION;
+    int status = a->header.NID_PACKET == b->header.NID_PACKET;
+    status = status && a->Q_DIR       == b->Q_DIR;
+    status = status && a->L_PACKET    == b->L_PACKET;
+    status = status && a->Q_SCALE     == b->Q_SCALE;
+    status = status && a->D_ADHESION  == b->D_ADHESION;
+    status = status && a->L_ADHESION  == b->L_ADHESION;
+    status = status && a->M_ADHESION  == b->M_ADHESION;
 
-     return status;
+    return status;
 }
 
 

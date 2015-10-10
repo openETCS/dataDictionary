@@ -1,6 +1,5 @@
 
 
-#include <stdlib.h>
 #include <assert.h>
 #include "AdhesionFactor.h"
 
@@ -17,6 +16,10 @@ int main()
 
     b.D_ADHESION  = 2;
     assert(!AdhesionFactor_Equal(&a, &b));
+
+    AdhesionFactor* p = AdhesionFactor_New();
+    assert(AdhesionFactor_Equal(&a, p));
+    AdhesionFactor_Delete(p);
 
     return EXIT_SUCCESS;
 }

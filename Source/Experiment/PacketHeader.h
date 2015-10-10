@@ -5,6 +5,7 @@
 #include "Bit64.h"
 #include "Bitstream.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 struct PacketHeader
 {

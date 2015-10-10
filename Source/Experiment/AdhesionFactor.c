@@ -2,6 +2,21 @@
 #include "AdhesionFactor.h"
 #include "Bit64.h"
 
+AdhesionFactor* AdhesionFactor_New()
+{
+    void* raw = malloc(sizeof(AdhesionFactor));
+    AdhesionFactor* ptr = (AdhesionFactor*)(raw);
+    AdhesionFactor_Init(ptr);
+    return ptr;
+}
+
+
+void AdhesionFactor_Delete(AdhesionFactor* ptr)
+{
+    free(ptr);
+}
+
+
 int AdhesionFactor_UpperBitsNotSet(const AdhesionFactor* p)
 {
     int status = 1;
@@ -185,3 +200,5 @@ int AdhesionFactor_DecodeInt(PacketInfo* data, const kcg_int* stream, AdhesionFa
     return 1;
 }
 */
+
+
