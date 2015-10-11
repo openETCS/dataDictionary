@@ -102,7 +102,7 @@ int PacketHeader_UpperBitsNotSet(const PacketHeader* p)
     disjoint behaviors;
 */
 static inline
-int PacketHeader_Encode(const PacketHeader* p, Bitstream* stream)
+int PacketHeader_EncodeBit(const PacketHeader* p, Bitstream* stream)
 {
     if (Bitstream_Normal(stream, PACKETHEADER_BITSIZE))
     {
@@ -161,7 +161,7 @@ int PacketHeader_Encode(const PacketHeader* p, Bitstream* stream)
     disjoint behaviors;
 */
 static inline
-int PacketHeader_Decode(PacketHeader* p, Bitstream* stream)
+int PacketHeader_DecodeBit(PacketHeader* p, Bitstream* stream)
 {
     if (Bitstream_Normal(stream, PACKETHEADER_BITSIZE))
     {

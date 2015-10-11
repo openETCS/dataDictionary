@@ -56,10 +56,14 @@ bool operator!=(const EurobaliseTelegram& a, const EurobaliseTelegram& b)
 
 int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
 {
+    printf("EurobaliseTelegram_DecodeBit::enter\n");
+
     if (TelegramHeader_DecodeBit(stream, &t->header) != 1)
     {
         return 0;
     }
+
+    printf("EurobaliseTelegram_DecodeBit::t->header.Q_UPDOWN = %d\n", t->header.Q_UPDOWN);
 
     //std::cout << stream->bitpos << std::endl;
 
@@ -75,14 +79,13 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
         }
 
         PacketHeader packet_header = {0};
-        PacketHeader_Decode(&packet_header, stream);
-
-        PacketHeader* ptr;
+        PacketHeader_DecodeBit(&packet_header, stream);
+        printf("EurobaliseTelegram_DecodeBit::packet_header = %d\n", packet_header.NID_PACKET);
 
         if (t->header.Q_UPDOWN == 1)
         {
-            ptr = PacketFactory_TrackToTrain(packet_header);
-            //assert(ptr);
+            PacketHeader* ptr = PacketFactory_TrackToTrain(packet_header);
+            assert(ptr);
 
             if (ptr)
             {
@@ -105,7 +108,8 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
         else
         {
             assert(t->header.Q_UPDOWN == 0);
-            ptr = PacketFactory_TrainToTrack(packet_header);
+
+            PacketHeader* ptr = PacketFactory_TrainToTrack(packet_header);
 
             if (ptr)
             {

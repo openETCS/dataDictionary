@@ -8,9 +8,7 @@ CFLAGS += -std=c99 -Wall -pedantic
 CFLAGS += -W
 LDFLAGS += -L../Baseline2/Foundation/Bits -lbits
 
-it: test_packets
-
-all: clean it
+all: clean test_packets
 	./test_packets
 
 SRC := AdhesionFactor.o ErrorReporting.o EndOfInformation.o\

@@ -53,9 +53,14 @@ int main()
         Bitstream_Init(&stream, raw, 1024, 0);
 
         TelegramHeader_EncodeBit(&stream, &t.header);
+
+        PacketHeader_EncodeBit(&a.header, &stream);
         AdhesionFactor_EncodeBit(&stream, (AdhesionFactor*)EurobaliseTelegram_Get(&t, 0));
+
+        PacketHeader_EncodeBit(&e.header, &stream);
         EndOfInformation_EncodeBit(&stream, (EndOfInformation*)EurobaliseTelegram_Get(&t, 1));
 
+        stream.bitpos = 0; // reset
 
         EurobaliseTelegram u;
         EurobaliseTelegram_Init(&u);
