@@ -2,6 +2,22 @@
 #include "TemporarySpeedRestriction.h"
 #include "Bit64.h"
 
+
+TemporarySpeedRestriction* TemporarySpeedRestriction_New()
+{
+    void* raw = malloc(sizeof(TemporarySpeedRestriction));
+    TemporarySpeedRestriction* ptr = (TemporarySpeedRestriction*)raw;
+    TemporarySpeedRestriction_Init(ptr);
+    return ptr;
+}
+
+
+void TemporarySpeedRestriction_Delete(TemporarySpeedRestriction* ptr)
+{
+    free(ptr);
+}
+
+
 int TemporarySpeedRestriction_UpperBitsNotSet(const TemporarySpeedRestriction* p)
 {
     int status = 1;

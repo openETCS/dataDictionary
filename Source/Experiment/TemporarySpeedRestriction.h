@@ -26,6 +26,25 @@ typedef struct TemporarySpeedRestriction TemporarySpeedRestriction;
 
 #define TEMPORARYSPEEDRESTRICTION_BITSIZE 63
 
+TemporarySpeedRestriction*  TemporarySpeedRestriction_New();
+
+void TemporarySpeedRestriction_Delete(TemporarySpeedRestriction*);
+
+
+static inline void TemporarySpeedRestriction_Init(TemporarySpeedRestriction* p)
+{
+    p->header.NID_PACKET = 65;
+    p->Q_DIR             = 0;
+    p->L_PACKET          = 0;
+    p->Q_SCALE           = 0;
+    p->NID_TSR           = 0;
+    p->D_TSR             = 0;
+    p->L_TSR             = 0;
+    p->Q_FRONT           = 0;
+    p->V_TSR             = 0;
+}
+
+
 /*@
     logic integer BitSize{L}(TemporarySpeedRestriction* p) = TEMPORARYSPEEDRESTRICTION_BITSIZE;
 

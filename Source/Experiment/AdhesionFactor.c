@@ -2,18 +2,18 @@
 #include "AdhesionFactor.h"
 #include "Bit64.h"
 
-static AdhesionFactor AdhesionFactor_Pool;
-
 AdhesionFactor* AdhesionFactor_New()
 {
-    AdhesionFactor_Init(&AdhesionFactor_Pool);
-    return &AdhesionFactor_Pool;
+    void* raw = malloc(sizeof(AdhesionFactor));
+    AdhesionFactor* ptr = (AdhesionFactor*)raw;
+    AdhesionFactor_Init(ptr);
+    return ptr;
 }
 
 
 void AdhesionFactor_Delete(AdhesionFactor* ptr)
 {
-    ptr = 0;
+    free(ptr);
 }
 
 
