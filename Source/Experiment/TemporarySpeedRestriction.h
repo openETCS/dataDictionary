@@ -167,47 +167,38 @@ int TemporarySpeedRestriction_EncodeInt(PacketInfo* data, kcg_int* stream, const
 
 int TemporarySpeedRestriction_DecodeInt(PacketInfo* data, const kcg_int* stream, TemporarySpeedRestriction* p);
 */
-#ifdef __cplusplus
 
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const TemporarySpeedRestriction& p)
+static inline void
+TemporarySpeedRestriction_Print(FILE* stream, const TemporarySpeedRestriction* p)
 {
-    stream
-            << +p.Q_DIR << ','
-            << +p.L_PACKET << ','
-            << +p.Q_SCALE << ','
-            << +p.NID_TSR << ','
-            << +p.D_TSR << ','
-            << +p.L_TSR << ','
-            << +p.Q_FRONT << ','
-            << +p.V_TSR;
-
-    return stream;
+    fprintf(stream, "(%u,%llu,%llu,%llu,%llu,%llu,%llu,%llu,%llu)",
+            p->header.NID_PACKET,
+            p->Q_DIR,
+            p->L_PACKET,
+            p->Q_SCALE,
+            p->NID_TSR,
+            p->D_TSR,
+            p->L_TSR,
+            p->Q_FRONT,
+            p->V_TSR);
 }
 
-inline bool operator==(const TemporarySpeedRestriction& a, const TemporarySpeedRestriction& b)
+static inline int 
+TemporarySpeedRestriction_Equal(const TemporarySpeedRestriction* a, const TemporarySpeedRestriction* b)
 {
-    bool status = true;
-
-    status = status && (a.Q_DIR == b.Q_DIR);
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.Q_SCALE == b.Q_SCALE);
-    status = status && (a.NID_TSR == b.NID_TSR);
-    status = status && (a.D_TSR == b.D_TSR);
-    status = status && (a.L_TSR == b.L_TSR);
-    status = status && (a.Q_FRONT == b.Q_FRONT);
-    status = status && (a.V_TSR == b.V_TSR);
+    int status = 1;
+    status = status && (a->header.NID_PACKET == b->header.NID_PACKET);
+    status = status && (a->Q_DIR    == b->Q_DIR);
+    status = status && (a->L_PACKET == b->L_PACKET);
+    status = status && (a->Q_SCALE  == b->Q_SCALE);
+    status = status && (a->NID_TSR  == b->NID_TSR);
+    status = status && (a->D_TSR    == b->D_TSR);
+    status = status && (a->L_TSR    == b->L_TSR);
+    status = status && (a->Q_FRONT  == b->Q_FRONT);
+    status = status && (a->V_TSR    == b->V_TSR);
 
     return status;
 }
-
-inline bool operator!=(const TemporarySpeedRestriction& a, const TemporarySpeedRestriction& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
 
 #endif // TEMPORARYSPEEDRESTRICTION_H_INCLUDED
 
