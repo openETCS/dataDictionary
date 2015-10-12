@@ -2,6 +2,22 @@
 #include "EndOfInformation.h"
 #include "Bit64.h"
 
+
+EndOfInformation* EndOfInformation_New()
+{
+    void* raw = malloc(sizeof(EndOfInformation));
+    EndOfInformation* ptr = (EndOfInformation*)raw;
+    EndOfInformation_Init(ptr);
+    return ptr;
+}
+
+
+void EndOfInformation_Delete(EndOfInformation* ptr)
+{
+    free(ptr);
+}
+
+
 int EndOfInformation_UpperBitsNotSet(const EndOfInformation* p)
 {
     p = 0; //-Wunused

@@ -21,6 +21,10 @@ typedef struct EndOfInformation EndOfInformation;
 
 #define ENDOFINFORMATION_BITSIZE 0
 
+EndOfInformation*  EndOfInformation_New();
+
+void   EndOfInformation_Delete(EndOfInformation*);
+
 static inline void EndOfInformation_Init(EndOfInformation* p)
 {
     p->header.NID_PACKET = 255;
