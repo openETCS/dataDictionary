@@ -23,6 +23,11 @@ int main()
         a.D_ADHESION  = 2;
         EurobaliseTelegram_Add(&t, &a.header);
 
+        AdhesionFactor a1;
+        AdhesionFactor_Init(&a1);
+        a1.D_ADHESION  = 3;
+        EurobaliseTelegram_Add(&t, &a1.header);
+
         EndOfInformation e;
         EndOfInformation_Init(&e);
         EurobaliseTelegram_Add(&t, &e.header);
