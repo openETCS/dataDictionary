@@ -20,6 +20,18 @@ typedef struct ErrorReporting ErrorReporting;
 
 #define ERRORREPORTING_BITSIZE 21
 
+ErrorReporting*  ErrorReporting_New();
+
+void   ErrorReporting_Delete(ErrorReporting*);
+
+static inline void ErrorReporting_Init(ErrorReporting* p)
+{
+    p->header.NID_PACKET = 4;
+    p->L_PACKET          = 0;
+    p->M_ERROR           = 0;
+}
+
+
 /*@
     logic integer BitSize{L}(ErrorReporting* p) = ERRORREPORTING_BITSIZE;
 
@@ -137,35 +149,28 @@ int ErrorReporting_EncodeInt(PacketInfo* data, kcg_int* stream, const ErrorRepor
 
 int ErrorReporting_DecodeInt(PacketInfo* data, const kcg_int* stream, ErrorReporting* p);
 */
-#ifdef __cplusplus
 
-#include <iostream>
 
-inline std::ostream& operator<<(std::ostream& stream, const ErrorReporting& p)
+static inline void ErrorReporting_Print(FILE* stream, const ErrorReporting* p)
 {
-    stream
-            << +p.L_PACKET << ','
-            << +p.M_ERROR;
-
-    return stream;
+    fprintf(stream, "(%u,%llu,%llu)",
+            p->header.NID_PACKET,
+            p->L_PACKET,
+            p->M_ERROR);
 }
 
-inline bool operator==(const ErrorReporting& a, const ErrorReporting& b)
-{
-    bool status = true;
 
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.M_ERROR == b.M_ERROR);
+static inline int ErrorReporting_Equal(const ErrorReporting* a, const ErrorReporting* b)
+{
+    int status = 1;
+
+    status = status && (a->header.NID_PACKET == b->header.NID_PACKET);
+    status = status && (a->L_PACKET == b->L_PACKET);
+    status = status && (a->M_ERROR  == b->M_ERROR);
 
     return status;
 }
 
-inline bool operator!=(const ErrorReporting& a, const ErrorReporting& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
 
 #endif // ERRORREPORTING_H_INCLUDED
 

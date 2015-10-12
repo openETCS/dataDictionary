@@ -2,6 +2,22 @@
 #include "ErrorReporting.h"
 #include "Bit64.h"
 
+
+ErrorReporting* ErrorReporting_New()
+{
+    void* raw = malloc(sizeof(ErrorReporting));
+    ErrorReporting* ptr = (ErrorReporting*)raw;
+    ErrorReporting_Init(ptr);
+    return ptr;
+}
+
+
+void ErrorReporting_Delete(ErrorReporting* ptr)
+{
+    free(ptr);
+}
+
+
 int ErrorReporting_UpperBitsNotSet(const ErrorReporting* p)
 {
     int status = 1;
@@ -18,6 +34,7 @@ int ErrorReporting_UpperBitsNotSet(const ErrorReporting* p)
         return 0;
     }
 }
+
 
 int ErrorReporting_EncodeBit(Bitstream* stream, const ErrorReporting* p)
 {

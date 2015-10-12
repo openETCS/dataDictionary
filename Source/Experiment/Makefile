@@ -16,6 +16,7 @@ SRC := AdhesionFactor.o ErrorReporting.o EndOfInformation.o\
        Packet.o PacketFactory.o EurobaliseTelegram.c
 
 TESTS := AdhesionFactor_Tests.o\
+         ErrorReporting_Tests.o\
          TemporarySpeedRestriction_Tests.o
 
 OBJ := $(SRC:.c=.o) $(TESTS:.c=.o)

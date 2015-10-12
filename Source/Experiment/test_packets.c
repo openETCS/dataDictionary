@@ -1,6 +1,7 @@
 
 #include <assert.h>
 #include "AdhesionFactor_Tests.h"
+#include "ErrorReporting_Tests.h"
 #include "TemporarySpeedRestriction_Tests.h"
 #include "EndOfInformation.h"
 #include "PacketFactory.h"
@@ -10,6 +11,7 @@ int main()
 {
     AdhesionFactor_Tests();
     TemporarySpeedRestriction_Tests();
+    ErrorReporting_Tests();
 
     {
         // set up test data

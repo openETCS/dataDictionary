@@ -9,7 +9,6 @@
 
 struct TrainToTrack_PacketPool
 {
-    ErrorReporting p4;
     Level23TransitionInformation p9;
 };
 
@@ -58,8 +57,9 @@ PacketHeader* PacketFactory_TrainToTrack(PacketHeader header)
     {
         case 4 :
         {
-            traintotrack_pool.p4.header = header;
-            return &traintotrack_pool.p4.header;
+            ErrorReporting* ptr = ErrorReporting_New();
+            PacketHeader*   p = &(ptr->header);
+            return p;
         }
 
         case 9 :
