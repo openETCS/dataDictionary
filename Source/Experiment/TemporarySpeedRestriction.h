@@ -202,7 +202,7 @@ TemporarySpeedRestriction_Print(FILE* stream, const TemporarySpeedRestriction* p
             p->V_TSR);
 }
 
-static inline int 
+static inline int
 TemporarySpeedRestriction_Equal(const TemporarySpeedRestriction* a, const TemporarySpeedRestriction* b)
 {
     int status = 1;
