@@ -11,12 +11,14 @@ LDFLAGS += -L../Baseline2/Foundation/Bits -lbits
 all: clean test_packets
 	./test_packets
 
-SRC := AdhesionFactor.o AdhesionFactor_Tests.c\
-       ErrorReporting.o EndOfInformation.o\
+SRC := AdhesionFactor.o ErrorReporting.o EndOfInformation.o\
        Level23TransitionInformation.o TemporarySpeedRestriction.o\
        Packet.o PacketFactory.o EurobaliseTelegram.c
 
-OBJ := $(SRC:.c=.o)
+TESTS := AdhesionFactor_Tests.o\
+         TemporarySpeedRestriction_Tests.o
+
+OBJ := $(SRC:.c=.o) $(TESTS:.c=.o)
 
 test_packets: test_packets.o $(OBJ)
 	$(CC) -o $@ $+ $(LDFLAGS)

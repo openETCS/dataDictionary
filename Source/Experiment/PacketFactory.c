@@ -9,7 +9,6 @@
 
 struct TrackToTrain_PacketPool
 {
-    TemporarySpeedRestriction p65;
     EndOfInformation p255;
 };
 
@@ -34,8 +33,9 @@ PacketHeader* PacketFactory_TrackToTrain(PacketHeader header)
     {
         case 65 :
         {
-            tracktotrain_pool.p65.header = header;
-            return &tracktotrain_pool.p65.header;
+            TemporarySpeedRestriction* ptr = TemporarySpeedRestriction_New();
+            PacketHeader*   p = &(ptr->header);
+            return p;
         }
 
         case 71 :
