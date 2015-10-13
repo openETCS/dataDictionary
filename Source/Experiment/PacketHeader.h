@@ -7,18 +7,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define TRAINTOTRACK 0
+#define TRACKTOTRAIN 1
+#define BOTHWAYS 2
+
 struct PacketHeader
 {
     uint8_t  NID_PACKET;         // # 8
-    uint8_t  list;
+    uint8_t  list;               // for correct type dispatch
 };
 
 typedef struct PacketHeader PacketHeader;
 
 #define PACKETHEADER_BITSIZE 8
-#define TRAINTOTRACK 0
-#define TRACKTOTRAIN 1
-#define BOTHWAYS 2
 
 /*@
     logic integer BitSize{L}(PacketHeader* p) = PACKETHEADER_BITSIZE;
@@ -184,28 +185,16 @@ int PacketHeader_DecodeBit(PacketHeader* p, Bitstream* stream)
     }
 }
 
-#ifdef __cplusplus
 
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const PacketHeader& p)
+static inline void PacketHeader_Print(FILE* stream, const PacketHeader* p)
 {
-    stream << +p.NID_PACKET;
-
-    return stream;
+    fprintf(stream, "(%d,%d)", p->NID_PACKET, p->list);
 }
 
-inline bool operator==(const PacketHeader& a, const PacketHeader& b)
+static inline int PacketHeader_Equal(const PacketHeader* a, const PacketHeader* b)
 {
-    return a.NID_PACKET == b.NID_PACKET;
+    return (a->NID_PACKET == b->NID_PACKET) && (a->list == b->list);
 }
-
-inline bool operator!=(const PacketHeader& a, const PacketHeader& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
 
 #endif // PACKETHEADER_H_INCLUDED
 
