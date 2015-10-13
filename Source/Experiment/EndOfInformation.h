@@ -151,6 +151,7 @@ static inline int EndOfInformation_Equal(const EndOfInformation* a, const EndOfI
 
 {
     int status = 1;
+    status = status && (a->header.NID_PACKET == b->header.NID_PACKET);
 
     return status;
 }
