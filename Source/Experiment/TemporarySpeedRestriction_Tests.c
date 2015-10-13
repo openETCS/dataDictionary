@@ -17,7 +17,7 @@ void TemporarySpeedRestriction_Tests()
     b.D_TSR  = 2;
     assert(!TemporarySpeedRestriction_Equal(&a, &b));
 
-    PacketHeader header = {65};
+    PacketHeader header = {65,1};
     PacketHeader* base = PacketFactory_TrackToTrain(header);
     TemporarySpeedRestriction* p = (TemporarySpeedRestriction*)(base);
     TemporarySpeedRestriction_Print(stdout, p);

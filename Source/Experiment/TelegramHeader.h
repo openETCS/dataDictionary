@@ -4,6 +4,8 @@
 
 #include "Bit64.h"
 #include "Bitstream.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 struct TelegramHeader
 {
@@ -399,6 +401,39 @@ int TelegramHeader_DecodeBit(Bitstream* stream, TelegramHeader* p)
     {
         return 0;
     }
+}
+
+static inline void TelegramHeader_Print(FILE* stream, const TelegramHeader* p)
+{
+    fprintf(stream, "(%llu,%llu,%llu,%llu,%llu,%llu,%llu,%llu,%llu,%llu)",
+            p->Q_UPDOWN,
+            p->M_VERSION,
+            p->Q_MEDIA,
+            p->N_PIG,
+            p->N_TOTAL,
+            p->M_DUP,
+            p->M_MCOUNT,
+            p->NID_C,
+            p->NID_BG,
+            p->Q_LINK);
+}
+
+static inline int TelegramHeader_Equal(const TelegramHeader* a, const TelegramHeader* b)
+{
+    int status = 1;
+
+    status = status && (a->Q_UPDOWN    == b->Q_UPDOWN);
+    status = status && (a->M_VERSION   == b->M_VERSION);
+    status = status && (a->Q_MEDIA     == b->Q_MEDIA);
+    status = status && (a->N_PIG       == b->N_PIG);
+    status = status && (a->N_TOTAL     == b->N_TOTAL);
+    status = status && (a->M_DUP       == b->M_DUP);
+    status = status && (a->M_MCOUNT    == b->M_MCOUNT);
+    status = status && (a->NID_C       == b->NID_C);
+    status = status && (a->NID_BG      == b->NID_BG);
+    status = status && (a->Q_LINK      == b->Q_LINK);
+
+    return status;
 }
 
 #ifdef __cplusplus

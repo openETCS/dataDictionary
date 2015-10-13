@@ -74,6 +74,7 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
     {
         if (current_pos != stream->bitpos)
         {
+	    printf("problem here %llu is not %llu\n", current_pos, stream->bitpos);
             //std::cerr << stream->bitpos << " != " << current_pos << std::endl;
             return 0;
         }
@@ -99,15 +100,12 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
         {
 
             PacketHeader* ptr = PacketFactory_TrackToTrain(packet_header);
-            assert(ptr);
-
             if (ptr)
             {
                 TrackToTrain_DecodeBit(ptr, stream);
                 EurobaliseTelegram_Add(t, ptr);
                 printf("EurobaliseTelegram_DecodeBit size after add = %d\n", EurobaliseTelegram_Size(t));
-
-                current_pos += TrackToTrain_Length(ptr);
+                current_pos += Packet_Length(ptr);
             }
             else
             {
@@ -117,16 +115,13 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
         else
         {
             assert(t->header.Q_UPDOWN == 0);
-
             PacketHeader* ptr = PacketFactory_TrainToTrack(packet_header);
-
             if (ptr)
             {
                 TrainToTrack_DecodeBit(ptr, stream);
                 EurobaliseTelegram_Add(t, ptr);
-                printf("EurobaliseTelegram_DecodeBit size after add = %d\n", EurobaliseTelegram_Size(t));
-
-                current_pos += TrainToTrack_Length(ptr);
+	        printf("EurobaliseTelegram_DecodeBit size after add = %d\n", EurobaliseTelegram_Size(t));
+                current_pos += Packet_Length(ptr);
             }
             else
             {
@@ -134,13 +129,16 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
             }
         }
 
+	if (ptr)
+	{
+            //current_pos += Packet_Length(ptr);
+	}
     }
 
     return 1;
 }
 
 /*
-
 bool EurobaliseTelegram::encode(Bitstream& stream) const
 {
     if (::encode(stream, header()) != 1)

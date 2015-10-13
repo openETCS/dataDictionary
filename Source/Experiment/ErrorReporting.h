@@ -27,6 +27,7 @@ void   ErrorReporting_Delete(ErrorReporting*);
 static inline void ErrorReporting_Init(ErrorReporting* p)
 {
     p->header.NID_PACKET = 4;
+    p->header.list = TRAINTOTRACK;
     p->L_PACKET          = 0;
     p->M_ERROR           = 0;
 }

@@ -28,6 +28,7 @@ void   Level23TransitionInformation_Delete(Level23TransitionInformation*);
 static inline void Level23TransitionInformation_Init(Level23TransitionInformation* p)
 {
     p->header.NID_PACKET = 9;
+    p->header.list = TRAINTOTRACK;
     p->L_PACKET          = 0;
     p->NID_LTRBG         = 0;
 }
