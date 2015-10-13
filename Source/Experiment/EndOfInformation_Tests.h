@@ -4,7 +4,7 @@
 
 #include "EndOfInformation.h"
 
-void EndOfInformation_Tests();
+void EndOfInformation_Tests(void);
 
 #endif // ENDOFINFORMATION_TESTS_INCLUDED
 

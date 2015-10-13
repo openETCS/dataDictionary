@@ -26,7 +26,7 @@ typedef struct TemporarySpeedRestriction TemporarySpeedRestriction;
 
 #define TEMPORARYSPEEDRESTRICTION_BITSIZE 63
 
-TemporarySpeedRestriction*  TemporarySpeedRestriction_New();
+TemporarySpeedRestriction*  TemporarySpeedRestriction_New(void);
 
 void TemporarySpeedRestriction_Delete(TemporarySpeedRestriction*);
 

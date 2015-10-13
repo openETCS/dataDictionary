@@ -20,7 +20,7 @@ typedef struct ErrorReporting ErrorReporting;
 
 #define ERRORREPORTING_BITSIZE 21
 
-ErrorReporting*  ErrorReporting_New();
+ErrorReporting*  ErrorReporting_New(void);
 
 void   ErrorReporting_Delete(ErrorReporting*);
 

@@ -1,5 +1,5 @@
 
-#include "EndOfInformation.h"
+#include "EndOfInformation_Tests.h"
 #include "PacketFactory.h"
 #include <assert.h>
 

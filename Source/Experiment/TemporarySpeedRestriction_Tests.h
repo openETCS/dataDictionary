@@ -4,7 +4,7 @@
 
 #include "TemporarySpeedRestriction.h"
 
-void TemporarySpeedRestriction_Tests();
+void TemporarySpeedRestriction_Tests(void);
 
 #endif // TEMPORARYSPEEDRESTRICTION_TESTS_INCLUDED
 

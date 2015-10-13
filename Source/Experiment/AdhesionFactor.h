@@ -25,7 +25,7 @@ typedef struct AdhesionFactor AdhesionFactor;
 
 #define ADHESIONFACTOR_BITSIZE 48
 
-AdhesionFactor*  AdhesionFactor_New();
+AdhesionFactor*  AdhesionFactor_New(void);
 
 void   AdhesionFactor_Delete(AdhesionFactor*);
 

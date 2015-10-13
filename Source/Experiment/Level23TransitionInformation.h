@@ -21,7 +21,7 @@ typedef struct Level23TransitionInformation Level23TransitionInformation;
 #define LEVEL23TRANSITIONINFORMATION_BITSIZE 37
 
 
-Level23TransitionInformation*  Level23TransitionInformation_New();
+Level23TransitionInformation*  Level23TransitionInformation_New(void);
 
 void   Level23TransitionInformation_Delete(Level23TransitionInformation*);
 

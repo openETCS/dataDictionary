@@ -4,7 +4,7 @@
 
 #include "AdhesionFactor.h"
 
-void AdhesionFactor_Tests();
+void AdhesionFactor_Tests(void);
 
 #endif // ADHESIONFACTOR_TESTS_INCLUDED
 

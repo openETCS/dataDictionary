@@ -21,7 +21,7 @@ typedef struct EndOfInformation EndOfInformation;
 
 #define ENDOFINFORMATION_BITSIZE 0
 
-EndOfInformation*  EndOfInformation_New();
+EndOfInformation*  EndOfInformation_New(void);
 
 void   EndOfInformation_Delete(EndOfInformation*);
 
