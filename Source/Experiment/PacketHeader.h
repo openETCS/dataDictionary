@@ -172,7 +172,7 @@ int PacketHeader_DecodeBit(PacketHeader* p, Bitstream* stream)
     {
         //@ ghost const uint32_t pos = stream->bitpos;
 
-        p->NID_PACKET = Bitstream_Read(stream, 8);
+        p->NID_PACKET = (uint8_t)Bitstream_Read(stream, 8);
 
         //@ assert NID_PACKET:        EqualBits(stream, pos,       pos + 8,   p->NID_PACKET);
         //@ assert NID_PACKET:        UpperBitsNotSet(p->NID_PACKET,        8);
