@@ -17,7 +17,7 @@ void AdhesionFactor_Tests()
     b.D_ADHESION  = 2;
     assert(!AdhesionFactor_Equal(&a, &b));
 
-    PacketHeader header = {71,1};
+    PacketHeader header = {71, 1};
     PacketHeader* base = PacketFactory_TrackToTrain(header);
     AdhesionFactor* p = (AdhesionFactor*)(base);
     AdhesionFactor_Print(stdout, p);

@@ -74,7 +74,7 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
     {
         if (current_pos != stream->bitpos)
         {
-	    //printf("problem here %lu is not %lu\n", current_pos, stream->bitpos);
+            //printf("problem here %lu is not %lu\n", current_pos, stream->bitpos);
             //std::cerr << stream->bitpos << " != " << current_pos << std::endl;
             return 0;
         }
@@ -85,12 +85,12 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
 
         PacketHeader* ptr = 0;
 
-        if(packet_header.NID_PACKET == 255)
+        if (packet_header.NID_PACKET == 255)
         {
             ptr = PacketFactory_BothWays(packet_header);
             assert(ptr);
 
-            // beware: no need to decode further fields 
+            // beware: no need to decode further fields
             EurobaliseTelegram_Add(t, ptr);
             //printf("EurobaliseTelegram_DecodeBit size after add = %d\n", EurobaliseTelegram_Size(t));
             break;
@@ -100,6 +100,7 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
         {
 
             ptr = PacketFactory_TrackToTrain(packet_header);
+
             if (ptr)
             {
                 TrackToTrain_DecodeBit(ptr, stream);
@@ -115,11 +116,12 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
         {
             assert(t->header.Q_UPDOWN == 0);
             ptr = PacketFactory_TrainToTrack(packet_header);
+
             if (ptr)
             {
                 TrainToTrack_DecodeBit(ptr, stream);
                 EurobaliseTelegram_Add(t, ptr);
-	        //printf("EurobaliseTelegram_DecodeBit size after add = %d\n", EurobaliseTelegram_Size(t));
+                //printf("EurobaliseTelegram_DecodeBit size after add = %d\n", EurobaliseTelegram_Size(t));
             }
             else
             {
@@ -127,10 +129,10 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
             }
         }
 
-	if (ptr)
-	{
+        if (ptr)
+        {
             current_pos += Packet_Length(ptr);
-	}
+        }
     }
 
     return 1;

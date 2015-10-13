@@ -44,18 +44,20 @@ static inline void EurobaliseTelegram_Print(FILE* stream, EurobaliseTelegram* p)
 {
     TelegramHeader_Print(stream, &p->header);
     fprintf(stream, "[");
-    for(uint32_t i = 0; i < p->packets.size; ++i)
+
+    for (uint32_t i = 0; i < p->packets.size; ++i)
     {
-	if(i == 0)
-	{
-             Packet_Print(stream, p->packets.header[i]);
-	}
-	else
-	{
-	     fprintf(stream, ",");
-             Packet_Print(stream, p->packets.header[i]);
-	}
+        if (i == 0)
+        {
+            Packet_Print(stream, p->packets.header[i]);
+        }
+        else
+        {
+            fprintf(stream, ",");
+            Packet_Print(stream, p->packets.header[i]);
+        }
     }
+
     fprintf(stream, "]\n");
 }
 

@@ -14,7 +14,7 @@ void EndOfInformation_Tests()
     EndOfInformation_Init(&b);
     assert(EndOfInformation_Equal(&a, &b));
 
-    PacketHeader header = {255,2};
+    PacketHeader header = {255, 2};
     PacketHeader* base = PacketFactory_BothWays(header);
     assert(base);
     EndOfInformation* p = (EndOfInformation*)(base);

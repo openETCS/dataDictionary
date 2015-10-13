@@ -23,26 +23,26 @@ int main()
 
         t.header.Q_UPDOWN = 1;
         //printf("telegram size of t = %d\n", EurobaliseTelegram_Size(&t));
-	EurobaliseTelegram_Print(stdout, &t);
+        EurobaliseTelegram_Print(stdout, &t);
 
         AdhesionFactor a;
         AdhesionFactor_Init(&a);
-	a.L_PACKET = 56;
+        a.L_PACKET = 56;
         a.D_ADHESION  = 2;
         EurobaliseTelegram_Add(&t, &a.header);
-	EurobaliseTelegram_Print(stdout, &t);
+        EurobaliseTelegram_Print(stdout, &t);
 
         AdhesionFactor a1;
         AdhesionFactor_Init(&a1);
         a1.L_PACKET = 56;
         a1.D_ADHESION  = 3;
         EurobaliseTelegram_Add(&t, &a1.header);
-	EurobaliseTelegram_Print(stdout, &t);
+        EurobaliseTelegram_Print(stdout, &t);
 
         EndOfInformation e;
         EndOfInformation_Init(&e);
         EurobaliseTelegram_Add(&t, &e.header);
-	EurobaliseTelegram_Print(stdout, &t);
+        EurobaliseTelegram_Print(stdout, &t);
 
         // encode
         uint8_t raw[1024];
@@ -66,7 +66,7 @@ int main()
         EurobaliseTelegram_Init(&u);
         EurobaliseTelegram_DecodeBit(&u, &stream);
 
-	EurobaliseTelegram_Print(stdout, &u);
+        EurobaliseTelegram_Print(stdout, &u);
     }
 
 

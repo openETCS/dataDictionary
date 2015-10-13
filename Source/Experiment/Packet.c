@@ -74,24 +74,24 @@ int Packet_DecodeBit(PacketHeader* header, Bitstream* stream)
     switch (header->list)
     {
         case 0 :
-	{
+        {
             return TrainToTrack_DecodeBit(header, stream);
-	}
+        }
 
         case 1 :
-	{
+        {
             return TrackToTrain_DecodeBit(header, stream);
-	}
+        }
 
         case 2 :
-	{
+        {
             return BothWays_DecodeBit(header, stream);
-	}
+        }
 
-	default :
-	{
+        default :
+        {
             return 0;
-	}
+        }
     };
 }
 
@@ -102,15 +102,15 @@ void TrainToTrack_Print(FILE* stream, const PacketHeader* header)
         case 4 :
         {
             ErrorReporting* ptr = (ErrorReporting*)(header);
-            ErrorReporting_Print(stream, ptr);         
-	    break;
+            ErrorReporting_Print(stream, ptr);
+            break;
         }
 
         case 9 :
         {
             Level23TransitionInformation* ptr = (Level23TransitionInformation*)(header);
             Level23TransitionInformation_Print(stream, ptr);
-	    break;
+            break;
         }
 
         default :
@@ -128,14 +128,14 @@ void TrackToTrain_Print(FILE* stream, const PacketHeader* header)
         {
             TemporarySpeedRestriction* ptr = (TemporarySpeedRestriction*)(header);
             TemporarySpeedRestriction_Print(stream, ptr);
-	    break;
+            break;
         }
 
         case 71 :
         {
             AdhesionFactor* ptr = (AdhesionFactor*)(header);
             AdhesionFactor_Print(stream, ptr);
-	    break;
+            break;
         }
 
         default :
@@ -153,7 +153,7 @@ void BothWays_Print(FILE* stream, const PacketHeader* header)
         {
             EndOfInformation* ptr = (EndOfInformation*)(header);
             EndOfInformation_Print(stream, ptr);
-	    break;
+            break;
         }
 
         default :
@@ -168,27 +168,27 @@ void Packet_Print(FILE* stream, const PacketHeader* header)
     switch (header->list)
     {
         case 0 :
-	{
+        {
             TrainToTrack_Print(stream, header);
-	    break;
-	}
+            break;
+        }
 
         case 1 :
-	{
+        {
             TrackToTrain_Print(stream, header);
-	    break;
-	}
+            break;
+        }
 
         case 2 :
-	{
+        {
             BothWays_Print(stream, header);
-	    break;
-	}
-
-	default :
-	{
             break;
-	}
+        }
+
+        default :
+        {
+            break;
+        }
     };
 }
 
@@ -243,19 +243,19 @@ int Packet_Length(const PacketHeader* header)
     switch (header->list)
     {
         case 0 :
-	{
+        {
             return TrainToTrack_Length(header);
-	}
+        }
 
-	case 1 :
-	{
+        case 1 :
+        {
             return TrackToTrain_Length(header);
-	}
+        }
 
-	default :
-	{
-	    return 8;
-	}
+        default :
+        {
+            return 8;
+        }
     };
 }
 
