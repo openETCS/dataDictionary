@@ -418,64 +418,19 @@ static inline void TelegramHeader_Print(FILE* stream, const TelegramHeader* p)
             p->Q_LINK);
 }
 
+
 static inline int TelegramHeader_Equal(const TelegramHeader* a, const TelegramHeader* b)
 {
-    int status = 1;
-
-    status = status && (a->Q_UPDOWN    == b->Q_UPDOWN);
-    status = status && (a->M_VERSION   == b->M_VERSION);
-    status = status && (a->Q_MEDIA     == b->Q_MEDIA);
-    status = status && (a->N_PIG       == b->N_PIG);
-    status = status && (a->N_TOTAL     == b->N_TOTAL);
-    status = status && (a->M_DUP       == b->M_DUP);
-    status = status && (a->M_MCOUNT    == b->M_MCOUNT);
-    status = status && (a->NID_C       == b->NID_C);
-    status = status && (a->NID_BG      == b->NID_BG);
-    status = status && (a->Q_LINK      == b->Q_LINK);
-
-    return status;
+    return (a->Q_UPDOWN  == b->Q_UPDOWN) &&
+           (a->M_VERSION == b->M_VERSION) &&
+           (a->Q_MEDIA   == b->Q_MEDIA) &&
+           (a->N_PIG     == b->N_PIG) &&
+           (a->N_TOTAL   == b->N_TOTAL) &&
+           (a->M_DUP     == b->M_DUP) &&
+           (a->M_MCOUNT  == b->M_MCOUNT) &&
+           (a->NID_C     == b->NID_C) &&
+           (a->NID_BG    == b->NID_BG) &&
+           (a->Q_LINK    == b->Q_LINK);
 }
-
-#ifdef __cplusplus
-
-#include <iostream>
-
-inline std::ostream& operator<< (std::ostream& stream, const TelegramHeader& p)
-{
-    stream << '('
-           << uint64_t(p.Q_UPDOWN) << ','
-           << uint64_t(p.M_VERSION) << ','
-           << uint64_t(p.Q_MEDIA) << ','
-           << uint64_t(p.N_PIG) << ','
-           << uint64_t(p.N_TOTAL) << ','
-           << uint64_t(p.M_DUP) << ','
-           << uint64_t(p.M_MCOUNT) << ','
-           << uint64_t(p.NID_C) << ','
-           << uint64_t(p.NID_BG) << ','
-           << uint64_t(p.Q_LINK) << ')';
-
-    return stream;
-}
-
-inline bool operator==(const TelegramHeader& a, const TelegramHeader& b)
-{
-    return (a.Q_UPDOWN == b.Q_UPDOWN) &&
-           (a.M_VERSION == b.M_VERSION) &&
-           (a.Q_MEDIA == b.Q_MEDIA) &&
-           (a.N_PIG == b.N_PIG) &&
-           (a.N_TOTAL == b.N_TOTAL) &&
-           (a.M_DUP == b.M_DUP) &&
-           (a.M_MCOUNT == b.M_MCOUNT) &&
-           (a.NID_C == b.NID_C) &&
-           (a.NID_BG == b.NID_BG) &&
-           (a.Q_LINK == b.Q_LINK);
-}
-
-inline bool operator!=(const TelegramHeader& a, const TelegramHeader& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
 
 #endif // TELEGRAMHEADER_H_INCLUDED
