@@ -18,24 +18,29 @@ int main()
 
     {
         // set up test data
+        printf("hello\n");
         EurobaliseTelegram t;
         EurobaliseTelegram_Init(&t);
 
         t.header.Q_UPDOWN = 1;
+        printf("telegram size of t = %d\n", EurobaliseTelegram_Size(&t));
 
         AdhesionFactor a;
         AdhesionFactor_Init(&a);
         a.D_ADHESION  = 2;
         EurobaliseTelegram_Add(&t, &a.header);
+        printf("telegram size of t = %d\n", EurobaliseTelegram_Size(&t));
 
         AdhesionFactor a1;
         AdhesionFactor_Init(&a1);
         a1.D_ADHESION  = 3;
         EurobaliseTelegram_Add(&t, &a1.header);
+        printf("telegram size of t = %d\n", EurobaliseTelegram_Size(&t));
 
         EndOfInformation e;
         EndOfInformation_Init(&e);
         EurobaliseTelegram_Add(&t, &e.header);
+        printf("telegram size of t = %d\n", EurobaliseTelegram_Size(&t));
 
         printf("telegram size of t = %d\n", EurobaliseTelegram_Size(&t));
 

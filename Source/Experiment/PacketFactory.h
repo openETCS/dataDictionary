@@ -8,5 +8,7 @@ PacketHeader* PacketFactory_TrackToTrain(PacketHeader header);
 
 PacketHeader* PacketFactory_TrainToTrack(PacketHeader header);
 
+PacketHeader* PacketFactory_BothWays(PacketHeader header);
+
 #endif /* PACKETFACTORY_H_INCLUDED */
 

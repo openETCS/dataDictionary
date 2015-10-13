@@ -15,7 +15,8 @@ void EndOfInformation_Tests()
     assert(EndOfInformation_Equal(&a, &b));
 
     PacketHeader header = {255};
-    PacketHeader* base = PacketFactory_TrackToTrain(header);
+    PacketHeader* base = PacketFactory_BothWays(header);
+    assert(base);
     EndOfInformation* p = (EndOfInformation*)(base);
     EndOfInformation_Print(stdout, p);
     printf("\n");

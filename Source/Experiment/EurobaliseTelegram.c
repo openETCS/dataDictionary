@@ -82,8 +82,22 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
         PacketHeader_DecodeBit(&packet_header, stream);
         printf("EurobaliseTelegram_DecodeBit::packet_header = %d\n", packet_header.NID_PACKET);
 
+        PacketHeader* ptr = 0;
+
+        if(packet_header.NID_PACKET == 255)
+        {
+            ptr = PacketFactory_BothWays(packet_header);
+            assert(ptr);
+
+            // beware: no need to decode further fields 
+            EurobaliseTelegram_Add(t, ptr);
+            printf("EurobaliseTelegram_DecodeBit size after add = %d\n", EurobaliseTelegram_Size(t));
+            break;
+        }
+
         if (t->header.Q_UPDOWN == 1)
         {
+
             PacketHeader* ptr = PacketFactory_TrackToTrain(packet_header);
             assert(ptr);
 
@@ -92,11 +106,6 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
                 TrackToTrain_DecodeBit(ptr, stream);
                 EurobaliseTelegram_Add(t, ptr);
                 printf("EurobaliseTelegram_DecodeBit size after add = %d\n", EurobaliseTelegram_Size(t));
-
-                if (ptr->NID_PACKET == 255)
-                {
-                    break;
-                }
 
                 current_pos += TrackToTrain_Length(ptr);
             }
@@ -116,12 +125,6 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
                 TrainToTrack_DecodeBit(ptr, stream);
                 EurobaliseTelegram_Add(t, ptr);
                 printf("EurobaliseTelegram_DecodeBit size after add = %d\n", EurobaliseTelegram_Size(t));
-
-
-                if (ptr->NID_PACKET == 255)
-                {
-                    break;
-                }
 
                 current_pos += TrainToTrack_Length(ptr);
             }
