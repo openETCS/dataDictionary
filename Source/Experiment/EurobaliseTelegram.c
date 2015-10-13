@@ -3,56 +3,27 @@
 #include "PacketFactory.h"
 #include "Packet.h"
 
-#ifdef __cplusplus
-
-std::ostream& operator<< (std::ostream& stream, const EurobaliseTelegram& telegram)
+void EurobaliseTelegram_Print(FILE* stream, EurobaliseTelegram* p)
 {
-    stream << '(' << telegram.header() << ",";
+    TelegramHeader_Print(stream, &p->header);
+    fprintf(stream, "[");
 
-    for (size_t i = 0; i != telegram.numberPackets(); ++i)
+    for (uint32_t i = 0; i < p->packets.size; ++i)
     {
-        stream << *telegram.packet(i);
-
-        if (i + 1 != telegram.numberPackets())
+        if (i == 0)
         {
-            stream << ',';
+            Packet_Print(stream, p->packets.header[i]);
         }
         else
         {
-            stream << ')';
-        }
-
-    }
-
-    return stream;
-}
-
-bool operator==(const EurobaliseTelegram& a, const EurobaliseTelegram& b)
-{
-    if (a.header() == b.header())
-    {
-        if (a.numberPackets() == b.numberPackets())
-        {
-            bool result = true;
-
-            for (size_t i = 0; i < a.numberPackets(); ++i)
-            {
-                result = result && (*(a.packet(i)) == *(b.packet(i)));
-            }
-
-            return result;
+            fprintf(stream, ",");
+            Packet_Print(stream, p->packets.header[i]);
         }
     }
 
-    return false;
+    fprintf(stream, "]\n");
 }
 
-bool operator!=(const EurobaliseTelegram& a, const EurobaliseTelegram& b)
-{
-    return !(a == b);
-}
-
-#endif
 
 int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
 {

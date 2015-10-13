@@ -40,40 +40,11 @@ static inline void EurobaliseTelegram_Add(EurobaliseTelegram* t, PacketHeader* p
     PacketSequence_Add(&t->packets, p);
 }
 
-static inline void EurobaliseTelegram_Print(FILE* stream, EurobaliseTelegram* p)
-{
-    TelegramHeader_Print(stream, &p->header);
-    fprintf(stream, "[");
-
-    for (uint32_t i = 0; i < p->packets.size; ++i)
-    {
-        if (i == 0)
-        {
-            Packet_Print(stream, p->packets.header[i]);
-        }
-        else
-        {
-            fprintf(stream, ",");
-            Packet_Print(stream, p->packets.header[i]);
-        }
-    }
-
-    fprintf(stream, "]\n");
-}
+void EurobaliseTelegram_Print(FILE* stream, EurobaliseTelegram* p);
 
 int EurobaliseTelegram_EncodeBit(const EurobaliseTelegram* t, Bitstream* stream);
 
 int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream);
-
-#ifdef __cplusplus
-
-std::ostream& operator<<(std::ostream& stream, const EurobaliseTelegram& p);
-
-bool operator==(const EurobaliseTelegram& a, const EurobaliseTelegram& b);
-
-bool operator!=(const EurobaliseTelegram& a, const EurobaliseTelegram& b);
-
-#endif
 
 #endif /* EUROBALISETELEGRAM_H_INCLUDED */
 
