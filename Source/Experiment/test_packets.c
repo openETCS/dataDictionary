@@ -4,7 +4,7 @@
 #include "ErrorReporting_Tests.h"
 #include "TemporarySpeedRestriction_Tests.h"
 #include "Level23TransitionInformation_Tests.h"
-#include "EndOfInformation.h"
+#include "EndOfInformation_Tests.h"
 #include "PacketFactory.h"
 #include "EurobaliseTelegram.h"
 
@@ -14,6 +14,7 @@ int main()
     TemporarySpeedRestriction_Tests();
     ErrorReporting_Tests();
     Level23TransitionInformation_Tests();
+    EndOfInformation_Tests();
 
     {
         // set up test data

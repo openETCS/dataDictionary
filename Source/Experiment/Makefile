@@ -18,7 +18,8 @@ SRC := AdhesionFactor.o ErrorReporting.o EndOfInformation.o\
 TESTS := AdhesionFactor_Tests.o\
          ErrorReporting_Tests.o\
          Level23TransitionInformation_Tests.o\
-         TemporarySpeedRestriction_Tests.o
+         TemporarySpeedRestriction_Tests.o\
+         EndOfInformation_Tests.o\
 
 OBJ := $(SRC:.c=.o) $(TESTS:.c=.o)
 

@@ -139,31 +139,21 @@ int EndOfInformation_EncodeInt(PacketInfo* data, kcg_int* stream, const EndOfInf
 
 int EndOfInformation_DecodeInt(PacketInfo* data, const kcg_int* stream, EndOfInformation* p);
 */
-#ifdef __cplusplus
 
-#include <iostream>
 
-inline std::ostream& operator<<(std::ostream& stream, const EndOfInformation& p)
+static inline void EndOfInformation_Print(FILE* stream, const EndOfInformation* p)
 {
-
-
-    return stream;
+    fprintf(stream, "(%u)",
+            p->header.NID_PACKET);
 }
 
-inline bool operator==(const EndOfInformation& a, const EndOfInformation& b)
-{
-    bool status = true;
+static inline int EndOfInformation_Equal(const EndOfInformation* a, const EndOfInformation* b)
 
+{
+    int status = 1;
 
     return status;
 }
-
-inline bool operator!=(const EndOfInformation& a, const EndOfInformation& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
 
 #endif // ENDOFINFORMATION_H_INCLUDED
 
