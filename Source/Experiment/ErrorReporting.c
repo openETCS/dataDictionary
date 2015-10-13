@@ -3,7 +3,7 @@
 #include "Bit64.h"
 
 
-ErrorReporting* ErrorReporting_New()
+ErrorReporting* ErrorReporting_New(void)
 {
     void* raw = malloc(sizeof(ErrorReporting));
     ErrorReporting* ptr = (ErrorReporting*)raw;

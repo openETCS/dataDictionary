@@ -3,7 +3,7 @@
 #include "Bit64.h"
 
 
-TemporarySpeedRestriction* TemporarySpeedRestriction_New()
+TemporarySpeedRestriction* TemporarySpeedRestriction_New(void)
 {
     void* raw = malloc(sizeof(TemporarySpeedRestriction));
     TemporarySpeedRestriction* ptr = (TemporarySpeedRestriction*)raw;

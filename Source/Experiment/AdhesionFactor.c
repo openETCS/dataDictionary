@@ -2,7 +2,7 @@
 #include "AdhesionFactor.h"
 #include "Bit64.h"
 
-AdhesionFactor* AdhesionFactor_New()
+AdhesionFactor* AdhesionFactor_New(void)
 {
     void* raw = malloc(sizeof(AdhesionFactor));
     AdhesionFactor* ptr = (AdhesionFactor*)raw;

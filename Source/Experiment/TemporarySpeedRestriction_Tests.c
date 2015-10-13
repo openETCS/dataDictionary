@@ -1,9 +1,9 @@
 
-#include "TemporarySpeedRestriction.h"
+#include "TemporarySpeedRestriction_Tests.h"
 #include "PacketFactory.h"
 #include <assert.h>
 
-void TemporarySpeedRestriction_Tests()
+void TemporarySpeedRestriction_Tests(void)
 {
     TemporarySpeedRestriction a;
     TemporarySpeedRestriction_Init(&a);

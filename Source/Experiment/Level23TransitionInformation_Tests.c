@@ -1,9 +1,9 @@
 
-#include "Level23TransitionInformation.h"
+#include "Level23TransitionInformation_Tests.h"
 #include "PacketFactory.h"
 #include <assert.h>
 
-void Level23TransitionInformation_Tests()
+void Level23TransitionInformation_Tests(void)
 {
     Level23TransitionInformation a;
     Level23TransitionInformation_Init(&a);

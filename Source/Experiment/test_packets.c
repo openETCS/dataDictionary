@@ -8,7 +8,7 @@
 #include "PacketFactory.h"
 #include "EurobaliseTelegram.h"
 
-int main()
+int main(void)
 {
     AdhesionFactor_Tests();
     TemporarySpeedRestriction_Tests();

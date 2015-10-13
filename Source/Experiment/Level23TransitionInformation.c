@@ -3,7 +3,7 @@
 #include "Bit64.h"
 
 
-Level23TransitionInformation* Level23TransitionInformation_New()
+Level23TransitionInformation* Level23TransitionInformation_New(void)
 {
     void* raw = malloc(sizeof(Level23TransitionInformation));
     Level23TransitionInformation* ptr = (Level23TransitionInformation*)raw;

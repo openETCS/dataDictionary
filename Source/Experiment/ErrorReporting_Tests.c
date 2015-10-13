@@ -1,9 +1,9 @@
 
-#include "ErrorReporting.h"
+#include "ErrorReporting_Tests.h"
 #include "PacketFactory.h"
 #include <assert.h>
 
-void ErrorReporting_Tests()
+void ErrorReporting_Tests(void)
 {
     ErrorReporting a;
     ErrorReporting_Init(&a);

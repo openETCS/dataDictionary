@@ -1,9 +1,9 @@
 
-#include "AdhesionFactor.h"
+#include "AdhesionFactor_Tests.h"
 #include "PacketFactory.h"
 #include <assert.h>
 
-void AdhesionFactor_Tests()
+void AdhesionFactor_Tests(void)
 {
     AdhesionFactor a;
     AdhesionFactor_Init(&a);

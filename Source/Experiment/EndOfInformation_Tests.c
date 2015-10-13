@@ -3,7 +3,7 @@
 #include "PacketFactory.h"
 #include <assert.h>
 
-void EndOfInformation_Tests()
+void EndOfInformation_Tests(void)
 {
     EndOfInformation a;
     EndOfInformation_Init(&a);

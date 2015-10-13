@@ -3,7 +3,7 @@
 #include "Bit64.h"
 
 
-EndOfInformation* EndOfInformation_New()
+EndOfInformation* EndOfInformation_New(void)
 {
     void* raw = malloc(sizeof(EndOfInformation));
     EndOfInformation* ptr = (EndOfInformation*)raw;
