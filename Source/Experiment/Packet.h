@@ -12,13 +12,13 @@ int BothWays_DecodeBit(PacketHeader* header, Bitstream* stream);
 
 int Packet_DecodeBit(PacketHeader* header, Bitstream* stream);
 
-void TrainToTrack_Print(FILE* stream, PacketHeader* header);
+void TrainToTrack_Print(FILE* stream, const PacketHeader* header);
 
-void TrackToTrain_Print(FILE* stream, PacketHeader* header);
+void TrackToTrain_Print(FILE* stream, const PacketHeader* header);
 
-void BothWays_Print(FILE* stream, PacketHeader* header);
+void BothWays_Print(FILE* stream, const PacketHeader* header);
 
-void Packet_Print(FILE* stream, PacketHeader* header);
+void Packet_Print(FILE* stream, const PacketHeader* header);
 
 int TrainToTrack_Length(const PacketHeader* header);
 

@@ -56,14 +56,14 @@ bool operator!=(const EurobaliseTelegram& a, const EurobaliseTelegram& b)
 
 int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
 {
-    printf("EurobaliseTelegram_DecodeBit::enter\n");
+    //printf("EurobaliseTelegram_DecodeBit::enter\n");
 
     if (TelegramHeader_DecodeBit(stream, &t->header) != 1)
     {
         return 0;
     }
 
-    printf("EurobaliseTelegram_DecodeBit::t->header.Q_UPDOWN = %d\n", t->header.Q_UPDOWN);
+    //printf("EurobaliseTelegram_DecodeBit::t->header.Q_UPDOWN = %llu\n", t->header.Q_UPDOWN);
 
     //std::cout << stream->bitpos << std::endl;
 
@@ -74,14 +74,14 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
     {
         if (current_pos != stream->bitpos)
         {
-	    printf("problem here %llu is not %llu\n", current_pos, stream->bitpos);
+	    //printf("problem here %lu is not %lu\n", current_pos, stream->bitpos);
             //std::cerr << stream->bitpos << " != " << current_pos << std::endl;
             return 0;
         }
 
-        PacketHeader packet_header = {0};
+        PacketHeader packet_header = {0, 0};
         PacketHeader_DecodeBit(&packet_header, stream);
-        printf("EurobaliseTelegram_DecodeBit::packet_header = %d\n", packet_header.NID_PACKET);
+        //printf("EurobaliseTelegram_DecodeBit::packet_header = %d\n", packet_header.NID_PACKET);
 
         PacketHeader* ptr = 0;
 
@@ -92,20 +92,19 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
 
             // beware: no need to decode further fields 
             EurobaliseTelegram_Add(t, ptr);
-            printf("EurobaliseTelegram_DecodeBit size after add = %d\n", EurobaliseTelegram_Size(t));
+            //printf("EurobaliseTelegram_DecodeBit size after add = %d\n", EurobaliseTelegram_Size(t));
             break;
         }
 
         if (t->header.Q_UPDOWN == 1)
         {
 
-            PacketHeader* ptr = PacketFactory_TrackToTrain(packet_header);
+            ptr = PacketFactory_TrackToTrain(packet_header);
             if (ptr)
             {
                 TrackToTrain_DecodeBit(ptr, stream);
                 EurobaliseTelegram_Add(t, ptr);
-                printf("EurobaliseTelegram_DecodeBit size after add = %d\n", EurobaliseTelegram_Size(t));
-                current_pos += Packet_Length(ptr);
+                //printf("EurobaliseTelegram_DecodeBit size after add = %d\n", EurobaliseTelegram_Size(t));
             }
             else
             {
@@ -115,13 +114,12 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
         else
         {
             assert(t->header.Q_UPDOWN == 0);
-            PacketHeader* ptr = PacketFactory_TrainToTrack(packet_header);
+            ptr = PacketFactory_TrainToTrack(packet_header);
             if (ptr)
             {
                 TrainToTrack_DecodeBit(ptr, stream);
                 EurobaliseTelegram_Add(t, ptr);
-	        printf("EurobaliseTelegram_DecodeBit size after add = %d\n", EurobaliseTelegram_Size(t));
-                current_pos += Packet_Length(ptr);
+	        //printf("EurobaliseTelegram_DecodeBit size after add = %d\n", EurobaliseTelegram_Size(t));
             }
             else
             {
@@ -131,7 +129,7 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
 
 	if (ptr)
 	{
-            //current_pos += Packet_Length(ptr);
+            current_pos += Packet_Length(ptr);
 	}
     }
 

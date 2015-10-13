@@ -95,7 +95,7 @@ int Packet_DecodeBit(PacketHeader* header, Bitstream* stream)
     };
 }
 
-void TrainToTrack_Print(FILE* stream, PacketHeader* header)
+void TrainToTrack_Print(FILE* stream, const PacketHeader* header)
 {
     switch (header->NID_PACKET)
     {
@@ -120,7 +120,7 @@ void TrainToTrack_Print(FILE* stream, PacketHeader* header)
     };
 }
 
-void TrackToTrain_Print(FILE* stream, PacketHeader* header)
+void TrackToTrain_Print(FILE* stream, const PacketHeader* header)
 {
     switch (header->NID_PACKET)
     {
@@ -145,7 +145,7 @@ void TrackToTrain_Print(FILE* stream, PacketHeader* header)
     };
 }
 
-void BothWays_Print(FILE* stream, PacketHeader* header)
+void BothWays_Print(FILE* stream, const PacketHeader* header)
 {
     switch (header->NID_PACKET)
     {
@@ -163,7 +163,7 @@ void BothWays_Print(FILE* stream, PacketHeader* header)
     };
 }
 
-void Packet_Print(FILE* stream, PacketHeader* header)
+void Packet_Print(FILE* stream, const PacketHeader* header)
 {
     switch (header->list)
     {

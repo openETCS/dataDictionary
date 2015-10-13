@@ -10,16 +10,16 @@
 struct TelegramHeader
 {
 
-    uint32_t  Q_UPDOWN;         // # 1
-    uint8_t   M_VERSION;        // # 7
-    uint32_t  Q_MEDIA;          // # 1
-    uint8_t   N_PIG;            // # 3
-    uint8_t   N_TOTAL;          // # 3
-    uint8_t   M_DUP;            // # 2
-    uint8_t   M_MCOUNT;         // # 8
-    uint16_t  NID_C;            // # 10
-    uint16_t  NID_BG;           // # 14
-    uint32_t  Q_LINK;           // # 1
+    uint64_t  Q_UPDOWN;         // # 1
+    uint64_t   M_VERSION;        // # 7
+    uint64_t  Q_MEDIA;          // # 1
+    uint64_t   N_PIG;            // # 3
+    uint64_t   N_TOTAL;          // # 3
+    uint64_t   M_DUP;            // # 2
+    uint64_t   M_MCOUNT;         // # 8
+    uint64_t  NID_C;            // # 10
+    uint64_t  NID_BG;           // # 14
+    uint64_t  Q_LINK;           // # 1
 };
 
 
