@@ -28,6 +28,7 @@ void   EndOfInformation_Delete(EndOfInformation*);
 static inline void EndOfInformation_Init(EndOfInformation* p)
 {
     p->header.NID_PACKET = 255;
+    p->header.list = BOTHWAYS;
 }
 
 /*@

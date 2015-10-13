@@ -4,6 +4,7 @@
 
 #include "TelegramHeader.h"
 #include "PacketSequence.h"
+#include "Packet.h"
 
 struct EurobaliseTelegram
 {
@@ -37,6 +38,27 @@ static inline const PacketHeader* EurobaliseTelegram_Get(const EurobaliseTelegra
 static inline void EurobaliseTelegram_Add(EurobaliseTelegram* t, PacketHeader* p)
 {
     PacketSequence_Add(&t->packets, p);
+}
+
+static inline void EurobaliseTelegram_Print(FILE* stream, EurobaliseTelegram* p)
+{
+    TelegramHeader_Print(stream, &p->header);
+    fprintf(stream, "[");
+
+    for (uint32_t i = 0; i < p->packets.size; ++i)
+    {
+        if (i == 0)
+        {
+            Packet_Print(stream, p->packets.header[i]);
+        }
+        else
+        {
+            fprintf(stream, ",");
+            Packet_Print(stream, p->packets.header[i]);
+        }
+    }
+
+    fprintf(stream, "]\n");
 }
 
 int EurobaliseTelegram_EncodeBit(const EurobaliseTelegram* t, Bitstream* stream);

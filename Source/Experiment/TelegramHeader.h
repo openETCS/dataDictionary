@@ -4,20 +4,22 @@
 
 #include "Bit64.h"
 #include "Bitstream.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 struct TelegramHeader
 {
 
-    uint32_t  Q_UPDOWN;         // # 1
-    uint8_t   M_VERSION;        // # 7
-    uint32_t  Q_MEDIA;          // # 1
-    uint8_t   N_PIG;            // # 3
-    uint8_t   N_TOTAL;          // # 3
-    uint8_t   M_DUP;            // # 2
-    uint8_t   M_MCOUNT;         // # 8
-    uint16_t  NID_C;            // # 10
-    uint16_t  NID_BG;           // # 14
-    uint32_t  Q_LINK;           // # 1
+    uint64_t  Q_UPDOWN;         // # 1
+    uint64_t   M_VERSION;        // # 7
+    uint64_t  Q_MEDIA;          // # 1
+    uint64_t   N_PIG;            // # 3
+    uint64_t   N_TOTAL;          // # 3
+    uint64_t   M_DUP;            // # 2
+    uint64_t   M_MCOUNT;         // # 8
+    uint64_t  NID_C;            // # 10
+    uint64_t  NID_BG;           // # 14
+    uint64_t  Q_LINK;           // # 1
 };
 
 
@@ -399,6 +401,39 @@ int TelegramHeader_DecodeBit(Bitstream* stream, TelegramHeader* p)
     {
         return 0;
     }
+}
+
+static inline void TelegramHeader_Print(FILE* stream, const TelegramHeader* p)
+{
+    fprintf(stream, "(%llu,%llu,%llu,%llu,%llu,%llu,%llu,%llu,%llu,%llu)",
+            p->Q_UPDOWN,
+            p->M_VERSION,
+            p->Q_MEDIA,
+            p->N_PIG,
+            p->N_TOTAL,
+            p->M_DUP,
+            p->M_MCOUNT,
+            p->NID_C,
+            p->NID_BG,
+            p->Q_LINK);
+}
+
+static inline int TelegramHeader_Equal(const TelegramHeader* a, const TelegramHeader* b)
+{
+    int status = 1;
+
+    status = status && (a->Q_UPDOWN    == b->Q_UPDOWN);
+    status = status && (a->M_VERSION   == b->M_VERSION);
+    status = status && (a->Q_MEDIA     == b->Q_MEDIA);
+    status = status && (a->N_PIG       == b->N_PIG);
+    status = status && (a->N_TOTAL     == b->N_TOTAL);
+    status = status && (a->M_DUP       == b->M_DUP);
+    status = status && (a->M_MCOUNT    == b->M_MCOUNT);
+    status = status && (a->NID_C       == b->NID_C);
+    status = status && (a->NID_BG      == b->NID_BG);
+    status = status && (a->Q_LINK      == b->Q_LINK);
+
+    return status;
 }
 
 #ifdef __cplusplus

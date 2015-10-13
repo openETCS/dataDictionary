@@ -17,7 +17,7 @@ void Level23TransitionInformation_Tests()
     b.NID_LTRBG  = 17;
     assert(!Level23TransitionInformation_Equal(&a, &b));
 
-    PacketHeader header = {9};
+    PacketHeader header = {9, 0};
     PacketHeader* base = PacketFactory_TrainToTrack(header);
     Level23TransitionInformation* p = (Level23TransitionInformation*)(base);
     Level23TransitionInformation_Print(stdout, p);

@@ -32,6 +32,7 @@ void   AdhesionFactor_Delete(AdhesionFactor*);
 static inline void AdhesionFactor_Init(AdhesionFactor* p)
 {
     p->header.NID_PACKET = 71;
+    p->header.list = TRACKTOTRAIN;
     p->Q_DIR             = 0;
     p->L_PACKET          = 0;
     p->Q_SCALE           = 0;

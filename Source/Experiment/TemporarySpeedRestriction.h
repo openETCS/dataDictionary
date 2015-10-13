@@ -34,6 +34,7 @@ void TemporarySpeedRestriction_Delete(TemporarySpeedRestriction*);
 static inline void TemporarySpeedRestriction_Init(TemporarySpeedRestriction* p)
 {
     p->header.NID_PACKET = 65;
+    p->header.list = TRACKTOTRAIN;
     p->Q_DIR             = 0;
     p->L_PACKET          = 0;
     p->Q_SCALE           = 0;

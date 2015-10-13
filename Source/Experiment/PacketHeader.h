@@ -10,11 +10,15 @@
 struct PacketHeader
 {
     uint8_t  NID_PACKET;         // # 8
+    uint8_t  list;
 };
 
 typedef struct PacketHeader PacketHeader;
 
 #define PACKETHEADER_BITSIZE 8
+#define TRAINTOTRACK 0
+#define TRACKTOTRAIN 1
+#define BOTHWAYS 2
 
 /*@
     logic integer BitSize{L}(PacketHeader* p) = PACKETHEADER_BITSIZE;

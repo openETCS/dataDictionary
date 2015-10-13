@@ -17,7 +17,7 @@ void ErrorReporting_Tests()
     b.M_ERROR  = 4;
     assert(!ErrorReporting_Equal(&a, &b));
 
-    PacketHeader header = {4};
+    PacketHeader header = {4, 0};
     PacketHeader* base = PacketFactory_TrainToTrack(header);
     ErrorReporting* p = (ErrorReporting*)(base);
     ErrorReporting_Print(stdout, p);
