@@ -20,11 +20,11 @@ void BothWays_Print(FILE* stream, const PacketHeader* header);
 
 void Packet_Print(FILE* stream, const PacketHeader* header);
 
-int TrainToTrack_Length(const PacketHeader* header);
+uint32_t TrainToTrack_Length(const PacketHeader* header);
 
-int TrackToTrain_Length(const PacketHeader* header);
+uint32_t TrackToTrain_Length(const PacketHeader* header);
 
-int Packet_Length(const PacketHeader* header);
+uint32_t Packet_Length(const PacketHeader* header);
 
 #endif /* PACKET_H_INCLUDED */
 

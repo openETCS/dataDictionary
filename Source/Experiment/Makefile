@@ -4,8 +4,8 @@ MAKEFLAGS += --no-print-directory --silent
 
 CC=cc
 CPPFLAGS+=-I../Baseline2/Foundation/Bits
-CFLAGS += -std=c99 -Wall -pedantic
-CFLAGS += -Weverything -Wno-padded
+CFLAGS += -std=c99 -Wall -pedantic 
+CFLAGS += -Weverything -Werror -Wno-padded 
 LDFLAGS += -L../Baseline2/Foundation/Bits -lbits
 
 all: clean test_packets

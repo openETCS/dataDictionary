@@ -101,14 +101,14 @@ void TrainToTrack_Print(FILE* stream, const PacketHeader* header)
     {
         case 4 :
         {
-            ErrorReporting* ptr = (ErrorReporting*)(header);
+            const ErrorReporting* ptr = (const ErrorReporting*)(header);
             ErrorReporting_Print(stream, ptr);
             break;
         }
 
         case 9 :
         {
-            Level23TransitionInformation* ptr = (Level23TransitionInformation*)(header);
+            const Level23TransitionInformation* ptr = (const Level23TransitionInformation*)(header);
             Level23TransitionInformation_Print(stream, ptr);
             break;
         }
@@ -126,14 +126,14 @@ void TrackToTrain_Print(FILE* stream, const PacketHeader* header)
     {
         case 65 :
         {
-            TemporarySpeedRestriction* ptr = (TemporarySpeedRestriction*)(header);
+            const TemporarySpeedRestriction* ptr = (const TemporarySpeedRestriction*)(header);
             TemporarySpeedRestriction_Print(stream, ptr);
             break;
         }
 
         case 71 :
         {
-            AdhesionFactor* ptr = (AdhesionFactor*)(header);
+            const AdhesionFactor* ptr = (const AdhesionFactor*)(header);
             AdhesionFactor_Print(stream, ptr);
             break;
         }
@@ -151,7 +151,7 @@ void BothWays_Print(FILE* stream, const PacketHeader* header)
     {
         case 255 :
         {
-            EndOfInformation* ptr = (EndOfInformation*)(header);
+            const EndOfInformation* ptr = (const EndOfInformation*)(header);
             EndOfInformation_Print(stream, ptr);
             break;
         }
@@ -192,20 +192,20 @@ void Packet_Print(FILE* stream, const PacketHeader* header)
     };
 }
 
-int TrainToTrack_Length(const PacketHeader* header)
+uint32_t TrainToTrack_Length(const PacketHeader* header)
 {
     switch (header->NID_PACKET)
     {
         case 4 :
         {
-            ErrorReporting* ptr = (ErrorReporting*)(header);
-            return ptr->L_PACKET;
+            const ErrorReporting* ptr = (const ErrorReporting*)(header);
+            return (uint32_t) ptr->L_PACKET;
         }
 
         case 9 :
         {
-            Level23TransitionInformation* ptr = (Level23TransitionInformation*)(header);
-            return ptr->L_PACKET;
+            const Level23TransitionInformation* ptr = (const Level23TransitionInformation*)(header);
+            return (uint32_t) ptr->L_PACKET;
         }
 
         default :
@@ -215,20 +215,20 @@ int TrainToTrack_Length(const PacketHeader* header)
     };
 }
 
-int TrackToTrain_Length(const PacketHeader* header)
+uint32_t TrackToTrain_Length(const PacketHeader* header)
 {
     switch (header->NID_PACKET)
     {
         case 65 :
         {
-            TemporarySpeedRestriction* ptr = (TemporarySpeedRestriction*)(header);
-            return ptr->L_PACKET;
+            const TemporarySpeedRestriction* ptr = (const TemporarySpeedRestriction*)(header);
+            return (uint32_t) ptr->L_PACKET;
         }
 
         case 71 :
         {
-            AdhesionFactor* ptr = (AdhesionFactor*)(header);
-            return ptr->L_PACKET;
+            const AdhesionFactor* ptr = (const AdhesionFactor*)(header);
+            return (uint32_t) ptr->L_PACKET;
         }
 
         default :
@@ -238,7 +238,7 @@ int TrackToTrain_Length(const PacketHeader* header)
     };
 }
 
-int Packet_Length(const PacketHeader* header)
+uint32_t Packet_Length(const PacketHeader* header)
 {
     switch (header->list)
     {
@@ -254,7 +254,7 @@ int Packet_Length(const PacketHeader* header)
 
         default :
         {
-            return 8;
+            return 8; // for packet 255
         }
     };
 }
