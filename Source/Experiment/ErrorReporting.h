@@ -154,7 +154,7 @@ int ErrorReporting_DecodeInt(PacketInfo* data, const kcg_int* stream, ErrorRepor
 
 static inline void ErrorReporting_Print(FILE* stream, const ErrorReporting* p)
 {
-    fprintf(stream, "(%u,%llu,%llu)",
+    fprintf(stream, "(%llu,%llu,%llu)",
             p->header.NID_PACKET,
             p->L_PACKET,
             p->M_ERROR);

@@ -13,8 +13,8 @@
 
 struct PacketHeader
 {
-    uint8_t  NID_PACKET;         // # 8
-    uint8_t  list;               // for correct type dispatch
+    uint64_t  NID_PACKET;         // # 8
+    uint64_t  list;               // for correct type dispatch
 };
 
 typedef struct PacketHeader PacketHeader;
@@ -188,7 +188,7 @@ int PacketHeader_DecodeBit(PacketHeader* p, Bitstream* stream)
 
 static inline void PacketHeader_Print(FILE* stream, const PacketHeader* p)
 {
-    fprintf(stream, "(%d,%d)", p->NID_PACKET, p->list);
+    fprintf(stream, "(%llu,%llu)", p->NID_PACKET, p->list);
 }
 
 static inline int PacketHeader_Equal(const PacketHeader* a, const PacketHeader* b)

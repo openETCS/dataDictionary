@@ -154,7 +154,7 @@ int Level23TransitionInformation_DecodeInt(PacketInfo* data, const kcg_int* stre
 
 static inline void Level23TransitionInformation_Print(FILE* stream, const Level23TransitionInformation* p)
 {
-    fprintf(stream, "(%u,%llu,%llu)",
+    fprintf(stream, "(%llu,%llu,%llu)",
             p->header.NID_PACKET,
             p->L_PACKET,
             p->NID_LTRBG);

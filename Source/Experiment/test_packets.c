@@ -55,7 +55,7 @@ int main()
         AdhesionFactor_EncodeBit(&stream, (const AdhesionFactor*)EurobaliseTelegram_Get(&t, 0));
 
         PacketHeader_EncodeBit(&a1.header, &stream);
-        AdhesionFactor_EncodeBit(&stream, (AdhesionFactor*)EurobaliseTelegram_Get(&t, 1));
+        AdhesionFactor_EncodeBit(&stream, (const AdhesionFactor*)EurobaliseTelegram_Get(&t, 1));
 
         PacketHeader_EncodeBit(&e.header, &stream);
         EndOfInformation_EncodeBit(&stream, (const EndOfInformation*)EurobaliseTelegram_Get(&t, 1));
