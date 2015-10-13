@@ -3,6 +3,7 @@
 #include "AdhesionFactor_Tests.h"
 #include "ErrorReporting_Tests.h"
 #include "TemporarySpeedRestriction_Tests.h"
+#include "Level23TransitionInformation_Tests.h"
 #include "EndOfInformation.h"
 #include "PacketFactory.h"
 #include "EurobaliseTelegram.h"
@@ -12,6 +13,7 @@ int main()
     AdhesionFactor_Tests();
     TemporarySpeedRestriction_Tests();
     ErrorReporting_Tests();
+    Level23TransitionInformation_Tests();
 
     {
         // set up test data

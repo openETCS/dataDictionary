@@ -20,6 +20,19 @@ typedef struct Level23TransitionInformation Level23TransitionInformation;
 
 #define LEVEL23TRANSITIONINFORMATION_BITSIZE 37
 
+
+Level23TransitionInformation*  Level23TransitionInformation_New();
+
+void   Level23TransitionInformation_Delete(Level23TransitionInformation*);
+
+static inline void Level23TransitionInformation_Init(Level23TransitionInformation* p)
+{
+    p->header.NID_PACKET = 9;
+    p->L_PACKET          = 0;
+    p->NID_LTRBG         = 0;
+}
+
+
 /*@
     logic integer BitSize{L}(Level23TransitionInformation* p) = LEVEL23TRANSITIONINFORMATION_BITSIZE;
 
@@ -137,35 +150,26 @@ int Level23TransitionInformation_EncodeInt(PacketInfo* data, kcg_int* stream, co
 
 int Level23TransitionInformation_DecodeInt(PacketInfo* data, const kcg_int* stream, Level23TransitionInformation* p);
 */
-#ifdef __cplusplus
 
-#include <iostream>
-
-inline std::ostream& operator<<(std::ostream& stream, const Level23TransitionInformation& p)
+static inline void Level23TransitionInformation_Print(FILE* stream, const Level23TransitionInformation* p)
 {
-    stream
-            << +p.L_PACKET << ','
-            << +p.NID_LTRBG;
-
-    return stream;
+    fprintf(stream, "(%u,%llu,%llu)",
+            p->header.NID_PACKET,
+            p->L_PACKET,
+            p->NID_LTRBG);
 }
 
-inline bool operator==(const Level23TransitionInformation& a, const Level23TransitionInformation& b)
+static inline int
+Level23TransitionInformation_Equal(const Level23TransitionInformation* a, const Level23TransitionInformation* b)
 {
-    bool status = true;
+    int status = 1;
 
-    status = status && (a.L_PACKET == b.L_PACKET);
-    status = status && (a.NID_LTRBG == b.NID_LTRBG);
+    status = status && (a->header.NID_PACKET == b->header.NID_PACKET);
+    status = status && (a->L_PACKET == b->L_PACKET);
+    status = status && (a->NID_LTRBG == b->NID_LTRBG);
 
     return status;
 }
-
-inline bool operator!=(const Level23TransitionInformation& a, const Level23TransitionInformation& b)
-{
-    return !(a == b);
-}
-
-#endif // __cplusplus
 
 #endif // LEVEL23TRANSITIONINFORMATION_H_INCLUDED
 

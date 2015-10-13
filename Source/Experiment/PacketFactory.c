@@ -7,14 +7,6 @@
 #include "Level23TransitionInformation.h"
 #include "TemporarySpeedRestriction.h"
 
-struct TrainToTrack_PacketPool
-{
-    Level23TransitionInformation p9;
-};
-
-typedef struct TrainToTrack_PacketPool TrainToTrack_PacketPool;
-
-static TrainToTrack_PacketPool traintotrack_pool;
 
 PacketHeader* PacketFactory_TrackToTrain(PacketHeader header)
 {
@@ -64,8 +56,9 @@ PacketHeader* PacketFactory_TrainToTrack(PacketHeader header)
 
         case 9 :
         {
-            traintotrack_pool.p9.header = header;
-            return &traintotrack_pool.p9.header;
+            Level23TransitionInformation* ptr = Level23TransitionInformation_New();
+            PacketHeader*   p = &(ptr->header);
+            return p;
         }
 
         case 255 :

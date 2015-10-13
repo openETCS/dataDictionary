@@ -2,6 +2,22 @@
 #include "Level23TransitionInformation.h"
 #include "Bit64.h"
 
+
+Level23TransitionInformation* Level23TransitionInformation_New()
+{
+    void* raw = malloc(sizeof(Level23TransitionInformation));
+    Level23TransitionInformation* ptr = (Level23TransitionInformation*)raw;
+    Level23TransitionInformation_Init(ptr);
+    return ptr;
+}
+
+
+void Level23TransitionInformation_Delete(Level23TransitionInformation* ptr)
+{
+    free(ptr);
+}
+
+
 int Level23TransitionInformation_UpperBitsNotSet(const Level23TransitionInformation* p)
 {
     int status = 1;
