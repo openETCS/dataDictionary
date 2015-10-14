@@ -99,7 +99,7 @@ int EndOfInformation_UpperBitsNotSet(const EndOfInformation* p);
     complete behaviors;
     disjoint behaviors;
 */
-int EndOfInformation_EncodeBit(Bitstream* stream, const EndOfInformation* p);
+int EndOfInformation_EncodeBit(const EndOfInformation* p, Bitstream* stream);
 
 /*@
     requires valid_stream:      Readable(stream);

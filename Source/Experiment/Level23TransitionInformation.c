@@ -35,7 +35,7 @@ int Level23TransitionInformation_UpperBitsNotSet(const Level23TransitionInformat
     }
 }
 
-int Level23TransitionInformation_EncodeBit(Bitstream* stream, const Level23TransitionInformation* p)
+int Level23TransitionInformation_EncodeBit(const Level23TransitionInformation* p, Bitstream* stream)
 {
     if (Bitstream_Normal(stream, LEVEL23TRANSITIONINFORMATION_BITSIZE))
     {

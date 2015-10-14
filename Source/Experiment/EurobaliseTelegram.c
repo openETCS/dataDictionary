@@ -3,6 +3,7 @@
 #include "PacketFactory.h"
 #include "Packet.h"
 #include "Packet_DecodeBit.h"
+#include "Packet_EncodeBit.h"
 
 void EurobaliseTelegram_Print(FILE* stream, const EurobaliseTelegram* t)
 {
@@ -106,41 +107,39 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
     return 1;
 }
 
-/*
-int EurobaliseTelegram_EncodeBit(Bitstream& stream) const
+int EurobaliseTelegram_EncodeBit(const EurobaliseTelegram* t, Bitstream* stream)
 {
-    if (::encode(stream, header()) != 1)
+    if (TelegramHeader_EncodeBit(&t->header, stream) != 1)
     {
-        return false;
+        return 0;
     }
 
-    uint32_t old_pos = stream.bitpos;
+    uint32_t old_pos = stream->bitpos;
 
     // check that last packet denotes end of message
-    assert(m_packets.back()->header.NID_PACKET == 255);
+    assert(PacketSequence_Back(&t->packets)->NID_PACKET == 255);
 
-    for (auto p = m_packets.begin(); p != m_packets.end(); ++p)
+    for (uint32_t i = 0; i < EurobaliseTelegram_Size(t); ++i)
     {
-        if (stream.bitpos > 1023 + old_pos)
+        if (stream->bitpos > 1023 + old_pos)
         {
-            return false;
+            return 0;
         }
 
-        if (::encode(stream, (*p)->header) != 1)
+        if (PacketHeader_EncodeBit(EurobaliseTelegram_Get(t, i), stream) != 1)
         {
-            return false;
+            return 0;
         }
 
-        if ((*p)->encode(stream) != 1)
+        if (Packet_EncodeBit(EurobaliseTelegram_Get(t, i), stream) != 1)
         {
-            return false;
+            return 0;
         }
 
     }
 
-    return true;
+    return 1;
 }
-*/
 
 /*
 bool EurobaliseTelegram::encode(FlatPackets& packetStruct) const

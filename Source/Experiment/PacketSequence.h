@@ -29,6 +29,12 @@ static inline const PacketHeader* PacketSequence_Get(const PacketSequence* s, ui
     return s->header[i];
 }
 
+static inline const PacketHeader* PacketSequence_Back(const PacketSequence* s)
+{
+    assert(s->size > 0);
+    return PacketSequence_Get(s, s->size - 1);
+}
+
 void PacketSequence_Print(FILE* stream, const PacketSequence* p);
 
 // similiar to std::vector::clear

@@ -174,7 +174,7 @@ int TelegramHeader_UpperBitsNotSet(const TelegramHeader* p)
     disjoint behaviors;
 */
 static inline
-int TelegramHeader_EncodeBit(Bitstream* stream, const TelegramHeader* p)
+int TelegramHeader_EncodeBit(const TelegramHeader* p, Bitstream* stream)
 {
     if (Bitstream_Normal(stream, TELEGRAM_HEADER_BITSIZE))
     {

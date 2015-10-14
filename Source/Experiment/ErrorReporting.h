@@ -109,7 +109,7 @@ int ErrorReporting_UpperBitsNotSet(const ErrorReporting* p);
     complete behaviors;
     disjoint behaviors;
 */
-int ErrorReporting_EncodeBit(Bitstream* stream, const ErrorReporting* p);
+int ErrorReporting_EncodeBit(const ErrorReporting* p, Bitstream* stream);
 
 /*@
     requires valid_stream:      Readable(stream);

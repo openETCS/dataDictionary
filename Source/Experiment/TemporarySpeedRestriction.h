@@ -146,7 +146,7 @@ int TemporarySpeedRestriction_UpperBitsNotSet(const TemporarySpeedRestriction* p
     complete behaviors;
     disjoint behaviors;
 */
-int TemporarySpeedRestriction_EncodeBit(Bitstream* stream, const TemporarySpeedRestriction* p);
+int TemporarySpeedRestriction_EncodeBit(const TemporarySpeedRestriction* p, Bitstream* stream);
 
 /*@
     requires valid_stream:      Readable(stream);

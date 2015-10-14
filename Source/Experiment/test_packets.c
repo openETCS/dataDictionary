@@ -46,30 +46,45 @@ int main(void)
 
         // encode
         uint8_t raw[1024];
-        Bitstream stream;
-        Bitstream_Init(&stream, raw, 1024, 0);
+        Bitstream stream1;
+        Bitstream_Init(&stream1, raw, 1024, 0);
 
-        TelegramHeader_EncodeBit(&stream, &t.header);
+        TelegramHeader_EncodeBit(&t.header, &stream1);
 
-        PacketHeader_EncodeBit(&a.header, &stream);
-        AdhesionFactor_EncodeBit(&stream, (const AdhesionFactor*)EurobaliseTelegram_Get(&t, 0));
+        PacketHeader_EncodeBit(&a.header, &stream1);
+        AdhesionFactor_EncodeBit((const AdhesionFactor*)EurobaliseTelegram_Get(&t, 0), &stream1);
 
-        PacketHeader_EncodeBit(&a1.header, &stream);
-        AdhesionFactor_EncodeBit(&stream, (const AdhesionFactor*)EurobaliseTelegram_Get(&t, 1));
+        PacketHeader_EncodeBit(&a1.header, &stream1);
+        AdhesionFactor_EncodeBit((const AdhesionFactor*)EurobaliseTelegram_Get(&t, 1), &stream1);
 
-        PacketHeader_EncodeBit(&e.header, &stream);
-        EndOfInformation_EncodeBit(&stream, (const EndOfInformation*)EurobaliseTelegram_Get(&t, 1));
+        PacketHeader_EncodeBit(&e.header, &stream1);
+        EndOfInformation_EncodeBit((const EndOfInformation*)EurobaliseTelegram_Get(&t, 1), &stream1);
 
-        stream.bitpos = 0; // reset
+        stream1.bitpos = 0; // reset
 
-        EurobaliseTelegram u;
-        EurobaliseTelegram_Init(&u);
-        EurobaliseTelegram_DecodeBit(&u, &stream);
+        EurobaliseTelegram u1;
+        EurobaliseTelegram_Init(&u1);
+        EurobaliseTelegram_DecodeBit(&u1, &stream1);
 
-        EurobaliseTelegram_Print(stdout, &u);
+        EurobaliseTelegram_Print(stdout, &u1);
 
-        assert(EurobaliseTelegram_Equal(&t, &u));
-        EurobaliseTelegram_Clear(&u);
+        assert(EurobaliseTelegram_Equal(&t, &u1));
+        EurobaliseTelegram_Clear(&u1);
+
+        Bitstream stream2;
+        Bitstream_Init(&stream2, raw, 1024, 0);
+
+        EurobaliseTelegram_EncodeBit(&t, &stream2);
+        stream2.bitpos = 0; // reset
+
+        EurobaliseTelegram u2;
+        EurobaliseTelegram_Init(&u2);
+        EurobaliseTelegram_DecodeBit(&u2, &stream2);
+
+        EurobaliseTelegram_Print(stdout, &u2);
+
+        assert(EurobaliseTelegram_Equal(&t, &u2));
+        //assert(EurobaliseTelegram_Equal(&u1, &u2));
     }
 
 

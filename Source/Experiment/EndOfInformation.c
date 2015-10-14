@@ -34,7 +34,7 @@ int EndOfInformation_UpperBitsNotSet(const EndOfInformation* p)
     }
 }
 
-int EndOfInformation_EncodeBit(Bitstream* stream, const EndOfInformation* p)
+int EndOfInformation_EncodeBit(const EndOfInformation* p, Bitstream* stream)
 {
     if (Bitstream_Normal(stream, ENDOFINFORMATION_BITSIZE))
     {

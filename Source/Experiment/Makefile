@@ -15,13 +15,14 @@ SRC := Packet.o\
        PacketFactory.o\
        Packet_DecodeBit.c\
        Packet_Delete.c\
+       Packet_EncodeBit.c\
        Packet_Equal.c\
        PacketSequence.c\
        EurobaliseTelegram.c
 
 PACKETS := AdhesionFactor.o\
-           ErrorReporting.o\
            EndOfInformation.o\
+           ErrorReporting.o\
            Level23TransitionInformation.o\
            TemporarySpeedRestriction.o
 

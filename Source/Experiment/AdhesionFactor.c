@@ -38,7 +38,7 @@ int AdhesionFactor_UpperBitsNotSet(const AdhesionFactor* p)
     }
 }
 
-int AdhesionFactor_EncodeBit(Bitstream* stream, const AdhesionFactor* p)
+int AdhesionFactor_EncodeBit(const AdhesionFactor* p, Bitstream* stream)
 {
     if (Bitstream_Normal(stream, ADHESIONFACTOR_BITSIZE))
     {

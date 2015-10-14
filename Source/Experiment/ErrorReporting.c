@@ -36,7 +36,7 @@ int ErrorReporting_UpperBitsNotSet(const ErrorReporting* p)
 }
 
 
-int ErrorReporting_EncodeBit(Bitstream* stream, const ErrorReporting* p)
+int ErrorReporting_EncodeBit(const ErrorReporting* p, Bitstream* stream)
 {
     if (Bitstream_Normal(stream, ERRORREPORTING_BITSIZE))
     {

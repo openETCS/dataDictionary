@@ -133,7 +133,7 @@ int AdhesionFactor_UpperBitsNotSet(const AdhesionFactor* p);
     complete behaviors;
     disjoint behaviors;
 */
-int AdhesionFactor_EncodeBit(Bitstream* stream, const AdhesionFactor* p);
+int AdhesionFactor_EncodeBit(const AdhesionFactor* p, Bitstream* stream);
 
 /*@
     requires valid_stream:      Readable(stream);

@@ -41,7 +41,7 @@ int TemporarySpeedRestriction_UpperBitsNotSet(const TemporarySpeedRestriction* p
     }
 }
 
-int TemporarySpeedRestriction_EncodeBit(Bitstream* stream, const TemporarySpeedRestriction* p)
+int TemporarySpeedRestriction_EncodeBit(const TemporarySpeedRestriction* p, Bitstream* stream)
 {
     if (Bitstream_Normal(stream, TEMPORARYSPEEDRESTRICTION_BITSIZE))
     {
