@@ -7,7 +7,7 @@ void ErrorReporting_Tests(void)
 {
     ErrorReporting a;
     ErrorReporting_Init(&a);
-    ErrorReporting_Print(stdout, &a);
+    ErrorReporting_Print(&a, stdout);
     printf("\n");
 
     ErrorReporting b;
@@ -20,7 +20,7 @@ void ErrorReporting_Tests(void)
     PacketHeader header = {4, 0};
     PacketHeader* base = PacketFactory_TrainToTrack(header);
     ErrorReporting* p = (ErrorReporting*)(base);
-    ErrorReporting_Print(stdout, p);
+    ErrorReporting_Print(p, stdout);
     printf("\n");
     assert(ErrorReporting_Equal(&a, p));
     ErrorReporting_Delete(p);

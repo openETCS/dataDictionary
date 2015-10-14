@@ -5,10 +5,10 @@
 #include "Packet_DecodeBit.h"
 #include "Packet_EncodeBit.h"
 
-void EurobaliseTelegram_Print(FILE* stream, const EurobaliseTelegram* t)
+void EurobaliseTelegram_Print(const EurobaliseTelegram* t, FILE* stream)
 {
-    TelegramHeader_Print(stream, &t->header);
-    PacketSequence_Print(stream, &t->packets);
+    TelegramHeader_Print(&t->header, stream);
+    PacketSequence_Print(&t->packets, stream);
 }
 
 void EurobaliseTelegram_Clear(EurobaliseTelegram* t)

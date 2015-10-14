@@ -3,6 +3,7 @@
 #include "Packet.h"
 #include "Packet_Delete.h"
 #include "Packet_Equal.h"
+#include "Packet_Print.h"
 
 void PacketSequence_Init(PacketSequence* s)
 {
@@ -14,7 +15,7 @@ void PacketSequence_Init(PacketSequence* s)
     s->size = 0;
 }
 
-void PacketSequence_Print(FILE* stream, const PacketSequence* p)
+void PacketSequence_Print(const PacketSequence* p, FILE* stream)
 {
     fprintf(stream, "[");
 
@@ -22,12 +23,12 @@ void PacketSequence_Print(FILE* stream, const PacketSequence* p)
     {
         if (i == 0)
         {
-            Packet_Print(stream, p->header[i]);
+            Packet_Print(p->header[i], stream);
         }
         else
         {
             fprintf(stream, ",");
-            Packet_Print(stream, p->header[i]);
+            Packet_Print(p->header[i], stream);
         }
     }
 

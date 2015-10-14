@@ -7,7 +7,7 @@ void Level23TransitionInformation_Tests(void)
 {
     Level23TransitionInformation a;
     Level23TransitionInformation_Init(&a);
-    Level23TransitionInformation_Print(stdout, &a);
+    Level23TransitionInformation_Print(&a, stdout);
     printf("\n");
 
     Level23TransitionInformation b;
@@ -20,7 +20,7 @@ void Level23TransitionInformation_Tests(void)
     PacketHeader header = {9, 0};
     PacketHeader* base = PacketFactory_TrainToTrack(header);
     Level23TransitionInformation* p = (Level23TransitionInformation*)(base);
-    Level23TransitionInformation_Print(stdout, p);
+    Level23TransitionInformation_Print(p, stdout);
     printf("\n");
     assert(Level23TransitionInformation_Equal(&a, p));
     Level23TransitionInformation_Delete(p);

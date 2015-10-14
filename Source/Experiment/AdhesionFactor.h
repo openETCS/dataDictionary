@@ -170,10 +170,10 @@ int AdhesionFactor_EncodeBit(const AdhesionFactor* p, Bitstream* stream);
 */
 int AdhesionFactor_DecodeBit(AdhesionFactor* p, Bitstream* stream);
 
-static inline void AdhesionFactor_Print(FILE* stream, const AdhesionFactor* p)
+static inline void AdhesionFactor_Print(const AdhesionFactor* p, FILE* stream)
 {
-    fprintf(stream, "(%llu,%llu,%llu,%llu,%llu,%llu,%llu)",
-            p->header.NID_PACKET,
+    PacketHeader_Print(&p->header, stream);
+    fprintf(stream, "(%llu,%llu,%llu,%llu,%llu,%llu)",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_SCALE,

@@ -152,10 +152,10 @@ int Level23TransitionInformation_EncodeInt(PacketInfo* data, kcg_int* stream, co
 int Level23TransitionInformation_DecodeInt(PacketInfo* data, const kcg_int* stream, Level23TransitionInformation* p);
 */
 
-static inline void Level23TransitionInformation_Print(FILE* stream, const Level23TransitionInformation* p)
+static inline void Level23TransitionInformation_Print(const Level23TransitionInformation* p, FILE* stream)
 {
-    fprintf(stream, "(%llu,%llu,%llu)",
-            p->header.NID_PACKET,
+    PacketHeader_Print(&p->header, stream);
+    fprintf(stream, "(%llu,%llu)",
             p->L_PACKET,
             p->NID_LTRBG);
 }

@@ -6,6 +6,7 @@
 #include "Bitstream.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 #define TRAINTOTRACK 0
 #define TRACKTOTRAIN 1
@@ -186,9 +187,21 @@ int PacketHeader_DecodeBit(PacketHeader* p, Bitstream* stream)
 }
 
 
-static inline void PacketHeader_Print(FILE* stream, const PacketHeader* p)
+static inline void PacketHeader_Print(const PacketHeader* p, FILE* stream)
 {
-    fprintf(stream, "(%llu,%llu)", p->NID_PACKET, p->list);
+    if (p->list == TRAINTOTRACK)
+    {
+        fprintf(stream, "(%llu,%s)", p->NID_PACKET, "TRAINTOTRACK");
+    }
+    else if (p->list == TRACKTOTRAIN)
+    {
+        fprintf(stream, "(%llu,%s)", p->NID_PACKET, "TRACKTOTRAIN");
+    }
+    else
+    {
+        assert(p->list == BOTHWAYS);
+        fprintf(stream, "(%llu,%s)", p->NID_PACKET, "BOTHWAYS");
+    }
 }
 
 static inline int PacketHeader_Equal(const PacketHeader* a, const PacketHeader* b)

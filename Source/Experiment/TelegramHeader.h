@@ -419,7 +419,7 @@ int TelegramHeader_DecodeBit(Bitstream* stream, TelegramHeader* p)
     }
 }
 
-static inline void TelegramHeader_Print(FILE* stream, const TelegramHeader* p)
+static inline void TelegramHeader_Print(const TelegramHeader* p, FILE* stream)
 {
     fprintf(stream, "(%llu,%llu,%llu,%llu,%llu,%llu,%llu,%llu,%llu,%llu)",
             p->Q_UPDOWN,

@@ -7,7 +7,7 @@ void AdhesionFactor_Tests(void)
 {
     AdhesionFactor a;
     AdhesionFactor_Init(&a);
-    AdhesionFactor_Print(stdout, &a);
+    AdhesionFactor_Print(&a, stdout);
     printf("\n");
 
     AdhesionFactor b;
@@ -24,7 +24,7 @@ void AdhesionFactor_Tests(void)
     PacketHeader header = {71, 1};
     PacketHeader* base = PacketFactory_TrackToTrain(header);
     AdhesionFactor* p = (AdhesionFactor*)(base);
-    AdhesionFactor_Print(stdout, p);
+    AdhesionFactor_Print(p, stdout);
     printf("\n");
     assert(AdhesionFactor_Equal(&a, p));
     AdhesionFactor_Delete(p);

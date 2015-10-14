@@ -189,10 +189,10 @@ int TemporarySpeedRestriction_DecodeInt(PacketInfo* data, const kcg_int* stream,
 */
 
 static inline void
-TemporarySpeedRestriction_Print(FILE* stream, const TemporarySpeedRestriction* p)
+TemporarySpeedRestriction_Print(const TemporarySpeedRestriction* p, FILE* stream)
 {
-    fprintf(stream, "(%llu,%llu,%llu,%llu,%llu,%llu,%llu,%llu,%llu)",
-            p->header.NID_PACKET,
+    PacketHeader_Print(&p->header, stream);
+    fprintf(stream, "(%llu,%llu,%llu,%llu,%llu,%llu,%llu,%llu)",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_SCALE,

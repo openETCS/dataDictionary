@@ -143,9 +143,9 @@ int EndOfInformation_DecodeInt(PacketInfo* data, const kcg_int* stream, EndOfInf
 */
 
 
-static inline void EndOfInformation_Print(FILE* stream, const EndOfInformation* p)
+static inline void EndOfInformation_Print(const EndOfInformation* p, FILE* stream)
 {
-    fprintf(stream, "(%llu)", p->header.NID_PACKET);
+    PacketHeader_Print(&p->header, stream);
 }
 
 static inline int EndOfInformation_Equal(const EndOfInformation* a, const EndOfInformation* b)

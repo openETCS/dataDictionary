@@ -13,12 +13,14 @@ all: clean test_packets
 
 SRC := Packet.o\
        PacketFactory.o\
-       Packet_DecodeBit.c\
-       Packet_Delete.c\
-       Packet_EncodeBit.c\
-       Packet_Equal.c\
        PacketSequence.c\
        EurobaliseTelegram.c
+
+FUNCTIONS := Packet_DecodeBit.c\
+             Packet_Delete.c\
+             Packet_EncodeBit.c\
+             Packet_Equal.c\
+             Packet_Print.c
 
 PACKETS := AdhesionFactor.o\
            EndOfInformation.o\
@@ -32,7 +34,7 @@ TESTS := AdhesionFactor_Tests.o\
          TemporarySpeedRestriction_Tests.o\
          EndOfInformation_Tests.o\
 
-OBJ := $(SRC:.c=.o) $(PACKETS:.c=.o) $(TESTS:.c=.o)
+OBJ := $(SRC:.c=.o) $(FUNCTIONS:.c=.o) $(PACKETS:.c=.o) $(TESTS:.c=.o)
 
 test_packets: test_packets.o $(OBJ)
 	$(CC) -o $@ $+ $(LDFLAGS)

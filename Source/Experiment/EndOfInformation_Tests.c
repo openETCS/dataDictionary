@@ -7,7 +7,7 @@ void EndOfInformation_Tests(void)
 {
     EndOfInformation a;
     EndOfInformation_Init(&a);
-    EndOfInformation_Print(stdout, &a);
+    EndOfInformation_Print(&a, stdout);
     printf("\n");
 
     EndOfInformation b;
@@ -18,7 +18,7 @@ void EndOfInformation_Tests(void)
     PacketHeader* base = PacketFactory_BothWays(header);
     assert(base);
     EndOfInformation* p = (EndOfInformation*)(base);
-    EndOfInformation_Print(stdout, p);
+    EndOfInformation_Print(p, stdout);
     printf("\n");
     assert(EndOfInformation_Equal(&a, p));
     EndOfInformation_Delete(p);

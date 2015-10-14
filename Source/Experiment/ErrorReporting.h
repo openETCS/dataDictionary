@@ -153,10 +153,10 @@ int ErrorReporting_DecodeInt(PacketInfo* data, const kcg_int* stream, ErrorRepor
 */
 
 
-static inline void ErrorReporting_Print(FILE* stream, const ErrorReporting* p)
+static inline void ErrorReporting_Print(const ErrorReporting* p, FILE* stream)
 {
-    fprintf(stream, "(%llu,%llu,%llu)",
-            p->header.NID_PACKET,
+    PacketHeader_Print(&p->header, stream);
+    fprintf(stream, "(%llu,%llu)",
             p->L_PACKET,
             p->M_ERROR);
 }

@@ -7,7 +7,7 @@ void TemporarySpeedRestriction_Tests(void)
 {
     TemporarySpeedRestriction a;
     TemporarySpeedRestriction_Init(&a);
-    TemporarySpeedRestriction_Print(stdout, &a);
+    TemporarySpeedRestriction_Print(&a, stdout);
     printf("\n");
 
     TemporarySpeedRestriction b;
@@ -20,7 +20,7 @@ void TemporarySpeedRestriction_Tests(void)
     PacketHeader header = {65, 1};
     PacketHeader* base = PacketFactory_TrackToTrain(header);
     TemporarySpeedRestriction* p = (TemporarySpeedRestriction*)(base);
-    TemporarySpeedRestriction_Print(stdout, p);
+    TemporarySpeedRestriction_Print(p, stdout);
     printf("\n");
     assert(TemporarySpeedRestriction_Equal(&a, p));
     TemporarySpeedRestriction_Delete(p);
