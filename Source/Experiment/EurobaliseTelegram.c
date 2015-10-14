@@ -19,7 +19,7 @@ void EurobaliseTelegram_Clear(EurobaliseTelegram* t)
 
 int EurobaliseTelegram_Equal(const EurobaliseTelegram* a, const EurobaliseTelegram* b)
 {
-    return TelegramHeader_Equal(&a->header, &b->header) &&
+    return TelegramHeader_Equal(&a->header,  &b->header) &&
            PacketSequence_Equal(&a->packets, &b->packets);
 }
 

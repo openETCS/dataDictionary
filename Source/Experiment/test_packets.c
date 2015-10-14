@@ -69,7 +69,6 @@ int main(void)
         EurobaliseTelegram_Print(&u1, stdout);
 
         assert(EurobaliseTelegram_Equal(&t, &u1));
-        EurobaliseTelegram_Clear(&u1);
 
         Bitstream stream2;
         Bitstream_Init(&stream2, raw, 1024, 0);
@@ -85,8 +84,11 @@ int main(void)
 
         assert(EurobaliseTelegram_Equal(&t, &u2));
         assert(EurobaliseTelegram_Equal(&u2, &t));
-        //assert(EurobaliseTelegram_Equal(&u1, &u2));
-        //assert(EurobaliseTelegram_Equal(&u2, &u1));
+        assert(EurobaliseTelegram_Equal(&u1, &u2));
+        assert(EurobaliseTelegram_Equal(&u2, &u1));
+
+        EurobaliseTelegram_Clear(&u1);
+        EurobaliseTelegram_Clear(&u2);
     }
 
 
