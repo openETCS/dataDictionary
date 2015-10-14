@@ -13,15 +13,7 @@ struct PacketSequence
 
 typedef struct PacketSequence PacketSequence;
 
-static inline void PacketSequence_Init(PacketSequence* s)
-{
-    for (uint32_t i = 0; i < 50; ++i)
-    {
-        s->header[i] = 0;
-    }
-
-    s->size = 0;
-}
+void PacketSequence_Init(PacketSequence* s);
 
 static inline void PacketSequence_Add(PacketSequence* s, PacketHeader* h)
 {
