@@ -107,7 +107,7 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
 }
 
 /*
-bool EurobaliseTelegram::encode(Bitstream& stream) const
+int EurobaliseTelegram_EncodeBit(Bitstream& stream) const
 {
     if (::encode(stream, header()) != 1)
     {
@@ -140,7 +140,9 @@ bool EurobaliseTelegram::encode(Bitstream& stream) const
 
     return true;
 }
+*/
 
+/*
 bool EurobaliseTelegram::encode(FlatPackets& packetStruct) const
 {
     kcg_int startAddress = 0;
@@ -205,3 +207,4 @@ bool EurobaliseTelegram::decode(FlatPackets& packetStruct)
 }
 
 */
+
