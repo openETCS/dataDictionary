@@ -184,9 +184,8 @@ static inline void AdhesionFactor_Print(FILE* stream, const AdhesionFactor* p)
 
 static inline int AdhesionFactor_Equal(const AdhesionFactor* a, const AdhesionFactor* b)
 {
-    int status = 1;
+    int status = PacketHeader_Equal(&a->header, &b->header);
 
-    status = status && (a->header.NID_PACKET == b->header.NID_PACKET);
     status = status && (a->Q_DIR       == b->Q_DIR);
     status = status && (a->L_PACKET    == b->L_PACKET);
     status = status && (a->Q_SCALE     == b->Q_SCALE);

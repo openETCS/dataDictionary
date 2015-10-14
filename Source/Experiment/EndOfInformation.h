@@ -151,8 +151,7 @@ static inline void EndOfInformation_Print(FILE* stream, const EndOfInformation* 
 static inline int EndOfInformation_Equal(const EndOfInformation* a, const EndOfInformation* b)
 
 {
-    int status = 1;
-    status = status && (a->header.NID_PACKET == b->header.NID_PACKET);
+    int status = PacketHeader_Equal(&a->header, &b->header);
 
     return status;
 }

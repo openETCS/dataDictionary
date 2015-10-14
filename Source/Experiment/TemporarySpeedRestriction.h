@@ -206,8 +206,8 @@ TemporarySpeedRestriction_Print(FILE* stream, const TemporarySpeedRestriction* p
 static inline int
 TemporarySpeedRestriction_Equal(const TemporarySpeedRestriction* a, const TemporarySpeedRestriction* b)
 {
-    int status = 1;
-    status = status && (a->header.NID_PACKET == b->header.NID_PACKET);
+    int status = PacketHeader_Equal(&a->header, &b->header);
+
     status = status && (a->Q_DIR    == b->Q_DIR);
     status = status && (a->L_PACKET == b->L_PACKET);
     status = status && (a->Q_SCALE  == b->Q_SCALE);

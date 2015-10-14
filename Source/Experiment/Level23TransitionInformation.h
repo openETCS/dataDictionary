@@ -163,9 +163,8 @@ static inline void Level23TransitionInformation_Print(FILE* stream, const Level2
 static inline int
 Level23TransitionInformation_Equal(const Level23TransitionInformation* a, const Level23TransitionInformation* b)
 {
-    int status = 1;
+    int status = PacketHeader_Equal(&a->header, &b->header);
 
-    status = status && (a->header.NID_PACKET == b->header.NID_PACKET);
     status = status && (a->L_PACKET == b->L_PACKET);
     status = status && (a->NID_LTRBG == b->NID_LTRBG);
 

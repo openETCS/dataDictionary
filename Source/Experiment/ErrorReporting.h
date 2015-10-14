@@ -164,9 +164,8 @@ static inline void ErrorReporting_Print(FILE* stream, const ErrorReporting* p)
 
 static inline int ErrorReporting_Equal(const ErrorReporting* a, const ErrorReporting* b)
 {
-    int status = 1;
+    int status = PacketHeader_Equal(&a->header, &b->header);
 
-    status = status && (a->header.NID_PACKET == b->header.NID_PACKET);
     status = status && (a->L_PACKET == b->L_PACKET);
     status = status && (a->M_ERROR  == b->M_ERROR);
 

@@ -84,7 +84,9 @@ int main(void)
         EurobaliseTelegram_Print(stdout, &u2);
 
         assert(EurobaliseTelegram_Equal(&t, &u2));
+        assert(EurobaliseTelegram_Equal(&u2, &t));
         //assert(EurobaliseTelegram_Equal(&u1, &u2));
+        //assert(EurobaliseTelegram_Equal(&u2, &u1));
     }
 
 
