@@ -63,7 +63,7 @@ int Level23TransitionInformation_EncodeBit(Bitstream* stream, const Level23Trans
     }
 }
 
-int Level23TransitionInformation_DecodeBit(Bitstream* stream, Level23TransitionInformation* p)
+int Level23TransitionInformation_DecodeBit(Level23TransitionInformation* p, Bitstream* stream)
 {
     if (Bitstream_Normal(stream, LEVEL23TRANSITIONINFORMATION_BITSIZE))
     {

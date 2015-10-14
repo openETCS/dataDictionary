@@ -168,7 +168,7 @@ int AdhesionFactor_EncodeBit(Bitstream* stream, const AdhesionFactor* p);
     complete behaviors;
     disjoint behaviors;
 */
-int AdhesionFactor_DecodeBit(Bitstream* stream, AdhesionFactor* p);
+int AdhesionFactor_DecodeBit(AdhesionFactor* p, Bitstream* stream);
 
 static inline void AdhesionFactor_Print(FILE* stream, const AdhesionFactor* p)
 {

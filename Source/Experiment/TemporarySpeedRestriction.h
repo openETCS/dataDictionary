@@ -181,7 +181,7 @@ int TemporarySpeedRestriction_EncodeBit(Bitstream* stream, const TemporarySpeedR
     complete behaviors;
     disjoint behaviors;
 */
-int TemporarySpeedRestriction_DecodeBit(Bitstream* stream, TemporarySpeedRestriction* p);
+int TemporarySpeedRestriction_DecodeBit(TemporarySpeedRestriction* p, Bitstream* stream);
 /*
 int TemporarySpeedRestriction_EncodeInt(PacketInfo* data, kcg_int* stream, const TemporarySpeedRestriction* p);
 

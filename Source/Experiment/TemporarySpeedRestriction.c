@@ -81,7 +81,7 @@ int TemporarySpeedRestriction_EncodeBit(Bitstream* stream, const TemporarySpeedR
     }
 }
 
-int TemporarySpeedRestriction_DecodeBit(Bitstream* stream, TemporarySpeedRestriction* p)
+int TemporarySpeedRestriction_DecodeBit(TemporarySpeedRestriction* p, Bitstream* stream)
 {
     if (Bitstream_Normal(stream, TEMPORARYSPEEDRESTRICTION_BITSIZE))
     {

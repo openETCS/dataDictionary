@@ -144,7 +144,8 @@ int ErrorReporting_EncodeBit(Bitstream* stream, const ErrorReporting* p);
     complete behaviors;
     disjoint behaviors;
 */
-int ErrorReporting_DecodeBit(Bitstream* stream, ErrorReporting* p);
+int ErrorReporting_DecodeBit(ErrorReporting* p, Bitstream* stream);
+
 /*
 int ErrorReporting_EncodeInt(PacketInfo* data, kcg_int* stream, const ErrorReporting* p);
 

@@ -2,6 +2,7 @@
 #include "EurobaliseTelegram.h"
 #include "PacketFactory.h"
 #include "Packet.h"
+#include "Packet_DecodeBit.h"
 
 void EurobaliseTelegram_Print(FILE* stream, const EurobaliseTelegram* t)
 {
@@ -71,7 +72,6 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
 
             if (ptr)
             {
-                TrackToTrain_DecodeBit(ptr, stream);
                 EurobaliseTelegram_Add(t, ptr);
                 //printf("EurobaliseTelegram_DecodeBit size after add = %d\n", EurobaliseTelegram_Size(t));
             }
@@ -87,7 +87,6 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
 
             if (ptr)
             {
-                TrainToTrack_DecodeBit(ptr, stream);
                 EurobaliseTelegram_Add(t, ptr);
                 //printf("EurobaliseTelegram_DecodeBit size after add = %d\n", EurobaliseTelegram_Size(t));
             }
@@ -99,6 +98,7 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
 
         if (ptr)
         {
+            Packet_DecodeBit(ptr, stream);
             current_pos += Packet_Length(ptr);
         }
     }

@@ -55,7 +55,7 @@ int EndOfInformation_EncodeBit(Bitstream* stream, const EndOfInformation* p)
     }
 }
 
-int EndOfInformation_DecodeBit(Bitstream* stream, EndOfInformation* p)
+int EndOfInformation_DecodeBit(EndOfInformation* p, Bitstream* stream)
 {
     p = 0; // -Wunused
 

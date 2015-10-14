@@ -4,14 +4,6 @@
 
 #include "PacketHeader.h"
 
-int TrainToTrack_DecodeBit(PacketHeader* header, Bitstream* stream);
-
-int TrackToTrain_DecodeBit(PacketHeader* header, Bitstream* stream);
-
-int BothWays_DecodeBit(PacketHeader* header, Bitstream* stream);
-
-int Packet_DecodeBit(PacketHeader* header, Bitstream* stream);
-
 void TrainToTrack_Print(FILE* stream, const PacketHeader* header);
 
 void TrackToTrain_Print(FILE* stream, const PacketHeader* header);

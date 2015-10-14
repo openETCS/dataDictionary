@@ -74,7 +74,7 @@ int AdhesionFactor_EncodeBit(Bitstream* stream, const AdhesionFactor* p)
     }
 }
 
-int AdhesionFactor_DecodeBit(Bitstream* stream, AdhesionFactor* p)
+int AdhesionFactor_DecodeBit(AdhesionFactor* p, Bitstream* stream)
 {
     if (Bitstream_Normal(stream, ADHESIONFACTOR_BITSIZE))
     {

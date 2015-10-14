@@ -145,7 +145,7 @@ int Level23TransitionInformation_EncodeBit(Bitstream* stream, const Level23Trans
     complete behaviors;
     disjoint behaviors;
 */
-int Level23TransitionInformation_DecodeBit(Bitstream* stream, Level23TransitionInformation* p);
+int Level23TransitionInformation_DecodeBit(Level23TransitionInformation* p, Bitstream* stream);
 /*
 int Level23TransitionInformation_EncodeInt(PacketInfo* data, kcg_int* stream, const Level23TransitionInformation* p);
 

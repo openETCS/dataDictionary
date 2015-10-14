@@ -134,7 +134,8 @@ int EndOfInformation_EncodeBit(Bitstream* stream, const EndOfInformation* p);
     complete behaviors;
     disjoint behaviors;
 */
-int EndOfInformation_DecodeBit(Bitstream* stream, EndOfInformation* p);
+int EndOfInformation_DecodeBit(EndOfInformation* p, Bitstream* stream);
+
 /*
 int EndOfInformation_EncodeInt(PacketInfo* data, kcg_int* stream, const EndOfInformation* p);
 
