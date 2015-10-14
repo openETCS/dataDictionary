@@ -4,7 +4,6 @@
 
 #include "TelegramHeader.h"
 #include "PacketSequence.h"
-#include "Packet.h"
 
 struct EurobaliseTelegram
 {

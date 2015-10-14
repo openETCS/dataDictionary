@@ -1,9 +1,9 @@
 
 #include "EurobaliseTelegram.h"
 #include "PacketFactory.h"
-#include "Packet.h"
 #include "Packet_DecodeBit.h"
 #include "Packet_EncodeBit.h"
+#include "Packet_Length.h"
 
 void EurobaliseTelegram_Print(const EurobaliseTelegram* t, FILE* stream)
 {

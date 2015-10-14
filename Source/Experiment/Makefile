@@ -11,8 +11,7 @@ LDFLAGS += -L../Baseline2/Foundation/Bits -lbits
 all: clean test_packets
 	./test_packets
 
-SRC := Packet.o\
-       PacketFactory.o\
+SRC := PacketFactory.o\
        PacketSequence.c\
        EurobaliseTelegram.c
 
@@ -20,6 +19,7 @@ FUNCTIONS := Packet_DecodeBit.c\
              Packet_Delete.c\
              Packet_EncodeBit.c\
              Packet_Equal.c\
+             Packet_Length.c\
              Packet_Print.c
 
 PACKETS := AdhesionFactor.o\
