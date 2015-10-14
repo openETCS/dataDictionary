@@ -40,7 +40,9 @@ static inline void EurobaliseTelegram_Add(EurobaliseTelegram* t, PacketHeader* p
     PacketSequence_Add(&t->packets, p);
 }
 
-void EurobaliseTelegram_Print(FILE* stream, EurobaliseTelegram* p);
+void EurobaliseTelegram_Print(FILE* stream, const EurobaliseTelegram* t);
+
+void EurobaliseTelegram_Clear(EurobaliseTelegram* t);
 
 int EurobaliseTelegram_EncodeBit(const EurobaliseTelegram* t, Bitstream* stream);
 

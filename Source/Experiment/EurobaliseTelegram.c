@@ -3,12 +3,17 @@
 #include "PacketFactory.h"
 #include "Packet.h"
 
-void EurobaliseTelegram_Print(FILE* stream, EurobaliseTelegram* p)
+void EurobaliseTelegram_Print(FILE* stream, const EurobaliseTelegram* t)
 {
-    TelegramHeader_Print(stream, &p->header);
-    PacketSequence_Print(stream, &p->packets);
+    TelegramHeader_Print(stream, &t->header);
+    PacketSequence_Print(stream, &t->packets);
 }
 
+void EurobaliseTelegram_Clear(EurobaliseTelegram* t)
+{
+    TelegramHeader_Init(&t->header);
+    PacketSequence_Clear(&t->packets);
+}
 
 int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
 {

@@ -31,6 +31,9 @@ static inline const PacketHeader* PacketSequence_Get(const PacketSequence* s, ui
 
 void PacketSequence_Print(FILE* stream, const PacketSequence* p);
 
+// similiar to std::vector::clear
+void PacketSequence_Clear(PacketSequence* p);
+
 
 #endif /* PACKETSEQUENCE_H_INCLUDED */
 

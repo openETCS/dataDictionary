@@ -67,6 +67,7 @@ int main(void)
         EurobaliseTelegram_DecodeBit(&u, &stream);
 
         EurobaliseTelegram_Print(stdout, &u);
+        EurobaliseTelegram_Clear(&u);
     }
 
 

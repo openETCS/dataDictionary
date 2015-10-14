@@ -11,12 +11,12 @@ struct TelegramHeader
 {
 
     uint64_t  Q_UPDOWN;         // # 1
-    uint64_t   M_VERSION;        // # 7
+    uint64_t  M_VERSION;        // # 7
     uint64_t  Q_MEDIA;          // # 1
-    uint64_t   N_PIG;            // # 3
-    uint64_t   N_TOTAL;          // # 3
-    uint64_t   M_DUP;            // # 2
-    uint64_t   M_MCOUNT;         // # 8
+    uint64_t  N_PIG;            // # 3
+    uint64_t  N_TOTAL;          // # 3
+    uint64_t  M_DUP;            // # 2
+    uint64_t  M_MCOUNT;         // # 8
     uint64_t  NID_C;            // # 10
     uint64_t  NID_BG;           // # 14
     uint64_t  Q_LINK;           // # 1
@@ -26,6 +26,22 @@ struct TelegramHeader
 typedef struct TelegramHeader TelegramHeader;
 
 #define TELEGRAM_HEADER_BITSIZE 50
+
+static inline void TelegramHeader_Init(TelegramHeader* p)
+{
+
+    p->Q_UPDOWN   = 0;
+    p->M_VERSION  = 0;
+    p->Q_MEDIA    = 0;
+    p->N_PIG      = 0;
+    p->N_TOTAL    = 0;
+    p->M_DUP      = 0;
+    p->M_MCOUNT   = 0;
+    p->NID_C      = 0;
+    p->NID_BG     = 0;
+    p->Q_LINK     = 0;
+}
+
 
 /*@
     logic integer BitSize{L}(TelegramHeader* p) = TELEGRAM_HEADER_BITSIZE;

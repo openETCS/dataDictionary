@@ -32,3 +32,14 @@ void PacketSequence_Print(FILE* stream, const PacketSequence* p)
     fprintf(stream, "]\n");
 }
 
+
+void PacketSequence_Clear(PacketSequence* p)
+{
+    for (uint32_t i = 0; i < p->size; ++i)
+    {
+        Packet_Delete(p->header[i]);
+    }
+
+    p->size = 0;
+}
+
