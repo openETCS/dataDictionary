@@ -34,6 +34,7 @@ void PacketSequence_Print(FILE* stream, const PacketSequence* p);
 // similiar to std::vector::clear
 void PacketSequence_Clear(PacketSequence* p);
 
+int PacketSequence_Equal(const PacketSequence* a, const PacketSequence* b);
 
 #endif /* PACKETSEQUENCE_H_INCLUDED */
 

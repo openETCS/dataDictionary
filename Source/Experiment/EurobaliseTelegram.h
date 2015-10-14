@@ -44,6 +44,8 @@ void EurobaliseTelegram_Print(FILE* stream, const EurobaliseTelegram* t);
 
 void EurobaliseTelegram_Clear(EurobaliseTelegram* t);
 
+int EurobaliseTelegram_Equal(const EurobaliseTelegram* a, const EurobaliseTelegram* b);
+
 int EurobaliseTelegram_EncodeBit(const EurobaliseTelegram* t, Bitstream* stream);
 
 int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream);

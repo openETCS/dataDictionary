@@ -14,6 +14,7 @@ all: clean test_packets
 SRC := AdhesionFactor.o ErrorReporting.o EndOfInformation.o\
        Level23TransitionInformation.o TemporarySpeedRestriction.o\
        Packet.o PacketFactory.o\
+       Packet_Delete.c Packet_Equal.c\
        PacketSequence.c\
        EurobaliseTelegram.c
 

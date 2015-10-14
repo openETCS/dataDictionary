@@ -15,6 +15,13 @@ void EurobaliseTelegram_Clear(EurobaliseTelegram* t)
     PacketSequence_Clear(&t->packets);
 }
 
+int EurobaliseTelegram_Equal(const EurobaliseTelegram* a, const EurobaliseTelegram* b)
+{
+    return TelegramHeader_Equal(&a->header, &b->header) &&
+           PacketSequence_Equal(&a->packets, &b->packets);
+}
+
+
 int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
 {
     //printf("EurobaliseTelegram_DecodeBit::enter\n");

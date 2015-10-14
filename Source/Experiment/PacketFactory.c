@@ -1,11 +1,6 @@
 
 #include "PacketFactory.h"
-
-#include "AdhesionFactor.h"
-#include "EndOfInformation.h"
-#include "ErrorReporting.h"
-#include "Level23TransitionInformation.h"
-#include "TemporarySpeedRestriction.h"
+#include "AllPackets.h"
 
 PacketHeader* PacketFactory_BothWays(PacketHeader header)
 {

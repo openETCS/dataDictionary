@@ -1,6 +1,8 @@
 
 #include "PacketSequence.h"
 #include "Packet.h"
+#include "Packet_Delete.h"
+#include "Packet_Equal.h"
 
 void PacketSequence_Init(PacketSequence* s)
 {
@@ -41,5 +43,24 @@ void PacketSequence_Clear(PacketSequence* p)
     }
 
     p->size = 0;
+}
+
+int PacketSequence_Equal(const PacketSequence* a, const PacketSequence* b)
+{
+    if (a->size == b->size)
+    {
+        int status = 1;
+
+        for (uint32_t i = 0; i < a->size; ++i)
+        {
+            status = status && Packet_Equal(a->header[i], b->header[i]);
+        }
+
+        return status;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
