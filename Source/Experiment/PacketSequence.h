@@ -2,8 +2,8 @@
 #ifndef PACKETSEQUENCE_H_INCLUDED
 #define PACKETSEQUENCE_H_INCLUDED
 
-#include <assert.h>
 #include "PacketHeader.h"
+#include <assert.h>
 
 struct PacketSequence
 {
@@ -28,6 +28,9 @@ static inline const PacketHeader* PacketSequence_Get(const PacketSequence* s, ui
 
     return s->header[i];
 }
+
+void PacketSequence_Print(FILE* stream, const PacketSequence* p);
+
 
 #endif /* PACKETSEQUENCE_H_INCLUDED */
 
