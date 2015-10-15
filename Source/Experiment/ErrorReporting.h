@@ -172,6 +172,10 @@ static inline int ErrorReporting_Equal(const ErrorReporting* a, const ErrorRepor
     return status;
 }
 
+static inline uint32_t ErrorReporting_Length(const ErrorReporting* p)
+{
+    return (uint32_t)(p->L_PACKET);
+}
 
 #endif // ERRORREPORTING_H_INCLUDED
 

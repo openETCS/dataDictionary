@@ -220,5 +220,12 @@ TemporarySpeedRestriction_Equal(const TemporarySpeedRestriction* a, const Tempor
     return status;
 }
 
+
+static inline uint32_t TemporarySpeedRestriction_Length(const TemporarySpeedRestriction* p)
+{
+    return (uint32_t)(p->L_PACKET);
+}
+
+
 #endif // TEMPORARYSPEEDRESTRICTION_H_INCLUDED
 

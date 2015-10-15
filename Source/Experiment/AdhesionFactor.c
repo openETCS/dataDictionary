@@ -201,4 +201,3 @@ int AdhesionFactor_DecodeInt(PacketInfo* data, const kcg_int* stream, AdhesionFa
 }
 */
 
-

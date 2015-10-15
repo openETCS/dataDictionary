@@ -156,5 +156,11 @@ static inline int EndOfInformation_Equal(const EndOfInformation* a, const EndOfI
     return status;
 }
 
+static inline uint32_t EndOfInformation_Length(const EndOfInformation* p)
+{
+    (void) p; // unused
+    return 8;
+}
+
 #endif // ENDOFINFORMATION_H_INCLUDED
 

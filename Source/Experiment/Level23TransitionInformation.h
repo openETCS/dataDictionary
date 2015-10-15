@@ -171,5 +171,11 @@ Level23TransitionInformation_Equal(const Level23TransitionInformation* a, const 
     return status;
 }
 
+static inline uint32_t Level23TransitionInformation_Length(const Level23TransitionInformation* p)
+{
+    return (uint32_t)(p->L_PACKET);
+}
+
+
 #endif // LEVEL23TRANSITIONINFORMATION_H_INCLUDED
 

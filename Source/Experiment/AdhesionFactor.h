@@ -196,6 +196,11 @@ static inline int AdhesionFactor_Equal(const AdhesionFactor* a, const AdhesionFa
     return status;
 }
 
+static inline uint32_t AdhesionFactor_Length(const AdhesionFactor* p)
+{
+    return (uint32_t)(p->L_PACKET);
+}
+
 
 #endif // ADHESIONFACTOR_H_INCLUDED
 

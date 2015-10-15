@@ -12,14 +12,12 @@ uint32_t Packet_Length(const PacketHeader* header)
             {
                 case 4 :
                 {
-                    const ErrorReporting* ptr = (const ErrorReporting*)(header);
-                    return (uint32_t) ptr->L_PACKET;
+                    return ErrorReporting_Length((const ErrorReporting*)(header));
                 }
 
                 case 9 :
                 {
-                    const Level23TransitionInformation* ptr = (const Level23TransitionInformation*)(header);
-                    return (uint32_t) ptr->L_PACKET;
+                    return Level23TransitionInformation_Length((const Level23TransitionInformation*)(header));
                 }
 
                 default :
@@ -36,14 +34,12 @@ uint32_t Packet_Length(const PacketHeader* header)
             {
                 case 65 :
                 {
-                    const TemporarySpeedRestriction* ptr = (const TemporarySpeedRestriction*)(header);
-                    return (uint32_t) ptr->L_PACKET;
+                    return TemporarySpeedRestriction_Length((const TemporarySpeedRestriction*)(header));
                 }
 
                 case 71 :
                 {
-                    const AdhesionFactor* ptr = (const AdhesionFactor*)(header);
-                    return (uint32_t) ptr->L_PACKET;
+                    return AdhesionFactor_Length((const AdhesionFactor*)(header));
                 }
 
                 default :
@@ -57,7 +53,7 @@ uint32_t Packet_Length(const PacketHeader* header)
         case BOTHWAYS :
         {
             assert(header->NID_PACKET == 255);
-            return 8;
+            return EndOfInformation_Length((const EndOfInformation*)header);
         }
 
         default:
