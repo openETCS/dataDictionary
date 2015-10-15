@@ -2,6 +2,9 @@
 #ifndef PACKETHEADER_H_INCLUDED
 #define PACKETHEADER_H_INCLUDED
 
+#define __STDC_FORMAT_MACROS
+#include <inttypes.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -191,16 +194,16 @@ static inline void PacketHeader_Print(const PacketHeader* p, FILE* stream)
 {
     if (p->list == TRAINTOTRACK)
     {
-        fprintf(stream, "(%zu,%s)", p->NID_PACKET, "TrainToTrack");
+        fprintf(stream, "(%"PRIu64",%s)", p->NID_PACKET, "TrainToTrack");
     }
     else if (p->list == TRACKTOTRAIN)
     {
-        fprintf(stream, "(%zu,%s)", p->NID_PACKET, "TrackToTrain");
+        fprintf(stream, "(%"PRIu64",%s)", p->NID_PACKET, "TrackToTrain");
     }
     else
     {
         assert(p->list == BOTHWAYS);
-        fprintf(stream, "(%zu,%s)", p->NID_PACKET, "BothWays");
+        fprintf(stream, "(%"PRIu64",%s)", p->NID_PACKET, "BothWays");
     }
 }
 

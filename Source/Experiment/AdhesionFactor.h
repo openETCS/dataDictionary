@@ -173,7 +173,7 @@ int AdhesionFactor_DecodeBit(AdhesionFactor* p, Bitstream* stream);
 static inline void AdhesionFactor_Print(const AdhesionFactor* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%zu,%zu,%zu,%zu,%zu,%zu)",
+    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64")",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_SCALE,
