@@ -2,10 +2,13 @@
 #ifndef TELEGRAMHEADER_H_INCLUDED
 #define TELEGRAMHEADER_H_INCLUDED
 
-#include "Bit64.h"
-#include "Bitstream.h"
+#define __STDC_FORMAT_MACROS
+#include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "Bit64.h"
+#include "Bitstream.h"
 
 struct TelegramHeader
 {
@@ -421,7 +424,7 @@ int TelegramHeader_DecodeBit(Bitstream* stream, TelegramHeader* p)
 
 static inline void TelegramHeader_Print(const TelegramHeader* p, FILE* stream)
 {
-    fprintf(stream, "(%llu,%llu,%llu,%llu,%llu,%llu,%llu,%llu,%llu,%llu)",
+    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64")",
             p->Q_UPDOWN,
             p->M_VERSION,
             p->Q_MEDIA,

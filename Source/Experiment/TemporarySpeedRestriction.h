@@ -192,7 +192,7 @@ static inline void
 TemporarySpeedRestriction_Print(const TemporarySpeedRestriction* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%llu,%llu,%llu,%llu,%llu,%llu,%llu,%llu)",
+    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64")",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_SCALE,

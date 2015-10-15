@@ -25,7 +25,7 @@ int Packet_DecodeBit(PacketHeader* header, Bitstream* stream)
 
                 default :
                 {
-                    fprintf(stderr, "Packet_DecodeBit: unexpected value for header->NID_PACKET = %llu\n", header->NID_PACKET);
+                    fprintf(stderr, "Packet_DecodeBit: unexpected value for header->NID_PACKET = %"PRIu64"\n", header->NID_PACKET);
                     return 0;
                 }
             };
@@ -49,7 +49,7 @@ int Packet_DecodeBit(PacketHeader* header, Bitstream* stream)
 
                 default :
                 {
-                    fprintf(stderr, "Packet_DecodeBit: unexpected value for header->NID_PACKET = %llu\n", header->NID_PACKET);
+                    fprintf(stderr, "Packet_DecodeBit: unexpected value for header->NID_PACKET = %"PRIu64"\n", header->NID_PACKET);
                     return 0;
                 }
             };
@@ -64,7 +64,7 @@ int Packet_DecodeBit(PacketHeader* header, Bitstream* stream)
 
         default:
         {
-            fprintf(stderr, "Packet_DecodeBit: unexpected value for header->list = %llu\n", header->list);
+            fprintf(stderr, "Packet_DecodeBit: unexpected value for header->list = %"PRIu64"\n", header->list);
             return 0;
         }
     };

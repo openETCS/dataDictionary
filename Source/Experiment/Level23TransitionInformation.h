@@ -155,7 +155,7 @@ int Level23TransitionInformation_DecodeInt(PacketInfo* data, const kcg_int* stre
 static inline void Level23TransitionInformation_Print(const Level23TransitionInformation* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%llu,%llu)",
+    fprintf(stream, "(%"PRIu64",%"PRIu64")",
             p->L_PACKET,
             p->NID_LTRBG);
 }

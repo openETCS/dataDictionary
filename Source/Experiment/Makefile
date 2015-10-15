@@ -5,7 +5,7 @@ MAKEFLAGS += --no-print-directory --silent
 CC=cc
 CPPFLAGS+=-I../Baseline2/Foundation/Bits
 CFLAGS += -std=c99 -Wall -pedantic 
-CFLAGS += -Werror 
+#CFLAGS += -Werror 
 #CFLAGS += -Weverything -Wno-padded 
 LDFLAGS += -L../Baseline2/Foundation/Bits -lbits
 

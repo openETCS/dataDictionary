@@ -33,7 +33,7 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
         return 0;
     }
 
-    //printf("EurobaliseTelegram_DecodeBit::t->header.Q_UPDOWN = %llu\n", t->header.Q_UPDOWN);
+    //printf("EurobaliseTelegram_DecodeBit::t->header.Q_UPDOWN = %"PRIu64"\n", t->header.Q_UPDOWN);
 
     //std::cout << stream->bitpos << std::endl;
 
