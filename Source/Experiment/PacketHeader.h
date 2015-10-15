@@ -191,16 +191,16 @@ static inline void PacketHeader_Print(const PacketHeader* p, FILE* stream)
 {
     if (p->list == TRAINTOTRACK)
     {
-        fprintf(stream, "(%llu,%s)", p->NID_PACKET, "TRAINTOTRACK");
+        fprintf(stream, "(%llu,%s)", p->NID_PACKET, "TrainToTrack");
     }
     else if (p->list == TRACKTOTRAIN)
     {
-        fprintf(stream, "(%llu,%s)", p->NID_PACKET, "TRACKTOTRAIN");
+        fprintf(stream, "(%llu,%s)", p->NID_PACKET, "TrackToTrain");
     }
     else
     {
         assert(p->list == BOTHWAYS);
-        fprintf(stream, "(%llu,%s)", p->NID_PACKET, "BOTHWAYS");
+        fprintf(stream, "(%llu,%s)", p->NID_PACKET, "BothWays");
     }
 }
 
