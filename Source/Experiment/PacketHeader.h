@@ -2,11 +2,11 @@
 #ifndef PACKETHEADER_H_INCLUDED
 #define PACKETHEADER_H_INCLUDED
 
-#include "Bit64.h"
-#include "Bitstream.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include "Bit64.h"
+#include "Bitstream.h"
 
 #define TRAINTOTRACK 0
 #define TRACKTOTRAIN 1
@@ -191,16 +191,16 @@ static inline void PacketHeader_Print(const PacketHeader* p, FILE* stream)
 {
     if (p->list == TRAINTOTRACK)
     {
-        fprintf(stream, "(%llu,%s)", p->NID_PACKET, "TrainToTrack");
+        fprintf(stream, "(%zu,%s)", p->NID_PACKET, "TrainToTrack");
     }
     else if (p->list == TRACKTOTRAIN)
     {
-        fprintf(stream, "(%llu,%s)", p->NID_PACKET, "TrackToTrain");
+        fprintf(stream, "(%zu,%s)", p->NID_PACKET, "TrackToTrain");
     }
     else
     {
         assert(p->list == BOTHWAYS);
-        fprintf(stream, "(%llu,%s)", p->NID_PACKET, "BothWays");
+        fprintf(stream, "(%zu,%s)", p->NID_PACKET, "BothWays");
     }
 }
 
