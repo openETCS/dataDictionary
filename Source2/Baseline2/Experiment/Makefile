@@ -5,11 +5,11 @@ MAKEFLAGS += --no-print-directory --silent
 TOPDIR=../
 
 CC=cc
-CPPFLAGS+=-I../Baseline2/Foundation/Bits
+CPPFLAGS+=-I$(TOPDIR)/Foundation/Bits
 CFLAGS += -std=c99 -Wall -pedantic 
 #CFLAGS += -Werror 
 #CFLAGS += -Weverything -Wno-padded 
-LDFLAGS += -L$(TOPDIR)/Baseline2/Foundation/Bits -lbits
+LDFLAGS += -L$(TOPDIR)/Foundation/Bits -lbits
 
 all: clean test_packets
 	./test_packets
