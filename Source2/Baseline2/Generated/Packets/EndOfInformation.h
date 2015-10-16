@@ -7,6 +7,8 @@
 
 struct EndOfInformation
 {
+    PacketHeader header;
+
     // TransmissionMedia=Any
     // This packet consists only of NID_PACKET containing 8 bit 1sIt acts
     // as a finish flag ; the receiver will stop reading the
@@ -14,7 +16,6 @@ struct EndOfInformation
     // one in the NID_PACKET field.
     // Packet Number = 255
 
-    PacketHeader header;
 };
 
 typedef struct EndOfInformation EndOfInformation;
@@ -40,13 +41,13 @@ static inline void EndOfInformation_Init(EndOfInformation* p)
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(EndOfInformation* p) = \true;
+    predicate Invariant(EndOfInformation* p) = \1;
 
-    predicate ZeroInitialized(EndOfInformation* p) = \true;
+    predicate ZeroInitialized(EndOfInformation* p) = \1;
 
-    predicate EqualBits(Bitstream* stream, integer pos, EndOfInformation* p) = \true;
+    predicate EqualBits(Bitstream* stream, integer pos, EndOfInformation* p) = \1;
 
-    predicate UpperBitsNotSet(EndOfInformation* p) = \true;
+    predicate UpperBitsNotSet(EndOfInformation* p) = \1;
 
 */
 
@@ -136,29 +137,22 @@ int EndOfInformation_EncodeBit(const EndOfInformation* p, Bitstream* stream);
 */
 int EndOfInformation_DecodeBit(EndOfInformation* p, Bitstream* stream);
 
-/*
-int EndOfInformation_EncodeInt(PacketInfo* data, kcg_int* stream, const EndOfInformation* p);
-
-int EndOfInformation_DecodeInt(PacketInfo* data, const kcg_int* stream, EndOfInformation* p);
-*/
-
-
 static inline void EndOfInformation_Print(const EndOfInformation* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
+
 }
 
 static inline int EndOfInformation_Equal(const EndOfInformation* a, const EndOfInformation* b)
-
 {
     int status = PacketHeader_Equal(&a->header, &b->header);
+    
 
     return status;
 }
 
 static inline uint32_t EndOfInformation_Length(const EndOfInformation* p)
 {
-    (void) p; // unused
     return 8;
 }
 

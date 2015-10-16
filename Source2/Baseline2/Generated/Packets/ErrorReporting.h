@@ -7,11 +7,12 @@
 
 struct ErrorReporting
 {
+    PacketHeader header;
+
     // TransmissionMedia=Radio
     // Error reporting to the RBC
     // Packet Number = 4
 
-    PacketHeader header;
     uint64_t  L_PACKET;         // # 13
     uint64_t   M_ERROR;          // # 8
 };
@@ -28,10 +29,9 @@ static inline void ErrorReporting_Init(ErrorReporting* p)
 {
     p->header.NID_PACKET = 4;
     p->header.list = TRAINTOTRACK;
-    p->L_PACKET          = 0;
-    p->M_ERROR           = 0;
+    p->L_PACKET = 0;
+    p->M_ERROR = 0;
 }
-
 
 /*@
     logic integer BitSize{L}(ErrorReporting* p) = ERRORREPORTING_BITSIZE;
@@ -146,13 +146,6 @@ int ErrorReporting_EncodeBit(const ErrorReporting* p, Bitstream* stream);
 */
 int ErrorReporting_DecodeBit(ErrorReporting* p, Bitstream* stream);
 
-/*
-int ErrorReporting_EncodeInt(PacketInfo* data, kcg_int* stream, const ErrorReporting* p);
-
-int ErrorReporting_DecodeInt(PacketInfo* data, const kcg_int* stream, ErrorReporting* p);
-*/
-
-
 static inline void ErrorReporting_Print(const ErrorReporting* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -161,13 +154,12 @@ static inline void ErrorReporting_Print(const ErrorReporting* p, FILE* stream)
             p->M_ERROR);
 }
 
-
 static inline int ErrorReporting_Equal(const ErrorReporting* a, const ErrorReporting* b)
 {
     int status = PacketHeader_Equal(&a->header, &b->header);
-
+    
     status = status && (a->L_PACKET == b->L_PACKET);
-    status = status && (a->M_ERROR  == b->M_ERROR);
+    status = status && (a->M_ERROR == b->M_ERROR);
 
     return status;
 }

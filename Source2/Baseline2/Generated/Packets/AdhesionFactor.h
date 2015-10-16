@@ -7,12 +7,13 @@
 
 struct AdhesionFactor
 {
+    PacketHeader header;
+
     // TransmissionMedia=Any
     // This packet is used when the trackside requests a change of
     // the adhesion factor to be used in the brake model.
     // Packet Number = 71
 
-    PacketHeader header;
     uint64_t   Q_DIR;            // # 2
     uint64_t  L_PACKET;         // # 13
     uint64_t   Q_SCALE;          // # 2
@@ -33,12 +34,12 @@ static inline void AdhesionFactor_Init(AdhesionFactor* p)
 {
     p->header.NID_PACKET = 71;
     p->header.list = TRACKTOTRAIN;
-    p->Q_DIR             = 0;
-    p->L_PACKET          = 0;
-    p->Q_SCALE           = 0;
-    p->D_ADHESION        = 0;
-    p->L_ADHESION        = 0;
-    p->M_ADHESION        = 0;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->D_ADHESION = 0;
+    p->L_ADHESION = 0;
+    p->M_ADHESION = 0;
 }
 
 /*@
@@ -185,13 +186,13 @@ static inline void AdhesionFactor_Print(const AdhesionFactor* p, FILE* stream)
 static inline int AdhesionFactor_Equal(const AdhesionFactor* a, const AdhesionFactor* b)
 {
     int status = PacketHeader_Equal(&a->header, &b->header);
-
-    status = status && (a->Q_DIR       == b->Q_DIR);
-    status = status && (a->L_PACKET    == b->L_PACKET);
-    status = status && (a->Q_SCALE     == b->Q_SCALE);
-    status = status && (a->D_ADHESION  == b->D_ADHESION);
-    status = status && (a->L_ADHESION  == b->L_ADHESION);
-    status = status && (a->M_ADHESION  == b->M_ADHESION);
+    
+    status = status && (a->Q_DIR == b->Q_DIR);
+    status = status && (a->L_PACKET == b->L_PACKET);
+    status = status && (a->Q_SCALE == b->Q_SCALE);
+    status = status && (a->D_ADHESION == b->D_ADHESION);
+    status = status && (a->L_ADHESION == b->L_ADHESION);
+    status = status && (a->M_ADHESION == b->M_ADHESION);
 
     return status;
 }
@@ -200,7 +201,6 @@ static inline uint32_t AdhesionFactor_Length(const AdhesionFactor* p)
 {
     return (uint32_t)(p->L_PACKET);
 }
-
 
 #endif // ADHESIONFACTOR_H_INCLUDED
 

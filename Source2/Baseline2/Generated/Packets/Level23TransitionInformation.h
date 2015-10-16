@@ -7,11 +7,12 @@
 
 struct Level23TransitionInformation
 {
+    PacketHeader header;
+
     // TransmissionMedia=Radio
     // Identity of the level 2/3 transition balise group
     // Packet Number = 9
 
-    PacketHeader header;
     uint64_t  L_PACKET;         // # 13
     uint64_t  NID_LTRBG;        // # 24
 };
@@ -19,7 +20,6 @@ struct Level23TransitionInformation
 typedef struct Level23TransitionInformation Level23TransitionInformation;
 
 #define LEVEL23TRANSITIONINFORMATION_BITSIZE 37
-
 
 Level23TransitionInformation*  Level23TransitionInformation_New(void);
 
@@ -29,10 +29,9 @@ static inline void Level23TransitionInformation_Init(Level23TransitionInformatio
 {
     p->header.NID_PACKET = 9;
     p->header.list = TRAINTOTRACK;
-    p->L_PACKET          = 0;
-    p->NID_LTRBG         = 0;
+    p->L_PACKET = 0;
+    p->NID_LTRBG = 0;
 }
-
 
 /*@
     logic integer BitSize{L}(Level23TransitionInformation* p) = LEVEL23TRANSITIONINFORMATION_BITSIZE;
@@ -146,11 +145,6 @@ int Level23TransitionInformation_EncodeBit(const Level23TransitionInformation* p
     disjoint behaviors;
 */
 int Level23TransitionInformation_DecodeBit(Level23TransitionInformation* p, Bitstream* stream);
-/*
-int Level23TransitionInformation_EncodeInt(PacketInfo* data, kcg_int* stream, const Level23TransitionInformation* p);
-
-int Level23TransitionInformation_DecodeInt(PacketInfo* data, const kcg_int* stream, Level23TransitionInformation* p);
-*/
 
 static inline void Level23TransitionInformation_Print(const Level23TransitionInformation* p, FILE* stream)
 {
@@ -160,11 +154,10 @@ static inline void Level23TransitionInformation_Print(const Level23TransitionInf
             p->NID_LTRBG);
 }
 
-static inline int
-Level23TransitionInformation_Equal(const Level23TransitionInformation* a, const Level23TransitionInformation* b)
+static inline int Level23TransitionInformation_Equal(const Level23TransitionInformation* a, const Level23TransitionInformation* b)
 {
     int status = PacketHeader_Equal(&a->header, &b->header);
-
+    
     status = status && (a->L_PACKET == b->L_PACKET);
     status = status && (a->NID_LTRBG == b->NID_LTRBG);
 
@@ -175,7 +168,6 @@ static inline uint32_t Level23TransitionInformation_Length(const Level23Transiti
 {
     return (uint32_t)(p->L_PACKET);
 }
-
 
 #endif // LEVEL23TRANSITIONINFORMATION_H_INCLUDED
 

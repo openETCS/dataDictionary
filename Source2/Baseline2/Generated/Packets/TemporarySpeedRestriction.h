@@ -7,11 +7,12 @@
 
 struct TemporarySpeedRestriction
 {
+    PacketHeader header;
+
     // TransmissionMedia=Any
     // Transmission of temporary speed restriction.
     // Packet Number = 65
 
-    PacketHeader header;
     uint64_t   Q_DIR;            // # 2
     uint64_t  L_PACKET;         // # 13
     uint64_t   Q_SCALE;          // # 2
@@ -28,23 +29,21 @@ typedef struct TemporarySpeedRestriction TemporarySpeedRestriction;
 
 TemporarySpeedRestriction*  TemporarySpeedRestriction_New(void);
 
-void TemporarySpeedRestriction_Delete(TemporarySpeedRestriction*);
-
+void   TemporarySpeedRestriction_Delete(TemporarySpeedRestriction*);
 
 static inline void TemporarySpeedRestriction_Init(TemporarySpeedRestriction* p)
 {
     p->header.NID_PACKET = 65;
     p->header.list = TRACKTOTRAIN;
-    p->Q_DIR             = 0;
-    p->L_PACKET          = 0;
-    p->Q_SCALE           = 0;
-    p->NID_TSR           = 0;
-    p->D_TSR             = 0;
-    p->L_TSR             = 0;
-    p->Q_FRONT           = 0;
-    p->V_TSR             = 0;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->NID_TSR = 0;
+    p->D_TSR = 0;
+    p->L_TSR = 0;
+    p->Q_FRONT = 0;
+    p->V_TSR = 0;
 }
-
 
 /*@
     logic integer BitSize{L}(TemporarySpeedRestriction* p) = TEMPORARYSPEEDRESTRICTION_BITSIZE;
@@ -182,14 +181,8 @@ int TemporarySpeedRestriction_EncodeBit(const TemporarySpeedRestriction* p, Bits
     disjoint behaviors;
 */
 int TemporarySpeedRestriction_DecodeBit(TemporarySpeedRestriction* p, Bitstream* stream);
-/*
-int TemporarySpeedRestriction_EncodeInt(PacketInfo* data, kcg_int* stream, const TemporarySpeedRestriction* p);
 
-int TemporarySpeedRestriction_DecodeInt(PacketInfo* data, const kcg_int* stream, TemporarySpeedRestriction* p);
-*/
-
-static inline void
-TemporarySpeedRestriction_Print(const TemporarySpeedRestriction* p, FILE* stream)
+static inline void TemporarySpeedRestriction_Print(const TemporarySpeedRestriction* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
     fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64")",
@@ -203,29 +196,26 @@ TemporarySpeedRestriction_Print(const TemporarySpeedRestriction* p, FILE* stream
             p->V_TSR);
 }
 
-static inline int
-TemporarySpeedRestriction_Equal(const TemporarySpeedRestriction* a, const TemporarySpeedRestriction* b)
+static inline int TemporarySpeedRestriction_Equal(const TemporarySpeedRestriction* a, const TemporarySpeedRestriction* b)
 {
     int status = PacketHeader_Equal(&a->header, &b->header);
-
-    status = status && (a->Q_DIR    == b->Q_DIR);
+    
+    status = status && (a->Q_DIR == b->Q_DIR);
     status = status && (a->L_PACKET == b->L_PACKET);
-    status = status && (a->Q_SCALE  == b->Q_SCALE);
-    status = status && (a->NID_TSR  == b->NID_TSR);
-    status = status && (a->D_TSR    == b->D_TSR);
-    status = status && (a->L_TSR    == b->L_TSR);
-    status = status && (a->Q_FRONT  == b->Q_FRONT);
-    status = status && (a->V_TSR    == b->V_TSR);
+    status = status && (a->Q_SCALE == b->Q_SCALE);
+    status = status && (a->NID_TSR == b->NID_TSR);
+    status = status && (a->D_TSR == b->D_TSR);
+    status = status && (a->L_TSR == b->L_TSR);
+    status = status && (a->Q_FRONT == b->Q_FRONT);
+    status = status && (a->V_TSR == b->V_TSR);
 
     return status;
 }
-
 
 static inline uint32_t TemporarySpeedRestriction_Length(const TemporarySpeedRestriction* p)
 {
     return (uint32_t)(p->L_PACKET);
 }
-
 
 #endif // TEMPORARYSPEEDRESTRICTION_H_INCLUDED
 
