@@ -9,10 +9,11 @@ lib:
 	(cd Generated        && $(MAKE) lib)
 
 test:
-	(cd Experiment       && $(MAKE))
+	(cd Tests            && $(MAKE))
 
 clean: 
 	(cd Foundation       && $(MAKE) clean)
 	(cd Generated        && $(MAKE) clean)
+	(cd Tests            && $(MAKE) clean)
 	(cd Experiment       && $(MAKE) clean)
 
