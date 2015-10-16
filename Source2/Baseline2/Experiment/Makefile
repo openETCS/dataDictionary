@@ -6,10 +6,13 @@ TOPDIR=../
 
 CC=cc
 CPPFLAGS+=-I$(TOPDIR)/Foundation/Bits
+CPPFLAGS+=-I$(TOPDIR)/Foundation/Packets
+CPPFLAGS+=-I$(TOPDIR)/Generated/Packets
 CFLAGS += -std=c99 -Wall -pedantic 
 #CFLAGS += -Werror 
 #CFLAGS += -Weverything -Wno-padded 
 LDFLAGS += -L$(TOPDIR)/Foundation/Bits -lbits
+LDFLAGS += -L$(TOPDIR)/Generated/Packets -lgenerated_packets
 
 all: clean test_packets
 	./test_packets
@@ -24,12 +27,6 @@ FUNCTIONS := Packet_DecodeBit.c\
              Packet_Equal.c\
              Packet_Length.c\
              Packet_Print.c
-
-PACKETS := AdhesionFactor.o\
-           EndOfInformation.o\
-           ErrorReporting.o\
-           Level23TransitionInformation.o\
-           TemporarySpeedRestriction.o
 
 TESTS := AdhesionFactor_Tests.o\
          ErrorReporting_Tests.o\
