@@ -2,7 +2,6 @@
 #include "EndOfInformation.h"
 #include "Bit64.h"
 
-
 EndOfInformation* EndOfInformation_New(void)
 {
     void* raw = malloc(sizeof(EndOfInformation));
@@ -20,7 +19,6 @@ void EndOfInformation_Delete(EndOfInformation* ptr)
 
 int EndOfInformation_UpperBitsNotSet(const EndOfInformation* p)
 {
-    p = 0; //-Wunused
     int status = 1;
 
 
@@ -42,6 +40,9 @@ int EndOfInformation_EncodeBit(const EndOfInformation* p, Bitstream* stream)
         {
             //@ ghost const uint32_t pos = stream->bitpos;
 
+
+
+
             return 1;
         }
         else
@@ -57,8 +58,6 @@ int EndOfInformation_EncodeBit(const EndOfInformation* p, Bitstream* stream)
 
 int EndOfInformation_DecodeBit(EndOfInformation* p, Bitstream* stream)
 {
-    p = 0; // -Wunused
-
     if (Bitstream_Normal(stream, ENDOFINFORMATION_BITSIZE))
     {
         //@ ghost const uint32_t pos = stream->bitpos;
@@ -74,16 +73,16 @@ int EndOfInformation_DecodeBit(EndOfInformation* p, Bitstream* stream)
         return 0;
     }
 }
+
 /*
-int EndOfInformation_EncodeInt(PacketInfo* data, kcg_int* stream, const EndOfInformation* p)
+int EndOfInformation_EncodeInt(const EndOfInformation* p, PacketInfo* data, kcg_int* stream)
 {
 
-    return 1;
 }
 
-int EndOfInformation_DecodeInt(PacketInfo* data, const kcg_int* stream, EndOfInformation* p)
+int EndOfInformation_DecodeInt(EndOfInformation* p, PacketInfo* data, kcg_int* stream)
 {
 
-    return 1;
 }
 */
+

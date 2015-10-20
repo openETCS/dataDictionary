@@ -19,7 +19,7 @@ typedef struct RouteSuitabilityData_1 RouteSuitabilityData_1;
 
 #define ROUTESUITABILITYDATA_1_BITSIZE 17
 
-RouteSuitabilityData_1*  RouteSuitabilityData_1_New();
+RouteSuitabilityData_1*  RouteSuitabilityData_1_New(void);
 
 void   RouteSuitabilityData_1_Delete(RouteSuitabilityData_1*);
 

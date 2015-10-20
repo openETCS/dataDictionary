@@ -20,7 +20,7 @@ typedef struct InternationalStaticSpeedProfile_2 InternationalStaticSpeedProfile
 
 #define INTERNATIONALSTATICSPEEDPROFILE_2_BITSIZE 28
 
-InternationalStaticSpeedProfile_2*  InternationalStaticSpeedProfile_2_New();
+InternationalStaticSpeedProfile_2*  InternationalStaticSpeedProfile_2_New(void);
 
 void   InternationalStaticSpeedProfile_2_Delete(InternationalStaticSpeedProfile_2*);
 

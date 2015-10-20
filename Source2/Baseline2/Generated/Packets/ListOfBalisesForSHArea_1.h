@@ -17,7 +17,7 @@ typedef struct ListOfBalisesForSHArea_1 ListOfBalisesForSHArea_1;
 
 #define LISTOFBALISESFORSHAREA_1_BITSIZE 15
 
-ListOfBalisesForSHArea_1*  ListOfBalisesForSHArea_1_New();
+ListOfBalisesForSHArea_1*  ListOfBalisesForSHArea_1_New(void);
 
 void   ListOfBalisesForSHArea_1_Delete(ListOfBalisesForSHArea_1*);
 

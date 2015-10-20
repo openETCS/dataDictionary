@@ -2,7 +2,6 @@
 #include "Level23TransitionInformation.h"
 #include "Bit64.h"
 
-
 Level23TransitionInformation* Level23TransitionInformation_New(void)
 {
     void* raw = malloc(sizeof(Level23TransitionInformation));
@@ -108,20 +107,16 @@ int Level23TransitionInformation_DecodeBit(Level23TransitionInformation* p, Bits
         return 0;
     }
 }
-/*
-int Level23TransitionInformation_EncodeInt(PacketInfo* data, kcg_int* stream, const Level23TransitionInformation* p)
-{
-    stream[data->startAddress++] = p->L_PACKET;
-    stream[data->startAddress++] = p->NID_LTRBG;
 
-    return 1;
+/*
+int Level23TransitionInformation_EncodeInt(const Level23TransitionInformation* p, PacketInfo* data, kcg_int* stream)
+{
+
 }
 
-int Level23TransitionInformation_DecodeInt(PacketInfo* data, const kcg_int* stream, Level23TransitionInformation* p)
+int Level23TransitionInformation_DecodeInt(Level23TransitionInformation* p, PacketInfo* data, kcg_int* stream)
 {
-    p->L_PACKET = stream[data->startAddress++];
-    p->NID_LTRBG = stream[data->startAddress++];
 
-    return 1;
 }
 */
+

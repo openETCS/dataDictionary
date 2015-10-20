@@ -15,7 +15,7 @@ typedef struct OnboardTelephoneNumbers_1 OnboardTelephoneNumbers_1;
 
 #define ONBOARDTELEPHONENUMBERS_1_BITSIZE 64
 
-OnboardTelephoneNumbers_1*  OnboardTelephoneNumbers_1_New();
+OnboardTelephoneNumbers_1*  OnboardTelephoneNumbers_1_New(void);
 
 void   OnboardTelephoneNumbers_1_Delete(OnboardTelephoneNumbers_1*);
 

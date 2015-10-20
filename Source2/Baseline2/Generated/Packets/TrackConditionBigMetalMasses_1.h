@@ -16,7 +16,7 @@ typedef struct TrackConditionBigMetalMasses_1 TrackConditionBigMetalMasses_1;
 
 #define TRACKCONDITIONBIGMETALMASSES_1_BITSIZE 30
 
-TrackConditionBigMetalMasses_1*  TrackConditionBigMetalMasses_1_New();
+TrackConditionBigMetalMasses_1*  TrackConditionBigMetalMasses_1_New(void);
 
 void   TrackConditionBigMetalMasses_1_Delete(TrackConditionBigMetalMasses_1*);
 

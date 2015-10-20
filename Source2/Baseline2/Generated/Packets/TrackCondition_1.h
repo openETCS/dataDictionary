@@ -17,7 +17,7 @@ typedef struct TrackCondition_1 TrackCondition_1;
 
 #define TRACKCONDITION_1_BITSIZE 34
 
-TrackCondition_1*  TrackCondition_1_New();
+TrackCondition_1*  TrackCondition_1_New(void);
 
 void   TrackCondition_1_Delete(TrackCondition_1*);
 

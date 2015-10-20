@@ -16,7 +16,7 @@ typedef struct InternationalStaticSpeedProfile_1 InternationalStaticSpeedProfile
 
 #define INTERNATIONALSTATICSPEEDPROFILE_1_BITSIZE 11
 
-InternationalStaticSpeedProfile_1*  InternationalStaticSpeedProfile_1_New();
+InternationalStaticSpeedProfile_1*  InternationalStaticSpeedProfile_1_New(void);
 
 void   InternationalStaticSpeedProfile_1_Delete(InternationalStaticSpeedProfile_1*);
 

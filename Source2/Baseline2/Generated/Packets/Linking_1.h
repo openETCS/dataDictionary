@@ -21,7 +21,7 @@ typedef struct Linking_1 Linking_1;
 
 #define LINKING_1_BITSIZE 39
 
-Linking_1*  Linking_1_New();
+Linking_1*  Linking_1_New(void);
 
 void   Linking_1_Delete(Linking_1*);
 

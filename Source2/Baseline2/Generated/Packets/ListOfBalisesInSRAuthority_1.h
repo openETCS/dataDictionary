@@ -17,7 +17,7 @@ typedef struct ListOfBalisesInSRAuthority_1 ListOfBalisesInSRAuthority_1;
 
 #define LISTOFBALISESINSRAUTHORITY_1_BITSIZE 15
 
-ListOfBalisesInSRAuthority_1*  ListOfBalisesInSRAuthority_1_New();
+ListOfBalisesInSRAuthority_1*  ListOfBalisesInSRAuthority_1_New(void);
 
 void   ListOfBalisesInSRAuthority_1_Delete(ListOfBalisesInSRAuthority_1*);
 

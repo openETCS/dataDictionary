@@ -19,7 +19,7 @@ typedef struct ModeProfile_1 ModeProfile_1;
 
 #define MODEPROFILE_1_BITSIZE 54
 
-ModeProfile_1*  ModeProfile_1_New();
+ModeProfile_1*  ModeProfile_1_New(void);
 
 void   ModeProfile_1_Delete(ModeProfile_1*);
 

@@ -17,7 +17,7 @@ typedef struct LevelTransitionOrder_1 LevelTransitionOrder_1;
 
 #define LEVELTRANSITIONORDER_1_BITSIZE 18
 
-LevelTransitionOrder_1*  LevelTransitionOrder_1_New();
+LevelTransitionOrder_1*  LevelTransitionOrder_1_New(void);
 
 void   LevelTransitionOrder_1_Delete(LevelTransitionOrder_1*);
 

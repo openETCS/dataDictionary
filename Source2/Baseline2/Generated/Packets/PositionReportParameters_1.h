@@ -16,7 +16,7 @@ typedef struct PositionReportParameters_1 PositionReportParameters_1;
 
 #define POSITIONREPORTPARAMETERS_1_BITSIZE 16
 
-PositionReportParameters_1*  PositionReportParameters_1_New();
+PositionReportParameters_1*  PositionReportParameters_1_New(void);
 
 void   PositionReportParameters_1_Delete(PositionReportParameters_1*);
 

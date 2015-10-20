@@ -20,7 +20,7 @@ typedef struct GeographicalPositionInformation_1 GeographicalPositionInformation
 
 #define GEOGRAPHICALPOSITIONINFORMATION_1_BITSIZE 51
 
-GeographicalPositionInformation_1*  GeographicalPositionInformation_1_New();
+GeographicalPositionInformation_1*  GeographicalPositionInformation_1_New(void);
 
 void   GeographicalPositionInformation_1_Delete(GeographicalPositionInformation_1*);
 

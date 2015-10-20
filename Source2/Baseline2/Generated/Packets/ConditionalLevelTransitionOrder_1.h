@@ -16,7 +16,7 @@ typedef struct ConditionalLevelTransitionOrder_1 ConditionalLevelTransitionOrder
 
 #define CONDITIONALLEVELTRANSITIONORDER_1_BITSIZE 3
 
-ConditionalLevelTransitionOrder_1*  ConditionalLevelTransitionOrder_1_New();
+ConditionalLevelTransitionOrder_1*  ConditionalLevelTransitionOrder_1_New(void);
 
 void   ConditionalLevelTransitionOrder_1_Delete(ConditionalLevelTransitionOrder_1*);
 

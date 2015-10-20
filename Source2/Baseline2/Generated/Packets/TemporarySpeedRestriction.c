@@ -2,7 +2,6 @@
 #include "TemporarySpeedRestriction.h"
 #include "Bit64.h"
 
-
 TemporarySpeedRestriction* TemporarySpeedRestriction_New(void)
 {
     void* raw = malloc(sizeof(TemporarySpeedRestriction));
@@ -210,32 +209,16 @@ int TemporarySpeedRestriction_DecodeBit(TemporarySpeedRestriction* p, Bitstream*
         return 0;
     }
 }
-/*
-int TemporarySpeedRestriction_EncodeInt(PacketInfo* data, kcg_int* stream, const TemporarySpeedRestriction* p)
-{
-    stream[data->startAddress++] = p->Q_DIR;
-    stream[data->startAddress++] = p->L_PACKET;
-    stream[data->startAddress++] = p->Q_SCALE;
-    stream[data->startAddress++] = p->NID_TSR;
-    stream[data->startAddress++] = p->D_TSR;
-    stream[data->startAddress++] = p->L_TSR;
-    stream[data->startAddress++] = p->Q_FRONT;
-    stream[data->startAddress++] = p->V_TSR;
 
-    return 1;
+/*
+int TemporarySpeedRestriction_EncodeInt(const TemporarySpeedRestriction* p, PacketInfo* data, kcg_int* stream)
+{
+
 }
 
-int TemporarySpeedRestriction_DecodeInt(PacketInfo* data, const kcg_int* stream, TemporarySpeedRestriction* p)
+int TemporarySpeedRestriction_DecodeInt(TemporarySpeedRestriction* p, PacketInfo* data, kcg_int* stream)
 {
-    p->Q_DIR = stream[data->startAddress++];
-    p->L_PACKET = stream[data->startAddress++];
-    p->Q_SCALE = stream[data->startAddress++];
-    p->NID_TSR = stream[data->startAddress++];
-    p->D_TSR = stream[data->startAddress++];
-    p->L_TSR = stream[data->startAddress++];
-    p->Q_FRONT = stream[data->startAddress++];
-    p->V_TSR = stream[data->startAddress++];
 
-    return 1;
 }
 */
+

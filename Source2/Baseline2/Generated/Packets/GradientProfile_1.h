@@ -17,7 +17,7 @@ typedef struct GradientProfile_1 GradientProfile_1;
 
 #define GRADIENTPROFILE_1_BITSIZE 24
 
-GradientProfile_1*  GradientProfile_1_New();
+GradientProfile_1*  GradientProfile_1_New(void);
 
 void   GradientProfile_1_Delete(GradientProfile_1*);
 

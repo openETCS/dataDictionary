@@ -15,7 +15,7 @@ typedef struct ValidatedTrainData_1 ValidatedTrainData_1;
 
 #define VALIDATEDTRAINDATA_1_BITSIZE 8
 
-ValidatedTrainData_1*  ValidatedTrainData_1_New();
+ValidatedTrainData_1*  ValidatedTrainData_1_New(void);
 
 void   ValidatedTrainData_1_Delete(ValidatedTrainData_1*);
 

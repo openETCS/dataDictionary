@@ -18,7 +18,7 @@ typedef struct Level23MovementAuthority_1 Level23MovementAuthority_1;
 
 #define LEVEL23MOVEMENTAUTHORITY_1_BITSIZE 41
 
-Level23MovementAuthority_1*  Level23MovementAuthority_1_New();
+Level23MovementAuthority_1*  Level23MovementAuthority_1_New(void);
 
 void   Level23MovementAuthority_1_Delete(Level23MovementAuthority_1*);
 

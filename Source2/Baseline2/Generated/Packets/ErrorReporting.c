@@ -2,7 +2,6 @@
 #include "ErrorReporting.h"
 #include "Bit64.h"
 
-
 ErrorReporting* ErrorReporting_New(void)
 {
     void* raw = malloc(sizeof(ErrorReporting));
@@ -34,7 +33,6 @@ int ErrorReporting_UpperBitsNotSet(const ErrorReporting* p)
         return 0;
     }
 }
-
 
 int ErrorReporting_EncodeBit(const ErrorReporting* p, Bitstream* stream)
 {
@@ -109,20 +107,16 @@ int ErrorReporting_DecodeBit(ErrorReporting* p, Bitstream* stream)
         return 0;
     }
 }
-/*
-int ErrorReporting_EncodeInt(PacketInfo* data, kcg_int* stream, const ErrorReporting* p)
-{
-    stream[data->startAddress++] = p->L_PACKET;
-    stream[data->startAddress++] = p->M_ERROR;
 
-    return 1;
+/*
+int ErrorReporting_EncodeInt(const ErrorReporting* p, PacketInfo* data, kcg_int* stream)
+{
+
 }
 
-int ErrorReporting_DecodeInt(PacketInfo* data, const kcg_int* stream, ErrorReporting* p)
+int ErrorReporting_DecodeInt(ErrorReporting* p, PacketInfo* data, kcg_int* stream)
 {
-    p->L_PACKET = stream[data->startAddress++];
-    p->M_ERROR = stream[data->startAddress++];
 
-    return 1;
 }
 */
+
