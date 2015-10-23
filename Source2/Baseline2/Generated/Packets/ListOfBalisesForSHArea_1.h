@@ -156,9 +156,9 @@ static inline int ListOfBalisesForSHArea_1_Equal(const ListOfBalisesForSHArea_1*
     return status;
 }
 
-int ListOfBalisesForSHArea_1_EncodeInt(const ListOfBalisesForSHArea_1* p, PacketInfo* data, kcg_int* stream);
+int ListOfBalisesForSHArea_1_EncodeInt(const ListOfBalisesForSHArea_1* p, kcg_int* startAddress, kcg_int* stream);
 
-int ListOfBalisesForSHArea_1_DecodeInt(ListOfBalisesForSHArea_1* p, PacketInfo* data, kcg_int* stream);
+int ListOfBalisesForSHArea_1_DecodeInt(ListOfBalisesForSHArea_1* p, kcg_int* startAddress, const kcg_int* stream);
 
 #endif // LISTOFBALISESFORSHAREA_1_H_INCLUDED
 

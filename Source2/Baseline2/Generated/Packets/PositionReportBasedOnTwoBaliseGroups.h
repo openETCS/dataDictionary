@@ -273,7 +273,7 @@ static inline uint32_t PositionReportBasedOnTwoBaliseGroups_Length(const Positio
 
 int PositionReportBasedOnTwoBaliseGroups_EncodeInt(const PositionReportBasedOnTwoBaliseGroups* p, PacketInfo* data, kcg_int* stream);
 
-int PositionReportBasedOnTwoBaliseGroups_DecodeInt(PositionReportBasedOnTwoBaliseGroups* p, PacketInfo* data, kcg_int* stream);
+int PositionReportBasedOnTwoBaliseGroups_DecodeInt(PositionReportBasedOnTwoBaliseGroups* p, const PacketInfo* data, const kcg_int* stream);
 
 #endif // POSITIONREPORTBASEDONTWOBALISEGROUPS_H_INCLUDED
 

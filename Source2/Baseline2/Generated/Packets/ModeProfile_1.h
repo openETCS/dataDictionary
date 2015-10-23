@@ -174,9 +174,9 @@ static inline int ModeProfile_1_Equal(const ModeProfile_1* a, const ModeProfile_
     return status;
 }
 
-int ModeProfile_1_EncodeInt(const ModeProfile_1* p, PacketInfo* data, kcg_int* stream);
+int ModeProfile_1_EncodeInt(const ModeProfile_1* p, kcg_int* startAddress, kcg_int* stream);
 
-int ModeProfile_1_DecodeInt(ModeProfile_1* p, PacketInfo* data, kcg_int* stream);
+int ModeProfile_1_DecodeInt(ModeProfile_1* p, kcg_int* startAddress, const kcg_int* stream);
 
 #endif // MODEPROFILE_1_H_INCLUDED
 

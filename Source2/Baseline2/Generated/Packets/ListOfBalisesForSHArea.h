@@ -196,7 +196,7 @@ static inline uint32_t ListOfBalisesForSHArea_Length(const ListOfBalisesForSHAre
 
 int ListOfBalisesForSHArea_EncodeInt(const ListOfBalisesForSHArea* p, PacketInfo* data, kcg_int* stream);
 
-int ListOfBalisesForSHArea_DecodeInt(ListOfBalisesForSHArea* p, PacketInfo* data, kcg_int* stream);
+int ListOfBalisesForSHArea_DecodeInt(ListOfBalisesForSHArea* p, const PacketInfo* data, const kcg_int* stream);
 
 #endif // LISTOFBALISESFORSHAREA_H_INCLUDED
 

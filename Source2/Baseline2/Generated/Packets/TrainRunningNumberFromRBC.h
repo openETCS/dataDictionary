@@ -180,7 +180,7 @@ static inline uint32_t TrainRunningNumberFromRBC_Length(const TrainRunningNumber
 
 int TrainRunningNumberFromRBC_EncodeInt(const TrainRunningNumberFromRBC* p, PacketInfo* data, kcg_int* stream);
 
-int TrainRunningNumberFromRBC_DecodeInt(TrainRunningNumberFromRBC* p, PacketInfo* data, kcg_int* stream);
+int TrainRunningNumberFromRBC_DecodeInt(TrainRunningNumberFromRBC* p, const PacketInfo* data, const kcg_int* stream);
 
 #endif // TRAINRUNNINGNUMBERFROMRBC_H_INCLUDED
 

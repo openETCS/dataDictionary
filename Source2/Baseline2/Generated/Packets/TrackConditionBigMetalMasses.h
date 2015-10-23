@@ -220,7 +220,7 @@ static inline uint32_t TrackConditionBigMetalMasses_Length(const TrackConditionB
 
 int TrackConditionBigMetalMasses_EncodeInt(const TrackConditionBigMetalMasses* p, PacketInfo* data, kcg_int* stream);
 
-int TrackConditionBigMetalMasses_DecodeInt(TrackConditionBigMetalMasses* p, PacketInfo* data, kcg_int* stream);
+int TrackConditionBigMetalMasses_DecodeInt(TrackConditionBigMetalMasses* p, const PacketInfo* data, const kcg_int* stream);
 
 #endif // TRACKCONDITIONBIGMETALMASSES_H_INCLUDED
 

@@ -279,7 +279,7 @@ static inline uint32_t Level23MovementAuthority_Length(const Level23MovementAuth
 
 int Level23MovementAuthority_EncodeInt(const Level23MovementAuthority* p, PacketInfo* data, kcg_int* stream);
 
-int Level23MovementAuthority_DecodeInt(Level23MovementAuthority* p, PacketInfo* data, kcg_int* stream);
+int Level23MovementAuthority_DecodeInt(Level23MovementAuthority* p, const PacketInfo* data, const kcg_int* stream);
 
 #endif // LEVEL23MOVEMENTAUTHORITY_H_INCLUDED
 

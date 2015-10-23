@@ -251,7 +251,7 @@ static inline uint32_t InternationalStaticSpeedProfile_Length(const Internationa
 
 int InternationalStaticSpeedProfile_EncodeInt(const InternationalStaticSpeedProfile* p, PacketInfo* data, kcg_int* stream);
 
-int InternationalStaticSpeedProfile_DecodeInt(InternationalStaticSpeedProfile* p, PacketInfo* data, kcg_int* stream);
+int InternationalStaticSpeedProfile_DecodeInt(InternationalStaticSpeedProfile* p, const PacketInfo* data, const kcg_int* stream);
 
 #endif // INTERNATIONALSTATICSPEEDPROFILE_H_INCLUDED
 

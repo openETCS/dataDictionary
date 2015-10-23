@@ -236,7 +236,7 @@ static inline uint32_t TrackCondition_Length(const TrackCondition* p)
 
 int TrackCondition_EncodeInt(const TrackCondition* p, PacketInfo* data, kcg_int* stream);
 
-int TrackCondition_DecodeInt(TrackCondition* p, PacketInfo* data, kcg_int* stream);
+int TrackCondition_DecodeInt(TrackCondition* p, const PacketInfo* data, const kcg_int* stream);
 
 #endif // TRACKCONDITION_H_INCLUDED
 

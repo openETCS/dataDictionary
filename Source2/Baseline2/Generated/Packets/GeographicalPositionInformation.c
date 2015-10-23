@@ -203,11 +203,68 @@ int GeographicalPositionInformation_DecodeBit(GeographicalPositionInformation* p
 
 int GeographicalPositionInformation_EncodeInt(const GeographicalPositionInformation* p, PacketInfo* data, kcg_int* stream)
 {
-    return 0;
+    data->nid_packet = 79;
+    data->q_dir = p->Q_DIR;
+    data->valid = 1;
+
+    kcg_int startAddress = data->startAddress;
+
+    stream[startAddress++] = p->header.NID_PACKET;
+
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->Q_SCALE;
+    stream[startAddress++] = p->Q_NEWCOUNTRY;
+    stream[startAddress++] = p->NID_C;
+    stream[startAddress++] = p->NID_BG;
+    stream[startAddress++] = p->D_POSOFF;
+    stream[startAddress++] = p->Q_MPOSITION;
+    stream[startAddress++] = p->M_POSITION;
+    stream[startAddress++] = p->N_ITER_1;
+
+    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+    {
+        GeographicalPositionInformation_1_EncodeInt(&(p->sub_1[i]), &startAddress, stream);
+    }
+
+
+    data->endAddress = startAddress-1;
+
+    return 1;
 }
 
-int GeographicalPositionInformation_DecodeInt(GeographicalPositionInformation* p, PacketInfo* data, kcg_int* stream)
+int GeographicalPositionInformation_DecodeInt(GeographicalPositionInformation* p, const PacketInfo* data, const kcg_int* stream)
 {
-    return 0;
+    if(data->nid_packet != 79)
+    {
+         return 0;
+    }
+
+    kcg_int startAddress = data->startAddress;
+    p->header.NID_PACKET = stream[startAddress++];
+
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->Q_SCALE = stream[startAddress++];
+    p->Q_NEWCOUNTRY = stream[startAddress++];
+    p->NID_C = stream[startAddress++];
+    p->NID_BG = stream[startAddress++];
+    p->D_POSOFF = stream[startAddress++];
+    p->Q_MPOSITION = stream[startAddress++];
+    p->M_POSITION = stream[startAddress++];
+    p->N_ITER_1 = stream[startAddress++];
+
+    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+    {
+        GeographicalPositionInformation_1_DecodeInt(&(p->sub_1[i]), &startAddress, stream);
+    }
+
+
+    if(startAddress-1 != data->endAddress)
+    {
+         return 0;
+    }
+
+    return 1;
 }
 

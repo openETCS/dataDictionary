@@ -146,9 +146,9 @@ static inline int NationalValues_1_Equal(const NationalValues_1* a, const Nation
     return status;
 }
 
-int NationalValues_1_EncodeInt(const NationalValues_1* p, PacketInfo* data, kcg_int* stream);
+int NationalValues_1_EncodeInt(const NationalValues_1* p, kcg_int* startAddress, kcg_int* stream);
 
-int NationalValues_1_DecodeInt(NationalValues_1* p, PacketInfo* data, kcg_int* stream);
+int NationalValues_1_DecodeInt(NationalValues_1* p, kcg_int* startAddress, const kcg_int* stream);
 
 #endif // NATIONALVALUES_1_H_INCLUDED
 

@@ -181,7 +181,7 @@ static inline uint32_t DataUsedByApplicationsOutsideTheERTMSETCSSystem_Length(co
 
 int DataUsedByApplicationsOutsideTheERTMSETCSSystem_EncodeInt(const DataUsedByApplicationsOutsideTheERTMSETCSSystem* p, PacketInfo* data, kcg_int* stream);
 
-int DataUsedByApplicationsOutsideTheERTMSETCSSystem_DecodeInt(DataUsedByApplicationsOutsideTheERTMSETCSSystem* p, PacketInfo* data, kcg_int* stream);
+int DataUsedByApplicationsOutsideTheERTMSETCSSystem_DecodeInt(DataUsedByApplicationsOutsideTheERTMSETCSSystem* p, const PacketInfo* data, const kcg_int* stream);
 
 #endif // DATAUSEDBYAPPLICATIONSOUTSIDETHEERTMSETCSSYSTEM_H_INCLUDED
 

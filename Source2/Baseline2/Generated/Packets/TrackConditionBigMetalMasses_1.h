@@ -153,9 +153,9 @@ static inline int TrackConditionBigMetalMasses_1_Equal(const TrackConditionBigMe
     return status;
 }
 
-int TrackConditionBigMetalMasses_1_EncodeInt(const TrackConditionBigMetalMasses_1* p, PacketInfo* data, kcg_int* stream);
+int TrackConditionBigMetalMasses_1_EncodeInt(const TrackConditionBigMetalMasses_1* p, kcg_int* startAddress, kcg_int* stream);
 
-int TrackConditionBigMetalMasses_1_DecodeInt(TrackConditionBigMetalMasses_1* p, PacketInfo* data, kcg_int* stream);
+int TrackConditionBigMetalMasses_1_DecodeInt(TrackConditionBigMetalMasses_1* p, kcg_int* startAddress, const kcg_int* stream);
 
 #endif // TRACKCONDITIONBIGMETALMASSES_1_H_INCLUDED
 

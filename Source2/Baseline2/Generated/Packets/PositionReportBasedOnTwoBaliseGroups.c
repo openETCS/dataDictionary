@@ -304,11 +304,67 @@ int PositionReportBasedOnTwoBaliseGroups_DecodeBit(PositionReportBasedOnTwoBalis
 
 int PositionReportBasedOnTwoBaliseGroups_EncodeInt(const PositionReportBasedOnTwoBaliseGroups* p, PacketInfo* data, kcg_int* stream)
 {
-    return 0;
+    data->nid_packet = 1;
+    data->valid = 1;
+
+    kcg_int startAddress = data->startAddress;
+
+    stream[startAddress++] = p->header.NID_PACKET;
+
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->Q_SCALE;
+    stream[startAddress++] = p->NID_LRBG;
+    stream[startAddress++] = p->NID_PRVLRBG;
+    stream[startAddress++] = p->D_LRBG;
+    stream[startAddress++] = p->Q_DIRLRBG;
+    stream[startAddress++] = p->Q_DLRBG;
+    stream[startAddress++] = p->L_DOUBTOVER;
+    stream[startAddress++] = p->L_DOUBTUNDER;
+    stream[startAddress++] = p->Q_LENGTH;
+    stream[startAddress++] = p->L_TRAININT;
+    stream[startAddress++] = p->V_TRAIN;
+    stream[startAddress++] = p->Q_DIRTRAIN;
+    stream[startAddress++] = p->M_MODE;
+    stream[startAddress++] = p->M_LEVEL;
+    stream[startAddress++] = p->NID_STM;
+
+    data->endAddress = startAddress-1;
+
+    return 1;
 }
 
-int PositionReportBasedOnTwoBaliseGroups_DecodeInt(PositionReportBasedOnTwoBaliseGroups* p, PacketInfo* data, kcg_int* stream)
+int PositionReportBasedOnTwoBaliseGroups_DecodeInt(PositionReportBasedOnTwoBaliseGroups* p, const PacketInfo* data, const kcg_int* stream)
 {
-    return 0;
+    if(data->nid_packet != 1)
+    {
+         return 0;
+    }
+
+    kcg_int startAddress = data->startAddress;
+    p->header.NID_PACKET = stream[startAddress++];
+
+    p->L_PACKET = stream[startAddress++];
+    p->Q_SCALE = stream[startAddress++];
+    p->NID_LRBG = stream[startAddress++];
+    p->NID_PRVLRBG = stream[startAddress++];
+    p->D_LRBG = stream[startAddress++];
+    p->Q_DIRLRBG = stream[startAddress++];
+    p->Q_DLRBG = stream[startAddress++];
+    p->L_DOUBTOVER = stream[startAddress++];
+    p->L_DOUBTUNDER = stream[startAddress++];
+    p->Q_LENGTH = stream[startAddress++];
+    p->L_TRAININT = stream[startAddress++];
+    p->V_TRAIN = stream[startAddress++];
+    p->Q_DIRTRAIN = stream[startAddress++];
+    p->M_MODE = stream[startAddress++];
+    p->M_LEVEL = stream[startAddress++];
+    p->NID_STM = stream[startAddress++];
+
+    if(startAddress-1 != data->endAddress)
+    {
+         return 0;
+    }
+
+    return 1;
 }
 

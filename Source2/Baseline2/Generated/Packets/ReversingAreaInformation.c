@@ -161,22 +161,45 @@ int ReversingAreaInformation_DecodeBit(ReversingAreaInformation* p, Bitstream* s
 
 int ReversingAreaInformation_EncodeInt(const ReversingAreaInformation* p, PacketInfo* data, kcg_int* stream)
 {
-    stream[data->startAddress++] = p->Q_DIR;
-    stream[data->startAddress++] = p->L_PACKET;
-    stream[data->startAddress++] = p->Q_SCALE;
-    stream[data->startAddress++] = p->D_STARTREVERSE;
-    stream[data->startAddress++] = p->L_REVERSEAREA;
+    data->nid_packet = 138;
+    data->q_dir = p->Q_DIR;
+    data->valid = 1;
+
+    kcg_int startAddress = data->startAddress;
+
+    stream[startAddress++] = p->header.NID_PACKET;
+
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->Q_SCALE;
+    stream[startAddress++] = p->D_STARTREVERSE;
+    stream[startAddress++] = p->L_REVERSEAREA;
+
+    data->endAddress = startAddress-1;
 
     return 1;
 }
 
-int ReversingAreaInformation_DecodeInt(ReversingAreaInformation* p, PacketInfo* data, kcg_int* stream)
+int ReversingAreaInformation_DecodeInt(ReversingAreaInformation* p, const PacketInfo* data, const kcg_int* stream)
 {
-    p->Q_DIR = stream[data->startAddress++];
-    p->L_PACKET = stream[data->startAddress++];
-    p->Q_SCALE = stream[data->startAddress++];
-    p->D_STARTREVERSE = stream[data->startAddress++];
-    p->L_REVERSEAREA = stream[data->startAddress++];
+    if(data->nid_packet != 138)
+    {
+         return 0;
+    }
+
+    kcg_int startAddress = data->startAddress;
+    p->header.NID_PACKET = stream[startAddress++];
+
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->Q_SCALE = stream[startAddress++];
+    p->D_STARTREVERSE = stream[startAddress++];
+    p->L_REVERSEAREA = stream[startAddress++];
+
+    if(startAddress-1 != data->endAddress)
+    {
+         return 0;
+    }
 
     return 1;
 }

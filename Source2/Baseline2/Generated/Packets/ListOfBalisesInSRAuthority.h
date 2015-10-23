@@ -196,7 +196,7 @@ static inline uint32_t ListOfBalisesInSRAuthority_Length(const ListOfBalisesInSR
 
 int ListOfBalisesInSRAuthority_EncodeInt(const ListOfBalisesInSRAuthority* p, PacketInfo* data, kcg_int* stream);
 
-int ListOfBalisesInSRAuthority_DecodeInt(ListOfBalisesInSRAuthority* p, PacketInfo* data, kcg_int* stream);
+int ListOfBalisesInSRAuthority_DecodeInt(ListOfBalisesInSRAuthority* p, const PacketInfo* data, const kcg_int* stream);
 
 #endif // LISTOFBALISESINSRAUTHORITY_H_INCLUDED
 

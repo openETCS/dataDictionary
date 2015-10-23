@@ -111,11 +111,51 @@ int OnboardTelephoneNumbers_DecodeBit(OnboardTelephoneNumbers* p, Bitstream* str
 
 int OnboardTelephoneNumbers_EncodeInt(const OnboardTelephoneNumbers* p, PacketInfo* data, kcg_int* stream)
 {
-    return 0;
+    data->nid_packet = 3;
+    data->valid = 1;
+
+    kcg_int startAddress = data->startAddress;
+
+    stream[startAddress++] = p->header.NID_PACKET;
+
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->N_ITER_1;
+
+    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+    {
+        OnboardTelephoneNumbers_1_EncodeInt(&(p->sub_1[i]), &startAddress, stream);
+    }
+
+
+    data->endAddress = startAddress-1;
+
+    return 1;
 }
 
-int OnboardTelephoneNumbers_DecodeInt(OnboardTelephoneNumbers* p, PacketInfo* data, kcg_int* stream)
+int OnboardTelephoneNumbers_DecodeInt(OnboardTelephoneNumbers* p, const PacketInfo* data, const kcg_int* stream)
 {
-    return 0;
+    if(data->nid_packet != 3)
+    {
+         return 0;
+    }
+
+    kcg_int startAddress = data->startAddress;
+    p->header.NID_PACKET = stream[startAddress++];
+
+    p->L_PACKET = stream[startAddress++];
+    p->N_ITER_1 = stream[startAddress++];
+
+    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+    {
+        OnboardTelephoneNumbers_1_DecodeInt(&(p->sub_1[i]), &startAddress, stream);
+    }
+
+
+    if(startAddress-1 != data->endAddress)
+    {
+         return 0;
+    }
+
+    return 1;
 }
 

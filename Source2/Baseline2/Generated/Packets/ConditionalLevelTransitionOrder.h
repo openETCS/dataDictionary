@@ -212,7 +212,7 @@ static inline uint32_t ConditionalLevelTransitionOrder_Length(const ConditionalL
 
 int ConditionalLevelTransitionOrder_EncodeInt(const ConditionalLevelTransitionOrder* p, PacketInfo* data, kcg_int* stream);
 
-int ConditionalLevelTransitionOrder_DecodeInt(ConditionalLevelTransitionOrder* p, PacketInfo* data, kcg_int* stream);
+int ConditionalLevelTransitionOrder_DecodeInt(ConditionalLevelTransitionOrder* p, const PacketInfo* data, const kcg_int* stream);
 
 #endif // CONDITIONALLEVELTRANSITIONORDER_H_INCLUDED
 

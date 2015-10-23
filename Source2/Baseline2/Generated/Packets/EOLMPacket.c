@@ -212,28 +212,51 @@ int EOLMPacket_DecodeBit(EOLMPacket* p, Bitstream* stream)
 
 int EOLMPacket_EncodeInt(const EOLMPacket* p, PacketInfo* data, kcg_int* stream)
 {
-    stream[data->startAddress++] = p->Q_DIR;
-    stream[data->startAddress++] = p->L_PACKET;
-    stream[data->startAddress++] = p->Q_SCALE;
-    stream[data->startAddress++] = p->NID_LOOP;
-    stream[data->startAddress++] = p->D_LOOP;
-    stream[data->startAddress++] = p->L_LOOP;
-    stream[data->startAddress++] = p->Q_LOOPDIR;
-    stream[data->startAddress++] = p->Q_SSCODE;
+    data->nid_packet = 134;
+    data->q_dir = p->Q_DIR;
+    data->valid = 1;
+
+    kcg_int startAddress = data->startAddress;
+
+    stream[startAddress++] = p->header.NID_PACKET;
+
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->Q_SCALE;
+    stream[startAddress++] = p->NID_LOOP;
+    stream[startAddress++] = p->D_LOOP;
+    stream[startAddress++] = p->L_LOOP;
+    stream[startAddress++] = p->Q_LOOPDIR;
+    stream[startAddress++] = p->Q_SSCODE;
+
+    data->endAddress = startAddress-1;
 
     return 1;
 }
 
-int EOLMPacket_DecodeInt(EOLMPacket* p, PacketInfo* data, kcg_int* stream)
+int EOLMPacket_DecodeInt(EOLMPacket* p, const PacketInfo* data, const kcg_int* stream)
 {
-    p->Q_DIR = stream[data->startAddress++];
-    p->L_PACKET = stream[data->startAddress++];
-    p->Q_SCALE = stream[data->startAddress++];
-    p->NID_LOOP = stream[data->startAddress++];
-    p->D_LOOP = stream[data->startAddress++];
-    p->L_LOOP = stream[data->startAddress++];
-    p->Q_LOOPDIR = stream[data->startAddress++];
-    p->Q_SSCODE = stream[data->startAddress++];
+    if(data->nid_packet != 134)
+    {
+         return 0;
+    }
+
+    kcg_int startAddress = data->startAddress;
+    p->header.NID_PACKET = stream[startAddress++];
+
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->Q_SCALE = stream[startAddress++];
+    p->NID_LOOP = stream[startAddress++];
+    p->D_LOOP = stream[startAddress++];
+    p->L_LOOP = stream[startAddress++];
+    p->Q_LOOPDIR = stream[startAddress++];
+    p->Q_SSCODE = stream[startAddress++];
+
+    if(startAddress-1 != data->endAddress)
+    {
+         return 0;
+    }
 
     return 1;
 }

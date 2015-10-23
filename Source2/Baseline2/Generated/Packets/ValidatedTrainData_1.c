@@ -91,13 +91,17 @@ int ValidatedTrainData_1_DecodeBit(ValidatedTrainData_1* p, Bitstream* stream)
     }
 }
 
-int ValidatedTrainData_1_EncodeInt(const ValidatedTrainData_1* p, PacketInfo* data, kcg_int* stream)
+int ValidatedTrainData_1_EncodeInt(const ValidatedTrainData_1* p, kcg_int* startAddress, kcg_int* stream)
 {
-    return 0;
+    stream[(*startAddress)++] = p->M_TRACTION;
+
+    return 1;
 }
 
-int ValidatedTrainData_1_DecodeInt(ValidatedTrainData_1* p, PacketInfo* data, kcg_int* stream)
+int ValidatedTrainData_1_DecodeInt(ValidatedTrainData_1* p, kcg_int* startAddress, const kcg_int* stream)
 {
-    return 0;
+    p->M_TRACTION = stream[(*startAddress)++];
+
+    return 1;
 }
 

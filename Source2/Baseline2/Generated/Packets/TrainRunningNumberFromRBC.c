@@ -127,18 +127,41 @@ int TrainRunningNumberFromRBC_DecodeBit(TrainRunningNumberFromRBC* p, Bitstream*
 
 int TrainRunningNumberFromRBC_EncodeInt(const TrainRunningNumberFromRBC* p, PacketInfo* data, kcg_int* stream)
 {
-    stream[data->startAddress++] = p->Q_DIR;
-    stream[data->startAddress++] = p->L_PACKET;
-    stream[data->startAddress++] = p->NID_OPERATIONAL;
+    data->nid_packet = 140;
+    data->q_dir = p->Q_DIR;
+    data->valid = 1;
+
+    kcg_int startAddress = data->startAddress;
+
+    stream[startAddress++] = p->header.NID_PACKET;
+
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->NID_OPERATIONAL;
+
+    data->endAddress = startAddress-1;
 
     return 1;
 }
 
-int TrainRunningNumberFromRBC_DecodeInt(TrainRunningNumberFromRBC* p, PacketInfo* data, kcg_int* stream)
+int TrainRunningNumberFromRBC_DecodeInt(TrainRunningNumberFromRBC* p, const PacketInfo* data, const kcg_int* stream)
 {
-    p->Q_DIR = stream[data->startAddress++];
-    p->L_PACKET = stream[data->startAddress++];
-    p->NID_OPERATIONAL = stream[data->startAddress++];
+    if(data->nid_packet != 140)
+    {
+         return 0;
+    }
+
+    kcg_int startAddress = data->startAddress;
+    p->header.NID_PACKET = stream[startAddress++];
+
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->NID_OPERATIONAL = stream[startAddress++];
+
+    if(startAddress-1 != data->endAddress)
+    {
+         return 0;
+    }
 
     return 1;
 }

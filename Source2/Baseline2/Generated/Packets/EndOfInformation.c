@@ -76,12 +76,34 @@ int EndOfInformation_DecodeBit(EndOfInformation* p, Bitstream* stream)
 
 int EndOfInformation_EncodeInt(const EndOfInformation* p, PacketInfo* data, kcg_int* stream)
 {
+    data->nid_packet = 255;
+    data->valid = 1;
+
+    kcg_int startAddress = data->startAddress;
+
+    stream[startAddress++] = p->header.NID_PACKET;
+
+
+    data->endAddress = startAddress-1;
 
     return 1;
 }
 
-int EndOfInformation_DecodeInt(EndOfInformation* p, PacketInfo* data, kcg_int* stream)
+int EndOfInformation_DecodeInt(EndOfInformation* p, const PacketInfo* data, const kcg_int* stream)
 {
+    if(data->nid_packet != 255)
+    {
+         return 0;
+    }
+
+    kcg_int startAddress = data->startAddress;
+    p->header.NID_PACKET = stream[startAddress++];
+
+
+    if(startAddress-1 != data->endAddress)
+    {
+         return 0;
+    }
 
     return 1;
 }

@@ -125,13 +125,21 @@ int TrackCondition_1_DecodeBit(TrackCondition_1* p, Bitstream* stream)
     }
 }
 
-int TrackCondition_1_EncodeInt(const TrackCondition_1* p, PacketInfo* data, kcg_int* stream)
+int TrackCondition_1_EncodeInt(const TrackCondition_1* p, kcg_int* startAddress, kcg_int* stream)
 {
-    return 0;
+    stream[(*startAddress)++] = p->D_TRACKCOND;
+    stream[(*startAddress)++] = p->L_TRACKCOND;
+    stream[(*startAddress)++] = p->M_TRACKCOND;
+
+    return 1;
 }
 
-int TrackCondition_1_DecodeInt(TrackCondition_1* p, PacketInfo* data, kcg_int* stream)
+int TrackCondition_1_DecodeInt(TrackCondition_1* p, kcg_int* startAddress, const kcg_int* stream)
 {
-    return 0;
+    p->D_TRACKCOND = stream[(*startAddress)++];
+    p->L_TRACKCOND = stream[(*startAddress)++];
+    p->M_TRACKCOND = stream[(*startAddress)++];
+
+    return 1;
 }
 

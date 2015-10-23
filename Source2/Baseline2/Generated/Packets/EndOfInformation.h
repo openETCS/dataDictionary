@@ -159,7 +159,7 @@ static inline uint32_t EndOfInformation_Length(const EndOfInformation* p)
 
 int EndOfInformation_EncodeInt(const EndOfInformation* p, PacketInfo* data, kcg_int* stream);
 
-int EndOfInformation_DecodeInt(EndOfInformation* p, PacketInfo* data, kcg_int* stream);
+int EndOfInformation_DecodeInt(EndOfInformation* p, const PacketInfo* data, const kcg_int* stream);
 
 #endif // ENDOFINFORMATION_H_INCLUDED
 

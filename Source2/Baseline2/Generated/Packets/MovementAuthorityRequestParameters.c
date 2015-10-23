@@ -161,22 +161,45 @@ int MovementAuthorityRequestParameters_DecodeBit(MovementAuthorityRequestParamet
 
 int MovementAuthorityRequestParameters_EncodeInt(const MovementAuthorityRequestParameters* p, PacketInfo* data, kcg_int* stream)
 {
-    stream[data->startAddress++] = p->Q_DIR;
-    stream[data->startAddress++] = p->L_PACKET;
-    stream[data->startAddress++] = p->T_MAR;
-    stream[data->startAddress++] = p->T_TIMEOUTRQST;
-    stream[data->startAddress++] = p->T_CYCRQST;
+    data->nid_packet = 57;
+    data->q_dir = p->Q_DIR;
+    data->valid = 1;
+
+    kcg_int startAddress = data->startAddress;
+
+    stream[startAddress++] = p->header.NID_PACKET;
+
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->T_MAR;
+    stream[startAddress++] = p->T_TIMEOUTRQST;
+    stream[startAddress++] = p->T_CYCRQST;
+
+    data->endAddress = startAddress-1;
 
     return 1;
 }
 
-int MovementAuthorityRequestParameters_DecodeInt(MovementAuthorityRequestParameters* p, PacketInfo* data, kcg_int* stream)
+int MovementAuthorityRequestParameters_DecodeInt(MovementAuthorityRequestParameters* p, const PacketInfo* data, const kcg_int* stream)
 {
-    p->Q_DIR = stream[data->startAddress++];
-    p->L_PACKET = stream[data->startAddress++];
-    p->T_MAR = stream[data->startAddress++];
-    p->T_TIMEOUTRQST = stream[data->startAddress++];
-    p->T_CYCRQST = stream[data->startAddress++];
+    if(data->nid_packet != 57)
+    {
+         return 0;
+    }
+
+    kcg_int startAddress = data->startAddress;
+    p->header.NID_PACKET = stream[startAddress++];
+
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->T_MAR = stream[startAddress++];
+    p->T_TIMEOUTRQST = stream[startAddress++];
+    p->T_CYCRQST = stream[startAddress++];
+
+    if(startAddress-1 != data->endAddress)
+    {
+         return 0;
+    }
 
     return 1;
 }

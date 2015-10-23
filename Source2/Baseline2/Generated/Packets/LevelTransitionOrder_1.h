@@ -156,9 +156,9 @@ static inline int LevelTransitionOrder_1_Equal(const LevelTransitionOrder_1* a, 
     return status;
 }
 
-int LevelTransitionOrder_1_EncodeInt(const LevelTransitionOrder_1* p, PacketInfo* data, kcg_int* stream);
+int LevelTransitionOrder_1_EncodeInt(const LevelTransitionOrder_1* p, kcg_int* startAddress, kcg_int* stream);
 
-int LevelTransitionOrder_1_DecodeInt(LevelTransitionOrder_1* p, PacketInfo* data, kcg_int* stream);
+int LevelTransitionOrder_1_DecodeInt(LevelTransitionOrder_1* p, kcg_int* startAddress, const kcg_int* stream);
 
 #endif // LEVELTRANSITIONORDER_1_H_INCLUDED
 

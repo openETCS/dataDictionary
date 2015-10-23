@@ -142,13 +142,23 @@ int Level23MovementAuthority_1_DecodeBit(Level23MovementAuthority_1* p, Bitstrea
     }
 }
 
-int Level23MovementAuthority_1_EncodeInt(const Level23MovementAuthority_1* p, PacketInfo* data, kcg_int* stream)
+int Level23MovementAuthority_1_EncodeInt(const Level23MovementAuthority_1* p, kcg_int* startAddress, kcg_int* stream)
 {
-    return 0;
+    stream[(*startAddress)++] = p->L_SECTION;
+    stream[(*startAddress)++] = p->Q_SECTIONTIMER;
+    stream[(*startAddress)++] = p->T_SECTIONTIMER;
+    stream[(*startAddress)++] = p->D_SECTIONTIMERSTOPLOC;
+
+    return 1;
 }
 
-int Level23MovementAuthority_1_DecodeInt(Level23MovementAuthority_1* p, PacketInfo* data, kcg_int* stream)
+int Level23MovementAuthority_1_DecodeInt(Level23MovementAuthority_1* p, kcg_int* startAddress, const kcg_int* stream)
 {
-    return 0;
+    p->L_SECTION = stream[(*startAddress)++];
+    p->Q_SECTIONTIMER = stream[(*startAddress)++];
+    p->T_SECTIONTIMER = stream[(*startAddress)++];
+    p->D_SECTIONTIMERSTOPLOC = stream[(*startAddress)++];
+
+    return 1;
 }
 

@@ -248,11 +248,79 @@ int ValidatedTrainData_DecodeBit(ValidatedTrainData* p, Bitstream* stream)
 
 int ValidatedTrainData_EncodeInt(const ValidatedTrainData* p, PacketInfo* data, kcg_int* stream)
 {
-    return 0;
+    data->nid_packet = 11;
+    data->valid = 1;
+
+    kcg_int startAddress = data->startAddress;
+
+    stream[startAddress++] = p->header.NID_PACKET;
+
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->NID_OPERATIONAL;
+    stream[startAddress++] = p->NC_TRAIN;
+    stream[startAddress++] = p->L_TRAIN;
+    stream[startAddress++] = p->V_MAXTRAIN;
+    stream[startAddress++] = p->M_LOADINGGAUGE;
+    stream[startAddress++] = p->M_AXLELOAD;
+    stream[startAddress++] = p->M_AIRTIGHT;
+    stream[startAddress++] = p->N_ITER_1;
+
+    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+    {
+        ValidatedTrainData_1_EncodeInt(&(p->sub_1[i]), &startAddress, stream);
+    }
+
+    stream[startAddress++] = p->N_ITER_2;
+
+    for (uint32_t i = 0; i < p->N_ITER_2; ++i)
+    {
+        ValidatedTrainData_2_EncodeInt(&(p->sub_2[i]), &startAddress, stream);
+    }
+
+
+    data->endAddress = startAddress-1;
+
+    return 1;
 }
 
-int ValidatedTrainData_DecodeInt(ValidatedTrainData* p, PacketInfo* data, kcg_int* stream)
+int ValidatedTrainData_DecodeInt(ValidatedTrainData* p, const PacketInfo* data, const kcg_int* stream)
 {
-    return 0;
+    if(data->nid_packet != 11)
+    {
+         return 0;
+    }
+
+    kcg_int startAddress = data->startAddress;
+    p->header.NID_PACKET = stream[startAddress++];
+
+    p->L_PACKET = stream[startAddress++];
+    p->NID_OPERATIONAL = stream[startAddress++];
+    p->NC_TRAIN = stream[startAddress++];
+    p->L_TRAIN = stream[startAddress++];
+    p->V_MAXTRAIN = stream[startAddress++];
+    p->M_LOADINGGAUGE = stream[startAddress++];
+    p->M_AXLELOAD = stream[startAddress++];
+    p->M_AIRTIGHT = stream[startAddress++];
+    p->N_ITER_1 = stream[startAddress++];
+
+    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+    {
+        ValidatedTrainData_1_DecodeInt(&(p->sub_1[i]), &startAddress, stream);
+    }
+
+    p->N_ITER_2 = stream[startAddress++];
+
+    for (uint32_t i = 0; i < p->N_ITER_2; ++i)
+    {
+        ValidatedTrainData_2_DecodeInt(&(p->sub_2[i]), &startAddress, stream);
+    }
+
+
+    if(startAddress-1 != data->endAddress)
+    {
+         return 0;
+    }
+
+    return 1;
 }
 

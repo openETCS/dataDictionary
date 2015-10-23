@@ -196,7 +196,7 @@ static inline uint32_t TrackConditionChangeOfTractionPower_Length(const TrackCon
 
 int TrackConditionChangeOfTractionPower_EncodeInt(const TrackConditionChangeOfTractionPower* p, PacketInfo* data, kcg_int* stream);
 
-int TrackConditionChangeOfTractionPower_DecodeInt(TrackConditionChangeOfTractionPower* p, PacketInfo* data, kcg_int* stream);
+int TrackConditionChangeOfTractionPower_DecodeInt(TrackConditionChangeOfTractionPower* p, const PacketInfo* data, const kcg_int* stream);
 
 #endif // TRACKCONDITIONCHANGEOFTRACTIONPOWER_H_INCLUDED
 

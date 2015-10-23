@@ -282,11 +282,68 @@ int PacketForSendingFixedTextMessages_DecodeBit(PacketForSendingFixedTextMessage
 
 int PacketForSendingFixedTextMessages_EncodeInt(const PacketForSendingFixedTextMessages* p, PacketInfo* data, kcg_int* stream)
 {
-    return 0;
+    data->nid_packet = 76;
+    data->q_dir = p->Q_DIR;
+    data->valid = 1;
+
+    kcg_int startAddress = data->startAddress;
+
+    stream[startAddress++] = p->header.NID_PACKET;
+
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->Q_SCALE;
+    stream[startAddress++] = p->Q_TEXTCLASS;
+    stream[startAddress++] = p->Q_TEXTDISPLAY;
+    stream[startAddress++] = p->D_TEXTDISPLAY;
+    stream[startAddress++] = p->M_MODETEXTDISPLAY_0;
+    stream[startAddress++] = p->M_LEVELTEXTDISPLAY_0;
+    stream[startAddress++] = p->NID_STM_0;
+    stream[startAddress++] = p->L_TEXTDISPLAY;
+    stream[startAddress++] = p->T_TEXTDISPLAY;
+    stream[startAddress++] = p->M_MODETEXTDISPLAY_1;
+    stream[startAddress++] = p->M_LEVELTEXTDISPLAY_1;
+    stream[startAddress++] = p->NID_STM_1;
+    stream[startAddress++] = p->Q_TEXTCONFIRM;
+    stream[startAddress++] = p->Q_TEXT;
+
+    data->endAddress = startAddress-1;
+
+    return 1;
 }
 
-int PacketForSendingFixedTextMessages_DecodeInt(PacketForSendingFixedTextMessages* p, PacketInfo* data, kcg_int* stream)
+int PacketForSendingFixedTextMessages_DecodeInt(PacketForSendingFixedTextMessages* p, const PacketInfo* data, const kcg_int* stream)
 {
-    return 0;
+    if(data->nid_packet != 76)
+    {
+         return 0;
+    }
+
+    kcg_int startAddress = data->startAddress;
+    p->header.NID_PACKET = stream[startAddress++];
+
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->Q_SCALE = stream[startAddress++];
+    p->Q_TEXTCLASS = stream[startAddress++];
+    p->Q_TEXTDISPLAY = stream[startAddress++];
+    p->D_TEXTDISPLAY = stream[startAddress++];
+    p->M_MODETEXTDISPLAY_0 = stream[startAddress++];
+    p->M_LEVELTEXTDISPLAY_0 = stream[startAddress++];
+    p->NID_STM_0 = stream[startAddress++];
+    p->L_TEXTDISPLAY = stream[startAddress++];
+    p->T_TEXTDISPLAY = stream[startAddress++];
+    p->M_MODETEXTDISPLAY_1 = stream[startAddress++];
+    p->M_LEVELTEXTDISPLAY_1 = stream[startAddress++];
+    p->NID_STM_1 = stream[startAddress++];
+    p->Q_TEXTCONFIRM = stream[startAddress++];
+    p->Q_TEXT = stream[startAddress++];
+
+    if(startAddress-1 != data->endAddress)
+    {
+         return 0;
+    }
+
+    return 1;
 }
 

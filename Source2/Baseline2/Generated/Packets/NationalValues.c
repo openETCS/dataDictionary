@@ -270,11 +270,94 @@ int NationalValues_DecodeBit(NationalValues* p, Bitstream* stream)
 
 int NationalValues_EncodeInt(const NationalValues* p, PacketInfo* data, kcg_int* stream)
 {
-    return 0;
+    data->nid_packet = 3;
+    data->q_dir = p->Q_DIR;
+    data->valid = 1;
+
+    kcg_int startAddress = data->startAddress;
+
+    stream[startAddress++] = p->header.NID_PACKET;
+
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->Q_SCALE;
+    stream[startAddress++] = p->D_VALIDNV;
+    stream[startAddress++] = p->N_ITER_1;
+
+    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+    {
+        NationalValues_1_EncodeInt(&(p->sub_1[i]), &startAddress, stream);
+    }
+
+    stream[startAddress++] = p->V_NVSHUNT;
+    stream[startAddress++] = p->V_NVSTFF;
+    stream[startAddress++] = p->V_NVONSIGHT;
+    stream[startAddress++] = p->V_NVUNFIT;
+    stream[startAddress++] = p->V_NVREL;
+    stream[startAddress++] = p->D_NVROLL;
+    stream[startAddress++] = p->Q_NVSRBKTRG;
+    stream[startAddress++] = p->Q_NVEMRRLS;
+    stream[startAddress++] = p->V_NVALLOWOVTRP;
+    stream[startAddress++] = p->V_NVSUPOVTRP;
+    stream[startAddress++] = p->D_NVOVTRP;
+    stream[startAddress++] = p->T_NVOVTRP;
+    stream[startAddress++] = p->D_NVPOTRP;
+    stream[startAddress++] = p->M_NVCONTACT;
+    stream[startAddress++] = p->T_NVCONTACT;
+    stream[startAddress++] = p->M_NVDERUN;
+    stream[startAddress++] = p->D_NVSTFF;
+    stream[startAddress++] = p->Q_NVDRIVER_ADHES;
+
+    data->endAddress = startAddress-1;
+
+    return 1;
 }
 
-int NationalValues_DecodeInt(NationalValues* p, PacketInfo* data, kcg_int* stream)
+int NationalValues_DecodeInt(NationalValues* p, const PacketInfo* data, const kcg_int* stream)
 {
-    return 0;
+    if(data->nid_packet != 3)
+    {
+         return 0;
+    }
+
+    kcg_int startAddress = data->startAddress;
+    p->header.NID_PACKET = stream[startAddress++];
+
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->Q_SCALE = stream[startAddress++];
+    p->D_VALIDNV = stream[startAddress++];
+    p->N_ITER_1 = stream[startAddress++];
+
+    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+    {
+        NationalValues_1_DecodeInt(&(p->sub_1[i]), &startAddress, stream);
+    }
+
+    p->V_NVSHUNT = stream[startAddress++];
+    p->V_NVSTFF = stream[startAddress++];
+    p->V_NVONSIGHT = stream[startAddress++];
+    p->V_NVUNFIT = stream[startAddress++];
+    p->V_NVREL = stream[startAddress++];
+    p->D_NVROLL = stream[startAddress++];
+    p->Q_NVSRBKTRG = stream[startAddress++];
+    p->Q_NVEMRRLS = stream[startAddress++];
+    p->V_NVALLOWOVTRP = stream[startAddress++];
+    p->V_NVSUPOVTRP = stream[startAddress++];
+    p->D_NVOVTRP = stream[startAddress++];
+    p->T_NVOVTRP = stream[startAddress++];
+    p->D_NVPOTRP = stream[startAddress++];
+    p->M_NVCONTACT = stream[startAddress++];
+    p->T_NVCONTACT = stream[startAddress++];
+    p->M_NVDERUN = stream[startAddress++];
+    p->D_NVSTFF = stream[startAddress++];
+    p->Q_NVDRIVER_ADHES = stream[startAddress++];
+
+    if(startAddress-1 != data->endAddress)
+    {
+         return 0;
+    }
+
+    return 1;
 }
 

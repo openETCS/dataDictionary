@@ -114,13 +114,21 @@ int LevelTransitionOrder_1_DecodeBit(LevelTransitionOrder_1* p, Bitstream* strea
     }
 }
 
-int LevelTransitionOrder_1_EncodeInt(const LevelTransitionOrder_1* p, PacketInfo* data, kcg_int* stream)
+int LevelTransitionOrder_1_EncodeInt(const LevelTransitionOrder_1* p, kcg_int* startAddress, kcg_int* stream)
 {
-    return 0;
+    stream[(*startAddress)++] = p->M_LEVELTR;
+    stream[(*startAddress)++] = p->NID_STM;
+    stream[(*startAddress)++] = p->L_ACKLEVELTR;
+
+    return 1;
 }
 
-int LevelTransitionOrder_1_DecodeInt(LevelTransitionOrder_1* p, PacketInfo* data, kcg_int* stream)
+int LevelTransitionOrder_1_DecodeInt(LevelTransitionOrder_1* p, kcg_int* startAddress, const kcg_int* stream)
 {
-    return 0;
+    p->M_LEVELTR = stream[(*startAddress)++];
+    p->NID_STM = stream[(*startAddress)++];
+    p->L_ACKLEVELTR = stream[(*startAddress)++];
+
+    return 1;
 }
 

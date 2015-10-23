@@ -174,9 +174,9 @@ static inline int RouteSuitabilityData_1_Equal(const RouteSuitabilityData_1* a, 
     return status;
 }
 
-int RouteSuitabilityData_1_EncodeInt(const RouteSuitabilityData_1* p, PacketInfo* data, kcg_int* stream);
+int RouteSuitabilityData_1_EncodeInt(const RouteSuitabilityData_1* p, kcg_int* startAddress, kcg_int* stream);
 
-int RouteSuitabilityData_1_DecodeInt(RouteSuitabilityData_1* p, PacketInfo* data, kcg_int* stream);
+int RouteSuitabilityData_1_DecodeInt(RouteSuitabilityData_1* p, kcg_int* startAddress, const kcg_int* stream);
 
 #endif // ROUTESUITABILITYDATA_1_H_INCLUDED
 

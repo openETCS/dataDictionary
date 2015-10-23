@@ -173,11 +173,50 @@ int SessionManagement_DecodeBit(SessionManagement* p, Bitstream* stream)
 
 int SessionManagement_EncodeInt(const SessionManagement* p, PacketInfo* data, kcg_int* stream)
 {
-    return 0;
+    data->nid_packet = 42;
+    data->q_dir = p->Q_DIR;
+    data->valid = 1;
+
+    kcg_int startAddress = data->startAddress;
+
+    stream[startAddress++] = p->header.NID_PACKET;
+
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->Q_RBC;
+    stream[startAddress++] = p->NID_C;
+    stream[startAddress++] = p->NID_RBC;
+    stream[startAddress++] = p->NID_RADIO;
+    stream[startAddress++] = p->Q_SLEEPSESSION;
+
+    data->endAddress = startAddress-1;
+
+    return 1;
 }
 
-int SessionManagement_DecodeInt(SessionManagement* p, PacketInfo* data, kcg_int* stream)
+int SessionManagement_DecodeInt(SessionManagement* p, const PacketInfo* data, const kcg_int* stream)
 {
-    return 0;
+    if(data->nid_packet != 42)
+    {
+         return 0;
+    }
+
+    kcg_int startAddress = data->startAddress;
+    p->header.NID_PACKET = stream[startAddress++];
+
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->Q_RBC = stream[startAddress++];
+    p->NID_C = stream[startAddress++];
+    p->NID_RBC = stream[startAddress++];
+    p->NID_RADIO = stream[startAddress++];
+    p->Q_SLEEPSESSION = stream[startAddress++];
+
+    if(startAddress-1 != data->endAddress)
+    {
+         return 0;
+    }
+
+    return 1;
 }
 

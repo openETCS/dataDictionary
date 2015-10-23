@@ -127,18 +127,41 @@ int RadioNetworkRegistration_DecodeBit(RadioNetworkRegistration* p, Bitstream* s
 
 int RadioNetworkRegistration_EncodeInt(const RadioNetworkRegistration* p, PacketInfo* data, kcg_int* stream)
 {
-    stream[data->startAddress++] = p->Q_DIR;
-    stream[data->startAddress++] = p->L_PACKET;
-    stream[data->startAddress++] = p->NID_MN;
+    data->nid_packet = 45;
+    data->q_dir = p->Q_DIR;
+    data->valid = 1;
+
+    kcg_int startAddress = data->startAddress;
+
+    stream[startAddress++] = p->header.NID_PACKET;
+
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->NID_MN;
+
+    data->endAddress = startAddress-1;
 
     return 1;
 }
 
-int RadioNetworkRegistration_DecodeInt(RadioNetworkRegistration* p, PacketInfo* data, kcg_int* stream)
+int RadioNetworkRegistration_DecodeInt(RadioNetworkRegistration* p, const PacketInfo* data, const kcg_int* stream)
 {
-    p->Q_DIR = stream[data->startAddress++];
-    p->L_PACKET = stream[data->startAddress++];
-    p->NID_MN = stream[data->startAddress++];
+    if(data->nid_packet != 45)
+    {
+         return 0;
+    }
+
+    kcg_int startAddress = data->startAddress;
+    p->header.NID_PACKET = stream[startAddress++];
+
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->NID_MN = stream[startAddress++];
+
+    if(startAddress-1 != data->endAddress)
+    {
+         return 0;
+    }
 
     return 1;
 }

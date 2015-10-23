@@ -180,7 +180,7 @@ static inline uint32_t DangerForShuntingInformation_Length(const DangerForShunti
 
 int DangerForShuntingInformation_EncodeInt(const DangerForShuntingInformation* p, PacketInfo* data, kcg_int* stream);
 
-int DangerForShuntingInformation_DecodeInt(DangerForShuntingInformation* p, PacketInfo* data, kcg_int* stream);
+int DangerForShuntingInformation_DecodeInt(DangerForShuntingInformation* p, const PacketInfo* data, const kcg_int* stream);
 
 #endif // DANGERFORSHUNTINGINFORMATION_H_INCLUDED
 

@@ -243,7 +243,7 @@ static inline uint32_t ModeProfile_Length(const ModeProfile* p)
 
 int ModeProfile_EncodeInt(const ModeProfile* p, PacketInfo* data, kcg_int* stream);
 
-int ModeProfile_DecodeInt(ModeProfile* p, PacketInfo* data, kcg_int* stream);
+int ModeProfile_DecodeInt(ModeProfile* p, const PacketInfo* data, const kcg_int* stream);
 
 #endif // MODEPROFILE_H_INCLUDED
 

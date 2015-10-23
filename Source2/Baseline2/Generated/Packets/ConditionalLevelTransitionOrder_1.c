@@ -108,13 +108,19 @@ int ConditionalLevelTransitionOrder_1_DecodeBit(ConditionalLevelTransitionOrder_
     }
 }
 
-int ConditionalLevelTransitionOrder_1_EncodeInt(const ConditionalLevelTransitionOrder_1* p, PacketInfo* data, kcg_int* stream)
+int ConditionalLevelTransitionOrder_1_EncodeInt(const ConditionalLevelTransitionOrder_1* p, kcg_int* startAddress, kcg_int* stream)
 {
-    return 0;
+    stream[(*startAddress)++] = p->M_LEVELTR;
+    stream[(*startAddress)++] = p->NID_STM;
+
+    return 1;
 }
 
-int ConditionalLevelTransitionOrder_1_DecodeInt(ConditionalLevelTransitionOrder_1* p, PacketInfo* data, kcg_int* stream)
+int ConditionalLevelTransitionOrder_1_DecodeInt(ConditionalLevelTransitionOrder_1* p, kcg_int* startAddress, const kcg_int* stream)
 {
-    return 0;
+    p->M_LEVELTR = stream[(*startAddress)++];
+    p->NID_STM = stream[(*startAddress)++];
+
+    return 1;
 }
 

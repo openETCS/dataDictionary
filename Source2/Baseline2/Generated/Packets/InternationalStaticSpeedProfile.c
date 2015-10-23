@@ -214,11 +214,76 @@ int InternationalStaticSpeedProfile_DecodeBit(InternationalStaticSpeedProfile* p
 
 int InternationalStaticSpeedProfile_EncodeInt(const InternationalStaticSpeedProfile* p, PacketInfo* data, kcg_int* stream)
 {
-    return 0;
+    data->nid_packet = 27;
+    data->q_dir = p->Q_DIR;
+    data->valid = 1;
+
+    kcg_int startAddress = data->startAddress;
+
+    stream[startAddress++] = p->header.NID_PACKET;
+
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->Q_SCALE;
+    stream[startAddress++] = p->D_STATIC;
+    stream[startAddress++] = p->V_STATIC;
+    stream[startAddress++] = p->Q_FRONT;
+    stream[startAddress++] = p->N_ITER_1;
+
+    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+    {
+        InternationalStaticSpeedProfile_1_EncodeInt(&(p->sub_1[i]), &startAddress, stream);
+    }
+
+    stream[startAddress++] = p->N_ITER_2;
+
+    for (uint32_t i = 0; i < p->N_ITER_2; ++i)
+    {
+        InternationalStaticSpeedProfile_2_EncodeInt(&(p->sub_2[i]), &startAddress, stream);
+    }
+
+
+    data->endAddress = startAddress-1;
+
+    return 1;
 }
 
-int InternationalStaticSpeedProfile_DecodeInt(InternationalStaticSpeedProfile* p, PacketInfo* data, kcg_int* stream)
+int InternationalStaticSpeedProfile_DecodeInt(InternationalStaticSpeedProfile* p, const PacketInfo* data, const kcg_int* stream)
 {
-    return 0;
+    if(data->nid_packet != 27)
+    {
+         return 0;
+    }
+
+    kcg_int startAddress = data->startAddress;
+    p->header.NID_PACKET = stream[startAddress++];
+
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->Q_SCALE = stream[startAddress++];
+    p->D_STATIC = stream[startAddress++];
+    p->V_STATIC = stream[startAddress++];
+    p->Q_FRONT = stream[startAddress++];
+    p->N_ITER_1 = stream[startAddress++];
+
+    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+    {
+        InternationalStaticSpeedProfile_1_DecodeInt(&(p->sub_1[i]), &startAddress, stream);
+    }
+
+    p->N_ITER_2 = stream[startAddress++];
+
+    for (uint32_t i = 0; i < p->N_ITER_2; ++i)
+    {
+        InternationalStaticSpeedProfile_2_DecodeInt(&(p->sub_2[i]), &startAddress, stream);
+    }
+
+
+    if(startAddress-1 != data->endAddress)
+    {
+         return 0;
+    }
+
+    return 1;
 }
 

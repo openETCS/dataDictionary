@@ -162,11 +162,58 @@ int ConditionalLevelTransitionOrder_DecodeBit(ConditionalLevelTransitionOrder* p
 
 int ConditionalLevelTransitionOrder_EncodeInt(const ConditionalLevelTransitionOrder* p, PacketInfo* data, kcg_int* stream)
 {
-    return 0;
+    data->nid_packet = 46;
+    data->q_dir = p->Q_DIR;
+    data->valid = 1;
+
+    kcg_int startAddress = data->startAddress;
+
+    stream[startAddress++] = p->header.NID_PACKET;
+
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->M_LEVELTR;
+    stream[startAddress++] = p->NID_STM;
+    stream[startAddress++] = p->N_ITER_1;
+
+    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+    {
+        ConditionalLevelTransitionOrder_1_EncodeInt(&(p->sub_1[i]), &startAddress, stream);
+    }
+
+
+    data->endAddress = startAddress-1;
+
+    return 1;
 }
 
-int ConditionalLevelTransitionOrder_DecodeInt(ConditionalLevelTransitionOrder* p, PacketInfo* data, kcg_int* stream)
+int ConditionalLevelTransitionOrder_DecodeInt(ConditionalLevelTransitionOrder* p, const PacketInfo* data, const kcg_int* stream)
 {
-    return 0;
+    if(data->nid_packet != 46)
+    {
+         return 0;
+    }
+
+    kcg_int startAddress = data->startAddress;
+    p->header.NID_PACKET = stream[startAddress++];
+
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->M_LEVELTR = stream[startAddress++];
+    p->NID_STM = stream[startAddress++];
+    p->N_ITER_1 = stream[startAddress++];
+
+    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+    {
+        ConditionalLevelTransitionOrder_1_DecodeInt(&(p->sub_1[i]), &startAddress, stream);
+    }
+
+
+    if(startAddress-1 != data->endAddress)
+    {
+         return 0;
+    }
+
+    return 1;
 }
 

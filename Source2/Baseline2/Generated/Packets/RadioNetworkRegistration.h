@@ -181,7 +181,7 @@ static inline uint32_t RadioNetworkRegistration_Length(const RadioNetworkRegistr
 
 int RadioNetworkRegistration_EncodeInt(const RadioNetworkRegistration* p, PacketInfo* data, kcg_int* stream);
 
-int RadioNetworkRegistration_DecodeInt(RadioNetworkRegistration* p, PacketInfo* data, kcg_int* stream);
+int RadioNetworkRegistration_DecodeInt(RadioNetworkRegistration* p, const PacketInfo* data, const kcg_int* stream);
 
 #endif // RADIONETWORKREGISTRATION_H_INCLUDED
 

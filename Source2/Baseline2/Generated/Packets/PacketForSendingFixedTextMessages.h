@@ -259,7 +259,7 @@ static inline uint32_t PacketForSendingFixedTextMessages_Length(const PacketForS
 
 int PacketForSendingFixedTextMessages_EncodeInt(const PacketForSendingFixedTextMessages* p, PacketInfo* data, kcg_int* stream);
 
-int PacketForSendingFixedTextMessages_DecodeInt(PacketForSendingFixedTextMessages* p, PacketInfo* data, kcg_int* stream);
+int PacketForSendingFixedTextMessages_DecodeInt(PacketForSendingFixedTextMessages* p, const PacketInfo* data, const kcg_int* stream);
 
 #endif // PACKETFORSENDINGFIXEDTEXTMESSAGES_H_INCLUDED
 

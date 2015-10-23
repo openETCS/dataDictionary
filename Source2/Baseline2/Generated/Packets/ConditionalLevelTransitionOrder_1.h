@@ -153,9 +153,9 @@ static inline int ConditionalLevelTransitionOrder_1_Equal(const ConditionalLevel
     return status;
 }
 
-int ConditionalLevelTransitionOrder_1_EncodeInt(const ConditionalLevelTransitionOrder_1* p, PacketInfo* data, kcg_int* stream);
+int ConditionalLevelTransitionOrder_1_EncodeInt(const ConditionalLevelTransitionOrder_1* p, kcg_int* startAddress, kcg_int* stream);
 
-int ConditionalLevelTransitionOrder_1_DecodeInt(ConditionalLevelTransitionOrder_1* p, PacketInfo* data, kcg_int* stream);
+int ConditionalLevelTransitionOrder_1_DecodeInt(ConditionalLevelTransitionOrder_1* p, kcg_int* startAddress, const kcg_int* stream);
 
 #endif // CONDITIONALLEVELTRANSITIONORDER_1_H_INCLUDED
 

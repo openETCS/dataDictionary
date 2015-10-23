@@ -183,9 +183,9 @@ static inline int AxleLoadSpeedProfile_2_Equal(const AxleLoadSpeedProfile_2* a, 
     return status;
 }
 
-int AxleLoadSpeedProfile_2_EncodeInt(const AxleLoadSpeedProfile_2* p, PacketInfo* data, kcg_int* stream);
+int AxleLoadSpeedProfile_2_EncodeInt(const AxleLoadSpeedProfile_2* p, kcg_int* startAddress, kcg_int* stream);
 
-int AxleLoadSpeedProfile_2_DecodeInt(AxleLoadSpeedProfile_2* p, PacketInfo* data, kcg_int* stream);
+int AxleLoadSpeedProfile_2_DecodeInt(AxleLoadSpeedProfile_2* p, kcg_int* startAddress, const kcg_int* stream);
 
 #endif // AXLELOADSPEEDPROFILE_2_H_INCLUDED
 

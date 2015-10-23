@@ -108,13 +108,19 @@ int InternationalStaticSpeedProfile_1_DecodeBit(InternationalStaticSpeedProfile_
     }
 }
 
-int InternationalStaticSpeedProfile_1_EncodeInt(const InternationalStaticSpeedProfile_1* p, PacketInfo* data, kcg_int* stream)
+int InternationalStaticSpeedProfile_1_EncodeInt(const InternationalStaticSpeedProfile_1* p, kcg_int* startAddress, kcg_int* stream)
 {
-    return 0;
+    stream[(*startAddress)++] = p->NC_DIFF;
+    stream[(*startAddress)++] = p->V_DIFF;
+
+    return 1;
 }
 
-int InternationalStaticSpeedProfile_1_DecodeInt(InternationalStaticSpeedProfile_1* p, PacketInfo* data, kcg_int* stream)
+int InternationalStaticSpeedProfile_1_DecodeInt(InternationalStaticSpeedProfile_1* p, kcg_int* startAddress, const kcg_int* stream)
 {
-    return 0;
+    p->NC_DIFF = stream[(*startAddress)++];
+    p->V_DIFF = stream[(*startAddress)++];
+
+    return 1;
 }
 

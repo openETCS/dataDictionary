@@ -159,13 +159,25 @@ int ModeProfile_1_DecodeBit(ModeProfile_1* p, Bitstream* stream)
     }
 }
 
-int ModeProfile_1_EncodeInt(const ModeProfile_1* p, PacketInfo* data, kcg_int* stream)
+int ModeProfile_1_EncodeInt(const ModeProfile_1* p, kcg_int* startAddress, kcg_int* stream)
 {
-    return 0;
+    stream[(*startAddress)++] = p->D_MAMODE;
+    stream[(*startAddress)++] = p->M_MAMODE;
+    stream[(*startAddress)++] = p->V_MAMODE;
+    stream[(*startAddress)++] = p->L_MAMODE;
+    stream[(*startAddress)++] = p->L_ACKMAMODE;
+
+    return 1;
 }
 
-int ModeProfile_1_DecodeInt(ModeProfile_1* p, PacketInfo* data, kcg_int* stream)
+int ModeProfile_1_DecodeInt(ModeProfile_1* p, kcg_int* startAddress, const kcg_int* stream)
 {
-    return 0;
+    p->D_MAMODE = stream[(*startAddress)++];
+    p->M_MAMODE = stream[(*startAddress)++];
+    p->V_MAMODE = stream[(*startAddress)++];
+    p->L_MAMODE = stream[(*startAddress)++];
+    p->L_ACKMAMODE = stream[(*startAddress)++];
+
+    return 1;
 }
 

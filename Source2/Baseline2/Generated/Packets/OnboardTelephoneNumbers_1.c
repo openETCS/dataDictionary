@@ -91,13 +91,17 @@ int OnboardTelephoneNumbers_1_DecodeBit(OnboardTelephoneNumbers_1* p, Bitstream*
     }
 }
 
-int OnboardTelephoneNumbers_1_EncodeInt(const OnboardTelephoneNumbers_1* p, PacketInfo* data, kcg_int* stream)
+int OnboardTelephoneNumbers_1_EncodeInt(const OnboardTelephoneNumbers_1* p, kcg_int* startAddress, kcg_int* stream)
 {
-    return 0;
+    stream[(*startAddress)++] = p->NID_RADIO;
+
+    return 1;
 }
 
-int OnboardTelephoneNumbers_1_DecodeInt(OnboardTelephoneNumbers_1* p, PacketInfo* data, kcg_int* stream)
+int OnboardTelephoneNumbers_1_DecodeInt(OnboardTelephoneNumbers_1* p, kcg_int* startAddress, const kcg_int* stream)
 {
-    return 0;
+    p->NID_RADIO = stream[(*startAddress)++];
+
+    return 1;
 }
 

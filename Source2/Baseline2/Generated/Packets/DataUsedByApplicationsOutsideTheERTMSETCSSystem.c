@@ -127,18 +127,40 @@ int DataUsedByApplicationsOutsideTheERTMSETCSSystem_DecodeBit(DataUsedByApplicat
 
 int DataUsedByApplicationsOutsideTheERTMSETCSSystem_EncodeInt(const DataUsedByApplicationsOutsideTheERTMSETCSSystem* p, PacketInfo* data, kcg_int* stream)
 {
-    stream[data->startAddress++] = p->L_PACKET;
-    stream[data->startAddress++] = p->NID_XUSER;
-    stream[data->startAddress++] = p->Other_data_depending_on__NID_XUSER;
+    data->nid_packet = 44;
+    data->valid = 1;
+
+    kcg_int startAddress = data->startAddress;
+
+    stream[startAddress++] = p->header.NID_PACKET;
+
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->NID_XUSER;
+    stream[startAddress++] = p->Other_data_depending_on__NID_XUSER;
+
+    data->endAddress = startAddress-1;
 
     return 1;
 }
 
-int DataUsedByApplicationsOutsideTheERTMSETCSSystem_DecodeInt(DataUsedByApplicationsOutsideTheERTMSETCSSystem* p, PacketInfo* data, kcg_int* stream)
+int DataUsedByApplicationsOutsideTheERTMSETCSSystem_DecodeInt(DataUsedByApplicationsOutsideTheERTMSETCSSystem* p, const PacketInfo* data, const kcg_int* stream)
 {
-    p->L_PACKET = stream[data->startAddress++];
-    p->NID_XUSER = stream[data->startAddress++];
-    p->Other_data_depending_on__NID_XUSER = stream[data->startAddress++];
+    if(data->nid_packet != 44)
+    {
+         return 0;
+    }
+
+    kcg_int startAddress = data->startAddress;
+    p->header.NID_PACKET = stream[startAddress++];
+
+    p->L_PACKET = stream[startAddress++];
+    p->NID_XUSER = stream[startAddress++];
+    p->Other_data_depending_on__NID_XUSER = stream[startAddress++];
+
+    if(startAddress-1 != data->endAddress)
+    {
+         return 0;
+    }
 
     return 1;
 }

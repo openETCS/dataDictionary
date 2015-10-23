@@ -128,11 +128,54 @@ int ListOfBalisesInSRAuthority_DecodeBit(ListOfBalisesInSRAuthority* p, Bitstrea
 
 int ListOfBalisesInSRAuthority_EncodeInt(const ListOfBalisesInSRAuthority* p, PacketInfo* data, kcg_int* stream)
 {
-    return 0;
+    data->nid_packet = 63;
+    data->q_dir = p->Q_DIR;
+    data->valid = 1;
+
+    kcg_int startAddress = data->startAddress;
+
+    stream[startAddress++] = p->header.NID_PACKET;
+
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->N_ITER_1;
+
+    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+    {
+        ListOfBalisesInSRAuthority_1_EncodeInt(&(p->sub_1[i]), &startAddress, stream);
+    }
+
+
+    data->endAddress = startAddress-1;
+
+    return 1;
 }
 
-int ListOfBalisesInSRAuthority_DecodeInt(ListOfBalisesInSRAuthority* p, PacketInfo* data, kcg_int* stream)
+int ListOfBalisesInSRAuthority_DecodeInt(ListOfBalisesInSRAuthority* p, const PacketInfo* data, const kcg_int* stream)
 {
-    return 0;
+    if(data->nid_packet != 63)
+    {
+         return 0;
+    }
+
+    kcg_int startAddress = data->startAddress;
+    p->header.NID_PACKET = stream[startAddress++];
+
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->N_ITER_1 = stream[startAddress++];
+
+    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+    {
+        ListOfBalisesInSRAuthority_1_DecodeInt(&(p->sub_1[i]), &startAddress, stream);
+    }
+
+
+    if(startAddress-1 != data->endAddress)
+    {
+         return 0;
+    }
+
+    return 1;
 }
 

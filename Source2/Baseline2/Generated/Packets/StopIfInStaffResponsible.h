@@ -180,7 +180,7 @@ static inline uint32_t StopIfInStaffResponsible_Length(const StopIfInStaffRespon
 
 int StopIfInStaffResponsible_EncodeInt(const StopIfInStaffResponsible* p, PacketInfo* data, kcg_int* stream);
 
-int StopIfInStaffResponsible_DecodeInt(StopIfInStaffResponsible* p, PacketInfo* data, kcg_int* stream);
+int StopIfInStaffResponsible_DecodeInt(StopIfInStaffResponsible* p, const PacketInfo* data, const kcg_int* stream);
 
 #endif // STOPIFINSTAFFRESPONSIBLE_H_INCLUDED
 

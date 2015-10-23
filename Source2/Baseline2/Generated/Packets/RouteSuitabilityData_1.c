@@ -159,13 +159,25 @@ int RouteSuitabilityData_1_DecodeBit(RouteSuitabilityData_1* p, Bitstream* strea
     }
 }
 
-int RouteSuitabilityData_1_EncodeInt(const RouteSuitabilityData_1* p, PacketInfo* data, kcg_int* stream)
+int RouteSuitabilityData_1_EncodeInt(const RouteSuitabilityData_1* p, kcg_int* startAddress, kcg_int* stream)
 {
-    return 0;
+    stream[(*startAddress)++] = p->D_SUITABILITY;
+    stream[(*startAddress)++] = p->Q_SUITABILITY;
+    stream[(*startAddress)++] = p->M_LOADINGGAUGE;
+    stream[(*startAddress)++] = p->M_AXLELOAD;
+    stream[(*startAddress)++] = p->M_TRACTION;
+
+    return 1;
 }
 
-int RouteSuitabilityData_1_DecodeInt(RouteSuitabilityData_1* p, PacketInfo* data, kcg_int* stream)
+int RouteSuitabilityData_1_DecodeInt(RouteSuitabilityData_1* p, kcg_int* startAddress, const kcg_int* stream)
 {
-    return 0;
+    p->D_SUITABILITY = stream[(*startAddress)++];
+    p->Q_SUITABILITY = stream[(*startAddress)++];
+    p->M_LOADINGGAUGE = stream[(*startAddress)++];
+    p->M_AXLELOAD = stream[(*startAddress)++];
+    p->M_TRACTION = stream[(*startAddress)++];
+
+    return 1;
 }
 

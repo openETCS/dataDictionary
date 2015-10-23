@@ -235,7 +235,7 @@ static inline uint32_t RadioInfillAreaInformation_Length(const RadioInfillAreaIn
 
 int RadioInfillAreaInformation_EncodeInt(const RadioInfillAreaInformation* p, PacketInfo* data, kcg_int* stream);
 
-int RadioInfillAreaInformation_DecodeInt(RadioInfillAreaInformation* p, PacketInfo* data, kcg_int* stream);
+int RadioInfillAreaInformation_DecodeInt(RadioInfillAreaInformation* p, const PacketInfo* data, const kcg_int* stream);
 
 #endif // RADIOINFILLAREAINFORMATION_H_INCLUDED
 

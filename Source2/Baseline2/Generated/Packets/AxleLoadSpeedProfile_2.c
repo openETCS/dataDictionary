@@ -143,13 +143,35 @@ int AxleLoadSpeedProfile_2_DecodeBit(AxleLoadSpeedProfile_2* p, Bitstream* strea
     }
 }
 
-int AxleLoadSpeedProfile_2_EncodeInt(const AxleLoadSpeedProfile_2* p, PacketInfo* data, kcg_int* stream)
+int AxleLoadSpeedProfile_2_EncodeInt(const AxleLoadSpeedProfile_2* p, kcg_int* startAddress, kcg_int* stream)
 {
-    return 0;
+    stream[(*startAddress)++] = p->D_AXLELOAD;
+    stream[(*startAddress)++] = p->L_AXLELOAD;
+    stream[(*startAddress)++] = p->Q_FRONT;
+    stream[(*startAddress)++] = p->N_ITER_2_1;
+
+    for (uint32_t i = 0; i < p->N_ITER_2_1; ++i)
+    {
+        AxleLoadSpeedProfile_2_1_EncodeInt(&(p->sub_2_1[i]), startAddress, stream);
+    }
+
+
+    return 1;
 }
 
-int AxleLoadSpeedProfile_2_DecodeInt(AxleLoadSpeedProfile_2* p, PacketInfo* data, kcg_int* stream)
+int AxleLoadSpeedProfile_2_DecodeInt(AxleLoadSpeedProfile_2* p, kcg_int* startAddress, const kcg_int* stream)
 {
-    return 0;
+    p->D_AXLELOAD = stream[(*startAddress)++];
+    p->L_AXLELOAD = stream[(*startAddress)++];
+    p->Q_FRONT = stream[(*startAddress)++];
+    p->N_ITER_2_1 = stream[(*startAddress)++];
+
+    for (uint32_t i = 0; i < p->N_ITER_2_1; ++i)
+    {
+        AxleLoadSpeedProfile_2_1_DecodeInt(&(p->sub_2_1[i]), startAddress, stream);
+    }
+
+
+    return 1;
 }
 

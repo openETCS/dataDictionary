@@ -110,16 +110,38 @@ int ErrorReporting_DecodeBit(ErrorReporting* p, Bitstream* stream)
 
 int ErrorReporting_EncodeInt(const ErrorReporting* p, PacketInfo* data, kcg_int* stream)
 {
-    stream[data->startAddress++] = p->L_PACKET;
-    stream[data->startAddress++] = p->M_ERROR;
+    data->nid_packet = 4;
+    data->valid = 1;
+
+    kcg_int startAddress = data->startAddress;
+
+    stream[startAddress++] = p->header.NID_PACKET;
+
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->M_ERROR;
+
+    data->endAddress = startAddress-1;
 
     return 1;
 }
 
-int ErrorReporting_DecodeInt(ErrorReporting* p, PacketInfo* data, kcg_int* stream)
+int ErrorReporting_DecodeInt(ErrorReporting* p, const PacketInfo* data, const kcg_int* stream)
 {
-    p->L_PACKET = stream[data->startAddress++];
-    p->M_ERROR = stream[data->startAddress++];
+    if(data->nid_packet != 4)
+    {
+         return 0;
+    }
+
+    kcg_int startAddress = data->startAddress;
+    p->header.NID_PACKET = stream[startAddress++];
+
+    p->L_PACKET = stream[startAddress++];
+    p->M_ERROR = stream[startAddress++];
+
+    if(startAddress-1 != data->endAddress)
+    {
+         return 0;
+    }
 
     return 1;
 }

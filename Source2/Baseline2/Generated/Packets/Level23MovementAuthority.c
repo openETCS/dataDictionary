@@ -269,11 +269,90 @@ int Level23MovementAuthority_DecodeBit(Level23MovementAuthority* p, Bitstream* s
 
 int Level23MovementAuthority_EncodeInt(const Level23MovementAuthority* p, PacketInfo* data, kcg_int* stream)
 {
-    return 0;
+    data->nid_packet = 15;
+    data->q_dir = p->Q_DIR;
+    data->valid = 1;
+
+    kcg_int startAddress = data->startAddress;
+
+    stream[startAddress++] = p->header.NID_PACKET;
+
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->Q_SCALE;
+    stream[startAddress++] = p->V_LOA;
+    stream[startAddress++] = p->T_LOA;
+    stream[startAddress++] = p->N_ITER_1;
+
+    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+    {
+        Level23MovementAuthority_1_EncodeInt(&(p->sub_1[i]), &startAddress, stream);
+    }
+
+    stream[startAddress++] = p->L_ENDSECTION;
+    stream[startAddress++] = p->Q_SECTIONTIMER;
+    stream[startAddress++] = p->T_SECTIONTIMER;
+    stream[startAddress++] = p->D_SECTIONTIMERSTOPLOC;
+    stream[startAddress++] = p->Q_ENDTIMER;
+    stream[startAddress++] = p->T_ENDTIMER;
+    stream[startAddress++] = p->D_ENDTIMERSTARTLOC;
+    stream[startAddress++] = p->Q_DANGERPOINT;
+    stream[startAddress++] = p->D_DP;
+    stream[startAddress++] = p->V_RELEASEDP;
+    stream[startAddress++] = p->Q_OVERLAP;
+    stream[startAddress++] = p->D_STARTOL;
+    stream[startAddress++] = p->T_OL;
+    stream[startAddress++] = p->D_OL;
+    stream[startAddress++] = p->V_RELEASEOL;
+
+    data->endAddress = startAddress-1;
+
+    return 1;
 }
 
-int Level23MovementAuthority_DecodeInt(Level23MovementAuthority* p, PacketInfo* data, kcg_int* stream)
+int Level23MovementAuthority_DecodeInt(Level23MovementAuthority* p, const PacketInfo* data, const kcg_int* stream)
 {
-    return 0;
+    if(data->nid_packet != 15)
+    {
+         return 0;
+    }
+
+    kcg_int startAddress = data->startAddress;
+    p->header.NID_PACKET = stream[startAddress++];
+
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->Q_SCALE = stream[startAddress++];
+    p->V_LOA = stream[startAddress++];
+    p->T_LOA = stream[startAddress++];
+    p->N_ITER_1 = stream[startAddress++];
+
+    for (uint32_t i = 0; i < p->N_ITER_1; ++i)
+    {
+        Level23MovementAuthority_1_DecodeInt(&(p->sub_1[i]), &startAddress, stream);
+    }
+
+    p->L_ENDSECTION = stream[startAddress++];
+    p->Q_SECTIONTIMER = stream[startAddress++];
+    p->T_SECTIONTIMER = stream[startAddress++];
+    p->D_SECTIONTIMERSTOPLOC = stream[startAddress++];
+    p->Q_ENDTIMER = stream[startAddress++];
+    p->T_ENDTIMER = stream[startAddress++];
+    p->D_ENDTIMERSTARTLOC = stream[startAddress++];
+    p->Q_DANGERPOINT = stream[startAddress++];
+    p->D_DP = stream[startAddress++];
+    p->V_RELEASEDP = stream[startAddress++];
+    p->Q_OVERLAP = stream[startAddress++];
+    p->D_STARTOL = stream[startAddress++];
+    p->T_OL = stream[startAddress++];
+    p->D_OL = stream[startAddress++];
+    p->V_RELEASEOL = stream[startAddress++];
+
+    if(startAddress-1 != data->endAddress)
+    {
+         return 0;
+    }
+
+    return 1;
 }
 

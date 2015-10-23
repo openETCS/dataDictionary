@@ -178,24 +178,47 @@ int AdhesionFactor_DecodeBit(AdhesionFactor* p, Bitstream* stream)
 
 int AdhesionFactor_EncodeInt(const AdhesionFactor* p, PacketInfo* data, kcg_int* stream)
 {
-    stream[data->startAddress++] = p->Q_DIR;
-    stream[data->startAddress++] = p->L_PACKET;
-    stream[data->startAddress++] = p->Q_SCALE;
-    stream[data->startAddress++] = p->D_ADHESION;
-    stream[data->startAddress++] = p->L_ADHESION;
-    stream[data->startAddress++] = p->M_ADHESION;
+    data->nid_packet = 71;
+    data->q_dir = p->Q_DIR;
+    data->valid = 1;
+
+    kcg_int startAddress = data->startAddress;
+
+    stream[startAddress++] = p->header.NID_PACKET;
+
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->Q_SCALE;
+    stream[startAddress++] = p->D_ADHESION;
+    stream[startAddress++] = p->L_ADHESION;
+    stream[startAddress++] = p->M_ADHESION;
+
+    data->endAddress = startAddress-1;
 
     return 1;
 }
 
-int AdhesionFactor_DecodeInt(AdhesionFactor* p, PacketInfo* data, kcg_int* stream)
+int AdhesionFactor_DecodeInt(AdhesionFactor* p, const PacketInfo* data, const kcg_int* stream)
 {
-    p->Q_DIR = stream[data->startAddress++];
-    p->L_PACKET = stream[data->startAddress++];
-    p->Q_SCALE = stream[data->startAddress++];
-    p->D_ADHESION = stream[data->startAddress++];
-    p->L_ADHESION = stream[data->startAddress++];
-    p->M_ADHESION = stream[data->startAddress++];
+    if(data->nid_packet != 71)
+    {
+         return 0;
+    }
+
+    kcg_int startAddress = data->startAddress;
+    p->header.NID_PACKET = stream[startAddress++];
+
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->Q_SCALE = stream[startAddress++];
+    p->D_ADHESION = stream[startAddress++];
+    p->L_ADHESION = stream[startAddress++];
+    p->M_ADHESION = stream[startAddress++];
+
+    if(startAddress-1 != data->endAddress)
+    {
+         return 0;
+    }
 
     return 1;
 }

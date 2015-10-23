@@ -205,7 +205,7 @@ static inline uint32_t SessionManagement_Length(const SessionManagement* p)
 
 int SessionManagement_EncodeInt(const SessionManagement* p, PacketInfo* data, kcg_int* stream);
 
-int SessionManagement_DecodeInt(SessionManagement* p, PacketInfo* data, kcg_int* stream);
+int SessionManagement_DecodeInt(SessionManagement* p, const PacketInfo* data, const kcg_int* stream);
 
 #endif // SESSIONMANAGEMENT_H_INCLUDED
 

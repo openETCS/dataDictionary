@@ -146,9 +146,9 @@ static inline int OnboardTelephoneNumbers_1_Equal(const OnboardTelephoneNumbers_
     return status;
 }
 
-int OnboardTelephoneNumbers_1_EncodeInt(const OnboardTelephoneNumbers_1* p, PacketInfo* data, kcg_int* stream);
+int OnboardTelephoneNumbers_1_EncodeInt(const OnboardTelephoneNumbers_1* p, kcg_int* startAddress, kcg_int* stream);
 
-int OnboardTelephoneNumbers_1_DecodeInt(OnboardTelephoneNumbers_1* p, PacketInfo* data, kcg_int* stream);
+int OnboardTelephoneNumbers_1_DecodeInt(OnboardTelephoneNumbers_1* p, kcg_int* startAddress, const kcg_int* stream);
 
 #endif // ONBOARDTELEPHONENUMBERS_1_H_INCLUDED
 

@@ -132,13 +132,27 @@ int GeographicalPositionInformation_1_DecodeBit(GeographicalPositionInformation_
     }
 }
 
-int GeographicalPositionInformation_1_EncodeInt(const GeographicalPositionInformation_1* p, PacketInfo* data, kcg_int* stream)
+int GeographicalPositionInformation_1_EncodeInt(const GeographicalPositionInformation_1* p, kcg_int* startAddress, kcg_int* stream)
 {
-    return 0;
+    stream[(*startAddress)++] = p->Q_NEWCOUNTRY;
+    stream[(*startAddress)++] = p->NID_C;
+    stream[(*startAddress)++] = p->NID_BG;
+    stream[(*startAddress)++] = p->D_POSOFF;
+    stream[(*startAddress)++] = p->Q_MPOSITION;
+    stream[(*startAddress)++] = p->M_POSITION;
+
+    return 1;
 }
 
-int GeographicalPositionInformation_1_DecodeInt(GeographicalPositionInformation_1* p, PacketInfo* data, kcg_int* stream)
+int GeographicalPositionInformation_1_DecodeInt(GeographicalPositionInformation_1* p, kcg_int* startAddress, const kcg_int* stream)
 {
-    return 0;
+    p->Q_NEWCOUNTRY = stream[(*startAddress)++];
+    p->NID_C = stream[(*startAddress)++];
+    p->NID_BG = stream[(*startAddress)++];
+    p->D_POSOFF = stream[(*startAddress)++];
+    p->Q_MPOSITION = stream[(*startAddress)++];
+    p->M_POSITION = stream[(*startAddress)++];
+
+    return 1;
 }
 

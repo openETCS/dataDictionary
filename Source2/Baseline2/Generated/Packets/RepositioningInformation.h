@@ -188,7 +188,7 @@ static inline uint32_t RepositioningInformation_Length(const RepositioningInform
 
 int RepositioningInformation_EncodeInt(const RepositioningInformation* p, PacketInfo* data, kcg_int* stream);
 
-int RepositioningInformation_DecodeInt(RepositioningInformation* p, PacketInfo* data, kcg_int* stream);
+int RepositioningInformation_DecodeInt(RepositioningInformation* p, const PacketInfo* data, const kcg_int* stream);
 
 #endif // REPOSITIONINGINFORMATION_H_INCLUDED
 

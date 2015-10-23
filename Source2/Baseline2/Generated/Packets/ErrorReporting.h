@@ -172,7 +172,7 @@ static inline uint32_t ErrorReporting_Length(const ErrorReporting* p)
 
 int ErrorReporting_EncodeInt(const ErrorReporting* p, PacketInfo* data, kcg_int* stream);
 
-int ErrorReporting_DecodeInt(ErrorReporting* p, PacketInfo* data, kcg_int* stream);
+int ErrorReporting_DecodeInt(ErrorReporting* p, const PacketInfo* data, const kcg_int* stream);
 
 #endif // ERRORREPORTING_H_INCLUDED
 

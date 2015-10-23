@@ -149,13 +149,29 @@ int Linking_1_DecodeBit(Linking_1* p, Bitstream* stream)
     }
 }
 
-int Linking_1_EncodeInt(const Linking_1* p, PacketInfo* data, kcg_int* stream)
+int Linking_1_EncodeInt(const Linking_1* p, kcg_int* startAddress, kcg_int* stream)
 {
-    return 0;
+    stream[(*startAddress)++] = p->D_LINK;
+    stream[(*startAddress)++] = p->Q_NEWCOUNTRY;
+    stream[(*startAddress)++] = p->NID_C;
+    stream[(*startAddress)++] = p->NID_BG;
+    stream[(*startAddress)++] = p->Q_LINKORIENTATION;
+    stream[(*startAddress)++] = p->Q_LINKREACTION;
+    stream[(*startAddress)++] = p->Q_LOCACC;
+
+    return 1;
 }
 
-int Linking_1_DecodeInt(Linking_1* p, PacketInfo* data, kcg_int* stream)
+int Linking_1_DecodeInt(Linking_1* p, kcg_int* startAddress, const kcg_int* stream)
 {
-    return 0;
+    p->D_LINK = stream[(*startAddress)++];
+    p->Q_NEWCOUNTRY = stream[(*startAddress)++];
+    p->NID_C = stream[(*startAddress)++];
+    p->NID_BG = stream[(*startAddress)++];
+    p->Q_LINKORIENTATION = stream[(*startAddress)++];
+    p->Q_LINKREACTION = stream[(*startAddress)++];
+    p->Q_LOCACC = stream[(*startAddress)++];
+
+    return 1;
 }
 

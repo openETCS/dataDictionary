@@ -173,7 +173,7 @@ static inline uint32_t DefaultBaliseLoopOrRIUInformation_Length(const DefaultBal
 
 int DefaultBaliseLoopOrRIUInformation_EncodeInt(const DefaultBaliseLoopOrRIUInformation* p, PacketInfo* data, kcg_int* stream);
 
-int DefaultBaliseLoopOrRIUInformation_DecodeInt(DefaultBaliseLoopOrRIUInformation* p, PacketInfo* data, kcg_int* stream);
+int DefaultBaliseLoopOrRIUInformation_DecodeInt(DefaultBaliseLoopOrRIUInformation* p, const PacketInfo* data, const kcg_int* stream);
 
 #endif // DEFAULTBALISELOOPORRIUINFORMATION_H_INCLUDED
 

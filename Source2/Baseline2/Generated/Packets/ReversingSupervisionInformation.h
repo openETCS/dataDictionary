@@ -197,7 +197,7 @@ static inline uint32_t ReversingSupervisionInformation_Length(const ReversingSup
 
 int ReversingSupervisionInformation_EncodeInt(const ReversingSupervisionInformation* p, PacketInfo* data, kcg_int* stream);
 
-int ReversingSupervisionInformation_DecodeInt(ReversingSupervisionInformation* p, PacketInfo* data, kcg_int* stream);
+int ReversingSupervisionInformation_DecodeInt(ReversingSupervisionInformation* p, const PacketInfo* data, const kcg_int* stream);
 
 #endif // REVERSINGSUPERVISIONINFORMATION_H_INCLUDED
 

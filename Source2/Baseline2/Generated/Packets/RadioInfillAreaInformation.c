@@ -246,32 +246,55 @@ int RadioInfillAreaInformation_DecodeBit(RadioInfillAreaInformation* p, Bitstrea
 
 int RadioInfillAreaInformation_EncodeInt(const RadioInfillAreaInformation* p, PacketInfo* data, kcg_int* stream)
 {
-    stream[data->startAddress++] = p->Q_DIR;
-    stream[data->startAddress++] = p->L_PACKET;
-    stream[data->startAddress++] = p->Q_SCALE;
-    stream[data->startAddress++] = p->Q_RIU;
-    stream[data->startAddress++] = p->NID_C_0;
-    stream[data->startAddress++] = p->NID_RIU;
-    stream[data->startAddress++] = p->NID_RADIO;
-    stream[data->startAddress++] = p->D_INFILL;
-    stream[data->startAddress++] = p->NID_C_1;
-    stream[data->startAddress++] = p->NID_BG;
+    data->nid_packet = 133;
+    data->q_dir = p->Q_DIR;
+    data->valid = 1;
+
+    kcg_int startAddress = data->startAddress;
+
+    stream[startAddress++] = p->header.NID_PACKET;
+
+    stream[startAddress++] = p->Q_DIR;
+    stream[startAddress++] = p->L_PACKET;
+    stream[startAddress++] = p->Q_SCALE;
+    stream[startAddress++] = p->Q_RIU;
+    stream[startAddress++] = p->NID_C_0;
+    stream[startAddress++] = p->NID_RIU;
+    stream[startAddress++] = p->NID_RADIO;
+    stream[startAddress++] = p->D_INFILL;
+    stream[startAddress++] = p->NID_C_1;
+    stream[startAddress++] = p->NID_BG;
+
+    data->endAddress = startAddress-1;
 
     return 1;
 }
 
-int RadioInfillAreaInformation_DecodeInt(RadioInfillAreaInformation* p, PacketInfo* data, kcg_int* stream)
+int RadioInfillAreaInformation_DecodeInt(RadioInfillAreaInformation* p, const PacketInfo* data, const kcg_int* stream)
 {
-    p->Q_DIR = stream[data->startAddress++];
-    p->L_PACKET = stream[data->startAddress++];
-    p->Q_SCALE = stream[data->startAddress++];
-    p->Q_RIU = stream[data->startAddress++];
-    p->NID_C_0 = stream[data->startAddress++];
-    p->NID_RIU = stream[data->startAddress++];
-    p->NID_RADIO = stream[data->startAddress++];
-    p->D_INFILL = stream[data->startAddress++];
-    p->NID_C_1 = stream[data->startAddress++];
-    p->NID_BG = stream[data->startAddress++];
+    if(data->nid_packet != 133)
+    {
+         return 0;
+    }
+
+    kcg_int startAddress = data->startAddress;
+    p->header.NID_PACKET = stream[startAddress++];
+
+    p->Q_DIR = stream[startAddress++];
+    p->L_PACKET = stream[startAddress++];
+    p->Q_SCALE = stream[startAddress++];
+    p->Q_RIU = stream[startAddress++];
+    p->NID_C_0 = stream[startAddress++];
+    p->NID_RIU = stream[startAddress++];
+    p->NID_RADIO = stream[startAddress++];
+    p->D_INFILL = stream[startAddress++];
+    p->NID_C_1 = stream[startAddress++];
+    p->NID_BG = stream[startAddress++];
+
+    if(startAddress-1 != data->endAddress)
+    {
+         return 0;
+    }
 
     return 1;
 }
