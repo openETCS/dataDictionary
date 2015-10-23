@@ -126,15 +126,13 @@ int ListOfBalisesForSHArea_DecodeBit(ListOfBalisesForSHArea* p, Bitstream* strea
     }
 }
 
-/*
 int ListOfBalisesForSHArea_EncodeInt(const ListOfBalisesForSHArea* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int ListOfBalisesForSHArea_DecodeInt(ListOfBalisesForSHArea* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 

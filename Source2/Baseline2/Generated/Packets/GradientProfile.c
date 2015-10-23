@@ -194,15 +194,13 @@ int GradientProfile_DecodeBit(GradientProfile* p, Bitstream* stream)
     }
 }
 
-/*
 int GradientProfile_EncodeInt(const GradientProfile* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int GradientProfile_DecodeInt(GradientProfile* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 

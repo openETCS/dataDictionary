@@ -233,5 +233,9 @@ static inline uint32_t GeographicalPositionInformation_Length(const Geographical
     return (uint32_t)(p->L_PACKET);
 }
 
+int GeographicalPositionInformation_EncodeInt(const GeographicalPositionInformation* p, PacketInfo* data, kcg_int* stream);
+
+int GeographicalPositionInformation_DecodeInt(GeographicalPositionInformation* p, PacketInfo* data, kcg_int* stream);
+
 #endif // GEOGRAPHICALPOSITIONINFORMATION_H_INCLUDED
 

@@ -159,15 +159,25 @@ int ReversingSupervisionInformation_DecodeBit(ReversingSupervisionInformation* p
     }
 }
 
-/*
 int ReversingSupervisionInformation_EncodeInt(const ReversingSupervisionInformation* p, PacketInfo* data, kcg_int* stream)
 {
+    stream[data->startAddress++] = p->Q_DIR;
+    stream[data->startAddress++] = p->L_PACKET;
+    stream[data->startAddress++] = p->Q_SCALE;
+    stream[data->startAddress++] = p->D_REVERSE;
+    stream[data->startAddress++] = p->V_REVERSE;
 
+    return 1;
 }
 
 int ReversingSupervisionInformation_DecodeInt(ReversingSupervisionInformation* p, PacketInfo* data, kcg_int* stream)
 {
+    p->Q_DIR = stream[data->startAddress++];
+    p->L_PACKET = stream[data->startAddress++];
+    p->Q_SCALE = stream[data->startAddress++];
+    p->D_REVERSE = stream[data->startAddress++];
+    p->V_REVERSE = stream[data->startAddress++];
 
+    return 1;
 }
-*/
 

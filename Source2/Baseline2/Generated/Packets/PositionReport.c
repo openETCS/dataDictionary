@@ -285,15 +285,13 @@ int PositionReport_DecodeBit(PositionReport* p, Bitstream* stream)
     }
 }
 
-/*
 int PositionReport_EncodeInt(const PositionReport* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int PositionReport_DecodeInt(PositionReport* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 

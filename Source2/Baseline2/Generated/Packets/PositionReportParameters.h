@@ -225,5 +225,9 @@ static inline uint32_t PositionReportParameters_Length(const PositionReportParam
     return (uint32_t)(p->L_PACKET);
 }
 
+int PositionReportParameters_EncodeInt(const PositionReportParameters* p, PacketInfo* data, kcg_int* stream);
+
+int PositionReportParameters_DecodeInt(PositionReportParameters* p, PacketInfo* data, kcg_int* stream);
+
 #endif // POSITIONREPORTPARAMETERS_H_INCLUDED
 

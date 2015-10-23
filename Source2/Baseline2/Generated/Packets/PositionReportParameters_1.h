@@ -152,5 +152,9 @@ static inline int PositionReportParameters_1_Equal(const PositionReportParameter
     return status;
 }
 
+int PositionReportParameters_1_EncodeInt(const PositionReportParameters_1* p, PacketInfo* data, kcg_int* stream);
+
+int PositionReportParameters_1_DecodeInt(PositionReportParameters_1* p, PacketInfo* data, kcg_int* stream);
+
 #endif // POSITIONREPORTPARAMETERS_1_H_INCLUDED
 

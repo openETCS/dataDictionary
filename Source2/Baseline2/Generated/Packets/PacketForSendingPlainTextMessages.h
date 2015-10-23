@@ -260,5 +260,9 @@ static inline uint32_t PacketForSendingPlainTextMessages_Length(const PacketForS
     return (uint32_t)(p->L_PACKET);
 }
 
+int PacketForSendingPlainTextMessages_EncodeInt(const PacketForSendingPlainTextMessages* p, PacketInfo* data, kcg_int* stream);
+
+int PacketForSendingPlainTextMessages_DecodeInt(PacketForSendingPlainTextMessages* p, PacketInfo* data, kcg_int* stream);
+
 #endif // PACKETFORSENDINGPLAINTEXTMESSAGES_H_INCLUDED
 

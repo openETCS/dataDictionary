@@ -159,5 +159,9 @@ static inline int GradientProfile_1_Equal(const GradientProfile_1* a, const Grad
     return status;
 }
 
+int GradientProfile_1_EncodeInt(const GradientProfile_1* p, PacketInfo* data, kcg_int* stream);
+
+int GradientProfile_1_DecodeInt(GradientProfile_1* p, PacketInfo* data, kcg_int* stream);
+
 #endif // GRADIENTPROFILE_1_H_INCLUDED
 

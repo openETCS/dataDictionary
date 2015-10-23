@@ -143,15 +143,13 @@ int AxleLoadSpeedProfile_2_DecodeBit(AxleLoadSpeedProfile_2* p, Bitstream* strea
     }
 }
 
-/*
 int AxleLoadSpeedProfile_2_EncodeInt(const AxleLoadSpeedProfile_2* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int AxleLoadSpeedProfile_2_DecodeInt(AxleLoadSpeedProfile_2* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 

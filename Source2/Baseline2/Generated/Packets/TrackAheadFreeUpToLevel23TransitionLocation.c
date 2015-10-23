@@ -148,15 +148,13 @@ int TrackAheadFreeUpToLevel23TransitionLocation_DecodeBit(TrackAheadFreeUpToLeve
     }
 }
 
-/*
 int TrackAheadFreeUpToLevel23TransitionLocation_EncodeInt(const TrackAheadFreeUpToLevel23TransitionLocation* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int TrackAheadFreeUpToLevel23TransitionLocation_DecodeInt(TrackAheadFreeUpToLevel23TransitionLocation* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 

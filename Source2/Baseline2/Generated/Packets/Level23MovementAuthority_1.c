@@ -142,15 +142,13 @@ int Level23MovementAuthority_1_DecodeBit(Level23MovementAuthority_1* p, Bitstrea
     }
 }
 
-/*
 int Level23MovementAuthority_1_EncodeInt(const Level23MovementAuthority_1* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int Level23MovementAuthority_1_DecodeInt(Level23MovementAuthority_1* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 

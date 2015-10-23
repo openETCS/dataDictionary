@@ -228,15 +228,13 @@ int ModeProfile_DecodeBit(ModeProfile* p, Bitstream* stream)
     }
 }
 
-/*
 int ModeProfile_EncodeInt(const ModeProfile* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int ModeProfile_DecodeInt(ModeProfile* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 

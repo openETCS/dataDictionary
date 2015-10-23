@@ -125,15 +125,21 @@ int TrainRunningNumberFromRBC_DecodeBit(TrainRunningNumberFromRBC* p, Bitstream*
     }
 }
 
-/*
 int TrainRunningNumberFromRBC_EncodeInt(const TrainRunningNumberFromRBC* p, PacketInfo* data, kcg_int* stream)
 {
+    stream[data->startAddress++] = p->Q_DIR;
+    stream[data->startAddress++] = p->L_PACKET;
+    stream[data->startAddress++] = p->NID_OPERATIONAL;
 
+    return 1;
 }
 
 int TrainRunningNumberFromRBC_DecodeInt(TrainRunningNumberFromRBC* p, PacketInfo* data, kcg_int* stream)
 {
+    p->Q_DIR = stream[data->startAddress++];
+    p->L_PACKET = stream[data->startAddress++];
+    p->NID_OPERATIONAL = stream[data->startAddress++];
 
+    return 1;
 }
-*/
 

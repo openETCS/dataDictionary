@@ -252,5 +252,9 @@ static inline uint32_t RouteSuitabilityData_Length(const RouteSuitabilityData* p
     return (uint32_t)(p->L_PACKET);
 }
 
+int RouteSuitabilityData_EncodeInt(const RouteSuitabilityData* p, PacketInfo* data, kcg_int* stream);
+
+int RouteSuitabilityData_DecodeInt(RouteSuitabilityData* p, PacketInfo* data, kcg_int* stream);
+
 #endif // ROUTESUITABILITYDATA_H_INCLUDED
 

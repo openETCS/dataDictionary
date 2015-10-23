@@ -302,15 +302,13 @@ int PositionReportBasedOnTwoBaliseGroups_DecodeBit(PositionReportBasedOnTwoBalis
     }
 }
 
-/*
 int PositionReportBasedOnTwoBaliseGroups_EncodeInt(const PositionReportBasedOnTwoBaliseGroups* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int PositionReportBasedOnTwoBaliseGroups_DecodeInt(PositionReportBasedOnTwoBaliseGroups* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 

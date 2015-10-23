@@ -267,15 +267,13 @@ int Level23MovementAuthority_DecodeBit(Level23MovementAuthority* p, Bitstream* s
     }
 }
 
-/*
 int Level23MovementAuthority_EncodeInt(const Level23MovementAuthority* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int Level23MovementAuthority_DecodeInt(Level23MovementAuthority* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 

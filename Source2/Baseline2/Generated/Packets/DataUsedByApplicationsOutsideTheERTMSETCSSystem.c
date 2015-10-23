@@ -125,15 +125,21 @@ int DataUsedByApplicationsOutsideTheERTMSETCSSystem_DecodeBit(DataUsedByApplicat
     }
 }
 
-/*
 int DataUsedByApplicationsOutsideTheERTMSETCSSystem_EncodeInt(const DataUsedByApplicationsOutsideTheERTMSETCSSystem* p, PacketInfo* data, kcg_int* stream)
 {
+    stream[data->startAddress++] = p->L_PACKET;
+    stream[data->startAddress++] = p->NID_XUSER;
+    stream[data->startAddress++] = p->Other_data_depending_on__NID_XUSER;
 
+    return 1;
 }
 
 int DataUsedByApplicationsOutsideTheERTMSETCSSystem_DecodeInt(DataUsedByApplicationsOutsideTheERTMSETCSSystem* p, PacketInfo* data, kcg_int* stream)
 {
+    p->L_PACKET = stream[data->startAddress++];
+    p->NID_XUSER = stream[data->startAddress++];
+    p->Other_data_depending_on__NID_XUSER = stream[data->startAddress++];
 
+    return 1;
 }
-*/
 

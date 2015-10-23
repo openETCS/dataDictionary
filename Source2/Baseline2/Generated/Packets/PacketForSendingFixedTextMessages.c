@@ -280,15 +280,13 @@ int PacketForSendingFixedTextMessages_DecodeBit(PacketForSendingFixedTextMessage
     }
 }
 
-/*
 int PacketForSendingFixedTextMessages_EncodeInt(const PacketForSendingFixedTextMessages* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int PacketForSendingFixedTextMessages_DecodeInt(PacketForSendingFixedTextMessages* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 

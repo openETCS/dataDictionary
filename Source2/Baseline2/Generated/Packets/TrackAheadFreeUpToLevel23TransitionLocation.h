@@ -190,5 +190,9 @@ static inline uint32_t TrackAheadFreeUpToLevel23TransitionLocation_Length(const 
     return (uint32_t)(p->L_PACKET);
 }
 
+int TrackAheadFreeUpToLevel23TransitionLocation_EncodeInt(const TrackAheadFreeUpToLevel23TransitionLocation* p, PacketInfo* data, kcg_int* stream);
+
+int TrackAheadFreeUpToLevel23TransitionLocation_DecodeInt(TrackAheadFreeUpToLevel23TransitionLocation* p, PacketInfo* data, kcg_int* stream);
+
 #endif // TRACKAHEADFREEUPTOLEVEL23TRANSITIONLOCATION_H_INCLUDED
 

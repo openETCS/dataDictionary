@@ -91,15 +91,13 @@ int OnboardTelephoneNumbers_1_DecodeBit(OnboardTelephoneNumbers_1* p, Bitstream*
     }
 }
 
-/*
 int OnboardTelephoneNumbers_1_EncodeInt(const OnboardTelephoneNumbers_1* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int OnboardTelephoneNumbers_1_DecodeInt(OnboardTelephoneNumbers_1* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 

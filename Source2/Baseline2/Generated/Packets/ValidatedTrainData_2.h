@@ -145,5 +145,9 @@ static inline int ValidatedTrainData_2_Equal(const ValidatedTrainData_2* a, cons
     return status;
 }
 
+int ValidatedTrainData_2_EncodeInt(const ValidatedTrainData_2* p, PacketInfo* data, kcg_int* stream);
+
+int ValidatedTrainData_2_DecodeInt(ValidatedTrainData_2* p, PacketInfo* data, kcg_int* stream);
+
 #endif // VALIDATEDTRAINDATA_2_H_INCLUDED
 

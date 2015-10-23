@@ -108,15 +108,13 @@ int InternationalStaticSpeedProfile_2_1_DecodeBit(InternationalStaticSpeedProfil
     }
 }
 
-/*
 int InternationalStaticSpeedProfile_2_1_EncodeInt(const InternationalStaticSpeedProfile_2_1* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int InternationalStaticSpeedProfile_2_1_DecodeInt(InternationalStaticSpeedProfile_2_1* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 

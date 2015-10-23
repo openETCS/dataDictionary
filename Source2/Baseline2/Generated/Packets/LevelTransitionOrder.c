@@ -200,15 +200,13 @@ int LevelTransitionOrder_DecodeBit(LevelTransitionOrder* p, Bitstream* stream)
     }
 }
 
-/*
 int LevelTransitionOrder_EncodeInt(const LevelTransitionOrder* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int LevelTransitionOrder_DecodeInt(LevelTransitionOrder* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 

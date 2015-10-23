@@ -210,15 +210,31 @@ int EOLMPacket_DecodeBit(EOLMPacket* p, Bitstream* stream)
     }
 }
 
-/*
 int EOLMPacket_EncodeInt(const EOLMPacket* p, PacketInfo* data, kcg_int* stream)
 {
+    stream[data->startAddress++] = p->Q_DIR;
+    stream[data->startAddress++] = p->L_PACKET;
+    stream[data->startAddress++] = p->Q_SCALE;
+    stream[data->startAddress++] = p->NID_LOOP;
+    stream[data->startAddress++] = p->D_LOOP;
+    stream[data->startAddress++] = p->L_LOOP;
+    stream[data->startAddress++] = p->Q_LOOPDIR;
+    stream[data->startAddress++] = p->Q_SSCODE;
 
+    return 1;
 }
 
 int EOLMPacket_DecodeInt(EOLMPacket* p, PacketInfo* data, kcg_int* stream)
 {
+    p->Q_DIR = stream[data->startAddress++];
+    p->L_PACKET = stream[data->startAddress++];
+    p->Q_SCALE = stream[data->startAddress++];
+    p->NID_LOOP = stream[data->startAddress++];
+    p->D_LOOP = stream[data->startAddress++];
+    p->L_LOOP = stream[data->startAddress++];
+    p->Q_LOOPDIR = stream[data->startAddress++];
+    p->Q_SSCODE = stream[data->startAddress++];
 
+    return 1;
 }
-*/
 

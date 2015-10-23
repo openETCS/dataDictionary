@@ -159,15 +159,25 @@ int MovementAuthorityRequestParameters_DecodeBit(MovementAuthorityRequestParamet
     }
 }
 
-/*
 int MovementAuthorityRequestParameters_EncodeInt(const MovementAuthorityRequestParameters* p, PacketInfo* data, kcg_int* stream)
 {
+    stream[data->startAddress++] = p->Q_DIR;
+    stream[data->startAddress++] = p->L_PACKET;
+    stream[data->startAddress++] = p->T_MAR;
+    stream[data->startAddress++] = p->T_TIMEOUTRQST;
+    stream[data->startAddress++] = p->T_CYCRQST;
 
+    return 1;
 }
 
 int MovementAuthorityRequestParameters_DecodeInt(MovementAuthorityRequestParameters* p, PacketInfo* data, kcg_int* stream)
 {
+    p->Q_DIR = stream[data->startAddress++];
+    p->L_PACKET = stream[data->startAddress++];
+    p->T_MAR = stream[data->startAddress++];
+    p->T_TIMEOUTRQST = stream[data->startAddress++];
+    p->T_CYCRQST = stream[data->startAddress++];
 
+    return 1;
 }
-*/
 

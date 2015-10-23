@@ -164,5 +164,9 @@ static inline int GeographicalPositionInformation_1_Equal(const GeographicalPosi
     return status;
 }
 
+int GeographicalPositionInformation_1_EncodeInt(const GeographicalPositionInformation_1* p, PacketInfo* data, kcg_int* stream);
+
+int GeographicalPositionInformation_1_DecodeInt(GeographicalPositionInformation_1* p, PacketInfo* data, kcg_int* stream);
+
 #endif // GEOGRAPHICALPOSITIONINFORMATION_1_H_INCLUDED
 

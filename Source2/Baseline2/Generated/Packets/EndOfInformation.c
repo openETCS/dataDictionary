@@ -74,15 +74,15 @@ int EndOfInformation_DecodeBit(EndOfInformation* p, Bitstream* stream)
     }
 }
 
-/*
 int EndOfInformation_EncodeInt(const EndOfInformation* p, PacketInfo* data, kcg_int* stream)
 {
 
+    return 1;
 }
 
 int EndOfInformation_DecodeInt(EndOfInformation* p, PacketInfo* data, kcg_int* stream)
 {
 
+    return 1;
 }
-*/
 

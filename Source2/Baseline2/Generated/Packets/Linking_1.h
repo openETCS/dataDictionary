@@ -171,5 +171,9 @@ static inline int Linking_1_Equal(const Linking_1* a, const Linking_1* b)
     return status;
 }
 
+int Linking_1_EncodeInt(const Linking_1* p, PacketInfo* data, kcg_int* stream);
+
+int Linking_1_DecodeInt(Linking_1* p, PacketInfo* data, kcg_int* stream);
+
 #endif // LINKING_1_H_INCLUDED
 

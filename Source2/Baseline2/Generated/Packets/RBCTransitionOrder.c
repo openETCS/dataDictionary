@@ -210,15 +210,31 @@ int RBCTransitionOrder_DecodeBit(RBCTransitionOrder* p, Bitstream* stream)
     }
 }
 
-/*
 int RBCTransitionOrder_EncodeInt(const RBCTransitionOrder* p, PacketInfo* data, kcg_int* stream)
 {
+    stream[data->startAddress++] = p->Q_DIR;
+    stream[data->startAddress++] = p->L_PACKET;
+    stream[data->startAddress++] = p->Q_SCALE;
+    stream[data->startAddress++] = p->D_RBCTR;
+    stream[data->startAddress++] = p->NID_C;
+    stream[data->startAddress++] = p->NID_RBC;
+    stream[data->startAddress++] = p->NID_RADIO;
+    stream[data->startAddress++] = p->Q_SLEEPSESSION;
 
+    return 1;
 }
 
 int RBCTransitionOrder_DecodeInt(RBCTransitionOrder* p, PacketInfo* data, kcg_int* stream)
 {
+    p->Q_DIR = stream[data->startAddress++];
+    p->L_PACKET = stream[data->startAddress++];
+    p->Q_SCALE = stream[data->startAddress++];
+    p->D_RBCTR = stream[data->startAddress++];
+    p->NID_C = stream[data->startAddress++];
+    p->NID_RBC = stream[data->startAddress++];
+    p->NID_RADIO = stream[data->startAddress++];
+    p->Q_SLEEPSESSION = stream[data->startAddress++];
 
+    return 1;
 }
-*/
 

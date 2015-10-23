@@ -166,5 +166,9 @@ static inline int Level23MovementAuthority_1_Equal(const Level23MovementAuthorit
     return status;
 }
 
+int Level23MovementAuthority_1_EncodeInt(const Level23MovementAuthority_1* p, PacketInfo* data, kcg_int* stream);
+
+int Level23MovementAuthority_1_DecodeInt(Level23MovementAuthority_1* p, PacketInfo* data, kcg_int* stream);
+
 #endif // LEVEL23MOVEMENTAUTHORITY_1_H_INCLUDED
 

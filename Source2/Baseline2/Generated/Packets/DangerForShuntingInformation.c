@@ -125,15 +125,21 @@ int DangerForShuntingInformation_DecodeBit(DangerForShuntingInformation* p, Bits
     }
 }
 
-/*
 int DangerForShuntingInformation_EncodeInt(const DangerForShuntingInformation* p, PacketInfo* data, kcg_int* stream)
 {
+    stream[data->startAddress++] = p->Q_DIR;
+    stream[data->startAddress++] = p->L_PACKET;
+    stream[data->startAddress++] = p->Q_ASPECT;
 
+    return 1;
 }
 
 int DangerForShuntingInformation_DecodeInt(DangerForShuntingInformation* p, PacketInfo* data, kcg_int* stream)
 {
+    p->Q_DIR = stream[data->startAddress++];
+    p->L_PACKET = stream[data->startAddress++];
+    p->Q_ASPECT = stream[data->startAddress++];
 
+    return 1;
 }
-*/
 

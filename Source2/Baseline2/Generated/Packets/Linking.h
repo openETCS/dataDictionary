@@ -240,5 +240,9 @@ static inline uint32_t Linking_Length(const Linking* p)
     return (uint32_t)(p->L_PACKET);
 }
 
+int Linking_EncodeInt(const Linking* p, PacketInfo* data, kcg_int* stream);
+
+int Linking_DecodeInt(Linking* p, PacketInfo* data, kcg_int* stream);
+
 #endif // LINKING_H_INCLUDED
 

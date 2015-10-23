@@ -286,15 +286,13 @@ int PacketForSendingPlainTextMessages_DecodeBit(PacketForSendingPlainTextMessage
     }
 }
 
-/*
 int PacketForSendingPlainTextMessages_EncodeInt(const PacketForSendingPlainTextMessages* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int PacketForSendingPlainTextMessages_DecodeInt(PacketForSendingPlainTextMessages* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 

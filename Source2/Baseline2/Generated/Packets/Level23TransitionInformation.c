@@ -108,15 +108,19 @@ int Level23TransitionInformation_DecodeBit(Level23TransitionInformation* p, Bits
     }
 }
 
-/*
 int Level23TransitionInformation_EncodeInt(const Level23TransitionInformation* p, PacketInfo* data, kcg_int* stream)
 {
+    stream[data->startAddress++] = p->L_PACKET;
+    stream[data->startAddress++] = p->NID_LTRBG;
 
+    return 1;
 }
 
 int Level23TransitionInformation_DecodeInt(Level23TransitionInformation* p, PacketInfo* data, kcg_int* stream)
 {
+    p->L_PACKET = stream[data->startAddress++];
+    p->NID_LTRBG = stream[data->startAddress++];
 
+    return 1;
 }
-*/
 

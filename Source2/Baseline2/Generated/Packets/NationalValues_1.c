@@ -91,15 +91,13 @@ int NationalValues_1_DecodeBit(NationalValues_1* p, Bitstream* stream)
     }
 }
 
-/*
 int NationalValues_1_EncodeInt(const NationalValues_1* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int NationalValues_1_DecodeInt(NationalValues_1* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 

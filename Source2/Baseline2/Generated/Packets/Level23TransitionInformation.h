@@ -169,5 +169,9 @@ static inline uint32_t Level23TransitionInformation_Length(const Level23Transiti
     return (uint32_t)(p->L_PACKET);
 }
 
+int Level23TransitionInformation_EncodeInt(const Level23TransitionInformation* p, PacketInfo* data, kcg_int* stream);
+
+int Level23TransitionInformation_DecodeInt(Level23TransitionInformation* p, PacketInfo* data, kcg_int* stream);
+
 #endif // LEVEL23TRANSITIONINFORMATION_H_INCLUDED
 

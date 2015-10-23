@@ -284,15 +284,13 @@ int Level1MovementAuthority_DecodeBit(Level1MovementAuthority* p, Bitstream* str
     }
 }
 
-/*
 int Level1MovementAuthority_EncodeInt(const Level1MovementAuthority* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int Level1MovementAuthority_DecodeInt(Level1MovementAuthority* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 

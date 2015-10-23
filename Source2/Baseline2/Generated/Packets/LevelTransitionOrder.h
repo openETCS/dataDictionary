@@ -230,5 +230,9 @@ static inline uint32_t LevelTransitionOrder_Length(const LevelTransitionOrder* p
     return (uint32_t)(p->L_PACKET);
 }
 
+int LevelTransitionOrder_EncodeInt(const LevelTransitionOrder* p, PacketInfo* data, kcg_int* stream);
+
+int LevelTransitionOrder_DecodeInt(LevelTransitionOrder* p, PacketInfo* data, kcg_int* stream);
+
 #endif // LEVELTRANSITIONORDER_H_INCLUDED
 

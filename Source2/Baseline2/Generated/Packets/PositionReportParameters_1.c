@@ -108,15 +108,13 @@ int PositionReportParameters_1_DecodeBit(PositionReportParameters_1* p, Bitstrea
     }
 }
 
-/*
 int PositionReportParameters_1_EncodeInt(const PositionReportParameters_1* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int PositionReportParameters_1_DecodeInt(PositionReportParameters_1* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 

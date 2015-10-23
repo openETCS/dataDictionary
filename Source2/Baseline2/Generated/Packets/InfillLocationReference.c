@@ -148,15 +148,13 @@ int InfillLocationReference_DecodeBit(InfillLocationReference* p, Bitstream* str
     }
 }
 
-/*
 int InfillLocationReference_EncodeInt(const InfillLocationReference* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int InfillLocationReference_DecodeInt(InfillLocationReference* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 

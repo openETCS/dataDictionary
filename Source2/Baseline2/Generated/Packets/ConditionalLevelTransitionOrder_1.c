@@ -108,15 +108,13 @@ int ConditionalLevelTransitionOrder_1_DecodeBit(ConditionalLevelTransitionOrder_
     }
 }
 
-/*
 int ConditionalLevelTransitionOrder_1_EncodeInt(const ConditionalLevelTransitionOrder_1* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int ConditionalLevelTransitionOrder_1_DecodeInt(ConditionalLevelTransitionOrder_1* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 

@@ -171,15 +171,13 @@ int SessionManagement_DecodeBit(SessionManagement* p, Bitstream* stream)
     }
 }
 
-/*
 int SessionManagement_EncodeInt(const SessionManagement* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int SessionManagement_DecodeInt(SessionManagement* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 

@@ -244,15 +244,35 @@ int RadioInfillAreaInformation_DecodeBit(RadioInfillAreaInformation* p, Bitstrea
     }
 }
 
-/*
 int RadioInfillAreaInformation_EncodeInt(const RadioInfillAreaInformation* p, PacketInfo* data, kcg_int* stream)
 {
+    stream[data->startAddress++] = p->Q_DIR;
+    stream[data->startAddress++] = p->L_PACKET;
+    stream[data->startAddress++] = p->Q_SCALE;
+    stream[data->startAddress++] = p->Q_RIU;
+    stream[data->startAddress++] = p->NID_C_0;
+    stream[data->startAddress++] = p->NID_RIU;
+    stream[data->startAddress++] = p->NID_RADIO;
+    stream[data->startAddress++] = p->D_INFILL;
+    stream[data->startAddress++] = p->NID_C_1;
+    stream[data->startAddress++] = p->NID_BG;
 
+    return 1;
 }
 
 int RadioInfillAreaInformation_DecodeInt(RadioInfillAreaInformation* p, PacketInfo* data, kcg_int* stream)
 {
+    p->Q_DIR = stream[data->startAddress++];
+    p->L_PACKET = stream[data->startAddress++];
+    p->Q_SCALE = stream[data->startAddress++];
+    p->Q_RIU = stream[data->startAddress++];
+    p->NID_C_0 = stream[data->startAddress++];
+    p->NID_RIU = stream[data->startAddress++];
+    p->NID_RADIO = stream[data->startAddress++];
+    p->D_INFILL = stream[data->startAddress++];
+    p->NID_C_1 = stream[data->startAddress++];
+    p->NID_BG = stream[data->startAddress++];
 
+    return 1;
 }
-*/
 

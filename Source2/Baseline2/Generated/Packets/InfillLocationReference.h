@@ -190,5 +190,9 @@ static inline uint32_t InfillLocationReference_Length(const InfillLocationRefere
     return (uint32_t)(p->L_PACKET);
 }
 
+int InfillLocationReference_EncodeInt(const InfillLocationReference* p, PacketInfo* data, kcg_int* stream);
+
+int InfillLocationReference_DecodeInt(InfillLocationReference* p, PacketInfo* data, kcg_int* stream);
+
 #endif // INFILLLOCATIONREFERENCE_H_INCLUDED
 

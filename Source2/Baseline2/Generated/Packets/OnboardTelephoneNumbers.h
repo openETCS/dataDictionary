@@ -184,5 +184,9 @@ static inline uint32_t OnboardTelephoneNumbers_Length(const OnboardTelephoneNumb
     return (uint32_t)(p->L_PACKET);
 }
 
+int OnboardTelephoneNumbers_EncodeInt(const OnboardTelephoneNumbers* p, PacketInfo* data, kcg_int* stream);
+
+int OnboardTelephoneNumbers_DecodeInt(OnboardTelephoneNumbers* p, PacketInfo* data, kcg_int* stream);
+
 #endif // ONBOARDTELEPHONENUMBERS_H_INCLUDED
 

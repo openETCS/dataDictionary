@@ -126,15 +126,13 @@ int ListOfBalisesInSRAuthority_DecodeBit(ListOfBalisesInSRAuthority* p, Bitstrea
     }
 }
 
-/*
 int ListOfBalisesInSRAuthority_EncodeInt(const ListOfBalisesInSRAuthority* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int ListOfBalisesInSRAuthority_DecodeInt(ListOfBalisesInSRAuthority* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 

@@ -152,5 +152,9 @@ static inline int InternationalStaticSpeedProfile_2_1_Equal(const InternationalS
     return status;
 }
 
+int InternationalStaticSpeedProfile_2_1_EncodeInt(const InternationalStaticSpeedProfile_2_1* p, PacketInfo* data, kcg_int* stream);
+
+int InternationalStaticSpeedProfile_2_1_DecodeInt(InternationalStaticSpeedProfile_2_1* p, PacketInfo* data, kcg_int* stream);
+
 #endif // INTERNATIONALSTATICSPEEDPROFILE_2_1_H_INCLUDED
 

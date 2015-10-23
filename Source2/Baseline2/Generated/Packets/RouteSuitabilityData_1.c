@@ -159,15 +159,13 @@ int RouteSuitabilityData_1_DecodeBit(RouteSuitabilityData_1* p, Bitstream* strea
     }
 }
 
-/*
 int RouteSuitabilityData_1_EncodeInt(const RouteSuitabilityData_1* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int RouteSuitabilityData_1_DecodeInt(RouteSuitabilityData_1* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 

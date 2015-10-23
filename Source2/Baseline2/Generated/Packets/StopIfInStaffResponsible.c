@@ -125,15 +125,21 @@ int StopIfInStaffResponsible_DecodeBit(StopIfInStaffResponsible* p, Bitstream* s
     }
 }
 
-/*
 int StopIfInStaffResponsible_EncodeInt(const StopIfInStaffResponsible* p, PacketInfo* data, kcg_int* stream)
 {
+    stream[data->startAddress++] = p->Q_DIR;
+    stream[data->startAddress++] = p->L_PACKET;
+    stream[data->startAddress++] = p->Q_SRSTOP;
 
+    return 1;
 }
 
 int StopIfInStaffResponsible_DecodeInt(StopIfInStaffResponsible* p, PacketInfo* data, kcg_int* stream)
 {
+    p->Q_DIR = stream[data->startAddress++];
+    p->L_PACKET = stream[data->startAddress++];
+    p->Q_SRSTOP = stream[data->startAddress++];
 
+    return 1;
 }
-*/
 

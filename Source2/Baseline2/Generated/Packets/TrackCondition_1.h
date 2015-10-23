@@ -159,5 +159,9 @@ static inline int TrackCondition_1_Equal(const TrackCondition_1* a, const TrackC
     return status;
 }
 
+int TrackCondition_1_EncodeInt(const TrackCondition_1* p, PacketInfo* data, kcg_int* stream);
+
+int TrackCondition_1_DecodeInt(TrackCondition_1* p, PacketInfo* data, kcg_int* stream);
+
 #endif // TRACKCONDITION_1_H_INCLUDED
 

@@ -149,15 +149,13 @@ int Linking_1_DecodeBit(Linking_1* p, Bitstream* stream)
     }
 }
 
-/*
 int Linking_1_EncodeInt(const Linking_1* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int Linking_1_DecodeInt(Linking_1* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 

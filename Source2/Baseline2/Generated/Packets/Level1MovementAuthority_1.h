@@ -166,5 +166,9 @@ static inline int Level1MovementAuthority_1_Equal(const Level1MovementAuthority_
     return status;
 }
 
+int Level1MovementAuthority_1_EncodeInt(const Level1MovementAuthority_1* p, PacketInfo* data, kcg_int* stream);
+
+int Level1MovementAuthority_1_DecodeInt(Level1MovementAuthority_1* p, PacketInfo* data, kcg_int* stream);
+
 #endif // LEVEL1MOVEMENTAUTHORITY_1_H_INCLUDED
 

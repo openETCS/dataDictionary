@@ -201,15 +201,13 @@ int GeographicalPositionInformation_DecodeBit(GeographicalPositionInformation* p
     }
 }
 
-/*
 int GeographicalPositionInformation_EncodeInt(const GeographicalPositionInformation* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int GeographicalPositionInformation_DecodeInt(GeographicalPositionInformation* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 

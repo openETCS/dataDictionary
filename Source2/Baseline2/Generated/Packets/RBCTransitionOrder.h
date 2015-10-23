@@ -217,5 +217,9 @@ static inline uint32_t RBCTransitionOrder_Length(const RBCTransitionOrder* p)
     return (uint32_t)(p->L_PACKET);
 }
 
+int RBCTransitionOrder_EncodeInt(const RBCTransitionOrder* p, PacketInfo* data, kcg_int* stream);
+
+int RBCTransitionOrder_DecodeInt(RBCTransitionOrder* p, PacketInfo* data, kcg_int* stream);
+
 #endif // RBCTRANSITIONORDER_H_INCLUDED
 

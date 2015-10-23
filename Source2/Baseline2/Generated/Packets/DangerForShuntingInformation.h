@@ -177,5 +177,9 @@ static inline uint32_t DangerForShuntingInformation_Length(const DangerForShunti
     return (uint32_t)(p->L_PACKET);
 }
 
+int DangerForShuntingInformation_EncodeInt(const DangerForShuntingInformation* p, PacketInfo* data, kcg_int* stream);
+
+int DangerForShuntingInformation_DecodeInt(DangerForShuntingInformation* p, PacketInfo* data, kcg_int* stream);
+
 #endif // DANGERFORSHUNTINGINFORMATION_H_INCLUDED
 

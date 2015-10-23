@@ -257,5 +257,9 @@ static inline uint32_t AxleLoadSpeedProfile_Length(const AxleLoadSpeedProfile* p
     return (uint32_t)(p->L_PACKET);
 }
 
+int AxleLoadSpeedProfile_EncodeInt(const AxleLoadSpeedProfile* p, PacketInfo* data, kcg_int* stream);
+
+int AxleLoadSpeedProfile_DecodeInt(AxleLoadSpeedProfile* p, PacketInfo* data, kcg_int* stream);
+
 #endif // AXLELOADSPEEDPROFILE_H_INCLUDED
 

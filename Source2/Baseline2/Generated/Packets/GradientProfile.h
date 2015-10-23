@@ -226,5 +226,9 @@ static inline uint32_t GradientProfile_Length(const GradientProfile* p)
     return (uint32_t)(p->L_PACKET);
 }
 
+int GradientProfile_EncodeInt(const GradientProfile* p, PacketInfo* data, kcg_int* stream);
+
+int GradientProfile_DecodeInt(GradientProfile* p, PacketInfo* data, kcg_int* stream);
+
 #endif // GRADIENTPROFILE_H_INCLUDED
 

@@ -202,5 +202,9 @@ static inline uint32_t AdhesionFactor_Length(const AdhesionFactor* p)
     return (uint32_t)(p->L_PACKET);
 }
 
+int AdhesionFactor_EncodeInt(const AdhesionFactor* p, PacketInfo* data, kcg_int* stream);
+
+int AdhesionFactor_DecodeInt(AdhesionFactor* p, PacketInfo* data, kcg_int* stream);
+
 #endif // ADHESIONFACTOR_H_INCLUDED
 

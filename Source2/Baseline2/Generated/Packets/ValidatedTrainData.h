@@ -264,5 +264,9 @@ static inline uint32_t ValidatedTrainData_Length(const ValidatedTrainData* p)
     return (uint32_t)(p->L_PACKET);
 }
 
+int ValidatedTrainData_EncodeInt(const ValidatedTrainData* p, PacketInfo* data, kcg_int* stream);
+
+int ValidatedTrainData_DecodeInt(ValidatedTrainData* p, PacketInfo* data, kcg_int* stream);
+
 #endif // VALIDATEDTRAINDATA_H_INCLUDED
 

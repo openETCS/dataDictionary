@@ -280,5 +280,9 @@ static inline uint32_t NationalValues_Length(const NationalValues* p)
     return (uint32_t)(p->L_PACKET);
 }
 
+int NationalValues_EncodeInt(const NationalValues* p, PacketInfo* data, kcg_int* stream);
+
+int NationalValues_DecodeInt(NationalValues* p, PacketInfo* data, kcg_int* stream);
+
 #endif // NATIONALVALUES_H_INCLUDED
 

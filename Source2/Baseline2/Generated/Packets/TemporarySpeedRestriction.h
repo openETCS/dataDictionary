@@ -217,5 +217,9 @@ static inline uint32_t TemporarySpeedRestriction_Length(const TemporarySpeedRest
     return (uint32_t)(p->L_PACKET);
 }
 
+int TemporarySpeedRestriction_EncodeInt(const TemporarySpeedRestriction* p, PacketInfo* data, kcg_int* stream);
+
+int TemporarySpeedRestriction_DecodeInt(TemporarySpeedRestriction* p, PacketInfo* data, kcg_int* stream);
+
 #endif // TEMPORARYSPEEDRESTRICTION_H_INCLUDED
 

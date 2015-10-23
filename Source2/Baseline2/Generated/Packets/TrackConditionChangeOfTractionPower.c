@@ -159,15 +159,25 @@ int TrackConditionChangeOfTractionPower_DecodeBit(TrackConditionChangeOfTraction
     }
 }
 
-/*
 int TrackConditionChangeOfTractionPower_EncodeInt(const TrackConditionChangeOfTractionPower* p, PacketInfo* data, kcg_int* stream)
 {
+    stream[data->startAddress++] = p->Q_DIR;
+    stream[data->startAddress++] = p->L_PACKET;
+    stream[data->startAddress++] = p->Q_SCALE;
+    stream[data->startAddress++] = p->D_TRACTION;
+    stream[data->startAddress++] = p->M_TRACTION;
 
+    return 1;
 }
 
 int TrackConditionChangeOfTractionPower_DecodeInt(TrackConditionChangeOfTractionPower* p, PacketInfo* data, kcg_int* stream)
 {
+    p->Q_DIR = stream[data->startAddress++];
+    p->L_PACKET = stream[data->startAddress++];
+    p->Q_SCALE = stream[data->startAddress++];
+    p->D_TRACTION = stream[data->startAddress++];
+    p->M_TRACTION = stream[data->startAddress++];
 
+    return 1;
 }
-*/
 

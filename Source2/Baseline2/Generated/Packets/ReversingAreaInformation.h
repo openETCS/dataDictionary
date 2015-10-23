@@ -194,5 +194,9 @@ static inline uint32_t ReversingAreaInformation_Length(const ReversingAreaInform
     return (uint32_t)(p->L_PACKET);
 }
 
+int ReversingAreaInformation_EncodeInt(const ReversingAreaInformation* p, PacketInfo* data, kcg_int* stream);
+
+int ReversingAreaInformation_DecodeInt(ReversingAreaInformation* p, PacketInfo* data, kcg_int* stream);
+
 #endif // REVERSINGAREAINFORMATION_H_INCLUDED
 

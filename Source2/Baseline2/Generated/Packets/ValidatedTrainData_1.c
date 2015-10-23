@@ -91,15 +91,13 @@ int ValidatedTrainData_1_DecodeBit(ValidatedTrainData_1* p, Bitstream* stream)
     }
 }
 
-/*
 int ValidatedTrainData_1_EncodeInt(const ValidatedTrainData_1* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int ValidatedTrainData_1_DecodeInt(ValidatedTrainData_1* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 

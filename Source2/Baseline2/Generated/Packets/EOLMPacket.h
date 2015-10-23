@@ -217,5 +217,9 @@ static inline uint32_t EOLMPacket_Length(const EOLMPacket* p)
     return (uint32_t)(p->L_PACKET);
 }
 
+int EOLMPacket_EncodeInt(const EOLMPacket* p, PacketInfo* data, kcg_int* stream);
+
+int EOLMPacket_DecodeInt(EOLMPacket* p, PacketInfo* data, kcg_int* stream);
+
 #endif // EOLMPACKET_H_INCLUDED
 

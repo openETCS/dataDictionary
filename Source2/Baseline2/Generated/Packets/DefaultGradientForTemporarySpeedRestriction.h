@@ -186,5 +186,9 @@ static inline uint32_t DefaultGradientForTemporarySpeedRestriction_Length(const 
     return (uint32_t)(p->L_PACKET);
 }
 
+int DefaultGradientForTemporarySpeedRestriction_EncodeInt(const DefaultGradientForTemporarySpeedRestriction* p, PacketInfo* data, kcg_int* stream);
+
+int DefaultGradientForTemporarySpeedRestriction_DecodeInt(DefaultGradientForTemporarySpeedRestriction* p, PacketInfo* data, kcg_int* stream);
+
 #endif // DEFAULTGRADIENTFORTEMPORARYSPEEDRESTRICTION_H_INCLUDED
 

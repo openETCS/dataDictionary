@@ -194,5 +194,9 @@ static inline uint32_t MovementAuthorityRequestParameters_Length(const MovementA
     return (uint32_t)(p->L_PACKET);
 }
 
+int MovementAuthorityRequestParameters_EncodeInt(const MovementAuthorityRequestParameters* p, PacketInfo* data, kcg_int* stream);
+
+int MovementAuthorityRequestParameters_DecodeInt(MovementAuthorityRequestParameters* p, PacketInfo* data, kcg_int* stream);
+
 #endif // MOVEMENTAUTHORITYREQUESTPARAMETERS_H_INCLUDED
 

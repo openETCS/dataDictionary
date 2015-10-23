@@ -108,15 +108,13 @@ int TrackConditionBigMetalMasses_1_DecodeBit(TrackConditionBigMetalMasses_1* p, 
     }
 }
 
-/*
 int TrackConditionBigMetalMasses_1_EncodeInt(const TrackConditionBigMetalMasses_1* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int TrackConditionBigMetalMasses_1_DecodeInt(TrackConditionBigMetalMasses_1* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 

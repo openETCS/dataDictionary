@@ -155,5 +155,9 @@ static inline int ListOfBalisesInSRAuthority_1_Equal(const ListOfBalisesInSRAuth
     return status;
 }
 
+int ListOfBalisesInSRAuthority_1_EncodeInt(const ListOfBalisesInSRAuthority_1* p, PacketInfo* data, kcg_int* stream);
+
+int ListOfBalisesInSRAuthority_1_DecodeInt(ListOfBalisesInSRAuthority_1* p, PacketInfo* data, kcg_int* stream);
+
 #endif // LISTOFBALISESINSRAUTHORITY_1_H_INCLUDED
 

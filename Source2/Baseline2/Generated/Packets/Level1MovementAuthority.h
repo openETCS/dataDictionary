@@ -284,5 +284,9 @@ static inline uint32_t Level1MovementAuthority_Length(const Level1MovementAuthor
     return (uint32_t)(p->L_PACKET);
 }
 
+int Level1MovementAuthority_EncodeInt(const Level1MovementAuthority* p, PacketInfo* data, kcg_int* stream);
+
+int Level1MovementAuthority_DecodeInt(Level1MovementAuthority* p, PacketInfo* data, kcg_int* stream);
+
 #endif // LEVEL1MOVEMENTAUTHORITY_H_INCLUDED
 

@@ -206,15 +206,13 @@ int TrackCondition_DecodeBit(TrackCondition* p, Bitstream* stream)
     }
 }
 
-/*
 int TrackCondition_EncodeInt(const TrackCondition* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
 
 int TrackCondition_DecodeInt(TrackCondition* p, PacketInfo* data, kcg_int* stream)
 {
-
+    return 0;
 }
-*/
 
