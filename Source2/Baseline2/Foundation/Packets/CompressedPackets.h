@@ -1,6 +1,12 @@
 #ifndef COMPRESSEDPACKETS_H_INCLUDED
 #define COMPRESSEDPACKETS_H_INCLUDED
 
+#ifdef HAVE_KCG_HEADER
+
+#include "kcg_types.h"
+
+#else
+
 #ifndef kcg_int
 #define kcg_int kcg_int
 typedef int kcg_int;
@@ -29,14 +35,17 @@ typedef struct
     kcg_int endAddress;
 } MetadataElement_T_Common_Types_Pkg;
 
-typedef MetadataElement_T_Common_Types_Pkg PacketInfo;
 
 // packet sequence struct
 typedef struct
 {
-    PacketInfo PacketHeaders[30];
+    MetadataElement_T_Common_Types_Pkg PacketHeaders[30];
     kcg_int  PacketData[500];
 } CompressedPackets_T_Common_Types_Pkg;
+
+#endif // HAVE_KCG_HEADER
+
+typedef MetadataElement_T_Common_Types_Pkg PacketInfo;
 
 typedef CompressedPackets_T_Common_Types_Pkg FlatPackets;
 
