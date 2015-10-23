@@ -9,7 +9,7 @@ export SCRIPT_DIR=$(TOPDIR)/Scripts
 
 #setup compiler flags
 # connect to kcg_types.h
-CPPFLAGS=-DHAVE_KCG_HEADER
+CPPFLAGS=-UHAVE_KCG_HEADER
 INCLUDES=$(CPPFLAGS) -I$(FRAMAC_SHARE)/libc
 
 #VPATH = $(COQ)
