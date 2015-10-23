@@ -18,8 +18,7 @@ LDFLAGS += -L$(TOPDIR)/Generated/Packets -lgenerated_packets
 all: clean test_packets
 	./test_packets
 
-SRC := PacketFactory.o\
-       PacketSequence.c\
+SRC := PacketSequence.c\
        EurobaliseTelegram.c
 
 TESTS := AdhesionFactor_Tests.o\
