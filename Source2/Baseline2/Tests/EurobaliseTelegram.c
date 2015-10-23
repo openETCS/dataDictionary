@@ -26,7 +26,7 @@ int EurobaliseTelegram_Equal(const EurobaliseTelegram* a, const EurobaliseTelegr
 
 int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
 {
-    printf("EurobaliseTelegram_DecodeBit::enter\n");
+    //printf("EurobaliseTelegram_DecodeBit::enter\n");
 
     if (TelegramHeader_DecodeBit(stream, &t->header) != 1)
     {
