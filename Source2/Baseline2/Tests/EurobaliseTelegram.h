@@ -21,6 +21,7 @@ typedef struct EurobaliseTelegram EurobaliseTelegram;
 
 static inline void EurobaliseTelegram_Init(EurobaliseTelegram* t)
 {
+    TelegramHeader_Init(&t->header);
     PacketSequence_Init(&t->packets);
 }
 

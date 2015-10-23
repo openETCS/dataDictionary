@@ -5,6 +5,7 @@ MAKEFLAGS += --no-print-directory --silent
 TOPDIR=../
 
 CC=cc
+
 CPPFLAGS+=-I$(TOPDIR)/Foundation/Bits
 CPPFLAGS+=-I$(TOPDIR)/Foundation/Packets
 CPPFLAGS+=-I$(TOPDIR)/Generated/Packets
