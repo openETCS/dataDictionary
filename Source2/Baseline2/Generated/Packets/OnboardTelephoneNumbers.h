@@ -3,6 +3,7 @@
 #define ONBOARDTELEPHONENUMBERS_H_INCLUDED
 
 #include "Bitstream.h"
+#include "CompressedPackets.h"
 #include "PacketHeader.h"
 #include "OnboardTelephoneNumbers_1.h"
 

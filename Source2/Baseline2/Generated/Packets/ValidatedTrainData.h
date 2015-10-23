@@ -3,6 +3,7 @@
 #define VALIDATEDTRAINDATA_H_INCLUDED
 
 #include "Bitstream.h"
+#include "CompressedPackets.h"
 #include "PacketHeader.h"
 #include "ValidatedTrainData_1.h"
 #include "ValidatedTrainData_2.h"

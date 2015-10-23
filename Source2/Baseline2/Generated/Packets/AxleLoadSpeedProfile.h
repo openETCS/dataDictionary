@@ -3,6 +3,7 @@
 #define AXLELOADSPEEDPROFILE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "CompressedPackets.h"
 #include "PacketHeader.h"
 #include "AxleLoadSpeedProfile_1.h"
 #include "AxleLoadSpeedProfile_2.h"

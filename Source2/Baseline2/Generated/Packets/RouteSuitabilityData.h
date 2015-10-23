@@ -3,6 +3,7 @@
 #define ROUTESUITABILITYDATA_H_INCLUDED
 
 #include "Bitstream.h"
+#include "CompressedPackets.h"
 #include "PacketHeader.h"
 #include "RouteSuitabilityData_1.h"
 

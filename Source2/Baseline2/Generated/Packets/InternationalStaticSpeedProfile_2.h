@@ -3,6 +3,7 @@
 #define INTERNATIONALSTATICSPEEDPROFILE_2_H_INCLUDED
 
 #include "Bitstream.h"
+#include "CompressedPackets.h"
 #include "PacketHeader.h"
 #include "InternationalStaticSpeedProfile_2_1.h"
 

@@ -3,6 +3,7 @@
 #define GEOGRAPHICALPOSITIONINFORMATION_H_INCLUDED
 
 #include "Bitstream.h"
+#include "CompressedPackets.h"
 #include "PacketHeader.h"
 #include "GeographicalPositionInformation_1.h"
 

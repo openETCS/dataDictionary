@@ -3,6 +3,7 @@
 #define POSITIONREPORTPARAMETERS_H_INCLUDED
 
 #include "Bitstream.h"
+#include "CompressedPackets.h"
 #include "PacketHeader.h"
 #include "PositionReportParameters_1.h"
 

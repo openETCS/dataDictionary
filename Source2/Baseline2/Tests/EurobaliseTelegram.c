@@ -26,7 +26,7 @@ int EurobaliseTelegram_Equal(const EurobaliseTelegram* a, const EurobaliseTelegr
 
 int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
 {
-    //printf("EurobaliseTelegram_DecodeBit::enter\n");
+    printf("EurobaliseTelegram_DecodeBit::enter\n");
 
     if (TelegramHeader_DecodeBit(stream, &t->header) != 1)
     {
@@ -42,6 +42,7 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
 
     while (stream->bitpos <= 1023 + old_pos)
     {
+        //printf("in while %lu", stream->bitpos);
         if (current_pos != stream->bitpos)
         {
             //printf("problem here %lu is not %lu\n", current_pos, stream->bitpos);
@@ -85,6 +86,7 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
         {
             assert(t->header.Q_UPDOWN == 0);
             ptr = PacketFactory_TrainToTrack(packet_header);
+	    //PacketHeader_Print(&packet_header, stdout);
 
             if (ptr)
             {

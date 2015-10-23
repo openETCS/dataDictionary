@@ -3,6 +3,7 @@
 #define NATIONALVALUES_H_INCLUDED
 
 #include "Bitstream.h"
+#include "CompressedPackets.h"
 #include "PacketHeader.h"
 #include "NationalValues_1.h"
 

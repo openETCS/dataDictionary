@@ -3,6 +3,7 @@
 #define LEVEL23TRANSITIONINFORMATION_H_INCLUDED
 
 #include "Bitstream.h"
+#include "CompressedPackets.h"
 #include "PacketHeader.h"
 
 struct Level23TransitionInformation

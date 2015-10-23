@@ -3,6 +3,7 @@
 #define TRACKCONDITIONBIGMETALMASSES_H_INCLUDED
 
 #include "Bitstream.h"
+#include "CompressedPackets.h"
 #include "PacketHeader.h"
 #include "TrackConditionBigMetalMasses_1.h"
 

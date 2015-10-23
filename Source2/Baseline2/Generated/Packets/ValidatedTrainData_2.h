@@ -3,6 +3,7 @@
 #define VALIDATEDTRAINDATA_2_H_INCLUDED
 
 #include "Bitstream.h"
+#include "CompressedPackets.h"
 #include "PacketHeader.h"
 
 struct ValidatedTrainData_2

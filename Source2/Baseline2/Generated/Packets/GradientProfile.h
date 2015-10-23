@@ -3,6 +3,7 @@
 #define GRADIENTPROFILE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "CompressedPackets.h"
 #include "PacketHeader.h"
 #include "GradientProfile_1.h"
 

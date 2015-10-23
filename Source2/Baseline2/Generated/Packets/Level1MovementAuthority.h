@@ -3,6 +3,7 @@
 #define LEVEL1MOVEMENTAUTHORITY_H_INCLUDED
 
 #include "Bitstream.h"
+#include "CompressedPackets.h"
 #include "PacketHeader.h"
 #include "Level1MovementAuthority_1.h"
 

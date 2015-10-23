@@ -3,6 +3,7 @@
 #define CONDITIONALLEVELTRANSITIONORDER_H_INCLUDED
 
 #include "Bitstream.h"
+#include "CompressedPackets.h"
 #include "PacketHeader.h"
 #include "ConditionalLevelTransitionOrder_1.h"
 

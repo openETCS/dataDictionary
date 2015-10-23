@@ -3,6 +3,7 @@
 #define MODEPROFILE_H_INCLUDED
 
 #include "Bitstream.h"
+#include "CompressedPackets.h"
 #include "PacketHeader.h"
 #include "ModeProfile_1.h"
 
