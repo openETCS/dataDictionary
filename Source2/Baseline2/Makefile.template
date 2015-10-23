@@ -8,6 +8,8 @@ export SCRIPT_DIR=$(TOPDIR)/Scripts
 #export COQ=$(TOPDIR)/Foundation/Coq
 
 #setup compiler flags
+# connect to kcg_types.h
+CPPFLAGS=-DHAVE_KCG_HEADER
 INCLUDES=$(CPPFLAGS) -I$(FRAMAC_SHARE)/libc
 
 #VPATH = $(COQ)
