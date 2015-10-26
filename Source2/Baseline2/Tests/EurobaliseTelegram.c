@@ -86,7 +86,7 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
         {
             assert(t->header.Q_UPDOWN == 0);
             ptr = PacketFactory_TrainToTrack(packet_header);
-	    //PacketHeader_Print(&packet_header, stdout);
+            //PacketHeader_Print(&packet_header, stdout);
 
             if (ptr)
             {

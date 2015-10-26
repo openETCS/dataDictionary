@@ -81,7 +81,7 @@ int main(void)
         EurobaliseTelegram_DecodeBit(&u2, &stream2);
 
         EurobaliseTelegram_Print(&u2, stdout);
-	EurobaliseTelegram_Print(&u1, stdout);
+        EurobaliseTelegram_Print(&u1, stdout);
 
         assert(EurobaliseTelegram_Equal(&t, &u2));
         assert(EurobaliseTelegram_Equal(&u2, &t));
