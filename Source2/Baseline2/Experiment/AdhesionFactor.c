@@ -15,7 +15,8 @@ AdhesionFactor* AdhesionFactor_New(void)
 
     if (AdhesionFactorMemoryFreeList != AdhesionFactorMemoryNil) {
 	// allocate from freelist
-	ptr = &AdhesionFactorMemory[
+	ptr = &AdhesionFactorMemory[AdhesionFactorMemoryFreeList];
+	AdhesionFactorMemoryFreeList = AdhesionFactorMemory[AdhesionFactorMemoryFreeList].header.NID_PACKET;
     } else if (AdhesionFactorMemoryTop < AdhesionFactorMemoryMax) {
 	// allocate from top
 	ptr = &AdhesionFactorMemory[AdhesionFactorMemoryTop];
@@ -24,9 +25,8 @@ AdhesionFactor* AdhesionFactor_New(void)
 	// memory exhausted
 	return 0;
     }
-    void* raw = malloc(sizeof(AdhesionFactor));
-    AdhesionFactor* ptr = (AdhesionFactor*)raw;
     AdhesionFactor_Init(ptr);
+
     return ptr;
 }
 
