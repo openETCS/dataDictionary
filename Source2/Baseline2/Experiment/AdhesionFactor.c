@@ -12,30 +12,23 @@
 static AdhesionFactor AdhesionFactorMemory[AdhesionFactorMemoryMax];
 
 // lowest unused cell of allocation memory
-static int AdhesionFactorMemoryTop = 0;
+static uint64_t AdhesionFactorMemoryTop = 0;
 
 // index of first element of freelist
-static int AdhesionFactorMemoryFreeList = AdhesionFactorMemoryNil;
-
-
+static uint64_t AdhesionFactorMemoryFreeList = AdhesionFactorMemoryNil;
 
 AdhesionFactor* AdhesionFactor_New(void)
 {
     AdhesionFactor* ptr;
 
     if (AdhesionFactorMemoryFreeList != AdhesionFactorMemoryNil) {
-//	fprintf(stderr,"AdhesionFactor_New freelist %d",AdhesionFactorMemoryFreeList);
 	// allocate from freelist
 	ptr = &AdhesionFactorMemory[AdhesionFactorMemoryFreeList];
-//	assert(ptr->header.list==1234567890);		// mark as belonging to freelist
 	AdhesionFactorMemoryFreeList = AdhesionFactorMemory[AdhesionFactorMemoryFreeList].header.NID_PACKET;
-//	fprintf(stderr," --> %d\n",AdhesionFactorMemoryFreeList);
     } else if (AdhesionFactorMemoryTop < AdhesionFactorMemoryMax) {
-//	fprintf(stderr,"AdhesionFactor_New top %d",AdhesionFactorMemoryTop);
 	// allocate from top
 	ptr = &AdhesionFactorMemory[AdhesionFactorMemoryTop];
 	AdhesionFactorMemoryTop += 1;
-//	fprintf(stderr," --> %d\n",AdhesionFactorMemoryTop);
     } else {
 	// memory exhausted
 	return 0;
@@ -48,13 +41,9 @@ AdhesionFactor* AdhesionFactor_New(void)
 
 void AdhesionFactor_Delete(AdhesionFactor* ptr)
 {
-//    fprintf(stderr,"AdhesionFactor_Delete(%p=%d) freelist %d",
-//					    (void*)ptr,ptr-AdhesionFactorMemory,AdhesionFactorMemoryFreeList);
     // prepend to freelist
     ptr->header.NID_PACKET = AdhesionFactorMemoryFreeList;
-//    ptr->header.list = 1234567890;		// check if belonging to freelist (redundant)
     AdhesionFactorMemoryFreeList = ptr - AdhesionFactorMemory;
-//    fprintf(stderr," --> %d\n",AdhesionFactorMemoryFreeList);
 }
 
 
