@@ -23,22 +23,24 @@ AdhesionFactor* AdhesionFactor_New(void)
 {
     AdhesionFactor* ptr;
 
-    if (AdhesionFactorMemoryFreeList != AdhesionFactorMemoryNil) {
-	fprintf(stderr,"AdhesionFactor_New freelist %d",AdhesionFactorMemoryFreeList);
-	// allocate from freelist
-	ptr = &AdhesionFactorMemory[AdhesionFactorMemoryFreeList];
-	AdhesionFactorMemoryFreeList = AdhesionFactorMemory[AdhesionFactorMemoryFreeList].header.NID_PACKET;
-	fprintf(stderr," --> %d\n",AdhesionFactorMemoryFreeList);
-    } else if (AdhesionFactorMemoryTop < AdhesionFactorMemoryMax) {
-	fprintf(stderr,"AdhesionFactor_New top %d",AdhesionFactorMemoryTop);
-	// allocate from top
-	ptr = &AdhesionFactorMemory[AdhesionFactorMemoryTop];
-	AdhesionFactorMemoryTop += 1;
-	fprintf(stderr," --> %d\n",AdhesionFactorMemoryTop);
-    } else {
-	// memory exhausted
-	return 0;
-    }
+//    if (AdhesionFactorMemoryFreeList != AdhesionFactorMemoryNil) {
+//	fprintf(stderr,"AdhesionFactor_New freelist %d",AdhesionFactorMemoryFreeList);
+//	// allocate from freelist
+//	ptr = &AdhesionFactorMemory[AdhesionFactorMemoryFreeList];
+//	assert(ptr->header.list==1234567890);
+//	AdhesionFactorMemoryFreeList = AdhesionFactorMemory[AdhesionFactorMemoryFreeList].header.NID_PACKET;
+//	fprintf(stderr," --> %d\n",AdhesionFactorMemoryFreeList);
+//    } else if (AdhesionFactorMemoryTop < AdhesionFactorMemoryMax) {
+//	fprintf(stderr,"AdhesionFactor_New top %d",AdhesionFactorMemoryTop);
+//	// allocate from top
+//	ptr = &AdhesionFactorMemory[AdhesionFactorMemoryTop];
+//	AdhesionFactorMemoryTop += 1;
+//	fprintf(stderr," --> %d\n",AdhesionFactorMemoryTop);
+//    } else {
+//	// memory exhausted
+//	return 0;
+//    }
+    ptr = (AdhesionFactor*)malloc(sizeof(AdhesionFactor));
     AdhesionFactor_Init(ptr);
 
     return ptr;
@@ -47,12 +49,14 @@ AdhesionFactor* AdhesionFactor_New(void)
 
 void AdhesionFactor_Delete(AdhesionFactor* ptr)
 {
-    fprintf(stderr,"AdhesionFactor_Delete(%p=%d) freelist %d",
-					    (void*)ptr,ptr-AdhesionFactorMemory,AdhesionFactorMemoryFreeList);
-    // prepend to freelist
-    ptr->header.NID_PACKET = AdhesionFactorMemoryFreeList;
-    AdhesionFactorMemoryFreeList = ptr - AdhesionFactorMemory;
-    fprintf(stderr," --> %d\n",AdhesionFactorMemoryFreeList);
+    free(ptr);
+//    fprintf(stderr,"AdhesionFactor_Delete(%p=%d) freelist %d",
+//					    (void*)ptr,ptr-AdhesionFactorMemory,AdhesionFactorMemoryFreeList);
+//    // prepend to freelist
+//    ptr->header.NID_PACKET = AdhesionFactorMemoryFreeList;
+//    ptr->header.list = 1234567890;
+//    AdhesionFactorMemoryFreeList = ptr - AdhesionFactorMemory;
+//    fprintf(stderr," --> %d\n",AdhesionFactorMemoryFreeList);
 }
 
 
