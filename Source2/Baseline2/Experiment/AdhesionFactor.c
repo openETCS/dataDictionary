@@ -2,8 +2,28 @@
 #include "AdhesionFactor.h"
 #include "Bit64.h"
 
+#define AdhesionFactorMemoryMax		32
+#define AdhesionFactorMemoryNil		(-1)
+
+static AdhesionFactor AdhesionFactorMemory[AdhesionFactorMemoryMax];
+static int AdhesionFactorMemoryTop = 0;
+static int AdhesionFactorMemoryFreeList = AdhesionFactorMemoryNil;
+
 AdhesionFactor* AdhesionFactor_New(void)
 {
+    AdhesionFactor* ptr;
+
+    if (AdhesionFactorMemoryFreeList != AdhesionFactorMemoryNil) {
+	// allocate from freelist
+	ptr = &AdhesionFactorMemory[
+    } else if (AdhesionFactorMemoryTop < AdhesionFactorMemoryMax) {
+	// allocate from top
+	ptr = &AdhesionFactorMemory[AdhesionFactorMemoryTop];
+	AdhesionFactorMemoryTop += 1;
+    } else {
+	// memory exhausted
+	return 0;
+    }
     void* raw = malloc(sizeof(AdhesionFactor));
     AdhesionFactor* ptr = (AdhesionFactor*)raw;
     AdhesionFactor_Init(ptr);
