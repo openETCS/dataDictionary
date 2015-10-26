@@ -2,18 +2,54 @@
 #include "PacketForSendingFixedTextMessages.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define PacketForSendingFixedTextMessagesMemoryMax 32
+
+// end-of-freelist indicator
+#define PacketForSendingFixedTextMessagesMemoryNil (-1)
+
+// allocation memory
+static PacketForSendingFixedTextMessages PacketForSendingFixedTextMessagesMemory[PacketForSendingFixedTextMessagesMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t PacketForSendingFixedTextMessagesMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t PacketForSendingFixedTextMessagesMemoryFreeList = PacketForSendingFixedTextMessagesMemoryNil;
+
 PacketForSendingFixedTextMessages* PacketForSendingFixedTextMessages_New(void)
 {
-    void* raw = malloc(sizeof(PacketForSendingFixedTextMessages));
-    PacketForSendingFixedTextMessages* ptr = (PacketForSendingFixedTextMessages*)raw;
+    PacketForSendingFixedTextMessages* ptr;
+
+    if (PacketForSendingFixedTextMessagesMemoryFreeList != PacketForSendingFixedTextMessagesMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &PacketForSendingFixedTextMessagesMemory[PacketForSendingFixedTextMessagesMemoryFreeList];
+	 PacketForSendingFixedTextMessagesMemoryFreeList = PacketForSendingFixedTextMessagesMemory[PacketForSendingFixedTextMessagesMemoryFreeList].header.NID_PACKET;
+    }
+    else if (PacketForSendingFixedTextMessagesMemoryTop < PacketForSendingFixedTextMessagesMemoryMax)
+    {
+         // allocate from top
+	 ptr = &PacketForSendingFixedTextMessagesMemory[PacketForSendingFixedTextMessagesMemoryTop];
+	 PacketForSendingFixedTextMessagesMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     PacketForSendingFixedTextMessages_Init(ptr);
+
     return ptr;
 }
 
 
 void PacketForSendingFixedTextMessages_Delete(PacketForSendingFixedTextMessages* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = PacketForSendingFixedTextMessagesMemoryFreeList;
+    PacketForSendingFixedTextMessagesMemoryFreeList = ptr - PacketForSendingFixedTextMessagesMemory;
 }
 
 

@@ -2,18 +2,54 @@
 #include "InternationalStaticSpeedProfile.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define InternationalStaticSpeedProfileMemoryMax 32
+
+// end-of-freelist indicator
+#define InternationalStaticSpeedProfileMemoryNil (-1)
+
+// allocation memory
+static InternationalStaticSpeedProfile InternationalStaticSpeedProfileMemory[InternationalStaticSpeedProfileMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t InternationalStaticSpeedProfileMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t InternationalStaticSpeedProfileMemoryFreeList = InternationalStaticSpeedProfileMemoryNil;
+
 InternationalStaticSpeedProfile* InternationalStaticSpeedProfile_New(void)
 {
-    void* raw = malloc(sizeof(InternationalStaticSpeedProfile));
-    InternationalStaticSpeedProfile* ptr = (InternationalStaticSpeedProfile*)raw;
+    InternationalStaticSpeedProfile* ptr;
+
+    if (InternationalStaticSpeedProfileMemoryFreeList != InternationalStaticSpeedProfileMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &InternationalStaticSpeedProfileMemory[InternationalStaticSpeedProfileMemoryFreeList];
+	 InternationalStaticSpeedProfileMemoryFreeList = InternationalStaticSpeedProfileMemory[InternationalStaticSpeedProfileMemoryFreeList].header.NID_PACKET;
+    }
+    else if (InternationalStaticSpeedProfileMemoryTop < InternationalStaticSpeedProfileMemoryMax)
+    {
+         // allocate from top
+	 ptr = &InternationalStaticSpeedProfileMemory[InternationalStaticSpeedProfileMemoryTop];
+	 InternationalStaticSpeedProfileMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     InternationalStaticSpeedProfile_Init(ptr);
+
     return ptr;
 }
 
 
 void InternationalStaticSpeedProfile_Delete(InternationalStaticSpeedProfile* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = InternationalStaticSpeedProfileMemoryFreeList;
+    InternationalStaticSpeedProfileMemoryFreeList = ptr - InternationalStaticSpeedProfileMemory;
 }
 
 

@@ -2,18 +2,54 @@
 #include "SessionManagement.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define SessionManagementMemoryMax 32
+
+// end-of-freelist indicator
+#define SessionManagementMemoryNil (-1)
+
+// allocation memory
+static SessionManagement SessionManagementMemory[SessionManagementMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t SessionManagementMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t SessionManagementMemoryFreeList = SessionManagementMemoryNil;
+
 SessionManagement* SessionManagement_New(void)
 {
-    void* raw = malloc(sizeof(SessionManagement));
-    SessionManagement* ptr = (SessionManagement*)raw;
+    SessionManagement* ptr;
+
+    if (SessionManagementMemoryFreeList != SessionManagementMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &SessionManagementMemory[SessionManagementMemoryFreeList];
+	 SessionManagementMemoryFreeList = SessionManagementMemory[SessionManagementMemoryFreeList].header.NID_PACKET;
+    }
+    else if (SessionManagementMemoryTop < SessionManagementMemoryMax)
+    {
+         // allocate from top
+	 ptr = &SessionManagementMemory[SessionManagementMemoryTop];
+	 SessionManagementMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     SessionManagement_Init(ptr);
+
     return ptr;
 }
 
 
 void SessionManagement_Delete(SessionManagement* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = SessionManagementMemoryFreeList;
+    SessionManagementMemoryFreeList = ptr - SessionManagementMemory;
 }
 
 

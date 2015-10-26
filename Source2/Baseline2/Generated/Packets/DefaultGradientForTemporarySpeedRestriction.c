@@ -2,18 +2,54 @@
 #include "DefaultGradientForTemporarySpeedRestriction.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define DefaultGradientForTemporarySpeedRestrictionMemoryMax 32
+
+// end-of-freelist indicator
+#define DefaultGradientForTemporarySpeedRestrictionMemoryNil (-1)
+
+// allocation memory
+static DefaultGradientForTemporarySpeedRestriction DefaultGradientForTemporarySpeedRestrictionMemory[DefaultGradientForTemporarySpeedRestrictionMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t DefaultGradientForTemporarySpeedRestrictionMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t DefaultGradientForTemporarySpeedRestrictionMemoryFreeList = DefaultGradientForTemporarySpeedRestrictionMemoryNil;
+
 DefaultGradientForTemporarySpeedRestriction* DefaultGradientForTemporarySpeedRestriction_New(void)
 {
-    void* raw = malloc(sizeof(DefaultGradientForTemporarySpeedRestriction));
-    DefaultGradientForTemporarySpeedRestriction* ptr = (DefaultGradientForTemporarySpeedRestriction*)raw;
+    DefaultGradientForTemporarySpeedRestriction* ptr;
+
+    if (DefaultGradientForTemporarySpeedRestrictionMemoryFreeList != DefaultGradientForTemporarySpeedRestrictionMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &DefaultGradientForTemporarySpeedRestrictionMemory[DefaultGradientForTemporarySpeedRestrictionMemoryFreeList];
+	 DefaultGradientForTemporarySpeedRestrictionMemoryFreeList = DefaultGradientForTemporarySpeedRestrictionMemory[DefaultGradientForTemporarySpeedRestrictionMemoryFreeList].header.NID_PACKET;
+    }
+    else if (DefaultGradientForTemporarySpeedRestrictionMemoryTop < DefaultGradientForTemporarySpeedRestrictionMemoryMax)
+    {
+         // allocate from top
+	 ptr = &DefaultGradientForTemporarySpeedRestrictionMemory[DefaultGradientForTemporarySpeedRestrictionMemoryTop];
+	 DefaultGradientForTemporarySpeedRestrictionMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     DefaultGradientForTemporarySpeedRestriction_Init(ptr);
+
     return ptr;
 }
 
 
 void DefaultGradientForTemporarySpeedRestriction_Delete(DefaultGradientForTemporarySpeedRestriction* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = DefaultGradientForTemporarySpeedRestrictionMemoryFreeList;
+    DefaultGradientForTemporarySpeedRestrictionMemoryFreeList = ptr - DefaultGradientForTemporarySpeedRestrictionMemory;
 }
 
 

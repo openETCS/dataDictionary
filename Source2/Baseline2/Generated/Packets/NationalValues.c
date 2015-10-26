@@ -2,18 +2,54 @@
 #include "NationalValues.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define NationalValuesMemoryMax 32
+
+// end-of-freelist indicator
+#define NationalValuesMemoryNil (-1)
+
+// allocation memory
+static NationalValues NationalValuesMemory[NationalValuesMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t NationalValuesMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t NationalValuesMemoryFreeList = NationalValuesMemoryNil;
+
 NationalValues* NationalValues_New(void)
 {
-    void* raw = malloc(sizeof(NationalValues));
-    NationalValues* ptr = (NationalValues*)raw;
+    NationalValues* ptr;
+
+    if (NationalValuesMemoryFreeList != NationalValuesMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &NationalValuesMemory[NationalValuesMemoryFreeList];
+	 NationalValuesMemoryFreeList = NationalValuesMemory[NationalValuesMemoryFreeList].header.NID_PACKET;
+    }
+    else if (NationalValuesMemoryTop < NationalValuesMemoryMax)
+    {
+         // allocate from top
+	 ptr = &NationalValuesMemory[NationalValuesMemoryTop];
+	 NationalValuesMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     NationalValues_Init(ptr);
+
     return ptr;
 }
 
 
 void NationalValues_Delete(NationalValues* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = NationalValuesMemoryFreeList;
+    NationalValuesMemoryFreeList = ptr - NationalValuesMemory;
 }
 
 

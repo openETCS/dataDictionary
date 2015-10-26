@@ -2,18 +2,54 @@
 #include "RepositioningInformation.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define RepositioningInformationMemoryMax 32
+
+// end-of-freelist indicator
+#define RepositioningInformationMemoryNil (-1)
+
+// allocation memory
+static RepositioningInformation RepositioningInformationMemory[RepositioningInformationMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t RepositioningInformationMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t RepositioningInformationMemoryFreeList = RepositioningInformationMemoryNil;
+
 RepositioningInformation* RepositioningInformation_New(void)
 {
-    void* raw = malloc(sizeof(RepositioningInformation));
-    RepositioningInformation* ptr = (RepositioningInformation*)raw;
+    RepositioningInformation* ptr;
+
+    if (RepositioningInformationMemoryFreeList != RepositioningInformationMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &RepositioningInformationMemory[RepositioningInformationMemoryFreeList];
+	 RepositioningInformationMemoryFreeList = RepositioningInformationMemory[RepositioningInformationMemoryFreeList].header.NID_PACKET;
+    }
+    else if (RepositioningInformationMemoryTop < RepositioningInformationMemoryMax)
+    {
+         // allocate from top
+	 ptr = &RepositioningInformationMemory[RepositioningInformationMemoryTop];
+	 RepositioningInformationMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     RepositioningInformation_Init(ptr);
+
     return ptr;
 }
 
 
 void RepositioningInformation_Delete(RepositioningInformation* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = RepositioningInformationMemoryFreeList;
+    RepositioningInformationMemoryFreeList = ptr - RepositioningInformationMemory;
 }
 
 

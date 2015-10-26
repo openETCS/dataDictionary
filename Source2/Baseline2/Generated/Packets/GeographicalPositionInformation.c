@@ -2,18 +2,54 @@
 #include "GeographicalPositionInformation.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define GeographicalPositionInformationMemoryMax 32
+
+// end-of-freelist indicator
+#define GeographicalPositionInformationMemoryNil (-1)
+
+// allocation memory
+static GeographicalPositionInformation GeographicalPositionInformationMemory[GeographicalPositionInformationMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t GeographicalPositionInformationMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t GeographicalPositionInformationMemoryFreeList = GeographicalPositionInformationMemoryNil;
+
 GeographicalPositionInformation* GeographicalPositionInformation_New(void)
 {
-    void* raw = malloc(sizeof(GeographicalPositionInformation));
-    GeographicalPositionInformation* ptr = (GeographicalPositionInformation*)raw;
+    GeographicalPositionInformation* ptr;
+
+    if (GeographicalPositionInformationMemoryFreeList != GeographicalPositionInformationMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &GeographicalPositionInformationMemory[GeographicalPositionInformationMemoryFreeList];
+	 GeographicalPositionInformationMemoryFreeList = GeographicalPositionInformationMemory[GeographicalPositionInformationMemoryFreeList].header.NID_PACKET;
+    }
+    else if (GeographicalPositionInformationMemoryTop < GeographicalPositionInformationMemoryMax)
+    {
+         // allocate from top
+	 ptr = &GeographicalPositionInformationMemory[GeographicalPositionInformationMemoryTop];
+	 GeographicalPositionInformationMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     GeographicalPositionInformation_Init(ptr);
+
     return ptr;
 }
 
 
 void GeographicalPositionInformation_Delete(GeographicalPositionInformation* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = GeographicalPositionInformationMemoryFreeList;
+    GeographicalPositionInformationMemoryFreeList = ptr - GeographicalPositionInformationMemory;
 }
 
 

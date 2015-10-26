@@ -2,18 +2,54 @@
 #include "ConditionalLevelTransitionOrder.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define ConditionalLevelTransitionOrderMemoryMax 32
+
+// end-of-freelist indicator
+#define ConditionalLevelTransitionOrderMemoryNil (-1)
+
+// allocation memory
+static ConditionalLevelTransitionOrder ConditionalLevelTransitionOrderMemory[ConditionalLevelTransitionOrderMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t ConditionalLevelTransitionOrderMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t ConditionalLevelTransitionOrderMemoryFreeList = ConditionalLevelTransitionOrderMemoryNil;
+
 ConditionalLevelTransitionOrder* ConditionalLevelTransitionOrder_New(void)
 {
-    void* raw = malloc(sizeof(ConditionalLevelTransitionOrder));
-    ConditionalLevelTransitionOrder* ptr = (ConditionalLevelTransitionOrder*)raw;
+    ConditionalLevelTransitionOrder* ptr;
+
+    if (ConditionalLevelTransitionOrderMemoryFreeList != ConditionalLevelTransitionOrderMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &ConditionalLevelTransitionOrderMemory[ConditionalLevelTransitionOrderMemoryFreeList];
+	 ConditionalLevelTransitionOrderMemoryFreeList = ConditionalLevelTransitionOrderMemory[ConditionalLevelTransitionOrderMemoryFreeList].header.NID_PACKET;
+    }
+    else if (ConditionalLevelTransitionOrderMemoryTop < ConditionalLevelTransitionOrderMemoryMax)
+    {
+         // allocate from top
+	 ptr = &ConditionalLevelTransitionOrderMemory[ConditionalLevelTransitionOrderMemoryTop];
+	 ConditionalLevelTransitionOrderMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     ConditionalLevelTransitionOrder_Init(ptr);
+
     return ptr;
 }
 
 
 void ConditionalLevelTransitionOrder_Delete(ConditionalLevelTransitionOrder* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = ConditionalLevelTransitionOrderMemoryFreeList;
+    ConditionalLevelTransitionOrderMemoryFreeList = ptr - ConditionalLevelTransitionOrderMemory;
 }
 
 

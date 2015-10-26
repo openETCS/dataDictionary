@@ -2,18 +2,54 @@
 #include "Level23TransitionInformation.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define Level23TransitionInformationMemoryMax 32
+
+// end-of-freelist indicator
+#define Level23TransitionInformationMemoryNil (-1)
+
+// allocation memory
+static Level23TransitionInformation Level23TransitionInformationMemory[Level23TransitionInformationMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t Level23TransitionInformationMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t Level23TransitionInformationMemoryFreeList = Level23TransitionInformationMemoryNil;
+
 Level23TransitionInformation* Level23TransitionInformation_New(void)
 {
-    void* raw = malloc(sizeof(Level23TransitionInformation));
-    Level23TransitionInformation* ptr = (Level23TransitionInformation*)raw;
+    Level23TransitionInformation* ptr;
+
+    if (Level23TransitionInformationMemoryFreeList != Level23TransitionInformationMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &Level23TransitionInformationMemory[Level23TransitionInformationMemoryFreeList];
+	 Level23TransitionInformationMemoryFreeList = Level23TransitionInformationMemory[Level23TransitionInformationMemoryFreeList].header.NID_PACKET;
+    }
+    else if (Level23TransitionInformationMemoryTop < Level23TransitionInformationMemoryMax)
+    {
+         // allocate from top
+	 ptr = &Level23TransitionInformationMemory[Level23TransitionInformationMemoryTop];
+	 Level23TransitionInformationMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     Level23TransitionInformation_Init(ptr);
+
     return ptr;
 }
 
 
 void Level23TransitionInformation_Delete(Level23TransitionInformation* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = Level23TransitionInformationMemoryFreeList;
+    Level23TransitionInformationMemoryFreeList = ptr - Level23TransitionInformationMemory;
 }
 
 

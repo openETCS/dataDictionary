@@ -2,18 +2,54 @@
 #include "EOLMPacket.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define EOLMPacketMemoryMax 32
+
+// end-of-freelist indicator
+#define EOLMPacketMemoryNil (-1)
+
+// allocation memory
+static EOLMPacket EOLMPacketMemory[EOLMPacketMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t EOLMPacketMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t EOLMPacketMemoryFreeList = EOLMPacketMemoryNil;
+
 EOLMPacket* EOLMPacket_New(void)
 {
-    void* raw = malloc(sizeof(EOLMPacket));
-    EOLMPacket* ptr = (EOLMPacket*)raw;
+    EOLMPacket* ptr;
+
+    if (EOLMPacketMemoryFreeList != EOLMPacketMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &EOLMPacketMemory[EOLMPacketMemoryFreeList];
+	 EOLMPacketMemoryFreeList = EOLMPacketMemory[EOLMPacketMemoryFreeList].header.NID_PACKET;
+    }
+    else if (EOLMPacketMemoryTop < EOLMPacketMemoryMax)
+    {
+         // allocate from top
+	 ptr = &EOLMPacketMemory[EOLMPacketMemoryTop];
+	 EOLMPacketMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     EOLMPacket_Init(ptr);
+
     return ptr;
 }
 
 
 void EOLMPacket_Delete(EOLMPacket* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = EOLMPacketMemoryFreeList;
+    EOLMPacketMemoryFreeList = ptr - EOLMPacketMemory;
 }
 
 

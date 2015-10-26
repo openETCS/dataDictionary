@@ -2,18 +2,54 @@
 #include "GradientProfile.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define GradientProfileMemoryMax 32
+
+// end-of-freelist indicator
+#define GradientProfileMemoryNil (-1)
+
+// allocation memory
+static GradientProfile GradientProfileMemory[GradientProfileMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t GradientProfileMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t GradientProfileMemoryFreeList = GradientProfileMemoryNil;
+
 GradientProfile* GradientProfile_New(void)
 {
-    void* raw = malloc(sizeof(GradientProfile));
-    GradientProfile* ptr = (GradientProfile*)raw;
+    GradientProfile* ptr;
+
+    if (GradientProfileMemoryFreeList != GradientProfileMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &GradientProfileMemory[GradientProfileMemoryFreeList];
+	 GradientProfileMemoryFreeList = GradientProfileMemory[GradientProfileMemoryFreeList].header.NID_PACKET;
+    }
+    else if (GradientProfileMemoryTop < GradientProfileMemoryMax)
+    {
+         // allocate from top
+	 ptr = &GradientProfileMemory[GradientProfileMemoryTop];
+	 GradientProfileMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     GradientProfile_Init(ptr);
+
     return ptr;
 }
 
 
 void GradientProfile_Delete(GradientProfile* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = GradientProfileMemoryFreeList;
+    GradientProfileMemoryFreeList = ptr - GradientProfileMemory;
 }
 
 

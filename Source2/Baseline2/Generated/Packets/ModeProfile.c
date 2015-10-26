@@ -2,18 +2,54 @@
 #include "ModeProfile.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define ModeProfileMemoryMax 32
+
+// end-of-freelist indicator
+#define ModeProfileMemoryNil (-1)
+
+// allocation memory
+static ModeProfile ModeProfileMemory[ModeProfileMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t ModeProfileMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t ModeProfileMemoryFreeList = ModeProfileMemoryNil;
+
 ModeProfile* ModeProfile_New(void)
 {
-    void* raw = malloc(sizeof(ModeProfile));
-    ModeProfile* ptr = (ModeProfile*)raw;
+    ModeProfile* ptr;
+
+    if (ModeProfileMemoryFreeList != ModeProfileMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &ModeProfileMemory[ModeProfileMemoryFreeList];
+	 ModeProfileMemoryFreeList = ModeProfileMemory[ModeProfileMemoryFreeList].header.NID_PACKET;
+    }
+    else if (ModeProfileMemoryTop < ModeProfileMemoryMax)
+    {
+         // allocate from top
+	 ptr = &ModeProfileMemory[ModeProfileMemoryTop];
+	 ModeProfileMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     ModeProfile_Init(ptr);
+
     return ptr;
 }
 
 
 void ModeProfile_Delete(ModeProfile* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = ModeProfileMemoryFreeList;
+    ModeProfileMemoryFreeList = ptr - ModeProfileMemory;
 }
 
 

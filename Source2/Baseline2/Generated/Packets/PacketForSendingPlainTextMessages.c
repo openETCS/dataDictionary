@@ -2,18 +2,54 @@
 #include "PacketForSendingPlainTextMessages.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define PacketForSendingPlainTextMessagesMemoryMax 32
+
+// end-of-freelist indicator
+#define PacketForSendingPlainTextMessagesMemoryNil (-1)
+
+// allocation memory
+static PacketForSendingPlainTextMessages PacketForSendingPlainTextMessagesMemory[PacketForSendingPlainTextMessagesMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t PacketForSendingPlainTextMessagesMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t PacketForSendingPlainTextMessagesMemoryFreeList = PacketForSendingPlainTextMessagesMemoryNil;
+
 PacketForSendingPlainTextMessages* PacketForSendingPlainTextMessages_New(void)
 {
-    void* raw = malloc(sizeof(PacketForSendingPlainTextMessages));
-    PacketForSendingPlainTextMessages* ptr = (PacketForSendingPlainTextMessages*)raw;
+    PacketForSendingPlainTextMessages* ptr;
+
+    if (PacketForSendingPlainTextMessagesMemoryFreeList != PacketForSendingPlainTextMessagesMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &PacketForSendingPlainTextMessagesMemory[PacketForSendingPlainTextMessagesMemoryFreeList];
+	 PacketForSendingPlainTextMessagesMemoryFreeList = PacketForSendingPlainTextMessagesMemory[PacketForSendingPlainTextMessagesMemoryFreeList].header.NID_PACKET;
+    }
+    else if (PacketForSendingPlainTextMessagesMemoryTop < PacketForSendingPlainTextMessagesMemoryMax)
+    {
+         // allocate from top
+	 ptr = &PacketForSendingPlainTextMessagesMemory[PacketForSendingPlainTextMessagesMemoryTop];
+	 PacketForSendingPlainTextMessagesMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     PacketForSendingPlainTextMessages_Init(ptr);
+
     return ptr;
 }
 
 
 void PacketForSendingPlainTextMessages_Delete(PacketForSendingPlainTextMessages* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = PacketForSendingPlainTextMessagesMemoryFreeList;
+    PacketForSendingPlainTextMessagesMemoryFreeList = ptr - PacketForSendingPlainTextMessagesMemory;
 }
 
 

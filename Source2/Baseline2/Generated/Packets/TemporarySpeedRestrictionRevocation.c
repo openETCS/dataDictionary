@@ -2,18 +2,54 @@
 #include "TemporarySpeedRestrictionRevocation.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define TemporarySpeedRestrictionRevocationMemoryMax 32
+
+// end-of-freelist indicator
+#define TemporarySpeedRestrictionRevocationMemoryNil (-1)
+
+// allocation memory
+static TemporarySpeedRestrictionRevocation TemporarySpeedRestrictionRevocationMemory[TemporarySpeedRestrictionRevocationMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t TemporarySpeedRestrictionRevocationMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t TemporarySpeedRestrictionRevocationMemoryFreeList = TemporarySpeedRestrictionRevocationMemoryNil;
+
 TemporarySpeedRestrictionRevocation* TemporarySpeedRestrictionRevocation_New(void)
 {
-    void* raw = malloc(sizeof(TemporarySpeedRestrictionRevocation));
-    TemporarySpeedRestrictionRevocation* ptr = (TemporarySpeedRestrictionRevocation*)raw;
+    TemporarySpeedRestrictionRevocation* ptr;
+
+    if (TemporarySpeedRestrictionRevocationMemoryFreeList != TemporarySpeedRestrictionRevocationMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &TemporarySpeedRestrictionRevocationMemory[TemporarySpeedRestrictionRevocationMemoryFreeList];
+	 TemporarySpeedRestrictionRevocationMemoryFreeList = TemporarySpeedRestrictionRevocationMemory[TemporarySpeedRestrictionRevocationMemoryFreeList].header.NID_PACKET;
+    }
+    else if (TemporarySpeedRestrictionRevocationMemoryTop < TemporarySpeedRestrictionRevocationMemoryMax)
+    {
+         // allocate from top
+	 ptr = &TemporarySpeedRestrictionRevocationMemory[TemporarySpeedRestrictionRevocationMemoryTop];
+	 TemporarySpeedRestrictionRevocationMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     TemporarySpeedRestrictionRevocation_Init(ptr);
+
     return ptr;
 }
 
 
 void TemporarySpeedRestrictionRevocation_Delete(TemporarySpeedRestrictionRevocation* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = TemporarySpeedRestrictionRevocationMemoryFreeList;
+    TemporarySpeedRestrictionRevocationMemoryFreeList = ptr - TemporarySpeedRestrictionRevocationMemory;
 }
 
 

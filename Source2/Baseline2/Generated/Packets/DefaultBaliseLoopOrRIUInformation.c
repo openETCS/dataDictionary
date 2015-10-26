@@ -2,18 +2,54 @@
 #include "DefaultBaliseLoopOrRIUInformation.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define DefaultBaliseLoopOrRIUInformationMemoryMax 32
+
+// end-of-freelist indicator
+#define DefaultBaliseLoopOrRIUInformationMemoryNil (-1)
+
+// allocation memory
+static DefaultBaliseLoopOrRIUInformation DefaultBaliseLoopOrRIUInformationMemory[DefaultBaliseLoopOrRIUInformationMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t DefaultBaliseLoopOrRIUInformationMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t DefaultBaliseLoopOrRIUInformationMemoryFreeList = DefaultBaliseLoopOrRIUInformationMemoryNil;
+
 DefaultBaliseLoopOrRIUInformation* DefaultBaliseLoopOrRIUInformation_New(void)
 {
-    void* raw = malloc(sizeof(DefaultBaliseLoopOrRIUInformation));
-    DefaultBaliseLoopOrRIUInformation* ptr = (DefaultBaliseLoopOrRIUInformation*)raw;
+    DefaultBaliseLoopOrRIUInformation* ptr;
+
+    if (DefaultBaliseLoopOrRIUInformationMemoryFreeList != DefaultBaliseLoopOrRIUInformationMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &DefaultBaliseLoopOrRIUInformationMemory[DefaultBaliseLoopOrRIUInformationMemoryFreeList];
+	 DefaultBaliseLoopOrRIUInformationMemoryFreeList = DefaultBaliseLoopOrRIUInformationMemory[DefaultBaliseLoopOrRIUInformationMemoryFreeList].header.NID_PACKET;
+    }
+    else if (DefaultBaliseLoopOrRIUInformationMemoryTop < DefaultBaliseLoopOrRIUInformationMemoryMax)
+    {
+         // allocate from top
+	 ptr = &DefaultBaliseLoopOrRIUInformationMemory[DefaultBaliseLoopOrRIUInformationMemoryTop];
+	 DefaultBaliseLoopOrRIUInformationMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     DefaultBaliseLoopOrRIUInformation_Init(ptr);
+
     return ptr;
 }
 
 
 void DefaultBaliseLoopOrRIUInformation_Delete(DefaultBaliseLoopOrRIUInformation* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = DefaultBaliseLoopOrRIUInformationMemoryFreeList;
+    DefaultBaliseLoopOrRIUInformationMemoryFreeList = ptr - DefaultBaliseLoopOrRIUInformationMemory;
 }
 
 

@@ -2,18 +2,54 @@
 #include "ErrorReporting.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define ErrorReportingMemoryMax 32
+
+// end-of-freelist indicator
+#define ErrorReportingMemoryNil (-1)
+
+// allocation memory
+static ErrorReporting ErrorReportingMemory[ErrorReportingMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t ErrorReportingMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t ErrorReportingMemoryFreeList = ErrorReportingMemoryNil;
+
 ErrorReporting* ErrorReporting_New(void)
 {
-    void* raw = malloc(sizeof(ErrorReporting));
-    ErrorReporting* ptr = (ErrorReporting*)raw;
+    ErrorReporting* ptr;
+
+    if (ErrorReportingMemoryFreeList != ErrorReportingMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &ErrorReportingMemory[ErrorReportingMemoryFreeList];
+	 ErrorReportingMemoryFreeList = ErrorReportingMemory[ErrorReportingMemoryFreeList].header.NID_PACKET;
+    }
+    else if (ErrorReportingMemoryTop < ErrorReportingMemoryMax)
+    {
+         // allocate from top
+	 ptr = &ErrorReportingMemory[ErrorReportingMemoryTop];
+	 ErrorReportingMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     ErrorReporting_Init(ptr);
+
     return ptr;
 }
 
 
 void ErrorReporting_Delete(ErrorReporting* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = ErrorReportingMemoryFreeList;
+    ErrorReportingMemoryFreeList = ptr - ErrorReportingMemory;
 }
 
 

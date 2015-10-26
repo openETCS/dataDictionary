@@ -2,18 +2,54 @@
 #include "TrackConditionChangeOfTractionPower.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define TrackConditionChangeOfTractionPowerMemoryMax 32
+
+// end-of-freelist indicator
+#define TrackConditionChangeOfTractionPowerMemoryNil (-1)
+
+// allocation memory
+static TrackConditionChangeOfTractionPower TrackConditionChangeOfTractionPowerMemory[TrackConditionChangeOfTractionPowerMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t TrackConditionChangeOfTractionPowerMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t TrackConditionChangeOfTractionPowerMemoryFreeList = TrackConditionChangeOfTractionPowerMemoryNil;
+
 TrackConditionChangeOfTractionPower* TrackConditionChangeOfTractionPower_New(void)
 {
-    void* raw = malloc(sizeof(TrackConditionChangeOfTractionPower));
-    TrackConditionChangeOfTractionPower* ptr = (TrackConditionChangeOfTractionPower*)raw;
+    TrackConditionChangeOfTractionPower* ptr;
+
+    if (TrackConditionChangeOfTractionPowerMemoryFreeList != TrackConditionChangeOfTractionPowerMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &TrackConditionChangeOfTractionPowerMemory[TrackConditionChangeOfTractionPowerMemoryFreeList];
+	 TrackConditionChangeOfTractionPowerMemoryFreeList = TrackConditionChangeOfTractionPowerMemory[TrackConditionChangeOfTractionPowerMemoryFreeList].header.NID_PACKET;
+    }
+    else if (TrackConditionChangeOfTractionPowerMemoryTop < TrackConditionChangeOfTractionPowerMemoryMax)
+    {
+         // allocate from top
+	 ptr = &TrackConditionChangeOfTractionPowerMemory[TrackConditionChangeOfTractionPowerMemoryTop];
+	 TrackConditionChangeOfTractionPowerMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     TrackConditionChangeOfTractionPower_Init(ptr);
+
     return ptr;
 }
 
 
 void TrackConditionChangeOfTractionPower_Delete(TrackConditionChangeOfTractionPower* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = TrackConditionChangeOfTractionPowerMemoryFreeList;
+    TrackConditionChangeOfTractionPowerMemoryFreeList = ptr - TrackConditionChangeOfTractionPowerMemory;
 }
 
 

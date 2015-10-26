@@ -2,18 +2,54 @@
 #include "ReversingSupervisionInformation.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define ReversingSupervisionInformationMemoryMax 32
+
+// end-of-freelist indicator
+#define ReversingSupervisionInformationMemoryNil (-1)
+
+// allocation memory
+static ReversingSupervisionInformation ReversingSupervisionInformationMemory[ReversingSupervisionInformationMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t ReversingSupervisionInformationMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t ReversingSupervisionInformationMemoryFreeList = ReversingSupervisionInformationMemoryNil;
+
 ReversingSupervisionInformation* ReversingSupervisionInformation_New(void)
 {
-    void* raw = malloc(sizeof(ReversingSupervisionInformation));
-    ReversingSupervisionInformation* ptr = (ReversingSupervisionInformation*)raw;
+    ReversingSupervisionInformation* ptr;
+
+    if (ReversingSupervisionInformationMemoryFreeList != ReversingSupervisionInformationMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &ReversingSupervisionInformationMemory[ReversingSupervisionInformationMemoryFreeList];
+	 ReversingSupervisionInformationMemoryFreeList = ReversingSupervisionInformationMemory[ReversingSupervisionInformationMemoryFreeList].header.NID_PACKET;
+    }
+    else if (ReversingSupervisionInformationMemoryTop < ReversingSupervisionInformationMemoryMax)
+    {
+         // allocate from top
+	 ptr = &ReversingSupervisionInformationMemory[ReversingSupervisionInformationMemoryTop];
+	 ReversingSupervisionInformationMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     ReversingSupervisionInformation_Init(ptr);
+
     return ptr;
 }
 
 
 void ReversingSupervisionInformation_Delete(ReversingSupervisionInformation* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = ReversingSupervisionInformationMemoryFreeList;
+    ReversingSupervisionInformationMemoryFreeList = ptr - ReversingSupervisionInformationMemory;
 }
 
 

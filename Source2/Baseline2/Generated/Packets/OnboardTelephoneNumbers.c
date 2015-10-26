@@ -2,18 +2,54 @@
 #include "OnboardTelephoneNumbers.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define OnboardTelephoneNumbersMemoryMax 32
+
+// end-of-freelist indicator
+#define OnboardTelephoneNumbersMemoryNil (-1)
+
+// allocation memory
+static OnboardTelephoneNumbers OnboardTelephoneNumbersMemory[OnboardTelephoneNumbersMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t OnboardTelephoneNumbersMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t OnboardTelephoneNumbersMemoryFreeList = OnboardTelephoneNumbersMemoryNil;
+
 OnboardTelephoneNumbers* OnboardTelephoneNumbers_New(void)
 {
-    void* raw = malloc(sizeof(OnboardTelephoneNumbers));
-    OnboardTelephoneNumbers* ptr = (OnboardTelephoneNumbers*)raw;
+    OnboardTelephoneNumbers* ptr;
+
+    if (OnboardTelephoneNumbersMemoryFreeList != OnboardTelephoneNumbersMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &OnboardTelephoneNumbersMemory[OnboardTelephoneNumbersMemoryFreeList];
+	 OnboardTelephoneNumbersMemoryFreeList = OnboardTelephoneNumbersMemory[OnboardTelephoneNumbersMemoryFreeList].header.NID_PACKET;
+    }
+    else if (OnboardTelephoneNumbersMemoryTop < OnboardTelephoneNumbersMemoryMax)
+    {
+         // allocate from top
+	 ptr = &OnboardTelephoneNumbersMemory[OnboardTelephoneNumbersMemoryTop];
+	 OnboardTelephoneNumbersMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     OnboardTelephoneNumbers_Init(ptr);
+
     return ptr;
 }
 
 
 void OnboardTelephoneNumbers_Delete(OnboardTelephoneNumbers* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = OnboardTelephoneNumbersMemoryFreeList;
+    OnboardTelephoneNumbersMemoryFreeList = ptr - OnboardTelephoneNumbersMemory;
 }
 
 

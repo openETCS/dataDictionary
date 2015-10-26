@@ -2,18 +2,54 @@
 #include "ListOfBalisesForSHArea.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define ListOfBalisesForSHAreaMemoryMax 32
+
+// end-of-freelist indicator
+#define ListOfBalisesForSHAreaMemoryNil (-1)
+
+// allocation memory
+static ListOfBalisesForSHArea ListOfBalisesForSHAreaMemory[ListOfBalisesForSHAreaMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t ListOfBalisesForSHAreaMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t ListOfBalisesForSHAreaMemoryFreeList = ListOfBalisesForSHAreaMemoryNil;
+
 ListOfBalisesForSHArea* ListOfBalisesForSHArea_New(void)
 {
-    void* raw = malloc(sizeof(ListOfBalisesForSHArea));
-    ListOfBalisesForSHArea* ptr = (ListOfBalisesForSHArea*)raw;
+    ListOfBalisesForSHArea* ptr;
+
+    if (ListOfBalisesForSHAreaMemoryFreeList != ListOfBalisesForSHAreaMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &ListOfBalisesForSHAreaMemory[ListOfBalisesForSHAreaMemoryFreeList];
+	 ListOfBalisesForSHAreaMemoryFreeList = ListOfBalisesForSHAreaMemory[ListOfBalisesForSHAreaMemoryFreeList].header.NID_PACKET;
+    }
+    else if (ListOfBalisesForSHAreaMemoryTop < ListOfBalisesForSHAreaMemoryMax)
+    {
+         // allocate from top
+	 ptr = &ListOfBalisesForSHAreaMemory[ListOfBalisesForSHAreaMemoryTop];
+	 ListOfBalisesForSHAreaMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     ListOfBalisesForSHArea_Init(ptr);
+
     return ptr;
 }
 
 
 void ListOfBalisesForSHArea_Delete(ListOfBalisesForSHArea* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = ListOfBalisesForSHAreaMemoryFreeList;
+    ListOfBalisesForSHAreaMemoryFreeList = ptr - ListOfBalisesForSHAreaMemory;
 }
 
 

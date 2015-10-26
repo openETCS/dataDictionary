@@ -2,18 +2,54 @@
 #include "MovementAuthorityRequestParameters.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define MovementAuthorityRequestParametersMemoryMax 32
+
+// end-of-freelist indicator
+#define MovementAuthorityRequestParametersMemoryNil (-1)
+
+// allocation memory
+static MovementAuthorityRequestParameters MovementAuthorityRequestParametersMemory[MovementAuthorityRequestParametersMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t MovementAuthorityRequestParametersMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t MovementAuthorityRequestParametersMemoryFreeList = MovementAuthorityRequestParametersMemoryNil;
+
 MovementAuthorityRequestParameters* MovementAuthorityRequestParameters_New(void)
 {
-    void* raw = malloc(sizeof(MovementAuthorityRequestParameters));
-    MovementAuthorityRequestParameters* ptr = (MovementAuthorityRequestParameters*)raw;
+    MovementAuthorityRequestParameters* ptr;
+
+    if (MovementAuthorityRequestParametersMemoryFreeList != MovementAuthorityRequestParametersMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &MovementAuthorityRequestParametersMemory[MovementAuthorityRequestParametersMemoryFreeList];
+	 MovementAuthorityRequestParametersMemoryFreeList = MovementAuthorityRequestParametersMemory[MovementAuthorityRequestParametersMemoryFreeList].header.NID_PACKET;
+    }
+    else if (MovementAuthorityRequestParametersMemoryTop < MovementAuthorityRequestParametersMemoryMax)
+    {
+         // allocate from top
+	 ptr = &MovementAuthorityRequestParametersMemory[MovementAuthorityRequestParametersMemoryTop];
+	 MovementAuthorityRequestParametersMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     MovementAuthorityRequestParameters_Init(ptr);
+
     return ptr;
 }
 
 
 void MovementAuthorityRequestParameters_Delete(MovementAuthorityRequestParameters* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = MovementAuthorityRequestParametersMemoryFreeList;
+    MovementAuthorityRequestParametersMemoryFreeList = ptr - MovementAuthorityRequestParametersMemory;
 }
 
 

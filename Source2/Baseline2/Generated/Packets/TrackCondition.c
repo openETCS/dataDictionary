@@ -2,18 +2,54 @@
 #include "TrackCondition.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define TrackConditionMemoryMax 32
+
+// end-of-freelist indicator
+#define TrackConditionMemoryNil (-1)
+
+// allocation memory
+static TrackCondition TrackConditionMemory[TrackConditionMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t TrackConditionMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t TrackConditionMemoryFreeList = TrackConditionMemoryNil;
+
 TrackCondition* TrackCondition_New(void)
 {
-    void* raw = malloc(sizeof(TrackCondition));
-    TrackCondition* ptr = (TrackCondition*)raw;
+    TrackCondition* ptr;
+
+    if (TrackConditionMemoryFreeList != TrackConditionMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &TrackConditionMemory[TrackConditionMemoryFreeList];
+	 TrackConditionMemoryFreeList = TrackConditionMemory[TrackConditionMemoryFreeList].header.NID_PACKET;
+    }
+    else if (TrackConditionMemoryTop < TrackConditionMemoryMax)
+    {
+         // allocate from top
+	 ptr = &TrackConditionMemory[TrackConditionMemoryTop];
+	 TrackConditionMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     TrackCondition_Init(ptr);
+
     return ptr;
 }
 
 
 void TrackCondition_Delete(TrackCondition* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = TrackConditionMemoryFreeList;
+    TrackConditionMemoryFreeList = ptr - TrackConditionMemory;
 }
 
 

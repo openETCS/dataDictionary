@@ -2,18 +2,54 @@
 #include "PositionReport.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define PositionReportMemoryMax 32
+
+// end-of-freelist indicator
+#define PositionReportMemoryNil (-1)
+
+// allocation memory
+static PositionReport PositionReportMemory[PositionReportMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t PositionReportMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t PositionReportMemoryFreeList = PositionReportMemoryNil;
+
 PositionReport* PositionReport_New(void)
 {
-    void* raw = malloc(sizeof(PositionReport));
-    PositionReport* ptr = (PositionReport*)raw;
+    PositionReport* ptr;
+
+    if (PositionReportMemoryFreeList != PositionReportMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &PositionReportMemory[PositionReportMemoryFreeList];
+	 PositionReportMemoryFreeList = PositionReportMemory[PositionReportMemoryFreeList].header.NID_PACKET;
+    }
+    else if (PositionReportMemoryTop < PositionReportMemoryMax)
+    {
+         // allocate from top
+	 ptr = &PositionReportMemory[PositionReportMemoryTop];
+	 PositionReportMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     PositionReport_Init(ptr);
+
     return ptr;
 }
 
 
 void PositionReport_Delete(PositionReport* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = PositionReportMemoryFreeList;
+    PositionReportMemoryFreeList = ptr - PositionReportMemory;
 }
 
 

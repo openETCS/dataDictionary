@@ -2,18 +2,54 @@
 #include "TemporarySpeedRestriction.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define TemporarySpeedRestrictionMemoryMax 32
+
+// end-of-freelist indicator
+#define TemporarySpeedRestrictionMemoryNil (-1)
+
+// allocation memory
+static TemporarySpeedRestriction TemporarySpeedRestrictionMemory[TemporarySpeedRestrictionMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t TemporarySpeedRestrictionMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t TemporarySpeedRestrictionMemoryFreeList = TemporarySpeedRestrictionMemoryNil;
+
 TemporarySpeedRestriction* TemporarySpeedRestriction_New(void)
 {
-    void* raw = malloc(sizeof(TemporarySpeedRestriction));
-    TemporarySpeedRestriction* ptr = (TemporarySpeedRestriction*)raw;
+    TemporarySpeedRestriction* ptr;
+
+    if (TemporarySpeedRestrictionMemoryFreeList != TemporarySpeedRestrictionMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &TemporarySpeedRestrictionMemory[TemporarySpeedRestrictionMemoryFreeList];
+	 TemporarySpeedRestrictionMemoryFreeList = TemporarySpeedRestrictionMemory[TemporarySpeedRestrictionMemoryFreeList].header.NID_PACKET;
+    }
+    else if (TemporarySpeedRestrictionMemoryTop < TemporarySpeedRestrictionMemoryMax)
+    {
+         // allocate from top
+	 ptr = &TemporarySpeedRestrictionMemory[TemporarySpeedRestrictionMemoryTop];
+	 TemporarySpeedRestrictionMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     TemporarySpeedRestriction_Init(ptr);
+
     return ptr;
 }
 
 
 void TemporarySpeedRestriction_Delete(TemporarySpeedRestriction* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = TemporarySpeedRestrictionMemoryFreeList;
+    TemporarySpeedRestrictionMemoryFreeList = ptr - TemporarySpeedRestrictionMemory;
 }
 
 

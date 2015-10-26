@@ -2,18 +2,54 @@
 #include "RBCTransitionOrder.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define RBCTransitionOrderMemoryMax 32
+
+// end-of-freelist indicator
+#define RBCTransitionOrderMemoryNil (-1)
+
+// allocation memory
+static RBCTransitionOrder RBCTransitionOrderMemory[RBCTransitionOrderMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t RBCTransitionOrderMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t RBCTransitionOrderMemoryFreeList = RBCTransitionOrderMemoryNil;
+
 RBCTransitionOrder* RBCTransitionOrder_New(void)
 {
-    void* raw = malloc(sizeof(RBCTransitionOrder));
-    RBCTransitionOrder* ptr = (RBCTransitionOrder*)raw;
+    RBCTransitionOrder* ptr;
+
+    if (RBCTransitionOrderMemoryFreeList != RBCTransitionOrderMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &RBCTransitionOrderMemory[RBCTransitionOrderMemoryFreeList];
+	 RBCTransitionOrderMemoryFreeList = RBCTransitionOrderMemory[RBCTransitionOrderMemoryFreeList].header.NID_PACKET;
+    }
+    else if (RBCTransitionOrderMemoryTop < RBCTransitionOrderMemoryMax)
+    {
+         // allocate from top
+	 ptr = &RBCTransitionOrderMemory[RBCTransitionOrderMemoryTop];
+	 RBCTransitionOrderMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     RBCTransitionOrder_Init(ptr);
+
     return ptr;
 }
 
 
 void RBCTransitionOrder_Delete(RBCTransitionOrder* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = RBCTransitionOrderMemoryFreeList;
+    RBCTransitionOrderMemoryFreeList = ptr - RBCTransitionOrderMemory;
 }
 
 

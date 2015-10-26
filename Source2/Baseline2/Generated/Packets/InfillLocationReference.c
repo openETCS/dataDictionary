@@ -2,18 +2,54 @@
 #include "InfillLocationReference.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define InfillLocationReferenceMemoryMax 32
+
+// end-of-freelist indicator
+#define InfillLocationReferenceMemoryNil (-1)
+
+// allocation memory
+static InfillLocationReference InfillLocationReferenceMemory[InfillLocationReferenceMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t InfillLocationReferenceMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t InfillLocationReferenceMemoryFreeList = InfillLocationReferenceMemoryNil;
+
 InfillLocationReference* InfillLocationReference_New(void)
 {
-    void* raw = malloc(sizeof(InfillLocationReference));
-    InfillLocationReference* ptr = (InfillLocationReference*)raw;
+    InfillLocationReference* ptr;
+
+    if (InfillLocationReferenceMemoryFreeList != InfillLocationReferenceMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &InfillLocationReferenceMemory[InfillLocationReferenceMemoryFreeList];
+	 InfillLocationReferenceMemoryFreeList = InfillLocationReferenceMemory[InfillLocationReferenceMemoryFreeList].header.NID_PACKET;
+    }
+    else if (InfillLocationReferenceMemoryTop < InfillLocationReferenceMemoryMax)
+    {
+         // allocate from top
+	 ptr = &InfillLocationReferenceMemory[InfillLocationReferenceMemoryTop];
+	 InfillLocationReferenceMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     InfillLocationReference_Init(ptr);
+
     return ptr;
 }
 
 
 void InfillLocationReference_Delete(InfillLocationReference* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = InfillLocationReferenceMemoryFreeList;
+    InfillLocationReferenceMemoryFreeList = ptr - InfillLocationReferenceMemory;
 }
 
 

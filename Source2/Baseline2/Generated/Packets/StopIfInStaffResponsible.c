@@ -2,18 +2,54 @@
 #include "StopIfInStaffResponsible.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define StopIfInStaffResponsibleMemoryMax 32
+
+// end-of-freelist indicator
+#define StopIfInStaffResponsibleMemoryNil (-1)
+
+// allocation memory
+static StopIfInStaffResponsible StopIfInStaffResponsibleMemory[StopIfInStaffResponsibleMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t StopIfInStaffResponsibleMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t StopIfInStaffResponsibleMemoryFreeList = StopIfInStaffResponsibleMemoryNil;
+
 StopIfInStaffResponsible* StopIfInStaffResponsible_New(void)
 {
-    void* raw = malloc(sizeof(StopIfInStaffResponsible));
-    StopIfInStaffResponsible* ptr = (StopIfInStaffResponsible*)raw;
+    StopIfInStaffResponsible* ptr;
+
+    if (StopIfInStaffResponsibleMemoryFreeList != StopIfInStaffResponsibleMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &StopIfInStaffResponsibleMemory[StopIfInStaffResponsibleMemoryFreeList];
+	 StopIfInStaffResponsibleMemoryFreeList = StopIfInStaffResponsibleMemory[StopIfInStaffResponsibleMemoryFreeList].header.NID_PACKET;
+    }
+    else if (StopIfInStaffResponsibleMemoryTop < StopIfInStaffResponsibleMemoryMax)
+    {
+         // allocate from top
+	 ptr = &StopIfInStaffResponsibleMemory[StopIfInStaffResponsibleMemoryTop];
+	 StopIfInStaffResponsibleMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     StopIfInStaffResponsible_Init(ptr);
+
     return ptr;
 }
 
 
 void StopIfInStaffResponsible_Delete(StopIfInStaffResponsible* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = StopIfInStaffResponsibleMemoryFreeList;
+    StopIfInStaffResponsibleMemoryFreeList = ptr - StopIfInStaffResponsibleMemory;
 }
 
 

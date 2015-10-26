@@ -2,18 +2,54 @@
 #include "EndOfInformation.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define EndOfInformationMemoryMax 32
+
+// end-of-freelist indicator
+#define EndOfInformationMemoryNil (-1)
+
+// allocation memory
+static EndOfInformation EndOfInformationMemory[EndOfInformationMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t EndOfInformationMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t EndOfInformationMemoryFreeList = EndOfInformationMemoryNil;
+
 EndOfInformation* EndOfInformation_New(void)
 {
-    void* raw = malloc(sizeof(EndOfInformation));
-    EndOfInformation* ptr = (EndOfInformation*)raw;
+    EndOfInformation* ptr;
+
+    if (EndOfInformationMemoryFreeList != EndOfInformationMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &EndOfInformationMemory[EndOfInformationMemoryFreeList];
+	 EndOfInformationMemoryFreeList = EndOfInformationMemory[EndOfInformationMemoryFreeList].header.NID_PACKET;
+    }
+    else if (EndOfInformationMemoryTop < EndOfInformationMemoryMax)
+    {
+         // allocate from top
+	 ptr = &EndOfInformationMemory[EndOfInformationMemoryTop];
+	 EndOfInformationMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     EndOfInformation_Init(ptr);
+
     return ptr;
 }
 
 
 void EndOfInformation_Delete(EndOfInformation* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = EndOfInformationMemoryFreeList;
+    EndOfInformationMemoryFreeList = ptr - EndOfInformationMemory;
 }
 
 

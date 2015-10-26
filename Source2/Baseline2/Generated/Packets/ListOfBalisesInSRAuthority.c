@@ -2,18 +2,54 @@
 #include "ListOfBalisesInSRAuthority.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define ListOfBalisesInSRAuthorityMemoryMax 32
+
+// end-of-freelist indicator
+#define ListOfBalisesInSRAuthorityMemoryNil (-1)
+
+// allocation memory
+static ListOfBalisesInSRAuthority ListOfBalisesInSRAuthorityMemory[ListOfBalisesInSRAuthorityMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t ListOfBalisesInSRAuthorityMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t ListOfBalisesInSRAuthorityMemoryFreeList = ListOfBalisesInSRAuthorityMemoryNil;
+
 ListOfBalisesInSRAuthority* ListOfBalisesInSRAuthority_New(void)
 {
-    void* raw = malloc(sizeof(ListOfBalisesInSRAuthority));
-    ListOfBalisesInSRAuthority* ptr = (ListOfBalisesInSRAuthority*)raw;
+    ListOfBalisesInSRAuthority* ptr;
+
+    if (ListOfBalisesInSRAuthorityMemoryFreeList != ListOfBalisesInSRAuthorityMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &ListOfBalisesInSRAuthorityMemory[ListOfBalisesInSRAuthorityMemoryFreeList];
+	 ListOfBalisesInSRAuthorityMemoryFreeList = ListOfBalisesInSRAuthorityMemory[ListOfBalisesInSRAuthorityMemoryFreeList].header.NID_PACKET;
+    }
+    else if (ListOfBalisesInSRAuthorityMemoryTop < ListOfBalisesInSRAuthorityMemoryMax)
+    {
+         // allocate from top
+	 ptr = &ListOfBalisesInSRAuthorityMemory[ListOfBalisesInSRAuthorityMemoryTop];
+	 ListOfBalisesInSRAuthorityMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     ListOfBalisesInSRAuthority_Init(ptr);
+
     return ptr;
 }
 
 
 void ListOfBalisesInSRAuthority_Delete(ListOfBalisesInSRAuthority* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = ListOfBalisesInSRAuthorityMemoryFreeList;
+    ListOfBalisesInSRAuthorityMemoryFreeList = ptr - ListOfBalisesInSRAuthorityMemory;
 }
 
 

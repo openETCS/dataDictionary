@@ -2,18 +2,54 @@
 #include "DataUsedByApplicationsOutsideTheERTMSETCSSystem.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryMax 32
+
+// end-of-freelist indicator
+#define DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryNil (-1)
+
+// allocation memory
+static DataUsedByApplicationsOutsideTheERTMSETCSSystem DataUsedByApplicationsOutsideTheERTMSETCSSystemMemory[DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList = DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryNil;
+
 DataUsedByApplicationsOutsideTheERTMSETCSSystem* DataUsedByApplicationsOutsideTheERTMSETCSSystem_New(void)
 {
-    void* raw = malloc(sizeof(DataUsedByApplicationsOutsideTheERTMSETCSSystem));
-    DataUsedByApplicationsOutsideTheERTMSETCSSystem* ptr = (DataUsedByApplicationsOutsideTheERTMSETCSSystem*)raw;
+    DataUsedByApplicationsOutsideTheERTMSETCSSystem* ptr;
+
+    if (DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList != DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &DataUsedByApplicationsOutsideTheERTMSETCSSystemMemory[DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList];
+	 DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList = DataUsedByApplicationsOutsideTheERTMSETCSSystemMemory[DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList].header.NID_PACKET;
+    }
+    else if (DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryTop < DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryMax)
+    {
+         // allocate from top
+	 ptr = &DataUsedByApplicationsOutsideTheERTMSETCSSystemMemory[DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryTop];
+	 DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     DataUsedByApplicationsOutsideTheERTMSETCSSystem_Init(ptr);
+
     return ptr;
 }
 
 
 void DataUsedByApplicationsOutsideTheERTMSETCSSystem_Delete(DataUsedByApplicationsOutsideTheERTMSETCSSystem* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList;
+    DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList = ptr - DataUsedByApplicationsOutsideTheERTMSETCSSystemMemory;
 }
 
 

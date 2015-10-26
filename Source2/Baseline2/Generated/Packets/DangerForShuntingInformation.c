@@ -2,18 +2,54 @@
 #include "DangerForShuntingInformation.h"
 #include "Bit64.h"
 
+// number of xells in allocation memory
+#define DangerForShuntingInformationMemoryMax 32
+
+// end-of-freelist indicator
+#define DangerForShuntingInformationMemoryNil (-1)
+
+// allocation memory
+static DangerForShuntingInformation DangerForShuntingInformationMemory[DangerForShuntingInformationMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t DangerForShuntingInformationMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t DangerForShuntingInformationMemoryFreeList = DangerForShuntingInformationMemoryNil;
+
 DangerForShuntingInformation* DangerForShuntingInformation_New(void)
 {
-    void* raw = malloc(sizeof(DangerForShuntingInformation));
-    DangerForShuntingInformation* ptr = (DangerForShuntingInformation*)raw;
+    DangerForShuntingInformation* ptr;
+
+    if (DangerForShuntingInformationMemoryFreeList != DangerForShuntingInformationMemoryNil)
+    {
+         // allocate from freelist
+	 ptr = &DangerForShuntingInformationMemory[DangerForShuntingInformationMemoryFreeList];
+	 DangerForShuntingInformationMemoryFreeList = DangerForShuntingInformationMemory[DangerForShuntingInformationMemoryFreeList].header.NID_PACKET;
+    }
+    else if (DangerForShuntingInformationMemoryTop < DangerForShuntingInformationMemoryMax)
+    {
+         // allocate from top
+	 ptr = &DangerForShuntingInformationMemory[DangerForShuntingInformationMemoryTop];
+	 DangerForShuntingInformationMemoryTop += 1;
+    }
+    else
+    {
+         // memory exhausted
+	 return 0;
+    }
+
     DangerForShuntingInformation_Init(ptr);
+
     return ptr;
 }
 
 
 void DangerForShuntingInformation_Delete(DangerForShuntingInformation* ptr)
 {
-    free(ptr);
+    // prepend to freelist
+    ptr->header.NID_PACKET = DangerForShuntingInformationMemoryFreeList;
+    DangerForShuntingInformationMemoryFreeList = ptr - DangerForShuntingInformationMemory;
 }
 
 
