@@ -17,6 +17,7 @@ int main(void)
     EndOfInformation_Tests();
 
     {
+	fprintf(stderr,"set up test data\n");
         // set up test data
         EurobaliseTelegram t;
         EurobaliseTelegram_Init(&t);
