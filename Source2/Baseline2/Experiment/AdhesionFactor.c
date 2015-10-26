@@ -21,18 +21,24 @@ AdhesionFactor* AdhesionFactor_New(void)
 {
     AdhesionFactor* ptr;
 
-    if (AdhesionFactorMemoryFreeList != AdhesionFactorMemoryNil) {
-	// allocate from freelist
-	ptr = &AdhesionFactorMemory[AdhesionFactorMemoryFreeList];
-	AdhesionFactorMemoryFreeList = AdhesionFactorMemory[AdhesionFactorMemoryFreeList].header.NID_PACKET;
-    } else if (AdhesionFactorMemoryTop < AdhesionFactorMemoryMax) {
-	// allocate from top
-	ptr = &AdhesionFactorMemory[AdhesionFactorMemoryTop];
-	AdhesionFactorMemoryTop += 1;
-    } else {
-	// memory exhausted
-	return 0;
+    if (AdhesionFactorMemoryFreeList != AdhesionFactorMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &AdhesionFactorMemory[AdhesionFactorMemoryFreeList];
+        AdhesionFactorMemoryFreeList = AdhesionFactorMemory[AdhesionFactorMemoryFreeList].header.NID_PACKET;
     }
+    else if (AdhesionFactorMemoryTop < AdhesionFactorMemoryMax)
+    {
+        // allocate from top
+        ptr = &AdhesionFactorMemory[AdhesionFactorMemoryTop];
+        AdhesionFactorMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
     AdhesionFactor_Init(ptr);
 
     return ptr;

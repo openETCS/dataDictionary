@@ -61,12 +61,12 @@ void AdhesionFactor_Tests(void)
         AdhesionFactor_Init(t);
         //AdhesionFactor_Print(t, stdout); printf("\n");
         printf("allocated at %p\n", t);
-        
+
         AdhesionFactor* u = AdhesionFactor_New();
         AdhesionFactor_Init(u);
         //AdhesionFactor_Print(u, stdout); //printf("\n");
         printf("allocated at %p\n", u);
-        
+
         AdhesionFactor* v = AdhesionFactor_New();
         AdhesionFactor_Init(v);
         //AdhesionFactor_Print(v, stdout); printf("\n");
