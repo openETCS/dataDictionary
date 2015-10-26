@@ -7,12 +7,12 @@ TOPDIR=../
 CC=cc
 CPPFLAGS+=-I$(TOPDIR)/Foundation/Bits
 CPPFLAGS+=-I$(TOPDIR)/Foundation/Packets
-CPPFLAGS+=-I$(TOPDIR)/Generated/Packets
+#CPPFLAGS+=-I$(TOPDIR)/Generated/Packets
 CFLAGS += -std=c99 -Wall -pedantic 
 #CFLAGS += -Werror 
 #CFLAGS += -Weverything -Wno-padded 
 LDFLAGS += -L$(TOPDIR)/Foundation/Bits -lbits
-LDFLAGS += -L$(TOPDIR)/Generated/Packets -lgenerated_packets
+#LDFLAGS += -L$(TOPDIR)/Generated/Packets -lgenerated_packets
 
 all: clean test_packets
 	./test_packets
@@ -28,11 +28,17 @@ FUNCTIONS := Packet_DecodeBit.c\
              Packet_Length.c\
              Packet_Print.c
 
+PACKETS := AdhesionFactor.o\
+         ErrorReporting.o\
+         Level23TransitionInformation.o\
+         TemporarySpeedRestriction.o\
+         EndOfInformation.o
+
 TESTS := AdhesionFactor_Tests.o\
          ErrorReporting_Tests.o\
          Level23TransitionInformation_Tests.o\
          TemporarySpeedRestriction_Tests.o\
-         EndOfInformation_Tests.o\
+         EndOfInformation_Tests.o
 
 OBJ := $(SRC:.c=.o) $(FUNCTIONS:.c=.o) $(PACKETS:.c=.o) $(TESTS:.c=.o)
 
