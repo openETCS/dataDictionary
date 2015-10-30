@@ -27,13 +27,13 @@ int main(void)
     SessionManagement* a = SessionManagement_New();
     {
         // NID_PACKET = 42;
-        a->Q_DIR =1;
+        a->Q_DIR = 1;
         a->L_PACKET = 113;
-        a->Q_RBC= 1;
-        a->NID_C= 352;
-        a->NID_RBC= 1515;
+        a->Q_RBC = 1;
+        a->NID_C = 352;
+        a->NID_RBC = 1515;
         a->NID_RADIO = 14185023402016767;
-        a->Q_SLEEPSESSION= 0;
+        a->Q_SLEEPSESSION = 0;
     }
 
     NationalValues* b = NationalValues_New();
@@ -47,10 +47,10 @@ int main(void)
         b->V_NVSHUNT = 6;
         b->V_NVSTFF = 8;
         b->V_NVONSIGHT = 6;
-	b->V_NVUNFIT = 20;
-	b->V_NVREL = 8;
+        b->V_NVUNFIT = 20;
+        b->V_NVREL = 8;
         b->D_NVROLL = 2;
-	b->Q_NVSRBKTRG = 0;
+        b->Q_NVSRBKTRG = 0;
         b->Q_NVEMRRLS = 0;
         b->V_NVALLOWOVTRP = 0;
         b->V_NVSUPOVTRP = 6;
