@@ -14,14 +14,14 @@ int main(void)
     {
         header.Q_UPDOWN  = 1;
         header.M_VERSION = 32;
-        header.Q_MEDIA	 = 0;
-        header.N_PIG	 = 0;
-        header.N_TOTAL	 = 1;
-        header.M_DUP	 = 0;
-        header.M_MCOUNT	 = 0;
-        header.NID_C	 = 64;
-        header.NID_BG	 = 3;
-        header.Q_LINK	 = 1;
+        header.Q_MEDIA   = 0;
+        header.N_PIG     = 0;
+        header.N_TOTAL   = 1;
+        header.M_DUP     = 0;
+        header.M_MCOUNT  = 0;
+        header.NID_C     = 64;
+        header.NID_BG    = 3;
+        header.Q_LINK    = 1;
     }
 
     SessionManagement* a = SessionManagement_New();
