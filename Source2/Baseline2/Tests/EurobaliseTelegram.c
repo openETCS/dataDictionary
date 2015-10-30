@@ -35,8 +35,6 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
 
     //printf("EurobaliseTelegram_DecodeBit::t->header.Q_UPDOWN = %"PRIu64"\n", t->header.Q_UPDOWN);
 
-    //std::cout << stream->bitpos << std::endl;
-
     const uint32_t old_pos = stream->bitpos;
     uint32_t current_pos = stream->bitpos;
 
@@ -46,7 +44,6 @@ int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream)
         if (current_pos != stream->bitpos)
         {
             //printf("problem here %lu is not %lu\n", current_pos, stream->bitpos);
-            //std::cerr << stream->bitpos << " != " << current_pos << std::endl;
             return 0;
         }
 
