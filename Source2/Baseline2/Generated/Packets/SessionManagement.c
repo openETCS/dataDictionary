@@ -114,13 +114,11 @@ int SessionManagement_EncodeBit(const SessionManagement* p, Bitstream* stream)
         }
         else
         {
-            fprintf(stdout, "error");
             return -2;
         }
     }
     else
     {
-        fprintf(stdout, "error");
         return -1;
     }
 }
