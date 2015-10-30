@@ -5,6 +5,7 @@
 
 int main(void)
 {
+    printf("\n\tstart issue31_2 test\n");
     uint8_t raw[1024];
     Bitstream stream1;
     Bitstream_Init(&stream1, raw, 1024, 0);
@@ -97,6 +98,7 @@ int main(void)
 
     assert(EurobaliseTelegram_Equal(&t1, &t2));
 
+    printf("\tend issue31_2 test\n");
     return EXIT_SUCCESS;
 }
 

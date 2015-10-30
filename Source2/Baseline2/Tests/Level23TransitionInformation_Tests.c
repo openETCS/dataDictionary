@@ -5,6 +5,7 @@
 
 void Level23TransitionInformation_Tests(void)
 {
+    printf("\n\tstart Level23TransitionInformation_Tests\n");
     Level23TransitionInformation a;
     Level23TransitionInformation_Init(&a);
     Level23TransitionInformation_Print(&a, stdout);
@@ -24,5 +25,7 @@ void Level23TransitionInformation_Tests(void)
     printf("\n");
     assert(Level23TransitionInformation_Equal(&a, p));
     Level23TransitionInformation_Delete(p);
+
+    printf("\tend Level23TransitionInformation_Tests\n");
 }
 

@@ -17,6 +17,9 @@ int main(void)
     EndOfInformation_Tests();
 
     {
+
+        printf("\n\tstart test_packets\n");
+
         // set up test data
         EurobaliseTelegram t;
         EurobaliseTelegram_Init(&t);
@@ -93,6 +96,7 @@ int main(void)
     }
 
 
+    printf("\tend test_packets\n");
     return EXIT_SUCCESS;
 }
 

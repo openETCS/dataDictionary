@@ -5,6 +5,7 @@
 
 void TemporarySpeedRestriction_Tests(void)
 {
+    printf("\n\tstart TemporarySpeedRestriction_Tests\n");
     TemporarySpeedRestriction a;
     TemporarySpeedRestriction_Init(&a);
     TemporarySpeedRestriction_Print(&a, stdout);
@@ -24,5 +25,7 @@ void TemporarySpeedRestriction_Tests(void)
     printf("\n");
     assert(TemporarySpeedRestriction_Equal(&a, p));
     TemporarySpeedRestriction_Delete(p);
+
+    printf("\tend TemporarySpeedRestriction_Test\n");
 }
 

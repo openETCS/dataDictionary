@@ -5,6 +5,7 @@
 
 void AdhesionFactor_Tests(void)
 {
+    printf("\n\tstart AdhesionFactor_Tests\n");
     AdhesionFactor a;
     AdhesionFactor_Init(&a);
     AdhesionFactor_Print(&a, stdout);
@@ -31,7 +32,6 @@ void AdhesionFactor_Tests(void)
 
     // new and delete
     {
-        printf("\tbegin test AdhesionFactor (de)allocation \n");
         AdhesionFactor* p = AdhesionFactor_New();
         AdhesionFactor_Init(p);
         //AdhesionFactor_Print(p, stdout); printf("\n");
@@ -72,7 +72,7 @@ void AdhesionFactor_Tests(void)
         //AdhesionFactor_Print(v, stdout); printf("\n");
         //printf("allocated at %p\n", v);
 
-        printf("\tend test AdhesionFactor (de)allocation \n");
     }
+        printf("\tend AdhesionFactor_Test\n");
 }
 

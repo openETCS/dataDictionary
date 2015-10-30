@@ -5,6 +5,7 @@
 
 void ErrorReporting_Tests(void)
 {
+    printf("\n\tstart ErrorReporting_Tests\n");
     ErrorReporting a;
     ErrorReporting_Init(&a);
     ErrorReporting_Print(&a, stdout);
@@ -24,5 +25,7 @@ void ErrorReporting_Tests(void)
     printf("\n");
     assert(ErrorReporting_Equal(&a, p));
     ErrorReporting_Delete(p);
+
+    printf("\tend ErrorReporting_Test\n");
 }
 
