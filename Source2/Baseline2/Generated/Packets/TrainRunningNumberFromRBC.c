@@ -2,11 +2,11 @@
 #include "TrainRunningNumberFromRBC.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define TrainRunningNumberFromRBCMemoryMax 32
+// number of cells in allocation memory
+#define TrainRunningNumberFromRBCMemoryMax		32
 
 // end-of-freelist indicator
-#define TrainRunningNumberFromRBCMemoryNil (-1)
+#define TrainRunningNumberFromRBCMemoryNil		(-1)
 
 // allocation memory
 static TrainRunningNumberFromRBC TrainRunningNumberFromRBCMemory[TrainRunningNumberFromRBCMemoryMax];
@@ -23,20 +23,20 @@ TrainRunningNumberFromRBC* TrainRunningNumberFromRBC_New(void)
 
     if (TrainRunningNumberFromRBCMemoryFreeList != TrainRunningNumberFromRBCMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &TrainRunningNumberFromRBCMemory[TrainRunningNumberFromRBCMemoryFreeList];
-	 TrainRunningNumberFromRBCMemoryFreeList = TrainRunningNumberFromRBCMemory[TrainRunningNumberFromRBCMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &TrainRunningNumberFromRBCMemory[TrainRunningNumberFromRBCMemoryFreeList];
+        TrainRunningNumberFromRBCMemoryFreeList = TrainRunningNumberFromRBCMemory[TrainRunningNumberFromRBCMemoryFreeList].header.NID_PACKET;
     }
     else if (TrainRunningNumberFromRBCMemoryTop < TrainRunningNumberFromRBCMemoryMax)
     {
-         // allocate from top
-	 ptr = &TrainRunningNumberFromRBCMemory[TrainRunningNumberFromRBCMemoryTop];
-	 TrainRunningNumberFromRBCMemoryTop += 1;
+        // allocate from top
+        ptr = &TrainRunningNumberFromRBCMemory[TrainRunningNumberFromRBCMemoryTop];
+        TrainRunningNumberFromRBCMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     TrainRunningNumberFromRBC_Init(ptr);

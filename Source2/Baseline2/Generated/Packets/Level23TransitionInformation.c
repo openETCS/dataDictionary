@@ -2,11 +2,11 @@
 #include "Level23TransitionInformation.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define Level23TransitionInformationMemoryMax 32
+// number of cells in allocation memory
+#define Level23TransitionInformationMemoryMax		32
 
 // end-of-freelist indicator
-#define Level23TransitionInformationMemoryNil (-1)
+#define Level23TransitionInformationMemoryNil		(-1)
 
 // allocation memory
 static Level23TransitionInformation Level23TransitionInformationMemory[Level23TransitionInformationMemoryMax];
@@ -23,20 +23,20 @@ Level23TransitionInformation* Level23TransitionInformation_New(void)
 
     if (Level23TransitionInformationMemoryFreeList != Level23TransitionInformationMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &Level23TransitionInformationMemory[Level23TransitionInformationMemoryFreeList];
-	 Level23TransitionInformationMemoryFreeList = Level23TransitionInformationMemory[Level23TransitionInformationMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &Level23TransitionInformationMemory[Level23TransitionInformationMemoryFreeList];
+        Level23TransitionInformationMemoryFreeList = Level23TransitionInformationMemory[Level23TransitionInformationMemoryFreeList].header.NID_PACKET;
     }
     else if (Level23TransitionInformationMemoryTop < Level23TransitionInformationMemoryMax)
     {
-         // allocate from top
-	 ptr = &Level23TransitionInformationMemory[Level23TransitionInformationMemoryTop];
-	 Level23TransitionInformationMemoryTop += 1;
+        // allocate from top
+        ptr = &Level23TransitionInformationMemory[Level23TransitionInformationMemoryTop];
+        Level23TransitionInformationMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     Level23TransitionInformation_Init(ptr);

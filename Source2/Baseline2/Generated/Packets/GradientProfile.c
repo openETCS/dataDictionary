@@ -2,11 +2,11 @@
 #include "GradientProfile.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define GradientProfileMemoryMax 32
+// number of cells in allocation memory
+#define GradientProfileMemoryMax		32
 
 // end-of-freelist indicator
-#define GradientProfileMemoryNil (-1)
+#define GradientProfileMemoryNil		(-1)
 
 // allocation memory
 static GradientProfile GradientProfileMemory[GradientProfileMemoryMax];
@@ -23,20 +23,20 @@ GradientProfile* GradientProfile_New(void)
 
     if (GradientProfileMemoryFreeList != GradientProfileMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &GradientProfileMemory[GradientProfileMemoryFreeList];
-	 GradientProfileMemoryFreeList = GradientProfileMemory[GradientProfileMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &GradientProfileMemory[GradientProfileMemoryFreeList];
+        GradientProfileMemoryFreeList = GradientProfileMemory[GradientProfileMemoryFreeList].header.NID_PACKET;
     }
     else if (GradientProfileMemoryTop < GradientProfileMemoryMax)
     {
-         // allocate from top
-	 ptr = &GradientProfileMemory[GradientProfileMemoryTop];
-	 GradientProfileMemoryTop += 1;
+        // allocate from top
+        ptr = &GradientProfileMemory[GradientProfileMemoryTop];
+        GradientProfileMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     GradientProfile_Init(ptr);

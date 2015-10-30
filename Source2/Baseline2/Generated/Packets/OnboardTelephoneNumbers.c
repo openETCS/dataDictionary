@@ -2,11 +2,11 @@
 #include "OnboardTelephoneNumbers.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define OnboardTelephoneNumbersMemoryMax 32
+// number of cells in allocation memory
+#define OnboardTelephoneNumbersMemoryMax		32
 
 // end-of-freelist indicator
-#define OnboardTelephoneNumbersMemoryNil (-1)
+#define OnboardTelephoneNumbersMemoryNil		(-1)
 
 // allocation memory
 static OnboardTelephoneNumbers OnboardTelephoneNumbersMemory[OnboardTelephoneNumbersMemoryMax];
@@ -23,20 +23,20 @@ OnboardTelephoneNumbers* OnboardTelephoneNumbers_New(void)
 
     if (OnboardTelephoneNumbersMemoryFreeList != OnboardTelephoneNumbersMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &OnboardTelephoneNumbersMemory[OnboardTelephoneNumbersMemoryFreeList];
-	 OnboardTelephoneNumbersMemoryFreeList = OnboardTelephoneNumbersMemory[OnboardTelephoneNumbersMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &OnboardTelephoneNumbersMemory[OnboardTelephoneNumbersMemoryFreeList];
+        OnboardTelephoneNumbersMemoryFreeList = OnboardTelephoneNumbersMemory[OnboardTelephoneNumbersMemoryFreeList].header.NID_PACKET;
     }
     else if (OnboardTelephoneNumbersMemoryTop < OnboardTelephoneNumbersMemoryMax)
     {
-         // allocate from top
-	 ptr = &OnboardTelephoneNumbersMemory[OnboardTelephoneNumbersMemoryTop];
-	 OnboardTelephoneNumbersMemoryTop += 1;
+        // allocate from top
+        ptr = &OnboardTelephoneNumbersMemory[OnboardTelephoneNumbersMemoryTop];
+        OnboardTelephoneNumbersMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     OnboardTelephoneNumbers_Init(ptr);

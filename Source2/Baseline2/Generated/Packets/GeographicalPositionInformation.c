@@ -2,11 +2,11 @@
 #include "GeographicalPositionInformation.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define GeographicalPositionInformationMemoryMax 32
+// number of cells in allocation memory
+#define GeographicalPositionInformationMemoryMax		32
 
 // end-of-freelist indicator
-#define GeographicalPositionInformationMemoryNil (-1)
+#define GeographicalPositionInformationMemoryNil		(-1)
 
 // allocation memory
 static GeographicalPositionInformation GeographicalPositionInformationMemory[GeographicalPositionInformationMemoryMax];
@@ -23,20 +23,20 @@ GeographicalPositionInformation* GeographicalPositionInformation_New(void)
 
     if (GeographicalPositionInformationMemoryFreeList != GeographicalPositionInformationMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &GeographicalPositionInformationMemory[GeographicalPositionInformationMemoryFreeList];
-	 GeographicalPositionInformationMemoryFreeList = GeographicalPositionInformationMemory[GeographicalPositionInformationMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &GeographicalPositionInformationMemory[GeographicalPositionInformationMemoryFreeList];
+        GeographicalPositionInformationMemoryFreeList = GeographicalPositionInformationMemory[GeographicalPositionInformationMemoryFreeList].header.NID_PACKET;
     }
     else if (GeographicalPositionInformationMemoryTop < GeographicalPositionInformationMemoryMax)
     {
-         // allocate from top
-	 ptr = &GeographicalPositionInformationMemory[GeographicalPositionInformationMemoryTop];
-	 GeographicalPositionInformationMemoryTop += 1;
+        // allocate from top
+        ptr = &GeographicalPositionInformationMemory[GeographicalPositionInformationMemoryTop];
+        GeographicalPositionInformationMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     GeographicalPositionInformation_Init(ptr);

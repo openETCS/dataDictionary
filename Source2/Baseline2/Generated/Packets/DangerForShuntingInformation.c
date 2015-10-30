@@ -2,11 +2,11 @@
 #include "DangerForShuntingInformation.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define DangerForShuntingInformationMemoryMax 32
+// number of cells in allocation memory
+#define DangerForShuntingInformationMemoryMax		32
 
 // end-of-freelist indicator
-#define DangerForShuntingInformationMemoryNil (-1)
+#define DangerForShuntingInformationMemoryNil		(-1)
 
 // allocation memory
 static DangerForShuntingInformation DangerForShuntingInformationMemory[DangerForShuntingInformationMemoryMax];
@@ -23,20 +23,20 @@ DangerForShuntingInformation* DangerForShuntingInformation_New(void)
 
     if (DangerForShuntingInformationMemoryFreeList != DangerForShuntingInformationMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &DangerForShuntingInformationMemory[DangerForShuntingInformationMemoryFreeList];
-	 DangerForShuntingInformationMemoryFreeList = DangerForShuntingInformationMemory[DangerForShuntingInformationMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &DangerForShuntingInformationMemory[DangerForShuntingInformationMemoryFreeList];
+        DangerForShuntingInformationMemoryFreeList = DangerForShuntingInformationMemory[DangerForShuntingInformationMemoryFreeList].header.NID_PACKET;
     }
     else if (DangerForShuntingInformationMemoryTop < DangerForShuntingInformationMemoryMax)
     {
-         // allocate from top
-	 ptr = &DangerForShuntingInformationMemory[DangerForShuntingInformationMemoryTop];
-	 DangerForShuntingInformationMemoryTop += 1;
+        // allocate from top
+        ptr = &DangerForShuntingInformationMemory[DangerForShuntingInformationMemoryTop];
+        DangerForShuntingInformationMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     DangerForShuntingInformation_Init(ptr);

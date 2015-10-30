@@ -2,11 +2,11 @@
 #include "TrackConditionBigMetalMasses.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define TrackConditionBigMetalMassesMemoryMax 32
+// number of cells in allocation memory
+#define TrackConditionBigMetalMassesMemoryMax		32
 
 // end-of-freelist indicator
-#define TrackConditionBigMetalMassesMemoryNil (-1)
+#define TrackConditionBigMetalMassesMemoryNil		(-1)
 
 // allocation memory
 static TrackConditionBigMetalMasses TrackConditionBigMetalMassesMemory[TrackConditionBigMetalMassesMemoryMax];
@@ -23,20 +23,20 @@ TrackConditionBigMetalMasses* TrackConditionBigMetalMasses_New(void)
 
     if (TrackConditionBigMetalMassesMemoryFreeList != TrackConditionBigMetalMassesMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &TrackConditionBigMetalMassesMemory[TrackConditionBigMetalMassesMemoryFreeList];
-	 TrackConditionBigMetalMassesMemoryFreeList = TrackConditionBigMetalMassesMemory[TrackConditionBigMetalMassesMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &TrackConditionBigMetalMassesMemory[TrackConditionBigMetalMassesMemoryFreeList];
+        TrackConditionBigMetalMassesMemoryFreeList = TrackConditionBigMetalMassesMemory[TrackConditionBigMetalMassesMemoryFreeList].header.NID_PACKET;
     }
     else if (TrackConditionBigMetalMassesMemoryTop < TrackConditionBigMetalMassesMemoryMax)
     {
-         // allocate from top
-	 ptr = &TrackConditionBigMetalMassesMemory[TrackConditionBigMetalMassesMemoryTop];
-	 TrackConditionBigMetalMassesMemoryTop += 1;
+        // allocate from top
+        ptr = &TrackConditionBigMetalMassesMemory[TrackConditionBigMetalMassesMemoryTop];
+        TrackConditionBigMetalMassesMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     TrackConditionBigMetalMasses_Init(ptr);

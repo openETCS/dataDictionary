@@ -2,11 +2,11 @@
 #include "InfillLocationReference.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define InfillLocationReferenceMemoryMax 32
+// number of cells in allocation memory
+#define InfillLocationReferenceMemoryMax		32
 
 // end-of-freelist indicator
-#define InfillLocationReferenceMemoryNil (-1)
+#define InfillLocationReferenceMemoryNil		(-1)
 
 // allocation memory
 static InfillLocationReference InfillLocationReferenceMemory[InfillLocationReferenceMemoryMax];
@@ -23,20 +23,20 @@ InfillLocationReference* InfillLocationReference_New(void)
 
     if (InfillLocationReferenceMemoryFreeList != InfillLocationReferenceMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &InfillLocationReferenceMemory[InfillLocationReferenceMemoryFreeList];
-	 InfillLocationReferenceMemoryFreeList = InfillLocationReferenceMemory[InfillLocationReferenceMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &InfillLocationReferenceMemory[InfillLocationReferenceMemoryFreeList];
+        InfillLocationReferenceMemoryFreeList = InfillLocationReferenceMemory[InfillLocationReferenceMemoryFreeList].header.NID_PACKET;
     }
     else if (InfillLocationReferenceMemoryTop < InfillLocationReferenceMemoryMax)
     {
-         // allocate from top
-	 ptr = &InfillLocationReferenceMemory[InfillLocationReferenceMemoryTop];
-	 InfillLocationReferenceMemoryTop += 1;
+        // allocate from top
+        ptr = &InfillLocationReferenceMemory[InfillLocationReferenceMemoryTop];
+        InfillLocationReferenceMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     InfillLocationReference_Init(ptr);

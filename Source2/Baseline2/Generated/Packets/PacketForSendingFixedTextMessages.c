@@ -2,11 +2,11 @@
 #include "PacketForSendingFixedTextMessages.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define PacketForSendingFixedTextMessagesMemoryMax 32
+// number of cells in allocation memory
+#define PacketForSendingFixedTextMessagesMemoryMax		32
 
 // end-of-freelist indicator
-#define PacketForSendingFixedTextMessagesMemoryNil (-1)
+#define PacketForSendingFixedTextMessagesMemoryNil		(-1)
 
 // allocation memory
 static PacketForSendingFixedTextMessages PacketForSendingFixedTextMessagesMemory[PacketForSendingFixedTextMessagesMemoryMax];
@@ -23,20 +23,20 @@ PacketForSendingFixedTextMessages* PacketForSendingFixedTextMessages_New(void)
 
     if (PacketForSendingFixedTextMessagesMemoryFreeList != PacketForSendingFixedTextMessagesMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &PacketForSendingFixedTextMessagesMemory[PacketForSendingFixedTextMessagesMemoryFreeList];
-	 PacketForSendingFixedTextMessagesMemoryFreeList = PacketForSendingFixedTextMessagesMemory[PacketForSendingFixedTextMessagesMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &PacketForSendingFixedTextMessagesMemory[PacketForSendingFixedTextMessagesMemoryFreeList];
+        PacketForSendingFixedTextMessagesMemoryFreeList = PacketForSendingFixedTextMessagesMemory[PacketForSendingFixedTextMessagesMemoryFreeList].header.NID_PACKET;
     }
     else if (PacketForSendingFixedTextMessagesMemoryTop < PacketForSendingFixedTextMessagesMemoryMax)
     {
-         // allocate from top
-	 ptr = &PacketForSendingFixedTextMessagesMemory[PacketForSendingFixedTextMessagesMemoryTop];
-	 PacketForSendingFixedTextMessagesMemoryTop += 1;
+        // allocate from top
+        ptr = &PacketForSendingFixedTextMessagesMemory[PacketForSendingFixedTextMessagesMemoryTop];
+        PacketForSendingFixedTextMessagesMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     PacketForSendingFixedTextMessages_Init(ptr);

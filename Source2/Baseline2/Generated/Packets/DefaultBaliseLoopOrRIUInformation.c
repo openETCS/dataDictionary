@@ -2,11 +2,11 @@
 #include "DefaultBaliseLoopOrRIUInformation.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define DefaultBaliseLoopOrRIUInformationMemoryMax 32
+// number of cells in allocation memory
+#define DefaultBaliseLoopOrRIUInformationMemoryMax		32
 
 // end-of-freelist indicator
-#define DefaultBaliseLoopOrRIUInformationMemoryNil (-1)
+#define DefaultBaliseLoopOrRIUInformationMemoryNil		(-1)
 
 // allocation memory
 static DefaultBaliseLoopOrRIUInformation DefaultBaliseLoopOrRIUInformationMemory[DefaultBaliseLoopOrRIUInformationMemoryMax];
@@ -23,20 +23,20 @@ DefaultBaliseLoopOrRIUInformation* DefaultBaliseLoopOrRIUInformation_New(void)
 
     if (DefaultBaliseLoopOrRIUInformationMemoryFreeList != DefaultBaliseLoopOrRIUInformationMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &DefaultBaliseLoopOrRIUInformationMemory[DefaultBaliseLoopOrRIUInformationMemoryFreeList];
-	 DefaultBaliseLoopOrRIUInformationMemoryFreeList = DefaultBaliseLoopOrRIUInformationMemory[DefaultBaliseLoopOrRIUInformationMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &DefaultBaliseLoopOrRIUInformationMemory[DefaultBaliseLoopOrRIUInformationMemoryFreeList];
+        DefaultBaliseLoopOrRIUInformationMemoryFreeList = DefaultBaliseLoopOrRIUInformationMemory[DefaultBaliseLoopOrRIUInformationMemoryFreeList].header.NID_PACKET;
     }
     else if (DefaultBaliseLoopOrRIUInformationMemoryTop < DefaultBaliseLoopOrRIUInformationMemoryMax)
     {
-         // allocate from top
-	 ptr = &DefaultBaliseLoopOrRIUInformationMemory[DefaultBaliseLoopOrRIUInformationMemoryTop];
-	 DefaultBaliseLoopOrRIUInformationMemoryTop += 1;
+        // allocate from top
+        ptr = &DefaultBaliseLoopOrRIUInformationMemory[DefaultBaliseLoopOrRIUInformationMemoryTop];
+        DefaultBaliseLoopOrRIUInformationMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     DefaultBaliseLoopOrRIUInformation_Init(ptr);

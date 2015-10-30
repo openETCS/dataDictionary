@@ -2,11 +2,11 @@
 #include "StopIfInStaffResponsible.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define StopIfInStaffResponsibleMemoryMax 32
+// number of cells in allocation memory
+#define StopIfInStaffResponsibleMemoryMax		32
 
 // end-of-freelist indicator
-#define StopIfInStaffResponsibleMemoryNil (-1)
+#define StopIfInStaffResponsibleMemoryNil		(-1)
 
 // allocation memory
 static StopIfInStaffResponsible StopIfInStaffResponsibleMemory[StopIfInStaffResponsibleMemoryMax];
@@ -23,20 +23,20 @@ StopIfInStaffResponsible* StopIfInStaffResponsible_New(void)
 
     if (StopIfInStaffResponsibleMemoryFreeList != StopIfInStaffResponsibleMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &StopIfInStaffResponsibleMemory[StopIfInStaffResponsibleMemoryFreeList];
-	 StopIfInStaffResponsibleMemoryFreeList = StopIfInStaffResponsibleMemory[StopIfInStaffResponsibleMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &StopIfInStaffResponsibleMemory[StopIfInStaffResponsibleMemoryFreeList];
+        StopIfInStaffResponsibleMemoryFreeList = StopIfInStaffResponsibleMemory[StopIfInStaffResponsibleMemoryFreeList].header.NID_PACKET;
     }
     else if (StopIfInStaffResponsibleMemoryTop < StopIfInStaffResponsibleMemoryMax)
     {
-         // allocate from top
-	 ptr = &StopIfInStaffResponsibleMemory[StopIfInStaffResponsibleMemoryTop];
-	 StopIfInStaffResponsibleMemoryTop += 1;
+        // allocate from top
+        ptr = &StopIfInStaffResponsibleMemory[StopIfInStaffResponsibleMemoryTop];
+        StopIfInStaffResponsibleMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     StopIfInStaffResponsible_Init(ptr);

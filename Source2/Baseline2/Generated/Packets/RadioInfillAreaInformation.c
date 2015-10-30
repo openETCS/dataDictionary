@@ -2,11 +2,11 @@
 #include "RadioInfillAreaInformation.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define RadioInfillAreaInformationMemoryMax 32
+// number of cells in allocation memory
+#define RadioInfillAreaInformationMemoryMax		32
 
 // end-of-freelist indicator
-#define RadioInfillAreaInformationMemoryNil (-1)
+#define RadioInfillAreaInformationMemoryNil		(-1)
 
 // allocation memory
 static RadioInfillAreaInformation RadioInfillAreaInformationMemory[RadioInfillAreaInformationMemoryMax];
@@ -23,20 +23,20 @@ RadioInfillAreaInformation* RadioInfillAreaInformation_New(void)
 
     if (RadioInfillAreaInformationMemoryFreeList != RadioInfillAreaInformationMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &RadioInfillAreaInformationMemory[RadioInfillAreaInformationMemoryFreeList];
-	 RadioInfillAreaInformationMemoryFreeList = RadioInfillAreaInformationMemory[RadioInfillAreaInformationMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &RadioInfillAreaInformationMemory[RadioInfillAreaInformationMemoryFreeList];
+        RadioInfillAreaInformationMemoryFreeList = RadioInfillAreaInformationMemory[RadioInfillAreaInformationMemoryFreeList].header.NID_PACKET;
     }
     else if (RadioInfillAreaInformationMemoryTop < RadioInfillAreaInformationMemoryMax)
     {
-         // allocate from top
-	 ptr = &RadioInfillAreaInformationMemory[RadioInfillAreaInformationMemoryTop];
-	 RadioInfillAreaInformationMemoryTop += 1;
+        // allocate from top
+        ptr = &RadioInfillAreaInformationMemory[RadioInfillAreaInformationMemoryTop];
+        RadioInfillAreaInformationMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     RadioInfillAreaInformation_Init(ptr);

@@ -2,11 +2,11 @@
 #include "RouteSuitabilityData.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define RouteSuitabilityDataMemoryMax 32
+// number of cells in allocation memory
+#define RouteSuitabilityDataMemoryMax		32
 
 // end-of-freelist indicator
-#define RouteSuitabilityDataMemoryNil (-1)
+#define RouteSuitabilityDataMemoryNil		(-1)
 
 // allocation memory
 static RouteSuitabilityData RouteSuitabilityDataMemory[RouteSuitabilityDataMemoryMax];
@@ -23,20 +23,20 @@ RouteSuitabilityData* RouteSuitabilityData_New(void)
 
     if (RouteSuitabilityDataMemoryFreeList != RouteSuitabilityDataMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &RouteSuitabilityDataMemory[RouteSuitabilityDataMemoryFreeList];
-	 RouteSuitabilityDataMemoryFreeList = RouteSuitabilityDataMemory[RouteSuitabilityDataMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &RouteSuitabilityDataMemory[RouteSuitabilityDataMemoryFreeList];
+        RouteSuitabilityDataMemoryFreeList = RouteSuitabilityDataMemory[RouteSuitabilityDataMemoryFreeList].header.NID_PACKET;
     }
     else if (RouteSuitabilityDataMemoryTop < RouteSuitabilityDataMemoryMax)
     {
-         // allocate from top
-	 ptr = &RouteSuitabilityDataMemory[RouteSuitabilityDataMemoryTop];
-	 RouteSuitabilityDataMemoryTop += 1;
+        // allocate from top
+        ptr = &RouteSuitabilityDataMemory[RouteSuitabilityDataMemoryTop];
+        RouteSuitabilityDataMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     RouteSuitabilityData_Init(ptr);

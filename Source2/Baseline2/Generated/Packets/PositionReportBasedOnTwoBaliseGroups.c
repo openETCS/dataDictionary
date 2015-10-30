@@ -2,11 +2,11 @@
 #include "PositionReportBasedOnTwoBaliseGroups.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define PositionReportBasedOnTwoBaliseGroupsMemoryMax 32
+// number of cells in allocation memory
+#define PositionReportBasedOnTwoBaliseGroupsMemoryMax		32
 
 // end-of-freelist indicator
-#define PositionReportBasedOnTwoBaliseGroupsMemoryNil (-1)
+#define PositionReportBasedOnTwoBaliseGroupsMemoryNil		(-1)
 
 // allocation memory
 static PositionReportBasedOnTwoBaliseGroups PositionReportBasedOnTwoBaliseGroupsMemory[PositionReportBasedOnTwoBaliseGroupsMemoryMax];
@@ -23,20 +23,20 @@ PositionReportBasedOnTwoBaliseGroups* PositionReportBasedOnTwoBaliseGroups_New(v
 
     if (PositionReportBasedOnTwoBaliseGroupsMemoryFreeList != PositionReportBasedOnTwoBaliseGroupsMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &PositionReportBasedOnTwoBaliseGroupsMemory[PositionReportBasedOnTwoBaliseGroupsMemoryFreeList];
-	 PositionReportBasedOnTwoBaliseGroupsMemoryFreeList = PositionReportBasedOnTwoBaliseGroupsMemory[PositionReportBasedOnTwoBaliseGroupsMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &PositionReportBasedOnTwoBaliseGroupsMemory[PositionReportBasedOnTwoBaliseGroupsMemoryFreeList];
+        PositionReportBasedOnTwoBaliseGroupsMemoryFreeList = PositionReportBasedOnTwoBaliseGroupsMemory[PositionReportBasedOnTwoBaliseGroupsMemoryFreeList].header.NID_PACKET;
     }
     else if (PositionReportBasedOnTwoBaliseGroupsMemoryTop < PositionReportBasedOnTwoBaliseGroupsMemoryMax)
     {
-         // allocate from top
-	 ptr = &PositionReportBasedOnTwoBaliseGroupsMemory[PositionReportBasedOnTwoBaliseGroupsMemoryTop];
-	 PositionReportBasedOnTwoBaliseGroupsMemoryTop += 1;
+        // allocate from top
+        ptr = &PositionReportBasedOnTwoBaliseGroupsMemory[PositionReportBasedOnTwoBaliseGroupsMemoryTop];
+        PositionReportBasedOnTwoBaliseGroupsMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     PositionReportBasedOnTwoBaliseGroups_Init(ptr);

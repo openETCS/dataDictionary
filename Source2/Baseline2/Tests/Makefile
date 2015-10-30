@@ -15,8 +15,10 @@ CFLAGS += -std=c99 -Wall -pedantic
 LDFLAGS += -L$(TOPDIR)/Foundation/Bits -lbits
 LDFLAGS += -L$(TOPDIR)/Generated/Packets -lgenerated_packets
 
-all: clean test_packets
+all: clean test_packets test_issue31_1 test_issue31_2
 	./test_packets
+	./test_issue31_1
+	./test_issue31_2
 
 SRC := PacketSequence.c\
        EurobaliseTelegram.c
@@ -32,9 +34,16 @@ OBJ := $(SRC:.c=.o) $(TESTS:.c=.o)
 test_packets: test_packets.o $(OBJ)
 	$(CC) -o $@ $+ $(LDFLAGS)
 
+test_issue31_1: test_issue31_1.o $(OBJ)
+	$(CC) -o $@ $+ $(LDFLAGS)
+
+test_issue31_2: test_issue31_2.o $(OBJ)
+	$(CC) -o $@ $+ $(LDFLAGS)
 
 clean:
 	$(RM) test_packets
+	$(RM) test_issue31_1
+	$(RM) test_issue31_2
 	$(RM) *.o
 	$(RM) *.orig
 

@@ -2,11 +2,11 @@
 #include "ModeProfile.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define ModeProfileMemoryMax 32
+// number of cells in allocation memory
+#define ModeProfileMemoryMax		32
 
 // end-of-freelist indicator
-#define ModeProfileMemoryNil (-1)
+#define ModeProfileMemoryNil		(-1)
 
 // allocation memory
 static ModeProfile ModeProfileMemory[ModeProfileMemoryMax];
@@ -23,20 +23,20 @@ ModeProfile* ModeProfile_New(void)
 
     if (ModeProfileMemoryFreeList != ModeProfileMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &ModeProfileMemory[ModeProfileMemoryFreeList];
-	 ModeProfileMemoryFreeList = ModeProfileMemory[ModeProfileMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &ModeProfileMemory[ModeProfileMemoryFreeList];
+        ModeProfileMemoryFreeList = ModeProfileMemory[ModeProfileMemoryFreeList].header.NID_PACKET;
     }
     else if (ModeProfileMemoryTop < ModeProfileMemoryMax)
     {
-         // allocate from top
-	 ptr = &ModeProfileMemory[ModeProfileMemoryTop];
-	 ModeProfileMemoryTop += 1;
+        // allocate from top
+        ptr = &ModeProfileMemory[ModeProfileMemoryTop];
+        ModeProfileMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     ModeProfile_Init(ptr);

@@ -2,11 +2,11 @@
 #include "EOLMPacket.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define EOLMPacketMemoryMax 32
+// number of cells in allocation memory
+#define EOLMPacketMemoryMax		32
 
 // end-of-freelist indicator
-#define EOLMPacketMemoryNil (-1)
+#define EOLMPacketMemoryNil		(-1)
 
 // allocation memory
 static EOLMPacket EOLMPacketMemory[EOLMPacketMemoryMax];
@@ -23,20 +23,20 @@ EOLMPacket* EOLMPacket_New(void)
 
     if (EOLMPacketMemoryFreeList != EOLMPacketMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &EOLMPacketMemory[EOLMPacketMemoryFreeList];
-	 EOLMPacketMemoryFreeList = EOLMPacketMemory[EOLMPacketMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &EOLMPacketMemory[EOLMPacketMemoryFreeList];
+        EOLMPacketMemoryFreeList = EOLMPacketMemory[EOLMPacketMemoryFreeList].header.NID_PACKET;
     }
     else if (EOLMPacketMemoryTop < EOLMPacketMemoryMax)
     {
-         // allocate from top
-	 ptr = &EOLMPacketMemory[EOLMPacketMemoryTop];
-	 EOLMPacketMemoryTop += 1;
+        // allocate from top
+        ptr = &EOLMPacketMemory[EOLMPacketMemoryTop];
+        EOLMPacketMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     EOLMPacket_Init(ptr);

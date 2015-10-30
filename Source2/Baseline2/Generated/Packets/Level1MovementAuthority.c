@@ -2,11 +2,11 @@
 #include "Level1MovementAuthority.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define Level1MovementAuthorityMemoryMax 32
+// number of cells in allocation memory
+#define Level1MovementAuthorityMemoryMax		32
 
 // end-of-freelist indicator
-#define Level1MovementAuthorityMemoryNil (-1)
+#define Level1MovementAuthorityMemoryNil		(-1)
 
 // allocation memory
 static Level1MovementAuthority Level1MovementAuthorityMemory[Level1MovementAuthorityMemoryMax];
@@ -23,20 +23,20 @@ Level1MovementAuthority* Level1MovementAuthority_New(void)
 
     if (Level1MovementAuthorityMemoryFreeList != Level1MovementAuthorityMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &Level1MovementAuthorityMemory[Level1MovementAuthorityMemoryFreeList];
-	 Level1MovementAuthorityMemoryFreeList = Level1MovementAuthorityMemory[Level1MovementAuthorityMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &Level1MovementAuthorityMemory[Level1MovementAuthorityMemoryFreeList];
+        Level1MovementAuthorityMemoryFreeList = Level1MovementAuthorityMemory[Level1MovementAuthorityMemoryFreeList].header.NID_PACKET;
     }
     else if (Level1MovementAuthorityMemoryTop < Level1MovementAuthorityMemoryMax)
     {
-         // allocate from top
-	 ptr = &Level1MovementAuthorityMemory[Level1MovementAuthorityMemoryTop];
-	 Level1MovementAuthorityMemoryTop += 1;
+        // allocate from top
+        ptr = &Level1MovementAuthorityMemory[Level1MovementAuthorityMemoryTop];
+        Level1MovementAuthorityMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     Level1MovementAuthority_Init(ptr);

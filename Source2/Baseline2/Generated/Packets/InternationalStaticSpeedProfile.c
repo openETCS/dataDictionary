@@ -2,11 +2,11 @@
 #include "InternationalStaticSpeedProfile.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define InternationalStaticSpeedProfileMemoryMax 32
+// number of cells in allocation memory
+#define InternationalStaticSpeedProfileMemoryMax		32
 
 // end-of-freelist indicator
-#define InternationalStaticSpeedProfileMemoryNil (-1)
+#define InternationalStaticSpeedProfileMemoryNil		(-1)
 
 // allocation memory
 static InternationalStaticSpeedProfile InternationalStaticSpeedProfileMemory[InternationalStaticSpeedProfileMemoryMax];
@@ -23,20 +23,20 @@ InternationalStaticSpeedProfile* InternationalStaticSpeedProfile_New(void)
 
     if (InternationalStaticSpeedProfileMemoryFreeList != InternationalStaticSpeedProfileMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &InternationalStaticSpeedProfileMemory[InternationalStaticSpeedProfileMemoryFreeList];
-	 InternationalStaticSpeedProfileMemoryFreeList = InternationalStaticSpeedProfileMemory[InternationalStaticSpeedProfileMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &InternationalStaticSpeedProfileMemory[InternationalStaticSpeedProfileMemoryFreeList];
+        InternationalStaticSpeedProfileMemoryFreeList = InternationalStaticSpeedProfileMemory[InternationalStaticSpeedProfileMemoryFreeList].header.NID_PACKET;
     }
     else if (InternationalStaticSpeedProfileMemoryTop < InternationalStaticSpeedProfileMemoryMax)
     {
-         // allocate from top
-	 ptr = &InternationalStaticSpeedProfileMemory[InternationalStaticSpeedProfileMemoryTop];
-	 InternationalStaticSpeedProfileMemoryTop += 1;
+        // allocate from top
+        ptr = &InternationalStaticSpeedProfileMemory[InternationalStaticSpeedProfileMemoryTop];
+        InternationalStaticSpeedProfileMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     InternationalStaticSpeedProfile_Init(ptr);

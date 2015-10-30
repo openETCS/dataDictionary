@@ -2,11 +2,11 @@
 #include "SessionManagement.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define SessionManagementMemoryMax 32
+// number of cells in allocation memory
+#define SessionManagementMemoryMax		32
 
 // end-of-freelist indicator
-#define SessionManagementMemoryNil (-1)
+#define SessionManagementMemoryNil		(-1)
 
 // allocation memory
 static SessionManagement SessionManagementMemory[SessionManagementMemoryMax];
@@ -23,20 +23,20 @@ SessionManagement* SessionManagement_New(void)
 
     if (SessionManagementMemoryFreeList != SessionManagementMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &SessionManagementMemory[SessionManagementMemoryFreeList];
-	 SessionManagementMemoryFreeList = SessionManagementMemory[SessionManagementMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &SessionManagementMemory[SessionManagementMemoryFreeList];
+        SessionManagementMemoryFreeList = SessionManagementMemory[SessionManagementMemoryFreeList].header.NID_PACKET;
     }
     else if (SessionManagementMemoryTop < SessionManagementMemoryMax)
     {
-         // allocate from top
-	 ptr = &SessionManagementMemory[SessionManagementMemoryTop];
-	 SessionManagementMemoryTop += 1;
+        // allocate from top
+        ptr = &SessionManagementMemory[SessionManagementMemoryTop];
+        SessionManagementMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     SessionManagement_Init(ptr);
@@ -114,11 +114,13 @@ int SessionManagement_EncodeBit(const SessionManagement* p, Bitstream* stream)
         }
         else
         {
+            fprintf(stdout, "error");
             return -2;
         }
     }
     else
     {
+        fprintf(stdout, "error");
         return -1;
     }
 }

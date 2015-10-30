@@ -2,11 +2,11 @@
 #include "TemporarySpeedRestriction.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define TemporarySpeedRestrictionMemoryMax 32
+// number of cells in allocation memory
+#define TemporarySpeedRestrictionMemoryMax		32
 
 // end-of-freelist indicator
-#define TemporarySpeedRestrictionMemoryNil (-1)
+#define TemporarySpeedRestrictionMemoryNil		(-1)
 
 // allocation memory
 static TemporarySpeedRestriction TemporarySpeedRestrictionMemory[TemporarySpeedRestrictionMemoryMax];
@@ -23,20 +23,20 @@ TemporarySpeedRestriction* TemporarySpeedRestriction_New(void)
 
     if (TemporarySpeedRestrictionMemoryFreeList != TemporarySpeedRestrictionMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &TemporarySpeedRestrictionMemory[TemporarySpeedRestrictionMemoryFreeList];
-	 TemporarySpeedRestrictionMemoryFreeList = TemporarySpeedRestrictionMemory[TemporarySpeedRestrictionMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &TemporarySpeedRestrictionMemory[TemporarySpeedRestrictionMemoryFreeList];
+        TemporarySpeedRestrictionMemoryFreeList = TemporarySpeedRestrictionMemory[TemporarySpeedRestrictionMemoryFreeList].header.NID_PACKET;
     }
     else if (TemporarySpeedRestrictionMemoryTop < TemporarySpeedRestrictionMemoryMax)
     {
-         // allocate from top
-	 ptr = &TemporarySpeedRestrictionMemory[TemporarySpeedRestrictionMemoryTop];
-	 TemporarySpeedRestrictionMemoryTop += 1;
+        // allocate from top
+        ptr = &TemporarySpeedRestrictionMemory[TemporarySpeedRestrictionMemoryTop];
+        TemporarySpeedRestrictionMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     TemporarySpeedRestriction_Init(ptr);

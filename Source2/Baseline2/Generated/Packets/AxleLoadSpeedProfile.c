@@ -2,11 +2,11 @@
 #include "AxleLoadSpeedProfile.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define AxleLoadSpeedProfileMemoryMax 32
+// number of cells in allocation memory
+#define AxleLoadSpeedProfileMemoryMax		32
 
 // end-of-freelist indicator
-#define AxleLoadSpeedProfileMemoryNil (-1)
+#define AxleLoadSpeedProfileMemoryNil		(-1)
 
 // allocation memory
 static AxleLoadSpeedProfile AxleLoadSpeedProfileMemory[AxleLoadSpeedProfileMemoryMax];
@@ -23,20 +23,20 @@ AxleLoadSpeedProfile* AxleLoadSpeedProfile_New(void)
 
     if (AxleLoadSpeedProfileMemoryFreeList != AxleLoadSpeedProfileMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &AxleLoadSpeedProfileMemory[AxleLoadSpeedProfileMemoryFreeList];
-	 AxleLoadSpeedProfileMemoryFreeList = AxleLoadSpeedProfileMemory[AxleLoadSpeedProfileMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &AxleLoadSpeedProfileMemory[AxleLoadSpeedProfileMemoryFreeList];
+        AxleLoadSpeedProfileMemoryFreeList = AxleLoadSpeedProfileMemory[AxleLoadSpeedProfileMemoryFreeList].header.NID_PACKET;
     }
     else if (AxleLoadSpeedProfileMemoryTop < AxleLoadSpeedProfileMemoryMax)
     {
-         // allocate from top
-	 ptr = &AxleLoadSpeedProfileMemory[AxleLoadSpeedProfileMemoryTop];
-	 AxleLoadSpeedProfileMemoryTop += 1;
+        // allocate from top
+        ptr = &AxleLoadSpeedProfileMemory[AxleLoadSpeedProfileMemoryTop];
+        AxleLoadSpeedProfileMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     AxleLoadSpeedProfile_Init(ptr);

@@ -2,11 +2,11 @@
 #include "TrackConditionChangeOfTractionPower.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define TrackConditionChangeOfTractionPowerMemoryMax 32
+// number of cells in allocation memory
+#define TrackConditionChangeOfTractionPowerMemoryMax		32
 
 // end-of-freelist indicator
-#define TrackConditionChangeOfTractionPowerMemoryNil (-1)
+#define TrackConditionChangeOfTractionPowerMemoryNil		(-1)
 
 // allocation memory
 static TrackConditionChangeOfTractionPower TrackConditionChangeOfTractionPowerMemory[TrackConditionChangeOfTractionPowerMemoryMax];
@@ -23,20 +23,20 @@ TrackConditionChangeOfTractionPower* TrackConditionChangeOfTractionPower_New(voi
 
     if (TrackConditionChangeOfTractionPowerMemoryFreeList != TrackConditionChangeOfTractionPowerMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &TrackConditionChangeOfTractionPowerMemory[TrackConditionChangeOfTractionPowerMemoryFreeList];
-	 TrackConditionChangeOfTractionPowerMemoryFreeList = TrackConditionChangeOfTractionPowerMemory[TrackConditionChangeOfTractionPowerMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &TrackConditionChangeOfTractionPowerMemory[TrackConditionChangeOfTractionPowerMemoryFreeList];
+        TrackConditionChangeOfTractionPowerMemoryFreeList = TrackConditionChangeOfTractionPowerMemory[TrackConditionChangeOfTractionPowerMemoryFreeList].header.NID_PACKET;
     }
     else if (TrackConditionChangeOfTractionPowerMemoryTop < TrackConditionChangeOfTractionPowerMemoryMax)
     {
-         // allocate from top
-	 ptr = &TrackConditionChangeOfTractionPowerMemory[TrackConditionChangeOfTractionPowerMemoryTop];
-	 TrackConditionChangeOfTractionPowerMemoryTop += 1;
+        // allocate from top
+        ptr = &TrackConditionChangeOfTractionPowerMemory[TrackConditionChangeOfTractionPowerMemoryTop];
+        TrackConditionChangeOfTractionPowerMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     TrackConditionChangeOfTractionPower_Init(ptr);

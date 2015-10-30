@@ -2,11 +2,11 @@
 #include "PositionReportParameters.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define PositionReportParametersMemoryMax 32
+// number of cells in allocation memory
+#define PositionReportParametersMemoryMax		32
 
 // end-of-freelist indicator
-#define PositionReportParametersMemoryNil (-1)
+#define PositionReportParametersMemoryNil		(-1)
 
 // allocation memory
 static PositionReportParameters PositionReportParametersMemory[PositionReportParametersMemoryMax];
@@ -23,20 +23,20 @@ PositionReportParameters* PositionReportParameters_New(void)
 
     if (PositionReportParametersMemoryFreeList != PositionReportParametersMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &PositionReportParametersMemory[PositionReportParametersMemoryFreeList];
-	 PositionReportParametersMemoryFreeList = PositionReportParametersMemory[PositionReportParametersMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &PositionReportParametersMemory[PositionReportParametersMemoryFreeList];
+        PositionReportParametersMemoryFreeList = PositionReportParametersMemory[PositionReportParametersMemoryFreeList].header.NID_PACKET;
     }
     else if (PositionReportParametersMemoryTop < PositionReportParametersMemoryMax)
     {
-         // allocate from top
-	 ptr = &PositionReportParametersMemory[PositionReportParametersMemoryTop];
-	 PositionReportParametersMemoryTop += 1;
+        // allocate from top
+        ptr = &PositionReportParametersMemory[PositionReportParametersMemoryTop];
+        PositionReportParametersMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     PositionReportParameters_Init(ptr);

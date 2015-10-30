@@ -2,11 +2,11 @@
 #include "DataUsedByApplicationsOutsideTheERTMSETCSSystem.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryMax 32
+// number of cells in allocation memory
+#define DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryMax		32
 
 // end-of-freelist indicator
-#define DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryNil (-1)
+#define DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryNil		(-1)
 
 // allocation memory
 static DataUsedByApplicationsOutsideTheERTMSETCSSystem DataUsedByApplicationsOutsideTheERTMSETCSSystemMemory[DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryMax];
@@ -23,20 +23,20 @@ DataUsedByApplicationsOutsideTheERTMSETCSSystem* DataUsedByApplicationsOutsideTh
 
     if (DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList != DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &DataUsedByApplicationsOutsideTheERTMSETCSSystemMemory[DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList];
-	 DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList = DataUsedByApplicationsOutsideTheERTMSETCSSystemMemory[DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &DataUsedByApplicationsOutsideTheERTMSETCSSystemMemory[DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList];
+        DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList = DataUsedByApplicationsOutsideTheERTMSETCSSystemMemory[DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList].header.NID_PACKET;
     }
     else if (DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryTop < DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryMax)
     {
-         // allocate from top
-	 ptr = &DataUsedByApplicationsOutsideTheERTMSETCSSystemMemory[DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryTop];
-	 DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryTop += 1;
+        // allocate from top
+        ptr = &DataUsedByApplicationsOutsideTheERTMSETCSSystemMemory[DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryTop];
+        DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     DataUsedByApplicationsOutsideTheERTMSETCSSystem_Init(ptr);

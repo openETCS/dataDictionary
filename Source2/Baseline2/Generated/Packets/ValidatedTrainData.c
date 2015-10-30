@@ -2,11 +2,11 @@
 #include "ValidatedTrainData.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define ValidatedTrainDataMemoryMax 32
+// number of cells in allocation memory
+#define ValidatedTrainDataMemoryMax		32
 
 // end-of-freelist indicator
-#define ValidatedTrainDataMemoryNil (-1)
+#define ValidatedTrainDataMemoryNil		(-1)
 
 // allocation memory
 static ValidatedTrainData ValidatedTrainDataMemory[ValidatedTrainDataMemoryMax];
@@ -23,20 +23,20 @@ ValidatedTrainData* ValidatedTrainData_New(void)
 
     if (ValidatedTrainDataMemoryFreeList != ValidatedTrainDataMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &ValidatedTrainDataMemory[ValidatedTrainDataMemoryFreeList];
-	 ValidatedTrainDataMemoryFreeList = ValidatedTrainDataMemory[ValidatedTrainDataMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &ValidatedTrainDataMemory[ValidatedTrainDataMemoryFreeList];
+        ValidatedTrainDataMemoryFreeList = ValidatedTrainDataMemory[ValidatedTrainDataMemoryFreeList].header.NID_PACKET;
     }
     else if (ValidatedTrainDataMemoryTop < ValidatedTrainDataMemoryMax)
     {
-         // allocate from top
-	 ptr = &ValidatedTrainDataMemory[ValidatedTrainDataMemoryTop];
-	 ValidatedTrainDataMemoryTop += 1;
+        // allocate from top
+        ptr = &ValidatedTrainDataMemory[ValidatedTrainDataMemoryTop];
+        ValidatedTrainDataMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     ValidatedTrainData_Init(ptr);

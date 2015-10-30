@@ -2,11 +2,11 @@
 #include "Linking.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define LinkingMemoryMax 32
+// number of cells in allocation memory
+#define LinkingMemoryMax		32
 
 // end-of-freelist indicator
-#define LinkingMemoryNil (-1)
+#define LinkingMemoryNil		(-1)
 
 // allocation memory
 static Linking LinkingMemory[LinkingMemoryMax];
@@ -23,20 +23,20 @@ Linking* Linking_New(void)
 
     if (LinkingMemoryFreeList != LinkingMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &LinkingMemory[LinkingMemoryFreeList];
-	 LinkingMemoryFreeList = LinkingMemory[LinkingMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &LinkingMemory[LinkingMemoryFreeList];
+        LinkingMemoryFreeList = LinkingMemory[LinkingMemoryFreeList].header.NID_PACKET;
     }
     else if (LinkingMemoryTop < LinkingMemoryMax)
     {
-         // allocate from top
-	 ptr = &LinkingMemory[LinkingMemoryTop];
-	 LinkingMemoryTop += 1;
+        // allocate from top
+        ptr = &LinkingMemory[LinkingMemoryTop];
+        LinkingMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     Linking_Init(ptr);

@@ -2,11 +2,11 @@
 #include "ReversingAreaInformation.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define ReversingAreaInformationMemoryMax 32
+// number of cells in allocation memory
+#define ReversingAreaInformationMemoryMax		32
 
 // end-of-freelist indicator
-#define ReversingAreaInformationMemoryNil (-1)
+#define ReversingAreaInformationMemoryNil		(-1)
 
 // allocation memory
 static ReversingAreaInformation ReversingAreaInformationMemory[ReversingAreaInformationMemoryMax];
@@ -23,20 +23,20 @@ ReversingAreaInformation* ReversingAreaInformation_New(void)
 
     if (ReversingAreaInformationMemoryFreeList != ReversingAreaInformationMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &ReversingAreaInformationMemory[ReversingAreaInformationMemoryFreeList];
-	 ReversingAreaInformationMemoryFreeList = ReversingAreaInformationMemory[ReversingAreaInformationMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &ReversingAreaInformationMemory[ReversingAreaInformationMemoryFreeList];
+        ReversingAreaInformationMemoryFreeList = ReversingAreaInformationMemory[ReversingAreaInformationMemoryFreeList].header.NID_PACKET;
     }
     else if (ReversingAreaInformationMemoryTop < ReversingAreaInformationMemoryMax)
     {
-         // allocate from top
-	 ptr = &ReversingAreaInformationMemory[ReversingAreaInformationMemoryTop];
-	 ReversingAreaInformationMemoryTop += 1;
+        // allocate from top
+        ptr = &ReversingAreaInformationMemory[ReversingAreaInformationMemoryTop];
+        ReversingAreaInformationMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     ReversingAreaInformation_Init(ptr);

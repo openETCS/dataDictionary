@@ -2,11 +2,11 @@
 #include "LevelTransitionOrder.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define LevelTransitionOrderMemoryMax 32
+// number of cells in allocation memory
+#define LevelTransitionOrderMemoryMax		32
 
 // end-of-freelist indicator
-#define LevelTransitionOrderMemoryNil (-1)
+#define LevelTransitionOrderMemoryNil		(-1)
 
 // allocation memory
 static LevelTransitionOrder LevelTransitionOrderMemory[LevelTransitionOrderMemoryMax];
@@ -23,20 +23,20 @@ LevelTransitionOrder* LevelTransitionOrder_New(void)
 
     if (LevelTransitionOrderMemoryFreeList != LevelTransitionOrderMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &LevelTransitionOrderMemory[LevelTransitionOrderMemoryFreeList];
-	 LevelTransitionOrderMemoryFreeList = LevelTransitionOrderMemory[LevelTransitionOrderMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &LevelTransitionOrderMemory[LevelTransitionOrderMemoryFreeList];
+        LevelTransitionOrderMemoryFreeList = LevelTransitionOrderMemory[LevelTransitionOrderMemoryFreeList].header.NID_PACKET;
     }
     else if (LevelTransitionOrderMemoryTop < LevelTransitionOrderMemoryMax)
     {
-         // allocate from top
-	 ptr = &LevelTransitionOrderMemory[LevelTransitionOrderMemoryTop];
-	 LevelTransitionOrderMemoryTop += 1;
+        // allocate from top
+        ptr = &LevelTransitionOrderMemory[LevelTransitionOrderMemoryTop];
+        LevelTransitionOrderMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     LevelTransitionOrder_Init(ptr);

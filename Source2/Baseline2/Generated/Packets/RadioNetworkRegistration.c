@@ -2,11 +2,11 @@
 #include "RadioNetworkRegistration.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define RadioNetworkRegistrationMemoryMax 32
+// number of cells in allocation memory
+#define RadioNetworkRegistrationMemoryMax		32
 
 // end-of-freelist indicator
-#define RadioNetworkRegistrationMemoryNil (-1)
+#define RadioNetworkRegistrationMemoryNil		(-1)
 
 // allocation memory
 static RadioNetworkRegistration RadioNetworkRegistrationMemory[RadioNetworkRegistrationMemoryMax];
@@ -23,20 +23,20 @@ RadioNetworkRegistration* RadioNetworkRegistration_New(void)
 
     if (RadioNetworkRegistrationMemoryFreeList != RadioNetworkRegistrationMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &RadioNetworkRegistrationMemory[RadioNetworkRegistrationMemoryFreeList];
-	 RadioNetworkRegistrationMemoryFreeList = RadioNetworkRegistrationMemory[RadioNetworkRegistrationMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &RadioNetworkRegistrationMemory[RadioNetworkRegistrationMemoryFreeList];
+        RadioNetworkRegistrationMemoryFreeList = RadioNetworkRegistrationMemory[RadioNetworkRegistrationMemoryFreeList].header.NID_PACKET;
     }
     else if (RadioNetworkRegistrationMemoryTop < RadioNetworkRegistrationMemoryMax)
     {
-         // allocate from top
-	 ptr = &RadioNetworkRegistrationMemory[RadioNetworkRegistrationMemoryTop];
-	 RadioNetworkRegistrationMemoryTop += 1;
+        // allocate from top
+        ptr = &RadioNetworkRegistrationMemory[RadioNetworkRegistrationMemoryTop];
+        RadioNetworkRegistrationMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     RadioNetworkRegistration_Init(ptr);

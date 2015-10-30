@@ -2,11 +2,11 @@
 #include "TrackAheadFreeUpToLevel23TransitionLocation.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define TrackAheadFreeUpToLevel23TransitionLocationMemoryMax 32
+// number of cells in allocation memory
+#define TrackAheadFreeUpToLevel23TransitionLocationMemoryMax		32
 
 // end-of-freelist indicator
-#define TrackAheadFreeUpToLevel23TransitionLocationMemoryNil (-1)
+#define TrackAheadFreeUpToLevel23TransitionLocationMemoryNil		(-1)
 
 // allocation memory
 static TrackAheadFreeUpToLevel23TransitionLocation TrackAheadFreeUpToLevel23TransitionLocationMemory[TrackAheadFreeUpToLevel23TransitionLocationMemoryMax];
@@ -23,20 +23,20 @@ TrackAheadFreeUpToLevel23TransitionLocation* TrackAheadFreeUpToLevel23Transition
 
     if (TrackAheadFreeUpToLevel23TransitionLocationMemoryFreeList != TrackAheadFreeUpToLevel23TransitionLocationMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &TrackAheadFreeUpToLevel23TransitionLocationMemory[TrackAheadFreeUpToLevel23TransitionLocationMemoryFreeList];
-	 TrackAheadFreeUpToLevel23TransitionLocationMemoryFreeList = TrackAheadFreeUpToLevel23TransitionLocationMemory[TrackAheadFreeUpToLevel23TransitionLocationMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &TrackAheadFreeUpToLevel23TransitionLocationMemory[TrackAheadFreeUpToLevel23TransitionLocationMemoryFreeList];
+        TrackAheadFreeUpToLevel23TransitionLocationMemoryFreeList = TrackAheadFreeUpToLevel23TransitionLocationMemory[TrackAheadFreeUpToLevel23TransitionLocationMemoryFreeList].header.NID_PACKET;
     }
     else if (TrackAheadFreeUpToLevel23TransitionLocationMemoryTop < TrackAheadFreeUpToLevel23TransitionLocationMemoryMax)
     {
-         // allocate from top
-	 ptr = &TrackAheadFreeUpToLevel23TransitionLocationMemory[TrackAheadFreeUpToLevel23TransitionLocationMemoryTop];
-	 TrackAheadFreeUpToLevel23TransitionLocationMemoryTop += 1;
+        // allocate from top
+        ptr = &TrackAheadFreeUpToLevel23TransitionLocationMemory[TrackAheadFreeUpToLevel23TransitionLocationMemoryTop];
+        TrackAheadFreeUpToLevel23TransitionLocationMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     TrackAheadFreeUpToLevel23TransitionLocation_Init(ptr);

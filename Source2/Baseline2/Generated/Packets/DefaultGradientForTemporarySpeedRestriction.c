@@ -2,11 +2,11 @@
 #include "DefaultGradientForTemporarySpeedRestriction.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define DefaultGradientForTemporarySpeedRestrictionMemoryMax 32
+// number of cells in allocation memory
+#define DefaultGradientForTemporarySpeedRestrictionMemoryMax		32
 
 // end-of-freelist indicator
-#define DefaultGradientForTemporarySpeedRestrictionMemoryNil (-1)
+#define DefaultGradientForTemporarySpeedRestrictionMemoryNil		(-1)
 
 // allocation memory
 static DefaultGradientForTemporarySpeedRestriction DefaultGradientForTemporarySpeedRestrictionMemory[DefaultGradientForTemporarySpeedRestrictionMemoryMax];
@@ -23,20 +23,20 @@ DefaultGradientForTemporarySpeedRestriction* DefaultGradientForTemporarySpeedRes
 
     if (DefaultGradientForTemporarySpeedRestrictionMemoryFreeList != DefaultGradientForTemporarySpeedRestrictionMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &DefaultGradientForTemporarySpeedRestrictionMemory[DefaultGradientForTemporarySpeedRestrictionMemoryFreeList];
-	 DefaultGradientForTemporarySpeedRestrictionMemoryFreeList = DefaultGradientForTemporarySpeedRestrictionMemory[DefaultGradientForTemporarySpeedRestrictionMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &DefaultGradientForTemporarySpeedRestrictionMemory[DefaultGradientForTemporarySpeedRestrictionMemoryFreeList];
+        DefaultGradientForTemporarySpeedRestrictionMemoryFreeList = DefaultGradientForTemporarySpeedRestrictionMemory[DefaultGradientForTemporarySpeedRestrictionMemoryFreeList].header.NID_PACKET;
     }
     else if (DefaultGradientForTemporarySpeedRestrictionMemoryTop < DefaultGradientForTemporarySpeedRestrictionMemoryMax)
     {
-         // allocate from top
-	 ptr = &DefaultGradientForTemporarySpeedRestrictionMemory[DefaultGradientForTemporarySpeedRestrictionMemoryTop];
-	 DefaultGradientForTemporarySpeedRestrictionMemoryTop += 1;
+        // allocate from top
+        ptr = &DefaultGradientForTemporarySpeedRestrictionMemory[DefaultGradientForTemporarySpeedRestrictionMemoryTop];
+        DefaultGradientForTemporarySpeedRestrictionMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     DefaultGradientForTemporarySpeedRestriction_Init(ptr);

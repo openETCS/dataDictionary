@@ -2,11 +2,11 @@
 #include "RepositioningInformation.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define RepositioningInformationMemoryMax 32
+// number of cells in allocation memory
+#define RepositioningInformationMemoryMax		32
 
 // end-of-freelist indicator
-#define RepositioningInformationMemoryNil (-1)
+#define RepositioningInformationMemoryNil		(-1)
 
 // allocation memory
 static RepositioningInformation RepositioningInformationMemory[RepositioningInformationMemoryMax];
@@ -23,20 +23,20 @@ RepositioningInformation* RepositioningInformation_New(void)
 
     if (RepositioningInformationMemoryFreeList != RepositioningInformationMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &RepositioningInformationMemory[RepositioningInformationMemoryFreeList];
-	 RepositioningInformationMemoryFreeList = RepositioningInformationMemory[RepositioningInformationMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &RepositioningInformationMemory[RepositioningInformationMemoryFreeList];
+        RepositioningInformationMemoryFreeList = RepositioningInformationMemory[RepositioningInformationMemoryFreeList].header.NID_PACKET;
     }
     else if (RepositioningInformationMemoryTop < RepositioningInformationMemoryMax)
     {
-         // allocate from top
-	 ptr = &RepositioningInformationMemory[RepositioningInformationMemoryTop];
-	 RepositioningInformationMemoryTop += 1;
+        // allocate from top
+        ptr = &RepositioningInformationMemory[RepositioningInformationMemoryTop];
+        RepositioningInformationMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     RepositioningInformation_Init(ptr);

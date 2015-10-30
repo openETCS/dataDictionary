@@ -2,11 +2,11 @@
 #include "ConditionalLevelTransitionOrder.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define ConditionalLevelTransitionOrderMemoryMax 32
+// number of cells in allocation memory
+#define ConditionalLevelTransitionOrderMemoryMax		32
 
 // end-of-freelist indicator
-#define ConditionalLevelTransitionOrderMemoryNil (-1)
+#define ConditionalLevelTransitionOrderMemoryNil		(-1)
 
 // allocation memory
 static ConditionalLevelTransitionOrder ConditionalLevelTransitionOrderMemory[ConditionalLevelTransitionOrderMemoryMax];
@@ -23,20 +23,20 @@ ConditionalLevelTransitionOrder* ConditionalLevelTransitionOrder_New(void)
 
     if (ConditionalLevelTransitionOrderMemoryFreeList != ConditionalLevelTransitionOrderMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &ConditionalLevelTransitionOrderMemory[ConditionalLevelTransitionOrderMemoryFreeList];
-	 ConditionalLevelTransitionOrderMemoryFreeList = ConditionalLevelTransitionOrderMemory[ConditionalLevelTransitionOrderMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &ConditionalLevelTransitionOrderMemory[ConditionalLevelTransitionOrderMemoryFreeList];
+        ConditionalLevelTransitionOrderMemoryFreeList = ConditionalLevelTransitionOrderMemory[ConditionalLevelTransitionOrderMemoryFreeList].header.NID_PACKET;
     }
     else if (ConditionalLevelTransitionOrderMemoryTop < ConditionalLevelTransitionOrderMemoryMax)
     {
-         // allocate from top
-	 ptr = &ConditionalLevelTransitionOrderMemory[ConditionalLevelTransitionOrderMemoryTop];
-	 ConditionalLevelTransitionOrderMemoryTop += 1;
+        // allocate from top
+        ptr = &ConditionalLevelTransitionOrderMemory[ConditionalLevelTransitionOrderMemoryTop];
+        ConditionalLevelTransitionOrderMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     ConditionalLevelTransitionOrder_Init(ptr);

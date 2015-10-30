@@ -2,11 +2,11 @@
 #include "TemporarySpeedRestrictionRevocation.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define TemporarySpeedRestrictionRevocationMemoryMax 32
+// number of cells in allocation memory
+#define TemporarySpeedRestrictionRevocationMemoryMax		32
 
 // end-of-freelist indicator
-#define TemporarySpeedRestrictionRevocationMemoryNil (-1)
+#define TemporarySpeedRestrictionRevocationMemoryNil		(-1)
 
 // allocation memory
 static TemporarySpeedRestrictionRevocation TemporarySpeedRestrictionRevocationMemory[TemporarySpeedRestrictionRevocationMemoryMax];
@@ -23,20 +23,20 @@ TemporarySpeedRestrictionRevocation* TemporarySpeedRestrictionRevocation_New(voi
 
     if (TemporarySpeedRestrictionRevocationMemoryFreeList != TemporarySpeedRestrictionRevocationMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &TemporarySpeedRestrictionRevocationMemory[TemporarySpeedRestrictionRevocationMemoryFreeList];
-	 TemporarySpeedRestrictionRevocationMemoryFreeList = TemporarySpeedRestrictionRevocationMemory[TemporarySpeedRestrictionRevocationMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &TemporarySpeedRestrictionRevocationMemory[TemporarySpeedRestrictionRevocationMemoryFreeList];
+        TemporarySpeedRestrictionRevocationMemoryFreeList = TemporarySpeedRestrictionRevocationMemory[TemporarySpeedRestrictionRevocationMemoryFreeList].header.NID_PACKET;
     }
     else if (TemporarySpeedRestrictionRevocationMemoryTop < TemporarySpeedRestrictionRevocationMemoryMax)
     {
-         // allocate from top
-	 ptr = &TemporarySpeedRestrictionRevocationMemory[TemporarySpeedRestrictionRevocationMemoryTop];
-	 TemporarySpeedRestrictionRevocationMemoryTop += 1;
+        // allocate from top
+        ptr = &TemporarySpeedRestrictionRevocationMemory[TemporarySpeedRestrictionRevocationMemoryTop];
+        TemporarySpeedRestrictionRevocationMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     TemporarySpeedRestrictionRevocation_Init(ptr);

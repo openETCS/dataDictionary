@@ -2,11 +2,11 @@
 #include "ReversingSupervisionInformation.h"
 #include "Bit64.h"
 
-// number of xells in allocation memory
-#define ReversingSupervisionInformationMemoryMax 32
+// number of cells in allocation memory
+#define ReversingSupervisionInformationMemoryMax		32
 
 // end-of-freelist indicator
-#define ReversingSupervisionInformationMemoryNil (-1)
+#define ReversingSupervisionInformationMemoryNil		(-1)
 
 // allocation memory
 static ReversingSupervisionInformation ReversingSupervisionInformationMemory[ReversingSupervisionInformationMemoryMax];
@@ -23,20 +23,20 @@ ReversingSupervisionInformation* ReversingSupervisionInformation_New(void)
 
     if (ReversingSupervisionInformationMemoryFreeList != ReversingSupervisionInformationMemoryNil)
     {
-         // allocate from freelist
-	 ptr = &ReversingSupervisionInformationMemory[ReversingSupervisionInformationMemoryFreeList];
-	 ReversingSupervisionInformationMemoryFreeList = ReversingSupervisionInformationMemory[ReversingSupervisionInformationMemoryFreeList].header.NID_PACKET;
+        // allocate from freelist
+        ptr = &ReversingSupervisionInformationMemory[ReversingSupervisionInformationMemoryFreeList];
+        ReversingSupervisionInformationMemoryFreeList = ReversingSupervisionInformationMemory[ReversingSupervisionInformationMemoryFreeList].header.NID_PACKET;
     }
     else if (ReversingSupervisionInformationMemoryTop < ReversingSupervisionInformationMemoryMax)
     {
-         // allocate from top
-	 ptr = &ReversingSupervisionInformationMemory[ReversingSupervisionInformationMemoryTop];
-	 ReversingSupervisionInformationMemoryTop += 1;
+        // allocate from top
+        ptr = &ReversingSupervisionInformationMemory[ReversingSupervisionInformationMemoryTop];
+        ReversingSupervisionInformationMemoryTop += 1;
     }
     else
     {
-         // memory exhausted
-	 return 0;
+        // memory exhausted
+        return 0;
     }
 
     ReversingSupervisionInformation_Init(ptr);
