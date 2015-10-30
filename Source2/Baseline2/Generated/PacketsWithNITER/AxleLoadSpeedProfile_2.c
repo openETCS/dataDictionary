@@ -2,21 +2,6 @@
 #include "AxleLoadSpeedProfile_2.h"
 #include "Bit64.h"
 
-AxleLoadSpeedProfile_2* AxleLoadSpeedProfile_2_New(void)
-{
-    void* raw = malloc(sizeof(AxleLoadSpeedProfile_2));
-    AxleLoadSpeedProfile_2* ptr = (AxleLoadSpeedProfile_2*)raw;
-    AxleLoadSpeedProfile_2_Init(ptr);
-    return ptr;
-}
-
-
-void AxleLoadSpeedProfile_2_Delete(AxleLoadSpeedProfile_2* ptr)
-{
-    free(ptr);
-}
-
-
 int AxleLoadSpeedProfile_2_UpperBitsNotSet(const AxleLoadSpeedProfile_2* p)
 {
     int status = 1;

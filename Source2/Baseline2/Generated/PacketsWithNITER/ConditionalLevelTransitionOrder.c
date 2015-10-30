@@ -208,9 +208,9 @@ int ConditionalLevelTransitionOrder_EncodeInt(const ConditionalLevelTransitionOr
 
     stream[startAddress++] = p->Q_DIR;
     stream[startAddress++] = p->L_PACKET;
-    stream[startAddress++] = p->N_ITER_1 + 1;
     stream[startAddress++] = p->M_LEVELTR;
     stream[startAddress++] = p->NID_STM;
+    stream[startAddress++] = p->N_ITER_1;
 
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
@@ -235,9 +235,9 @@ int ConditionalLevelTransitionOrder_DecodeInt(ConditionalLevelTransitionOrder* p
 
     p->Q_DIR = stream[startAddress++];
     p->L_PACKET = stream[startAddress++];
-    p->N_ITER_1 = stream[startAddress++] - 1;
     p->M_LEVELTR = stream[startAddress++];
     p->NID_STM = stream[startAddress++];
+    p->N_ITER_1 = stream[startAddress++];
 
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {

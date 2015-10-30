@@ -21,12 +21,14 @@ typedef struct GeographicalPositionInformation_1 GeographicalPositionInformation
 
 #define GEOGRAPHICALPOSITIONINFORMATION_1_BITSIZE 51
 
-GeographicalPositionInformation_1*  GeographicalPositionInformation_1_New(void);
-
-void   GeographicalPositionInformation_1_Delete(GeographicalPositionInformation_1*);
-
 static inline void GeographicalPositionInformation_1_Init(GeographicalPositionInformation_1* p)
 {
+    p->Q_NEWCOUNTRY = 0;
+    p->NID_C = 0;
+    p->NID_BG = 0;
+    p->D_POSOFF = 0;
+    p->Q_MPOSITION = 0;
+    p->M_POSITION = 0;
 }
 
 /*@

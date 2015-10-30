@@ -16,12 +16,9 @@ typedef struct OnboardTelephoneNumbers_1 OnboardTelephoneNumbers_1;
 
 #define ONBOARDTELEPHONENUMBERS_1_BITSIZE 64
 
-OnboardTelephoneNumbers_1*  OnboardTelephoneNumbers_1_New(void);
-
-void   OnboardTelephoneNumbers_1_Delete(OnboardTelephoneNumbers_1*);
-
 static inline void OnboardTelephoneNumbers_1_Init(OnboardTelephoneNumbers_1* p)
 {
+    p->NID_RADIO = 0;
 }
 
 /*@

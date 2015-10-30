@@ -2,21 +2,6 @@
 #include "ModeProfile_1.h"
 #include "Bit64.h"
 
-ModeProfile_1* ModeProfile_1_New(void)
-{
-    void* raw = malloc(sizeof(ModeProfile_1));
-    ModeProfile_1* ptr = (ModeProfile_1*)raw;
-    ModeProfile_1_Init(ptr);
-    return ptr;
-}
-
-
-void ModeProfile_1_Delete(ModeProfile_1* ptr)
-{
-    free(ptr);
-}
-
-
 int ModeProfile_1_UpperBitsNotSet(const ModeProfile_1* p)
 {
     int status = 1;

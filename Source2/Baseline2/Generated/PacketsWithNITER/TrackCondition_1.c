@@ -2,21 +2,6 @@
 #include "TrackCondition_1.h"
 #include "Bit64.h"
 
-TrackCondition_1* TrackCondition_1_New(void)
-{
-    void* raw = malloc(sizeof(TrackCondition_1));
-    TrackCondition_1* ptr = (TrackCondition_1*)raw;
-    TrackCondition_1_Init(ptr);
-    return ptr;
-}
-
-
-void TrackCondition_1_Delete(TrackCondition_1* ptr)
-{
-    free(ptr);
-}
-
-
 int TrackCondition_1_UpperBitsNotSet(const TrackCondition_1* p)
 {
     int status = 1;

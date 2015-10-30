@@ -267,7 +267,6 @@ int Linking_EncodeInt(const Linking* p, PacketInfo* data, kcg_int* stream)
     stream[startAddress++] = p->Q_DIR;
     stream[startAddress++] = p->L_PACKET;
     stream[startAddress++] = p->Q_SCALE;
-    stream[startAddress++] = p->N_ITER_1 + 1;
     stream[startAddress++] = p->D_LINK;
     stream[startAddress++] = p->Q_NEWCOUNTRY;
     stream[startAddress++] = p->NID_C;
@@ -275,6 +274,7 @@ int Linking_EncodeInt(const Linking* p, PacketInfo* data, kcg_int* stream)
     stream[startAddress++] = p->Q_LINKORIENTATION;
     stream[startAddress++] = p->Q_LINKREACTION;
     stream[startAddress++] = p->Q_LOCACC;
+    stream[startAddress++] = p->N_ITER_1;
 
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
@@ -300,7 +300,6 @@ int Linking_DecodeInt(Linking* p, const PacketInfo* data, const kcg_int* stream)
     p->Q_DIR = stream[startAddress++];
     p->L_PACKET = stream[startAddress++];
     p->Q_SCALE = stream[startAddress++];
-    p->N_ITER_1 = stream[startAddress++] - 1;
     p->D_LINK = stream[startAddress++];
     p->Q_NEWCOUNTRY = stream[startAddress++];
     p->NID_C = stream[startAddress++];
@@ -308,6 +307,7 @@ int Linking_DecodeInt(Linking* p, const PacketInfo* data, const kcg_int* stream)
     p->Q_LINKORIENTATION = stream[startAddress++];
     p->Q_LINKREACTION = stream[startAddress++];
     p->Q_LOCACC = stream[startAddress++];
+    p->N_ITER_1 = stream[startAddress++];
 
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {

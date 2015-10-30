@@ -21,12 +21,18 @@ typedef struct AxleLoadSpeedProfile_2 AxleLoadSpeedProfile_2;
 
 #define AXLELOADSPEEDPROFILE_2_BITSIZE 36
 
-AxleLoadSpeedProfile_2*  AxleLoadSpeedProfile_2_New(void);
-
-void   AxleLoadSpeedProfile_2_Delete(AxleLoadSpeedProfile_2*);
-
 static inline void AxleLoadSpeedProfile_2_Init(AxleLoadSpeedProfile_2* p)
 {
+    p->D_AXLELOAD = 0;
+    p->L_AXLELOAD = 0;
+    p->Q_FRONT = 0;
+    p->N_ITER_2_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        AxleLoadSpeedProfile_2_1_Init(&(p->sub_2_1[i]));
+    }
+
 }
 
 /*@

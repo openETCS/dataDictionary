@@ -48,6 +48,13 @@ static inline void TrackCondition_Init(TrackCondition* p)
     p->D_TRACKCOND = 0;
     p->L_TRACKCOND = 0;
     p->M_TRACKCOND = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        TrackCondition_1_Init(&(p->sub_1[i]));
+    }
+
 }
 
 /*@

@@ -2,21 +2,6 @@
 #include "ListOfBalisesForSHArea_1.h"
 #include "Bit64.h"
 
-ListOfBalisesForSHArea_1* ListOfBalisesForSHArea_1_New(void)
-{
-    void* raw = malloc(sizeof(ListOfBalisesForSHArea_1));
-    ListOfBalisesForSHArea_1* ptr = (ListOfBalisesForSHArea_1*)raw;
-    ListOfBalisesForSHArea_1_Init(ptr);
-    return ptr;
-}
-
-
-void ListOfBalisesForSHArea_1_Delete(ListOfBalisesForSHArea_1* ptr)
-{
-    free(ptr);
-}
-
-
 int ListOfBalisesForSHArea_1_UpperBitsNotSet(const ListOfBalisesForSHArea_1* p)
 {
     int status = 1;

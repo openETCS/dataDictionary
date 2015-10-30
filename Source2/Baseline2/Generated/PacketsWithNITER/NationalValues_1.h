@@ -16,12 +16,9 @@ typedef struct NationalValues_1 NationalValues_1;
 
 #define NATIONALVALUES_1_BITSIZE 10
 
-NationalValues_1*  NationalValues_1_New(void);
-
-void   NationalValues_1_Delete(NationalValues_1*);
-
 static inline void NationalValues_1_Init(NationalValues_1* p)
 {
+    p->NID_C = 0;
 }
 
 /*@

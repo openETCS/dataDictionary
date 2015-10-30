@@ -17,12 +17,10 @@ typedef struct AxleLoadSpeedProfile_2_1 AxleLoadSpeedProfile_2_1;
 
 #define AXLELOADSPEEDPROFILE_2_1_BITSIZE 14
 
-AxleLoadSpeedProfile_2_1*  AxleLoadSpeedProfile_2_1_New(void);
-
-void   AxleLoadSpeedProfile_2_1_Delete(AxleLoadSpeedProfile_2_1*);
-
 static inline void AxleLoadSpeedProfile_2_1_Init(AxleLoadSpeedProfile_2_1* p)
 {
+    p->M_AXLELOAD = 0;
+    p->V_AXLELOAD = 0;
 }
 
 /*@

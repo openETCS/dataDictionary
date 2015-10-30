@@ -16,12 +16,9 @@ typedef struct ValidatedTrainData_2 ValidatedTrainData_2;
 
 #define VALIDATEDTRAINDATA_2_BITSIZE 8
 
-ValidatedTrainData_2*  ValidatedTrainData_2_New(void);
-
-void   ValidatedTrainData_2_Delete(ValidatedTrainData_2*);
-
 static inline void ValidatedTrainData_2_Init(ValidatedTrainData_2* p)
 {
+    p->NID_STM = 0;
 }
 
 /*@

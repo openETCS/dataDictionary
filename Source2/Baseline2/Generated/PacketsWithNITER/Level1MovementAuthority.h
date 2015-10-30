@@ -58,6 +58,13 @@ static inline void Level1MovementAuthority_Init(Level1MovementAuthority* p)
     p->V_MAIN = 0;
     p->V_LOA = 0;
     p->T_LOA = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        Level1MovementAuthority_1_Init(&(p->sub_1[i]));
+    }
+
     p->L_ENDSECTION = 0;
     p->Q_SECTIONTIMER = 0;
     p->T_SECTIONTIMER = 0;

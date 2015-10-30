@@ -2,21 +2,6 @@
 #include "TrackConditionBigMetalMasses_1.h"
 #include "Bit64.h"
 
-TrackConditionBigMetalMasses_1* TrackConditionBigMetalMasses_1_New(void)
-{
-    void* raw = malloc(sizeof(TrackConditionBigMetalMasses_1));
-    TrackConditionBigMetalMasses_1* ptr = (TrackConditionBigMetalMasses_1*)raw;
-    TrackConditionBigMetalMasses_1_Init(ptr);
-    return ptr;
-}
-
-
-void TrackConditionBigMetalMasses_1_Delete(TrackConditionBigMetalMasses_1* ptr)
-{
-    free(ptr);
-}
-
-
 int TrackConditionBigMetalMasses_1_UpperBitsNotSet(const TrackConditionBigMetalMasses_1* p)
 {
     int status = 1;

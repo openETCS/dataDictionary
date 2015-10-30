@@ -40,6 +40,13 @@ static inline void ConditionalLevelTransitionOrder_Init(ConditionalLevelTransiti
     p->L_PACKET = 0;
     p->M_LEVELTR = 0;
     p->NID_STM = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        ConditionalLevelTransitionOrder_1_Init(&(p->sub_1[i]));
+    }
+
 }
 
 /*@

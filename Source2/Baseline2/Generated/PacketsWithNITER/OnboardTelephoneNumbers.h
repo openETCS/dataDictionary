@@ -33,6 +33,13 @@ static inline void OnboardTelephoneNumbers_Init(OnboardTelephoneNumbers* p)
     p->header.NID_PACKET = 3;
     p->header.list = TRAINTOTRACK;
     p->L_PACKET = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        OnboardTelephoneNumbers_1_Init(&(p->sub_1[i]));
+    }
+
 }
 
 /*@

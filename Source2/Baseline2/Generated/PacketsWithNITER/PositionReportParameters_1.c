@@ -2,21 +2,6 @@
 #include "PositionReportParameters_1.h"
 #include "Bit64.h"
 
-PositionReportParameters_1* PositionReportParameters_1_New(void)
-{
-    void* raw = malloc(sizeof(PositionReportParameters_1));
-    PositionReportParameters_1* ptr = (PositionReportParameters_1*)raw;
-    PositionReportParameters_1_Init(ptr);
-    return ptr;
-}
-
-
-void PositionReportParameters_1_Delete(PositionReportParameters_1* ptr)
-{
-    free(ptr);
-}
-
-
 int PositionReportParameters_1_UpperBitsNotSet(const PositionReportParameters_1* p)
 {
     int status = 1;

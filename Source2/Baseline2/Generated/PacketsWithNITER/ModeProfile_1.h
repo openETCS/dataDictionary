@@ -20,12 +20,13 @@ typedef struct ModeProfile_1 ModeProfile_1;
 
 #define MODEPROFILE_1_BITSIZE 54
 
-ModeProfile_1*  ModeProfile_1_New(void);
-
-void   ModeProfile_1_Delete(ModeProfile_1*);
-
 static inline void ModeProfile_1_Init(ModeProfile_1* p)
 {
+    p->D_MAMODE = 0;
+    p->M_MAMODE = 0;
+    p->V_MAMODE = 0;
+    p->L_MAMODE = 0;
+    p->L_ACKMAMODE = 0;
 }
 
 /*@

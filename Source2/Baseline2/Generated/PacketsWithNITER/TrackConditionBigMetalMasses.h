@@ -42,6 +42,13 @@ static inline void TrackConditionBigMetalMasses_Init(TrackConditionBigMetalMasse
     p->Q_SCALE = 0;
     p->D_TRACKCOND = 0;
     p->L_TRACKCOND = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        TrackConditionBigMetalMasses_1_Init(&(p->sub_1[i]));
+    }
+
 }
 
 /*@

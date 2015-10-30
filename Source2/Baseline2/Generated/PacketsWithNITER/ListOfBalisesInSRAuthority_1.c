@@ -2,21 +2,6 @@
 #include "ListOfBalisesInSRAuthority_1.h"
 #include "Bit64.h"
 
-ListOfBalisesInSRAuthority_1* ListOfBalisesInSRAuthority_1_New(void)
-{
-    void* raw = malloc(sizeof(ListOfBalisesInSRAuthority_1));
-    ListOfBalisesInSRAuthority_1* ptr = (ListOfBalisesInSRAuthority_1*)raw;
-    ListOfBalisesInSRAuthority_1_Init(ptr);
-    return ptr;
-}
-
-
-void ListOfBalisesInSRAuthority_1_Delete(ListOfBalisesInSRAuthority_1* ptr)
-{
-    free(ptr);
-}
-
-
 int ListOfBalisesInSRAuthority_1_UpperBitsNotSet(const ListOfBalisesInSRAuthority_1* p)
 {
     int status = 1;

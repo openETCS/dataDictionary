@@ -2,21 +2,6 @@
 #include "ConditionalLevelTransitionOrder_1.h"
 #include "Bit64.h"
 
-ConditionalLevelTransitionOrder_1* ConditionalLevelTransitionOrder_1_New(void)
-{
-    void* raw = malloc(sizeof(ConditionalLevelTransitionOrder_1));
-    ConditionalLevelTransitionOrder_1* ptr = (ConditionalLevelTransitionOrder_1*)raw;
-    ConditionalLevelTransitionOrder_1_Init(ptr);
-    return ptr;
-}
-
-
-void ConditionalLevelTransitionOrder_1_Delete(ConditionalLevelTransitionOrder_1* ptr)
-{
-    free(ptr);
-}
-
-
 int ConditionalLevelTransitionOrder_1_UpperBitsNotSet(const ConditionalLevelTransitionOrder_1* p)
 {
     int status = 1;

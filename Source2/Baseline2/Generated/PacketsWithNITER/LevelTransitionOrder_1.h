@@ -18,12 +18,11 @@ typedef struct LevelTransitionOrder_1 LevelTransitionOrder_1;
 
 #define LEVELTRANSITIONORDER_1_BITSIZE 18
 
-LevelTransitionOrder_1*  LevelTransitionOrder_1_New(void);
-
-void   LevelTransitionOrder_1_Delete(LevelTransitionOrder_1*);
-
 static inline void LevelTransitionOrder_1_Init(LevelTransitionOrder_1* p)
 {
+    p->M_LEVELTR = 0;
+    p->NID_STM = 0;
+    p->L_ACKLEVELTR = 0;
 }
 
 /*@

@@ -51,6 +51,20 @@ static inline void ValidatedTrainData_Init(ValidatedTrainData* p)
     p->M_LOADINGGAUGE = 0;
     p->M_AXLELOAD = 0;
     p->M_AIRTIGHT = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        ValidatedTrainData_1_Init(&(p->sub_1[i]));
+    }
+
+    p->N_ITER_2 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        ValidatedTrainData_2_Init(&(p->sub_2[i]));
+    }
+
 }
 
 /*@

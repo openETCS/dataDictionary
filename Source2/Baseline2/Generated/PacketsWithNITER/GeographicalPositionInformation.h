@@ -50,6 +50,13 @@ static inline void GeographicalPositionInformation_Init(GeographicalPositionInfo
     p->D_POSOFF = 0;
     p->Q_MPOSITION = 0;
     p->M_POSITION = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        GeographicalPositionInformation_1_Init(&(p->sub_1[i]));
+    }
+
 }
 
 /*@

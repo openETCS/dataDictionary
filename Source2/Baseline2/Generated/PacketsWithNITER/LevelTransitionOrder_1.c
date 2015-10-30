@@ -2,21 +2,6 @@
 #include "LevelTransitionOrder_1.h"
 #include "Bit64.h"
 
-LevelTransitionOrder_1* LevelTransitionOrder_1_New(void)
-{
-    void* raw = malloc(sizeof(LevelTransitionOrder_1));
-    LevelTransitionOrder_1* ptr = (LevelTransitionOrder_1*)raw;
-    LevelTransitionOrder_1_Init(ptr);
-    return ptr;
-}
-
-
-void LevelTransitionOrder_1_Delete(LevelTransitionOrder_1* ptr)
-{
-    free(ptr);
-}
-
-
 int LevelTransitionOrder_1_UpperBitsNotSet(const LevelTransitionOrder_1* p)
 {
     int status = 1;

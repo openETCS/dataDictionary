@@ -2,21 +2,6 @@
 #include "RouteSuitabilityData_1.h"
 #include "Bit64.h"
 
-RouteSuitabilityData_1* RouteSuitabilityData_1_New(void)
-{
-    void* raw = malloc(sizeof(RouteSuitabilityData_1));
-    RouteSuitabilityData_1* ptr = (RouteSuitabilityData_1*)raw;
-    RouteSuitabilityData_1_Init(ptr);
-    return ptr;
-}
-
-
-void RouteSuitabilityData_1_Delete(RouteSuitabilityData_1* ptr)
-{
-    free(ptr);
-}
-
-
 int RouteSuitabilityData_1_UpperBitsNotSet(const RouteSuitabilityData_1* p)
 {
     int status = 1;

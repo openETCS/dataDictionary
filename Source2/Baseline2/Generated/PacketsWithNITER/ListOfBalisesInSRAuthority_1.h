@@ -18,12 +18,11 @@ typedef struct ListOfBalisesInSRAuthority_1 ListOfBalisesInSRAuthority_1;
 
 #define LISTOFBALISESINSRAUTHORITY_1_BITSIZE 15
 
-ListOfBalisesInSRAuthority_1*  ListOfBalisesInSRAuthority_1_New(void);
-
-void   ListOfBalisesInSRAuthority_1_Delete(ListOfBalisesInSRAuthority_1*);
-
 static inline void ListOfBalisesInSRAuthority_1_Init(ListOfBalisesInSRAuthority_1* p)
 {
+    p->Q_NEWCOUNTRY = 0;
+    p->NID_C = 0;
+    p->NID_BG = 0;
 }
 
 /*@

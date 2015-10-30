@@ -47,6 +47,13 @@ static inline void LevelTransitionOrder_Init(LevelTransitionOrder* p)
     p->M_LEVELTR = 0;
     p->NID_STM = 0;
     p->L_ACKLEVELTR = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        LevelTransitionOrder_1_Init(&(p->sub_1[i]));
+    }
+
 }
 
 /*@

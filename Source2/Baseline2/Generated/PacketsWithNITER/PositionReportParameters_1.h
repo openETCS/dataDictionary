@@ -17,12 +17,10 @@ typedef struct PositionReportParameters_1 PositionReportParameters_1;
 
 #define POSITIONREPORTPARAMETERS_1_BITSIZE 16
 
-PositionReportParameters_1*  PositionReportParameters_1_New(void);
-
-void   PositionReportParameters_1_Delete(PositionReportParameters_1*);
-
 static inline void PositionReportParameters_1_Init(PositionReportParameters_1* p)
 {
+    p->D_LOC = 0;
+    p->Q_LGTLOC = 0;
 }
 
 /*@

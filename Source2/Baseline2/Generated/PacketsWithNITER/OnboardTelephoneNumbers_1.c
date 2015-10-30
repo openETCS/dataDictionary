@@ -2,21 +2,6 @@
 #include "OnboardTelephoneNumbers_1.h"
 #include "Bit64.h"
 
-OnboardTelephoneNumbers_1* OnboardTelephoneNumbers_1_New(void)
-{
-    void* raw = malloc(sizeof(OnboardTelephoneNumbers_1));
-    OnboardTelephoneNumbers_1* ptr = (OnboardTelephoneNumbers_1*)raw;
-    OnboardTelephoneNumbers_1_Init(ptr);
-    return ptr;
-}
-
-
-void OnboardTelephoneNumbers_1_Delete(OnboardTelephoneNumbers_1* ptr)
-{
-    free(ptr);
-}
-
-
 int OnboardTelephoneNumbers_1_UpperBitsNotSet(const OnboardTelephoneNumbers_1* p)
 {
     int status = 1;

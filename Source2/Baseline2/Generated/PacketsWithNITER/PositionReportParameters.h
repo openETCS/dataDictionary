@@ -44,6 +44,13 @@ static inline void PositionReportParameters_Init(PositionReportParameters* p)
     p->T_CYCLOC = 0;
     p->D_CYCLOC = 0;
     p->M_LOC = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        PositionReportParameters_1_Init(&(p->sub_1[i]));
+    }
+
 }
 
 /*@

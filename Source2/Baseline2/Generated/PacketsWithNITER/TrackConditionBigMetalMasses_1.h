@@ -17,12 +17,10 @@ typedef struct TrackConditionBigMetalMasses_1 TrackConditionBigMetalMasses_1;
 
 #define TRACKCONDITIONBIGMETALMASSES_1_BITSIZE 30
 
-TrackConditionBigMetalMasses_1*  TrackConditionBigMetalMasses_1_New(void);
-
-void   TrackConditionBigMetalMasses_1_Delete(TrackConditionBigMetalMasses_1*);
-
 static inline void TrackConditionBigMetalMasses_1_Init(TrackConditionBigMetalMasses_1* p)
 {
+    p->D_TRACKCOND = 0;
+    p->L_TRACKCOND = 0;
 }
 
 /*@

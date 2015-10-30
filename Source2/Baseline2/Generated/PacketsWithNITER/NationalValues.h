@@ -57,6 +57,13 @@ static inline void NationalValues_Init(NationalValues* p)
     p->L_PACKET = 0;
     p->Q_SCALE = 0;
     p->D_VALIDNV = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        NationalValues_1_Init(&(p->sub_1[i]));
+    }
+
     p->V_NVSHUNT = 0;
     p->V_NVSTFF = 0;
     p->V_NVONSIGHT = 0;

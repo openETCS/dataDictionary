@@ -51,6 +51,13 @@ static inline void RouteSuitabilityData_Init(RouteSuitabilityData* p)
     p->M_LOADINGGAUGE = 0;
     p->M_AXLELOAD = 0;
     p->M_TRACTION = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        RouteSuitabilityData_1_Init(&(p->sub_1[i]));
+    }
+
 }
 
 /*@

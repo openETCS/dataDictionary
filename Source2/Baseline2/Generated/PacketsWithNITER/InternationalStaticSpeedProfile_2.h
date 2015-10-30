@@ -21,12 +21,18 @@ typedef struct InternationalStaticSpeedProfile_2 InternationalStaticSpeedProfile
 
 #define INTERNATIONALSTATICSPEEDPROFILE_2_BITSIZE 28
 
-InternationalStaticSpeedProfile_2*  InternationalStaticSpeedProfile_2_New(void);
-
-void   InternationalStaticSpeedProfile_2_Delete(InternationalStaticSpeedProfile_2*);
-
 static inline void InternationalStaticSpeedProfile_2_Init(InternationalStaticSpeedProfile_2* p)
 {
+    p->D_STATIC = 0;
+    p->V_STATIC = 0;
+    p->Q_FRONT = 0;
+    p->N_ITER_2_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        InternationalStaticSpeedProfile_2_1_Init(&(p->sub_2_1[i]));
+    }
+
 }
 
 /*@

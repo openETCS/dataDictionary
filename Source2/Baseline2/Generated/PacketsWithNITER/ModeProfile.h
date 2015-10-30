@@ -47,6 +47,13 @@ static inline void ModeProfile_Init(ModeProfile* p)
     p->V_MAMODE = 0;
     p->L_MAMODE = 0;
     p->L_ACKMAMODE = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        ModeProfile_1_Init(&(p->sub_1[i]));
+    }
+
 }
 
 /*@

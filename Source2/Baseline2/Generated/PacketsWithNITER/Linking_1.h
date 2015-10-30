@@ -22,12 +22,15 @@ typedef struct Linking_1 Linking_1;
 
 #define LINKING_1_BITSIZE 39
 
-Linking_1*  Linking_1_New(void);
-
-void   Linking_1_Delete(Linking_1*);
-
 static inline void Linking_1_Init(Linking_1* p)
 {
+    p->D_LINK = 0;
+    p->Q_NEWCOUNTRY = 0;
+    p->NID_C = 0;
+    p->NID_BG = 0;
+    p->Q_LINKORIENTATION = 0;
+    p->Q_LINKREACTION = 0;
+    p->Q_LOCACC = 0;
 }
 
 /*@

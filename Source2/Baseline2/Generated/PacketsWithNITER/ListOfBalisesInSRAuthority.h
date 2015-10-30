@@ -36,6 +36,13 @@ static inline void ListOfBalisesInSRAuthority_Init(ListOfBalisesInSRAuthority* p
     p->header.list = TRACKTOTRAIN;
     p->Q_DIR = 0;
     p->L_PACKET = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        ListOfBalisesInSRAuthority_1_Init(&(p->sub_1[i]));
+    }
+
 }
 
 /*@

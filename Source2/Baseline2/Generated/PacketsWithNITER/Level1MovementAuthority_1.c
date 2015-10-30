@@ -2,21 +2,6 @@
 #include "Level1MovementAuthority_1.h"
 #include "Bit64.h"
 
-Level1MovementAuthority_1* Level1MovementAuthority_1_New(void)
-{
-    void* raw = malloc(sizeof(Level1MovementAuthority_1));
-    Level1MovementAuthority_1* ptr = (Level1MovementAuthority_1*)raw;
-    Level1MovementAuthority_1_Init(ptr);
-    return ptr;
-}
-
-
-void Level1MovementAuthority_1_Delete(Level1MovementAuthority_1* ptr)
-{
-    free(ptr);
-}
-
-
 int Level1MovementAuthority_1_UpperBitsNotSet(const Level1MovementAuthority_1* p)
 {
     int status = 1;

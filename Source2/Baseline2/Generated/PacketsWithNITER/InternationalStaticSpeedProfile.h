@@ -47,6 +47,20 @@ static inline void InternationalStaticSpeedProfile_Init(InternationalStaticSpeed
     p->D_STATIC = 0;
     p->V_STATIC = 0;
     p->Q_FRONT = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        InternationalStaticSpeedProfile_1_Init(&(p->sub_1[i]));
+    }
+
+    p->N_ITER_2 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        InternationalStaticSpeedProfile_2_Init(&(p->sub_2[i]));
+    }
+
 }
 
 /*@

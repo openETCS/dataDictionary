@@ -2,21 +2,6 @@
 #include "ValidatedTrainData_2.h"
 #include "Bit64.h"
 
-ValidatedTrainData_2* ValidatedTrainData_2_New(void)
-{
-    void* raw = malloc(sizeof(ValidatedTrainData_2));
-    ValidatedTrainData_2* ptr = (ValidatedTrainData_2*)raw;
-    ValidatedTrainData_2_Init(ptr);
-    return ptr;
-}
-
-
-void ValidatedTrainData_2_Delete(ValidatedTrainData_2* ptr)
-{
-    free(ptr);
-}
-
-
 int ValidatedTrainData_2_UpperBitsNotSet(const ValidatedTrainData_2* p)
 {
     int status = 1;

@@ -2,21 +2,6 @@
 #include "Linking_1.h"
 #include "Bit64.h"
 
-Linking_1* Linking_1_New(void)
-{
-    void* raw = malloc(sizeof(Linking_1));
-    Linking_1* ptr = (Linking_1*)raw;
-    Linking_1_Init(ptr);
-    return ptr;
-}
-
-
-void Linking_1_Delete(Linking_1* ptr)
-{
-    free(ptr);
-}
-
-
 int Linking_1_UpperBitsNotSet(const Linking_1* p)
 {
     int status = 1;

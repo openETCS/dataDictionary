@@ -19,12 +19,12 @@ typedef struct Level1MovementAuthority_1 Level1MovementAuthority_1;
 
 #define LEVEL1MOVEMENTAUTHORITY_1_BITSIZE 41
 
-Level1MovementAuthority_1*  Level1MovementAuthority_1_New(void);
-
-void   Level1MovementAuthority_1_Delete(Level1MovementAuthority_1*);
-
 static inline void Level1MovementAuthority_1_Init(Level1MovementAuthority_1* p)
 {
+    p->L_SECTION = 0;
+    p->Q_SECTIONTIMER = 0;
+    p->T_SECTIONTIMER = 0;
+    p->D_SECTIONTIMERSTOPLOC = 0;
 }
 
 /*@

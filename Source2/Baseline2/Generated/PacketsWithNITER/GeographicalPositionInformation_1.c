@@ -2,21 +2,6 @@
 #include "GeographicalPositionInformation_1.h"
 #include "Bit64.h"
 
-GeographicalPositionInformation_1* GeographicalPositionInformation_1_New(void)
-{
-    void* raw = malloc(sizeof(GeographicalPositionInformation_1));
-    GeographicalPositionInformation_1* ptr = (GeographicalPositionInformation_1*)raw;
-    GeographicalPositionInformation_1_Init(ptr);
-    return ptr;
-}
-
-
-void GeographicalPositionInformation_1_Delete(GeographicalPositionInformation_1* ptr)
-{
-    free(ptr);
-}
-
-
 int GeographicalPositionInformation_1_UpperBitsNotSet(const GeographicalPositionInformation_1* p)
 {
     int status = 1;

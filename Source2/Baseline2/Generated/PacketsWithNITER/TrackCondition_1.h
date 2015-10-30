@@ -18,12 +18,11 @@ typedef struct TrackCondition_1 TrackCondition_1;
 
 #define TRACKCONDITION_1_BITSIZE 34
 
-TrackCondition_1*  TrackCondition_1_New(void);
-
-void   TrackCondition_1_Delete(TrackCondition_1*);
-
 static inline void TrackCondition_1_Init(TrackCondition_1* p)
 {
+    p->D_TRACKCOND = 0;
+    p->L_TRACKCOND = 0;
+    p->M_TRACKCOND = 0;
 }
 
 /*@

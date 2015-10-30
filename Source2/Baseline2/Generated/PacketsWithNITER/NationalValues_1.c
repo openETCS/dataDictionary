@@ -2,21 +2,6 @@
 #include "NationalValues_1.h"
 #include "Bit64.h"
 
-NationalValues_1* NationalValues_1_New(void)
-{
-    void* raw = malloc(sizeof(NationalValues_1));
-    NationalValues_1* ptr = (NationalValues_1*)raw;
-    NationalValues_1_Init(ptr);
-    return ptr;
-}
-
-
-void NationalValues_1_Delete(NationalValues_1* ptr)
-{
-    free(ptr);
-}
-
-
 int NationalValues_1_UpperBitsNotSet(const NationalValues_1* p)
 {
     int status = 1;

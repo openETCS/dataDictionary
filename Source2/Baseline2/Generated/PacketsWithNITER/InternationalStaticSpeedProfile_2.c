@@ -2,21 +2,6 @@
 #include "InternationalStaticSpeedProfile_2.h"
 #include "Bit64.h"
 
-InternationalStaticSpeedProfile_2* InternationalStaticSpeedProfile_2_New(void)
-{
-    void* raw = malloc(sizeof(InternationalStaticSpeedProfile_2));
-    InternationalStaticSpeedProfile_2* ptr = (InternationalStaticSpeedProfile_2*)raw;
-    InternationalStaticSpeedProfile_2_Init(ptr);
-    return ptr;
-}
-
-
-void InternationalStaticSpeedProfile_2_Delete(InternationalStaticSpeedProfile_2* ptr)
-{
-    free(ptr);
-}
-
-
 int InternationalStaticSpeedProfile_2_UpperBitsNotSet(const InternationalStaticSpeedProfile_2* p)
 {
     int status = 1;

@@ -2,21 +2,6 @@
 #include "GradientProfile_1.h"
 #include "Bit64.h"
 
-GradientProfile_1* GradientProfile_1_New(void)
-{
-    void* raw = malloc(sizeof(GradientProfile_1));
-    GradientProfile_1* ptr = (GradientProfile_1*)raw;
-    GradientProfile_1_Init(ptr);
-    return ptr;
-}
-
-
-void GradientProfile_1_Delete(GradientProfile_1* ptr)
-{
-    free(ptr);
-}
-
-
 int GradientProfile_1_UpperBitsNotSet(const GradientProfile_1* p)
 {
     int status = 1;

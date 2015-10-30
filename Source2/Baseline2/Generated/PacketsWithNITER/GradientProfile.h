@@ -45,6 +45,13 @@ static inline void GradientProfile_Init(GradientProfile* p)
     p->D_GRADIENT = 0;
     p->Q_GDIR = 0;
     p->G_A = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        GradientProfile_1_Init(&(p->sub_1[i]));
+    }
+
 }
 
 /*@

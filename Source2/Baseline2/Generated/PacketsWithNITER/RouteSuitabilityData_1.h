@@ -20,12 +20,13 @@ typedef struct RouteSuitabilityData_1 RouteSuitabilityData_1;
 
 #define ROUTESUITABILITYDATA_1_BITSIZE 17
 
-RouteSuitabilityData_1*  RouteSuitabilityData_1_New(void);
-
-void   RouteSuitabilityData_1_Delete(RouteSuitabilityData_1*);
-
 static inline void RouteSuitabilityData_1_Init(RouteSuitabilityData_1* p)
 {
+    p->D_SUITABILITY = 0;
+    p->Q_SUITABILITY = 0;
+    p->M_LOADINGGAUGE = 0;
+    p->M_AXLELOAD = 0;
+    p->M_TRACTION = 0;
 }
 
 /*@

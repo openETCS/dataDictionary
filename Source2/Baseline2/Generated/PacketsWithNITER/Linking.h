@@ -51,6 +51,13 @@ static inline void Linking_Init(Linking* p)
     p->Q_LINKORIENTATION = 0;
     p->Q_LINKREACTION = 0;
     p->Q_LOCACC = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        Linking_1_Init(&(p->sub_1[i]));
+    }
+
 }
 
 /*@

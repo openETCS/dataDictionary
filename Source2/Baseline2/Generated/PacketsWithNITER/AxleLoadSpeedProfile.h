@@ -50,6 +50,20 @@ static inline void AxleLoadSpeedProfile_Init(AxleLoadSpeedProfile* p)
     p->D_AXLELOAD = 0;
     p->L_AXLELOAD = 0;
     p->Q_FRONT = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        AxleLoadSpeedProfile_1_Init(&(p->sub_1[i]));
+    }
+
+    p->N_ITER_2 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        AxleLoadSpeedProfile_2_Init(&(p->sub_2[i]));
+    }
+
 }
 
 /*@
