@@ -8,12 +8,14 @@ CC=cc
 
 CPPFLAGS+=-I$(TOPDIR)/Foundation/Bits
 CPPFLAGS+=-I$(TOPDIR)/Foundation/Packets
-CPPFLAGS+=-I$(TOPDIR)/Generated/Packets
+CPPFLAGS+=-I$(TOPDIR)/Generated/PacketsWithoutNITER
+CPPFLAGS+=-I$(TOPDIR)/Generated/PacketsWithNITER
 CFLAGS += -std=c99 -Wall -pedantic 
 #CFLAGS += -Werror 
 #CFLAGS += -Weverything -Wno-padded 
 LDFLAGS += -L$(TOPDIR)/Foundation/Bits -lbits
-LDFLAGS += -L$(TOPDIR)/Generated/Packets -lgenerated_packets
+LDFLAGS += -L$(TOPDIR)/Generated/PacketsWithoutNITER -lgenerated_packetswithoutniter
+LDFLAGS += -L$(TOPDIR)/Generated/PacketsWithNITER -lgenerated_packetswithniter
 
 all: clean test_packets test_issue31_1 test_issue31_2
 	./test_packets
