@@ -226,9 +226,9 @@ int TrackConditionBigMetalMasses_EncodeInt(const TrackConditionBigMetalMasses* p
     stream[startAddress++] = p->Q_DIR;
     stream[startAddress++] = p->L_PACKET;
     stream[startAddress++] = p->Q_SCALE;
+    stream[startAddress++] = p->N_ITER_1 + 1;
     stream[startAddress++] = p->D_TRACKCOND;
     stream[startAddress++] = p->L_TRACKCOND;
-    stream[startAddress++] = p->N_ITER_1;
 
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
@@ -254,9 +254,9 @@ int TrackConditionBigMetalMasses_DecodeInt(TrackConditionBigMetalMasses* p, cons
     p->Q_DIR = stream[startAddress++];
     p->L_PACKET = stream[startAddress++];
     p->Q_SCALE = stream[startAddress++];
+    p->N_ITER_1 = stream[startAddress++] - 1;
     p->D_TRACKCOND = stream[startAddress++];
     p->L_TRACKCOND = stream[startAddress++];
-    p->N_ITER_1 = stream[startAddress++];
 
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
