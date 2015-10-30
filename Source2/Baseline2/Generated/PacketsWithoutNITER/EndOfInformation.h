@@ -154,7 +154,7 @@ static inline int EndOfInformation_Equal(const EndOfInformation* a, const EndOfI
 
 static inline uint32_t EndOfInformation_Length(const EndOfInformation* p)
 {
-    (void) p;
+    (void) *p;
     return 8;
 }
 
