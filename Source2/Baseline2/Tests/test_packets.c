@@ -18,7 +18,7 @@ int main(void)
 
     {
 
-        printf("\n\tstart test_packets\n");
+        printf("\nstart test_packets\n");
 
         // set up test data
         EurobaliseTelegram t;
@@ -96,7 +96,7 @@ int main(void)
     }
 
 
-    printf("\tend test_packets\n");
+    printf("end test_packets\n");
     return EXIT_SUCCESS;
 }
 
