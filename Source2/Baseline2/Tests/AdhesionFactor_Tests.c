@@ -5,7 +5,7 @@
 
 void AdhesionFactor_Tests(void)
 {
-    printf("\n\tstart AdhesionFactor_Tests\n");
+    printf("\nstart AdhesionFactor_Tests\n");
     AdhesionFactor a;
     AdhesionFactor_Init(&a);
     AdhesionFactor_Print(&a, stdout);
@@ -73,6 +73,6 @@ void AdhesionFactor_Tests(void)
         //printf("allocated at %p\n", v);
 
     }
-        printf("\tend AdhesionFactor_Test\n");
+    printf("end AdhesionFactor_Test\n");
 }
 

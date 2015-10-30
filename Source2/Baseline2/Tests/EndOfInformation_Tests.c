@@ -5,7 +5,7 @@
 
 void EndOfInformation_Tests(void)
 {
-    printf("\n\tstart EndOfInformation_Tests\n");
+    printf("\nstart EndOfInformation_Tests\n");
     EndOfInformation a;
     EndOfInformation_Init(&a);
     EndOfInformation_Print(&a, stdout);
@@ -24,6 +24,6 @@ void EndOfInformation_Tests(void)
     assert(EndOfInformation_Equal(&a, p));
     EndOfInformation_Delete(p);
 
-    printf("\tend EndOfInformation_Test\n");
+    printf("end EndOfInformation_Test\n");
 }
 

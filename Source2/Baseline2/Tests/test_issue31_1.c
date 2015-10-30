@@ -5,7 +5,7 @@
 
 int main(void)
 {
-    printf("\n\tstart issue31_1 test\n");
+    printf("\nstart issue31_1 test\n");
     uint8_t raw[1024];
     Bitstream stream1;
     Bitstream_Init(&stream1, raw, 1024, 0);
@@ -14,14 +14,14 @@ int main(void)
     {
         header.Q_UPDOWN  = 1;
         header.M_VERSION = 32;
-        header.Q_MEDIA	 = 0;
-        header.N_PIG	 = 1;
-        header.N_TOTAL	 = 1;
-        header.M_DUP	 = 0;
-        header.M_MCOUNT	 = 0;
-        header.NID_C	 = 64;
-        header.NID_BG	 = 3;
-        header.Q_LINK	 = 1;
+        header.Q_MEDIA   = 0;
+        header.N_PIG     = 1;
+        header.N_TOTAL   = 1;
+        header.M_DUP     = 0;
+        header.M_MCOUNT  = 0;
+        header.NID_C     = 64;
+        header.NID_BG    = 3;
+        header.Q_LINK    = 1;
     }
 
     EndOfInformation* f = EndOfInformation_New();
@@ -43,7 +43,7 @@ int main(void)
 
     assert(EurobaliseTelegram_Equal(&t1, &t2));
 
-    printf("\tend issue31_1 test\n");
+    printf("end issue31_1 test\n");
     return EXIT_SUCCESS;
 }
 

@@ -5,7 +5,7 @@
 
 int main(void)
 {
-    printf("\n\tstart issue31_2 test\n");
+    printf("\nstart issue31_2 test\n");
     uint8_t raw[1024];
     Bitstream stream1;
     Bitstream_Init(&stream1, raw, 1024, 0);
@@ -14,26 +14,26 @@ int main(void)
     {
         header.Q_UPDOWN  = 1;
         header.M_VERSION = 32;
-        header.Q_MEDIA	 = 0;
-        header.N_PIG	 = 0;
-        header.N_TOTAL	 = 1;
-        header.M_DUP	 = 0;
-        header.M_MCOUNT	 = 0;
-        header.NID_C	 = 64;
-        header.NID_BG	 = 3;
-        header.Q_LINK	 = 1;
+        header.Q_MEDIA   = 0;
+        header.N_PIG     = 0;
+        header.N_TOTAL   = 1;
+        header.M_DUP     = 0;
+        header.M_MCOUNT  = 0;
+        header.NID_C     = 64;
+        header.NID_BG    = 3;
+        header.Q_LINK    = 1;
     }
 
     SessionManagement* a = SessionManagement_New();
     {
         // NID_PACKET = 42;
-        a->Q_DIR =1;
+        a->Q_DIR = 1;
         a->L_PACKET = 113;
-        a->Q_RBC= 1;
-        a->NID_C= 352;
-        a->NID_RBC= 1515;
+        a->Q_RBC = 1;
+        a->NID_C = 352;
+        a->NID_RBC = 1515;
         a->NID_RADIO = 14185023402016767;
-        a->Q_SLEEPSESSION= 0;
+        a->Q_SLEEPSESSION = 0;
     }
 
     NationalValues* b = NationalValues_New();
@@ -47,10 +47,10 @@ int main(void)
         b->V_NVSHUNT = 6;
         b->V_NVSTFF = 8;
         b->V_NVONSIGHT = 6;
-	b->V_NVUNFIT = 20;
-	b->V_NVREL = 8;
+        b->V_NVUNFIT = 20;
+        b->V_NVREL = 8;
         b->D_NVROLL = 2;
-	b->Q_NVSRBKTRG = 0;
+        b->Q_NVSRBKTRG = 0;
         b->Q_NVEMRRLS = 0;
         b->V_NVALLOWOVTRP = 0;
         b->V_NVSUPOVTRP = 6;
@@ -98,7 +98,7 @@ int main(void)
 
     assert(EurobaliseTelegram_Equal(&t1, &t2));
 
-    printf("\tend issue31_2 test\n");
+    printf("end issue31_2 test\n");
     return EXIT_SUCCESS;
 }
 
