@@ -1,0 +1,19 @@
+AxleLoadSpeedProfile: No pattern, regular en- and decoding
+ConditionalLevelTransitionOrder: GradientProfile pattern, modified en- and decoding
+GeographicalPositionInformation: GradientProfile pattern, modified en- and decoding
+GradientProfile: GradientProfile pattern, modified en- and decoding
+InternationalStaticSpeedProfile: GradientProfile pattern (with nested N_ITER), modified en- and decoding
+Level1MovementAuthority: No pattern, regular en- and decoding
+Level23MovementAuthority: No pattern, regular en- and decoding
+LevelTransitionOrder: No pattern, regular en- and decoding
+Linking: GradientProfile pattern, modified en- and decoding
+ListOfBalisesForSHArea: No pattern, regular en- and decoding
+ListOfBalisesInSRAuthority: No pattern, regular en- and decoding
+ModeProfile: GradientProfile pattern, modified en- and decoding
+NationalValues: No pattern, regular en- and decoding
+OnboardTelephoneNumbers: No pattern, regular en- and decoding
+PositionReportParameters: No pattern, regular en- and decoding
+RouteSuitabilityData: No pattern, regular en- and decoding
+TrackCondition: No pattern, regular en- and decoding
+TrackConditionBigMetalMasses: GradientProfile pattern, modified en- and decoding
+ValidatedTrainData: No pattern, regular en- and decoding
