@@ -4,6 +4,7 @@
 #include "Packet_DecodeBit.h"
 #include "Packet_EncodeBit.h"
 #include "Packet_EncodeInt.h"
+#include "Packet_DecodeInt.h"
 #include "Packet_Length.h"
 
 void EurobaliseTelegram_Print(const EurobaliseTelegram* t, FILE* stream)
@@ -163,49 +164,64 @@ int EurobaliseTelegram_EncodeInt(const EurobaliseTelegram* t, CompressedPackets*
     return 1;
 }
 
-/*
-bool EurobaliseTelegram::decode(FlatPackets& packetStruct)
+int EurobaliseTelegram_DecodeInt(EurobaliseTelegram* t, const CompressedPackets* packetStruct)
 {
-    for (unsigned int i = 0; i < 50; ++i)
+    for (uint32_t i = 0; i < 50; ++i)
     {
-        if (packetStruct.PacketHeaders[i].valid == 1)
+        if (packetStruct->PacketHeaders[i].valid == 1)
         {
-            BasePacketPtr ptr;
+	    PacketHeader packet_header = {0, 0};
+            PacketHeader* ptr = 0;
+	    
+	    packet_header.NID_PACKET = packetStruct->PacketHeaders[i].nid_packet;
 
-            if (m_header.Q_UPDOWN == 0)
-            {
-                ptr = PacketFactory_TrainToTrack(packetStruct.PacketHeaders[i].nid_packet);
-            }
-            else if (m_header.Q_UPDOWN == 1)
-            {
-                ptr = PacketFactory_TrackToTrain(packetStruct.PacketHeaders[i].nid_packet);
-            }
-            else
-            {
-                std::cout << "wrong q_updown" << std::endl;
-                return false;
-            }
+	    if (packet_header.NID_PACKET == 255)
+	    {
+                ptr = PacketFactory_BothWays(packet_header);
+		assert(ptr);
 
-            if (ptr)
-            {
-                ptr->decode(packetStruct.PacketHeaders[i], packetStruct.PacketData);
+		EurobaliseTelegram_Add(t, ptr);
+		break;
+	    }
 
-                m_packets.push_back(ptr);
-            }
-            else
-            {
-                return false;
-            }
+	    if (t->header.Q_UPDOWN == 1)
+	    {
+                ptr = PacketFactory_TrackToTrain(packet_header);
 
-            if (ptr->header.NID_PACKET == 255)
-            {
-                break;
-            }
+		if (ptr)
+		{
+                    EurobaliseTelegram_Add(t, ptr);
+		}
+		else
+		{
+		    return 0;
+		}
+	    }
+	    else
+	    {
+                assert(t->header.Q_UPDOWN == 0);
+		ptr = PacketFactory_TrainToTrack(packet_header);
+
+		if (ptr)
+		{
+                    EurobaliseTelegram_Add(t, ptr);
+		}
+		else
+		{
+		    return 0;
+		}
+	    }
+
+	    if (ptr)
+	    {
+                Packet_DecodeInt(ptr, &(packetStruct->PacketHeaders[i]), packetStruct->PacketData);
+	    }
+	    else
+	    {
+                return 0;
+	    }
         }
     }
-
-    return true;
+    return 1;
 }
-
-*/
 
