@@ -2,7 +2,6 @@
 #ifndef PACKETHEADER_H_INCLUDED
 #define PACKETHEADER_H_INCLUDED
 
-#define __STDC_FORMAT_MACROS
 #include <inttypes.h>
 
 #include <stdio.h>

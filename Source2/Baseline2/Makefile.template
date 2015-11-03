@@ -12,13 +12,14 @@ export SCRIPT_DIR=$(TOPDIR)/Scripts
 CPPFLAGS=-UHAVE_KCG_HEADER
 INCLUDES=$(CPPFLAGS) -I$(FRAMAC_SHARE)/libc
 
-#VPATH = $(COQ)
-
 SHARED_FLAGS=-Wall -pedantic -O3
-#SHARED_FLAGS+=-Wconversion
-CFLAGS= -std=c99 $(SHARED_FLAGS)
-CXXFLAGS=-std=c++11 $(SHARED_FLAGS)
+CFLAGS  = $(SHARED_FLAGS)
+CFLAGS += -std=c99 
+CFLAGS += -Wno-format
+#CFLAGS += -Werror 
+#CFLAGS += -Weverything -Wno-padded 
 
+CXXFLAGS=-std=c++11 $(SHARED_FLAGS)
 
 #setup wp
 WP_TIMEOUT ?= 10
