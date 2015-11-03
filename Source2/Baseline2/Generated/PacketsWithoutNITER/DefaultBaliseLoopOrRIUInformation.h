@@ -151,7 +151,7 @@ int DefaultBaliseLoopOrRIUInformation_DecodeBit(DefaultBaliseLoopOrRIUInformatio
 static inline void DefaultBaliseLoopOrRIUInformation_Print(const DefaultBaliseLoopOrRIUInformation* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu)",
             p->Q_DIR,
             p->L_PACKET);
 }
@@ -171,9 +171,9 @@ static inline uint32_t DefaultBaliseLoopOrRIUInformation_Length(const DefaultBal
     return (uint32_t)(p->L_PACKET);
 }
 
-int DefaultBaliseLoopOrRIUInformation_EncodeInt(const DefaultBaliseLoopOrRIUInformation* p, PacketInfo* data, kcg_int* stream);
+int DefaultBaliseLoopOrRIUInformation_EncodeInt(const DefaultBaliseLoopOrRIUInformation* p, Metadata* data, kcg_int* stream);
 
-int DefaultBaliseLoopOrRIUInformation_DecodeInt(DefaultBaliseLoopOrRIUInformation* p, const PacketInfo* data, const kcg_int* stream);
+int DefaultBaliseLoopOrRIUInformation_DecodeInt(DefaultBaliseLoopOrRIUInformation* p, const Metadata* data, const kcg_int* stream);
 
 #endif // DEFAULTBALISELOOPORRIUINFORMATION_H_INCLUDED
 

@@ -130,7 +130,7 @@ int OnboardTelephoneNumbers_1_DecodeBit(OnboardTelephoneNumbers_1* p, Bitstream*
 
 static inline void OnboardTelephoneNumbers_1_Print(const OnboardTelephoneNumbers_1* p, FILE* stream)
 {
-    fprintf(stream, "(%"PRIu64")",
+    fprintf(stream, "(%lu)",
             p->NID_RADIO);
 }
 

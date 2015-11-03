@@ -45,17 +45,18 @@ typedef struct
 
 #endif // HAVE_KCG_HEADER
 
-typedef MetadataElement_T_Common_Types_Pkg PacketInfo;
+typedef MetadataElement_T_Common_Types_Pkg Metadata;
 
-typedef CompressedPackets_T_Common_Types_Pkg FlatPackets;
+typedef CompressedPackets_T_Common_Types_Pkg CompressedPackets;
 
 
-inline static
+/*inline static
 void FlatPacket_Write(PacketInfo* info, kcg_int* data, kcg_int v)
 {
     ++info->endAddress;
     data[info->endAddress] = v;
 }
+*/
  
 
 #endif // COMPRESSEDPACKETS_H_INCLUDED

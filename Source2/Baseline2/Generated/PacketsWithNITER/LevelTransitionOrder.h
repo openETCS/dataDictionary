@@ -184,7 +184,7 @@ int LevelTransitionOrder_DecodeBit(LevelTransitionOrder* p, Bitstream* stream);
 static inline void LevelTransitionOrder_Print(const LevelTransitionOrder* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64"",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_SCALE,
@@ -238,9 +238,9 @@ static inline uint32_t LevelTransitionOrder_Length(const LevelTransitionOrder* p
     return (uint32_t)(p->L_PACKET);
 }
 
-int LevelTransitionOrder_EncodeInt(const LevelTransitionOrder* p, PacketInfo* data, kcg_int* stream);
+int LevelTransitionOrder_EncodeInt(const LevelTransitionOrder* p, Metadata* data, kcg_int* stream);
 
-int LevelTransitionOrder_DecodeInt(LevelTransitionOrder* p, const PacketInfo* data, const kcg_int* stream);
+int LevelTransitionOrder_DecodeInt(LevelTransitionOrder* p, const Metadata* data, const kcg_int* stream);
 
 #endif // LEVELTRANSITIONORDER_H_INCLUDED
 

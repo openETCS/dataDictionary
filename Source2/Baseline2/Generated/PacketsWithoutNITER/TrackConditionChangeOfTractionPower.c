@@ -195,7 +195,7 @@ int TrackConditionChangeOfTractionPower_DecodeBit(TrackConditionChangeOfTraction
     }
 }
 
-int TrackConditionChangeOfTractionPower_EncodeInt(const TrackConditionChangeOfTractionPower* p, PacketInfo* data, kcg_int* stream)
+int TrackConditionChangeOfTractionPower_EncodeInt(const TrackConditionChangeOfTractionPower* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 39;
     data->q_dir = p->Q_DIR;
@@ -216,7 +216,7 @@ int TrackConditionChangeOfTractionPower_EncodeInt(const TrackConditionChangeOfTr
     return 1;
 }
 
-int TrackConditionChangeOfTractionPower_DecodeInt(TrackConditionChangeOfTractionPower* p, const PacketInfo* data, const kcg_int* stream)
+int TrackConditionChangeOfTractionPower_DecodeInt(TrackConditionChangeOfTractionPower* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 39)
     {

@@ -142,7 +142,7 @@ int TrackCondition_1_DecodeBit(TrackCondition_1* p, Bitstream* stream);
 
 static inline void TrackCondition_1_Print(const TrackCondition_1* p, FILE* stream)
 {
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu,%lu)",
             p->D_TRACKCOND,
             p->L_TRACKCOND,
             p->M_TRACKCOND);

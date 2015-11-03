@@ -322,7 +322,7 @@ int PacketForSendingPlainTextMessages_DecodeBit(PacketForSendingPlainTextMessage
     }
 }
 
-int PacketForSendingPlainTextMessages_EncodeInt(const PacketForSendingPlainTextMessages* p, PacketInfo* data, kcg_int* stream)
+int PacketForSendingPlainTextMessages_EncodeInt(const PacketForSendingPlainTextMessages* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 72;
     data->q_dir = p->Q_DIR;
@@ -355,7 +355,7 @@ int PacketForSendingPlainTextMessages_EncodeInt(const PacketForSendingPlainTextM
     return 1;
 }
 
-int PacketForSendingPlainTextMessages_DecodeInt(PacketForSendingPlainTextMessages* p, const PacketInfo* data, const kcg_int* stream)
+int PacketForSendingPlainTextMessages_DecodeInt(PacketForSendingPlainTextMessages* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 72)
     {

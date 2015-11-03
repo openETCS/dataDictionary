@@ -178,7 +178,7 @@ int RepositioningInformation_DecodeBit(RepositioningInformation* p, Bitstream* s
     }
 }
 
-int RepositioningInformation_EncodeInt(const RepositioningInformation* p, PacketInfo* data, kcg_int* stream)
+int RepositioningInformation_EncodeInt(const RepositioningInformation* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 16;
     data->q_dir = p->Q_DIR;
@@ -198,7 +198,7 @@ int RepositioningInformation_EncodeInt(const RepositioningInformation* p, Packet
     return 1;
 }
 
-int RepositioningInformation_DecodeInt(RepositioningInformation* p, const PacketInfo* data, const kcg_int* stream)
+int RepositioningInformation_DecodeInt(RepositioningInformation* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 16)
     {

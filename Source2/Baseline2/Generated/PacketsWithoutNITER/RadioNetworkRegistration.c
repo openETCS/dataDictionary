@@ -161,7 +161,7 @@ int RadioNetworkRegistration_DecodeBit(RadioNetworkRegistration* p, Bitstream* s
     }
 }
 
-int RadioNetworkRegistration_EncodeInt(const RadioNetworkRegistration* p, PacketInfo* data, kcg_int* stream)
+int RadioNetworkRegistration_EncodeInt(const RadioNetworkRegistration* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 45;
     data->q_dir = p->Q_DIR;
@@ -180,7 +180,7 @@ int RadioNetworkRegistration_EncodeInt(const RadioNetworkRegistration* p, Packet
     return 1;
 }
 
-int RadioNetworkRegistration_DecodeInt(RadioNetworkRegistration* p, const PacketInfo* data, const kcg_int* stream)
+int RadioNetworkRegistration_DecodeInt(RadioNetworkRegistration* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 45)
     {

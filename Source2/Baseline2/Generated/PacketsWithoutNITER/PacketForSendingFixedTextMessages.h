@@ -201,7 +201,7 @@ int PacketForSendingFixedTextMessages_DecodeBit(PacketForSendingFixedTextMessage
 static inline void PacketForSendingFixedTextMessages_Print(const PacketForSendingFixedTextMessages* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu)",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_SCALE,
@@ -257,9 +257,9 @@ static inline uint32_t PacketForSendingFixedTextMessages_Length(const PacketForS
     return (uint32_t)(p->L_PACKET);
 }
 
-int PacketForSendingFixedTextMessages_EncodeInt(const PacketForSendingFixedTextMessages* p, PacketInfo* data, kcg_int* stream);
+int PacketForSendingFixedTextMessages_EncodeInt(const PacketForSendingFixedTextMessages* p, Metadata* data, kcg_int* stream);
 
-int PacketForSendingFixedTextMessages_DecodeInt(PacketForSendingFixedTextMessages* p, const PacketInfo* data, const kcg_int* stream);
+int PacketForSendingFixedTextMessages_DecodeInt(PacketForSendingFixedTextMessages* p, const Metadata* data, const kcg_int* stream);
 
 #endif // PACKETFORSENDINGFIXEDTEXTMESSAGES_H_INCLUDED
 

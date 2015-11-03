@@ -162,7 +162,7 @@ int RepositioningInformation_DecodeBit(RepositioningInformation* p, Bitstream* s
 static inline void RepositioningInformation_Print(const RepositioningInformation* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu,%lu,%lu)",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_SCALE,
@@ -186,9 +186,9 @@ static inline uint32_t RepositioningInformation_Length(const RepositioningInform
     return (uint32_t)(p->L_PACKET);
 }
 
-int RepositioningInformation_EncodeInt(const RepositioningInformation* p, PacketInfo* data, kcg_int* stream);
+int RepositioningInformation_EncodeInt(const RepositioningInformation* p, Metadata* data, kcg_int* stream);
 
-int RepositioningInformation_DecodeInt(RepositioningInformation* p, const PacketInfo* data, const kcg_int* stream);
+int RepositioningInformation_DecodeInt(RepositioningInformation* p, const Metadata* data, const kcg_int* stream);
 
 #endif // REPOSITIONINGINFORMATION_H_INCLUDED
 

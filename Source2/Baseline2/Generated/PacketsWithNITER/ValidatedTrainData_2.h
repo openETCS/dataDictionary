@@ -130,7 +130,7 @@ int ValidatedTrainData_2_DecodeBit(ValidatedTrainData_2* p, Bitstream* stream);
 
 static inline void ValidatedTrainData_2_Print(const ValidatedTrainData_2* p, FILE* stream)
 {
-    fprintf(stream, "(%"PRIu64")",
+    fprintf(stream, "(%lu)",
             p->NID_STM);
 }
 

@@ -169,7 +169,7 @@ int ConditionalLevelTransitionOrder_DecodeBit(ConditionalLevelTransitionOrder* p
 static inline void ConditionalLevelTransitionOrder_Print(const ConditionalLevelTransitionOrder* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64"",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu",
             p->Q_DIR,
             p->L_PACKET,
             p->M_LEVELTR,
@@ -217,9 +217,9 @@ static inline uint32_t ConditionalLevelTransitionOrder_Length(const ConditionalL
     return (uint32_t)(p->L_PACKET);
 }
 
-int ConditionalLevelTransitionOrder_EncodeInt(const ConditionalLevelTransitionOrder* p, PacketInfo* data, kcg_int* stream);
+int ConditionalLevelTransitionOrder_EncodeInt(const ConditionalLevelTransitionOrder* p, Metadata* data, kcg_int* stream);
 
-int ConditionalLevelTransitionOrder_DecodeInt(ConditionalLevelTransitionOrder* p, const PacketInfo* data, const kcg_int* stream);
+int ConditionalLevelTransitionOrder_DecodeInt(ConditionalLevelTransitionOrder* p, const Metadata* data, const kcg_int* stream);
 
 #endif // CONDITIONALLEVELTRANSITIONORDER_H_INCLUDED
 

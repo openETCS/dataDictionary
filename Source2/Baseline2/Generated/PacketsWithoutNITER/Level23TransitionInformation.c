@@ -144,7 +144,7 @@ int Level23TransitionInformation_DecodeBit(Level23TransitionInformation* p, Bits
     }
 }
 
-int Level23TransitionInformation_EncodeInt(const Level23TransitionInformation* p, PacketInfo* data, kcg_int* stream)
+int Level23TransitionInformation_EncodeInt(const Level23TransitionInformation* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 9;
     data->valid = 1;
@@ -161,7 +161,7 @@ int Level23TransitionInformation_EncodeInt(const Level23TransitionInformation* p
     return 1;
 }
 
-int Level23TransitionInformation_DecodeInt(Level23TransitionInformation* p, const PacketInfo* data, const kcg_int* stream)
+int Level23TransitionInformation_DecodeInt(Level23TransitionInformation* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 9)
     {

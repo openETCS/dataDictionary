@@ -212,7 +212,7 @@ int AdhesionFactor_DecodeBit(AdhesionFactor* p, Bitstream* stream)
     }
 }
 
-int AdhesionFactor_EncodeInt(const AdhesionFactor* p, PacketInfo* data, kcg_int* stream)
+int AdhesionFactor_EncodeInt(const AdhesionFactor* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 71;
     data->q_dir = p->Q_DIR;
@@ -234,7 +234,7 @@ int AdhesionFactor_EncodeInt(const AdhesionFactor* p, PacketInfo* data, kcg_int*
     return 1;
 }
 
-int AdhesionFactor_DecodeInt(AdhesionFactor* p, const PacketInfo* data, const kcg_int* stream)
+int AdhesionFactor_DecodeInt(AdhesionFactor* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 71)
     {

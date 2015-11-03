@@ -195,7 +195,7 @@ int MovementAuthorityRequestParameters_DecodeBit(MovementAuthorityRequestParamet
     }
 }
 
-int MovementAuthorityRequestParameters_EncodeInt(const MovementAuthorityRequestParameters* p, PacketInfo* data, kcg_int* stream)
+int MovementAuthorityRequestParameters_EncodeInt(const MovementAuthorityRequestParameters* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 57;
     data->q_dir = p->Q_DIR;
@@ -216,7 +216,7 @@ int MovementAuthorityRequestParameters_EncodeInt(const MovementAuthorityRequestP
     return 1;
 }
 
-int MovementAuthorityRequestParameters_DecodeInt(MovementAuthorityRequestParameters* p, const PacketInfo* data, const kcg_int* stream)
+int MovementAuthorityRequestParameters_DecodeInt(MovementAuthorityRequestParameters* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 57)
     {

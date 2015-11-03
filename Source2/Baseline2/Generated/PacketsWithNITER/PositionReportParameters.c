@@ -230,7 +230,7 @@ int PositionReportParameters_DecodeBit(PositionReportParameters* p, Bitstream* s
     }
 }
 
-int PositionReportParameters_EncodeInt(const PositionReportParameters* p, PacketInfo* data, kcg_int* stream)
+int PositionReportParameters_EncodeInt(const PositionReportParameters* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 58;
     data->q_dir = p->Q_DIR;
@@ -259,7 +259,7 @@ int PositionReportParameters_EncodeInt(const PositionReportParameters* p, Packet
     return 1;
 }
 
-int PositionReportParameters_DecodeInt(PositionReportParameters* p, const PacketInfo* data, const kcg_int* stream)
+int PositionReportParameters_DecodeInt(PositionReportParameters* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 58)
     {

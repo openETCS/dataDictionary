@@ -162,7 +162,7 @@ int ListOfBalisesForSHArea_DecodeBit(ListOfBalisesForSHArea* p, Bitstream* strea
     }
 }
 
-int ListOfBalisesForSHArea_EncodeInt(const ListOfBalisesForSHArea* p, PacketInfo* data, kcg_int* stream)
+int ListOfBalisesForSHArea_EncodeInt(const ListOfBalisesForSHArea* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 49;
     data->q_dir = p->Q_DIR;
@@ -187,7 +187,7 @@ int ListOfBalisesForSHArea_EncodeInt(const ListOfBalisesForSHArea* p, PacketInfo
     return 1;
 }
 
-int ListOfBalisesForSHArea_DecodeInt(ListOfBalisesForSHArea* p, const PacketInfo* data, const kcg_int* stream)
+int ListOfBalisesForSHArea_DecodeInt(ListOfBalisesForSHArea* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 49)
     {

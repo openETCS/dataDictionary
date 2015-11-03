@@ -146,7 +146,7 @@ int Linking_1_DecodeBit(Linking_1* p, Bitstream* stream);
 
 static inline void Linking_1_Print(const Linking_1* p, FILE* stream)
 {
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu,%lu,%lu)",
             p->D_LINK,
             p->Q_NEWCOUNTRY,
             p->NID_C,

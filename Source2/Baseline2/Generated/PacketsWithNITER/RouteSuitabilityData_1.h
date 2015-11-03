@@ -142,7 +142,7 @@ int RouteSuitabilityData_1_DecodeBit(RouteSuitabilityData_1* p, Bitstream* strea
 
 static inline void RouteSuitabilityData_1_Print(const RouteSuitabilityData_1* p, FILE* stream)
 {
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu)",
             p->D_SUITABILITY,
             p->Q_SUITABILITY,
             p->M_LOADINGGAUGE,

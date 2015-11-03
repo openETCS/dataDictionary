@@ -236,7 +236,7 @@ int LevelTransitionOrder_DecodeBit(LevelTransitionOrder* p, Bitstream* stream)
     }
 }
 
-int LevelTransitionOrder_EncodeInt(const LevelTransitionOrder* p, PacketInfo* data, kcg_int* stream)
+int LevelTransitionOrder_EncodeInt(const LevelTransitionOrder* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 41;
     data->q_dir = p->Q_DIR;
@@ -266,7 +266,7 @@ int LevelTransitionOrder_EncodeInt(const LevelTransitionOrder* p, PacketInfo* da
     return 1;
 }
 
-int LevelTransitionOrder_DecodeInt(LevelTransitionOrder* p, const PacketInfo* data, const kcg_int* stream)
+int LevelTransitionOrder_DecodeInt(LevelTransitionOrder* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 41)
     {

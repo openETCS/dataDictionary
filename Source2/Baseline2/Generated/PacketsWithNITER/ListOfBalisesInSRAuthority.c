@@ -162,7 +162,7 @@ int ListOfBalisesInSRAuthority_DecodeBit(ListOfBalisesInSRAuthority* p, Bitstrea
     }
 }
 
-int ListOfBalisesInSRAuthority_EncodeInt(const ListOfBalisesInSRAuthority* p, PacketInfo* data, kcg_int* stream)
+int ListOfBalisesInSRAuthority_EncodeInt(const ListOfBalisesInSRAuthority* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 63;
     data->q_dir = p->Q_DIR;
@@ -187,7 +187,7 @@ int ListOfBalisesInSRAuthority_EncodeInt(const ListOfBalisesInSRAuthority* p, Pa
     return 1;
 }
 
-int ListOfBalisesInSRAuthority_DecodeInt(ListOfBalisesInSRAuthority* p, const PacketInfo* data, const kcg_int* stream)
+int ListOfBalisesInSRAuthority_DecodeInt(ListOfBalisesInSRAuthority* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 63)
     {

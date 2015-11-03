@@ -186,7 +186,7 @@ int GradientProfile_DecodeBit(GradientProfile* p, Bitstream* stream);
 static inline void GradientProfile_Print(const GradientProfile* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64"",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu,%lu,%lu",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_SCALE,
@@ -234,9 +234,9 @@ static inline uint32_t GradientProfile_Length(const GradientProfile* p)
     return (uint32_t)(p->L_PACKET);
 }
 
-int GradientProfile_EncodeInt(const GradientProfile* p, PacketInfo* data, kcg_int* stream);
+int GradientProfile_EncodeInt(const GradientProfile* p, Metadata* data, kcg_int* stream);
 
-int GradientProfile_DecodeInt(GradientProfile* p, const PacketInfo* data, const kcg_int* stream);
+int GradientProfile_DecodeInt(GradientProfile* p, const Metadata* data, const kcg_int* stream);
 
 #endif // GRADIENTPROFILE_H_INCLUDED
 

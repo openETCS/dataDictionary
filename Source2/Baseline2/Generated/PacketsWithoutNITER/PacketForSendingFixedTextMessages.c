@@ -316,7 +316,7 @@ int PacketForSendingFixedTextMessages_DecodeBit(PacketForSendingFixedTextMessage
     }
 }
 
-int PacketForSendingFixedTextMessages_EncodeInt(const PacketForSendingFixedTextMessages* p, PacketInfo* data, kcg_int* stream)
+int PacketForSendingFixedTextMessages_EncodeInt(const PacketForSendingFixedTextMessages* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 76;
     data->q_dir = p->Q_DIR;
@@ -348,7 +348,7 @@ int PacketForSendingFixedTextMessages_EncodeInt(const PacketForSendingFixedTextM
     return 1;
 }
 
-int PacketForSendingFixedTextMessages_DecodeInt(PacketForSendingFixedTextMessages* p, const PacketInfo* data, const kcg_int* stream)
+int PacketForSendingFixedTextMessages_DecodeInt(PacketForSendingFixedTextMessages* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 76)
     {

@@ -136,7 +136,7 @@ int InternationalStaticSpeedProfile_2_1_DecodeBit(InternationalStaticSpeedProfil
 
 static inline void InternationalStaticSpeedProfile_2_1_Print(const InternationalStaticSpeedProfile_2_1* p, FILE* stream)
 {
-    fprintf(stream, "(%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu)",
             p->NC_DIFF,
             p->V_DIFF);
 }

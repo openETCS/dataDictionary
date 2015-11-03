@@ -145,7 +145,7 @@ int OnboardTelephoneNumbers_DecodeBit(OnboardTelephoneNumbers* p, Bitstream* str
     }
 }
 
-int OnboardTelephoneNumbers_EncodeInt(const OnboardTelephoneNumbers* p, PacketInfo* data, kcg_int* stream)
+int OnboardTelephoneNumbers_EncodeInt(const OnboardTelephoneNumbers* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 3;
     data->valid = 1;
@@ -168,7 +168,7 @@ int OnboardTelephoneNumbers_EncodeInt(const OnboardTelephoneNumbers* p, PacketIn
     return 1;
 }
 
-int OnboardTelephoneNumbers_DecodeInt(OnboardTelephoneNumbers* p, const PacketInfo* data, const kcg_int* stream)
+int OnboardTelephoneNumbers_DecodeInt(OnboardTelephoneNumbers* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 3)
     {

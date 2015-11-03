@@ -208,7 +208,7 @@ int NationalValues_DecodeBit(NationalValues* p, Bitstream* stream);
 static inline void NationalValues_Print(const NationalValues* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64"",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_SCALE,
@@ -220,7 +220,7 @@ static inline void NationalValues_Print(const NationalValues* p, FILE* stream)
         NationalValues_1_Print(&p->sub_1[i], stream);
     }
 
-    fprintf(stream, "%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu)",
             p->V_NVSHUNT,
             p->V_NVSTFF,
             p->V_NVONSIGHT,
@@ -288,9 +288,9 @@ static inline uint32_t NationalValues_Length(const NationalValues* p)
     return (uint32_t)(p->L_PACKET);
 }
 
-int NationalValues_EncodeInt(const NationalValues* p, PacketInfo* data, kcg_int* stream);
+int NationalValues_EncodeInt(const NationalValues* p, Metadata* data, kcg_int* stream);
 
-int NationalValues_DecodeInt(NationalValues* p, const PacketInfo* data, const kcg_int* stream);
+int NationalValues_DecodeInt(NationalValues* p, const Metadata* data, const kcg_int* stream);
 
 #endif // NATIONALVALUES_H_INCLUDED
 

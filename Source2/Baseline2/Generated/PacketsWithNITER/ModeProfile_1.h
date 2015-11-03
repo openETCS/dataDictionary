@@ -154,7 +154,7 @@ int ModeProfile_1_DecodeBit(ModeProfile_1* p, Bitstream* stream);
 
 static inline void ModeProfile_1_Print(const ModeProfile_1* p, FILE* stream)
 {
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu)",
             p->D_MAMODE,
             p->M_MAMODE,
             p->V_MAMODE,

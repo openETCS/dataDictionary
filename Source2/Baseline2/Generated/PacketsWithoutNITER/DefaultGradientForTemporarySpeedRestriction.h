@@ -163,7 +163,7 @@ int DefaultGradientForTemporarySpeedRestriction_DecodeBit(DefaultGradientForTemp
 static inline void DefaultGradientForTemporarySpeedRestriction_Print(const DefaultGradientForTemporarySpeedRestriction* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu,%lu,%lu)",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_GDIR,
@@ -187,9 +187,9 @@ static inline uint32_t DefaultGradientForTemporarySpeedRestriction_Length(const 
     return (uint32_t)(p->L_PACKET);
 }
 
-int DefaultGradientForTemporarySpeedRestriction_EncodeInt(const DefaultGradientForTemporarySpeedRestriction* p, PacketInfo* data, kcg_int* stream);
+int DefaultGradientForTemporarySpeedRestriction_EncodeInt(const DefaultGradientForTemporarySpeedRestriction* p, Metadata* data, kcg_int* stream);
 
-int DefaultGradientForTemporarySpeedRestriction_DecodeInt(DefaultGradientForTemporarySpeedRestriction* p, const PacketInfo* data, const kcg_int* stream);
+int DefaultGradientForTemporarySpeedRestriction_DecodeInt(DefaultGradientForTemporarySpeedRestriction* p, const Metadata* data, const kcg_int* stream);
 
 #endif // DEFAULTGRADIENTFORTEMPORARYSPEEDRESTRICTION_H_INCLUDED
 

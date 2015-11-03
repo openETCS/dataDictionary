@@ -134,7 +134,7 @@ int ListOfBalisesInSRAuthority_1_DecodeBit(ListOfBalisesInSRAuthority_1* p, Bits
 
 static inline void ListOfBalisesInSRAuthority_1_Print(const ListOfBalisesInSRAuthority_1* p, FILE* stream)
 {
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu,%lu)",
             p->Q_NEWCOUNTRY,
             p->NID_C,
             p->NID_BG);

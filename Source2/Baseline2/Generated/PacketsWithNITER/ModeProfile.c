@@ -264,7 +264,7 @@ int ModeProfile_DecodeBit(ModeProfile* p, Bitstream* stream)
     }
 }
 
-int ModeProfile_EncodeInt(const ModeProfile* p, PacketInfo* data, kcg_int* stream)
+int ModeProfile_EncodeInt(const ModeProfile* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 80;
     data->q_dir = p->Q_DIR;
@@ -277,12 +277,12 @@ int ModeProfile_EncodeInt(const ModeProfile* p, PacketInfo* data, kcg_int* strea
     stream[startAddress++] = p->Q_DIR;
     stream[startAddress++] = p->L_PACKET;
     stream[startAddress++] = p->Q_SCALE;
-    stream[startAddress++] = p->N_ITER_1 + 1;
     stream[startAddress++] = p->D_MAMODE;
     stream[startAddress++] = p->M_MAMODE;
     stream[startAddress++] = p->V_MAMODE;
     stream[startAddress++] = p->L_MAMODE;
     stream[startAddress++] = p->L_ACKMAMODE;
+    stream[startAddress++] = p->N_ITER_1;
 
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
@@ -295,7 +295,7 @@ int ModeProfile_EncodeInt(const ModeProfile* p, PacketInfo* data, kcg_int* strea
     return 1;
 }
 
-int ModeProfile_DecodeInt(ModeProfile* p, const PacketInfo* data, const kcg_int* stream)
+int ModeProfile_DecodeInt(ModeProfile* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 80)
     {
@@ -308,12 +308,12 @@ int ModeProfile_DecodeInt(ModeProfile* p, const PacketInfo* data, const kcg_int*
     p->Q_DIR = stream[startAddress++];
     p->L_PACKET = stream[startAddress++];
     p->Q_SCALE = stream[startAddress++];
-    p->N_ITER_1 = stream[startAddress++] - 1;
     p->D_MAMODE = stream[startAddress++];
     p->M_MAMODE = stream[startAddress++];
     p->V_MAMODE = stream[startAddress++];
     p->L_MAMODE = stream[startAddress++];
     p->L_ACKMAMODE = stream[startAddress++];
+    p->N_ITER_1 = stream[startAddress++];
 
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {

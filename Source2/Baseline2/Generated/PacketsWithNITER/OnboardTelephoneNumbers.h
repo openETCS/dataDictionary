@@ -154,7 +154,7 @@ int OnboardTelephoneNumbers_DecodeBit(OnboardTelephoneNumbers* p, Bitstream* str
 static inline void OnboardTelephoneNumbers_Print(const OnboardTelephoneNumbers* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64"",
+    fprintf(stream, "(%lu,%lu",
             p->L_PACKET,
             p->N_ITER_1);
 
@@ -192,9 +192,9 @@ static inline uint32_t OnboardTelephoneNumbers_Length(const OnboardTelephoneNumb
     return (uint32_t)(p->L_PACKET);
 }
 
-int OnboardTelephoneNumbers_EncodeInt(const OnboardTelephoneNumbers* p, PacketInfo* data, kcg_int* stream);
+int OnboardTelephoneNumbers_EncodeInt(const OnboardTelephoneNumbers* p, Metadata* data, kcg_int* stream);
 
-int OnboardTelephoneNumbers_DecodeInt(OnboardTelephoneNumbers* p, const PacketInfo* data, const kcg_int* stream);
+int OnboardTelephoneNumbers_DecodeInt(OnboardTelephoneNumbers* p, const Metadata* data, const kcg_int* stream);
 
 #endif // ONBOARDTELEPHONENUMBERS_H_INCLUDED
 

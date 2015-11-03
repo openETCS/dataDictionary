@@ -110,7 +110,7 @@ int EndOfInformation_DecodeBit(EndOfInformation* p, Bitstream* stream)
     }
 }
 
-int EndOfInformation_EncodeInt(const EndOfInformation* p, PacketInfo* data, kcg_int* stream)
+int EndOfInformation_EncodeInt(const EndOfInformation* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 255;
     data->valid = 1;
@@ -125,7 +125,7 @@ int EndOfInformation_EncodeInt(const EndOfInformation* p, PacketInfo* data, kcg_
     return 1;
 }
 
-int EndOfInformation_DecodeInt(EndOfInformation* p, const PacketInfo* data, const kcg_int* stream)
+int EndOfInformation_DecodeInt(EndOfInformation* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 255)
     {

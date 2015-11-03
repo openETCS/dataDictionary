@@ -150,7 +150,7 @@ int ErrorReporting_DecodeBit(ErrorReporting* p, Bitstream* stream);
 static inline void ErrorReporting_Print(const ErrorReporting* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu)",
             p->L_PACKET,
             p->M_ERROR);
 }
@@ -170,9 +170,9 @@ static inline uint32_t ErrorReporting_Length(const ErrorReporting* p)
     return (uint32_t)(p->L_PACKET);
 }
 
-int ErrorReporting_EncodeInt(const ErrorReporting* p, PacketInfo* data, kcg_int* stream);
+int ErrorReporting_EncodeInt(const ErrorReporting* p, Metadata* data, kcg_int* stream);
 
-int ErrorReporting_DecodeInt(ErrorReporting* p, const PacketInfo* data, const kcg_int* stream);
+int ErrorReporting_DecodeInt(ErrorReporting* p, const Metadata* data, const kcg_int* stream);
 
 #endif // ERRORREPORTING_H_INCLUDED
 

@@ -280,7 +280,7 @@ int RadioInfillAreaInformation_DecodeBit(RadioInfillAreaInformation* p, Bitstrea
     }
 }
 
-int RadioInfillAreaInformation_EncodeInt(const RadioInfillAreaInformation* p, PacketInfo* data, kcg_int* stream)
+int RadioInfillAreaInformation_EncodeInt(const RadioInfillAreaInformation* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 133;
     data->q_dir = p->Q_DIR;
@@ -306,7 +306,7 @@ int RadioInfillAreaInformation_EncodeInt(const RadioInfillAreaInformation* p, Pa
     return 1;
 }
 
-int RadioInfillAreaInformation_DecodeInt(RadioInfillAreaInformation* p, const PacketInfo* data, const kcg_int* stream)
+int RadioInfillAreaInformation_DecodeInt(RadioInfillAreaInformation* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 133)
     {

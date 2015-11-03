@@ -3,7 +3,7 @@
 #include "AllPackets.h"
 #include <assert.h>
 
-int Packet_EncodeInt(const PacketHeader* header, PacketInfo* data, kcg_int* stream)
+int Packet_EncodeInt(const PacketHeader* header, Metadata* data, kcg_int* stream)
 {
     switch (header->list)
     {
@@ -55,7 +55,7 @@ int Packet_EncodeInt(const PacketHeader* header, PacketInfo* data, kcg_int* stre
 
                 default :
                 {
-                    fprintf(stderr, "Packet_EncodeInt: unexpected value for header->NID_PACKET = %"PRIu64"\n", header->NID_PACKET);
+                    fprintf(stderr, "Packet_EncodeInt: unexpected value for header->NID_PACKET = %lu\n", header->NID_PACKET);
                     return 0;
                 }
             };
@@ -307,7 +307,7 @@ int Packet_EncodeInt(const PacketHeader* header, PacketInfo* data, kcg_int* stre
 
                 default :
                 {
-                    fprintf(stderr, "Packet_EncodeInt: unexpected value for header->NID_PACKET = %"PRIu64"\n", header->NID_PACKET);
+                    fprintf(stderr, "Packet_EncodeInt: unexpected value for header->NID_PACKET = %lu\n", header->NID_PACKET);
                     return 0;
                 }
             };
@@ -322,7 +322,7 @@ int Packet_EncodeInt(const PacketHeader* header, PacketInfo* data, kcg_int* stre
 
         default:
         {
-            fprintf(stderr, "Packet_EncodeInt: unexpected value for header->list = %"PRIu64"\n", header->list);
+            fprintf(stderr, "Packet_EncodeInt: unexpected value for header->list = %lu\n", header->list);
             return 0;
         }
     };

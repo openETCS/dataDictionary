@@ -144,7 +144,7 @@ int DefaultBaliseLoopOrRIUInformation_DecodeBit(DefaultBaliseLoopOrRIUInformatio
     }
 }
 
-int DefaultBaliseLoopOrRIUInformation_EncodeInt(const DefaultBaliseLoopOrRIUInformation* p, PacketInfo* data, kcg_int* stream)
+int DefaultBaliseLoopOrRIUInformation_EncodeInt(const DefaultBaliseLoopOrRIUInformation* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 254;
     data->q_dir = p->Q_DIR;
@@ -162,7 +162,7 @@ int DefaultBaliseLoopOrRIUInformation_EncodeInt(const DefaultBaliseLoopOrRIUInfo
     return 1;
 }
 
-int DefaultBaliseLoopOrRIUInformation_DecodeInt(DefaultBaliseLoopOrRIUInformation* p, const PacketInfo* data, const kcg_int* stream)
+int DefaultBaliseLoopOrRIUInformation_DecodeInt(DefaultBaliseLoopOrRIUInformation* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 254)
     {

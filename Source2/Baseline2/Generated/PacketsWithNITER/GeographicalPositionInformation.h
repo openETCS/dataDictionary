@@ -183,7 +183,7 @@ int GeographicalPositionInformation_DecodeBit(GeographicalPositionInformation* p
 static inline void GeographicalPositionInformation_Print(const GeographicalPositionInformation* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64"",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_SCALE,
@@ -241,9 +241,9 @@ static inline uint32_t GeographicalPositionInformation_Length(const Geographical
     return (uint32_t)(p->L_PACKET);
 }
 
-int GeographicalPositionInformation_EncodeInt(const GeographicalPositionInformation* p, PacketInfo* data, kcg_int* stream);
+int GeographicalPositionInformation_EncodeInt(const GeographicalPositionInformation* p, Metadata* data, kcg_int* stream);
 
-int GeographicalPositionInformation_DecodeInt(GeographicalPositionInformation* p, const PacketInfo* data, const kcg_int* stream);
+int GeographicalPositionInformation_DecodeInt(GeographicalPositionInformation* p, const Metadata* data, const kcg_int* stream);
 
 #endif // GEOGRAPHICALPOSITIONINFORMATION_H_INCLUDED
 

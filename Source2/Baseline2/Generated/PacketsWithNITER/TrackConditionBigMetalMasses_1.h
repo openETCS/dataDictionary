@@ -136,7 +136,7 @@ int TrackConditionBigMetalMasses_1_DecodeBit(TrackConditionBigMetalMasses_1* p, 
 
 static inline void TrackConditionBigMetalMasses_1_Print(const TrackConditionBigMetalMasses_1* p, FILE* stream)
 {
-    fprintf(stream, "(%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu)",
             p->D_TRACKCOND,
             p->L_TRACKCOND);
 }

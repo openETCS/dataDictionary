@@ -3,6 +3,7 @@
 #include "PacketFactory.h"
 #include "Packet_DecodeBit.h"
 #include "Packet_EncodeBit.h"
+#include "Packet_EncodeInt.h"
 #include "Packet_Length.h"
 
 void EurobaliseTelegram_Print(const EurobaliseTelegram* t, FILE* stream)
@@ -140,27 +141,29 @@ int EurobaliseTelegram_EncodeBit(const EurobaliseTelegram* t, Bitstream* stream)
     return 1;
 }
 
-/*
-bool EurobaliseTelegram::encode(FlatPackets& packetStruct) const
+int EurobaliseTelegram_EncodeInt(const EurobaliseTelegram* t, CompressedPackets* packetStruct)
 {
     kcg_int startAddress = 0;
-    unsigned int i;
 
-    for (i = 0; i < m_packets.size(); ++i)
+    for (uint32_t i = 0; i < EurobaliseTelegram_Size(t); ++i)
     {
-        packetStruct.PacketHeaders[i].startAddress = startAddress;
-        m_packets[i]->encode(packetStruct.PacketHeaders[i], packetStruct.PacketData);
-        startAddress = packetStruct.PacketHeaders[i].endAddress + 1;
+        packetStruct->PacketHeaders[i].startAddress = startAddress;
+        if (Packet_EncodeInt(EurobaliseTelegram_Get(t, i), &(packetStruct->PacketHeaders[i]), packetStruct->PacketData) != 1)
+	{
+             return 0;
+        }
+        startAddress = packetStruct->PacketHeaders[i].endAddress + 1;
     }
 
-    if (packetStruct.PacketHeaders[i - 1].nid_packet != 255)
+    if (packetStruct->PacketHeaders[EurobaliseTelegram_Size(t)-1].nid_packet != 255)
     {
-        return false;
+        return 0;
     }
 
-    return true;
+    return 1;
 }
 
+/*
 bool EurobaliseTelegram::decode(FlatPackets& packetStruct)
 {
     for (unsigned int i = 0; i < 50; ++i)

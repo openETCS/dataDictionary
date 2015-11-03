@@ -4,6 +4,7 @@
 
 #include "TelegramHeader.h"
 #include "PacketSequence.h"
+#include "CompressedPackets.h"
 
 struct EurobaliseTelegram
 {
@@ -49,6 +50,8 @@ int EurobaliseTelegram_Equal(const EurobaliseTelegram* a, const EurobaliseTelegr
 int EurobaliseTelegram_EncodeBit(const EurobaliseTelegram* t, Bitstream* stream);
 
 int EurobaliseTelegram_DecodeBit(EurobaliseTelegram* t, Bitstream* stream);
+
+int EurobaliseTelegram_EncodeInt(const EurobaliseTelegram* t, CompressedPackets* packetStruct);
 
 #endif /* EUROBALISETELEGRAM_H_INCLUDED */
 

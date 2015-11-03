@@ -142,7 +142,7 @@ int GradientProfile_1_DecodeBit(GradientProfile_1* p, Bitstream* stream);
 
 static inline void GradientProfile_1_Print(const GradientProfile_1* p, FILE* stream)
 {
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu,%lu)",
             p->D_GRADIENT,
             p->Q_GDIR,
             p->G_A);

@@ -144,7 +144,7 @@ int ErrorReporting_DecodeBit(ErrorReporting* p, Bitstream* stream)
     }
 }
 
-int ErrorReporting_EncodeInt(const ErrorReporting* p, PacketInfo* data, kcg_int* stream)
+int ErrorReporting_EncodeInt(const ErrorReporting* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 4;
     data->valid = 1;
@@ -161,7 +161,7 @@ int ErrorReporting_EncodeInt(const ErrorReporting* p, PacketInfo* data, kcg_int*
     return 1;
 }
 
-int ErrorReporting_DecodeInt(ErrorReporting* p, const PacketInfo* data, const kcg_int* stream)
+int ErrorReporting_DecodeInt(ErrorReporting* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 4)
     {

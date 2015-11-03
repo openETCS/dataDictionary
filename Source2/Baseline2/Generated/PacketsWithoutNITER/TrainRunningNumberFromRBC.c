@@ -161,7 +161,7 @@ int TrainRunningNumberFromRBC_DecodeBit(TrainRunningNumberFromRBC* p, Bitstream*
     }
 }
 
-int TrainRunningNumberFromRBC_EncodeInt(const TrainRunningNumberFromRBC* p, PacketInfo* data, kcg_int* stream)
+int TrainRunningNumberFromRBC_EncodeInt(const TrainRunningNumberFromRBC* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 140;
     data->q_dir = p->Q_DIR;
@@ -180,7 +180,7 @@ int TrainRunningNumberFromRBC_EncodeInt(const TrainRunningNumberFromRBC* p, Pack
     return 1;
 }
 
-int TrainRunningNumberFromRBC_DecodeInt(TrainRunningNumberFromRBC* p, const PacketInfo* data, const kcg_int* stream)
+int TrainRunningNumberFromRBC_DecodeInt(TrainRunningNumberFromRBC* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 140)
     {

@@ -48,7 +48,7 @@ int Packet_Equal(const PacketHeader* a, const PacketHeader* b)
 
                 default :
                 {
-                    fprintf(stderr, "Packet_Equal: unexpected value for a->NID_PACKET = %"PRIu64"\n", a->NID_PACKET);
+                    fprintf(stderr, "Packet_Equal: unexpected value for a->NID_PACKET = %lu\n", a->NID_PACKET);
                     return 0;
                 }
             };
@@ -260,7 +260,7 @@ int Packet_Equal(const PacketHeader* a, const PacketHeader* b)
 
                 default :
                 {
-                    fprintf(stderr, "Packet_Equal: unexpected value for a->NID_PACKET = %"PRIu64"\n", a->NID_PACKET);
+                    fprintf(stderr, "Packet_Equal: unexpected value for a->NID_PACKET = %lu\n", a->NID_PACKET);
                     return 0;
                 }
             };
@@ -274,7 +274,7 @@ int Packet_Equal(const PacketHeader* a, const PacketHeader* b)
 
         default:
         {
-            fprintf(stderr, "Packet_Equal: unexpected value for a->list = %"PRIu64"\n", a->list);
+            fprintf(stderr, "Packet_Equal: unexpected value for a->list = %lu\n", a->list);
             return 0;
         }
     };

@@ -161,7 +161,7 @@ int DataUsedByApplicationsOutsideTheERTMSETCSSystem_DecodeBit(DataUsedByApplicat
     }
 }
 
-int DataUsedByApplicationsOutsideTheERTMSETCSSystem_EncodeInt(const DataUsedByApplicationsOutsideTheERTMSETCSSystem* p, PacketInfo* data, kcg_int* stream)
+int DataUsedByApplicationsOutsideTheERTMSETCSSystem_EncodeInt(const DataUsedByApplicationsOutsideTheERTMSETCSSystem* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 44;
     data->valid = 1;
@@ -179,7 +179,7 @@ int DataUsedByApplicationsOutsideTheERTMSETCSSystem_EncodeInt(const DataUsedByAp
     return 1;
 }
 
-int DataUsedByApplicationsOutsideTheERTMSETCSSystem_DecodeInt(DataUsedByApplicationsOutsideTheERTMSETCSSystem* p, const PacketInfo* data, const kcg_int* stream)
+int DataUsedByApplicationsOutsideTheERTMSETCSSystem_DecodeInt(DataUsedByApplicationsOutsideTheERTMSETCSSystem* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 44)
     {

@@ -156,7 +156,7 @@ int StopIfInStaffResponsible_DecodeBit(StopIfInStaffResponsible* p, Bitstream* s
 static inline void StopIfInStaffResponsible_Print(const StopIfInStaffResponsible* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu,%lu)",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_SRSTOP);
@@ -178,9 +178,9 @@ static inline uint32_t StopIfInStaffResponsible_Length(const StopIfInStaffRespon
     return (uint32_t)(p->L_PACKET);
 }
 
-int StopIfInStaffResponsible_EncodeInt(const StopIfInStaffResponsible* p, PacketInfo* data, kcg_int* stream);
+int StopIfInStaffResponsible_EncodeInt(const StopIfInStaffResponsible* p, Metadata* data, kcg_int* stream);
 
-int StopIfInStaffResponsible_DecodeInt(StopIfInStaffResponsible* p, const PacketInfo* data, const kcg_int* stream);
+int StopIfInStaffResponsible_DecodeInt(StopIfInStaffResponsible* p, const Metadata* data, const kcg_int* stream);
 
 #endif // STOPIFINSTAFFRESPONSIBLE_H_INCLUDED
 

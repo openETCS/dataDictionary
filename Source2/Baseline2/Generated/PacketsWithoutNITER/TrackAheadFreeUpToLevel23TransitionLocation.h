@@ -161,7 +161,7 @@ int TrackAheadFreeUpToLevel23TransitionLocation_DecodeBit(TrackAheadFreeUpToLeve
 static inline void TrackAheadFreeUpToLevel23TransitionLocation_Print(const TrackAheadFreeUpToLevel23TransitionLocation* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu)",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_NEWCOUNTRY,
@@ -191,9 +191,9 @@ static inline uint32_t TrackAheadFreeUpToLevel23TransitionLocation_Length(const 
     return (uint32_t)(p->L_PACKET);
 }
 
-int TrackAheadFreeUpToLevel23TransitionLocation_EncodeInt(const TrackAheadFreeUpToLevel23TransitionLocation* p, PacketInfo* data, kcg_int* stream);
+int TrackAheadFreeUpToLevel23TransitionLocation_EncodeInt(const TrackAheadFreeUpToLevel23TransitionLocation* p, Metadata* data, kcg_int* stream);
 
-int TrackAheadFreeUpToLevel23TransitionLocation_DecodeInt(TrackAheadFreeUpToLevel23TransitionLocation* p, const PacketInfo* data, const kcg_int* stream);
+int TrackAheadFreeUpToLevel23TransitionLocation_DecodeInt(TrackAheadFreeUpToLevel23TransitionLocation* p, const Metadata* data, const kcg_int* stream);
 
 #endif // TRACKAHEADFREEUPTOLEVEL23TRANSITIONLOCATION_H_INCLUDED
 

@@ -134,7 +134,7 @@ int LevelTransitionOrder_1_DecodeBit(LevelTransitionOrder_1* p, Bitstream* strea
 
 static inline void LevelTransitionOrder_1_Print(const LevelTransitionOrder_1* p, FILE* stream)
 {
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu,%lu)",
             p->M_LEVELTR,
             p->NID_STM,
             p->L_ACKLEVELTR);

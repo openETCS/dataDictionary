@@ -169,7 +169,7 @@ int MovementAuthorityRequestParameters_DecodeBit(MovementAuthorityRequestParamet
 static inline void MovementAuthorityRequestParameters_Print(const MovementAuthorityRequestParameters* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu)",
             p->Q_DIR,
             p->L_PACKET,
             p->T_MAR,
@@ -195,9 +195,9 @@ static inline uint32_t MovementAuthorityRequestParameters_Length(const MovementA
     return (uint32_t)(p->L_PACKET);
 }
 
-int MovementAuthorityRequestParameters_EncodeInt(const MovementAuthorityRequestParameters* p, PacketInfo* data, kcg_int* stream);
+int MovementAuthorityRequestParameters_EncodeInt(const MovementAuthorityRequestParameters* p, Metadata* data, kcg_int* stream);
 
-int MovementAuthorityRequestParameters_DecodeInt(MovementAuthorityRequestParameters* p, const PacketInfo* data, const kcg_int* stream);
+int MovementAuthorityRequestParameters_DecodeInt(MovementAuthorityRequestParameters* p, const Metadata* data, const kcg_int* stream);
 
 #endif // MOVEMENTAUTHORITYREQUESTPARAMETERS_H_INCLUDED
 

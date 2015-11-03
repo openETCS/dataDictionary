@@ -185,7 +185,7 @@ int PositionReportParameters_DecodeBit(PositionReportParameters* p, Bitstream* s
 static inline void PositionReportParameters_Print(const PositionReportParameters* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64"",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu,%lu,%lu",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_SCALE,
@@ -233,9 +233,9 @@ static inline uint32_t PositionReportParameters_Length(const PositionReportParam
     return (uint32_t)(p->L_PACKET);
 }
 
-int PositionReportParameters_EncodeInt(const PositionReportParameters* p, PacketInfo* data, kcg_int* stream);
+int PositionReportParameters_EncodeInt(const PositionReportParameters* p, Metadata* data, kcg_int* stream);
 
-int PositionReportParameters_DecodeInt(PositionReportParameters* p, const PacketInfo* data, const kcg_int* stream);
+int PositionReportParameters_DecodeInt(PositionReportParameters* p, const Metadata* data, const kcg_int* stream);
 
 #endif // POSITIONREPORTPARAMETERS_H_INCLUDED
 

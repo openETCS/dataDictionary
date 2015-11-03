@@ -207,7 +207,7 @@ int ValidatedTrainData_DecodeBit(ValidatedTrainData* p, Bitstream* stream);
 static inline void ValidatedTrainData_Print(const ValidatedTrainData* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64"",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu",
             p->L_PACKET,
             p->NID_OPERATIONAL,
             p->NC_TRAIN,
@@ -223,7 +223,7 @@ static inline void ValidatedTrainData_Print(const ValidatedTrainData* p, FILE* s
         ValidatedTrainData_1_Print(&p->sub_1[i], stream);
     }
 
-    fprintf(stream, "%"PRIu64"",
+    fprintf(stream, "%lu",
             p->N_ITER_2);
 
     for (uint32_t i = 0; i < p->N_ITER_2; ++i)
@@ -279,9 +279,9 @@ static inline uint32_t ValidatedTrainData_Length(const ValidatedTrainData* p)
     return (uint32_t)(p->L_PACKET);
 }
 
-int ValidatedTrainData_EncodeInt(const ValidatedTrainData* p, PacketInfo* data, kcg_int* stream);
+int ValidatedTrainData_EncodeInt(const ValidatedTrainData* p, Metadata* data, kcg_int* stream);
 
-int ValidatedTrainData_DecodeInt(ValidatedTrainData* p, const PacketInfo* data, const kcg_int* stream);
+int ValidatedTrainData_DecodeInt(ValidatedTrainData* p, const Metadata* data, const kcg_int* stream);
 
 #endif // VALIDATEDTRAINDATA_H_INCLUDED
 

@@ -148,7 +148,7 @@ int Level1MovementAuthority_1_DecodeBit(Level1MovementAuthority_1* p, Bitstream*
 
 static inline void Level1MovementAuthority_1_Print(const Level1MovementAuthority_1* p, FILE* stream)
 {
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu,%lu,%lu)",
             p->L_SECTION,
             p->Q_SECTIONTIMER,
             p->T_SECTIONTIMER,

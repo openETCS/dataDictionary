@@ -203,7 +203,7 @@ int PacketForSendingPlainTextMessages_DecodeBit(PacketForSendingPlainTextMessage
 static inline void PacketForSendingPlainTextMessages_Print(const PacketForSendingPlainTextMessages* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu)",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_SCALE,
@@ -261,9 +261,9 @@ static inline uint32_t PacketForSendingPlainTextMessages_Length(const PacketForS
     return (uint32_t)(p->L_PACKET);
 }
 
-int PacketForSendingPlainTextMessages_EncodeInt(const PacketForSendingPlainTextMessages* p, PacketInfo* data, kcg_int* stream);
+int PacketForSendingPlainTextMessages_EncodeInt(const PacketForSendingPlainTextMessages* p, Metadata* data, kcg_int* stream);
 
-int PacketForSendingPlainTextMessages_DecodeInt(PacketForSendingPlainTextMessages* p, const PacketInfo* data, const kcg_int* stream);
+int PacketForSendingPlainTextMessages_DecodeInt(PacketForSendingPlainTextMessages* p, const Metadata* data, const kcg_int* stream);
 
 #endif // PACKETFORSENDINGPLAINTEXTMESSAGES_H_INCLUDED
 

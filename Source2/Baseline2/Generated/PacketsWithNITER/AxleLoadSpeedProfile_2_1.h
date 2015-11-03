@@ -136,7 +136,7 @@ int AxleLoadSpeedProfile_2_1_DecodeBit(AxleLoadSpeedProfile_2_1* p, Bitstream* s
 
 static inline void AxleLoadSpeedProfile_2_1_Print(const AxleLoadSpeedProfile_2_1* p, FILE* stream)
 {
-    fprintf(stream, "(%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu)",
             p->M_AXLELOAD,
             p->V_AXLELOAD);
 }

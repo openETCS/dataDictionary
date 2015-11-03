@@ -208,7 +208,7 @@ int Level23MovementAuthority_DecodeBit(Level23MovementAuthority* p, Bitstream* s
 static inline void Level23MovementAuthority_Print(const Level23MovementAuthority* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64"",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu,%lu",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_SCALE,
@@ -221,7 +221,7 @@ static inline void Level23MovementAuthority_Print(const Level23MovementAuthority
         Level23MovementAuthority_1_Print(&p->sub_1[i], stream);
     }
 
-    fprintf(stream, "%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu)",
             p->L_ENDSECTION,
             p->Q_SECTIONTIMER,
             p->T_SECTIONTIMER,
@@ -284,9 +284,9 @@ static inline uint32_t Level23MovementAuthority_Length(const Level23MovementAuth
     return (uint32_t)(p->L_PACKET);
 }
 
-int Level23MovementAuthority_EncodeInt(const Level23MovementAuthority* p, PacketInfo* data, kcg_int* stream);
+int Level23MovementAuthority_EncodeInt(const Level23MovementAuthority* p, Metadata* data, kcg_int* stream);
 
-int Level23MovementAuthority_DecodeInt(Level23MovementAuthority* p, const PacketInfo* data, const kcg_int* stream);
+int Level23MovementAuthority_DecodeInt(Level23MovementAuthority* p, const Metadata* data, const kcg_int* stream);
 
 #endif // LEVEL23MOVEMENTAUTHORITY_H_INCLUDED
 

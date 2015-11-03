@@ -169,7 +169,7 @@ int ReversingSupervisionInformation_DecodeBit(ReversingSupervisionInformation* p
 static inline void ReversingSupervisionInformation_Print(const ReversingSupervisionInformation* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu)",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_SCALE,
@@ -195,9 +195,9 @@ static inline uint32_t ReversingSupervisionInformation_Length(const ReversingSup
     return (uint32_t)(p->L_PACKET);
 }
 
-int ReversingSupervisionInformation_EncodeInt(const ReversingSupervisionInformation* p, PacketInfo* data, kcg_int* stream);
+int ReversingSupervisionInformation_EncodeInt(const ReversingSupervisionInformation* p, Metadata* data, kcg_int* stream);
 
-int ReversingSupervisionInformation_DecodeInt(ReversingSupervisionInformation* p, const PacketInfo* data, const kcg_int* stream);
+int ReversingSupervisionInformation_DecodeInt(ReversingSupervisionInformation* p, const Metadata* data, const kcg_int* stream);
 
 #endif // REVERSINGSUPERVISIONINFORMATION_H_INCLUDED
 

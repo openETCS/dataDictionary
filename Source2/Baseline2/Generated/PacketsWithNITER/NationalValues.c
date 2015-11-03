@@ -304,7 +304,7 @@ int NationalValues_DecodeBit(NationalValues* p, Bitstream* stream)
     }
 }
 
-int NationalValues_EncodeInt(const NationalValues* p, PacketInfo* data, kcg_int* stream)
+int NationalValues_EncodeInt(const NationalValues* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 3;
     data->q_dir = p->Q_DIR;
@@ -349,7 +349,7 @@ int NationalValues_EncodeInt(const NationalValues* p, PacketInfo* data, kcg_int*
     return 1;
 }
 
-int NationalValues_DecodeInt(NationalValues* p, const PacketInfo* data, const kcg_int* stream)
+int NationalValues_DecodeInt(NationalValues* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 3)
     {

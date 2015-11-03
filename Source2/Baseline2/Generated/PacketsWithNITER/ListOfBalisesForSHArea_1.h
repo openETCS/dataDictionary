@@ -134,7 +134,7 @@ int ListOfBalisesForSHArea_1_DecodeBit(ListOfBalisesForSHArea_1* p, Bitstream* s
 
 static inline void ListOfBalisesForSHArea_1_Print(const ListOfBalisesForSHArea_1* p, FILE* stream)
 {
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu,%lu)",
             p->Q_NEWCOUNTRY,
             p->NID_C,
             p->NID_BG);

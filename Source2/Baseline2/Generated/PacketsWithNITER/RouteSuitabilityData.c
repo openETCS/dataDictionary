@@ -287,7 +287,7 @@ int RouteSuitabilityData_DecodeBit(RouteSuitabilityData* p, Bitstream* stream)
     }
 }
 
-int RouteSuitabilityData_EncodeInt(const RouteSuitabilityData* p, PacketInfo* data, kcg_int* stream)
+int RouteSuitabilityData_EncodeInt(const RouteSuitabilityData* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 70;
     data->q_dir = p->Q_DIR;
@@ -320,7 +320,7 @@ int RouteSuitabilityData_EncodeInt(const RouteSuitabilityData* p, PacketInfo* da
     return 1;
 }
 
-int RouteSuitabilityData_DecodeInt(RouteSuitabilityData* p, const PacketInfo* data, const kcg_int* stream)
+int RouteSuitabilityData_DecodeInt(RouteSuitabilityData* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 70)
     {

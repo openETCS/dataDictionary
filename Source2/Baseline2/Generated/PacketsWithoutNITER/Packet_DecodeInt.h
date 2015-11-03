@@ -6,7 +6,7 @@
 #include "Bitstream.h"
 #include "CompressedPackets.h"
 
-int Packet_DecodeBit(PacketHeader* header, const PacketInfo* data, const kcg_int* stream);
+int Packet_DecodeBit(PacketHeader* header, const Metadata* data, const kcg_int* stream);
 
 #endif // PACKET_DECODEINT_H_INCLUDE
 

@@ -202,7 +202,7 @@ int AxleLoadSpeedProfile_DecodeBit(AxleLoadSpeedProfile* p, Bitstream* stream);
 static inline void AxleLoadSpeedProfile_Print(const AxleLoadSpeedProfile* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64"",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_SCALE,
@@ -217,7 +217,7 @@ static inline void AxleLoadSpeedProfile_Print(const AxleLoadSpeedProfile* p, FIL
         AxleLoadSpeedProfile_1_Print(&p->sub_1[i], stream);
     }
 
-    fprintf(stream, "%"PRIu64"",
+    fprintf(stream, "%lu",
             p->N_ITER_2);
 
     for (uint32_t i = 0; i < p->N_ITER_2; ++i)
@@ -272,9 +272,9 @@ static inline uint32_t AxleLoadSpeedProfile_Length(const AxleLoadSpeedProfile* p
     return (uint32_t)(p->L_PACKET);
 }
 
-int AxleLoadSpeedProfile_EncodeInt(const AxleLoadSpeedProfile* p, PacketInfo* data, kcg_int* stream);
+int AxleLoadSpeedProfile_EncodeInt(const AxleLoadSpeedProfile* p, Metadata* data, kcg_int* stream);
 
-int AxleLoadSpeedProfile_DecodeInt(AxleLoadSpeedProfile* p, const PacketInfo* data, const kcg_int* stream);
+int AxleLoadSpeedProfile_DecodeInt(AxleLoadSpeedProfile* p, const Metadata* data, const kcg_int* stream);
 
 #endif // AXLELOADSPEEDPROFILE_H_INCLUDED
 

@@ -195,7 +195,7 @@ int InternationalStaticSpeedProfile_DecodeBit(InternationalStaticSpeedProfile* p
 static inline void InternationalStaticSpeedProfile_Print(const InternationalStaticSpeedProfile* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64"",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu,%lu,%lu",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_SCALE,
@@ -209,7 +209,7 @@ static inline void InternationalStaticSpeedProfile_Print(const InternationalStat
         InternationalStaticSpeedProfile_1_Print(&p->sub_1[i], stream);
     }
 
-    fprintf(stream, "%"PRIu64"",
+    fprintf(stream, "%lu",
             p->N_ITER_2);
 
     for (uint32_t i = 0; i < p->N_ITER_2; ++i)
@@ -263,9 +263,9 @@ static inline uint32_t InternationalStaticSpeedProfile_Length(const Internationa
     return (uint32_t)(p->L_PACKET);
 }
 
-int InternationalStaticSpeedProfile_EncodeInt(const InternationalStaticSpeedProfile* p, PacketInfo* data, kcg_int* stream);
+int InternationalStaticSpeedProfile_EncodeInt(const InternationalStaticSpeedProfile* p, Metadata* data, kcg_int* stream);
 
-int InternationalStaticSpeedProfile_DecodeInt(InternationalStaticSpeedProfile* p, const PacketInfo* data, const kcg_int* stream);
+int InternationalStaticSpeedProfile_DecodeInt(InternationalStaticSpeedProfile* p, const Metadata* data, const kcg_int* stream);
 
 #endif // INTERNATIONALSTATICSPEEDPROFILE_H_INCLUDED
 

@@ -161,7 +161,7 @@ int DangerForShuntingInformation_DecodeBit(DangerForShuntingInformation* p, Bits
     }
 }
 
-int DangerForShuntingInformation_EncodeInt(const DangerForShuntingInformation* p, PacketInfo* data, kcg_int* stream)
+int DangerForShuntingInformation_EncodeInt(const DangerForShuntingInformation* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 132;
     data->q_dir = p->Q_DIR;
@@ -180,7 +180,7 @@ int DangerForShuntingInformation_EncodeInt(const DangerForShuntingInformation* p
     return 1;
 }
 
-int DangerForShuntingInformation_DecodeInt(DangerForShuntingInformation* p, const PacketInfo* data, const kcg_int* stream)
+int DangerForShuntingInformation_DecodeInt(DangerForShuntingInformation* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 132)
     {

@@ -242,7 +242,7 @@ int TrackCondition_DecodeBit(TrackCondition* p, Bitstream* stream)
     }
 }
 
-int TrackCondition_EncodeInt(const TrackCondition* p, PacketInfo* data, kcg_int* stream)
+int TrackCondition_EncodeInt(const TrackCondition* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 68;
     data->q_dir = p->Q_DIR;
@@ -273,7 +273,7 @@ int TrackCondition_EncodeInt(const TrackCondition* p, PacketInfo* data, kcg_int*
     return 1;
 }
 
-int TrackCondition_DecodeInt(TrackCondition* p, const PacketInfo* data, const kcg_int* stream)
+int TrackCondition_DecodeInt(TrackCondition* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 68)
     {

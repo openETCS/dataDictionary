@@ -165,7 +165,7 @@ int SessionManagement_DecodeBit(SessionManagement* p, Bitstream* stream);
 static inline void SessionManagement_Print(const SessionManagement* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu,%lu,%lu)",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_RBC,
@@ -203,9 +203,9 @@ static inline uint32_t SessionManagement_Length(const SessionManagement* p)
     return (uint32_t)(p->L_PACKET);
 }
 
-int SessionManagement_EncodeInt(const SessionManagement* p, PacketInfo* data, kcg_int* stream);
+int SessionManagement_EncodeInt(const SessionManagement* p, Metadata* data, kcg_int* stream);
 
-int SessionManagement_DecodeInt(SessionManagement* p, const PacketInfo* data, const kcg_int* stream);
+int SessionManagement_DecodeInt(SessionManagement* p, const Metadata* data, const kcg_int* stream);
 
 #endif // SESSIONMANAGEMENT_H_INCLUDED
 

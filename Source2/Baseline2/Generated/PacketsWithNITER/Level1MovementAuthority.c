@@ -320,7 +320,7 @@ int Level1MovementAuthority_DecodeBit(Level1MovementAuthority* p, Bitstream* str
     }
 }
 
-int Level1MovementAuthority_EncodeInt(const Level1MovementAuthority* p, PacketInfo* data, kcg_int* stream)
+int Level1MovementAuthority_EncodeInt(const Level1MovementAuthority* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 12;
     data->q_dir = p->Q_DIR;
@@ -364,7 +364,7 @@ int Level1MovementAuthority_EncodeInt(const Level1MovementAuthority* p, PacketIn
     return 1;
 }
 
-int Level1MovementAuthority_DecodeInt(Level1MovementAuthority* p, const PacketInfo* data, const kcg_int* stream)
+int Level1MovementAuthority_DecodeInt(Level1MovementAuthority* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 12)
     {

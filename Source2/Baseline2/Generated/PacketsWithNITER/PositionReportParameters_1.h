@@ -136,7 +136,7 @@ int PositionReportParameters_1_DecodeBit(PositionReportParameters_1* p, Bitstrea
 
 static inline void PositionReportParameters_1_Print(const PositionReportParameters_1* p, FILE* stream)
 {
-    fprintf(stream, "(%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu)",
             p->D_LOC,
             p->Q_LGTLOC);
 }

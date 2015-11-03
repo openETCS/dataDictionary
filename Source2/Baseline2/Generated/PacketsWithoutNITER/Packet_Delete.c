@@ -55,7 +55,7 @@ int Packet_Delete(PacketHeader* header)
 
                 default :
                 {
-                    fprintf(stderr, "Packet_Delete: unexpected value for header->NID_PACKET = %"PRIu64"\n", header->NID_PACKET);
+                    fprintf(stderr, "Packet_Delete: unexpected value for header->NID_PACKET = %lu\n", header->NID_PACKET);
                     return 0;
                 }
             };
@@ -307,7 +307,7 @@ int Packet_Delete(PacketHeader* header)
 
                 default :
                 {
-                    fprintf(stderr, "Packet_Delete: unexpected value for header->NID_PACKET = %"PRIu64"\n", header->NID_PACKET);
+                    fprintf(stderr, "Packet_Delete: unexpected value for header->NID_PACKET = %lu\n", header->NID_PACKET);
                     return 0;
                 }
             };
@@ -322,7 +322,7 @@ int Packet_Delete(PacketHeader* header)
 
         default:
         {
-            fprintf(stderr, "Packet_Delete: unexpected value for header->list = %"PRIu64"\n", header->list);
+            fprintf(stderr, "Packet_Delete: unexpected value for header->list = %lu\n", header->list);
             return 0;
         }
     };

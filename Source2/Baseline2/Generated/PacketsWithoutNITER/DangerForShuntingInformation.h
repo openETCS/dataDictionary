@@ -156,7 +156,7 @@ int DangerForShuntingInformation_DecodeBit(DangerForShuntingInformation* p, Bits
 static inline void DangerForShuntingInformation_Print(const DangerForShuntingInformation* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu,%lu)",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_ASPECT);
@@ -178,9 +178,9 @@ static inline uint32_t DangerForShuntingInformation_Length(const DangerForShunti
     return (uint32_t)(p->L_PACKET);
 }
 
-int DangerForShuntingInformation_EncodeInt(const DangerForShuntingInformation* p, PacketInfo* data, kcg_int* stream);
+int DangerForShuntingInformation_EncodeInt(const DangerForShuntingInformation* p, Metadata* data, kcg_int* stream);
 
-int DangerForShuntingInformation_DecodeInt(DangerForShuntingInformation* p, const PacketInfo* data, const kcg_int* stream);
+int DangerForShuntingInformation_DecodeInt(DangerForShuntingInformation* p, const Metadata* data, const kcg_int* stream);
 
 #endif // DANGERFORSHUNTINGINFORMATION_H_INCLUDED
 

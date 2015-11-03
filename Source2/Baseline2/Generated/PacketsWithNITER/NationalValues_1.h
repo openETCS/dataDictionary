@@ -130,7 +130,7 @@ int NationalValues_1_DecodeBit(NationalValues_1* p, Bitstream* stream);
 
 static inline void NationalValues_1_Print(const NationalValues_1* p, FILE* stream)
 {
-    fprintf(stream, "(%"PRIu64")",
+    fprintf(stream, "(%lu)",
             p->NID_C);
 }
 

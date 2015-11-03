@@ -321,7 +321,7 @@ int PositionReport_DecodeBit(PositionReport* p, Bitstream* stream)
     }
 }
 
-int PositionReport_EncodeInt(const PositionReport* p, PacketInfo* data, kcg_int* stream)
+int PositionReport_EncodeInt(const PositionReport* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 0;
     data->valid = 1;
@@ -351,7 +351,7 @@ int PositionReport_EncodeInt(const PositionReport* p, PacketInfo* data, kcg_int*
     return 1;
 }
 
-int PositionReport_DecodeInt(PositionReport* p, const PacketInfo* data, const kcg_int* stream)
+int PositionReport_DecodeInt(PositionReport* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 0)
     {

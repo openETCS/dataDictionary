@@ -338,7 +338,7 @@ int PositionReportBasedOnTwoBaliseGroups_DecodeBit(PositionReportBasedOnTwoBalis
     }
 }
 
-int PositionReportBasedOnTwoBaliseGroups_EncodeInt(const PositionReportBasedOnTwoBaliseGroups* p, PacketInfo* data, kcg_int* stream)
+int PositionReportBasedOnTwoBaliseGroups_EncodeInt(const PositionReportBasedOnTwoBaliseGroups* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 1;
     data->valid = 1;
@@ -369,7 +369,7 @@ int PositionReportBasedOnTwoBaliseGroups_EncodeInt(const PositionReportBasedOnTw
     return 1;
 }
 
-int PositionReportBasedOnTwoBaliseGroups_DecodeInt(PositionReportBasedOnTwoBaliseGroups* p, const PacketInfo* data, const kcg_int* stream)
+int PositionReportBasedOnTwoBaliseGroups_DecodeInt(PositionReportBasedOnTwoBaliseGroups* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 1)
     {

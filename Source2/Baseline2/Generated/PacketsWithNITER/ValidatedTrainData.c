@@ -282,7 +282,7 @@ int ValidatedTrainData_DecodeBit(ValidatedTrainData* p, Bitstream* stream)
     }
 }
 
-int ValidatedTrainData_EncodeInt(const ValidatedTrainData* p, PacketInfo* data, kcg_int* stream)
+int ValidatedTrainData_EncodeInt(const ValidatedTrainData* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 11;
     data->valid = 1;
@@ -319,7 +319,7 @@ int ValidatedTrainData_EncodeInt(const ValidatedTrainData* p, PacketInfo* data, 
     return 1;
 }
 
-int ValidatedTrainData_DecodeInt(ValidatedTrainData* p, const PacketInfo* data, const kcg_int* stream)
+int ValidatedTrainData_DecodeInt(ValidatedTrainData* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 11)
     {

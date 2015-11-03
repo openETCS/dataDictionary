@@ -184,7 +184,7 @@ int TrackAheadFreeUpToLevel23TransitionLocation_DecodeBit(TrackAheadFreeUpToLeve
     }
 }
 
-int TrackAheadFreeUpToLevel23TransitionLocation_EncodeInt(const TrackAheadFreeUpToLevel23TransitionLocation* p, PacketInfo* data, kcg_int* stream)
+int TrackAheadFreeUpToLevel23TransitionLocation_EncodeInt(const TrackAheadFreeUpToLevel23TransitionLocation* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 90;
     data->q_dir = p->Q_DIR;
@@ -205,7 +205,7 @@ int TrackAheadFreeUpToLevel23TransitionLocation_EncodeInt(const TrackAheadFreeUp
     return 1;
 }
 
-int TrackAheadFreeUpToLevel23TransitionLocation_DecodeInt(TrackAheadFreeUpToLevel23TransitionLocation* p, const PacketInfo* data, const kcg_int* stream)
+int TrackAheadFreeUpToLevel23TransitionLocation_DecodeInt(TrackAheadFreeUpToLevel23TransitionLocation* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 90)
     {

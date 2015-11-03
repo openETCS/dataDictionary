@@ -186,7 +186,7 @@ int TemporarySpeedRestriction_DecodeBit(TemporarySpeedRestriction* p, Bitstream*
 static inline void TemporarySpeedRestriction_Print(const TemporarySpeedRestriction* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu)",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_SCALE,
@@ -218,9 +218,9 @@ static inline uint32_t TemporarySpeedRestriction_Length(const TemporarySpeedRest
     return (uint32_t)(p->L_PACKET);
 }
 
-int TemporarySpeedRestriction_EncodeInt(const TemporarySpeedRestriction* p, PacketInfo* data, kcg_int* stream);
+int TemporarySpeedRestriction_EncodeInt(const TemporarySpeedRestriction* p, Metadata* data, kcg_int* stream);
 
-int TemporarySpeedRestriction_DecodeInt(TemporarySpeedRestriction* p, const PacketInfo* data, const kcg_int* stream);
+int TemporarySpeedRestriction_DecodeInt(TemporarySpeedRestriction* p, const Metadata* data, const kcg_int* stream);
 
 #endif // TEMPORARYSPEEDRESTRICTION_H_INCLUDED
 

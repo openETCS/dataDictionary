@@ -184,7 +184,7 @@ int InfillLocationReference_DecodeBit(InfillLocationReference* p, Bitstream* str
     }
 }
 
-int InfillLocationReference_EncodeInt(const InfillLocationReference* p, PacketInfo* data, kcg_int* stream)
+int InfillLocationReference_EncodeInt(const InfillLocationReference* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 136;
     data->q_dir = p->Q_DIR;
@@ -205,7 +205,7 @@ int InfillLocationReference_EncodeInt(const InfillLocationReference* p, PacketIn
     return 1;
 }
 
-int InfillLocationReference_DecodeInt(InfillLocationReference* p, const PacketInfo* data, const kcg_int* stream)
+int InfillLocationReference_DecodeInt(InfillLocationReference* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 136)
     {

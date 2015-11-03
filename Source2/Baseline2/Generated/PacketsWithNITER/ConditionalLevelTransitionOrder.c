@@ -196,7 +196,7 @@ int ConditionalLevelTransitionOrder_DecodeBit(ConditionalLevelTransitionOrder* p
     }
 }
 
-int ConditionalLevelTransitionOrder_EncodeInt(const ConditionalLevelTransitionOrder* p, PacketInfo* data, kcg_int* stream)
+int ConditionalLevelTransitionOrder_EncodeInt(const ConditionalLevelTransitionOrder* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 46;
     data->q_dir = p->Q_DIR;
@@ -208,9 +208,9 @@ int ConditionalLevelTransitionOrder_EncodeInt(const ConditionalLevelTransitionOr
 
     stream[startAddress++] = p->Q_DIR;
     stream[startAddress++] = p->L_PACKET;
-    stream[startAddress++] = p->N_ITER_1 + 1;
     stream[startAddress++] = p->M_LEVELTR;
     stream[startAddress++] = p->NID_STM;
+    stream[startAddress++] = p->N_ITER_1;
 
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
@@ -223,7 +223,7 @@ int ConditionalLevelTransitionOrder_EncodeInt(const ConditionalLevelTransitionOr
     return 1;
 }
 
-int ConditionalLevelTransitionOrder_DecodeInt(ConditionalLevelTransitionOrder* p, const PacketInfo* data, const kcg_int* stream)
+int ConditionalLevelTransitionOrder_DecodeInt(ConditionalLevelTransitionOrder* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 46)
     {
@@ -235,9 +235,9 @@ int ConditionalLevelTransitionOrder_DecodeInt(ConditionalLevelTransitionOrder* p
 
     p->Q_DIR = stream[startAddress++];
     p->L_PACKET = stream[startAddress++];
-    p->N_ITER_1 = stream[startAddress++] - 1;
     p->M_LEVELTR = stream[startAddress++];
     p->NID_STM = stream[startAddress++];
+    p->N_ITER_1 = stream[startAddress++];
 
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {

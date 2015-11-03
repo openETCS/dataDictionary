@@ -188,7 +188,7 @@ int Linking_DecodeBit(Linking* p, Bitstream* stream);
 static inline void Linking_Print(const Linking* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64"",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_SCALE,
@@ -248,9 +248,9 @@ static inline uint32_t Linking_Length(const Linking* p)
     return (uint32_t)(p->L_PACKET);
 }
 
-int Linking_EncodeInt(const Linking* p, PacketInfo* data, kcg_int* stream);
+int Linking_EncodeInt(const Linking* p, Metadata* data, kcg_int* stream);
 
-int Linking_DecodeInt(Linking* p, const PacketInfo* data, const kcg_int* stream);
+int Linking_DecodeInt(Linking* p, const Metadata* data, const kcg_int* stream);
 
 #endif // LINKING_H_INCLUDED
 

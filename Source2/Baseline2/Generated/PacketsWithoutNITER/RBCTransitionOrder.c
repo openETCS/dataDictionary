@@ -246,7 +246,7 @@ int RBCTransitionOrder_DecodeBit(RBCTransitionOrder* p, Bitstream* stream)
     }
 }
 
-int RBCTransitionOrder_EncodeInt(const RBCTransitionOrder* p, PacketInfo* data, kcg_int* stream)
+int RBCTransitionOrder_EncodeInt(const RBCTransitionOrder* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 131;
     data->q_dir = p->Q_DIR;
@@ -270,7 +270,7 @@ int RBCTransitionOrder_EncodeInt(const RBCTransitionOrder* p, PacketInfo* data, 
     return 1;
 }
 
-int RBCTransitionOrder_DecodeInt(RBCTransitionOrder* p, const PacketInfo* data, const kcg_int* stream)
+int RBCTransitionOrder_DecodeInt(RBCTransitionOrder* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 131)
     {

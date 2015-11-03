@@ -207,7 +207,7 @@ int SessionManagement_DecodeBit(SessionManagement* p, Bitstream* stream)
     }
 }
 
-int SessionManagement_EncodeInt(const SessionManagement* p, PacketInfo* data, kcg_int* stream)
+int SessionManagement_EncodeInt(const SessionManagement* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 42;
     data->q_dir = p->Q_DIR;
@@ -230,7 +230,7 @@ int SessionManagement_EncodeInt(const SessionManagement* p, PacketInfo* data, kc
     return 1;
 }
 
-int SessionManagement_DecodeInt(SessionManagement* p, const PacketInfo* data, const kcg_int* stream)
+int SessionManagement_DecodeInt(SessionManagement* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 42)
     {

@@ -132,7 +132,7 @@ int ConditionalLevelTransitionOrder_1_DecodeBit(ConditionalLevelTransitionOrder_
 
 static inline void ConditionalLevelTransitionOrder_1_Print(const ConditionalLevelTransitionOrder_1* p, FILE* stream)
 {
-    fprintf(stream, "(%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu)",
             p->M_LEVELTR,
             p->NID_STM);
 }

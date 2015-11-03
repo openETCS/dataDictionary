@@ -246,7 +246,7 @@ int TemporarySpeedRestriction_DecodeBit(TemporarySpeedRestriction* p, Bitstream*
     }
 }
 
-int TemporarySpeedRestriction_EncodeInt(const TemporarySpeedRestriction* p, PacketInfo* data, kcg_int* stream)
+int TemporarySpeedRestriction_EncodeInt(const TemporarySpeedRestriction* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 65;
     data->q_dir = p->Q_DIR;
@@ -270,7 +270,7 @@ int TemporarySpeedRestriction_EncodeInt(const TemporarySpeedRestriction* p, Pack
     return 1;
 }
 
-int TemporarySpeedRestriction_DecodeInt(TemporarySpeedRestriction* p, const PacketInfo* data, const kcg_int* stream)
+int TemporarySpeedRestriction_DecodeInt(TemporarySpeedRestriction* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 65)
     {

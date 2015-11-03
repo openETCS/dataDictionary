@@ -215,7 +215,7 @@ int PositionReportBasedOnTwoBaliseGroups_DecodeBit(PositionReportBasedOnTwoBalis
 static inline void PositionReportBasedOnTwoBaliseGroups_Print(const PositionReportBasedOnTwoBaliseGroups* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu)",
             p->L_PACKET,
             p->Q_SCALE,
             p->NID_LRBG,
@@ -271,9 +271,9 @@ static inline uint32_t PositionReportBasedOnTwoBaliseGroups_Length(const Positio
     return (uint32_t)(p->L_PACKET);
 }
 
-int PositionReportBasedOnTwoBaliseGroups_EncodeInt(const PositionReportBasedOnTwoBaliseGroups* p, PacketInfo* data, kcg_int* stream);
+int PositionReportBasedOnTwoBaliseGroups_EncodeInt(const PositionReportBasedOnTwoBaliseGroups* p, Metadata* data, kcg_int* stream);
 
-int PositionReportBasedOnTwoBaliseGroups_DecodeInt(PositionReportBasedOnTwoBaliseGroups* p, const PacketInfo* data, const kcg_int* stream);
+int PositionReportBasedOnTwoBaliseGroups_DecodeInt(PositionReportBasedOnTwoBaliseGroups* p, const Metadata* data, const kcg_int* stream);
 
 #endif // POSITIONREPORTBASEDONTWOBALISEGROUPS_H_INCLUDED
 

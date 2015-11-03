@@ -140,7 +140,7 @@ int GeographicalPositionInformation_1_DecodeBit(GeographicalPositionInformation_
 
 static inline void GeographicalPositionInformation_1_Print(const GeographicalPositionInformation_1* p, FILE* stream)
 {
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu,%lu)",
             p->Q_NEWCOUNTRY,
             p->NID_C,
             p->NID_BG,

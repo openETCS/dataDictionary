@@ -161,7 +161,7 @@ int ListOfBalisesForSHArea_DecodeBit(ListOfBalisesForSHArea* p, Bitstream* strea
 static inline void ListOfBalisesForSHArea_Print(const ListOfBalisesForSHArea* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64"",
+    fprintf(stream, "(%lu,%lu,%lu",
             p->Q_DIR,
             p->L_PACKET,
             p->N_ITER_1);
@@ -201,9 +201,9 @@ static inline uint32_t ListOfBalisesForSHArea_Length(const ListOfBalisesForSHAre
     return (uint32_t)(p->L_PACKET);
 }
 
-int ListOfBalisesForSHArea_EncodeInt(const ListOfBalisesForSHArea* p, PacketInfo* data, kcg_int* stream);
+int ListOfBalisesForSHArea_EncodeInt(const ListOfBalisesForSHArea* p, Metadata* data, kcg_int* stream);
 
-int ListOfBalisesForSHArea_DecodeInt(ListOfBalisesForSHArea* p, const PacketInfo* data, const kcg_int* stream);
+int ListOfBalisesForSHArea_DecodeInt(ListOfBalisesForSHArea* p, const Metadata* data, const kcg_int* stream);
 
 #endif // LISTOFBALISESFORSHAREA_H_INCLUDED
 

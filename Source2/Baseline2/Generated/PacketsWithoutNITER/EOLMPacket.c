@@ -246,7 +246,7 @@ int EOLMPacket_DecodeBit(EOLMPacket* p, Bitstream* stream)
     }
 }
 
-int EOLMPacket_EncodeInt(const EOLMPacket* p, PacketInfo* data, kcg_int* stream)
+int EOLMPacket_EncodeInt(const EOLMPacket* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 134;
     data->q_dir = p->Q_DIR;
@@ -270,7 +270,7 @@ int EOLMPacket_EncodeInt(const EOLMPacket* p, PacketInfo* data, kcg_int* stream)
     return 1;
 }
 
-int EOLMPacket_DecodeInt(EOLMPacket* p, const PacketInfo* data, const kcg_int* stream)
+int EOLMPacket_DecodeInt(EOLMPacket* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 134)
     {

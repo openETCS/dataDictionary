@@ -303,7 +303,7 @@ int Level23MovementAuthority_DecodeBit(Level23MovementAuthority* p, Bitstream* s
     }
 }
 
-int Level23MovementAuthority_EncodeInt(const Level23MovementAuthority* p, PacketInfo* data, kcg_int* stream)
+int Level23MovementAuthority_EncodeInt(const Level23MovementAuthority* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 15;
     data->q_dir = p->Q_DIR;
@@ -346,7 +346,7 @@ int Level23MovementAuthority_EncodeInt(const Level23MovementAuthority* p, Packet
     return 1;
 }
 
-int Level23MovementAuthority_DecodeInt(Level23MovementAuthority* p, const PacketInfo* data, const kcg_int* stream)
+int Level23MovementAuthority_DecodeInt(Level23MovementAuthority* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 15)
     {

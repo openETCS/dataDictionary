@@ -161,7 +161,7 @@ int StopIfInStaffResponsible_DecodeBit(StopIfInStaffResponsible* p, Bitstream* s
     }
 }
 
-int StopIfInStaffResponsible_EncodeInt(const StopIfInStaffResponsible* p, PacketInfo* data, kcg_int* stream)
+int StopIfInStaffResponsible_EncodeInt(const StopIfInStaffResponsible* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 137;
     data->q_dir = p->Q_DIR;
@@ -180,7 +180,7 @@ int StopIfInStaffResponsible_EncodeInt(const StopIfInStaffResponsible* p, Packet
     return 1;
 }
 
-int StopIfInStaffResponsible_DecodeInt(StopIfInStaffResponsible* p, const PacketInfo* data, const kcg_int* stream)
+int StopIfInStaffResponsible_DecodeInt(StopIfInStaffResponsible* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 137)
     {

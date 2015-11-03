@@ -265,7 +265,7 @@ int AxleLoadSpeedProfile_DecodeBit(AxleLoadSpeedProfile* p, Bitstream* stream)
     }
 }
 
-int AxleLoadSpeedProfile_EncodeInt(const AxleLoadSpeedProfile* p, PacketInfo* data, kcg_int* stream)
+int AxleLoadSpeedProfile_EncodeInt(const AxleLoadSpeedProfile* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 51;
     data->q_dir = p->Q_DIR;
@@ -302,7 +302,7 @@ int AxleLoadSpeedProfile_EncodeInt(const AxleLoadSpeedProfile* p, PacketInfo* da
     return 1;
 }
 
-int AxleLoadSpeedProfile_DecodeInt(AxleLoadSpeedProfile* p, const PacketInfo* data, const kcg_int* stream)
+int AxleLoadSpeedProfile_DecodeInt(AxleLoadSpeedProfile* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 51)
     {

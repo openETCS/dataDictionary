@@ -161,7 +161,7 @@ int TemporarySpeedRestrictionRevocation_DecodeBit(TemporarySpeedRestrictionRevoc
     }
 }
 
-int TemporarySpeedRestrictionRevocation_EncodeInt(const TemporarySpeedRestrictionRevocation* p, PacketInfo* data, kcg_int* stream)
+int TemporarySpeedRestrictionRevocation_EncodeInt(const TemporarySpeedRestrictionRevocation* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 66;
     data->q_dir = p->Q_DIR;
@@ -180,7 +180,7 @@ int TemporarySpeedRestrictionRevocation_EncodeInt(const TemporarySpeedRestrictio
     return 1;
 }
 
-int TemporarySpeedRestrictionRevocation_DecodeInt(TemporarySpeedRestrictionRevocation* p, const PacketInfo* data, const kcg_int* stream)
+int TemporarySpeedRestrictionRevocation_DecodeInt(TemporarySpeedRestrictionRevocation* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 66)
     {

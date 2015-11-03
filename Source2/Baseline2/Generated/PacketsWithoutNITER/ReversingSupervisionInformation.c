@@ -195,7 +195,7 @@ int ReversingSupervisionInformation_DecodeBit(ReversingSupervisionInformation* p
     }
 }
 
-int ReversingSupervisionInformation_EncodeInt(const ReversingSupervisionInformation* p, PacketInfo* data, kcg_int* stream)
+int ReversingSupervisionInformation_EncodeInt(const ReversingSupervisionInformation* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 139;
     data->q_dir = p->Q_DIR;
@@ -216,7 +216,7 @@ int ReversingSupervisionInformation_EncodeInt(const ReversingSupervisionInformat
     return 1;
 }
 
-int ReversingSupervisionInformation_DecodeInt(ReversingSupervisionInformation* p, const PacketInfo* data, const kcg_int* stream)
+int ReversingSupervisionInformation_DecodeInt(ReversingSupervisionInformation* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 139)
     {

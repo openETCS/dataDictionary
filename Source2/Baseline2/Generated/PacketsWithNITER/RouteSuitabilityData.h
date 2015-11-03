@@ -184,7 +184,7 @@ int RouteSuitabilityData_DecodeBit(RouteSuitabilityData* p, Bitstream* stream);
 static inline void RouteSuitabilityData_Print(const RouteSuitabilityData* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64"",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_SCALE,
@@ -260,9 +260,9 @@ static inline uint32_t RouteSuitabilityData_Length(const RouteSuitabilityData* p
     return (uint32_t)(p->L_PACKET);
 }
 
-int RouteSuitabilityData_EncodeInt(const RouteSuitabilityData* p, PacketInfo* data, kcg_int* stream);
+int RouteSuitabilityData_EncodeInt(const RouteSuitabilityData* p, Metadata* data, kcg_int* stream);
 
-int RouteSuitabilityData_DecodeInt(RouteSuitabilityData* p, const PacketInfo* data, const kcg_int* stream);
+int RouteSuitabilityData_DecodeInt(RouteSuitabilityData* p, const Metadata* data, const kcg_int* stream);
 
 #endif // ROUTESUITABILITYDATA_H_INCLUDED
 

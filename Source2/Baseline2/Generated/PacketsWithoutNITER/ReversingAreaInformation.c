@@ -195,7 +195,7 @@ int ReversingAreaInformation_DecodeBit(ReversingAreaInformation* p, Bitstream* s
     }
 }
 
-int ReversingAreaInformation_EncodeInt(const ReversingAreaInformation* p, PacketInfo* data, kcg_int* stream)
+int ReversingAreaInformation_EncodeInt(const ReversingAreaInformation* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 138;
     data->q_dir = p->Q_DIR;
@@ -216,7 +216,7 @@ int ReversingAreaInformation_EncodeInt(const ReversingAreaInformation* p, Packet
     return 1;
 }
 
-int ReversingAreaInformation_DecodeInt(ReversingAreaInformation* p, const PacketInfo* data, const kcg_int* stream)
+int ReversingAreaInformation_DecodeInt(ReversingAreaInformation* p, const Metadata* data, const kcg_int* stream)
 {
     if(data->nid_packet != 138)
     {

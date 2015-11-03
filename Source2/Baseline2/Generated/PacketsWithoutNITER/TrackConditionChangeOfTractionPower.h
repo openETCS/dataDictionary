@@ -168,7 +168,7 @@ int TrackConditionChangeOfTractionPower_DecodeBit(TrackConditionChangeOfTraction
 static inline void TrackConditionChangeOfTractionPower_Print(const TrackConditionChangeOfTractionPower* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu)",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_SCALE,
@@ -194,9 +194,9 @@ static inline uint32_t TrackConditionChangeOfTractionPower_Length(const TrackCon
     return (uint32_t)(p->L_PACKET);
 }
 
-int TrackConditionChangeOfTractionPower_EncodeInt(const TrackConditionChangeOfTractionPower* p, PacketInfo* data, kcg_int* stream);
+int TrackConditionChangeOfTractionPower_EncodeInt(const TrackConditionChangeOfTractionPower* p, Metadata* data, kcg_int* stream);
 
-int TrackConditionChangeOfTractionPower_DecodeInt(TrackConditionChangeOfTractionPower* p, const PacketInfo* data, const kcg_int* stream);
+int TrackConditionChangeOfTractionPower_DecodeInt(TrackConditionChangeOfTractionPower* p, const Metadata* data, const kcg_int* stream);
 
 #endif // TRACKCONDITIONCHANGEOFTRACTIONPOWER_H_INCLUDED
 

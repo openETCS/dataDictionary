@@ -157,7 +157,7 @@ int RadioNetworkRegistration_DecodeBit(RadioNetworkRegistration* p, Bitstream* s
 static inline void RadioNetworkRegistration_Print(const RadioNetworkRegistration* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu,%lu)",
             p->Q_DIR,
             p->L_PACKET,
             p->NID_MN);
@@ -179,9 +179,9 @@ static inline uint32_t RadioNetworkRegistration_Length(const RadioNetworkRegistr
     return (uint32_t)(p->L_PACKET);
 }
 
-int RadioNetworkRegistration_EncodeInt(const RadioNetworkRegistration* p, PacketInfo* data, kcg_int* stream);
+int RadioNetworkRegistration_EncodeInt(const RadioNetworkRegistration* p, Metadata* data, kcg_int* stream);
 
-int RadioNetworkRegistration_DecodeInt(RadioNetworkRegistration* p, const PacketInfo* data, const kcg_int* stream);
+int RadioNetworkRegistration_DecodeInt(RadioNetworkRegistration* p, const Metadata* data, const kcg_int* stream);
 
 #endif // RADIONETWORKREGISTRATION_H_INCLUDED
 

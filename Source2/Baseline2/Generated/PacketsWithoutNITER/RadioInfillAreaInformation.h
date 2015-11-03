@@ -197,7 +197,7 @@ int RadioInfillAreaInformation_DecodeBit(RadioInfillAreaInformation* p, Bitstrea
 static inline void RadioInfillAreaInformation_Print(const RadioInfillAreaInformation* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu,%lu)",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_SCALE,
@@ -233,9 +233,9 @@ static inline uint32_t RadioInfillAreaInformation_Length(const RadioInfillAreaIn
     return (uint32_t)(p->L_PACKET);
 }
 
-int RadioInfillAreaInformation_EncodeInt(const RadioInfillAreaInformation* p, PacketInfo* data, kcg_int* stream);
+int RadioInfillAreaInformation_EncodeInt(const RadioInfillAreaInformation* p, Metadata* data, kcg_int* stream);
 
-int RadioInfillAreaInformation_DecodeInt(RadioInfillAreaInformation* p, const PacketInfo* data, const kcg_int* stream);
+int RadioInfillAreaInformation_DecodeInt(RadioInfillAreaInformation* p, const Metadata* data, const kcg_int* stream);
 
 #endif // RADIOINFILLAREAINFORMATION_H_INCLUDED
 

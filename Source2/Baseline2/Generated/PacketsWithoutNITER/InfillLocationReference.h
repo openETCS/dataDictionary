@@ -161,7 +161,7 @@ int InfillLocationReference_DecodeBit(InfillLocationReference* p, Bitstream* str
 static inline void InfillLocationReference_Print(const InfillLocationReference* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
-    fprintf(stream, "(%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64",%"PRIu64")",
+    fprintf(stream, "(%lu,%lu,%lu,%lu,%lu)",
             p->Q_DIR,
             p->L_PACKET,
             p->Q_NEWCOUNTRY,
@@ -191,9 +191,9 @@ static inline uint32_t InfillLocationReference_Length(const InfillLocationRefere
     return (uint32_t)(p->L_PACKET);
 }
 
-int InfillLocationReference_EncodeInt(const InfillLocationReference* p, PacketInfo* data, kcg_int* stream);
+int InfillLocationReference_EncodeInt(const InfillLocationReference* p, Metadata* data, kcg_int* stream);
 
-int InfillLocationReference_DecodeInt(InfillLocationReference* p, const PacketInfo* data, const kcg_int* stream);
+int InfillLocationReference_DecodeInt(InfillLocationReference* p, const Metadata* data, const kcg_int* stream);
 
 #endif // INFILLLOCATIONREFERENCE_H_INCLUDED
 
