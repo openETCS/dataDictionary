@@ -135,33 +135,28 @@ int main (void)
         f.sub_1[0].L_ACKMAMODE = 1000;
         f.sub_1[0].Q_MAMODE = 0;
     }
-
-    PacketForsendingPlainTextMessages g;
+*/
+    PacketForSendingPlainTextMessages* g = PacketForSendingPlainTextMessages_New();
     {
-        g.Q_DIR = 1;
-        g.L_PACKET = 142;
-        g.Q_SCALE = 1;
-        g.Q_TEXTCLASS = 0;
-        g.Q_TEXTDISPLAY = 0;
-        g.D_TEXTDISPLAY = 400;
-        g.M_MODETEXTDISPLAY_0 = 3;
-        g.M_LEVELTEXTDISPLAY_0 = 1;
-        g.NID_NTC_0 = 200;
-        g.L_TEXTDISPLAY = 700;
-        g.T_TEXTDISPLAY = 80;
-        g.M_MODETEXTDISPLAY_1 = 3;
-        g.M_LEVELTEXTDISPLAY_1 = 1;
-        g.NID_NTC_1 = 23;
-        g.Q_TEXTCONFIRM = 1;
-        g.Q_CONFTEXTDISPLAY = 0;
-        g.Q_TEXTREPORT = 1;
-        g.NID_TEXTMESSAGE = 100;
-        g.NID_C = 333;
-        g.NID_RBC = 1200;
-        g.L_TEXT = 2;
-        g.X_TEXT = 30;
+        g->Q_DIR = 1;
+        g->L_PACKET = 116;
+        g->Q_SCALE = 1;
+        g->Q_TEXTCLASS = 0;
+        g->Q_TEXTDISPLAY = 0;
+        g->D_TEXTDISPLAY = 400;
+        g->M_MODETEXTDISPLAY_0 = 3;
+        g->M_LEVELTEXTDISPLAY_0 = 1;
+        g->NID_STM_0 = 200;
+        g->L_TEXTDISPLAY = 700;
+        g->T_TEXTDISPLAY = 80;
+        g->M_MODETEXTDISPLAY_1 = 3;
+        g->M_LEVELTEXTDISPLAY_1 = 1;
+        g->NID_STM_1 = 23;
+        g->Q_TEXTCONFIRM = 1;
+        g->L_TEXT = 2;
+        g->X_TEXT = 30;
     }
-
+/*
     Linking h;
     {
 	h.Q_DIR = 1;
@@ -408,7 +403,9 @@ int main (void)
     EurobaliseTelegram_Add(&t1, &d->header);
     EurobaliseTelegram_Add(&t1, &e->header);
     EurobaliseTelegram_Add(&t1, &f->header);
+    */
     EurobaliseTelegram_Add(&t1, &g->header);
+    /*
     EurobaliseTelegram_Add(&t1, &h->header);
     EurobaliseTelegram_Add(&t1, &i->header);
     EurobaliseTelegram_Add(&t1, &j->header);
