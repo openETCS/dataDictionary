@@ -4,28 +4,24 @@ MAKEFLAGS += --no-print-directory --silent
 
 TOPDIR=../
 
+all: clean test_packets test_issue31_1 test_issue31_2
+	./test_packets
+	./test_issue31_1
+	./test_issue31_2
+
 VPATH = $(TOPDIR)/Telegram
 
-CC=cc
+include $(TOPDIR)/Makefile.template
 
 CPPFLAGS+=-I$(TOPDIR)/Foundation/Bits
 CPPFLAGS+=-I$(TOPDIR)/Foundation/Packets
 CPPFLAGS+=-I$(TOPDIR)/Generated/PacketsWithoutNITER
 CPPFLAGS+=-I$(TOPDIR)/Generated/PacketsWithNITER
 CPPFLAGS+=-I$(TOPDIR)/Telegram
-CFLAGS += -std=c99 -Wall -pedantic -Wno-format
-
-#CFLAGS += -Werror 
-#CFLAGS += -Weverything -Wno-padded 
 
 LDFLAGS += -L$(TOPDIR)/Foundation/Bits -lbits
 LDFLAGS += -L$(TOPDIR)/Generated/PacketsWithoutNITER -lgenerated_packetswithoutniter
 LDFLAGS += -L$(TOPDIR)/Generated/PacketsWithNITER -lgenerated_packetswithniter
-
-all: clean test_packets test_issue31_1 test_issue31_2
-	./test_packets
-	./test_issue31_1
-	./test_issue31_2
 
 SRC := PacketSequence.c\
        EurobaliseTelegram.c
@@ -47,7 +43,7 @@ test_issue31_1: test_issue31_1.o $(OBJ)
 test_issue31_2: test_issue31_2.o $(OBJ)
 	$(CC) -o $@ $+ $(LDFLAGS)
 
-clean:
+clean::
 	$(RM) test_packets
 	$(RM) test_issue31_1
 	$(RM) test_issue31_2
