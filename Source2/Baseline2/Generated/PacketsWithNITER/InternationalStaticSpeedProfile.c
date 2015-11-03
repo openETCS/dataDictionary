@@ -261,6 +261,8 @@ int InternationalStaticSpeedProfile_EncodeInt(const InternationalStaticSpeedProf
     stream[startAddress++] = p->Q_DIR;
     stream[startAddress++] = p->L_PACKET;
     stream[startAddress++] = p->Q_SCALE;
+    stream[startAddress++] = p->N_ITER_2 + 1;
+
     stream[startAddress++] = p->D_STATIC;
     stream[startAddress++] = p->V_STATIC;
     stream[startAddress++] = p->Q_FRONT;
@@ -270,8 +272,6 @@ int InternationalStaticSpeedProfile_EncodeInt(const InternationalStaticSpeedProf
     {
         InternationalStaticSpeedProfile_1_EncodeInt(&(p->sub_1[i]), &startAddress, stream);
     }
-
-    stream[startAddress++] = p->N_ITER_2;
 
     for (uint32_t i = 0; i < p->N_ITER_2; ++i)
     {
@@ -297,6 +297,8 @@ int InternationalStaticSpeedProfile_DecodeInt(InternationalStaticSpeedProfile* p
     p->Q_DIR = stream[startAddress++];
     p->L_PACKET = stream[startAddress++];
     p->Q_SCALE = stream[startAddress++];
+    p->N_ITER_2 = stream[startAddress++] - 1;
+
     p->D_STATIC = stream[startAddress++];
     p->V_STATIC = stream[startAddress++];
     p->Q_FRONT = stream[startAddress++];
@@ -306,8 +308,6 @@ int InternationalStaticSpeedProfile_DecodeInt(InternationalStaticSpeedProfile* p
     {
         InternationalStaticSpeedProfile_1_DecodeInt(&(p->sub_1[i]), &startAddress, stream);
     }
-
-    p->N_ITER_2 = stream[startAddress++];
 
     for (uint32_t i = 0; i < p->N_ITER_2; ++i)
     {

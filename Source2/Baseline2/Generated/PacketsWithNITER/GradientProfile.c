@@ -243,10 +243,10 @@ int GradientProfile_EncodeInt(const GradientProfile* p, Metadata* data, kcg_int*
     stream[startAddress++] = p->Q_DIR;
     stream[startAddress++] = p->L_PACKET;
     stream[startAddress++] = p->Q_SCALE;
+    stream[startAddress++] = p->N_ITER_1 + 1;
     stream[startAddress++] = p->D_GRADIENT;
     stream[startAddress++] = p->Q_GDIR;
     stream[startAddress++] = p->G_A;
-    stream[startAddress++] = p->N_ITER_1;
 
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
@@ -272,10 +272,10 @@ int GradientProfile_DecodeInt(GradientProfile* p, const Metadata* data, const kc
     p->Q_DIR = stream[startAddress++];
     p->L_PACKET = stream[startAddress++];
     p->Q_SCALE = stream[startAddress++];
+    p->N_ITER_1 = stream[startAddress++] - 1;
     p->D_GRADIENT = stream[startAddress++];
     p->Q_GDIR = stream[startAddress++];
     p->G_A = stream[startAddress++];
-    p->N_ITER_1 = stream[startAddress++];
 
     for (uint32_t i = 0; i < p->N_ITER_1; ++i)
     {
