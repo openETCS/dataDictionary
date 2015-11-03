@@ -13,7 +13,7 @@ CPPFLAGS+=-I$(TOPDIR)/Foundation/Packets
 CPPFLAGS+=-I$(TOPDIR)/Generated/PacketsWithoutNITER
 CPPFLAGS+=-I$(TOPDIR)/Generated/PacketsWithNITER
 CPPFLAGS+=-I$(TOPDIR)/Telegram
-CFLAGS += -std=c99 -Wall -pedantic 
+CFLAGS += -std=c99 -Wall -pedantic -Wno-format
 
 #CFLAGS += -Werror 
 #CFLAGS += -Weverything -Wno-padded 

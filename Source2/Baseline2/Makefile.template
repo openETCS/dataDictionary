@@ -17,6 +17,7 @@ INCLUDES=$(CPPFLAGS) -I$(FRAMAC_SHARE)/libc
 SHARED_FLAGS=-Wall -pedantic -O3
 #SHARED_FLAGS+=-Wconversion
 CFLAGS= -std=c99 $(SHARED_FLAGS)
+CFLAGS+= -Wno-format
 CXXFLAGS=-std=c++11 $(SHARED_FLAGS)
 
 
