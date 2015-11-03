@@ -1,25 +1,34 @@
 
 This directory contains the packet data structures together
 with their respective functions 
-	- to decode data from a bitstream
-	- and encode data into a bitstream.
+	- to en/decode data into/from a bitstream
+	- to en/decode data into/from a integer stream 
 
-There are also functions to convert an eurobalise telegram into the format
-required by the SCADE model.
-(These functions are not tested because we have no access to the SCADE model.)
+The integer stream functions connect to the SCADE model and
+have not been tested because we have no access to the SCADE model.
 
-The data structure for eurobalise telegram is contained in the directory Tests.
+IMPORTANT:
+	In order to compile for the SCADE model the preprocessor flag '-DHAVE_KCG_HEADER' must be used.
+
+The directory structure is as follows
+
+├── Foundation
+│   ├── Bits
+│   └── Packets
+├── Generated
+│   ├── PacketsWithNITER
+│   └── PacketsWithoutNITER
+├── Scripts
+├── Telegram
+└── Tests
+
+
+The data structures for Eurobalise telegram are contained in the directory Telegram.
 
 The basic bitstream function are in the directory Foundation/Bits.
 
 All code is written in C99.
 The code can be compiled with 'make'.
 The default target of Makefile also executes a few tests in directory Tests.
-
-IMPORTANT:
-
-In order to compile for the SCADE model the preprocessor flag '-DHAVE_KCG_HEADER' must be used.
-
-
 
 
