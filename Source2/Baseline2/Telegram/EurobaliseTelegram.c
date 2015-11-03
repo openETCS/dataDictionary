@@ -142,6 +142,8 @@ int EurobaliseTelegram_EncodeBit(const EurobaliseTelegram* t, Bitstream* stream)
     return 1;
 }
 
+// Note: the telegram header (t->header) is not used by this function
+//
 int EurobaliseTelegram_EncodeInt(const EurobaliseTelegram* t, CompressedPackets* packetStruct)
 {
     kcg_int startAddress = 0;
@@ -164,6 +166,9 @@ int EurobaliseTelegram_EncodeInt(const EurobaliseTelegram* t, CompressedPackets*
     return 1;
 }
 
+// Note: this function assumes that the telegram header, that is,
+//       the field t->header.Q_UPDOWN has already been set to 0 or 1
+//
 int EurobaliseTelegram_DecodeInt(EurobaliseTelegram* t, const CompressedPackets* packetStruct)
 {
     for (uint32_t i = 0; i < 50; ++i)
