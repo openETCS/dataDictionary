@@ -4,10 +4,11 @@ MAKEFLAGS += --no-print-directory --silent
 
 TOPDIR=../
 
-all: clean test_packets test_issue31_1 test_issue31_2
+all: clean test_packets test_issue31_1 test_issue31_2 TrackToTrain_telegram_test
 	./test_packets
 	./test_issue31_1
 	./test_issue31_2
+	./TrackToTrain_telegram_test
 
 VPATH = $(TOPDIR)/Telegram
 
@@ -43,10 +44,14 @@ test_issue31_1: test_issue31_1.o $(OBJ)
 test_issue31_2: test_issue31_2.o $(OBJ)
 	$(CC) -o $@ $+ $(LDFLAGS)
 
+TrackToTrain_telegram_test: TrackToTrain_telegram_test.o $(OBJ)
+	$(CC) -o $@ $+ $(LDFLAGS)
+
 clean::
 	$(RM) test_packets
 	$(RM) test_issue31_1
 	$(RM) test_issue31_2
+	$(RM) TrackToTrain_telegram_test
 	$(RM) *.o
 	$(RM) *.orig
 
