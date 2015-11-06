@@ -22,7 +22,6 @@ The directory structure is as follows
 ├── Telegram
 └── Tests
 
-
 The data structures for Eurobalise telegram are contained in the directory Telegram.
 
 The basic bitstream function are in the directory Foundation/Bits.
@@ -30,5 +29,4 @@ The basic bitstream function are in the directory Foundation/Bits.
 All code is written in C99.
 The code can be compiled with 'make'.
 The default target of Makefile also executes a few tests in directory Tests.
-
 
