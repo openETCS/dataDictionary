@@ -72,6 +72,11 @@ void AdhesionFactor_Tests(void)
         //AdhesionFactor_Print(v, stdout); printf("\n");
         //printf("allocated at %p\n", v);
 
+	AdhesionFactor_Delete(p);
+	AdhesionFactor_Delete(r);
+	AdhesionFactor_Delete(t);
+	AdhesionFactor_Delete(u);
+
     }
     printf("end AdhesionFactor_Test\n");
 }
