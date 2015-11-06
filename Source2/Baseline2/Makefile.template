@@ -92,7 +92,7 @@ export WPREPORT=$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS)
 
 # start WP on command line but do not run provers
 %.check:%.c FORCE 
-	@$(WP) $(WP_FLAGS) -wp-check -wp-out $(patsubst %.c,%.wp, $<)  $< 
+	@$(WP) $(WP_FLAGS) -wp-prover none -wp-out $(patsubst %.c,%.wp, $<)  $< 
 
 
 %.gen:%.c FORCE
