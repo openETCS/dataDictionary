@@ -49,23 +49,6 @@ typedef struct SessionManagement SessionManagement;
 
 #define SESSIONMANAGEMENT_BITSIZE 31
 
-SessionManagement*  SessionManagement_New(void);
-
-void   SessionManagement_Delete(SessionManagement*);
-
-static inline void SessionManagement_Init(SessionManagement* p)
-{
-    p->header.NID_PACKET = 42;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_RBC = 0;
-    p->NID_C = 0;
-    p->NID_RBC = 0;
-    p->NID_RADIO = 0;
-    p->Q_SLEEPSESSION = 0;
-}
-
 /*@
     logic integer BitSize{L}(SessionManagement* p) = SESSIONMANAGEMENT_BITSIZE;
 
@@ -183,6 +166,25 @@ int SessionManagement_EncodeBit(const SessionManagement* p, Bitstream* stream);
 */
 int SessionManagement_DecodeBit(SessionManagement* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+SessionManagement*  SessionManagement_New(void);
+
+void   SessionManagement_Delete(SessionManagement*);
+
+static inline void SessionManagement_Init(SessionManagement* p)
+{
+    p->header.NID_PACKET = 42;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_RBC = 0;
+    p->NID_C = 0;
+    p->NID_RBC = 0;
+    p->NID_RADIO = 0;
+    p->Q_SLEEPSESSION = 0;
+}
+
 static inline void SessionManagement_Print(const SessionManagement* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -228,5 +230,8 @@ int SessionManagement_EncodeInt(const SessionManagement* p, Metadata* data, kcg_
 
 int SessionManagement_DecodeInt(SessionManagement* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // SESSIONMANAGEMENT_H_INCLUDED
+
 

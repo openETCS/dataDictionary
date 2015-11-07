@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "DataUsedByApplicationsOutsideTheERTMSETCSSystem.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryMax		8
-
-// end-of-freelist indicator
-#define DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryNil		(-1)
-
-// allocation memory
-static DataUsedByApplicationsOutsideTheERTMSETCSSystem DataUsedByApplicationsOutsideTheERTMSETCSSystemMemory[DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList = DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryNil;
-
-DataUsedByApplicationsOutsideTheERTMSETCSSystem* DataUsedByApplicationsOutsideTheERTMSETCSSystem_New(void)
-{
-    DataUsedByApplicationsOutsideTheERTMSETCSSystem* ptr;
-
-    if (DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList != DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &DataUsedByApplicationsOutsideTheERTMSETCSSystemMemory[DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList];
-        DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList = DataUsedByApplicationsOutsideTheERTMSETCSSystemMemory[DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList].header.NID_PACKET;
-    }
-    else if (DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryTop < DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryMax)
-    {
-        // allocate from top
-        ptr = &DataUsedByApplicationsOutsideTheERTMSETCSSystemMemory[DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryTop];
-        DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    DataUsedByApplicationsOutsideTheERTMSETCSSystem_Init(ptr);
-
-    return ptr;
-}
-
-
-void DataUsedByApplicationsOutsideTheERTMSETCSSystem_Delete(DataUsedByApplicationsOutsideTheERTMSETCSSystem* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList;
-    DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList = ptr - DataUsedByApplicationsOutsideTheERTMSETCSSystemMemory;
-}
 
 
 int DataUsedByApplicationsOutsideTheERTMSETCSSystem_UpperBitsNotSet(const DataUsedByApplicationsOutsideTheERTMSETCSSystem* p)
@@ -182,6 +133,8 @@ int DataUsedByApplicationsOutsideTheERTMSETCSSystem_DecodeBit(DataUsedByApplicat
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int DataUsedByApplicationsOutsideTheERTMSETCSSystem_EncodeInt(const DataUsedByApplicationsOutsideTheERTMSETCSSystem* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 44;
@@ -221,4 +174,56 @@ int DataUsedByApplicationsOutsideTheERTMSETCSSystem_DecodeInt(DataUsedByApplicat
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryMax		8
+
+// end-of-freelist indicator
+#define DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryNil		(-1)
+
+// allocation memory
+static DataUsedByApplicationsOutsideTheERTMSETCSSystem DataUsedByApplicationsOutsideTheERTMSETCSSystemMemory[DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList = DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryNil;
+
+DataUsedByApplicationsOutsideTheERTMSETCSSystem* DataUsedByApplicationsOutsideTheERTMSETCSSystem_New(void)
+{
+    DataUsedByApplicationsOutsideTheERTMSETCSSystem* ptr;
+
+    if (DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList != DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &DataUsedByApplicationsOutsideTheERTMSETCSSystemMemory[DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList];
+        DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList = DataUsedByApplicationsOutsideTheERTMSETCSSystemMemory[DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList].header.NID_PACKET;
+    }
+    else if (DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryTop < DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryMax)
+    {
+        // allocate from top
+        ptr = &DataUsedByApplicationsOutsideTheERTMSETCSSystemMemory[DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryTop];
+        DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    DataUsedByApplicationsOutsideTheERTMSETCSSystem_Init(ptr);
+
+    return ptr;
+}
+
+
+void DataUsedByApplicationsOutsideTheERTMSETCSSystem_Delete(DataUsedByApplicationsOutsideTheERTMSETCSSystem* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList;
+    DataUsedByApplicationsOutsideTheERTMSETCSSystemMemoryFreeList = ptr - DataUsedByApplicationsOutsideTheERTMSETCSSystemMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

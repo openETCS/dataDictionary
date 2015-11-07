@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "ReversingAreaInformation.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define ReversingAreaInformationMemoryMax		8
-
-// end-of-freelist indicator
-#define ReversingAreaInformationMemoryNil		(-1)
-
-// allocation memory
-static ReversingAreaInformation ReversingAreaInformationMemory[ReversingAreaInformationMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t ReversingAreaInformationMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t ReversingAreaInformationMemoryFreeList = ReversingAreaInformationMemoryNil;
-
-ReversingAreaInformation* ReversingAreaInformation_New(void)
-{
-    ReversingAreaInformation* ptr;
-
-    if (ReversingAreaInformationMemoryFreeList != ReversingAreaInformationMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &ReversingAreaInformationMemory[ReversingAreaInformationMemoryFreeList];
-        ReversingAreaInformationMemoryFreeList = ReversingAreaInformationMemory[ReversingAreaInformationMemoryFreeList].header.NID_PACKET;
-    }
-    else if (ReversingAreaInformationMemoryTop < ReversingAreaInformationMemoryMax)
-    {
-        // allocate from top
-        ptr = &ReversingAreaInformationMemory[ReversingAreaInformationMemoryTop];
-        ReversingAreaInformationMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    ReversingAreaInformation_Init(ptr);
-
-    return ptr;
-}
-
-
-void ReversingAreaInformation_Delete(ReversingAreaInformation* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = ReversingAreaInformationMemoryFreeList;
-    ReversingAreaInformationMemoryFreeList = ptr - ReversingAreaInformationMemory;
-}
 
 
 int ReversingAreaInformation_UpperBitsNotSet(const ReversingAreaInformation* p)
@@ -216,6 +167,8 @@ int ReversingAreaInformation_DecodeBit(ReversingAreaInformation* p, Bitstream* s
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int ReversingAreaInformation_EncodeInt(const ReversingAreaInformation* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 138;
@@ -260,4 +213,56 @@ int ReversingAreaInformation_DecodeInt(ReversingAreaInformation* p, const Metada
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define ReversingAreaInformationMemoryMax		8
+
+// end-of-freelist indicator
+#define ReversingAreaInformationMemoryNil		(-1)
+
+// allocation memory
+static ReversingAreaInformation ReversingAreaInformationMemory[ReversingAreaInformationMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t ReversingAreaInformationMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t ReversingAreaInformationMemoryFreeList = ReversingAreaInformationMemoryNil;
+
+ReversingAreaInformation* ReversingAreaInformation_New(void)
+{
+    ReversingAreaInformation* ptr;
+
+    if (ReversingAreaInformationMemoryFreeList != ReversingAreaInformationMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &ReversingAreaInformationMemory[ReversingAreaInformationMemoryFreeList];
+        ReversingAreaInformationMemoryFreeList = ReversingAreaInformationMemory[ReversingAreaInformationMemoryFreeList].header.NID_PACKET;
+    }
+    else if (ReversingAreaInformationMemoryTop < ReversingAreaInformationMemoryMax)
+    {
+        // allocate from top
+        ptr = &ReversingAreaInformationMemory[ReversingAreaInformationMemoryTop];
+        ReversingAreaInformationMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    ReversingAreaInformation_Init(ptr);
+
+    return ptr;
+}
+
+
+void ReversingAreaInformation_Delete(ReversingAreaInformation* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = ReversingAreaInformationMemoryFreeList;
+    ReversingAreaInformationMemoryFreeList = ptr - ReversingAreaInformationMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

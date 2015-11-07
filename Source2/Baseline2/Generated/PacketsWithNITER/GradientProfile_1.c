@@ -131,6 +131,8 @@ int GradientProfile_1_DecodeBit(GradientProfile_1* p, Bitstream* stream)
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int GradientProfile_1_EncodeInt(const GradientProfile_1* p, kcg_int* startAddress, kcg_int* stream)
 {
     stream[(*startAddress)++] = p->D_GRADIENT;
@@ -148,4 +150,6 @@ int GradientProfile_1_DecodeInt(GradientProfile_1* p, kcg_int* startAddress, con
 
     return 1;
 }
+
+#endif // FRAMAC_IGNORE
 

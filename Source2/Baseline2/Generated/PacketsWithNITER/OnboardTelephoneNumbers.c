@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "OnboardTelephoneNumbers.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define OnboardTelephoneNumbersMemoryMax		8
-
-// end-of-freelist indicator
-#define OnboardTelephoneNumbersMemoryNil		(-1)
-
-// allocation memory
-static OnboardTelephoneNumbers OnboardTelephoneNumbersMemory[OnboardTelephoneNumbersMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t OnboardTelephoneNumbersMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t OnboardTelephoneNumbersMemoryFreeList = OnboardTelephoneNumbersMemoryNil;
-
-OnboardTelephoneNumbers* OnboardTelephoneNumbers_New(void)
-{
-    OnboardTelephoneNumbers* ptr;
-
-    if (OnboardTelephoneNumbersMemoryFreeList != OnboardTelephoneNumbersMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &OnboardTelephoneNumbersMemory[OnboardTelephoneNumbersMemoryFreeList];
-        OnboardTelephoneNumbersMemoryFreeList = OnboardTelephoneNumbersMemory[OnboardTelephoneNumbersMemoryFreeList].header.NID_PACKET;
-    }
-    else if (OnboardTelephoneNumbersMemoryTop < OnboardTelephoneNumbersMemoryMax)
-    {
-        // allocate from top
-        ptr = &OnboardTelephoneNumbersMemory[OnboardTelephoneNumbersMemoryTop];
-        OnboardTelephoneNumbersMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    OnboardTelephoneNumbers_Init(ptr);
-
-    return ptr;
-}
-
-
-void OnboardTelephoneNumbers_Delete(OnboardTelephoneNumbers* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = OnboardTelephoneNumbersMemoryFreeList;
-    OnboardTelephoneNumbersMemoryFreeList = ptr - OnboardTelephoneNumbersMemory;
-}
 
 
 int OnboardTelephoneNumbers_UpperBitsNotSet(const OnboardTelephoneNumbers* p)
@@ -166,6 +117,8 @@ int OnboardTelephoneNumbers_DecodeBit(OnboardTelephoneNumbers* p, Bitstream* str
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int OnboardTelephoneNumbers_EncodeInt(const OnboardTelephoneNumbers* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 3;
@@ -215,4 +168,56 @@ int OnboardTelephoneNumbers_DecodeInt(OnboardTelephoneNumbers* p, const Metadata
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define OnboardTelephoneNumbersMemoryMax		8
+
+// end-of-freelist indicator
+#define OnboardTelephoneNumbersMemoryNil		(-1)
+
+// allocation memory
+static OnboardTelephoneNumbers OnboardTelephoneNumbersMemory[OnboardTelephoneNumbersMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t OnboardTelephoneNumbersMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t OnboardTelephoneNumbersMemoryFreeList = OnboardTelephoneNumbersMemoryNil;
+
+OnboardTelephoneNumbers* OnboardTelephoneNumbers_New(void)
+{
+    OnboardTelephoneNumbers* ptr;
+
+    if (OnboardTelephoneNumbersMemoryFreeList != OnboardTelephoneNumbersMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &OnboardTelephoneNumbersMemory[OnboardTelephoneNumbersMemoryFreeList];
+        OnboardTelephoneNumbersMemoryFreeList = OnboardTelephoneNumbersMemory[OnboardTelephoneNumbersMemoryFreeList].header.NID_PACKET;
+    }
+    else if (OnboardTelephoneNumbersMemoryTop < OnboardTelephoneNumbersMemoryMax)
+    {
+        // allocate from top
+        ptr = &OnboardTelephoneNumbersMemory[OnboardTelephoneNumbersMemoryTop];
+        OnboardTelephoneNumbersMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    OnboardTelephoneNumbers_Init(ptr);
+
+    return ptr;
+}
+
+
+void OnboardTelephoneNumbers_Delete(OnboardTelephoneNumbers* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = OnboardTelephoneNumbersMemoryFreeList;
+    OnboardTelephoneNumbersMemoryFreeList = ptr - OnboardTelephoneNumbersMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

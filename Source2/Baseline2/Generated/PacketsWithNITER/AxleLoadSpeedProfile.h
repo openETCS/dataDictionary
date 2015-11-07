@@ -56,37 +56,6 @@ typedef struct AxleLoadSpeedProfile AxleLoadSpeedProfile;
 
 #define AXLELOADSPEEDPROFILE_BITSIZE 59
 
-AxleLoadSpeedProfile*  AxleLoadSpeedProfile_New(void);
-
-void   AxleLoadSpeedProfile_Delete(AxleLoadSpeedProfile*);
-
-static inline void AxleLoadSpeedProfile_Init(AxleLoadSpeedProfile* p)
-{
-    p->header.NID_PACKET = 51;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_SCALE = 0;
-    p->Q_TRACKINIT = 0;
-    p->D_AXLELOAD = 0;
-    p->L_AXLELOAD = 0;
-    p->Q_FRONT = 0;
-    p->N_ITER_1 = 0;
-
-    for (uint32_t i = 0; i < 31; ++i)
-    {
-        AxleLoadSpeedProfile_1_Init(&(p->sub_1[i]));
-    }
-
-    p->N_ITER_2 = 0;
-
-    for (uint32_t i = 0; i < 31; ++i)
-    {
-        AxleLoadSpeedProfile_2_Init(&(p->sub_2[i]));
-    }
-
-}
-
 /*@
     logic integer BitSize{L}(AxleLoadSpeedProfile* p) = AXLELOADSPEEDPROFILE_BITSIZE;
 
@@ -220,6 +189,39 @@ int AxleLoadSpeedProfile_EncodeBit(const AxleLoadSpeedProfile* p, Bitstream* str
 */
 int AxleLoadSpeedProfile_DecodeBit(AxleLoadSpeedProfile* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+AxleLoadSpeedProfile*  AxleLoadSpeedProfile_New(void);
+
+void   AxleLoadSpeedProfile_Delete(AxleLoadSpeedProfile*);
+
+static inline void AxleLoadSpeedProfile_Init(AxleLoadSpeedProfile* p)
+{
+    p->header.NID_PACKET = 51;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->Q_TRACKINIT = 0;
+    p->D_AXLELOAD = 0;
+    p->L_AXLELOAD = 0;
+    p->Q_FRONT = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        AxleLoadSpeedProfile_1_Init(&(p->sub_1[i]));
+    }
+
+    p->N_ITER_2 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        AxleLoadSpeedProfile_2_Init(&(p->sub_2[i]));
+    }
+
+}
+
 static inline void AxleLoadSpeedProfile_Print(const AxleLoadSpeedProfile* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -297,5 +299,8 @@ int AxleLoadSpeedProfile_EncodeInt(const AxleLoadSpeedProfile* p, Metadata* data
 
 int AxleLoadSpeedProfile_DecodeInt(AxleLoadSpeedProfile* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // AXLELOADSPEEDPROFILE_H_INCLUDED
+
 

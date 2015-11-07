@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "Level23TransitionInformation.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define Level23TransitionInformationMemoryMax		8
-
-// end-of-freelist indicator
-#define Level23TransitionInformationMemoryNil		(-1)
-
-// allocation memory
-static Level23TransitionInformation Level23TransitionInformationMemory[Level23TransitionInformationMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t Level23TransitionInformationMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t Level23TransitionInformationMemoryFreeList = Level23TransitionInformationMemoryNil;
-
-Level23TransitionInformation* Level23TransitionInformation_New(void)
-{
-    Level23TransitionInformation* ptr;
-
-    if (Level23TransitionInformationMemoryFreeList != Level23TransitionInformationMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &Level23TransitionInformationMemory[Level23TransitionInformationMemoryFreeList];
-        Level23TransitionInformationMemoryFreeList = Level23TransitionInformationMemory[Level23TransitionInformationMemoryFreeList].header.NID_PACKET;
-    }
-    else if (Level23TransitionInformationMemoryTop < Level23TransitionInformationMemoryMax)
-    {
-        // allocate from top
-        ptr = &Level23TransitionInformationMemory[Level23TransitionInformationMemoryTop];
-        Level23TransitionInformationMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    Level23TransitionInformation_Init(ptr);
-
-    return ptr;
-}
-
-
-void Level23TransitionInformation_Delete(Level23TransitionInformation* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = Level23TransitionInformationMemoryFreeList;
-    Level23TransitionInformationMemoryFreeList = ptr - Level23TransitionInformationMemory;
-}
 
 
 int Level23TransitionInformation_UpperBitsNotSet(const Level23TransitionInformation* p)
@@ -165,6 +116,8 @@ int Level23TransitionInformation_DecodeBit(Level23TransitionInformation* p, Bits
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int Level23TransitionInformation_EncodeInt(const Level23TransitionInformation* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 9;
@@ -202,4 +155,56 @@ int Level23TransitionInformation_DecodeInt(Level23TransitionInformation* p, cons
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define Level23TransitionInformationMemoryMax		8
+
+// end-of-freelist indicator
+#define Level23TransitionInformationMemoryNil		(-1)
+
+// allocation memory
+static Level23TransitionInformation Level23TransitionInformationMemory[Level23TransitionInformationMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t Level23TransitionInformationMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t Level23TransitionInformationMemoryFreeList = Level23TransitionInformationMemoryNil;
+
+Level23TransitionInformation* Level23TransitionInformation_New(void)
+{
+    Level23TransitionInformation* ptr;
+
+    if (Level23TransitionInformationMemoryFreeList != Level23TransitionInformationMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &Level23TransitionInformationMemory[Level23TransitionInformationMemoryFreeList];
+        Level23TransitionInformationMemoryFreeList = Level23TransitionInformationMemory[Level23TransitionInformationMemoryFreeList].header.NID_PACKET;
+    }
+    else if (Level23TransitionInformationMemoryTop < Level23TransitionInformationMemoryMax)
+    {
+        // allocate from top
+        ptr = &Level23TransitionInformationMemory[Level23TransitionInformationMemoryTop];
+        Level23TransitionInformationMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    Level23TransitionInformation_Init(ptr);
+
+    return ptr;
+}
+
+
+void Level23TransitionInformation_Delete(Level23TransitionInformation* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = Level23TransitionInformationMemoryFreeList;
+    Level23TransitionInformationMemoryFreeList = ptr - Level23TransitionInformationMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

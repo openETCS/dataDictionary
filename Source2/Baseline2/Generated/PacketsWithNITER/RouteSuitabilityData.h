@@ -54,33 +54,6 @@ typedef struct RouteSuitabilityData RouteSuitabilityData;
 
 #define ROUTESUITABILITYDATA_BITSIZE 25
 
-RouteSuitabilityData*  RouteSuitabilityData_New(void);
-
-void   RouteSuitabilityData_Delete(RouteSuitabilityData*);
-
-static inline void RouteSuitabilityData_Init(RouteSuitabilityData* p)
-{
-    p->header.NID_PACKET = 70;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_SCALE = 0;
-    p->Q_TRACKINIT = 0;
-    p->D_TRACKINIT = 0;
-    p->D_SUITABILITY = 0;
-    p->Q_SUITABILITY = 0;
-    p->M_LOADINGGAUGE = 0;
-    p->M_AXLELOAD = 0;
-    p->M_TRACTION = 0;
-    p->N_ITER_1 = 0;
-
-    for (uint32_t i = 0; i < 31; ++i)
-    {
-        RouteSuitabilityData_1_Init(&(p->sub_1[i]));
-    }
-
-}
-
 /*@
     logic integer BitSize{L}(RouteSuitabilityData* p) = ROUTESUITABILITYDATA_BITSIZE;
 
@@ -202,6 +175,35 @@ int RouteSuitabilityData_EncodeBit(const RouteSuitabilityData* p, Bitstream* str
 */
 int RouteSuitabilityData_DecodeBit(RouteSuitabilityData* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+RouteSuitabilityData*  RouteSuitabilityData_New(void);
+
+void   RouteSuitabilityData_Delete(RouteSuitabilityData*);
+
+static inline void RouteSuitabilityData_Init(RouteSuitabilityData* p)
+{
+    p->header.NID_PACKET = 70;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->Q_TRACKINIT = 0;
+    p->D_TRACKINIT = 0;
+    p->D_SUITABILITY = 0;
+    p->Q_SUITABILITY = 0;
+    p->M_LOADINGGAUGE = 0;
+    p->M_AXLELOAD = 0;
+    p->M_TRACTION = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        RouteSuitabilityData_1_Init(&(p->sub_1[i]));
+    }
+
+}
+
 static inline void RouteSuitabilityData_Print(const RouteSuitabilityData* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -285,5 +287,8 @@ int RouteSuitabilityData_EncodeInt(const RouteSuitabilityData* p, Metadata* data
 
 int RouteSuitabilityData_DecodeInt(RouteSuitabilityData* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // ROUTESUITABILITYDATA_H_INCLUDED
+
 

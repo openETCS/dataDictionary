@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "InfillLocationReference.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define InfillLocationReferenceMemoryMax		8
-
-// end-of-freelist indicator
-#define InfillLocationReferenceMemoryNil		(-1)
-
-// allocation memory
-static InfillLocationReference InfillLocationReferenceMemory[InfillLocationReferenceMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t InfillLocationReferenceMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t InfillLocationReferenceMemoryFreeList = InfillLocationReferenceMemoryNil;
-
-InfillLocationReference* InfillLocationReference_New(void)
-{
-    InfillLocationReference* ptr;
-
-    if (InfillLocationReferenceMemoryFreeList != InfillLocationReferenceMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &InfillLocationReferenceMemory[InfillLocationReferenceMemoryFreeList];
-        InfillLocationReferenceMemoryFreeList = InfillLocationReferenceMemory[InfillLocationReferenceMemoryFreeList].header.NID_PACKET;
-    }
-    else if (InfillLocationReferenceMemoryTop < InfillLocationReferenceMemoryMax)
-    {
-        // allocate from top
-        ptr = &InfillLocationReferenceMemory[InfillLocationReferenceMemoryTop];
-        InfillLocationReferenceMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    InfillLocationReference_Init(ptr);
-
-    return ptr;
-}
-
-
-void InfillLocationReference_Delete(InfillLocationReference* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = InfillLocationReferenceMemoryFreeList;
-    InfillLocationReferenceMemoryFreeList = ptr - InfillLocationReferenceMemory;
-}
 
 
 int InfillLocationReference_UpperBitsNotSet(const InfillLocationReference* p)
@@ -205,6 +156,8 @@ int InfillLocationReference_DecodeBit(InfillLocationReference* p, Bitstream* str
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int InfillLocationReference_EncodeInt(const InfillLocationReference* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 136;
@@ -249,4 +202,56 @@ int InfillLocationReference_DecodeInt(InfillLocationReference* p, const Metadata
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define InfillLocationReferenceMemoryMax		8
+
+// end-of-freelist indicator
+#define InfillLocationReferenceMemoryNil		(-1)
+
+// allocation memory
+static InfillLocationReference InfillLocationReferenceMemory[InfillLocationReferenceMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t InfillLocationReferenceMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t InfillLocationReferenceMemoryFreeList = InfillLocationReferenceMemoryNil;
+
+InfillLocationReference* InfillLocationReference_New(void)
+{
+    InfillLocationReference* ptr;
+
+    if (InfillLocationReferenceMemoryFreeList != InfillLocationReferenceMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &InfillLocationReferenceMemory[InfillLocationReferenceMemoryFreeList];
+        InfillLocationReferenceMemoryFreeList = InfillLocationReferenceMemory[InfillLocationReferenceMemoryFreeList].header.NID_PACKET;
+    }
+    else if (InfillLocationReferenceMemoryTop < InfillLocationReferenceMemoryMax)
+    {
+        // allocate from top
+        ptr = &InfillLocationReferenceMemory[InfillLocationReferenceMemoryTop];
+        InfillLocationReferenceMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    InfillLocationReference_Init(ptr);
+
+    return ptr;
+}
+
+
+void InfillLocationReference_Delete(InfillLocationReference* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = InfillLocationReferenceMemoryFreeList;
+    InfillLocationReferenceMemoryFreeList = ptr - InfillLocationReferenceMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

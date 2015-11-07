@@ -52,29 +52,6 @@ typedef struct GradientProfile GradientProfile;
 
 #define GRADIENTPROFILE_BITSIZE 46
 
-GradientProfile*  GradientProfile_New(void);
-
-void   GradientProfile_Delete(GradientProfile*);
-
-static inline void GradientProfile_Init(GradientProfile* p)
-{
-    p->header.NID_PACKET = 21;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_SCALE = 0;
-    p->D_GRADIENT = 0;
-    p->Q_GDIR = 0;
-    p->G_A = 0;
-    p->N_ITER_1 = 0;
-
-    for (uint32_t i = 0; i < 31; ++i)
-    {
-        GradientProfile_1_Init(&(p->sub_1[i]));
-    }
-
-}
-
 /*@
     logic integer BitSize{L}(GradientProfile* p) = GRADIENTPROFILE_BITSIZE;
 
@@ -204,6 +181,31 @@ int GradientProfile_EncodeBit(const GradientProfile* p, Bitstream* stream);
 */
 int GradientProfile_DecodeBit(GradientProfile* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+GradientProfile*  GradientProfile_New(void);
+
+void   GradientProfile_Delete(GradientProfile*);
+
+static inline void GradientProfile_Init(GradientProfile* p)
+{
+    p->header.NID_PACKET = 21;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->D_GRADIENT = 0;
+    p->Q_GDIR = 0;
+    p->G_A = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        GradientProfile_1_Init(&(p->sub_1[i]));
+    }
+
+}
+
 static inline void GradientProfile_Print(const GradientProfile* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -259,5 +261,8 @@ int GradientProfile_EncodeInt(const GradientProfile* p, Metadata* data, kcg_int*
 
 int GradientProfile_DecodeInt(GradientProfile* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // GRADIENTPROFILE_H_INCLUDED
+
 

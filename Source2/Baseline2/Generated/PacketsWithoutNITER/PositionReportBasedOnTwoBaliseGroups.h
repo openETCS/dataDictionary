@@ -62,32 +62,6 @@ typedef struct PositionReportBasedOnTwoBaliseGroups PositionReportBasedOnTwoBali
 
 #define POSITIONREPORTBASEDONTWOBALISEGROUPS_BITSIZE 130
 
-PositionReportBasedOnTwoBaliseGroups*  PositionReportBasedOnTwoBaliseGroups_New(void);
-
-void   PositionReportBasedOnTwoBaliseGroups_Delete(PositionReportBasedOnTwoBaliseGroups*);
-
-static inline void PositionReportBasedOnTwoBaliseGroups_Init(PositionReportBasedOnTwoBaliseGroups* p)
-{
-    p->header.NID_PACKET = 1;
-    p->header.list = TRAINTOTRACK;
-    p->L_PACKET = 0;
-    p->Q_SCALE = 0;
-    p->NID_LRBG = 0;
-    p->NID_PRVLRBG = 0;
-    p->D_LRBG = 0;
-    p->Q_DIRLRBG = 0;
-    p->Q_DLRBG = 0;
-    p->L_DOUBTOVER = 0;
-    p->L_DOUBTUNDER = 0;
-    p->Q_LENGTH = 0;
-    p->L_TRAININT = 0;
-    p->V_TRAIN = 0;
-    p->Q_DIRTRAIN = 0;
-    p->M_MODE = 0;
-    p->M_LEVEL = 0;
-    p->NID_STM = 0;
-}
-
 /*@
     logic integer BitSize{L}(PositionReportBasedOnTwoBaliseGroups* p) = POSITIONREPORTBASEDONTWOBALISEGROUPS_BITSIZE;
 
@@ -233,6 +207,34 @@ int PositionReportBasedOnTwoBaliseGroups_EncodeBit(const PositionReportBasedOnTw
 */
 int PositionReportBasedOnTwoBaliseGroups_DecodeBit(PositionReportBasedOnTwoBaliseGroups* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+PositionReportBasedOnTwoBaliseGroups*  PositionReportBasedOnTwoBaliseGroups_New(void);
+
+void   PositionReportBasedOnTwoBaliseGroups_Delete(PositionReportBasedOnTwoBaliseGroups*);
+
+static inline void PositionReportBasedOnTwoBaliseGroups_Init(PositionReportBasedOnTwoBaliseGroups* p)
+{
+    p->header.NID_PACKET = 1;
+    p->header.list = TRAINTOTRACK;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->NID_LRBG = 0;
+    p->NID_PRVLRBG = 0;
+    p->D_LRBG = 0;
+    p->Q_DIRLRBG = 0;
+    p->Q_DLRBG = 0;
+    p->L_DOUBTOVER = 0;
+    p->L_DOUBTUNDER = 0;
+    p->Q_LENGTH = 0;
+    p->L_TRAININT = 0;
+    p->V_TRAIN = 0;
+    p->Q_DIRTRAIN = 0;
+    p->M_MODE = 0;
+    p->M_LEVEL = 0;
+    p->NID_STM = 0;
+}
+
 static inline void PositionReportBasedOnTwoBaliseGroups_Print(const PositionReportBasedOnTwoBaliseGroups* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -296,5 +298,8 @@ int PositionReportBasedOnTwoBaliseGroups_EncodeInt(const PositionReportBasedOnTw
 
 int PositionReportBasedOnTwoBaliseGroups_DecodeInt(PositionReportBasedOnTwoBaliseGroups* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // POSITIONREPORTBASEDONTWOBALISEGROUPS_H_INCLUDED
+
 

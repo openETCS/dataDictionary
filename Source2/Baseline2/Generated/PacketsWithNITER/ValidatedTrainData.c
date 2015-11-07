@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "ValidatedTrainData.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define ValidatedTrainDataMemoryMax		8
-
-// end-of-freelist indicator
-#define ValidatedTrainDataMemoryNil		(-1)
-
-// allocation memory
-static ValidatedTrainData ValidatedTrainDataMemory[ValidatedTrainDataMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t ValidatedTrainDataMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t ValidatedTrainDataMemoryFreeList = ValidatedTrainDataMemoryNil;
-
-ValidatedTrainData* ValidatedTrainData_New(void)
-{
-    ValidatedTrainData* ptr;
-
-    if (ValidatedTrainDataMemoryFreeList != ValidatedTrainDataMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &ValidatedTrainDataMemory[ValidatedTrainDataMemoryFreeList];
-        ValidatedTrainDataMemoryFreeList = ValidatedTrainDataMemory[ValidatedTrainDataMemoryFreeList].header.NID_PACKET;
-    }
-    else if (ValidatedTrainDataMemoryTop < ValidatedTrainDataMemoryMax)
-    {
-        // allocate from top
-        ptr = &ValidatedTrainDataMemory[ValidatedTrainDataMemoryTop];
-        ValidatedTrainDataMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    ValidatedTrainData_Init(ptr);
-
-    return ptr;
-}
-
-
-void ValidatedTrainData_Delete(ValidatedTrainData* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = ValidatedTrainDataMemoryFreeList;
-    ValidatedTrainDataMemoryFreeList = ptr - ValidatedTrainDataMemory;
-}
 
 
 int ValidatedTrainData_UpperBitsNotSet(const ValidatedTrainData* p)
@@ -303,6 +254,8 @@ int ValidatedTrainData_DecodeBit(ValidatedTrainData* p, Bitstream* stream)
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int ValidatedTrainData_EncodeInt(const ValidatedTrainData* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 11;
@@ -380,4 +333,56 @@ int ValidatedTrainData_DecodeInt(ValidatedTrainData* p, const Metadata* data, co
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define ValidatedTrainDataMemoryMax		8
+
+// end-of-freelist indicator
+#define ValidatedTrainDataMemoryNil		(-1)
+
+// allocation memory
+static ValidatedTrainData ValidatedTrainDataMemory[ValidatedTrainDataMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t ValidatedTrainDataMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t ValidatedTrainDataMemoryFreeList = ValidatedTrainDataMemoryNil;
+
+ValidatedTrainData* ValidatedTrainData_New(void)
+{
+    ValidatedTrainData* ptr;
+
+    if (ValidatedTrainDataMemoryFreeList != ValidatedTrainDataMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &ValidatedTrainDataMemory[ValidatedTrainDataMemoryFreeList];
+        ValidatedTrainDataMemoryFreeList = ValidatedTrainDataMemory[ValidatedTrainDataMemoryFreeList].header.NID_PACKET;
+    }
+    else if (ValidatedTrainDataMemoryTop < ValidatedTrainDataMemoryMax)
+    {
+        // allocate from top
+        ptr = &ValidatedTrainDataMemory[ValidatedTrainDataMemoryTop];
+        ValidatedTrainDataMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    ValidatedTrainData_Init(ptr);
+
+    return ptr;
+}
+
+
+void ValidatedTrainData_Delete(ValidatedTrainData* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = ValidatedTrainDataMemoryFreeList;
+    ValidatedTrainDataMemoryFreeList = ptr - ValidatedTrainDataMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

@@ -39,13 +39,6 @@ typedef struct TrackCondition_1 TrackCondition_1;
 
 #define TRACKCONDITION_1_BITSIZE 34
 
-static inline void TrackCondition_1_Init(TrackCondition_1* p)
-{
-    p->D_TRACKCOND = 0;
-    p->L_TRACKCOND = 0;
-    p->M_TRACKCOND = 0;
-}
-
 /*@
     logic integer BitSize{L}(TrackCondition_1* p) = TRACKCONDITION_1_BITSIZE;
 
@@ -161,6 +154,15 @@ int TrackCondition_1_EncodeBit(const TrackCondition_1* p, Bitstream* stream);
 */
 int TrackCondition_1_DecodeBit(TrackCondition_1* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+static inline void TrackCondition_1_Init(TrackCondition_1* p)
+{
+    p->D_TRACKCOND = 0;
+    p->L_TRACKCOND = 0;
+    p->M_TRACKCOND = 0;
+}
+
 static inline void TrackCondition_1_Print(const TrackCondition_1* p, FILE* stream)
 {
     fprintf(stream, "(%lu,%lu,%lu)",
@@ -183,6 +185,8 @@ static inline int TrackCondition_1_Equal(const TrackCondition_1* a, const TrackC
 int TrackCondition_1_EncodeInt(const TrackCondition_1* p, kcg_int* startAddress, kcg_int* stream);
 
 int TrackCondition_1_DecodeInt(TrackCondition_1* p, kcg_int* startAddress, const kcg_int* stream);
+
+#endif // FRAMAC_IGNORE
 
 #endif // TRACKCONDITION_1_H_INCLUDED
 

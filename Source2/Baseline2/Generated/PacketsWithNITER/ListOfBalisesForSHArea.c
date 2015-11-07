@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "ListOfBalisesForSHArea.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define ListOfBalisesForSHAreaMemoryMax		8
-
-// end-of-freelist indicator
-#define ListOfBalisesForSHAreaMemoryNil		(-1)
-
-// allocation memory
-static ListOfBalisesForSHArea ListOfBalisesForSHAreaMemory[ListOfBalisesForSHAreaMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t ListOfBalisesForSHAreaMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t ListOfBalisesForSHAreaMemoryFreeList = ListOfBalisesForSHAreaMemoryNil;
-
-ListOfBalisesForSHArea* ListOfBalisesForSHArea_New(void)
-{
-    ListOfBalisesForSHArea* ptr;
-
-    if (ListOfBalisesForSHAreaMemoryFreeList != ListOfBalisesForSHAreaMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &ListOfBalisesForSHAreaMemory[ListOfBalisesForSHAreaMemoryFreeList];
-        ListOfBalisesForSHAreaMemoryFreeList = ListOfBalisesForSHAreaMemory[ListOfBalisesForSHAreaMemoryFreeList].header.NID_PACKET;
-    }
-    else if (ListOfBalisesForSHAreaMemoryTop < ListOfBalisesForSHAreaMemoryMax)
-    {
-        // allocate from top
-        ptr = &ListOfBalisesForSHAreaMemory[ListOfBalisesForSHAreaMemoryTop];
-        ListOfBalisesForSHAreaMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    ListOfBalisesForSHArea_Init(ptr);
-
-    return ptr;
-}
-
-
-void ListOfBalisesForSHArea_Delete(ListOfBalisesForSHArea* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = ListOfBalisesForSHAreaMemoryFreeList;
-    ListOfBalisesForSHAreaMemoryFreeList = ptr - ListOfBalisesForSHAreaMemory;
-}
 
 
 int ListOfBalisesForSHArea_UpperBitsNotSet(const ListOfBalisesForSHArea* p)
@@ -183,6 +134,8 @@ int ListOfBalisesForSHArea_DecodeBit(ListOfBalisesForSHArea* p, Bitstream* strea
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int ListOfBalisesForSHArea_EncodeInt(const ListOfBalisesForSHArea* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 49;
@@ -235,4 +188,56 @@ int ListOfBalisesForSHArea_DecodeInt(ListOfBalisesForSHArea* p, const Metadata* 
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define ListOfBalisesForSHAreaMemoryMax		8
+
+// end-of-freelist indicator
+#define ListOfBalisesForSHAreaMemoryNil		(-1)
+
+// allocation memory
+static ListOfBalisesForSHArea ListOfBalisesForSHAreaMemory[ListOfBalisesForSHAreaMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t ListOfBalisesForSHAreaMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t ListOfBalisesForSHAreaMemoryFreeList = ListOfBalisesForSHAreaMemoryNil;
+
+ListOfBalisesForSHArea* ListOfBalisesForSHArea_New(void)
+{
+    ListOfBalisesForSHArea* ptr;
+
+    if (ListOfBalisesForSHAreaMemoryFreeList != ListOfBalisesForSHAreaMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &ListOfBalisesForSHAreaMemory[ListOfBalisesForSHAreaMemoryFreeList];
+        ListOfBalisesForSHAreaMemoryFreeList = ListOfBalisesForSHAreaMemory[ListOfBalisesForSHAreaMemoryFreeList].header.NID_PACKET;
+    }
+    else if (ListOfBalisesForSHAreaMemoryTop < ListOfBalisesForSHAreaMemoryMax)
+    {
+        // allocate from top
+        ptr = &ListOfBalisesForSHAreaMemory[ListOfBalisesForSHAreaMemoryTop];
+        ListOfBalisesForSHAreaMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    ListOfBalisesForSHArea_Init(ptr);
+
+    return ptr;
+}
+
+
+void ListOfBalisesForSHArea_Delete(ListOfBalisesForSHArea* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = ListOfBalisesForSHAreaMemoryFreeList;
+    ListOfBalisesForSHAreaMemoryFreeList = ptr - ListOfBalisesForSHAreaMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

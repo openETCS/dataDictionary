@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "TrainRunningNumberFromRBC.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define TrainRunningNumberFromRBCMemoryMax		8
-
-// end-of-freelist indicator
-#define TrainRunningNumberFromRBCMemoryNil		(-1)
-
-// allocation memory
-static TrainRunningNumberFromRBC TrainRunningNumberFromRBCMemory[TrainRunningNumberFromRBCMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t TrainRunningNumberFromRBCMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t TrainRunningNumberFromRBCMemoryFreeList = TrainRunningNumberFromRBCMemoryNil;
-
-TrainRunningNumberFromRBC* TrainRunningNumberFromRBC_New(void)
-{
-    TrainRunningNumberFromRBC* ptr;
-
-    if (TrainRunningNumberFromRBCMemoryFreeList != TrainRunningNumberFromRBCMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &TrainRunningNumberFromRBCMemory[TrainRunningNumberFromRBCMemoryFreeList];
-        TrainRunningNumberFromRBCMemoryFreeList = TrainRunningNumberFromRBCMemory[TrainRunningNumberFromRBCMemoryFreeList].header.NID_PACKET;
-    }
-    else if (TrainRunningNumberFromRBCMemoryTop < TrainRunningNumberFromRBCMemoryMax)
-    {
-        // allocate from top
-        ptr = &TrainRunningNumberFromRBCMemory[TrainRunningNumberFromRBCMemoryTop];
-        TrainRunningNumberFromRBCMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    TrainRunningNumberFromRBC_Init(ptr);
-
-    return ptr;
-}
-
-
-void TrainRunningNumberFromRBC_Delete(TrainRunningNumberFromRBC* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = TrainRunningNumberFromRBCMemoryFreeList;
-    TrainRunningNumberFromRBCMemoryFreeList = ptr - TrainRunningNumberFromRBCMemory;
-}
 
 
 int TrainRunningNumberFromRBC_UpperBitsNotSet(const TrainRunningNumberFromRBC* p)
@@ -182,6 +133,8 @@ int TrainRunningNumberFromRBC_DecodeBit(TrainRunningNumberFromRBC* p, Bitstream*
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int TrainRunningNumberFromRBC_EncodeInt(const TrainRunningNumberFromRBC* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 140;
@@ -222,4 +175,56 @@ int TrainRunningNumberFromRBC_DecodeInt(TrainRunningNumberFromRBC* p, const Meta
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define TrainRunningNumberFromRBCMemoryMax		8
+
+// end-of-freelist indicator
+#define TrainRunningNumberFromRBCMemoryNil		(-1)
+
+// allocation memory
+static TrainRunningNumberFromRBC TrainRunningNumberFromRBCMemory[TrainRunningNumberFromRBCMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t TrainRunningNumberFromRBCMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t TrainRunningNumberFromRBCMemoryFreeList = TrainRunningNumberFromRBCMemoryNil;
+
+TrainRunningNumberFromRBC* TrainRunningNumberFromRBC_New(void)
+{
+    TrainRunningNumberFromRBC* ptr;
+
+    if (TrainRunningNumberFromRBCMemoryFreeList != TrainRunningNumberFromRBCMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &TrainRunningNumberFromRBCMemory[TrainRunningNumberFromRBCMemoryFreeList];
+        TrainRunningNumberFromRBCMemoryFreeList = TrainRunningNumberFromRBCMemory[TrainRunningNumberFromRBCMemoryFreeList].header.NID_PACKET;
+    }
+    else if (TrainRunningNumberFromRBCMemoryTop < TrainRunningNumberFromRBCMemoryMax)
+    {
+        // allocate from top
+        ptr = &TrainRunningNumberFromRBCMemory[TrainRunningNumberFromRBCMemoryTop];
+        TrainRunningNumberFromRBCMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    TrainRunningNumberFromRBC_Init(ptr);
+
+    return ptr;
+}
+
+
+void TrainRunningNumberFromRBC_Delete(TrainRunningNumberFromRBC* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = TrainRunningNumberFromRBCMemoryFreeList;
+    TrainRunningNumberFromRBCMemoryFreeList = ptr - TrainRunningNumberFromRBCMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

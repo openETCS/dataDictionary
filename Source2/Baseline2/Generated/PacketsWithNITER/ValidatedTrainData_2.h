@@ -37,11 +37,6 @@ typedef struct ValidatedTrainData_2 ValidatedTrainData_2;
 
 #define VALIDATEDTRAINDATA_2_BITSIZE 8
 
-static inline void ValidatedTrainData_2_Init(ValidatedTrainData_2* p)
-{
-    p->NID_STM = 0;
-}
-
 /*@
     logic integer BitSize{L}(ValidatedTrainData_2* p) = VALIDATEDTRAINDATA_2_BITSIZE;
 
@@ -149,6 +144,13 @@ int ValidatedTrainData_2_EncodeBit(const ValidatedTrainData_2* p, Bitstream* str
 */
 int ValidatedTrainData_2_DecodeBit(ValidatedTrainData_2* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+static inline void ValidatedTrainData_2_Init(ValidatedTrainData_2* p)
+{
+    p->NID_STM = 0;
+}
+
 static inline void ValidatedTrainData_2_Print(const ValidatedTrainData_2* p, FILE* stream)
 {
     fprintf(stream, "(%lu)",
@@ -167,6 +169,8 @@ static inline int ValidatedTrainData_2_Equal(const ValidatedTrainData_2* a, cons
 int ValidatedTrainData_2_EncodeInt(const ValidatedTrainData_2* p, kcg_int* startAddress, kcg_int* stream);
 
 int ValidatedTrainData_2_DecodeInt(ValidatedTrainData_2* p, kcg_int* startAddress, const kcg_int* stream);
+
+#endif // FRAMAC_IGNORE
 
 #endif // VALIDATEDTRAINDATA_2_H_INCLUDED
 

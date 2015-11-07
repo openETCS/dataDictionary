@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "DefaultGradientForTemporarySpeedRestriction.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define DefaultGradientForTemporarySpeedRestrictionMemoryMax		8
-
-// end-of-freelist indicator
-#define DefaultGradientForTemporarySpeedRestrictionMemoryNil		(-1)
-
-// allocation memory
-static DefaultGradientForTemporarySpeedRestriction DefaultGradientForTemporarySpeedRestrictionMemory[DefaultGradientForTemporarySpeedRestrictionMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t DefaultGradientForTemporarySpeedRestrictionMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t DefaultGradientForTemporarySpeedRestrictionMemoryFreeList = DefaultGradientForTemporarySpeedRestrictionMemoryNil;
-
-DefaultGradientForTemporarySpeedRestriction* DefaultGradientForTemporarySpeedRestriction_New(void)
-{
-    DefaultGradientForTemporarySpeedRestriction* ptr;
-
-    if (DefaultGradientForTemporarySpeedRestrictionMemoryFreeList != DefaultGradientForTemporarySpeedRestrictionMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &DefaultGradientForTemporarySpeedRestrictionMemory[DefaultGradientForTemporarySpeedRestrictionMemoryFreeList];
-        DefaultGradientForTemporarySpeedRestrictionMemoryFreeList = DefaultGradientForTemporarySpeedRestrictionMemory[DefaultGradientForTemporarySpeedRestrictionMemoryFreeList].header.NID_PACKET;
-    }
-    else if (DefaultGradientForTemporarySpeedRestrictionMemoryTop < DefaultGradientForTemporarySpeedRestrictionMemoryMax)
-    {
-        // allocate from top
-        ptr = &DefaultGradientForTemporarySpeedRestrictionMemory[DefaultGradientForTemporarySpeedRestrictionMemoryTop];
-        DefaultGradientForTemporarySpeedRestrictionMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    DefaultGradientForTemporarySpeedRestriction_Init(ptr);
-
-    return ptr;
-}
-
-
-void DefaultGradientForTemporarySpeedRestriction_Delete(DefaultGradientForTemporarySpeedRestriction* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = DefaultGradientForTemporarySpeedRestrictionMemoryFreeList;
-    DefaultGradientForTemporarySpeedRestrictionMemoryFreeList = ptr - DefaultGradientForTemporarySpeedRestrictionMemory;
-}
 
 
 int DefaultGradientForTemporarySpeedRestriction_UpperBitsNotSet(const DefaultGradientForTemporarySpeedRestriction* p)
@@ -199,6 +150,8 @@ int DefaultGradientForTemporarySpeedRestriction_DecodeBit(DefaultGradientForTemp
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int DefaultGradientForTemporarySpeedRestriction_EncodeInt(const DefaultGradientForTemporarySpeedRestriction* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 141;
@@ -241,4 +194,56 @@ int DefaultGradientForTemporarySpeedRestriction_DecodeInt(DefaultGradientForTemp
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define DefaultGradientForTemporarySpeedRestrictionMemoryMax		8
+
+// end-of-freelist indicator
+#define DefaultGradientForTemporarySpeedRestrictionMemoryNil		(-1)
+
+// allocation memory
+static DefaultGradientForTemporarySpeedRestriction DefaultGradientForTemporarySpeedRestrictionMemory[DefaultGradientForTemporarySpeedRestrictionMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t DefaultGradientForTemporarySpeedRestrictionMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t DefaultGradientForTemporarySpeedRestrictionMemoryFreeList = DefaultGradientForTemporarySpeedRestrictionMemoryNil;
+
+DefaultGradientForTemporarySpeedRestriction* DefaultGradientForTemporarySpeedRestriction_New(void)
+{
+    DefaultGradientForTemporarySpeedRestriction* ptr;
+
+    if (DefaultGradientForTemporarySpeedRestrictionMemoryFreeList != DefaultGradientForTemporarySpeedRestrictionMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &DefaultGradientForTemporarySpeedRestrictionMemory[DefaultGradientForTemporarySpeedRestrictionMemoryFreeList];
+        DefaultGradientForTemporarySpeedRestrictionMemoryFreeList = DefaultGradientForTemporarySpeedRestrictionMemory[DefaultGradientForTemporarySpeedRestrictionMemoryFreeList].header.NID_PACKET;
+    }
+    else if (DefaultGradientForTemporarySpeedRestrictionMemoryTop < DefaultGradientForTemporarySpeedRestrictionMemoryMax)
+    {
+        // allocate from top
+        ptr = &DefaultGradientForTemporarySpeedRestrictionMemory[DefaultGradientForTemporarySpeedRestrictionMemoryTop];
+        DefaultGradientForTemporarySpeedRestrictionMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    DefaultGradientForTemporarySpeedRestriction_Init(ptr);
+
+    return ptr;
+}
+
+
+void DefaultGradientForTemporarySpeedRestriction_Delete(DefaultGradientForTemporarySpeedRestriction* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = DefaultGradientForTemporarySpeedRestrictionMemoryFreeList;
+    DefaultGradientForTemporarySpeedRestrictionMemoryFreeList = ptr - DefaultGradientForTemporarySpeedRestrictionMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

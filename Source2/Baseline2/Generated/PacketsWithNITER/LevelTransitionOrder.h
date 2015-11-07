@@ -53,30 +53,6 @@ typedef struct LevelTransitionOrder LevelTransitionOrder;
 
 #define LEVELTRANSITIONORDER_BITSIZE 55
 
-LevelTransitionOrder*  LevelTransitionOrder_New(void);
-
-void   LevelTransitionOrder_Delete(LevelTransitionOrder*);
-
-static inline void LevelTransitionOrder_Init(LevelTransitionOrder* p)
-{
-    p->header.NID_PACKET = 41;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_SCALE = 0;
-    p->D_LEVELTR = 0;
-    p->M_LEVELTR = 0;
-    p->NID_STM = 0;
-    p->L_ACKLEVELTR = 0;
-    p->N_ITER_1 = 0;
-
-    for (uint32_t i = 0; i < 31; ++i)
-    {
-        LevelTransitionOrder_1_Init(&(p->sub_1[i]));
-    }
-
-}
-
 /*@
     logic integer BitSize{L}(LevelTransitionOrder* p) = LEVELTRANSITIONORDER_BITSIZE;
 
@@ -202,6 +178,32 @@ int LevelTransitionOrder_EncodeBit(const LevelTransitionOrder* p, Bitstream* str
 */
 int LevelTransitionOrder_DecodeBit(LevelTransitionOrder* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+LevelTransitionOrder*  LevelTransitionOrder_New(void);
+
+void   LevelTransitionOrder_Delete(LevelTransitionOrder*);
+
+static inline void LevelTransitionOrder_Init(LevelTransitionOrder* p)
+{
+    p->header.NID_PACKET = 41;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->D_LEVELTR = 0;
+    p->M_LEVELTR = 0;
+    p->NID_STM = 0;
+    p->L_ACKLEVELTR = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        LevelTransitionOrder_1_Init(&(p->sub_1[i]));
+    }
+
+}
+
 static inline void LevelTransitionOrder_Print(const LevelTransitionOrder* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -263,5 +265,8 @@ int LevelTransitionOrder_EncodeInt(const LevelTransitionOrder* p, Metadata* data
 
 int LevelTransitionOrder_DecodeInt(LevelTransitionOrder* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // LEVELTRANSITIONORDER_H_INCLUDED
+
 

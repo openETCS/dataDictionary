@@ -120,6 +120,8 @@ int ListOfBalisesForSHArea_1_DecodeBit(ListOfBalisesForSHArea_1* p, Bitstream* s
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int ListOfBalisesForSHArea_1_EncodeInt(const ListOfBalisesForSHArea_1* p, kcg_int* startAddress, kcg_int* stream)
 {
     stream[(*startAddress)++] = p->Q_NEWCOUNTRY;
@@ -137,4 +139,6 @@ int ListOfBalisesForSHArea_1_DecodeInt(ListOfBalisesForSHArea_1* p, kcg_int* sta
 
     return 1;
 }
+
+#endif // FRAMAC_IGNORE
 

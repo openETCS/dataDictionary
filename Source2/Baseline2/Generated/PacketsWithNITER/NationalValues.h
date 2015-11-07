@@ -66,45 +66,6 @@ typedef struct NationalValues NationalValues;
 
 #define NATIONALVALUES_BITSIZE 168
 
-NationalValues*  NationalValues_New(void);
-
-void   NationalValues_Delete(NationalValues*);
-
-static inline void NationalValues_Init(NationalValues* p)
-{
-    p->header.NID_PACKET = 3;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_SCALE = 0;
-    p->D_VALIDNV = 0;
-    p->N_ITER_1 = 0;
-
-    for (uint32_t i = 0; i < 31; ++i)
-    {
-        NationalValues_1_Init(&(p->sub_1[i]));
-    }
-
-    p->V_NVSHUNT = 0;
-    p->V_NVSTFF = 0;
-    p->V_NVONSIGHT = 0;
-    p->V_NVUNFIT = 0;
-    p->V_NVREL = 0;
-    p->D_NVROLL = 0;
-    p->Q_NVSRBKTRG = 0;
-    p->Q_NVEMRRLS = 0;
-    p->V_NVALLOWOVTRP = 0;
-    p->V_NVSUPOVTRP = 0;
-    p->D_NVOVTRP = 0;
-    p->T_NVOVTRP = 0;
-    p->D_NVPOTRP = 0;
-    p->M_NVCONTACT = 0;
-    p->T_NVCONTACT = 0;
-    p->M_NVDERUN = 0;
-    p->D_NVSTFF = 0;
-    p->Q_NVDRIVER_ADHES = 0;
-}
-
 /*@
     logic integer BitSize{L}(NationalValues* p) = NATIONALVALUES_BITSIZE;
 
@@ -226,6 +187,47 @@ int NationalValues_EncodeBit(const NationalValues* p, Bitstream* stream);
 */
 int NationalValues_DecodeBit(NationalValues* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+NationalValues*  NationalValues_New(void);
+
+void   NationalValues_Delete(NationalValues*);
+
+static inline void NationalValues_Init(NationalValues* p)
+{
+    p->header.NID_PACKET = 3;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->D_VALIDNV = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        NationalValues_1_Init(&(p->sub_1[i]));
+    }
+
+    p->V_NVSHUNT = 0;
+    p->V_NVSTFF = 0;
+    p->V_NVONSIGHT = 0;
+    p->V_NVUNFIT = 0;
+    p->V_NVREL = 0;
+    p->D_NVROLL = 0;
+    p->Q_NVSRBKTRG = 0;
+    p->Q_NVEMRRLS = 0;
+    p->V_NVALLOWOVTRP = 0;
+    p->V_NVSUPOVTRP = 0;
+    p->D_NVOVTRP = 0;
+    p->T_NVOVTRP = 0;
+    p->D_NVPOTRP = 0;
+    p->M_NVCONTACT = 0;
+    p->T_NVCONTACT = 0;
+    p->M_NVDERUN = 0;
+    p->D_NVSTFF = 0;
+    p->Q_NVDRIVER_ADHES = 0;
+}
+
 static inline void NationalValues_Print(const NationalValues* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -313,5 +315,8 @@ int NationalValues_EncodeInt(const NationalValues* p, Metadata* data, kcg_int* s
 
 int NationalValues_DecodeInt(NationalValues* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // NATIONALVALUES_H_INCLUDED
+
 

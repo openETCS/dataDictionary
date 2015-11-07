@@ -138,6 +138,8 @@ int GeographicalPositionInformation_1_DecodeBit(GeographicalPositionInformation_
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int GeographicalPositionInformation_1_EncodeInt(const GeographicalPositionInformation_1* p, kcg_int* startAddress, kcg_int* stream)
 {
     stream[(*startAddress)++] = p->Q_NEWCOUNTRY;
@@ -161,4 +163,6 @@ int GeographicalPositionInformation_1_DecodeInt(GeographicalPositionInformation_
 
     return 1;
 }
+
+#endif // FRAMAC_IGNORE
 

@@ -37,11 +37,6 @@ typedef struct OnboardTelephoneNumbers_1 OnboardTelephoneNumbers_1;
 
 #define ONBOARDTELEPHONENUMBERS_1_BITSIZE 64
 
-static inline void OnboardTelephoneNumbers_1_Init(OnboardTelephoneNumbers_1* p)
-{
-    p->NID_RADIO = 0;
-}
-
 /*@
     logic integer BitSize{L}(OnboardTelephoneNumbers_1* p) = ONBOARDTELEPHONENUMBERS_1_BITSIZE;
 
@@ -149,6 +144,13 @@ int OnboardTelephoneNumbers_1_EncodeBit(const OnboardTelephoneNumbers_1* p, Bits
 */
 int OnboardTelephoneNumbers_1_DecodeBit(OnboardTelephoneNumbers_1* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+static inline void OnboardTelephoneNumbers_1_Init(OnboardTelephoneNumbers_1* p)
+{
+    p->NID_RADIO = 0;
+}
+
 static inline void OnboardTelephoneNumbers_1_Print(const OnboardTelephoneNumbers_1* p, FILE* stream)
 {
     fprintf(stream, "(%lu)",
@@ -167,6 +169,8 @@ static inline int OnboardTelephoneNumbers_1_Equal(const OnboardTelephoneNumbers_
 int OnboardTelephoneNumbers_1_EncodeInt(const OnboardTelephoneNumbers_1* p, kcg_int* startAddress, kcg_int* stream);
 
 int OnboardTelephoneNumbers_1_DecodeInt(OnboardTelephoneNumbers_1* p, kcg_int* startAddress, const kcg_int* stream);
+
+#endif // FRAMAC_IGNORE
 
 #endif // ONBOARDTELEPHONENUMBERS_1_H_INCLUDED
 

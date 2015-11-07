@@ -45,24 +45,6 @@ typedef struct OnboardTelephoneNumbers OnboardTelephoneNumbers;
 
 #define ONBOARDTELEPHONENUMBERS_BITSIZE 18
 
-OnboardTelephoneNumbers*  OnboardTelephoneNumbers_New(void);
-
-void   OnboardTelephoneNumbers_Delete(OnboardTelephoneNumbers*);
-
-static inline void OnboardTelephoneNumbers_Init(OnboardTelephoneNumbers* p)
-{
-    p->header.NID_PACKET = 3;
-    p->header.list = TRAINTOTRACK;
-    p->L_PACKET = 0;
-    p->N_ITER_1 = 0;
-
-    for (uint32_t i = 0; i < 31; ++i)
-    {
-        OnboardTelephoneNumbers_1_Init(&(p->sub_1[i]));
-    }
-
-}
-
 /*@
     logic integer BitSize{L}(OnboardTelephoneNumbers* p) = ONBOARDTELEPHONENUMBERS_BITSIZE;
 
@@ -172,6 +154,26 @@ int OnboardTelephoneNumbers_EncodeBit(const OnboardTelephoneNumbers* p, Bitstrea
 */
 int OnboardTelephoneNumbers_DecodeBit(OnboardTelephoneNumbers* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+OnboardTelephoneNumbers*  OnboardTelephoneNumbers_New(void);
+
+void   OnboardTelephoneNumbers_Delete(OnboardTelephoneNumbers*);
+
+static inline void OnboardTelephoneNumbers_Init(OnboardTelephoneNumbers* p)
+{
+    p->header.NID_PACKET = 3;
+    p->header.list = TRAINTOTRACK;
+    p->L_PACKET = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        OnboardTelephoneNumbers_1_Init(&(p->sub_1[i]));
+    }
+
+}
+
 static inline void OnboardTelephoneNumbers_Print(const OnboardTelephoneNumbers* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -217,5 +219,8 @@ int OnboardTelephoneNumbers_EncodeInt(const OnboardTelephoneNumbers* p, Metadata
 
 int OnboardTelephoneNumbers_DecodeInt(OnboardTelephoneNumbers* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // ONBOARDTELEPHONENUMBERS_H_INCLUDED
+
 

@@ -44,19 +44,6 @@ typedef struct TemporarySpeedRestrictionRevocation TemporarySpeedRestrictionRevo
 
 #define TEMPORARYSPEEDRESTRICTIONREVOCATION_BITSIZE 23
 
-TemporarySpeedRestrictionRevocation*  TemporarySpeedRestrictionRevocation_New(void);
-
-void   TemporarySpeedRestrictionRevocation_Delete(TemporarySpeedRestrictionRevocation*);
-
-static inline void TemporarySpeedRestrictionRevocation_Init(TemporarySpeedRestrictionRevocation* p)
-{
-    p->header.NID_PACKET = 66;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->NID_TSR = 0;
-}
-
 /*@
     logic integer BitSize{L}(TemporarySpeedRestrictionRevocation* p) = TEMPORARYSPEEDRESTRICTIONREVOCATION_BITSIZE;
 
@@ -174,6 +161,21 @@ int TemporarySpeedRestrictionRevocation_EncodeBit(const TemporarySpeedRestrictio
 */
 int TemporarySpeedRestrictionRevocation_DecodeBit(TemporarySpeedRestrictionRevocation* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+TemporarySpeedRestrictionRevocation*  TemporarySpeedRestrictionRevocation_New(void);
+
+void   TemporarySpeedRestrictionRevocation_Delete(TemporarySpeedRestrictionRevocation*);
+
+static inline void TemporarySpeedRestrictionRevocation_Init(TemporarySpeedRestrictionRevocation* p)
+{
+    p->header.NID_PACKET = 66;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->NID_TSR = 0;
+}
+
 static inline void TemporarySpeedRestrictionRevocation_Print(const TemporarySpeedRestrictionRevocation* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -203,5 +205,8 @@ int TemporarySpeedRestrictionRevocation_EncodeInt(const TemporarySpeedRestrictio
 
 int TemporarySpeedRestrictionRevocation_DecodeInt(TemporarySpeedRestrictionRevocation* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // TEMPORARYSPEEDRESTRICTIONREVOCATION_H_INCLUDED
+
 

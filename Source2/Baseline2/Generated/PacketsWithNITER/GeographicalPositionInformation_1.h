@@ -42,16 +42,6 @@ typedef struct GeographicalPositionInformation_1 GeographicalPositionInformation
 
 #define GEOGRAPHICALPOSITIONINFORMATION_1_BITSIZE 51
 
-static inline void GeographicalPositionInformation_1_Init(GeographicalPositionInformation_1* p)
-{
-    p->Q_NEWCOUNTRY = 0;
-    p->NID_C = 0;
-    p->NID_BG = 0;
-    p->D_POSOFF = 0;
-    p->Q_MPOSITION = 0;
-    p->M_POSITION = 0;
-}
-
 /*@
     logic integer BitSize{L}(GeographicalPositionInformation_1* p) = GEOGRAPHICALPOSITIONINFORMATION_1_BITSIZE;
 
@@ -159,6 +149,18 @@ int GeographicalPositionInformation_1_EncodeBit(const GeographicalPositionInform
 */
 int GeographicalPositionInformation_1_DecodeBit(GeographicalPositionInformation_1* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+static inline void GeographicalPositionInformation_1_Init(GeographicalPositionInformation_1* p)
+{
+    p->Q_NEWCOUNTRY = 0;
+    p->NID_C = 0;
+    p->NID_BG = 0;
+    p->D_POSOFF = 0;
+    p->Q_MPOSITION = 0;
+    p->M_POSITION = 0;
+}
+
 static inline void GeographicalPositionInformation_1_Print(const GeographicalPositionInformation_1* p, FILE* stream)
 {
     fprintf(stream, "(%lu,%lu,%lu,%lu,%lu,%lu)",
@@ -191,6 +193,8 @@ static inline int GeographicalPositionInformation_1_Equal(const GeographicalPosi
 int GeographicalPositionInformation_1_EncodeInt(const GeographicalPositionInformation_1* p, kcg_int* startAddress, kcg_int* stream);
 
 int GeographicalPositionInformation_1_DecodeInt(GeographicalPositionInformation_1* p, kcg_int* startAddress, const kcg_int* stream);
+
+#endif // FRAMAC_IGNORE
 
 #endif // GEOGRAPHICALPOSITIONINFORMATION_1_H_INCLUDED
 

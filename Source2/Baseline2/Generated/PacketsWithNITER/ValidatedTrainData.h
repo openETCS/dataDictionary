@@ -56,38 +56,6 @@ typedef struct ValidatedTrainData ValidatedTrainData;
 
 #define VALIDATEDTRAINDATA_BITSIZE 106
 
-ValidatedTrainData*  ValidatedTrainData_New(void);
-
-void   ValidatedTrainData_Delete(ValidatedTrainData*);
-
-static inline void ValidatedTrainData_Init(ValidatedTrainData* p)
-{
-    p->header.NID_PACKET = 11;
-    p->header.list = TRAINTOTRACK;
-    p->L_PACKET = 0;
-    p->NID_OPERATIONAL = 0;
-    p->NC_TRAIN = 0;
-    p->L_TRAIN = 0;
-    p->V_MAXTRAIN = 0;
-    p->M_LOADINGGAUGE = 0;
-    p->M_AXLELOAD = 0;
-    p->M_AIRTIGHT = 0;
-    p->N_ITER_1 = 0;
-
-    for (uint32_t i = 0; i < 31; ++i)
-    {
-        ValidatedTrainData_1_Init(&(p->sub_1[i]));
-    }
-
-    p->N_ITER_2 = 0;
-
-    for (uint32_t i = 0; i < 31; ++i)
-    {
-        ValidatedTrainData_2_Init(&(p->sub_2[i]));
-    }
-
-}
-
 /*@
     logic integer BitSize{L}(ValidatedTrainData* p) = VALIDATEDTRAINDATA_BITSIZE;
 
@@ -225,6 +193,40 @@ int ValidatedTrainData_EncodeBit(const ValidatedTrainData* p, Bitstream* stream)
 */
 int ValidatedTrainData_DecodeBit(ValidatedTrainData* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+ValidatedTrainData*  ValidatedTrainData_New(void);
+
+void   ValidatedTrainData_Delete(ValidatedTrainData*);
+
+static inline void ValidatedTrainData_Init(ValidatedTrainData* p)
+{
+    p->header.NID_PACKET = 11;
+    p->header.list = TRAINTOTRACK;
+    p->L_PACKET = 0;
+    p->NID_OPERATIONAL = 0;
+    p->NC_TRAIN = 0;
+    p->L_TRAIN = 0;
+    p->V_MAXTRAIN = 0;
+    p->M_LOADINGGAUGE = 0;
+    p->M_AXLELOAD = 0;
+    p->M_AIRTIGHT = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        ValidatedTrainData_1_Init(&(p->sub_1[i]));
+    }
+
+    p->N_ITER_2 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        ValidatedTrainData_2_Init(&(p->sub_2[i]));
+    }
+
+}
+
 static inline void ValidatedTrainData_Print(const ValidatedTrainData* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -304,5 +306,8 @@ int ValidatedTrainData_EncodeInt(const ValidatedTrainData* p, Metadata* data, kc
 
 int ValidatedTrainData_DecodeInt(ValidatedTrainData* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // VALIDATEDTRAINDATA_H_INCLUDED
+
 

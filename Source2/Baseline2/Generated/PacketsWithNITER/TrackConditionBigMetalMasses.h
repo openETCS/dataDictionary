@@ -50,28 +50,6 @@ typedef struct TrackConditionBigMetalMasses TrackConditionBigMetalMasses;
 
 #define TRACKCONDITIONBIGMETALMASSES_BITSIZE 52
 
-TrackConditionBigMetalMasses*  TrackConditionBigMetalMasses_New(void);
-
-void   TrackConditionBigMetalMasses_Delete(TrackConditionBigMetalMasses*);
-
-static inline void TrackConditionBigMetalMasses_Init(TrackConditionBigMetalMasses* p)
-{
-    p->header.NID_PACKET = 67;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_SCALE = 0;
-    p->D_TRACKCOND = 0;
-    p->L_TRACKCOND = 0;
-    p->N_ITER_1 = 0;
-
-    for (uint32_t i = 0; i < 31; ++i)
-    {
-        TrackConditionBigMetalMasses_1_Init(&(p->sub_1[i]));
-    }
-
-}
-
 /*@
     logic integer BitSize{L}(TrackConditionBigMetalMasses* p) = TRACKCONDITIONBIGMETALMASSES_BITSIZE;
 
@@ -197,6 +175,30 @@ int TrackConditionBigMetalMasses_EncodeBit(const TrackConditionBigMetalMasses* p
 */
 int TrackConditionBigMetalMasses_DecodeBit(TrackConditionBigMetalMasses* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+TrackConditionBigMetalMasses*  TrackConditionBigMetalMasses_New(void);
+
+void   TrackConditionBigMetalMasses_Delete(TrackConditionBigMetalMasses*);
+
+static inline void TrackConditionBigMetalMasses_Init(TrackConditionBigMetalMasses* p)
+{
+    p->header.NID_PACKET = 67;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->D_TRACKCOND = 0;
+    p->L_TRACKCOND = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        TrackConditionBigMetalMasses_1_Init(&(p->sub_1[i]));
+    }
+
+}
+
 static inline void TrackConditionBigMetalMasses_Print(const TrackConditionBigMetalMasses* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -250,5 +252,8 @@ int TrackConditionBigMetalMasses_EncodeInt(const TrackConditionBigMetalMasses* p
 
 int TrackConditionBigMetalMasses_DecodeInt(TrackConditionBigMetalMasses* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // TRACKCONDITIONBIGMETALMASSES_H_INCLUDED
+
 

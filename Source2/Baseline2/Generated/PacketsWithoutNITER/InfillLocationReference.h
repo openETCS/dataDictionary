@@ -47,21 +47,6 @@ typedef struct InfillLocationReference InfillLocationReference;
 
 #define INFILLLOCATIONREFERENCE_BITSIZE 30
 
-InfillLocationReference*  InfillLocationReference_New(void);
-
-void   InfillLocationReference_Delete(InfillLocationReference*);
-
-static inline void InfillLocationReference_Init(InfillLocationReference* p)
-{
-    p->header.NID_PACKET = 136;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_NEWCOUNTRY = 0;
-    p->NID_C = 0;
-    p->NID_BG = 0;
-}
-
 /*@
     logic integer BitSize{L}(InfillLocationReference* p) = INFILLLOCATIONREFERENCE_BITSIZE;
 
@@ -179,6 +164,23 @@ int InfillLocationReference_EncodeBit(const InfillLocationReference* p, Bitstrea
 */
 int InfillLocationReference_DecodeBit(InfillLocationReference* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+InfillLocationReference*  InfillLocationReference_New(void);
+
+void   InfillLocationReference_Delete(InfillLocationReference*);
+
+static inline void InfillLocationReference_Init(InfillLocationReference* p)
+{
+    p->header.NID_PACKET = 136;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_NEWCOUNTRY = 0;
+    p->NID_C = 0;
+    p->NID_BG = 0;
+}
+
 static inline void InfillLocationReference_Print(const InfillLocationReference* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -216,5 +218,8 @@ int InfillLocationReference_EncodeInt(const InfillLocationReference* p, Metadata
 
 int InfillLocationReference_DecodeInt(InfillLocationReference* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // INFILLLOCATIONREFERENCE_H_INCLUDED
+
 

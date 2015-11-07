@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "ErrorReporting.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define ErrorReportingMemoryMax		8
-
-// end-of-freelist indicator
-#define ErrorReportingMemoryNil		(-1)
-
-// allocation memory
-static ErrorReporting ErrorReportingMemory[ErrorReportingMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t ErrorReportingMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t ErrorReportingMemoryFreeList = ErrorReportingMemoryNil;
-
-ErrorReporting* ErrorReporting_New(void)
-{
-    ErrorReporting* ptr;
-
-    if (ErrorReportingMemoryFreeList != ErrorReportingMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &ErrorReportingMemory[ErrorReportingMemoryFreeList];
-        ErrorReportingMemoryFreeList = ErrorReportingMemory[ErrorReportingMemoryFreeList].header.NID_PACKET;
-    }
-    else if (ErrorReportingMemoryTop < ErrorReportingMemoryMax)
-    {
-        // allocate from top
-        ptr = &ErrorReportingMemory[ErrorReportingMemoryTop];
-        ErrorReportingMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    ErrorReporting_Init(ptr);
-
-    return ptr;
-}
-
-
-void ErrorReporting_Delete(ErrorReporting* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = ErrorReportingMemoryFreeList;
-    ErrorReportingMemoryFreeList = ptr - ErrorReportingMemory;
-}
 
 
 int ErrorReporting_UpperBitsNotSet(const ErrorReporting* p)
@@ -165,6 +116,8 @@ int ErrorReporting_DecodeBit(ErrorReporting* p, Bitstream* stream)
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int ErrorReporting_EncodeInt(const ErrorReporting* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 4;
@@ -202,4 +155,56 @@ int ErrorReporting_DecodeInt(ErrorReporting* p, const Metadata* data, const kcg_
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define ErrorReportingMemoryMax		8
+
+// end-of-freelist indicator
+#define ErrorReportingMemoryNil		(-1)
+
+// allocation memory
+static ErrorReporting ErrorReportingMemory[ErrorReportingMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t ErrorReportingMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t ErrorReportingMemoryFreeList = ErrorReportingMemoryNil;
+
+ErrorReporting* ErrorReporting_New(void)
+{
+    ErrorReporting* ptr;
+
+    if (ErrorReportingMemoryFreeList != ErrorReportingMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &ErrorReportingMemory[ErrorReportingMemoryFreeList];
+        ErrorReportingMemoryFreeList = ErrorReportingMemory[ErrorReportingMemoryFreeList].header.NID_PACKET;
+    }
+    else if (ErrorReportingMemoryTop < ErrorReportingMemoryMax)
+    {
+        // allocate from top
+        ptr = &ErrorReportingMemory[ErrorReportingMemoryTop];
+        ErrorReportingMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    ErrorReporting_Init(ptr);
+
+    return ptr;
+}
+
+
+void ErrorReporting_Delete(ErrorReporting* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = ErrorReportingMemoryFreeList;
+    ErrorReportingMemoryFreeList = ptr - ErrorReportingMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

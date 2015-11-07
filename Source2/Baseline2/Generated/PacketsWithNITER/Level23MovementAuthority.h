@@ -64,43 +64,6 @@ typedef struct Level23MovementAuthority Level23MovementAuthority;
 
 #define LEVEL23MOVEMENTAUTHORITY_BITSIZE 177
 
-Level23MovementAuthority*  Level23MovementAuthority_New(void);
-
-void   Level23MovementAuthority_Delete(Level23MovementAuthority*);
-
-static inline void Level23MovementAuthority_Init(Level23MovementAuthority* p)
-{
-    p->header.NID_PACKET = 15;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_SCALE = 0;
-    p->V_LOA = 0;
-    p->T_LOA = 0;
-    p->N_ITER_1 = 0;
-
-    for (uint32_t i = 0; i < 31; ++i)
-    {
-        Level23MovementAuthority_1_Init(&(p->sub_1[i]));
-    }
-
-    p->L_ENDSECTION = 0;
-    p->Q_SECTIONTIMER = 0;
-    p->T_SECTIONTIMER = 0;
-    p->D_SECTIONTIMERSTOPLOC = 0;
-    p->Q_ENDTIMER = 0;
-    p->T_ENDTIMER = 0;
-    p->D_ENDTIMERSTARTLOC = 0;
-    p->Q_DANGERPOINT = 0;
-    p->D_DP = 0;
-    p->V_RELEASEDP = 0;
-    p->Q_OVERLAP = 0;
-    p->D_STARTOL = 0;
-    p->T_OL = 0;
-    p->D_OL = 0;
-    p->V_RELEASEOL = 0;
-}
-
 /*@
     logic integer BitSize{L}(Level23MovementAuthority* p) = LEVEL23MOVEMENTAUTHORITY_BITSIZE;
 
@@ -226,6 +189,45 @@ int Level23MovementAuthority_EncodeBit(const Level23MovementAuthority* p, Bitstr
 */
 int Level23MovementAuthority_DecodeBit(Level23MovementAuthority* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+Level23MovementAuthority*  Level23MovementAuthority_New(void);
+
+void   Level23MovementAuthority_Delete(Level23MovementAuthority*);
+
+static inline void Level23MovementAuthority_Init(Level23MovementAuthority* p)
+{
+    p->header.NID_PACKET = 15;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->V_LOA = 0;
+    p->T_LOA = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        Level23MovementAuthority_1_Init(&(p->sub_1[i]));
+    }
+
+    p->L_ENDSECTION = 0;
+    p->Q_SECTIONTIMER = 0;
+    p->T_SECTIONTIMER = 0;
+    p->D_SECTIONTIMERSTOPLOC = 0;
+    p->Q_ENDTIMER = 0;
+    p->T_ENDTIMER = 0;
+    p->D_ENDTIMERSTARTLOC = 0;
+    p->Q_DANGERPOINT = 0;
+    p->D_DP = 0;
+    p->V_RELEASEDP = 0;
+    p->Q_OVERLAP = 0;
+    p->D_STARTOL = 0;
+    p->T_OL = 0;
+    p->D_OL = 0;
+    p->V_RELEASEOL = 0;
+}
+
 static inline void Level23MovementAuthority_Print(const Level23MovementAuthority* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -309,5 +311,8 @@ int Level23MovementAuthority_EncodeInt(const Level23MovementAuthority* p, Metada
 
 int Level23MovementAuthority_DecodeInt(Level23MovementAuthority* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // LEVEL23MOVEMENTAUTHORITY_H_INCLUDED
+
 

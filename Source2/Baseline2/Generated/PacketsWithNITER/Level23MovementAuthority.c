@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "Level23MovementAuthority.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define Level23MovementAuthorityMemoryMax		8
-
-// end-of-freelist indicator
-#define Level23MovementAuthorityMemoryNil		(-1)
-
-// allocation memory
-static Level23MovementAuthority Level23MovementAuthorityMemory[Level23MovementAuthorityMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t Level23MovementAuthorityMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t Level23MovementAuthorityMemoryFreeList = Level23MovementAuthorityMemoryNil;
-
-Level23MovementAuthority* Level23MovementAuthority_New(void)
-{
-    Level23MovementAuthority* ptr;
-
-    if (Level23MovementAuthorityMemoryFreeList != Level23MovementAuthorityMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &Level23MovementAuthorityMemory[Level23MovementAuthorityMemoryFreeList];
-        Level23MovementAuthorityMemoryFreeList = Level23MovementAuthorityMemory[Level23MovementAuthorityMemoryFreeList].header.NID_PACKET;
-    }
-    else if (Level23MovementAuthorityMemoryTop < Level23MovementAuthorityMemoryMax)
-    {
-        // allocate from top
-        ptr = &Level23MovementAuthorityMemory[Level23MovementAuthorityMemoryTop];
-        Level23MovementAuthorityMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    Level23MovementAuthority_Init(ptr);
-
-    return ptr;
-}
-
-
-void Level23MovementAuthority_Delete(Level23MovementAuthority* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = Level23MovementAuthorityMemoryFreeList;
-    Level23MovementAuthorityMemoryFreeList = ptr - Level23MovementAuthorityMemory;
-}
 
 
 int Level23MovementAuthority_UpperBitsNotSet(const Level23MovementAuthority* p)
@@ -324,6 +275,8 @@ int Level23MovementAuthority_DecodeBit(Level23MovementAuthority* p, Bitstream* s
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int Level23MovementAuthority_EncodeInt(const Level23MovementAuthority* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 15;
@@ -412,4 +365,56 @@ int Level23MovementAuthority_DecodeInt(Level23MovementAuthority* p, const Metada
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define Level23MovementAuthorityMemoryMax		8
+
+// end-of-freelist indicator
+#define Level23MovementAuthorityMemoryNil		(-1)
+
+// allocation memory
+static Level23MovementAuthority Level23MovementAuthorityMemory[Level23MovementAuthorityMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t Level23MovementAuthorityMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t Level23MovementAuthorityMemoryFreeList = Level23MovementAuthorityMemoryNil;
+
+Level23MovementAuthority* Level23MovementAuthority_New(void)
+{
+    Level23MovementAuthority* ptr;
+
+    if (Level23MovementAuthorityMemoryFreeList != Level23MovementAuthorityMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &Level23MovementAuthorityMemory[Level23MovementAuthorityMemoryFreeList];
+        Level23MovementAuthorityMemoryFreeList = Level23MovementAuthorityMemory[Level23MovementAuthorityMemoryFreeList].header.NID_PACKET;
+    }
+    else if (Level23MovementAuthorityMemoryTop < Level23MovementAuthorityMemoryMax)
+    {
+        // allocate from top
+        ptr = &Level23MovementAuthorityMemory[Level23MovementAuthorityMemoryTop];
+        Level23MovementAuthorityMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    Level23MovementAuthority_Init(ptr);
+
+    return ptr;
+}
+
+
+void Level23MovementAuthority_Delete(Level23MovementAuthority* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = Level23MovementAuthorityMemoryFreeList;
+    Level23MovementAuthorityMemoryFreeList = ptr - Level23MovementAuthorityMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

@@ -40,14 +40,6 @@ typedef struct Level1MovementAuthority_1 Level1MovementAuthority_1;
 
 #define LEVEL1MOVEMENTAUTHORITY_1_BITSIZE 41
 
-static inline void Level1MovementAuthority_1_Init(Level1MovementAuthority_1* p)
-{
-    p->L_SECTION = 0;
-    p->Q_SECTIONTIMER = 0;
-    p->T_SECTIONTIMER = 0;
-    p->D_SECTIONTIMERSTOPLOC = 0;
-}
-
 /*@
     logic integer BitSize{L}(Level1MovementAuthority_1* p) = LEVEL1MOVEMENTAUTHORITY_1_BITSIZE;
 
@@ -167,6 +159,16 @@ int Level1MovementAuthority_1_EncodeBit(const Level1MovementAuthority_1* p, Bits
 */
 int Level1MovementAuthority_1_DecodeBit(Level1MovementAuthority_1* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+static inline void Level1MovementAuthority_1_Init(Level1MovementAuthority_1* p)
+{
+    p->L_SECTION = 0;
+    p->Q_SECTIONTIMER = 0;
+    p->T_SECTIONTIMER = 0;
+    p->D_SECTIONTIMERSTOPLOC = 0;
+}
+
 static inline void Level1MovementAuthority_1_Print(const Level1MovementAuthority_1* p, FILE* stream)
 {
     fprintf(stream, "(%lu,%lu,%lu,%lu)",
@@ -191,6 +193,8 @@ static inline int Level1MovementAuthority_1_Equal(const Level1MovementAuthority_
 int Level1MovementAuthority_1_EncodeInt(const Level1MovementAuthority_1* p, kcg_int* startAddress, kcg_int* stream);
 
 int Level1MovementAuthority_1_DecodeInt(Level1MovementAuthority_1* p, kcg_int* startAddress, const kcg_int* stream);
+
+#endif // FRAMAC_IGNORE
 
 #endif // LEVEL1MOVEMENTAUTHORITY_1_H_INCLUDED
 

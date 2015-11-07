@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "Level1MovementAuthority.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define Level1MovementAuthorityMemoryMax		8
-
-// end-of-freelist indicator
-#define Level1MovementAuthorityMemoryNil		(-1)
-
-// allocation memory
-static Level1MovementAuthority Level1MovementAuthorityMemory[Level1MovementAuthorityMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t Level1MovementAuthorityMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t Level1MovementAuthorityMemoryFreeList = Level1MovementAuthorityMemoryNil;
-
-Level1MovementAuthority* Level1MovementAuthority_New(void)
-{
-    Level1MovementAuthority* ptr;
-
-    if (Level1MovementAuthorityMemoryFreeList != Level1MovementAuthorityMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &Level1MovementAuthorityMemory[Level1MovementAuthorityMemoryFreeList];
-        Level1MovementAuthorityMemoryFreeList = Level1MovementAuthorityMemory[Level1MovementAuthorityMemoryFreeList].header.NID_PACKET;
-    }
-    else if (Level1MovementAuthorityMemoryTop < Level1MovementAuthorityMemoryMax)
-    {
-        // allocate from top
-        ptr = &Level1MovementAuthorityMemory[Level1MovementAuthorityMemoryTop];
-        Level1MovementAuthorityMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    Level1MovementAuthority_Init(ptr);
-
-    return ptr;
-}
-
-
-void Level1MovementAuthority_Delete(Level1MovementAuthority* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = Level1MovementAuthorityMemoryFreeList;
-    Level1MovementAuthorityMemoryFreeList = ptr - Level1MovementAuthorityMemory;
-}
 
 
 int Level1MovementAuthority_UpperBitsNotSet(const Level1MovementAuthority* p)
@@ -341,6 +292,8 @@ int Level1MovementAuthority_DecodeBit(Level1MovementAuthority* p, Bitstream* str
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int Level1MovementAuthority_EncodeInt(const Level1MovementAuthority* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 12;
@@ -431,4 +384,56 @@ int Level1MovementAuthority_DecodeInt(Level1MovementAuthority* p, const Metadata
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define Level1MovementAuthorityMemoryMax		8
+
+// end-of-freelist indicator
+#define Level1MovementAuthorityMemoryNil		(-1)
+
+// allocation memory
+static Level1MovementAuthority Level1MovementAuthorityMemory[Level1MovementAuthorityMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t Level1MovementAuthorityMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t Level1MovementAuthorityMemoryFreeList = Level1MovementAuthorityMemoryNil;
+
+Level1MovementAuthority* Level1MovementAuthority_New(void)
+{
+    Level1MovementAuthority* ptr;
+
+    if (Level1MovementAuthorityMemoryFreeList != Level1MovementAuthorityMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &Level1MovementAuthorityMemory[Level1MovementAuthorityMemoryFreeList];
+        Level1MovementAuthorityMemoryFreeList = Level1MovementAuthorityMemory[Level1MovementAuthorityMemoryFreeList].header.NID_PACKET;
+    }
+    else if (Level1MovementAuthorityMemoryTop < Level1MovementAuthorityMemoryMax)
+    {
+        // allocate from top
+        ptr = &Level1MovementAuthorityMemory[Level1MovementAuthorityMemoryTop];
+        Level1MovementAuthorityMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    Level1MovementAuthority_Init(ptr);
+
+    return ptr;
+}
+
+
+void Level1MovementAuthority_Delete(Level1MovementAuthority* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = Level1MovementAuthorityMemoryFreeList;
+    Level1MovementAuthorityMemoryFreeList = ptr - Level1MovementAuthorityMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

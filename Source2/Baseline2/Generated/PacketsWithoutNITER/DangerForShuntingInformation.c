@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "DangerForShuntingInformation.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define DangerForShuntingInformationMemoryMax		8
-
-// end-of-freelist indicator
-#define DangerForShuntingInformationMemoryNil		(-1)
-
-// allocation memory
-static DangerForShuntingInformation DangerForShuntingInformationMemory[DangerForShuntingInformationMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t DangerForShuntingInformationMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t DangerForShuntingInformationMemoryFreeList = DangerForShuntingInformationMemoryNil;
-
-DangerForShuntingInformation* DangerForShuntingInformation_New(void)
-{
-    DangerForShuntingInformation* ptr;
-
-    if (DangerForShuntingInformationMemoryFreeList != DangerForShuntingInformationMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &DangerForShuntingInformationMemory[DangerForShuntingInformationMemoryFreeList];
-        DangerForShuntingInformationMemoryFreeList = DangerForShuntingInformationMemory[DangerForShuntingInformationMemoryFreeList].header.NID_PACKET;
-    }
-    else if (DangerForShuntingInformationMemoryTop < DangerForShuntingInformationMemoryMax)
-    {
-        // allocate from top
-        ptr = &DangerForShuntingInformationMemory[DangerForShuntingInformationMemoryTop];
-        DangerForShuntingInformationMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    DangerForShuntingInformation_Init(ptr);
-
-    return ptr;
-}
-
-
-void DangerForShuntingInformation_Delete(DangerForShuntingInformation* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = DangerForShuntingInformationMemoryFreeList;
-    DangerForShuntingInformationMemoryFreeList = ptr - DangerForShuntingInformationMemory;
-}
 
 
 int DangerForShuntingInformation_UpperBitsNotSet(const DangerForShuntingInformation* p)
@@ -182,6 +133,8 @@ int DangerForShuntingInformation_DecodeBit(DangerForShuntingInformation* p, Bits
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int DangerForShuntingInformation_EncodeInt(const DangerForShuntingInformation* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 132;
@@ -222,4 +175,56 @@ int DangerForShuntingInformation_DecodeInt(DangerForShuntingInformation* p, cons
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define DangerForShuntingInformationMemoryMax		8
+
+// end-of-freelist indicator
+#define DangerForShuntingInformationMemoryNil		(-1)
+
+// allocation memory
+static DangerForShuntingInformation DangerForShuntingInformationMemory[DangerForShuntingInformationMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t DangerForShuntingInformationMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t DangerForShuntingInformationMemoryFreeList = DangerForShuntingInformationMemoryNil;
+
+DangerForShuntingInformation* DangerForShuntingInformation_New(void)
+{
+    DangerForShuntingInformation* ptr;
+
+    if (DangerForShuntingInformationMemoryFreeList != DangerForShuntingInformationMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &DangerForShuntingInformationMemory[DangerForShuntingInformationMemoryFreeList];
+        DangerForShuntingInformationMemoryFreeList = DangerForShuntingInformationMemory[DangerForShuntingInformationMemoryFreeList].header.NID_PACKET;
+    }
+    else if (DangerForShuntingInformationMemoryTop < DangerForShuntingInformationMemoryMax)
+    {
+        // allocate from top
+        ptr = &DangerForShuntingInformationMemory[DangerForShuntingInformationMemoryTop];
+        DangerForShuntingInformationMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    DangerForShuntingInformation_Init(ptr);
+
+    return ptr;
+}
+
+
+void DangerForShuntingInformation_Delete(DangerForShuntingInformation* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = DangerForShuntingInformationMemoryFreeList;
+    DangerForShuntingInformationMemoryFreeList = ptr - DangerForShuntingInformationMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

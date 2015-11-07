@@ -97,6 +97,8 @@ int ValidatedTrainData_1_DecodeBit(ValidatedTrainData_1* p, Bitstream* stream)
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int ValidatedTrainData_1_EncodeInt(const ValidatedTrainData_1* p, kcg_int* startAddress, kcg_int* stream)
 {
     stream[(*startAddress)++] = p->M_TRACTION;
@@ -110,4 +112,6 @@ int ValidatedTrainData_1_DecodeInt(ValidatedTrainData_1* p, kcg_int* startAddres
 
     return 1;
 }
+
+#endif // FRAMAC_IGNORE
 

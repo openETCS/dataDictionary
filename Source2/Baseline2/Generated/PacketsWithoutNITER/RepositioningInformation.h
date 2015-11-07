@@ -45,20 +45,6 @@ typedef struct RepositioningInformation RepositioningInformation;
 
 #define REPOSITIONINGINFORMATION_BITSIZE 32
 
-RepositioningInformation*  RepositioningInformation_New(void);
-
-void   RepositioningInformation_Delete(RepositioningInformation*);
-
-static inline void RepositioningInformation_Init(RepositioningInformation* p)
-{
-    p->header.NID_PACKET = 16;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_SCALE = 0;
-    p->L_SECTION = 0;
-}
-
 /*@
     logic integer BitSize{L}(RepositioningInformation* p) = REPOSITIONINGINFORMATION_BITSIZE;
 
@@ -180,6 +166,22 @@ int RepositioningInformation_EncodeBit(const RepositioningInformation* p, Bitstr
 */
 int RepositioningInformation_DecodeBit(RepositioningInformation* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+RepositioningInformation*  RepositioningInformation_New(void);
+
+void   RepositioningInformation_Delete(RepositioningInformation*);
+
+static inline void RepositioningInformation_Init(RepositioningInformation* p)
+{
+    p->header.NID_PACKET = 16;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->L_SECTION = 0;
+}
+
 static inline void RepositioningInformation_Print(const RepositioningInformation* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -211,5 +213,8 @@ int RepositioningInformation_EncodeInt(const RepositioningInformation* p, Metada
 
 int RepositioningInformation_DecodeInt(RepositioningInformation* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // REPOSITIONINGINFORMATION_H_INCLUDED
+
 

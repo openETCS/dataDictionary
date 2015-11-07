@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "PositionReportParameters.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define PositionReportParametersMemoryMax		8
-
-// end-of-freelist indicator
-#define PositionReportParametersMemoryNil		(-1)
-
-// allocation memory
-static PositionReportParameters PositionReportParametersMemory[PositionReportParametersMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t PositionReportParametersMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t PositionReportParametersMemoryFreeList = PositionReportParametersMemoryNil;
-
-PositionReportParameters* PositionReportParameters_New(void)
-{
-    PositionReportParameters* ptr;
-
-    if (PositionReportParametersMemoryFreeList != PositionReportParametersMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &PositionReportParametersMemory[PositionReportParametersMemoryFreeList];
-        PositionReportParametersMemoryFreeList = PositionReportParametersMemory[PositionReportParametersMemoryFreeList].header.NID_PACKET;
-    }
-    else if (PositionReportParametersMemoryTop < PositionReportParametersMemoryMax)
-    {
-        // allocate from top
-        ptr = &PositionReportParametersMemory[PositionReportParametersMemoryTop];
-        PositionReportParametersMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    PositionReportParameters_Init(ptr);
-
-    return ptr;
-}
-
-
-void PositionReportParameters_Delete(PositionReportParameters* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = PositionReportParametersMemoryFreeList;
-    PositionReportParametersMemoryFreeList = ptr - PositionReportParametersMemory;
-}
 
 
 int PositionReportParameters_UpperBitsNotSet(const PositionReportParameters* p)
@@ -251,6 +202,8 @@ int PositionReportParameters_DecodeBit(PositionReportParameters* p, Bitstream* s
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int PositionReportParameters_EncodeInt(const PositionReportParameters* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 58;
@@ -311,4 +264,56 @@ int PositionReportParameters_DecodeInt(PositionReportParameters* p, const Metada
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define PositionReportParametersMemoryMax		8
+
+// end-of-freelist indicator
+#define PositionReportParametersMemoryNil		(-1)
+
+// allocation memory
+static PositionReportParameters PositionReportParametersMemory[PositionReportParametersMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t PositionReportParametersMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t PositionReportParametersMemoryFreeList = PositionReportParametersMemoryNil;
+
+PositionReportParameters* PositionReportParameters_New(void)
+{
+    PositionReportParameters* ptr;
+
+    if (PositionReportParametersMemoryFreeList != PositionReportParametersMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &PositionReportParametersMemory[PositionReportParametersMemoryFreeList];
+        PositionReportParametersMemoryFreeList = PositionReportParametersMemory[PositionReportParametersMemoryFreeList].header.NID_PACKET;
+    }
+    else if (PositionReportParametersMemoryTop < PositionReportParametersMemoryMax)
+    {
+        // allocate from top
+        ptr = &PositionReportParametersMemory[PositionReportParametersMemoryTop];
+        PositionReportParametersMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    PositionReportParameters_Init(ptr);
+
+    return ptr;
+}
+
+
+void PositionReportParameters_Delete(PositionReportParameters* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = PositionReportParametersMemoryFreeList;
+    PositionReportParametersMemoryFreeList = ptr - PositionReportParametersMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

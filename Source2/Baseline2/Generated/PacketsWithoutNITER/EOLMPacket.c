@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "EOLMPacket.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define EOLMPacketMemoryMax		8
-
-// end-of-freelist indicator
-#define EOLMPacketMemoryNil		(-1)
-
-// allocation memory
-static EOLMPacket EOLMPacketMemory[EOLMPacketMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t EOLMPacketMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t EOLMPacketMemoryFreeList = EOLMPacketMemoryNil;
-
-EOLMPacket* EOLMPacket_New(void)
-{
-    EOLMPacket* ptr;
-
-    if (EOLMPacketMemoryFreeList != EOLMPacketMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &EOLMPacketMemory[EOLMPacketMemoryFreeList];
-        EOLMPacketMemoryFreeList = EOLMPacketMemory[EOLMPacketMemoryFreeList].header.NID_PACKET;
-    }
-    else if (EOLMPacketMemoryTop < EOLMPacketMemoryMax)
-    {
-        // allocate from top
-        ptr = &EOLMPacketMemory[EOLMPacketMemoryTop];
-        EOLMPacketMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    EOLMPacket_Init(ptr);
-
-    return ptr;
-}
-
-
-void EOLMPacket_Delete(EOLMPacket* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = EOLMPacketMemoryFreeList;
-    EOLMPacketMemoryFreeList = ptr - EOLMPacketMemory;
-}
 
 
 int EOLMPacket_UpperBitsNotSet(const EOLMPacket* p)
@@ -267,6 +218,8 @@ int EOLMPacket_DecodeBit(EOLMPacket* p, Bitstream* stream)
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int EOLMPacket_EncodeInt(const EOLMPacket* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 134;
@@ -317,4 +270,56 @@ int EOLMPacket_DecodeInt(EOLMPacket* p, const Metadata* data, const kcg_int* str
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define EOLMPacketMemoryMax		8
+
+// end-of-freelist indicator
+#define EOLMPacketMemoryNil		(-1)
+
+// allocation memory
+static EOLMPacket EOLMPacketMemory[EOLMPacketMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t EOLMPacketMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t EOLMPacketMemoryFreeList = EOLMPacketMemoryNil;
+
+EOLMPacket* EOLMPacket_New(void)
+{
+    EOLMPacket* ptr;
+
+    if (EOLMPacketMemoryFreeList != EOLMPacketMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &EOLMPacketMemory[EOLMPacketMemoryFreeList];
+        EOLMPacketMemoryFreeList = EOLMPacketMemory[EOLMPacketMemoryFreeList].header.NID_PACKET;
+    }
+    else if (EOLMPacketMemoryTop < EOLMPacketMemoryMax)
+    {
+        // allocate from top
+        ptr = &EOLMPacketMemory[EOLMPacketMemoryTop];
+        EOLMPacketMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    EOLMPacket_Init(ptr);
+
+    return ptr;
+}
+
+
+void EOLMPacket_Delete(EOLMPacket* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = EOLMPacketMemoryFreeList;
+    EOLMPacketMemoryFreeList = ptr - EOLMPacketMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

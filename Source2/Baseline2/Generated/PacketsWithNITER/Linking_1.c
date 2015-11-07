@@ -155,6 +155,8 @@ int Linking_1_DecodeBit(Linking_1* p, Bitstream* stream)
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int Linking_1_EncodeInt(const Linking_1* p, kcg_int* startAddress, kcg_int* stream)
 {
     stream[(*startAddress)++] = p->D_LINK;
@@ -180,4 +182,6 @@ int Linking_1_DecodeInt(Linking_1* p, kcg_int* startAddress, const kcg_int* stre
 
     return 1;
 }
+
+#endif // FRAMAC_IGNORE
 

@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "ModeProfile.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define ModeProfileMemoryMax		8
-
-// end-of-freelist indicator
-#define ModeProfileMemoryNil		(-1)
-
-// allocation memory
-static ModeProfile ModeProfileMemory[ModeProfileMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t ModeProfileMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t ModeProfileMemoryFreeList = ModeProfileMemoryNil;
-
-ModeProfile* ModeProfile_New(void)
-{
-    ModeProfile* ptr;
-
-    if (ModeProfileMemoryFreeList != ModeProfileMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &ModeProfileMemory[ModeProfileMemoryFreeList];
-        ModeProfileMemoryFreeList = ModeProfileMemory[ModeProfileMemoryFreeList].header.NID_PACKET;
-    }
-    else if (ModeProfileMemoryTop < ModeProfileMemoryMax)
-    {
-        // allocate from top
-        ptr = &ModeProfileMemory[ModeProfileMemoryTop];
-        ModeProfileMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    ModeProfile_Init(ptr);
-
-    return ptr;
-}
-
-
-void ModeProfile_Delete(ModeProfile* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = ModeProfileMemoryFreeList;
-    ModeProfileMemoryFreeList = ptr - ModeProfileMemory;
-}
 
 
 int ModeProfile_UpperBitsNotSet(const ModeProfile* p)
@@ -285,6 +236,8 @@ int ModeProfile_DecodeBit(ModeProfile* p, Bitstream* stream)
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int ModeProfile_EncodeInt(const ModeProfile* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 80;
@@ -349,4 +302,56 @@ int ModeProfile_DecodeInt(ModeProfile* p, const Metadata* data, const kcg_int* s
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define ModeProfileMemoryMax		8
+
+// end-of-freelist indicator
+#define ModeProfileMemoryNil		(-1)
+
+// allocation memory
+static ModeProfile ModeProfileMemory[ModeProfileMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t ModeProfileMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t ModeProfileMemoryFreeList = ModeProfileMemoryNil;
+
+ModeProfile* ModeProfile_New(void)
+{
+    ModeProfile* ptr;
+
+    if (ModeProfileMemoryFreeList != ModeProfileMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &ModeProfileMemory[ModeProfileMemoryFreeList];
+        ModeProfileMemoryFreeList = ModeProfileMemory[ModeProfileMemoryFreeList].header.NID_PACKET;
+    }
+    else if (ModeProfileMemoryTop < ModeProfileMemoryMax)
+    {
+        // allocate from top
+        ptr = &ModeProfileMemory[ModeProfileMemoryTop];
+        ModeProfileMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    ModeProfile_Init(ptr);
+
+    return ptr;
+}
+
+
+void ModeProfile_Delete(ModeProfile* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = ModeProfileMemoryFreeList;
+    ModeProfileMemoryFreeList = ptr - ModeProfileMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

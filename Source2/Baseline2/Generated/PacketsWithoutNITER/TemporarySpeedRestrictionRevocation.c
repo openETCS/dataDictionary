@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "TemporarySpeedRestrictionRevocation.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define TemporarySpeedRestrictionRevocationMemoryMax		8
-
-// end-of-freelist indicator
-#define TemporarySpeedRestrictionRevocationMemoryNil		(-1)
-
-// allocation memory
-static TemporarySpeedRestrictionRevocation TemporarySpeedRestrictionRevocationMemory[TemporarySpeedRestrictionRevocationMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t TemporarySpeedRestrictionRevocationMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t TemporarySpeedRestrictionRevocationMemoryFreeList = TemporarySpeedRestrictionRevocationMemoryNil;
-
-TemporarySpeedRestrictionRevocation* TemporarySpeedRestrictionRevocation_New(void)
-{
-    TemporarySpeedRestrictionRevocation* ptr;
-
-    if (TemporarySpeedRestrictionRevocationMemoryFreeList != TemporarySpeedRestrictionRevocationMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &TemporarySpeedRestrictionRevocationMemory[TemporarySpeedRestrictionRevocationMemoryFreeList];
-        TemporarySpeedRestrictionRevocationMemoryFreeList = TemporarySpeedRestrictionRevocationMemory[TemporarySpeedRestrictionRevocationMemoryFreeList].header.NID_PACKET;
-    }
-    else if (TemporarySpeedRestrictionRevocationMemoryTop < TemporarySpeedRestrictionRevocationMemoryMax)
-    {
-        // allocate from top
-        ptr = &TemporarySpeedRestrictionRevocationMemory[TemporarySpeedRestrictionRevocationMemoryTop];
-        TemporarySpeedRestrictionRevocationMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    TemporarySpeedRestrictionRevocation_Init(ptr);
-
-    return ptr;
-}
-
-
-void TemporarySpeedRestrictionRevocation_Delete(TemporarySpeedRestrictionRevocation* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = TemporarySpeedRestrictionRevocationMemoryFreeList;
-    TemporarySpeedRestrictionRevocationMemoryFreeList = ptr - TemporarySpeedRestrictionRevocationMemory;
-}
 
 
 int TemporarySpeedRestrictionRevocation_UpperBitsNotSet(const TemporarySpeedRestrictionRevocation* p)
@@ -182,6 +133,8 @@ int TemporarySpeedRestrictionRevocation_DecodeBit(TemporarySpeedRestrictionRevoc
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int TemporarySpeedRestrictionRevocation_EncodeInt(const TemporarySpeedRestrictionRevocation* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 66;
@@ -222,4 +175,56 @@ int TemporarySpeedRestrictionRevocation_DecodeInt(TemporarySpeedRestrictionRevoc
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define TemporarySpeedRestrictionRevocationMemoryMax		8
+
+// end-of-freelist indicator
+#define TemporarySpeedRestrictionRevocationMemoryNil		(-1)
+
+// allocation memory
+static TemporarySpeedRestrictionRevocation TemporarySpeedRestrictionRevocationMemory[TemporarySpeedRestrictionRevocationMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t TemporarySpeedRestrictionRevocationMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t TemporarySpeedRestrictionRevocationMemoryFreeList = TemporarySpeedRestrictionRevocationMemoryNil;
+
+TemporarySpeedRestrictionRevocation* TemporarySpeedRestrictionRevocation_New(void)
+{
+    TemporarySpeedRestrictionRevocation* ptr;
+
+    if (TemporarySpeedRestrictionRevocationMemoryFreeList != TemporarySpeedRestrictionRevocationMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &TemporarySpeedRestrictionRevocationMemory[TemporarySpeedRestrictionRevocationMemoryFreeList];
+        TemporarySpeedRestrictionRevocationMemoryFreeList = TemporarySpeedRestrictionRevocationMemory[TemporarySpeedRestrictionRevocationMemoryFreeList].header.NID_PACKET;
+    }
+    else if (TemporarySpeedRestrictionRevocationMemoryTop < TemporarySpeedRestrictionRevocationMemoryMax)
+    {
+        // allocate from top
+        ptr = &TemporarySpeedRestrictionRevocationMemory[TemporarySpeedRestrictionRevocationMemoryTop];
+        TemporarySpeedRestrictionRevocationMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    TemporarySpeedRestrictionRevocation_Init(ptr);
+
+    return ptr;
+}
+
+
+void TemporarySpeedRestrictionRevocation_Delete(TemporarySpeedRestrictionRevocation* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = TemporarySpeedRestrictionRevocationMemoryFreeList;
+    TemporarySpeedRestrictionRevocationMemoryFreeList = ptr - TemporarySpeedRestrictionRevocationMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

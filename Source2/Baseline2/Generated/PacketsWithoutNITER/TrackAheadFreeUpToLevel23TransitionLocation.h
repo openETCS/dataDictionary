@@ -47,21 +47,6 @@ typedef struct TrackAheadFreeUpToLevel23TransitionLocation TrackAheadFreeUpToLev
 
 #define TRACKAHEADFREEUPTOLEVEL23TRANSITIONLOCATION_BITSIZE 30
 
-TrackAheadFreeUpToLevel23TransitionLocation*  TrackAheadFreeUpToLevel23TransitionLocation_New(void);
-
-void   TrackAheadFreeUpToLevel23TransitionLocation_Delete(TrackAheadFreeUpToLevel23TransitionLocation*);
-
-static inline void TrackAheadFreeUpToLevel23TransitionLocation_Init(TrackAheadFreeUpToLevel23TransitionLocation* p)
-{
-    p->header.NID_PACKET = 90;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_NEWCOUNTRY = 0;
-    p->NID_C = 0;
-    p->NID_BG = 0;
-}
-
 /*@
     logic integer BitSize{L}(TrackAheadFreeUpToLevel23TransitionLocation* p) = TRACKAHEADFREEUPTOLEVEL23TRANSITIONLOCATION_BITSIZE;
 
@@ -179,6 +164,23 @@ int TrackAheadFreeUpToLevel23TransitionLocation_EncodeBit(const TrackAheadFreeUp
 */
 int TrackAheadFreeUpToLevel23TransitionLocation_DecodeBit(TrackAheadFreeUpToLevel23TransitionLocation* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+TrackAheadFreeUpToLevel23TransitionLocation*  TrackAheadFreeUpToLevel23TransitionLocation_New(void);
+
+void   TrackAheadFreeUpToLevel23TransitionLocation_Delete(TrackAheadFreeUpToLevel23TransitionLocation*);
+
+static inline void TrackAheadFreeUpToLevel23TransitionLocation_Init(TrackAheadFreeUpToLevel23TransitionLocation* p)
+{
+    p->header.NID_PACKET = 90;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_NEWCOUNTRY = 0;
+    p->NID_C = 0;
+    p->NID_BG = 0;
+}
+
 static inline void TrackAheadFreeUpToLevel23TransitionLocation_Print(const TrackAheadFreeUpToLevel23TransitionLocation* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -216,5 +218,8 @@ int TrackAheadFreeUpToLevel23TransitionLocation_EncodeInt(const TrackAheadFreeUp
 
 int TrackAheadFreeUpToLevel23TransitionLocation_DecodeInt(TrackAheadFreeUpToLevel23TransitionLocation* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // TRACKAHEADFREEUPTOLEVEL23TRANSITIONLOCATION_H_INCLUDED
+
 

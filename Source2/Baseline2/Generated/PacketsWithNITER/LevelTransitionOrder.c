@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "LevelTransitionOrder.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define LevelTransitionOrderMemoryMax		8
-
-// end-of-freelist indicator
-#define LevelTransitionOrderMemoryNil		(-1)
-
-// allocation memory
-static LevelTransitionOrder LevelTransitionOrderMemory[LevelTransitionOrderMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t LevelTransitionOrderMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t LevelTransitionOrderMemoryFreeList = LevelTransitionOrderMemoryNil;
-
-LevelTransitionOrder* LevelTransitionOrder_New(void)
-{
-    LevelTransitionOrder* ptr;
-
-    if (LevelTransitionOrderMemoryFreeList != LevelTransitionOrderMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &LevelTransitionOrderMemory[LevelTransitionOrderMemoryFreeList];
-        LevelTransitionOrderMemoryFreeList = LevelTransitionOrderMemory[LevelTransitionOrderMemoryFreeList].header.NID_PACKET;
-    }
-    else if (LevelTransitionOrderMemoryTop < LevelTransitionOrderMemoryMax)
-    {
-        // allocate from top
-        ptr = &LevelTransitionOrderMemory[LevelTransitionOrderMemoryTop];
-        LevelTransitionOrderMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    LevelTransitionOrder_Init(ptr);
-
-    return ptr;
-}
-
-
-void LevelTransitionOrder_Delete(LevelTransitionOrder* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = LevelTransitionOrderMemoryFreeList;
-    LevelTransitionOrderMemoryFreeList = ptr - LevelTransitionOrderMemory;
-}
 
 
 int LevelTransitionOrder_UpperBitsNotSet(const LevelTransitionOrder* p)
@@ -257,6 +208,8 @@ int LevelTransitionOrder_DecodeBit(LevelTransitionOrder* p, Bitstream* stream)
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int LevelTransitionOrder_EncodeInt(const LevelTransitionOrder* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 41;
@@ -319,4 +272,56 @@ int LevelTransitionOrder_DecodeInt(LevelTransitionOrder* p, const Metadata* data
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define LevelTransitionOrderMemoryMax		8
+
+// end-of-freelist indicator
+#define LevelTransitionOrderMemoryNil		(-1)
+
+// allocation memory
+static LevelTransitionOrder LevelTransitionOrderMemory[LevelTransitionOrderMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t LevelTransitionOrderMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t LevelTransitionOrderMemoryFreeList = LevelTransitionOrderMemoryNil;
+
+LevelTransitionOrder* LevelTransitionOrder_New(void)
+{
+    LevelTransitionOrder* ptr;
+
+    if (LevelTransitionOrderMemoryFreeList != LevelTransitionOrderMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &LevelTransitionOrderMemory[LevelTransitionOrderMemoryFreeList];
+        LevelTransitionOrderMemoryFreeList = LevelTransitionOrderMemory[LevelTransitionOrderMemoryFreeList].header.NID_PACKET;
+    }
+    else if (LevelTransitionOrderMemoryTop < LevelTransitionOrderMemoryMax)
+    {
+        // allocate from top
+        ptr = &LevelTransitionOrderMemory[LevelTransitionOrderMemoryTop];
+        LevelTransitionOrderMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    LevelTransitionOrder_Init(ptr);
+
+    return ptr;
+}
+
+
+void LevelTransitionOrder_Delete(LevelTransitionOrder* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = LevelTransitionOrderMemoryFreeList;
+    LevelTransitionOrderMemoryFreeList = ptr - LevelTransitionOrderMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

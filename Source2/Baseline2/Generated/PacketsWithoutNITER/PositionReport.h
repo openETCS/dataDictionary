@@ -58,31 +58,6 @@ typedef struct PositionReport PositionReport;
 
 #define POSITIONREPORT_BITSIZE 106
 
-PositionReport*  PositionReport_New(void);
-
-void   PositionReport_Delete(PositionReport*);
-
-static inline void PositionReport_Init(PositionReport* p)
-{
-    p->header.NID_PACKET = 0;
-    p->header.list = TRAINTOTRACK;
-    p->L_PACKET = 0;
-    p->Q_SCALE = 0;
-    p->NID_LRBG = 0;
-    p->D_LRBG = 0;
-    p->Q_DIRLRBG = 0;
-    p->Q_DLRBG = 0;
-    p->L_DOUBTOVER = 0;
-    p->L_DOUBTUNDER = 0;
-    p->Q_LENGTH = 0;
-    p->L_TRAININT = 0;
-    p->V_TRAIN = 0;
-    p->Q_DIRTRAIN = 0;
-    p->M_MODE = 0;
-    p->M_LEVEL = 0;
-    p->NID_STM = 0;
-}
-
 /*@
     logic integer BitSize{L}(PositionReport* p) = POSITIONREPORT_BITSIZE;
 
@@ -224,6 +199,33 @@ int PositionReport_EncodeBit(const PositionReport* p, Bitstream* stream);
 */
 int PositionReport_DecodeBit(PositionReport* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+PositionReport*  PositionReport_New(void);
+
+void   PositionReport_Delete(PositionReport*);
+
+static inline void PositionReport_Init(PositionReport* p)
+{
+    p->header.NID_PACKET = 0;
+    p->header.list = TRAINTOTRACK;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->NID_LRBG = 0;
+    p->D_LRBG = 0;
+    p->Q_DIRLRBG = 0;
+    p->Q_DLRBG = 0;
+    p->L_DOUBTOVER = 0;
+    p->L_DOUBTUNDER = 0;
+    p->Q_LENGTH = 0;
+    p->L_TRAININT = 0;
+    p->V_TRAIN = 0;
+    p->Q_DIRTRAIN = 0;
+    p->M_MODE = 0;
+    p->M_LEVEL = 0;
+    p->NID_STM = 0;
+}
+
 static inline void PositionReport_Print(const PositionReport* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -285,5 +287,8 @@ int PositionReport_EncodeInt(const PositionReport* p, Metadata* data, kcg_int* s
 
 int PositionReport_DecodeInt(PositionReport* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // POSITIONREPORT_H_INCLUDED
+
 

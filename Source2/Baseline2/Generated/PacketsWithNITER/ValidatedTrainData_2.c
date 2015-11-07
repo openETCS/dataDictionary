@@ -97,6 +97,8 @@ int ValidatedTrainData_2_DecodeBit(ValidatedTrainData_2* p, Bitstream* stream)
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int ValidatedTrainData_2_EncodeInt(const ValidatedTrainData_2* p, kcg_int* startAddress, kcg_int* stream)
 {
     stream[(*startAddress)++] = p->NID_STM;
@@ -110,4 +112,6 @@ int ValidatedTrainData_2_DecodeInt(ValidatedTrainData_2* p, kcg_int* startAddres
 
     return 1;
 }
+
+#endif // FRAMAC_IGNORE
 

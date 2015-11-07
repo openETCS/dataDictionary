@@ -44,19 +44,6 @@ typedef struct DangerForShuntingInformation DangerForShuntingInformation;
 
 #define DANGERFORSHUNTINGINFORMATION_BITSIZE 16
 
-DangerForShuntingInformation*  DangerForShuntingInformation_New(void);
-
-void   DangerForShuntingInformation_Delete(DangerForShuntingInformation*);
-
-static inline void DangerForShuntingInformation_Init(DangerForShuntingInformation* p)
-{
-    p->header.NID_PACKET = 132;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_ASPECT = 0;
-}
-
 /*@
     logic integer BitSize{L}(DangerForShuntingInformation* p) = DANGERFORSHUNTINGINFORMATION_BITSIZE;
 
@@ -174,6 +161,21 @@ int DangerForShuntingInformation_EncodeBit(const DangerForShuntingInformation* p
 */
 int DangerForShuntingInformation_DecodeBit(DangerForShuntingInformation* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+DangerForShuntingInformation*  DangerForShuntingInformation_New(void);
+
+void   DangerForShuntingInformation_Delete(DangerForShuntingInformation*);
+
+static inline void DangerForShuntingInformation_Init(DangerForShuntingInformation* p)
+{
+    p->header.NID_PACKET = 132;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_ASPECT = 0;
+}
+
 static inline void DangerForShuntingInformation_Print(const DangerForShuntingInformation* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -203,5 +205,8 @@ int DangerForShuntingInformation_EncodeInt(const DangerForShuntingInformation* p
 
 int DangerForShuntingInformation_DecodeInt(DangerForShuntingInformation* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // DANGERFORSHUNTINGINFORMATION_H_INCLUDED
+
 

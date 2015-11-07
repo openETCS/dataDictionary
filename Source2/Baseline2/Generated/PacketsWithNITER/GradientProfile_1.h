@@ -39,13 +39,6 @@ typedef struct GradientProfile_1 GradientProfile_1;
 
 #define GRADIENTPROFILE_1_BITSIZE 24
 
-static inline void GradientProfile_1_Init(GradientProfile_1* p)
-{
-    p->D_GRADIENT = 0;
-    p->Q_GDIR = 0;
-    p->G_A = 0;
-}
-
 /*@
     logic integer BitSize{L}(GradientProfile_1* p) = GRADIENTPROFILE_1_BITSIZE;
 
@@ -161,6 +154,15 @@ int GradientProfile_1_EncodeBit(const GradientProfile_1* p, Bitstream* stream);
 */
 int GradientProfile_1_DecodeBit(GradientProfile_1* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+static inline void GradientProfile_1_Init(GradientProfile_1* p)
+{
+    p->D_GRADIENT = 0;
+    p->Q_GDIR = 0;
+    p->G_A = 0;
+}
+
 static inline void GradientProfile_1_Print(const GradientProfile_1* p, FILE* stream)
 {
     fprintf(stream, "(%lu,%lu,%lu)",
@@ -183,6 +185,8 @@ static inline int GradientProfile_1_Equal(const GradientProfile_1* a, const Grad
 int GradientProfile_1_EncodeInt(const GradientProfile_1* p, kcg_int* startAddress, kcg_int* stream);
 
 int GradientProfile_1_DecodeInt(GradientProfile_1* p, kcg_int* startAddress, const kcg_int* stream);
+
+#endif // FRAMAC_IGNORE
 
 #endif // GRADIENTPROFILE_1_H_INCLUDED
 

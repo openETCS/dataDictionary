@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "PositionReport.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define PositionReportMemoryMax		8
-
-// end-of-freelist indicator
-#define PositionReportMemoryNil		(-1)
-
-// allocation memory
-static PositionReport PositionReportMemory[PositionReportMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t PositionReportMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t PositionReportMemoryFreeList = PositionReportMemoryNil;
-
-PositionReport* PositionReport_New(void)
-{
-    PositionReport* ptr;
-
-    if (PositionReportMemoryFreeList != PositionReportMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &PositionReportMemory[PositionReportMemoryFreeList];
-        PositionReportMemoryFreeList = PositionReportMemory[PositionReportMemoryFreeList].header.NID_PACKET;
-    }
-    else if (PositionReportMemoryTop < PositionReportMemoryMax)
-    {
-        // allocate from top
-        ptr = &PositionReportMemory[PositionReportMemoryTop];
-        PositionReportMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    PositionReport_Init(ptr);
-
-    return ptr;
-}
-
-
-void PositionReport_Delete(PositionReport* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = PositionReportMemoryFreeList;
-    PositionReportMemoryFreeList = ptr - PositionReportMemory;
-}
 
 
 int PositionReport_UpperBitsNotSet(const PositionReport* p)
@@ -342,6 +293,8 @@ int PositionReport_DecodeBit(PositionReport* p, Bitstream* stream)
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int PositionReport_EncodeInt(const PositionReport* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 0;
@@ -405,4 +358,56 @@ int PositionReport_DecodeInt(PositionReport* p, const Metadata* data, const kcg_
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define PositionReportMemoryMax		8
+
+// end-of-freelist indicator
+#define PositionReportMemoryNil		(-1)
+
+// allocation memory
+static PositionReport PositionReportMemory[PositionReportMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t PositionReportMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t PositionReportMemoryFreeList = PositionReportMemoryNil;
+
+PositionReport* PositionReport_New(void)
+{
+    PositionReport* ptr;
+
+    if (PositionReportMemoryFreeList != PositionReportMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &PositionReportMemory[PositionReportMemoryFreeList];
+        PositionReportMemoryFreeList = PositionReportMemory[PositionReportMemoryFreeList].header.NID_PACKET;
+    }
+    else if (PositionReportMemoryTop < PositionReportMemoryMax)
+    {
+        // allocate from top
+        ptr = &PositionReportMemory[PositionReportMemoryTop];
+        PositionReportMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    PositionReport_Init(ptr);
+
+    return ptr;
+}
+
+
+void PositionReport_Delete(PositionReport* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = PositionReportMemoryFreeList;
+    PositionReportMemoryFreeList = ptr - PositionReportMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

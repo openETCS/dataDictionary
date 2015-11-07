@@ -43,17 +43,6 @@ typedef struct Linking_1 Linking_1;
 
 #define LINKING_1_BITSIZE 39
 
-static inline void Linking_1_Init(Linking_1* p)
-{
-    p->D_LINK = 0;
-    p->Q_NEWCOUNTRY = 0;
-    p->NID_C = 0;
-    p->NID_BG = 0;
-    p->Q_LINKORIENTATION = 0;
-    p->Q_LINKREACTION = 0;
-    p->Q_LOCACC = 0;
-}
-
 /*@
     logic integer BitSize{L}(Linking_1* p) = LINKING_1_BITSIZE;
 
@@ -165,6 +154,19 @@ int Linking_1_EncodeBit(const Linking_1* p, Bitstream* stream);
 */
 int Linking_1_DecodeBit(Linking_1* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+static inline void Linking_1_Init(Linking_1* p)
+{
+    p->D_LINK = 0;
+    p->Q_NEWCOUNTRY = 0;
+    p->NID_C = 0;
+    p->NID_BG = 0;
+    p->Q_LINKORIENTATION = 0;
+    p->Q_LINKREACTION = 0;
+    p->Q_LOCACC = 0;
+}
+
 static inline void Linking_1_Print(const Linking_1* p, FILE* stream)
 {
     fprintf(stream, "(%lu,%lu,%lu,%lu,%lu,%lu,%lu)",
@@ -199,6 +201,8 @@ static inline int Linking_1_Equal(const Linking_1* a, const Linking_1* b)
 int Linking_1_EncodeInt(const Linking_1* p, kcg_int* startAddress, kcg_int* stream);
 
 int Linking_1_DecodeInt(Linking_1* p, kcg_int* startAddress, const kcg_int* stream);
+
+#endif // FRAMAC_IGNORE
 
 #endif // LINKING_1_H_INCLUDED
 

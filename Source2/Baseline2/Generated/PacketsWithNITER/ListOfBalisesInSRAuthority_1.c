@@ -120,6 +120,8 @@ int ListOfBalisesInSRAuthority_1_DecodeBit(ListOfBalisesInSRAuthority_1* p, Bits
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int ListOfBalisesInSRAuthority_1_EncodeInt(const ListOfBalisesInSRAuthority_1* p, kcg_int* startAddress, kcg_int* stream)
 {
     stream[(*startAddress)++] = p->Q_NEWCOUNTRY;
@@ -137,4 +139,6 @@ int ListOfBalisesInSRAuthority_1_DecodeInt(ListOfBalisesInSRAuthority_1* p, kcg_
 
     return 1;
 }
+
+#endif // FRAMAC_IGNORE
 

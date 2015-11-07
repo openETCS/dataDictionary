@@ -47,25 +47,6 @@ typedef struct ListOfBalisesForSHArea ListOfBalisesForSHArea;
 
 #define LISTOFBALISESFORSHAREA_BITSIZE 20
 
-ListOfBalisesForSHArea*  ListOfBalisesForSHArea_New(void);
-
-void   ListOfBalisesForSHArea_Delete(ListOfBalisesForSHArea*);
-
-static inline void ListOfBalisesForSHArea_Init(ListOfBalisesForSHArea* p)
-{
-    p->header.NID_PACKET = 49;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->N_ITER_1 = 0;
-
-    for (uint32_t i = 0; i < 31; ++i)
-    {
-        ListOfBalisesForSHArea_1_Init(&(p->sub_1[i]));
-    }
-
-}
-
 /*@
     logic integer BitSize{L}(ListOfBalisesForSHArea* p) = LISTOFBALISESFORSHAREA_BITSIZE;
 
@@ -179,6 +160,27 @@ int ListOfBalisesForSHArea_EncodeBit(const ListOfBalisesForSHArea* p, Bitstream*
 */
 int ListOfBalisesForSHArea_DecodeBit(ListOfBalisesForSHArea* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+ListOfBalisesForSHArea*  ListOfBalisesForSHArea_New(void);
+
+void   ListOfBalisesForSHArea_Delete(ListOfBalisesForSHArea*);
+
+static inline void ListOfBalisesForSHArea_Init(ListOfBalisesForSHArea* p)
+{
+    p->header.NID_PACKET = 49;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        ListOfBalisesForSHArea_1_Init(&(p->sub_1[i]));
+    }
+
+}
+
 static inline void ListOfBalisesForSHArea_Print(const ListOfBalisesForSHArea* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -226,5 +228,8 @@ int ListOfBalisesForSHArea_EncodeInt(const ListOfBalisesForSHArea* p, Metadata* 
 
 int ListOfBalisesForSHArea_DecodeInt(ListOfBalisesForSHArea* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // LISTOFBALISESFORSHAREA_H_INCLUDED
+
 

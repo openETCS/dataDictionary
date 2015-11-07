@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "RouteSuitabilityData.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define RouteSuitabilityDataMemoryMax		8
-
-// end-of-freelist indicator
-#define RouteSuitabilityDataMemoryNil		(-1)
-
-// allocation memory
-static RouteSuitabilityData RouteSuitabilityDataMemory[RouteSuitabilityDataMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t RouteSuitabilityDataMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t RouteSuitabilityDataMemoryFreeList = RouteSuitabilityDataMemoryNil;
-
-RouteSuitabilityData* RouteSuitabilityData_New(void)
-{
-    RouteSuitabilityData* ptr;
-
-    if (RouteSuitabilityDataMemoryFreeList != RouteSuitabilityDataMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &RouteSuitabilityDataMemory[RouteSuitabilityDataMemoryFreeList];
-        RouteSuitabilityDataMemoryFreeList = RouteSuitabilityDataMemory[RouteSuitabilityDataMemoryFreeList].header.NID_PACKET;
-    }
-    else if (RouteSuitabilityDataMemoryTop < RouteSuitabilityDataMemoryMax)
-    {
-        // allocate from top
-        ptr = &RouteSuitabilityDataMemory[RouteSuitabilityDataMemoryTop];
-        RouteSuitabilityDataMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    RouteSuitabilityData_Init(ptr);
-
-    return ptr;
-}
-
-
-void RouteSuitabilityData_Delete(RouteSuitabilityData* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = RouteSuitabilityDataMemoryFreeList;
-    RouteSuitabilityDataMemoryFreeList = ptr - RouteSuitabilityDataMemory;
-}
 
 
 int RouteSuitabilityData_UpperBitsNotSet(const RouteSuitabilityData* p)
@@ -308,6 +259,8 @@ int RouteSuitabilityData_DecodeBit(RouteSuitabilityData* p, Bitstream* stream)
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int RouteSuitabilityData_EncodeInt(const RouteSuitabilityData* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 70;
@@ -376,4 +329,56 @@ int RouteSuitabilityData_DecodeInt(RouteSuitabilityData* p, const Metadata* data
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define RouteSuitabilityDataMemoryMax		8
+
+// end-of-freelist indicator
+#define RouteSuitabilityDataMemoryNil		(-1)
+
+// allocation memory
+static RouteSuitabilityData RouteSuitabilityDataMemory[RouteSuitabilityDataMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t RouteSuitabilityDataMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t RouteSuitabilityDataMemoryFreeList = RouteSuitabilityDataMemoryNil;
+
+RouteSuitabilityData* RouteSuitabilityData_New(void)
+{
+    RouteSuitabilityData* ptr;
+
+    if (RouteSuitabilityDataMemoryFreeList != RouteSuitabilityDataMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &RouteSuitabilityDataMemory[RouteSuitabilityDataMemoryFreeList];
+        RouteSuitabilityDataMemoryFreeList = RouteSuitabilityDataMemory[RouteSuitabilityDataMemoryFreeList].header.NID_PACKET;
+    }
+    else if (RouteSuitabilityDataMemoryTop < RouteSuitabilityDataMemoryMax)
+    {
+        // allocate from top
+        ptr = &RouteSuitabilityDataMemory[RouteSuitabilityDataMemoryTop];
+        RouteSuitabilityDataMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    RouteSuitabilityData_Init(ptr);
+
+    return ptr;
+}
+
+
+void RouteSuitabilityData_Delete(RouteSuitabilityData* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = RouteSuitabilityDataMemoryFreeList;
+    RouteSuitabilityDataMemoryFreeList = ptr - RouteSuitabilityDataMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

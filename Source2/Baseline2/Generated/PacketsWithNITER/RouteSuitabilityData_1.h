@@ -41,15 +41,6 @@ typedef struct RouteSuitabilityData_1 RouteSuitabilityData_1;
 
 #define ROUTESUITABILITYDATA_1_BITSIZE 17
 
-static inline void RouteSuitabilityData_1_Init(RouteSuitabilityData_1* p)
-{
-    p->D_SUITABILITY = 0;
-    p->Q_SUITABILITY = 0;
-    p->M_LOADINGGAUGE = 0;
-    p->M_AXLELOAD = 0;
-    p->M_TRACTION = 0;
-}
-
 /*@
     logic integer BitSize{L}(RouteSuitabilityData_1* p) = ROUTESUITABILITYDATA_1_BITSIZE;
 
@@ -161,6 +152,17 @@ int RouteSuitabilityData_1_EncodeBit(const RouteSuitabilityData_1* p, Bitstream*
 */
 int RouteSuitabilityData_1_DecodeBit(RouteSuitabilityData_1* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+static inline void RouteSuitabilityData_1_Init(RouteSuitabilityData_1* p)
+{
+    p->D_SUITABILITY = 0;
+    p->Q_SUITABILITY = 0;
+    p->M_LOADINGGAUGE = 0;
+    p->M_AXLELOAD = 0;
+    p->M_TRACTION = 0;
+}
+
 static inline void RouteSuitabilityData_1_Print(const RouteSuitabilityData_1* p, FILE* stream)
 {
     fprintf(stream, "(%lu,%lu,%lu,%lu,%lu)",
@@ -199,6 +201,8 @@ static inline int RouteSuitabilityData_1_Equal(const RouteSuitabilityData_1* a, 
 int RouteSuitabilityData_1_EncodeInt(const RouteSuitabilityData_1* p, kcg_int* startAddress, kcg_int* stream);
 
 int RouteSuitabilityData_1_DecodeInt(RouteSuitabilityData_1* p, kcg_int* startAddress, const kcg_int* stream);
+
+#endif // FRAMAC_IGNORE
 
 #endif // ROUTESUITABILITYDATA_1_H_INCLUDED
 

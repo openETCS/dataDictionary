@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "GradientProfile.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define GradientProfileMemoryMax		8
-
-// end-of-freelist indicator
-#define GradientProfileMemoryNil		(-1)
-
-// allocation memory
-static GradientProfile GradientProfileMemory[GradientProfileMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t GradientProfileMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t GradientProfileMemoryFreeList = GradientProfileMemoryNil;
-
-GradientProfile* GradientProfile_New(void)
-{
-    GradientProfile* ptr;
-
-    if (GradientProfileMemoryFreeList != GradientProfileMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &GradientProfileMemory[GradientProfileMemoryFreeList];
-        GradientProfileMemoryFreeList = GradientProfileMemory[GradientProfileMemoryFreeList].header.NID_PACKET;
-    }
-    else if (GradientProfileMemoryTop < GradientProfileMemoryMax)
-    {
-        // allocate from top
-        ptr = &GradientProfileMemory[GradientProfileMemoryTop];
-        GradientProfileMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    GradientProfile_Init(ptr);
-
-    return ptr;
-}
-
-
-void GradientProfile_Delete(GradientProfile* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = GradientProfileMemoryFreeList;
-    GradientProfileMemoryFreeList = ptr - GradientProfileMemory;
-}
 
 
 int GradientProfile_UpperBitsNotSet(const GradientProfile* p)
@@ -251,6 +202,8 @@ int GradientProfile_DecodeBit(GradientProfile* p, Bitstream* stream)
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int GradientProfile_EncodeInt(const GradientProfile* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 21;
@@ -311,4 +264,56 @@ int GradientProfile_DecodeInt(GradientProfile* p, const Metadata* data, const kc
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define GradientProfileMemoryMax		8
+
+// end-of-freelist indicator
+#define GradientProfileMemoryNil		(-1)
+
+// allocation memory
+static GradientProfile GradientProfileMemory[GradientProfileMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t GradientProfileMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t GradientProfileMemoryFreeList = GradientProfileMemoryNil;
+
+GradientProfile* GradientProfile_New(void)
+{
+    GradientProfile* ptr;
+
+    if (GradientProfileMemoryFreeList != GradientProfileMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &GradientProfileMemory[GradientProfileMemoryFreeList];
+        GradientProfileMemoryFreeList = GradientProfileMemory[GradientProfileMemoryFreeList].header.NID_PACKET;
+    }
+    else if (GradientProfileMemoryTop < GradientProfileMemoryMax)
+    {
+        // allocate from top
+        ptr = &GradientProfileMemory[GradientProfileMemoryTop];
+        GradientProfileMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    GradientProfile_Init(ptr);
+
+    return ptr;
+}
+
+
+void GradientProfile_Delete(GradientProfile* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = GradientProfileMemoryFreeList;
+    GradientProfileMemoryFreeList = ptr - GradientProfileMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "AdhesionFactor.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define AdhesionFactorMemoryMax		8
-
-// end-of-freelist indicator
-#define AdhesionFactorMemoryNil		(-1)
-
-// allocation memory
-static AdhesionFactor AdhesionFactorMemory[AdhesionFactorMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t AdhesionFactorMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t AdhesionFactorMemoryFreeList = AdhesionFactorMemoryNil;
-
-AdhesionFactor* AdhesionFactor_New(void)
-{
-    AdhesionFactor* ptr;
-
-    if (AdhesionFactorMemoryFreeList != AdhesionFactorMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &AdhesionFactorMemory[AdhesionFactorMemoryFreeList];
-        AdhesionFactorMemoryFreeList = AdhesionFactorMemory[AdhesionFactorMemoryFreeList].header.NID_PACKET;
-    }
-    else if (AdhesionFactorMemoryTop < AdhesionFactorMemoryMax)
-    {
-        // allocate from top
-        ptr = &AdhesionFactorMemory[AdhesionFactorMemoryTop];
-        AdhesionFactorMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    AdhesionFactor_Init(ptr);
-
-    return ptr;
-}
-
-
-void AdhesionFactor_Delete(AdhesionFactor* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = AdhesionFactorMemoryFreeList;
-    AdhesionFactorMemoryFreeList = ptr - AdhesionFactorMemory;
-}
 
 
 int AdhesionFactor_UpperBitsNotSet(const AdhesionFactor* p)
@@ -233,6 +184,8 @@ int AdhesionFactor_DecodeBit(AdhesionFactor* p, Bitstream* stream)
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int AdhesionFactor_EncodeInt(const AdhesionFactor* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 71;
@@ -279,4 +232,56 @@ int AdhesionFactor_DecodeInt(AdhesionFactor* p, const Metadata* data, const kcg_
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define AdhesionFactorMemoryMax		8
+
+// end-of-freelist indicator
+#define AdhesionFactorMemoryNil		(-1)
+
+// allocation memory
+static AdhesionFactor AdhesionFactorMemory[AdhesionFactorMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t AdhesionFactorMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t AdhesionFactorMemoryFreeList = AdhesionFactorMemoryNil;
+
+AdhesionFactor* AdhesionFactor_New(void)
+{
+    AdhesionFactor* ptr;
+
+    if (AdhesionFactorMemoryFreeList != AdhesionFactorMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &AdhesionFactorMemory[AdhesionFactorMemoryFreeList];
+        AdhesionFactorMemoryFreeList = AdhesionFactorMemory[AdhesionFactorMemoryFreeList].header.NID_PACKET;
+    }
+    else if (AdhesionFactorMemoryTop < AdhesionFactorMemoryMax)
+    {
+        // allocate from top
+        ptr = &AdhesionFactorMemory[AdhesionFactorMemoryTop];
+        AdhesionFactorMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    AdhesionFactor_Init(ptr);
+
+    return ptr;
+}
+
+
+void AdhesionFactor_Delete(AdhesionFactor* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = AdhesionFactorMemoryFreeList;
+    AdhesionFactorMemoryFreeList = ptr - AdhesionFactorMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

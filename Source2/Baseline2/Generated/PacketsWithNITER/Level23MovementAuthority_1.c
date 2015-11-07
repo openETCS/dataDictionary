@@ -148,6 +148,8 @@ int Level23MovementAuthority_1_DecodeBit(Level23MovementAuthority_1* p, Bitstrea
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int Level23MovementAuthority_1_EncodeInt(const Level23MovementAuthority_1* p, kcg_int* startAddress, kcg_int* stream)
 {
     stream[(*startAddress)++] = p->L_SECTION;
@@ -167,4 +169,6 @@ int Level23MovementAuthority_1_DecodeInt(Level23MovementAuthority_1* p, kcg_int*
 
     return 1;
 }
+
+#endif // FRAMAC_IGNORE
 

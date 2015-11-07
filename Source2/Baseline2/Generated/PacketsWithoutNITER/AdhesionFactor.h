@@ -48,22 +48,6 @@ typedef struct AdhesionFactor AdhesionFactor;
 
 #define ADHESIONFACTOR_BITSIZE 48
 
-AdhesionFactor*  AdhesionFactor_New(void);
-
-void   AdhesionFactor_Delete(AdhesionFactor*);
-
-static inline void AdhesionFactor_Init(AdhesionFactor* p)
-{
-    p->header.NID_PACKET = 71;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_SCALE = 0;
-    p->D_ADHESION = 0;
-    p->L_ADHESION = 0;
-    p->M_ADHESION = 0;
-}
-
 /*@
     logic integer BitSize{L}(AdhesionFactor* p) = ADHESIONFACTOR_BITSIZE;
 
@@ -193,6 +177,24 @@ int AdhesionFactor_EncodeBit(const AdhesionFactor* p, Bitstream* stream);
 */
 int AdhesionFactor_DecodeBit(AdhesionFactor* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+AdhesionFactor*  AdhesionFactor_New(void);
+
+void   AdhesionFactor_Delete(AdhesionFactor*);
+
+static inline void AdhesionFactor_Init(AdhesionFactor* p)
+{
+    p->header.NID_PACKET = 71;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->D_ADHESION = 0;
+    p->L_ADHESION = 0;
+    p->M_ADHESION = 0;
+}
+
 static inline void AdhesionFactor_Print(const AdhesionFactor* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -228,5 +230,8 @@ int AdhesionFactor_EncodeInt(const AdhesionFactor* p, Metadata* data, kcg_int* s
 
 int AdhesionFactor_DecodeInt(AdhesionFactor* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // ADHESIONFACTOR_H_INCLUDED
+
 

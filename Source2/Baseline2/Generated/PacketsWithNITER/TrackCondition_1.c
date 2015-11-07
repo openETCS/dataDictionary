@@ -131,6 +131,8 @@ int TrackCondition_1_DecodeBit(TrackCondition_1* p, Bitstream* stream)
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int TrackCondition_1_EncodeInt(const TrackCondition_1* p, kcg_int* startAddress, kcg_int* stream)
 {
     stream[(*startAddress)++] = p->D_TRACKCOND;
@@ -148,4 +150,6 @@ int TrackCondition_1_DecodeInt(TrackCondition_1* p, kcg_int* startAddress, const
 
     return 1;
 }
+
+#endif // FRAMAC_IGNORE
 

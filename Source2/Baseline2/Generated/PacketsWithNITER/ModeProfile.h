@@ -52,31 +52,6 @@ typedef struct ModeProfile ModeProfile;
 
 #define MODEPROFILE_BITSIZE 76
 
-ModeProfile*  ModeProfile_New(void);
-
-void   ModeProfile_Delete(ModeProfile*);
-
-static inline void ModeProfile_Init(ModeProfile* p)
-{
-    p->header.NID_PACKET = 80;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_SCALE = 0;
-    p->D_MAMODE = 0;
-    p->M_MAMODE = 0;
-    p->V_MAMODE = 0;
-    p->L_MAMODE = 0;
-    p->L_ACKMAMODE = 0;
-    p->N_ITER_1 = 0;
-
-    for (uint32_t i = 0; i < 31; ++i)
-    {
-        ModeProfile_1_Init(&(p->sub_1[i]));
-    }
-
-}
-
 /*@
     logic integer BitSize{L}(ModeProfile* p) = MODEPROFILE_BITSIZE;
 
@@ -214,6 +189,33 @@ int ModeProfile_EncodeBit(const ModeProfile* p, Bitstream* stream);
 */
 int ModeProfile_DecodeBit(ModeProfile* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+ModeProfile*  ModeProfile_New(void);
+
+void   ModeProfile_Delete(ModeProfile*);
+
+static inline void ModeProfile_Init(ModeProfile* p)
+{
+    p->header.NID_PACKET = 80;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->D_MAMODE = 0;
+    p->M_MAMODE = 0;
+    p->V_MAMODE = 0;
+    p->L_MAMODE = 0;
+    p->L_ACKMAMODE = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        ModeProfile_1_Init(&(p->sub_1[i]));
+    }
+
+}
+
 static inline void ModeProfile_Print(const ModeProfile* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -273,5 +275,8 @@ int ModeProfile_EncodeInt(const ModeProfile* p, Metadata* data, kcg_int* stream)
 
 int ModeProfile_DecodeInt(ModeProfile* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // MODEPROFILE_H_INCLUDED
+
 

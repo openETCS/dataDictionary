@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "RepositioningInformation.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define RepositioningInformationMemoryMax		8
-
-// end-of-freelist indicator
-#define RepositioningInformationMemoryNil		(-1)
-
-// allocation memory
-static RepositioningInformation RepositioningInformationMemory[RepositioningInformationMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t RepositioningInformationMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t RepositioningInformationMemoryFreeList = RepositioningInformationMemoryNil;
-
-RepositioningInformation* RepositioningInformation_New(void)
-{
-    RepositioningInformation* ptr;
-
-    if (RepositioningInformationMemoryFreeList != RepositioningInformationMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &RepositioningInformationMemory[RepositioningInformationMemoryFreeList];
-        RepositioningInformationMemoryFreeList = RepositioningInformationMemory[RepositioningInformationMemoryFreeList].header.NID_PACKET;
-    }
-    else if (RepositioningInformationMemoryTop < RepositioningInformationMemoryMax)
-    {
-        // allocate from top
-        ptr = &RepositioningInformationMemory[RepositioningInformationMemoryTop];
-        RepositioningInformationMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    RepositioningInformation_Init(ptr);
-
-    return ptr;
-}
-
-
-void RepositioningInformation_Delete(RepositioningInformation* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = RepositioningInformationMemoryFreeList;
-    RepositioningInformationMemoryFreeList = ptr - RepositioningInformationMemory;
-}
 
 
 int RepositioningInformation_UpperBitsNotSet(const RepositioningInformation* p)
@@ -199,6 +150,8 @@ int RepositioningInformation_DecodeBit(RepositioningInformation* p, Bitstream* s
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int RepositioningInformation_EncodeInt(const RepositioningInformation* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 16;
@@ -241,4 +194,56 @@ int RepositioningInformation_DecodeInt(RepositioningInformation* p, const Metada
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define RepositioningInformationMemoryMax		8
+
+// end-of-freelist indicator
+#define RepositioningInformationMemoryNil		(-1)
+
+// allocation memory
+static RepositioningInformation RepositioningInformationMemory[RepositioningInformationMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t RepositioningInformationMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t RepositioningInformationMemoryFreeList = RepositioningInformationMemoryNil;
+
+RepositioningInformation* RepositioningInformation_New(void)
+{
+    RepositioningInformation* ptr;
+
+    if (RepositioningInformationMemoryFreeList != RepositioningInformationMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &RepositioningInformationMemory[RepositioningInformationMemoryFreeList];
+        RepositioningInformationMemoryFreeList = RepositioningInformationMemory[RepositioningInformationMemoryFreeList].header.NID_PACKET;
+    }
+    else if (RepositioningInformationMemoryTop < RepositioningInformationMemoryMax)
+    {
+        // allocate from top
+        ptr = &RepositioningInformationMemory[RepositioningInformationMemoryTop];
+        RepositioningInformationMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    RepositioningInformation_Init(ptr);
+
+    return ptr;
+}
+
+
+void RepositioningInformation_Delete(RepositioningInformation* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = RepositioningInformationMemoryFreeList;
+    RepositioningInformationMemoryFreeList = ptr - RepositioningInformationMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

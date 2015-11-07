@@ -51,29 +51,6 @@ typedef struct PositionReportParameters PositionReportParameters;
 
 #define POSITIONREPORTPARAMETERS_BITSIZE 48
 
-PositionReportParameters*  PositionReportParameters_New(void);
-
-void   PositionReportParameters_Delete(PositionReportParameters*);
-
-static inline void PositionReportParameters_Init(PositionReportParameters* p)
-{
-    p->header.NID_PACKET = 58;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_SCALE = 0;
-    p->T_CYCLOC = 0;
-    p->D_CYCLOC = 0;
-    p->M_LOC = 0;
-    p->N_ITER_1 = 0;
-
-    for (uint32_t i = 0; i < 31; ++i)
-    {
-        PositionReportParameters_1_Init(&(p->sub_1[i]));
-    }
-
-}
-
 /*@
     logic integer BitSize{L}(PositionReportParameters* p) = POSITIONREPORTPARAMETERS_BITSIZE;
 
@@ -203,6 +180,31 @@ int PositionReportParameters_EncodeBit(const PositionReportParameters* p, Bitstr
 */
 int PositionReportParameters_DecodeBit(PositionReportParameters* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+PositionReportParameters*  PositionReportParameters_New(void);
+
+void   PositionReportParameters_Delete(PositionReportParameters*);
+
+static inline void PositionReportParameters_Init(PositionReportParameters* p)
+{
+    p->header.NID_PACKET = 58;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->T_CYCLOC = 0;
+    p->D_CYCLOC = 0;
+    p->M_LOC = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        PositionReportParameters_1_Init(&(p->sub_1[i]));
+    }
+
+}
+
 static inline void PositionReportParameters_Print(const PositionReportParameters* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -258,5 +260,8 @@ int PositionReportParameters_EncodeInt(const PositionReportParameters* p, Metada
 
 int PositionReportParameters_DecodeInt(PositionReportParameters* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // POSITIONREPORTPARAMETERS_H_INCLUDED
+
 

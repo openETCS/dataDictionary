@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "ConditionalLevelTransitionOrder.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define ConditionalLevelTransitionOrderMemoryMax		8
-
-// end-of-freelist indicator
-#define ConditionalLevelTransitionOrderMemoryNil		(-1)
-
-// allocation memory
-static ConditionalLevelTransitionOrder ConditionalLevelTransitionOrderMemory[ConditionalLevelTransitionOrderMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t ConditionalLevelTransitionOrderMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t ConditionalLevelTransitionOrderMemoryFreeList = ConditionalLevelTransitionOrderMemoryNil;
-
-ConditionalLevelTransitionOrder* ConditionalLevelTransitionOrder_New(void)
-{
-    ConditionalLevelTransitionOrder* ptr;
-
-    if (ConditionalLevelTransitionOrderMemoryFreeList != ConditionalLevelTransitionOrderMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &ConditionalLevelTransitionOrderMemory[ConditionalLevelTransitionOrderMemoryFreeList];
-        ConditionalLevelTransitionOrderMemoryFreeList = ConditionalLevelTransitionOrderMemory[ConditionalLevelTransitionOrderMemoryFreeList].header.NID_PACKET;
-    }
-    else if (ConditionalLevelTransitionOrderMemoryTop < ConditionalLevelTransitionOrderMemoryMax)
-    {
-        // allocate from top
-        ptr = &ConditionalLevelTransitionOrderMemory[ConditionalLevelTransitionOrderMemoryTop];
-        ConditionalLevelTransitionOrderMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    ConditionalLevelTransitionOrder_Init(ptr);
-
-    return ptr;
-}
-
-
-void ConditionalLevelTransitionOrder_Delete(ConditionalLevelTransitionOrder* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = ConditionalLevelTransitionOrderMemoryFreeList;
-    ConditionalLevelTransitionOrderMemoryFreeList = ptr - ConditionalLevelTransitionOrderMemory;
-}
 
 
 int ConditionalLevelTransitionOrder_UpperBitsNotSet(const ConditionalLevelTransitionOrder* p)
@@ -217,6 +168,8 @@ int ConditionalLevelTransitionOrder_DecodeBit(ConditionalLevelTransitionOrder* p
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int ConditionalLevelTransitionOrder_EncodeInt(const ConditionalLevelTransitionOrder* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 46;
@@ -229,7 +182,7 @@ int ConditionalLevelTransitionOrder_EncodeInt(const ConditionalLevelTransitionOr
 
     stream[startAddress++] = p->Q_DIR;
     stream[startAddress++] = p->L_PACKET;
-    stream[startAddress++] = p->N_ITER_1 + 1;
+    stream[startAddress++] = p->N_ITER_1 - +1;
     stream[startAddress++] = p->M_LEVELTR;
     stream[startAddress++] = p->NID_STM;
 
@@ -273,4 +226,56 @@ int ConditionalLevelTransitionOrder_DecodeInt(ConditionalLevelTransitionOrder* p
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define ConditionalLevelTransitionOrderMemoryMax		8
+
+// end-of-freelist indicator
+#define ConditionalLevelTransitionOrderMemoryNil		(-1)
+
+// allocation memory
+static ConditionalLevelTransitionOrder ConditionalLevelTransitionOrderMemory[ConditionalLevelTransitionOrderMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t ConditionalLevelTransitionOrderMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t ConditionalLevelTransitionOrderMemoryFreeList = ConditionalLevelTransitionOrderMemoryNil;
+
+ConditionalLevelTransitionOrder* ConditionalLevelTransitionOrder_New(void)
+{
+    ConditionalLevelTransitionOrder* ptr;
+
+    if (ConditionalLevelTransitionOrderMemoryFreeList != ConditionalLevelTransitionOrderMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &ConditionalLevelTransitionOrderMemory[ConditionalLevelTransitionOrderMemoryFreeList];
+        ConditionalLevelTransitionOrderMemoryFreeList = ConditionalLevelTransitionOrderMemory[ConditionalLevelTransitionOrderMemoryFreeList].header.NID_PACKET;
+    }
+    else if (ConditionalLevelTransitionOrderMemoryTop < ConditionalLevelTransitionOrderMemoryMax)
+    {
+        // allocate from top
+        ptr = &ConditionalLevelTransitionOrderMemory[ConditionalLevelTransitionOrderMemoryTop];
+        ConditionalLevelTransitionOrderMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    ConditionalLevelTransitionOrder_Init(ptr);
+
+    return ptr;
+}
+
+
+void ConditionalLevelTransitionOrder_Delete(ConditionalLevelTransitionOrder* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = ConditionalLevelTransitionOrderMemoryFreeList;
+    ConditionalLevelTransitionOrderMemoryFreeList = ptr - ConditionalLevelTransitionOrderMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

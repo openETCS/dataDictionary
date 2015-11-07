@@ -56,32 +56,6 @@ typedef struct PacketForSendingFixedTextMessages PacketForSendingFixedTextMessag
 
 #define PACKETFORSENDINGFIXEDTEXTMESSAGES_BITSIZE 84
 
-PacketForSendingFixedTextMessages*  PacketForSendingFixedTextMessages_New(void);
-
-void   PacketForSendingFixedTextMessages_Delete(PacketForSendingFixedTextMessages*);
-
-static inline void PacketForSendingFixedTextMessages_Init(PacketForSendingFixedTextMessages* p)
-{
-    p->header.NID_PACKET = 76;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_SCALE = 0;
-    p->Q_TEXTCLASS = 0;
-    p->Q_TEXTDISPLAY = 0;
-    p->D_TEXTDISPLAY = 0;
-    p->M_MODETEXTDISPLAY_0 = 0;
-    p->M_LEVELTEXTDISPLAY_0 = 0;
-    p->NID_STM_0 = 0;
-    p->L_TEXTDISPLAY = 0;
-    p->T_TEXTDISPLAY = 0;
-    p->M_MODETEXTDISPLAY_1 = 0;
-    p->M_LEVELTEXTDISPLAY_1 = 0;
-    p->NID_STM_1 = 0;
-    p->Q_TEXTCONFIRM = 0;
-    p->Q_TEXT = 0;
-}
-
 /*@
     logic integer BitSize{L}(PacketForSendingFixedTextMessages* p) = PACKETFORSENDINGFIXEDTEXTMESSAGES_BITSIZE;
 
@@ -219,6 +193,34 @@ int PacketForSendingFixedTextMessages_EncodeBit(const PacketForSendingFixedTextM
 */
 int PacketForSendingFixedTextMessages_DecodeBit(PacketForSendingFixedTextMessages* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+PacketForSendingFixedTextMessages*  PacketForSendingFixedTextMessages_New(void);
+
+void   PacketForSendingFixedTextMessages_Delete(PacketForSendingFixedTextMessages*);
+
+static inline void PacketForSendingFixedTextMessages_Init(PacketForSendingFixedTextMessages* p)
+{
+    p->header.NID_PACKET = 76;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->Q_TEXTCLASS = 0;
+    p->Q_TEXTDISPLAY = 0;
+    p->D_TEXTDISPLAY = 0;
+    p->M_MODETEXTDISPLAY_0 = 0;
+    p->M_LEVELTEXTDISPLAY_0 = 0;
+    p->NID_STM_0 = 0;
+    p->L_TEXTDISPLAY = 0;
+    p->T_TEXTDISPLAY = 0;
+    p->M_MODETEXTDISPLAY_1 = 0;
+    p->M_LEVELTEXTDISPLAY_1 = 0;
+    p->NID_STM_1 = 0;
+    p->Q_TEXTCONFIRM = 0;
+    p->Q_TEXT = 0;
+}
+
 static inline void PacketForSendingFixedTextMessages_Print(const PacketForSendingFixedTextMessages* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -282,5 +284,8 @@ int PacketForSendingFixedTextMessages_EncodeInt(const PacketForSendingFixedTextM
 
 int PacketForSendingFixedTextMessages_DecodeInt(PacketForSendingFixedTextMessages* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // PACKETFORSENDINGFIXEDTEXTMESSAGES_H_INCLUDED
+
 

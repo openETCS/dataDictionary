@@ -44,18 +44,6 @@ typedef struct DefaultBaliseLoopOrRIUInformation DefaultBaliseLoopOrRIUInformati
 
 #define DEFAULTBALISELOOPORRIUINFORMATION_BITSIZE 15
 
-DefaultBaliseLoopOrRIUInformation*  DefaultBaliseLoopOrRIUInformation_New(void);
-
-void   DefaultBaliseLoopOrRIUInformation_Delete(DefaultBaliseLoopOrRIUInformation*);
-
-static inline void DefaultBaliseLoopOrRIUInformation_Init(DefaultBaliseLoopOrRIUInformation* p)
-{
-    p->header.NID_PACKET = 254;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-}
-
 /*@
     logic integer BitSize{L}(DefaultBaliseLoopOrRIUInformation* p) = DEFAULTBALISELOOPORRIUINFORMATION_BITSIZE;
 
@@ -169,6 +157,20 @@ int DefaultBaliseLoopOrRIUInformation_EncodeBit(const DefaultBaliseLoopOrRIUInfo
 */
 int DefaultBaliseLoopOrRIUInformation_DecodeBit(DefaultBaliseLoopOrRIUInformation* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+DefaultBaliseLoopOrRIUInformation*  DefaultBaliseLoopOrRIUInformation_New(void);
+
+void   DefaultBaliseLoopOrRIUInformation_Delete(DefaultBaliseLoopOrRIUInformation*);
+
+static inline void DefaultBaliseLoopOrRIUInformation_Init(DefaultBaliseLoopOrRIUInformation* p)
+{
+    p->header.NID_PACKET = 254;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+}
+
 static inline void DefaultBaliseLoopOrRIUInformation_Print(const DefaultBaliseLoopOrRIUInformation* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -196,5 +198,8 @@ int DefaultBaliseLoopOrRIUInformation_EncodeInt(const DefaultBaliseLoopOrRIUInfo
 
 int DefaultBaliseLoopOrRIUInformation_DecodeInt(DefaultBaliseLoopOrRIUInformation* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // DEFAULTBALISELOOPORRIUINFORMATION_H_INCLUDED
+
 

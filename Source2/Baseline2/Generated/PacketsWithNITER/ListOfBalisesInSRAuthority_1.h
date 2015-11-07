@@ -39,13 +39,6 @@ typedef struct ListOfBalisesInSRAuthority_1 ListOfBalisesInSRAuthority_1;
 
 #define LISTOFBALISESINSRAUTHORITY_1_BITSIZE 15
 
-static inline void ListOfBalisesInSRAuthority_1_Init(ListOfBalisesInSRAuthority_1* p)
-{
-    p->Q_NEWCOUNTRY = 0;
-    p->NID_C = 0;
-    p->NID_BG = 0;
-}
-
 /*@
     logic integer BitSize{L}(ListOfBalisesInSRAuthority_1* p) = LISTOFBALISESINSRAUTHORITY_1_BITSIZE;
 
@@ -153,6 +146,15 @@ int ListOfBalisesInSRAuthority_1_EncodeBit(const ListOfBalisesInSRAuthority_1* p
 */
 int ListOfBalisesInSRAuthority_1_DecodeBit(ListOfBalisesInSRAuthority_1* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+static inline void ListOfBalisesInSRAuthority_1_Init(ListOfBalisesInSRAuthority_1* p)
+{
+    p->Q_NEWCOUNTRY = 0;
+    p->NID_C = 0;
+    p->NID_BG = 0;
+}
+
 static inline void ListOfBalisesInSRAuthority_1_Print(const ListOfBalisesInSRAuthority_1* p, FILE* stream)
 {
     fprintf(stream, "(%lu,%lu,%lu)",
@@ -179,6 +181,8 @@ static inline int ListOfBalisesInSRAuthority_1_Equal(const ListOfBalisesInSRAuth
 int ListOfBalisesInSRAuthority_1_EncodeInt(const ListOfBalisesInSRAuthority_1* p, kcg_int* startAddress, kcg_int* stream);
 
 int ListOfBalisesInSRAuthority_1_DecodeInt(ListOfBalisesInSRAuthority_1* p, kcg_int* startAddress, const kcg_int* stream);
+
+#endif // FRAMAC_IGNORE
 
 #endif // LISTOFBALISESINSRAUTHORITY_1_H_INCLUDED
 

@@ -43,18 +43,6 @@ typedef struct Level23TransitionInformation Level23TransitionInformation;
 
 #define LEVEL23TRANSITIONINFORMATION_BITSIZE 37
 
-Level23TransitionInformation*  Level23TransitionInformation_New(void);
-
-void   Level23TransitionInformation_Delete(Level23TransitionInformation*);
-
-static inline void Level23TransitionInformation_Init(Level23TransitionInformation* p)
-{
-    p->header.NID_PACKET = 9;
-    p->header.list = TRAINTOTRACK;
-    p->L_PACKET = 0;
-    p->NID_LTRBG = 0;
-}
-
 /*@
     logic integer BitSize{L}(Level23TransitionInformation* p) = LEVEL23TRANSITIONINFORMATION_BITSIZE;
 
@@ -168,6 +156,20 @@ int Level23TransitionInformation_EncodeBit(const Level23TransitionInformation* p
 */
 int Level23TransitionInformation_DecodeBit(Level23TransitionInformation* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+Level23TransitionInformation*  Level23TransitionInformation_New(void);
+
+void   Level23TransitionInformation_Delete(Level23TransitionInformation*);
+
+static inline void Level23TransitionInformation_Init(Level23TransitionInformation* p)
+{
+    p->header.NID_PACKET = 9;
+    p->header.list = TRAINTOTRACK;
+    p->L_PACKET = 0;
+    p->NID_LTRBG = 0;
+}
+
 static inline void Level23TransitionInformation_Print(const Level23TransitionInformation* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -195,5 +197,8 @@ int Level23TransitionInformation_EncodeInt(const Level23TransitionInformation* p
 
 int Level23TransitionInformation_DecodeInt(Level23TransitionInformation* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // LEVEL23TRANSITIONINFORMATION_H_INCLUDED
+
 

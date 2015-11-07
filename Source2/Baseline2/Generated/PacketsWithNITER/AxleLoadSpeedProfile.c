@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "AxleLoadSpeedProfile.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define AxleLoadSpeedProfileMemoryMax		8
-
-// end-of-freelist indicator
-#define AxleLoadSpeedProfileMemoryNil		(-1)
-
-// allocation memory
-static AxleLoadSpeedProfile AxleLoadSpeedProfileMemory[AxleLoadSpeedProfileMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t AxleLoadSpeedProfileMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t AxleLoadSpeedProfileMemoryFreeList = AxleLoadSpeedProfileMemoryNil;
-
-AxleLoadSpeedProfile* AxleLoadSpeedProfile_New(void)
-{
-    AxleLoadSpeedProfile* ptr;
-
-    if (AxleLoadSpeedProfileMemoryFreeList != AxleLoadSpeedProfileMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &AxleLoadSpeedProfileMemory[AxleLoadSpeedProfileMemoryFreeList];
-        AxleLoadSpeedProfileMemoryFreeList = AxleLoadSpeedProfileMemory[AxleLoadSpeedProfileMemoryFreeList].header.NID_PACKET;
-    }
-    else if (AxleLoadSpeedProfileMemoryTop < AxleLoadSpeedProfileMemoryMax)
-    {
-        // allocate from top
-        ptr = &AxleLoadSpeedProfileMemory[AxleLoadSpeedProfileMemoryTop];
-        AxleLoadSpeedProfileMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    AxleLoadSpeedProfile_Init(ptr);
-
-    return ptr;
-}
-
-
-void AxleLoadSpeedProfile_Delete(AxleLoadSpeedProfile* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = AxleLoadSpeedProfileMemoryFreeList;
-    AxleLoadSpeedProfileMemoryFreeList = ptr - AxleLoadSpeedProfileMemory;
-}
 
 
 int AxleLoadSpeedProfile_UpperBitsNotSet(const AxleLoadSpeedProfile* p)
@@ -286,6 +237,8 @@ int AxleLoadSpeedProfile_DecodeBit(AxleLoadSpeedProfile* p, Bitstream* stream)
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int AxleLoadSpeedProfile_EncodeInt(const AxleLoadSpeedProfile* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 51;
@@ -362,4 +315,56 @@ int AxleLoadSpeedProfile_DecodeInt(AxleLoadSpeedProfile* p, const Metadata* data
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define AxleLoadSpeedProfileMemoryMax		8
+
+// end-of-freelist indicator
+#define AxleLoadSpeedProfileMemoryNil		(-1)
+
+// allocation memory
+static AxleLoadSpeedProfile AxleLoadSpeedProfileMemory[AxleLoadSpeedProfileMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t AxleLoadSpeedProfileMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t AxleLoadSpeedProfileMemoryFreeList = AxleLoadSpeedProfileMemoryNil;
+
+AxleLoadSpeedProfile* AxleLoadSpeedProfile_New(void)
+{
+    AxleLoadSpeedProfile* ptr;
+
+    if (AxleLoadSpeedProfileMemoryFreeList != AxleLoadSpeedProfileMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &AxleLoadSpeedProfileMemory[AxleLoadSpeedProfileMemoryFreeList];
+        AxleLoadSpeedProfileMemoryFreeList = AxleLoadSpeedProfileMemory[AxleLoadSpeedProfileMemoryFreeList].header.NID_PACKET;
+    }
+    else if (AxleLoadSpeedProfileMemoryTop < AxleLoadSpeedProfileMemoryMax)
+    {
+        // allocate from top
+        ptr = &AxleLoadSpeedProfileMemory[AxleLoadSpeedProfileMemoryTop];
+        AxleLoadSpeedProfileMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    AxleLoadSpeedProfile_Init(ptr);
+
+    return ptr;
+}
+
+
+void AxleLoadSpeedProfile_Delete(AxleLoadSpeedProfile* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = AxleLoadSpeedProfileMemoryFreeList;
+    AxleLoadSpeedProfileMemoryFreeList = ptr - AxleLoadSpeedProfileMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

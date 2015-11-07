@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "TrackConditionChangeOfTractionPower.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define TrackConditionChangeOfTractionPowerMemoryMax		8
-
-// end-of-freelist indicator
-#define TrackConditionChangeOfTractionPowerMemoryNil		(-1)
-
-// allocation memory
-static TrackConditionChangeOfTractionPower TrackConditionChangeOfTractionPowerMemory[TrackConditionChangeOfTractionPowerMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t TrackConditionChangeOfTractionPowerMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t TrackConditionChangeOfTractionPowerMemoryFreeList = TrackConditionChangeOfTractionPowerMemoryNil;
-
-TrackConditionChangeOfTractionPower* TrackConditionChangeOfTractionPower_New(void)
-{
-    TrackConditionChangeOfTractionPower* ptr;
-
-    if (TrackConditionChangeOfTractionPowerMemoryFreeList != TrackConditionChangeOfTractionPowerMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &TrackConditionChangeOfTractionPowerMemory[TrackConditionChangeOfTractionPowerMemoryFreeList];
-        TrackConditionChangeOfTractionPowerMemoryFreeList = TrackConditionChangeOfTractionPowerMemory[TrackConditionChangeOfTractionPowerMemoryFreeList].header.NID_PACKET;
-    }
-    else if (TrackConditionChangeOfTractionPowerMemoryTop < TrackConditionChangeOfTractionPowerMemoryMax)
-    {
-        // allocate from top
-        ptr = &TrackConditionChangeOfTractionPowerMemory[TrackConditionChangeOfTractionPowerMemoryTop];
-        TrackConditionChangeOfTractionPowerMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    TrackConditionChangeOfTractionPower_Init(ptr);
-
-    return ptr;
-}
-
-
-void TrackConditionChangeOfTractionPower_Delete(TrackConditionChangeOfTractionPower* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = TrackConditionChangeOfTractionPowerMemoryFreeList;
-    TrackConditionChangeOfTractionPowerMemoryFreeList = ptr - TrackConditionChangeOfTractionPowerMemory;
-}
 
 
 int TrackConditionChangeOfTractionPower_UpperBitsNotSet(const TrackConditionChangeOfTractionPower* p)
@@ -216,6 +167,8 @@ int TrackConditionChangeOfTractionPower_DecodeBit(TrackConditionChangeOfTraction
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int TrackConditionChangeOfTractionPower_EncodeInt(const TrackConditionChangeOfTractionPower* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 39;
@@ -260,4 +213,56 @@ int TrackConditionChangeOfTractionPower_DecodeInt(TrackConditionChangeOfTraction
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define TrackConditionChangeOfTractionPowerMemoryMax		8
+
+// end-of-freelist indicator
+#define TrackConditionChangeOfTractionPowerMemoryNil		(-1)
+
+// allocation memory
+static TrackConditionChangeOfTractionPower TrackConditionChangeOfTractionPowerMemory[TrackConditionChangeOfTractionPowerMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t TrackConditionChangeOfTractionPowerMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t TrackConditionChangeOfTractionPowerMemoryFreeList = TrackConditionChangeOfTractionPowerMemoryNil;
+
+TrackConditionChangeOfTractionPower* TrackConditionChangeOfTractionPower_New(void)
+{
+    TrackConditionChangeOfTractionPower* ptr;
+
+    if (TrackConditionChangeOfTractionPowerMemoryFreeList != TrackConditionChangeOfTractionPowerMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &TrackConditionChangeOfTractionPowerMemory[TrackConditionChangeOfTractionPowerMemoryFreeList];
+        TrackConditionChangeOfTractionPowerMemoryFreeList = TrackConditionChangeOfTractionPowerMemory[TrackConditionChangeOfTractionPowerMemoryFreeList].header.NID_PACKET;
+    }
+    else if (TrackConditionChangeOfTractionPowerMemoryTop < TrackConditionChangeOfTractionPowerMemoryMax)
+    {
+        // allocate from top
+        ptr = &TrackConditionChangeOfTractionPowerMemory[TrackConditionChangeOfTractionPowerMemoryTop];
+        TrackConditionChangeOfTractionPowerMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    TrackConditionChangeOfTractionPower_Init(ptr);
+
+    return ptr;
+}
+
+
+void TrackConditionChangeOfTractionPower_Delete(TrackConditionChangeOfTractionPower* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = TrackConditionChangeOfTractionPowerMemoryFreeList;
+    TrackConditionChangeOfTractionPowerMemoryFreeList = ptr - TrackConditionChangeOfTractionPowerMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

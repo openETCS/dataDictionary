@@ -114,6 +114,8 @@ int ConditionalLevelTransitionOrder_1_DecodeBit(ConditionalLevelTransitionOrder_
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int ConditionalLevelTransitionOrder_1_EncodeInt(const ConditionalLevelTransitionOrder_1* p, kcg_int* startAddress, kcg_int* stream)
 {
     stream[(*startAddress)++] = p->M_LEVELTR;
@@ -129,4 +131,6 @@ int ConditionalLevelTransitionOrder_1_DecodeInt(ConditionalLevelTransitionOrder_
 
     return 1;
 }
+
+#endif // FRAMAC_IGNORE
 

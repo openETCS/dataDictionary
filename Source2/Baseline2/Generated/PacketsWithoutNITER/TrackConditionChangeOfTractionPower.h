@@ -46,21 +46,6 @@ typedef struct TrackConditionChangeOfTractionPower TrackConditionChangeOfTractio
 
 #define TRACKCONDITIONCHANGEOFTRACTIONPOWER_BITSIZE 40
 
-TrackConditionChangeOfTractionPower*  TrackConditionChangeOfTractionPower_New(void);
-
-void   TrackConditionChangeOfTractionPower_Delete(TrackConditionChangeOfTractionPower*);
-
-static inline void TrackConditionChangeOfTractionPower_Init(TrackConditionChangeOfTractionPower* p)
-{
-    p->header.NID_PACKET = 39;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_SCALE = 0;
-    p->D_TRACTION = 0;
-    p->M_TRACTION = 0;
-}
-
 /*@
     logic integer BitSize{L}(TrackConditionChangeOfTractionPower* p) = TRACKCONDITIONCHANGEOFTRACTIONPOWER_BITSIZE;
 
@@ -186,6 +171,23 @@ int TrackConditionChangeOfTractionPower_EncodeBit(const TrackConditionChangeOfTr
 */
 int TrackConditionChangeOfTractionPower_DecodeBit(TrackConditionChangeOfTractionPower* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+TrackConditionChangeOfTractionPower*  TrackConditionChangeOfTractionPower_New(void);
+
+void   TrackConditionChangeOfTractionPower_Delete(TrackConditionChangeOfTractionPower*);
+
+static inline void TrackConditionChangeOfTractionPower_Init(TrackConditionChangeOfTractionPower* p)
+{
+    p->header.NID_PACKET = 39;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->D_TRACTION = 0;
+    p->M_TRACTION = 0;
+}
+
 static inline void TrackConditionChangeOfTractionPower_Print(const TrackConditionChangeOfTractionPower* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -219,5 +221,8 @@ int TrackConditionChangeOfTractionPower_EncodeInt(const TrackConditionChangeOfTr
 
 int TrackConditionChangeOfTractionPower_DecodeInt(TrackConditionChangeOfTractionPower* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // TRACKCONDITIONCHANGEOFTRACTIONPOWER_H_INCLUDED
+
 

@@ -149,6 +149,8 @@ int AxleLoadSpeedProfile_2_DecodeBit(AxleLoadSpeedProfile_2* p, Bitstream* strea
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int AxleLoadSpeedProfile_2_EncodeInt(const AxleLoadSpeedProfile_2* p, kcg_int* startAddress, kcg_int* stream)
 {
     stream[(*startAddress)++] = p->D_AXLELOAD;
@@ -180,4 +182,6 @@ int AxleLoadSpeedProfile_2_DecodeInt(AxleLoadSpeedProfile_2* p, kcg_int* startAd
 
     return 1;
 }
+
+#endif // FRAMAC_IGNORE
 

@@ -40,14 +40,6 @@ typedef struct Level23MovementAuthority_1 Level23MovementAuthority_1;
 
 #define LEVEL23MOVEMENTAUTHORITY_1_BITSIZE 41
 
-static inline void Level23MovementAuthority_1_Init(Level23MovementAuthority_1* p)
-{
-    p->L_SECTION = 0;
-    p->Q_SECTIONTIMER = 0;
-    p->T_SECTIONTIMER = 0;
-    p->D_SECTIONTIMERSTOPLOC = 0;
-}
-
 /*@
     logic integer BitSize{L}(Level23MovementAuthority_1* p) = LEVEL23MOVEMENTAUTHORITY_1_BITSIZE;
 
@@ -167,6 +159,16 @@ int Level23MovementAuthority_1_EncodeBit(const Level23MovementAuthority_1* p, Bi
 */
 int Level23MovementAuthority_1_DecodeBit(Level23MovementAuthority_1* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+static inline void Level23MovementAuthority_1_Init(Level23MovementAuthority_1* p)
+{
+    p->L_SECTION = 0;
+    p->Q_SECTIONTIMER = 0;
+    p->T_SECTIONTIMER = 0;
+    p->D_SECTIONTIMERSTOPLOC = 0;
+}
+
 static inline void Level23MovementAuthority_1_Print(const Level23MovementAuthority_1* p, FILE* stream)
 {
     fprintf(stream, "(%lu,%lu,%lu,%lu)",
@@ -191,6 +193,8 @@ static inline int Level23MovementAuthority_1_Equal(const Level23MovementAuthorit
 int Level23MovementAuthority_1_EncodeInt(const Level23MovementAuthority_1* p, kcg_int* startAddress, kcg_int* stream);
 
 int Level23MovementAuthority_1_DecodeInt(Level23MovementAuthority_1* p, kcg_int* startAddress, const kcg_int* stream);
+
+#endif // FRAMAC_IGNORE
 
 #endif // LEVEL23MOVEMENTAUTHORITY_1_H_INCLUDED
 

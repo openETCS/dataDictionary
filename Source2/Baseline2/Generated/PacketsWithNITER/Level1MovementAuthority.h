@@ -65,44 +65,6 @@ typedef struct Level1MovementAuthority Level1MovementAuthority;
 
 #define LEVEL1MOVEMENTAUTHORITY_BITSIZE 184
 
-Level1MovementAuthority*  Level1MovementAuthority_New(void);
-
-void   Level1MovementAuthority_Delete(Level1MovementAuthority*);
-
-static inline void Level1MovementAuthority_Init(Level1MovementAuthority* p)
-{
-    p->header.NID_PACKET = 12;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_SCALE = 0;
-    p->V_MAIN = 0;
-    p->V_LOA = 0;
-    p->T_LOA = 0;
-    p->N_ITER_1 = 0;
-
-    for (uint32_t i = 0; i < 31; ++i)
-    {
-        Level1MovementAuthority_1_Init(&(p->sub_1[i]));
-    }
-
-    p->L_ENDSECTION = 0;
-    p->Q_SECTIONTIMER = 0;
-    p->T_SECTIONTIMER = 0;
-    p->D_SECTIONTIMERSTOPLOC = 0;
-    p->Q_ENDTIMER = 0;
-    p->T_ENDTIMER = 0;
-    p->D_ENDTIMERSTARTLOC = 0;
-    p->Q_DANGERPOINT = 0;
-    p->D_DP = 0;
-    p->V_RELEASEDP = 0;
-    p->Q_OVERLAP = 0;
-    p->D_STARTOL = 0;
-    p->T_OL = 0;
-    p->D_OL = 0;
-    p->V_RELEASEOL = 0;
-}
-
 /*@
     logic integer BitSize{L}(Level1MovementAuthority* p) = LEVEL1MOVEMENTAUTHORITY_BITSIZE;
 
@@ -232,6 +194,46 @@ int Level1MovementAuthority_EncodeBit(const Level1MovementAuthority* p, Bitstrea
 */
 int Level1MovementAuthority_DecodeBit(Level1MovementAuthority* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+Level1MovementAuthority*  Level1MovementAuthority_New(void);
+
+void   Level1MovementAuthority_Delete(Level1MovementAuthority*);
+
+static inline void Level1MovementAuthority_Init(Level1MovementAuthority* p)
+{
+    p->header.NID_PACKET = 12;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->V_MAIN = 0;
+    p->V_LOA = 0;
+    p->T_LOA = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        Level1MovementAuthority_1_Init(&(p->sub_1[i]));
+    }
+
+    p->L_ENDSECTION = 0;
+    p->Q_SECTIONTIMER = 0;
+    p->T_SECTIONTIMER = 0;
+    p->D_SECTIONTIMERSTOPLOC = 0;
+    p->Q_ENDTIMER = 0;
+    p->T_ENDTIMER = 0;
+    p->D_ENDTIMERSTARTLOC = 0;
+    p->Q_DANGERPOINT = 0;
+    p->D_DP = 0;
+    p->V_RELEASEDP = 0;
+    p->Q_OVERLAP = 0;
+    p->D_STARTOL = 0;
+    p->T_OL = 0;
+    p->D_OL = 0;
+    p->V_RELEASEOL = 0;
+}
+
 static inline void Level1MovementAuthority_Print(const Level1MovementAuthority* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -317,5 +319,8 @@ int Level1MovementAuthority_EncodeInt(const Level1MovementAuthority* p, Metadata
 
 int Level1MovementAuthority_DecodeInt(Level1MovementAuthority* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // LEVEL1MOVEMENTAUTHORITY_H_INCLUDED
+
 

@@ -114,6 +114,8 @@ int InternationalStaticSpeedProfile_1_DecodeBit(InternationalStaticSpeedProfile_
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int InternationalStaticSpeedProfile_1_EncodeInt(const InternationalStaticSpeedProfile_1* p, kcg_int* startAddress, kcg_int* stream)
 {
     stream[(*startAddress)++] = p->NC_DIFF;
@@ -129,4 +131,6 @@ int InternationalStaticSpeedProfile_1_DecodeInt(InternationalStaticSpeedProfile_
 
     return 1;
 }
+
+#endif // FRAMAC_IGNORE
 

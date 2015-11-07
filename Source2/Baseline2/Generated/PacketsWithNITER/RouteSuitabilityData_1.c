@@ -165,6 +165,8 @@ int RouteSuitabilityData_1_DecodeBit(RouteSuitabilityData_1* p, Bitstream* strea
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int RouteSuitabilityData_1_EncodeInt(const RouteSuitabilityData_1* p, kcg_int* startAddress, kcg_int* stream)
 {
     stream[(*startAddress)++] = p->D_SUITABILITY;
@@ -186,4 +188,6 @@ int RouteSuitabilityData_1_DecodeInt(RouteSuitabilityData_1* p, kcg_int* startAd
 
     return 1;
 }
+
+#endif // FRAMAC_IGNORE
 

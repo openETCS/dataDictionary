@@ -49,24 +49,6 @@ typedef struct EOLMPacket EOLMPacket;
 
 #define EOLMPACKET_BITSIZE 66
 
-EOLMPacket*  EOLMPacket_New(void);
-
-void   EOLMPacket_Delete(EOLMPacket*);
-
-static inline void EOLMPacket_Init(EOLMPacket* p)
-{
-    p->header.NID_PACKET = 134;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_SCALE = 0;
-    p->NID_LOOP = 0;
-    p->D_LOOP = 0;
-    p->L_LOOP = 0;
-    p->Q_LOOPDIR = 0;
-    p->Q_SSCODE = 0;
-}
-
 /*@
     logic integer BitSize{L}(EOLMPacket* p) = EOLMPACKET_BITSIZE;
 
@@ -204,6 +186,26 @@ int EOLMPacket_EncodeBit(const EOLMPacket* p, Bitstream* stream);
 */
 int EOLMPacket_DecodeBit(EOLMPacket* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+EOLMPacket*  EOLMPacket_New(void);
+
+void   EOLMPacket_Delete(EOLMPacket*);
+
+static inline void EOLMPacket_Init(EOLMPacket* p)
+{
+    p->header.NID_PACKET = 134;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->NID_LOOP = 0;
+    p->D_LOOP = 0;
+    p->L_LOOP = 0;
+    p->Q_LOOPDIR = 0;
+    p->Q_SSCODE = 0;
+}
+
 static inline void EOLMPacket_Print(const EOLMPacket* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -243,5 +245,8 @@ int EOLMPacket_EncodeInt(const EOLMPacket* p, Metadata* data, kcg_int* stream);
 
 int EOLMPacket_DecodeInt(EOLMPacket* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // EOLMPACKET_H_INCLUDED
+
 

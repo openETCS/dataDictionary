@@ -49,27 +49,6 @@ typedef struct ConditionalLevelTransitionOrder ConditionalLevelTransitionOrder;
 
 #define CONDITIONALLEVELTRANSITIONORDER_BITSIZE 23
 
-ConditionalLevelTransitionOrder*  ConditionalLevelTransitionOrder_New(void);
-
-void   ConditionalLevelTransitionOrder_Delete(ConditionalLevelTransitionOrder*);
-
-static inline void ConditionalLevelTransitionOrder_Init(ConditionalLevelTransitionOrder* p)
-{
-    p->header.NID_PACKET = 46;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->M_LEVELTR = 0;
-    p->NID_STM = 0;
-    p->N_ITER_1 = 0;
-
-    for (uint32_t i = 0; i < 31; ++i)
-    {
-        ConditionalLevelTransitionOrder_1_Init(&(p->sub_1[i]));
-    }
-
-}
-
 /*@
     logic integer BitSize{L}(ConditionalLevelTransitionOrder* p) = CONDITIONALLEVELTRANSITIONORDER_BITSIZE;
 
@@ -187,6 +166,29 @@ int ConditionalLevelTransitionOrder_EncodeBit(const ConditionalLevelTransitionOr
 */
 int ConditionalLevelTransitionOrder_DecodeBit(ConditionalLevelTransitionOrder* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+ConditionalLevelTransitionOrder*  ConditionalLevelTransitionOrder_New(void);
+
+void   ConditionalLevelTransitionOrder_Delete(ConditionalLevelTransitionOrder*);
+
+static inline void ConditionalLevelTransitionOrder_Init(ConditionalLevelTransitionOrder* p)
+{
+    p->header.NID_PACKET = 46;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->M_LEVELTR = 0;
+    p->NID_STM = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        ConditionalLevelTransitionOrder_1_Init(&(p->sub_1[i]));
+    }
+
+}
+
 static inline void ConditionalLevelTransitionOrder_Print(const ConditionalLevelTransitionOrder* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -242,5 +244,8 @@ int ConditionalLevelTransitionOrder_EncodeInt(const ConditionalLevelTransitionOr
 
 int ConditionalLevelTransitionOrder_DecodeInt(ConditionalLevelTransitionOrder* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // CONDITIONALLEVELTRANSITIONORDER_H_INCLUDED
+
 

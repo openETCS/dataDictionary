@@ -44,19 +44,6 @@ typedef struct StopIfInStaffResponsible StopIfInStaffResponsible;
 
 #define STOPIFINSTAFFRESPONSIBLE_BITSIZE 16
 
-StopIfInStaffResponsible*  StopIfInStaffResponsible_New(void);
-
-void   StopIfInStaffResponsible_Delete(StopIfInStaffResponsible*);
-
-static inline void StopIfInStaffResponsible_Init(StopIfInStaffResponsible* p)
-{
-    p->header.NID_PACKET = 137;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_SRSTOP = 0;
-}
-
 /*@
     logic integer BitSize{L}(StopIfInStaffResponsible* p) = STOPIFINSTAFFRESPONSIBLE_BITSIZE;
 
@@ -174,6 +161,21 @@ int StopIfInStaffResponsible_EncodeBit(const StopIfInStaffResponsible* p, Bitstr
 */
 int StopIfInStaffResponsible_DecodeBit(StopIfInStaffResponsible* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+StopIfInStaffResponsible*  StopIfInStaffResponsible_New(void);
+
+void   StopIfInStaffResponsible_Delete(StopIfInStaffResponsible*);
+
+static inline void StopIfInStaffResponsible_Init(StopIfInStaffResponsible* p)
+{
+    p->header.NID_PACKET = 137;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SRSTOP = 0;
+}
+
 static inline void StopIfInStaffResponsible_Print(const StopIfInStaffResponsible* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -203,5 +205,8 @@ int StopIfInStaffResponsible_EncodeInt(const StopIfInStaffResponsible* p, Metada
 
 int StopIfInStaffResponsible_DecodeInt(StopIfInStaffResponsible* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // STOPIFINSTAFFRESPONSIBLE_H_INCLUDED
+
 

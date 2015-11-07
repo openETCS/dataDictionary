@@ -165,6 +165,8 @@ int ModeProfile_1_DecodeBit(ModeProfile_1* p, Bitstream* stream)
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int ModeProfile_1_EncodeInt(const ModeProfile_1* p, kcg_int* startAddress, kcg_int* stream)
 {
     stream[(*startAddress)++] = p->D_MAMODE;
@@ -186,4 +188,6 @@ int ModeProfile_1_DecodeInt(ModeProfile_1* p, kcg_int* startAddress, const kcg_i
 
     return 1;
 }
+
+#endif // FRAMAC_IGNORE
 

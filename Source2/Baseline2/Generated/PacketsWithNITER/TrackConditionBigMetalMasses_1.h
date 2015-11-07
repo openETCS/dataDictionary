@@ -38,12 +38,6 @@ typedef struct TrackConditionBigMetalMasses_1 TrackConditionBigMetalMasses_1;
 
 #define TRACKCONDITIONBIGMETALMASSES_1_BITSIZE 30
 
-static inline void TrackConditionBigMetalMasses_1_Init(TrackConditionBigMetalMasses_1* p)
-{
-    p->D_TRACKCOND = 0;
-    p->L_TRACKCOND = 0;
-}
-
 /*@
     logic integer BitSize{L}(TrackConditionBigMetalMasses_1* p) = TRACKCONDITIONBIGMETALMASSES_1_BITSIZE;
 
@@ -155,6 +149,14 @@ int TrackConditionBigMetalMasses_1_EncodeBit(const TrackConditionBigMetalMasses_
 */
 int TrackConditionBigMetalMasses_1_DecodeBit(TrackConditionBigMetalMasses_1* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+static inline void TrackConditionBigMetalMasses_1_Init(TrackConditionBigMetalMasses_1* p)
+{
+    p->D_TRACKCOND = 0;
+    p->L_TRACKCOND = 0;
+}
+
 static inline void TrackConditionBigMetalMasses_1_Print(const TrackConditionBigMetalMasses_1* p, FILE* stream)
 {
     fprintf(stream, "(%lu,%lu)",
@@ -175,6 +177,8 @@ static inline int TrackConditionBigMetalMasses_1_Equal(const TrackConditionBigMe
 int TrackConditionBigMetalMasses_1_EncodeInt(const TrackConditionBigMetalMasses_1* p, kcg_int* startAddress, kcg_int* stream);
 
 int TrackConditionBigMetalMasses_1_DecodeInt(TrackConditionBigMetalMasses_1* p, kcg_int* startAddress, const kcg_int* stream);
+
+#endif // FRAMAC_IGNORE
 
 #endif // TRACKCONDITIONBIGMETALMASSES_1_H_INCLUDED
 

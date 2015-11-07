@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "PositionReportBasedOnTwoBaliseGroups.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define PositionReportBasedOnTwoBaliseGroupsMemoryMax		8
-
-// end-of-freelist indicator
-#define PositionReportBasedOnTwoBaliseGroupsMemoryNil		(-1)
-
-// allocation memory
-static PositionReportBasedOnTwoBaliseGroups PositionReportBasedOnTwoBaliseGroupsMemory[PositionReportBasedOnTwoBaliseGroupsMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t PositionReportBasedOnTwoBaliseGroupsMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t PositionReportBasedOnTwoBaliseGroupsMemoryFreeList = PositionReportBasedOnTwoBaliseGroupsMemoryNil;
-
-PositionReportBasedOnTwoBaliseGroups* PositionReportBasedOnTwoBaliseGroups_New(void)
-{
-    PositionReportBasedOnTwoBaliseGroups* ptr;
-
-    if (PositionReportBasedOnTwoBaliseGroupsMemoryFreeList != PositionReportBasedOnTwoBaliseGroupsMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &PositionReportBasedOnTwoBaliseGroupsMemory[PositionReportBasedOnTwoBaliseGroupsMemoryFreeList];
-        PositionReportBasedOnTwoBaliseGroupsMemoryFreeList = PositionReportBasedOnTwoBaliseGroupsMemory[PositionReportBasedOnTwoBaliseGroupsMemoryFreeList].header.NID_PACKET;
-    }
-    else if (PositionReportBasedOnTwoBaliseGroupsMemoryTop < PositionReportBasedOnTwoBaliseGroupsMemoryMax)
-    {
-        // allocate from top
-        ptr = &PositionReportBasedOnTwoBaliseGroupsMemory[PositionReportBasedOnTwoBaliseGroupsMemoryTop];
-        PositionReportBasedOnTwoBaliseGroupsMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    PositionReportBasedOnTwoBaliseGroups_Init(ptr);
-
-    return ptr;
-}
-
-
-void PositionReportBasedOnTwoBaliseGroups_Delete(PositionReportBasedOnTwoBaliseGroups* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = PositionReportBasedOnTwoBaliseGroupsMemoryFreeList;
-    PositionReportBasedOnTwoBaliseGroupsMemoryFreeList = ptr - PositionReportBasedOnTwoBaliseGroupsMemory;
-}
 
 
 int PositionReportBasedOnTwoBaliseGroups_UpperBitsNotSet(const PositionReportBasedOnTwoBaliseGroups* p)
@@ -359,6 +310,8 @@ int PositionReportBasedOnTwoBaliseGroups_DecodeBit(PositionReportBasedOnTwoBalis
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int PositionReportBasedOnTwoBaliseGroups_EncodeInt(const PositionReportBasedOnTwoBaliseGroups* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 1;
@@ -424,4 +377,56 @@ int PositionReportBasedOnTwoBaliseGroups_DecodeInt(PositionReportBasedOnTwoBalis
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define PositionReportBasedOnTwoBaliseGroupsMemoryMax		8
+
+// end-of-freelist indicator
+#define PositionReportBasedOnTwoBaliseGroupsMemoryNil		(-1)
+
+// allocation memory
+static PositionReportBasedOnTwoBaliseGroups PositionReportBasedOnTwoBaliseGroupsMemory[PositionReportBasedOnTwoBaliseGroupsMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t PositionReportBasedOnTwoBaliseGroupsMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t PositionReportBasedOnTwoBaliseGroupsMemoryFreeList = PositionReportBasedOnTwoBaliseGroupsMemoryNil;
+
+PositionReportBasedOnTwoBaliseGroups* PositionReportBasedOnTwoBaliseGroups_New(void)
+{
+    PositionReportBasedOnTwoBaliseGroups* ptr;
+
+    if (PositionReportBasedOnTwoBaliseGroupsMemoryFreeList != PositionReportBasedOnTwoBaliseGroupsMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &PositionReportBasedOnTwoBaliseGroupsMemory[PositionReportBasedOnTwoBaliseGroupsMemoryFreeList];
+        PositionReportBasedOnTwoBaliseGroupsMemoryFreeList = PositionReportBasedOnTwoBaliseGroupsMemory[PositionReportBasedOnTwoBaliseGroupsMemoryFreeList].header.NID_PACKET;
+    }
+    else if (PositionReportBasedOnTwoBaliseGroupsMemoryTop < PositionReportBasedOnTwoBaliseGroupsMemoryMax)
+    {
+        // allocate from top
+        ptr = &PositionReportBasedOnTwoBaliseGroupsMemory[PositionReportBasedOnTwoBaliseGroupsMemoryTop];
+        PositionReportBasedOnTwoBaliseGroupsMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    PositionReportBasedOnTwoBaliseGroups_Init(ptr);
+
+    return ptr;
+}
+
+
+void PositionReportBasedOnTwoBaliseGroups_Delete(PositionReportBasedOnTwoBaliseGroups* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = PositionReportBasedOnTwoBaliseGroupsMemoryFreeList;
+    PositionReportBasedOnTwoBaliseGroupsMemoryFreeList = ptr - PositionReportBasedOnTwoBaliseGroupsMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

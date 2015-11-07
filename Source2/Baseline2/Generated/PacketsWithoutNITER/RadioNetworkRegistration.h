@@ -45,19 +45,6 @@ typedef struct RadioNetworkRegistration RadioNetworkRegistration;
 
 #define RADIONETWORKREGISTRATION_BITSIZE 39
 
-RadioNetworkRegistration*  RadioNetworkRegistration_New(void);
-
-void   RadioNetworkRegistration_Delete(RadioNetworkRegistration*);
-
-static inline void RadioNetworkRegistration_Init(RadioNetworkRegistration* p)
-{
-    p->header.NID_PACKET = 45;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->NID_MN = 0;
-}
-
 /*@
     logic integer BitSize{L}(RadioNetworkRegistration* p) = RADIONETWORKREGISTRATION_BITSIZE;
 
@@ -175,6 +162,21 @@ int RadioNetworkRegistration_EncodeBit(const RadioNetworkRegistration* p, Bitstr
 */
 int RadioNetworkRegistration_DecodeBit(RadioNetworkRegistration* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+RadioNetworkRegistration*  RadioNetworkRegistration_New(void);
+
+void   RadioNetworkRegistration_Delete(RadioNetworkRegistration*);
+
+static inline void RadioNetworkRegistration_Init(RadioNetworkRegistration* p)
+{
+    p->header.NID_PACKET = 45;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->NID_MN = 0;
+}
+
 static inline void RadioNetworkRegistration_Print(const RadioNetworkRegistration* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -204,5 +206,8 @@ int RadioNetworkRegistration_EncodeInt(const RadioNetworkRegistration* p, Metada
 
 int RadioNetworkRegistration_DecodeInt(RadioNetworkRegistration* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // RADIONETWORKREGISTRATION_H_INCLUDED
+
 

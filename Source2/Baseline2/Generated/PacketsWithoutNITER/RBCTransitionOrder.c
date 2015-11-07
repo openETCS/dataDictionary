@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "RBCTransitionOrder.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define RBCTransitionOrderMemoryMax		8
-
-// end-of-freelist indicator
-#define RBCTransitionOrderMemoryNil		(-1)
-
-// allocation memory
-static RBCTransitionOrder RBCTransitionOrderMemory[RBCTransitionOrderMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t RBCTransitionOrderMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t RBCTransitionOrderMemoryFreeList = RBCTransitionOrderMemoryNil;
-
-RBCTransitionOrder* RBCTransitionOrder_New(void)
-{
-    RBCTransitionOrder* ptr;
-
-    if (RBCTransitionOrderMemoryFreeList != RBCTransitionOrderMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &RBCTransitionOrderMemory[RBCTransitionOrderMemoryFreeList];
-        RBCTransitionOrderMemoryFreeList = RBCTransitionOrderMemory[RBCTransitionOrderMemoryFreeList].header.NID_PACKET;
-    }
-    else if (RBCTransitionOrderMemoryTop < RBCTransitionOrderMemoryMax)
-    {
-        // allocate from top
-        ptr = &RBCTransitionOrderMemory[RBCTransitionOrderMemoryTop];
-        RBCTransitionOrderMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    RBCTransitionOrder_Init(ptr);
-
-    return ptr;
-}
-
-
-void RBCTransitionOrder_Delete(RBCTransitionOrder* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = RBCTransitionOrderMemoryFreeList;
-    RBCTransitionOrderMemoryFreeList = ptr - RBCTransitionOrderMemory;
-}
 
 
 int RBCTransitionOrder_UpperBitsNotSet(const RBCTransitionOrder* p)
@@ -267,6 +218,8 @@ int RBCTransitionOrder_DecodeBit(RBCTransitionOrder* p, Bitstream* stream)
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int RBCTransitionOrder_EncodeInt(const RBCTransitionOrder* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 131;
@@ -317,4 +270,56 @@ int RBCTransitionOrder_DecodeInt(RBCTransitionOrder* p, const Metadata* data, co
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define RBCTransitionOrderMemoryMax		8
+
+// end-of-freelist indicator
+#define RBCTransitionOrderMemoryNil		(-1)
+
+// allocation memory
+static RBCTransitionOrder RBCTransitionOrderMemory[RBCTransitionOrderMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t RBCTransitionOrderMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t RBCTransitionOrderMemoryFreeList = RBCTransitionOrderMemoryNil;
+
+RBCTransitionOrder* RBCTransitionOrder_New(void)
+{
+    RBCTransitionOrder* ptr;
+
+    if (RBCTransitionOrderMemoryFreeList != RBCTransitionOrderMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &RBCTransitionOrderMemory[RBCTransitionOrderMemoryFreeList];
+        RBCTransitionOrderMemoryFreeList = RBCTransitionOrderMemory[RBCTransitionOrderMemoryFreeList].header.NID_PACKET;
+    }
+    else if (RBCTransitionOrderMemoryTop < RBCTransitionOrderMemoryMax)
+    {
+        // allocate from top
+        ptr = &RBCTransitionOrderMemory[RBCTransitionOrderMemoryTop];
+        RBCTransitionOrderMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    RBCTransitionOrder_Init(ptr);
+
+    return ptr;
+}
+
+
+void RBCTransitionOrder_Delete(RBCTransitionOrder* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = RBCTransitionOrderMemoryFreeList;
+    RBCTransitionOrderMemoryFreeList = ptr - RBCTransitionOrderMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

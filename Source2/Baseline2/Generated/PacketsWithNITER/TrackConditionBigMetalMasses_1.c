@@ -114,6 +114,8 @@ int TrackConditionBigMetalMasses_1_DecodeBit(TrackConditionBigMetalMasses_1* p, 
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int TrackConditionBigMetalMasses_1_EncodeInt(const TrackConditionBigMetalMasses_1* p, kcg_int* startAddress, kcg_int* stream)
 {
     stream[(*startAddress)++] = p->D_TRACKCOND;
@@ -129,4 +131,6 @@ int TrackConditionBigMetalMasses_1_DecodeInt(TrackConditionBigMetalMasses_1* p, 
 
     return 1;
 }
+
+#endif // FRAMAC_IGNORE
 

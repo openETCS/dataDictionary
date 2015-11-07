@@ -39,13 +39,6 @@ typedef struct ListOfBalisesForSHArea_1 ListOfBalisesForSHArea_1;
 
 #define LISTOFBALISESFORSHAREA_1_BITSIZE 15
 
-static inline void ListOfBalisesForSHArea_1_Init(ListOfBalisesForSHArea_1* p)
-{
-    p->Q_NEWCOUNTRY = 0;
-    p->NID_C = 0;
-    p->NID_BG = 0;
-}
-
 /*@
     logic integer BitSize{L}(ListOfBalisesForSHArea_1* p) = LISTOFBALISESFORSHAREA_1_BITSIZE;
 
@@ -153,6 +146,15 @@ int ListOfBalisesForSHArea_1_EncodeBit(const ListOfBalisesForSHArea_1* p, Bitstr
 */
 int ListOfBalisesForSHArea_1_DecodeBit(ListOfBalisesForSHArea_1* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+static inline void ListOfBalisesForSHArea_1_Init(ListOfBalisesForSHArea_1* p)
+{
+    p->Q_NEWCOUNTRY = 0;
+    p->NID_C = 0;
+    p->NID_BG = 0;
+}
+
 static inline void ListOfBalisesForSHArea_1_Print(const ListOfBalisesForSHArea_1* p, FILE* stream)
 {
     fprintf(stream, "(%lu,%lu,%lu)",
@@ -179,6 +181,8 @@ static inline int ListOfBalisesForSHArea_1_Equal(const ListOfBalisesForSHArea_1*
 int ListOfBalisesForSHArea_1_EncodeInt(const ListOfBalisesForSHArea_1* p, kcg_int* startAddress, kcg_int* stream);
 
 int ListOfBalisesForSHArea_1_DecodeInt(ListOfBalisesForSHArea_1* p, kcg_int* startAddress, const kcg_int* stream);
+
+#endif // FRAMAC_IGNORE
 
 #endif // LISTOFBALISESFORSHAREA_1_H_INCLUDED
 

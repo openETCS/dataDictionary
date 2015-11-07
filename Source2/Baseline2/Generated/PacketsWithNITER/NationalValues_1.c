@@ -97,6 +97,8 @@ int NationalValues_1_DecodeBit(NationalValues_1* p, Bitstream* stream)
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int NationalValues_1_EncodeInt(const NationalValues_1* p, kcg_int* startAddress, kcg_int* stream)
 {
     stream[(*startAddress)++] = p->NID_C;
@@ -110,4 +112,6 @@ int NationalValues_1_DecodeInt(NationalValues_1* p, kcg_int* startAddress, const
 
     return 1;
 }
+
+#endif // FRAMAC_IGNORE
 

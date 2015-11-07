@@ -2,11 +2,12 @@
 #ifndef PACKETHEADER_H_INCLUDED
 #define PACKETHEADER_H_INCLUDED
 
-#include <inttypes.h>
-
+#ifndef FRAMAC_IGNORE
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#endif //  FRAMAC_IGNORE
+
 #include "Bit64.h"
 #include "Bitstream.h"
 
@@ -189,20 +190,22 @@ int PacketHeader_DecodeBit(PacketHeader* p, Bitstream* stream)
 }
 
 
+#ifndef FRAMAC_IGNORE
+
 static inline void PacketHeader_Print(const PacketHeader* p, FILE* stream)
 {
     if (p->list == TRAINTOTRACK)
     {
-        fprintf(stream, "(%"PRIu64",%s)", p->NID_PACKET, "TrainToTrack");
+        fprintf(stream, "(%lu,%s)", p->NID_PACKET, "TrainToTrack");
     }
     else if (p->list == TRACKTOTRAIN)
     {
-        fprintf(stream, "(%"PRIu64",%s)", p->NID_PACKET, "TrackToTrain");
+        fprintf(stream, "(%lu,%s)", p->NID_PACKET, "TrackToTrain");
     }
     else
     {
         assert(p->list == BOTHWAYS);
-        fprintf(stream, "(%"PRIu64",%s)", p->NID_PACKET, "BothWays");
+        fprintf(stream, "(%lu,%s)", p->NID_PACKET, "BothWays");
     }
 }
 
@@ -210,6 +213,8 @@ static inline int PacketHeader_Equal(const PacketHeader* a, const PacketHeader* 
 {
     return (a->NID_PACKET == b->NID_PACKET) && (a->list == b->list);
 }
+
+#endif // FRAMAC_IGNORE
 
 #endif // PACKETHEADER_H_INCLUDED
 

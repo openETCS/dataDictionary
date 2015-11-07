@@ -57,33 +57,6 @@ typedef struct PacketForSendingPlainTextMessages PacketForSendingPlainTextMessag
 
 #define PACKETFORSENDINGPLAINTEXTMESSAGES_BITSIZE 92
 
-PacketForSendingPlainTextMessages*  PacketForSendingPlainTextMessages_New(void);
-
-void   PacketForSendingPlainTextMessages_Delete(PacketForSendingPlainTextMessages*);
-
-static inline void PacketForSendingPlainTextMessages_Init(PacketForSendingPlainTextMessages* p)
-{
-    p->header.NID_PACKET = 72;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_SCALE = 0;
-    p->Q_TEXTCLASS = 0;
-    p->Q_TEXTDISPLAY = 0;
-    p->D_TEXTDISPLAY = 0;
-    p->M_MODETEXTDISPLAY_0 = 0;
-    p->M_LEVELTEXTDISPLAY_0 = 0;
-    p->NID_STM_0 = 0;
-    p->L_TEXTDISPLAY = 0;
-    p->T_TEXTDISPLAY = 0;
-    p->M_MODETEXTDISPLAY_1 = 0;
-    p->M_LEVELTEXTDISPLAY_1 = 0;
-    p->NID_STM_1 = 0;
-    p->Q_TEXTCONFIRM = 0;
-    p->L_TEXT = 0;
-    p->X_TEXT = 0;
-}
-
 /*@
     logic integer BitSize{L}(PacketForSendingPlainTextMessages* p) = PACKETFORSENDINGPLAINTEXTMESSAGES_BITSIZE;
 
@@ -221,6 +194,35 @@ int PacketForSendingPlainTextMessages_EncodeBit(const PacketForSendingPlainTextM
 */
 int PacketForSendingPlainTextMessages_DecodeBit(PacketForSendingPlainTextMessages* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+PacketForSendingPlainTextMessages*  PacketForSendingPlainTextMessages_New(void);
+
+void   PacketForSendingPlainTextMessages_Delete(PacketForSendingPlainTextMessages*);
+
+static inline void PacketForSendingPlainTextMessages_Init(PacketForSendingPlainTextMessages* p)
+{
+    p->header.NID_PACKET = 72;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->Q_TEXTCLASS = 0;
+    p->Q_TEXTDISPLAY = 0;
+    p->D_TEXTDISPLAY = 0;
+    p->M_MODETEXTDISPLAY_0 = 0;
+    p->M_LEVELTEXTDISPLAY_0 = 0;
+    p->NID_STM_0 = 0;
+    p->L_TEXTDISPLAY = 0;
+    p->T_TEXTDISPLAY = 0;
+    p->M_MODETEXTDISPLAY_1 = 0;
+    p->M_LEVELTEXTDISPLAY_1 = 0;
+    p->NID_STM_1 = 0;
+    p->Q_TEXTCONFIRM = 0;
+    p->L_TEXT = 0;
+    p->X_TEXT = 0;
+}
+
 static inline void PacketForSendingPlainTextMessages_Print(const PacketForSendingPlainTextMessages* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -286,5 +288,8 @@ int PacketForSendingPlainTextMessages_EncodeInt(const PacketForSendingPlainTextM
 
 int PacketForSendingPlainTextMessages_DecodeInt(PacketForSendingPlainTextMessages* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // PACKETFORSENDINGPLAINTEXTMESSAGES_H_INCLUDED
+
 

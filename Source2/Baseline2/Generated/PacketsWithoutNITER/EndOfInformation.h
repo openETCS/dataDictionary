@@ -44,16 +44,6 @@ typedef struct EndOfInformation EndOfInformation;
 
 #define ENDOFINFORMATION_BITSIZE 0
 
-EndOfInformation*  EndOfInformation_New(void);
-
-void   EndOfInformation_Delete(EndOfInformation*);
-
-static inline void EndOfInformation_Init(EndOfInformation* p)
-{
-    p->header.NID_PACKET = 255;
-    p->header.list = BOTHWAYS;
-}
-
 /*@
     logic integer BitSize{L}(EndOfInformation* p) = ENDOFINFORMATION_BITSIZE;
 
@@ -63,13 +53,13 @@ static inline void EndOfInformation_Init(EndOfInformation* p)
       \separated(stream, p) &&
       \separated(stream->addr + (0..stream->size-1), p);
 
-    predicate Invariant(EndOfInformation* p) = \1;
+    predicate Invariant(EndOfInformation* p) = \true;
 
-    predicate ZeroInitialized(EndOfInformation* p) = \1;
+    predicate ZeroInitialized(EndOfInformation* p) = \true;
 
-    predicate EqualBits(Bitstream* stream, integer pos, EndOfInformation* p) = \1;
+    predicate EqualBits(Bitstream* stream, integer pos, EndOfInformation* p) = \true;
 
-    predicate UpperBitsNotSet(EndOfInformation* p) = \1;
+    predicate UpperBitsNotSet(EndOfInformation* p) = \true;
 
 */
 
@@ -94,7 +84,7 @@ int EndOfInformation_UpperBitsNotSet(const EndOfInformation* p);
     assigns stream->addr[0..(stream->size-1)];
 
     behavior normal_case:
-      assumes Normal{Pre}(stream, MaxBitSize(p)) && UpperBitsNotSet{Pre}(p);
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && UpperBitsNotSet(p);
 
       assigns stream->bitpos;
       assigns stream->addr[0..(stream->size-1)];
@@ -106,7 +96,7 @@ int EndOfInformation_UpperBitsNotSet(const EndOfInformation* p);
       ensures right:      Unchanged{Here,Old}(stream, stream->bitpos, 8 * stream->size);
 
     behavior values_too_big:
-      assumes Normal{Pre}(stream, MaxBitSize(p)) && !UpperBitsNotSet{Pre}(p);
+      assumes Normal{Pre}(stream, MaxBitSize(p)) && !UpperBitsNotSet(p);
 
       assigns \nothing;
 
@@ -159,6 +149,18 @@ int EndOfInformation_EncodeBit(const EndOfInformation* p, Bitstream* stream);
 */
 int EndOfInformation_DecodeBit(EndOfInformation* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+EndOfInformation*  EndOfInformation_New(void);
+
+void   EndOfInformation_Delete(EndOfInformation*);
+
+static inline void EndOfInformation_Init(EndOfInformation* p)
+{
+    p->header.NID_PACKET = 255;
+    p->header.list = BOTHWAYS;
+}
+
 static inline void EndOfInformation_Print(const EndOfInformation* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -183,5 +185,8 @@ int EndOfInformation_EncodeInt(const EndOfInformation* p, Metadata* data, kcg_in
 
 int EndOfInformation_DecodeInt(EndOfInformation* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // ENDOFINFORMATION_H_INCLUDED
+
 

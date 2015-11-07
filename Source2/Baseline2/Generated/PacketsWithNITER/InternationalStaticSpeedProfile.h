@@ -54,36 +54,6 @@ typedef struct InternationalStaticSpeedProfile InternationalStaticSpeedProfile;
 
 #define INTERNATIONALSTATICSPEEDPROFILE_BITSIZE 50
 
-InternationalStaticSpeedProfile*  InternationalStaticSpeedProfile_New(void);
-
-void   InternationalStaticSpeedProfile_Delete(InternationalStaticSpeedProfile*);
-
-static inline void InternationalStaticSpeedProfile_Init(InternationalStaticSpeedProfile* p)
-{
-    p->header.NID_PACKET = 27;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_SCALE = 0;
-    p->D_STATIC = 0;
-    p->V_STATIC = 0;
-    p->Q_FRONT = 0;
-    p->N_ITER_1 = 0;
-
-    for (uint32_t i = 0; i < 31; ++i)
-    {
-        InternationalStaticSpeedProfile_1_Init(&(p->sub_1[i]));
-    }
-
-    p->N_ITER_2 = 0;
-
-    for (uint32_t i = 0; i < 31; ++i)
-    {
-        InternationalStaticSpeedProfile_2_Init(&(p->sub_2[i]));
-    }
-
-}
-
 /*@
     logic integer BitSize{L}(InternationalStaticSpeedProfile* p) = INTERNATIONALSTATICSPEEDPROFILE_BITSIZE;
 
@@ -213,6 +183,38 @@ int InternationalStaticSpeedProfile_EncodeBit(const InternationalStaticSpeedProf
 */
 int InternationalStaticSpeedProfile_DecodeBit(InternationalStaticSpeedProfile* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+InternationalStaticSpeedProfile*  InternationalStaticSpeedProfile_New(void);
+
+void   InternationalStaticSpeedProfile_Delete(InternationalStaticSpeedProfile*);
+
+static inline void InternationalStaticSpeedProfile_Init(InternationalStaticSpeedProfile* p)
+{
+    p->header.NID_PACKET = 27;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->D_STATIC = 0;
+    p->V_STATIC = 0;
+    p->Q_FRONT = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        InternationalStaticSpeedProfile_1_Init(&(p->sub_1[i]));
+    }
+
+    p->N_ITER_2 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        InternationalStaticSpeedProfile_2_Init(&(p->sub_2[i]));
+    }
+
+}
+
 static inline void InternationalStaticSpeedProfile_Print(const InternationalStaticSpeedProfile* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -288,5 +290,8 @@ int InternationalStaticSpeedProfile_EncodeInt(const InternationalStaticSpeedProf
 
 int InternationalStaticSpeedProfile_DecodeInt(InternationalStaticSpeedProfile* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // INTERNATIONALSTATICSPEEDPROFILE_H_INCLUDED
+
 

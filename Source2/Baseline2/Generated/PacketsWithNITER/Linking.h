@@ -54,33 +54,6 @@ typedef struct Linking Linking;
 
 #define LINKING_BITSIZE 61
 
-Linking*  Linking_New(void);
-
-void   Linking_Delete(Linking*);
-
-static inline void Linking_Init(Linking* p)
-{
-    p->header.NID_PACKET = 5;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_SCALE = 0;
-    p->D_LINK = 0;
-    p->Q_NEWCOUNTRY = 0;
-    p->NID_C = 0;
-    p->NID_BG = 0;
-    p->Q_LINKORIENTATION = 0;
-    p->Q_LINKREACTION = 0;
-    p->Q_LOCACC = 0;
-    p->N_ITER_1 = 0;
-
-    for (uint32_t i = 0; i < 31; ++i)
-    {
-        Linking_1_Init(&(p->sub_1[i]));
-    }
-
-}
-
 /*@
     logic integer BitSize{L}(Linking* p) = LINKING_BITSIZE;
 
@@ -206,6 +179,35 @@ int Linking_EncodeBit(const Linking* p, Bitstream* stream);
 */
 int Linking_DecodeBit(Linking* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+Linking*  Linking_New(void);
+
+void   Linking_Delete(Linking*);
+
+static inline void Linking_Init(Linking* p)
+{
+    p->header.NID_PACKET = 5;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->D_LINK = 0;
+    p->Q_NEWCOUNTRY = 0;
+    p->NID_C = 0;
+    p->NID_BG = 0;
+    p->Q_LINKORIENTATION = 0;
+    p->Q_LINKREACTION = 0;
+    p->Q_LOCACC = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        Linking_1_Init(&(p->sub_1[i]));
+    }
+
+}
+
 static inline void Linking_Print(const Linking* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -273,5 +275,8 @@ int Linking_EncodeInt(const Linking* p, Metadata* data, kcg_int* stream);
 
 int Linking_DecodeInt(Linking* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // LINKING_H_INCLUDED
+
 

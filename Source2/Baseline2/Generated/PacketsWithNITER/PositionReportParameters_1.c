@@ -114,6 +114,8 @@ int PositionReportParameters_1_DecodeBit(PositionReportParameters_1* p, Bitstrea
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int PositionReportParameters_1_EncodeInt(const PositionReportParameters_1* p, kcg_int* startAddress, kcg_int* stream)
 {
     stream[(*startAddress)++] = p->D_LOC;
@@ -129,4 +131,6 @@ int PositionReportParameters_1_DecodeInt(PositionReportParameters_1* p, kcg_int*
 
     return 1;
 }
+
+#endif // FRAMAC_IGNORE
 

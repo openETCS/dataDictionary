@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "StopIfInStaffResponsible.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define StopIfInStaffResponsibleMemoryMax		8
-
-// end-of-freelist indicator
-#define StopIfInStaffResponsibleMemoryNil		(-1)
-
-// allocation memory
-static StopIfInStaffResponsible StopIfInStaffResponsibleMemory[StopIfInStaffResponsibleMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t StopIfInStaffResponsibleMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t StopIfInStaffResponsibleMemoryFreeList = StopIfInStaffResponsibleMemoryNil;
-
-StopIfInStaffResponsible* StopIfInStaffResponsible_New(void)
-{
-    StopIfInStaffResponsible* ptr;
-
-    if (StopIfInStaffResponsibleMemoryFreeList != StopIfInStaffResponsibleMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &StopIfInStaffResponsibleMemory[StopIfInStaffResponsibleMemoryFreeList];
-        StopIfInStaffResponsibleMemoryFreeList = StopIfInStaffResponsibleMemory[StopIfInStaffResponsibleMemoryFreeList].header.NID_PACKET;
-    }
-    else if (StopIfInStaffResponsibleMemoryTop < StopIfInStaffResponsibleMemoryMax)
-    {
-        // allocate from top
-        ptr = &StopIfInStaffResponsibleMemory[StopIfInStaffResponsibleMemoryTop];
-        StopIfInStaffResponsibleMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    StopIfInStaffResponsible_Init(ptr);
-
-    return ptr;
-}
-
-
-void StopIfInStaffResponsible_Delete(StopIfInStaffResponsible* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = StopIfInStaffResponsibleMemoryFreeList;
-    StopIfInStaffResponsibleMemoryFreeList = ptr - StopIfInStaffResponsibleMemory;
-}
 
 
 int StopIfInStaffResponsible_UpperBitsNotSet(const StopIfInStaffResponsible* p)
@@ -182,6 +133,8 @@ int StopIfInStaffResponsible_DecodeBit(StopIfInStaffResponsible* p, Bitstream* s
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int StopIfInStaffResponsible_EncodeInt(const StopIfInStaffResponsible* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 137;
@@ -222,4 +175,56 @@ int StopIfInStaffResponsible_DecodeInt(StopIfInStaffResponsible* p, const Metada
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define StopIfInStaffResponsibleMemoryMax		8
+
+// end-of-freelist indicator
+#define StopIfInStaffResponsibleMemoryNil		(-1)
+
+// allocation memory
+static StopIfInStaffResponsible StopIfInStaffResponsibleMemory[StopIfInStaffResponsibleMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t StopIfInStaffResponsibleMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t StopIfInStaffResponsibleMemoryFreeList = StopIfInStaffResponsibleMemoryNil;
+
+StopIfInStaffResponsible* StopIfInStaffResponsible_New(void)
+{
+    StopIfInStaffResponsible* ptr;
+
+    if (StopIfInStaffResponsibleMemoryFreeList != StopIfInStaffResponsibleMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &StopIfInStaffResponsibleMemory[StopIfInStaffResponsibleMemoryFreeList];
+        StopIfInStaffResponsibleMemoryFreeList = StopIfInStaffResponsibleMemory[StopIfInStaffResponsibleMemoryFreeList].header.NID_PACKET;
+    }
+    else if (StopIfInStaffResponsibleMemoryTop < StopIfInStaffResponsibleMemoryMax)
+    {
+        // allocate from top
+        ptr = &StopIfInStaffResponsibleMemory[StopIfInStaffResponsibleMemoryTop];
+        StopIfInStaffResponsibleMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    StopIfInStaffResponsible_Init(ptr);
+
+    return ptr;
+}
+
+
+void StopIfInStaffResponsible_Delete(StopIfInStaffResponsible* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = StopIfInStaffResponsibleMemoryFreeList;
+    StopIfInStaffResponsibleMemoryFreeList = ptr - StopIfInStaffResponsibleMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

@@ -50,26 +50,6 @@ typedef struct RadioInfillAreaInformation RadioInfillAreaInformation;
 
 #define RADIOINFILLAREAINFORMATION_BITSIZE 145
 
-RadioInfillAreaInformation*  RadioInfillAreaInformation_New(void);
-
-void   RadioInfillAreaInformation_Delete(RadioInfillAreaInformation*);
-
-static inline void RadioInfillAreaInformation_Init(RadioInfillAreaInformation* p)
-{
-    p->header.NID_PACKET = 133;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_SCALE = 0;
-    p->Q_RIU = 0;
-    p->NID_C_0 = 0;
-    p->NID_RIU = 0;
-    p->NID_RADIO = 0;
-    p->D_INFILL = 0;
-    p->NID_C_1 = 0;
-    p->NID_BG = 0;
-}
-
 /*@
     logic integer BitSize{L}(RadioInfillAreaInformation* p) = RADIOINFILLAREAINFORMATION_BITSIZE;
 
@@ -215,6 +195,28 @@ int RadioInfillAreaInformation_EncodeBit(const RadioInfillAreaInformation* p, Bi
 */
 int RadioInfillAreaInformation_DecodeBit(RadioInfillAreaInformation* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+RadioInfillAreaInformation*  RadioInfillAreaInformation_New(void);
+
+void   RadioInfillAreaInformation_Delete(RadioInfillAreaInformation*);
+
+static inline void RadioInfillAreaInformation_Init(RadioInfillAreaInformation* p)
+{
+    p->header.NID_PACKET = 133;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->Q_RIU = 0;
+    p->NID_C_0 = 0;
+    p->NID_RIU = 0;
+    p->NID_RADIO = 0;
+    p->D_INFILL = 0;
+    p->NID_C_1 = 0;
+    p->NID_BG = 0;
+}
+
 static inline void RadioInfillAreaInformation_Print(const RadioInfillAreaInformation* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -258,5 +260,8 @@ int RadioInfillAreaInformation_EncodeInt(const RadioInfillAreaInformation* p, Me
 
 int RadioInfillAreaInformation_DecodeInt(RadioInfillAreaInformation* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // RADIOINFILLAREAINFORMATION_H_INCLUDED
+
 

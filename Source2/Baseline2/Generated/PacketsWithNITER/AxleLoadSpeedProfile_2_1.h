@@ -38,12 +38,6 @@ typedef struct AxleLoadSpeedProfile_2_1 AxleLoadSpeedProfile_2_1;
 
 #define AXLELOADSPEEDPROFILE_2_1_BITSIZE 14
 
-static inline void AxleLoadSpeedProfile_2_1_Init(AxleLoadSpeedProfile_2_1* p)
-{
-    p->M_AXLELOAD = 0;
-    p->V_AXLELOAD = 0;
-}
-
 /*@
     logic integer BitSize{L}(AxleLoadSpeedProfile_2_1* p) = AXLELOADSPEEDPROFILE_2_1_BITSIZE;
 
@@ -155,6 +149,14 @@ int AxleLoadSpeedProfile_2_1_EncodeBit(const AxleLoadSpeedProfile_2_1* p, Bitstr
 */
 int AxleLoadSpeedProfile_2_1_DecodeBit(AxleLoadSpeedProfile_2_1* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+static inline void AxleLoadSpeedProfile_2_1_Init(AxleLoadSpeedProfile_2_1* p)
+{
+    p->M_AXLELOAD = 0;
+    p->V_AXLELOAD = 0;
+}
+
 static inline void AxleLoadSpeedProfile_2_1_Print(const AxleLoadSpeedProfile_2_1* p, FILE* stream)
 {
     fprintf(stream, "(%lu,%lu)",
@@ -175,6 +177,8 @@ static inline int AxleLoadSpeedProfile_2_1_Equal(const AxleLoadSpeedProfile_2_1*
 int AxleLoadSpeedProfile_2_1_EncodeInt(const AxleLoadSpeedProfile_2_1* p, kcg_int* startAddress, kcg_int* stream);
 
 int AxleLoadSpeedProfile_2_1_DecodeInt(AxleLoadSpeedProfile_2_1* p, kcg_int* startAddress, const kcg_int* stream);
+
+#endif // FRAMAC_IGNORE
 
 #endif // AXLELOADSPEEDPROFILE_2_1_H_INCLUDED
 

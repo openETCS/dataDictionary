@@ -49,24 +49,6 @@ typedef struct RBCTransitionOrder RBCTransitionOrder;
 
 #define RBCTRANSITIONORDER_BITSIZE 121
 
-RBCTransitionOrder*  RBCTransitionOrder_New(void);
-
-void   RBCTransitionOrder_Delete(RBCTransitionOrder*);
-
-static inline void RBCTransitionOrder_Init(RBCTransitionOrder* p)
-{
-    p->header.NID_PACKET = 131;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_SCALE = 0;
-    p->D_RBCTR = 0;
-    p->NID_C = 0;
-    p->NID_RBC = 0;
-    p->NID_RADIO = 0;
-    p->Q_SLEEPSESSION = 0;
-}
-
 /*@
     logic integer BitSize{L}(RBCTransitionOrder* p) = RBCTRANSITIONORDER_BITSIZE;
 
@@ -204,6 +186,26 @@ int RBCTransitionOrder_EncodeBit(const RBCTransitionOrder* p, Bitstream* stream)
 */
 int RBCTransitionOrder_DecodeBit(RBCTransitionOrder* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+RBCTransitionOrder*  RBCTransitionOrder_New(void);
+
+void   RBCTransitionOrder_Delete(RBCTransitionOrder*);
+
+static inline void RBCTransitionOrder_Init(RBCTransitionOrder* p)
+{
+    p->header.NID_PACKET = 131;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->D_RBCTR = 0;
+    p->NID_C = 0;
+    p->NID_RBC = 0;
+    p->NID_RADIO = 0;
+    p->Q_SLEEPSESSION = 0;
+}
+
 static inline void RBCTransitionOrder_Print(const RBCTransitionOrder* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -243,5 +245,8 @@ int RBCTransitionOrder_EncodeInt(const RBCTransitionOrder* p, Metadata* data, kc
 
 int RBCTransitionOrder_DecodeInt(RBCTransitionOrder* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // RBCTRANSITIONORDER_H_INCLUDED
+
 

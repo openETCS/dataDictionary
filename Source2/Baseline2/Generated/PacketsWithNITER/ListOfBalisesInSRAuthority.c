@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "ListOfBalisesInSRAuthority.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define ListOfBalisesInSRAuthorityMemoryMax		8
-
-// end-of-freelist indicator
-#define ListOfBalisesInSRAuthorityMemoryNil		(-1)
-
-// allocation memory
-static ListOfBalisesInSRAuthority ListOfBalisesInSRAuthorityMemory[ListOfBalisesInSRAuthorityMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t ListOfBalisesInSRAuthorityMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t ListOfBalisesInSRAuthorityMemoryFreeList = ListOfBalisesInSRAuthorityMemoryNil;
-
-ListOfBalisesInSRAuthority* ListOfBalisesInSRAuthority_New(void)
-{
-    ListOfBalisesInSRAuthority* ptr;
-
-    if (ListOfBalisesInSRAuthorityMemoryFreeList != ListOfBalisesInSRAuthorityMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &ListOfBalisesInSRAuthorityMemory[ListOfBalisesInSRAuthorityMemoryFreeList];
-        ListOfBalisesInSRAuthorityMemoryFreeList = ListOfBalisesInSRAuthorityMemory[ListOfBalisesInSRAuthorityMemoryFreeList].header.NID_PACKET;
-    }
-    else if (ListOfBalisesInSRAuthorityMemoryTop < ListOfBalisesInSRAuthorityMemoryMax)
-    {
-        // allocate from top
-        ptr = &ListOfBalisesInSRAuthorityMemory[ListOfBalisesInSRAuthorityMemoryTop];
-        ListOfBalisesInSRAuthorityMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    ListOfBalisesInSRAuthority_Init(ptr);
-
-    return ptr;
-}
-
-
-void ListOfBalisesInSRAuthority_Delete(ListOfBalisesInSRAuthority* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = ListOfBalisesInSRAuthorityMemoryFreeList;
-    ListOfBalisesInSRAuthorityMemoryFreeList = ptr - ListOfBalisesInSRAuthorityMemory;
-}
 
 
 int ListOfBalisesInSRAuthority_UpperBitsNotSet(const ListOfBalisesInSRAuthority* p)
@@ -183,6 +134,8 @@ int ListOfBalisesInSRAuthority_DecodeBit(ListOfBalisesInSRAuthority* p, Bitstrea
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int ListOfBalisesInSRAuthority_EncodeInt(const ListOfBalisesInSRAuthority* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 63;
@@ -235,4 +188,56 @@ int ListOfBalisesInSRAuthority_DecodeInt(ListOfBalisesInSRAuthority* p, const Me
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define ListOfBalisesInSRAuthorityMemoryMax		8
+
+// end-of-freelist indicator
+#define ListOfBalisesInSRAuthorityMemoryNil		(-1)
+
+// allocation memory
+static ListOfBalisesInSRAuthority ListOfBalisesInSRAuthorityMemory[ListOfBalisesInSRAuthorityMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t ListOfBalisesInSRAuthorityMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t ListOfBalisesInSRAuthorityMemoryFreeList = ListOfBalisesInSRAuthorityMemoryNil;
+
+ListOfBalisesInSRAuthority* ListOfBalisesInSRAuthority_New(void)
+{
+    ListOfBalisesInSRAuthority* ptr;
+
+    if (ListOfBalisesInSRAuthorityMemoryFreeList != ListOfBalisesInSRAuthorityMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &ListOfBalisesInSRAuthorityMemory[ListOfBalisesInSRAuthorityMemoryFreeList];
+        ListOfBalisesInSRAuthorityMemoryFreeList = ListOfBalisesInSRAuthorityMemory[ListOfBalisesInSRAuthorityMemoryFreeList].header.NID_PACKET;
+    }
+    else if (ListOfBalisesInSRAuthorityMemoryTop < ListOfBalisesInSRAuthorityMemoryMax)
+    {
+        // allocate from top
+        ptr = &ListOfBalisesInSRAuthorityMemory[ListOfBalisesInSRAuthorityMemoryTop];
+        ListOfBalisesInSRAuthorityMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    ListOfBalisesInSRAuthority_Init(ptr);
+
+    return ptr;
+}
+
+
+void ListOfBalisesInSRAuthority_Delete(ListOfBalisesInSRAuthority* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = ListOfBalisesInSRAuthorityMemoryFreeList;
+    ListOfBalisesInSRAuthorityMemoryFreeList = ptr - ListOfBalisesInSRAuthorityMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

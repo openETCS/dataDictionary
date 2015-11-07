@@ -53,31 +53,6 @@ typedef struct TrackCondition TrackCondition;
 
 #define TRACKCONDITION_BITSIZE 23
 
-TrackCondition*  TrackCondition_New(void);
-
-void   TrackCondition_Delete(TrackCondition*);
-
-static inline void TrackCondition_Init(TrackCondition* p)
-{
-    p->header.NID_PACKET = 68;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_SCALE = 0;
-    p->Q_TRACKINIT = 0;
-    p->D_TRACKINIT = 0;
-    p->D_TRACKCOND = 0;
-    p->L_TRACKCOND = 0;
-    p->M_TRACKCOND = 0;
-    p->N_ITER_1 = 0;
-
-    for (uint32_t i = 0; i < 31; ++i)
-    {
-        TrackCondition_1_Init(&(p->sub_1[i]));
-    }
-
-}
-
 /*@
     logic integer BitSize{L}(TrackCondition* p) = TRACKCONDITION_BITSIZE;
 
@@ -199,6 +174,33 @@ int TrackCondition_EncodeBit(const TrackCondition* p, Bitstream* stream);
 */
 int TrackCondition_DecodeBit(TrackCondition* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+TrackCondition*  TrackCondition_New(void);
+
+void   TrackCondition_Delete(TrackCondition*);
+
+static inline void TrackCondition_Init(TrackCondition* p)
+{
+    p->header.NID_PACKET = 68;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->Q_TRACKINIT = 0;
+    p->D_TRACKINIT = 0;
+    p->D_TRACKCOND = 0;
+    p->L_TRACKCOND = 0;
+    p->M_TRACKCOND = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        TrackCondition_1_Init(&(p->sub_1[i]));
+    }
+
+}
+
 static inline void TrackCondition_Print(const TrackCondition* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -266,5 +268,8 @@ int TrackCondition_EncodeInt(const TrackCondition* p, Metadata* data, kcg_int* s
 
 int TrackCondition_DecodeInt(TrackCondition* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // TRACKCONDITION_H_INCLUDED
+
 

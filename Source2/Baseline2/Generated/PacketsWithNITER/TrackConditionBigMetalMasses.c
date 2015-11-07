@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "TrackConditionBigMetalMasses.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define TrackConditionBigMetalMassesMemoryMax		8
-
-// end-of-freelist indicator
-#define TrackConditionBigMetalMassesMemoryNil		(-1)
-
-// allocation memory
-static TrackConditionBigMetalMasses TrackConditionBigMetalMassesMemory[TrackConditionBigMetalMassesMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t TrackConditionBigMetalMassesMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t TrackConditionBigMetalMassesMemoryFreeList = TrackConditionBigMetalMassesMemoryNil;
-
-TrackConditionBigMetalMasses* TrackConditionBigMetalMasses_New(void)
-{
-    TrackConditionBigMetalMasses* ptr;
-
-    if (TrackConditionBigMetalMassesMemoryFreeList != TrackConditionBigMetalMassesMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &TrackConditionBigMetalMassesMemory[TrackConditionBigMetalMassesMemoryFreeList];
-        TrackConditionBigMetalMassesMemoryFreeList = TrackConditionBigMetalMassesMemory[TrackConditionBigMetalMassesMemoryFreeList].header.NID_PACKET;
-    }
-    else if (TrackConditionBigMetalMassesMemoryTop < TrackConditionBigMetalMassesMemoryMax)
-    {
-        // allocate from top
-        ptr = &TrackConditionBigMetalMassesMemory[TrackConditionBigMetalMassesMemoryTop];
-        TrackConditionBigMetalMassesMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    TrackConditionBigMetalMasses_Init(ptr);
-
-    return ptr;
-}
-
-
-void TrackConditionBigMetalMasses_Delete(TrackConditionBigMetalMasses* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = TrackConditionBigMetalMassesMemoryFreeList;
-    TrackConditionBigMetalMassesMemoryFreeList = ptr - TrackConditionBigMetalMassesMemory;
-}
 
 
 int TrackConditionBigMetalMasses_UpperBitsNotSet(const TrackConditionBigMetalMasses* p)
@@ -234,6 +185,8 @@ int TrackConditionBigMetalMasses_DecodeBit(TrackConditionBigMetalMasses* p, Bits
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int TrackConditionBigMetalMasses_EncodeInt(const TrackConditionBigMetalMasses* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 67;
@@ -246,8 +199,8 @@ int TrackConditionBigMetalMasses_EncodeInt(const TrackConditionBigMetalMasses* p
 
     stream[startAddress++] = p->Q_DIR;
     stream[startAddress++] = p->L_PACKET;
-    stream[startAddress++] = p->N_ITER_1 + 1;
     stream[startAddress++] = p->Q_SCALE;
+    stream[startAddress++] = p->N_ITER_1 + 1;
     stream[startAddress++] = p->D_TRACKCOND;
     stream[startAddress++] = p->L_TRACKCOND;
 
@@ -292,4 +245,56 @@ int TrackConditionBigMetalMasses_DecodeInt(TrackConditionBigMetalMasses* p, cons
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define TrackConditionBigMetalMassesMemoryMax		8
+
+// end-of-freelist indicator
+#define TrackConditionBigMetalMassesMemoryNil		(-1)
+
+// allocation memory
+static TrackConditionBigMetalMasses TrackConditionBigMetalMassesMemory[TrackConditionBigMetalMassesMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t TrackConditionBigMetalMassesMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t TrackConditionBigMetalMassesMemoryFreeList = TrackConditionBigMetalMassesMemoryNil;
+
+TrackConditionBigMetalMasses* TrackConditionBigMetalMasses_New(void)
+{
+    TrackConditionBigMetalMasses* ptr;
+
+    if (TrackConditionBigMetalMassesMemoryFreeList != TrackConditionBigMetalMassesMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &TrackConditionBigMetalMassesMemory[TrackConditionBigMetalMassesMemoryFreeList];
+        TrackConditionBigMetalMassesMemoryFreeList = TrackConditionBigMetalMassesMemory[TrackConditionBigMetalMassesMemoryFreeList].header.NID_PACKET;
+    }
+    else if (TrackConditionBigMetalMassesMemoryTop < TrackConditionBigMetalMassesMemoryMax)
+    {
+        // allocate from top
+        ptr = &TrackConditionBigMetalMassesMemory[TrackConditionBigMetalMassesMemoryTop];
+        TrackConditionBigMetalMassesMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    TrackConditionBigMetalMasses_Init(ptr);
+
+    return ptr;
+}
+
+
+void TrackConditionBigMetalMasses_Delete(TrackConditionBigMetalMasses* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = TrackConditionBigMetalMassesMemoryFreeList;
+    TrackConditionBigMetalMassesMemoryFreeList = ptr - TrackConditionBigMetalMassesMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

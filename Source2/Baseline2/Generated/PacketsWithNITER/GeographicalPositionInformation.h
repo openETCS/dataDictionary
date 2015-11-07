@@ -54,32 +54,6 @@ typedef struct GeographicalPositionInformation GeographicalPositionInformation;
 
 #define GEOGRAPHICALPOSITIONINFORMATION_BITSIZE 73
 
-GeographicalPositionInformation*  GeographicalPositionInformation_New(void);
-
-void   GeographicalPositionInformation_Delete(GeographicalPositionInformation*);
-
-static inline void GeographicalPositionInformation_Init(GeographicalPositionInformation* p)
-{
-    p->header.NID_PACKET = 79;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_SCALE = 0;
-    p->Q_NEWCOUNTRY = 0;
-    p->NID_C = 0;
-    p->NID_BG = 0;
-    p->D_POSOFF = 0;
-    p->Q_MPOSITION = 0;
-    p->M_POSITION = 0;
-    p->N_ITER_1 = 0;
-
-    for (uint32_t i = 0; i < 31; ++i)
-    {
-        GeographicalPositionInformation_1_Init(&(p->sub_1[i]));
-    }
-
-}
-
 /*@
     logic integer BitSize{L}(GeographicalPositionInformation* p) = GEOGRAPHICALPOSITIONINFORMATION_BITSIZE;
 
@@ -201,6 +175,34 @@ int GeographicalPositionInformation_EncodeBit(const GeographicalPositionInformat
 */
 int GeographicalPositionInformation_DecodeBit(GeographicalPositionInformation* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+GeographicalPositionInformation*  GeographicalPositionInformation_New(void);
+
+void   GeographicalPositionInformation_Delete(GeographicalPositionInformation*);
+
+static inline void GeographicalPositionInformation_Init(GeographicalPositionInformation* p)
+{
+    p->header.NID_PACKET = 79;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->Q_NEWCOUNTRY = 0;
+    p->NID_C = 0;
+    p->NID_BG = 0;
+    p->D_POSOFF = 0;
+    p->Q_MPOSITION = 0;
+    p->M_POSITION = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        GeographicalPositionInformation_1_Init(&(p->sub_1[i]));
+    }
+
+}
+
 static inline void GeographicalPositionInformation_Print(const GeographicalPositionInformation* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -266,5 +268,8 @@ int GeographicalPositionInformation_EncodeInt(const GeographicalPositionInformat
 
 int GeographicalPositionInformation_DecodeInt(GeographicalPositionInformation* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // GEOGRAPHICALPOSITIONINFORMATION_H_INCLUDED
+
 

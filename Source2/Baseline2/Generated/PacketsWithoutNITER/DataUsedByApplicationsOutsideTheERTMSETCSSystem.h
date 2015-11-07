@@ -45,19 +45,6 @@ typedef struct DataUsedByApplicationsOutsideTheERTMSETCSSystem DataUsedByApplica
 
 #define DATAUSEDBYAPPLICATIONSOUTSIDETHEERTMSETCSSYSTEM_BITSIZE 86
 
-DataUsedByApplicationsOutsideTheERTMSETCSSystem*  DataUsedByApplicationsOutsideTheERTMSETCSSystem_New(void);
-
-void   DataUsedByApplicationsOutsideTheERTMSETCSSystem_Delete(DataUsedByApplicationsOutsideTheERTMSETCSSystem*);
-
-static inline void DataUsedByApplicationsOutsideTheERTMSETCSSystem_Init(DataUsedByApplicationsOutsideTheERTMSETCSSystem* p)
-{
-    p->header.NID_PACKET = 44;
-    p->header.list = TRAINTOTRACK;
-    p->L_PACKET = 0;
-    p->NID_XUSER = 0;
-    p->Other_data_depending_on__NID_XUSER = 0;
-}
-
 /*@
     logic integer BitSize{L}(DataUsedByApplicationsOutsideTheERTMSETCSSystem* p) = DATAUSEDBYAPPLICATIONSOUTSIDETHEERTMSETCSSYSTEM_BITSIZE;
 
@@ -175,6 +162,21 @@ int DataUsedByApplicationsOutsideTheERTMSETCSSystem_EncodeBit(const DataUsedByAp
 */
 int DataUsedByApplicationsOutsideTheERTMSETCSSystem_DecodeBit(DataUsedByApplicationsOutsideTheERTMSETCSSystem* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+DataUsedByApplicationsOutsideTheERTMSETCSSystem*  DataUsedByApplicationsOutsideTheERTMSETCSSystem_New(void);
+
+void   DataUsedByApplicationsOutsideTheERTMSETCSSystem_Delete(DataUsedByApplicationsOutsideTheERTMSETCSSystem*);
+
+static inline void DataUsedByApplicationsOutsideTheERTMSETCSSystem_Init(DataUsedByApplicationsOutsideTheERTMSETCSSystem* p)
+{
+    p->header.NID_PACKET = 44;
+    p->header.list = TRAINTOTRACK;
+    p->L_PACKET = 0;
+    p->NID_XUSER = 0;
+    p->Other_data_depending_on__NID_XUSER = 0;
+}
+
 static inline void DataUsedByApplicationsOutsideTheERTMSETCSSystem_Print(const DataUsedByApplicationsOutsideTheERTMSETCSSystem* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -204,5 +206,8 @@ int DataUsedByApplicationsOutsideTheERTMSETCSSystem_EncodeInt(const DataUsedByAp
 
 int DataUsedByApplicationsOutsideTheERTMSETCSSystem_DecodeInt(DataUsedByApplicationsOutsideTheERTMSETCSSystem* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // DATAUSEDBYAPPLICATIONSOUTSIDETHEERTMSETCSSYSTEM_H_INCLUDED
+
 

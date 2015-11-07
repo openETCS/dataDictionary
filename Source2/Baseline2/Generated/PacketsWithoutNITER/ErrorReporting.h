@@ -43,18 +43,6 @@ typedef struct ErrorReporting ErrorReporting;
 
 #define ERRORREPORTING_BITSIZE 21
 
-ErrorReporting*  ErrorReporting_New(void);
-
-void   ErrorReporting_Delete(ErrorReporting*);
-
-static inline void ErrorReporting_Init(ErrorReporting* p)
-{
-    p->header.NID_PACKET = 4;
-    p->header.list = TRAINTOTRACK;
-    p->L_PACKET = 0;
-    p->M_ERROR = 0;
-}
-
 /*@
     logic integer BitSize{L}(ErrorReporting* p) = ERRORREPORTING_BITSIZE;
 
@@ -168,6 +156,20 @@ int ErrorReporting_EncodeBit(const ErrorReporting* p, Bitstream* stream);
 */
 int ErrorReporting_DecodeBit(ErrorReporting* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+ErrorReporting*  ErrorReporting_New(void);
+
+void   ErrorReporting_Delete(ErrorReporting*);
+
+static inline void ErrorReporting_Init(ErrorReporting* p)
+{
+    p->header.NID_PACKET = 4;
+    p->header.list = TRAINTOTRACK;
+    p->L_PACKET = 0;
+    p->M_ERROR = 0;
+}
+
 static inline void ErrorReporting_Print(const ErrorReporting* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -195,5 +197,8 @@ int ErrorReporting_EncodeInt(const ErrorReporting* p, Metadata* data, kcg_int* s
 
 int ErrorReporting_DecodeInt(ErrorReporting* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // ERRORREPORTING_H_INCLUDED
+
 

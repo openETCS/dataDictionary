@@ -38,12 +38,6 @@ typedef struct PositionReportParameters_1 PositionReportParameters_1;
 
 #define POSITIONREPORTPARAMETERS_1_BITSIZE 16
 
-static inline void PositionReportParameters_1_Init(PositionReportParameters_1* p)
-{
-    p->D_LOC = 0;
-    p->Q_LGTLOC = 0;
-}
-
 /*@
     logic integer BitSize{L}(PositionReportParameters_1* p) = POSITIONREPORTPARAMETERS_1_BITSIZE;
 
@@ -155,6 +149,14 @@ int PositionReportParameters_1_EncodeBit(const PositionReportParameters_1* p, Bi
 */
 int PositionReportParameters_1_DecodeBit(PositionReportParameters_1* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+static inline void PositionReportParameters_1_Init(PositionReportParameters_1* p)
+{
+    p->D_LOC = 0;
+    p->Q_LGTLOC = 0;
+}
+
 static inline void PositionReportParameters_1_Print(const PositionReportParameters_1* p, FILE* stream)
 {
     fprintf(stream, "(%lu,%lu)",
@@ -175,6 +177,8 @@ static inline int PositionReportParameters_1_Equal(const PositionReportParameter
 int PositionReportParameters_1_EncodeInt(const PositionReportParameters_1* p, kcg_int* startAddress, kcg_int* stream);
 
 int PositionReportParameters_1_DecodeInt(PositionReportParameters_1* p, kcg_int* startAddress, const kcg_int* stream);
+
+#endif // FRAMAC_IGNORE
 
 #endif // POSITIONREPORTPARAMETERS_1_H_INCLUDED
 

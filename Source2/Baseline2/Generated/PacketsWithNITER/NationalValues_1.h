@@ -37,11 +37,6 @@ typedef struct NationalValues_1 NationalValues_1;
 
 #define NATIONALVALUES_1_BITSIZE 10
 
-static inline void NationalValues_1_Init(NationalValues_1* p)
-{
-    p->NID_C = 0;
-}
-
 /*@
     logic integer BitSize{L}(NationalValues_1* p) = NATIONALVALUES_1_BITSIZE;
 
@@ -149,6 +144,13 @@ int NationalValues_1_EncodeBit(const NationalValues_1* p, Bitstream* stream);
 */
 int NationalValues_1_DecodeBit(NationalValues_1* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+static inline void NationalValues_1_Init(NationalValues_1* p)
+{
+    p->NID_C = 0;
+}
+
 static inline void NationalValues_1_Print(const NationalValues_1* p, FILE* stream)
 {
     fprintf(stream, "(%lu)",
@@ -167,6 +169,8 @@ static inline int NationalValues_1_Equal(const NationalValues_1* a, const Nation
 int NationalValues_1_EncodeInt(const NationalValues_1* p, kcg_int* startAddress, kcg_int* stream);
 
 int NationalValues_1_DecodeInt(NationalValues_1* p, kcg_int* startAddress, const kcg_int* stream);
+
+#endif // FRAMAC_IGNORE
 
 #endif // NATIONALVALUES_1_H_INCLUDED
 

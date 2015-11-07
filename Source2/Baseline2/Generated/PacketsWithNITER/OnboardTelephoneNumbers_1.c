@@ -97,6 +97,8 @@ int OnboardTelephoneNumbers_1_DecodeBit(OnboardTelephoneNumbers_1* p, Bitstream*
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int OnboardTelephoneNumbers_1_EncodeInt(const OnboardTelephoneNumbers_1* p, kcg_int* startAddress, kcg_int* stream)
 {
     stream[(*startAddress)++] = p->NID_RADIO;
@@ -110,4 +112,6 @@ int OnboardTelephoneNumbers_1_DecodeInt(OnboardTelephoneNumbers_1* p, kcg_int* s
 
     return 1;
 }
+
+#endif // FRAMAC_IGNORE
 

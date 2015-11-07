@@ -38,12 +38,6 @@ typedef struct InternationalStaticSpeedProfile_1 InternationalStaticSpeedProfile
 
 #define INTERNATIONALSTATICSPEEDPROFILE_1_BITSIZE 11
 
-static inline void InternationalStaticSpeedProfile_1_Init(InternationalStaticSpeedProfile_1* p)
-{
-    p->NC_DIFF = 0;
-    p->V_DIFF = 0;
-}
-
 /*@
     logic integer BitSize{L}(InternationalStaticSpeedProfile_1* p) = INTERNATIONALSTATICSPEEDPROFILE_1_BITSIZE;
 
@@ -155,6 +149,14 @@ int InternationalStaticSpeedProfile_1_EncodeBit(const InternationalStaticSpeedPr
 */
 int InternationalStaticSpeedProfile_1_DecodeBit(InternationalStaticSpeedProfile_1* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+static inline void InternationalStaticSpeedProfile_1_Init(InternationalStaticSpeedProfile_1* p)
+{
+    p->NC_DIFF = 0;
+    p->V_DIFF = 0;
+}
+
 static inline void InternationalStaticSpeedProfile_1_Print(const InternationalStaticSpeedProfile_1* p, FILE* stream)
 {
     fprintf(stream, "(%lu,%lu)",
@@ -175,6 +177,8 @@ static inline int InternationalStaticSpeedProfile_1_Equal(const InternationalSta
 int InternationalStaticSpeedProfile_1_EncodeInt(const InternationalStaticSpeedProfile_1* p, kcg_int* startAddress, kcg_int* stream);
 
 int InternationalStaticSpeedProfile_1_DecodeInt(InternationalStaticSpeedProfile_1* p, kcg_int* startAddress, const kcg_int* stream);
+
+#endif // FRAMAC_IGNORE
 
 #endif // INTERNATIONALSTATICSPEEDPROFILE_1_H_INCLUDED
 

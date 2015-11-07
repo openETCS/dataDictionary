@@ -46,20 +46,6 @@ typedef struct DefaultGradientForTemporarySpeedRestriction DefaultGradientForTem
 
 #define DEFAULTGRADIENTFORTEMPORARYSPEEDRESTRICTION_BITSIZE 24
 
-DefaultGradientForTemporarySpeedRestriction*  DefaultGradientForTemporarySpeedRestriction_New(void);
-
-void   DefaultGradientForTemporarySpeedRestriction_Delete(DefaultGradientForTemporarySpeedRestriction*);
-
-static inline void DefaultGradientForTemporarySpeedRestriction_Init(DefaultGradientForTemporarySpeedRestriction* p)
-{
-    p->header.NID_PACKET = 141;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_GDIR = 0;
-    p->G_TSR = 0;
-}
-
 /*@
     logic integer BitSize{L}(DefaultGradientForTemporarySpeedRestriction* p) = DEFAULTGRADIENTFORTEMPORARYSPEEDRESTRICTION_BITSIZE;
 
@@ -181,6 +167,22 @@ int DefaultGradientForTemporarySpeedRestriction_EncodeBit(const DefaultGradientF
 */
 int DefaultGradientForTemporarySpeedRestriction_DecodeBit(DefaultGradientForTemporarySpeedRestriction* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+DefaultGradientForTemporarySpeedRestriction*  DefaultGradientForTemporarySpeedRestriction_New(void);
+
+void   DefaultGradientForTemporarySpeedRestriction_Delete(DefaultGradientForTemporarySpeedRestriction*);
+
+static inline void DefaultGradientForTemporarySpeedRestriction_Init(DefaultGradientForTemporarySpeedRestriction* p)
+{
+    p->header.NID_PACKET = 141;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_GDIR = 0;
+    p->G_TSR = 0;
+}
+
 static inline void DefaultGradientForTemporarySpeedRestriction_Print(const DefaultGradientForTemporarySpeedRestriction* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -212,5 +214,8 @@ int DefaultGradientForTemporarySpeedRestriction_EncodeInt(const DefaultGradientF
 
 int DefaultGradientForTemporarySpeedRestriction_DecodeInt(DefaultGradientForTemporarySpeedRestriction* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // DEFAULTGRADIENTFORTEMPORARYSPEEDRESTRICTION_H_INCLUDED
+
 

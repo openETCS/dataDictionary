@@ -47,21 +47,6 @@ typedef struct MovementAuthorityRequestParameters MovementAuthorityRequestParame
 
 #define MOVEMENTAUTHORITYREQUESTPARAMETERS_BITSIZE 41
 
-MovementAuthorityRequestParameters*  MovementAuthorityRequestParameters_New(void);
-
-void   MovementAuthorityRequestParameters_Delete(MovementAuthorityRequestParameters*);
-
-static inline void MovementAuthorityRequestParameters_Init(MovementAuthorityRequestParameters* p)
-{
-    p->header.NID_PACKET = 57;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->T_MAR = 0;
-    p->T_TIMEOUTRQST = 0;
-    p->T_CYCRQST = 0;
-}
-
 /*@
     logic integer BitSize{L}(MovementAuthorityRequestParameters* p) = MOVEMENTAUTHORITYREQUESTPARAMETERS_BITSIZE;
 
@@ -187,6 +172,23 @@ int MovementAuthorityRequestParameters_EncodeBit(const MovementAuthorityRequestP
 */
 int MovementAuthorityRequestParameters_DecodeBit(MovementAuthorityRequestParameters* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+MovementAuthorityRequestParameters*  MovementAuthorityRequestParameters_New(void);
+
+void   MovementAuthorityRequestParameters_Delete(MovementAuthorityRequestParameters*);
+
+static inline void MovementAuthorityRequestParameters_Init(MovementAuthorityRequestParameters* p)
+{
+    p->header.NID_PACKET = 57;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->T_MAR = 0;
+    p->T_TIMEOUTRQST = 0;
+    p->T_CYCRQST = 0;
+}
+
 static inline void MovementAuthorityRequestParameters_Print(const MovementAuthorityRequestParameters* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -220,5 +222,8 @@ int MovementAuthorityRequestParameters_EncodeInt(const MovementAuthorityRequestP
 
 int MovementAuthorityRequestParameters_DecodeInt(MovementAuthorityRequestParameters* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // MOVEMENTAUTHORITYREQUESTPARAMETERS_H_INCLUDED
+
 

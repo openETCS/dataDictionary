@@ -42,7 +42,6 @@ SCRIPT?='wp0.script' # default script
 WP_BASE_FLAGS += -cpp-gnu-like
 WP_BASE_FLAGS += -pp-annot -no-unicode
 WP_BASE_FLAGS += -wp
-WP_BASE_FLAGS += -wp-split
 
 # RTE options and more
 WP_BASE_FLAGS += -wp-rte
@@ -50,7 +49,7 @@ WP_BASE_FLAGS += -warn-signed-downcast
 WP_BASE_FLAGS += -warn-signed-overflow
 #WP_BASE_FLAGS += -warn-unsigned-downcast
 WP_BASE_FLAGS += -warn-unsigned-overflow
-WP_BASE_FLAGS += -wp-split
+#WP_BASE_FLAGS += -wp-split
 
 #Qed options
 #WP_BASE_FLAGS += -wp-no-simpl
@@ -75,7 +74,7 @@ WP_PROVER_FLAGS += -wp-prover cvc4
 WP_PROVER_FLAGS += -wp-prover alt-ergo
 
 WP_FLAGS = $(WP_BASE_FLAGS)
-WP_FLAGS +=-cpp-command 'gcc -C -E $(INCLUDES)'
+WP_FLAGS +=-cpp-extra-args="$(INCLUDES) -DFRAMAC_IGNORE"
 
 # run WP on command line 
 export WP=frama-c 
@@ -84,10 +83,10 @@ export WPREPORT=$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS)
 
 # start WP on command line and run provers
 %.wp:%.c FORCE
-	@$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 1 -wp-out $(patsubst %.c,%.wp, $<)   $<
+	@$(WP) $(WP_FLAGS) -wp-par 1 $(WP_PROVER_FLAGS) -wp-out $(patsubst %.c,%.wp, $<)   $<
 
 %.wp:%.h FORCE
-	@$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 1 -wp-out $(patsubst %.h,%.wp, $<)   $<
+	@$(WP) $(WP_FLAGS) -wp-par 1 $(WP_PROVER_FLAGS) -wp-out $(patsubst %.h,%.wp, $<)   $<
 
 
 # start WP on command line but do not run provers
@@ -108,7 +107,7 @@ export WPREPORT=$(WP) $(WP_FLAGS) $(WP_PROVER_FLAGS)
 
 # start WP GUI and run provers
 %.wpgui:%.c FORCE
-	@($(WPGUI) $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-par 4 -wp-out $(patsubst %.c,%.wp, $<)  $< &)
+	@($(WPGUI) -wp-par 4 $(WP_FLAGS) $(WP_PROVER_FLAGS) -wp-out $(patsubst %.c,%.wp, $<)  $< &)
 
 
 # start WP GUI but do not run provers

@@ -47,21 +47,6 @@ typedef struct ReversingSupervisionInformation ReversingSupervisionInformation;
 
 #define REVERSINGSUPERVISIONINFORMATION_BITSIZE 39
 
-ReversingSupervisionInformation*  ReversingSupervisionInformation_New(void);
-
-void   ReversingSupervisionInformation_Delete(ReversingSupervisionInformation*);
-
-static inline void ReversingSupervisionInformation_Init(ReversingSupervisionInformation* p)
-{
-    p->header.NID_PACKET = 139;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_SCALE = 0;
-    p->D_REVERSE = 0;
-    p->V_REVERSE = 0;
-}
-
 /*@
     logic integer BitSize{L}(ReversingSupervisionInformation* p) = REVERSINGSUPERVISIONINFORMATION_BITSIZE;
 
@@ -187,6 +172,23 @@ int ReversingSupervisionInformation_EncodeBit(const ReversingSupervisionInformat
 */
 int ReversingSupervisionInformation_DecodeBit(ReversingSupervisionInformation* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+ReversingSupervisionInformation*  ReversingSupervisionInformation_New(void);
+
+void   ReversingSupervisionInformation_Delete(ReversingSupervisionInformation*);
+
+static inline void ReversingSupervisionInformation_Init(ReversingSupervisionInformation* p)
+{
+    p->header.NID_PACKET = 139;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->D_REVERSE = 0;
+    p->V_REVERSE = 0;
+}
+
 static inline void ReversingSupervisionInformation_Print(const ReversingSupervisionInformation* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -220,5 +222,8 @@ int ReversingSupervisionInformation_EncodeInt(const ReversingSupervisionInformat
 
 int ReversingSupervisionInformation_DecodeInt(ReversingSupervisionInformation* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // REVERSINGSUPERVISIONINFORMATION_H_INCLUDED
+
 

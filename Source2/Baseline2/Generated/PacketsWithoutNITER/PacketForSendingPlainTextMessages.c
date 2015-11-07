@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "PacketForSendingPlainTextMessages.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define PacketForSendingPlainTextMessagesMemoryMax		8
-
-// end-of-freelist indicator
-#define PacketForSendingPlainTextMessagesMemoryNil		(-1)
-
-// allocation memory
-static PacketForSendingPlainTextMessages PacketForSendingPlainTextMessagesMemory[PacketForSendingPlainTextMessagesMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t PacketForSendingPlainTextMessagesMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t PacketForSendingPlainTextMessagesMemoryFreeList = PacketForSendingPlainTextMessagesMemoryNil;
-
-PacketForSendingPlainTextMessages* PacketForSendingPlainTextMessages_New(void)
-{
-    PacketForSendingPlainTextMessages* ptr;
-
-    if (PacketForSendingPlainTextMessagesMemoryFreeList != PacketForSendingPlainTextMessagesMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &PacketForSendingPlainTextMessagesMemory[PacketForSendingPlainTextMessagesMemoryFreeList];
-        PacketForSendingPlainTextMessagesMemoryFreeList = PacketForSendingPlainTextMessagesMemory[PacketForSendingPlainTextMessagesMemoryFreeList].header.NID_PACKET;
-    }
-    else if (PacketForSendingPlainTextMessagesMemoryTop < PacketForSendingPlainTextMessagesMemoryMax)
-    {
-        // allocate from top
-        ptr = &PacketForSendingPlainTextMessagesMemory[PacketForSendingPlainTextMessagesMemoryTop];
-        PacketForSendingPlainTextMessagesMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    PacketForSendingPlainTextMessages_Init(ptr);
-
-    return ptr;
-}
-
-
-void PacketForSendingPlainTextMessages_Delete(PacketForSendingPlainTextMessages* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = PacketForSendingPlainTextMessagesMemoryFreeList;
-    PacketForSendingPlainTextMessagesMemoryFreeList = ptr - PacketForSendingPlainTextMessagesMemory;
-}
 
 
 int PacketForSendingPlainTextMessages_UpperBitsNotSet(const PacketForSendingPlainTextMessages* p)
@@ -343,6 +294,8 @@ int PacketForSendingPlainTextMessages_DecodeBit(PacketForSendingPlainTextMessage
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int PacketForSendingPlainTextMessages_EncodeInt(const PacketForSendingPlainTextMessages* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 72;
@@ -411,4 +364,56 @@ int PacketForSendingPlainTextMessages_DecodeInt(PacketForSendingPlainTextMessage
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define PacketForSendingPlainTextMessagesMemoryMax		8
+
+// end-of-freelist indicator
+#define PacketForSendingPlainTextMessagesMemoryNil		(-1)
+
+// allocation memory
+static PacketForSendingPlainTextMessages PacketForSendingPlainTextMessagesMemory[PacketForSendingPlainTextMessagesMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t PacketForSendingPlainTextMessagesMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t PacketForSendingPlainTextMessagesMemoryFreeList = PacketForSendingPlainTextMessagesMemoryNil;
+
+PacketForSendingPlainTextMessages* PacketForSendingPlainTextMessages_New(void)
+{
+    PacketForSendingPlainTextMessages* ptr;
+
+    if (PacketForSendingPlainTextMessagesMemoryFreeList != PacketForSendingPlainTextMessagesMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &PacketForSendingPlainTextMessagesMemory[PacketForSendingPlainTextMessagesMemoryFreeList];
+        PacketForSendingPlainTextMessagesMemoryFreeList = PacketForSendingPlainTextMessagesMemory[PacketForSendingPlainTextMessagesMemoryFreeList].header.NID_PACKET;
+    }
+    else if (PacketForSendingPlainTextMessagesMemoryTop < PacketForSendingPlainTextMessagesMemoryMax)
+    {
+        // allocate from top
+        ptr = &PacketForSendingPlainTextMessagesMemory[PacketForSendingPlainTextMessagesMemoryTop];
+        PacketForSendingPlainTextMessagesMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    PacketForSendingPlainTextMessages_Init(ptr);
+
+    return ptr;
+}
+
+
+void PacketForSendingPlainTextMessages_Delete(PacketForSendingPlainTextMessages* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = PacketForSendingPlainTextMessagesMemoryFreeList;
+    PacketForSendingPlainTextMessagesMemoryFreeList = ptr - PacketForSendingPlainTextMessagesMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

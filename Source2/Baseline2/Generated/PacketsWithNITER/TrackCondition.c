@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "TrackCondition.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define TrackConditionMemoryMax		8
-
-// end-of-freelist indicator
-#define TrackConditionMemoryNil		(-1)
-
-// allocation memory
-static TrackCondition TrackConditionMemory[TrackConditionMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t TrackConditionMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t TrackConditionMemoryFreeList = TrackConditionMemoryNil;
-
-TrackCondition* TrackCondition_New(void)
-{
-    TrackCondition* ptr;
-
-    if (TrackConditionMemoryFreeList != TrackConditionMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &TrackConditionMemory[TrackConditionMemoryFreeList];
-        TrackConditionMemoryFreeList = TrackConditionMemory[TrackConditionMemoryFreeList].header.NID_PACKET;
-    }
-    else if (TrackConditionMemoryTop < TrackConditionMemoryMax)
-    {
-        // allocate from top
-        ptr = &TrackConditionMemory[TrackConditionMemoryTop];
-        TrackConditionMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    TrackCondition_Init(ptr);
-
-    return ptr;
-}
-
-
-void TrackCondition_Delete(TrackCondition* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = TrackConditionMemoryFreeList;
-    TrackConditionMemoryFreeList = ptr - TrackConditionMemory;
-}
 
 
 int TrackCondition_UpperBitsNotSet(const TrackCondition* p)
@@ -263,6 +214,8 @@ int TrackCondition_DecodeBit(TrackCondition* p, Bitstream* stream)
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int TrackCondition_EncodeInt(const TrackCondition* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 68;
@@ -327,4 +280,56 @@ int TrackCondition_DecodeInt(TrackCondition* p, const Metadata* data, const kcg_
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define TrackConditionMemoryMax		8
+
+// end-of-freelist indicator
+#define TrackConditionMemoryNil		(-1)
+
+// allocation memory
+static TrackCondition TrackConditionMemory[TrackConditionMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t TrackConditionMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t TrackConditionMemoryFreeList = TrackConditionMemoryNil;
+
+TrackCondition* TrackCondition_New(void)
+{
+    TrackCondition* ptr;
+
+    if (TrackConditionMemoryFreeList != TrackConditionMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &TrackConditionMemory[TrackConditionMemoryFreeList];
+        TrackConditionMemoryFreeList = TrackConditionMemory[TrackConditionMemoryFreeList].header.NID_PACKET;
+    }
+    else if (TrackConditionMemoryTop < TrackConditionMemoryMax)
+    {
+        // allocate from top
+        ptr = &TrackConditionMemory[TrackConditionMemoryTop];
+        TrackConditionMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    TrackCondition_Init(ptr);
+
+    return ptr;
+}
+
+
+void TrackCondition_Delete(TrackCondition* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = TrackConditionMemoryFreeList;
+    TrackConditionMemoryFreeList = ptr - TrackConditionMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

@@ -41,15 +41,6 @@ typedef struct ModeProfile_1 ModeProfile_1;
 
 #define MODEPROFILE_1_BITSIZE 54
 
-static inline void ModeProfile_1_Init(ModeProfile_1* p)
-{
-    p->D_MAMODE = 0;
-    p->M_MAMODE = 0;
-    p->V_MAMODE = 0;
-    p->L_MAMODE = 0;
-    p->L_ACKMAMODE = 0;
-}
-
 /*@
     logic integer BitSize{L}(ModeProfile_1* p) = MODEPROFILE_1_BITSIZE;
 
@@ -173,6 +164,17 @@ int ModeProfile_1_EncodeBit(const ModeProfile_1* p, Bitstream* stream);
 */
 int ModeProfile_1_DecodeBit(ModeProfile_1* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+static inline void ModeProfile_1_Init(ModeProfile_1* p)
+{
+    p->D_MAMODE = 0;
+    p->M_MAMODE = 0;
+    p->V_MAMODE = 0;
+    p->L_MAMODE = 0;
+    p->L_ACKMAMODE = 0;
+}
+
 static inline void ModeProfile_1_Print(const ModeProfile_1* p, FILE* stream)
 {
     fprintf(stream, "(%lu,%lu,%lu,%lu,%lu)",
@@ -199,6 +201,8 @@ static inline int ModeProfile_1_Equal(const ModeProfile_1* a, const ModeProfile_
 int ModeProfile_1_EncodeInt(const ModeProfile_1* p, kcg_int* startAddress, kcg_int* stream);
 
 int ModeProfile_1_DecodeInt(ModeProfile_1* p, kcg_int* startAddress, const kcg_int* stream);
+
+#endif // FRAMAC_IGNORE
 
 #endif // MODEPROFILE_1_H_INCLUDED
 

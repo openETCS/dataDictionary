@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "DefaultBaliseLoopOrRIUInformation.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define DefaultBaliseLoopOrRIUInformationMemoryMax		8
-
-// end-of-freelist indicator
-#define DefaultBaliseLoopOrRIUInformationMemoryNil		(-1)
-
-// allocation memory
-static DefaultBaliseLoopOrRIUInformation DefaultBaliseLoopOrRIUInformationMemory[DefaultBaliseLoopOrRIUInformationMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t DefaultBaliseLoopOrRIUInformationMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t DefaultBaliseLoopOrRIUInformationMemoryFreeList = DefaultBaliseLoopOrRIUInformationMemoryNil;
-
-DefaultBaliseLoopOrRIUInformation* DefaultBaliseLoopOrRIUInformation_New(void)
-{
-    DefaultBaliseLoopOrRIUInformation* ptr;
-
-    if (DefaultBaliseLoopOrRIUInformationMemoryFreeList != DefaultBaliseLoopOrRIUInformationMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &DefaultBaliseLoopOrRIUInformationMemory[DefaultBaliseLoopOrRIUInformationMemoryFreeList];
-        DefaultBaliseLoopOrRIUInformationMemoryFreeList = DefaultBaliseLoopOrRIUInformationMemory[DefaultBaliseLoopOrRIUInformationMemoryFreeList].header.NID_PACKET;
-    }
-    else if (DefaultBaliseLoopOrRIUInformationMemoryTop < DefaultBaliseLoopOrRIUInformationMemoryMax)
-    {
-        // allocate from top
-        ptr = &DefaultBaliseLoopOrRIUInformationMemory[DefaultBaliseLoopOrRIUInformationMemoryTop];
-        DefaultBaliseLoopOrRIUInformationMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    DefaultBaliseLoopOrRIUInformation_Init(ptr);
-
-    return ptr;
-}
-
-
-void DefaultBaliseLoopOrRIUInformation_Delete(DefaultBaliseLoopOrRIUInformation* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = DefaultBaliseLoopOrRIUInformationMemoryFreeList;
-    DefaultBaliseLoopOrRIUInformationMemoryFreeList = ptr - DefaultBaliseLoopOrRIUInformationMemory;
-}
 
 
 int DefaultBaliseLoopOrRIUInformation_UpperBitsNotSet(const DefaultBaliseLoopOrRIUInformation* p)
@@ -165,6 +116,8 @@ int DefaultBaliseLoopOrRIUInformation_DecodeBit(DefaultBaliseLoopOrRIUInformatio
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int DefaultBaliseLoopOrRIUInformation_EncodeInt(const DefaultBaliseLoopOrRIUInformation* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 254;
@@ -203,4 +156,56 @@ int DefaultBaliseLoopOrRIUInformation_DecodeInt(DefaultBaliseLoopOrRIUInformatio
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define DefaultBaliseLoopOrRIUInformationMemoryMax		8
+
+// end-of-freelist indicator
+#define DefaultBaliseLoopOrRIUInformationMemoryNil		(-1)
+
+// allocation memory
+static DefaultBaliseLoopOrRIUInformation DefaultBaliseLoopOrRIUInformationMemory[DefaultBaliseLoopOrRIUInformationMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t DefaultBaliseLoopOrRIUInformationMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t DefaultBaliseLoopOrRIUInformationMemoryFreeList = DefaultBaliseLoopOrRIUInformationMemoryNil;
+
+DefaultBaliseLoopOrRIUInformation* DefaultBaliseLoopOrRIUInformation_New(void)
+{
+    DefaultBaliseLoopOrRIUInformation* ptr;
+
+    if (DefaultBaliseLoopOrRIUInformationMemoryFreeList != DefaultBaliseLoopOrRIUInformationMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &DefaultBaliseLoopOrRIUInformationMemory[DefaultBaliseLoopOrRIUInformationMemoryFreeList];
+        DefaultBaliseLoopOrRIUInformationMemoryFreeList = DefaultBaliseLoopOrRIUInformationMemory[DefaultBaliseLoopOrRIUInformationMemoryFreeList].header.NID_PACKET;
+    }
+    else if (DefaultBaliseLoopOrRIUInformationMemoryTop < DefaultBaliseLoopOrRIUInformationMemoryMax)
+    {
+        // allocate from top
+        ptr = &DefaultBaliseLoopOrRIUInformationMemory[DefaultBaliseLoopOrRIUInformationMemoryTop];
+        DefaultBaliseLoopOrRIUInformationMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    DefaultBaliseLoopOrRIUInformation_Init(ptr);
+
+    return ptr;
+}
+
+
+void DefaultBaliseLoopOrRIUInformation_Delete(DefaultBaliseLoopOrRIUInformation* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = DefaultBaliseLoopOrRIUInformationMemoryFreeList;
+    DefaultBaliseLoopOrRIUInformationMemoryFreeList = ptr - DefaultBaliseLoopOrRIUInformationMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

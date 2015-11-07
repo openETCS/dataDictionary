@@ -44,19 +44,6 @@ typedef struct TrainRunningNumberFromRBC TrainRunningNumberFromRBC;
 
 #define TRAINRUNNINGNUMBERFROMRBC_BITSIZE 47
 
-TrainRunningNumberFromRBC*  TrainRunningNumberFromRBC_New(void);
-
-void   TrainRunningNumberFromRBC_Delete(TrainRunningNumberFromRBC*);
-
-static inline void TrainRunningNumberFromRBC_Init(TrainRunningNumberFromRBC* p)
-{
-    p->header.NID_PACKET = 140;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->NID_OPERATIONAL = 0;
-}
-
 /*@
     logic integer BitSize{L}(TrainRunningNumberFromRBC* p) = TRAINRUNNINGNUMBERFROMRBC_BITSIZE;
 
@@ -174,6 +161,21 @@ int TrainRunningNumberFromRBC_EncodeBit(const TrainRunningNumberFromRBC* p, Bits
 */
 int TrainRunningNumberFromRBC_DecodeBit(TrainRunningNumberFromRBC* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+TrainRunningNumberFromRBC*  TrainRunningNumberFromRBC_New(void);
+
+void   TrainRunningNumberFromRBC_Delete(TrainRunningNumberFromRBC*);
+
+static inline void TrainRunningNumberFromRBC_Init(TrainRunningNumberFromRBC* p)
+{
+    p->header.NID_PACKET = 140;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->NID_OPERATIONAL = 0;
+}
+
 static inline void TrainRunningNumberFromRBC_Print(const TrainRunningNumberFromRBC* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -203,5 +205,8 @@ int TrainRunningNumberFromRBC_EncodeInt(const TrainRunningNumberFromRBC* p, Meta
 
 int TrainRunningNumberFromRBC_DecodeInt(TrainRunningNumberFromRBC* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // TRAINRUNNINGNUMBERFROMRBC_H_INCLUDED
+
 

@@ -47,25 +47,6 @@ typedef struct ListOfBalisesInSRAuthority ListOfBalisesInSRAuthority;
 
 #define LISTOFBALISESINSRAUTHORITY_BITSIZE 20
 
-ListOfBalisesInSRAuthority*  ListOfBalisesInSRAuthority_New(void);
-
-void   ListOfBalisesInSRAuthority_Delete(ListOfBalisesInSRAuthority*);
-
-static inline void ListOfBalisesInSRAuthority_Init(ListOfBalisesInSRAuthority* p)
-{
-    p->header.NID_PACKET = 63;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->N_ITER_1 = 0;
-
-    for (uint32_t i = 0; i < 31; ++i)
-    {
-        ListOfBalisesInSRAuthority_1_Init(&(p->sub_1[i]));
-    }
-
-}
-
 /*@
     logic integer BitSize{L}(ListOfBalisesInSRAuthority* p) = LISTOFBALISESINSRAUTHORITY_BITSIZE;
 
@@ -179,6 +160,27 @@ int ListOfBalisesInSRAuthority_EncodeBit(const ListOfBalisesInSRAuthority* p, Bi
 */
 int ListOfBalisesInSRAuthority_DecodeBit(ListOfBalisesInSRAuthority* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+ListOfBalisesInSRAuthority*  ListOfBalisesInSRAuthority_New(void);
+
+void   ListOfBalisesInSRAuthority_Delete(ListOfBalisesInSRAuthority*);
+
+static inline void ListOfBalisesInSRAuthority_Init(ListOfBalisesInSRAuthority* p)
+{
+    p->header.NID_PACKET = 63;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->N_ITER_1 = 0;
+
+    for (uint32_t i = 0; i < 31; ++i)
+    {
+        ListOfBalisesInSRAuthority_1_Init(&(p->sub_1[i]));
+    }
+
+}
+
 static inline void ListOfBalisesInSRAuthority_Print(const ListOfBalisesInSRAuthority* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -226,5 +228,8 @@ int ListOfBalisesInSRAuthority_EncodeInt(const ListOfBalisesInSRAuthority* p, Me
 
 int ListOfBalisesInSRAuthority_DecodeInt(ListOfBalisesInSRAuthority* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // LISTOFBALISESINSRAUTHORITY_H_INCLUDED
+
 

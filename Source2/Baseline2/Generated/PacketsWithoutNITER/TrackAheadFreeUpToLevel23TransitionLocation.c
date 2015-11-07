@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "TrackAheadFreeUpToLevel23TransitionLocation.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define TrackAheadFreeUpToLevel23TransitionLocationMemoryMax		8
-
-// end-of-freelist indicator
-#define TrackAheadFreeUpToLevel23TransitionLocationMemoryNil		(-1)
-
-// allocation memory
-static TrackAheadFreeUpToLevel23TransitionLocation TrackAheadFreeUpToLevel23TransitionLocationMemory[TrackAheadFreeUpToLevel23TransitionLocationMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t TrackAheadFreeUpToLevel23TransitionLocationMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t TrackAheadFreeUpToLevel23TransitionLocationMemoryFreeList = TrackAheadFreeUpToLevel23TransitionLocationMemoryNil;
-
-TrackAheadFreeUpToLevel23TransitionLocation* TrackAheadFreeUpToLevel23TransitionLocation_New(void)
-{
-    TrackAheadFreeUpToLevel23TransitionLocation* ptr;
-
-    if (TrackAheadFreeUpToLevel23TransitionLocationMemoryFreeList != TrackAheadFreeUpToLevel23TransitionLocationMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &TrackAheadFreeUpToLevel23TransitionLocationMemory[TrackAheadFreeUpToLevel23TransitionLocationMemoryFreeList];
-        TrackAheadFreeUpToLevel23TransitionLocationMemoryFreeList = TrackAheadFreeUpToLevel23TransitionLocationMemory[TrackAheadFreeUpToLevel23TransitionLocationMemoryFreeList].header.NID_PACKET;
-    }
-    else if (TrackAheadFreeUpToLevel23TransitionLocationMemoryTop < TrackAheadFreeUpToLevel23TransitionLocationMemoryMax)
-    {
-        // allocate from top
-        ptr = &TrackAheadFreeUpToLevel23TransitionLocationMemory[TrackAheadFreeUpToLevel23TransitionLocationMemoryTop];
-        TrackAheadFreeUpToLevel23TransitionLocationMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    TrackAheadFreeUpToLevel23TransitionLocation_Init(ptr);
-
-    return ptr;
-}
-
-
-void TrackAheadFreeUpToLevel23TransitionLocation_Delete(TrackAheadFreeUpToLevel23TransitionLocation* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = TrackAheadFreeUpToLevel23TransitionLocationMemoryFreeList;
-    TrackAheadFreeUpToLevel23TransitionLocationMemoryFreeList = ptr - TrackAheadFreeUpToLevel23TransitionLocationMemory;
-}
 
 
 int TrackAheadFreeUpToLevel23TransitionLocation_UpperBitsNotSet(const TrackAheadFreeUpToLevel23TransitionLocation* p)
@@ -205,6 +156,8 @@ int TrackAheadFreeUpToLevel23TransitionLocation_DecodeBit(TrackAheadFreeUpToLeve
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int TrackAheadFreeUpToLevel23TransitionLocation_EncodeInt(const TrackAheadFreeUpToLevel23TransitionLocation* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 90;
@@ -249,4 +202,56 @@ int TrackAheadFreeUpToLevel23TransitionLocation_DecodeInt(TrackAheadFreeUpToLeve
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define TrackAheadFreeUpToLevel23TransitionLocationMemoryMax		8
+
+// end-of-freelist indicator
+#define TrackAheadFreeUpToLevel23TransitionLocationMemoryNil		(-1)
+
+// allocation memory
+static TrackAheadFreeUpToLevel23TransitionLocation TrackAheadFreeUpToLevel23TransitionLocationMemory[TrackAheadFreeUpToLevel23TransitionLocationMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t TrackAheadFreeUpToLevel23TransitionLocationMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t TrackAheadFreeUpToLevel23TransitionLocationMemoryFreeList = TrackAheadFreeUpToLevel23TransitionLocationMemoryNil;
+
+TrackAheadFreeUpToLevel23TransitionLocation* TrackAheadFreeUpToLevel23TransitionLocation_New(void)
+{
+    TrackAheadFreeUpToLevel23TransitionLocation* ptr;
+
+    if (TrackAheadFreeUpToLevel23TransitionLocationMemoryFreeList != TrackAheadFreeUpToLevel23TransitionLocationMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &TrackAheadFreeUpToLevel23TransitionLocationMemory[TrackAheadFreeUpToLevel23TransitionLocationMemoryFreeList];
+        TrackAheadFreeUpToLevel23TransitionLocationMemoryFreeList = TrackAheadFreeUpToLevel23TransitionLocationMemory[TrackAheadFreeUpToLevel23TransitionLocationMemoryFreeList].header.NID_PACKET;
+    }
+    else if (TrackAheadFreeUpToLevel23TransitionLocationMemoryTop < TrackAheadFreeUpToLevel23TransitionLocationMemoryMax)
+    {
+        // allocate from top
+        ptr = &TrackAheadFreeUpToLevel23TransitionLocationMemory[TrackAheadFreeUpToLevel23TransitionLocationMemoryTop];
+        TrackAheadFreeUpToLevel23TransitionLocationMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    TrackAheadFreeUpToLevel23TransitionLocation_Init(ptr);
+
+    return ptr;
+}
+
+
+void TrackAheadFreeUpToLevel23TransitionLocation_Delete(TrackAheadFreeUpToLevel23TransitionLocation* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = TrackAheadFreeUpToLevel23TransitionLocationMemoryFreeList;
+    TrackAheadFreeUpToLevel23TransitionLocationMemoryFreeList = ptr - TrackAheadFreeUpToLevel23TransitionLocationMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

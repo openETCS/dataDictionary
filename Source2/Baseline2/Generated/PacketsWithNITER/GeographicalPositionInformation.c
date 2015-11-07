@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "GeographicalPositionInformation.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define GeographicalPositionInformationMemoryMax		8
-
-// end-of-freelist indicator
-#define GeographicalPositionInformationMemoryNil		(-1)
-
-// allocation memory
-static GeographicalPositionInformation GeographicalPositionInformationMemory[GeographicalPositionInformationMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t GeographicalPositionInformationMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t GeographicalPositionInformationMemoryFreeList = GeographicalPositionInformationMemoryNil;
-
-GeographicalPositionInformation* GeographicalPositionInformation_New(void)
-{
-    GeographicalPositionInformation* ptr;
-
-    if (GeographicalPositionInformationMemoryFreeList != GeographicalPositionInformationMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &GeographicalPositionInformationMemory[GeographicalPositionInformationMemoryFreeList];
-        GeographicalPositionInformationMemoryFreeList = GeographicalPositionInformationMemory[GeographicalPositionInformationMemoryFreeList].header.NID_PACKET;
-    }
-    else if (GeographicalPositionInformationMemoryTop < GeographicalPositionInformationMemoryMax)
-    {
-        // allocate from top
-        ptr = &GeographicalPositionInformationMemory[GeographicalPositionInformationMemoryTop];
-        GeographicalPositionInformationMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    GeographicalPositionInformation_Init(ptr);
-
-    return ptr;
-}
-
-
-void GeographicalPositionInformation_Delete(GeographicalPositionInformation* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = GeographicalPositionInformationMemoryFreeList;
-    GeographicalPositionInformationMemoryFreeList = ptr - GeographicalPositionInformationMemory;
-}
 
 
 int GeographicalPositionInformation_UpperBitsNotSet(const GeographicalPositionInformation* p)
@@ -258,6 +209,8 @@ int GeographicalPositionInformation_DecodeBit(GeographicalPositionInformation* p
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int GeographicalPositionInformation_EncodeInt(const GeographicalPositionInformation* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 79;
@@ -324,4 +277,56 @@ int GeographicalPositionInformation_DecodeInt(GeographicalPositionInformation* p
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define GeographicalPositionInformationMemoryMax		8
+
+// end-of-freelist indicator
+#define GeographicalPositionInformationMemoryNil		(-1)
+
+// allocation memory
+static GeographicalPositionInformation GeographicalPositionInformationMemory[GeographicalPositionInformationMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t GeographicalPositionInformationMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t GeographicalPositionInformationMemoryFreeList = GeographicalPositionInformationMemoryNil;
+
+GeographicalPositionInformation* GeographicalPositionInformation_New(void)
+{
+    GeographicalPositionInformation* ptr;
+
+    if (GeographicalPositionInformationMemoryFreeList != GeographicalPositionInformationMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &GeographicalPositionInformationMemory[GeographicalPositionInformationMemoryFreeList];
+        GeographicalPositionInformationMemoryFreeList = GeographicalPositionInformationMemory[GeographicalPositionInformationMemoryFreeList].header.NID_PACKET;
+    }
+    else if (GeographicalPositionInformationMemoryTop < GeographicalPositionInformationMemoryMax)
+    {
+        // allocate from top
+        ptr = &GeographicalPositionInformationMemory[GeographicalPositionInformationMemoryTop];
+        GeographicalPositionInformationMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    GeographicalPositionInformation_Init(ptr);
+
+    return ptr;
+}
+
+
+void GeographicalPositionInformation_Delete(GeographicalPositionInformation* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = GeographicalPositionInformationMemoryFreeList;
+    GeographicalPositionInformationMemoryFreeList = ptr - GeographicalPositionInformationMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

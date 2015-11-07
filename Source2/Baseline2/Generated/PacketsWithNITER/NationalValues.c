@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "NationalValues.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define NationalValuesMemoryMax		8
-
-// end-of-freelist indicator
-#define NationalValuesMemoryNil		(-1)
-
-// allocation memory
-static NationalValues NationalValuesMemory[NationalValuesMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t NationalValuesMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t NationalValuesMemoryFreeList = NationalValuesMemoryNil;
-
-NationalValues* NationalValues_New(void)
-{
-    NationalValues* ptr;
-
-    if (NationalValuesMemoryFreeList != NationalValuesMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &NationalValuesMemory[NationalValuesMemoryFreeList];
-        NationalValuesMemoryFreeList = NationalValuesMemory[NationalValuesMemoryFreeList].header.NID_PACKET;
-    }
-    else if (NationalValuesMemoryTop < NationalValuesMemoryMax)
-    {
-        // allocate from top
-        ptr = &NationalValuesMemory[NationalValuesMemoryTop];
-        NationalValuesMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    NationalValues_Init(ptr);
-
-    return ptr;
-}
-
-
-void NationalValues_Delete(NationalValues* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = NationalValuesMemoryFreeList;
-    NationalValuesMemoryFreeList = ptr - NationalValuesMemory;
-}
 
 
 int NationalValues_UpperBitsNotSet(const NationalValues* p)
@@ -325,6 +276,8 @@ int NationalValues_DecodeBit(NationalValues* p, Bitstream* stream)
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int NationalValues_EncodeInt(const NationalValues* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 3;
@@ -417,4 +370,56 @@ int NationalValues_DecodeInt(NationalValues* p, const Metadata* data, const kcg_
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define NationalValuesMemoryMax		8
+
+// end-of-freelist indicator
+#define NationalValuesMemoryNil		(-1)
+
+// allocation memory
+static NationalValues NationalValuesMemory[NationalValuesMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t NationalValuesMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t NationalValuesMemoryFreeList = NationalValuesMemoryNil;
+
+NationalValues* NationalValues_New(void)
+{
+    NationalValues* ptr;
+
+    if (NationalValuesMemoryFreeList != NationalValuesMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &NationalValuesMemory[NationalValuesMemoryFreeList];
+        NationalValuesMemoryFreeList = NationalValuesMemory[NationalValuesMemoryFreeList].header.NID_PACKET;
+    }
+    else if (NationalValuesMemoryTop < NationalValuesMemoryMax)
+    {
+        // allocate from top
+        ptr = &NationalValuesMemory[NationalValuesMemoryTop];
+        NationalValuesMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    NationalValues_Init(ptr);
+
+    return ptr;
+}
+
+
+void NationalValues_Delete(NationalValues* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = NationalValuesMemoryFreeList;
+    NationalValuesMemoryFreeList = ptr - NationalValuesMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

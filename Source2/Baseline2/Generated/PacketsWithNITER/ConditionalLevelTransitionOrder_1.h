@@ -38,12 +38,6 @@ typedef struct ConditionalLevelTransitionOrder_1 ConditionalLevelTransitionOrder
 
 #define CONDITIONALLEVELTRANSITIONORDER_1_BITSIZE 3
 
-static inline void ConditionalLevelTransitionOrder_1_Init(ConditionalLevelTransitionOrder_1* p)
-{
-    p->M_LEVELTR = 0;
-    p->NID_STM = 0;
-}
-
 /*@
     logic integer BitSize{L}(ConditionalLevelTransitionOrder_1* p) = CONDITIONALLEVELTRANSITIONORDER_1_BITSIZE;
 
@@ -151,6 +145,14 @@ int ConditionalLevelTransitionOrder_1_EncodeBit(const ConditionalLevelTransition
 */
 int ConditionalLevelTransitionOrder_1_DecodeBit(ConditionalLevelTransitionOrder_1* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+static inline void ConditionalLevelTransitionOrder_1_Init(ConditionalLevelTransitionOrder_1* p)
+{
+    p->M_LEVELTR = 0;
+    p->NID_STM = 0;
+}
+
 static inline void ConditionalLevelTransitionOrder_1_Print(const ConditionalLevelTransitionOrder_1* p, FILE* stream)
 {
     fprintf(stream, "(%lu,%lu)",
@@ -175,6 +177,8 @@ static inline int ConditionalLevelTransitionOrder_1_Equal(const ConditionalLevel
 int ConditionalLevelTransitionOrder_1_EncodeInt(const ConditionalLevelTransitionOrder_1* p, kcg_int* startAddress, kcg_int* stream);
 
 int ConditionalLevelTransitionOrder_1_DecodeInt(ConditionalLevelTransitionOrder_1* p, kcg_int* startAddress, const kcg_int* stream);
+
+#endif // FRAMAC_IGNORE
 
 #endif // CONDITIONALLEVELTRANSITIONORDER_1_H_INCLUDED
 

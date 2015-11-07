@@ -20,58 +20,9 @@ which may cause harm to people, physical accidents or financial loss.
 THEREFORE, NO LIABILITY WILL BE GIVEN FOR SUCH AND ANY OTHER KIND OF USE.       
 ============================================================================= */
 
+
 #include "InternationalStaticSpeedProfile.h"
 #include "Bit64.h"
-
-// number of cells in allocation memory
-#define InternationalStaticSpeedProfileMemoryMax		8
-
-// end-of-freelist indicator
-#define InternationalStaticSpeedProfileMemoryNil		(-1)
-
-// allocation memory
-static InternationalStaticSpeedProfile InternationalStaticSpeedProfileMemory[InternationalStaticSpeedProfileMemoryMax];
-
-// lowest unused cell of allocation memory
-static uint64_t InternationalStaticSpeedProfileMemoryTop = 0;
-
-// index of first element of freelist
-static uint64_t InternationalStaticSpeedProfileMemoryFreeList = InternationalStaticSpeedProfileMemoryNil;
-
-InternationalStaticSpeedProfile* InternationalStaticSpeedProfile_New(void)
-{
-    InternationalStaticSpeedProfile* ptr;
-
-    if (InternationalStaticSpeedProfileMemoryFreeList != InternationalStaticSpeedProfileMemoryNil)
-    {
-        // allocate from freelist
-        ptr = &InternationalStaticSpeedProfileMemory[InternationalStaticSpeedProfileMemoryFreeList];
-        InternationalStaticSpeedProfileMemoryFreeList = InternationalStaticSpeedProfileMemory[InternationalStaticSpeedProfileMemoryFreeList].header.NID_PACKET;
-    }
-    else if (InternationalStaticSpeedProfileMemoryTop < InternationalStaticSpeedProfileMemoryMax)
-    {
-        // allocate from top
-        ptr = &InternationalStaticSpeedProfileMemory[InternationalStaticSpeedProfileMemoryTop];
-        InternationalStaticSpeedProfileMemoryTop += 1;
-    }
-    else
-    {
-        // memory exhausted
-        return 0;
-    }
-
-    InternationalStaticSpeedProfile_Init(ptr);
-
-    return ptr;
-}
-
-
-void InternationalStaticSpeedProfile_Delete(InternationalStaticSpeedProfile* ptr)
-{
-    // prepend to freelist
-    ptr->header.NID_PACKET = InternationalStaticSpeedProfileMemoryFreeList;
-    InternationalStaticSpeedProfileMemoryFreeList = ptr - InternationalStaticSpeedProfileMemory;
-}
 
 
 int InternationalStaticSpeedProfile_UpperBitsNotSet(const InternationalStaticSpeedProfile* p)
@@ -269,6 +220,8 @@ int InternationalStaticSpeedProfile_DecodeBit(InternationalStaticSpeedProfile* p
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int InternationalStaticSpeedProfile_EncodeInt(const InternationalStaticSpeedProfile* p, Metadata* data, kcg_int* stream)
 {
     data->nid_packet = 27;
@@ -283,7 +236,7 @@ int InternationalStaticSpeedProfile_EncodeInt(const InternationalStaticSpeedProf
     stream[startAddress++] = p->L_PACKET;
     stream[startAddress++] = p->Q_SCALE;
     stream[startAddress++] = p->N_ITER_2 + 1;
-    
+
     stream[startAddress++] = p->D_STATIC;
     stream[startAddress++] = p->V_STATIC;
     stream[startAddress++] = p->Q_FRONT;
@@ -343,4 +296,56 @@ int InternationalStaticSpeedProfile_DecodeInt(InternationalStaticSpeedProfile* p
 
     return 1;
 }
+
+// number of cells in allocation memory
+#define InternationalStaticSpeedProfileMemoryMax		8
+
+// end-of-freelist indicator
+#define InternationalStaticSpeedProfileMemoryNil		(-1)
+
+// allocation memory
+static InternationalStaticSpeedProfile InternationalStaticSpeedProfileMemory[InternationalStaticSpeedProfileMemoryMax];
+
+// lowest unused cell of allocation memory
+static uint64_t InternationalStaticSpeedProfileMemoryTop = 0;
+
+// index of first element of freelist
+static uint64_t InternationalStaticSpeedProfileMemoryFreeList = InternationalStaticSpeedProfileMemoryNil;
+
+InternationalStaticSpeedProfile* InternationalStaticSpeedProfile_New(void)
+{
+    InternationalStaticSpeedProfile* ptr;
+
+    if (InternationalStaticSpeedProfileMemoryFreeList != InternationalStaticSpeedProfileMemoryNil)
+    {
+        // allocate from freelist
+        ptr = &InternationalStaticSpeedProfileMemory[InternationalStaticSpeedProfileMemoryFreeList];
+        InternationalStaticSpeedProfileMemoryFreeList = InternationalStaticSpeedProfileMemory[InternationalStaticSpeedProfileMemoryFreeList].header.NID_PACKET;
+    }
+    else if (InternationalStaticSpeedProfileMemoryTop < InternationalStaticSpeedProfileMemoryMax)
+    {
+        // allocate from top
+        ptr = &InternationalStaticSpeedProfileMemory[InternationalStaticSpeedProfileMemoryTop];
+        InternationalStaticSpeedProfileMemoryTop += 1;
+    }
+    else
+    {
+        // memory exhausted
+        return 0;
+    }
+
+    InternationalStaticSpeedProfile_Init(ptr);
+
+    return ptr;
+}
+
+
+void InternationalStaticSpeedProfile_Delete(InternationalStaticSpeedProfile* ptr)
+{
+    // prepend to freelist
+    ptr->header.NID_PACKET = InternationalStaticSpeedProfileMemoryFreeList;
+    InternationalStaticSpeedProfileMemoryFreeList = ptr - InternationalStaticSpeedProfileMemory;
+}
+
+#endif // FRAMAC_IGNORE
 

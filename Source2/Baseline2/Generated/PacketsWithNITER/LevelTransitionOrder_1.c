@@ -120,6 +120,8 @@ int LevelTransitionOrder_1_DecodeBit(LevelTransitionOrder_1* p, Bitstream* strea
     }
 }
 
+#ifndef FRAMAC_IGNORE
+
 int LevelTransitionOrder_1_EncodeInt(const LevelTransitionOrder_1* p, kcg_int* startAddress, kcg_int* stream)
 {
     stream[(*startAddress)++] = p->M_LEVELTR;
@@ -137,4 +139,6 @@ int LevelTransitionOrder_1_DecodeInt(LevelTransitionOrder_1* p, kcg_int* startAd
 
     return 1;
 }
+
+#endif // FRAMAC_IGNORE
 

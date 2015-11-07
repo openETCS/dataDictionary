@@ -47,21 +47,6 @@ typedef struct ReversingAreaInformation ReversingAreaInformation;
 
 #define REVERSINGAREAINFORMATION_BITSIZE 47
 
-ReversingAreaInformation*  ReversingAreaInformation_New(void);
-
-void   ReversingAreaInformation_Delete(ReversingAreaInformation*);
-
-static inline void ReversingAreaInformation_Init(ReversingAreaInformation* p)
-{
-    p->header.NID_PACKET = 138;
-    p->header.list = TRACKTOTRAIN;
-    p->Q_DIR = 0;
-    p->L_PACKET = 0;
-    p->Q_SCALE = 0;
-    p->D_STARTREVERSE = 0;
-    p->L_REVERSEAREA = 0;
-}
-
 /*@
     logic integer BitSize{L}(ReversingAreaInformation* p) = REVERSINGAREAINFORMATION_BITSIZE;
 
@@ -187,6 +172,23 @@ int ReversingAreaInformation_EncodeBit(const ReversingAreaInformation* p, Bitstr
 */
 int ReversingAreaInformation_DecodeBit(ReversingAreaInformation* p, Bitstream* stream);
 
+#ifndef FRAMAC_IGNORE
+
+ReversingAreaInformation*  ReversingAreaInformation_New(void);
+
+void   ReversingAreaInformation_Delete(ReversingAreaInformation*);
+
+static inline void ReversingAreaInformation_Init(ReversingAreaInformation* p)
+{
+    p->header.NID_PACKET = 138;
+    p->header.list = TRACKTOTRAIN;
+    p->Q_DIR = 0;
+    p->L_PACKET = 0;
+    p->Q_SCALE = 0;
+    p->D_STARTREVERSE = 0;
+    p->L_REVERSEAREA = 0;
+}
+
 static inline void ReversingAreaInformation_Print(const ReversingAreaInformation* p, FILE* stream)
 {
     PacketHeader_Print(&p->header, stream);
@@ -220,5 +222,8 @@ int ReversingAreaInformation_EncodeInt(const ReversingAreaInformation* p, Metada
 
 int ReversingAreaInformation_DecodeInt(ReversingAreaInformation* p, const Metadata* data, const kcg_int* stream);
 
+#endif // FRAMAC_IGNORE
+
 #endif // REVERSINGAREAINFORMATION_H_INCLUDED
+
 
