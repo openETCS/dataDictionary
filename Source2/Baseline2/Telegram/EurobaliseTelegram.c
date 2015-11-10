@@ -3,8 +3,6 @@
 #include "PacketFactory.h"
 #include "Packet_DecodeBit.h"
 #include "Packet_EncodeBit.h"
-#include "Packet_EncodeInt.h"
-#include "Packet_DecodeInt.h"
 #include "Packet_Length.h"
 
 void EurobaliseTelegram_Print(const EurobaliseTelegram* t, FILE* stream)
@@ -146,24 +144,7 @@ int EurobaliseTelegram_EncodeBit(const EurobaliseTelegram* t, Bitstream* stream)
 //
 int EurobaliseTelegram_EncodeInt(const EurobaliseTelegram* t, CompressedPackets* packetStruct)
 {
-    kcg_int startAddress = 0;
-
-    for (uint32_t i = 0; i < EurobaliseTelegram_Size(t); ++i)
-    {
-        packetStruct->PacketHeaders[i].startAddress = startAddress;
-        if (Packet_EncodeInt(EurobaliseTelegram_Get(t, i), &(packetStruct->PacketHeaders[i]), packetStruct->PacketData) != 1)
-	{
-             return 0;
-        }
-        startAddress = packetStruct->PacketHeaders[i].endAddress + 1;
-    }
-
-    if (packetStruct->PacketHeaders[EurobaliseTelegram_Size(t)-1].nid_packet != 255)
-    {
-        return 0;
-    }
-
-    return 1;
+    return PacketSequence_EncodeInt(&(t->packets), packetStruct);
 }
 
 // Note: this function assumes that the telegram header, that is,
@@ -171,62 +152,6 @@ int EurobaliseTelegram_EncodeInt(const EurobaliseTelegram* t, CompressedPackets*
 //
 int EurobaliseTelegram_DecodeInt(EurobaliseTelegram* t, const CompressedPackets* packetStruct)
 {
-    for (uint32_t i = 0; i < 50; ++i)
-    {
-        if (packetStruct->PacketHeaders[i].valid == 1)
-        {
-	    PacketHeader packet_header = {0, 0};
-            PacketHeader* ptr = 0;
-	    
-	    packet_header.NID_PACKET = packetStruct->PacketHeaders[i].nid_packet;
-
-	    if (packet_header.NID_PACKET == 255)
-	    {
-                ptr = PacketFactory_BothWays(packet_header);
-		assert(ptr);
-
-		EurobaliseTelegram_Add(t, ptr);
-		break;
-	    }
-
-	    if (t->header.Q_UPDOWN == 1)
-	    {
-                ptr = PacketFactory_TrackToTrain(packet_header);
-
-		if (ptr)
-		{
-                    EurobaliseTelegram_Add(t, ptr);
-		}
-		else
-		{
-		    return 0;
-		}
-	    }
-	    else
-	    {
-                assert(t->header.Q_UPDOWN == 0);
-		ptr = PacketFactory_TrainToTrack(packet_header);
-
-		if (ptr)
-		{
-                    EurobaliseTelegram_Add(t, ptr);
-		}
-		else
-		{
-		    return 0;
-		}
-	    }
-
-	    if (ptr)
-	    {
-                Packet_DecodeInt(ptr, &(packetStruct->PacketHeaders[i]), packetStruct->PacketData);
-	    }
-	    else
-	    {
-                return 0;
-	    }
-        }
-    }
-    return 1;
+    return PacketSequence_DecodeInt(&(t->packets), t->header.Q_UPDOWN, packetStruct);;
 }
 

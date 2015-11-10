@@ -3,6 +3,7 @@
 #define PACKETSEQUENCE_H_INCLUDED
 
 #include "PacketHeader.h"
+#include "CompressedPackets.h"
 #include <assert.h>
 
 struct PacketSequence
@@ -41,6 +42,10 @@ void PacketSequence_Print(const PacketSequence* p, FILE* stream);
 void PacketSequence_Clear(PacketSequence* p);
 
 int PacketSequence_Equal(const PacketSequence* a, const PacketSequence* b);
+
+int PacketSequence_EncodeInt(const PacketSequence* p, CompressedPackets* packetStruct);
+
+int PacketSequence_DecodeInt(PacketSequence* p, uint64_t q_updown, const CompressedPackets* packetStruct);
 
 #endif /* PACKETSEQUENCE_H_INCLUDED */
 
