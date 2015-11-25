@@ -34,3 +34,33 @@ clean::
 
 format: FORCE
 	@$(ASTYLE) *.c *.cpp *.h
+
+
+report: AdhesionFactor.report\
+	DangerForShuntingInformation.report\
+	DataUsedByApplicationsOutsideTheERTMSETCSSystem.report\
+	DefaultBaliseLoopOrRIUInformation.report\
+	DefaultGradientForTemporarySpeedRestriction.report\
+	EOLMPacket.report\
+	EndOfInformation.report\
+	ErrorReporting.report\
+	InfillLocationReference.report\
+	Level23TransitionInformation.report\
+	MovementAuthorityRequestParameters.report\
+	PacketForSendingFixedTextMessages.report\
+	PacketForSendingPlainTextMessages.report\
+	PositionReport.report\
+	PositionReportBasedOnTwoBaliseGroups.report\
+	RBCTransitionOrder.report\
+	RadioInfillAreaInformation.report\
+	RadioNetworkRegistration.report\
+	RepositioningInformation.report\
+	ReversingAreaInformation.report\
+	ReversingSupervisionInformation.report\
+	SessionManagement.report\
+	StopIfInStaffResponsible.report\
+	TemporarySpeedRestriction.report\
+	TemporarySpeedRestrictionRevocation.report\
+	TrackAheadFreeUpToLevel23TransitionLocation.report\
+	TrackConditionChangeOfTractionPower.report\
+	TrainRunningNumberFromRBC.report
