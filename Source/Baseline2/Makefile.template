@@ -13,7 +13,7 @@ VPATH = $(COQ)
 
 SHARED_FLAGS=-Wall -pedantic -O3
 #SHARED_FLAGS+=-Wconversion
-CFLAGS= -x c++ -std=c++11 $(SHARED_FLAGS)
+CFLAGS= -std=c99 $(SHARED_FLAGS)
 CXXFLAGS=-std=c++11 $(SHARED_FLAGS)
 
 

@@ -1,0 +1,10 @@
+
+#ifndef TEMPORARYSPEEDRESTRICTION_TESTS_INCLUDED
+#define TEMPORARYSPEEDRESTRICTION_TESTS_INCLUDED
+
+#include "TemporarySpeedRestriction.h"
+
+void TemporarySpeedRestriction_Tests(void);
+
+#endif // TEMPORARYSPEEDRESTRICTION_TESTS_INCLUDED
+
