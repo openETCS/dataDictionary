@@ -91,7 +91,7 @@ function extract_raw_data_Wp()
     local valid_alt_ergo=0
     local valid_cvc4=0
     local valid_z3=0
-    local valid_coq=0
+    #local valid_coq=0
     local invalid=0
     local valid=0
 
@@ -101,7 +101,7 @@ function extract_raw_data_Wp()
 
     wp_pattern='^\[wp\]+[[:blank:]]+'
     valid_pattern='[[:print:]]*[[:blank:]]+Valid'
-    coq_pattern=${wp_pattern}'\[Coq\]'${valid_pattern}
+    #coq_pattern=${wp_pattern}'\[Coq\]'${valid_pattern}
     cvc4_pattern=${wp_pattern}'\[cvc4\]'${valid_pattern}
     z3_pattern=${wp_pattern}'\[z3\]'${valid_pattern}
     qed_pattern=${wp_pattern}'\[Qed\]'${valid_pattern}
@@ -121,14 +121,14 @@ function extract_raw_data_Wp()
 
     let "valid_qed=$valid_qed + `grep -E $qed_pattern $tempFile |countData`"
     let "valid_alt_ergo=$valid_alt_ergo + `grep -E $alt_ergo_pattern $tempFile |countData`"
-    let "valid_coq=$valid_coq + `grep -E $coq_pattern $tempFile |countData`"
+    #let "valid_coq=$valid_coq + `grep -E $coq_pattern $tempFile |countData`"
     let "valid_cvc4=$valid_cvc4 + `grep -E $cvc4_pattern $tempFile |countData`"
     let "valid_z3=$valid_z3 + `grep -E $z3_pattern $tempFile |countData`"
 
     #cat $tempFile > fillFull.debug
     #calculate all valid goals
-    let "valid=$valid_qed + $valid_alt_ergo + $valid_cvc4 + $valid_z3 + $valid_coq"
-    printf "%s;%d;%d;%d;%d;%d;%d;%d;\n" $alg $goalCount $valid $valid_qed $valid_alt_ergo $valid_cvc4 $valid_z3 $valid_coq
+    let "valid=$valid_qed + $valid_alt_ergo + $valid_cvc4 + $valid_z3"
+    printf "%s;%d;%d;%d;%d;%d;%d;\n" $alg $goalCount $valid $valid_qed $valid_alt_ergo $valid_cvc4 $valid_z3
 
     #debug
     #cat $tempFile2 > fill1.debug
@@ -158,7 +158,7 @@ function reportWp()
     local valid_alt_ergo=0
     local valid_cvc4=0
     local valid_z3=0
-    local valid_coq=0
+    #local valid_coq=0
     local percent=0
     local invalid=0
     local tempFile
@@ -185,14 +185,14 @@ function reportWp()
     let "valid_alt_ergo= $valid_alt_ergo + `cat $tempFile |  cut -f5`"
     let "valid_cvc4= $valid_cvc4 + `cat $tempFile |  cut -f6`"
     let "valid_z3= $valid_z3 + `cat $tempFile |  cut -f7`"
-    let "valid_coq= $valid_coq + `cat $tempFile |  cut -f8`"
+    #let "valid_coq= $valid_coq + `cat $tempFile |  cut -f8`"
     if [ $goalCount -ne 0 ]
         then
              let "invalid=$goalCount -$valid"
              let "percent=(100*$valid)/$goalCount"
         else    percent=0
         fi
-    printf  "   verify  %-35s [%-4d %3d   (%-3d %3d %3d %3d %3d)]     %3d%%\n" $1 $goalCount $valid $valid_qed $valid_alt_ergo $valid_cvc4 $valid_z3 $valid_coq $percent
+    printf  "   verify  %-35s [%-4d %3d   (%-3d %3d %3d %3d)]     %3d%%\n" $1 $goalCount $valid $valid_qed $valid_alt_ergo $valid_cvc4 $valid_z3 $percent
 
 
     unset goalCount

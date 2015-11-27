@@ -39,7 +39,7 @@ SCRIPT?='wp0.script' # default script
 # run the prover(s) on select proof obligtions.
 
 
-WP_BASE_FLAGS += -cpp-gnu-like
+#WP_BASE_FLAGS += -cpp-gnu-like
 WP_BASE_FLAGS += -pp-annot -no-unicode
 WP_BASE_FLAGS += -wp
 
@@ -65,11 +65,11 @@ WP_BASE_FLAGS += -wp-driver $(TOPDIR)/Bit.driver
 WP_PROVER_FLAGS += -wp-timeout $(WP_TIMEOUT)
 #WP_PROVER_FLAGS += -wp-steps $(WP_ALT_ERGO_STEPS)
 WP_PROVER_FLAGS += -wp-script $(SCRIPT)
-WP_PROVER_FLAGS += -wp-coq-timeout $(WP_COQ_TIMEOUT)
+#WP_PROVER_FLAGS += -wp-coq-timeout $(WP_COQ_TIMEOUT)
 
 #WP_PROVER_FLAGS += -wp-prover none
 WP_PROVER_FLAGS += -wp-prover z3
-WP_PROVER_FLAGS += -wp-prover coq
+#WP_PROVER_FLAGS += -wp-prover coq
 WP_PROVER_FLAGS += -wp-prover cvc4
 WP_PROVER_FLAGS += -wp-prover alt-ergo
 
